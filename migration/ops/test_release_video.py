@@ -22,6 +22,8 @@ elif a[:2] == ["release", "download"]:
     for n in hits: shutil.copy(os.path.join(store, n), dest)
 elif a[:2] == ["release", "view"]:
     print("\n".join(sorted(os.listdir(store))))
+elif a[0] == "api" and "/releases/tags/" in a[1]:   # assets.sh asset_names (E91): the REST release object
+    print("\n".join(sorted(os.listdir(store))))
 elif a[:2] == ["release", "delete-asset"]:
     os.remove(os.path.join(store, a[3]))
 '''

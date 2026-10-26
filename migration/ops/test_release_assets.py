@@ -33,10 +33,14 @@ elif a[:2] == ["release", "download"]:
     if opt("-O"): shutil.copy(os.path.join(d, hits[0]), opt("-O"))
     else:
         for n in hits: shutil.copy(os.path.join(d, n), opt("-D") or ".")
-elif a[:2] == ["release", "view"]:
+elif a[:2] == ["release", "view"]:   # like the runner on 2026-10-26 (E91): lists only part of a big release
     d = store(a[2])
-    if "--jq" in a and "length" in opt("--jq"): print(len(os.listdir(d)))
-    else: print("\n".join(sorted(os.listdir(d))))
+    if "--jq" in a and "length" in opt("--jq"): print(min(len(os.listdir(d)), 100))
+    else: print("\n".join(sorted(os.listdir(d))[:100]))
+elif a[0] == "api" and "/releases/tags/" in a[1]:   # the REST release object: every asset
+    d = os.path.join(root, a[1].rsplit("/", 1)[1])
+    if not os.path.isdir(d): print("gh: Not Found (HTTP 404)", file=sys.stderr); sys.exit(1)
+    print("\n".join(sorted(os.listdir(d))))
 elif a[:2] == ["release", "delete-asset"]:
     p = os.path.join(store(a[2]), a[3])
     if not os.path.exists(p): print("asset not found", file=sys.stderr); sys.exit(1)
@@ -100,6 +104,16 @@ class ReleaseAssets(unittest.TestCase):
         self.assertEqual(os.listdir(self.t / "rel" / NEW), [])
         self.assertEqual(sorted(os.listdir(self.t / "rel" / OLD)), ["a.mp4"])
         self.assertNotEqual(self.run_script("delete", "zz.mp4", "--repo", "o/r", "-y").returncode, 0)
+
+    def test_which_finds_an_asset_past_the_first_hundred_of_a_full_release(self):
+        # E91: the TikTok mirror of Genesis 4 failed ASSET_NOT_FOUND although `release download` found the file in the
+        # 1000-asset release; `which` must read every asset name, and a real API error must not read as "absent"
+        for i in range(150):
+            self.put_old(f"a{i:03d}.mp4", b"x")
+        self.put_old("zz-genesis-04.mp4", b"x")
+        r = self.run_script("which", "zz-genesis-04.mp4", "--repo", "o/r")
+        self.assertEqual((r.returncode, r.stdout.strip()), (0, OLD), r.stderr)
+        self.assertEqual(len(self.run_script("names", "--repo", "o/r").stdout.split()), 151)
 
     def test_no_caller_reads_or_writes_one_release_directly(self):
         bad = re.compile(r'gh release (download|upload|view|delete-asset) "?\$\{?TAG|releases/download/v0\.0\.0-cloud-assets')

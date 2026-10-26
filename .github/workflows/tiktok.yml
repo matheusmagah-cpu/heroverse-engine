@@ -29,6 +29,8 @@ jobs:
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Latest main (a run queued behind another must read the ledger that run pushed, E90)
+        run: git pull -q --ff-only origin main
       - name: Publication hold and configuration
         id: cfg
         run: |

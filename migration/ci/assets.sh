@@ -21,6 +21,14 @@ while [ $# -gt 0 ]; do
 done
 : "${repo:?--repo or GITHUB_REPOSITORY}"
 missing() { grep -qiE "no assets match|release not found|not found" <<<"$1"; }
+# every asset name of a release from the REST release object (E91: `gh release view --json assets` missed an asset
+# that `release download` found in the 1000-asset release); a missing release lists nothing, any other error stops
+asset_names() {
+  local out
+  if out=$(gh api "repos/$repo/releases/tags/$1" --jq '.assets[].name' 2>&1); then printf '%s\n' "$out"; return 0; fi
+  missing "$out" && return 0
+  echo "$out" >&2; return 1
+}
 
 case "$cmd" in
   download)
@@ -37,16 +45,17 @@ case "$cmd" in
         gh release view "$t" --repo "$repo" --json tagName >/dev/null   # a parallel run may have just created it
     fi
     gh release upload "$t" "${args[@]}" --repo "$repo"
-    n=$(gh release view "$t" --repo "$repo" --json assets --jq '.assets | length' 2>/dev/null || echo 0)
+    n=$(asset_names "$t" | grep -c . || true)
     if [ "${n:-0}" -ge "$WARN_AT" ]; then echo "::warning::ASSET_RELEASE_NEARLY_FULL $t has $n of 1000 assets: add a new tag to migration/ci/assets.sh (E85)"; fi ;;
   names)
     for t in "${TAGS[@]}"; do
-      gh release view "$t" --repo "$repo" --json assets --jq '.assets[].name' 2>/dev/null || true
+      asset_names "$t"
     done ;;
   which)
     name=${args[0]:?}
     for t in "${TAGS[@]}"; do
-      if gh release view "$t" --repo "$repo" --json assets --jq '.assets[].name' 2>/dev/null | grep -qxF -- "$name"; then
+      names=$(asset_names "$t") || exit 1
+      if grep -qxF -- "$name" <<<"$names"; then
         echo "$t"; exit 0
       fi
     done
