@@ -35,7 +35,7 @@
 - Ads stage and digital product are on hold: no selling.
 
 ## Channels
-- **Active platform:** YouTube only (Shorts 13:30 and 23:30 UTC; a 10-15 min long every 3 days, per `SERIES.md`).
+- **Active platform:** YouTube only (Shorts 13:30 and 23:30 UTC; a 14-18 min Bible-story long every 2 days at 10:00 UTC, per `SERIES.md`).
 - **Language:** English content; the owner is addressed in Portuguese.
 
 ## Operational defaults (tool skills read these)

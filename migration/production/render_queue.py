@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """The nightly queue: which pilots need images, and which one to render next.
 
-A pilot is due when its schedule.json opens within HORIZON hours and it is not
+A pilot is due when it is a Bible-story long (STORY_LONG; prayer pilots are retired,
+owner 2026-10-26), its schedule.json opens within HORIZON hours and it is not
 yet on YouTube. It needs images while any image its script uses has no
 images/<id>.json record; it needs a render when its images are complete and no
 completed frozen-v3 render exists for the current script and matching output hash.
@@ -91,12 +92,31 @@ def next_render(rows):
                  and r["preview_ok"]), None)
 
 
+# Owner, 2026-10-26: "stop the prayer videos; the channel is going in another direction." The only long the engine
+# makes, schedules or counts is a Bible-story long (structures/bible-story-long.json, SERIES.md). A prayer pilot
+# (any other archetype) never enters the queue again: no images, preview, render, review, approval, upload, Shorts
+# or comment retry. Already uploaded prayer longs are handled only by channel-privacy.yml (hold-plan.json).
+STORY_LONG = "bible-story-long"
+
+
+def story_long(script):
+    """True only for a Bible-story long script (archetype bible-story-long)."""
+    return isinstance(script, dict) and script.get("archetype") == STORY_LONG
+
+
+def story_pilot(d):
+    """The pilot directory holds a Bible-story long script."""
+    return story_long(object_or_empty(Path(d) / "script.json"))
+
+
 def due(production, ledger, now, hours):
     entries = ledger.get("entries", {})
     out = []
     for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
         if not (d / "schedule.json").exists() or not (d / "script.json").exists():
             continue
+        if not story_pilot(d):
+            continue  # a retired prayer pilot (owner, 2026-10-26)
         t = when(json.loads((d / "schedule.json").read_text())["publish_at"])
         if not now - timedelta(hours=6) <= t <= now + timedelta(hours=hours):
             continue
@@ -127,6 +147,8 @@ def pending_comments(production, ledger, now):
         comment = (entry.get("steps") or {}).get("first_comment")
         if not re.fullmatch(r"pilot-\d{3}", pilot) or not entry.get("video_id"):
             continue
+        if not story_pilot(Path(production) / pilot):
+            continue  # a retired prayer long (owner, 2026-10-26): no first-comment retries on it
         if not (isinstance(comment, str) and comment.startswith("PENDING")):
             continue
         sched = Path(production) / pilot / "schedule.json"
@@ -167,8 +189,8 @@ def stale(production, ledger, now, days=STALE_DAYS):
     entries = ledger.get("entries", {})
     out = []
     for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
-        if not (d / "schedule.json").exists() or not (d / "script.json").exists():
-            continue
+        if not (d / "schedule.json").exists() or not (d / "script.json").exists() or not story_pilot(d):
+            continue  # a retired prayer pilot is never rescheduled (owner, 2026-10-26)
         t = when(json.loads((d / "schedule.json").read_text())["publish_at"])
         if not now - timedelta(days=days) <= t < now - timedelta(hours=6):
             continue

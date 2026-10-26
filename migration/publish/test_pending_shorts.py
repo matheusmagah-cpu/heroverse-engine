@@ -155,6 +155,18 @@ class Pending(unittest.TestCase):
             self.assertIsNone(ps.pending(prod, ledger))
 
 
+class RetiredPrayerLongs(unittest.TestCase):
+    def test_no_short_of_a_prayer_long_is_published(self):
+        # owner, 2026-10-26: "stop the prayer videos"; a Bible-story long's approved Shorts still go out
+        with tempfile.TemporaryDirectory() as t:
+            prod, ledger = setup(t)
+            script = prod / "pilot-002" / "script.json"
+            script.write_text(json.dumps({"archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md"}))
+            self.assertIsNone(ps.pending(prod, ledger, ps.when("2026-10-18T09:00:00Z")))
+            script.write_text(json.dumps({"archetype": "bible-story-long"}))
+            self.assertEqual(ps.pending(prod, ledger, ps.when("2026-10-18T09:00:00Z"))[0], "pilot-002")
+
+
 class CorrectionRouting(unittest.TestCase):
     def test_correction_marker_never_falls_back_to_old_binding(self):
         import review_recovery as rr
