@@ -431,19 +431,26 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 ## Owner decision: prayer videos stop; the long cadence counts Bible-story longs only (2026-10-26)
 - **Owner.** "Stop the prayer videos; the channel is going in another direction." And: the long must stand on its own,
   Shorts traffic only a plus, following its own registered structure, `structures/bible-story-long.json`.
-- **Kind.** A direction change, not a failure: no `ERRORS.json` entry. It replaces the 2026-10-25 "what stays" rule
+- **Kind.** A direction change, not a failure: no `ERRORS.json` entry for it (the review of #415 found two real bugs, E100 and E101). It replaces the 2026-10-25 "what stays" rule
   (prayer longs already made keep their slots).
 - **Stopped at the source (code).** `render_queue.story_pilot` (archetype `bible-story-long`) is the one test of a long:
   a prayer pilot no longer enters `due()` (so no images, preview, render, Claude review, approval, publish or Shorts
   from the heartbeat, runner, engine fallback or reconcile), is never reported stale for rescheduling, gets no
-  first-comment retries, and `pending_shorts.py` publishes no Short of it.
+  first-comment retries, and `pending_shorts.py` publishes no Short of it. The publication gate refuses it too:
+  `prepublish_gate.py` has a `format` row (FAIL `NOT_STORY_LONG`), and `publication_binding.py`, which publish.yml
+  runs before any upload or resume, refuses `NOT_STORY_LONG` even with an older approval and a PASS gate.
 - **Long cadence rewritten.** The old runway demanded a long at every 00:00 and 10:00 UTC slot (two prayer longs a
   day, never a day without one). `ops/runway.py` now checks one Bible-story long every 2 days at 10:00 UTC from 28/10
-  (= `production/bible/arcs.json`), counted only when its script follows the structure's gate
-  (`script.gate`, enforced by `script_check.structure_problems`: 14-18 min, a character speaks the conflict in the first
-  30 s, >= 6 re-hooks, one climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in the cold open, no burned
-  captions). The daily report's runway alert asks for Bible-story long scripts ("LONG SCRIPT RUNWAY"), not pilots.
+  (= `production/bible/arcs.json`). One stage rule (`runway.long_stage`, also used by the daily report): uploaded,
+  approved, rendered, then "script" only when the full `script_check` passes, including the structure's gate
+  (`script.gate`, `script_check.structure_problems`: 14-18 min, an APPROVED character or God's voice speaks the
+  conflict in the first 30 s, >= 6 re-hooks, one climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in
+  the cold open, no burned captions), else "script-fail" with its problems. A prayer pilot still scheduled ahead
+  alerts `PRAYER_LONG_SCHEDULED`. The daily report's runway alert asks for Bible-story long scripts ("LONG SCRIPT
+  RUNWAY"), not pilots.
 - **Already uploaded.** pilot-008 (`8heTdP0LllM`, 27/10 00:00) and pilot-014 (`53Xysf9x46c`, 26/10 10:00) are listed in
   `channel/hold-plan.json` for `channel-privacy.yml` mode `unschedule` (private, publishAt cleared, nothing deleted,
-  the receipt keeps the old publishAt for the undo; a video already public is skipped). It runs only when dispatched.
+  the receipt keeps the old publishAt for the undo). A video already public is skipped, never hidden, and named in
+  the log (`HELD_VIDEO_ALREADY_PUBLIC`, an Actions warning) and in the receipt (`already_public_not_changed`). It runs
+  only when dispatched.
 - **Measured.** The daily report's long runway and the arc funnel; pilot-015 is the first long on this rule.

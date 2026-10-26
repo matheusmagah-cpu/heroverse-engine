@@ -438,6 +438,28 @@ class StoryStructure(unittest.TestCase):
             out = sc.structure_problems(structured_story(segments=segs))
             self.assertTrue(any(p.startswith("STORY_COLD_OPEN_CONFLICT") for p in out), out)
 
+    def test_conflict_speaker_is_an_approved_character_or_god(self):
+        # review of #415: "narrator", the Keeper, an unknown name or a DRAFT character never speaks the conflict
+        for speaker, ok in (("serpent", True), ("god", True), ("eve", True), ("narrator", False), ("keeper", False),
+                            ("goliath", False), ("noah", False)):
+            segs = self.segs(lambda x: dict(x, speaker=speaker) if x["id"] == "peak" else x)
+            out = sc.structure_problems(structured_story(segments=segs))
+            self.assertEqual(not any(p.startswith("STORY_COLD_OPEN_CONFLICT") for p in out), ok, (speaker, out))
+
+    def test_story_gate_is_read_once(self):
+        # review of #415: the structure file is cached, not re-read for every pilot
+        self.assertIs(sc.story_gate(), sc.story_gate())
+
+    def test_check_feeds_the_same_timeline_to_every_story_rule(self):
+        # review of #415: check() built its own starts without the v4 sentence breath that timeline() and the
+        # length use; a roadmap at ~28 s by words alone starts at ~34 s with it, which is late (R13: 30 s)
+        def to_story(s, d):
+            s.update(story_script())
+            s["segments"][1] = dict(s["segments"][1], text="Go. " * 50)
+        with tempfile.TemporaryDirectory() as t:
+            problems = sc.check(make(t, to_story))[0]
+        self.assertIn(f"ROADMAP_MISSING_OR_LATE (R13: within {sc.ROADMAP_MAX_S} s)", problems)
+
     def test_keeper_missing_in_the_cold_open_or_over_25_percent_fails(self):
         none = self.segs(lambda x: {k: v for k, v in x.items() if k not in ("keeper", "speaker")} if x.get("keeper") else x)
         self.assertIn("STORY_KEEPER_MISSING (the Keeper appears in every long)",

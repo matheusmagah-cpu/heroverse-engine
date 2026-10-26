@@ -47,7 +47,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 "stop the prayer videos; the channel is going in another direction").** The long stands on its own: it follows its own
 registered structure (`structures/bible-story-long.json`, gate in `script.gate`: 14-18 min, a character speaks the
 conflict in the first 30 s, >= 6 re-hooks, the climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in the
-cold open, no burned captions); traffic from its Shorts is only a plus. `ops/runway.py` counts these slots.
+cold open, no burned captions); traffic from its Shorts is only a plus. `ops/runway.py` counts these slots (a
+script counts once the full `script_check` passes; a prayer long still scheduled alerts PRAYER_LONG_SCHEDULED).
 | Arc | Shorts (episodes) | Shorts dates | Long | Long slot |
 |---|---|---|---|---|
 | prayer (stopped 26/10) | - | - | 013 night (public); 014 morning (its slot passed before the stop: the hold leaves it if public); 008 night held by `channel-privacy.yml` unschedule (`channel/hold-plan.json`) | 26/10 00:00, 26/10 10:00; 27/10 00:00 withdrawn |

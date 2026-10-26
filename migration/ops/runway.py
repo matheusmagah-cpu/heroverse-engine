@@ -6,7 +6,7 @@ calendar): one Bible-story long every LONG_EVERY days at 10:00 UTC from FIRST_ST
 than LONG_EVERY days between two longs. Only a Bible-story long counts (script archetype bible-story-long,
 render_queue.story_pilot); a prayer pilot never fills a slot, and its retired slots (00:00 and 10:00 every day) are not
 slots any more. A story script counts as written only when it follows its registered structure
-(structures/bible-story-long.json, script_check.structure_problems: 14-18 min, the conflict spoken in the cold open,
+(structures/bible-story-long.json via the full script_check, structure_problems included: 14-18 min, the conflict spoken in the cold open,
 >= 6 re-hooks, the climax at 0.6-0.85, the Keeper <= 25 % and never in the cold open, no burned captions).
 
 For every long slot of the next DAYS days, report the stage of its pilot and alert when a stage is late:
@@ -48,30 +48,51 @@ def slots(now, days=DAYS):
     return out
 
 
-def stage(d, ledger):
-    if any(k.startswith(f"{d.name}:") and v.get("video_id") for k, v in ledger.get("entries", {}).items()):
-        return "uploaded"
+def uploaded(d, ledger):
+    return any(k.startswith(f"{Path(d).name}:") and v.get("video_id") for k, v in ledger.get("entries", {}).items())
+
+
+def long_stage(d, ledger):
+    """The one stage rule of a Bible-story long, shared by this runway and the daily report (goal_report.py):
+    uploaded > approved > rendered (a long past its script is never re-judged by later gate fields) > "script" only
+    when the full script_check passes (structure included) > "script-fail" with its problems. Never raises: an
+    unreadable script is a "script-fail"."""
+    d = Path(d)
+    if uploaded(d, ledger):
+        return "uploaded", []
     if (d / "inspection" / "APPROVAL.json").exists():
-        return "approved"
+        return "approved", []
     if (d / "out" / "manifest.json").exists():
-        return "rendered"
-    if script_check.structure_problems(json.loads((d / "script.json").read_text())):
-        return "off-structure"
-    return "script"
+        return "rendered", []
+    try:
+        problems = list(script_check.check(d, d.parent)[0])
+    except Exception as e:  # a malformed file must not crash the report; it is a failed script
+        problems = [f"SCRIPT_CHECK_ERROR {type(e).__name__}: {str(e)[:120]}"]
+    return ("script-fail", problems) if problems else ("script", [])
 
 
 def check(production, ledger, now):
-    by_slot = {}
-    for f in Path(production).glob("pilot-[0-9][0-9][0-9]/schedule.json"):
-        at = json.loads(f.read_text()).get("publish_at")
-        if at and render_queue.story_pilot(f.parent):
-            by_slot[ts(at)] = f.parent
-    rows, alerts = [], []
+    by_slot, alerts = {}, []
+    for f in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]/schedule.json")):
+        sched = render_queue.object_or_empty(f)
+        try:
+            at = ts(sched["publish_at"])
+        except (KeyError, TypeError, ValueError, AttributeError):
+            continue
+        if render_queue.story_pilot(f.parent):
+            by_slot[at] = f.parent
+        elif at > now:
+            # review of #415: a prayer long with a pending slot is shown, never dropped silently
+            state = "uploaded" if uploaded(f.parent, ledger) else "not uploaded"
+            alerts.append(f"PRAYER_LONG_SCHEDULED {f.parent.name} at {at:%Y-%m-%d %H:%M} UTC ({state}; prayer longs "
+                          "stopped 2026-10-26: hold the upload with channel-privacy.yml unschedule and retire its "
+                          "schedule.json)")
+    rows = []
     for t in slots(now):
         d = by_slot.get(t)
-        st = stage(d, ledger) if d else "missing"
+        st = long_stage(d, ledger)[0] if d else "missing"
         left = t - now
-        late = ((st in ("missing", "off-structure") and left < SCRIPT_LEAD) or (st == "script" and left < RENDER_LEAD)
+        late = ((st in ("missing", "script-fail") and left < SCRIPT_LEAD) or (st == "script" and left < RENDER_LEAD)
                 or (st == "rendered" and left < APPROVAL_LEAD))
         rows.append({"slot": t.strftime("%Y-%m-%dT%H:%MZ"), "pilot": d.name if d else None, "stage": st, "late": late})
         if late:

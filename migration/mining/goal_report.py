@@ -26,8 +26,11 @@ import market_panel as mp  # noqa: E402
 from learning_loop import capture_existing, save_capture
 from packaging_mining import seconds  # noqa: E402
 sys.path.insert(0, str(HERE.parent / "production"))
-import render_queue  # noqa: E402  (story_pilot: only a Bible-story long counts)
-import script_check  # noqa: E402  (structure_problems: the long's registered beat map)
+import render_queue  # noqa: E402  (story_long: only a Bible-story long counts)
+sys.path.insert(0, str(HERE.parent / "ops"))
+import runway as long_runway  # noqa: E402  (long_stage: the one stage rule of a long, shared with the runway section)
+
+COUNTED_STAGES = ("script", "rendered", "approved", "uploaded")
 
 ANALYTICS = "https://youtubeanalytics.googleapis.com/v2/reports"
 # titles that read as fear-bait or fabricated prophecy (owner policy; YouTube misleading-metadata risk at YPP review)
@@ -102,30 +105,38 @@ def pipeline(production, ledger, now, observed_privacy=None):
     observed_privacy = observed_privacy or {}
     rows = []
     for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
-        if not (d / "schedule.json").exists():
+        try:   # one malformed file never stops the whole report (review of #415)
+            t = datetime.fromisoformat(render_queue.object_or_empty(d / "schedule.json")["publish_at"].replace("Z", "+00:00"))
+        except (KeyError, AttributeError, TypeError, ValueError):
             continue
-        t = datetime.fromisoformat(json.loads((d / "schedule.json").read_text())["publish_at"].replace("Z", "+00:00"))
         if t < now - timedelta(days=2):
             continue
-        man = json.loads((d / "out" / "manifest.json").read_text()) if (d / "out" / "manifest.json").exists() else {}
-        qa = json.loads((d / "out" / "qa.json").read_text()) if (d / "out" / "qa.json").exists() else {}
-        rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}
+        man = render_queue.object_or_empty(d / "out" / "manifest.json")
+        qa = render_queue.object_or_empty(d / "out" / "qa.json")
+        rev = render_queue.object_or_empty(d / "out" / "review.json")
         sha = man.get("output_sha256")
         current = rev.get("output_sha256") == sha
-        story = render_queue.story_pilot(d)
-        script = json.loads((d / "script.json").read_text()) if (d / "script.json").exists() else {}
+        try:   # the script is parsed once, tolerantly
+            script = json.loads((d / "script.json").read_bytes()) if (d / "script.json").exists() else None
+        except (OSError, ValueError):
+            script = "UNREADABLE"
+        story = render_queue.story_long(script)
+        fmt = ("bible-story-long" if story else "script.json unreadable" if script == "UNREADABLE"
+               else "no script" if script is None else "prayer (retired)")
+        # the same stage rule as ops/runway.py (review of #415): a long past its script keeps its stage
+        stage, problems = long_runway.long_stage(d, ledger) if story else (None, [])
         rows.append({"pilot": d.name, "publish_at": t.strftime("%Y-%m-%d %H:%M UTC"),
-                     "format": "bible-story-long" if story else "prayer (retired)",
-                     "structure": (script_check.structure_problems(script) or "PASS") if story else None,
+                     "format": fmt, "stage": stage, "problems": problems,
                      "rendered": bool(man), "qa": qa.get("status") if qa.get("output_sha256") == sha else None,
                      "review": rev.get("status") if current else None,
                      "uploaded": "video_id" in ledger.get("entries", {}).get(f"{d.name}:{sha}", {}),
                      "published": (observed_privacy[ledger['entries'][f'{d.name}:{sha}']['video_id']]=='public')
                          if ledger.get('entries',{}).get(f'{d.name}:{sha}',{}).get('video_id') in observed_privacy else None,
-                     "title": json.loads((d / "script.json").read_text()).get("working_title") if (d / "script.json").exists() else None})
-    # owner, 2026-10-26: the runway counts only Bible-story longs on their registered structure, never prayer pilots
+                     "title": script.get("working_title") if isinstance(script, dict) else None})
+    # owner, 2026-10-26: the runway counts only Bible-story longs whose script passed (or that are already rendered,
+    # approved or uploaded), never prayer pilots
     ahead = [r for r in rows if datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc) > now
-             and r["format"] == "bible-story-long" and r["structure"] == "PASS"]
+             and r["format"] == "bible-story-long" and r["stage"] in COUNTED_STAGES]
     last = max((datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC") for r in ahead), default=None)
     runway = round((last.replace(tzinfo=timezone.utc) - now).total_seconds() / 86400, 1) if last else 0.0
     return rows, runway
@@ -138,8 +149,10 @@ def pipeline_alerts(rows, runway):
     if runway < 2:
         alerts.append(f"LONG SCRIPT RUNWAY {runway} days (< 2): write the next Bible-story long script "
                       "(structures/bible-story-long.json); prayer longs are stopped")
-    alerts += [f"{r['pilot']} Bible-story long off its structure: {'; '.join(r['structure'])}"
-               for r in rows if r.get("format") == "bible-story-long" and isinstance(r.get("structure"), list)]
+    alerts += [f"{r['pilot']} Bible-story long script FAIL: {'; '.join(r['problems'][:6])}"
+               + (f" (+{len(r['problems']) - 6} more)" if len(r["problems"]) > 6 else "")
+               for r in rows if r.get("format") == "bible-story-long" and r.get("stage") == "script-fail"]
+    alerts += [f"{r['pilot']} script.json unreadable" for r in rows if r.get("format") == "script.json unreadable"]
     alerts += [f"{r['pilot']} review FAIL: read out/review.json" for r in rows if r["review"] == "FAIL"]
     alerts += [f"{r['pilot']} QA FAIL" for r in rows if r["qa"] == "FAIL"]
     return alerts
