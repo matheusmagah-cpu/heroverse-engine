@@ -1,0 +1,248 @@
+{
+ "episode": "genesis-08-short",
+ "plan_sha256": "e865d4d488ec7dda3f8402ec8dda9a608006d6010e7080330605c8a09796d6dd",
+ "attempts": 3,
+ "shots": {
+  "s-dust": {
+   "kind": "scene",
+   "request_sha256": "89597a6e039fbcaaaf8e753a02f9f3a959d6c1b27940d565ce3a312034469ee9",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A laughing man seen from behind scoops up a handful of dry dust and lets the wind blow it toward the half-built ark, seen side-on far off across the bare plain, a row of bare upright ribs along its top. Hot evening light, dust glowing in the air. Scornful and dry. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-genesis-08-short-s-dust-sha256-9589865221d2758867639753a29a4cc8c3fd252a2aacf1a4835ce5f1ce1e511e.mp4",
+     "clip_sha256": "9589865221d2758867639753a29a4cc8c3fd252a2aacf1a4835ce5f1ce1e511e",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373397000706388032",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-dust-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "asset": "shot-genesis-08-short-s-dust-sha256-fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c.mp4",
+     "clip_sha256": "fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373399064807261696",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-dust-2.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 3,
+     "asset": "shot-genesis-08-short-s-dust-sha256-a68f3d7a72639fe2ee6957ef25f68ccdbf540c28ea3ad5aa556d4fff72cde330.mp4",
+     "clip_sha256": "a68f3d7a72639fe2ee6957ef25f68ccdbf540c28ea3ad5aa556d4fff72cde330",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373401830916657408",
+       "submission": "unknown",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-dust-3.jpg",
+     "uploaded": true
+    }
+   ]
+  },
+  "s-ridge": {
+   "kind": "scene",
+   "request_sha256": "44f6d4f538e7bd2a7732d32b0f09ac1527876837cfcc7a891415e0158e11e539",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A line of onlookers in silhouette stands on a ridge, backs to the camera, looking down at the half-built ark seen from high above at an angle, lying in a dry valley far from any water. Dusk, low warm light raking across the valley floor. Absurd and uneasy. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-genesis-08-short-s-ridge-sha256-7824bf80402684118517830301d28349f188d957800d42109f6a0ee0ceeaf1b6.mp4",
+     "clip_sha256": "7824bf80402684118517830301d28349f188d957800d42109f6a0ee0ceeaf1b6",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373397696851286592",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-ridge-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "asset": "shot-genesis-08-short-s-ridge-sha256-492ebcffcb029f06c71a4465e257e8b0c9c8caf6fbeb810d57d8a6b32662515f.mp4",
+     "clip_sha256": "492ebcffcb029f06c71a4465e257e8b0c9c8caf6fbeb810d57d8a6b32662515f",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373399709110573632",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-ridge-2.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 3,
+     "asset": "shot-genesis-08-short-s-ridge-sha256-86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0.mp4",
+     "clip_sha256": "86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373402518233549440",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 6.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-ridge-3.jpg",
+     "uploaded": true
+    }
+   ]
+  },
+  "s-board": {
+   "kind": "scene",
+   "request_sha256": "82094099b661bf0a09ac08d00c802581f5f9db2c1198c4178668bd42abb2bcce",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow crane up. Four men in silhouette stand on the flat plank roof of the almost finished ark, seen side-on, lift the last plank into place and step back. Grey dawn, the camp below still and quiet. Quiet and complete. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-genesis-08-short-s-board-sha256-4f7a3278fb64a2b0dda4aa7873185671721716149fd267a1e58326895d5fe781.mp4",
+     "clip_sha256": "4f7a3278fb64a2b0dda4aa7873185671721716149fd267a1e58326895d5fe781",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373398345836447232",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 8.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-board-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "asset": "shot-genesis-08-short-s-board-sha256-d9827690f40320133860441bfc047b53066ee7c1225bb47b8db50e7f7f0a9afc.mp4",
+     "clip_sha256": "d9827690f40320133860441bfc047b53066ee7c1225bb47b8db50e7f7f0a9afc",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373400870865637632",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 8.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-board-2.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 3,
+     "asset": "shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4",
+     "clip_sha256": "e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373403361049088256",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1280.0,
+        "seconds": 8.0
+       },
+       "flags": []
+      }
+     ],
+     "sheet": "40477936323-s-board-3.jpg",
+     "uploaded": true
+    }
+   ]
+  }
+ },
+ "run_id": "40477936323"
+}
