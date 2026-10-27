@@ -69,6 +69,14 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   sentences carries ARK_LOOK and ARK_EXCLUDE word for word (PROPS; ARK_LOOK_NOT_CANONICAL) and, with them and the
   period sentences taken out, names no ship, boat, mast, sail, prow, funnel... (ARK_LOOK_CONFLICT). plan_check,
   long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function.
+- image first (owner, 27/10): a scene shot may declare `first_frame` (and `last_frame`), the id of a scene still
+  (bible/stills/<id>.json, scene_stills.py). Pavo then animates that still (frames_to_video) and the shot's prompt
+  says the motion and camera. Frames go only on a scene with no characters and no input audio (Pavo: frames and
+  references are exclusive, frames take no audio): FRAMES_WITH_REFERENCES / FRAMES_WITH_AUDIO / FRAMES_NOT_SCENE /
+  FRAME_FIELD_INVALID / FRAME_LAST_WITHOUT_FIRST. The still exists (STILL_MISSING), is APPROVED by Claude's review
+  (STILL_NOT_APPROVED), its image is the one approved (STILL_PATH_REFUSED, STILL_SHA256_MISMATCH,
+  STILL_PROMPT_CHANGED) at the plan's aspect (STILL_ASPECT_MISMATCH), and its own prompt passes the period, writing
+  and ark rules above (STILL_PROMPT_REFUSED). episode_build.request (frame_refusal) refuses by the same function.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -692,6 +700,119 @@ def plan_prop_problems(plan, shots):
                   for p in prop_problems(i, s, per)]
 
 
+STILLS_DIR = HERE / "stills"          # scene stills: <id>.json records, candidates/ (scene_stills.py)
+STILL_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+STILL_ID_MAX = 80
+FRAME_FIELDS = ("first_frame", "last_frame")
+
+
+def still_record(still_id, stills_dir=None):
+    """A scene still's record (bible/stills/<id>.json), or None."""
+    if not isinstance(still_id, str) or not STILL_ID.fullmatch(still_id) or len(still_id) > STILL_ID_MAX:
+        return None
+    path = Path(stills_dir or STILLS_DIR) / f"{still_id}.json"
+    return json.loads(path.read_text()) if path.is_file() else None
+
+
+def still_prompt_problems(label, prompt, plan):
+    """A still's own prompt under the scene rules (E108 period, E110 writing, E113 ark): what a frame shows is what
+    Pavo animates, so the still states the period and the ark's look word for word like any scene prompt."""
+    pseudo = {"kind": "scene", "id": label, "prompt": prompt}
+    found = []
+    per, problem = resolve_period(plan)
+    if problem:
+        found.append(problem)
+    else:
+        found += period_problems(0, pseudo, per)
+    found += writing_problems(0, pseudo) + prop_problems(0, pseudo, per)
+    return found
+
+
+def _image_size(path):
+    """(width, height) of a PNG or JPEG, read from its header (no imaging library at plan time)."""
+    data = Path(path).read_bytes()
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+    i = 2
+    while data[:2] == b"\xff\xd8" and i + 9 < len(data):
+        if data[i] != 0xFF:
+            break
+        marker, size = data[i + 1], int.from_bytes(data[i + 2:i + 4], "big")
+        if marker in (0xC0, 0xC1, 0xC2):
+            return int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big")
+        i += 2 + size
+    return None
+
+
+def frame_problems(i, shot, plan, stills_dir=None):
+    """Image first (owner, 27/10): a scene shot's `first_frame` / `last_frame` name APPROVED scene stills whose image
+    is the approved one, at the plan's aspect, and whose prompt passes the scene rules. Shared by plan_check (and the
+    preflight, which runs it) and episode_build.request (frame_refusal)."""
+    given = [f for f in FRAME_FIELDS if f in shot]
+    if not given:
+        return []
+    sid, out = shot.get("id"), []
+    if shot.get("kind") != "scene":
+        out.append(f"FRAMES_NOT_SCENE shot {i} {sid} (a still is the first frame of a scene shot, never the Keeper's)")
+    bad = [f for f in given if not isinstance(shot[f], str) or not STILL_ID.fullmatch(shot[f])
+           or len(shot[f]) > STILL_ID_MAX]
+    if bad:
+        out.append(f"FRAME_FIELD_INVALID shot {i} {sid} ({', '.join(bad)}: a scene still id, a-z 0-9 -)")
+    if "last_frame" in shot and "first_frame" not in shot:
+        out.append(f"FRAME_LAST_WITHOUT_FIRST shot {i} {sid} (a last frame needs a first frame, as Pavo does)")
+    if shot.get("characters"):
+        out.append(f"FRAMES_WITH_REFERENCES shot {i} {sid} (Pavo takes frames or character references, never both: "
+                   "a still-first shot shows no approved character)")
+    if talking(shot):
+        out.append(f"FRAMES_WITH_AUDIO shot {i} {sid} (Pavo's frames_to_video takes no input audio: a talking shot "
+                   "is generated from references)")
+    if out:
+        return out
+    aspect = plan.get("aspect_ratio", "9:16")
+    for f in given:
+        still = shot[f]
+        rec = still_record(still, stills_dir)
+        if rec is None:
+            out.append(f"STILL_MISSING shot {i} {sid} ({f} {still}: no bible/stills/{still}.json; write its prompt, "
+                       "then scene-stills.yml)")
+            continue
+        if isinstance(rec.get("prompt"), str):
+            out += [f"STILL_PROMPT_REFUSED shot {i} {sid} ({f} {still}: {p})"
+                    for p in still_prompt_problems(f"{sid}/{still}", rec["prompt"], plan)]
+        else:
+            out.append(f"STILL_PROMPT_REFUSED shot {i} {sid} ({f} {still}: no prompt in its record)")
+        if rec.get("status") != "APPROVED":
+            out.append(f"STILL_NOT_APPROVED shot {i} {sid} ({f} {still} is {rec.get('status')}: Claude reviews its "
+                       "candidates and approves one with scene_stills.py approve, by PR)")
+            continue
+        src = (ROOT / str(rec.get("repo_path") or "")).resolve()
+        if not rec.get("repo_path") or ROOT.resolve() not in src.parents or not src.is_file() \
+                or src.suffix.lower() not in (".jpg", ".jpeg", ".png"):
+            out.append(f"STILL_PATH_REFUSED shot {i} {sid} ({f} {still}: a PNG/JPEG inside the repository)")
+            continue
+        if hashlib.sha256(src.read_bytes()).hexdigest() != rec.get("sha256"):
+            out.append(f"STILL_SHA256_MISMATCH shot {i} {sid} ({f} {still}: the image is not the one approved)")
+        approved = rec.get("approved") or {}
+        if not isinstance(rec.get("prompt"), str) or \
+                hashlib.sha256(rec["prompt"].encode()).hexdigest() != approved.get("prompt_sha256"):
+            out.append(f"STILL_PROMPT_CHANGED shot {i} {sid} ({f} {still}: its prompt is not the one its image was "
+                       "approved with)")
+        size = _image_size(src)
+        w, h = (int(x) for x in aspect.split(":"))
+        if not size or abs(size[0] / size[1] - w / h) > 0.01:
+            out.append(f"STILL_ASPECT_MISMATCH shot {i} {sid} ({f} {still}: {size} is not {aspect})")
+    return out
+
+
+def frame_paths(shot, stills_dir=None):
+    """(first, last) repository paths of a shot's approved stills ("" when it has none): what the request sends."""
+    out = []
+    for f in FRAME_FIELDS:
+        rec = still_record(shot.get(f), stills_dir) if shot.get(f) else None
+        out.append(rec["repo_path"] if rec and rec.get("repo_path") else "")
+    return tuple(out)
+
+
 def _speaker_problems(i, s, chars, span, span_slowest):
     """A speaking scene: who speaks, in which voice, and how long the line is."""
     out, sid, who = [], s["id"], s["speaker"]
@@ -1001,6 +1122,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     problems += plan_prop_problems(plan, shots)
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
+        problems += frame_problems(i, s, plan)
         # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,
         # made a plan rule: one prompt is one picture, so the same prompt twice shows the same shot twice
         if isinstance(s.get("prompt"), str):

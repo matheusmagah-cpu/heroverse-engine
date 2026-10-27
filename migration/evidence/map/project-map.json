@@ -315,6 +315,7 @@
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_lipsync_check.py",
     "migration/production/bible/test_plan_check.py",
+    "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_short_engine.py",
     "migration/production/characters/test_characters.py",
     "migration/production/footage/test_assign.py",
@@ -449,6 +450,19 @@
    "cron": [],
    "calls": [
     "migration/ops/reviewer_probe.py"
+   ],
+   "dispatches": []
+  },
+  "scene-stills.yml": {
+   "name": "HeroVerse scene stills (image first; FLUX on the Workers AI free allocation; candidates for Claude's review)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/bible/scene_stills.py",
+    "migration/production/imagegen/cf_images.py",
+    "migration/production/imagegen/upscale.py"
    ],
    "dispatches": []
   },
@@ -837,7 +851,8 @@
     "migration/integrations/pavo/video.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/test_episode_build.py",
-    "migration/production/bible/test_episode_preflight.py"
+    "migration/production/bible/test_episode_preflight.py",
+    "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/integrations/pavo/test_client.py",
    "is_test": false
@@ -851,7 +866,8 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/integrations/pavo/audio.py",
-    "migration/integrations/pavo/video.py"
+    "migration/integrations/pavo/video.py",
+    "migration/production/bible/test_scene_stills.py"
    ],
    "test": null,
    "is_test": false
@@ -1718,7 +1734,8 @@
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/test_episode_build.py",
-    "migration/production/bible/test_plan_check.py"
+    "migration/production/bible/test_plan_check.py",
+    "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/production/bible/test_episode_build.py",
    "is_test": false
@@ -1812,9 +1829,26 @@
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/long_plan_check.py",
-    "migration/production/bible/test_plan_check.py"
+    "migration/production/bible/scene_stills.py",
+    "migration/production/bible/test_plan_check.py",
+    "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/scene_stills.py": {
+   "purpose": "Scene stills, \"image first\" (owner, 27/10): Claude reviews cheap stills of a whole episode before any video.",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/plan_check.py"
+   ],
+   "called_by_workflows": [
+    "scene-stills.yml"
+   ],
+   "imported_by": [
+    "migration/production/bible/test_scene_stills.py"
+   ],
+   "test": "migration/production/bible/test_scene_stills.py",
    "is_test": false
   },
   "migration/production/bible/short_engine.py": {
@@ -1921,6 +1955,23 @@
     "migration/production/bible/plan_check.py",
     "migration/production/bible/test_long_plan_check.py",
     "migration/production/bible/voice_pace.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/bible/test_scene_stills.py": {
+   "purpose": "Image first (owner, 27/10): a scene shot's `first_frame` / `last_frame` name APPROVED scene stills; plan_check and",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/integrations/pavo/client.py",
+    "migration/integrations/pavo/images.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/scene_stills.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
@@ -2085,7 +2136,8 @@
    "dir": "migration/production/imagegen",
    "local_imports": [],
    "called_by_workflows": [
-    "cf-images.yml"
+    "cf-images.yml",
+    "scene-stills.yml"
    ],
    "imported_by": [
     "migration/production/imagegen/test_cf_images.py"
@@ -2135,7 +2187,8 @@
    "local_imports": [],
    "called_by_workflows": [
     "cf-images.yml",
-    "images-upres.yml"
+    "images-upres.yml",
+    "scene-stills.yml"
    ],
    "imported_by": [
     "migration/production/footage/pavo_footage.py"

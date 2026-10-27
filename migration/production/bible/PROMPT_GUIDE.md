@@ -68,6 +68,14 @@ Then: duration and aspect come from the tool fields, not the text.
 3. If the still is right, send it as Pavo's `first_frame` (vidIQ: `startFrameB64`) and prompt only the motion and the
    camera (do not re-describe the picture: two descriptions of one subject drift). Light, dust and particle moments
    always start from a checked still.
+   In the engine (owner, 27/10, "image first"): the still's prompt goes in `bible/stills/<still-id>.json` (status
+   DRAFT; the static composition, the period sentences and, when it shows the ark, the ark sentences word for word),
+   the shot gets `"first_frame": "<still-id>"` (optional `last_frame`; a scene with no characters and no input audio)
+   and a motion-and-camera prompt. `scene-stills.yml` (plan, shots, candidates 1-3) makes the candidates on the free
+   FLUX allocation at 9:16 and pushes them with a contact sheet to `claude/stills-<episode>-<run>`; after Claude's
+   review `scene_stills.py approve <still-id> <candidate-id> --score S --note TEXT` records it APPROVED with its sha256,
+   by PR. plan_check refuses a missing, unapproved or changed still (STILL_*), and the request digest carries the
+   still's sha256, so a new still is SHOT_REQUEST_CHANGED.
 4. One generation per shot. A miss is diagnosed against this guide before any retry, and the lesson is added here.
 
 ## Template

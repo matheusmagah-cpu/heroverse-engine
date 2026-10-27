@@ -1,0 +1,9 @@
+{"run": "40476210996", "reviewer": "Claude", "date": "2026-10-27", "floor": 9.5,
+ "verdicts": {
+  "genesis-08-s-board-40476210996-1": "reject: curved floating hull with a window, not the canonical ark",
+  "genesis-08-s-board-40476210996-2": "reject (~8.5): bowl-shaped hull bottom, dark silhouette",
+  "genesis-08-s-dust-40476210996-1": "reject: anonymous mocker's face visible; ark reads as a barrel wagon",
+  "genesis-08-s-dust-40476210996-2": "reject: sailing ship with a sail in the background",
+  "genesis-08-s-ridge-40476210996-1": "reject: ark reads as a toy model, tyre-like tracks in the sand",
+  "genesis-08-s-ridge-40476210996-2": "reject (~8): ark reads as a crate on the sand"},
+ "decision": "Cloudflare FLUX stills fall short of Pavo's own frames for these shots; the three shots return to their canonical-ark text prompts (E113) and go through shot-probe, where the reviewed clip is the clip that ships (E114). Image-first stays available but is not the default until a still source reaches 9.5."}

@@ -367,6 +367,51 @@
    ],
    "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
   },
+  "FRAMES_NOT_SCENE": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a `first_frame`/`last_frame` on a Keeper shot; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "FRAMES_WITH_AUDIO": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): frames on a talking shot (Pavo's frames_to_video takes no input audio); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "FRAMES_WITH_REFERENCES": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): frames on a shot with characters (Pavo: frames and references are exclusive); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "FRAME_FIELD_INVALID": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a frame field that is not a scene still id; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "FRAME_LAST_WITHOUT_FIRST": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a last frame without a first frame (Pavo refuses it too); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
   "FRAME_TAG": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
@@ -1344,6 +1389,10 @@
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
   },
+  "SHOTS_REFUSED": {
+   "class": "N",
+   "why": "Image first (owner, 27/10): scene-stills.yml refuses a malformed input of a free still generation (FLUX, Workers AI free allocation) before any image; it stops no Pavo generation, voice or render"
+  },
   "SHOT_APPROVED_CLIP_FAILED": {
    "class": "A",
    "early": [
@@ -1528,6 +1577,28 @@
    "early": "migration/publish/preflight.py::captions.problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
+  "STILL_ASPECT_MISMATCH": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): an approved still not at the plan's aspect; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_CANDIDATES_INVALID": {
+   "class": "N",
+   "why": "Image first (owner, 27/10): scene-stills.yml refuses a malformed input of a free still generation (FLUX, Workers AI free allocation) before any image; it stops no Pavo generation, voice or render"
+  },
+  "STILL_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a frame naming no bible/stills/<id>.json; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
   "STILL_MOUTH_CHECK_BLIND": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
@@ -1535,6 +1606,51 @@
   "STILL_MOUTH_TOOL_BROKEN": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
+  },
+  "STILL_NOT_APPROVED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a frame whose still Claude has not approved (scene_stills.py approve, by PR); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_PATH_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): an approved still whose image is not a PNG/JPEG inside the repository; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_PROMPT_CHANGED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): an approved still whose prompt is not the one its image was approved with; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_PROMPT_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): a still whose own prompt fails the scene rules (E108 period, E110 writing, E113 ark), checked by the same period_problems / writing_problems / prop_problems; scene_stills.py prepare refuses it before any image too; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_SHA256_MISMATCH": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "Image first (owner, 27/10): an approved still whose image is not the one approved; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
   },
   "TALK_LINE_RETIME_OVER": {
    "class": "C",

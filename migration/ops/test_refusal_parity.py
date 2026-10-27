@@ -39,7 +39,7 @@ LATER = [
     "migration/publish/publish_video.py", "migration/publish/captions.py",
     "migration/integrations/pavo/client.py", "migration/integrations/pavo/video.py",
     "migration/integrations/pavo/images.py", "migration/integrations/pavo/audio.py",
-    ".github/workflows/episode.yml", ".github/workflows/cf-images.yml", ".github/workflows/publish-episode.yml",
+    ".github/workflows/episode.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
     ".github/workflows/pavo-footage.yml", ".github/workflows/footage.yml", ".github/workflows/approve.yml",
     ".github/workflows/publish.yml", ".github/workflows/shorts.yml", ".github/workflows/publish-shorts.yml",
     ".github/workflows/tiktok.yml", ".github/workflows/agnes-clip.yml",

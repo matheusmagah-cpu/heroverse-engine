@@ -500,6 +500,32 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   serpent silent, God as a voice, the Keeper), no Cain or Abel for now. It passes `long_plan_check.py --strict`.
 - **Kind.** Rule decisions, not failures: no `ERRORS.json` entry.
 
+## Owner decision: Pavo freed in the long, no real-footage minimum (2026-10-27)
+- **Owner.** "Libera o pavo no longo." The Bible-story long may be 100 % Pavo AI video, with no real licensed footage.
+  Every Pavo clip meets the same checks as in the Shorts: clip_check, lipsync_check where someone talks, the reviewed
+  clip being the build clip (E114), the single look of the ark (E113) and the period rules. The 9.5 floor is
+  unchanged.
+- **No new QA file.** The frozen `production/qa_criteria_story_v3.json` (2026-10-26) already says this. It has no
+  `footage_picture_share_min` or `footage_picture_share_counts` row, its `ai_video_picture_share_max` is 1.0, and
+  its `ai_video_clip_checks` requires clip_check and lipsync_check. QA_CONFLICT_REAL_FOOTAGE is raised only against
+  v2 and older, and `long_plan_check.py --strict` on `plans/arc-01-long.json` passes against v3 (problems [],
+  pending []). The rework audit was wrong to say that v3 needs footage. A v4 would repeat v3 key for key, so none was
+  made, and no frozen file was touched.
+- **Guard.** `bible/test_long_plan_check.py` `test_owner_frees_pavo_in_the_long_and_v3_already_holds_it` checks
+  three things: v3 has no footage-share row, its AI share is 1.0 with both clip checks, and the arc-01 plan raises no
+  QA_CONFLICT_REAL_FOOTAGE or QA_CONFLICT_AI_SHARE.
+- **Still open for the arc-01 long (rework audit, fix 3; not fixed here).**
+  - `qa_pilot.py` and `prepublish_gate.py` still read the story v1 keys. `qa_pilot` still requires
+    `footage_picture_share_min` 0.4. The v3 reader is slice 3, and its rows must not bring back a footage minimum.
+  - Nothing writes or checks the .srt track.
+  - 23 `refusal_registry.json` review rows for `long` are `open`.
+  - There is no `long_preflight` to refuse while those rows are open, and there is no `risk_order`, no resume and
+    no approved-shot contract for the long's shots.
+  - The preview gate has not run on the real opening.
+  - SERIES.md should point its long paragraph only to LONG_DESIGN.md. The old footage lines are now marked as
+    superseded but not yet removed.
+- **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
+
 ## Owner decision: the repository stays public; optimise the long for wall-clock time (2026-10-26)
 - **Owner.** "Manter público." The repository is public, so GitHub's standard hosted runners cost nothing: Actions
   minutes are not the constraint for the long. Parallel jobs (a matrix for the 1440p Real-ESRGAN upscale) and

@@ -406,7 +406,8 @@ def request_problems(plan, layout, refs, client=None, chars=None):
         try:
             req = request(shot, index, plan, layout, refs, chars)
             client.prepare_video(req["prompt"], req["seconds"], req["aspect_ratio"])
-            client._plan("", "", req["references"], req["audios"], req["sound"])
+            client._plan(req.get("first_frame", ""), req.get("last_frame", ""), req["references"], req["audios"],
+                         req["sound"])
         except PavoError as exc:
             out.append(f"PAVO_REQUEST_INVALID {shot['id']} {(str(exc).split() or ['PavoError'])[0]}")
         except (Exception, SystemExit) as exc:   # review of #422: any failure is a refusal by name, never a crash
@@ -727,6 +728,23 @@ def prop_refusal(plan, shot):
     return f"ARK_LOOK_CONFLICT {shot['id']} {detail}"
 
 
+# image first (owner, 27/10): the refusals frame_refusal passes on, each raised by plan_check.frame_problems
+FRAME_REFUSALS = ("FRAMES_NOT_SCENE", "FRAME_FIELD_INVALID", "FRAME_LAST_WITHOUT_FIRST", "FRAMES_WITH_REFERENCES",
+                  "FRAMES_WITH_AUDIO", "STILL_MISSING", "STILL_NOT_APPROVED", "STILL_PATH_REFUSED",
+                  "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED")
+
+
+def frame_refusal(plan, shot):
+    """Image first: a shot's `first_frame` / `last_frame` are refused unless each names an APPROVED scene still whose
+    image and prompt are the approved ones (plan_check.frame_problems, the same function plan_check and the
+    preflight run): None or the refusal."""
+    found = plan_check.frame_problems(0, shot, plan)
+    if not found:
+        return None
+    code = found[0].split()[0]   # one of FRAME_REFUSALS (test_episode_build holds them equal)
+    return f"{code} {shot['id']} {found[0].split(' ', 4)[-1]}"
+
+
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
@@ -735,7 +753,8 @@ def request(shot, index, plan, layout, refs, chars=None):
     the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
-    refused = period_refusal(plan, shot) or writing_refusal(shot) or prop_refusal(plan, shot)
+    refused = (period_refusal(plan, shot) or writing_refusal(shot) or prop_refusal(plan, shot)
+               or frame_refusal(plan, shot))
     if refused:
         raise SystemExit(refused)
     if plan_check.voiceover(shot) and not refs.get(f"{ch.NARRATOR}:talk"):
@@ -752,9 +771,15 @@ def request(shot, index, plan, layout, refs, chars=None):
     if len(references) > ch.MAX_REFS:
         raise SystemExit(f"REFERENCES_OVER_{ch.MAX_REFS} {shot['id']}")
     audios = [talk_record(layout, shot)["wav"]] if talks else []
-    return {"prompt": prompt, "seconds": shot_seconds(shot, index, plan, layout),
-            "aspect_ratio": plan.get("aspect_ratio", "9:16"), "references": references or None,
-            "audios": audios or None, "sound": False}
+    req = {"prompt": prompt, "seconds": shot_seconds(shot, index, plan, layout),
+           "aspect_ratio": plan.get("aspect_ratio", "9:16"), "references": references or None,
+           "audios": audios or None, "sound": False}
+    first, last = plan_check.frame_paths(shot)
+    if first:   # image first: Pavo's frames_to_video animates the approved still; the prompt gives motion and camera
+        req["first_frame"] = first
+        if last:
+            req["last_frame"] = last
+    return req
 
 
 WORD = re.compile(r"[a-z0-9']+")
@@ -800,6 +825,10 @@ def request_digest(req, shot, words=None, chars=None):
         audio = {"speaker": who, "voice": voice_of(who, chars), "words": list(words or [])}
     canonical = {"prompt": req["prompt"], "seconds": req["seconds"], "aspect_ratio": req["aspect_ratio"],
                  "sound": req["sound"], "references": references, "audio": audio}
+    frames = [req[f] for f in plan_check.FRAME_FIELDS if req.get(f)]
+    if frames:   # image first: each still by its id and approved sha256 (a request without frames digests as before)
+        canonical["frames"] = [{"still": Path(p).stem, "sha256": (plan_check.still_record(Path(p).stem) or {}).get(
+            "sha256")} for p in frames]
     return digest(canonical), canonical
 
 
