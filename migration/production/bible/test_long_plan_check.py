@@ -586,6 +586,21 @@ class StoryQa(unittest.TestCase):
         self.assertEqual(v3["perceptual_review_required_before_approval"], v2["perceptual_review_required_before_approval"])
         self.assertTrue(v3["frozen_before_first_story_render"])
 
+    def test_owner_frees_pavo_in_the_long_and_v3_already_holds_it(self):
+        # owner, 2026-10-27 "Libera o pavo no longo": the long may be 100 % Pavo, no real-footage minimum. v3 already
+        # says so (no footage_picture_share_* row, AI share up to 1.0, each clip through clip_check / lipsync_check),
+        # so no new frozen version: the arc-01 plan meets no QA_CONFLICT_REAL_FOOTAGE / QA_CONFLICT_AI_SHARE row
+        g3 = json.loads(QA_V3.read_text())["grammar"]
+        self.assertFalse([k for k in g3 if k.startswith("footage_picture_share")], g3)
+        self.assertEqual(g3["ai_video_picture_share_max"], 1.0)
+        for tool in ("clip_check", "lipsync_check"):
+            self.assertIn(tool, g3["ai_video_clip_checks"])
+        r = lc.check(json.loads(DRAFT_PLAN.read_text()))
+        self.assertFalse({"QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE"} & set(codes(r, "pending")), r["pending"])
+        decisions = (ROOT / "migration" / "strategy" / "DECISIONS.md").read_text()
+        entry = "## Owner decision: Pavo freed in the long, no real-footage minimum (2026-10-27)"
+        self.assertIn('"Libera o pavo no longo."', decisions.split(entry, 1)[1].split("\n## ", 1)[0])
+
     def test_v2_differs_from_v1_only_in_the_caption_rows(self):
         v1, v2 = json.loads(QA_V1.read_text()), json.loads(QA_V2.read_text())
         meta = {"version", "frozen_at_utc", "basis"}
