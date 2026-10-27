@@ -1,6 +1,6 @@
 {
  "id": "ch-noah-full",
- "prompt": "character reference, full figure standing, front view: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his long beard dark iron-grey and streaked with black, never white, a bald crown with short grey hair at the sides, the coarse undyed robe worn directly over his skin with a bare neck and no garment beneath, the knotted rope belt visible at his waist, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "prompt": "character reference, full figure standing, front view: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, very dark brown eyes, his long beard dark iron-grey and streaked with black, never white, a bald crown with short grey hair at the sides, the coarse undyed robe worn directly over his skin with a bare neck and no garment beneath, the knotted rope belt visible at his waist, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
  "negative": null,
  "seed": null,
  "size": [
@@ -15,7 +15,7 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 2.7,
+ "seconds": 2.9,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
   "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
@@ -23,7 +23,7 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "characters-img-ch-noah-full-sha256-d51e375fa219dd48fe6c8c7e5e346f1d6ca9a9f3844cd61c3c121f04358f04a9.png",
- "sha256": "d51e375fa219dd48fe6c8c7e5e346f1d6ca9a9f3844cd61c3c121f04358f04a9",
+ "release_asset": "characters-img-ch-noah-full-sha256-01c0fe91ce37ad1315470e7d29b687ccef7c28d0de6eeee2a501988ffe365300.png",
+ "sha256": "01c0fe91ce37ad1315470e7d29b687ccef7c28d0de6eeee2a501988ffe365300",
  "release_tag": "v0.0.0-cloud-assets-20261025"
 }
