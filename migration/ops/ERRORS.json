@@ -1054,6 +1054,24 @@
      "random"
     ]
    }
+  },
+  {
+   "id": "E119",
+   "date": "2026-10-27",
+   "class": "threshold",
+   "prior": [
+    "E104",
+    "E111"
+   ],
+   "error": "lipsync_check's mouth gate (MOUTH_CORR_MIN 0.45, LAG_MAX_MS 84, SPEAK_TO_PAUSE_MIN 1.5) was set on one Pavo clip (0.52 at 0 ms) and never measured on real speech. When the bearded Keeper stayed at 0.23-0.37 under MuseTalk and LatentSync 1.5, nothing in the repository could say whether the instrument under-reads a mouth covered by a beard or the outputs are out of sync.",
+   "fix": "Labelled calibration set (evidence/lipsync-calibration/20261027/calibration.json): 34 segments of real speakers from Wikimedia Commons (20 with full beards and moustaches over the lips, from 5 sources; 14 clean-shaven, from 5), public domain or CC BY, kept as per-frame lip-opening and speech-envelope series only. With their own audio no positive passes (corr 0.06-0.51, medians 0.28 bearded and 0.30 clean-shaven, speak-to-pause ~1.15, lags up to 250 ms); all 170 negatives (audio shifted 300-500 ms, or another segment's audio) fail. The beard does not lower the reading, so no beard-robust signal was added and no threshold changed (never loosened): the gate is stricter than natural speech and accepts only strongly audio-driven mouths, a direction for the owner. The 32 existing Keeper outputs were re-scored without generation (keeper-rescore.json); the verdicts stand.",
+   "antidote": {
+    "file": "migration/production/bible/test_lipsync_check.py",
+    "contains": "def test_the_mouth_gate_is_measured_on_the_labelled_calibration_set",
+    "covers": [
+     "threshold"
+    ]
+   }
   }
  ]
 }

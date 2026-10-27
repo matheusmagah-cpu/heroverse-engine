@@ -152,5 +152,58 @@ class StillMouth(unittest.TestCase):
         self.assertIn('sys.argv[1] == "--still-mouth"', Path(lc.__file__).read_text())
 
 
+CALIBRATION = Path(__file__).resolve().parents[2] / "evidence/lipsync-calibration/20261027/calibration.json"
+
+
+def _replay(seg, env):
+    o = np.array([np.nan if v is None else v for v in seg["opening"]])
+    corr, lag, ratio = lc.mouth_sync(o, seg["fps"], env)
+    share = float((~np.isnan(o)).mean())
+    return lc.verdict({"corr": 1.0, "lag_ms": 0},
+                      {"corr": corr, "lag_ms": lag, "speak_to_pause": ratio, "face_frames": round(share, 2)}), corr
+
+
+def _env(seg, shift_s=0.0):
+    k = int(round((seg["env_pad_s"] + shift_s) / lc.HOP_S))
+    return np.array(seg["env"][k:k + int(round((seg["t1"] - seg["t0"]) / lc.HOP_S))])
+
+
+class Calibration(unittest.TestCase):
+    """E119: the mouth thresholds were set on one Pavo clip. Measured 2026-10-27 on a labelled set of real speakers
+    (20 segments with full beards and moustaches over the lips, 14 clean-shaven; public-domain / CC sources, series
+    only, evidence/lipsync-calibration/20261027): every negative (audio shifted 300-500 ms or another clip's audio)
+    fails, and no real positive passes either, bearded or not (corr medians 0.28 bearded, 0.30 clean-shaven). The
+    instrument does not under-read beards; it accepts only mouths at least as audio-coupled as the Pavo calibration,
+    more than natural speech shows. Any change to the mouth gate must be replayed here."""
+
+    def test_the_mouth_gate_is_measured_on_the_labelled_calibration_set(self):
+        data = json.loads(CALIBRATION.read_text())
+        segs = data["segments"]
+        by_id = {s["id"]: s for s in segs}
+        groups = {g: [s for s in segs if s["group"] == g] for g in ("beard", "clear")}
+        self.assertGreaterEqual(len(groups["beard"]), 5)
+        self.assertGreaterEqual(len(groups["clear"]), 3)
+        self.assertGreaterEqual(len({s["clip"] for s in groups["beard"]}), 4)
+        for s in segs:
+            src = data["sources"][s["clip"]]
+            self.assertTrue(src["licence"] and src["page"].startswith("https://commons.wikimedia.org/"), s["clip"])
+        passed, corr = {"beard": 0, "clear": 0}, {"beard": [], "clear": []}
+        for s in segs:
+            flags, c = _replay(s, _env(s))
+            self.assertAlmostEqual(c, s["measured"]["pos"]["corr"], places=3)     # the series reproduce the record
+            passed[s["group"]] += flags == []
+            corr[s["group"]].append(c)
+            # negatives: never a pass, whatever the gate becomes
+            for d in (-0.5, -0.3, 0.3, 0.5):
+                self.assertNotEqual(_replay(s, _env(s, d))[0], [], (s["id"], d))
+            self.assertNotEqual(_replay(s, _env(by_id[s["swap_with"]]))[0], [], (s["id"], "swap"))
+        # no beard bias: the bearded positives pass at least as often and read about as high as the clean-shaven
+        rate = {g: passed[g] / len(groups[g]) for g in groups}
+        self.assertGreaterEqual(rate["beard"], rate["clear"], rate)
+        self.assertLess(abs(np.median(corr["beard"]) - np.median(corr["clear"])), 0.1)
+        # as measured 2026-10-27 with the current thresholds: no real speaker passes (recorded, not a target)
+        self.assertEqual(passed, {"beard": 0, "clear": 0})
+
+
 if __name__ == "__main__":
     unittest.main()
