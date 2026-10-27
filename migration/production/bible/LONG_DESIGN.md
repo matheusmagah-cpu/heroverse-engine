@@ -316,3 +316,34 @@ Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes 
 
 The production estimate (no generation) is `evidence/long/20261027/arc-01-long-production-estimate.json`
 (`long_preflight.py estimate PLAN --write`).
+
+## 8. The long's build (slice 3, 2026-10-27)
+
+`long-build.yml` (manual, main only, inputs `plan` and `resume_run`; no Pavo secret, nothing generated) runs
+`long_build.py` around the Short's own steps:
+1. **prepare**: the dispatch guard, `long_plan_check --strict`, `episode_build.py verify-preflight` (PASS report bound
+   to this plan, no review row open, every generated shot approved for its request now), then episode_build's
+   voice-script, Kokoro, `lines`, `refs` and `generate` (approved clips by sha256, clip_check / lipsync_check / face
+   check again). `lines` lays the voice at LONG_LINE_GAP and holds the cold open's last frame in silence until the
+   Keeper at exactly 30 s, re-checked on the measured voice (`episode_build.voice_layout` →
+   `long_build.cold_open_layout`: COLD_OPEN_LENGTH, COLD_OPEN_SHORT; the preflight predicts the same).
+   `long_build.py timeline` cuts the long on the 720p clips before any upscale.
+2. **upscale** (matrix, 20 at once): each approved clip through Real-ESRGAN general x4v3 to 2560x1440 30 fps
+   (`pavo_footage.render`), recorded with the approved clip's sha256. A window is never upscaled: it reuses its
+   source's picture.
+3. **assemble**: one cut a shot, every cut 4-7 s (story QA v3 `grammar.scene_seconds`: HOLD_UNDER_QA, HOLD_OVER_QA);
+   the shots of one voice run share it equally (long_plan_check's model); a talking shot from its first word at
+   normal speed to the next line, its last frame held for the gap; a window shows the next unseen part of its
+   source clip (source and windows slowed together, at most 1.3x: FOOTAGE_SHORT). No burned captions; the owned
+   music ducked under the voice; two-pass loudnorm to -15 LUFS / -1.5 dBTP, measured again on the file. The .srt
+   comes from `captions.track_record` (the writer of #469, `captions.py long`), and `manifest.json` carries the
+   fields qa_pilot reads for v3 (section 3). The preflight now predicts this compose too (`compose_problems`).
+4. **record**: `bible-<long>-sha256-<sha>.mp4` and `bible-<long>-sha256-<sha>.srt` into the release; the report,
+   manifest, .srt and a 16:9 sheet on `claude/long-<long>-<run>` for Claude's review (>= 9.5).
+
+`resume_run` keeps the upscaled clips of an earlier run whose artifact (`long-up-<long>--<shot>-<sha16>`) is of the
+clip approved now; a shot approved again since is upscaled again.
+
+The 9 image-first shots get 16:9 stills: `scene_stills.py` prepares, crops, finalizes (1920x1080), sheets and
+approves at the plan's aspect, and refuses a picture at another aspect instead of stretching it
+(STILL_ASPECT_MISMATCH). Pavo agnes-image at 16:9 quoted 0 credits (`evidence/pavo/20261027/agnes-image-16x9-quote.json`).

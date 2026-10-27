@@ -111,6 +111,17 @@ def episode(i):
                      "migration/production/characters/"]}
 
 
+def long_build(i):
+    """The long's build (long-build.yml, the long design's slice 3) takes a long plan only and ships approved clips."""
+    plan = _plan(i)
+    need(plan.get("version") == "bible-long-plan-v1", "plan", i.get("plan"), "a long plan (bible-long-plan-v1)")
+    need(re.fullmatch(r"(\d{6,20})?", i.get("resume_run") or ""), "resume_run", i.get("resume_run"), "a run id or empty")
+    ep = plan["episode"]
+    return {"uploads": 2,   # the composed long and its .srt track
+            "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}.json",
+                     "migration/production/characters/"]}
+
+
 def shot_probe(i):
     plan = _plan(i)
     shots = ids(i.get("shots"))
@@ -217,7 +228,7 @@ def subject_of(workflow, inputs):
     characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
     failure history (4) is keyed on workflow + subject. None: the workflow has no subject (agnes-clip)."""
     first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
-    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml"):
+    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml"):
         return first
     if workflow == "publish-episode.yml":
         return f"migration/production/bible/plans/{first}.json"
@@ -234,6 +245,7 @@ def subject_of(workflow, inputs):
 WORKFLOWS = {
     "episode.yml": (("plan", "resume_run"), episode),   # regenerate is always refused (E114), and kept off run-name
     "shot-probe.yml": (("plan", "shots", "attempts", "adopt_run"), shot_probe),
+    "long-build.yml": (("plan", "resume_run"), long_build),
     "cf-images.yml": (("pilot", "engine", "only"), cf_images),
     "pilot-render-stills.yml": (("pilot",), pilot_render),
     "pilot-preview.yml": (("pilot",), pilot_preview),
@@ -247,7 +259,7 @@ WORKFLOWS = {
 # GitHub keeps one pending job per group and cancels the rest, so it keeps its workflow-level group only)
 SUBJECT_JOBS = {"episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
                 "pilot-render-stills.yml": "render", "pilot-preview.yml": "preview", "footage.yml": "library",
-                "publish-episode.yml": "publish", "scene-stills.yml": "stills"}
+                "publish-episode.yml": "publish", "scene-stills.yml": "stills", "long-build.yml": "prepare"}
 
 
 def run_name(workflow, inputs):

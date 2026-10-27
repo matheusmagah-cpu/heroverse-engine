@@ -196,6 +196,24 @@
    ],
    "dispatches": []
   },
+  "long-build.yml": {
+   "name": "HeroVerse long build (approved clips -> 16:9 Real-ESRGAN 1440p long, .srt, -15 LUFS; nothing published)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/lipsync_check.py",
+    "migration/production/bible/long_build.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/syncnet.py",
+    "migration/production/pilot_render.py"
+   ],
+   "dispatches": []
+  },
   "market-panel.yml": {
    "name": "HeroVerse market panel (English Christian niche, read-only Data API)",
    "triggers": [
@@ -327,6 +345,7 @@
     "migration/production/bible/test_episode_order.py",
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_lipsync_check.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_plan_check.py",
     "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py",
@@ -1541,6 +1560,7 @@
     "cf-images.yml",
     "episode.yml",
     "footage.yml",
+    "long-build.yml",
     "pavo-footage.yml",
     "pilot-preview.yml",
     "pilot-render-stills.yml",
@@ -1866,6 +1886,7 @@
    ],
    "imported_by": [
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/test_clip_check.py"
    ],
    "test": "migration/production/bible/test_clip_check.py",
@@ -1879,6 +1900,7 @@
     "migration/integrations/pavo/video.py",
     "migration/production/bible/clip_check.py",
     "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
@@ -1888,14 +1910,17 @@
    ],
    "called_by_workflows": [
     "episode.yml",
+    "long-build.yml",
     "shot-probe.yml"
    ],
    "imported_by": [
     "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py"
@@ -1931,9 +1956,11 @@
    "imported_by": [
     "migration/ops/test_dispatch_guard.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_preflight.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_preflight.py"
    ],
    "test": "migration/production/bible/test_episode_preflight.py",
@@ -1959,12 +1986,36 @@
    "local_imports": [],
    "called_by_workflows": [
     "episode.yml",
+    "long-build.yml",
     "shot-probe.yml"
    ],
    "imported_by": [
     "migration/production/bible/test_lipsync_check.py"
    ],
    "test": "migration/production/bible/test_lipsync_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/long_build.py": {
+   "purpose": "The Bible-story long's build (LONG_DESIGN.md slice 3 and section 7; owner 27/10: arc-01's long publishable with no",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/clip_check.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/short_engine.py",
+    "migration/production/footage/pavo_footage.py",
+    "migration/publish/captions.py"
+   ],
+   "called_by_workflows": [
+    "long-build.yml"
+   ],
+   "imported_by": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/test_long_build.py"
+   ],
+   "test": "migration/production/bible/test_long_build.py",
    "is_test": false
   },
   "migration/production/bible/long_plan_check.py": {
@@ -1976,11 +2027,14 @@
     "migration/production/script_check.py"
    ],
    "called_by_workflows": [
+    "long-build.yml",
     "shot-probe.yml"
    ],
    "imported_by": [
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_plan_check.py",
     "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py"
@@ -2024,6 +2078,7 @@
    "imported_by": [
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/scene_stills.py",
@@ -2071,7 +2126,9 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
     "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_short_engine.py"
    ],
    "test": "migration/production/bible/test_short_engine.py",
@@ -2083,6 +2140,7 @@
    "local_imports": [],
    "called_by_workflows": [
     "episode.yml",
+    "long-build.yml",
     "shot-probe.yml"
    ],
    "imported_by": [
@@ -2152,6 +2210,24 @@
    "local_imports": [
     "migration/production/bible/lipsync_check.py",
     "migration/production/bible/syncnet.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/bible/test_long_build.py": {
+   "purpose": "LONG_DESIGN slice 3: the long's build. Offline: a tiny synthetic long (4 approved fake clips, one window) assembles",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_build.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/short_engine.py",
+    "migration/publish/captions.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
@@ -2386,6 +2462,7 @@
    ],
    "imported_by": [
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
     "migration/production/footage/test_pavo_footage.py"
    ],
    "test": "migration/production/footage/test_pavo_footage.py",
@@ -2558,6 +2635,7 @@
    ],
    "called_by_workflows": [
     "episode.yml",
+    "long-build.yml",
     "pilot-preview.yml",
     "pilot-render-stills.yml",
     "render-smoke.yml",
@@ -3191,6 +3269,8 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/channel/captions_audit.py",
+    "migration/production/bible/long_build.py",
+    "migration/production/bible/test_long_build.py",
     "migration/production/qa_pilot.py",
     "migration/production/test_qa_pilot.py",
     "migration/publish/preflight.py",

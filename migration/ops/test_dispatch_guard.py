@@ -17,6 +17,7 @@ sys.path.insert(0, str(g.ROOT / "migration" / "production" / "bible"))
 
 ROOT = g.ROOT
 PLAN = "migration/production/bible/plans/genesis-09-short.json"
+LONG_PLAN = "migration/production/bible/plans/arc-01-long.json"
 PILOT = next(p.parent.name for p in sorted((ROOT / "migration/production").glob("pilot-*/script.json")))
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
@@ -86,6 +87,7 @@ SAMPLES = {
     "pilot-preview.yml": {"pilot": PILOT},
     "footage.yml": {"queries": f"migration/production/{PILOT}/beats.json", "per_theme": "3"},
     "scene-stills.yml": {"plan": PLAN, "shots": "s-voice", "candidates": "2"},
+    "long-build.yml": {"plan": LONG_PLAN, "resume_run": ""},
 }
 
 
@@ -214,6 +216,10 @@ class Inputs(unittest.TestCase):
         self.refused("footage.yml", {"queries": "/etc/passwd", "per_theme": "3"}, "GUARD_INPUT_INVALID")
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
         self.refused("pilot-render-stills.yml", {"pilot": "pilot-999"}, "GUARD_INPUT_MISSING")
+        # LONG_DESIGN slice 3: the long's build takes a long plan only
+        self.refused("long-build.yml", {"plan": PLAN}, "GUARD_INPUT_INVALID")
+        self.refused("long-build.yml", {"plan": LONG_PLAN, "resume_run": "x"}, "GUARD_INPUT_INVALID")
+        self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 2)
 
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": "s-voice,s-laugh", "attempts": "3"})

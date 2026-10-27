@@ -343,5 +343,81 @@ class Stills(unittest.TestCase):
         self.assertEqual(raised, set(eb.FRAME_REFUSALS))
 
 
+
+class LongStills(unittest.TestCase):
+    """LONG_DESIGN slice 3: the long's image-first shots get 16:9 stills (1920x1080) through the same prepare,
+    crop, finalize, sheet and approve; a picture at the wrong aspect is refused, never stretched."""
+    SHOT = "s-co-gate"
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp(prefix=".test-long-stills-", dir=HERE))
+        self.saved = pc.STILLS_DIR
+        pc.STILLS_DIR = self.dir
+        self.plan = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        self.i, shot = next((i, s) for i, s in enumerate(self.plan["shots"]) if s["id"] == self.SHOT)
+        self.still = f"arc-01-long-{self.SHOT}"
+        shot["first_frame"] = self.still
+        self.shot = shot
+        ss.save(self.dir / f"{self.still}.json", {"id": self.still, "episode": "arc-01-long", "shot": self.SHOT,
+                                                  "status": "DRAFT", "prompt": shot["prompt"]})
+
+    def tearDown(self):
+        pc.STILLS_DIR = self.saved
+        shutil.rmtree(self.dir)
+
+    def test_a_long_still_is_made_reviewed_and_approved_at_16x9(self):
+        from PIL import Image
+        spec = ss.prepare(self.plan, [self.SHOT], 2, "55", stills_dir=self.dir)
+        self.assertEqual((spec["aspect_ratio"], spec["side"], spec["style"]), ("16:9", [1920, 1080], ss.STYLES["16:9"]))
+        self.assertEqual(ss.prepare(self.plan, [self.SHOT], 1, "55", stills_dir=self.dir, engine="pavo")["aspect_ratio"],
+                         "16:9")   # the Pavo agnes-image request's ratio (quoted 0 credits at 16:9)
+        img = self.dir / "img"
+        img.mkdir()
+        Image.new("RGB", (1024, 1024), (200, 100, 50)).save(img / f"{self.still}-55-1.png")
+        (img / f"{self.still}-55-1.json").write_text(json.dumps({"prompt": "x", "engine": "flux"}))
+        ss.crop(img)
+        with Image.open(img / f"{self.still}-55-1.png") as im:
+            self.assertEqual(im.size, (1024, 576))       # the centre 16:9 band
+        self.assertEqual(ss.finalize(img, "55", stills_dir=self.dir), [f"{self.still}-55-1"])
+        cid = f"{self.still}-55-1"
+        meta = json.loads((self.dir / "candidates" / f"{cid}.json").read_text())
+        self.assertEqual((meta["size"], meta["aspect_ratio"]), ([1920, 1080], "16:9"))
+        with Image.open(self.dir / "candidates" / f"{cid}.jpg") as im:
+            self.assertEqual(im.size, (1920, 1080))
+        out = self.dir / "sheet.jpg"
+        self.assertEqual(ss.sheet("55", out, stills_dir=self.dir), [cid])
+        with Image.open(out) as im:
+            self.assertGreater(im.size[0], im.size[1] * 0.9)   # 640x360 cells
+        rec = ss.approve(self.still, cid, 9.6, "the sword's fire soft, the gate dark, no figure", stills_dir=self.dir,
+                         today="2026-10-27")
+        self.assertEqual((rec["status"], rec["size"]), ("APPROVED", [1920, 1080]))
+        self.assertEqual(pc.frame_problems(self.i, self.shot, self.plan), [])
+        # the request sends the approved 16:9 still as its first frame
+        self.assertEqual(pc.frame_paths(self.shot)[0], rec["repo_path"])
+
+    def test_a_still_at_the_wrong_aspect_is_refused_never_stretched(self):
+        from PIL import Image
+        img = self.dir / "img"
+        img.mkdir()
+        Image.new("RGB", (1080, 1920), (90, 80, 70)).save(img / f"{self.still}-56-1.jpg", "JPEG")   # a 9:16 picture
+        with self.assertRaises(SystemExit) as c:
+            ss.finalize(img, "56", stills_dir=self.dir)
+        self.assertTrue(str(c.exception).startswith("STILL_ASPECT_MISMATCH"), str(c.exception))
+        # a 9:16 candidate recorded by hand is refused at the approval too
+        cand = self.dir / "candidates" / f"{self.still}-56-2.jpg"
+        cand.parent.mkdir(parents=True, exist_ok=True)
+        jpeg(cand)
+        ss.save(cand.with_suffix(".json"), {"id": cand.stem, "still": self.still, "status": "DRAFT",
+                                            "prompt": self.shot["prompt"], "size": [1080, 1920],
+                                            "repo_path": ss.rel(cand), "sha256": ss.sha256(cand)})
+        with self.assertRaises(SystemExit) as c:
+            ss.approve(self.still, cand.stem, 9.6, "x", stills_dir=self.dir)
+        self.assertTrue(str(c.exception).startswith("STILL_ASPECT_MISMATCH"), str(c.exception))
+        with self.assertRaises(SystemExit) as c:
+            ss.aspect_of({"aspect_ratio": "4:3"})
+        self.assertTrue(str(c.exception).startswith("STILL_ASPECT_UNSUPPORTED"))
+        self.assertEqual(ss.aspect_of({}), "9:16")
+
+
 if __name__ == "__main__":
     unittest.main()

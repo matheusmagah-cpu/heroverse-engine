@@ -10,7 +10,8 @@ images' pattern:
                                       repo_path (bible/stills/<still-id>.jpg), sha256, size, candidate, approved
                                       {date, score, note, prompt_sha256}
   bible/stills/candidates/<cid>.jpg   candidates made by scene-stills.yml (FLUX on the Workers AI free allocation,
-  bible/stills/candidates/<cid>.json  centre crop to 9:16, Real-ESRGAN, 1080x1920 JPEG), cid = <still-id>-<run>-<n>,
+  bible/stills/candidates/<cid>.json  centre crop to the plan's aspect, Real-ESRGAN, 1080x1920 JPEG at 9:16 or
+                                      1920x1080 at 16:9 for the long), cid = <still-id>-<run>-<n>,
                                       each with its sha256 and the prompt it was made from; status DRAFT
   bible/stills/sheets/<episode>-<run>.jpg   the contact sheet Claude reviews
 
@@ -29,7 +30,7 @@ usage:
   scene_stills.py prepare PLAN SHOTS CANDIDATES RUN OUT_JSON [--engine flux|pavo]   the shots' stills (1-3 each):
                                                                 cf_images.py's input (flux), or the Pavo requests
                                                                 with each still's `references` (pavo; E122)
-  scene_stills.py crop IMG_DIR                                  centre crop each FLUX PNG to 9:16 (in place)
+  scene_stills.py crop IMG_DIR                                  centre crop each FLUX PNG to its plan's aspect
   scene_stills.py finalize IMG_DIR RUN                          candidates (JPEG 1080x1920 + record) into stills/candidates
                                                                 (FLUX PNGs, or Pavo Agnes Image JPEGs with `source`)
   scene_stills.py sheet RUN OUT_JPG                             contact sheet of that run's candidates
@@ -49,12 +50,20 @@ import plan_check  # noqa: E402
 
 REPO = plan_check.ROOT
 STILLS = plan_check.STILLS_DIR
-SIDE = (1080, 1920)              # 9:16, the Short's frame (Pavo: side 256-5760, aspect 0.4-2.5)
+# a still at its plan's aspect (Pavo: side 256-5760, aspect 0.4-2.5): the Short's 9:16 frame, the long's 16:9
+# (LONG_DESIGN slice 3: its 9 image-first shots; 1920x1080, above Pavo's 1280x720 video frame). Any other aspect is
+# refused (STILL_ASPECT_UNSUPPORTED), and a candidate whose picture is not at its plan's aspect is refused, never
+# stretched (STILL_ASPECT_MISMATCH, the same code plan_check raises on an approved still)
+SIDES = {"9:16": (1080, 1920), "16:9": (1920, 1080)}
+SIDE = SIDES["9:16"]
+ASPECT_TOL = 0.01                # plan_check.frame_problems' tolerance
 FLOOR = 9.5
 MAX_CANDIDATES = 3
 # cf_images.py appends ", " + style to each prompt: FLUX schnell on Workers AI is square, so the subject is kept in
-# the central third and the square is cropped to 9:16
-STYLE = "tall vertical composition, the whole subject inside the central third of the frame"
+# the central third (a 9:16 column) or band (a 16:9 band) and the square is cropped to the plan's aspect
+STYLES = {"9:16": "tall vertical composition, the whole subject inside the central third of the frame",
+          "16:9": "wide horizontal composition, the whole subject inside the central band of the frame"}
+STYLE = STYLES["9:16"]
 RUN = re.compile(r"^[0-9]{1,20}$")
 
 
@@ -69,6 +78,26 @@ def save(path, data):
 
 def rel(path):
     return str(Path(path).resolve().relative_to(REPO.resolve()))
+
+
+def aspect_of(plan):
+    """The still aspect of a plan (its `aspect_ratio`, 9:16 when it names none): STILL_ASPECT_UNSUPPORTED otherwise."""
+    aspect = (plan or {}).get("aspect_ratio", "9:16")
+    if aspect not in SIDES:
+        raise SystemExit(f"STILL_ASPECT_UNSUPPORTED {aspect} ({' or '.join(SIDES)})")
+    return aspect
+
+
+def still_aspect(still, stills_dir=None):
+    """The aspect a still is made at: its record's episode plan's (plans/<episode>.json)."""
+    rec = plan_check.still_record(still, stills_dir) or {}
+    path = HERE / "plans" / f"{rec.get('episode')}.json"
+    return aspect_of(json.loads(path.read_text()) if path.is_file() else {})
+
+
+def at_aspect(size, aspect):
+    w, h = (int(x) for x in aspect.split(":"))
+    return bool(size) and abs(size[0] / size[1] - w / h) <= ASPECT_TOL
 
 
 def plan_stills(plan, ids):
@@ -98,6 +127,7 @@ def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
         raise SystemExit(f"STILL_RUN_INVALID {run}")
     if engine not in ENGINES:
         raise SystemExit(f"STILL_ENGINE_INVALID {engine} ({' or '.join(ENGINES)})")
+    aspect = aspect_of(plan)
     images = []
     shots = {s.get("id"): (i, s) for i, s in enumerate(plan.get("shots") or [])}
     for sid, still in plan_stills(plan, ids):
@@ -123,23 +153,30 @@ def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
         images += [{"id": f"{still}-{run}-{n}", "still": still, "prompt": rec["prompt"], "seed": None,
                     "references": [r["repo_path"] for r in refs], "reference_records": refs}
                    for n in range(1, candidates + 1)]
-    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "engine": engine, "style": STYLE,
-            "negative": None,
+    # aspect_ratio: what a Pavo agnes-image request asks for (16:9 quoted 0 credits, evidence/pavo/20261027)
+    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "engine": engine, "style": STYLES[aspect],
+            "aspect_ratio": aspect, "side": list(SIDES[aspect]), "negative": None,
             "width": 1024, "height": 1024, "images": images}
 
 
-def crop(img_dir):
-    """Each FLUX PNG (1024 square) cut to its centre 9:16 column, in place."""
+def crop(img_dir, stills_dir=None):
+    """Each FLUX PNG (1024 square) cut to its plan's aspect, in place: the centre 9:16 column of a Short's still, the
+    centre 16:9 band of a long's (still_aspect: the candidate's still's episode plan)."""
     from PIL import Image
-    # FLUX PNGs from scene-stills.yml, or a native 9:16 source's JPEG/PNG whose sidecar names its `source` and
-    # `upscaler` (pavo-agnes-image-2.5-flash: 1472x2624 JPEG, Lanczos to 1080x1920)
+    # FLUX PNGs from scene-stills.yml, or a native source's JPEG/PNG whose sidecar names its `source` and
+    # `upscaler` (pavo-agnes-image-2.5-flash: 1472x2624 JPEG at 9:16, Lanczos to 1080x1920)
     for png in sorted(p for p in Path(img_dir).iterdir() if p.suffix in (".png", ".jpg")):
+        parts = split_candidate(png.stem)
+        side = SIDES[still_aspect(parts[0], stills_dir) if parts else "9:16"]
         im = Image.open(png).convert("RGB")
         w, h = im.size
-        cw = round(h * SIDE[0] / SIDE[1])
+        cw, chh = round(h * side[0] / side[1]), round(w * side[1] / side[0])
         if cw < w:
             left = (w - cw) // 2
             im.crop((left, 0, left + cw, h)).save(png)
+        elif chh < h:
+            top = (h - chh) // 2
+            im.crop((0, top, w, top + chh)).save(png)
 
 
 def split_candidate(cid):
@@ -149,7 +186,9 @@ def split_candidate(cid):
 
 
 def finalize(img_dir, run, stills_dir=None):
-    """Candidates into stills/candidates: 1080x1920 JPEG, its sha256, the still's prompt, status DRAFT."""
+    """Candidates into stills/candidates: a JPEG at the plan's side (1080x1920 for 9:16, 1920x1080 for 16:9), its
+    sha256, the still's prompt, status DRAFT. A picture at another aspect is refused (STILL_ASPECT_MISMATCH), never
+    stretched."""
     from PIL import Image
     stills_dir = Path(stills_dir or STILLS)
     out = []
@@ -163,9 +202,14 @@ def finalize(img_dir, run, stills_dir=None):
         rec = plan_check.still_record(still, stills_dir)
         if rec is None:
             raise SystemExit(f"STILL_MISSING {still}")
+        aspect = still_aspect(still, stills_dir)
+        side = SIDES[aspect]
+        im = Image.open(png).convert("RGB")
+        if not at_aspect(im.size, aspect):
+            raise SystemExit(f"STILL_ASPECT_MISMATCH {png.stem} ({list(im.size)} is not {aspect}: crop it first)")
         dst = stills_dir / "candidates" / f"{png.stem}.jpg"
         dst.parent.mkdir(parents=True, exist_ok=True)
-        Image.open(png).convert("RGB").resize(SIDE, Image.LANCZOS).save(dst, "JPEG", quality=92)
+        im.resize(side, Image.LANCZOS).save(dst, "JPEG", quality=92)
         made = png.with_suffix(".json")
         meta = json.loads(made.read_text()) if made.is_file() else {}
         plan_path = HERE / "plans" / f"{rec.get('episode')}.json"   # E123: the plan decides what names the ark
@@ -180,21 +224,25 @@ def finalize(img_dir, run, stills_dir=None):
             "engine": meta.get("engine"), "models": meta.get("models"), "generated_by": meta.get("generated_by"),
             "source": meta.get("source", "cf-flux"), "conversation_id": meta.get("conversation_id"),
             "quote": meta.get("quote"), "references": meta.get("references") or [], "pavo": meta.get("pavo"),
-            "upscaler": meta.get("upscaler", "Real-ESRGAN general x4v3 (bsd-3-clause), then Lanczos to 1080x1920"),
-            "size": list(SIDE), "repo_path": rel(dst), "sha256": sha256(dst)})
+            "upscaler": meta.get("upscaler", "Real-ESRGAN general x4v3 (bsd-3-clause), then Lanczos to "
+                                             f"{side[0]}x{side[1]}"),
+            "aspect_ratio": aspect, "size": list(side), "repo_path": rel(dst), "sha256": sha256(dst)})
         out.append(png.stem)
     return out
 
 
 def sheet(run, out_jpg, stills_dir=None):
-    """The run's candidates side by side (3 a row, 360x640 each), each labelled with its candidate id."""
+    """The run's candidates side by side, each labelled with its candidate id: 3 a row at 360x640 (9:16), 2 a row at
+    640x360 (16:9, the long's)."""
     from PIL import Image, ImageDraw
     stills_dir = Path(stills_dir or STILLS)
     files = sorted(p for p in (stills_dir / "candidates").glob("*.jpg")
                    if (split_candidate(p.stem) or (None, None))[1] == str(run))
     if not files:
         raise SystemExit(f"STILL_SHEET_EMPTY run {run}")
-    cols, tw, th, band = 3, 360, 640, 28
+    with Image.open(files[0]) as first:
+        wide = first.size[0] > first.size[1]
+    cols, tw, th, band = (2, 640, 360, 28) if wide else (3, 360, 640, 28)
     rows = (len(files) + cols - 1) // cols
     canvas = Image.new("RGB", (cols * tw, rows * (th + band)), (20, 20, 20))
     draw = ImageDraw.Draw(canvas)
@@ -227,6 +275,12 @@ def approve(still, candidate, score, note, stills_dir=None, today=None):
     meta = json.loads(meta_path.read_text())
     if sha256(src) != meta.get("sha256"):
         raise SystemExit(f"STILL_CANDIDATE_SHA256_MISMATCH {candidate}")
+    from PIL import Image
+    with Image.open(src) as im:
+        size = im.size
+    aspect = still_aspect(still, stills_dir)
+    if not at_aspect(size, aspect):
+        raise SystemExit(f"STILL_ASPECT_MISMATCH {candidate} ({list(size)} is not {aspect})")
     if meta.get("prompt") != rec.get("prompt"):
         raise SystemExit(f"STILL_PROMPT_CHANGED {candidate} (made from another prompt than {still}'s; generate again)")
     plan_path = HERE / "plans" / f"{rec.get('episode')}.json"

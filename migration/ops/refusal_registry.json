@@ -57,6 +57,11 @@
    ],
    "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
   },
+  "AUDIO_FORMAT": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_a_tiny_long_assembles_to_a_16x9_file_with_its_srt_track_and_manifest",
+   "note": "the render writes AAC 48 kHz stereo; the check keeps the frozen QA's technical.video row"
+  },
   "AUDIO_NEEDS_REFERENCES": {
    "class": "A",
    "was": "B",
@@ -139,6 +144,11 @@
   "CAPTIONS_LIST": {
    "class": "D",
    "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_long_build_yml_ships_approved_clips_only_and_resumes",
+   "note": "long-build.yml's record job: the .srt uploaded is the track the manifest records (captions.track_record)"
   },
   "CAPTIONS_SRT_INVALID": {
    "class": "A",
@@ -249,6 +259,11 @@
    "class": "D",
    "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
   },
+  "CLIP_MISSING": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_a_picture_not_made_from_the_approved_clip_is_refused",
+   "note": "every generated shot's clip is fetched by generate_step (approved, sha256 checked) before the timeline step"
+  },
   "CLIP_TOO_SHORT": {
    "class": "A",
    "was": "B",
@@ -266,6 +281,22 @@
   "CLOUDFLARE_API_TOKEN_MISSING": {
    "class": "D",
    "resume": "a secret's configuration: set it, dispatch again (nothing was generated)"
+  },
+  "COLD_OPEN_LENGTH": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::COLD_OPEN_LENGTH",
+    "migration/production/bible/episode_build.py::long_build.cold_open_layout(plan, layout)"
+   ],
+   "note": "slice 3: long_plan_check refuses it on the estimate; the preflight's lines step (episode_build.voice_layout) on the measured Kokoro voice, the same function the build's lines step runs"
+  },
+  "COLD_OPEN_SHORT": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::COLD_OPEN_SHORT",
+    "migration/production/bible/episode_build.py::long_build.cold_open_layout(plan, layout)"
+   ],
+   "note": "slice 3: as COLD_OPEN_LENGTH (the held frame over COLD_OPEN_HOLD_MAX)"
   },
   "COMMAND_FAILED": {
    "class": "I",
@@ -397,6 +428,14 @@
   "FOOTAGE_HASH_MISMATCH": {
    "class": "D",
    "resume": "a changed release asset: restore it (assets.sh) and the render runs again; nothing is published"
+  },
+  "FOOTAGE_SHORT": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::FOOTAGE_SHORT",
+    "migration/production/bible/episode_preflight.py::if layout and not problems:   # a long's compose too"
+   ],
+   "note": "slice 3: a source clip and its windows slowed at most 1.3x, on the plan's seconds, the measured voice, and the approved clips' lengths (coverage_problems) before any upscale"
   },
   "FOOTAGE_SHORTAGE": {
    "class": "A",
@@ -604,6 +643,22 @@
   "HERO_YT_AUTHORIZED_USER_JSON": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "HOLD_OVER_QA": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::HOLD_OVER_QA",
+    "migration/production/bible/episode_preflight.py::if layout and not problems:   # a long's compose too"
+   ],
+   "note": "slice 3: as HOLD_UNDER_QA"
+  },
+  "HOLD_UNDER_QA": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::HOLD_UNDER_QA",
+    "migration/production/bible/episode_preflight.py::if layout and not problems:   # a long's compose too"
+   ],
+   "note": "slice 3: the long's cuts (compose_problems) predicted by the preflight on the measured voice and the planned clip lengths, and by the build's timeline step on the approved 720p clips before any upscale"
   },
   "HTTP_{}": {
    "class": "D",
@@ -882,6 +937,10 @@
    "early": ".github/workflows/pavo-footage.yml::LIST_PATH_REFUSED",
    "note": "refused in the workflow's first step before any work (a 0 s run)"
   },
+  "LONG_COMPOSE_REFUSED": {
+   "class": "C",
+   "probe": "the timeline step runs compose_problems on the approved clips before the upscale; the frame, length, black frames and loudness are measured on the composed file (two-pass loudnorm sets -15 LUFS)"
+  },
   "LONG_DESCRIPTION_LENGTH": {
    "class": "B",
    "early": "package_pilot / script_check keeping the long's description under DESCRIPTION_MAX minus the arc block arcs.json implies",
@@ -911,6 +970,24 @@
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
   },
+  "LONG_PLAN_REQUIRED": {
+   "class": "N",
+   "why": "long_build.py run on a Short's plan: a wrong input, refused before any work (the dispatch guard refuses it at dispatch)"
+  },
+  "LONG_TIMELINE_REFUSED": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::if layout and not problems:   # a long's compose too",
+   "note": "slice 3: the wrapper of compose_problems on the approved 720p clips, the same function the preflight runs on the measured voice and the planned lengths; residual: a clip a few hundredths shorter than recorded"
+  },
+  "LONG_VOICEOVER_UNSUPPORTED": {
+   "class": "A",
+   "early": "migration/production/bible/long_plan_check.py::LONG_VOICEOVER_UNSUPPORTED",
+   "note": "the long's plan check refuses a voice-over Keeper; the compose keeps the refusal as an invariant"
+  },
+  "LOUDNORM_MEASURE_FAILED": {
+   "class": "D",
+   "resume": "ffmpeg's loudnorm first pass printed no measure: a tool fault, the run is dispatched again with resume_run (its upscales kept)"
+  },
   "LOW_FPS": {
    "class": "C",
    "probe": "one clip of a new model or resolution (Agnes Flash 720p 24 fps passes, measured 2026-10-25)"
@@ -922,6 +999,11 @@
   "MANIFEST_NOT_FOR_THIS_FILE": {
    "class": "I",
    "guard": "migration/publish/test_publish_video.py::def test_"
+  },
+  "MANIFEST_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_long_build_yml_ships_approved_clips_only_and_resumes",
+   "note": "long-build.yml's record job: the manifest names the file uploaded (assemble writes both from one sha256)"
   },
   "MEDIA_RESOLUTION_LOW": {
    "class": "N",
@@ -1481,6 +1563,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "RESUME_RUN_NOT_A_LONG_BUILD": {
+   "class": "N",
+   "why": "long-build.yml's resume_run names a run that is not an earlier long-build.yml dispatch of main: a wrong input, refused before its artifacts are read (sweep H2)"
+  },
   "RESUME_RUN_REFUSED": {
    "class": "A",
    "early": ".github/workflows/episode.yml::RESUME_RUN_REFUSED",
@@ -1612,6 +1698,10 @@
    "was": "B",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "SHOT_ID_REFUSED": {
+   "class": "N",
+   "why": "long-build.yml's upscale job: a matrix value that is not a shot id (upscale-ids lists the plan's generated shot ids only)"
   },
   "SHOT_NOTE_MISSING": {
    "class": "N",
@@ -2099,6 +2189,10 @@
    "class": "C",
    "probe": "the review score of the render; its cheap probe is the preview review at >= 9.5 before the render (preview_gate)"
   },
+  "TRUE_PEAK": {
+   "class": "C",
+   "probe": "two-pass loudnorm at -1.5 dBTP; measured on the composed file (ebur128 true peak)"
+  },
   "UNSAFE_SOURCE_MEMBER": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
@@ -2119,9 +2213,32 @@
    "class": "D",
    "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
+  "UPSCALE_FRAME": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_the_upscale_binds_its_picture_to_the_approved_clip",
+   "note": "pavo_footage.render writes 2560x1440 and refuses another output (PAVO_OUTPUT_SPEC)"
+  },
+  "UPSCALE_MISSING": {
+   "class": "D",
+   "resume": "an upscale job failed or its artifact expired: dispatch again with resume_run; the kept upscales are reused"
+  },
   "UPSCALE_SECONDS": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "UPSCALE_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_the_upscale_binds_its_picture_to_the_approved_clip",
+   "note": "the upscaled file is the one its record names"
+  },
+  "UPSCALE_SHOT_REFUSED": {
+   "class": "N",
+   "why": "an upscale job named a window or a shot not in the plan: a wrong input (upscale-ids lists generated shots only)"
+  },
+  "UPSCALE_SOURCE_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_a_picture_not_made_from_the_approved_clip_is_refused",
+   "note": "an upscaled picture is bound to the approved clip's sha256; a shot approved again since is upscaled again"
   },
   "UPSTREAM_HTTP_REFUSED": {
    "class": "D",

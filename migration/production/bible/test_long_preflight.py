@@ -79,8 +79,8 @@ class Preflight(Scratch):
         lp.REGISTRY.write_text(json.dumps(registry()))
         r = pf.preflight(self.plan_path, setups=[], today_images=0)
         self.assertFalse([b for b in r["blockers"] if b.startswith("LONG_REVIEW_OPEN")])
-        # and on main today the long is blocked by its open rows (the other slice closes them)
-        self.assertTrue(lp.open_rows(json.loads(self.saved[1].read_text())))
+        # the other slice (#469, story QA v3's readers and the .srt) closed every row: none is open now
+        self.assertEqual(lp.open_rows(json.loads(self.saved[1].read_text())), [])
 
     def test_the_long_plan_is_checked_by_long_plan_check_strict_and_the_frozen_qa(self):
         r = pf.preflight(LONG, setups=[], today_images=0)
@@ -270,7 +270,7 @@ class Contract(unittest.TestCase):
         # build, LONG_DESIGN slice 3, must do the same)
         for w in sorted(WORKFLOWS.glob("*.yml")):
             text = w.read_text()
-            if "episode_build.py generate" in text or "long_build" in text:
+            if "episode_build.py generate" in text or "bible/long_build.py " in text:
                 self.assertIn("verify-preflight", text, w.name)
                 self.assertLess(text.index("verify-preflight"), text.index("episode_build.py generate"), w.name)
                 self.assertNotIn("PAVO_TOKEN", text, w.name)

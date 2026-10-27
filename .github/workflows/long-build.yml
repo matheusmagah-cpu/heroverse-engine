@@ -1,0 +1,303 @@
+name: HeroVerse long build (approved clips -> 16:9 Real-ESRGAN 1440p long, .srt, -15 LUFS; nothing published)
+run-name: "long-build: plan=${{ inputs.plan }} resume_run=${{ inputs.resume_run }}"
+# LONG_DESIGN.md slice 3 and section 7 (E126): the Bible-story long is built like a Short (episode.yml) from approved
+# clips only. It generates nothing and holds no Pavo secret: verify-preflight first (a PASS preflight bound to this
+# plan, no review row open, every generated shot approved in shots/<long>.json for the request the plan sends now),
+# episode_build's voice, lines (LONG_LINE_GAP, the cold open's hold measured), refs and generate (the approved clips by
+# content hash, checked again), the long's cuts on the 720p clips (its timeline step), then one Real-ESRGAN job a
+# clip (2560x1440 30 fps, the QA's upscaler) and the assembly (one cut a shot, story QA v3 holds, windows on their
+# source clip, owned music, -15 LUFS / -1.5 dBTP, the .srt by captions.py's writer, the manifest qa_pilot reads).
+# The record job (no secret) puts the file and its .srt in the release under the file's sha256 and the sheet,
+# manifest and report on a claude/long-* branch for Claude's review. resume_run: a failed run's upscaled clips are
+# kept (artifacts of the approved clip they were made from); the rest is redone.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Long plan path (migration/production/bible/plans/<arc>-long.json, bible-long-plan-v1)
+        required: true
+      resume_run:
+        description: Run id of an earlier long-build of the same plan whose upscaled clips are kept; empty = from the start
+        required: false
+        default: ""
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-long-build
+  cancel-in-progress: false
+jobs:
+  prepare:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: heroverse-subject-${{ inputs.plan }}
+      cancel-in-progress: false
+    # a manual run of main only
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    permissions:
+      contents: read   # checkout, the release's reference images and approved clips
+      actions: read    # the dispatch guard and resume_run's artifact names
+    outputs:
+      episode: ${{ steps.plan.outputs.episode }}
+      ids: ${{ steps.ids.outputs.ids }}
+    env:
+      PLAN: ${{ inputs.plan }}
+      GH_TOKEN: ${{ github.token }}
+      RESUME_RUN: ${{ inputs.resume_run }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run long-build.yml
+      - id: plan
+        name: The plan (a long, long_plan_check strict, a PASS preflight of this exact plan and every shot approved; E106, E126)
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*-long)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          ep="${BASH_REMATCH[1]}"
+          test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
+          python3 -I -B migration/production/bible/long_plan_check.py "$PLAN" --strict
+          # E126: the committed long preflight is PASS for this plan, no review row is open, every generated shot has
+          # an approved clip of the request the plan sends now; else the build stops here, before any voice or clip
+          python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
+          [[ -z "$RESUME_RUN" || "$RESUME_RUN" =~ ^[0-9]{6,20}$ ]] || { echo "RESUME_RUN_REFUSED"; exit 1; }
+          echo "episode=$ep" >> "$GITHUB_OUTPUT"
+          echo "EP=$ep" >> "$GITHUB_ENV"
+          echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout (episode_build.rel)
+      - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
+        run: |
+          timeout 300s sudo apt-get update -qq
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
+          python3 -m venv "$RUNNER_TEMP/voice"
+          "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
+          python3 -m venv "$RUNNER_TEMP/lip"
+          "$RUNNER_TEMP/lip/bin/pip" install --disable-pip-version-check -q 'mediapipe==0.10.35'
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+          sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
+          echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
+          sha=$(python3 -I -c "import re,sys;print(re.search(r'SYNCNET_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/syncnet.py)
+          echo "$sha  $RUNNER_TEMP/syncnet_v2.model" | sha256sum -c -
+          # the lips check must work before an approved talking clip is checked again (E89): the calibration clip passes
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
+          # and the face check of God's voice-over shots must see the Keeper's face in the same clip
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
+          mkdir -p "$WORK"
+      - name: Voice track (Kokoro line by line at the long's gap, the cold open's hold measured) and the talking clips' audio
+        run: |
+          python3 -I -B migration/production/bible/episode_build.py voice-script "$PLAN" "$WORK"
+          python3 -I -B migration/production/pilot_render.py prepare "$WORK" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+          ESPEAK_DATA_PATH=$("$RUNNER_TEMP/voice/bin/python" -I -c "import espeakng_loader as e;print(e.get_data_path())")
+          test -d "$ESPEAK_DATA_PATH" || { echo "ESPEAK_DATA_MISSING"; exit 1; }
+          export ESPEAK_DATA_PATH
+          "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$WORK" "$WORK/voice-script.json"
+          python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
+      - name: Approved reference images (sha256 checked; the requests are recomputed from them)
+        run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
+      - name: Approved clips (E114, E126; shots/<long>.json, sha256 checked), clip_check, lipsync_check, face check again; no generation, no secret
+        run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"
+      - name: The long's cuts on the approved clips (one cut a shot, story QA v3 holds, windows on their source), before any upscale
+        run: python3 -I -B migration/production/bible/long_build.py timeline "$PLAN" "$WORK"
+      - id: ids
+        name: The clips to upscale (resume_run keeps the upscaled clips of the approved clips they were made from)
+        run: |
+          : > "$RUNNER_TEMP/done.txt"
+          if [ -n "$RESUME_RUN" ]; then
+            src=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN" --jq '[.path, .event, .head_branch] | join(" ")')
+            # sweep H2: only an earlier long-build of main may lend its upscales (never a pull request run's artifacts)
+            [ "$src" = ".github/workflows/long-build.yml workflow_dispatch main" ] || { echo "RESUME_RUN_NOT_A_LONG_BUILD $src"; exit 1; }
+            gh api --paginate "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN/artifacts?per_page=100" --jq '.artifacts[] | select(.expired == false) | .name' > "$RUNNER_TEMP/done.txt"
+          fi
+          ids=$(python3 -I -B migration/production/bible/long_build.py upscale-ids "$PLAN" "$RUNNER_TEMP/done.txt")
+          echo "UPSCALE $ids"
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+      - name: Collect the prepared files (also on failure, when the report names the failed shot)
+        if: always() && steps.plan.outputs.episode != ''
+        run: |
+          mkdir -p "$RUNNER_TEMP/prep"
+          for f in report.json layout.json compose-timeline.json long-timeline.json narration.wav; do
+            [ -f "$WORK/$f" ] && cp "$WORK/$f" "$RUNNER_TEMP/prep/" || true
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.plan.outputs.episode != ''
+        with:
+          name: long-prep-${{ steps.plan.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/prep
+          retention-days: 14
+
+  upscale:
+    needs: prepare
+    if: needs.prepare.outputs.ids != '[]' && needs.prepare.outputs.ids != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read   # the approved clip from the release (assets.sh)
+      actions: read    # the guard's attempt rule
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        shot: ${{ fromJSON(needs.prepare.outputs.ids) }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PLAN: ${{ inputs.plan }}
+      SHOT: ${{ matrix.shot }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard, re-run attempt (no secret in this job's env; E116)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py attempt long-build.yml
+      - id: pins
+        run: echo "hash=$(grep -E '/bin/pip\" install ' .github/workflows/long-build.yml | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684  # v4.2.3
+        with:
+          path: ~/.cache/pip
+          key: pip-upres-${{ runner.os }}-${{ steps.pins.outputs.hash }}
+      - name: ffmpeg and Real-ESRGAN general x4v3 on CPU (same model, weights and hash as pavo-footage.yml)
+        run: |
+          [[ "$SHOT" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "SHOT_ID_REFUSED"; exit 1; }
+          [[ "$PLAN" =~ ^migration/production/bible/plans/[a-z0-9]+(-[a-z0-9]+)*-long\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }   # sweep H1
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          python3 -m venv "$RUNNER_TEMP/up"
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1 torchvision==0.20.1
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/realesr-general-x4v3.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+          echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
+      - id: up
+        name: The approved clip (sha256 checked) to 2560x1440 30 fps, every native frame through the model (timed)
+        run: |
+          start=$(date +%s)
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/bible/long_build.py upscale "$PLAN" "$SHOT" "$RUNNER_TEMP/up-out" "$RUNNER_TEMP/realesr-general-x4v3.pth"
+          echo "UPSCALE_SECONDS $(( $(date +%s) - start ))"
+          name=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['artifact'])" "$RUNNER_TEMP/up-out/$SHOT.json")
+          echo "artifact=$name" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ${{ steps.up.outputs.artifact }}
+          path: ${{ runner.temp }}/up-out
+          retention-days: 14
+
+  assemble:
+    needs: [prepare, upscale]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && (needs.upscale.result == 'success' || needs.upscale.result == 'skipped') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    permissions:
+      contents: read   # the owned music from the release
+      actions: read    # resume_run's upscaled clips, the guard's attempt rule
+    outputs:
+      episode: ${{ needs.prepare.outputs.episode }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PLAN: ${{ inputs.plan }}
+      EP: ${{ needs.prepare.outputs.episode }}
+      RESUME_RUN: ${{ inputs.resume_run }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard, re-run attempt (no secret in this job's env; E116)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py attempt long-build.yml
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: long-prep-${{ needs.prepare.outputs.episode }}-${{ github.run_id }}
+          path: ${{ github.workspace }}/.episode/${{ needs.prepare.outputs.episode }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: needs.upscale.result == 'success'
+        with:
+          pattern: long-up-${{ needs.prepare.outputs.episode }}--*
+          merge-multiple: true
+          path: ${{ runner.temp }}/up
+      - name: Upscaled clips of resume_run (kept only when made from the clip approved now; long_build checks each record)
+        if: inputs.resume_run != ''
+        run: |
+          [[ "$RESUME_RUN" =~ ^[0-9]{6,20}$ ]] || { echo "RESUME_RUN_REFUSED"; exit 1; }
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          src=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN" --jq '[.path, .event, .head_branch] | join(" ")')
+          # sweep H2: only an earlier long-build of main may lend its upscales (never a pull request run's artifacts)
+          [ "$src" = ".github/workflows/long-build.yml workflow_dispatch main" ] || { echo "RESUME_RUN_NOT_A_LONG_BUILD $src"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/up" "$RUNNER_TEMP/prev"
+          gh run download "$RESUME_RUN" --repo "$GITHUB_REPOSITORY" -p "long-up-$EP--*" -D "$RUNNER_TEMP/prev"
+          # this run's upscales win; a clip of resume_run fills only a shot this run did not upscale
+          find "$RUNNER_TEMP/prev" -type f \( -name '*.mp4' -o -name '*.json' \) -exec cp -n {} "$RUNNER_TEMP/up/" \;
+          echo "RESUMED_FROM $RESUME_RUN"
+      - name: Assemble (one cut a shot, owned music, -15 LUFS, the .srt by captions.py, the manifest), 20-frame sheet
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          [[ "$PLAN" =~ ^migration/production/bible/plans/[a-z0-9]+(-[a-z0-9]+)*-long\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }   # sweep H1
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
+          bash migration/ci/assets.sh download --pattern original-rest-music.lossless.flac -O "$RUNNER_TEMP/music.flac" --clobber
+          echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $RUNNER_TEMP/music.flac" | sha256sum -c -
+          python3 -I -B migration/production/bible/long_build.py assemble "$PLAN" "$GITHUB_WORKSPACE/.episode/$EP" "$RUNNER_TEMP/up" "$RUNNER_TEMP/music.flac" "$RUNNER_TEMP/out"
+          python3 -I -B migration/production/bible/long_build.py sheet "$RUNNER_TEMP/out/$EP.mp4" "$RUNNER_TEMP/out/sheet.jpg"
+      - name: Collect the report on failure (the refusal names what failed)
+        if: failure()
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          cp "$GITHUB_WORKSPACE/.episode/$EP/report.json" "$RUNNER_TEMP/out/" 2>/dev/null || true
+          cp "$GITHUB_WORKSPACE/.episode/$EP/compose-plan.json" "$RUNNER_TEMP/out/" 2>/dev/null || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: long-out-${{ needs.prepare.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+          retention-days: 14
+
+  record:
+    needs: assemble
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write   # release assets (assets.sh) and the evidence branch; no secret in this job
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EP: ${{ needs.assemble.outputs.episode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: long-out-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+      - name: The long and its .srt into the release by the file's sha256; sheet, manifest and report on claude/long-<id>-<run>
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          out="$RUNNER_TEMP/out"; mp4="$out/$EP.mp4"
+          sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['composed']['output_sha256']==sys.argv[2] else 'REPORT_SHA256_MISMATCH')" "$out/report.json" "$sha"
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['output_sha256']==sys.argv[2] else 'MANIFEST_SHA256_MISMATCH')" "$out/manifest.json" "$sha"
+          srt_sha=$(sha256sum "$out/captions.srt" | cut -d' ' -f1)
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['caption_track']['sha256']==sys.argv[2] else 'CAPTIONS_SHA256_MISMATCH')" "$out/manifest.json" "$srt_sha"
+          asset="bible-$EP-sha256-$sha.mp4"
+          srt_asset="bible-$EP-sha256-$sha.srt"   # the track of exactly this file
+          cp "$mp4" "$RUNNER_TEMP/$asset"
+          cp "$out/captions.srt" "$RUNNER_TEMP/$srt_asset"
+          bash migration/ci/assets.sh upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+          bash migration/ci/assets.sh upload "$RUNNER_TEMP/$srt_asset" --repo "$GITHUB_REPOSITORY" --clobber
+          tag=$(bash migration/ci/assets.sh which "$asset" --repo "$GITHUB_REPOSITORY")
+          d="migration/evidence/episodes/$EP"; mkdir -p "$d"
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r['composed'].update(release_asset=sys.argv[2],srt_asset=sys.argv[3],release_tag=sys.argv[4],run_id=sys.argv[5]);open(sys.argv[6],'w').write(json.dumps(r,indent=1,ensure_ascii=False)+'\n')" \
+            "$out/report.json" "$asset" "$srt_asset" "$tag" "$GITHUB_RUN_ID" "$d/report-$GITHUB_RUN_ID.json"
+          cp "$out/manifest.json" "$d/manifest-$GITHUB_RUN_ID.json"
+          cp "$out/captions.srt" "$d/captions-$GITHUB_RUN_ID.srt"
+          cp "$out/sheet.jpg" "$d/sheet-$GITHUB_RUN_ID.jpg"
+          branch="claude/long-$EP-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "Long $EP built from its approved clips (run $GITHUB_RUN_ID): sheet, manifest, .srt and report for review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"
+          echo "ASSET $asset"
+          echo "SRT $srt_asset"

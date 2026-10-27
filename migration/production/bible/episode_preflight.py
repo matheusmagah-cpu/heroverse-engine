@@ -297,7 +297,7 @@ def voice_step(plan, voice_python, prepared, work):
     except SystemExit as exc:
         layout = json.loads((work / "layout.json").read_text()) if (work / "layout.json").exists() else None
         problems = [str(exc)]
-    if layout and not problems and not eb.is_long(plan):   # the long's compose is LONG_DESIGN slice 3
+    if layout and not problems:   # a long's compose too (long_build.compose_problems, LONG_DESIGN slice 3)
         problems = [f"COMPOSE {p}" for p in eb.compose_prediction(plan, layout)]
     return {"ran": True, "problems": problems, "pace": measured_pace(plan, work),
             "measured": {k: layout[k] for k in ("total", "keeper_share", "lesson_share", "retimed")} if layout else None}
