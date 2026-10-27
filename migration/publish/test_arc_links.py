@@ -85,7 +85,11 @@ class Fixture:
         d = Path(d)
         self.arcs, self.eps, self.ledger, self.links = d / "arcs.json", d / "episodes", d / "ledger.json", d / "links.json"
         self.eps.mkdir()
-        self.arcs.write_text((ROOT / "migration/production/bible/arcs.json").read_text())
+        # the scenarios below are timed around a long slot of 28/10 10:00; the real calendar moves (arc-01 went to
+        # 04/11, owner 27/10), so the fixture pins its own slot and RepoFiles checks the real one
+        table = json.loads((ROOT / "migration/production/bible/arcs.json").read_text())
+        table["arcs"][0]["long"]["slot"] = "2026-10-28T10:00:00Z"
+        self.arcs.write_text(json.dumps(table))
         entries = {}
         vids = []
         for n, (ep, vid) in enumerate(SHORTS.items(), 1):
@@ -339,7 +343,7 @@ class RepoFiles(unittest.TestCase):
         self.assertEqual([a["shorts"] for a in arcs],
                          [[f"genesis-{n:02d}-short" for n in range(k, k + 4)] for k in (1, 5, 9, 13)])
         self.assertEqual(arcs[0]["long"]["pilot"], "pilot-015")
-        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-28T10:00:00Z")
+        self.assertEqual(arcs[0]["long"]["slot"], "2026-11-04T10:00:00Z")
         self.assertEqual([a["next"] for a in arcs], ["arc-02", "arc-03", "arc-04", None])
         for p in (ROOT / "migration/production/bible/episodes").glob("*.json"):
             self.assertEqual(sum(p.stem in a["shorts"] for a in arcs), 1, p.stem)

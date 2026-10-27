@@ -531,20 +531,6 @@
    ]
   },
   {
-   "id": "s-co-eye",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, its golden eye slowly narrowing. Deep green shade of the fruit tree, warm specks of dusk light on the scales. Cold and patient. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "cold_open",
-   "lines": [
-    0,
-    1
-   ]
-  },
-  {
    "id": "s-co-hide",
    "kind": "scene",
    "seconds": 6,
@@ -986,7 +972,7 @@
   {
    "id": "s-c1-both",
    "kind": "scene",
-   "seconds": 8,
+   "seconds": 9,
    "characters": [
     "adam",
     "eve"
@@ -1913,7 +1899,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, glances back toward the garden, then at the fruit. Noon light. Torn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    63
+    63,
+    64
    ],
    "chapter": "c3"
   },
@@ -1927,7 +1914,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, lowers its head close beside the fruit. Deep shade. Persuasion. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    63
+    63,
+    64
    ],
    "chapter": "c3"
   },
@@ -1941,6 +1929,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands a few steps behind her under the tree, silent. Noon shade. Passive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
+    63,
     64
    ],
    "chapter": "c3"
@@ -1957,6 +1946,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand beneath the branch where The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, waits. Noon light. Fateful. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
+    63,
     64
    ],
    "chapter": "c3"
@@ -2413,7 +2403,7 @@
    "id": "g-c4-woman",
    "kind": "scene",
    "speaker": "god",
-   "line": "I will greatly multiply thy sorrow and thy conception; in sorrow thou shalt bring forth children",
+   "line": "in sorrow thou shalt bring forth children, and thy desire shall be to thy husband",
    "reference": "Genesis 3:16 (KJV)",
    "seconds": 8,
    "characters": [],

@@ -48,8 +48,11 @@ class Runway(unittest.TestCase):
         self.assertTrue(all(b - a == timedelta(days=2) for a, b in zip(got, got[1:])))   # never 2+ days without
         self.assertNotIn(0, {t.hour for t in r.slots(NOW, 20)})                       # the night slots retired
         arcs = json.loads((Path(r.__file__).resolve().parents[1] / "production/bible/arcs.json").read_text())["arcs"]
-        long_slots = [r.ts(a["long"]["slot"]) for a in arcs]
-        self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if t <= long_slots[-1]])  # = SERIES.md calendar
+        # = SERIES.md calendar; arc-01's long moved off it to 04/11 (owner 27/10, "prioriza o longo agora":
+        # DECISIONS.md), the other arcs keep the cadence slots from 30/10
+        self.assertEqual(arcs[0]["long"]["slot"], "2026-11-04T10:00:00Z")
+        long_slots = [r.ts(a["long"]["slot"]) for a in arcs[1:]]
+        self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if long_slots[0] <= t <= long_slots[-1]])
 
     def test_every_slot_listed_and_gaps_alerted(self):
         # E15: every long slot of the next days is listed and a gap alerts; a prayer pilot never fills one (2026-10-26)

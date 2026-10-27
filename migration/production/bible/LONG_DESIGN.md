@@ -272,6 +272,21 @@ long could be measured or approved. Now:
 
   The first voicing, before the talking lines were lengthened and with the 0.35 s gap, measured 13.97 min and 164.5
   words a minute.
+- **The local preflight (27/10, `evidence/preflight/arc-01-long.json`)** compose-predicted the measured voice with the
+  long's own cut (#470) and found four plan problems the estimate missed, fixed in the plan without touching a gate:
+  - FOOTAGE_SHORT s-c1-both: its 8 s clip had to cover 10.55 s (its own hold and the s-ki-valley window), 1.32x > 1.3:
+    it is now a 9 s clip.
+  - HOLD_UNDER_QA s-co-adam, s-co-eye, s-co-hide (3.86 s each on lines 0-1): three cuts did not fit those two lines,
+    and two lines more would make one 25 s voice run (SLOW_STRETCH). s-co-eye (the serpent's eye) is cut; s-co-adam
+    and s-co-hide hold lines 0-1, s-co-gate and s-co-exile lines 2-3.
+  - HOLD_UNDER_QA s-c3-turn, s-c3-listen (3.90 s on line 63): the four shots of lines 63 and 64 now share both lines
+    (about 4.3 s each).
+  - HOLD_OVER_QA g-c4-woman (8.12 s): Kokoro pauses at the semicolon of "I will greatly multiply thy sorrow and thy
+    conception; in sorrow thou shalt bring forth children". The first clause alone reads under 4 s at God's fastest
+    pace; the line is now "in sorrow thou shalt bring forth children, and thy desire shall be to thy husband" (Genesis
+    3:16 word for word, kjv_check PASS, one comma for the semicolon so it is one sentence).
+  The draft is now 174 holds, 164 generations (135 scenes); measured 14.54 min (872.6 s), Keeper 7.5 %. Plan, voice
+  and every request digest are clean; only the talking-line probes block (`evidence/pavo/20261027/arc-01-long-talk`).
 
 ## 6. Slices
 1. (This PR.)
