@@ -22,9 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         pair:
-          - {name: k-insight, clip: probe-k-insight-1-373107010075637504.mp4, wav: genesis07/k-insight.wav}
-          - {name: k-question, clip: probe-k-question-1-373107181912649792.mp4, wav: genesis07/k-question.wav}
-          - {name: k-close, clip: probe-k-close-1-373107379233670656.mp4, wav: genesis07/k-close.wav}
+          - {name: k-insight-lit, clip: vo-close-lit-373097892611438336.mp4, wav: genesis07/k-insight.wav}
+          - {name: k-question-lit, clip: vo-close-lit-373097892611438336.mp4, wav: genesis07/k-question.wav}
+          - {name: k-insight-p2, clip: probe-k-insight-2-373107104304894208.mp4, wav: genesis07/k-insight.wav}
+          - {name: k-question-p2, clip: probe-k-question-2-373107257543825984.mp4, wav: genesis07/k-question.wav}
     permissions:
       contents: write   # the results branch only; no secret in this job
     env:
@@ -73,13 +74,11 @@ jobs:
             ffmpeg -nostdin -v error -y -i "$out/$n.mp4" -vf "fps=6,crop=iw/2:ih/4:iw/4:ih/6,scale=200:-1,tile=8x4" -frames:v 1 "$out/$n-mouth.jpg"
             cat "$out/$n.run.json" "$out/$n.check.json"
           }
-          R2=migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg
           ffmpeg -nostdin -v error -y -i "$V/$CLIP" -vf fps=25 -c:v libx264 -crf 12 -an "$RUNNER_TEMP/src25.mp4"
           mkdir -p "$RUNNER_TEMP/v25" && cp "$RUNNER_TEMP/src25.mp4" "$RUNNER_TEMP/v25/$CLIP"
           run r1-lips-24 --ref-image "$R1" --mask lips --detail
           V="$RUNNER_TEMP/v25"
           run r1-lips-25 --ref-image "$R1" --mask lips --detail
-          run r2-lips-25 --ref-image "$R2" --mask lips --detail
           cp "$RUNNER_TEMP/weights.sha256" "$out/"
       - name: Results to claude/musetalk-probe-<run>-<pair>
         if: always()
