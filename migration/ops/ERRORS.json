@@ -933,6 +933,16 @@
     "file": "migration/production/bible/test_clip_check.py",
     "contains": "def test_a_dark_sky_over_dark_ground_is_not_a_letterbox"
    }
+  },
+  {
+   "id": "E112",
+   "date": "2026-10-27",
+   "error": "genesis-09's build (episode.yml run 40455741166) was dispatched while genesis-08 (run 40438106839) still had 7 shots rejected at the frame review and needed a resume. episode.yml runs one build at a time (concurrency group heroverse-episode), so genesis-08's resume (run 40460764662, slot 2026-10-27 23:30) sat pending behind a whole genesis-09 build; genesis-09 had to be cancelled. Root cause: nothing tied the order of the series to dispatch; the orchestrator started the next part to keep the two-day slack instead of finishing the open one (owner, 2026-10-27: resolve the open problems before producing more).",
+   "fix": "episode_order.py: a part builds only when the part before it, if it was planned, is recorded in episodes/ (built, reviewed at >= 9.5, recorded). episode.yml runs it right after plan_check and before verify-preflight, so the refusal comes before any secret; kept out of the preflight's CODE binding so no committed preflight goes stale.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_order.py",
+    "contains": "def test_a_later_part_waits_until_the_earlier_part_is_recorded"
+   }
   }
  ]
 }
