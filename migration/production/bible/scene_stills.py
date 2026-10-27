@@ -21,6 +21,7 @@ usage:
   scene_stills.py prepare PLAN SHOTS CANDIDATES RUN OUT_JSON   cf_images.py's input for the shots' stills (1-3 each)
   scene_stills.py crop IMG_DIR                                  centre crop each FLUX PNG to 9:16 (in place)
   scene_stills.py finalize IMG_DIR RUN                          candidates (JPEG 1080x1920 + record) into stills/candidates
+                                                                (FLUX PNGs, or Pavo Agnes Image JPEGs with `source`)
   scene_stills.py sheet RUN OUT_JPG                             contact sheet of that run's candidates
   scene_stills.py approve STILL_ID CANDIDATE_ID --score S --note TEXT   after Claude's review (>= 9.5), by PR
 """
@@ -107,7 +108,9 @@ def prepare(plan, ids, candidates, run, stills_dir=None):
 def crop(img_dir):
     """Each FLUX PNG (1024 square) cut to its centre 9:16 column, in place."""
     from PIL import Image
-    for png in sorted(Path(img_dir).glob("*.png")):
+    # FLUX PNGs from scene-stills.yml, or a native 9:16 source's JPEG/PNG whose sidecar names its `source` and
+    # `upscaler` (pavo-agnes-image-2.5-flash: 1472x2624 JPEG, Lanczos to 1080x1920)
+    for png in sorted(p for p in Path(img_dir).iterdir() if p.suffix in (".png", ".jpg")):
         im = Image.open(png).convert("RGB")
         w, h = im.size
         cw = round(h * SIDE[0] / SIDE[1])
@@ -127,7 +130,9 @@ def finalize(img_dir, run, stills_dir=None):
     from PIL import Image
     stills_dir = Path(stills_dir or STILLS)
     out = []
-    for png in sorted(Path(img_dir).glob("*.png")):
+    # FLUX PNGs from scene-stills.yml, or a native 9:16 source's JPEG/PNG whose sidecar names its `source` and
+    # `upscaler` (pavo-agnes-image-2.5-flash: 1472x2624 JPEG, Lanczos to 1080x1920)
+    for png in sorted(p for p in Path(img_dir).iterdir() if p.suffix in (".png", ".jpg")):
         parts = split_candidate(png.stem)
         if not parts or parts[1] != str(run):
             raise SystemExit(f"STILL_CANDIDATE_NAME_REFUSED {png.name}")
@@ -144,7 +149,9 @@ def finalize(img_dir, run, stills_dir=None):
             "id": png.stem, "still": still, "episode": rec.get("episode"), "shot": rec.get("shot"), "run": str(run),
             "status": "DRAFT", "prompt": rec["prompt"], "sent_prompt": meta.get("prompt"),
             "engine": meta.get("engine"), "models": meta.get("models"), "generated_by": meta.get("generated_by"),
-            "upscaler": "Real-ESRGAN general x4v3 (bsd-3-clause), then Lanczos to 1080x1920",
+            "source": meta.get("source", "cf-flux"), "conversation_id": meta.get("conversation_id"),
+            "quote": meta.get("quote"),
+            "upscaler": meta.get("upscaler", "Real-ESRGAN general x4v3 (bsd-3-clause), then Lanczos to 1080x1920"),
             "size": list(SIDE), "repo_path": rel(dst), "sha256": sha256(dst)})
         out.append(png.stem)
     return out

@@ -91,6 +91,35 @@ What the web client allows (chunks of 2026-10-26, see Protocol sources):
   input audio (rather than laying it as a soundtrack) is not documented. Prompt it explicitly ("the narrator speaks
   to camera") and check the first clip.
 
+### Image generation (v0.5, 2026-10-27)
+
+Goal: Pavo's own free still model as the source for image-first scene stills (`production/bible/scene_stills.py`),
+because the Cloudflare FLUX stills of genesis-08 fell below 9.5 (`evidence/shots/genesis-08-short/stills-review-*`).
+
+| Tool | Behavior |
+|---|---|
+| `pavo_quote_image` | Authenticated, read-only price of one `agnes-image` still: ratio, resolution, reference images counted. |
+| `pavo_generate_image` | One private still, only after a fresh, exact zero-credit quote; a nonzero quote refuses with the number. |
+| `pavo_image_job` | Read the still's job and its image URL; an uncertain submission is checked here, never resent. |
+
+- Model: `agnes-image` ("Agnes Image 2.5 Flash", tagged Free in `mode_support_models?mode_code=generate_image`).
+  Every other image model of that catalog (GPT Image, Seedream, Qwen Image, NanoBanana...) is paid: the adapter
+  sends only `agnes-image`, to the quote and to the stream alike.
+- Spec (`model-capability-spec?model_code=agnes-image`, 2026-10-27): modes text_to_image and image_to_image; ratios
+  9:16, 2:3, 3:4, 1:1, 4:3, 3:2, 16:9, 21:9; resolutions sd/hd/uhd (1K/2K/4K, default sd); prompt up to 10000
+  characters; up to 6 input images (role `reference`, JPEG/PNG/WebP); one output (PNG/JPEG); seed supported (not sent).
+- Quote (chunk 5334): `{model_code, outputs: [{count: 1, media_type: "image", resolution}], inputs?}`; no ratio and no
+  duration. Stream (chunks 9821 `function A`, 4321): `mode: "generate_image"`, `model`, `ratio`, `resolution`,
+  `creative_prompt_json` (text block + `{type: "image", url, source_index}` per reference), `images: [{url, meta_data?}]`;
+  no `sound` or `duration`. The adapter also sends `count: 1`, as for video. References go through the same presigned
+  upload as video inputs, after the free quote and before the conversation.
+- Result: history `GenerationSuccess`, `results[].url` (or `image_url`), accepted only as an HTTPS `.png/.jpg/.jpeg/.webp`
+  on the Pavo CDN without a query; the adapter does not fetch it.
+- Live, 2026-10-27: 9:16 sd and hd quoted exactly 0 (`is_estimate: false`); six 9:16 hd stills of genesis-08 (s-dust,
+  s-ridge, s-board, two each), each after its own fresh zero quote, came back as 1472x2624 JPEGs on the CDN
+  (stills registry run `20261027`, `source: pavo-agnes-image-2.5-flash`, contact sheet
+  `production/bible/stills/sheets/genesis-08-short-20261027.jpg`). Text-only; references are offline-tested only.
+
 ## Authorization
 
 Standing owner authorization (2026-10-25): generations need no per-clip approval in the chat; every limit above

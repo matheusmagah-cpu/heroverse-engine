@@ -18,15 +18,20 @@ class Stdio(unittest.TestCase):
                 listed = await session.list_tools()
                 self.assertEqual({t.name for t in listed.tools},
                                  {"pavo_status", "pavo_account", "pavo_models", "pavo_prepare_video",
-                                  "pavo_quote_video", "pavo_generate_video", "pavo_job"})
+                                  "pavo_quote_video", "pavo_generate_video", "pavo_job",
+                                  "pavo_quote_image", "pavo_generate_image", "pavo_image_job"})
                 for tool in listed.tools:
-                    self.assertEqual(tool.annotations.read_only_hint, tool.name != "pavo_generate_video")
+                    self.assertEqual(tool.annotations.read_only_hint,
+                                     tool.name not in ("pavo_generate_video", "pavo_generate_image"))
                 generator = next(t for t in listed.tools if t.name == "pavo_generate_video")
                 self.assertFalse(generator.annotations.idempotent_hint)
                 for name in ("pavo_quote_video", "pavo_generate_video"):
                     schema = next(t for t in listed.tools if t.name == name).input_schema["properties"]
                     self.assertTrue({"references", "audios", "sound"} <= set(schema), name)
                     self.assertIs(schema["sound"]["default"], False)
+                image_quote = await session.call_tool("pavo_quote_image", {})
+                self.assertTrue(image_quote.is_error)
+                self.assertIn("PAVO_CREDENTIAL_REQUIRED", image_quote.content[0].text)
                 status = await session.call_tool("pavo_status", {})
                 self.assertFalse(status.is_error)
                 status_data = json.loads(status.content[0].text)

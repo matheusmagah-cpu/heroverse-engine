@@ -29,6 +29,7 @@ PATHS = {
     "inspect": "/v1/file/inspect",
 }
 UPLOAD_HEADERS = re.compile(r"[A-Za-z0-9-]{1,64}")
+VIDEO_PATH = r"/[A-Za-z0-9_./%+-]+\.mp4"
 
 
 def conversation_id(value):
@@ -221,6 +222,10 @@ class PavoVideoClient(PavoClient):
             # The web client names a mentioned audio as {"type": "audio", "url"} (no source_index).
             blocks += [{"type": "audio", "url": u["url"]} for u in voiced]
             body["creative_prompt_json"] = json.dumps(blocks)
+        return self._await_start(body, MODEL)
+
+    def _await_start(self, body, model):
+        """POST one stream body; True at GenerationStart for MODEL, False at an explicit failure, else unknown."""
         request = self._video_request("stream", body)
         # Closing after GenerationStart leaves the job running on Pavo. Read its
         # history afterwards; never create a replacement just because a read timed out.
@@ -240,7 +245,7 @@ class PavoVideoClient(PavoClient):
                     if kind.lower() == "error" or kind in ("GenerationFailed", "TaskFailed"):
                         return False
                     if kind == "GenerationStart":
-                        if not isinstance(data, dict) or data.get("model_code") != MODEL:
+                        if not isinstance(data, dict) or data.get("model_code") != model:
                             raise PavoError("PAVO_SUBMISSION_STATE_UNKNOWN")
                         return True
                     event, parts = "message", []
@@ -323,6 +328,13 @@ class PavoVideoClient(PavoClient):
                 "next_action": "Call pavo_job with this conversation_id."}
 
     def job(self, job):
+        job, running, status, videos, turns = self._history(job, MODEL, VIDEO_PATH)
+        return {"conversation_id": job, "running": running, "status": status, "videos": videos,
+                "turn_count": turns, "published": False,
+                "conversation_url": "https://app.pavo-ai.work/chat?conversationId=" + job}
+
+    def _history(self, job, model, path_pattern, url_keys=("url",)):
+        """(job, running, status, media, turn count): the last turn's media of MODEL on the fixed CDN; read-only."""
         job = conversation_id(job)
         if self._token and self._token in job:
             raise PavoError("CREDENTIAL_IN_CONVERSATION_ID_REFUSED")
@@ -345,12 +357,12 @@ class PavoVideoClient(PavoClient):
                     continue
                 wrapper = block.get("data")
                 payload = wrapper.get("data") if isinstance(wrapper, dict) else None
-                if not isinstance(payload, dict) or payload.get("model_code") != MODEL or not isinstance(payload.get("results"), list):
+                if not isinstance(payload, dict) or payload.get("model_code") != model or not isinstance(payload.get("results"), list):
                     raise PavoError("PAVO_RESULT_SCHEMA_CHANGED")
                 for item in payload["results"][:8]:
                     if not isinstance(item, dict):
                         raise PavoError("PAVO_RESULT_SCHEMA_CHANGED")
-                    url = item.get("url")
+                    url = next((item[k] for k in url_keys if item.get(k) is not None), None)
                     if not isinstance(url, str) or len(url) > 2048 or (self._token and self._token in url):
                         raise PavoError("PAVO_MEDIA_URL_REFUSED")
                     try:
@@ -358,7 +370,7 @@ class PavoVideoClient(PavoClient):
                         valid = (parsed.scheme == "https" and parsed.hostname == "cos-aigc-default.agnes-ai.space"
                                  and parsed.port in (None, 443) and not parsed.username and not parsed.password
                                  and not parsed.query and not parsed.fragment
-                                 and re.fullmatch(r"/[A-Za-z0-9_./%+-]+\.mp4", parsed.path))
+                                 and re.fullmatch(path_pattern, parsed.path))
                     except ValueError:
                         valid = False
                     if not valid:
@@ -366,6 +378,4 @@ class PavoVideoClient(PavoClient):
                     videos.append({"url": url, "seconds": number(item.get("duration")),
                                    "width": number(item.get("width")), "height": number(item.get("height"))})
         status = "running" if data["is_running"] else "completed" if videos else "failed" if failed else "incomplete"
-        return {"conversation_id": job, "running": data["is_running"], "status": status, "videos": videos,
-                "turn_count": len(data["turns"]), "published": False,
-                "conversation_url": "https://app.pavo-ai.work/chat?conversationId=" + job}
+        return job, data["is_running"], status, videos, len(data["turns"])
