@@ -1,0 +1,1450 @@
+{
+ "episode": "genesis-08-short",
+ "shots": {
+  "s-voice": {
+   "kind": "scene",
+   "lines": null,
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black storm clouds pile up over a dry valley where the bare wooden ribs of a vast unfinished box-shaped hull rise out of the dust, lightning flickering deep inside the clouds. Dusk, a hot wind driving sand across the cracked ground. Ominous and vast. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "speaker": "god",
+   "line": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh",
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373296274017695488",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": [],
+     "faces": {
+      "frames_sampled": 48,
+      "faces_found": 0
+     }
+    }
+   ]
+  },
+  "s-axe": {
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. A strong old man seen from behind, his face never visible, swings an axe into the trunk of a tall cypress tree, chips flying. Early morning on a dry hillside, low golden sun and long shadows. Resolute and alone. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373303076503471616",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-valley": {
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, low-angle, slow pan. From ground level, a wild dry valley of thorn bushes and wind-rippled dust stretches away to bare hills, a few felled cypress logs lying in the foreground, no water anywhere in sight. Morning haze, a pale hot sky. Empty and strange. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373304182809900800",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-watchers": {
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. A crowd seen from behind gathers at the edge of a clearing and points at the first tall curved wooden ribs of a long hull standing upright in the dust, heads thrown back in laughter. Midday, harsh sun and drifting dust. Curious and scornful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373305487988693568",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-laugh": {
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Men in silhouette, faces in shadow, nudge each other and laugh, one miming a boat rowing through the air. Hot afternoon, dust hanging in the sunlight behind them. Mocking and loud. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373306852488059456",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-timber": {
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, low tracking shot. Four men seen from behind, an old man and three young men, drag heavy cypress logs on ropes across the dust while onlookers in silhouette jeer from a ridge. Late afternoon, long shadows and dust in the air. Toiling and defiant. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373307938733617216",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-pitch": {
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. Hands seen from behind brush thick black pitch from a clay pot over a broad wooden plank, the pitch glistening. Inside a half-built hull, slanting light through the open ribs. Patient and careful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373309756095631616",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-ridge": {
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A line of onlookers in silhouette stands on a ridge, backs to the camera, looking down at a huge wooden frame in a dry valley far from any water. Dusk, the sky orange behind the hull. Absurd and uneasy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373310462898747136",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-dust": {
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A laughing man seen from behind scoops up a handful of dry dust and lets the wind blow it toward the distant hull. Hot evening light, dust glowing in the air. Scornful and dry. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373311358806847552",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-measure": {
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tracking shot. A man seen from behind paces along the endless wooden keel, counting his steps with raised fingers, while a crowd in silhouette laughs behind him. Afternoon, harsh light and long shadows across the timber. Mocking and immense. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373313223514131520",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-ribs": {
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Workers in silhouette stand on rough scaffolds of lashed wooden poles along the side of a long, low, box-shaped wooden hull and haul a giant curved rib upright with ropes. Late afternoon, the sun low behind the frame, sawdust drifting in the light. Vast and laborious. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373314090590538368",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-beam": {
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow tilt up. Three young men in silhouette haul a long beam up the side of the hull on ropes as onlookers below, seen from behind, shout and point. Golden hour, dust and sawdust in the air. Straining and defiant. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373315053036583616",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-jeer": {
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, handheld drift. A mocker seen from behind points up at the towering hull and laughs, two others behind him bowing in a mock salute. Evening, warm light on the timber above them. Cruel and cheerful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373316214531314304",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-clods": {
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Children seen from behind throw clods of earth at the scaffolding while men in silhouette laugh and egg them on. Late afternoon, clods bursting into dust against the wood. Careless and mean. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373317059583209536",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-scorn": {
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A larger crowd in silhouette shouts up at the scaffold, fists and staffs raised, faces hidden by the glare of the low sun. Dusk, dust thrown up by many feet. Rising and hostile. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373318418990141696",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-feast": {
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot from behind, slow tracking shot. A row of feasters seen from behind, their faces never visible, sits on woven rugs spread on the ground and faces the torch-lit goat-hair tents of the camp, clay wine cups raised and bread passed from hand to hand. Night, warm torchlight and smoke. Merry and heedless. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373319405016463104",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-wedding": {
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pan. A wedding procession seen from behind dances through the camp with drums and torches, never looking up at the dark hull on the hill above them. Night, firelight below and a starless sky. Joyful and blind. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373320131088257280",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-hill": {
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. From behind the dancing crowd, the vast dark hull stands alone on the hill, a few small figures in silhouette still working on it by lamplight. Night, music and torchlight in the foreground. Lonely and steadfast. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373321118516066048",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-stones": {
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Men in silhouette hurl stones that crack against the planks of the hull, their shadows long in the torchlight. Night, sparks and dust flying. Angry and violent. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373322100737609984",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-rope": {
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A hand seen from behind saws through a scaffold rope with a bronze knife, the fibres parting one by one. Night, a single torch on a pole throwing hard shadows. Cold and threatening. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373323083098699520",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-alone": {
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man in silhouette, his face never visible, works on alone inside the hull by one oil lamp, fitting a plank into place. Night, the lamp's small warm glow among the dark ribs. Patient and quiet. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373324208895709824",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-peg": {
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. Hands seen from behind drive a wooden peg into a plank with a mallet as a thrown stone thuds onto the boards beside them. Night, lamplight flickering on the grain of the wood. Steady under fire. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373325001220437760",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-covenant": {
+   "kind": "scene",
+   "lines": null,
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the black clouds above the vast dark hull on the hill, and for a moment the whole sky flashes white over the timber. Night, a hot wind tearing dust off the slopes. Solemn and grand. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "speaker": "god",
+   "line": "But with thee will I establish my covenant; and thou shalt come into the ark,",
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373297691881192128",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": [],
+     "faces": {
+      "frames_sampled": 48,
+      "faces_found": 0
+     }
+    }
+   ]
+  },
+  "s-torches": {
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. A ringleader in silhouette, his face hidden in shadow, holds a burning torch high and leads a shouting mob in silhouette up the hill to the foot of the ark, stones flying from their hands, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373326505780255296",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-mob": {
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Torches and fists raised in silhouette, faces hidden by the glare, the crowd presses against the scaffold poles and shakes them. Night, sparks and smoke rising past the planks. Furious and chaotic. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373329273652310080",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-steady": {
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow push-in. An old man seen from behind on the scaffold drives one last peg home with a mallet while the torches of the crowd glow below him. Night, firelight on the wet pitch. Calm against chaos. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373331474637951232",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-board": {
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow crane up. Four men in silhouette lift the last board into place high on the side of the hull and step back. Grey dawn, the torches below burned out to smoke. Quiet and complete. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373332445695362560",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-finished": {
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. A small family seen from behind stands on the hill before the vast finished ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black from the ground to the deck, resting on timber blocks on the dry ground, a plain earthen ramp rising to its wide wooden door open in the side. Dawn, pale gold light on the black pitch. Majestic and still. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373334521758430976",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 8.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "s-silent": {
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The crowd seen from behind stands silent at the foot of the hill, burnt-out torches hanging from their hands, looking up at the ark. Early morning, cold light and drifting smoke. Hushed and uneasy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373335353006551104",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": []
+    }
+   ]
+  },
+  "k-insight": {
+   "kind": "keeper",
+   "lines": [
+    16
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-08-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373298531685108800",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 9.0
+     },
+     "flags": [],
+     "still_mouth": {
+      "opening_range": 0.0539,
+      "opening_motion": 0.00047,
+      "window_motion": 0.00284,
+      "closed_opening": 0.00267,
+      "face_frames": 1.0,
+      "frames": 226
+     }
+    }
+   ]
+  },
+  "k-question": {
+   "kind": "keeper",
+   "lines": [
+    17
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-08-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373300419746894080",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 6.0
+     },
+     "flags": [],
+     "still_mouth": {
+      "opening_range": 0.0576,
+      "opening_motion": 0.00068,
+      "window_motion": 0.00211,
+      "closed_opening": 0.00345,
+      "face_frames": 1.0,
+      "frames": 158
+     }
+    }
+   ]
+  },
+  "k-close": {
+   "kind": "keeper",
+   "lines": [
+    18
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
+    "seconds": 7,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-08-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "attempts": [
+    {
+     "generation": 1,
+     "conversation_id": "373301564452685312",
+     "submission": "submitted",
+     "quoted_credits": 0,
+     "source": {
+      "width": 720.0,
+      "height": 1280.0,
+      "seconds": 7.0
+     },
+     "flags": [],
+     "still_mouth": {
+      "opening_range": 0.0491,
+      "opening_motion": 0.0006,
+      "window_motion": 0.00264,
+      "closed_opening": 0.00306,
+      "face_frames": 0.99,
+      "frames": 175
+     }
+    }
+   ]
+  }
+ },
+ "composed": {
+  "output_sha256": "40e902e4c1333abd11fa929ab95a53253a25c782572920de60ef2fc80e9e3739",
+  "seconds": 175.06,
+  "frame": [
+   1080,
+   1920
+  ],
+  "black_check": {
+   "black_starts": [],
+   "unexpected": [],
+   "intended_dips": [
+    174.26
+   ]
+  },
+  "lufs": -14.5,
+  "keeper_share": 0.11,
+  "lesson_share": 0.114,
+  "spoken": {
+   "s-voice": {
+    "start": 0.0,
+    "end": 5.824,
+    "seconds": 5.824,
+    "speaker": "god"
+   },
+   "s-covenant": {
+    "start": 113.447,
+    "end": 119.323,
+    "seconds": 5.876,
+    "speaker": "god"
+   }
+  },
+  "establishing_share": 0.011,
+  "cuts": 59,
+  "timeline": [
+   {
+    "shot": "s-voice",
+    "kind": "scene",
+    "start": 0.0,
+    "end": 3.087,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-voice",
+    "kind": "scene",
+    "start": 3.087,
+    "end": 6.174,
+    "src_start": 4.913,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-axe",
+    "kind": "scene",
+    "start": 6.174,
+    "end": 9.162,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-axe",
+    "kind": "scene",
+    "start": 9.162,
+    "end": 12.149,
+    "src_start": 3.596,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-valley",
+    "kind": "scene",
+    "start": 12.149,
+    "end": 14.149,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-watchers",
+    "kind": "scene",
+    "start": 14.149,
+    "end": 17.863,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-laugh",
+    "kind": "scene",
+    "start": 17.863,
+    "end": 21.506,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-timber",
+    "kind": "scene",
+    "start": 21.506,
+    "end": 24.402,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-timber",
+    "kind": "scene",
+    "start": 24.402,
+    "end": 27.297,
+    "src_start": 3.688,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-pitch",
+    "kind": "scene",
+    "start": 27.297,
+    "end": 29.46,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-ridge",
+    "kind": "scene",
+    "start": 29.46,
+    "end": 31.947,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-ridge",
+    "kind": "scene",
+    "start": 31.947,
+    "end": 34.433,
+    "src_start": 4.097,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-dust",
+    "kind": "scene",
+    "start": 34.433,
+    "end": 36.92,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-dust",
+    "kind": "scene",
+    "start": 36.92,
+    "end": 39.407,
+    "src_start": 4.097,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-measure",
+    "kind": "scene",
+    "start": 39.407,
+    "end": 42.437,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-measure",
+    "kind": "scene",
+    "start": 42.437,
+    "end": 45.468,
+    "src_start": 4.97,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-ribs",
+    "kind": "scene",
+    "start": 45.468,
+    "end": 47.961,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-ribs",
+    "kind": "scene",
+    "start": 47.961,
+    "end": 50.455,
+    "src_start": 4.09,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-beam",
+    "kind": "scene",
+    "start": 50.455,
+    "end": 53.33,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-beam",
+    "kind": "scene",
+    "start": 53.33,
+    "end": 56.205,
+    "src_start": 3.709,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-jeer",
+    "kind": "scene",
+    "start": 56.205,
+    "end": 59.698,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-clods",
+    "kind": "scene",
+    "start": 59.698,
+    "end": 62.371,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-clods",
+    "kind": "scene",
+    "start": 62.371,
+    "end": 65.045,
+    "src_start": 3.91,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-scorn",
+    "kind": "scene",
+    "start": 65.045,
+    "end": 67.719,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-scorn",
+    "kind": "scene",
+    "start": 67.719,
+    "end": 70.392,
+    "src_start": 3.91,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-feast",
+    "kind": "scene",
+    "start": 70.392,
+    "end": 72.864,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-feast",
+    "kind": "scene",
+    "start": 72.864,
+    "end": 75.335,
+    "src_start": 4.112,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-wedding",
+    "kind": "scene",
+    "start": 75.335,
+    "end": 77.807,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-wedding",
+    "kind": "scene",
+    "start": 77.807,
+    "end": 80.278,
+    "src_start": 4.112,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-hill",
+    "kind": "scene",
+    "start": 80.278,
+    "end": 83.335,
+    "src_start": 0.0,
+    "speed": 1.1462
+   },
+   {
+    "shot": "s-hill",
+    "kind": "scene",
+    "start": 83.335,
+    "end": 86.391,
+    "src_start": 2.667,
+    "speed": 1.1462
+   },
+   {
+    "shot": "s-hill",
+    "kind": "scene",
+    "start": 86.391,
+    "end": 89.448,
+    "src_start": 5.333,
+    "speed": 1.1462
+   },
+   {
+    "shot": "s-stones",
+    "kind": "scene",
+    "start": 89.448,
+    "end": 91.756,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-stones",
+    "kind": "scene",
+    "start": 91.756,
+    "end": 94.064,
+    "src_start": 4.276,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-rope",
+    "kind": "scene",
+    "start": 94.064,
+    "end": 96.371,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-rope",
+    "kind": "scene",
+    "start": 96.371,
+    "end": 98.679,
+    "src_start": 4.276,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-alone",
+    "kind": "scene",
+    "start": 98.679,
+    "end": 101.734,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-alone",
+    "kind": "scene",
+    "start": 101.734,
+    "end": 104.789,
+    "src_start": 3.528,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-peg",
+    "kind": "scene",
+    "start": 104.789,
+    "end": 107.675,
+    "src_start": 0.0,
+    "speed": 1.0823
+   },
+   {
+    "shot": "s-peg",
+    "kind": "scene",
+    "start": 107.675,
+    "end": 110.561,
+    "src_start": 2.667,
+    "speed": 1.0823
+   },
+   {
+    "shot": "s-peg",
+    "kind": "scene",
+    "start": 110.561,
+    "end": 113.447,
+    "src_start": 5.333,
+    "speed": 1.0823
+   },
+   {
+    "shot": "s-covenant",
+    "kind": "scene",
+    "start": 113.447,
+    "end": 116.56,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-covenant",
+    "kind": "scene",
+    "start": 116.56,
+    "end": 119.673,
+    "src_start": 4.887,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-torches",
+    "kind": "scene",
+    "start": 119.673,
+    "end": 121.777,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-torches",
+    "kind": "scene",
+    "start": 121.777,
+    "end": 123.88,
+    "src_start": 3.23,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-mob",
+    "kind": "scene",
+    "start": 123.88,
+    "end": 126.362,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-mob",
+    "kind": "scene",
+    "start": 126.362,
+    "end": 128.843,
+    "src_start": 3.81,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-steady",
+    "kind": "scene",
+    "start": 128.843,
+    "end": 131.594,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-steady",
+    "kind": "scene",
+    "start": 131.594,
+    "end": 134.344,
+    "src_start": 3.833,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-board",
+    "kind": "scene",
+    "start": 134.344,
+    "end": 137.226,
+    "src_start": 0.0,
+    "speed": 1.0808
+   },
+   {
+    "shot": "s-board",
+    "kind": "scene",
+    "start": 137.226,
+    "end": 140.108,
+    "src_start": 2.667,
+    "speed": 1.0808
+   },
+   {
+    "shot": "s-board",
+    "kind": "scene",
+    "start": 140.108,
+    "end": 142.99,
+    "src_start": 5.333,
+    "speed": 1.0808
+   },
+   {
+    "shot": "s-finished",
+    "kind": "scene",
+    "start": 142.99,
+    "end": 146.005,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-finished",
+    "kind": "scene",
+    "start": 146.005,
+    "end": 149.02,
+    "src_start": 4.985,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-silent",
+    "kind": "scene",
+    "start": 149.02,
+    "end": 151.502,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-silent",
+    "kind": "scene",
+    "start": 151.502,
+    "end": 153.983,
+    "src_start": 4.102,
+    "speed": 1.0
+   },
+   {
+    "shot": "k-insight",
+    "kind": "keeper-vo",
+    "start": 153.983,
+    "end": 162.949,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "k-question",
+    "kind": "keeper-vo",
+    "start": 162.949,
+    "end": 168.129,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "k-close",
+    "kind": "keeper-vo",
+    "start": 168.129,
+    "end": 175.065,
+    "src_start": 0.0,
+    "speed": 1.0
+   }
+  ],
+  "release_asset": "bible-genesis-08-short-sha256-40e902e4c1333abd11fa929ab95a53253a25c782572920de60ef2fc80e9e3739.mp4",
+  "release_tag": "v0.0.0-cloud-assets-20261025",
+  "run_id": "40438106839"
+ }
+}
