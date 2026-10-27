@@ -1984,6 +1984,7 @@
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/rekey_shots_e118.py",
+    "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_preflight.py"
@@ -2250,6 +2251,7 @@
     "migration/integrations/pavo/client.py",
     "migration/integrations/pavo/quota.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
     "migration/production/bible/pavo_native.py",
     "migration/production/bible/short_engine.py",
     "migration/production/bible/shot_sources.py"
