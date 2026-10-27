@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-enter-2026102701-1",
+ "still": "genesis-09-s-enter",
+ "episode": "genesis-09-short",
+ "shot": "s-enter",
+ "run": "2026102701",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of the vast ark, its whole hull smeared pitch-black under a flat plank roof. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of the vast ark, its whole hull smeared pitch-black under a flat plank roof. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373453349830008576",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-enter-2026102701-1.jpg",
+ "sha256": "579600a769403b027414d78ef3301cbb27d5701a47ed521f14b7510dee58ad81"
+}

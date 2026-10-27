@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-climb-2026102702-2",
+ "still": "genesis-09-s-climb",
+ "episode": "genesis-09-short",
+ "shot": "s-climb",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Crowds in silhouette on a muddy slope in the rain, carrying children and leading goats on ropes, the valley below turned to water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Crowds in silhouette on a muddy slope in the rain, carrying children and leading goats on ropes, the valley below turned to water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373456027787788096",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-climb-2026102702-2.jpg",
+ "sha256": "d407fd82b7cf81cc26b69505a9d5da49d70a988f9d98332c34a33b84376d665b"
+}

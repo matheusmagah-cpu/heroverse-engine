@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-sky-2026102701-1",
+ "still": "genesis-09-s-sky",
+ "episode": "genesis-09-short",
+ "shot": "s-sky",
+ "run": "2026102701",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Men in silhouette, faces hidden in shadow, stand among the cooking fires of a camp of tents under a darkening grey sky heavy with cloud. Evening, smoke rising from the camp. Heedless and uneasy. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Men in silhouette, faces hidden in shadow, stand among the cooking fires of a camp of tents under a darkening grey sky heavy with cloud. Evening, smoke rising from the camp. Heedless and uneasy. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373451283699153600",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-sky-2026102701-1.jpg",
+ "sha256": "35c7a5ee60c937b02f0b0c5d04f51e6385b27b423bea2885be2515a1ecd0577a"
+}

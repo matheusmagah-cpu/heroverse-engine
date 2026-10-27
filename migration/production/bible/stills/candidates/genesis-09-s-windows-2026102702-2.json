@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-windows-2026102702-2",
+ "still": "genesis-09-s-windows",
+ "episode": "genesis-09-short",
+ "shot": "s-windows",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Torrents of rain pour from a black sky onto a camp of tents, people seen from behind, faces not visible, shielding their heads with their arms. Night, a flash of lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Torrents of rain pour from a black sky onto a camp of tents, people seen from behind, faces not visible, shielding their heads with their arms. Night, a flash of lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373455078885767872",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-windows-2026102702-2.jpg",
+ "sha256": "7fa243ee382f1bab9e93a49aa09acb9e90bdcf9373544dacf314c7d4670b7d8d"
+}
