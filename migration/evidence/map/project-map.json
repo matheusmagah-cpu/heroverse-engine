@@ -1865,7 +1865,8 @@
    ],
    "imported_by": [
     "migration/production/bible/episode_build.py",
-    "migration/production/bible/test_clip_check.py"
+    "migration/production/bible/test_clip_check.py",
+    "migration/production/bible/test_long_preflight.py"
    ],
    "test": "migration/production/bible/test_clip_check.py",
    "is_test": false
@@ -1987,7 +1988,7 @@
    "is_test": false
   },
   "migration/production/bible/long_preflight.py": {
-   "purpose": "The Bible-story long's no-rework contract (E126, owner 27/10: \"no rework, ever\"). The Shorts had it since E106/E114",
+   "purpose": "The Bible-story long's no-rework contract (E127, owner 27/10: \"no rework, ever\"). The Shorts had it since E106/E114",
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/production/bible/episode_build.py",
@@ -2175,10 +2176,11 @@
    "is_test": true
   },
   "migration/production/bible/test_long_preflight.py": {
-   "purpose": "E126: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the",
+   "purpose": "E127: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the",
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/ops/dispatch_guard.py",
+    "migration/production/bible/clip_check.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/long_plan_check.py",

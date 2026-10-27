@@ -280,7 +280,7 @@ knows `story-qa-criteria-v3`. This PR does not wire them.
    - The manifest the QA reads.
    - qa_pilot, render_queue and prepublish_gate learn v3.
 
-## 7. The no-rework contract of the Shorts, for the long (E126, 2026-10-27)
+## 7. The no-rework contract of the Shorts, for the long (E127, 2026-10-27)
 
 Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes through the Shorts' own contract
 (E106, E114, E99), by the same code (`long_preflight.py` holds only what differs):

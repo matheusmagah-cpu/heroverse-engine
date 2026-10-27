@@ -483,7 +483,7 @@ class Gating(unittest.TestCase):
         (self.work / "layout.json").write_text(json.dumps(layout_for(self.plan, [2.4, 3.0, 2.5, 3.1])))
         (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"]}))
         self.lip, self.faces, self.stripped = [], [], []
-        eb.clip_flags = lambda path: []
+        eb.clip_flags = lambda path, aspect=None: []
         eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append((Path(clip).name, Path(wav).name)) or [],
                                                          {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
         eb.face_flags = lambda py, model, clip: (self.faces.append(Path(clip).name) or [],
@@ -526,7 +526,7 @@ class Gating(unittest.TestCase):
         # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
         approvals, fetched, checked = self.approvals(), [], []
-        eb.clip_flags = lambda path: checked.append(Path(path).name) or []
+        eb.clip_flags = lambda path, aspect=None: checked.append(Path(path).name) or []
 
         def fetch(name, dst):
             fetched.append(name)
@@ -567,7 +567,7 @@ class Gating(unittest.TestCase):
                 eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals,
                                  fetch=lambda name, dst: Path(dst).write_bytes(b"other"))
             self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
-            eb.clip_flags = lambda path: ["BLACK_FRAMES"]
+            eb.clip_flags = lambda path, aspect=None: ["BLACK_FRAMES"]
             with self.assertRaises(SystemExit) as err:
                 eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals, fetch=fetch)
             self.assertIn("SHOT_APPROVED_CLIP_FAILED", str(err.exception))
@@ -1386,7 +1386,7 @@ class StillMouthGate(unittest.TestCase):
         (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "keeper:talk": ["k-talk.jpg"],
                                                          "eve": ["eve.jpg"]}))
         self.lip, self.still, self.stripped = [], [], []
-        eb.clip_flags = lambda path: []
+        eb.clip_flags = lambda path, aspect=None: []
         eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append(Path(clip).name) or [],
                                                          {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
         eb.face_flags = lambda py, model, clip: ([], {"faces": {"frames_sampled": 40, "faces_found": 0}})

@@ -115,15 +115,17 @@ def shot_probe(i):
     plan = _plan(i)
     shots = ids(i.get("shots"))
     need(shots and re.fullmatch(IDS, i.get("shots", "")), "shots", i.get("shots"), "comma list of shot ids")
-    # E126: a long's `window_of` shot is a second view of an earlier clip: never generated, so never probed
+    # E127: a long's `window_of` shot is a second view of an earlier clip: never generated, so never probed
     known = {s.get("id") for s in plan.get("shots", []) if s.get("window_of") is None}
     need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan's generated shots ({len(known)} shots)")
     need(re.fullmatch(r"[1-6]", i.get("attempts") or ""), "attempts", i.get("attempts"), "1-6")
     need(re.fullmatch(r"(\d{6,20})?", i.get("adopt_run") or ""), "adopt_run", i.get("adopt_run"), "a run id or empty")
-    # E126: a long's probe also depends on its committed preflight (check-probe's LONG_PROBE_PREFLIGHT)
-    return {"uploads": len(shots) * int(i["attempts"]),
-            "deps": [i["plan"], "migration/production/characters/", "migration/evidence/pavo/setups.json",
-                     f"migration/evidence/preflight/{plan['episode']}.json"]}
+    deps = [i["plan"], "migration/production/characters/", "migration/evidence/pavo/setups.json"]
+    if plan.get("version") == "bible-long-plan-v1":
+        # E127: only a long's probe depends on its committed preflight (check-probe's LONG_PROBE_PREFLIGHT); a Short's
+        # does not, so a new Short report is no fix that lifts GUARD_RERUN_WITHOUT_FIX
+        deps.append(f"migration/evidence/preflight/{plan['episode']}.json")
+    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps}
 
 
 def cf_images(i):

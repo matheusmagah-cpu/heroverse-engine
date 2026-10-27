@@ -537,7 +537,7 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
     `footage_picture_share_min` 0.4. The v3 reader is slice 3, and its rows must not bring back a footage minimum.
   - Nothing writes or checks the .srt track.
   - 23 `refusal_registry.json` review rows for `long` are `open`.
-  - Fixed by E126 (claude/long-preflight, 27/10): the long's preflight refuses while those rows are open
+  - Fixed by E127 (claude/long-preflight, 27/10): the long's preflight refuses while those rows are open
     (LONG_REVIEW_OPEN), and the long has the Shorts' risk order, resume (`probe-queue`) and approved-shot contract
     (LONG_DESIGN.md section 7).
   - The preview gate has not run on the real opening.
