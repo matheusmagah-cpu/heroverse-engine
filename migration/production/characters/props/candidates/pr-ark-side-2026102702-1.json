@@ -1,0 +1,27 @@
+{
+ "id": "pr-ark-side-2026102702-1",
+ "prop": "ark",
+ "view": "side",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "source": "approved-clip-frame",
+ "clip": {
+  "episode": "genesis-08-short",
+  "shot": "s-scorn",
+  "asset": "shot-genesis-08-short-s-scorn-sha256-f3fceda82760232322c14ac7e99ee6e2c17a0443ff229d83fc4193add35d01fa.mp4",
+  "clip_sha256": "f3fceda82760232322c14ac7e99ee6e2c17a0443ff229d83fc4193add35d01fa",
+  "seconds": 3.0,
+  "approved_score": 9.5,
+  "approval_note": "Claude frame review of composed run 40460764662 (regenerated shot): passes the 9.5 floor"
+ },
+ "prompt": null,
+ "quote": null,
+ "references": [],
+ "size": [
+  720,
+  1280
+ ],
+ "repo_path": "migration/production/characters/props/candidates/pr-ark-side-2026102702-1.jpg",
+ "sha256": "c7a40bcff161d6717b84dac35a7c3a11037de67d1ce011a89bd96d112d9e0e17",
+ "generated_by": "HeroVerse pipeline (frame of an AI-generated clip)"
+}

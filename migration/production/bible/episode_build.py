@@ -733,9 +733,11 @@ def prop_refusal(plan, shot):
     same function plan_check, long_plan_check and the preflight run): None or the refusal."""
     if shot.get("id") in plan_check.ark_grandfathered(plan, plan.get("shots") or [])[0]:
         return None
-    found = plan_check.prop_problems(0, shot, plan_check.period(plan))
+    per = plan_check.period(plan)
+    found = plan_check.prop_problems(0, shot, per)
     if not found:
-        return None
+        still = plan_check.prop_shot_problems(0, shot, plan, per)   # E122: from part 9 a prop is shown from a still
+        return f"PROP_SHOT_WITHOUT_STILL {shot['id']} {still[0].split(' ', 4)[-1]}" if still else None
     detail = found[0].split(" ", 4)[-1]
     if found[0].startswith("ARK_LOOK_NOT_CANONICAL"):
         return f"ARK_LOOK_NOT_CANONICAL {shot['id']} {detail}"
@@ -745,7 +747,8 @@ def prop_refusal(plan, shot):
 # image first (owner, 27/10): the refusals frame_refusal passes on, each raised by plan_check.frame_problems
 FRAME_REFUSALS = ("FRAMES_NOT_SCENE", "FRAME_FIELD_INVALID", "FRAME_LAST_WITHOUT_FIRST", "FRAMES_WITH_REFERENCES",
                   "FRAMES_WITH_AUDIO", "STILL_MISSING", "STILL_NOT_APPROVED", "STILL_PATH_REFUSED",
-                  "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED")
+                  "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED",
+                  "STILL_PROP_UNREFERENCED")
 
 
 def frame_refusal(plan, shot):

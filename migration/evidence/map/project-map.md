@@ -334,7 +334,7 @@ flowchart LR
 | `kjv_check.py` | Every quotation narrated as Scripture must be the KJV word for word (owner, 2026-10-24). Nothing checked it: a | - | - | **no** |
 | `lipsync_check.py` | Check that a talking clip (the Keeper, Pavo audio-input mode) says OUR narration line, in sync (owner, 2026-10 | episode.yml, shot-probe.yml | - | yes |
 | `long_plan_check.py` | Check a Bible-story long's shot plan (`bible-long-plan-v1`) before anything is voiced or generated (owner, | - | plan_check, voice_pace, script_check | yes |
-| `plan_check.py` | Check a Short's plan (`bible-plan-v2`) before anything is voiced or generated (owner, 2026-10-26, after the mi | episode.yml, shot-probe.yml | episode_build, kjv_check, voice_pace, characters, publish_episode | yes |
+| `plan_check.py` | Check a Short's plan (`bible-plan-v2`) before anything is voiced or generated (owner, 2026-10-26, after the mi | episode.yml, shot-probe.yml | episode_build, kjv_check, voice_pace, characters, props, publish_episode | yes |
 | `rekey_shots_e118.py` | E118 one-off migration: re-key every approved clip in shots/*.json to the request digest without `seconds`. | - | episode_build, episode_preflight | **no** |
 | `scene_stills.py` | Scene stills, "image first" (owner, 27/10): Claude reviews cheap stills of a whole episode before any video. | scene-stills.yml | plan_check | yes |
 | `short_engine.py` | Compose a Bible-series Short with the engine, at no credit cost (owner, 2026-10-25: "montar no motor, grátis") | - | - | yes |
@@ -347,6 +347,7 @@ flowchart LR
 | module | purpose | run by | imports | test |
 |---|---|---|---|---|
 | `characters.py` | The character bible (owner, 2026-10-25: "if Moses appears once, he is the same Moses 100 videos later"). | - | - | yes |
+| `props.py` | Props with approved reference images, like a character's (E122). | - | plan_check | **no** |
 
 ### `migration/production/footage`
 

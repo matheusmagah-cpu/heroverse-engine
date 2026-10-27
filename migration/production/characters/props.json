@@ -1,0 +1,21 @@
+{
+ "version": "props-v1",
+ "rule": "E122 (2026-10-27): a prop seen in many shots holds one look the way a character does: its look and exclusion sentences word for word (plan_check.PROPS) AND its approved reference images. genesis-09's 64 Pavo stills carried the ark's two sentences word for word and still drew a tower at one end, a gabled barn or a ship's curved bow from shot to shot. A still whose prompt names a prop is made only with every approved reference of that prop (props.py, plan_check.prop_references; STILL_PROP_UNREFERENCED). A prop is APPROVED only when Claude kept an image for every view (props.py approve, by PR).",
+ "props": {
+  "ark": {
+   "name": "The ark (Genesis 6-9)",
+   "first_story": "Genesis 6",
+   "status": "APPROVED",
+   "look": "plan_check.ARK_LOOK + plan_check.ARK_EXCLUDE (word for word; one source)",
+   "views": [
+    "side",
+    "three-quarter"
+   ],
+   "refs": [
+    "side",
+    "three-quarter"
+   ],
+   "reviewed": "2026-10-27: side pr-ark-side-2026102702-2 kept (9.5): Frame of genesis-08 s-board (approved clip, 9.5) at 0.5 s: the same finished box along its long side, flat roof and square end visible, no tower or bow. No true side elevation exists in approved clips; this oblique long-side view is the nearest and matches the three-quarter reference."
+  }
+ }
+}

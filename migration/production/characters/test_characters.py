@@ -113,5 +113,218 @@ class RepoReference(unittest.TestCase):
         self.assertEqual(hashlib.sha256(img.read_bytes()).hexdigest(), rec["sha256"])
 
 
+class Props(unittest.TestCase):
+    """E122: the ark is a referenced prop like a character: DRAFT candidates with sha256 and a 0-credit quote, approved
+    only by `props.py approve` (>= 9.5), APPROVED only when every view has its image."""
+
+    def setUp(self):
+        import props as pr
+        import shutil
+        self.pr, self.shutil = pr, shutil
+        sys.path.insert(0, str(pr.REPO / "migration" / "production" / "bible"))
+        import plan_check
+        self.look = plan_check.ARK_LOOK + " " + plan_check.ARK_EXCLUDE
+        self.d = Path(tempfile.mkdtemp(prefix=".test-props-", dir=pr.HERE))   # inside the repository
+        self.file = self.d / "props.json"
+        pr.save(self.file, {"props": {"ark": {"status": "DRAFT", "views": ["side", "three-quarter"], "refs": []}}})
+        self.props = pr.registry(self.file)
+
+    def tearDown(self):
+        self.shutil.rmtree(self.d)
+
+    def image(self, name, colour):
+        from PIL import Image
+        path = self.d / name
+        Image.new("RGB", (64, 36), colour).save(path, "JPEG")
+        return path
+
+    def meta(self, prompt=None, credits=0.0):
+        return {"prompt": prompt or f"Prop reference image, side elevation. {self.look} No text.",
+                "conversation_id": "1", "quote": {"required_credits": credits, "final_points": 0.0,
+                                                  "is_estimate": False}}
+
+    def finalize(self, view, n, colour, **kw):
+        return self.pr.finalize("ark", view, "9", n, self.image(f"{view}-{n}.jpg", colour), self.meta(**kw),
+                                cand_dir=self.d / "candidates", props=self.props)
+
+    def approve(self, view, cid, score=9.6):
+        return self.pr.approve("ark", view, cid, score, "one box, flat square ends", cand_dir=self.d / "candidates",
+                               props_file=self.file, images_dir=self.d / "images", refs_dir=self.d / "refs",
+                               today="2026-10-27")
+
+    def test_candidates_carry_the_look_a_zero_quote_and_their_sha256(self):
+        rec = self.finalize("side", 1, (90, 60, 30))
+        self.assertEqual((rec["status"], rec["id"]), ("DRAFT", "pr-ark-side-9-1"))
+        self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]))
+        for kw, code in (({"prompt": "a long wooden ship"}, "PROP_PROMPT_REFUSED"), ({"credits": 2.0},
+                                                                                     "PROP_QUOTE_NOT_ZERO")):
+            with self.assertRaises(SystemExit) as err:
+                self.finalize("side", 2, (1, 2, 3), **kw)
+            self.assertIn(code, str(err.exception))
+        with self.assertRaises(SystemExit):
+            self.finalize("top", 1, (1, 2, 3))
+        self.assertEqual(self.pr.sheet("ark", "9", self.d / "sheet.jpg", cand_dir=self.d / "candidates"),
+                         ["pr-ark-side-9-1"])
+
+    def test_the_prop_is_approved_only_with_every_view_and_its_images_by_sha256(self):
+        side = self.finalize("side", 1, (90, 60, 30))["id"]
+        tq = self.finalize("three-quarter", 1, (80, 50, 20))["id"]
+        with self.assertRaises(SystemExit) as err:
+            self.approve("side", side, score=9.4)
+        self.assertIn("PROP_SCORE_BELOW_FLOOR", str(err.exception))
+        with self.assertRaises(SystemExit):
+            self.approve("three-quarter", side)   # a side candidate is no three-quarter view
+        self.approve("side", side)
+        props = self.pr.registry(self.file)
+        self.assertEqual((props["ark"]["status"], props["ark"]["refs"]), ("DRAFT", ["side"]))
+        self.assertEqual(self.pr.approved_refs("ark", props, self.d / "images")[0], [])
+        self.approve("three-quarter", tq)
+        props = self.pr.registry(self.file)
+        self.assertEqual(props["ark"]["status"], "APPROVED")
+        refs, why = self.pr.approved_refs("ark", props, self.d / "images")
+        self.assertIsNone(why)
+        self.assertEqual([r["record"] for r in refs], ["pr-ark-side", "pr-ark-three-quarter"])
+        from PIL import Image
+        Image.new("RGB", (64, 36), (1, 1, 1)).save(self.d / "refs" / "pr-ark-side.jpg", "JPEG")
+        self.assertIn("sha256", self.pr.approved_refs("ark", props, self.d / "images")[1])
+
+    def test_a_frame_is_cut_only_from_a_clip_claude_approved(self):
+        import subprocess
+        clip = self.d / "clip.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=brown:s=144x256:d=2:r=10",
+                        "-pix_fmt", "yuv420p", str(clip)], check=True)
+        digest = self.pr.sha256(clip)
+        shots = self.d / "shots"
+        self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"asset": "a.mp4", "clip_sha256": digest, "score": 9.5,
+                                                              "clip_seconds": 2},
+                                                    "s-low": {"clip_sha256": digest, "score": 9.0}}})
+        kw = {"cand_dir": self.d / "candidates", "props": self.props, "shots_dir": shots}
+        rec = self.pr.finalize_frame("ark", "side", "9", 1, clip, "ep-a", "s-box", 1.0, crop=[0, 0, 144, 128], **kw)
+        self.assertEqual((rec["source"], rec["size"], rec["clip"]["clip_sha256"]), ("approved-clip-frame", [144, 128],
+                                                                                   digest))
+        self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]))
+        for args, code in ((("ep-a", "s-low", 1.0), "PROP_SOURCE_REFUSED"),     # approved below 9.5
+                           (("ep-a", "s-none", 1.0), "PROP_SOURCE_REFUSED"),    # no approval
+                           (("../x", "s-box", 1.0), "PROP_SOURCE_REFUSED"),
+                           (("ep-a", "s-box", 9.0), "PROP_FRAME_TIME_REFUSED")):
+            with self.assertRaises(SystemExit) as err:
+                self.pr.finalize_frame("ark", "side", "9", 2, clip, *args, **kw)
+            self.assertIn(code, str(err.exception))
+        with self.assertRaises(SystemExit) as err:   # another clip under the approved shot's name
+            other = self.d / "other.mp4"
+            other.write_bytes(clip.read_bytes() + b"x")
+            self.pr.finalize_frame("ark", "side", "9", 2, other, "ep-a", "s-box", 1.0, **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        # a frame never enters as a Pavo still with a borrowed source, nor any other source
+        with self.assertRaises(SystemExit) as err:
+            self.pr.finalize(
+                "ark", "side", "9", 3, self.image("x.jpg", (1, 2, 3)), dict(self.meta(), source="approved-clip-frame"),
+                cand_dir=self.d / "candidates", props=self.props)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        self.assertTrue(self.pr.source_problems("ark", {"source": "hand"}))
+        # approve re-checks the approval: a clip no longer approved refuses its frame
+        self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": "0" * 64, "score": 9.5}}})
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", rec["id"], 9.6, "box", cand_dir=self.d / "candidates", props_file=self.file,
+                            images_dir=self.d / "images", refs_dir=self.d / "refs", shots_dir=shots)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": digest, "score": 9.5}}})
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs", "shots_dir": shots}
+        with self.assertRaises(SystemExit) as err:    # E122: the clip itself is needed to remake the frame
+            self.pr.approve("ark", "side", rec["id"], 9.6, "box", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "box", clip=clip, **kw)
+        self.assertIn("approved-clip-frame", ref["source"])
+
+    def test_a_hand_made_picture_naming_an_approved_clip_is_not_approved(self):
+        # E122 (review of #462): a red JPEG with a sidecar naming the approved clip's sha256 was approved; approve now
+        # cuts the frame again from the clip and requires the same bytes
+        import subprocess
+        clip = self.d / "clip.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc=s=144x256:d=2:r=10",
+                        "-pix_fmt", "yuv420p", str(clip)], check=True)
+        digest = self.pr.sha256(clip)
+        shots = self.d / "shots"
+        self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": digest, "score": 9.5, "clip_seconds": 2}}})
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs", "shots_dir": shots}
+        real = self.pr.finalize_frame("ark", "side", "9", 1, clip, "ep-a", "s-box", 1.0, cand_dir=self.d / "candidates",
+                                      props=self.props, shots_dir=shots)
+        forged = self.d / "candidates" / "pr-ark-side-9-2.jpg"
+        from PIL import Image
+        Image.new("RGB", (144, 256), (255, 0, 0)).save(forged, "JPEG")
+        self.pr.save(forged.with_suffix(".json"), dict(real, id="pr-ark-side-9-2", repo_path=self.pr.rel(forged),
+                                                       sha256=self.pr.sha256(forged)))
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", "pr-ark-side-9-2", 9.6, "box", clip=clip, **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        # the right picture with another time or crop in its sidecar is refused the same way
+        moved = dict(real, clip=dict(real["clip"], seconds=1.5))
+        self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", moved)
+        with self.assertRaises(SystemExit):
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)
+        self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", real)
+        other = self.d / "other.mp4"
+        other.write_bytes(clip.read_bytes() + b"x")
+        with self.assertRaises(SystemExit):
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=other, **kw)
+        self.assertEqual(self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)["sha256"],
+                         real["sha256"])
+
+    def test_every_refusal_of_the_registry_tool(self):
+        # E122 (review of #462): each PROP_* code of props.py is reached
+        def refused(code, fn, *a, **k):
+            with self.assertRaises(SystemExit) as err:
+                fn(*a, **k)
+            self.assertIn(code, str(err.exception))
+        cands = self.d / "candidates"
+        img = self.image("i.jpg", (9, 9, 9))
+        refused("PROP_VIEW_UNKNOWN", self.pr.finalize, "ark", "top", "9", 1, img, self.meta(), cand_dir=cands,
+                props=self.props)
+        refused("PROP_VIEW_UNKNOWN", self.pr.finalize, "boat", "side", "9", 1, img, self.meta(), cand_dir=cands,
+                props=self.props)
+        refused("PROP_CANDIDATE_NAME_REFUSED", self.pr.finalize, "ark", "side", "9x", 1, img, self.meta(),
+                cand_dir=cands, props=self.props)
+        refused("PROP_CANDIDATE_NAME_REFUSED", self.pr.finalize, "ark", "side", "9", 10, img, self.meta(),
+                cand_dir=cands, props=self.props)
+        refused("PROP_SHEET_EMPTY", self.pr.sheet, "ark", "9", self.d / "s.jpg", cand_dir=cands)
+        cid = self.finalize("side", 1, (90, 60, 30))["id"]
+        ak = {"cand_dir": cands, "props_file": self.file, "images_dir": self.d / "images", "refs_dir": self.d / "refs"}
+        refused("PROP_VIEW_UNKNOWN", self.pr.approve, "ark", "top", cid, 9.6, "x", **ak)
+        refused("PROP_NOTE_MISSING", self.pr.approve, "ark", "side", cid, 9.6, "  ", **ak)
+        refused("PROP_SCORE_BELOW_FLOOR", self.pr.approve, "ark", "side", cid, 10.5, "x", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "pr-ark-side-9-7", 9.6, "x", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "../x", 9.6, "x", **ak)
+        Image = __import__("PIL.Image", fromlist=["Image"])
+        Image.new("RGB", (64, 36), (0, 0, 0)).save(cands / f"{cid}.jpg", "JPEG")
+        refused("PROP_CANDIDATE_SHA256_MISMATCH", self.pr.approve, "ark", "side", cid, 9.6, "x", **ak)
+        import subprocess
+        clip = self.d / "c.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=gray:s=144x256:d=1:r=10",
+                        "-pix_fmt", "yuv420p", str(clip)], check=True)
+        shots = self.d / "shots"
+        self.pr.save(shots / "e.json", {"shots": {"s": {"clip_sha256": self.pr.sha256(clip), "score": 9.6}}})
+        for crop in ([0, 0, 200, 100], [-1, 0, 100, 100], [0, 0, 32, 32]):
+            refused("PROP_CROP_REFUSED", self.pr.finalize_frame, "ark", "side", "9", 3, clip, "e", "s", 0.5,
+                    crop=crop, cand_dir=cands, props=self.props, shots_dir=shots)
+
+    def test_the_committed_ark_candidates_are_recorded_and_unapproved_until_review(self):
+        props = self.pr.registry()
+        ark = props["ark"]
+        if ark["status"] != "APPROVED":
+            self.assertEqual(self.pr.approved_refs("ark", props)[0], [])
+        for meta in sorted(self.pr.CANDIDATES_DIR.glob("pr-ark-*.json")):
+            rec = json.loads(meta.read_text())
+            self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]), meta.name)
+            # a Pavo still with the look and an exact 0-credit quote, or a frame of a clip approved at >= 9.5
+            self.assertEqual(self.pr.source_problems("ark", rec), [], meta.name)
+            if rec["source"] == self.pr.PAVO:
+                self.assertIn(self.look, rec["prompt"], meta.name)
+        for view in ark.get("refs") or []:
+            rec = json.loads(self.pr.record_path("ark", view).read_text())
+            self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]))
+
+
 if __name__ == "__main__":
     unittest.main()

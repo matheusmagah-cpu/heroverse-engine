@@ -1,0 +1,20 @@
+{
+ "id": "pr-ark-three-quarter",
+ "prop": "ark",
+ "view": "three-quarter",
+ "repo_path": "migration/production/characters/refs/pr-ark-three-quarter.jpg",
+ "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee",
+ "size": [
+  720,
+  600
+ ],
+ "candidate": "pr-ark-three-quarter-2026102702-3",
+ "prompt": null,
+ "source": "approved-clip-frame {\"approval_note\": \"Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)\", \"approved_score\": 9.5, \"asset\": \"shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4\", \"clip_sha256\": \"e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e\", \"crop\": [0, 620, 720, 600], \"episode\": \"genesis-08-short\", \"seconds\": 6.5, \"shot\": \"s-board\"}",
+ "approved": {
+  "date": "2026-10-27",
+  "score": 9.6,
+  "note": "Frame of genesis-08 s-board (approved clip, 9.5) at 6.5 s, cropped: the finished ark as published in Genesis 8 - one long straight-sided plank box, flat roof, flat square ends, same height end to end, no tower, cabin, prow, mast or funnel. Tall for 'low', but it is the look viewers already saw; continuity wins.",
+  "by": "Claude's reference review (ops/CLAUDE_REVIEW.md)"
+ }
+}

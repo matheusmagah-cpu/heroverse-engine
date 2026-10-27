@@ -121,6 +121,15 @@ because the Cloudflare FLUX stills of genesis-08 fell below 9.5 (`evidence/shots
   `production/bible/stills/sheets/genesis-08-short-20261027.jpg`). Text-only. References live, 2026-10-27: one 9:16 hd thumbnail candidate of genesis-09 with Noah's two approved
   references (quoted exactly 0 with 2 input images) kept his approved face; the text-only twin drew another man
   (`evidence/thumbs/genesis-09-short-20261027.json`).
+- Stills with references (E122): a still whose prompt names a prop (the ark) is made with that prop's approved
+  reference images (`production/characters/props.json`). `scene_stills.py prepare PLAN SHOTS N RUN OUT --engine pavo`
+  lists each candidate's `references` (repository paths, at most 6): pass them as `references` to
+  `pavo_quote_image` (input images counted; exact 0 only) and to `pavo_generate_image`, then read the job back with
+  `pavo_image_job`. The candidate's sidecar records `references` ([{record, sha256}], from `reference_records`) and
+  `pavo`: `generate` = the generate answer (`model`, `conversation_id`, `input_images`, `quote`) and `job` = the
+  read-back (`conversation_id`, `status`). `finalize` and `approve` refuse a candidate whose `input_images` is not the
+  number of required references (STILL_PROP_UNREFERENCED); FLUX (`scene-stills.yml`) cannot send references and
+  `prepare` refuses such a still on it.
 
 ## Authorization
 
