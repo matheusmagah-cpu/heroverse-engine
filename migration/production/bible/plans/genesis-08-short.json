@@ -3,14 +3,15 @@
  "episode": "genesis-08-short",
  "part": 8,
  "passage": "Genesis 6:14-22 (KJV, public domain)",
+ "period": "before-the-flood",
  "aspect_ratio": "9:16",
  "story": "Noah builds the ark (SERIES.md episode 8; arc 2, Brothers and the walk with God)",
- "people": "The scoffer (characters.json, an invented antagonist, DRAFT until his reference sheet is reviewed; this plan is built only after he is APPROVED) is the valley's ringleader: he opens on screen speaking a taunt in our own words (kind story, no reference: Genesis records no word of the mockers, and none is presented as Scripture) and leads the torch mob at the climax. Noah is DRAFT: only a faceless old man seen from behind or in silhouette, his sons three young men in silhouette; the rest of the mockers are anonymous crowds seen from behind or in silhouette and never speak. The only verses that touch those years are Matthew 24:38 (eating and drinking until the day he entered the ark) and 1 Peter 3:20 (God waited while the ark was a preparing). God is never shown: His lines (Genesis 6:17 right after the taunt, Genesis 6:18 at the turn) are a deep voice-over over storm and lightning. One establishing shot (2 s). The Keeper only for the insight, the comment question and the close.",
- "beats": "structure bible-story-short (script.beats): cold_open s-taunt (the scoffer on screen mocks the hull on dry ground, Noah working behind him), then God's Genesis 6:17 (s-voice, voice-over: the flood is real); stake and open loop (years before, one man picked up an axe; how long can he keep building while everyone mocks him?); escalation in three rising steps of the mockers, acted, each ending on a hook (laughter at the size; scorn while the world feasts; stones and cut ropes at night, and God waited); God speaks Genesis 6:18 (s-covenant, voice-over), then the acted climax s-torches (the scoffer leads the mob with torches, Noah keeps hammering) and Genesis 6:22; payoff (the finished ark, the valley goes quiet); keeper_close (insight: Noah never speaks, his sermon was the ark; comment question; part 9).",
+ "people": "Noah is APPROVED (characters.json), but no talking (lip-synced) shot is used in this episode: he is shown only as a strong old man seen from behind or in silhouette, his face never visible, and his sons as three young men in silhouette. The mockers of the valley are an unnamed crowd seen from behind or in silhouette, with a ringleader in silhouette at the climax; none of them is a characters.json entry and none speaks (the scoffer, DRAFT, is not in this episode). The only verses that touch those years are Matthew 24:38 (eating and drinking until the day he entered the ark) and 1 Peter 3:20 (God waited while the ark was a preparing). God is never shown: His lines (Genesis 6:17 at the open, Genesis 6:18 at the turn) are a deep voice-over over storm and lightning. One establishing shot (2 s). The Keeper only for the insight, the comment question and the close, in voice-over (plan B): silent on screen with his narration over, genesis-07's exact prompts.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:17, voice-over: the flood is coming); stake and open loop (one man picked up an axe on dry ground; how long can he keep building while everyone mocks him?); escalation in three rising steps of the mockers, acted, each ending on a hook (laughter at the size; scorn while the world feasts; stones and cut ropes at night, and God waited); God speaks Genesis 6:18 (s-covenant, voice-over), then the acted climax s-torches (a ringleader in silhouette leads the mob with torches, Noah keeps hammering) and Genesis 6:22; payoff (the finished ark, the valley goes quiet); keeper_close in voice-over (insight: Noah never speaks, his sermon was the ark; comment question; part 9).",
  "narration": [
   {
    "kind": "story",
-   "text": "Years before that laugh, one man heard those words, and picked up an axe. On dry ground. Far from any sea."
+   "text": "One man heard those words, and picked up an axe. On dry ground, far from any sea, he began to build a ship."
   },
   {
    "kind": "story",
@@ -36,7 +37,7 @@
   },
   {
    "kind": "story",
-   "text": "Year after year the laughter grew louder. Men paced out the hull and shook their heads. Children threw clods of earth at the scaffolding."
+   "text": "Year after year the laughter grew louder. Men paced out the hull and shook their heads. Children threw clods of earth at the scaffolding, and their fathers cheered."
   },
   {
    "kind": "scripture",
@@ -45,11 +46,11 @@
   },
   {
    "kind": "story",
-   "text": "Feasts and weddings below, music in every camp. And up on the hill, one strange family still hammering."
+   "text": "Feasts and weddings below, music in every camp, and nobody looking up. And up on the hill, one strange family still hammering."
   },
   {
    "kind": "story",
-   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold. And still the ark grew taller."
+   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold in the dark. And still the ark grew taller."
   },
   {
    "kind": "scripture",
@@ -58,7 +59,7 @@
   },
   {
    "kind": "story",
-   "text": "Waited. Every hammer blow was one more day of mercy, even for the people throwing stones."
+   "text": "Waited. Every hammer blow was one more day of mercy, one more open door, even for the people throwing stones."
   },
   {
    "kind": "story",
@@ -75,7 +76,7 @@
   },
   {
    "kind": "story",
-   "text": "At dawn it stood as it was told: a window above, a door in the side, three decks within. The valley that laughed went quiet."
+   "text": "At dawn it stood as it was told: a window above, a door in the side, three decks within. The valley that laughed went quiet, and nobody threw another stone."
   },
   {
    "kind": "insight",
@@ -92,17 +93,6 @@
  ],
  "shots": [
   {
-   "id": "s-taunt",
-   "kind": "scene",
-   "speaker": "scoffer",
-   "line": "Look at him, building a boat on dry ground! Tell us, old man, where is your flood?",
-   "characters": [
-    "scoffer"
-   ],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, standing at the front of a jeering crowd in a dry valley, one arm flung toward a vast wooden hull, turns to the camera and speaks a mocking taunt, his lips moving clearly with every word, while behind him the crowd seen from behind laughs and an old man seen from behind, his face never visible, keeps working high on the bare ribs of the hull. Hot afternoon in the dry valley, harsh sun and drifting dust. Scornful and loud. No text, no logos."
-  },
-  {
    "id": "s-voice",
    "kind": "scene",
    "speaker": "god",
@@ -110,7 +100,7 @@
    "line": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh",
    "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black storm clouds pile up over a dry valley where the bare wooden ribs of a vast unfinished hull rise out of the dust, lightning flickering deep inside the clouds. Dusk, a hot wind driving sand across the cracked ground. Ominous and vast. No people, no text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black storm clouds pile up over a dry valley where the bare wooden ribs of a vast unfinished box-shaped hull rise out of the dust, lightning flickering deep inside the clouds. Dusk, a hot wind driving sand across the cracked ground. Ominous and vast. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos."
   },
   {
    "id": "s-axe",
@@ -120,7 +110,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. A strong old man seen from behind, his face never visible, swings an axe into the trunk of a tall cypress tree, chips flying. Early morning on a dry hillside, low golden sun and long shadows. Resolute and alone. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. A strong old man seen from behind, his face never visible, swings an axe into the trunk of a tall cypress tree, chips flying. Early morning on a dry hillside, low golden sun and long shadows. Resolute and alone. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -131,7 +121,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow crane down. A dry valley of dust and thorn bushes stretches to bare hills, a few felled cypress logs lying in a clearing, no water anywhere in sight. Morning haze, a pale hot sky. Empty and strange. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow crane down. A dry valley of dust and thorn bushes stretches to bare hills, a few felled cypress logs lying in a clearing, no water anywhere in sight. Morning haze, a pale hot sky. Empty and strange. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "establishing": true
   },
   {
@@ -142,7 +132,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. A crowd seen from behind gathers at the edge of a clearing and points at the first wooden ribs rising from the dust, heads thrown back in laughter. Midday, harsh sun and drifting dust. Curious and scornful. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. A crowd seen from behind gathers at the edge of a clearing and points at the first wooden ribs rising from the dust, heads thrown back in laughter. Midday, harsh sun and drifting dust. Curious and scornful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -153,7 +143,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Men in silhouette, faces in shadow, nudge each other and laugh, one miming a boat rowing through the air. Hot afternoon, dust hanging in the sunlight behind them. Mocking and loud. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Men in silhouette, faces in shadow, nudge each other and laugh, one miming a boat rowing through the air. Hot afternoon, dust hanging in the sunlight behind them. Mocking and loud. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -164,7 +154,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, low tracking shot. Four men seen from behind, an old man and three young men, drag heavy cypress logs on ropes across the dust while onlookers in silhouette jeer from a ridge. Late afternoon, long shadows and dust in the air. Toiling and defiant. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, low tracking shot. Four men seen from behind, an old man and three young men, drag heavy cypress logs on ropes across the dust while onlookers in silhouette jeer from a ridge. Late afternoon, long shadows and dust in the air. Toiling and defiant. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -175,7 +165,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. Hands seen from behind brush thick black pitch from a clay pot over a broad wooden plank, the pitch glistening. Inside a half-built hull, slanting light through the open ribs. Patient and careful. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. Hands seen from behind brush thick black pitch from a clay pot over a broad wooden plank, the pitch glistening. Inside a half-built hull, slanting light through the open ribs. Patient and careful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -186,7 +176,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A line of onlookers in silhouette stands on a ridge, backs to the camera, looking down at a huge wooden frame in a dry valley far from any water. Dusk, the sky orange behind the hull. Absurd and uneasy. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A line of onlookers in silhouette stands on a ridge, backs to the camera, looking down at a huge wooden frame in a dry valley far from any water. Dusk, the sky orange behind the hull. Absurd and uneasy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -197,7 +187,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A laughing man seen from behind scoops up a handful of dry dust and lets the wind blow it toward the distant hull. Hot evening light, dust glowing in the air. Scornful and dry. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A laughing man seen from behind scoops up a handful of dry dust and lets the wind blow it toward the distant hull. Hot evening light, dust glowing in the air. Scornful and dry. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -208,7 +198,7 @@
    ],
    "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tracking shot. A man seen from behind paces along the endless wooden keel, counting his steps with raised fingers, while a crowd in silhouette laughs behind him. Afternoon, harsh light and long shadows across the timber. Mocking and immense. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tracking shot. A man seen from behind paces along the endless wooden keel, counting his steps with raised fingers, while a crowd in silhouette laughs behind him. Afternoon, harsh light and long shadows across the timber. Mocking and immense. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -219,7 +209,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Workers in silhouette on high scaffolding raise giant curved ribs of the hull on ropes and pulleys. Late afternoon, the sun low behind the frame, sawdust drifting in the light. Vast and laborious. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Workers in silhouette stand on rough scaffolds of lashed wooden poles along the side of a long, low, box-shaped wooden hull and haul a giant curved rib upright with ropes. Late afternoon, the sun low behind the frame, sawdust drifting in the light. Vast and laborious. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -230,7 +220,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow tilt up. Three young men in silhouette haul a long beam up the side of the hull on ropes as onlookers below, seen from behind, shout and point. Golden hour, dust and sawdust in the air. Straining and defiant. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow tilt up. Three young men in silhouette haul a long beam up the side of the hull on ropes as onlookers below, seen from behind, shout and point. Golden hour, dust and sawdust in the air. Straining and defiant. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -241,7 +231,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, handheld drift. A mocker seen from behind points up at the towering hull and laughs, two others behind him bowing in a mock salute. Evening, warm light on the timber above them. Cruel and cheerful. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, handheld drift. A mocker seen from behind points up at the towering hull and laughs, two others behind him bowing in a mock salute. Evening, warm light on the timber above them. Cruel and cheerful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -252,7 +242,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Children seen from behind throw clods of earth at the scaffolding while men in silhouette laugh and egg them on. Late afternoon, clods bursting into dust against the wood. Careless and mean. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Children seen from behind throw clods of earth at the scaffolding while men in silhouette laugh and egg them on. Late afternoon, clods bursting into dust against the wood. Careless and mean. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -263,7 +253,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A larger crowd in silhouette shouts up at the scaffold, fists and staffs raised, faces hidden by the glare of the low sun. Dusk, dust thrown up by many feet. Rising and hostile. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A larger crowd in silhouette shouts up at the scaffold, fists and staffs raised, faces hidden by the glare of the low sun. Dusk, dust thrown up by many feet. Rising and hostile. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -274,7 +264,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Silhouettes feast around long low tables in a torch-lit camp of tents, wine cups raised and bread passed from hand to hand. Night, warm torchlight and smoke. Merry and heedless. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot from behind, slow tracking shot. A row of feasters seen from behind, their faces never visible, sits on woven rugs spread on the ground and faces the torch-lit goat-hair tents of the camp, clay wine cups raised and bread passed from hand to hand. Night, warm torchlight and smoke. Merry and heedless. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -285,7 +275,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pan. A wedding procession seen from behind dances through the camp with drums and torches, never looking up at the dark hull on the hill above them. Night, firelight below and a starless sky. Joyful and blind. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pan. A wedding procession seen from behind dances through the camp with drums and torches, never looking up at the dark hull on the hill above them. Night, firelight below and a starless sky. Joyful and blind. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -294,9 +284,9 @@
    "lines": [
     8
    ],
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. From behind the dancing crowd, the vast dark hull stands alone on the hill, a few small figures in silhouette still working on it by lamplight. Night, music and torchlight in the foreground. Lonely and steadfast. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. From behind the dancing crowd, the vast dark hull stands alone on the hill, a few small figures in silhouette still working on it by lamplight. Night, music and torchlight in the foreground. Lonely and steadfast. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -307,7 +297,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Men in silhouette hurl stones that crack against the planks of the hull, their shadows long in the torchlight. Night, sparks and dust flying. Angry and violent. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Men in silhouette hurl stones that crack against the planks of the hull, their shadows long in the torchlight. Night, sparks and dust flying. Angry and violent. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -318,7 +308,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A hand seen from behind saws through a scaffold rope with a bronze knife, the fibres parting one by one. Night, a single torch on a pole throwing hard shadows. Cold and threatening. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A hand seen from behind saws through a scaffold rope with a bronze knife, the fibres parting one by one. Night, a single torch on a pole throwing hard shadows. Cold and threatening. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -329,7 +319,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man in silhouette, his face never visible, works on alone inside the hull by one oil lamp, fitting a plank into place. Night, the lamp's small warm glow among the dark ribs. Patient and quiet. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man in silhouette, his face never visible, works on alone inside the hull by one oil lamp, fitting a plank into place. Night, the lamp's small warm glow among the dark ribs. Patient and quiet. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -338,9 +328,9 @@
    "lines": [
     11
    ],
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. Hands seen from behind drive a wooden peg into a plank with a mallet as a thrown stone thuds onto the boards beside them. Night, lamplight flickering on the grain of the wood. Steady under fire. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. Hands seen from behind drive a wooden peg into a plank with a mallet as a thrown stone thuds onto the boards beside them. Night, lamplight flickering on the grain of the wood. Steady under fire. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -351,7 +341,7 @@
    "line": "But with thee will I establish my covenant; and thou shalt come into the ark,",
    "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the black clouds above the vast dark hull on the hill, and for a moment the whole sky flashes white over the timber. Night, a hot wind tearing dust off the slopes. Solemn and grand. No people, no text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the black clouds above the vast dark hull on the hill, and for a moment the whole sky flashes white over the timber. Night, a hot wind tearing dust off the slopes. Solemn and grand. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos."
   },
   {
    "id": "s-torches",
@@ -360,10 +350,8 @@
     12
    ],
    "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, leads a mob in silhouette up the hill to the foot of the ark, shouting and hurling stones, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. No text, no logos.",
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. A ringleader in silhouette, his face hidden in shadow, holds a burning torch high and leads a shouting mob in silhouette up the hill to the foot of the ark, stones flying from their hands, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous",
    "climax": true
   },
@@ -375,7 +363,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Torches and fists raised in silhouette, faces hidden by the glare, the crowd presses against the scaffold poles and shakes them. Night, sparks and smoke rising past the planks. Furious and chaotic. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Torches and fists raised in silhouette, faces hidden by the glare, the crowd presses against the scaffold poles and shakes them. Night, sparks and smoke rising past the planks. Furious and chaotic. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -386,7 +374,7 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow push-in. An old man seen from behind on the scaffold drives one last peg home with a mallet while the torches of the crowd glow below him. Night, firelight on the wet pitch. Calm against chaos. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow push-in. An old man seen from behind on the scaffold drives one last peg home with a mallet while the torches of the crowd glow below him. Night, firelight on the wet pitch. Calm against chaos. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -395,9 +383,9 @@
    "lines": [
     14
    ],
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow crane up. Four men in silhouette lift the last board into place high on the side of the hull and step back. Grey dawn, the torches below burned out to smoke. Quiet and complete. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow crane up. Four men in silhouette lift the last board into place high on the side of the hull and step back. Grey dawn, the torches below burned out to smoke. Quiet and complete. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -408,7 +396,7 @@
    ],
    "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. A small family seen from behind stands before the open door in the side of a vast finished ark on the hill, a long window under its roof. Dawn, pale gold light on the pitch-black hull. Majestic and still. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. A small family seen from behind stands on the hill before a vast finished wooden ark, a long box-shaped hull of dark pitched planks and heavy beams under a plain wooden roof, its wide wooden door open in the side. Dawn, pale gold light on the pitch-black planks. Majestic and still. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
@@ -419,32 +407,35 @@
    ],
    "seconds": 6,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The crowd seen from behind stands silent at the foot of the hill, burnt-out torches hanging from their hands, looking up at the ark. Early morning, cold light and drifting smoke. Hushed and uneasy. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The crowd seen from behind stands silent at the foot of the hill, burnt-out torches hanging from their hands, looking up at the ark. Early morning, cold light and drifting smoke. Hushed and uneasy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
    "id": "k-insight",
    "kind": "keeper",
+   "voiceover": true,
    "lines": [
     16
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes bright with the thought. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
   },
   {
    "id": "k-question",
    "kind": "keeper",
+   "voiceover": true,
    "lines": [
     17
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
   },
   {
    "id": "k-close",
    "kind": "keeper",
+   "voiceover": true,
    "lines": [
     18
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
   }
  ]
 }
