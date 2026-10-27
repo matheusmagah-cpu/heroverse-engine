@@ -382,5 +382,105 @@ class Rerun(unittest.TestCase):
         g.attempt_check(api("failure"), 9, 1, "e" * 40)
 
 
+class PavoBudget(unittest.TestCase):
+    """E128: shot-probe run 40592173923 started on a day whose free Pavo quota was already spent (~187 stills, ~32
+    MCP video probes) and burned 24 submissions; nothing before the dispatch counted Pavo at all. The guard now
+    refuses a batch whose expected units do not fit what is left today of the one budget (main's ledger + today's
+    shot-probe records), or that runs into a suspected quota stop, and hands the count to the probe."""
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.ledger = Path(self.tmp.name) / "image-ledger.json"
+        sys.path.insert(0, str(ROOT / "migration" / "integrations" / "pavo"))
+        import quota
+        self.quota = quota
+        self.patch = mock.patch.object(quota, "LEDGER", self.ledger)
+        self.patch.start()
+
+    def tearDown(self):
+        self.patch.stop()
+        self.tmp.cleanup()
+
+    def api(self, failed=0, ok=3, date="2026-10-27T22:41:42Z"):
+        import base64
+        gens = [{"conversation_id": str(373595250617019904 + k), "flags": []} for k in range(ok)]
+        gens += [{"conversation_id": str(373599328776227520 + k), "flags": ["NO_VIDEO"]} for k in range(failed)]
+        record = {"episode": "arc-01-long", "shots": {"g-c1-lights": {"clips": [{"round": 1, "generations": gens}]}}}
+        content = base64.b64encode(json.dumps(record).encode()).decode()
+        return fake_api([
+            ("branches?", [{"name": "claude/shot-probe-arc-01-long-40592173923", "commit": {"sha": "p1"}},
+                           {"name": "claude/shot-probe-genesis-08-short-40477936323", "commit": {"sha": "p0"}},
+                           {"name": "main", "commit": {"sha": "m"}}]),
+            ("commits/p1", {"commit": {"committer": {"date": date}}}),
+            ("commits/p0", {"commit": {"committer": {"date": "2026-10-26T09:35:04Z"}}}),   # yesterday: not counted
+            ("contents/migration/evidence/shots/arc-01-long/40592173923.json?ref=p1", {"content": content})])
+
+    def test_a_probe_batch_names_its_expected_units_and_an_adopt_run_none(self):
+        probe = g.WORKFLOWS["shot-probe.yml"][1]
+        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights,g-c1-image", "attempts": "2", "adopt_run": ""})
+        # review of #475: the worst case, 2 shots x 2 rounds x 3 generations (make_shot's ATTEMPTS) x 2 units, so a
+        # batch that starts can finish; the mean (1.2 a round: 10 units) is only probe-queue's estimate
+        self.assertEqual(f["pavo_units"], 24)
+        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights", "attempts": "2", "adopt_run": "40592173923"})
+        self.assertEqual(f["pavo_units"], 0)
+
+    def test_todays_probe_records_count_from_their_branches(self):
+        usage = g.pavo_actions_usage(self.api(failed=24), "2026-10-27")
+        self.assertEqual((usage["units"], usage["failed_tail"]), (27 * self.quota.VIDEO_UNITS, 24))
+
+    def test_a_batch_that_cannot_finish_today_is_refused_before_it_starts(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 28, 1, 0, tzinfo=timezone.utc)
+        self.ledger.write_text(json.dumps({"days": {"2026-10-28": {"generated": 100}}}))
+        api = self.api(ok=4, date="2026-10-28T00:30:00Z")                 # 8 units on Actions today
+        facts = {"uploads": 0, "pavo_units": 13}
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_budget(facts, api, "2026-10-28", now=now)
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_SHORT planned=13 used=108 cap=120"), c.exception)
+        self.assertEqual(g.pavo_budget(dict(facts, pavo_units=12), api, "2026-10-28", now=now), 108)
+        api = self.api(failed=2, date="2026-10-28T00:30:00Z")              # the last run ended on 2 failed read-backs
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_budget(dict(facts, pavo_units=2), api, "2026-10-28", now=now)
+        self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
+
+    def test_capacity_checks_the_budget_and_the_probe_gets_the_count(self):
+        with mock.patch.object(g, "pavo_budget", return_value=57) as budget:
+            facts = {"uploads": 0, "pavo_units": 10}
+            g.capacity("shot-probe.yml", facts, fake_api([]), "2026-10-27")
+            self.assertEqual(facts["pavo_used"], 57)
+            g.capacity("shot-probe.yml", {"uploads": 0, "pavo_units": 0}, fake_api([]), "2026-10-27")
+            self.assertEqual(budget.call_count, 1)                          # an adopt run spends nothing
+        src = (HERE / "dispatch_guard.py").read_text()
+        self.assertIn('out.write(f"pavo_used={facts[\'pavo_used\']}\\n")', src)
+
+
+class PavoBudgetReview475(unittest.TestCase):
+    """Review of #475: the REST count never passes what it could not read (an unreadable record, more branches than it
+    scans), and a stop shortly before 00:00 UTC still holds after it."""
+    setUp, tearDown, api = PavoBudget.setUp, PavoBudget.tearDown, PavoBudget.api
+
+    def test_an_unreadable_record_or_too_many_branches_refuses(self):
+        bad = fake_api([("branches?", [{"name": "claude/shot-probe-arc-01-long-40592173923", "commit": {"sha": "p1"}}]),
+                        ("commits/p1", {"commit": {"committer": {"date": "2026-10-27T22:41:42Z"}}}),
+                        ("contents/", {"content": "not base64 json"})])
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_actions_usage(bad, "2026-10-27")
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_UNREADABLE"), c.exception)
+        full = [{"name": f"claude/other-{k}", "commit": {"sha": "x"}} for k in range(100)]
+        many = fake_api([("branches?", full)])                  # every page full: more remain after the last scanned
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_actions_usage(many, "2026-10-27")
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_UNREADABLE"), c.exception)
+
+    def test_a_stop_just_before_midnight_holds_after_it(self):
+        from datetime import datetime, timezone
+        after = datetime(2026, 10, 28, 0, 30, tzinfo=timezone.utc)
+        api = self.api(failed=3, date="2026-10-27T23:30:00Z")
+        usage = g.pavo_actions_usage(api, "2026-10-28", after)
+        self.assertEqual((usage["units"], usage["failed_tail"]), (0, 3))   # yesterday's units, the stop still on
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_budget({"uploads": 0, "pavo_units": 2}, api, "2026-10-28", now=after)
+        self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
+
+
 if __name__ == "__main__":
     unittest.main()

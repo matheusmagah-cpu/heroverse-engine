@@ -239,7 +239,7 @@ class FakeClient:
     def job(self, cid):
         self.reads.append(cid)
         item = self.jobs[cid].pop(0)
-        if isinstance(item, Exception):
+        if isinstance(item, BaseException):   # a cancel (KeyboardInterrupt) or a SIGTERM exit too
             raise item
         return item
 
@@ -1497,6 +1497,145 @@ class Workflow(unittest.TestCase):
         for bad in ("migration/production/bible/plans/../x.json", "migration/production/bible/plans/a;b.json",
                     "migration/production/bible/plans/a b.json"):
             self.assertIsNone(re.fullmatch(rx, bad), bad)
+
+
+class GuardedFake(FakeClient):
+    """FakeClient behind the real quota guard, as PavoVideoClient wires it (E128): before_generate before the quote,
+    submitted once a conversation exists, read_back on every job read."""
+    def __init__(self, guard, submissions, jobs):
+        super().__init__(submissions, jobs)
+        self.guard = guard
+
+    def generate_video(self, **req):
+        import quota
+        self.guard.before_generate(quota.VIDEO_UNITS)
+        result = super().generate_video(**req)
+        self.guard.submitted(result["conversation_id"], quota.VIDEO_UNITS)
+        return result
+
+    def job(self, cid):
+        result = super().job(cid)
+        self.guard.read_back(cid, result["status"], result.get("videos") or [])
+        return result
+
+
+class SharedQuotaStop(unittest.TestCase):
+    """E128: shot-probe run 40592173923 (arc-01-long, God's voice-overs) read back 3 clips, then submitted 24 more that
+    all came back failed with no video (Pavo's free-model quota was spent; the quote still said 0): make_shot
+    regenerated each failed clip and probe_step went on to the next shot. Now the run's client is guarded by a
+    run-local ledger seeded with the day's units, two failed read-backs in a row stop the whole run, and the
+    generations already spent stay in its record."""
+    def setUp(self):
+        self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, os.environ.get("PAVO_IMAGE_LEDGER"))
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-quota-"))
+        self.plan = dialogue_plan()
+        (self.work / "layout.json").write_text(json.dumps(layout_for(self.plan, [2.4, 3.0, 2.5, 3.1])))
+        (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"]}))
+        eb.clip_flags = lambda path, aspect=None: []
+        eb.lipsync_flags = lambda py, model, clip, wav: ([], {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
+        eb.face_flags = lambda py, model, clip: ([], {"faces": {"frames_sampled": 40, "faces_found": 0}})
+        eb.run = lambda args, **kw: Path(str(args[-1])).write_bytes(b"v")
+
+    def tearDown(self):
+        eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, ledger = self.saved
+        if ledger is None:
+            os.environ.pop("PAVO_IMAGE_LEDGER", None)
+        else:
+            os.environ["PAVO_IMAGE_LEDGER"] = ledger
+        shutil.rmtree(self.work)
+
+    def test_two_failed_read_backs_stop_the_whole_probe_run(self):
+        import quota
+        ledger = eb.seed_budget(self.work, "0", main_ledger=self.work / "missing-main-ledger.json")
+        n = 30
+        failed = {"status": "failed", "videos": []}
+        client = GuardedFake(quota.QuotaGuard(ledger, actions=None),
+                             [{"conversation_id": str(373599328776227520 + i), "status": "submitted"} for i in range(n)],
+                             {str(373599328776227520 + i): [dict(failed, conversation_id=str(373599328776227520 + i))]
+                              for i in range(n)})
+        out = self.work / "out"
+        ids = [s["id"] for s in self.plan["shots"]]
+        with self.assertRaises(SystemExit) as err:
+            eb.probe_step(self.plan, self.work, "py", "model", out, ids, 2, client=client,
+                          download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                          sheet=lambda video, sheet: None)
+        self.assertTrue(str(err.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), err.exception)
+        self.assertEqual(len(client.calls), quota.FAILED_STREAK)          # 2 spent, not 24
+        record = json.loads((out / "probe.json").read_text())
+        spent = [g["conversation_id"] for e in record["shots"].values() for c in e["clips"] for g in c["generations"]]
+        self.assertEqual(len(spent), quota.FAILED_STREAK)                  # the spent generations stay in the record
+        self.assertIn("PAVO_FREE_QUOTA_SUSPECTED", record["stopped"])
+        self.assertEqual(quota.record_usage(record), (2 * quota.VIDEO_UNITS, 2))   # what the next guard reads
+        day = json.loads(ledger.read_text())["days"]
+        self.assertEqual(sum(d["generated"] for d in day.values()), 2 * quota.VIDEO_UNITS)
+
+    def test_the_run_ledger_is_seeded_from_the_guard_count_and_never_missing(self):
+        import quota
+        for used in ("", "x", "-1", None):
+            with self.assertRaises(SystemExit) as err:
+                eb.seed_budget(self.work, used)
+            self.assertTrue(str(err.exception).startswith("PAVO_BUDGET_UNKNOWN"), err.exception)
+        main = self.work / "main-ledger.json"
+        main.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}, "daily_cap": 300,
+                                    "suspended_at": "2026-10-27T22:00:00+00:00",
+                                    "suspended_until": "2026-10-28T01:00:00+00:00", "failed_streak": 2}))
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
+        ledger = eb.seed_budget(self.work, "305", main_ledger=main, now=now)
+        seeded = json.loads(ledger.read_text())
+        self.assertEqual(seeded["days"]["2026-10-27"]["generated"], 305)     # main's 251 + today's probe records
+        self.assertEqual((seeded["daily_cap"], seeded["suspended_until"]), (300, "2026-10-28T01:00:00+00:00"))
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            quota.QuotaGuard(ledger, now=lambda: now).before_generate(quota.VIDEO_UNITS)
+        os.environ.pop("PAVO_IMAGE_LEDGER", None)
+        with self.assertRaises(SystemExit) as err:                           # never an unguarded client
+            eb.budget_client()
+        self.assertTrue(str(err.exception).startswith("PAVO_BUDGET_UNKNOWN"))
+        os.environ["PAVO_IMAGE_LEDGER"] = str(ledger)
+        self.assertEqual(eb.budget_client()._guard.path, ledger)
+        import inspect
+        self.assertIn("client = budget_client()", inspect.getsource(eb.generate_clips))
+        self.assertNotIn("PavoVideoClient()", inspect.getsource(eb.generate_clips))
+
+    def test_the_probe_command_seeds_the_budget_before_any_generation(self):
+        text = (eb.HERE / "episode_build.py").read_text()
+        start = text.index('elif cmd == "probe" and len(argv) == 7:')
+        body = text[start:text.index("elif cmd ==", start + 10)]
+        self.assertLess(body.index("seed_budget("), body.index("probe_step("))   # seeded before any generation
+        wf = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()
+        self.assertIn("PAVO_BUDGET_USED: ${{ steps.guard.outputs.pavo_used }}", wf)
+
+
+class ProbeRecordOnAnyExit(unittest.TestCase):
+    """Review of #475: a probe cancelled, timed out or crashed while a shot waited on Pavo lost that shot's submitted
+    generations from out/probe.json, so the next dispatch guard under-counted the day's units."""
+    setUp, tearDown = SharedQuotaStop.setUp, SharedQuotaStop.tearDown
+    def run_until(self, interrupt):
+        import quota
+        ledger = eb.seed_budget(self.work, "0", main_ledger=self.work / "missing-main-ledger.json")
+        cids = [str(373600000000000000 + i) for i in range(4)]
+        client = GuardedFake(quota.QuotaGuard(ledger, actions=None),
+                             [{"conversation_id": c, "status": "submitted"} for c in cids],
+                             {cids[0]: [done(cids[0])], cids[1]: [interrupt]})
+        out = self.work / "out"
+        ids = [s["id"] for s in self.plan["shots"]]
+        with self.assertRaises(type(interrupt)):
+            eb.probe_step(self.plan, self.work, "py", "model", out, ids, 1, client=client,
+                          download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                          sheet=lambda video, sheet: None)
+        record = json.loads((out / "probe.json").read_text())
+        spent = [g["conversation_id"] for e in record["shots"].values() for c in e["clips"] for g in c["generations"]]
+        self.assertEqual(spent, cids[:2])                      # the one in flight is in the record too
+        self.assertIn("PROBE_INTERRUPTED", [c.get("error") for e in record["shots"].values() for c in e["clips"]])
+        self.assertEqual(quota.record_usage(record)[0], 2 * quota.VIDEO_UNITS)
+
+    def test_a_cancel_keeps_the_in_flight_generation(self):
+        self.run_until(KeyboardInterrupt())
+
+    def test_a_terminate_or_crash_keeps_it_too(self):
+        self.run_until(SystemExit("PROBE_TERMINATED (SIGTERM)"))
+        text = (eb.HERE / "episode_build.py").read_text()
+        self.assertIn("signal.signal(signal.SIGTERM", text)
 
 
 if __name__ == "__main__":

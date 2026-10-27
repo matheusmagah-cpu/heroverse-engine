@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
-      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+      - name: Dispatch guard (inputs, capacity and the Pavo free-model budget, one run per subject, no re-run without a fix, imports; E116, E128)
         id: guard
         env:
           GUARD_INPUTS: ${{ toJSON(inputs) }}
@@ -158,6 +158,9 @@ jobs:
         if: inputs.adopt_run == ''
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
+          # E128: today's free-model units (main's quota ledger + today's probe records), from the dispatch guard; it
+          # seeds the run-local ledger, so a refused budget or two failed read-backs in a row stop the run
+          PAVO_BUDGET_USED: ${{ steps.guard.outputs.pavo_used }}
         run: python3 -I -B migration/production/bible/episode_build.py probe "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task" "$OUT"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && steps.plan.outputs.episode != ''

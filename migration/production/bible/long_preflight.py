@@ -60,6 +60,8 @@ PROBE_ROUNDS = 2              # shot-probe.yml's default attempts: two clean can
 # expected generations a round makes for one shot (make_shot regenerates a failed clip): a scene ~1.2 (E108/E114 frame
 # misses happen after the checks, at the review), a talking clip 1 / its lips pass rate, ~0.4 (keeper-lipsync-rate)
 GENERATIONS_PER_ROUND = {"talking": 2.5, "voice_over": 1.2, "scene": 1.2}
+sys.path.insert(0, str(REPO / "migration" / "integrations" / "pavo"))
+import quota  # noqa: E402  (E128: the shared free-model budget; stdlib only)
 
 
 def review_rows(registry=None):
@@ -142,17 +144,29 @@ def shot_minutes(shot, rounds=PROBE_ROUNDS):
     return rounds * GENERATIONS_PER_ROUND[kind] * each / 60
 
 
+def planned_units(shots, rounds=PROBE_ROUNDS, worst=False):
+    """E128: the free-model units a shot-probe batch spends: rounds x the expected generations a round
+    (GENERATIONS_PER_ROUND, the same mean the minutes use) x quota.VIDEO_UNITS, rounded up; with worst, rounds x every
+    generation make_shot may spend (eb.attempts_for) x VIDEO_UNITS, the bound a batch must fit before it starts so it
+    never stops half-way for the budget (review of #475)."""
+    if worst:
+        return sum(rounds * eb.attempts_for(s) for s in shots) * quota.VIDEO_UNITS
+    return math.ceil(sum(rounds * GENERATIONS_PER_ROUND[kind_of(s)] for s in shots) * quota.VIDEO_UNITS)
+
+
 def batch_budget():
     """Expected minutes of generation one shot-probe run is packed with: PROBE_BATCH_SHARE of its timeout, less setup."""
     return PROBE_BATCH_SHARE * PROBE_JOB_MINUTES - PROBE_SETUP_MINUTES
 
 
-def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_ROUNDS):
+def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_ROUNDS, max_units=None):
     """The shots still to probe and approve (no approved clip, or one of another request or too short), in
     risk_order, cut into shot-probe.yml batches: one rank per batch, each fitting max_minutes (default:
-    batch_budget(), PROBE_BATCH_SHARE of the job's timeout less its setup). Resume is this list: an approved shot
-    leaves it, a changed request comes back."""
+    batch_budget(), PROBE_BATCH_SHARE of the job's timeout less its setup) and max_units (E128: the free-model units a
+    day allows, default the quota cap; a batch's worst case, pavo_units_max, must fit it), each with its expected units
+    (pavo_units_est). Resume is this list: an approved shot leaves it, a changed request comes back."""
     max_minutes = max_minutes or batch_budget()
+    max_units = max_units or quota.QuotaGuard(actions=None).cap()
     approvals = approvals or {}
     todo = []
     for i, s in eb.risk_order(plan["shots"]):
@@ -163,18 +177,20 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
             continue
         todo.append(s)
     batches, cur, used, rank = [], [], 0.0, None
+    def close():
+        batches.append({"shots": ",".join(x["id"] for x in cur), "attempts": rounds, "minutes_est": round(used),
+                        "rank": rank, "pavo_units_est": planned_units(cur, rounds),
+                        "pavo_units_max": planned_units(cur, rounds, worst=True)})
     for s in todo:
         m = shot_minutes(s, rounds)
-        if cur and (used + m > max_minutes or eb.risk_rank(s) != rank):
-            batches.append({"shots": ",".join(x["id"] for x in cur), "attempts": rounds, "minutes_est": round(used),
-                            "rank": rank})
+        if cur and (used + m > max_minutes or eb.risk_rank(s) != rank or planned_units(cur + [s], rounds, worst=True) > max_units):
+            close()
             cur, used = [], 0.0
         cur.append(s)
         used += m
         rank = eb.risk_rank(s)
     if cur:
-        batches.append({"shots": ",".join(x["id"] for x in cur), "attempts": rounds, "minutes_est": round(used),
-                        "rank": rank})
+        close()
     generated = [s for s in plan["shots"] if not eb.is_window(s)]
     return {"episode": plan.get("episode"), "generated_shots": len(generated),
             "approved": len(generated) - len(todo), "to_probe": len(todo), "batches": batches,
@@ -186,9 +202,24 @@ def queue_main(plan_path, max_minutes=None):
     if report is None:
         raise SystemExit(f"PREFLIGHT_MISSING {path.name} (the queue reads the committed preflight's request digests)")
     requests = report.get("requests") or {}
-    print(json.dumps(queue(plan, requests.get("digests") or {}, eb.load_approvals(plan), requests.get("needs"),
-                           float(max_minutes) if max_minutes else None), indent=1))
+    result = queue(plan, requests.get("digests") or {}, eb.load_approvals(plan), requests.get("needs"),
+                   float(max_minutes) if max_minutes else None)
+    result["pavo_budget"] = budget_today(result["batches"])
+    print(json.dumps(result, indent=1))
     return 0
+
+
+def budget_today(batches, guard=None):
+    """E128: today's free-model budget (main's ledger + the shot-probe records on the local origin refs) and whether
+    the next batch's worst case fits it; the dispatch guard refuses the same batch with PAVO_BUDGET_SHORT."""
+    guard = guard or quota.QuotaGuard(actions=quota.git_actions_usage)
+    if not batches:
+        return {"next_batch": None}
+    try:
+        fits = guard.check_batch(batches[0]["pavo_units_max"])
+        return {"next_batch": "fits", **fits}
+    except quota.PavoError as exc:
+        return {"next_batch": "refused", "refusal": str(exc)}
 
 
 # ---------- the production estimate (no generation) ----------
@@ -256,11 +287,13 @@ def estimate(plan, today=None):
             "aspect": "16:9 honoured (evidence/pavo/20261026/long-16x9-and-concurrency.json)",
             "inputs": "<= 5 reference images or first(+last) frame, never both; <= 3 input audios 2-12 s in all",
             "price": "every generation at a fresh exact 0-credit quote (refused otherwise)",
-            "free_limits": "no free VIDEO quota is documented (integrations/pavo/README.md) or recorded in "
-                           "evidence/pavo; the limits seen are concurrency (PAVO_RATE_LIMITED while jobs run; two at "
-                           "once measured) and, for IMAGES only, the free agnes-image quota (~180 a day, then 'try "
-                           "again in 3 hours'; E124 cap 120/day in quota.py). E124's lesson holds for video too: a 0 "
-                           "quote does not prove free quota, so a `failed` read-back is a stop signal",
+            "free_limits": "E128: Pavo's free quota is the model quota, shared by stills and videos (a Flash video makes "
+                           "an Agnes still inside its conversation; run 40592173923 burned 24 video submissions on a "
+                           "spent quota). quota.py counts every generation (a still 1 unit, a video 2) against one "
+                           "cap of 120 units a UTC day, MCP and shot-probe alike; the dispatch guard refuses a batch "
+                           "whose worst case does not fit (PAVO_BUDGET_SHORT) and two failed read-backs in a row stop "
+                           "generation. A 0 quote does not prove free quota. At 120 units a day a probe day holds "
+                           "about 60 video jobs: the long's probes take several days",
             "jobs_first_pass": len(gens),
             "jobs_expected_probe": round(sum(rounds * GENERATIONS_PER_ROUND[kind_of(s)] for _, s in gens)),
             "jobs_direct_talking_probes": f"{talk_lines} lines x {6} generations = {talk_lines * 6} (the preflight's "

@@ -13,8 +13,12 @@ Checks, each a named refusal (classified in ops/refusal_registry.json):
      (episode.yml also E112's order: a later part waits for the earlier one)   EARLIER_PART_NOT_RECORDED
   2. capacity: the newest asset release (ci/assets.sh) has room for the run's uploads (1000 a release, E85), the
      Cloudflare allocation is not used up today when the run makes images (CF_DAILY_IMAGES, E62), a publish record
-     fits YouTube's title and description limits (E52)        GUARD_ASSETS_FULL, GUARD_CF_ALLOCATION_USED,
-                                                              GUARD_RECORD_OVER_LIMIT
+     fits YouTube's title and description limits (E52), and a Pavo batch's expected free-model units fit what is
+     left today of the one budget every Pavo generation shares (E128: main's quota ledger + today's shot-probe
+     records on their claude/shot-probe-* branches; its count goes to the probe as the `pavo_used` output)
+                                                              GUARD_ASSETS_FULL, GUARD_CF_ALLOCATION_USED,
+                                                              GUARD_RECORD_OVER_LIMIT, PAVO_BUDGET_SHORT,
+                                                              PAVO_FREE_QUOTA_SUSPECTED
   3. one run per subject (the same episode plan, pilot, characters or footage library): not this script but GitHub,
      by the job-level `concurrency: group: heroverse-subject-<subject>` every guarded workflow shares (E112, E63,
      E10; test_dispatch_guard checks each group renders subject_of)
@@ -32,6 +36,7 @@ An API that cannot be read refuses (GUARD_API_UNAVAILABLE): the guard never pass
 The API is read-only (actions, releases, commits, compare) with the run's GITHUB_TOKEN; nothing is written.
 """
 import ast
+import base64
 import functools
 from datetime import datetime, timezone
 import json
@@ -136,7 +141,13 @@ def shot_probe(i):
         # E127: only a long's probe depends on its committed preflight (check-probe's LONG_PROBE_PREFLIGHT); a Short's
         # does not, so a new Short report is no fix that lifts GUARD_RERUN_WITHOUT_FIX
         deps.append(f"migration/evidence/preflight/{plan['episode']}.json")
-    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps}
+    sys.path.insert(0, str(ROOT / "migration" / "production" / "bible"))
+    import long_preflight  # E128: the batch's free-model units (planned_units, as probe-queue)
+    by_id = {s.get("id"): s for s in plan.get("shots", [])}
+    # review of #475: the worst case (every generation make_shot may spend), so a batch never starts it cannot finish
+    units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
+                                                                      worst=True)
+    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units}
 
 
 def cf_images(i):
@@ -590,6 +601,63 @@ def cf_images_today(api, today):
     return used
 
 
+BRANCH_PAGES = 10   # 1000 branches; more refuses PAVO_BUDGET_UNREADABLE (review of #475: never a partial count)
+
+
+def pavo_actions_usage(api, today, now=None):
+    """E128: shot-probe usage (quota.combine) from the records the record job pushed to claude/shot-probe-* branches,
+    by REST: units of the records committed today (UTC), the failed tail of those of the last quota.COOL_DOWN too (a
+    stop before midnight holds after it). The MCP guard reads the same records from the local refs. A record that
+    cannot be read, or more branches than BRANCH_PAGES pages, refuses: the count is never partial."""
+    sys.path.insert(0, str(ROOT / "migration" / "integrations" / "pavo"))
+    import quota
+    now = now or datetime.now(timezone.utc)
+    records, page = [], 1
+    while True:
+        if page > BRANCH_PAGES:
+            refuse("PAVO_BUDGET_UNREADABLE", f"more than {BRANCH_PAGES * 100} branches: delete merged probe branches "
+                                             "or raise BRANCH_PAGES")
+        batch = api(f"branches?per_page=100&page={page}") or []
+        for b in batch:
+            path = quota.probe_record_path(b.get("name", ""))
+            if not path:
+                continue
+            c = api(f"commits/{b['commit']['sha']}") or {}
+            date = ((c.get("commit") or {}).get("committer") or {}).get("date", "")
+            try:
+                at = datetime.fromisoformat(date.replace("Z", "+00:00"))
+            except ValueError:
+                refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: no commit time")
+            if not quota.wanted(at, today, now):
+                continue
+            f = api(f"contents/{path}?ref={b['commit']['sha']}")
+            if not f:
+                continue      # the probe job left no record (NO_PROBE_RECORD)
+            try:
+                record = json.loads(base64.b64decode(f["content"]))
+            except (KeyError, ValueError, TypeError):
+                refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: its record cannot be read")
+            records.append((at, record))
+        if len(batch) < 100:
+            break
+        page += 1
+    return quota.combine(records, today)
+
+
+def pavo_budget(facts, api, today, now=None):
+    """E128: refuse a Pavo batch that does not fit today's free-model budget (PAVO_BUDGET_SHORT) or runs into a
+    suspected quota stop; returns the units used today (the probe seeds its run-local ledger with them)."""
+    import quota
+    when = now or datetime.now(timezone.utc)
+    usage = pavo_actions_usage(api, today, when)
+    guard = quota.QuotaGuard(quota.LEDGER, now=lambda: when, actions=lambda day: usage)
+    try:
+        fits = guard.check_batch(facts["pavo_units"])
+    except quota.PavoError as exc:
+        raise Refusal(str(exc)) from None
+    return fits["used"]
+
+
 def capacity(workflow, facts, api, today):
     tag = newest_tag()
     n = asset_count(api, tag)
@@ -601,6 +669,8 @@ def capacity(workflow, facts, api, today):
         if used >= cap:
             refuse("GUARD_CF_ALLOCATION_USED", f"{used} FLUX images recorded today of about {cap}: dispatch after "
                                                f"00:00 UTC (E62)")
+    if facts.get("pavo_units"):
+        facts["pavo_used"] = pavo_budget(facts, api, today)
 
 
 def failed_in_guard(api, run_id, attempt=None):
@@ -708,6 +778,9 @@ def main(argv):
     if env.get("GITHUB_OUTPUT") and facts["subject"]:
         with open(env["GITHUB_OUTPUT"], "a") as out:
             out.write(f"subject={facts['subject']}\n")
+    if env.get("GITHUB_OUTPUT") and "pavo_used" in facts:   # E128: shot-probe's run-local quota ledger is seeded with it
+        with open(env["GITHUB_OUTPUT"], "a") as out:
+            out.write(f"pavo_used={facts['pavo_used']}\n")
     print(f"GUARD_OK {argv[2]} subject={facts['subject']} uploads<={facts['uploads']}")
     return 0
 
