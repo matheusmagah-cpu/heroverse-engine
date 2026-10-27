@@ -1159,6 +1159,30 @@
      "recurrence"
     ]
    }
+  },
+  {
+   "id": "E125",
+   "date": "2026-10-27",
+   "class": [
+    "fragile-input",
+    "recurrence"
+   ],
+   "prior": [
+    "E101",
+    "E115",
+    "E122",
+    "E123"
+   ],
+   "error": "Claude's review of genesis-09 run 2026102705 and of the E123 probe (evidence/pavo/20261027/genesis-09-ark-probe): every still made with the ark's approved references drew three figures standing on the ark's roof, even s-voice with 'No people' and 'its roof empty and flat' in the prompt. Root cause: both approved references (pr-ark-side, pr-ark-three-quarter; E122) are frames of genesis-08 s-board, a scene in which three people stand on the roof, and Pavo copies a reference image whole, people included. The reference review (props.py approve, notes 'the same finished box...') judged the prop's shape only; nothing asked whether anything else was in the picture. The class recurs: E113 and E122 each fixed the ark's look while the input that carries it (the wording, then the image) still carried something else into every still.",
+   "fix": "props.py `retouch` (finalize_retouch, retouch_image: a deterministic PIL clone through feathered masks from the APPROVED reference, recorded with the parent's sha256, the patches and the Pillow version; approve remakes it from the parent inside the repository that is the reference approved now, byte for byte, else PROP_SOURCE_REFUSED, naming a Pillow mismatch when the versions differ) made clean views (run 2026102706), approved by Claude (9.5/9.5, ec8823bc). Class antidote: a reference is the prop alone. props.approve refuses a review note that does not state that no people or figures remain or that they were removed (FIGURES_CHECKED; PROP_NOTE_FIGURES_UNCHECKED, class N), and approved_refs refuses any approved record whose note lacks it, so no still is made from an unchecked reference whatever its source (a Pavo prop still, a clip frame, a retouch). Chosen over a lineage rule (only retouched refs) because the class is any extra subject in any reference, not the clip frame alone; a word list cannot see the picture, so the note is the reviewer's explicit check, and the stills are still reviewed at 9.5. Review of #467: the lineage shortcut in source_problems (8e6dc837) is reverted; the listing test handles lineage itself.",
+   "antidote": {
+    "file": "migration/production/characters/test_characters.py",
+    "contains": "def test_a_reference_is_approved_only_when_the_review_states_it_shows_no_people",
+    "covers": [
+     "fragile-input",
+     "recurrence"
+    ]
+   }
   }
  ]
 }

@@ -60,6 +60,11 @@ RETOUCH_TOOL = ("PIL: crop the box shifted by offset, paste it over the box thro
                 "or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in "
                 "order; JPEG quality 95")
 FLOOR = 9.5
+# E125: a reference is the prop alone. Both approved ark references (frames of genesis-08 s-board) showed figures
+# standing on the roof and every still made with them copied the figures. The review states that no people or figures
+# remain (or that they were removed), in approve's note; approved_refs reads the same note before any still uses it.
+FIGURES_CHECKED = re.compile(r"(?i)\bno (?:people|persons?|figures?|one)\b|\b(?:figures?|people)\b[^.]{0,40}?\b"
+                             r"(?:removed|cloned out|painted out|retouched out)\b")
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CID = re.compile(r"^pr-([a-z0-9]+)-([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9]{1,20})-([1-9])$")
 
@@ -105,6 +110,9 @@ def approved_refs(prop, props=None, images_dir=None):
         if not rec.get("repo_path") or REPO.resolve() not in src.parents or not src.is_file() \
                 or sha256(src) != rec.get("sha256"):
             return [], f"pr-{prop}-{view}: its image is not the approved one (sha256)"
+        if not FIGURES_CHECKED.search(str((rec.get("approved") or {}).get("note") or "")):
+            return [], (f"pr-{prop}-{view}: its review does not state that no people or figures remain (E125: every "
+                        "still copies them); review it again with props.py approve")
         out.append({"record": rec.get("id") or f"pr-{prop}-{view}", "repo_path": rec["repo_path"],
                     "sha256": rec["sha256"]})
     return out, None
@@ -138,17 +146,6 @@ def _approved_clip(episode, shot, clip_sha256, shots_dir=None):
     return rec
 
 
-def _retouched_from(rec):
-    """The parent sha256 of an approved reference record made by `retouch`, else None."""
-    src = str((rec or {}).get("source") or "")
-    if not src.startswith(RETOUCHED + " "):
-        return None
-    try:
-        return (json.loads(src[len(RETOUCHED) + 1:]).get("parent") or {}).get("sha256")
-    except (ValueError, AttributeError):
-        return None
-
-
 def source_problems(prop, meta, shots_dir=None, images_dir=None):
     """What keeps a candidate from being a reference: a Pavo still needs the prop's look word for word and an exact
     0-credit quote; a clip frame needs the clip Claude approved (sha256, >= 9.5). Any other source is refused."""
@@ -167,11 +164,9 @@ def source_problems(prop, meta, shots_dir=None, images_dir=None):
         par = meta.get("parent") or {}
         rec_path = record_path(prop, meta.get("view") or "", images_dir)
         rec = json.loads(rec_path.read_text()) if rec_path.is_file() else {}
-        if par.get("sha256") and _retouched_from(rec) == par.get("sha256"):
-            return []   # the approved reference is a retouch of this same parent (its candidate or a sibling)
-        path = (REPO / str(par.get("repo_path") or "")).resolve()
+        path = _parent_path(par)
         if not rec or rec.get("sha256") != par.get("sha256") or rec.get("repo_path") != par.get("repo_path") \
-                or not path.is_file() or sha256(path) != par.get("sha256"):
+                or path is None or sha256(path) != par.get("sha256"):
             return [f"the parent {par.get('record')} {par.get('sha256')} is not the {meta.get('view')} reference "
                     "approved now"]
         return []
@@ -245,15 +240,35 @@ def retouch_image(parent, patches, dst):
     return [W, H]
 
 
+def _parent_path(par):
+    """The parent image of a retouch: a file inside the repository whose sha256 is the recorded one, else None."""
+    rel_path = str((par or {}).get("repo_path") or "")
+    if not rel_path or Path(rel_path).is_absolute():
+        return None
+    path = (REPO / rel_path).resolve()
+    if REPO.resolve() not in path.parents or not path.is_file() or sha256(path) != (par or {}).get("sha256"):
+        return None
+    return path
+
+
 def retouch_problems(meta, path):
-    """A retouched candidate is the parent remade with its recorded patches, byte for byte."""
+    """A retouched candidate is the parent (inside the repository, by sha256) remade with its recorded patches, byte
+    for byte; when it is not and the recorded Pillow differs from this one, the mismatch is named."""
     import tempfile
+    import PIL
     par = meta.get("parent") or {}
+    parent = _parent_path(par)
+    if parent is None:
+        return [f"the parent {par.get('repo_path')} is not an image inside the repository with sha256 "
+                f"{par.get('sha256')}"]
     with tempfile.TemporaryDirectory() as tmp:
         again = Path(tmp) / "again.jpg"
-        retouch_image(REPO / str(par.get("repo_path")), (meta.get("retouch") or {}).get("patches"), again)
+        retouch_image(parent, (meta.get("retouch") or {}).get("patches"), again)
         if again.read_bytes() != Path(path).read_bytes():
-            return [f"the image is not {par.get('record')} retouched with its recorded patches"]
+            made = (meta.get("retouch") or {}).get("pillow")
+            why = (f"; it was made with Pillow {made}, this Pillow is {PIL.__version__}: remake it here or run approve "
+                   f"with Pillow {made}" if made and made != PIL.__version__ else "")
+            return [f"the image is not {par.get('record')} retouched with its recorded patches{why}"]
     return []
 
 
@@ -405,6 +420,9 @@ def approve(prop, view, candidate, score, note, cand_dir=None, props_file=None, 
         raise SystemExit(f"PROP_SCORE_BELOW_FLOOR {score} (overall >= {FLOOR})")
     if not isinstance(note, str) or not note.strip():
         raise SystemExit("PROP_NOTE_MISSING (what the review saw)")
+    if not FIGURES_CHECKED.search(note):
+        raise SystemExit("PROP_NOTE_FIGURES_UNCHECKED (a reference is the prop alone: say that no people or figures "
+                         "remain, or that they were removed; E125)")
     m = CID.fullmatch(candidate or "")
     src = Path(cand_dir or CANDIDATES_DIR) / f"{candidate}.jpg"
     meta_path = src.with_suffix(".json")

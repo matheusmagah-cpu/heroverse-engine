@@ -1239,6 +1239,10 @@
    "class": "N",
    "why": "E122: props.py, the prop reference registry, refuses a frame time outside the approved clip; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
   },
+  "PROP_NOTE_FIGURES_UNCHECKED": {
+   "class": "N",
+   "why": "E125: props.py, the prop reference registry, refuses an approval whose review note does not state that no people or figures remain (a reference is the prop alone); it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
   "PROP_NOTE_MISSING": {
    "class": "N",
    "why": "E122: props.py, the prop reference registry, refuses an approval without what the review saw; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
