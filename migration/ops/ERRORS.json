@@ -1015,6 +1015,22 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E117",
+   "date": "2026-10-27",
+   "class": "review-after-build",
+   "prior": [
+    "E109",
+    "E110"
+   ],
+   "error": "genesis-08 shot-probe run 40477936323 (s-board, round 1): Pavo returned the picture turned 90 degrees inside the 9:16 frame (the horizon ran down the frame, the people on the ark lay on their sides; sheet migration/evidence/shots/genesis-08-short/40477936323-s-board-1.jpg), clip_check recorded flags [] and only Claude's review rejected it. Root cause: clip_check measured black at the ends, resolution, frame rate and letterbox bars (E109), nothing about the picture's orientation, so a turned generation was kept as clean; like E109, a picture defect only the review could see, one per defect.",
+   "fix": "clip_check ROTATED_PICTURE: on the frames it already samples for bars (BAR_FRAMES 5 on the 90x160 grid, one sampling shared by bars_of and turn_of), the standard deviation of the column means against the row means' (a landscape's sky-to-ground change runs down the frame; turned 90 or 270 degrees it runs across). Flagged when in every sampled frame the column spread is over ROT_SPREAD 30 and over ROT_RATIO 3.0 times the row spread. Calibrated on real clips (E111's lesson): s-board round 1 reads 4.56-5.31 (spread 53-54); 94 good clips (32 approved genesis-08 shots + its 5 other probe rounds, the 29 Pavo clips in evidence/pavo, 28 genesis-09 candidates) at most 1.62 (genesis-06's lamp), no other flag raised on any of them; one mid-pan frame of a genesis-09 candidate reads 3.47 alone, so the rule needs every frame. Class-level antidote: migration/production/bible/fixtures/clip_check holds the real sampled frames of every review-rejected clip whose defect a measure can see (s-board round 1) with the flag it must raise, and 13 approved negatives (12 approved genesis-08 shots + the lamp) plus the 3.47 pan; the test runs clip_check's picture checks over every fixture, and the whole check() path on the bad frames, the approved s-board round 3 upright and turned 90/270. Registered class C (refusal_registry.json) and in picture_quality's review mapping. A turned close-up with no horizon profile stays the review's.",
+   "antidote": {
+    "file": "migration/production/bible/test_clip_check.py",
+    "contains": "def test_a_picture_turned_90_degrees_is_refused_and_every_reviewed_fixture_holds",
+    "covers": "review-after-build"
+   }
   }
  ]
 }

@@ -1,0 +1,120 @@
+{
+ "about": "Real frames for clip_check's picture checks: each file is the 5 frames clip_check samples (BAR_FRAMES, on the BAR_GRID grid, 90x160 grey) of one real clip, stacked top to bottom. `flags` are the picture flags clip_check must raise on them (LETTERBOX_BARS, ROTATED_PICTURE). Every clip Claude's review rejects for a picture defect a measure can see gets a file here with its flag (E117, class review-after-build); approved clips are the negatives.",
+ "fixtures": [
+  {
+   "file": "g08-s-board-r1-rotated.jpg",
+   "clip": "shot-genesis-08-short-s-board-sha256-4f7a3278fb64a2b0dda4aa7873185671721716149fd267a1e58326895d5fe781.mp4",
+   "source": "migration/evidence/shots/genesis-08-short/40477936323.json (s-board round 1)",
+   "verdict": "rejected by Claude's review: the picture is turned 90 degrees in the 9:16 frame",
+   "error": "E117",
+   "flags": [
+    "ROTATED_PICTURE"
+   ]
+  },
+  {
+   "file": "g08-s-board-r3.jpg",
+   "clip": "shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-board)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-beam.jpg",
+   "clip": "shot-genesis-08-short-s-beam-sha256-50bb1b3bbb3f088672d33e1722110808f76059b76c85f6e26e194b206d80064a.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-beam)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-axe.jpg",
+   "clip": "shot-genesis-08-short-s-axe-sha256-1037ff2c136dd47edc8b57beb604f6c259d239227e2946c85bb393d372d9c069.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-axe)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-clods.jpg",
+   "clip": "shot-genesis-08-short-s-clods-sha256-a4376e8e2fc43fa13b8e7e732ce15236195d109375056dc3ceb0a8a2744ed7a7.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-clods)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-measure.jpg",
+   "clip": "shot-genesis-08-short-s-measure-sha256-138660c39fa7473fe71a9b7affffb625ae5270e8cd5b00d5443693637ca850b1.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-measure)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-k-close.jpg",
+   "clip": "shot-genesis-08-short-k-close-sha256-34378dece51a5f2ffa96d4509e89e3d11f4ab4aedc15c8c0cef7db6da567680c.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (k-close)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-watchers.jpg",
+   "clip": "shot-genesis-08-short-s-watchers-sha256-013b3b0837672fc32b9a693d6b23021d6841e78afc5c45a57bbbb58ea3a5606d.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-watchers)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-valley.jpg",
+   "clip": "shot-genesis-08-short-s-valley-sha256-ee00ba649088ac091d0ada31db57ca0ed80316f4856f1be784e39cd0fc0be223.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-valley)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-laugh.jpg",
+   "clip": "shot-genesis-08-short-s-laugh-sha256-f720a68183e79e1fd27a40a620cd6a5cc823d7f6d490aa53a1772a4bd2651576.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-laugh)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-jeer.jpg",
+   "clip": "shot-genesis-08-short-s-jeer-sha256-8b477a0f0b4c9a7afa6b05287c50cff57ed3961383743a7b65e2ce5aeec7bd21.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-jeer)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-pitch.jpg",
+   "clip": "shot-genesis-08-short-s-pitch-sha256-cc36c90147ff2679cef3bb6ac08fc6229d61f445a7a85117c55a8e72728e1d48.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-pitch)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-stones.jpg",
+   "clip": "shot-genesis-08-short-s-stones-sha256-1a44a03549bdf277047a0d35647313ed1805d44d70db2ef630a267ff3a3cf4da.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-stones)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g08-s-wedding.jpg",
+   "clip": "shot-genesis-08-short-s-wedding-sha256-aa0be47285ecaaf33e943719a9b4b242dff88dc66a335a11b4358609de371c66.mp4",
+   "source": "migration/production/bible/shots/genesis-08-short.json (s-wedding)",
+   "verdict": "approved",
+   "flags": []
+  },
+  {
+   "file": "g06-lamp.jpg",
+   "clip": "migration/evidence/pavo/20261025/genesis-06/lamp.mp4",
+   "source": "evidence/pavo",
+   "verdict": "approved night shot; the highest column/row ratio of the good clips (1.62-1.71)",
+   "flags": []
+  },
+  {
+   "file": "g09-s-peak-r1.jpg",
+   "clip": "genesis-09 s-peak round 1 candidate",
+   "source": "genesis-09 candidate, upright (checked by eye)",
+   "verdict": "upright; its middle frame, mid-pan past a dark hull, reads column/row 3.47 alone, so a turn must hold in every sampled frame",
+   "flags": []
+  }
+ ]
+}
