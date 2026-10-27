@@ -443,11 +443,71 @@ class SharedBudget(unittest.TestCase):
             vcs("add", "-A")
             vcs("commit", "-q", "-m", run, date=date)
             vcs("update-ref", f"refs/remotes/origin/claude/shot-probe-arc-01-long-{run}", "HEAD")
-        usage = git_actions_usage("2026-10-27", repo=repo)
+        usage = git_actions_usage("2026-10-27", repo=repo, now=datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc))
         self.assertEqual((usage["units"], usage["failed_tail"]), (3 * VIDEO_UNITS, 3))
-        self.assertEqual(git_actions_usage("2026-10-25", repo=repo), NO_ACTIONS)
+        self.assertEqual(git_actions_usage("2026-10-25", repo=repo, now=datetime(2026, 10, 25, 12, 0, tzinfo=timezone.utc)),
+                         NO_ACTIONS)
         with self.assertRaisesRegex(PavoError, "PAVO_BUDGET_UNREADABLE"):
             git_actions_usage("2026-10-27", repo=Path(self.tmp.name) / "not-a-repo")
+
+
+def probe_repo(root, runs):
+    """A git repo whose origin/claude/shot-probe-* refs hold RUNS: [(run id, ISO commit time, record)]."""
+    import os
+    import subprocess
+    repo = Path(root) / "repo"
+    env = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid", "GIT_COMMITTER_NAME": "t",
+           "GIT_COMMITTER_EMAIL": "t@example.invalid", "HOME": str(root), "PATH": os.environ["PATH"],
+           "GIT_CONFIG_NOSYSTEM": "1"}
+
+    def vcs(*args, date="2026-10-27T22:41:00+00:00"):
+        subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True, text=True,
+                       env=dict(env, GIT_COMMITTER_DATE=date, GIT_AUTHOR_DATE=date))
+    repo.mkdir()
+    vcs("init", "-q")
+    for run, date, record in runs:
+        path = repo / "migration" / "evidence" / "shots" / "arc-01-long" / f"{run}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(record))
+        vcs("add", "-A")
+        vcs("commit", "-q", "-m", run, date=date)
+        vcs("update-ref", f"refs/remotes/origin/claude/shot-probe-arc-01-long-{run}", "HEAD")
+    return repo
+
+
+class ReviewOf475(unittest.TestCase):
+    """Review of #475: a probe record with no generations (an adopt_run) after a stop hid the stop's cool-down, and
+    the cool-down ended at 00:00 UTC because only the day's records were read."""
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def stopped(self):
+        return probe_record([("g-c4-serpent", str(373599328776227520 + k), False) for k in range(3)])
+
+    def test_an_adopt_run_after_a_stop_does_not_hide_it(self):
+        stop = datetime(2026, 10, 27, 22, 41, tzinfo=timezone.utc)
+        adopted = {"episode": "arc-01-long", "shots": {"s-a": {"clips": [{"round": 1, "asset": "shot-x.mp4"}]}}}
+        usage = combine([(stop, self.stopped()), (stop + timedelta(minutes=20), adopted)], "2026-10-27")
+        self.assertEqual(usage, {"units": 3 * VIDEO_UNITS, "failed_tail": 3, "last_at": stop.isoformat()})
+        self.assertEqual(combine([(stop, adopted)]), {"units": 0, "failed_tail": 0, "last_at": None})
+        guard = QuotaGuard(Path(self.tmp.name) / "l.json", now=lambda: stop + timedelta(minutes=30),
+                           actions=lambda day: usage)
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            guard.before_generate(VIDEO_UNITS)
+
+    def test_a_stop_just_before_midnight_holds_after_it(self):
+        repo = probe_repo(self.tmp.name, [("40592173923", "2026-10-27T23:30:00+00:00", self.stopped())])
+        after = datetime(2026, 10, 28, 0, 30, tzinfo=timezone.utc)
+        usage = git_actions_usage("2026-10-28", repo=repo, now=after)
+        self.assertEqual((usage["units"], usage["failed_tail"]), (0, 3))   # yesterday's units, today's stop
+        guard = QuotaGuard(Path(self.tmp.name) / "l.json", now=lambda: after, actions=lambda day: usage)
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            guard.before_generate(VIDEO_UNITS)
+        later = after + timedelta(hours=2, minutes=1)                         # 3 h after the stop: over
+        self.assertEqual(git_actions_usage("2026-10-28", repo=repo, now=later), NO_ACTIONS)
 
 
 if __name__ == "__main__":

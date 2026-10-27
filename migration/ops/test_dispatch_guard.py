@@ -417,7 +417,9 @@ class PavoBudget(unittest.TestCase):
     def test_a_probe_batch_names_its_expected_units_and_an_adopt_run_none(self):
         probe = g.WORKFLOWS["shot-probe.yml"][1]
         f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights,g-c1-image", "attempts": "2", "adopt_run": ""})
-        self.assertEqual(f["pavo_units"], 10)          # 2 shots x 2 rounds x 1.2 generations x 2 units, rounded up
+        # review of #475: the worst case, 2 shots x 2 rounds x 3 generations (make_shot's ATTEMPTS) x 2 units, so a
+        # batch that starts can finish; the mean (1.2 a round: 10 units) is only probe-queue's estimate
+        self.assertEqual(f["pavo_units"], 24)
         f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights", "attempts": "2", "adopt_run": "40592173923"})
         self.assertEqual(f["pavo_units"], 0)
 
@@ -449,6 +451,35 @@ class PavoBudget(unittest.TestCase):
             self.assertEqual(budget.call_count, 1)                          # an adopt run spends nothing
         src = (HERE / "dispatch_guard.py").read_text()
         self.assertIn('out.write(f"pavo_used={facts[\'pavo_used\']}\\n")', src)
+
+
+class PavoBudgetReview475(unittest.TestCase):
+    """Review of #475: the REST count never passes what it could not read (an unreadable record, more branches than it
+    scans), and a stop shortly before 00:00 UTC still holds after it."""
+    setUp, tearDown, api = PavoBudget.setUp, PavoBudget.tearDown, PavoBudget.api
+
+    def test_an_unreadable_record_or_too_many_branches_refuses(self):
+        bad = fake_api([("branches?", [{"name": "claude/shot-probe-arc-01-long-40592173923", "commit": {"sha": "p1"}}]),
+                        ("commits/p1", {"commit": {"committer": {"date": "2026-10-27T22:41:42Z"}}}),
+                        ("contents/", {"content": "not base64 json"})])
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_actions_usage(bad, "2026-10-27")
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_UNREADABLE"), c.exception)
+        full = [{"name": f"claude/other-{k}", "commit": {"sha": "x"}} for k in range(100)]
+        many = fake_api([("branches?", full)])                  # every page full: more remain after the last scanned
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_actions_usage(many, "2026-10-27")
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_UNREADABLE"), c.exception)
+
+    def test_a_stop_just_before_midnight_holds_after_it(self):
+        from datetime import datetime, timezone
+        after = datetime(2026, 10, 28, 0, 30, tzinfo=timezone.utc)
+        api = self.api(failed=3, date="2026-10-27T23:30:00Z")
+        usage = g.pavo_actions_usage(api, "2026-10-28", after)
+        self.assertEqual((usage["units"], usage["failed_tail"]), (0, 3))   # yesterday's units, the stop still on
+        with self.assertRaises(g.Refusal) as c:
+            g.pavo_budget({"uploads": 0, "pavo_units": 2}, api, "2026-10-28", now=after)
+        self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
 
 
 if __name__ == "__main__":

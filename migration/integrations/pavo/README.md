@@ -180,8 +180,19 @@ in a row `failed` with no video and no reason. E124 counted only MCP stills. Now
   fetch them before an MCP generation session (`git fetch origin 'refs/heads/claude/shot-probe-*:refs/remotes/origin/claude/shot-probe-*'`).
   A git that cannot answer refuses (`PAVO_BUDGET_UNREADABLE`). Commit the ledger with each session's evidence, so the
   dispatch guard sees the MCP's usage too.
-- **Before a batch.** `episode_build.py probe-queue PLAN` cuts batches to fit a day's cap, names each batch's
-  `pavo_units_est` and says whether the next one fits today (`pavo_budget`); dispatch only a batch that fits.
+- **Before a batch.** `episode_build.py probe-queue PLAN` cuts batches so each one's worst case fits a day's cap, names
+  each batch's mean (`pavo_units_est`) and worst case (`pavo_units_max`: rounds x every generation make_shot may spend
+  x 2) and says whether the next one fits today (`pavo_budget`); the dispatch guard checks the worst case, so a batch
+  that starts can finish. Dispatch only a batch that fits.
+- **Stops and records (review of #475).** The failed tail comes from the latest record *with* generations (an
+  adopt_run never hides a stop), and records of the last 3 h are read across 00:00 UTC. A probe run saves every
+  submitted generation to its record on any exit (after each submission, in a `finally`, SIGTERM unwound as
+  `PROBE_TERMINATED`; the cut round is marked `PROBE_INTERRUPTED`). More branches than the guard scans (10 pages of
+  100) refuse `PAVO_BUDGET_UNREADABLE` instead of a partial count.
+- **Known gaps.** MCP spend reaches the dispatch guard only once the ledger is merged to main; the MCP guard sees
+  Actions spend only from fetched `origin/claude/shot-probe-*` refs; a deleted probe branch takes its record out of
+  the count, so keep probe branches until their UTC day and its 3 h cool-down are over. The in-run stop (two failed
+  read-backs in a row) holds whatever the counts miss.
 
 ## Authorization
 

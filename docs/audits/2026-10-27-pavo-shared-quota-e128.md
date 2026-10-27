@@ -29,3 +29,8 @@ MCP server, and fail-open paths in the budget (a check that passes what it could
 | S5 an unguarded Pavo client on the Actions path | pavo-shared-quota-e128 | FALSE POSITIVE | < 8 | Yes | `generate_clips` builds its client only through `budget_client()`, which refuses without the run-local ledger; `episode_build.py probe` seeds it before `probe_step`. | `test_the_probe_command_seeds_the_budget_before_any_generation`, `test_two_failed_read_backs_stop_the_whole_probe_run` |
 
 0 of 5 claimed findings at 8 or above; no hardening needed beyond the PR.
+
+Review of #475 (same PR, second commit): the REST scan of probe branches now refuses `PAVO_BUDGET_UNREADABLE` when more
+pages remain than it reads (it used to stop at 10 pages and pass a partial count), the failed tail ignores records with
+no generations and reads the last 3 h across 00:00 UTC, the dispatch check uses the batch's worst case, and the probe
+installs a SIGTERM handler that only exits (no new input, no secret moves).
