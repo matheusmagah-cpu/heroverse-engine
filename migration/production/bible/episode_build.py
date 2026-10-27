@@ -233,6 +233,18 @@ def line_layout(durations, gap=LINE_GAP):
     return out
 
 
+def voice_layout(plan, durations):
+    """The voice track's lines laid out: (layout, cold-open hold (line index, seconds) or None, problems). A Short's
+    lines sit end to end at LINE_GAP. A long's sit at LONG_LINE_GAP, and its cold open's last frame is held (silence
+    under the music) until the Keeper at the structure's cold_open_s, at most COLD_OPEN_HOLD_MAX: measured here on
+    the real voice (long_build.cold_open_layout; LONG_DESIGN slice 3: "the build must re-check it")."""
+    layout = line_layout(durations, line_gap(plan))
+    if not is_long(plan):
+        return layout, None, []
+    import long_build
+    return long_build.cold_open_layout(plan, layout)
+
+
 def keeper_span(lines, layout):
     return layout[lines[0]][0], layout[lines[-1]][1]
 
@@ -349,7 +361,11 @@ def compose_prediction(plan, layout, clip_seconds=None):
     differ by Pavo's few hundredths of a second (clip_seconds: measured ones, when there are)."""
     import short_engine
     if clip_seconds is None:
-        clip_seconds = {s["id"]: float(shot_seconds(s, i, plan, layout)) for i, s in enumerate(plan["shots"])}
+        clip_seconds = {s["id"]: float(shot_seconds(s, i, plan, layout)) for i, s in enumerate(plan["shots"])
+                        if not is_window(s)}
+    if is_long(plan):   # LONG_DESIGN slice 3: one cut a shot at the story QA's 4-7 s holds, windows on their source
+        import long_build
+        return long_build.compose_problems(plan, layout, clip_seconds)
     try:
         shots = compose_shots(plan, layout, {s["id"]: s["id"] for s in plan["shots"]}, clip_seconds)
     except SystemExit as exc:
@@ -383,8 +399,9 @@ def predict(plan, durations):
     for idx, _, stretch in stretches.values():
         for k in idx:
             durations[k] *= stretch
-    layout = plan_layout(plan, line_layout(durations, line_gap(plan)), None, problems)
-    if layout["problems"] or is_long(plan):   # the compose needs every talking record; the long's is slice 3
+    laid, _, cold = voice_layout(plan, durations)
+    layout = plan_layout(plan, laid, None, problems + cold)
+    if layout["problems"]:   # the compose needs every talking record
         return layout["problems"], layout
     return compose_prediction(plan, layout), layout
 
@@ -528,9 +545,15 @@ def lines_step(plan, work):
                         "atempo": round(factor, 4)}
     for k in range(n):
         write_wav(work / "lines" / f"n{k:02d}.wav", params, pieces[k])
-    layout = line_layout(durations, line_gap(plan))
+    layout, cold, cold_problems = voice_layout(plan, durations)
+    problems += cold_problems
     silence = b"\x00" * (int(round(line_gap(plan) * rate)) * width)
-    track = silence.join(pieces)
+    if cold:   # a long: the cold open's last frame held in silence until the Keeper (voice_layout)
+        k0, hold = cold
+        held = silence + b"\x00" * (int(round(hold * rate)) * width)
+        track = silence.join(pieces[:k0]) + held + silence.join(pieces[k0:])
+    else:
+        track = silence.join(pieces)
     write_wav(work / "narration.wav", params, track)
     voice_seconds = round(len(track) / width / rate, 3)
     sentences = []

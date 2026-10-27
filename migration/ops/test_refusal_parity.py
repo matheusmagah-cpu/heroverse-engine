@@ -45,7 +45,7 @@ LATER = [
     "migration/integrations/pavo/images.py", "migration/integrations/pavo/audio.py",
     "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/quota.py",   # E124: the free-image daily cap and quota stop
-    ".github/workflows/episode.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
+    ".github/workflows/episode.yml", ".github/workflows/long-build.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
     ".github/workflows/pavo-footage.yml", ".github/workflows/footage.yml", ".github/workflows/approve.yml",
     ".github/workflows/publish.yml", ".github/workflows/shorts.yml", ".github/workflows/publish-shorts.yml",
     ".github/workflows/tiktok.yml", ".github/workflows/agnes-clip.yml",

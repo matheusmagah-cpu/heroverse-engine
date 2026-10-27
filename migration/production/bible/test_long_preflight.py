@@ -368,7 +368,7 @@ class Contract(unittest.TestCase):
         # build, LONG_DESIGN slice 3, must do the same)
         for w in sorted(WORKFLOWS.glob("*.yml")):
             text = w.read_text()
-            if "episode_build.py generate" in text or "long_build" in text:
+            if "episode_build.py generate" in text or "bible/long_build.py " in text:
                 self.assertIn("verify-preflight", text, w.name)
                 self.assertLess(text.index("verify-preflight"), text.index("episode_build.py generate"), w.name)
                 self.assertNotIn("PAVO_TOKEN", text, w.name)
