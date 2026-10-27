@@ -1,6 +1,6 @@
 {
  "id": "ch-scoffer-three-quarter",
- "prompt": "character reference portrait, three-quarter view, head and shoulders: a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, a lean narrow bony face with hollow cheeks, his black beard short and close to the jaw ending in a sharp point, a scornful half-smile, the headcloth striped only crimson and black with no gold, a plain woven crimson tunic with no armour on the shoulders, his bare forearms each ringed by one thin plain bronze band, nothing around his neck, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "prompt": "character reference portrait, three-quarter view, head and shoulders: a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long plain crimson wool tunic tied with a broad black sash, a lean narrow bony face with hollow cheeks, his black beard short and close to the jaw ending in a sharp point, a scornful half-smile, the headcloth boldly striped crimson and black, his neck and forearms bare, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
  "negative": null,
  "seed": null,
  "size": [
@@ -15,7 +15,7 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 6.1,
+ "seconds": 4.3,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
   "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
@@ -23,7 +23,7 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "characters-img-ch-scoffer-three-quarter-sha256-037c287a4bc328848346ce585dc406c04aaf2159fb1157dd580e2287e310d970.png",
- "sha256": "037c287a4bc328848346ce585dc406c04aaf2159fb1157dd580e2287e310d970",
+ "release_asset": "characters-img-ch-scoffer-three-quarter-sha256-e74c16ee2406ba65331ef6a338688697c6295b362936feb54b76c4f756d7938f.png",
+ "sha256": "e74c16ee2406ba65331ef6a338688697c6295b362936feb54b76c4f756d7938f",
  "release_tag": "v0.0.0-cloud-assets-20261025"
 }

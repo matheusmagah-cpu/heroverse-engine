@@ -1,6 +1,6 @@
 {
  "id": "ch-scoffer-front",
- "prompt": "character reference portrait, front view, head and shoulders, a sneering smile, looking at the camera: a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, a lean narrow bony face with hollow cheeks, his black beard short and close to the jaw ending in a sharp point, a scornful half-smile, the headcloth striped only crimson and black with no gold, a plain woven crimson tunic with no armour on the shoulders, his bare forearms each ringed by one thin plain bronze band, nothing around his neck, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "prompt": "character reference portrait, front view, head and shoulders, a sneering smile, looking at the camera: a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long plain crimson wool tunic tied with a broad black sash, a lean narrow bony face with hollow cheeks, his black beard short and close to the jaw ending in a sharp point, a scornful half-smile, the headcloth boldly striped crimson and black, his neck and forearms bare, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
  "negative": null,
  "seed": null,
  "size": [
@@ -15,7 +15,7 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 2.7,
+ "seconds": 3.7,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
   "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
@@ -23,7 +23,7 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "characters-img-ch-scoffer-front-sha256-793ea98974aa91196653f595c7b8d24f199155b9db7ce813f7cdf77cc3003a60.png",
- "sha256": "793ea98974aa91196653f595c7b8d24f199155b9db7ce813f7cdf77cc3003a60",
+ "release_asset": "characters-img-ch-scoffer-front-sha256-d4b2a29e559019ad67a649872fb74b4552d3ac5789a4d071538829ec6a824c01.png",
+ "sha256": "d4b2a29e559019ad67a649872fb74b4552d3ac5789a4d071538829ec6a824c01",
  "release_tag": "v0.0.0-cloud-assets-20261025"
 }
