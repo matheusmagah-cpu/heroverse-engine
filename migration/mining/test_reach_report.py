@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Offline checks of the impressions / CTR / clicks report (YouTube Reporting API reach reports; no network)."""
 from datetime import datetime, timezone
+import contextlib
+import email.message
 import io
 import json
 from pathlib import Path
@@ -8,6 +10,8 @@ import sys
 import tempfile
 import unittest
 import urllib.error
+import urllib.request
+import urllib.response
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import reach_report as rr  # noqa: E402
@@ -201,6 +205,137 @@ class Run(unittest.TestCase):
         self.assertTrue(r.startswith("HTTP 401"))
 
 
+class Redirect(urllib.request.BaseHandler):
+    """A fake HTTPS layer: the Reporting API answers 302 to another host; records what each host received."""
+    handler_order = 100
+
+    def __init__(self):
+        self.seen = []
+
+    def https_open(self, req):
+        auth = req.get_header("Authorization") or req.unredirected_hdrs.get("Authorization")
+        self.seen.append((req.host, auth))
+        if req.host == "youtubereporting.googleapis.com":
+            hdrs = email.message.Message()
+            hdrs["Location"] = "https://evil.example/steal"
+            return self.answer(b"", hdrs, req.full_url, 302, "Found")
+        return self.answer(b"{}", email.message.Message(), req.full_url, 200, "OK")
+
+    @staticmethod
+    def answer(body, hdrs, url, code, msg):
+        r = urllib.response.addinfourl(io.BytesIO(body), hdrs, url, code)
+        r.msg = msg
+        return r
+
+
+class TokenNeverFollowsARedirect(unittest.TestCase):
+    """Review of #463: urllib copies request headers to a redirected host; the token must never reach it."""
+    def test_a_redirect_is_refused_and_the_other_host_gets_nothing(self):
+        fake = Redirect()
+        h = rr.Http("TOKEN", opener=rr.make_opener(urllib.request.ProxyHandler({}), fake))
+        with self.assertRaises(urllib.error.HTTPError) as e:
+            h.json("GET", "jobs")
+        self.assertEqual((e.exception.code, e.exception.reason), (302, "REDIRECT_REFUSED"))
+        self.assertEqual(fake.seen, [("youtubereporting.googleapis.com", "Bearer TOKEN")])
+        self.assertTrue(rr.reason(e.exception).startswith("HTTP 302"))
+
+    def test_even_an_opener_that_follows_redirects_never_forwards_the_token(self):
+        fake = Redirect()
+        h = rr.Http("TOKEN", opener=urllib.request.build_opener(urllib.request.ProxyHandler({}), fake).open)
+        h.json("GET", "jobs")
+        self.assertEqual(fake.seen, [("youtubereporting.googleapis.com", "Bearer TOKEN"), ("evil.example", None)])
+
+    def test_a_redirected_download_is_a_problem_and_the_run_goes_on(self):
+        job = {"id": "J1", "reportTypeId": rr.REPORT_TYPE}
+        h = FakeHttp(jobs=[job], reports=[report("r12", "2026-10-12", "2026-10-14T00:00:00Z")])
+        fake = Redirect()
+        h.download = rr.Http("TOKEN", opener=rr.make_opener(urllib.request.ProxyHandler({}), fake)).download
+        s = rr.run(lambda: h, {}, VIDEOS, NOW)
+        self.assertEqual((s["status"], s["downloaded"]), ("PENDING", 0))
+        self.assertIn("REDIRECT_REFUSED", " ".join(s["problems"]))
+        self.assertNotIn("evil.example", [x[0] for x in fake.seen])
+
+
+class TimeCap(unittest.TestCase):
+    def test_downloads_stop_after_the_time_cap_and_resume_next_run(self):
+        job = {"id": "J1", "reportTypeId": rr.REPORT_TYPE}
+        h = FakeHttp(jobs=[job], reports=[report("r12", "2026-10-12", "2026-10-14T00:00:00Z"),
+                                          report("r13", "2026-10-13", "2026-10-15T00:00:00Z")],
+                     files={DL.format("r12"): CSV_12, DL.format("r13"): CSV_13})
+        ticks = iter([0, 10, 200, 200])
+        state = {}
+        got, problems = rr.ingest(h, job, state, clock=lambda: next(ticks))
+        self.assertEqual(got, 1)
+        self.assertEqual(problems, ["1 reports left for the next run (time cap 120 s)"])
+        got, problems = rr.ingest(h, job, state)            # next run picks up the rest
+        self.assertEqual((got, problems), (1, []))
+        self.assertEqual(sorted(state["days"]), ["2026-10-12", "2026-10-13"])
+
+
+class Classification(unittest.TestCase):
+    """Review of #463: the goal report's `videos` keeps the 20 newest, so older public videos with impressions were
+    'unclassified'; Analytics' content type sits under analytics.per_video."""
+    def test_every_public_video_is_classified_from_the_full_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            index = {f"V{i:02d}": {"title": f"t{i}", "published": f"2026-10-{i + 1:02d}T10:00", "views": i,
+                                   "short": i % 2 == 0, "content_type": None} for i in range(22)}
+            newest = [dict(index[k], id=k) for k in sorted(index, reverse=True)[:20]]
+            (Path(tmp) / "20261027.json").write_text(json.dumps({"videos": newest, "video_index": index}))
+            videos = rr.latest_videos(tmp)
+            days = {"2026-10-26": {k: [10, 0.1] for k in index}}
+            pv, _, split = rr.aggregate(days, videos)
+            self.assertNotIn("unclassified", split)
+            self.assertEqual((pv["V00"]["kind"], pv["V01"]["kind"], pv["V00"]["title"]), ("short", "long", "t0"))
+
+    def test_analytics_content_type_and_the_ledger_fill_the_rest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rep = {"videos": [{"id": "A", "title": "a", "short": False, "views": 3}],
+                   "analytics": {"per_video": {"A": {"content_type": "SHORTS"},
+                                               "OLD": {"content_type": "LONG_FORM_CONTENT", "views": 9}}}}
+            (Path(tmp) / "20261027.json").write_text(json.dumps(rep))
+            ledger = Path(tmp) / "ledger.json"
+            ledger.write_text(json.dumps({"entries": {"pilot-002:abc": {"video_id": "L"},
+                                                      "short:pilot-002:def": {"video_id": "S"}}}))
+            kinds = {v["id"]: rr.kind_of(v) for v in rr.latest_videos(tmp, ledger)}
+            self.assertEqual(kinds, {"A": "short", "OLD": "long", "L": "long", "S": "short"})
+
+
+class Cli(unittest.TestCase):
+    """Review of #463: whatever happens, the step exits 0 and latest.md says UNKNOWN with the reason."""
+    def test_a_reach_json_that_is_not_an_object_is_ignored(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "reach.json").write_text("[1, 2]")
+            (Path(tmp) / "latest.md").write_text("# r\n")
+            s = rr.main(tmp, now=NOW, http_factory=lambda: FakeHttp(fail=PermissionError("CREDENTIAL_MISSING")))
+            self.assertEqual(s["status"], "UNKNOWN")
+            self.assertIsInstance(json.loads((Path(tmp) / "reach.json").read_text()), dict)
+
+    def test_a_crash_writes_unknown_and_exits_zero(self):
+        def boom(*a):
+            raise KeyError("x")
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "latest.md").write_text("# r\n")
+            (Path(tmp) / "reach.json").write_text("not json")
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(rr.cli([tmp], main=boom), 0)
+            md = (Path(tmp) / "latest.md").read_text()
+            self.assertIn("| UNKNOWN | CRASH KeyError", md)
+            self.assertEqual(json.loads((Path(tmp) / "reach.json").read_text())["status"], "UNKNOWN")
+            good = {"days": {"2026-10-12": {"V": [1, 1.0]}}}
+            (Path(tmp) / "reach.json").write_text(json.dumps(good))
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(rr.cli([tmp], main=boom), 0)
+            self.assertEqual(json.loads((Path(tmp) / "reach.json").read_text()), good)   # history kept
+
+    def test_the_workflow_fallback_after_a_timeout_writes_unknown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "latest.md").write_text("# r\n")
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(rr.cli(["--step-failed", "124", tmp]), 0)
+            self.assertIn("| UNKNOWN | STEP_FAILED exit 124 (timed out)", (Path(tmp) / "latest.md").read_text())
+            self.assertEqual(json.loads((Path(tmp) / "reach.json").read_text())["status"], "UNKNOWN")
+
+
 class HttpLayer(unittest.TestCase):
     def test_requests_are_built_for_the_reporting_api_with_a_size_cap(self):
         seen = []
@@ -213,7 +348,7 @@ class HttpLayer(unittest.TestCase):
                 return False
 
         def opener(req, timeout):
-            seen.append((req.get_method(), req.full_url, req.get_header("Authorization"), req.data))
+            seen.append((req.get_method(), req.full_url, req.unredirected_hdrs.get("Authorization"), req.data))
             return Resp(b'{"id": "NEW"}')
         h = rr.Http("TOKEN", opener=opener)
         h.json("POST", "jobs", body={"reportTypeId": rr.REPORT_TYPE, "name": rr.JOB_NAME})
@@ -237,7 +372,7 @@ class Main(unittest.TestCase):
             job = {"id": "J1", "reportTypeId": rr.REPORT_TYPE}
             h = FakeHttp(jobs=[job], reports=[report("r13", "2026-10-13", "2026-10-15T00:00:00Z")],
                          files={DL.format("r13"): CSV_13})
-            rr.main(tmp, NOW, http_factory=lambda: h)
+            rr.main(tmp, now=NOW, http_factory=lambda: h)
             md = (out / "latest.md").read_text()
             self.assertTrue(md.startswith("# HeroVerse daily report\n"))
             self.assertIn("| Eve (SHORT01) | short | 30 | 0.00 % | 0 | 5000 |", md)
@@ -255,7 +390,14 @@ class Workflow(unittest.TestCase):
         run = step.split("run:")[1]
         self.assertNotIn("secrets.", run)
         self.assertNotIn("echo", run)
-        self.assertIn("migration/mining/reach_report.py migration/evidence/daily-report", run)
+        self.assertIn("migration/mining/reach_report.py migration/evidence/daily-report migration/publish/ledger.json", run)
+        # review of #463: a hung or crashed step never stops the report, its later steps or the Record step; without
+        # continue-on-error, which test_learning_loop forbids in this workflow
+        self.assertIn("timeout-minutes: 3", step)
+        self.assertIn('timeout 150 "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/reach_report.py', run)
+        self.assertIn('[ "$rc" = 0 ] || python3 -I -B migration/mining/reach_report.py --step-failed "$rc" '
+                      "migration/evidence/daily-report", run)
+        self.assertNotIn("continue-on-error", wf)
 
 
 if __name__ == "__main__":

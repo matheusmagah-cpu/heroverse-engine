@@ -76,6 +76,12 @@ def eligible(videos, per365, per90):
             "all_content_watch_hours_365d_top200": round(all_hours, 1)}
 
 
+def video_index(videos):
+    """Every public video, unsliced (the report's `videos` keeps the 20 newest): id -> title, published, views, Shorts
+    or long by duration and Analytics' content type when known. reach_report.py classifies impressions with it."""
+    return {v["id"]: {k: v.get(k) for k in ("title", "published", "views", "short", "content_type")} for v in videos}
+
+
 def funnel(rows):
     """Short -> long funnel of ONE long video from its Analytics rows by traffic source
     ([insightTrafficSourceType, views, estimatedMinutesWatched, averageViewDuration]). The market shows no such funnel
@@ -219,7 +225,8 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
     report = {"version": "goal-report-v2", "at": now.isoformat(), "day": day, "target_day": TARGET_DAYS, "max_day": MAX_DAYS,
               "subscribers": subs, "views_total": int(st.get("viewCount", 0)), "public_videos": len(videos),
               "shorts_views_public_lifetime": shorts_views, "analytics": a, "needed_from_today": need, "ypp": YPP,
-              "videos": sorted(videos, key=lambda v: v["published"], reverse=True)[:20], "pipeline": rows,
+              "videos": sorted(videos, key=lambda v: v["published"], reverse=True)[:20],
+              "video_index": video_index(videos), "pipeline": rows,
               "script_runway_days": runway, "alerts": alerts, "data_api_units": client.units,
               "policy_risk_videos": [{k: v.get(k) for k in ("id", "title", "views", "watch_hours", "subscribers_gained", "short")} for v in risky],
               "policy_risk_watch_hours": risk_hours}

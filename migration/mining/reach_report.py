@@ -19,7 +19,7 @@ It appends an "Impressions and CTR" section to daily-report/latest.md: per video
 dates, Shorts or long as goal_report classified it) and per day. With no report yet it says PENDING with the job's
 creation date; when the token lacks the scope, the API is disabled in the Google Cloud project or anything else
 fails, it says UNKNOWN with the reason and keeps the last numbers it had. It never fails the daily report.
-usage: reach_report.py DAILY_REPORT_DIR
+usage: reach_report.py DAILY_REPORT_DIR [PUBLISH_LEDGER]
 """
 import csv
 from datetime import date, datetime, timedelta, timezone
@@ -27,6 +27,7 @@ import io
 import json
 from pathlib import Path
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -41,17 +42,29 @@ IMPRESSIONS, CTR = "video_thumbnail_impressions", "video_thumbnail_impressions_c
 DOWNLOAD_HOST = "youtubereporting.googleapis.com"   # the bearer token goes to this host only
 MAX_REPORT_BYTES = 20_000_000
 MAX_DOWNLOADS = 120          # per run; the rest next run (60 days of history fit in one run)
+MAX_SECONDS = 120            # wall clock spent downloading per run; the rest next run (the step has 3 minutes)
 HEADING = "## Impressions and CTR (thumbnail impressions, YouTube Reporting API channel_reach_basic_a1)"
 DAYS_SHOWN = 14
 
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    """A 3xx is an error, never followed: urllib copies request headers to the redirected host (review of #463)."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise urllib.error.HTTPError(req.full_url, code, "REDIRECT_REFUSED", headers, None)
+
+
+def make_opener(*handlers):
+    return urllib.request.build_opener(*handlers, NoRedirect()).open
+
+
 class Http:
     """The only network layer (tests pass a fake with the same two methods)."""
-    def __init__(self, token, opener=urllib.request.urlopen):
-        self.token, self.opener = token, opener
+    def __init__(self, token, opener=None):
+        self.token, self.opener = token, opener or make_opener()
 
     def _open(self, req, cap):
-        req.add_header("Authorization", "Bearer " + self.token)
+        # unredirected: even a redirect followed by another opener never carries the token
+        req.add_unredirected_header("Authorization", "Bearer " + self.token)
         with self.opener(req, timeout=60) as r:
             body = r.read(cap + 1)
         if len(body) > cap:
@@ -113,14 +126,17 @@ def parse_csv(raw):
     return out
 
 
-def ingest(http, job, state, limit=MAX_DOWNLOADS):
+def ingest(http, job, state, limit=MAX_DOWNLOADS, seconds=MAX_SECONDS, clock=time.monotonic):
     """Download the job's reports not yet in state (or regenerated later); returns (downloaded, skipped reasons)."""
     days, seen = state.setdefault("days", {}), state.setdefault("reports", {})
     todo = [r for r in pages(http, f"jobs/{urllib.parse.quote(job['id'])}/reports", "reports")
             if seen.get(r.get("startTime", "")[:10], {}).get("created", "") < r.get("createTime", "")]
     todo.sort(key=lambda r: (r.get("startTime", ""), r.get("createTime", "")))
-    got, problems = 0, []
-    for r in todo[:limit]:
+    got, problems, start = 0, [], clock()
+    for n, r in enumerate(todo[:limit]):
+        if clock() - start > seconds:
+            problems.append(f"{len(todo) - n} reports left for the next run (time cap {seconds} s)")
+            return got, problems
         day = r.get("startTime", "")[:10]   # Pacific midnight is 07:00/08:00Z of the same calendar date
         if len(day) != 10 or not r.get("downloadUrl"):
             problems.append(f"report {r.get('id')}: no startTime or downloadUrl")
@@ -268,16 +284,40 @@ def section(s, now):
     return md
 
 
-def latest_videos(out):
-    """The videos (with Shorts/long class) of the newest goal report JSON in the folder."""
+def latest_videos(out, ledger_path=None):
+    """Every video we can classify (review of #463: the report's `videos` keeps only the 20 newest): the newest goal
+    report's `video_index` (all public videos), else its `videos` with Analytics' content type from
+    `analytics.per_video`; then the publish ledger (a `short:` entry is a Short, any other a long) for the rest."""
+    index = {}
     days = sorted(p for p in Path(out).glob("[0-9]" * 8 + ".json"))
     try:
-        return json.loads(days[-1].read_text()).get("videos", []) if days else []
+        rep = json.loads(days[-1].read_text()) if days else {}
     except (OSError, ValueError):
-        return []
+        rep = {}
+    rep = rep if isinstance(rep, dict) else {}
+    per = ((rep.get("analytics") or {}).get("per_video") or {}) if isinstance(rep.get("analytics"), dict) else {}
+    for v in rep.get("videos") or []:
+        if isinstance(v, dict) and v.get("id"):
+            index[v["id"]] = dict(v, content_type=v.get("content_type") or (per.get(v["id"]) or {}).get("content_type"))
+    for vid, v in (rep.get("video_index") or {}).items():
+        if isinstance(v, dict):
+            index[vid] = dict(index.get(vid, {}), **{k: x for k, x in v.items() if x is not None}, id=vid)
+    for vid, p in per.items():
+        if vid not in index and isinstance(p, dict) and p.get("content_type"):
+            index[vid] = {"id": vid, "content_type": p["content_type"], "views": p.get("views")}
+    try:
+        ledger = json.loads(Path(ledger_path).read_text()) if ledger_path and Path(ledger_path).exists() else {}
+    except (OSError, ValueError):
+        ledger = {}
+    entries = ledger.get("entries", {}) if isinstance(ledger, dict) else {}
+    for key, e in (entries.items() if isinstance(entries, dict) else []):
+        vid = isinstance(e, dict) and e.get("video_id")
+        if vid and vid not in index:
+            index[vid] = {"id": vid, "short": key.startswith("short:"), "published": (e.get("uploaded_at") or "")[:16]}
+    return list(index.values())
 
 
-def main(out_dir, now=None, http_factory=None):
+def main(out_dir, ledger_path=None, now=None, http_factory=None):
     now = now or datetime.now(timezone.utc)
     out = Path(out_dir)
     path = out / "reach.json"
@@ -285,11 +325,13 @@ def main(out_dir, now=None, http_factory=None):
         state = json.loads(path.read_text()) if path.exists() else {}
     except (OSError, ValueError):
         state = {}
+    if not isinstance(state, dict):
+        state = {}
     if http_factory is None:
         def http_factory():
             import market_panel as mp     # the same token refresh as goal_report.py
             return Http(mp.access_token())
-    s = run(http_factory, state, latest_videos(out), now)
+    s = run(http_factory, state, latest_videos(out, ledger_path), now)
     out.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(s, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
     with open(out / "latest.md", "a") as f:
@@ -299,5 +341,40 @@ def main(out_dir, now=None, http_factory=None):
     return s
 
 
+def write_unknown(out, why):
+    """Append an UNKNOWN row to latest.md; write reach.json only when it holds no good history."""
+    out = Path(out)
+    path = out / "reach.json"
+    try:
+        ok = isinstance(json.loads(path.read_text()), dict)
+    except (OSError, ValueError):
+        ok = False
+    if not ok:    # never overwrite good history with a crash note
+        path.write_text(json.dumps({"version": "reach-v1", "status": "UNKNOWN", "reason": why}) + "\n")
+    with open(out / "latest.md", "a") as f:
+        f.write("\n".join(["", HEADING, "| status | reason |", "|---|---|", f"| UNKNOWN | {why} |"]) + "\n")
+    print(json.dumps({"reach": "UNKNOWN", "reason": why}))
+
+
+def cli(argv, main=main):
+    """The workflow's entry point: whatever goes wrong, latest.md says UNKNOWN with the reason and the exit is 0, so
+    the daily report and its later steps always go on (review of #463). `--step-failed RC DIR` is the workflow's
+    fallback when the run was killed by its `timeout` (exit 124) or died before cli could report."""
+    try:
+        if argv[:1] == ["--step-failed"]:
+            rc = argv[1] if len(argv) > 1 and argv[1].isdigit() else "?"
+            write_unknown(argv[2], f"STEP_FAILED exit {rc}" + (" (timed out)" if rc == "124" else "")
+                          + ": reach_report.py did not finish; the rest of the daily report is unaffected")
+            return 0
+        main(*argv[:2])
+    except Exception as e:
+        try:
+            write_unknown(argv[0] if argv else ".", f"CRASH {type(e).__name__}: reach_report.py failed; "
+                          "the rest of the daily report is unaffected")
+        except Exception:
+            pass
+    return 0
+
+
 if __name__ == "__main__":
-    main(*sys.argv[1:2])
+    sys.exit(cli(sys.argv[1:4]))
