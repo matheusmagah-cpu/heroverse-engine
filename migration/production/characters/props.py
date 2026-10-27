@@ -138,6 +138,17 @@ def _approved_clip(episode, shot, clip_sha256, shots_dir=None):
     return rec
 
 
+def _retouched_from(rec):
+    """The parent sha256 of an approved reference record made by `retouch`, else None."""
+    src = str((rec or {}).get("source") or "")
+    if not src.startswith(RETOUCHED + " "):
+        return None
+    try:
+        return (json.loads(src[len(RETOUCHED) + 1:]).get("parent") or {}).get("sha256")
+    except (ValueError, AttributeError):
+        return None
+
+
 def source_problems(prop, meta, shots_dir=None, images_dir=None):
     """What keeps a candidate from being a reference: a Pavo still needs the prop's look word for word and an exact
     0-credit quote; a clip frame needs the clip Claude approved (sha256, >= 9.5). Any other source is refused."""
@@ -156,6 +167,8 @@ def source_problems(prop, meta, shots_dir=None, images_dir=None):
         par = meta.get("parent") or {}
         rec_path = record_path(prop, meta.get("view") or "", images_dir)
         rec = json.loads(rec_path.read_text()) if rec_path.is_file() else {}
+        if par.get("sha256") and _retouched_from(rec) == par.get("sha256"):
+            return []   # the approved reference is a retouch of this same parent (its candidate or a sibling)
         path = (REPO / str(par.get("repo_path") or "")).resolve()
         if not rec or rec.get("sha256") != par.get("sha256") or rec.get("repo_path") != par.get("repo_path") \
                 or not path.is_file() or sha256(path) != par.get("sha256"):
