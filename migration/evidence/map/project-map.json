@@ -151,6 +151,7 @@
    "calls": [
     "migration/mining/goal_report.py",
     "migration/mining/learning_loop.py",
+    "migration/mining/reach_report.py",
     "migration/ops/health.py",
     "migration/ops/heartbeat.py",
     "migration/ops/minutes.py",
@@ -304,6 +305,7 @@
     "migration/mining/test_opportunity.py",
     "migration/mining/test_owned_feedback.py",
     "migration/mining/test_packaging_mining.py",
+    "migration/mining/test_reach_report.py",
     "migration/mining/test_structure_mining.py",
     "migration/mining/test_thumb_study.py",
     "migration/mining/test_video_analysis_card.py",
@@ -1130,6 +1132,7 @@
    "imported_by": [
     "migration/mining/goal_report.py",
     "migration/mining/packaging_mining.py",
+    "migration/mining/reach_report.py",
     "migration/mining/structure_mining.py",
     "migration/mining/test_market_panel.py"
    ],
@@ -1198,6 +1201,21 @@
     "migration/mining/test_packaging_mining.py"
    ],
    "test": "migration/mining/test_packaging_mining.py",
+   "is_test": false
+  },
+  "migration/mining/reach_report.py": {
+   "purpose": "Impressions, thumbnail CTR and clicks of every video, every day (owner, 2026-10-27: \"são os dados mais importantes\").",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/market_panel.py"
+   ],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/mining/test_reach_report.py"
+   ],
+   "test": "migration/mining/test_reach_report.py",
    "is_test": false
   },
   "migration/mining/structure_mining.py": {
@@ -1389,6 +1407,19 @@
    "dir": "migration/mining",
    "local_imports": [
     "migration/mining/packaging_mining.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_reach_report.py": {
+   "purpose": "Offline checks of the impressions / CTR / clicks report (YouTube Reporting API reach reports; no network).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/reach_report.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"

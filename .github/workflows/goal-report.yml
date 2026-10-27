@@ -22,6 +22,11 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/goal_report.py migration/production migration/publish/ledger.json migration/evidence/daily-report
+      - name: Impressions and CTR (YouTube Reporting API reach reports; PENDING or UNKNOWN with a reason, never fails the report)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/reach_report.py migration/evidence/daily-report
       - name: Scheduler health (every task of the heartbeat, the heartbeat itself, the render runner)
         env:
           GH_TOKEN: ${{ github.token }}
