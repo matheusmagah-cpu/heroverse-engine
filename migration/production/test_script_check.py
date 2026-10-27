@@ -441,7 +441,7 @@ class StoryStructure(unittest.TestCase):
     def test_conflict_speaker_is_an_approved_character_or_god(self):
         # review of #415: "narrator", the Keeper, an unknown name or a DRAFT character never speaks the conflict
         for speaker, ok in (("serpent", True), ("god", True), ("eve", True), ("narrator", False), ("keeper", False),
-                            ("goliath", False), ("noah", False)):
+                            ("goliath", False), ("noah", True), ("scoffer", False)):
             segs = self.segs(lambda x: dict(x, speaker=speaker) if x["id"] == "peak" else x)
             out = sc.structure_problems(structured_story(segments=segs))
             self.assertEqual(not any(p.startswith("STORY_COLD_OPEN_CONFLICT") for p in out), ok, (speaker, out))
