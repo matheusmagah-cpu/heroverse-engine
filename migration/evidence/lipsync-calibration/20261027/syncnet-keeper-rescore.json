@@ -1,8 +1,9 @@
 {
  "date": "2026-10-27",
- "note": "The 32 existing Keeper outputs (MuseTalk runs 40421369397, 40424942367, 40433105910, 40442652320; LatentSync 1.5 run 40474743697; files from the claude/musetalk-probe-* and claude/latentsync-probe-* branches) re-scored with no generation by the E120 gate: SyncNet on the face crop at 25 fps against the clip soundtrack (the line; its audio check passed on every clip in keeper-rescore.json), |offset| <= 2 and conf >= 2.7, face in >= 80 % of frames. first_gate_flags = the lip-opening gate verdict (keeper-rescore.json). Caution: LatentSync and MuseTalk 1.5 are trained with a SyncNet-style sync loss (Wav2Lip with this very expert), so a high confidence is necessary, not sufficient: the 9.5 frame review still judges the mouth.",
+ "note": "The 32 existing Keeper outputs (MuseTalk runs 40421369397, 40424942367, 40433105910, 40442652320; LatentSync 1.5 run 40474743697; files from the claude/musetalk-probe-* and claude/latentsync-probe-* branches) re-scored with no generation by the E120 gate: SyncNet on the face crop at 25 fps against the clip soundtrack (the line; its audio check passed on every clip in keeper-rescore.json), |offset + 1.5| <= 1.5 (offsets -3..0) and conf >= 2.7, measured through lipsync_check.face_track / face_crops / sync_measure (one decode), face in >= 80 % of frames. first_gate_flags = the lip-opening gate verdict (keeper-rescore.json). Caution: LatentSync and MuseTalk 1.5 are trained with a SyncNet-style sync loss (Wav2Lip with this very expert), so a high confidence is necessary, not sufficient: the 9.5 frame review still judges the mouth.",
  "gate": {
-  "SYNC_OFFSET_MAX": 2,
+  "SYNC_OFFSET_CENTRE": -1.5,
+  "SYNC_OFFSET_TOL": 1.5,
   "SYNC_CONF_MIN": 2.7,
   "FACE_FRAMES_MIN": 0.8
  },
@@ -11,22 +12,22 @@
    "line": "line-01",
    "sync": {
     "offset": 0,
-    "conf": 4.713,
-    "min_dist": 9.227,
+    "conf": 4.729,
+    "min_dist": 9.216,
     "windows": 154
    },
    "face_frames": 1.0,
    "flags": [],
    "first_gate_flags": [],
-   "cpu_s": 17.9,
+   "cpu_s": 22.0,
    "seconds": 6.4
   },
   "run-40421369397-k-insight": {
    "line": "k-insight",
    "sync": {
     "offset": 0,
-    "conf": 2.322,
-    "min_dist": 11.274,
+    "conf": 2.325,
+    "min_dist": 11.264,
     "windows": 205
    },
    "face_frames": 0.99,
@@ -36,29 +37,29 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 30.1,
+   "cpu_s": 21.8,
    "seconds": 8.4
   },
   "run-40421369397-uestion": {
    "line": "k-question",
    "sync": {
     "offset": 0,
-    "conf": 4.87,
-    "min_dist": 9.786,
+    "conf": 4.869,
+    "min_dist": 9.784,
     "windows": 108
    },
    "face_frames": 1.0,
    "flags": [],
    "first_gate_flags": [],
-   "cpu_s": 12.8,
+   "cpu_s": 13.3,
    "seconds": 4.6
   },
   "run-40424942367-k-close-lipsdetail": {
    "line": "k-close",
    "sync": {
     "offset": 0,
-    "conf": 2.511,
-    "min_dist": 11.132,
+    "conf": 2.51,
+    "min_dist": 11.144,
     "windows": 158
    },
    "face_frames": 1.0,
@@ -68,45 +69,47 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 18.9,
+   "cpu_s": 20.7,
    "seconds": 6.6
   },
   "run-40424942367-k-close-refr1-lipsdetail": {
    "line": "k-close",
    "sync": {
     "offset": 0,
-    "conf": 4.512,
-    "min_dist": 9.742,
+    "conf": 4.503,
+    "min_dist": 9.757,
     "windows": 158
    },
    "face_frames": 1.0,
    "flags": [],
    "first_gate_flags": [],
-   "cpu_s": 21.3,
+   "cpu_s": 16.7,
    "seconds": 6.6
   },
   "run-40424942367-k-close-refr1": {
    "line": "k-close",
    "sync": {
     "offset": 1,
-    "conf": 5.21,
-    "min_dist": 8.949,
+    "conf": 5.19,
+    "min_dist": 8.966,
     "windows": 158
    },
    "face_frames": 1.0,
-   "flags": [],
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
    "first_gate_flags": [
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 16.3,
+   "cpu_s": 17.3,
    "seconds": 6.6
   },
   "run-40424942367-k-insight-lipsdetail": {
    "line": "k-insight",
    "sync": {
     "offset": -1,
-    "conf": 1.166,
-    "min_dist": 12.009,
+    "conf": 1.167,
+    "min_dist": 12.021,
     "windows": 205
    },
    "face_frames": 0.95,
@@ -116,162 +119,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 21.2,
+   "cpu_s": 26.9,
    "seconds": 8.4
   },
   "run-40424942367-k-insight-refr1-lipsdetail": {
    "line": "k-insight",
    "sync": {
     "offset": 0,
-    "conf": 2.164,
-    "min_dist": 11.107,
-    "windows": 205
-   },
-   "face_frames": 0.89,
-   "flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "cpu_s": 23.7,
-   "seconds": 8.4
-  },
-  "run-40424942367-k-insight-refr1": {
-   "line": "k-insight",
-   "sync": {
-    "offset": 0,
-    "conf": 3.038,
-    "min_dist": 10.329,
-    "windows": 205
-   },
-   "face_frames": 0.99,
-   "flags": [],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC",
-    "MOUTH_OPEN_IN_PAUSES"
-   ],
-   "cpu_s": 26.2,
-   "seconds": 8.4
-  },
-  "run-40424942367-k-question-lipsdetail": {
-   "line": "k-question",
-   "sync": {
-    "offset": 0,
-    "conf": 3.238,
-    "min_dist": 11.467,
-    "windows": 108
-   },
-   "face_frames": 0.97,
-   "flags": [],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "cpu_s": 16.8,
-   "seconds": 4.6
-  },
-  "run-40424942367-k-question-refr1-lipsdetail": {
-   "line": "k-question",
-   "sync": {
-    "offset": 0,
-    "conf": 3.797,
-    "min_dist": 10.815,
-    "windows": 108
-   },
-   "face_frames": 0.99,
-   "flags": [],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "cpu_s": 17.7,
-   "seconds": 4.6
-  },
-  "run-40424942367-k-question-refr1": {
-   "line": "k-question",
-   "sync": {
-    "offset": 0,
-    "conf": 4.531,
-    "min_dist": 9.954,
-    "windows": 108
-   },
-   "face_frames": 1.0,
-   "flags": [],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC",
-    "MOUTH_OPEN_IN_PAUSES"
-   ],
-   "cpu_s": 14.4,
-   "seconds": 4.6
-  },
-  "run-40433105910-k-close-r1-lips-24": {
-   "line": "k-close",
-   "sync": {
-    "offset": 0,
-    "conf": 4.56,
-    "min_dist": 9.713,
-    "windows": 158
-   },
-   "face_frames": 1.0,
-   "flags": [],
-   "first_gate_flags": [],
-   "cpu_s": 18.2,
-   "seconds": 6.6
-  },
-  "run-40433105910-k-close-r1-lips-25": {
-   "line": "k-close",
-   "sync": {
-    "offset": -1,
-    "conf": 4.136,
-    "min_dist": 9.891,
-    "windows": 157
-   },
-   "face_frames": 1.0,
-   "flags": [],
-   "first_gate_flags": [],
-   "cpu_s": 18.7,
-   "seconds": 6.5
-  },
-  "run-40433105910-k-close-r2-lips-25": {
-   "line": "k-close",
-   "sync": {
-    "offset": -1,
-    "conf": 3.35,
-    "min_dist": 10.594,
-    "windows": 157
-   },
-   "face_frames": 0.8,
-   "flags": [],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "cpu_s": 22.5,
-   "seconds": 6.5
-  },
-  "run-40433105910-k-insight-r1-lips-24": {
-   "line": "k-insight",
-   "sync": {
-    "offset": 0,
-    "conf": 1.883,
-    "min_dist": 11.413,
-    "windows": 205
-   },
-   "face_frames": 0.91,
-   "flags": [
-    "MOUTH_NOT_IN_SYNC"
-   ],
-   "first_gate_flags": [
-    "MOUTH_NOT_IN_SYNC",
-    "MOUTH_OPEN_IN_PAUSES"
-   ],
-   "cpu_s": 24.6,
-   "seconds": 8.4
-  },
-  "run-40433105910-k-insight-r1-lips-25": {
-   "line": "k-insight",
-   "sync": {
-    "offset": -1,
-    "conf": 2.23,
-    "min_dist": 11.133,
+    "conf": 2.163,
+    "min_dist": 11.11,
     "windows": 205
    },
    "face_frames": 0.89,
@@ -284,12 +140,159 @@
    "cpu_s": 23.8,
    "seconds": 8.4
   },
+  "run-40424942367-k-insight-refr1": {
+   "line": "k-insight",
+   "sync": {
+    "offset": 0,
+    "conf": 3.03,
+    "min_dist": 10.337,
+    "windows": 205
+   },
+   "face_frames": 0.99,
+   "flags": [],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "cpu_s": 24.1,
+   "seconds": 8.4
+  },
+  "run-40424942367-k-question-lipsdetail": {
+   "line": "k-question",
+   "sync": {
+    "offset": 0,
+    "conf": 3.222,
+    "min_dist": 11.474,
+    "windows": 108
+   },
+   "face_frames": 0.97,
+   "flags": [],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "cpu_s": 14.2,
+   "seconds": 4.6
+  },
+  "run-40424942367-k-question-refr1-lipsdetail": {
+   "line": "k-question",
+   "sync": {
+    "offset": 0,
+    "conf": 3.781,
+    "min_dist": 10.838,
+    "windows": 108
+   },
+   "face_frames": 0.99,
+   "flags": [],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "cpu_s": 13.0,
+   "seconds": 4.6
+  },
+  "run-40424942367-k-question-refr1": {
+   "line": "k-question",
+   "sync": {
+    "offset": 0,
+    "conf": 4.541,
+    "min_dist": 9.946,
+    "windows": 108
+   },
+   "face_frames": 1.0,
+   "flags": [],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "cpu_s": 18.8,
+   "seconds": 4.6
+  },
+  "run-40433105910-k-close-r1-lips-24": {
+   "line": "k-close",
+   "sync": {
+    "offset": 0,
+    "conf": 4.541,
+    "min_dist": 9.729,
+    "windows": 158
+   },
+   "face_frames": 1.0,
+   "flags": [],
+   "first_gate_flags": [],
+   "cpu_s": 17.6,
+   "seconds": 6.6
+  },
+  "run-40433105910-k-close-r1-lips-25": {
+   "line": "k-close",
+   "sync": {
+    "offset": -1,
+    "conf": 4.132,
+    "min_dist": 9.895,
+    "windows": 157
+   },
+   "face_frames": 1.0,
+   "flags": [],
+   "first_gate_flags": [],
+   "cpu_s": 19.3,
+   "seconds": 6.5
+  },
+  "run-40433105910-k-close-r2-lips-25": {
+   "line": "k-close",
+   "sync": {
+    "offset": -1,
+    "conf": 3.35,
+    "min_dist": 10.612,
+    "windows": 157
+   },
+   "face_frames": 0.8,
+   "flags": [],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "cpu_s": 17.8,
+   "seconds": 6.5
+  },
+  "run-40433105910-k-insight-r1-lips-24": {
+   "line": "k-insight",
+   "sync": {
+    "offset": 0,
+    "conf": 1.879,
+    "min_dist": 11.429,
+    "windows": 205
+   },
+   "face_frames": 0.91,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "cpu_s": 20.8,
+   "seconds": 8.4
+  },
+  "run-40433105910-k-insight-r1-lips-25": {
+   "line": "k-insight",
+   "sync": {
+    "offset": -1,
+    "conf": 2.208,
+    "min_dist": 11.152,
+    "windows": 205
+   },
+   "face_frames": 0.89,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "first_gate_flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "cpu_s": 23.7,
+   "seconds": 8.4
+  },
   "run-40433105910-k-insight-r2-lips-25": {
    "line": "k-insight",
    "sync": {
     "offset": -2,
-    "conf": 1.695,
-    "min_dist": 11.997,
+    "conf": 1.678,
+    "min_dist": 12.02,
     "windows": 205
    },
    "face_frames": 0.85,
@@ -300,15 +303,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 23.3,
+   "cpu_s": 21.8,
    "seconds": 8.4
   },
   "run-40433105910-k-question-r1-lips-24": {
    "line": "k-question",
    "sync": {
     "offset": 0,
-    "conf": 3.945,
-    "min_dist": 10.662,
+    "conf": 3.932,
+    "min_dist": 10.682,
     "windows": 108
    },
    "face_frames": 0.94,
@@ -316,15 +319,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 15.8,
+   "cpu_s": 13.1,
    "seconds": 4.6
   },
   "run-40433105910-k-question-r1-lips-25": {
    "line": "k-question",
    "sync": {
     "offset": -1,
-    "conf": 3.868,
-    "min_dist": 10.61,
+    "conf": 3.837,
+    "min_dist": 10.641,
     "windows": 107
    },
    "face_frames": 0.99,
@@ -332,15 +335,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 12.9,
+   "cpu_s": 14.8,
    "seconds": 4.5
   },
   "run-40433105910-k-question-r2-lips-25": {
    "line": "k-question",
    "sync": {
     "offset": -1,
-    "conf": 3.654,
-    "min_dist": 10.853,
+    "conf": 3.641,
+    "min_dist": 10.872,
     "windows": 107
    },
    "face_frames": 0.97,
@@ -349,15 +352,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 12.4,
+   "cpu_s": 15.0,
    "seconds": 4.5
   },
   "run-40442652320-k-insight-lit-r1-lips-24": {
    "line": "k-insight",
    "sync": {
     "offset": 0,
-    "conf": 2.737,
-    "min_dist": 10.943,
+    "conf": 2.734,
+    "min_dist": 10.948,
     "windows": 205
    },
    "face_frames": 0.38,
@@ -369,15 +372,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 23.5,
+   "cpu_s": 23.4,
    "seconds": 8.4
   },
   "run-40442652320-k-insight-lit-r1-lips-25": {
    "line": "k-insight",
    "sync": {
     "offset": -1,
-    "conf": 2.318,
-    "min_dist": 11.252,
+    "conf": 2.298,
+    "min_dist": 11.273,
     "windows": 205
    },
    "face_frames": 0.37,
@@ -390,15 +393,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 20.9,
+   "cpu_s": 22.8,
    "seconds": 8.4
   },
   "run-40442652320-k-insight-p2-r1-lips-24": {
    "line": "k-insight",
    "sync": {
     "offset": 0,
-    "conf": 2.432,
-    "min_dist": 11.179,
+    "conf": 2.43,
+    "min_dist": 11.175,
     "windows": 205
    },
    "face_frames": 0.93,
@@ -409,15 +412,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 18.7,
+   "cpu_s": 29.5,
    "seconds": 8.4
   },
   "run-40442652320-k-insight-p2-r1-lips-25": {
    "line": "k-insight",
    "sync": {
     "offset": -1,
-    "conf": 2.712,
-    "min_dist": 10.877,
+    "conf": 2.739,
+    "min_dist": 10.858,
     "windows": 205
    },
    "face_frames": 0.96,
@@ -425,15 +428,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 20.5,
+   "cpu_s": 27.4,
    "seconds": 8.4
   },
   "run-40442652320-k-question-lit-r1-lips-24": {
    "line": "k-question",
    "sync": {
     "offset": 0,
-    "conf": 3.297,
-    "min_dist": 11.412,
+    "conf": 3.311,
+    "min_dist": 11.392,
     "windows": 108
    },
    "face_frames": 0.65,
@@ -445,15 +448,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 11.7,
+   "cpu_s": 15.6,
    "seconds": 4.6
   },
   "run-40442652320-k-question-lit-r1-lips-25": {
    "line": "k-question",
    "sync": {
     "offset": -1,
-    "conf": 3.558,
-    "min_dist": 11.078,
+    "conf": 3.556,
+    "min_dist": 11.077,
     "windows": 107
    },
    "face_frames": 0.71,
@@ -463,15 +466,15 @@
    "first_gate_flags": [
     "FACE_NOT_FOUND"
    ],
-   "cpu_s": 12.1,
+   "cpu_s": 18.8,
    "seconds": 4.5
   },
   "run-40442652320-k-question-p2-r1-lips-24": {
    "line": "k-question",
    "sync": {
     "offset": 0,
-    "conf": 3.816,
-    "min_dist": 10.506,
+    "conf": 3.815,
+    "min_dist": 10.502,
     "windows": 108
    },
    "face_frames": 0.98,
@@ -480,15 +483,15 @@
     "MOUTH_NOT_IN_SYNC",
     "MOUTH_OPEN_IN_PAUSES"
    ],
-   "cpu_s": 11.4,
+   "cpu_s": 15.0,
    "seconds": 4.6
   },
   "run-40442652320-k-question-p2-r1-lips-25": {
    "line": "k-question",
    "sync": {
     "offset": -1,
-    "conf": 3.682,
-    "min_dist": 10.625,
+    "conf": 3.661,
+    "min_dist": 10.641,
     "windows": 107
    },
    "face_frames": 0.99,
@@ -496,15 +499,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 12.1,
+   "cpu_s": 13.4,
    "seconds": 4.5
   },
   "run-40474743697-k-close-ls15": {
    "line": "k-close",
    "sync": {
     "offset": 0,
-    "conf": 6.412,
-    "min_dist": 8.052,
+    "conf": 6.397,
+    "min_dist": 8.057,
     "windows": 159
    },
    "face_frames": 1.0,
@@ -512,15 +515,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 15.6,
+   "cpu_s": 21.2,
    "seconds": 6.6
   },
   "run-40474743697-k-insight-ls15": {
    "line": "k-insight",
    "sync": {
     "offset": 0,
-    "conf": 6.26,
-    "min_dist": 8.277,
+    "conf": 6.243,
+    "min_dist": 8.303,
     "windows": 206
    },
    "face_frames": 1.0,
@@ -528,15 +531,15 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 19.5,
+   "cpu_s": 29.3,
    "seconds": 8.5
   },
   "run-40474743697-k-question-ls15": {
    "line": "k-question",
    "sync": {
     "offset": 0,
-    "conf": 7.151,
-    "min_dist": 8.126,
+    "conf": 7.132,
+    "min_dist": 8.145,
     "windows": 110
    },
    "face_frames": 1.0,
@@ -544,7 +547,7 @@
    "first_gate_flags": [
     "MOUTH_NOT_IN_SYNC"
    ],
-   "cpu_s": 12.3,
+   "cpu_s": 12.5,
    "seconds": 4.6
   }
  },
@@ -578,6 +581,149 @@
      "MOUTH_TALKING",
      "MOUTH_NOT_CLOSED"
     ]
+   }
+  },
+  "parity": {
+   "note": "Review of #457: still_mouth now runs on face_track (one ffmpeg decode at the clip's own rate, the shared landmarker) instead of its own OpenCV loop. Every output field is identical, before and after, on all 19 clips with a face model run: the 3 genesis-08-short voice-over Keeper clips, the 13 keeper-vo clips (probes and vo-*), adam-eve-ref and the talking calibration clip.",
+   "identical": true,
+   "clips": {
+    "680970672.mp4": {
+     "flags": [],
+     "window_motion": 0.0025,
+     "closed_opening": 0.0031,
+     "frames": 175
+    },
+    "680970796.mp4": {
+     "flags": [],
+     "window_motion": 0.00304,
+     "closed_opening": 0.00145,
+     "frames": 243
+    },
+    "680970929.mp4": {
+     "flags": [],
+     "window_motion": 0.00241,
+     "closed_opening": 0.00351,
+     "frames": 158
+    },
+    "probe-k-close-1-373107379233670656.mp4": {
+     "flags": [],
+     "window_motion": 0.00275,
+     "closed_opening": 0.0027,
+     "frames": 192
+    },
+    "probe-k-close-2-373107458262174784.mp4": {
+     "flags": [],
+     "window_motion": 0.00214,
+     "closed_opening": 0.00351,
+     "frames": 192
+    },
+    "probe-k-insight-1-373107010075637504.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND"
+     ],
+     "window_motion": 0.00245,
+     "closed_opening": 0.00139,
+     "frames": 226
+    },
+    "probe-k-insight-2-373107104304894208.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND"
+     ],
+     "window_motion": 0.0029,
+     "closed_opening": 0.00109,
+     "frames": 226
+    },
+    "probe-k-insight-b1-373109868900930176.mp4": {
+     "flags": [],
+     "window_motion": 0.00315,
+     "closed_opening": 0.00149,
+     "frames": 226
+    },
+    "probe-k-insight-b2-373109960089614080.mp4": {
+     "flags": [],
+     "window_motion": 0.0026,
+     "closed_opening": 0.00201,
+     "frames": 226
+    },
+    "probe-k-question-1-373107181912649792.mp4": {
+     "flags": [],
+     "window_motion": 0.00382,
+     "closed_opening": 0.00197,
+     "frames": 124
+    },
+    "probe-k-question-2-373107257543825984.mp4": {
+     "flags": [],
+     "window_motion": 0.00266,
+     "closed_opening": 0.00157,
+     "frames": 124
+    },
+    "vo-close-373095804094978624.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND"
+     ],
+     "window_motion": 0.00129,
+     "closed_opening": 0.00406,
+     "frames": 192
+    },
+    "vo-close-lit-373097892611438336.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND",
+      "MOUTH_NOT_CLOSED"
+     ],
+     "window_motion": 0.00052,
+     "closed_opening": null,
+     "frames": 192
+    },
+    "vo-close-talkref-373100393016087168.mp4": {
+     "flags": [],
+     "window_motion": 0.00215,
+     "closed_opening": 0.00259,
+     "frames": 192
+    },
+    "vo-insight-373095612252221504.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND",
+      "MOUTH_UNMEASURED",
+      "MOUTH_NOT_CLOSED"
+     ],
+     "window_motion": null,
+     "closed_opening": null,
+     "frames": 226
+    },
+    "vo-insight-talkref-373102497449398912.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND"
+     ],
+     "window_motion": 0.00428,
+     "closed_opening": 0.00296,
+     "frames": 226
+    },
+    "vo-question-373095704325601984.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND"
+     ],
+     "window_motion": 0.00129,
+     "closed_opening": 0.00462,
+     "frames": 158
+    },
+    "adam-eve-ref.mp4": {
+     "flags": [
+      "FACE_NOT_FOUND",
+      "MOUTH_NOT_CLOSED"
+     ],
+     "window_motion": 0.00157,
+     "closed_opening": 0.01343,
+     "frames": 192
+    },
+    "keeper-lipsync.mp4": {
+     "flags": [
+      "MOUTH_TALKING",
+      "MOUTH_NOT_CLOSED"
+     ],
+     "window_motion": 0.02159,
+     "closed_opening": 0.07183,
+     "frames": 175
+    }
    }
   }
  }

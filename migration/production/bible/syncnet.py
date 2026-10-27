@@ -75,16 +75,22 @@ def parse(raw):
     storage keys, then each storage as an int64 count and its raw little-endian data) without torch."""
     import io
     f = io.BytesIO(raw)
-    for _ in range(3):              # magic number, protocol version, sys info (plain values)
-        pickle.load(f)
-    u = _Unpickler(f)
-    u.storages = {}
-    state = u.load()
-    keys = pickle.load(f)
+
+    def restricted():
+        u = _Unpickler(f)
+        u.storages = storages
+        return u.load()
+    storages = {}
+    for _ in range(3):              # magic number, protocol version, sys info: plain values, same restricted loader
+        restricted()
+    state = restricted()
+    keys = restricted()
+    if not isinstance(state, dict) or not isinstance(keys, list):
+        raise pickle.UnpicklingError("SYNCNET_MODEL_FORBIDDEN layout")
     data = {}
     for key in keys:
         n, = struct.unpack("<q", f.read(8))
-        dt = np.dtype(_DTYPES[u.storages[key]])
+        dt = np.dtype(_DTYPES[storages[key]])
         data[key] = np.frombuffer(f.read(n * dt.itemsize), dtype=dt)
     weights = {}
     for name, (_, key, offset, size, _stride) in state.items():

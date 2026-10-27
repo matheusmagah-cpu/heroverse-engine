@@ -825,6 +825,10 @@
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
   },
+  "LIPSYNC_DECODE_FAILED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_lipsync_check.py::def test_a_failed_or_short_decode_is_a_named_refusal"
+  },
   "LIPSYNC_TOOL_BROKEN": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::the lips check must work before any Pavo generation is spent (E89)"

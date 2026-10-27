@@ -29,7 +29,7 @@ class Verdict(unittest.TestCase):
     GOOD_AUDIO = {"corr": 0.886, "lag_ms": 0}
     # the Pavo calibration clip (keeper-lipsync.mp4 with line-01.wav), measured 2026-10-27 with SyncNet
     GOOD_MOUTH = {"corr": 0.483, "lag_ms": 0, "speak_to_pause": 1.87, "face_frames": 0.89,
-                  "sync": {"offset": -1, "conf": 8.43, "min_dist": 7.534, "windows": 177}}
+                  "sync": {"offset": -1, "conf": 8.437, "min_dist": 7.536, "windows": 177}}
 
     def test_calibration_clip_passes(self):
         self.assertEqual(lc.verdict(self.GOOD_AUDIO, self.GOOD_MOUTH), [])
@@ -37,16 +37,17 @@ class Verdict(unittest.TestCase):
     def test_the_same_clip_with_its_audio_400_ms_late_fails(self):
         # ffmpeg adelay=400 on the calibration clip (the episode.yml / shot-probe.yml self-check): offset -11
         flags = lc.verdict({"corr": 0.245, "lag_ms": 240},
-                           dict(self.GOOD_MOUTH, sync={"offset": -11, "conf": 8.245, "min_dist": 7.81, "windows": 176}))
+                           dict(self.GOOD_MOUTH, sync={"offset": -11, "conf": 8.251, "min_dist": 7.807, "windows": 176}))
         self.assertEqual(flags, ["AUDIO_NOT_OUR_LINE", "AUDIO_OFFSET", "MOUTH_NOT_IN_SYNC"])
 
     def test_each_rule(self):
         self.assertIn("AUDIO_OFFSET", lc.verdict({"corr": 0.9, "lag_ms": 120}, self.GOOD_MOUTH))
         self.assertIn("FACE_NOT_FOUND", lc.verdict(self.GOOD_AUDIO, dict(self.GOOD_MOUTH, face_frames=0.5)))
         sync = self.GOOD_MOUTH["sync"]
-        for bad in ({"offset": 3}, {"offset": -3}, {"conf": 2.69}):
+        # the window is centred on the offset real in-sync speech reads (-1.5) with +-1.5 frames: -3..0
+        for bad in ({"offset": 1}, {"offset": -4}, {"conf": 2.69}):
             self.assertIn("MOUTH_NOT_IN_SYNC", lc.verdict(self.GOOD_AUDIO, dict(self.GOOD_MOUTH, sync=dict(sync, **bad))))
-        for ok in ({"offset": 2}, {"offset": -2}, {"conf": 2.7}):
+        for ok in ({"offset": 0}, {"offset": -3}, {"conf": lc.SYNC_CONF_MIN}):
             self.assertEqual(lc.verdict(self.GOOD_AUDIO, dict(self.GOOD_MOUTH, sync=dict(sync, **ok))), [])
         # nothing measured (no face, too short) is never in sync
         self.assertIn("MOUTH_NOT_IN_SYNC", lc.verdict(self.GOOD_AUDIO, dict(self.GOOD_MOUTH, sync=None)))
@@ -257,11 +258,15 @@ class SyncNetCalibration(unittest.TestCase):
                         pos_conf.append(m["conf"])
                 else:
                     self.assertTrue(fails, (sid, name, m["offset"], m["conf"]))   # zero false positives
-                    if abs(m["offset"]) <= lc.SYNC_OFFSET_MAX:
+                    if abs(m["offset"] - lc.SYNC_OFFSET_CENTRE) <= lc.SYNC_OFFSET_TOL:
                         neg_in.append(m["conf"])
         self.assertEqual(passed, {"beard": 14, "clear": 14})
-        # margin: the threshold sits at least 1.0 from the closest negative and the weakest passing positive
-        self.assertGreaterEqual(lc.SYNC_CONF_MIN - max(neg_in), 1.0)
+        # margin: the threshold sits at least 1.0 from the closest negative and the weakest passing positive; the
+        # window is centred on what real in-sync speech reads (-2 or -1), not on 0 (review of #457)
+        in_sync = [s["pos"]["offset"] for k, s in data["segments"].items() if k[:3] not in ("c01", "c02")]
+        self.assertEqual(sorted(set(in_sync)), [-2, -1])
+        self.assertEqual(lc.SYNC_OFFSET_CENTRE, (min(in_sync) + max(in_sync)) / 2)
+        self.assertGreaterEqual(lc.SYNC_CONF_MIN - max(neg_in, default=0.0), 1.0)
         self.assertGreaterEqual(min(pos_conf) - lc.SYNC_CONF_MIN, 1.0)
         # no beard bias among the sources that are themselves in sync (c00, c06, c07)
         beard_ok = [s for s in data["segments"] if group[s] == "beard" and s[:3] in ("c00", "c06", "c07")]
@@ -349,11 +354,16 @@ class SyncNetUnits(unittest.TestCase):
         self.assertRegex(sn.SYNCNET_SHA256, r"^[0-9a-f]{64}$")
 
     def test_a_weights_file_cannot_run_code(self):
+        # review of #457: every one of the five pickles (magic, protocol, sys info, the state dict, the storage keys)
+        # goes through the restricted unpickler; a global in any slot is refused before it runs
         import pickle
-        evil = b"".join(pickle.dumps(v, protocol=2) for v in (1, 1001, {})) + b"cos\nsystem\n(S'true'\ntR."
-        with self.assertRaises(pickle.UnpicklingError) as e:
-            sn.parse(evil)
-        self.assertIn("SYNCNET_MODEL_FORBIDDEN", str(e.exception))
+        evil = b"cos\nsystem\n(S'true'\ntR."
+        good = [pickle.dumps(v, protocol=2) for v in (1, 1001, {}, {}, [])]
+        for slot in range(5):
+            raw = b"".join(evil if i == slot else g for i, g in enumerate(good))
+            with self.assertRaises(pickle.UnpicklingError, msg=slot) as e:
+                sn.parse(raw)
+            self.assertIn("SYNCNET_MODEL_FORBIDDEN", str(e.exception))
 
     def test_conv_and_pool_match_their_definition(self):
         rng = np.random.default_rng(0)
@@ -405,6 +415,61 @@ class SyncNetUnits(unittest.TestCase):
         self.assertIsNone(sn.crop_boxes(np.full((5, 4), np.nan)))
         face = sn.crop(np.zeros((100, 100, 3), np.uint8), 30, 30, 40)
         self.assertEqual(face.shape, (224, 224, 3))
+
+
+def _clip(path, extra=()):
+    import subprocess
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc=size=64x32:rate=25:duration=1",
+                    "-c:v", "mpeg4", "-pix_fmt", "yuv420p", str(path)], check=True)
+    if extra:
+        rotated = path.with_name("rot-" + path.name)
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", *extra, "-i", str(path), "-c", "copy", str(rotated)],
+                       check=True)
+        return rotated
+    return path
+
+
+class Decode(unittest.TestCase):
+    """Review of #457: the frames come from one checked decode, shaped after ffmpeg's rotation; a failed or partial
+    decode stops the check (LIPSYNC_DECODE_FAILED), never a verdict."""
+
+    def test_a_clip_tagged_rotate_90_is_shaped_as_decoded(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            clip = _clip(Path(d) / "a.mp4", ("-display_rotation", "90"))
+            got = list(lc.frames(str(clip), fps=25))
+            self.assertEqual(len(got), 25)
+            self.assertEqual(got[0].shape, (64, 32, 3))
+            plain = list(lc.frames(str(_clip(Path(d) / "b.mp4")), fps=None))
+            self.assertEqual((len(plain), plain[0].shape), (25, (32, 64, 3)))
+            # the rotated frame is the plain one turned, not a mis-reshaped buffer
+            turned = [np.rot90(plain[0], k) for k in (1, 3)]
+            self.assertTrue(min(np.abs(t.astype(int) - got[0]).mean() for t in turned) < 20)
+
+    def test_a_failed_or_short_decode_is_a_named_refusal(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            bad = Path(d) / "bad.mp4"
+            bad.write_bytes(b"not a video")
+            with self.assertRaises(SystemExit) as e:
+                list(lc.frames(str(bad), fps=25))
+            self.assertIn("LIPSYNC_DECODE_FAILED", str(e.exception))
+            clip = _clip(Path(d) / "c.mp4")
+            probe = lc._probe
+            try:
+                lc._probe = lambda c: (probe(c)[0], 25.0, 3.0)        # the container promises 3 s, 1 s decodes
+                with self.assertRaises(SystemExit) as e:
+                    list(lc.frames(str(clip), fps=25))
+            finally:
+                lc._probe = probe
+            self.assertIn("LIPSYNC_DECODE_FAILED", str(e.exception))
+            self.assertIn("25 frames of 75", str(e.exception))
+
+    def test_the_clip_is_decoded_once_and_still_mouth_shares_the_track(self):
+        text = Path(lc.__file__).read_text()
+        self.assertNotIn("def lip_opening", text)
+        self.assertIn('track = face_track(clip, model, fps=None)', text)
+        self.assertIn('sync_measure(face_crops(track), samples, rate, weights)', text)
 
 
 if __name__ == "__main__":
