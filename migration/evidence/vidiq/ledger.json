@@ -1163,6 +1163,22 @@
    "credits": 5,
    "purpose": "package mining: Bible-story Shorts outliers (breakout >= 50) to widen the winners sample",
    "saved_to": "evidence/vidiq/20261027/package_titles_thumbnails.json"
+  },
+  {
+   "date": "2026-10-27",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "thumbnail host analysis: Bible-story long outliers, 'Bible story full movie retold from scripture' (widen winners)",
+   "saved_to": "evidence/vidiq/20261027/thumb-host.json"
+  },
+  {
+   "date": "2026-10-27",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "thumbnail host analysis: Bible-story long outliers, 'presenter on camera tells a Bible story' (find host-led winners)",
+   "saved_to": "evidence/vidiq/20261027/thumb-host.json"
   }
  ]
 }
