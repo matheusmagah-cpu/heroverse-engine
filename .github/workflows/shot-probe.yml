@@ -1,0 +1,178 @@
+name: HeroVerse shot probe (a shot's exact build request on Pavo, the build's checks, clips for Claude's review; nothing published)
+# E114 (owner, 27/10: "no rework, ever"): the probe used to vouch for a prompt's wording while the build generated a
+# NEW clip for it, so Claude's >= 9.5 frame review met each shot only after a ~3 h build (genesis-07: 8 builds;
+# genesis-08: 7 of 29 shots rejected). Here each listed shot gets exactly the request episode_build sends (the same
+# request(), references, input audio and checks: clip_check, lipsync_check on a talking shot, the face check on God's
+# voice-over, still-mouth on a voice-over Keeper), every clip at a fresh exact 0-credit quote. Each clip goes into the
+# release under its content-hash name; its frame sheet and the record (request sha256, clip sha256, checks) go to
+# branch claude/shot-probe-<episode>-<run>. Claude reviews the sheets and approves one clip per shot with
+# `episode_build.py approve-shot` (shots/<episode>.json, by PR); episode.yml then ships those exact clips.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Plan path (migration/production/bible/plans/<episode-id>.json, plan_check clean)
+        required: true
+      shots:
+        description: Comma list of the plan's shot ids to probe
+        required: true
+      attempts:
+        description: Generations per shot (1-6), every one kept for the review
+        required: false
+        default: "2"
+      adopt_run:
+        description: Instead of generating, adopt the listed shots' clips from this episode.yml run's artifact (clips Claude already approved; request recomputed and equal to the plan's now); empty = generate
+        required: false
+        default: ""
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-shot-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    # the Pavo secret only on a manual run of main
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    permissions:
+      contents: read   # checkout and the release's reference images
+      actions: read    # adopt_run: that build run's artifact
+    outputs:
+      episode: ${{ steps.plan.outputs.episode }}
+    env:
+      PLAN: ${{ inputs.plan }}
+      GH_TOKEN: ${{ github.token }}
+      # the inputs reach the steps through the env only, never inline in a run script (review of #426)
+      SHOTS: ${{ inputs.shots }}
+      ATTEMPTS: ${{ inputs.attempts }}
+      ADOPT_RUN: ${{ inputs.adopt_run }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - id: plan
+        name: The plan (path checked, plan_check strict) and the shots to probe (ids of this plan, 1-6 attempts)
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          ep="${BASH_REMATCH[1]}"
+          test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
+          python3 -I -B migration/production/bible/plan_check.py "$PLAN" --strict
+          python3 -I -B migration/production/bible/episode_build.py check-probe "$PLAN"
+          [ -z "$ADOPT_RUN" ] || [[ "$ADOPT_RUN" =~ ^[0-9]{6,20}$ ]] || { echo "ADOPT_RUN_REFUSED"; exit 1; }
+          echo "episode=$ep" >> "$GITHUB_OUTPUT"
+          echo "EP=$ep" >> "$GITHUB_ENV"
+          echo "WORK=$GITHUB_WORKSPACE/.episode/probe-$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only
+          echo "OUT=$RUNNER_TEMP/out" >> "$GITHUB_ENV"
+      - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256)
+        run: |
+          timeout 300s sudo apt-get update -qq
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
+          python3 -m venv "$RUNNER_TEMP/voice"
+          "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
+          python3 -m venv "$RUNNER_TEMP/lip"
+          "$RUNNER_TEMP/lip/bin/pip" install --disable-pip-version-check -q 'mediapipe==0.10.35'
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+          sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
+          echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          # the lips check must work before any Pavo generation is spent (E89): the calibration clip must pass
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
+          # and the face check of God's voice-over shots must see the Keeper's face in the same clip
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
+          # E106: the still-mouth check of a voice-over Keeper must work before any generation too: a probe clip that
+          # passed it (keeper-vo/calibration.json) passes again, and the talking calibration clip is flagged
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper-vo/probe-k-close-1-373107379233670656.mp4 "$RUNNER_TEMP/face_landmarker.task"
+          # review of #422: the talking clip must be flagged MOUTH_TALKING itself, not merely fail in some way
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/still.json" || true
+          python3 -I - "$RUNNER_TEMP/still.json" <<'PY'
+          import json, sys
+          lines = open(sys.argv[1]).read().strip().splitlines()
+          try:
+              flags = json.loads(lines[-1]).get("flags", [])
+          except (IndexError, ValueError, AttributeError):
+              flags = []
+          sys.exit(0 if "MOUTH_TALKING" in flags else "STILL_MOUTH_CHECK_BLIND")
+          PY
+          mkdir -p "$WORK" "$OUT"
+      - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
+        if: inputs.adopt_run == ''   # an adopted clip is checked with its own run's layout and audio
+        run: |
+          python3 -I -B migration/production/bible/episode_build.py voice-script "$PLAN" "$WORK"
+          python3 -I -B migration/production/pilot_render.py prepare "$WORK" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+          # espeakng-loader's compiled default data path may not exist on the runner; point it at the wheel's own data
+          ESPEAK_DATA_PATH=$("$RUNNER_TEMP/voice/bin/python" -I -c "import espeakng_loader as e;print(e.get_data_path())")
+          test -d "$ESPEAK_DATA_PATH" || { echo "ESPEAK_DATA_MISSING"; exit 1; }
+          export ESPEAK_DATA_PATH
+          "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$WORK" "$WORK/voice-script.json"
+          python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
+      - name: Approved reference images (sha256 checked, <= 1536 px JPEG)
+        if: inputs.adopt_run == ''   # an adopted clip is checked with its own run's layout and audio
+        run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
+      - name: Adopt the listed shots' clips from a build run (E114; no generation, the build's checks again), frame sheets
+        if: inputs.adopt_run != ''
+        run: |
+          gh run download "$ADOPT_RUN" --repo "$GITHUB_REPOSITORY" -n "episode-$EP-$ADOPT_RUN" -D "$RUNNER_TEMP/adopt"
+          python3 -I -B migration/production/bible/episode_build.py adopt "$PLAN" "$RUNNER_TEMP/adopt" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task" "$OUT" "$ADOPT_RUN"
+      - name: Pavo clips of the listed shots (the build's own request and checks; 0-credit quote each), frame sheets
+        if: inputs.adopt_run == ''
+        env:
+          PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
+        run: python3 -I -B migration/production/bible/episode_build.py probe "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task" "$OUT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.plan.outputs.episode != ''
+        with:
+          name: shot-probe-${{ steps.plan.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+          if-no-files-found: ignore
+          retention-days: 14
+
+  record:
+    needs: probe
+    if: always() && needs.probe.outputs.episode != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write   # release assets (assets.sh) and the evidence branch; no secret in this job
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EP: ${{ needs.probe.outputs.episode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - id: artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        continue-on-error: true   # no artifact: NO_PROBE_RECORD below, by name
+        with:
+          name: shot-probe-${{ needs.probe.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+      - name: Every clip into the release under its content-hash name; sheets and record on claude/shot-probe-<id>-<run>
+        env:
+          ARTIFACT: ${{ steps.artifact.outcome }}
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          out="$RUNNER_TEMP/out"
+          if [ ! -f "$out/probe.json" ]; then
+            echo "::error::NO_PROBE_RECORD: the probe job left no record (artifact download: $ARTIFACT); read the probe job's log"
+            exit 1
+          fi
+          d="migration/evidence/shots/$EP"; mkdir -p "$d"
+          # episode_build's own names and sha256 (shot_asset_name), checked before the upload
+          python3 -I -B migration/production/bible/episode_build.py probe-assets "$out" "$EP" > "$RUNNER_TEMP/assets.txt"
+          while read -r name; do
+            [ -n "$name" ] || continue
+            bash migration/ci/assets.sh upload "$out/$name" --repo "$GITHUB_REPOSITORY" --clobber
+          done < "$RUNNER_TEMP/assets.txt"
+          # sealed only after every upload: the run id and each uploaded clip (the only record approve-shot accepts)
+          python3 -I -B migration/production/bible/episode_build.py probe-assets "$out" "$EP" "$GITHUB_RUN_ID" "$d/$GITHUB_RUN_ID.json" >/dev/null
+          for f in "$out"/*.jpg; do
+            [ -f "$f" ] && cp "$f" "$d/$GITHUB_RUN_ID-$(basename "$f")"
+          done
+          branch="claude/shot-probe-$EP-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "Shot probe $EP (run $GITHUB_RUN_ID): clips' frame sheets and record for Claude's review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"

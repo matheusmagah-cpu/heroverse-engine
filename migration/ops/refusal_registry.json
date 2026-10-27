@@ -1,6 +1,18 @@
 {
  "about": "E106: every refusal code a later, expensive stage can raise (test_refusal_parity.LATER), with its class: A predicted early by the same function or constant (`early`: path::needle), B a rework hole (`early`: the cheap check that would catch it, `open`: why it is still open), C knowable only after a generation, voice or render (`probe`: the cheapest earlier probe), D external or transient (`resume`), I an engine invariant no plan can break (`guard`), N not a refusal (`why`). `was`: B means the hole was closed by E106. A new later-stage code fails migration/ops/test_refusal_parity.py until it is classified here.",
  "codes": {
+  "ADOPT_CLIP_MISSING": {
+   "class": "N",
+   "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"
+  },
+  "ADOPT_EPISODE_MISMATCH": {
+   "class": "N",
+   "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"
+  },
+  "ADOPT_RUN_REFUSED": {
+   "class": "N",
+   "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"
+  },
   "ALREADY_ABSENT": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
@@ -842,6 +854,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "NO_PROBE_RECORD": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
   "NO_RENDER_ADDED": {
    "class": "D",
    "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
@@ -1048,6 +1064,38 @@
    "class": "D",
    "resume": "waits for Claude's review (ops/CLAUDE_REVIEW.md); the render or preview is kept"
   },
+  "PROBE_ATTEMPTS_REFUSED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/production/bible/episode_build.py::def probe_ids("
+   ],
+   "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
+  "PROBE_EPISODE_MISMATCH": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
+  "PROBE_RUN_REFUSED": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
+  "PROBE_SHOTS_REFUSED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/production/bible/episode_build.py::def probe_ids("
+   ],
+   "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
+  "PROBE_UNKNOWN_SHOT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/production/bible/episode_build.py::def probe_ids("
+   ],
+   "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
   "PROMPT_TOO_LONG": {
    "class": "A",
    "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
@@ -1136,30 +1184,6 @@
    ],
    "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
   },
-  "REGENERATE_REFUSED": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
-  "REGENERATE_UNKNOWN_SHOT": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
-  "REGENERATE_WITHOUT_RESUME": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
   "RENDER_HOLD": {
    "class": "D",
    "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
@@ -1188,10 +1212,6 @@
   "RESUMED_FROM": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
-  "RESUME_RUN": {
-   "class": "N",
-   "why": "an environment variable: episode.yml passes its resume_run input through the env (review of #426), read by regenerate_ids"
   },
   "RESUME_RUN_REFUSED": {
    "class": "A",
@@ -1256,6 +1276,44 @@
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
   },
+  "SHOT_APPROVED_CLIP_FAILED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_build.py::def approve_shot(",
+    "migration/production/bible/episode_build.py::SHOT_CHECKS_FAILED"
+   ],
+   "note": "E114: the build's checks ran on the clip in shot-probe.yml (shot_runner's check, the same function) and approve-shot refuses a clip with any flag; the build runs them again on the downloaded file"
+  },
+  "SHOT_APPROVED_USE_PROBE": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "E114: the build generates nothing, so episode.yml's `regenerate` input is refused whatever it names; check-regenerate runs the same regenerate_ids in the plan step before any secret. A rejected clip is replaced by shot-probe.yml and a new approval"
+  },
+  "SHOT_ASSET_NAME_REFUSED": {
+   "class": "I",
+   "guard": "migration/production/bible/episode_build.py::def probe_assets(",
+   "note": "E114: approve-shot copies the asset name from the sealed probe record, whose names probe_assets checks against shot_asset_name and the clip's sha256 before the upload; fetch_shot_clip refuses any other name before a download"
+  },
+  "SHOT_CHECKS_FAILED": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_CLIP_NOT_IN_RECORD": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_CLIP_NOT_UPLOADED": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_CLIP_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/test_episode_build.py::def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip",
+   "note": "E114: the approved clip is fetched by its content-hash name and its sha256 checked (fetch_shot_clip; shot-probe.yml's record job checks it before the upload); another file under the name stops the run, never shipped"
+  },
   "SHOT_FAILED": {
    "class": "C",
    "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
@@ -1265,6 +1323,40 @@
    "was": "B",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "SHOT_NOTE_MISSING": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_NOT_REVIEWED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py verify-preflight",
+    "migration/production/bible/episode_preflight.py::eb.review_problems(",
+    "migration/production/bible/episode_build.py::def review_problems("
+   ],
+   "note": "E114: a build runs only when every shot has a clip Claude reviewed (shot-probe.yml, approve-shot, shots/<episode>.json by PR); verify-preflight runs the same review_problems on the committed preflight's request digests before any secret, generate_step again before the first generation"
+  },
+  "SHOT_RECORD_REFUSED": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_REQUEST_CHANGED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py verify-preflight",
+    "migration/production/bible/episode_preflight.py::eb.review_problems(",
+    "migration/production/bible/episode_build.py::def request_identity("
+   ],
+   "note": "E114: an approved clip belongs to one request (request_identity: prompt, seconds, references by record sha256, input audio by words, voice and seconds); verify-preflight compares the approvals with the preflight's digests of the plan now, the build with its own"
+  },
+  "SHOT_SCORE_INVALID": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_SCORE_OUT_OF_RANGE": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },
   "SHOT_TOO_SHORT": {
    "class": "A",
