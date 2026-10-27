@@ -668,6 +668,19 @@ def writing_refusal(shot):
     return f"SCENE_WRITING {shot['id']} {found[0].split(' ', 4)[-1]}" if found else None
 
 
+def prop_refusal(plan, shot):
+    """E113: a scene's request is refused when its prompt names the ark (a hull, keel, ship, boat, vessel) without
+    its look and exclusion sentences word for word, or names what that look rules out (plan_check.prop_problems, the
+    same function plan_check, long_plan_check and the preflight run): None or the refusal."""
+    found = plan_check.prop_problems(0, shot, plan_check.period(plan))
+    if not found:
+        return None
+    detail = found[0].split(" ", 4)[-1]
+    if found[0].startswith("ARK_LOOK_NOT_CANONICAL"):
+        return f"ARK_LOOK_NOT_CANONICAL {shot['id']} {detail}"
+    return f"ARK_LOOK_CONFLICT {shot['id']} {detail}"
+
+
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
@@ -676,7 +689,7 @@ def request(shot, index, plan, layout, refs, chars=None):
     the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
-    refused = period_refusal(plan, shot) or writing_refusal(shot)
+    refused = period_refusal(plan, shot) or writing_refusal(shot) or prop_refusal(plan, shot)
     if refused:
         raise SystemExit(refused)
     if plan_check.voiceover(shot) and not refs.get(f"{ch.NARRATOR}:talk"):

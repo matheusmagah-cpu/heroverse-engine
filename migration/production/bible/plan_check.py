@@ -65,6 +65,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   text, tablet, parchment, book, page, glyphs, runes, symbols...) outside a negation ("No text", "without
   letters"): SCENE_WRITING. The Keeper's own scroll is his look, not a scene. plan_check, long_plan_check
   (plan_writing_problems) and episode_build.request (writing_refusal) by the same function.
+- the ark's look (E113): a scene prompt that names the ark (or a hull, keel, ship, boat, vessel) outside the period
+  sentences carries ARK_LOOK and ARK_EXCLUDE word for word (PROPS; ARK_LOOK_NOT_CANONICAL) and, with them and the
+  period sentences taken out, names no ship, boat, mast, sail, prow, funnel... (ARK_LOOK_CONFLICT). plan_check,
+  long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -177,6 +181,28 @@ PERIODS = {"eden": {"setting": PERIOD_SETTING_EDEN, "exclude": PERIOD_EXCLUDE, "
 # (book, first chapter, last chapter, period) for a plan with no `period`: Cain's city to the eve of the flood (Genesis
 # 6:14-22, the ark commanded, is still before it), then the flood to the covenant of the rainbow (7-9)
 STORY_PERIODS = (("Genesis", 1, 3, "eden"), ("Genesis", 4, 6, "before-the-flood"), ("Genesis", 7, 9, "the-flood"))
+# E113 (frame review of genesis-08 run 40438106839, evidence/pavo/20261027/genesis-08-r1/review.json): 7 of 29 scene
+# shots were rejected because each prompt described the ark in its own words ("a huge wooden frame", "the distant
+# hull", "the towering hull", "tall curved wooden ribs") and Pavo drew a Viking longship with a spiked prow, a
+# steamship with a smoking funnel, a galleon with a dragon prow, a round vat with a chimney-like post, separate rib
+# arcs; genesis-09's probes (evidence/pavo/20261027/genesis-09/) drew a sailing ship, a galleon, a barn, a dome, a
+# funnel and a red waterline band the same way. The ark is a prop with a fixed look, like a character's: every scene
+# prompt that names it (or a hull, keel, ship, boat or vessel) carries ARK_LOOK and ARK_EXCLUDE word for word, the
+# shape taken from the wordings that passed those probes (s-ridge 3, s-board 2, s-scorn 7, s-silent 2: "long, low,
+# box-shaped wooden hull", "straight sides of rough planks", "flat square ends", "the same low height from end to
+# end"); the shot's own words say only its state (half-built with its ribs, or finished and pitch-black), never its
+# shape again. Outside the two sentences a scene prompt names no ship (ARK_AVOID: "a long, low wooden ship with
+# gently curved sides" drew curled prows and a deckhouse in genesis-09, and "ship", "boat" or "mast" invite one).
+ARK_LOOK = ("The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, "
+            "the same low height from end to end.")
+ARK_EXCLUDE = ("The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band "
+               "along its waterline.")
+ARK_MENTION = (r"arks?", r"hulls?", r"keels?", r"ships?", r"boats?", r"vessels?")
+ARK_AVOID = (r"ships?", r"boats?", r"vessels?", r"galleons?", r"longships?", r"masts?", r"sails?", r"rigging",
+             r"prows?", r"figureheads?", r"funnels?", r"smokestacks?", r"(?:gently )?curved sides")
+# props: a thing seen in many shots, with one look stated word for word wherever a prompt names it
+PROPS = {"ark": {"look": ARK_LOOK, "exclude": ARK_EXCLUDE, "mentions": list(ARK_MENTION),
+                 "avoid": list(ARK_AVOID)}}
 # "Genesis 6:5-13" (chapter 6), "Genesis 6:14-7:5" (6 to 7), "Genesis 6-8", "Genesis 7"; the end chapter matters (a
 # passage may cross the flood)
 PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)(:\d+)?"
@@ -580,6 +606,41 @@ def plan_period_problems(plan, shots):
     return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in period_problems(i, s, per)]
 
 
+def prop_problems(i, shot, per=None):
+    """E113: a scene prompt that names a prop (PROPS: the ark, a hull, keel, ship, boat or vessel), outside the period
+    sentences, carries the prop's look and exclusion sentences word for word (ARK_LOOK_NOT_CANONICAL; one of the two
+    alone is refused too); with those and the period sentences taken out, it names nothing the prop's look rules out
+    (ARK_LOOK_CONFLICT: ship, boat, mast, prow, funnel...). [] for a Keeper shot."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+        return []
+    sid, p = shot.get("id"), shot["prompt"]
+    rest = p
+    for w in [per or {}] + list(PERIODS.values()):    # the flood's setting sentence names "the great wooden ark"
+        for k in ("exclude", "setting"):
+            if isinstance(w.get(k), str) and w[k]:
+                rest = rest.replace(w[k], " ")
+    out = []
+    for name, prop in PROPS.items():
+        tag = name.upper()
+        bare = rest.replace(prop["look"], " ").replace(prop["exclude"], " ")
+        named = sorted({m.group(0).lower() for a in prop["mentions"] for m in re.finditer(rf"(?i)\b(?:{a})\b", bare)})
+        missing = [w for w in (prop["look"], prop["exclude"]) if w not in p]
+        if missing and (named or len(missing) == 1):
+            out.append(f"{tag}_LOOK_NOT_CANONICAL shot {i} {sid} (names the {name} ({', '.join(named) or 'half its look'}"
+                       "): the prompt states, word for word: " + " ".join(f"'{w}'" for w in missing) + "; E113)")
+        hits = sorted({m.group(0).lower() for a in prop["avoid"] for m in re.finditer(rf"(?i)\b(?:{a})\b", bare)})
+        if hits:
+            out.append(f"{tag}_LOOK_CONFLICT shot {i} {sid} (names what the {name}'s look rules out: {', '.join(hits)}; "
+                       "the shot says only its state, the look sentence gives its shape; E113)")
+    return out
+
+
+def plan_prop_problems(plan, shots):
+    """E113, shared by plan_check and long_plan_check: every scene prompt's own prop problems."""
+    per = period(plan) if isinstance(plan, dict) else None
+    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in prop_problems(i, s, per)]
+
+
 def _speaker_problems(i, s, chars, span, span_slowest):
     """A speaking scene: who speaks, in which voice, and how long the line is."""
     out, sid, who = [], s["id"], s["speaker"]
@@ -886,6 +947,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     first_prompt = {}
     problems += plan_period_problems(plan, shots)
     problems += plan_writing_problems(shots)
+    problems += plan_prop_problems(plan, shots)
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
         # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,

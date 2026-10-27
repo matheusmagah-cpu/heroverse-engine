@@ -1099,6 +1099,102 @@ class SceneWriting(unittest.TestCase):
         self.assertTrue(scroll["prompt"].startswith(shots["s-well"]["prompt"].split(" Medium shot")[0]))
         self.assertTrue(scroll["prompt"].endswith(f"{PERIOD} No text, no logos."))
 
+# E113 (frame review of genesis-08 run 40438106839): each prompt described the ark in its own words and Pavo drew a
+# longship, a steamship with a funnel, a galleon, a vat, separate rib arcs. The ark's one look, written out here so the
+# test fails while plan_check has no such rule: the shape from the wordings that passed the probes
+# (evidence/pavo/20261027/genesis-08-r1, genesis-09)
+ARK_LOOK = ("The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, "
+            "the same low height from end to end.")
+ARK_EXCLUDE = ("The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band "
+               "along its waterline.")
+ARK = f"{ARK_LOOK} {ARK_EXCLUDE}"
+
+
+class ArkLook(unittest.TestCase):
+    def with_body(self, body, ark=False):
+        p = plan()
+        old = p["shots"][1]["prompt"]
+        p["shots"][1]["prompt"] = old.replace(PERIOD, (f"{body} {ARK} " if ark else f"{body} ") + PERIOD)
+        return p
+
+    def test_a_prompt_that_names_the_ark_without_its_one_look_is_refused(self):
+        for body in ("The distant hull stands far off.", "A huge wooden ark stands on the hill.",
+                     "He paces along the endless wooden keel.", "One mimes rowing a boat.",
+                     "A long, low wooden ship with gently curved sides waits."):
+            got = codes(pc.check(self.with_body(body), CHARS))
+            self.assertIn("ARK_LOOK_NOT_CANONICAL", got, body)
+        p = self.with_body("The half-built ark stands in the dust, a row of bare upright ribs along its top.", ark=True)
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+        # half the look is refused too, even where the shot's own words name no ark
+        p = self.with_body(ARK_LOOK)
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(p, CHARS)))
+        # a reworded look (one word changed) is not the look
+        p = self.with_body("The ark stands on the hill.", ark=True)
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("box-shaped", "boxy")
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(p, CHARS)))
+
+    def test_the_look_is_the_shape_so_the_shot_names_no_ship_beside_it(self):
+        for body in ("The ark, a long, low wooden ship, stands on the hill.", "The ark's mast leans in the wind.",
+                     "The ark with gently curved sides stands on the hill.", "A boat floats by the ark."):
+            got = codes(pc.check(self.with_body(body, ark=True), CHARS))
+            self.assertIn("ARK_LOOK_CONFLICT", got, body)
+            self.assertNotIn("ARK_LOOK_NOT_CANONICAL", got, body)
+        # the flood's period sentence names "the great wooden ark": the period, not the shot, so no look is asked for
+        p = plan()
+        p["period"] = "the-flood"
+        flood = f"{pc.PERIODS['the-flood']['setting']} {pc.PERIODS['the-flood']['exclude']}"
+        for s in p["shots"]:
+            if s["kind"] == "scene":
+                s["prompt"] = s["prompt"].replace(PERIOD, flood)
+        self.assertNotIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(p, CHARS)))
+        self.assertEqual(pc.prop_problems(len(p["shots"]) - 1, dict(p["shots"][-1], prompt="the ark")), [])  # Keeper
+
+    def test_the_constants_are_the_probed_wordings(self):
+        self.assertEqual(pc.ARK_LOOK, ARK_LOOK)
+        self.assertEqual(pc.ARK_EXCLUDE, ARK_EXCLUDE)
+        self.assertEqual(pc.PROPS["ark"]["look"], ARK_LOOK)
+        # the exclusion sentence asks for nothing the period or the writing rule refuses
+        for name, per in pc.PERIODS.items():
+            self.assertEqual(pc.period_problems(0, {"kind": "scene", "id": "x", "prompt": f"{ARK} {per['setting']} "
+                                                    f"{per['exclude']}"}, per), [], name)
+        self.assertEqual(pc.writing_problems(0, {"kind": "scene", "id": "x", "prompt": ARK}), [])
+
+    def test_the_build_and_the_long_refuse_it_by_the_same_function(self):
+        import episode_build as eb
+        import long_plan_check as lc
+        p = self.with_body("The ark stands on the hill.", ark=True)
+        self.assertIsNone(eb.prop_refusal(p, p["shots"][1]))
+        p = self.with_body("The distant hull stands far off.")
+        self.assertTrue(eb.prop_refusal(p, p["shots"][1]).startswith("ARK_LOOK_NOT_CANONICAL s-a"))
+        with self.assertRaises(SystemExit) as e:
+            eb.request(p["shots"][1], 1, p, None, {})
+        self.assertTrue(str(e.exception).startswith("ARK_LOOK_NOT_CANONICAL s-a"))
+        p = self.with_body("A ship stands on the hill.", ark=True)
+        self.assertTrue(eb.prop_refusal(p, p["shots"][1]).startswith("ARK_LOOK_CONFLICT s-a"))
+        self.assertIs(lc.pc.plan_prop_problems, pc.plan_prop_problems)
+        self.assertIn("pc.plan_prop_problems(plan, plan[\"shots\"])", (HERE / "long_plan_check.py").read_text())
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
+        arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". A boat drifts past. ", 1)
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", [x.split()[0] for x in lc.check(arc)["problems"]])
+
+    def test_every_plan_shows_the_ark_by_its_one_look(self):
+        for folder in ("plans", "drafts", "episodes"):
+            for f in sorted((HERE / folder).glob("*.json")):
+                pl = json.loads(f.read_text())
+                if isinstance(pl.get("shots"), list):
+                    self.assertEqual(pc.plan_prop_problems(pl, pl["shots"]), [], f.name)
+        for ep, expect in (("genesis-08-short", 19), ("genesis-09-short", 22)):
+            shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
+            self.assertEqual(sum(ARK in s["prompt"] for s in shots), expect, ep)
+        # genesis-08's seven rejected shots carry the look, their meaning and seconds kept
+        shots = {s["id"]: s for s in json.loads((HERE / "plans" / "genesis-08-short.json").read_text())["shots"]}
+        for sid in ("s-watchers", "s-ridge", "s-dust", "s-jeer", "s-scorn", "s-board", "s-silent"):
+            self.assertIn(ARK, shots[sid]["prompt"], sid)
+        self.assertEqual(shots["s-board"]["seconds"], 8)
+        self.assertNotIn("boat", shots["s-laugh"]["prompt"])
+
+
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
 from test_long_plan_check import DraftArc1, Grammar as LongGrammar, NoRendererReadsTheNewQaYet, StoryQa  # noqa: E402,F401,E501
 

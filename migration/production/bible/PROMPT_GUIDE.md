@@ -47,6 +47,18 @@ Then: duration and aspect come from the tool fields, not the text.
   none, but a small metal-and-glass candle lantern in 3 of 11 night shots; "...open fires and torches" none of either
   in the probes that followed. Look for a stray prop on the frame sheet anyway; `episode.yml` `regenerate` redoes that
   shot alone.
+- **The ark has one look (E113).** genesis-08 run 40438106839 lost 7 of 29 shots at the frame review because each
+  prompt described the ark in its own words ("a huge wooden frame", "the distant hull", "the towering hull"): a
+  longship with a spiked prow, a steamship with a smoking funnel, a galleon, a round vat, separate rib arcs; genesis-09's
+  probes drew sailing ships, a barn, a dome and a red waterline band. Every scene prompt that names the ark (ark, hull,
+  keel, ship, boat, vessel; the flood's period sentence does not count) carries `plan_check.ARK_LOOK` "The ark is one
+  long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from
+  end to end." and `ARK_EXCLUDE` "The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising
+  from it and no band along its waterline." word for word (ARK_LOOK_NOT_CANONICAL), and names no ship, boat, mast,
+  sail, prow, funnel or curved sides beside them (ARK_LOOK_CONFLICT). The shot's own words say only its state ("the
+  half-built ark ... a row of bare upright ribs along its top", "the vast finished ark, its whole hull smeared
+  pitch-black under a flat plank roof"), never its shape again. Light it from the side or show it from above: a hull
+  silhouetted against a bright sky drew curled ends in every probe that tried it.
 - **People and God.** No face of God. Biblical people only when the story needs them, then from a fixed reference
   image (character sheet) so the same face returns in every episode.
 
