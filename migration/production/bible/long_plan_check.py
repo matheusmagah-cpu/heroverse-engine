@@ -176,6 +176,8 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         problems += pc.plan_period_problems(plan, plan["shots"])
         # E110: and no scene prompt asks for writing (the same shared helper)
         problems += pc.plan_writing_problems(plan["shots"])
+        # E113: and every prompt that names the ark carries its one look (the same shared helper)
+        problems += pc.plan_prop_problems(plan, plan["shots"])
     arc = arc_map.get(plan.get("arc"))
     chapters = plan.get("chapters")
     if not arc:

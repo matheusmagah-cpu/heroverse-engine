@@ -13,6 +13,16 @@
    "class": "I",
    "guard": "migration/publish/test_publication_binding.py::def test_"
   },
+  "ARK_LOOK_CONFLICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def prop_problems(",
+   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function; the one exemption, genesis-08's approved shots by `ark_look_grandfathered` (ark_grandfathered, prompt sha256 pinned), is honoured by both alike"
+  },
+  "ARK_LOOK_NOT_CANONICAL": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def plan_prop_problems(",
+   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function; the one exemption, genesis-08's approved shots by `ark_look_grandfathered` (ark_grandfathered, prompt sha256 pinned), is honoured by both alike"
+  },
   "ASPECT_REFUSED": {
    "class": "A",
    "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
@@ -1577,9 +1587,13 @@
       "migration/production/bible/episode_build.py::def period_refusal",
       "migration/production/bible/plan_check.py::SCENE_WRITING",
       "migration/production/bible/long_plan_check.py::pc.plan_writing_problems",
-      "migration/production/bible/episode_build.py::def writing_refusal"
+      "migration/production/bible/episode_build.py::def writing_refusal",
+      "migration/production/bible/plan_check.py::ARK_LOOK_NOT_CANONICAL",
+      "migration/production/bible/plan_check.py::ARK_LOOK_CONFLICT",
+      "migration/production/bible/long_plan_check.py::pc.plan_prop_problems",
+      "migration/production/bible/episode_build.py::def prop_refusal"
      ],
-     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot; E110: no scene prompt asks for writing (SCENE_WRITING), since Pavo draws any asked-for writing as AI text"
+     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot; E110: no scene prompt asks for writing (SCENE_WRITING), since Pavo draws any asked-for writing as AI text; E113: every prompt that names the ark carries its one look and exclusion sentences word for word (ARK_LOOK_NOT_CANONICAL) and names no ship beside it (ARK_LOOK_CONFLICT); the probes of genesis-08/09 still saw small residuals (a short post, a deckhouse), so the per-shot frame sheet keeps watching the ark"
     }
    },
    "captions_readable_and_synced": {
