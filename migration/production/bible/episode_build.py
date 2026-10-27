@@ -729,12 +729,13 @@ def writing_refusal(shot):
 
 def prop_refusal(plan, shot):
     """E113: a scene's request is refused when its prompt names the ark (a hull, keel, ship, boat, vessel) without
-    its look and exclusion sentences word for word, or names what that look rules out (plan_check.prop_problems, the
+    its look and exclusion sentences word for word, or names what that look rules out; E123, from part 9: when it says
+    any of plan_check.ARK_WORDS or "crate" without ARK_PHRASE (plan_check.prop_problems, the
     same function plan_check, long_plan_check and the preflight run): None or the refusal."""
     if shot.get("id") in plan_check.ark_grandfathered(plan, plan.get("shots") or [])[0]:
         return None
     per = plan_check.period(plan)
-    found = plan_check.prop_problems(0, shot, per)
+    found = plan_check.prop_problems(0, shot, per, plan)   # E123: from part 9, the positive phrase and no ship words
     if not found:
         still = plan_check.prop_shot_problems(0, shot, plan, per)   # E122: from part 9 a prop is shown from a still
         return f"PROP_SHOT_WITHOUT_STILL {shot['id']} {still[0].split(' ', 4)[-1]}" if still else None

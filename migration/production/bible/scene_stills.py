@@ -114,7 +114,7 @@ def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
         bad = plan_check.still_prompt_problems(f"{sid}/{still}", rec.get("prompt") or "", plan)
         if bad:
             raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
-        refs, missing = plan_check.prop_references(rec["prompt"])
+        refs, missing = plan_check.prop_references(rec["prompt"], plan=plan)
         if (refs or missing) and engine == "flux":   # E122: refused before any image, not in finalize
             raise SystemExit(f"STILL_PROP_UNREFERENCED {still}: names a prop and FLUX (cf_images.py) cannot send its "
                              "reference images; prepare with --engine pavo (E122)")
@@ -168,7 +168,10 @@ def finalize(img_dir, run, stills_dir=None):
         Image.open(png).convert("RGB").resize(SIDE, Image.LANCZOS).save(dst, "JPEG", quality=92)
         made = png.with_suffix(".json")
         meta = json.loads(made.read_text()) if made.is_file() else {}
-        unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"))
+        plan_path = HERE / "plans" / f"{rec.get('episode')}.json"   # E123: the plan decides what names the ark
+        plan = json.loads(plan_path.read_text()) if plan_path.is_file() else None
+        unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"),
+                                                   plan=plan)
         if unref:   # E122: text alone does not hold a prop's look; a FLUX or text-only image of the ark is refused
             raise SystemExit(f"STILL_PROP_UNREFERENCED {png.stem}: " + "; ".join(unref) + " (E122)")
         save(dst.with_suffix(".json"), {
@@ -231,7 +234,8 @@ def approve(still, candidate, score, note, stills_dir=None, today=None):
     bad = plan_check.still_prompt_problems(f"{rec.get('shot')}/{still}", rec["prompt"], plan)
     if bad:
         raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
-    unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"))
+    unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"),
+                                               plan=plan or None)
     if unref:
         raise SystemExit(f"STILL_PROP_UNREFERENCED {candidate}: " + "; ".join(unref) + " (E122)")
     dst = stills_dir / f"{still}.jpg"
