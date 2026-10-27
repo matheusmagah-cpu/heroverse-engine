@@ -79,6 +79,7 @@ usage: plan_check.py PLAN.json [--strict]   prints JSON {problems, pending, esti
                                             (--strict: also on a pending row and on a path episode.yml would refuse,
                                             PLAN_PATH / PLAN_EPISODE_MISMATCH; episode_build runs it strict)
 """
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -200,6 +201,28 @@ ARK_EXCLUDE = ("The ark has no mast, sail, prow, figurehead, funnel or smokestac
 ARK_MENTION = (r"arks?", r"hulls?", r"keels?", r"ships?", r"boats?", r"vessels?")
 ARK_AVOID = (r"ships?", r"boats?", r"vessels?", r"galleons?", r"longships?", r"masts?", r"sails?", r"rigging",
              r"prows?", r"figureheads?", r"funnels?", r"smokestacks?", r"(?:gently )?curved sides")
+# E113, the one narrow exemption (orchestrator, 2026-10-27): genesis-08's shots whose clips were already approved at
+# 9.5 in runs 40438106839/40460764662 keep main's prompt at E113 time (a new prompt is a new request, regenerated:
+# rework). A plan may list shot ids in `ark_look_grandfathered` only when it is genesis-08-short and only for these
+# shots, each with exactly this prompt (sha256); anything else is ARK_GRANDFATHER_REFUSED and the shot is checked.
+ARK_GRANDFATHERED = {"genesis-08-short": {
+    "s-voice": "23c0911b05967df9c01a15eb72bfaae456aca1ee236a0807f6dd27a200303a98",
+    "s-watchers": "4e0bcd51714662592612f88a5f30adb5bb2d2565a0f5735fc588dde6cea00385",
+    "s-laugh": "3be92537de42b76b8fd7ed02b9179a96393796cdc7499b7c84344d5df2b21be6",
+    "s-pitch": "bec69ae6a2fe0c6b2695ee4ce2fdafabb2e483acf9feb09b4b4b97fbce9336b1",
+    "s-measure": "8e307e215a8dce9c36c8472738f3ee6baa7ad894abbef8031024481a5c6dd315",
+    "s-ribs": "81a3f45c59cea9582b75b4c5c254b7be017bd3fc4f30a2a049f0d0542cd0f201",
+    "s-beam": "130dfdcd5708d4cc0cdc61d9aa99278a60dfc38a6bbfe978b906fc276fd9399f",
+    "s-jeer": "838c315a5613ab4ce5f883ac3f1c0b936b8811809cc89377a11673ae6df2704b",
+    "s-scorn": "8ecdcb486035b2fa6b262bcfe84af17fd12323e57b47f3c4698320400ee1f999",
+    "s-wedding": "2299c3dc6109b535894a8a372f6db0dc0375aa068662cde6903ef5c056422d96",
+    "s-hill": "135efd4a8ca4f7f294f56ab7c12e80c32cf6d51f805a023a340f2f06a5819fa1",
+    "s-stones": "68df38a128cc9aa86558e3e437a1195441a17d5613c4e5d2c26be276590a4f60",
+    "s-alone": "07c7697091fda0564424ffee2ead87a8a6d0ba549ac1e55ecd5096d1e5a53897",
+    "s-covenant": "1f0ef76400b8b3280df8841228d6e82c825c270c233385beaafac01c2e8580ee",
+    "s-torches": "df0e0000fbc0843843d62c4c8ddecb5e5ef541745f1e10f284c71c8eee0c31cb",
+    "s-finished": "10072ac8e1eba68d02b3982ae679030690d02ad52efc399c5952c1c27f4730c9",
+    "s-silent": "a55447837347eaf90133a0403d46dc5f65d6198acffb9c025dbe8c5a1f43e6cf"}}
 # props: a thing seen in many shots, with one look stated word for word wherever a prompt names it
 PROPS = {"ark": {"look": ARK_LOOK, "exclude": ARK_EXCLUDE, "mentions": list(ARK_MENTION),
                  "avoid": list(ARK_AVOID)}}
@@ -635,10 +658,38 @@ def prop_problems(i, shot, per=None):
     return out
 
 
+def ark_grandfathered(plan, shots):
+    """E113: (the shot ids exempt from the ark's look, the ARK_GRANDFATHER_REFUSED problems). Only genesis-08-short's
+    listed shots (ARK_GRANDFATHERED) with exactly their prompt at E113 time; the field anywhere else is refused."""
+    given = plan.get("ark_look_grandfathered") if isinstance(plan, dict) else None
+    if given is None:
+        return set(), []
+    allowed = ARK_GRANDFATHERED.get(plan.get("episode"))
+    if not allowed:
+        return set(), [f"ARK_GRANDFATHER_REFUSED (`ark_look_grandfathered` is allowed only in "
+                       f"{sorted(ARK_GRANDFATHERED)}, not {plan.get('episode')}; E113)"]
+    if not isinstance(given, list) or not all(isinstance(x, str) for x in given):
+        return set(), ["ARK_GRANDFATHER_REFUSED (`ark_look_grandfathered` is a list of shot ids; E113)"]
+    prompts = {s.get("id"): s.get("prompt") for s in shots if isinstance(s, dict)}
+    ok, out = set(), []
+    for sid in given:
+        prompt = prompts.get(sid)
+        if sid not in allowed:
+            out.append(f"ARK_GRANDFATHER_REFUSED {sid} (not a shot approved before E113; E113)")
+        elif not isinstance(prompt, str) or hashlib.sha256(prompt.encode()).hexdigest() != allowed[sid]:
+            out.append(f"ARK_GRANDFATHER_REFUSED {sid} (its prompt is not the one approved before E113; E113)")
+        else:
+            ok.add(sid)
+    return ok, out
+
+
 def plan_prop_problems(plan, shots):
-    """E113, shared by plan_check and long_plan_check: every scene prompt's own prop problems."""
+    """E113, shared by plan_check and long_plan_check: every scene prompt's own prop problems, but for the shots
+    ark_grandfathered exempts (and its refusals)."""
     per = period(plan) if isinstance(plan, dict) else None
-    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in prop_problems(i, s, per)]
+    exempt, out = ark_grandfathered(plan, shots)
+    return out + [p for i, s in enumerate(shots) if isinstance(s, dict) and s.get("id") not in exempt
+                  for p in prop_problems(i, s, per)]
 
 
 def _speaker_problems(i, s, chars, span, span_slowest):

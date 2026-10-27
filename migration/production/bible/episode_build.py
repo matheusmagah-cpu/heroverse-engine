@@ -672,6 +672,8 @@ def prop_refusal(plan, shot):
     """E113: a scene's request is refused when its prompt names the ark (a hull, keel, ship, boat, vessel) without
     its look and exclusion sentences word for word, or names what that look rules out (plan_check.prop_problems, the
     same function plan_check, long_plan_check and the preflight run): None or the refusal."""
+    if shot.get("id") in plan_check.ark_grandfathered(plan, plan.get("shots") or [])[0]:
+        return None
     found = plan_check.prop_problems(0, shot, plan_check.period(plan))
     if not found:
         return None

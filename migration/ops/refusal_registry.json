@@ -16,12 +16,12 @@
   "ARK_LOOK_CONFLICT": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def prop_problems(",
-   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function"
+   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function; the one exemption, genesis-08's approved shots by `ark_look_grandfathered` (ark_grandfathered, prompt sha256 pinned), is honoured by both alike"
   },
   "ARK_LOOK_NOT_CANONICAL": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def plan_prop_problems(",
-   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function"
+   "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function; the one exemption, genesis-08's approved shots by `ark_look_grandfathered` (ark_grandfathered, prompt sha256 pinned), is honoured by both alike"
   },
   "ASPECT_REFUSED": {
    "class": "A",

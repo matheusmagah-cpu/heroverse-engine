@@ -1184,15 +1184,50 @@ class ArkLook(unittest.TestCase):
                 pl = json.loads(f.read_text())
                 if isinstance(pl.get("shots"), list):
                     self.assertEqual(pc.plan_prop_problems(pl, pl["shots"]), [], f.name)
-        for ep, expect in (("genesis-08-short", 19), ("genesis-09-short", 22)):
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 22)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(ARK in s["prompt"] for s in shots), expect, ep)
-        # genesis-08's seven rejected shots carry the look, their meaning and seconds kept
+        # genesis-08's three shots still rejected carry the look, their meaning and seconds kept
         shots = {s["id"]: s for s in json.loads((HERE / "plans" / "genesis-08-short.json").read_text())["shots"]}
-        for sid in ("s-watchers", "s-ridge", "s-dust", "s-jeer", "s-scorn", "s-board", "s-silent"):
+        for sid in ("s-ridge", "s-dust", "s-board"):
             self.assertIn(ARK, shots[sid]["prompt"], sid)
         self.assertEqual(shots["s-board"]["seconds"], 8)
-        self.assertNotIn("boat", shots["s-laugh"]["prompt"])
+
+    def test_only_genesis_08s_approved_shots_are_grandfathered(self):
+        g08 = json.loads((HERE / "plans" / "genesis-08-short.json").read_text())
+        listed = g08["ark_look_grandfathered"]
+        self.assertEqual(set(listed), set(pc.ARK_GRANDFATHERED["genesis-08-short"]))
+        self.assertTrue(not {"s-ridge", "s-dust", "s-board"} & set(listed))
+        self.assertEqual(pc.plan_prop_problems(g08, g08["shots"]), [])        # a grandfathered shot passes
+        # without the field the same shots are refused: the exemption is what lets them through
+        bare = {k: v for k, v in g08.items() if k != "ark_look_grandfathered"}
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", [x.split()[0] for x in pc.plan_prop_problems(bare, bare["shots"])])
+        # a grandfathered shot whose prompt changed is refused, and checked
+        changed = copy.deepcopy(g08)
+        s = next(x for x in changed["shots"] if x["id"] == "s-scorn")
+        s["prompt"] = s["prompt"].replace("A larger crowd", "A crowd")
+        got = [x.split()[0] for x in pc.plan_prop_problems(changed, changed["shots"])]
+        self.assertIn("ARK_GRANDFATHER_REFUSED", got)
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", got)
+        # a shot not on the list (one still rejected) cannot be grandfathered
+        extra = copy.deepcopy(g08)
+        extra["ark_look_grandfathered"] = listed + ["s-dust"]
+        self.assertIn("ARK_GRANDFATHER_REFUSED", [x.split()[0] for x in pc.plan_prop_problems(extra, extra["shots"])])
+        # the same field in any other plan is refused, and its shots are checked
+        g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
+        g09["ark_look_grandfathered"] = ["s-voice"]
+        g09["shots"][0]["prompt"] = g09["shots"][0]["prompt"].replace(ARK, "")
+        got = codes(pc.check(g09))
+        self.assertIn("ARK_GRANDFATHER_REFUSED", got)
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", got)
+        p = self.with_body("The distant hull stands far off.")
+        p["ark_look_grandfathered"] = ["s-a"]
+        self.assertIn("ARK_GRANDFATHER_REFUSED", codes(pc.check(p, CHARS)))
+        # the build honours the same exemption, and only it
+        import episode_build as eb
+        scorn = next(x for x in g08["shots"] if x["id"] == "s-scorn")
+        self.assertIsNone(eb.prop_refusal(g08, scorn))
+        self.assertTrue(eb.prop_refusal(bare, scorn).startswith("ARK_LOOK_NOT_CANONICAL s-scorn"))
 
 
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
