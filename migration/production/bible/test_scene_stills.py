@@ -241,8 +241,12 @@ class Stills(unittest.TestCase):
         self.assertEqual(pc.prop_references("A camp of goat-hair tents at dusk.")[1], [])
         need, missing = pc.prop_references(prompt)
         self.assertEqual((need, missing), (self.arkrefs, []))
-        # the flood's setting sentence alone names the ark (and Pavo draws it): it needs the references too
-        self.assertEqual(pc.prop_references(pc.PERIODS["the-flood"]["setting"])[0], self.arkrefs)
+        # E113's flood sentence alone named the ark (and Pavo drew it: 2026102704's carry, climb, feet); E123's names
+        # none, so a still that does not show the ark needs no reference; the phrase alone is the ark
+        self.assertEqual(pc.prop_references(pc.PERIOD_SETTING_FLOOD_E113)[0], self.arkrefs)
+        self.assertEqual(pc.prop_references(pc.PERIODS["the-flood"]["setting"]), ([], []))
+        self.assertEqual(pc.prop_references("Wide shot. " + pc.ARK_PHRASE[:1].upper() + pc.ARK_PHRASE[1:] + " sits "
+                                            "level in the floodwater.")[0], self.arkrefs)
         # prepare hands the references (repository paths Pavo takes) with every candidate
         spec = ss.prepare(self.plan, ["s-dust"], 1, "123", stills_dir=self.dir, engine="pavo")
         self.assertEqual(spec["images"][0]["references"], [r["repo_path"] for r in self.arkrefs])

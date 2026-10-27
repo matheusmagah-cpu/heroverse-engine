@@ -44,7 +44,7 @@ class Spec(unittest.TestCase):
         self.assertIn("THUMB_LOOK_CHANGED", codes(thumbs.spec_problems(
             dict(REAL, prompt=REAL["prompt"].replace("long grey beard", "short beard")), chars)))
         self.assertIn("THUMB_PROMPT_REFUSED", codes(thumbs.spec_problems(
-            dict(REAL, prompt=REAL["prompt"].replace(thumbs_ark(), "")), chars)))
+            dict(REAL, prompt=REAL["prompt"] + " " + thumbs_ark()), chars)))   # E123: E113's ark sentence
         self.assertIn("THUMB_TEXT_IN_PROMPT", codes(thumbs.spec_problems(
             dict(REAL, prompt=REAL["prompt"] + " THE FLOOD BEGINS"), chars)))
 
