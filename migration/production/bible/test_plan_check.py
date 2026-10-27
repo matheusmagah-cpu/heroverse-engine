@@ -1163,6 +1163,7 @@ class ArkLook(unittest.TestCase):
         self.assertEqual(pc.prop_shot_problems(1, dict(shot, prompt=f"Rain on the tents. {flood}"), p), [])
         # genesis-09-short on main is refused for exactly this until #461's image-first plan lands, and for E123's
         # wording (E113's ark sentences and flood sentence) until it is reworded
+        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
         g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
         if not all(s.get("first_frame") for s in g09["shots"] if s["kind"] == "scene" and not s.get("characters")):
             self.assertLessEqual(set(codes(pc.check(g09))),
@@ -1211,6 +1212,7 @@ class ArkLook(unittest.TestCase):
         arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
         i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
         arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". A boat drifts past. ", 1)
+        arc["period"] = "the-flood"   # E123 is the ark's periods' rule (Eden keeps its boats)
         self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])   # a long: E123
 
     def test_every_plan_shows_the_ark_by_its_one_look(self):
@@ -1226,7 +1228,8 @@ class ArkLook(unittest.TestCase):
                         got = [x for x in got if not x.startswith("PROP_SHOT_WITHOUT_STILL")]
                     if f.name == "genesis-09-short.json" and any(ARK_LOOK in (s.get("prompt") or "")
                                                                 for s in pl["shots"]):
-                        # E123: on main genesis-09 still holds E113's wording; refused until it is reworded
+                        # E123: on main genesis-09 still holds E113's wording; refused until it is reworded.
+                        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
                         got = [x for x in got if not x.startswith("ARK_LOOK_CONFLICT")]
                     self.assertEqual(got, [], f.name)
         def shown(s):
@@ -1318,6 +1321,7 @@ class ArkPositiveWording(unittest.TestCase):
         arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
         i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
         arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", f". {ARK_EXCLUDE} ", 1)
+        arc["period"] = "the-flood"
         self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])
         import thumbs
         spec = json.loads((HERE / "thumbs" / "genesis-09-short.json").read_text())
@@ -1354,6 +1358,53 @@ class ArkPositiveWording(unittest.TestCase):
             for sentence in (per["setting"], per["exclude"]):
                 self.assertEqual(pc.prop_problems_e123(0, {"kind": "scene", "id": "x", "prompt": sentence}), [], name)
                 self.assertEqual(pc.prop_references(sentence), ([], []), name)
+
+    # review of #465: the ark's words belong to the ark's stories (Genesis 4-10: before the flood, the flood); other
+    # stories keep their ships, boats, vessels and crates
+    OTHER = ("Jonah sleeps in the ship's hold.", "Fishermen haul nets from a boat.",
+             "Moses lies in an ark of bulrushes among the reeds.", "A clay vessel stands by the fire.",
+             "A chimney of rock rises from the cliff.", "There is no smoke in the sky.",
+             "A wooden crate of figs sits by the tent.")
+    ARKCODES = {"ARK_LOOK_CONFLICT", "ARK_LOOK_NOT_CANONICAL", "PROP_SHOT_WITHOUT_STILL"}
+
+    def elsewhere(self, body):
+        p = self.part9(body)
+        p.update(part=20, passage="Jonah 1:1-17 (KJV)", period={"setting": SETTING, "exclude": EXCLUDE})
+        return p
+
+    def test_scoped_to_the_arks_periods(self):
+        for body in self.OTHER:
+            self.assertFalse(self.ARKCODES & set(codes(pc.check(self.elsewhere(body), CHARS))), body)
+            self.assertTrue(self.ARKCODES & set(codes(pc.check(self.part9(body), CHARS))), body)
+            self.assertEqual(pc.prop_references(body, plan=self.elsewhere(body)), ([], []), body)
+        self.assertTrue(pc.ark_period(self.part9("x")))
+        for passage in ("Genesis 7 (KJV)", "Genesis 9:1-17 (KJV)", "Genesis 4:1-16 (KJV)"):
+            self.assertTrue(pc.ark_period({"passage": passage}), passage)
+        for passage in ("Genesis 1:1-31 (KJV)", "Genesis 12:1-9 (KJV)", "Jonah 1 (KJV)", "Exodus 2:1-10 (KJV)"):
+            self.assertFalse(pc.ark_period({"passage": passage}), passage)
+        self.assertTrue(pc.ark_period({"period": "the-flood"}))
+        self.assertFalse(pc.ark_period({"period": "eden"}))
+        # a long and a thumbnail are scoped by their passage or period the same way
+        import long_plan_check as lc
+        import thumbs
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
+        arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". A boat drifts past. ", 1)
+        self.assertFalse(self.ARKCODES & {x.split()[0] for x in lc.check(arc)["problems"]})        # Eden
+        arc["period"] = "the-flood"
+        self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])
+        spec = json.loads((HERE / "thumbs" / "genesis-09-short.json").read_text())
+        boat = dict(spec, prompt=spec["prompt"] + " A boat drifts past.")
+        self.assertIn("ARK_LOOK_CONFLICT", " ".join(thumbs.spec_problems(boat)))
+        self.assertNotIn("ARK_LOOK", " ".join(thumbs.spec_problems(dict(boat, period="eden"))))
+
+    def test_inside_the_arks_periods_the_cheap_bypasses_are_closed(self):
+        for body in ("A galley drifts on the water.", "Its keelless shape floats.", "Men stand on its deck.",
+                     "A floating box drifts by.", "A wooden enclosure stands on the hill."):
+            self.assertIn("ARK_LOOK_CONFLICT", codes(pc.check(self.part9(body), CHARS)), body)
+        # the rainbow is "my bow in the cloud" (Genesis 9:13): never refused
+        self.assertFalse(self.ARKCODES & set(codes(pc.check(self.part9("A bow of colours arches in the cloud."),
+                                                          CHARS))))
 
     def test_the_probe_that_found_it(self):
         probe = json.loads(PROBE.read_text())

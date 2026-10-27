@@ -60,7 +60,7 @@ Then: duration and aspect come from the tool fields, not the text.
   pitch-black under a flat plank roof"), never its shape again. Light it from the side or show it from above: a hull
   silhouetted against a bright sky drew curled ends in every probe that tried it. (Parts 1-8; from part 9 the next
   rule replaces it.)
-- **From part 9 the ark is named in positive words only (E123).** With the ark's approved references sent, E113's two
+- **From part 9 the ark is named in positive words only (E123; the ark's stories only: Genesis 4-10, periods before-the-flood and the-flood; Jonah's ship or a fishing boat elsewhere stay as they are).** With the ark's approved references sent, E113's two
   sentences still drew curved bows, cabins and smoking funnels (genesis-09 run 2026102704): an image model reads "no
   mast, sail, prow, funnel or smokestack, no smoke rising" as a list of things to draw, and "ark"/"hull" pull its ship
   prior. Probe (`evidence/pavo/20261027/genesis-09-ark-probe/`): E113's wording with the references 0 of 3 held the
@@ -72,7 +72,8 @@ Then: duration and aspect come from the tool fields, not the text.
   smokestack, "no smoke" and the like (`ARK_WORDS`, ARK_LOOK_CONFLICT), even negated; "crate" without the phrase is
   ARK_LOOK_NOT_CANONICAL. The flood's period sentence names no ark: "The ancient Near East in the days of the flood: the
   open water, the mountains of Ararat and the empty new earth." A still with the phrase is made with the ark's
-  references; a still without it needs none and shows none. People near it, in positive words: "the roof is empty and
+  references; a still without it needs none and shows none. No word list closes every synonym (galley, deck, floating
+  box and enclosure are refused too; "bow" never, Genesis 9:13): the 9.5 frame review stays the final guard. People near it, in positive words: "the roof is empty and
   flat" (not "nobody on the roof"), and a crowd "seen from behind, faces turned away toward the crate".
 - **People and God.** No face of God. Biblical people only when the story needs them, then from a fixed reference
   image (character sheet) so the same face returns in every episode.
