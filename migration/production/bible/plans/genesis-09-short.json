@@ -1,0 +1,522 @@
+{
+ "version": "bible-plan-v2",
+ "episode": "genesis-09-short",
+ "part": 9,
+ "passage": "Genesis 7 (KJV, public domain)",
+ "period": "the-flood",
+ "aspect_ratio": "9:16",
+ "story": "The flood (SERIES.md episode 9; arc 3, The Flood)",
+ "people": "Noah is APPROVED (characters.json) and appears by reference in two silent shots at the ark's door (wardrobe 'ark', his lips closed): Genesis gives him no words before the flood is over, and no talking (lip-synced) shot is used in this episode. Elsewhere his family is seen from behind or in silhouette. The people of the valley are an unnamed crowd seen from behind or in silhouette, a man at its front in silhouette and a lone man seen from behind on the last rock at the climax; none of them is a characters.json entry and none speaks (the scoffer, DRAFT, is not in this episode). Nobody outside the ark is given words: Genesis records none. God is never shown: His Genesis 7:4 is a deep voice-over over the storm at the open. No establishing shot. The Keeper only for the insight, the comment question and the close, in voice-over (plan B): silent on screen with his narration over, genesis-07's exact prompts.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 7:4, voice-over: seven days, then forty days of rain); stake and open loop (seven days before the rain the valley was still laughing; one week, one open door: would anyone believe?); escalation in three rising steps of the flood against the valley, acted, each ending on a hook (the animals come and the family goes in, and the Lord shut him in; the fountains of the deep and the windows of heaven, and the loudest mockers run for the hills; the waters bear up the ark and cover the hills, one last peak); acted climax s-peak and s-drift (a lone man seen from behind on the last rock watches the ark float past) carrying Genesis 7:23 'and Noah only remained alive'; payoff (Genesis 7:24, the family safe inside, the shut door held); keeper_close in voice-over (insight: seven more days with the door open, and the Lord, not Noah, shut it; comment question; part 10).",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "Seven days before the rain, the ark stood finished on the hillside, its door wide open, and the whole valley was still laughing at it."
+  },
+  {
+   "kind": "story",
+   "text": "One week of warning. One open door, and room inside. Would anyone outside believe it before the sky broke?"
+  },
+  {
+   "kind": "scripture",
+   "text": "There went in two and two unto Noah into the ark, the male and the female, as God had commanded Noah.",
+   "reference": "Genesis 7:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "They descended from the mountains by themselves. Lions beside frightened sheep. Birds in pairs settling along the roof. Nobody herded them."
+  },
+  {
+   "kind": "story",
+   "text": "The crowd stopped laughing for a moment. Then the loudest of them shrugged, and the music in the camps started again."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah went in, and his sons, and his wife, and his sons’ wives with him, into the ark, because of the waters of the flood.",
+   "reference": "Genesis 7:7 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "and the Lord shut him in.",
+   "reference": "Genesis 7:16 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "And once that door was shut, no hand on earth could open it again, not even Noah's."
+  },
+  {
+   "kind": "scripture",
+   "text": "the same day were all the fountains of the great deep broken up, and the windows of heaven were opened.",
+   "reference": "Genesis 7:11 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Water from below and water from above. The ground split, springs burst through the camps, and the rain did not stop, day or night."
+  },
+  {
+   "kind": "story",
+   "text": "Now the whole valley stampeded toward higher ground, dragging children and animals up the slopes. And the men who had laughed the loudest ran first."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the flood was forty days upon the earth; and the waters increased, and bare up the ark, and it was lift up above the earth.",
+   "reference": "Genesis 7:17 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The ark that sat in the dust for years groaned, lifted, and floated free. Fists pounded on its hull as it drifted away from them."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the waters prevailed exceedingly upon the earth; and all the high hills, that were under the whole heaven, were covered.",
+   "reference": "Genesis 7:19 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Hill after hill went under. The last of the people crowded onto one bare peak, and still the cold water kept climbing."
+  },
+  {
+   "kind": "story",
+   "text": "On the last rock, a man who had laughed for years watched the ark he mocked float past him in the rain."
+  },
+  {
+   "kind": "scripture",
+   "text": "and Noah only remained alive, and they that were with him in the ark.",
+   "reference": "Genesis 7:23 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And the waters prevailed upon the earth an hundred and fifty days.",
+   "reference": "Genesis 7:24 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Inside, eight people and a vessel full of animals, alone on an ocean with no shoreline. The door that was shut had held."
+  },
+  {
+   "kind": "insight",
+   "text": "Most miss this: after the ark was finished, God gave seven more days with the door open. And Noah never shut it. The Lord did."
+  },
+  {
+   "kind": "cta",
+   "text": "If that door were open today, who would you call inside? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part ten tomorrow: The dove and the rainbow."
+  }
+ ],
+ "shots": [
+  {
+   "id": "s-voice",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 7:4 (KJV)",
+   "line": "For yet seven days, and I will cause it to rain upon the earth forty days and forty nights;",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black rain clouds roll in low over a dry valley where the vast finished ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, stands on a hill, lightning flickering deep inside the clouds. Dusk, a cold wind bending the dry grass and lifting dust off the slopes. Ominous and vast. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos."
+  },
+  {
+   "id": "s-laugh",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. A crowd seen from behind stands at the foot of a hill and laughs up at the vast finished ark on the hill, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, a man in silhouette at the front flinging one arm toward it, heads thrown back. Hot afternoon, harsh sun on the black pitch of the hull. Scornful and loud. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-finished",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A crowd seen from behind stands at the foot of a hill and points up at the vast finished ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, its wide wooden door open in the side and an earthen ramp down to the dust. Late afternoon, long shadows and drifting dust. Mocking and uneasy. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-door",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing in the open doorway of a vast wooden ark under a grey sky, looks out over the valley, his lips closed, silent, a gust of wind tugging at his robe, while people in silhouette pass far below without looking up. Overcast afternoon, flat grey light on the timber. Patient and grave. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "id": "s-sky",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tilt up. Men in silhouette at a camp of tents pause in their work and glance up at a darkening grey sky, then turn back to their fires. Evening, smoke drifting from the camp. Heedless and uneasy. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-pairs",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. Animals in pairs, two camels, two oxen, two deer, walk calmly up to the vast ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black from the ground to the deck, resting on timber blocks on the dry ground, a plain earthen ramp rising to its wide wooden door open in the side, while onlookers in silhouette watch from a ridge. Morning, soft grey light and dust under the hooves. Strange and orderly. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-ramp",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing in the open doorway of a vast wooden ark under a grey sky, stands aside at the top of the ramp as a pair of sheep and a pair of goats walk past him into the ark, its whole hull smeared pitch-black, and he watches them go in, his lips closed, silent. Morning, grey light and a cool wind. Reverent and calm. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "id": "s-lions",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tracking shot. A pair of lions walks down a rocky hillside beside a pair of sheep, and a crowd seen from behind steps back in fear to let them pass. Morning, dust and pale light. Astonished and hushed. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-birds",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Flocks of birds in pairs settle along the roof of the vast ark, a long, low wooden ship with gently curved sides and a plain roof of planks along its whole length, its whole hull smeared pitch-black, while three young men in silhouette on the roof look up at them. Morning, a grey sky full of wings. Wondrous and still. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-shrug",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. A man in silhouette at the front of the crowd, his face hidden in shadow, shrugs, waves a dismissive hand at the vast ark on the hill, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, and turns back toward the camp, the crowd seen from behind following him. Evening, warm firelight from the tents ahead of them. Careless and proud. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-music",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Silhouettes dance around a fire in a camp of tents with drums and raised cups, never looking up at the vast ark on the hill behind them, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black. Night, torchlight and smoke. Merry and blind. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-enter",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A family of eight seen from behind, an old man and his wife, three young men and their wives, carry bundles up the earthen ramp into the wide wooden door in the side of the vast ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-wife",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. An old woman seen from behind stops in the doorway of the ark, takes one last look at the valley and the tents below, and steps inside. Grey morning, wind in her shawl. Sorrowful and resolute. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-shut",
+   "kind": "scene",
+   "lines": [
+    6,
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The wide wooden door in the side of the vast ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, swings slowly up and closes by itself with a heavy boom, while onlookers in silhouette at the foot of the earthen ramp stumble back. Grey dusk, wind and the first heavy rain streaking across the black pitch. Final and awesome. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-latecomer",
+   "kind": "scene",
+   "lines": [
+    6,
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. A man seen from behind throws his shoulder against the shut door of the ark and it does not move at all. Dusk, rain streaming down the black pitch. Helpless and cold. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-deep",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, handheld drift. The ground cracks open between the tents and water bursts up out of the earth as people in silhouette scramble away, the vast ark, a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black, dark on the hill beyond the camp. Night, lightning lighting the spray. Violent and sudden. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-windows",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tilt down. Torrents of rain pour from a black sky onto a camp while people seen from behind shield their heads and run. Night, lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-springs",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low tracking shot. Muddy water rushes between collapsing tents, and people seen from behind wade through it, holding baskets above their heads. Night, rain and flashes of lightning. Frantic and dark. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-tents",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, handheld drift. Tents fold and wash away in the downpour as silhouettes drag sacks and jars out of the water. Grey dawn, rain without end. Lost and desperate. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-climb",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Crowds in silhouette climb a muddy slope in the rain, carrying children and dragging goats on ropes, the valley below turning to water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-run",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld tracking shot. A man seen from behind, soaked and muddy, his face never visible, scrambles up the slope among the crowd in silhouette, slipping in the mud. Grey day, heavy rain on the hillside. Afraid and breathless. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-lift",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The vast ark, a long, low wooden ship with gently curved sides and a plain roof of planks along its whole length, its whole hull smeared pitch-black, creaks and lifts off the ground as brown floodwater swirls around its hull, while people in silhouette on the hillside watch it rise. Grey day, rain and churning water. Mighty and terrible. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-float",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. The vast ark, a long, low wooden ship with gently curved sides and a plain roof of planks along its whole length, its whole hull smeared pitch-black, floats free above the drowned valley, the tops of trees and tents vanishing beneath it, a few figures in silhouette clinging to a floating tree trunk watching it drift. Grey day, rain and mist. Vast and lonely. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-fists",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, handheld drift. Hands seen from behind pound on the wet black hull as it slides past them through the water. Rain, grey light on the pitch. Desperate and too late. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-inside",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Inside the ark, a family in silhouette braces against the timbers in the grey daylight falling through a long gap under the roof beams as the hull tilts and groans. Grey day, animals restless in the stalls behind them. Tense and enclosed. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-hills",
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A crowd in silhouette packs a hilltop as the brown water rises below them, the last trees going under. Grey day, rain and drifting mist. Crowded and afraid. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-carry",
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low tracking shot. Two men seen from behind carry an old woman up a rocky slope through the rain, water at their knees. Grey day, rain streaming over the stones. Straining and afraid. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-peak-crowd",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Silhouettes crowd onto one bare rocky peak, the water lapping at the stones below them on every side. Grey dusk, rain and mist. Trapped and silent. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-feet",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. Water creeps over the rock around sandaled feet seen from behind, and the feet step back onto higher stone. Grey light, rain rippling the water. Rising and relentless. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-peak",
+   "kind": "scene",
+   "lines": [
+    15,
+    16
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. A lone man seen from behind, soaked to the bone, his face never visible, stands on the last rock with the water at his waist and looks up as the vast ark, a long, low wooden ship with gently curved sides and a plain roof of planks along its whole length, its whole hull smeared pitch-black, drifts past him in the rain. Grey dusk, heavy rain and mist on the water. Stunned and silent. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous",
+   "climax": true
+  },
+  {
+   "id": "s-drift",
+   "kind": "scene",
+   "lines": [
+    15,
+    16
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A lone man seen from behind on a rock in the rising water watches the vast ark, a long, low wooden ship with gently curved sides and a plain roof of planks along its whole length, its whole hull smeared pitch-black, drift away into the rain until it is only a shadow. Grey dusk, rain and mist. Final and quiet. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous",
+   "climax": true
+  },
+  {
+   "id": "s-lamp",
+   "kind": "scene",
+   "lines": [
+    17,
+    18
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Inside the ark, a family of eight in silhouette sits close together on the plank floor in the grey daylight falling through a long gap under the roof beams, animals resting in straw stalls behind them. Grey day, soft light and rain drumming on the roof. Safe and solemn. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-hull",
+   "kind": "scene",
+   "lines": [
+    17,
+    18
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. An old man seen from behind lays his palm flat on the inner timbers of the hull, listening to the water outside. Grey day, soft light from a gap under the roof beams on the wood grain. Quiet and grateful. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-feed",
+   "kind": "scene",
+   "lines": [
+    17,
+    18
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Young women seen from behind carry hay to the animals in their stalls in the grey daylight falling through a long gap under the roof beams, a dove asleep on a beam above. Grey day, soft light and long shadows. Tender and patient. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "k-insight",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    19
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+  },
+  {
+   "id": "k-question",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    20
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+  },
+  {
+   "id": "k-close",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    21
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  }
+ ]
+}

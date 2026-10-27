@@ -1,0 +1,177 @@
+{
+ "plan": "migration/production/bible/plans/genesis-09-short.json",
+ "episode": "genesis-09-short",
+ "checked_at": "2026-10-27T05:10:20Z",
+ "plan_check": {
+  "problems": [],
+  "pending": [],
+  "estimate": {
+   "seconds": 177.6,
+   "keeper_share": 0.117,
+   "lesson_share": 0.121,
+   "establishing_share": 0.0,
+   "lines": 23,
+   "shots": 37,
+   "spoken_lines": 1,
+   "words": 466
+  }
+ },
+ "characters": [
+  {
+   "id": "noah",
+   "status": "APPROVED",
+   "refs": [
+    "front",
+    "three-quarter"
+   ],
+   "talk_refs": [],
+   "voice": "bm_george",
+   "image_records": [
+    "ch-noah-front",
+    "ch-noah-full",
+    "ch-noah-three-quarter"
+   ]
+  },
+  {
+   "id": "keeper",
+   "status": "APPROVED",
+   "refs": [
+    "front"
+   ],
+   "talk_refs": [
+    "talk"
+   ],
+   "voice": "am_michael",
+   "image_records": [
+    "ch-keeper-front",
+    "ch-keeper-talk"
+   ]
+  }
+ ],
+ "cf_images": {
+  "recorded_today": 6,
+  "daily_allocation": 44,
+  "sheets_needed": {},
+  "fits_today": true
+ },
+ "voice": {
+  "ran": true,
+  "problems": [],
+  "pace": {
+   "god": [
+    3.37
+   ],
+   "narration": [
+    2.95,
+    2.28,
+    2.99,
+    2.06,
+    2.9,
+    3.07,
+    3.47,
+    2.93,
+    3.08,
+    2.72,
+    2.66,
+    3.39,
+    2.88,
+    2.96,
+    2.67,
+    3.37,
+    3.15,
+    3.02,
+    2.78,
+    2.48,
+    2.84,
+    2.44
+   ]
+  },
+  "measured": {
+   "total": 173.664,
+   "keeper_share": 0.128,
+   "lesson_share": 0.132,
+   "retimed": {}
+  }
+ },
+ "requests": {
+  "ran": true,
+  "problems": []
+ },
+ "setups": {
+  "shots": [
+   {
+    "kind": "god_voice_over",
+    "shot": "s-voice",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-insight",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-question",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-close",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   }
+  ],
+  "probes_required": [],
+  "rate_low": [],
+  "talk_attempts": 6,
+  "min_shot_chance": 0.9,
+  "run_chance_all_talking_shots": 0.999
+ },
+ "binding": {
+  "plan": "30e810c6197f9585bbb4a4a4701ea89e046541b147df5d77bd4218854ab659c3",
+  "characters": "6faebadd832fe833ebc4dc0f00b238a852efad81e345f3b64d31bb3beef07e68",
+  "image_records": {
+   "ch-noah-front.json": "3f9d442cac58d4ef7fe93719b9629a0b34591657adf53d695db80e90897e6dc9",
+   "ch-noah-full.json": "e0b92fca157d52923940084b038efe4e183f5eeaefffffc31148027be7c0a339",
+   "ch-noah-three-quarter.json": "e1a31ddc0bf1f5bc05e7bff907f7e069d99ddf981644fe28cdf55425bea0fefb",
+   "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
+   "ch-keeper-talk.json": "c431a6013669385cb236c64158160cc6966337cdfb8ada711ed98f58b509b6cc"
+  },
+  "setups": "386110cf6909cea8ed1edcfe0f6476ea1b4ae528e6a3399e1861a7396d808a95",
+  "code": {
+   "episode_build.py": "9177a6a37e85ff550944543d83686fefbdfa247a4761941724d2cf077f809e3e",
+   "plan_check.py": "2ad651a45682b354e8ac7cabba8db6d3963e796cc0fe276b24e7c5a56b27e916",
+   "voice_pace.py": "53ca18e54b2b7472b296f9a9dddba8e1df98f95bf9de924dd5be80bcddff01e5",
+   "lipsync_check.py": "a8bf2c564253bd4021bbf9f67bef305ae327fc5f4114c96cacf34ac191de7835",
+   "episode_preflight.py": "d486f36f092df36fc615abeb6a021ef00783f1d6bde83dff19ed21a0d71328da"
+  }
+ },
+ "blockers": [],
+ "status": "PASS"
+}

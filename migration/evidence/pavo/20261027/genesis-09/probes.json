@@ -1,0 +1,353 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-09-short",
+ "plan": "migration/production/bible/plans/genesis-09-short.json",
+ "purpose": "E108, before genesis-09's first build: the reworked scene prompts (the-flood period sentences on every scene, the scoffer removed, Noah by reference and silent, the ark described the same way in every shot that shows it, the interiors by daylight) probed as the build sends them, with a frame sheet of each clip checked for anachronisms, writing, extra limbs, faces on anonymous figures, the ark's look and the period",
+ "how": "Direct calls from a Claude session through the heroverse-pavo MCP tools, with no Actions run. Every pavo_generate_video came right after its own pavo_quote_video (9:16, sound false, the plan's seconds; the two Noah shots with his two approved reference images as the build sends them, ch-noah-front and ch-noah-three-quarter, sha256-checked and resized to 1536 px like episode_build refs), which read required_credits 0.0, zero_cost_confirmed true and is_estimate false. Three submissions (s-voice-1, s-shut-2, s-pairs-5) answered status unknown; each was read with pavo_job (running) before any new call and none was retried. Each job was polled with pavo_job. Clips were downloaded to the session scratchpad only and are not committed. Each probe-<shot>-<n>.jpg holds 6 frames of one clip, tiled 3x2, and Claude looked at every sheet.",
+ "credits": 0,
+ "period": {
+  "preset": "the-flood",
+  "setting": "The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth.",
+  "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+ },
+ "final_prompts_sha256": {
+  "s-voice": "df0fd3b86397a1d8912f10581e2070216f3b2ab1e2996c2fed78a4e130a0ac7e",
+  "s-laugh": "6052b2730ecdeca476539e098f0f77480cde8548f0e0b77d2dd0ddfde59c73e7",
+  "s-noah-door": "9f8f05e22320d7c369534069044068838698be41e2bd80eab90f3b8079626be2",
+  "s-pairs": "932d52b536990af3aff52160ba0204fe15387b30eb248038303536c2be81d444",
+  "s-music": "22daea597aac8965e3dc1d89ac30c8ea50f045ffcfe28f4b3c165dae89262aaf",
+  "s-shut": "351a8718516db7164557345e9c5204208233a0652c624cf4478a9c211ac02c15",
+  "s-deep": "b13a7d0b4c16da9116ee4162f7bf7c5f931dbd3f6a1f3422307098a8f569ac4e",
+  "s-climb": "68f4b8821a168158b6aefbd2cadaa8b6ed72277f34a97bd955f53e5417038019",
+  "s-noah-ramp": "b89325546589b55131c42aa4918b0ec0a32c79650abec499345a7004ee163300",
+  "s-float": "00219f13e5aed7b147f635e5b0ca41e2e2072b2f4ae64b082a912e20dedd1cfd",
+  "s-peak": "822786f18415044eae3f59676eca77cbdac1066e7b881819d77b63fdbee9e1ea",
+  "s-inside": "8579a9a583e6a409e9df0dc9cbfcc9d512f19a2435d7fd6ecf84ca9d7faa7472"
+ },
+ "probed_settings": "One probe line per distinct setting: the storm over the finished ark (God's voice-over), the day crowd at the ark (s-laugh, also s-finished and s-shrug), Noah at the door by reference (s-noah-door) and on the ramp (s-noah-ramp), the animals at the ramp (s-pairs, also s-lions and s-birds), the night camp under the ark (s-music, also s-sky), the door shut (s-shut, also s-enter, s-wife and s-latecomer), the fountains of the deep in the camp at night (s-deep, also s-windows, s-springs and s-tents), the climb in the rain (s-climb, also s-run, s-hills and s-carry), the ark afloat (s-float, also s-lift, s-fists and s-drift), the climax on the last rock (s-peak, also s-peak-crowd and s-feet), and inside the ark (s-inside, also s-lamp, s-hull and s-feed).",
+ "not_probed_individually": [
+  "s-finished",
+  "s-sky",
+  "s-lions",
+  "s-birds",
+  "s-shrug",
+  "s-enter",
+  "s-wife",
+  "s-latecomer",
+  "s-windows",
+  "s-springs",
+  "s-tents",
+  "s-run",
+  "s-lift",
+  "s-fists",
+  "s-hills",
+  "s-carry",
+  "s-peak-crowd",
+  "s-feet",
+  "s-drift",
+  "s-lamp",
+  "s-hull",
+  "s-feed"
+ ],
+ "findings": [
+  "The preset's setting sentence names 'the great wooden ark', so Pavo puts an ark in every exterior shot, and left to itself draws a sailing ship, a galleon, a Viking longship, a barn or a tub (9 of the 16 rejected or superseded clips). Every shot that shows the ark now describes it the same way (a long, low wooden ship with gently curved sides, its whole hull smeared pitch-black; with a flat deck or a plain roof of planks): no sail or mast in the 12 clips that carried it, though s-pairs still drew a flag pole and funnel, a cabin with a chimney and a dome before it took genesis-08 s-finished's exact passing ark wording.",
+  "Night interiors lit by an oil lamp drew a hanging metal-and-glass lantern 3 of 3 times, even as 'an open fire in a clay bowl'. The four interiors are now by grey daylight under the roof beams: no lamp in the probe.",
+  "No probe showed writing or extra limbs; no anonymous figure's face was lit or turned to the lens; God's shot had no person or face.",
+  "Left for the frame review: the ark's shape varies from shot to shot (a plain black hull, or a hull with a timber deckhouse), a dark-red band along the waterline in s-deep and s-noah-ramp, a small stack at the stern in s-shut, footpaths in s-laugh and s-voice, and the lake the preset's 'open water' puts in the dry-valley shots before the rain."
+ ],
+ "probes": [
+  {
+   "shot": "s-voice",
+   "n": 1,
+   "conversation_id": "373325565275146880",
+   "seconds": 8,
+   "sheet": "probe-s-voice-1.jpg",
+   "verdict": "superseded",
+   "current_prompt": false,
+   "note": "Period clean: storm, lightning, dry grass, the mountains and a lake, no people, no writing. The ark came out small and round like a tub, not vast, so the prompt now describes it as genesis-08's s-finished does (a long, low wooden ship with a flat deck and gently curved sides, its whole hull smeared pitch-black)."
+  },
+  {
+   "shot": "s-voice",
+   "n": 2,
+   "conversation_id": "373327804119201536",
+   "seconds": 8,
+   "sheet": "probe-s-voice-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A vast, long, low pitch-black hull on the dry hill under the storm, lightning, no people, no face, no writing, period clean. Residuals: the hull's ends curl up a little like a prow, and a faint footpath crosses the grass."
+  },
+  {
+   "shot": "s-laugh",
+   "n": 1,
+   "conversation_id": "373325679125412544",
+   "seconds": 6,
+   "sheet": "probe-s-laugh-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The ark came out as a sailing ship with a mast and rigging. The crowd was right, seen from behind, with the man at the front flinging an arm. Reworded with the black-hull description."
+  },
+  {
+   "shot": "s-laugh",
+   "n": 2,
+   "conversation_id": "373327851846186752",
+   "seconds": 6,
+   "sheet": "probe-s-laugh-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The crowd seen from behind laughs up at a long black hull with a plain timber deckhouse on the hill; the man at the front is in silhouette. No mast, no writing, period clean. Residual: a dirt footpath up the hill (not a road)."
+  },
+  {
+   "shot": "s-noah-door",
+   "n": 1,
+   "conversation_id": "373325770808382080",
+   "seconds": 6,
+   "references": [
+    "ch-noah-front",
+    "ch-noah-three-quarter"
+   ],
+   "sheet": "probe-s-noah-door-1.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Noah as his approved refs (bald crown, grey sides, long grey beard, brown robe with a rope belt), standing in a timber doorway, his lips closed, silent; silhouettes far below. Period clean. Residual: he looks at the lens rather than over the valley, and a lake sits behind him."
+  },
+  {
+   "shot": "s-pairs",
+   "n": 1,
+   "conversation_id": "373325840731945664",
+   "seconds": 6,
+   "sheet": "probe-s-pairs-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The ark came out as a small timber barn with a gabled roof and hinged plank doors. Reworded with the black-hull description."
+  },
+  {
+   "shot": "s-pairs",
+   "n": 2,
+   "conversation_id": "373327903247061632",
+   "seconds": 6,
+   "sheet": "probe-s-pairs-2.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "Black curved hull and the ramp were right, but a pole with a flag and a funnel-like stack stood on the top. Reworded (roof of planks)."
+  },
+  {
+   "shot": "s-pairs",
+   "n": 3,
+   "conversation_id": "373331649650017792",
+   "seconds": 6,
+   "sheet": "probe-s-pairs-3.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "A log cabin with a chimney on the deck. Reworded as a closer shot of the hull's side."
+  },
+  {
+   "shot": "s-pairs",
+   "n": 4,
+   "conversation_id": "373334239376914176",
+   "seconds": 6,
+   "sheet": "probe-s-pairs-4.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The hull came out as a dome, like an egg. Reworded with genesis-08 s-finished's exact passing ark wording (resting on timber blocks, a plain earthen ramp to the wide door)."
+  },
+  {
+   "shot": "s-pairs",
+   "n": 5,
+   "conversation_id": "373335841710094080",
+   "seconds": 6,
+   "sheet": "probe-s-pairs-5.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Camels, oxen and deer in pairs walk up the ramp into the side door of a long black hull; silhouettes on a ridge. No mast, chimney, dome or writing. Residuals: a large timber deckhouse with small window openings and a dark-red lower hull."
+  },
+  {
+   "shot": "s-music",
+   "n": 1,
+   "conversation_id": "373325901415106048",
+   "seconds": 6,
+   "sheet": "probe-s-music-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The ark on the hill had a funnel-like stack with smoke (a steamship look), and a lantern-like lamp stood in the foreground. Reworded with the black-hull description."
+  },
+  {
+   "shot": "s-music",
+   "n": 2,
+   "conversation_id": "373329829430630976",
+   "seconds": 6,
+   "sheet": "probe-s-music-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Silhouettes dance around the fire among goat-hair tents; behind them a long black hull with a lit timber deckhouse. No lantern, no stack, period clean."
+  },
+  {
+   "shot": "s-shut",
+   "n": 1,
+   "conversation_id": "373325943848376896",
+   "seconds": 6,
+   "sheet": "probe-s-shut-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "A multi-masted galleon with sails and rows of windows. Reworded with the black-hull description."
+  },
+  {
+   "shot": "s-shut",
+   "n": 2,
+   "conversation_id": "373329875094018624",
+   "seconds": 6,
+   "sheet": "probe-s-shut-2.jpg",
+   "verdict": "superseded",
+   "current_prompt": false,
+   "note": "The ark was right (a long black hull with a roofed deckhouse, a ramp), period clean, but in the wide shot the door's closing could not be seen and no rain fell. Reworded closer (medium wide) with the rain on the pitch."
+  },
+  {
+   "shot": "s-shut",
+   "n": 3,
+   "conversation_id": "373332933132237504",
+   "seconds": 6,
+   "sheet": "probe-s-shut-3.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The door in the black side closes during the clip, silhouettes at the foot of the ramp. Period clean. Residuals: a railed upper deck with cloth awnings and a small stack at the stern; little rain visible."
+  },
+  {
+   "shot": "s-deep",
+   "n": 1,
+   "conversation_id": "373326004330743296",
+   "seconds": 6,
+   "sheet": "probe-s-deep-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The camp, the cracks and the water bursting up were right, but a longship with masts stood in the background (the period sentence names the ark, so Pavo drew one). Reworded to show the ark with the black-hull description."
+  },
+  {
+   "shot": "s-deep",
+   "n": 2,
+   "conversation_id": "373329986272966400",
+   "seconds": 6,
+   "sheet": "probe-s-deep-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The ground splits between goat-hair tents and water bursts up, silhouettes run; the ark is a long black hull with a timber deckhouse. No lantern (the small lights are open fires), period clean. Residual: a dark-red band along the hull's waterline."
+  },
+  {
+   "shot": "s-climb",
+   "n": 1,
+   "conversation_id": "373326053475355264",
+   "seconds": 6,
+   "sheet": "probe-s-climb-1.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Crowds in silhouette climb a muddy slope with goats and children in the rain, the valley turning to water; a long low hull far below. No faces in the light, period clean."
+  },
+  {
+   "shot": "s-noah-ramp",
+   "n": 1,
+   "conversation_id": "373327991587246336",
+   "seconds": 6,
+   "references": [
+    "ch-noah-front",
+    "ch-noah-three-quarter"
+   ],
+   "sheet": "probe-s-noah-ramp-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "Noah right, lips closed, but his robe got a hood and a sailing ship with masts stood behind him. The prompt now says the ark's hull is smeared pitch-black."
+  },
+  {
+   "shot": "s-noah-ramp",
+   "n": 2,
+   "conversation_id": "373331838968346368",
+   "seconds": 6,
+   "references": [
+    "ch-noah-front",
+    "ch-noah-three-quarter"
+   ],
+   "sheet": "probe-s-noah-ramp-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Noah as his refs at the top of the ramp before a pitch-black hull, sheep and goats walk past him into the door, his lips closed. Residuals: a dark-red band low on the hull and water at the foot of the ramp."
+  },
+  {
+   "shot": "s-float",
+   "n": 1,
+   "conversation_id": "373328060940098112",
+   "seconds": 6,
+   "sheet": "probe-s-float-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "A Viking ship with a square sail, and palm trees. Reworded with the roofed black-hull description."
+  },
+  {
+   "shot": "s-float",
+   "n": 2,
+   "conversation_id": "373331700644317824",
+   "seconds": 6,
+   "sheet": "probe-s-float-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A long roofed ark floats over the drowned valley, tents going under, three silhouettes on a floating tree trunk. Period clean."
+  },
+  {
+   "shot": "s-peak",
+   "n": 1,
+   "conversation_id": "373328109502263360",
+   "seconds": 8,
+   "sheet": "probe-s-peak-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The man seen from behind on the rock was right, but the hull had a lit port and a red waterline band, and the clip ends in sunshine without rain. Reworded with the roofed black-hull description."
+  },
+  {
+   "shot": "s-peak",
+   "n": 2,
+   "conversation_id": "373331750929905408",
+   "seconds": 8,
+   "sheet": "probe-s-peak-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A lone man seen from behind, waist-deep by the rock, as the ark drifts past in mist; face never visible. Period clean. Residuals: a small timber cabin on the deck, little visible rain."
+  },
+  {
+   "shot": "s-inside",
+   "n": 1,
+   "conversation_id": "373328164875482880",
+   "seconds": 6,
+   "sheet": "probe-s-inside-1.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "A hanging metal-and-glass candle lantern and blue window panes (the night oil lamp drew it, as in genesis-07). Reworded."
+  },
+  {
+   "shot": "s-inside",
+   "n": 2,
+   "conversation_id": "373331554862952512",
+   "seconds": 6,
+   "sheet": "probe-s-inside-2.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "A small clay oil lamp on a beam still came out as a hanging glass lantern. Reworded to an open fire in a clay bowl."
+  },
+  {
+   "shot": "s-inside",
+   "n": 3,
+   "conversation_id": "373334285606212224",
+   "seconds": 6,
+   "sheet": "probe-s-inside-3.jpg",
+   "verdict": "rejected",
+   "current_prompt": false,
+   "note": "The fire in the clay bowl was right, but a hanging lantern hung at the back again. The interiors (s-inside, s-lamp, s-feed, s-hull) are now by grey daylight through a gap under the roof beams: no lamp at all."
+  },
+  {
+   "shot": "s-inside",
+   "n": 4,
+   "conversation_id": "373335959129067776",
+   "seconds": 6,
+   "sheet": "probe-s-inside-4.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Inside the ark by grey daylight under the roof beams, the family in silhouette braces among the animals. No lantern, no writing, period clean. Residuals: a wide opening in the hull shows the water and mountains, and the family stands in a line."
+  }
+ ]
+}
