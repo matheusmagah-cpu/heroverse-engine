@@ -1778,6 +1778,142 @@ class NativeSpeech(unittest.TestCase):
         self.assertEqual([c["src_start"] for c in cuts], [1.16, 0.0])             # only a talking cut follows the lips
 
 
+class VoiceBinding(unittest.TestCase):
+    """Review of #476 (blocking): a native speech clip's voice is judged against exactly the reference voices.json
+    holds for its speaker (by sha256; a caller's file never replaces it) and against every other speaker's reference;
+    the reference itself is chosen by Claude's review through `episode_build.py voice-reference`, never by hand."""
+    K, E, A = "k" * 64, "e" * 64, "a" * 64
+
+    def setUp(self):
+        import pavo_native
+        self.pn = pavo_native
+        self.saved = pavo_native.VOICES
+        self.root = eb.REPO / "migration" / "evidence" / "shots"
+        self.episode = f"t-voice-{os.getpid()}"
+        self.dir = self.root / self.episode
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.out = Path(tempfile.mkdtemp(prefix="voice-"))
+        self.voices = self.out / "voices.json"
+        self.set_refs(keeper=self.K)
+        pavo_native.VOICES = self.voices
+        self.clip = "c" * 64
+        self.record = self.dir / "40500000002.json"
+        self.record.write_text(json.dumps({"episode": self.episode, "run_id": "40500000002", "shots": {"s-eve": {
+            "request_sha256": "r", "clip_seconds": 6, "request": {"audio": {
+                "route": "pavo_native", "speaker": "eve", "words": ["Why", "do", "you", "hide?"]}},
+            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True}]}}}))
+
+    def tearDown(self):
+        self.pn.VOICES = self.saved
+        shutil.rmtree(self.dir)
+        shutil.rmtree(self.out)
+
+    def set_refs(self, **refs):
+        voices = {w: {"pavo_voice": f"{w}'s voice", "reference": None} for w in ("keeper", "god", "adam", "eve")}
+        for who, sha in refs.items():
+            voices[who]["reference"] = {"clip_sha256": sha}
+        self.voices.write_text(json.dumps({"voices": voices}))
+
+    def measures(self, reference=None, others=None, music=0.0):
+        crit = self.pn.criteria()
+        return {"asr": {"model_bin_sha256": crit["speech"]["asr_model"]["model_bin_sha256"], "text": "Why do you hide?",
+                        "speech_span": [1.0, 3.0]},
+                "voice": {"reference": reference or self.E, "same": 0.93, "others": [0.7] * len(others or [self.K]),
+                          "others_references": others or [self.K]},
+                "lufs": -24.0, "music": music, "singing": 0.0, "lips": []}
+
+    def side(self, measures):
+        (self.dir / "speech").mkdir(exist_ok=True)
+        (self.dir / "speech" / f"{self.clip}.json").write_text(json.dumps({"measures": measures}))
+
+    def approve(self):
+        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out)
+
+    def test_the_verdict_binds_the_speakers_reference_and_every_other_reference(self):
+        line, ok = "Why do you hide?", {"reference": self.E, "others": [self.K]}
+        self.assertEqual(self.pn.speech_verdict(self.measures(), line, binding=ok), [])
+        cases = ((None, self.measures(), "VOICE_REFERENCE_MISSING"),                      # no reference recorded
+                 ({"reference": self.A, "others": [self.K]}, self.measures(), "VOICE_REFERENCE_MISMATCH"),
+                 ({"reference": self.E, "others": []}, self.measures(), "VOICE_OTHERS_MISSING"),   # distinct from none
+                 (ok, dict(self.measures(), voice={"reference": self.E, "same": 0.93, "others": []}),
+                  "VOICE_OTHERS_MISSING"),
+                 ({"reference": self.E, "others": [self.A, self.K]}, self.measures(), "VOICE_OTHERS_MISMATCH"))
+        for binding, m, flag in cases:
+            self.assertEqual(self.pn.speech_verdict(m, line, binding=binding), [flag], flag)
+        self.set_refs(keeper=self.K, eve=self.E, adam=self.A)
+        self.assertEqual(self.pn.voice_binding("eve"), {"reference": self.E, "others": [self.A, self.K]})
+        self.assertEqual(self.pn.voice_binding("god"), {"reference": None, "others": [self.A, self.E, self.K]})
+
+    def test_a_reference_file_is_the_recorded_clip_or_refused(self):
+        clip = self.out / "eve.mp4"
+        clip.write_bytes(b"eve's reference clip")
+        keeper = self.out / "keeper.mp4"
+        keeper.write_bytes(b"the keeper")
+        self.set_refs(keeper=eb.sha256(keeper), eve=eb.sha256(clip))
+        both = {"eve": str(clip), "keeper": str(keeper)}
+        self.assertEqual(eb.voice_references(both), both)
+        other = self.out / "other.mp4"
+        other.write_bytes(b"another voice")
+        for given, code in (({"eve": str(other), "keeper": str(keeper)}, "VOICE_REFERENCE_FILE_MISMATCH"),
+                            ({"eve": str(clip)}, "VOICE_REFERENCE_FILES_MISSING"),      # the others are measured
+                            (dict(both, adam=str(other)), "VOICE_REFERENCE_UNSET")):
+            with self.assertRaises(SystemExit) as err:
+                eb.voice_references(given)
+            self.assertTrue(str(err.exception).startswith(code), (code, str(err.exception)))
+
+    def test_approve_shot_refuses_unchecked_or_failed_speech_and_binds_voices_json(self):
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertTrue(str(err.exception).startswith("SPEECH_UNCHECKED"))
+        self.side(self.measures())
+        with self.assertRaises(SystemExit) as err:                     # eve has no reference in voices.json yet
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_REFERENCE_MISSING")
+        self.set_refs(keeper=self.K, eve=self.A)                       # the sidecar was measured against another clip
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_REFERENCE_MISMATCH")
+        self.set_refs(keeper=self.K, eve=self.E, adam=self.A)          # adam's reference was not measured
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_OTHERS_MISMATCH")
+        self.set_refs(keeper=self.K, eve=self.E)
+        self.side(self.measures(music=0.3))
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve PAVO_MUSIC")
+        self.side(self.measures())
+        self.assertEqual(self.approve()["speech"]["flags"], [])
+
+    def test_voice_reference_records_a_reviewed_clips_sha256_by_command(self):
+        def choose(score="9.6", note="one warm clear voice"):
+            return eb.voice_reference_step(self.record, "s-eve", "shot-x.mp4", score, note, today="2026-10-28")
+        with self.assertRaises(SystemExit) as err:
+            choose()
+        self.assertTrue(str(err.exception).startswith("SPEECH_UNCHECKED"))
+        self.side(self.measures(music=0.3))
+        with self.assertRaises(SystemExit) as err:                     # every check but the voice ones must pass
+            choose()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve PAVO_MUSIC")
+        self.side(self.measures())
+        with self.assertRaises(SystemExit) as err:
+            choose(score="9.4")
+        self.assertTrue(str(err.exception).startswith("SHOT_SCORE_OUT_OF_RANGE"))
+        ref = choose()
+        self.assertEqual((ref["clip_sha256"], ref["shot"], ref["run_id"]), (self.clip, "s-eve", "40500000002"))
+        self.assertEqual(self.pn.voice_reference("eve"), self.clip)       # copied from the record, never typed
+        self.assertEqual(choose()["previous"]["clip_sha256"], self.clip)   # a replaced reference is kept
+        kokoro = json.loads(self.record.read_text())
+        kokoro["shots"]["s-eve"]["request"]["audio"]["route"] = None
+        self.record.write_text(json.dumps(kokoro))
+        with self.assertRaises(SystemExit) as err:
+            choose()
+        self.assertTrue(str(err.exception).startswith("VOICE_REFERENCE_NOT_NATIVE"))
+        text = (eb.HERE / "episode_build.py").read_text()
+        self.assertIn('cmd == "voice-reference"', text)
+        self.assertIn("episode_build.py voice-reference", json.loads(self.saved.read_text())["about"])
+
+
 class ProbeRecordOnAnyExit(unittest.TestCase):
     """Review of #475: a probe cancelled, timed out or crashed while a shot waited on Pavo lost that shot's submitted
     generations from out/probe.json, so the next dispatch guard under-counted the day's units."""

@@ -63,6 +63,10 @@ the episode record and dispatches publish-episode.yml.
   episode_build.py approve-shot RECORD SHOT ASSET SCORE NOTE
                                                  E114: Claude's frame review (SCORE >= 9.5) approves one probed clip
                                                  into shots/<episode>.json (by PR); the build ships that clip
+  episode_build.py voice-reference RECORD SHOT ASSET SCORE NOTE
+                                                 story QA v4 (review of #476): Claude's review (>= 9.5) records one
+                                                 probed native clip's sha256 as its speaker's reference in voices.json
+                                                 (by PR); speech-check and approve-shot bind every voice to it
   episode_build.py check-record EPISODE_JSON [VIDEO]
                                                  what publish-episode.yml would refuse in the record (title,
                                                  description, disclosure, the words), before it is dispatched
@@ -1340,7 +1344,7 @@ def speech_check_step(plan_path, record_path, shot_id, clip, whisper_dir, yamnet
     out = REPO / "migration" / "evidence" / "shots" / str(record["episode"]) / "speech" / f"{clip_sha}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     words = " ".join(((entry.get("request") or {}).get("audio") or {}).get("words") or [])
-    verdict = pavo_native.speech_verdict(measures, words, reference=pavo_native.voice_reference(who))
+    verdict = pavo_native.speech_verdict(measures, words, binding=pavo_native.voice_binding(who))
     save(out, {"shot": shot_id, "clip_sha256": clip_sha, "measures": measures, "verdict": verdict})
     return {"shot": shot_id, "sidecar": rel(out), "verdict": verdict}
 
@@ -1365,7 +1369,8 @@ def voice_references(given, voices=None):
     return out
 
 
-VOICE_FLAGS = ("VOICE_REFERENCE_MISSING", "VOICE_OTHERS_MISSING", "VOICE_NOT_CONSISTENT", "VOICE_NOT_DISTINCT")
+VOICE_FLAGS = ("VOICE_REFERENCE_MISSING", "VOICE_REFERENCE_MISMATCH", "VOICE_OTHERS_MISSING", "VOICE_OTHERS_MISMATCH",
+               "VOICE_NOT_CONSISTENT", "VOICE_NOT_DISTINCT")
 
 
 def voice_reference_step(record_path, shot_id, asset, score, note, voices_path=None, today=None):
@@ -1823,7 +1828,7 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
                              f"{rel(side)})")
         speech = pavo_native.speech_record(clip["clip_sha256"], load(side).get("measures") or {},
                                            " ".join(audio.get("words") or []),
-                                           reference=pavo_native.voice_reference(audio.get("speaker")))
+                                           binding=pavo_native.voice_binding(audio.get("speaker")))
         if speech["flags"]:
             raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"

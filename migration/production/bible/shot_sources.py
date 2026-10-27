@@ -398,7 +398,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                 raise SystemExit(f"REUSE_SPEECH_UNCHECKED {shot_id} (episode_build.py speech-check on the clip first)")
             speech = pavo_native.speech_record(clip["clip_sha256"], json.loads(Path(side).read_text()).get(
                 "measures") or {}, pavo_native.shot_line(plan, i),
-                reference=pavo_native.voice_reference(pavo_native.speaker(shot)))
+                binding=pavo_native.voice_binding(pavo_native.speaker(shot)))
             if speech["flags"]:
                 raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
             entry["speech"] = speech

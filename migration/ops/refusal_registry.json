@@ -2456,9 +2456,37 @@
    "class": "C",
    "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
   },
+  "VOICE_OTHERS_MISMATCH": {
+   "class": "C",
+   "probe": "review of #476: the measured others must be exactly every other speaker's reference in voices.json (pavo_native.voice_binding). Knowable only on a generated clip: episode_build.py speech-check measures every reference voices.json holds (VOICE_REFERENCE_FILES_MISSING otherwise), approve-shot recomputes"
+  },
+  "VOICE_OTHERS_MISSING": {
+   "class": "C",
+   "probe": "review of #476: a voice is distinct only from measured others; with no other speaker's reference in voices.json, or none measured, the clip is refused. Knowable only on a generated clip (episode_build.py speech-check, recomputed at approve-shot); a second speaker's reference is chosen first with episode_build.py voice-reference"
+  },
+  "VOICE_REFERENCE_FILES_MISSING": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command before approve-shot: every reference voices.json holds must be given, so the 'others' a voice is distinct from are every other speaker"
+  },
+  "VOICE_REFERENCE_FILE_MISMATCH": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command before approve-shot (no generation, voice or render): it refuses a REFS file that is not the clip voices.json holds as that speaker's reference (sha256), so a caller's file never replaces the recorded one"
+  },
+  "VOICE_REFERENCE_MISMATCH": {
+   "class": "C",
+   "probe": "review of #476: a speech clip's voice is measured against exactly the reference voices.json holds for its speaker (pavo_native.voice_binding, sha256). Knowable only on a generated clip: episode_build.py speech-check measures it (its REFS checked against voices.json first, episode_build.voice_references), approve-shot and approve-source pavo_reuse recompute the verdict against voices.json"
+  },
   "VOICE_REFERENCE_MISSING": {
    "class": "C",
    "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "VOICE_REFERENCE_NOT_NATIVE": {
+   "class": "N",
+   "why": "review of #476: voice-reference is the review's own local command (Claude, after reviewing a probed clip, before the PR): a reference is Pavo's own speech only, so a Kokoro-route clip is refused as a wrong argument"
+  },
+  "VOICE_REFERENCE_UNSET": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command: a REFS file for a speaker with no reference in voices.json is refused (episode_build.py voice-reference chooses one first, by PR)"
   },
   "VOICE_RETRY": {
    "class": "N",

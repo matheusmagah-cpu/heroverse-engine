@@ -248,12 +248,22 @@ def voice_reference(speaker_id, voices=None):
     return ref.get("clip_sha256") if isinstance(ref, dict) else None
 
 
-def speech_verdict(measures, line, crit=None, reference=None):
+def voice_binding(speaker_id, voices=None):
+    """Review of #476: what a speech clip's voice must be measured against, from voices.json only: this speaker's
+    reference clip sha256 and every other speaker's reference sha256 (the "others" the margin is judged on)."""
+    voices = load_voices() if voices is None else voices
+    others = sorted(r for w in voices if w != speaker_id for r in [voice_reference(w, voices)] if r)
+    return {"reference": voice_reference(speaker_id, voices), "others": others}
+
+
+def speech_verdict(measures, line, crit=None, binding=None):
     """Flags of one Pavo speech clip under story QA v4 (empty: it passes). `measures`: asr {model_bin_sha256, text},
     voice {reference (sha256 or None), same (cosine to its character's reference), others (cosines to the other
     characters' references)}, lufs (integrated, the clip's speech), music, singing (YAMNet shares), lips (the flags of
-    lipsync_check / --still-mouth / --faces by its kind). A missing measure is a flag, never a pass. `reference`: the
-    speaker's reference clip sha256 in voices.json; the measure must be against exactly it (review of #476)."""
+    lipsync_check / --still-mouth / --faces by its kind). A missing measure is a flag, never a pass. `binding`
+    (voice_binding, review of #476): the voice is measured against exactly the speaker's reference in voices.json
+    (VOICE_REFERENCE_MISSING / VOICE_REFERENCE_MISMATCH) and against every other speaker's reference there, none
+    missing and none extra (VOICE_OTHERS_MISSING when there is none: distinct from no one is not distinct)."""
     crit = criteria() if crit is None else crit
     checks = crit["rights"]["ai_video"]["speech_checks"]
     pinned = crit["speech"]["asr_model"]["model_bin_sha256"]
@@ -266,12 +276,16 @@ def speech_verdict(measures, line, crit=None, reference=None):
     elif wer(line, asr["text"]) > checks["exact_words_wer_max"] + 1e-9:
         flags.append("SPEECH_WORDS_NOT_EXACT")
     voice = measures.get("voice") or {}
-    if not voice.get("reference") or not reference:
+    binding = binding or {}
+    others, measured = voice.get("others") or [], voice.get("others_references") or []
+    if not voice.get("reference") or not binding.get("reference"):
         flags.append("VOICE_REFERENCE_MISSING")
-    elif voice["reference"] != reference:
+    elif voice["reference"] != binding["reference"]:
         flags.append("VOICE_REFERENCE_MISMATCH")
-    elif not voice.get("others"):   # distinct from whom? every other speaker's reference is measured
+    elif not binding.get("others") or not others:   # distinct from whom? every other speaker's reference is measured
         flags.append("VOICE_OTHERS_MISSING")
+    elif sorted(measured) != sorted(binding["others"]) or len(others) != len(measured):
+        flags.append("VOICE_OTHERS_MISMATCH")
     elif not isinstance(voice.get("same"), (int, float)) or voice["same"] < checks["voice_same_character_cosine_min"]:
         flags.append("VOICE_NOT_CONSISTENT")
     elif max(voice.get("others") or [-1.0]) > voice["same"] - checks["voice_other_character_margin_min"] + 1e-9:
@@ -330,19 +344,20 @@ def measure(clip, whisper_dir, yamnet, references, speaker_id, lips, run=None):
         def cos(path):
             other = enc.embed_utterance(preprocess_wav(str(path)))
             return round(float((mine * other).sum()), 4)   # embeddings are L2-normalised
+        rest = [p for who, p in sorted(references.items()) if who != speaker_id]
         voice = {"reference": sha256_file(references[speaker_id]), "same": cos(references[speaker_id]),
-                 "others": [cos(p) for who, p in sorted(references.items()) if who != speaker_id]}
+                 "others": [cos(p) for p in rest], "others_references": [sha256_file(p) for p in rest]}
     return {"asr": {"model_bin_sha256": sha256_file(Path(whisper_dir) / "model.bin"), "text": text,
                     "speech_span": span},
             "music": shares.get("music"), "singing": shares.get("singing"), "lufs": lufs, "voice": voice,
             "lips": list(lips) if lips is not None else None}
 
 
-def speech_record(clip_sha, measures, line, crit=None, reference=None):
+def speech_record(clip_sha, measures, line, crit=None, binding=None):
     """What approve-shot copies into a native clip's approval: the verdict recomputed from the measures (never a
     recorded `flags` field), the speech span and the one gain to the common level."""
     crit = criteria() if crit is None else crit
-    flags = speech_verdict(measures, line, crit, reference)
+    flags = speech_verdict(measures, line, crit, binding)
     onset, end = speech_span(measures) if not flags else ((measures.get("asr") or {}).get("speech_span") or [None, None])
     return {"clip_sha256": clip_sha, "flags": flags, "onset": onset, "end": end, "lufs": measures.get("lufs"),
             "gain_db": clip_gain_db(measures.get("lufs"), crit["rights"]["ai_video"]["speech_checks"]),

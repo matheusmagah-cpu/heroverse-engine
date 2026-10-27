@@ -169,32 +169,35 @@ class ApproveSource(unittest.TestCase):
 class SpeechChecks(unittest.TestCase):
     """R4 / story QA v4: each kept speech clip, measured; a missing measure never passes."""
     LINE = "Who told thee that thou wast naked"
+    BIND = {"reference": "r", "others": ["a", "k"]}   # voices.json's references (pavo_native.voice_binding)
 
     def good(self):
         return {"asr": {"model_bin_sha256": V4["speech"]["asr_model"]["model_bin_sha256"], "text": self.LINE + "?",
                         "speech_span": [1.2, 4.0]},
-                "voice": {"reference": "r", "same": 0.93, "others": [0.72, 0.64]}, "lufs": -24.0, "music": 0.0,
+                "voice": {"reference": "r", "same": 0.93, "others": [0.72, 0.64], "others_references": ["k", "a"]},
+                "lufs": -24.0, "music": 0.0,
                 "singing": 0.0, "lips": []}
 
     def test_a_clean_clip_passes_and_each_defect_fails(self):
-        self.assertEqual(pn.speech_verdict(self.good(), self.LINE, V4), [])
+        self.assertEqual(pn.speech_verdict(self.good(), self.LINE, V4, self.BIND), [])
         cases = {"SPEECH_WORDS_NOT_EXACT": ("asr", {"text": "Who told thee that thou was naked"}),
                  "ASR_MODEL_NOT_PINNED": ("asr", {"model_bin_sha256": "base.en"}),
                  "VOICE_REFERENCE_MISSING": ("voice", {"reference": None}),
                  "VOICE_NOT_CONSISTENT": ("voice", {"same": 0.85}),
-                 "VOICE_NOT_DISTINCT": ("voice", {"same": 0.893, "others": [0.878]}),   # #473: Adam vs the Keeper
+                 "VOICE_NOT_DISTINCT": ("voice", {"same": 0.893, "others": [0.878, 0.6]}),   # #473: Adam vs Keeper
                  "SPEECH_LEVEL_UNREACHABLE": ("lufs", -31.0), "PAVO_MUSIC": ("music", 0.2),
                  "PAVO_SINGING": ("singing", 0.1), "LIPS_NOT_CHECKED": ("lips", None)}
         for flag, (key, value) in cases.items():
             m = self.good()
             m[key] = dict(m[key], **value) if isinstance(value, dict) else value
-            self.assertIn(flag, pn.speech_verdict(m, self.LINE, V4), flag)
+            self.assertIn(flag, pn.speech_verdict(m, self.LINE, V4, self.BIND), flag)
         m = self.good()
         m["lips"] = ["MOUTH_NOT_IN_SYNC"]
-        self.assertEqual(pn.speech_verdict(m, self.LINE, V4), ["MOUTH_NOT_IN_SYNC"])
+        self.assertEqual(pn.speech_verdict(m, self.LINE, V4, self.BIND), ["MOUTH_NOT_IN_SYNC"])
+        self.assertIn("VOICE_REFERENCE_MISSING", pn.speech_verdict(self.good(), self.LINE, V4))   # no binding
 
     def test_the_approval_record_holds_the_span_and_one_gain(self):
-        rec = pn.speech_record("c", self.good(), self.LINE, V4)
+        rec = pn.speech_record("c", self.good(), self.LINE, V4, self.BIND)
         self.assertEqual((rec["flags"], rec["onset"], rec["end"], rec["gain_db"]), ([], 1.2, 4.0, 6.0))
         self.assertEqual(pn.clip_gain_db(-27.6, V4["rights"]["ai_video"]["speech_checks"]), 9.6)   # #473's God clip
         self.assertIsNone(pn.clip_gain_db(-31.0, V4["rights"]["ai_video"]["speech_checks"]))
