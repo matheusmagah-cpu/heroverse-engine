@@ -654,12 +654,14 @@ class NoRendererReadsTheNewQaYet(unittest.TestCase):
             self.assertEqual(early, [], "story QA v2/v3 referenced before qa_pilot/prepublish_gate can read them "
                                         "(LONG_DESIGN.md, build blocker)")
 
-    def test_the_readers_still_index_the_v1_keys(self):
-        # the gap this guards: the keys v2/v3 removed are read directly today
+    def test_the_readers_read_v3_and_the_older_pilots_keep_their_own_keys(self):
+        # E126 (slice 3 of the readers): qa_pilot and prepublish_gate read story QA v3 by its own rows
+        # (STORY_V3_ROWS, test_qa_pilot / test_prepublish_gate StoryV3); the v1 keys stay for the frozen older pilots
         qa_pilot = (ROOT / "migration" / "production" / "qa_pilot.py").read_text()
         self.assertIn('g["caption_coverage_of_speech_min"]', qa_pilot)
         self.assertIn('g["footage_picture_share_min"]', qa_pilot)
-        self.assertNotIn("story-qa-criteria-v3", (ROOT / "migration" / "publish" / "prepublish_gate.py").read_text())
+        self.assertIn("story-qa-criteria-v3", (ROOT / "migration" / "publish" / "prepublish_gate.py").read_text())
+        self.assertIn("STORY_V3_ROWS", qa_pilot)
 
 
 if __name__ == "__main__":

@@ -72,24 +72,9 @@ script counts once the full `script_check` passes; a prayer long still scheduled
 - Voice: the Shorts use ElevenLabs "George" through vidIQ (about 14 credits a minute: about 220 for a 16-minute long,
   which the budget cannot carry every other day). The long uses the engine's free Kokoro voice `am_michael`, the
   voice the frozen gate pins (`qa_pilot.voice_model_pinned`); a different Kokoro voice would mean changing a gate.
-- Long, from 2026-10-26 (owner: the Keeper narrating, the same characters as the Shorts): designed in
-  `LONG_DESIGN.md`, a shot plan (`plans/<arc>-long.json`, `bible-long-plan-v1`) checked by `long_plan_check.py`
-  against the structure's gate and the frozen story QA v3 (owner, 2026-10-26: approved characters on screen, up to
-  100 % Pavo with clip_check and lipsync_check, the acted cold open first, an .srt track instead of burned captions).
-  One long per arc of `arcs.json` (arc-01 = Genesis 1-3, Shorts 1-4). No real-footage minimum (owner, 2026-10-27:
-  "Libera o pavo no longo"): every Pavo clip held to the Shorts' checks, the 9.5 floor unchanged. Not built yet; the
-  two lines below describe the old footage path (story QA v1), superseded by v3.
-- Long (old path): the engine's free render path (GitHub Actions, Kokoro voice, licensed footage plus free FLUX stills from
-  `cf-images.yml`, Scripture cards, captions), with its own script spec and frozen QA for the story format
-  (`production/qa_criteria_story_v1.json`, frozen 2026-10-25): technical floors equal to v4 (loudness, true peak, speech, WER, black and silence
-  scan), Claude review at 9.5, AI visuals disclosed. Prayer-only rules (prayer hook, "prayer request" CTA, morning or
-  night titles) do not apply to the story format; no frozen v2/v3/v4 file is edited.
-- Picture follows the words (owner, 2026-10-25: "not any landscape"). Every segment of a story long names the
-  clips mined for what it says (`shots`), from `pilot-NNN/beats-N.json` (one query per segment, run through
-  `footage.yml` with `queries`), and the moment stills of what footage cannot show (people, the cherubim). The gate
-  (`script_check.picture_problems`) refuses a segment without enough matched shots for its cuts and any clip no
-  segment asked for. Under story QA v1 Pavo filled up to 55 % and real footage at least 40 %; v3 (the acted long)
-  drops that minimum: up to 100 % Pavo.
+- Long: one per arc of `arcs.json` (arc-01 = Genesis 1-3, Shorts 1-4). How it is planned, built, measured and
+  published is `LONG_DESIGN.md` only (owner, 2026-10-26: the Keeper narrating, the same characters as the Shorts;
+  owner, 2026-10-27: "Libera o pavo no longo").
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)

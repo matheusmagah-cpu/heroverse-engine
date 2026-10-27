@@ -46,19 +46,35 @@ def check(response, what):
     return response.json() if response.content else {}
 
 
-def srt_problems(manifest):
-    """The strict problems of the SRT this manifest would upload, measured against the video's length (E107)."""
-    text = captions.srt(manifest.get("sentences") or [])
-    return captions.problems(text.encode("utf-8"), manifest.get("output_seconds"))
+def srt_problems(manifest, base=None):
+    """The strict problems of the SRT this manifest would upload, measured against the video's length (E107); for
+    the acted long (`caption_track`, story QA v3) also its recorded hash and, with `base`, its written file."""
+    return captions.manifest_problems(manifest, base)
 
 
 def caption_tracks(s, vid):
     return captions.tracks(check(s.get(API + "captions", params={"part": "snippet", "videoId": vid}), "CAPTIONS_LIST"))
 
 
-def insert_captions(s, vid, sentences, duration=None):
-    """captions.insert of our English track; the SRT is validated before the call (E107). Returns the track id."""
-    text = captions.srt(sentences)
+V3_LONG = "story-qa-criteria-v3"
+
+
+def caption_track_missing(manifest_path, manifest):
+    """Story QA v3 (the acted long) carries its words only as the uploaded .srt (no burned captions): a v3 render
+    whose manifest records no `caption_track` would go up with the one-cue-per-sentence prayer track, outside v3's
+    cue limits. The QA beside the manifest names the criteria; qa_pilot fails that render first (caption_track)."""
+    try:
+        qa = json.loads((Path(manifest_path).parent / "qa.json").read_text())
+    except (OSError, ValueError):
+        return False
+    return isinstance(qa, dict) and qa.get("criteria_version") == V3_LONG and not isinstance(
+        manifest.get("caption_track"), dict)
+
+
+def insert_captions(s, vid, sentences, duration=None, track=None):
+    """captions.insert of our English track (the acted long's short cues when `track`, its manifest's
+    caption_track, is given); the SRT is validated before the call (E107). Returns the track id."""
+    text = captions.track_srt(sentences, track)
     bad = captions.problems(text.encode("utf-8"), duration)
     if bad:
         raise SystemExit("CAPTIONS_SRT_INVALID: " + "; ".join(bad[:5]))
@@ -109,7 +125,8 @@ def replace_captions(s, vid, steps, manifest, bad):
         return True
     if old and old["track_kind"] in ("standard", "STANDARD"):
         check(s.delete(API + "captions", params={"id": old["id"]}), "CAPTIONS_DELETE")
-    steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"))
+    steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"),
+                                              manifest.get("caption_track"))
     steps["captions"] = True
     for k in ("captions_status", "captions_failure_reason", "captions_srt_invalid"):
         steps.pop(k, None)
@@ -289,9 +306,11 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
     entry = ledger["entries"].get(key, {"steps": {}})
     if "video_id" not in entry:
         check_new_upload(manifest_path, manifest, video)
-    bad_srt = srt_problems(manifest) if manifest.get("sentences") else []
+    bad_srt = srt_problems(manifest, Path(manifest_path).parent) if manifest.get("sentences") else []
     if "video_id" not in entry and bad_srt:  # a new upload never goes up with captions it cannot carry (E107)
         raise SystemExit("CAPTIONS_SRT_INVALID: " + "; ".join(bad_srt[:5]))
+    if "video_id" not in entry and caption_track_missing(manifest_path, manifest):
+        raise SystemExit("CAPTIONS_TRACK_MISSING: a story QA v3 long uploads its recorded .srt track (caption_track)")
     s = session()
     if [c["id"] for c in check(s.get(API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -324,7 +343,8 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
         elif bad_srt:  # a resumed upload of a legacy manifest: a warning, never an invalid track or a blocked chain
             srt_invalid_warning(vid, steps, bad_srt)
         else:
-            steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"))
+            steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"),
+                                                      manifest.get("caption_track"))
             steps["captions"], inserted = True, True
         save()
     captions_failed = None

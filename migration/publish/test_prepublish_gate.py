@@ -209,5 +209,64 @@ class StoryV1(unittest.TestCase):
         self.assertEqual(run(wrong, man, rev)["dimensions"]["rights"], "FAIL")
 
 
+class StoryV3(unittest.TestCase):
+    """E126: the acted Bible-story long is measured by the frozen story QA v3 (no footage minimum: owner,
+    2026-10-27), and every v3 row is an item of the gate: PASS, FAIL or UNKNOWN, never skipped."""
+    CRIT = (PROD / "qa_criteria_story_v3.json").read_bytes()
+
+    def v3(self):
+        rows = g.story_v3_rows()
+        checks = sorted({n for names in rows.values() for n in names})
+        qa, man, rev = good()
+        qa.update({"criteria_version": "story-qa-criteria-v3", "criteria_sha256": hashlib.sha256(self.CRIT).hexdigest(),
+                   "checks": {c: True for c in checks}})
+        return qa, man, rev
+
+    def test_v3_is_pinned_and_its_file_is_the_frozen_one(self):
+        self.assertEqual(hashlib.sha256(self.CRIT).hexdigest(), g.FROZEN_CRITERIA_SHA256["story-qa-criteria-v3"])
+        self.assertIn("story-qa-criteria-v3", g.STANDARD_VERSIONS)
+        self.assertEqual(g.CRITERIA_FILES["story-qa-criteria-v3"].read_bytes(), self.CRIT)
+
+    def test_every_v3_row_is_an_item_and_a_full_qa_passes(self):
+        crit = json.loads(self.CRIT)
+        rows = sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in crit[s])
+        r = run(*self.v3())
+        self.assertEqual(sorted(i["item"] for i in r["items"]["story_qa_v3"]), rows)
+        self.assertEqual(r["dimensions"]["story_qa_v3"], "PASS")
+        for dim in ("binding", "technical", "audio", "transcript", "captions", "sync", "image", "rights"):
+            self.assertEqual(r["dimensions"][dim], "PASS", dim)
+        # every qa check a v3 row names is read by a dimension too
+        named = {n for names in g.story_v3_rows().values() for n in names}
+        read = {n for spec in g.dimensions_story_v3().values() for n in spec["qa"]}
+        self.assertEqual(named - read, set())
+
+    def test_no_footage_minimum_and_no_v1_row(self):
+        read = {n for spec in g.dimensions_story_v3().values() for n in spec["qa"]}
+        for gone in ("footage_picture_share", "title_card_seconds", "no_figure", "caption_hold_median",
+                     "caption_coverage_of_speech", "caption_chars_max"):
+            self.assertNotIn(gone, read)
+        qa, man, rev = self.v3()
+        self.assertNotIn("footage_picture_share", qa["checks"])
+        self.assertEqual(run(qa, man, rev)["dimensions"]["image"], "PASS")
+
+    def test_a_failed_absent_or_unknown_check_never_passes_its_row(self):
+        qa, man, rev = self.v3()
+        bad = copy.deepcopy(qa); bad["checks"]["srt_cue_words_max"] = False
+        r = run(bad, man, rev)
+        state = {i["item"]: i["state"] for i in r["items"]["story_qa_v3"]}
+        self.assertEqual((state["grammar.srt_cue_words_max"], r["dimensions"]["captions"]), ("FAIL", "FAIL"))
+        gone = copy.deepcopy(qa); del gone["checks"]["first_shot_cold_open"]
+        r = run(gone, man, rev)
+        state = {i["item"]: i["state"] for i in r["items"]["story_qa_v3"]}
+        self.assertEqual((state["grammar.first_shot"], r["decision"]), ("UNKNOWN", "UNKNOWN"))
+        unknown = copy.deepcopy(qa); unknown["checks"]["ai_video_clip_checks"] = None
+        r = run(unknown, man, rev)
+        state = {i["item"]: i["state"] for i in r["items"]["story_qa_v3"]}
+        self.assertEqual((state["grammar.ai_video_clip_checks"], r["dimensions"]["image"]), ("UNKNOWN", "UNKNOWN"))
+        other = copy.deepcopy(qa); other["output_sha256"] = "0" * 64
+        r = run(other, man, rev)
+        self.assertEqual({i["state"] for i in r["items"]["story_qa_v3"]}, {"UNKNOWN"})
+
+
 if __name__ == "__main__":
     unittest.main()
