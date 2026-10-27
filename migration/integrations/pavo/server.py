@@ -9,11 +9,12 @@ from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
 from client import PavoError
 from image_gen import PavoImageClient
+from quota import QuotaGuard
 
 mcp = MCPServer("heroverse-pavo", version="0.5.0", log_level="CRITICAL",
                 instructions="Unofficial Pavo connection. Generate only with a fresh exact zero-credit quote. "
                              "Never retry an uncertain submission; check its conversation_id with pavo_job.")
-client = PavoImageClient()
+client = PavoImageClient(guard=QuotaGuard())   # E124: daily cap + stop after failed read-backs
 read = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True)
 local = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 write = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=True)

@@ -1029,9 +1029,25 @@
    "class": "D",
    "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_DAILY_CAP": {
+   "class": "D",
+   "resume": "E124: the day's free-image cap (quota.py, 120 a UTC day) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
+  },
+  "PAVO_FREE_QUOTA_SUSPECTED": {
+   "class": "D",
+   "resume": "E124: two failed read-backs in a row suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
+  },
   "PAVO_HISTORY_SCHEMA_CHANGED": {
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_IMAGE_DAILY_CAP": {
+   "class": "N",
+   "why": "an environment variable name (the cap's override), not a refusal"
+  },
+  "PAVO_IMAGE_LEDGER": {
+   "class": "N",
+   "why": "an environment variable name (the ledger path override), not a refusal"
   },
   "PAVO_INTERNAL_ERROR": {
    "class": "D",
@@ -1040,6 +1056,10 @@
   "PAVO_JOB": {
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_LEDGER_UNREADABLE": {
+   "class": "D",
+   "resume": "E124: the image ledger (migration/evidence/pavo/image-ledger.json) cannot be read or holds malformed fields; nothing was sent. Fix it by PR (resolve a merge conflict, restore the time zone or counts), then generate the missing candidates; the ones already made are kept"
   },
   "PAVO_MEDIA_URL_REFUSED": {
    "class": "D",

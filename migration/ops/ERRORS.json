@@ -1159,6 +1159,29 @@
      "recurrence"
     ]
    }
+  },
+  {
+   "id": "E124",
+   "date": "2026-10-27",
+   "class": [
+    "capacity",
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E116",
+    "E121"
+   ],
+   "error": "genesis-09 run 2026102705 (#461): 31 of 34 Pavo agnes-image submissions failed. Pavo's free image quota ran out after ~156 completed stills that day (genesis-09 runs 2026102701-05, genesis-08 run 20261027, the ark props, the ark probe, two thumbnail candidates); the owner's app showed 'the free model quota has been used up ... try again in 3 hours' (refunded, nothing spent). Root cause: the adapter's only spending check was the price quote, and /v1/aigc/credits/calculate kept answering required_credits 0.0, is_estimate false for every call after the quota was gone: the price does not see the free-generation quota. pavo_image_job returned only status 'failed' with no images and no reason, and nothing counted the day's generations or stopped after a failed read-back, so the session kept submitting in batches (31 burned, the run left with 3 of 64 candidates).",
+   "fix": "migration/integrations/pavo/quota.py QuotaGuard, wired in server.py (PavoImageClient(guard=QuotaGuard())): PAVO_DAILY_CAP refuses before the quote (nothing sent) once the UTC day's submissions reach the cap (120; env PAVO_IMAGE_DAILY_CAP or the ledger's daily_cap); every submission that created a conversation is counted in migration/evidence/pavo/image-ledger.json (env PAVO_IMAGE_LEDGER; counts and conversation ids only). pavo_image_job feeds the guard: two read-backs in a row that end failed with no image (each job once) suspend generation for 3 h (PAVO_FREE_QUOTA_SUSPECTED); after the cool-down one probe may go, a failed read-back suspends again at once, a completed one lifts it. The ledger is seeded with 2026-10-27's reconstructed count (187 submissions) and the 31 failed jobs. README 'Free image quota': a 0 quote does not mean the free quota is available; read back jobs before submitting many more. Codes registered class D (quota.py in the refusal-parity scan). Review of #466: after the cool-down exactly one probe is allowed and every other call is refused until it reads back; only a job submitted after suspended_at lifts the suspension; a ledger that cannot be read or holds malformed fields fails closed (PAVO_LEDGER_UNREADABLE); a malformed env cap is ignored for the default; the ledger is written through a unique tempfile.mkstemp file.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "class FreeQuota",
+    "covers": [
+     "capacity",
+     "silent"
+    ]
+   }
   }
  ]
 }
