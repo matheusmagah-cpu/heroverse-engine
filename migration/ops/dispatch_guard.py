@@ -184,6 +184,16 @@ def agnes_clip(i):
     return {"uploads": 0, "deps": ["migration/production/characters/"]}
 
 
+def scene_stills(i):
+    plan = _plan(i)
+    shots = ids(i.get("shots"))
+    need(shots and re.fullmatch(IDS, i.get("shots", "")), "shots", i.get("shots"), "comma list of shot ids")
+    known = {s.get("id") for s in plan.get("shots", [])}
+    need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan ({len(known)} shots)")
+    need(re.fullmatch(r"[1-3]", i.get("candidates") or ""), "candidates", i.get("candidates"), "1-3")
+    return {"uploads": 0, "deps": [i["plan"], "migration/production/bible/stills/"]}   # a review branch, no asset
+
+
 def publish_episode(i):
     ep = i.get("episode", "")
     need(re.fullmatch(SLUG, ep), "episode", ep, "an episode id")
@@ -204,7 +214,7 @@ def subject_of(workflow, inputs):
     characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
     failure history (4) is keyed on workflow + subject. None: the workflow has no subject (agnes-clip)."""
     first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
-    if workflow in ("episode.yml", "shot-probe.yml"):
+    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml"):
         return first
     if workflow == "publish-episode.yml":
         return f"migration/production/bible/plans/{first}.json"
@@ -228,12 +238,13 @@ WORKFLOWS = {
     "pavo-footage.yml": (("list",), pavo_footage),
     "agnes-clip.yml": (("seconds", "aspect", "characters", "first_frame", "prompt"), agnes_clip),
     "publish-episode.yml": (("episode", "source_url", "publish_at"), publish_episode),
+    "scene-stills.yml": (("plan", "shots", "candidates"), scene_stills),
 }
 # the job of each workflow that holds its subject's concurrency group (pavo-footage's work is a matrix of clip jobs:
 # GitHub keeps one pending job per group and cancels the rest, so it keeps its workflow-level group only)
 SUBJECT_JOBS = {"episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
                 "pilot-render-stills.yml": "render", "pilot-preview.yml": "preview", "footage.yml": "library",
-                "publish-episode.yml": "publish"}
+                "publish-episode.yml": "publish", "scene-stills.yml": "stills"}
 
 
 def run_name(workflow, inputs):
@@ -537,17 +548,28 @@ def cf_daily_images():
 
 
 def cf_images_today(api, today):
-    """FLUX images recorded on main today (UTC), by REST, with episode_preflight's own predicate
-    (cf_allocation.flux_record)."""
+    """FLUX images recorded today (UTC), by REST, with episode_preflight's own predicate (cf_allocation.flux_record):
+    the records cf-images.yml commits to main and the candidates scene-stills.yml commits to its review branches."""
     sys.path.insert(0, str(ROOT / "migration" / "production" / "imagegen"))
     import cf_allocation
+    shas = [c["sha"] for c in api(f"commits?sha=main&since={today}T00:00:00Z&per_page=100") or []
+            if cf_allocation.MARK in (c["commit"]["message"] or "").split("\n", 1)[0]]
+    page = 1
+    while page <= 10:
+        batch = api(f"branches?per_page=100&page={page}") or []
+        shas += [b["commit"]["sha"] for b in batch if b["name"].startswith(cf_allocation.STILLS_BRANCH)]
+        if len(batch) < 100:
+            break
+        page += 1
     used = 0
-    for c in api(f"commits?sha=main&since={today}T00:00:00Z&per_page=100") or []:
-        subject = c["commit"]["message"].splitlines()[0] if c["commit"]["message"] else ""
-        if cf_allocation.MARK in subject:
-            files = (api(f"commits/{c['sha']}") or {}).get("files", [])
-            used += sum(1 for f in files if f.get("status") == "added"
-                        and cf_allocation.flux_record(subject, f["filename"]))
+    for sha in dict.fromkeys(shas):
+        c = api(f"commits/{sha}") or {}
+        meta = c.get("commit", {})
+        subject = (meta.get("message") or "").split("\n", 1)[0]
+        if not (meta.get("committer") or {}).get("date", "").startswith(today):
+            continue
+        used += sum(1 for f in c.get("files", []) if f.get("status") == "added"
+                    and cf_allocation.flux_record(subject, f["filename"]))
     return used
 
 
@@ -629,7 +651,7 @@ def check_local(workflow, inputs):
         refuse("GUARD_WORKFLOW_UNKNOWN", f"{workflow}: add it to dispatch_guard.WORKFLOWS")
     facts = WORKFLOWS[workflow][1](inputs)
     facts["subject"] = subject_of(workflow, inputs)
-    facts["flux"] = workflow == "cf-images.yml" and inputs.get("engine") == "flux"
+    facts["flux"] = (workflow == "cf-images.yml" and inputs.get("engine") == "flux") or workflow == "scene-stills.yml"
     scan = static_import_problems(workflow)      # once: its problems here, its files for (4)
     bad = import_problems(workflow, scan)
     if bad:

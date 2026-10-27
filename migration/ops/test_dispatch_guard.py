@@ -85,6 +85,7 @@ SAMPLES = {
     "pilot-render-stills.yml": {"pilot": PILOT},
     "pilot-preview.yml": {"pilot": PILOT},
     "footage.yml": {"queries": f"migration/production/{PILOT}/beats.json", "per_theme": "3"},
+    "scene-stills.yml": {"plan": PLAN, "shots": "s-voice", "candidates": "2"},
 }
 
 
@@ -130,7 +131,7 @@ class Wiring(unittest.TestCase):
             self.assertEqual(render(m.group(1), SAMPLES[wf], subject), f"heroverse-subject-{subject}", wf)
         # the episode's build, its probes and its publication share one group; a pilot's images, render and preview
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("episode.yml", "shot-probe.yml",
-                                                                     "publish-episode.yml")}), 1)
+                                                                     "publish-episode.yml", "scene-stills.yml")}), 1)
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("cf-images.yml", "pilot-render-stills.yml",
                                                                      "pilot-preview.yml", "footage.yml")}), 1)
         footage = (g.WF_DIR / "footage.yml").read_text()
@@ -259,17 +260,30 @@ class Capacity(unittest.TestCase):
         g.capacity("pilot-render-stills.yml", {"uploads": 12}, fake_api([]), "2026-10-27")  # no release yet: 0
 
     def test_a_used_up_flux_allocation_refuses_a_flux_run_only(self):
-        # review of #445: FLUX records only, by episode_preflight's own predicate (cf_allocation.flux_record)
+        # review of #445: FLUX records only, by episode_preflight's own predicate (cf_allocation.flux_record), on
+        # main and on scene-stills' review branches
         cap = g.cf_daily_images()
-        files = [{"status": "added", "filename": f"migration/production/pilot-010/images/i{k}.json"} for k in range(cap)]
-        api = fake_api([("commits?", [{"sha": "c1", "commit": {"message": "Record pilot-010 images from Cloudflare "
-                                                                          "Workers AI (flux, run 1)"}},
-                                      {"sha": "c2", "commit": {"message": "Record pilot-011 images from Cloudflare "
-                                                                          "Workers AI (sdxl, run 2)"}}]),
-                        ("commits/c1", {"files": files}), ("commits/c2", {"files": files})])
-        self.assertEqual(g.cf_images_today(api, "2026-10-27"), cap)                 # the sdxl records not counted
+        half = cap // 2
+
+        def commit(msg, files, date="2026-10-27T10:00:00Z"):
+            return {"commit": {"message": msg, "committer": {"date": date}},
+                    "files": [{"status": "added", "filename": f} for f in files]}
+        flux = commit("Record pilot-010 images from Cloudflare Workers AI (flux, run 1)",
+                      [f"migration/production/pilot-010/images/i{k}.json" for k in range(half)])
+        sdxl = commit("Record pilot-011 images from Cloudflare Workers AI (sdxl, run 2)",
+                      [f"migration/production/pilot-011/images/i{k}.json" for k in range(cap)])
+        stills = commit("Record scene stills images from Cloudflare Workers AI (flux, run 3; candidates)",
+                        [f"migration/production/bible/stills/candidates/s-{k}.json" for k in range(cap - half)])
+        old = commit(stills["commit"]["message"], ["migration/production/bible/stills/candidates/x.json"],
+                     date="2026-10-26T10:00:00Z")
+        api = fake_api([("commits?", [{"sha": "c1", "commit": flux["commit"]}, {"sha": "c2", "commit": sdxl["commit"]}]),
+                        ("branches?", [{"name": "claude/stills-genesis-09-short-3", "commit": {"sha": "c3"}},
+                                       {"name": "claude/stills-genesis-08-short-1", "commit": {"sha": "c4"}},
+                                       {"name": "main", "commit": {"sha": "c9"}}]),
+                        ("commits/c1", flux), ("commits/c2", sdxl), ("commits/c3", stills), ("commits/c4", old)])
+        self.assertEqual(g.cf_images_today(api, "2026-10-27"), cap)        # no sdxl, nothing from yesterday
         with self.assertRaises(g.Refusal) as c:
-            g.capacity("cf-images.yml", {"uploads": 0, "flux": True}, api, "2026-10-27")
+            g.capacity("scene-stills.yml", {"uploads": 0, "flux": True}, api, "2026-10-27")
         self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
         g.capacity("cf-images.yml", {"uploads": 0, "flux": False}, api, "2026-10-27")   # an sdxl run
         sys.path.insert(0, str(ROOT / "migration/production/bible"))
