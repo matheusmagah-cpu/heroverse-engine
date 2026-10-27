@@ -8,7 +8,9 @@ image passed to the model). A prop gets the same: props.json holds each prop's s
 Pavo agnes-image stills of the prop alone in a neutral setting, whose prompt carries the prop's look and exclusion
 sentences (plan_check.PROPS) word for word, each after a fresh exact 0-credit quote, or frames cut by `frame` from a
 shot clip Claude already approved at >= 9.5 (its sha256 in bible/shots/<episode>.json; the text-to-image run
-2026102701 kept drawing end blocks and ship bows); any other source is refused. Claude reviews the contact sheet
+2026102701 kept drawing end blocks and ship bows), or a deterministic retouch of an APPROVED reference (`retouch`:
+figures painted out of the roof, review of genesis-09 run 2026102705; approve remakes it from that parent, byte for
+byte); any other source is refused. Claude reviews the contact sheet
 and `approve` copies a kept candidate to refs/pr-<prop>-<view>.jpg with its record images/pr-<prop>-<view>.json
 (repo_path, sha256: never by hand). The prop is APPROVED when every view has its approved image.
 
@@ -26,6 +28,9 @@ usage:
   props.py frame PROP VIEW RUN N CLIP EPISODE SHOT SECONDS [--crop X,Y,W,H]   one candidate cut from a clip Claude already approved at
                                                        >= 9.5 (bible/shots/<episode>.json: the clip's sha256 must be
                                                        the approved one; ffmpeg takes the frame here, never by hand)
+  props.py retouch PROP VIEW RUN N PATCHES_JSON        one candidate retouched from the APPROVED VIEW reference
+                                                       (PATCHES_JSON: [{box, offset, feather}]; figures painted out
+                                                       deterministically; approve remakes it byte for byte)
   props.py sheet PROP RUN OUT_JPG                      that run's contact sheet
   props.py approve PROP VIEW CANDIDATE --score S --note TEXT [--clip CLIP]   after Claude's review (>= 9.5), by PR;
                                                        a clip frame needs its approved clip: the frame is cut again
@@ -48,6 +53,12 @@ CANDIDATES_DIR = HERE / "props" / "candidates"
 SHOTS_DIR = REPO / "migration" / "production" / "bible" / "shots"
 PAVO = "pavo-agnes-image-2.5-flash"
 CLIP_FRAME = "approved-clip-frame"   # a frame of a shot clip Claude approved (E122: text-to-image did not hold it)
+# a deterministic retouch of an APPROVED reference (review of genesis-09 run 2026102705: both ark references show
+# figures standing on the roof and every still copied them); approve remakes it from the parent, byte for byte
+RETOUCHED = "retouched-approved-reference"
+RETOUCH_TOOL = ("PIL: crop the box shifted by offset, paste it over the box through a mask (the rectangle inset by feather, "
+                "or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in "
+                "order; JPEG quality 95")
 FLOOR = 9.5
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CID = re.compile(r"^pr-([a-z0-9]+)-([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9]{1,20})-([1-9])$")
@@ -127,7 +138,7 @@ def _approved_clip(episode, shot, clip_sha256, shots_dir=None):
     return rec
 
 
-def source_problems(prop, meta, shots_dir=None):
+def source_problems(prop, meta, shots_dir=None, images_dir=None):
     """What keeps a candidate from being a reference: a Pavo still needs the prop's look word for word and an exact
     0-credit quote; a clip frame needs the clip Claude approved (sha256, >= 9.5). Any other source is refused."""
     src = meta.get("source")
@@ -141,7 +152,17 @@ def source_problems(prop, meta, shots_dir=None):
         if not _approved_clip(c.get("episode"), c.get("shot"), c.get("clip_sha256"), shots_dir):
             return [f"the clip {c.get('episode')} {c.get('shot')} {c.get('clip_sha256')} is not an approved clip"]
         return []
-    return [f"source {src!r} is neither {PAVO} nor {CLIP_FRAME}"]
+    if src == RETOUCHED:
+        par = meta.get("parent") or {}
+        rec_path = record_path(prop, meta.get("view") or "", images_dir)
+        rec = json.loads(rec_path.read_text()) if rec_path.is_file() else {}
+        path = (REPO / str(par.get("repo_path") or "")).resolve()
+        if not rec or rec.get("sha256") != par.get("sha256") or rec.get("repo_path") != par.get("repo_path") \
+                or not path.is_file() or sha256(path) != par.get("sha256"):
+            return [f"the parent {par.get('record')} {par.get('sha256')} is not the {meta.get('view')} reference "
+                    "approved now"]
+        return []
+    return [f"source {src!r} is neither {PAVO}, {CLIP_FRAME} nor {RETOUCHED}"]
 
 
 def cut_frame(clip, seconds, crop, dst):
@@ -164,6 +185,91 @@ def cut_frame(clip, seconds, crop, dst):
                 im = im.crop((x, y, x + w, y + h))
             im.save(dst, "JPEG", quality=95)
             return list(im.size)
+
+
+def retouch_image(parent, patches, dst):
+    """The one way a retouched reference is made (RETOUCH_TOOL): each patch {box: [x0, y0, x1, y1], offset: [dx, dy],
+    feather, polygon?} covers BOX with the pixels of BOX moved by OFFSET, through a rectangle mask inset by FEATHER
+    (or POLYGON, image coordinates inside BOX: a roof edge is a diagonal) blurred by FEATHER/2; JPEG quality 95 at
+    DST. `finalize_retouch` makes candidates with it, `approve` remakes them."""
+    from PIL import Image, ImageDraw, ImageFilter
+    if not isinstance(patches, list) or not patches or len(patches) > 20:
+        raise SystemExit("PROP_RETOUCH_REFUSED (1-20 patches)")
+    with Image.open(parent) as im:
+        im = im.convert("RGB")
+    W, H = im.size
+    for p in patches:
+        try:
+            x0, y0, x1, y1 = (int(v) for v in p["box"])
+            dx, dy = (int(v) for v in p["offset"])
+            f = int(p.get("feather", 0))
+        except (KeyError, TypeError, ValueError):
+            raise SystemExit(f"PROP_RETOUCH_REFUSED {p!r} (box [x0, y0, x1, y1], offset [dx, dy], feather)")
+        w, h = x1 - x0, y1 - y0
+        if not (0 <= x0 < x1 <= W and 0 <= y0 < y1 <= H) or not (0 <= x0 + dx and x1 + dx <= W and 0 <= y0 + dy
+                                                                  and y1 + dy <= H):
+            raise SystemExit(f"PROP_RETOUCH_REFUSED {p!r} (box and source inside the {W}x{H} image)")
+        if (dx, dy) == (0, 0) or not 0 <= f <= min(w, h) // 4:
+            raise SystemExit(f"PROP_RETOUCH_REFUSED {p!r} (a nonzero offset; feather 0-{min(w, h) // 4})")
+        src = im.crop((x0 + dx, y0 + dy, x1 + dx, y1 + dy))
+        mask = Image.new("L", (w, h), 0)
+        poly = p.get("polygon")
+        if poly is not None:
+            try:
+                pts = [(int(a) - x0, int(b) - y0) for a, b in poly]
+            except (TypeError, ValueError):
+                raise SystemExit(f"PROP_RETOUCH_REFUSED {p!r} (polygon: [[x, y], ...])")
+            if not 3 <= len(pts) <= 32 or not all(0 <= a <= w and 0 <= b <= h for a, b in pts):
+                raise SystemExit(f"PROP_RETOUCH_REFUSED {p!r} (polygon: 3-32 points inside the box)")
+            ImageDraw.Draw(mask).polygon(pts, fill=255)
+        else:
+            ImageDraw.Draw(mask).rectangle([f, f, w - 1 - f, h - 1 - f], fill=255)
+        if f:
+            mask = mask.filter(ImageFilter.GaussianBlur(f / 2))
+        im.paste(src, (x0, y0), mask)
+    Path(dst).parent.mkdir(parents=True, exist_ok=True)
+    im.save(dst, "JPEG", quality=95)
+    return [W, H]
+
+
+def retouch_problems(meta, path):
+    """A retouched candidate is the parent remade with its recorded patches, byte for byte."""
+    import tempfile
+    par = meta.get("parent") or {}
+    with tempfile.TemporaryDirectory() as tmp:
+        again = Path(tmp) / "again.jpg"
+        retouch_image(REPO / str(par.get("repo_path")), (meta.get("retouch") or {}).get("patches"), again)
+        if again.read_bytes() != Path(path).read_bytes():
+            return [f"the image is not {par.get('record')} retouched with its recorded patches"]
+    return []
+
+
+def finalize_retouch(prop, view, run, n, patches, cand_dir=None, props=None, images_dir=None):
+    """One candidate retouched from the prop's APPROVED VIEW reference (its record and image by sha256): figures or
+    debris painted out by RETOUCH_TOOL; status DRAFT, for Claude's review like any candidate."""
+    props = registry() if props is None else props
+    if prop not in props or view not in (props[prop].get("views") or []):
+        raise SystemExit(f"PROP_VIEW_UNKNOWN {prop} {view}")
+    if not re.fullmatch(r"[0-9]{1,20}", str(run)) or not 1 <= int(n) <= 9:
+        raise SystemExit(f"PROP_CANDIDATE_NAME_REFUSED {run}-{n}")
+    rp = record_path(prop, view, images_dir)
+    parent = json.loads(rp.read_text()) if rp.is_file() else {}
+    src = (REPO / str(parent.get("repo_path") or "")).resolve()
+    if not parent or not src.is_file() or sha256(src) != parent.get("sha256"):
+        raise SystemExit(f"PROP_SOURCE_REFUSED pr-{prop}-{view} (no approved reference to retouch, or its image is "
+                         "not the approved one)")
+    cid = f"pr-{prop}-{view}-{run}-{n}"
+    dst = Path(cand_dir or CANDIDATES_DIR) / f"{cid}.jpg"
+    size = retouch_image(src, patches, dst)
+    import PIL
+    rec = {"id": cid, "prop": prop, "view": view, "run": str(run), "status": "DRAFT", "source": RETOUCHED,
+           "parent": {"record": parent.get("id"), "repo_path": parent.get("repo_path"), "sha256": parent.get("sha256"),
+                      "candidate": parent.get("candidate")},
+           "retouch": {"patches": patches, "tool": RETOUCH_TOOL, "pillow": PIL.__version__},
+           "prompt": None, "quote": None, "references": [], "size": size, "repo_path": rel(dst),
+           "sha256": sha256(dst), "generated_by": "HeroVerse pipeline (deterministic retouch of an approved reference)"}
+    save(dst.with_suffix(".json"), rec)
+    return rec
 
 
 def frame_problems(meta, path, clip, shots_dir=None):
@@ -294,9 +400,11 @@ def approve(prop, view, candidate, score, note, cand_dir=None, props_file=None, 
     meta = json.loads(meta_path.read_text())
     if sha256(src) != meta.get("sha256"):
         raise SystemExit(f"PROP_CANDIDATE_SHA256_MISMATCH {candidate}")
-    bad = source_problems(prop, meta, shots_dir)
+    bad = source_problems(prop, dict(meta, view=view), shots_dir, images_dir)
     if not bad and meta.get("source") == CLIP_FRAME:
         bad = frame_problems(meta, src, clip, shots_dir)
+    if not bad and meta.get("source") == RETOUCHED:
+        bad = retouch_problems(meta, src)
     if bad:
         raise SystemExit(f"PROP_SOURCE_REFUSED {candidate}: " + "; ".join(bad))
     dst = Path(refs_dir or REFS_DIR) / f"pr-{prop}-{view}.jpg"
@@ -306,6 +414,8 @@ def approve(prop, view, candidate, score, note, cand_dir=None, props_file=None, 
     rec = {"id": f"pr-{prop}-{view}", "prop": prop, "view": view, "repo_path": rel(dst), "sha256": sha256(dst),
            "size": meta.get("size"), "candidate": candidate, "prompt": meta.get("prompt"),
            "source": (f"{PAVO} conversation {meta.get('conversation_id')}, 0-credit quote" if meta.get("source") == PAVO
+                      else f"{RETOUCHED} {json.dumps({'parent': meta.get('parent'), 'retouch': meta.get('retouch')}, sort_keys=True)}"
+                      if meta.get("source") == RETOUCHED
                       else f"{CLIP_FRAME} {json.dumps(meta.get('clip'), sort_keys=True)}"),
            "approved": {"date": date, "score": score, "note": note.strip(),
                         "by": "Claude's reference review (ops/CLAUDE_REVIEW.md)"}}
@@ -330,6 +440,9 @@ def main(argv):
         crop = [int(v) for v in args[9].split(",")] if len(args) == 10 else None
         rec = finalize_frame(args[0], args[1], args[2], int(args[3]), args[4], args[5], args[6], args[7], crop)
         print(json.dumps({"candidate": rec["id"], "sha256": rec["sha256"], "clip": rec["clip"]["clip_sha256"]}))
+    elif cmd == "retouch" and len(args) == 5:
+        rec = finalize_retouch(args[0], args[1], args[2], int(args[3]), json.loads(Path(args[4]).read_text()))
+        print(json.dumps({"candidate": rec["id"], "sha256": rec["sha256"], "parent": rec["parent"]["sha256"]}))
     elif cmd == "sheet" and len(args) == 3:
         print(json.dumps({"sheet": args[2], "candidates": sheet(args[0], args[1], args[2])}))
     elif cmd == "approve" and len(args) in (7, 9) and args[3] == "--score" and args[5] == "--note" \

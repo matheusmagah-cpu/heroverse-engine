@@ -1,0 +1,43 @@
+{
+ "id": "pr-ark-three-quarter-2026102706-2",
+ "prop": "ark",
+ "view": "three-quarter",
+ "run": "2026102706",
+ "status": "DRAFT",
+ "source": "retouched-approved-reference",
+ "parent": {
+  "record": "pr-ark-three-quarter",
+  "repo_path": "migration/production/characters/refs/pr-ark-three-quarter.jpg",
+  "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee",
+  "candidate": "pr-ark-three-quarter-2026102702-3"
+ },
+ "retouch": {
+  "patches": [
+   {
+    "box": [
+     328,
+     36,
+     476,
+     182
+    ],
+    "offset": [
+     -138,
+     33
+    ],
+    "feather": 8
+   }
+  ],
+  "tool": "PIL: crop the box shifted by offset, paste it over the box through a mask (the rectangle inset by feather, or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in order; JPEG quality 95",
+  "pillow": "12.3.0"
+ },
+ "prompt": null,
+ "quote": null,
+ "references": [],
+ "size": [
+  720,
+  600
+ ],
+ "repo_path": "migration/production/characters/props/candidates/pr-ark-three-quarter-2026102706-2.jpg",
+ "sha256": "9b786322fe2f49cf2cd42b700318a9a3ce0d5aec7f69e3adf8ff317169ddc6b1",
+ "generated_by": "HeroVerse pipeline (deterministic retouch of an approved reference)"
+}

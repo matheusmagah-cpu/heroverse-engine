@@ -188,6 +188,65 @@ class Props(unittest.TestCase):
         Image.new("RGB", (64, 36), (1, 1, 1)).save(self.d / "refs" / "pr-ark-side.jpg", "JPEG")
         self.assertIn("sha256", self.pr.approved_refs("ark", props, self.d / "images")[1])
 
+    def test_a_retouched_approved_reference_is_rederived_byte_for_byte_on_approve(self):
+        # E122 follow-up (review of genesis-09 run 2026102705): both approved ark references (frames of genesis-08
+        # s-board) show figures standing on the roof, and every still made with them copied the figures. A
+        # retouched derivative of an APPROVED reference is a source only when approve can remake it from that exact
+        # parent (sha256) with the recorded patches, byte for byte
+        from PIL import Image
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs"}
+        src = self.d / "side-1.jpg"
+        im = Image.new("RGB", (64, 36), (90, 60, 30))
+        im.paste((250, 250, 250), (10, 5, 20, 15))          # the "figure" to paint out
+        im.save(src, "JPEG")
+        side = self.pr.finalize("ark", "side", "9", 1, src, self.meta(), cand_dir=self.d / "candidates",
+                                props=self.props)["id"]
+        parent = self.approve("side", side)
+        patches = [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 2}]
+        rec = self.pr.finalize_retouch("ark", "side", "9", 2, patches, cand_dir=self.d / "candidates",
+                                       props=self.props, images_dir=self.d / "images")
+        self.assertEqual((rec["source"], rec["status"]), ("retouched-approved-reference", "DRAFT"))
+        self.assertEqual(rec["parent"]["sha256"], parent["sha256"])
+        self.assertEqual(rec["retouch"]["patches"], patches)
+        out = self.pr.REPO / rec["repo_path"]
+        with Image.open(out) as done:
+            self.assertLess(sum(done.convert("RGB").getpixel((15, 10))), 400)   # the white figure is gone
+        for bad in ([{"box": [60, 3, 70, 17], "offset": [0, 0], "feather": 0}],      # outside the image
+                    [{"box": [8, 3, 22, 17], "offset": [60, 0], "feather": 0}],      # source outside
+                    [{"box": [8, 3, 22, 17], "offset": [0, 0], "feather": 0}],       # copies itself
+                    [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 9}], []):  # feather too wide; nothing
+            with self.assertRaises(SystemExit) as err:
+                self.pr.finalize_retouch("ark", "side", "9", 3, bad, cand_dir=self.d / "candidates",
+                                         props=self.props, images_dir=self.d / "images")
+            self.assertIn("PROP_RETOUCH_REFUSED", str(err.exception))
+        poly = [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 1, "polygon": [[8, 3], [22, 3], [22, 17]]}]
+        self.assertEqual(self.pr.finalize_retouch("ark", "side", "9", 5, poly, cand_dir=self.d / "candidates",
+                                                  props=self.props, images_dir=self.d / "images")["status"], "DRAFT")
+        with self.assertRaises(SystemExit) as err:     # a polygon outside its box
+            self.pr.finalize_retouch("ark", "side", "9", 6, [dict(poly[0], polygon=[[0, 0], [30, 3], [22, 17]])],
+                                     cand_dir=self.d / "candidates", props=self.props, images_dir=self.d / "images")
+        self.assertIn("PROP_RETOUCH_REFUSED", str(err.exception))
+        # a picture edited by hand under the retouch's sidecar is refused: approve remakes it from the parent
+        forged = self.d / "candidates" / "pr-ark-side-9-4.jpg"
+        with Image.open(out) as done:
+            hand = done.convert("RGB")
+        hand.putpixel((40, 30), (0, 255, 0))
+        hand.save(forged, "JPEG", quality=95)
+        self.pr.save(forged.with_suffix(".json"), dict(rec, id="pr-ark-side-9-4", repo_path=self.pr.rel(forged),
+                                                       sha256=self.pr.sha256(forged)))
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", "pr-ark-side-9-4", 9.6, "clean roof", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        # the real one is approved and becomes the reference, its record naming the parent and the patches
+        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "clean roof", **kw)
+        self.assertIn("retouched-approved-reference", ref["source"])
+        self.assertIn(parent["sha256"], ref["source"])
+        # once the reference changed, a retouch of the old parent is refused
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", rec["id"], 9.6, "again", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+
     def test_a_frame_is_cut_only_from_a_clip_claude_approved(self):
         import subprocess
         clip = self.d / "clip.mp4"

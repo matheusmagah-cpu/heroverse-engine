@@ -1251,6 +1251,10 @@
    "class": "N",
    "why": "E122: props.py, the prop reference registry, refuses a Pavo candidate without an exact 0-credit quote (no spending); it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
   },
+  "PROP_RETOUCH_REFUSED": {
+   "class": "N",
+   "why": "props.py, the prop reference registry, refuses a retouch whose patches leave the image, copy a box onto itself, feather too wide or name a malformed polygon; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
   "PROP_SCORE_BELOW_FLOOR": {
    "class": "N",
    "why": "E122: props.py, the prop reference registry, refuses an approval under the 9.5 floor; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
@@ -1271,7 +1275,7 @@
   },
   "PROP_SOURCE_REFUSED": {
    "class": "N",
-   "why": "E122: props.py, the prop reference registry, refuses a candidate neither a Pavo still with its look and 0-credit quote nor the frame cut again, byte for byte, from a clip Claude approved at >= 9.5; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+   "why": "E122: props.py, the prop reference registry, refuses a candidate neither a Pavo still with its look and 0-credit quote nor the frame cut again, byte for byte, from a clip Claude approved at >= 9.5, nor a retouch remade byte for byte from the reference approved now; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
   },
   "PROP_VIEW_UNKNOWN": {
    "class": "N",
