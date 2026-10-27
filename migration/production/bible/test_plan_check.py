@@ -1184,13 +1184,19 @@ class ArkLook(unittest.TestCase):
                 pl = json.loads(f.read_text())
                 if isinstance(pl.get("shots"), list):
                     self.assertEqual(pc.plan_prop_problems(pl, pl["shots"]), [], f.name)
+        def shown(s):
+            # image first (owner, 27/10): a shot that starts from a still shows the ark the still's prompt draws (its
+            # own prompt gives the motion); plan_check refuses that still prompt without the look (STILL_PROMPT_REFUSED)
+            still = pc.still_record(s.get("first_frame"), HERE / "stills") if s.get("first_frame") else None
+            return ARK in s["prompt"] or bool(still and ARK in still["prompt"])
         for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 22)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
-            self.assertEqual(sum(ARK in s["prompt"] for s in shots), expect, ep)
-        # genesis-08's three shots still rejected carry the look, their meaning and seconds kept
+            self.assertEqual(sum(shown(s) for s in shots), expect, ep)
+        # genesis-08's three shots still rejected carry the look (in the still they start from), meaning and seconds kept
         shots = {s["id"]: s for s in json.loads((HERE / "plans" / "genesis-08-short.json").read_text())["shots"]}
         for sid in ("s-ridge", "s-dust", "s-board"):
-            self.assertIn(ARK, shots[sid]["prompt"], sid)
+            self.assertTrue(shown(shots[sid]), sid)
+            self.assertEqual(shots[sid]["first_frame"], f"genesis-08-{sid}")
         self.assertEqual(shots["s-board"]["seconds"], 8)
 
     def test_only_genesis_08s_approved_shots_are_grandfathered(self):
