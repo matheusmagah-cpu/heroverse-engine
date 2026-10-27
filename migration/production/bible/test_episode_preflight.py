@@ -299,9 +299,13 @@ class Allocation(unittest.TestCase):
     def test_today_counts_the_image_records_cf_images_commits(self):
         class Done:
             returncode = 0
-            stdout = ("migration/production/characters/images/ch-noah-front.json\n"
+            stdout = ("\0Record characters images from Cloudflare Workers AI (flux, run 1)\n\n"
+                      "migration/production/characters/images/ch-noah-front.json\n"
                       "migration/production/characters/images/ch-noah-front.png\n"
-                      "migration/production/pilot-015/images/a.json\n")
+                      "\0Record pilot-015 images from Cloudflare Workers AI (flux, run 2)\n\n"
+                      "migration/production/pilot-015/images/a.json\n"
+                      "\0Record pilot-016 images from Cloudflare Workers AI (sdxl, run 3)\n\n"   # E116: FLUX only
+                      "migration/production/pilot-016/images/b.json\n")
         self.assertEqual(pf.cf_images_today("2026-10-26", run=lambda *a, **k: Done()), 2)
 
 

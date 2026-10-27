@@ -32,6 +32,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   probe:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: heroverse-subject-${{ inputs.plan }}
+      cancel-in-progress: false
     # the Pavo secret only on a manual run of main
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
@@ -53,6 +56,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
         env:
           GUARD_INPUTS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}

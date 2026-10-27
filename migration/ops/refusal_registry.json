@@ -436,6 +436,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "GITHUB_OUTPUT": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
   "GITHUB_REPOSITORY": {
    "class": "N",
    "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
@@ -495,10 +499,6 @@
   "GUARD_RERUN_WITHOUT_FIX": {
    "class": "D",
    "resume": "E116: merge the fix that touches what the failed run depends on, or record the external cause in migration/evidence/dispatch/retries.json by PR, then dispatch"
-  },
-  "GUARD_SUBJECT_IN_FLIGHT": {
-   "class": "D",
-   "resume": "E112/E116: wait for the named run of the same episode, pilot or library to finish, then dispatch"
   },
   "GUARD_WORKFLOW_UNKNOWN": {
    "class": "I",

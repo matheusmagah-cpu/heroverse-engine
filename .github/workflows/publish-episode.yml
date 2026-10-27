@@ -20,6 +20,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: ${{ format('heroverse-subject-migration/production/bible/plans/{0}.json', inputs.episode) }}
+      cancel-in-progress: false
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -31,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
         env:
           GUARD_INPUTS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}

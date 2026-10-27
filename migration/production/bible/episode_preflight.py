@@ -42,6 +42,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 import episode_build as eb  # noqa: E402
+sys.path.insert(0, str(REPO / "migration" / "production" / "imagegen"))
+import cf_allocation  # noqa: E402
 import plan_check  # noqa: E402
 
 ch = eb.ch
@@ -111,15 +113,22 @@ def character_rows(plan, chars, images_dir=ch.HERE / "images"):
 
 
 def cf_images_today(today=None, run=subprocess.run):
-    """FLUX images recorded on main today (UTC): the image records cf-images.yml commits ("Record ... images from
-    Cloudflare Workers AI"). Reported, not enforced: a used-up allocation defers (E62), it never fails a build."""
+    """FLUX images recorded on main today (UTC): the image records cf-images.yml commits, counted by the one
+    predicate the dispatch guard uses too (cf_allocation.flux_record, E116). Reported, not enforced here: a used-up
+    allocation defers (E62), it never fails a build."""
     today = today or datetime.now(timezone.utc).strftime("%Y-%m-%d")
     done = run(["git", "-C", str(REPO), "log", f"--since={today}T00:00:00Z", "--grep",
-                "images from Cloudflare Workers AI", "--diff-filter=A", "--name-only", "--format=", "origin/main"],
+                "images from Cloudflare Workers AI", "--diff-filter=A", "--name-only", "--format=%x00%s", "origin/main"],
                capture_output=True, text=True)
     if done.returncode:
         return None
-    return sum(1 for line in done.stdout.splitlines() if line.endswith(".json") and "/images/" in line)
+    subject, n = "", 0
+    for line in done.stdout.splitlines():
+        if line.startswith("\0"):
+            subject = line[1:]
+        elif line:
+            n += cf_allocation.flux_record(subject, line)
+    return n
 
 
 MIN_SHOT_CHANCE = 0.9         # a talking shot must pass its lips check within TALK_ATTEMPTS at least this often

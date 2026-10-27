@@ -49,21 +49,43 @@ EXEMPT = {
 
 def fake_api(routes):
     """routes: (path prefix, response) pairs, first match wins; anything else is a 404 (None)."""
-    calls = []
-
     def api(path):
-        calls.append(path)
         for prefix, resp in routes:
             if path.startswith(prefix):
                 return resp(path) if callable(resp) else resp
         return None
-    api.calls = calls
     return api
 
 
-def run_obj(rid, wf, title, conclusion=None, sha="a" * 40, status="completed"):
+def run_obj(rid, wf, title, conclusion=None, sha="a" * 40):
     return {"id": rid, "path": f".github/workflows/{wf}", "display_title": title, "conclusion": conclusion,
-            "head_sha": sha, "status": status}
+            "head_sha": sha, "status": "completed"}
+
+
+def jobs(blocks_text):
+    """{job name: its text} of a workflow."""
+    body = blocks_text.split("\njobs:\n", 1)[1]
+    parts = re.split(r"^  ([a-z][a-z0-9-]*):\n", body, flags=re.M)
+    return dict(zip(parts[1::2], parts[2::2]))
+
+
+def render(expr, inputs, subject):
+    """A concurrency group expression with the dispatch's inputs (the three forms the guarded workflows use)."""
+    out = re.sub(r"\$\{\{ format\('([^']*)', inputs\.(\w+)\) \}\}", lambda m: m.group(1).replace("{0}", inputs[m.group(2)]),
+                 expr)
+    out = re.sub(r"\$\{\{ inputs\.(\w+) \}\}", lambda m: inputs[m.group(1)], out)
+    return out.replace("${{ needs.guard.outputs.subject }}", subject or "")
+
+
+SAMPLES = {
+    "episode.yml": {"plan": PLAN, "resume_run": ""},
+    "shot-probe.yml": {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""},
+    "publish-episode.yml": {"episode": "genesis-09-short", "source_url": "", "publish_at": ""},
+    "cf-images.yml": {"pilot": PILOT, "engine": "flux", "only": ""},
+    "pilot-render-stills.yml": {"pilot": PILOT},
+    "pilot-preview.yml": {"pilot": PILOT},
+    "footage.yml": {"queries": f"migration/production/{PILOT}/beats.json", "per_theme": "3"},
+}
 
 
 class Wiring(unittest.TestCase):
@@ -78,19 +100,41 @@ class Wiring(unittest.TestCase):
             self.assertTrue(step.startswith(g.GUARD_STEP), wf)
             self.assertIn("GUARD_INPUTS: ${{ toJSON(inputs) }}", step, wf)
             self.assertRegex(text, r"actions: (read|write)", f"{wf}: the guard reads runs")
-            # the guard is the first step after the checkout of its job, and a guard job gates every other job
-            job = text[:text.index(call)].rsplit("    steps:\n", 1)[1]
-            self.assertEqual(job.count("      - "), 2, f"{wf}: the guard is not the step after the checkout")
-            if "\n  guard:\n" in text:
-                jobs = re.findall(r"^  ([a-z-]+):\n", text.split("\njobs:\n", 1)[1], re.M)
-                for other in jobs[1:]:
-                    body = text.split(f"\n  {other}:\n", 1)[1]
-                    self.assertTrue(body.startswith("    needs: guard") or "needs: [guard" in body.split("\n  ")[0]
-                                    or re.match(r"    needs: \[?[\w, -]*guard", body), f"{wf}: {other} skips the guard")
-            # the run-name holds the inputs, so a later dispatch can find the failed run of the same inputs
+            # the run-name holds the inputs (the first names the subject), so a later dispatch finds its failures
             name = re.search(r"^run-name: \"(.*)\"$", text, re.M)
             self.assertIsNotNone(name, wf)
             self.assertEqual(name.group(1), g.run_name(wf, {k: "${{ inputs.%s }}" % k for k in keys}), wf)
+
+    def test_every_job_that_holds_a_secret_or_does_the_work_runs_the_guard_first(self):
+        # review of #445: "Re-run failed jobs" skips a separate guard job that passed, so each such job starts with
+        # the guard (or its attempt rule) after the checkout, and its job-level env holds no secret
+        for wf in g.WORKFLOWS:
+            for name, body in jobs((g.WF_DIR / wf).read_text()).items():
+                head = body.split("    steps:\n", 1)[0]
+                self.assertNotIn("secrets.", head, f"{wf} {name}: a secret in the job's env reaches the guard step")
+                if "secrets." not in body and int(re.search(r"timeout-minutes: (\d+)", head).group(1)) < 30:
+                    continue          # light jobs with no secret (record, failure evidence, plan)
+                steps = body.split("    steps:\n", 1)[1].split("\n      - ")
+                self.assertIn("actions/checkout@", steps[0], f"{wf} {name}")
+                self.assertRegex(steps[1], rf"dispatch_guard\.py (run|attempt) {re.escape(wf)}", f"{wf} {name}")
+                self.assertTrue(steps[1].startswith("name: " + g.GUARD_STEP), f"{wf} {name}")
+                self.assertNotIn("secrets.", steps[1], f"{wf} {name}")
+
+    def test_one_run_per_subject_is_a_shared_concurrency_group(self):
+        # review of #445: GitHub's own concurrency, not a scan of in-flight runs; the group renders subject_of
+        for wf, job in g.SUBJECT_JOBS.items():
+            head = jobs((g.WF_DIR / wf).read_text())[job].split("    steps:\n", 1)[0]
+            m = re.search(r"    concurrency:.*\n      group: (.+)\n      cancel-in-progress: false\n", head)
+            self.assertIsNotNone(m, f"{wf} {job}: no subject concurrency group")
+            subject = g.subject_of(wf, SAMPLES[wf])
+            self.assertEqual(render(m.group(1), SAMPLES[wf], subject), f"heroverse-subject-{subject}", wf)
+        # the episode's build, its probes and its publication share one group; a pilot's images, render and preview
+        self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("episode.yml", "shot-probe.yml",
+                                                                     "publish-episode.yml")}), 1)
+        self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("cf-images.yml", "pilot-render-stills.yml",
+                                                                     "pilot-preview.yml", "footage.yml")}), 1)
+        footage = (g.WF_DIR / "footage.yml").read_text()
+        self.assertIn("subject: ${{ steps.guard.outputs.subject }}", footage)
 
     def test_every_dispatch_workflow_is_guarded_or_exempt(self):
         for wf in sorted(g.WF_DIR.glob("*.yml")):
@@ -114,15 +158,37 @@ class Imports(unittest.TestCase):
             bad, _ = g.static_import_problems("footage.yml")
         self.assertTrue(any("cinematic.py imports numpy" in b for b in bad), bad)
 
+    def test_imports_resolve_from_the_importing_folder_first_and_same_names_stay_apart(self):
+        # review of #445: two modules with one stem are two modules; a script's own folder and its sys.path
+        # inserts decide which one it imports
+        d = Path(tempfile.mkdtemp())
+        try:
+            (d / "a").mkdir()
+            (d / "b").mkdir()
+            (d / "a" / "client.py").write_text("import numpy\n")
+            (d / "b" / "client.py").write_text("import json\n")
+            (d / "b" / "entry.py").write_text("import client\n")
+            (d / "a" / "far.py").write_text("import sys\nfrom pathlib import Path\n"
+                                            "sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'b'))\n")
+            self.assertEqual(g._resolve("client", d / "b" / "entry.py", []), [(d / "b" / "client.py").resolve()])
+            far = d / "a" / "far.py"
+            dirs = g._sys_path_dirs(g.ast.parse(far.read_text()), far)
+            self.assertEqual([p.resolve() for p in dirs], [(d / "b").resolve()])
+            with mock.patch.object(g, "_module_index", return_value={"x": [d / "a" / "client.py", d / "b" / "client.py"]}):
+                self.assertEqual(len(g._resolve("x", d / "z.py", [])), 2)          # never collapsed into one
+        finally:
+            shutil.rmtree(d)
+
     def test_a_sibling_import_that_fails_under_isolation_is_refused(self):
-        # E73: python3 -I leaves the script's own folder off sys.path
+        # E73: python3 -I leaves the script's own folder off sys.path; one process checks every script, and what
+        # one script put on sys.path does not rescue the next
         d = Path(tempfile.mkdtemp())
         try:
             (d / "helper_e116.py").write_text("X = 1\n")
-            (d / "entry_e116.py").write_text("import helper_e116\n")
             (d / "fixed_e116.py").write_text("import sys\nfrom pathlib import Path\n"
                                              "sys.path.insert(0, str(Path(__file__).parent))\nimport helper_e116\n")
-            with mock.patch.object(g, "scripts", return_value=[str(d / "entry_e116.py"), str(d / "fixed_e116.py")]):
+            (d / "entry_e116.py").write_text("import helper_e116\n")
+            with mock.patch.object(g, "scripts", return_value=(str(d / "fixed_e116.py"), str(d / "entry_e116.py"))):
                 bad = g.runtime_import_problems("footage.yml")
             self.assertEqual(len(bad), 1, bad)
             self.assertIn("entry_e116.py", bad[0])
@@ -150,10 +216,12 @@ class Inputs(unittest.TestCase):
 
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": "s-voice,s-laugh", "attempts": "3"})
-        self.assertEqual(f["subject"], ("episode", "genesis-09-short"))
         self.assertEqual(f["uploads"], 6)
-        self.assertEqual(g.WORKFLOWS["pilot-preview.yml"][1]({"pilot": PILOT})["subject"], ("pilot", PILOT))
-        self.assertIsNone(g.WORKFLOWS["agnes-clip.yml"][1]({"prompt": "a", "seconds": "6", "aspect": "9:16"})["subject"])
+        self.assertEqual(g.subject_of("shot-probe.yml", {"plan": PLAN}), PLAN)
+        self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
+        self.assertEqual(g.subject_of("footage.yml", {"queries": "migration/production/footage/queries.json"}),
+                         "footage-library")
+        self.assertIsNone(g.subject_of("agnes-clip.yml", {"seconds": "6"}))
 
     def test_a_later_episode_part_waits_for_the_earlier_one(self):
         # E112's order, reused: the guard refuses with episode_order's own refusal
@@ -167,11 +235,12 @@ class Inputs(unittest.TestCase):
         with mock.patch.object(g, "load", return_value=rec):
             self.refused("publish-episode.yml", {"episode": "genesis-01-short"}, "GUARD_RECORD_OVER_LIMIT")
 
-    def test_the_run_name_reads_back_into_its_inputs(self):
-        inputs = {"seconds": "6", "aspect": "9:16", "characters": "", "first_frame": "", "prompt": "a man walks, slow"}
-        title = g.run_name("agnes-clip.yml", inputs)
-        self.assertEqual(g.parse_run_name("agnes-clip.yml", title), inputs)
-        self.assertIsNone(g.parse_run_name("episode.yml", title))
+    def test_the_run_name_names_its_subject(self):
+        title = g.run_name("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "2"})
+        self.assertEqual(g.run_subject("shot-probe.yml", title), PLAN)
+        self.assertEqual(g.run_subject("publish-episode.yml", g.run_name("publish-episode.yml",
+                                                                         {"episode": "genesis-09-short"})), PLAN)
+        self.assertIsNone(g.run_subject("episode.yml", title))
 
 
 class Capacity(unittest.TestCase):
@@ -189,38 +258,31 @@ class Capacity(unittest.TestCase):
         g.capacity("pilot-render-stills.yml", {"uploads": 5}, api, "2026-10-27")
         g.capacity("pilot-render-stills.yml", {"uploads": 12}, fake_api([]), "2026-10-27")  # no release yet: 0
 
-    def test_a_used_up_image_allocation_is_refused(self):
+    def test_a_used_up_flux_allocation_refuses_a_flux_run_only(self):
+        # review of #445: FLUX records only, by episode_preflight's own predicate (cf_allocation.flux_record)
         cap = g.cf_daily_images()
         files = [{"status": "added", "filename": f"migration/production/pilot-010/images/i{k}.json"} for k in range(cap)]
-        api = fake_api([("commits?", [{"sha": "c1", "commit": {"message": "Record 44 images from Cloudflare Workers AI"}},
-                                      {"sha": "c2", "commit": {"message": "other"}}]),
-                        ("commits/c1", {"files": files})])
+        api = fake_api([("commits?", [{"sha": "c1", "commit": {"message": "Record pilot-010 images from Cloudflare "
+                                                                          "Workers AI (flux, run 1)"}},
+                                      {"sha": "c2", "commit": {"message": "Record pilot-011 images from Cloudflare "
+                                                                          "Workers AI (sdxl, run 2)"}}]),
+                        ("commits/c1", {"files": files}), ("commits/c2", {"files": files})])
+        self.assertEqual(g.cf_images_today(api, "2026-10-27"), cap)                 # the sdxl records not counted
         with self.assertRaises(g.Refusal) as c:
-            g.capacity("cf-images.yml", {"uploads": 0}, api, "2026-10-27")
+            g.capacity("cf-images.yml", {"uploads": 0, "flux": True}, api, "2026-10-27")
         self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
-        g.capacity("pilot-preview.yml", {"uploads": 0}, api, "2026-10-27")   # it makes no image
-
-
-class InFlight(unittest.TestCase):
-    def test_one_run_per_subject_across_workflows(self):
-        probe = run_obj(11, "shot-probe.yml", g.run_name("shot-probe.yml", {"plan": PLAN, "shots": "s-voice",
-                                                                            "attempts": "2"}), status="in_progress")
-        api = fake_api([("actions/runs?status=in_progress", {"workflow_runs": [probe]})])
-        facts = {"subject": ("episode", "genesis-09-short")}
-        with self.assertRaises(g.Refusal) as c:
-            g.in_flight("episode.yml", facts, api, run_id=99)
-        self.assertTrue(str(c.exception).startswith("GUARD_SUBJECT_IN_FLIGHT"))
-        g.in_flight("episode.yml", facts, api, run_id=11)                       # its own run
-        g.in_flight("episode.yml", {"subject": ("episode", "genesis-08-short")}, api, run_id=99)
-        g.in_flight("agnes-clip.yml", {"subject": None}, api, run_id=99)
+        g.capacity("cf-images.yml", {"uploads": 0, "flux": False}, api, "2026-10-27")   # an sdxl run
+        sys.path.insert(0, str(ROOT / "migration/production/bible"))
+        import episode_preflight
+        self.assertIs(episode_preflight.cf_allocation, sys.modules["cf_allocation"])   # one predicate for both
 
 
 class Rerun(unittest.TestCase):
     INPUTS = {"pilot": PILOT}
     WF = "pilot-preview.yml"
 
-    def api(self, conclusion="failure", compare=None, guard_failed=False, older=None):
-        title = g.run_name(self.WF, self.INPUTS)
+    def api(self, conclusion="failure", compare=None, guard_failed=False, older=None, title=None):
+        title = title or g.run_name(self.WF, self.INPUTS)
         runs = [run_obj(5, self.WF, g.run_name(self.WF, {"pilot": "pilot-000"}), "failure"),
                 run_obj(4, self.WF, title, conclusion, sha="f" * 40)] + (older or [])
         step = g.GUARD_STEP + " (...)" if guard_failed else "Render"
@@ -229,26 +291,53 @@ class Rerun(unittest.TestCase):
                          ("actions/runs/3/jobs", {"jobs": [{"steps": [{"name": "Render", "conclusion": "failure"}]}]}),
                          ("compare/", compare or {"status": "identical", "files": []})])
 
-    def facts(self):
-        return g.WORKFLOWS[self.WF][1](self.INPUTS)
+    def facts(self, wf=None, inputs=None):
+        wf, inputs = wf or self.WF, inputs or self.INPUTS
+        f = g.WORKFLOWS[wf][1](inputs)
+        f["subject"], f["files"] = g.subject_of(wf, inputs), g.static_import_problems(wf)[1]
+        return f
 
-    def assert_refused(self, api, attempt=1):
+    def assert_refused(self, api, attempt=1, wf=None, inputs=None):
         with self.assertRaises(g.Refusal) as c:
-            g.rerun(self.WF, self.facts(), self.INPUTS, api, 9, attempt, "e" * 40)
+            g.rerun(wf or self.WF, self.facts(wf, inputs), inputs or self.INPUTS, api, 9, attempt, "e" * 40)
         self.assertTrue(str(c.exception).startswith("GUARD_RERUN_WITHOUT_FIX"), str(c.exception))
 
     def test_failed_inputs_need_a_new_commit_touching_what_the_run_depends_on(self):
         self.assert_refused(self.api())                                         # main has not moved
         self.assert_refused(self.api(compare={"status": "ahead", "files": [{"filename": "README.md"}]}))
-        g.rerun(self.WF, self.facts(), self.INPUTS,
-                self.api(compare={"status": "ahead", "files": [{"filename": f"migration/production/{PILOT}/x.json"}]}),
-                9, 1, "e" * 40)
-        g.rerun(self.WF, self.facts(), self.INPUTS,
-                self.api(compare={"status": "ahead", "files": [{"filename": "migration/production/still_render.py"}]}),
-                9, 1, "e" * 40)
+        for touched in (f"migration/production/{PILOT}/x.json", "migration/production/still_render.py"):
+            g.rerun(self.WF, self.facts(), self.INPUTS,
+                    self.api(compare={"status": "ahead", "files": [{"filename": touched}]}), 9, 1, "e" * 40)
         g.rerun(self.WF, self.facts(), self.INPUTS, self.api(conclusion="success"), 9, 1, "e" * 40)
+        g.rerun(self.WF, self.facts(), self.INPUTS, self.api(conclusion="cancelled"), 9, 1, "e" * 40)
 
-    def test_a_run_the_guard_refused_is_not_a_failure_of_its_inputs(self):
+    def test_the_failure_history_is_keyed_on_the_subject_not_the_other_inputs(self):
+        # review of #445: a new resume_run / attempts / adopt_run is not a fix
+        wf = "shot-probe.yml"
+        old = g.run_name(wf, {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""})
+        new = {"plan": PLAN, "shots": "s-laugh", "attempts": "3", "adopt_run": ""}
+        api = fake_api([(f"actions/workflows/{wf}/runs", {"workflow_runs": [run_obj(4, wf, old, "failure")]}),
+                        ("actions/runs/4/jobs", {"jobs": []}), ("compare/", {"status": "identical", "files": []})])
+        self.assert_refused(api, wf=wf, inputs=new)
+
+    def test_a_new_pass_preflight_counts_as_a_fix_for_the_episode_build(self):
+        # review of #445: the dependency is the report file evidence/preflight/<episode>.json
+        wf, inputs = "episode.yml", {"plan": PLAN, "resume_run": ""}
+        with mock.patch("episode_order.earlier_part_open", return_value=None):
+            facts = self.facts(wf, inputs)
+        ep = PLAN.rsplit("/", 1)[1][:-5]
+        self.assertIn(f"migration/evidence/preflight/{ep}.json", g.depends_on(wf, facts))
+
+        def api(report):
+            return fake_api([(f"actions/workflows/{wf}/runs", {"workflow_runs": [
+                                run_obj(4, wf, g.run_name(wf, {"plan": PLAN, "resume_run": "123456"}), "failure")]}),
+                             ("actions/runs/4/jobs", {"jobs": []}),
+                             ("compare/", {"status": "ahead", "files": [{"filename": report}]})])
+        g.rerun(wf, facts, inputs, api(f"migration/evidence/preflight/{ep}.json"), 9, 1, "e" * 40)
+        with self.assertRaises(g.Refusal):
+            g.rerun(wf, facts, inputs, api(f"migration/evidence/preflight/{ep}-old.md"), 9, 1, "e" * 40)
+
+    def test_a_run_the_guard_refused_is_not_a_failure_of_its_subject(self):
         g.rerun(self.WF, self.facts(), self.INPUTS, self.api(guard_failed=True), 9, 1, "e" * 40)
         older = [run_obj(3, self.WF, g.run_name(self.WF, self.INPUTS), "failure")]
         self.assert_refused(self.api(guard_failed=True, older=older))        # the failure before it still counts
@@ -256,13 +345,21 @@ class Rerun(unittest.TestCase):
     def test_an_external_failure_recorded_by_pr_may_run_again(self):
         with mock.patch.object(g, "recorded_retry", side_effect=lambda rid: str(rid) == "4"):
             g.rerun(self.WF, self.facts(), self.INPUTS, self.api(), 9, 1, "e" * 40)
-        retries = json.loads(g.RETRIES.read_text())
-        self.assertIn("retries", retries)
+        self.assertIn("retries", json.loads(g.RETRIES.read_text()))
 
-    def test_a_re_run_attempt_of_a_failed_run_is_refused(self):
-        api = fake_api([("actions/runs/9/attempts/1/jobs", {"jobs": [{"steps": [{"name": "Render",
-                                                                                   "conclusion": "failure"}]}]})])
-        self.assert_refused(api, attempt=2)
+    def test_a_re_run_attempt_is_refused_only_after_a_failed_attempt(self):
+        # review of #445: a re-run after a cancelled or successful attempt, or one the guard refused, is allowed
+        def api(conclusion, step="Render"):
+            return fake_api([("actions/runs/9/attempts/1/jobs", {"jobs": [{"steps": [{"name": step,
+                                                                                      "conclusion": "failure"}]}]}),
+                             ("actions/runs/9/attempts/1", {"conclusion": conclusion})])
+        with self.assertRaises(g.Refusal) as c:
+            g.attempt_check(api("failure"), 9, 2, "e" * 40)
+        self.assertIn("attempt 1 failed", str(c.exception))
+        g.attempt_check(api("cancelled"), 9, 2, "e" * 40)
+        g.attempt_check(api("success"), 9, 2, "e" * 40)
+        g.attempt_check(api("failure", step=g.GUARD_STEP + " (...)"), 9, 2, "e" * 40)
+        g.attempt_check(api("failure"), 9, 1, "e" * 40)
 
 
 if __name__ == "__main__":

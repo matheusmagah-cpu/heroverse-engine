@@ -6,6 +6,7 @@ secret, with its inputs (`GUARD_INPUTS: ${{ toJSON(inputs) }}`) and the run's ow
 
   dispatch_guard.py run WORKFLOW.yml      every check below; exit 1 with the named refusal, else GUARD_OK
   dispatch_guard.py local WORKFLOW.yml    the checks that need no API (inputs, order, imports), e.g. before a dispatch
+  dispatch_guard.py attempt WORKFLOW.yml  only the re-run attempt rule (4), for a job whose guard ran in another job
 
 Checks, each a named refusal (classified in ops/refusal_registry.json):
   1. inputs: the workflow's own input rules, and the files they name exist   GUARD_INPUT_INVALID, GUARD_INPUT_MISSING
@@ -14,12 +15,15 @@ Checks, each a named refusal (classified in ops/refusal_registry.json):
      Cloudflare allocation is not used up today when the run makes images (CF_DAILY_IMAGES, E62), a publish record
      fits YouTube's title and description limits (E52)        GUARD_ASSETS_FULL, GUARD_CF_ALLOCATION_USED,
                                                               GUARD_RECORD_OVER_LIMIT
-  3. one run in flight per subject (the same episode, pilot, characters or footage library), across every guarded
-     workflow (E112, E63, E10)                                GUARD_SUBJECT_IN_FLIGHT
-  4. the same inputs failed last time: refused unless main has a new commit touching a file that run depends on
-     (the workflow, the scripts it calls and their local imports, the subject's files) since the failed run's
-     head_sha, or the failed run is recorded as external in evidence/dispatch/retries.json (a re-run attempt of a
-     failed run is the same commit, so only that record lets it through)   GUARD_RERUN_WITHOUT_FIX
+  3. one run per subject (the same episode plan, pilot, characters or footage library): not this script but GitHub,
+     by the job-level `concurrency: group: heroverse-subject-<subject>` every guarded workflow shares (E112, E63,
+     E10; test_dispatch_guard checks each group renders subject_of)
+  4. the latest run of this workflow on the same subject failed (whatever its other inputs: resume_run, attempts,
+     adopt_run): refused unless main has a new commit touching a file that run depends on (the workflow, the
+     scripts it calls and their local imports, the subject's files) since the failed run's head_sha, or the failed
+     run is recorded as external in evidence/dispatch/retries.json. A "Re-run" attempt after a failed attempt is
+     the same commit, so only that record lets it through (`attempt`: the first step of a job whose guard ran in
+     another job)                                             GUARD_RERUN_WITHOUT_FIX
   5. every Python script the workflow calls imports in the job's environment: each module-level import (followed
      through the repo's own modules) is stdlib, a repo module or a package the workflow (or the shell script it runs)
      installs, and the script's top level imports under
@@ -28,6 +32,7 @@ An API that cannot be read refuses (GUARD_API_UNAVAILABLE): the guard never pass
 The API is read-only (actions, releases, commits, compare) with the run's GITHUB_TOKEN; nothing is written.
 """
 import ast
+import functools
 from datetime import datetime, timezone
 import json
 import os
@@ -81,7 +86,7 @@ def ids(text):
     return [x for x in (text or "").split(",") if x]
 
 
-# ---- per workflow: inputs (1), subject (3), uploads to the asset release (2), files its run depends on (4) ----
+# ---- per workflow: inputs (1), uploads to the asset release (2), files its run depends on (4) ----
 def _plan(i):
     p = i.get("plan", "")
     m = re.fullmatch(rf"migration/production/bible/plans/({SLUG})\.json", p)
@@ -101,8 +106,8 @@ def episode(i):
     if bad:
         raise Refusal(bad)
     ep = plan["episode"]
-    return {"subject": ("episode", ep), "uploads": 1,
-            "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}",
+    return {"uploads": 1,
+            "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}.json",
                      "migration/production/characters/"]}
 
 
@@ -114,8 +119,7 @@ def shot_probe(i):
     need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan ({len(known)} shots)")
     need(re.fullmatch(r"[1-6]", i.get("attempts") or ""), "attempts", i.get("attempts"), "1-6")
     need(re.fullmatch(r"(\d{6,20})?", i.get("adopt_run") or ""), "adopt_run", i.get("adopt_run"), "a run id or empty")
-    ep = plan["episode"]
-    return {"subject": ("episode", ep), "uploads": len(shots) * int(i["attempts"]),
+    return {"uploads": len(shots) * int(i["attempts"]),
             "deps": [i["plan"], "migration/production/characters/", "migration/evidence/pavo/setups.json"]}
 
 
@@ -127,8 +131,7 @@ def cf_images(i):
     rel = f"migration/production/{pilot}/images.json"
     need_file(rel)
     n = len(ids(i.get("only"))) or len(load(rel).get("images", []))
-    subject = ("characters", "characters") if pilot == "characters" else ("pilot", pilot)
-    return {"subject": subject, "uploads": 2 * n, "images": n, "deps": [f"migration/production/{pilot}/"]}
+    return {"uploads": 2 * n, "images": n, "deps": [f"migration/production/{pilot}/"]}
 
 
 def _pilot(i):
@@ -140,12 +143,12 @@ def _pilot(i):
 
 def pilot_render(i):
     pilot = _pilot(i)
-    return {"subject": ("pilot", pilot), "uploads": 12, "deps": [f"migration/production/{pilot}/", "migration/ci/"]}
+    return {"uploads": 12, "deps": [f"migration/production/{pilot}/", "migration/ci/"]}
 
 
 def pilot_preview(i):
     pilot = _pilot(i)
-    return {"subject": ("pilot", pilot), "uploads": 6, "deps": [f"migration/production/{pilot}/", "migration/ci/"]}
+    return {"uploads": 6, "deps": [f"migration/production/{pilot}/", "migration/ci/"]}
 
 
 def footage(i):
@@ -155,8 +158,7 @@ def footage(i):
     need(re.fullmatch(r"\d{1,2}", i.get("per_theme") or "3"), "per_theme", i.get("per_theme"), "1-2 digits")
     need_file(q)
     themes = load(q).get("themes", [])
-    subject = ("pilot", m.group(2)) if m.group(2) else ("footage", "library")
-    return {"subject": subject, "uploads": len(themes) * int(i.get("per_theme") or 3),
+    return {"uploads": len(themes) * int(i.get("per_theme") or 3),
             "deps": [q, "migration/production/footage/"]}
 
 
@@ -166,7 +168,7 @@ def pavo_footage(i):
     need(m, "list", lst, "migration/production/pilot-NNN/pavo(-N).json")
     need_file(lst)
     entries = load(lst)
-    return {"subject": ("pilot", m.group(1)), "uploads": len(entries) if isinstance(entries, list) else 50,
+    return {"uploads": len(entries) if isinstance(entries, list) else 50,
             "deps": [lst, "migration/production/footage/"]}
 
 
@@ -179,7 +181,7 @@ def agnes_clip(i):
          "comma list of character ids")
     need(re.fullmatch(r"([A-Za-z0-9._-]+\.(png|jpg|jpeg))?", i.get("first_frame") or ""), "first_frame",
          i.get("first_frame"), "a release asset name of a still")
-    return {"subject": None, "uploads": 0, "deps": ["migration/production/characters/"]}
+    return {"uploads": 0, "deps": ["migration/production/characters/"]}
 
 
 def publish_episode(i):
@@ -194,10 +196,28 @@ def publish_episode(i):
     if len(rec.get("title", "")) > TITLE_MAX or len(rec.get("description", "").encode()) > DESCRIPTION_MAX:
         refuse("GUARD_RECORD_OVER_LIMIT", f"{rel}: title <= {TITLE_MAX} characters, description <= "
                                           f"{DESCRIPTION_MAX} bytes (E52)")
-    return {"subject": ("episode", ep), "uploads": 1, "deps": [rel, "migration/publish/"]}
+    return {"uploads": 1, "deps": [rel, "migration/publish/"]}
 
 
-# workflow file -> (input names in run-name order, check). run-name is "<stem>: k=v k=v" (test_dispatch_guard).
+def subject_of(workflow, inputs):
+    """The subject a run works on, from its inputs alone (no file read): the episode's plan path, the pilot (or
+    characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
+    failure history (4) is keyed on workflow + subject. None: the workflow has no subject (agnes-clip)."""
+    first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
+    if workflow in ("episode.yml", "shot-probe.yml"):
+        return first
+    if workflow == "publish-episode.yml":
+        return f"migration/production/bible/plans/{first}.json"
+    if workflow in ("cf-images.yml", "pilot-render-stills.yml", "pilot-preview.yml"):
+        return first
+    if workflow in ("footage.yml", "pavo-footage.yml"):
+        m = re.match(r"migration/production/(pilot-\d{3})/", first or "migration/production/footage/")
+        return m.group(1) if m else "footage-library"
+    return None
+
+
+# workflow file -> (input names in run-name order, the first one naming the subject; check). run-name is
+# "<stem>: k=v k=v" (test_dispatch_guard), so a later dispatch finds the earlier runs of its subject.
 WORKFLOWS = {
     "episode.yml": (("plan", "resume_run"), episode),   # regenerate is always refused (E114), and kept off run-name
     "shot-probe.yml": (("plan", "shots", "attempts", "adopt_run"), shot_probe),
@@ -209,7 +229,11 @@ WORKFLOWS = {
     "agnes-clip.yml": (("seconds", "aspect", "characters", "first_frame", "prompt"), agnes_clip),
     "publish-episode.yml": (("episode", "source_url", "publish_at"), publish_episode),
 }
-MAKES_IMAGES = {"cf-images.yml"}
+# the job of each workflow that holds its subject's concurrency group (pavo-footage's work is a matrix of clip jobs:
+# GitHub keeps one pending job per group and cancels the rest, so it keeps its workflow-level group only)
+SUBJECT_JOBS = {"episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
+                "pilot-render-stills.yml": "render", "pilot-preview.yml": "preview", "footage.yml": "library",
+                "publish-episode.yml": "publish"}
 
 
 def run_name(workflow, inputs):
@@ -217,13 +241,15 @@ def run_name(workflow, inputs):
     return f"{workflow[:-4]}: " + " ".join(f"{k}={inputs.get(k) or ''}" for k in keys)
 
 
-def parse_run_name(workflow, title):
-    keys = WORKFLOWS[workflow][0]
-    m = re.fullmatch(re.escape(f"{workflow[:-4]}: ") + " ".join(f"{k}=(.*?)" for k in keys), title or "")
-    return dict(zip(keys, m.groups())) if m else None
+def run_subject(workflow, title):
+    """The subject of an earlier run, read from the first input of its run-name; None when it is not one of ours."""
+    key = WORKFLOWS[workflow][0][0]
+    m = re.match(re.escape(f"{workflow[:-4]}: {key}=") + r"(\S*)(?: |$)", title or "")
+    return subject_of(workflow, {key: m.group(1)}) if m else None
 
 
 # ---- (5) imports in the job's environment ----
+@functools.lru_cache(maxsize=None)
 def workflow_texts(workflow):
     """The workflow and the shell scripts it runs (render_pilot.sh installs the render's venvs)."""
     text = (WF_DIR / workflow).read_text()
@@ -231,9 +257,10 @@ def workflow_texts(workflow):
     for sh in sorted(set(re.findall(r"migration/ci/[\w-]+\.sh", text))):
         if (ROOT / sh).is_file():
             out.append((ROOT / sh).read_text())
-    return out
+    return tuple(out)
 
 
+@functools.lru_cache(maxsize=None)
 def installed(workflow):
     """Import names of the packages the workflow (or a script it runs) installs: pinned pip, apt python3-*."""
     names = set()
@@ -245,29 +272,99 @@ def installed(workflow):
                 names.add(IMPORT_NAME.get(dist.lower(), dist.lower().replace("-", "_")))
             for dist in re.findall(r"\b(python3-[a-z0-9]+)\b", line):
                 names.add(IMPORT_NAME.get(dist, dist[len("python3-"):]))
-    return names
+    return frozenset(names)
 
 
+@functools.lru_cache(maxsize=None)
 def scripts(workflow):
     found = []
     for text in workflow_texts(workflow):
         for rel in re.findall(r"migration/[\w/.-]+?\.py\b", text):
             if (ROOT / rel).is_file() and rel not in found:
                 found.append(rel)
-    return found
+    return tuple(found)
 
 
+@functools.lru_cache(maxsize=None)
 def _module_index():
+    """stem -> every repo module with that name (never collapsed: two client.py stay two)."""
     index = {}
     for p in sorted((ROOT / "migration").rglob("*.py")):
-        if "/." not in str(p.relative_to(ROOT)) and not p.name.startswith("test_"):
-            index.setdefault(p.stem, p)
-    for p in sorted((ROOT / "migration").rglob("__init__.py")):
-        index.setdefault(p.parent.name, p)
+        rel = str(p.relative_to(ROOT))
+        if "/." in rel or p.name.startswith("test_"):
+            continue
+        if p.name == "__init__.py":
+            index.setdefault(p.parent.name, []).append(p)
+        else:
+            index.setdefault(p.stem, []).append(p)
     return index
 
 
-def _imports(path, lazy=False):
+def _path_value(node, env, path):
+    """Evaluate the path expressions scripts give sys.path (Path(__file__).resolve().parents[1] / "x", HERE, REPO
+    / "migration", str(...), os.path.dirname(...)); None when it is anything else."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.Name):
+        return path if node.id == "__file__" else env.get(node.id)
+    if isinstance(node, ast.Call):
+        f = node.func
+        name = f.id if isinstance(f, ast.Name) else f.attr if isinstance(f, ast.Attribute) else ""
+        if name in ("Path", "str", "abspath", "realpath") and len(node.args) == 1:
+            v = _path_value(node.args[0], env, path)
+            return Path(v) if v is not None else None
+        if name == "dirname" and len(node.args) == 1:
+            v = _path_value(node.args[0], env, path)
+            return Path(v).parent if v is not None else None
+        if name == "join" and node.args:
+            parts = [_path_value(a, env, path) for a in node.args]
+            return Path(*parts) if None not in parts else None
+        if name in ("resolve", "absolute") and isinstance(f, ast.Attribute):
+            v = _path_value(f.value, env, path)
+            return Path(v).resolve() if v is not None else None
+    if isinstance(node, ast.Attribute) and node.attr == "parent":
+        v = _path_value(node.value, env, path)
+        return Path(v).parent if v is not None else None
+    if isinstance(node, ast.Subscript) and isinstance(node.value, ast.Attribute) and node.value.attr == "parents":
+        v = _path_value(node.value.value, env, path)
+        k = node.slice.value if isinstance(node.slice, ast.Constant) else None
+        return Path(v).parents[k] if v is not None and isinstance(k, int) else None
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
+        a, b = _path_value(node.left, env, path), _path_value(node.right, env, path)
+        return Path(a) / b if a is not None and b is not None else None
+    return None
+
+
+def _sys_path_dirs(tree, path):
+    """The folders a module puts on sys.path (sys.path.insert / append), evaluated where they can be."""
+    env = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            v = _path_value(node.value, env, path)
+            if v is not None:
+                env[node.targets[0].id] = v
+    dirs = []
+    for node in ast.walk(tree):
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr in ("insert", "append")
+                and isinstance(node.func.value, ast.Attribute) and node.func.value.attr == "path" and node.args):
+            v = _path_value(node.args[-1], env, path)
+            if v is not None:
+                dirs.append(Path(v))
+    return dirs
+
+
+def _resolve(name, path, extra_dirs):
+    """The repo module(s) `name` means when imported from `path`: its own folder and the folders it (or its entry
+    script) puts on sys.path first; else every repo module of that name (an unresolved local name is followed in
+    all its homes, never collapsed into one)."""
+    for d in [path.parent] + extra_dirs:
+        for cand in (d / f"{name}.py", d / name / "__init__.py"):
+            if cand.is_file():
+                return [cand.resolve()]
+    return [p.resolve() for p in _module_index().get(name, [])]
+
+
+def _imports(tree, lazy=False):
     """Names imported at module level (also inside a top-level if/with), except under try/except ImportError.
     A lazy import inside a function is left out (lazy=True takes it too): it runs only on the path that calls it,
     often under another venv."""
@@ -289,7 +386,6 @@ def _imports(path, lazy=False):
                            for h in node.handlers):
                     walk(node.body)
                 walk(node.finalbody)
-    tree = ast.parse(path.read_text())
     walk(tree.body)
     if lazy:
         for node in ast.walk(tree):
@@ -301,33 +397,42 @@ def _imports(path, lazy=False):
 
 
 def static_import_problems(workflow):
-    """Every module-level import reached from the workflow's scripts. An entry script's lazy imports of the repo's
-    own modules are followed too (E81: footage.py's vetting called cinematic lazily, and cinematic imports numpy at
-    its top), but not its lazy third-party imports, which belong to a path another venv runs."""
-    have, index, seen, bad = installed(workflow), _module_index(), set(), []
-    todo = [(ROOT / s, True) for s in scripts(workflow)]
+    """Every module-level import reached from the workflow's scripts, resolved from the importing file's folder and
+    sys.path inserts. An entry script's lazy imports of the repo's own modules are followed too (E81: footage.py's
+    vetting called cinematic lazily, and cinematic imports numpy at its top), but not its lazy third-party imports,
+    which belong to a path another venv runs. Returns (problems, every repo file reached)."""
+    have, seen, bad = installed(workflow), set(), []
+    todo = [((ROOT / s).resolve(), True, []) for s in scripts(workflow)]
     while todo:
-        path, entry = todo.pop()
+        path, entry, inherited = todo.pop()
         if path in seen:
             continue
         seen.add(path)
-        top = _imports(path)
-        for name in sorted(_imports(path, lazy=entry)):
+        tree = ast.parse(path.read_text())
+        dirs = _sys_path_dirs(tree, path) + inherited
+        top = _imports(tree)
+        for name in sorted(_imports(tree, lazy=entry)):
             if name in sys.stdlib_module_names or name in have or name == "__future__":
                 continue
-            if name in index:
-                todo.append((index[name], False))
-                continue
-            if name in top:
-                bad.append(f"{path.relative_to(ROOT)} imports {name}: not stdlib, not in the repo, not installed by "
-                           f"{workflow}")
-    return bad, sorted(str(p.relative_to(ROOT)) for p in seen)
+            homes = _resolve(name, path, dirs)
+            if homes:
+                todo += [(h, False, dirs) for h in homes]
+            elif name in top:
+                bad.append(f"{_rel(path)} imports {name}: not stdlib, not in the repo, not installed by {workflow}")
+    return bad, sorted(_rel(p) for p in seen)
+
+
+def _rel(path):
+    try:
+        return str(Path(path).relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 SMOKE = r"""
-import importlib.abc, importlib.util, runpy, sys, types
+import importlib.abc, importlib.util, json, runpy, sys, types
 from unittest import mock
-STUBS = set(sys.argv[2].split(",")) - {""}
+STUBS = set(sys.argv[1].split(",")) - {""}
 class Stub(importlib.abc.MetaPathFinder, importlib.abc.Loader):
     def find_spec(self, name, path, target=None):
         if name.split(".")[0] in STUBS:
@@ -340,35 +445,50 @@ class Stub(importlib.abc.MetaPathFinder, importlib.abc.Loader):
     def exec_module(self, module):
         pass
 sys.meta_path.insert(0, Stub())
-sys.argv = [sys.argv[1]]
-runpy.run_path(sys.argv[0], run_name="__dispatch_guard__")
+path0, mods0 = list(sys.path), set(sys.modules)
+for script in sys.argv[2:]:
+    sys.argv[1:] = []
+    try:
+        runpy.run_path(script, run_name="__dispatch_guard__")
+    except BaseException as e:
+        if not (isinstance(e, SystemExit) and e.code in (0, None)):
+            print(json.dumps([script, type(e).__name__ + ": " + str(e)]))
+    sys.path[:] = path0          # each script starts as `python3 -I script` would: nothing the one before added
+    for name in set(sys.modules) - mods0:
+        del sys.modules[name]
 """
 
 
 def runtime_import_problems(workflow):
-    """Each script's top level run under `python3 -I` (as the workflow runs it, E73), installed packages stubbed."""
-    stubs = ",".join(sorted(installed(workflow)))
+    """Each script's top level run as `python3 -I` runs it (E73), the workflow's packages stubbed; one process for
+    all of a workflow's scripts, sys.path and sys.modules reset between them."""
+    paths = [str(ROOT / rel) for rel in scripts(workflow)]
+    if not paths:
+        return []
+    r = subprocess.run([sys.executable, "-I", "-B", "-c", SMOKE, ",".join(sorted(installed(workflow)))] + paths,
+                       cwd=ROOT, capture_output=True, text=True, timeout=300, env={"PATH": os.environ.get("PATH", "")})
     bad = []
-    for rel in scripts(workflow):
-        r = subprocess.run([sys.executable, "-I", "-B", "-c", SMOKE, str(ROOT / rel), stubs], cwd=ROOT,
-                           capture_output=True, text=True, timeout=120, env={"PATH": os.environ.get("PATH", "")})
-        if r.returncode:
-            last = (r.stderr.strip().splitlines() or ["exit %d" % r.returncode])[-1]
-            bad.append(f"{rel}: {last}")
+    for line in r.stdout.splitlines():
+        try:
+            script, err = json.loads(line)
+        except ValueError:
+            continue
+        bad.append(f"{_rel(script)}: {err}")
+    if r.returncode and not bad:
+        bad.append(f"import smoke exited {r.returncode}: {(r.stderr.strip().splitlines() or [''])[-1]}")
     return bad
 
 
-def import_problems(workflow):
-    static, _ = static_import_problems(workflow)
+def import_problems(workflow, scan=None):
+    static, _ = scan or static_import_problems(workflow)
     return static + runtime_import_problems(workflow)
 
 
 def depends_on(workflow, facts):
-    """Path prefixes a run of this workflow depends on: the workflow, its scripts and their local imports, the shell
-    scripts it runs and the subject's files."""
-    _, local = static_import_problems(workflow)
-    shells = [sh for t in workflow_texts(workflow)[:1] for sh in re.findall(r"migration/ci/[\w-]+\.sh", t)]
-    return sorted(set([f".github/workflows/{workflow}"] + local + shells + facts["deps"]))
+    """Path prefixes a run of this workflow depends on: the workflow, its scripts and their local imports (from the
+    one import scan of this check), the shell scripts it runs and the subject's files."""
+    shells = re.findall(r"migration/ci/[\w-]+\.sh", workflow_texts(workflow)[0])
+    return sorted(set([f".github/workflows/{workflow}"] + facts["files"] + shells + facts["deps"]))
 
 
 # ---- the API (read-only) ----
@@ -417,13 +537,17 @@ def cf_daily_images():
 
 
 def cf_images_today(api, today):
-    """FLUX images recorded on main today (UTC), counted as episode_preflight.cf_images_today counts them, by REST."""
+    """FLUX images recorded on main today (UTC), by REST, with episode_preflight's own predicate
+    (cf_allocation.flux_record)."""
+    sys.path.insert(0, str(ROOT / "migration" / "production" / "imagegen"))
+    import cf_allocation
     used = 0
     for c in api(f"commits?sha=main&since={today}T00:00:00Z&per_page=100") or []:
-        if "images from Cloudflare Workers AI" in c["commit"]["message"]:
+        subject = c["commit"]["message"].splitlines()[0] if c["commit"]["message"] else ""
+        if cf_allocation.MARK in subject:
             files = (api(f"commits/{c['sha']}") or {}).get("files", [])
-            used += sum(1 for f in files if f.get("status") == "added" and "/images/" in f["filename"]
-                        and f["filename"].endswith(".json"))
+            used += sum(1 for f in files if f.get("status") == "added"
+                        and cf_allocation.flux_record(subject, f["filename"]))
     return used
 
 
@@ -433,31 +557,11 @@ def capacity(workflow, facts, api, today):
     if facts["uploads"] and n + facts["uploads"] > ASSET_LIMIT:
         refuse("GUARD_ASSETS_FULL", f"{tag} holds {n} of {ASSET_LIMIT} assets and this run uploads up to "
                                     f"{facts['uploads']}: add a new tag at the front of migration/ci/assets.sh TAGS (E85)")
-    if workflow in MAKES_IMAGES:
+    if facts.get("flux"):
         used, cap = cf_images_today(api, today), cf_daily_images()
         if used >= cap:
             refuse("GUARD_CF_ALLOCATION_USED", f"{used} FLUX images recorded today of about {cap}: dispatch after "
                                                f"00:00 UTC (E62)")
-
-
-def in_flight(workflow, facts, api, run_id):
-    if not facts["subject"]:
-        return
-    for status in ("in_progress", "queued", "waiting", "pending"):
-        for r in (api(f"actions/runs?status={status}&per_page=100") or {}).get("workflow_runs", []):
-            other = Path(r.get("path", "")).name
-            if str(r["id"]) == str(run_id) or other not in WORKFLOWS:
-                continue
-            got = parse_run_name(other, r.get("display_title"))
-            if got is None:
-                continue
-            try:
-                theirs = WORKFLOWS[other][1](got)["subject"]
-            except Refusal:
-                continue
-            if theirs == facts["subject"]:
-                refuse("GUARD_SUBJECT_IN_FLIGHT", f"{facts['subject'][0]} {facts['subject'][1]} is in flight in "
-                                                  f"{other} run {r['id']} ({status}): one run per subject (E112)")
 
 
 def failed_in_guard(api, run_id, attempt=None):
@@ -475,20 +579,37 @@ def recorded_retry(run_id):
     return any(str(r.get("run")) == str(run_id) and r.get("reason") for r in json.loads(RETRIES.read_text())["retries"])
 
 
+def attempt_check(api, run_id, attempt, sha):
+    """GitHub's "Re-run" runs the same commit again: allowed after a cancelled or successful attempt, or one this
+    guard refused; after a failed one only when retries.json records its external cause."""
+    if attempt <= 1:
+        return
+    prev = api(f"actions/runs/{run_id}/attempts/{attempt - 1}") or {}
+    if prev.get("conclusion") in FAILED and not failed_in_guard(api, run_id, attempt - 1) and not recorded_retry(run_id):
+        refuse("GUARD_RERUN_WITHOUT_FIX", f"attempt {attempt} of run {run_id} re-runs commit {sha[:12]}, on which "
+                                          f"attempt {attempt - 1} failed: merge a fix and dispatch again, or record "
+                                          f"an external cause in {RETRIES.relative_to(ROOT)}")
+
+
+def same_subject(workflow, facts, inputs, title):
+    if facts["subject"] is None:
+        return title == run_name(workflow, inputs)      # no subject: the same inputs
+    return run_subject(workflow, title) == facts["subject"]
+
+
 def rerun(workflow, facts, inputs, api, run_id, attempt, sha):
-    if attempt > 1 and not failed_in_guard(api, run_id, attempt - 1) and not recorded_retry(run_id):
-        refuse("GUARD_RERUN_WITHOUT_FIX", f"attempt {attempt} of run {run_id} re-runs commit {sha[:12]}, which already "
-                                          f"failed: merge a fix and dispatch again, or record an external cause in "
-                                          f"{RETRIES.relative_to(ROOT)}")
-    title = run_name(workflow, inputs)
+    """(4) keyed on workflow + subject, whatever the other inputs (resume_run, attempts, adopt_run): the latest run
+    of this subject that this guard did not refuse failed -> a commit since its head_sha must touch what it depends
+    on, or retries.json records its external cause."""
+    attempt_check(api, run_id, attempt, sha)
     runs = (api(f"actions/workflows/{workflow}/runs?status=completed&per_page=100") or {}).get("workflow_runs", [])
     for r in runs:
-        if str(r["id"]) == str(run_id) or r.get("display_title") != title:
+        if str(r["id"]) == str(run_id) or not same_subject(workflow, facts, inputs, r.get("display_title")):
             continue
         if r.get("conclusion") not in FAILED:
-            return                    # the last run of these inputs did not fail
+            return                    # the last run of this subject did not fail
         if failed_in_guard(api, r["id"]):
-            continue                  # refused by this guard before any work: not a failure of the inputs
+            continue                  # refused by this guard before any work: not a failure of the subject
         if recorded_retry(r["id"]):
             return
         deps = depends_on(workflow, facts)
@@ -497,33 +618,35 @@ def rerun(workflow, facts, inputs, api, run_id, attempt, sha):
         if cmp.get("status") == "ahead" and (len(files) >= 300 or any(
                 f == d or (d.endswith("/") and f.startswith(d)) or f.startswith(d + "/") for f in files for d in deps)):
             return
-        refuse("GUARD_RERUN_WITHOUT_FIX", f"run {r['id']} of these inputs failed at {r['head_sha'][:12]} and main "
-                                          f"has no commit since touching what it depends on ({len(deps)} paths: "
-                                          f"{', '.join(deps[:6])}...): merge the fix first, or record an external "
-                                          f"cause in {RETRIES.relative_to(ROOT)}")
-    return
+        refuse("GUARD_RERUN_WITHOUT_FIX", f"run {r['id']} on {facts['subject'] or 'these inputs'} failed at "
+                                          f"{r['head_sha'][:12]} and main has no commit since touching what it "
+                                          f"depends on ({len(deps)} paths: {', '.join(deps[:6])}...): merge the fix "
+                                          f"first, or record an external cause in {RETRIES.relative_to(ROOT)}")
 
 
 def check_local(workflow, inputs):
     if workflow not in WORKFLOWS:
         refuse("GUARD_WORKFLOW_UNKNOWN", f"{workflow}: add it to dispatch_guard.WORKFLOWS")
     facts = WORKFLOWS[workflow][1](inputs)
-    bad = import_problems(workflow)
+    facts["subject"] = subject_of(workflow, inputs)
+    facts["flux"] = workflow == "cf-images.yml" and inputs.get("engine") == "flux"
+    scan = static_import_problems(workflow)      # once: its problems here, its files for (4)
+    bad = import_problems(workflow, scan)
     if bad:
         refuse("GUARD_IMPORT_UNRESOLVED", "; ".join(bad))
+    facts["files"] = scan[1]
     return facts
 
 
 def check(workflow, inputs, api, run_id, attempt, sha, today):
     facts = check_local(workflow, inputs)
     capacity(workflow, facts, api, today)
-    in_flight(workflow, facts, api, run_id)
     rerun(workflow, facts, inputs, api, run_id, attempt, sha)
     return facts
 
 
 def main(argv):
-    if len(argv) != 3 or argv[1] not in ("run", "local"):
+    if len(argv) != 3 or argv[1] not in ("run", "local", "attempt"):
         raise SystemExit(__doc__)
     env = os.environ
     inputs = json.loads(env.get("GUARD_INPUTS") or "{}")
@@ -532,12 +655,20 @@ def main(argv):
             facts = check_local(argv[2], inputs)
         else:
             repo, token = env["GITHUB_REPOSITORY"], env.get("GH_TOKEN", "")
-            facts = check(argv[2], inputs, lambda p: github(p, token, repo), env["GITHUB_RUN_ID"],
-                          int(env.get("GITHUB_RUN_ATTEMPT") or 1), env["GITHUB_SHA"],
+            api = lambda p: github(p, token, repo)  # noqa: E731
+            attempt, sha = int(env.get("GITHUB_RUN_ATTEMPT") or 1), env["GITHUB_SHA"]
+            if argv[1] == "attempt":
+                attempt_check(api, env["GITHUB_RUN_ID"], attempt, sha)
+                print(f"GUARD_OK {argv[2]} attempt {attempt}")
+                return 0
+            facts = check(argv[2], inputs, api, env["GITHUB_RUN_ID"], attempt, sha,
                           datetime.now(timezone.utc).strftime("%Y-%m-%d"))
     except Refusal as e:
         print(e)
         return 1
+    if env.get("GITHUB_OUTPUT") and facts["subject"]:
+        with open(env["GITHUB_OUTPUT"], "a") as out:
+            out.write(f"subject={facts['subject']}\n")
     print(f"GUARD_OK {argv[2]} subject={facts['subject']} uploads<={facts['uploads']}")
     return 0
 
