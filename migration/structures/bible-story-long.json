@@ -237,5 +237,44 @@
     "burned_captions": "false: the long carries YouTube captions (our SRT), no captions burned into the picture"
    }
   }
+ },
+ "package": {
+  "status": "hygiene only (no package driver validated)",
+  "measured_on": "2026-10-27",
+  "evidence": "evidence/vidiq/20261027/package_titles_thumbnails.json",
+  "sample": "7 winners from 7 channels, max share 1/7, breakout >= 67.7; 3 weak contrasts (3 channels)",
+  "hygiene": {
+   "title_names_character_or_place": {
+    "label": "hygiene",
+    "winners": "7/7",
+    "weak": "3/3"
+   },
+   "thumbnail_designed_text_repeats_story_name": {
+    "label": "hygiene",
+    "winners": "7/7",
+    "weak": "3/3",
+    "target": "large title text on the art naming the story (winners 1-8 words; 4/7 use <= 4)"
+   },
+   "thumbnail_closeup_face_emotion": {
+    "label": "hygiene",
+    "winners": "6/7",
+    "weak": "3/3"
+   }
+  },
+  "free": [
+   "question (0/7)",
+   "opponent named (1/7 vs 1/3)",
+   "CAPS segment (2/7 vs 0/3)",
+   "antagonist visible (2/7 vs 0/3)",
+   "frozen action (1/7 vs 1/3)",
+   "text <= 4 words (4/7 vs 1/3)",
+   "pipe series tag (6/7 vs 2/3)"
+  ],
+  "not_validated": {
+   "title_conflict_or_question": "NOT validated (26/10 lead). Shorts 14/27 winners (52 %), same-form 10/18 (56 %), weak 0/3; longs 1/7, weak 1/3. Below the 70 % driver bar; no plan_check title rule.",
+   "title_label_only_anti": "NOT validated: label-only titles win too (Shorts 13/27, longs 6/7)",
+   "missing_sample": ">= 6 more weak contrasts per form from >= 4 channels (same form, at or below channel norm), from the winners' own channels, so the package is compared within channel"
+  },
+  "best_winner_hypothesis": "q5FW9qWzPSc (breakout 1224): deadline title 'The LAST NIGHT of SODOM' (CAPS on 3 key words), one big word on a muted poster, no face. One video, and it breaks the face hygiene: a hypothesis, not a target"
  }
 }

@@ -170,5 +170,36 @@
    "AI disclosure",
    "no third-party footage or text"
   ]
+ },
+ "package": {
+  "status": "hygiene only (no package driver validated)",
+  "measured_on": "2026-10-27",
+  "evidence": "evidence/vidiq/20261027/package_titles_thumbnails.json",
+  "sample": "27 winners from 27 channels (18 same-form 60-180 s), max share 1/27, breakout >= 51; 3 weak contrasts (2 channels)",
+  "hygiene": {
+   "title_names_character_or_place": {
+    "label": "hygiene",
+    "winners": "17/18 same form (23/27 all)",
+    "weak": "3/3",
+    "target": "the title names the story's hero or place"
+   }
+  },
+  "free": [
+   "question",
+   "opponent named",
+   "CAPS segment",
+   "emoji",
+   "number",
+   "reversal marker (... but / until)",
+   "frame with close-up face (11/18 vs 1/3)",
+   "antagonist visible in frame (7/18 vs 0/3)",
+   "designed text on frame (5/18 vs 0/3)"
+  ],
+  "not_validated": {
+   "title_conflict_or_question": "NOT validated (26/10 lead). Shorts 14/27 winners (52 %), same-form 10/18 (56 %), weak 0/3; longs 1/7, weak 1/3. Below the 70 % driver bar; no plan_check title rule.",
+   "title_label_only_anti": "NOT validated: label-only titles win too (Shorts 13/27, longs 6/7)",
+   "missing_sample": ">= 6 more weak contrasts per form from >= 4 channels (same form, at or below channel norm), from the winners' own channels, so the package is compared within channel"
+  },
+  "best_winner_hypothesis": "vE_XJw7nU34 (breakout 1511): CAPS question title + designed text box on the frame. One video: a hypothesis for the daily loop, not a target"
  }
 }
