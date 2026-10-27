@@ -328,6 +328,7 @@
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_lipsync_check.py",
     "migration/production/bible/test_long_plan_check.py",
+    "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_short_engine.py",
@@ -527,6 +528,7 @@
     "migration/ops/dispatch_guard.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/lipsync_check.py",
+    "migration/production/bible/long_plan_check.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/syncnet.py",
     "migration/production/pilot_render.py"
@@ -1547,7 +1549,8 @@
     "shot-probe.yml"
    ],
    "imported_by": [
-    "migration/ops/test_dispatch_guard.py"
+    "migration/ops/test_dispatch_guard.py",
+    "migration/production/bible/test_long_preflight.py"
    ],
    "test": "migration/ops/test_dispatch_guard.py",
    "is_test": false
@@ -1863,7 +1866,8 @@
    ],
    "imported_by": [
     "migration/production/bible/episode_build.py",
-    "migration/production/bible/test_clip_check.py"
+    "migration/production/bible/test_clip_check.py",
+    "migration/production/bible/test_long_preflight.py"
    ],
    "test": "migration/production/bible/test_clip_check.py",
    "is_test": false
@@ -1876,6 +1880,8 @@
     "migration/integrations/pavo/video.py",
     "migration/production/bible/clip_check.py",
     "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/short_engine.py",
     "migration/production/characters/characters.py",
@@ -1887,9 +1893,11 @@
    ],
    "imported_by": [
     "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py"
    ],
@@ -1916,6 +1924,7 @@
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/imagegen/cf_allocation.py"
    ],
@@ -1923,8 +1932,10 @@
    "imported_by": [
     "migration/ops/test_dispatch_guard.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/rekey_shots_e118.py",
-    "migration/production/bible/test_episode_preflight.py"
+    "migration/production/bible/test_episode_preflight.py",
+    "migration/production/bible/test_long_preflight.py"
    ],
    "test": "migration/production/bible/test_episode_preflight.py",
    "is_test": false
@@ -1965,12 +1976,35 @@
     "migration/production/bible/voice_pace.py",
     "migration/production/script_check.py"
    ],
-   "called_by_workflows": [],
+   "called_by_workflows": [
+    "shot-probe.yml"
+   ],
    "imported_by": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/test_long_plan_check.py",
+    "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py"
    ],
    "test": "migration/production/bible/test_long_plan_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/long_preflight.py": {
+   "purpose": "The Bible-story long's no-rework contract (E127, owner 27/10: \"no rework, ever\"). The Shorts had it since E106/E114",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/plan_check.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/test_long_preflight.py"
+   ],
+   "test": "migration/production/bible/test_long_preflight.py",
    "is_test": false
   },
   "migration/production/bible/plan_check.py": {
@@ -1992,6 +2026,7 @@
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/bible/scene_stills.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
@@ -2139,6 +2174,24 @@
    "imported_by": [
     "migration/production/bible/test_plan_check.py"
    ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/bible/test_long_preflight.py": {
+   "purpose": "E127: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/ops/dispatch_guard.py",
+    "migration/production/bible/clip_check.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/long_preflight.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
    "test": null,
    "is_test": true
   },

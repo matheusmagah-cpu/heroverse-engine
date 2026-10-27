@@ -31,6 +31,7 @@ LATER = [
     "migration/production/bible/episode_build.py", "migration/production/bible/short_engine.py",
     "migration/production/bible/lipsync_check.py", "migration/production/bible/syncnet.py",
     "migration/production/bible/clip_check.py",
+    "migration/production/bible/long_preflight.py",   # E127: the long's verify-preflight and shot-probe gate
     "migration/production/render_queue.py", "migration/production/qa_pilot.py", "migration/production/still_render.py",
     "migration/production/preview_gate.py", "migration/production/pilot_render.py", "migration/production/long_review.py",
     "migration/production/footage/assign.py", "migration/production/imagegen/cf_images.py",

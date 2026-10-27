@@ -1226,6 +1226,30 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E127",
+   "date": "2026-10-27",
+   "class": [
+    "review-after-build",
+    "cheap-vs-expensive"
+   ],
+   "prior": [
+    "E106",
+    "E109",
+    "E110",
+    "E117"
+   ],
+   "error": "Rework audit of the arc-01 long (pilot-015, plans/arc-01-long.json, DECISIONS 'Still open for the arc-01 long'): the Shorts had a no-rework contract (E106 preflight before any build, E114 every shot probed by shot-probe.yml and approved by Claude before the build, the build shipping only approved clips, E99 risk order) and the long, a second kind of plan beside them, had none of it. long_plan_check passed with --strict, but nothing bound the long's plan, characters, references, voices or probes to a report, nothing refused its build while 25 of its review rows (story QA v3, rubric long) had no earlier check, shot-probe.yml refused its plan (plan_check: PLAN_VERSION) and its windows had no place in the request digests, so its first build would have generated ~165 clips that Claude met only at the review (the genesis-07/-08 rework, at 6x the size). Root cause: the contract was written for the Short's plan kind and nothing required a new plan kind to carry it.",
+   "fix": "long_preflight.py and the long's path through the Short's own code: episode_build.check_plan (long_plan_check --strict + the frozen story QA + LONG_EPISODE_ID), the long layout (LONG_LINE_GAP, the structure gate's length and Keeper share, measured), windows excluded from request digests, clip needs, review_problems, risk_order and probes (PROBE_WINDOW_SHOT; the dispatch guard too); episode_preflight runs on the long and adds LONG_REVIEW_OPEN while any long review row is open, binds the review rows and the long's code, verify-preflight refuses an open row now; shot-probe.yml takes the long (long_plan_check) and check-probe refuses a long without a clean preflight of the exact plan (LONG_PROBE_PREFLIGHT); risk_rank puts talking characters, the Keeper, voice-overs and wide/establishing scenes first; probe-queue resumes from the approvals in run-sized batches; the production estimate is written to evidence/long/20261027. Class antidote: every plan kind in plans/ must be one the plan check, preflight, verify-preflight, shot-probe.yml and approve-shot all take, and any workflow that ships clips runs verify-preflight first and holds no Pavo secret.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_preflight.py",
+    "contains": "def test_every_plan_kind_in_plans_has_the_preflight_and_approved_shot_contract",
+    "covers": [
+     "review-after-build",
+     "cheap-vs-expensive"
+    ]
+   }
   }
  ]
 }

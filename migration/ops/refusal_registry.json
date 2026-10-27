@@ -257,6 +257,10 @@
    "class": "D",
    "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
   },
+  "CLIP_ASPECT_MISMATCH": {
+   "class": "C",
+   "probe": "shot-probe: clip_check on each generation with the plan's aspect_ratio (CLIP_ASPECT_MISMATCH: width / height off the requested W:H by more than ASPECT_TOL), regenerated within the shot's attempts; E127: the request names the aspect, but only the returned clip shows the shape Pavo made"
+  },
   "CLIP_TOO_SHORT": {
    "class": "A",
    "was": "B",
@@ -895,6 +899,18 @@
    "early": "package_pilot / script_check keeping the long's description under DESCRIPTION_MAX minus the arc block arcs.json implies",
    "open": "costs a skipped link, not a generation; the fix touches the long's package (PR #418's grammar) and migration/publish/ (security sweep), so it gets its own PR"
   },
+  "LONG_EPISODE_ID": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_preflight.py::eb.check_plan(plan, chars)",
+    "migration/production/bible/episode_build.py::def check_plan("
+   ],
+   "note": "E127: a long's `episode` must equal its `long` id (shot-probe.yml, the dispatch guard and shots/ key on it); the long's preflight runs the same check_plan before any probe or build"
+  },
+  "LONG_LENGTH": {
+   "class": "C",
+   "probe": "episode_preflight --voice on the long (E127): the pinned Kokoro voiced locally and episode_build lines laid out at LONG_LINE_GAP against the structure's gate (0 Actions, 0 credits); the same rule is predicted on the estimate by long_plan_check (LONG_LENGTH)"
+  },
   "LONG_NOT_PUBLIC": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
@@ -906,6 +922,22 @@
   "LONG_NOT_UPLOADED": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "LONG_PROBE_PREFLIGHT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/production/bible/long_preflight.py::def probe_gate("
+   ],
+   "note": "E127: shot-probe.yml's first step, before any secret, refuses a long without a clean committed preflight of its exact plan; the local preflight (--write) is what makes it pass"
+  },
+  "LONG_REVIEW_OPEN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_preflight.py::def review_problems(",
+    "migration/production/bible/episode_preflight.py::long_preflight.extend("
+   ],
+   "note": "E127: the long's preflight is BLOCKED by the same review_problems while a long review row of ops/refusal_registry.json is open; verify-preflight (the build's first step) runs it again on the registry now"
   },
   "LOW_FPS": {
    "class": "C",
@@ -1242,6 +1274,10 @@
    "early": "migration/publish/prepublish_gate.py::preflight_problems",
    "note": "publish/preflight.py crashing is reported as a failed row, never a pass"
   },
+  "PREFLIGHT_MISSING": {
+   "class": "N",
+   "why": "E127: probe-queue, a local read of the committed preflight's request digests (no generation, no dispatch), names the missing report; the build's PREFLIGHT_MISSING is episode_preflight.verify's, before any secret"
+  },
   "PREVIEW_APPROVED": {
    "class": "N",
    "why": "a state word of the preview gate"
@@ -1266,6 +1302,14 @@
    "class": "N",
    "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
   },
+  "PROBE_RATE_LOW": {
+   "class": "N",
+   "why": "E127: named in long_preflight.PROBE_TOLERATED, the preflight blockers that do not stop a long's shot probe (neither changes a request); the refusal itself is the local preflight's (episode_preflight.probe_rows), before any dispatch"
+  },
+  "PROBE_REQUIRED": {
+   "class": "N",
+   "why": "E127: named in long_preflight.PROBE_TOLERATED, the preflight blockers that do not stop a long's shot probe (neither changes a request); the refusal itself is the local preflight's (episode_preflight.probe_rows), before any dispatch"
+  },
   "PROBE_RUN_REFUSED": {
    "class": "N",
    "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
@@ -1285,6 +1329,14 @@
     "migration/production/bible/episode_build.py::def probe_ids("
    ],
    "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
+  "PROBE_WINDOW_SHOT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/ops/dispatch_guard.py::if s.get(\"window_of\") is None"
+   ],
+   "note": "E127: a long's window_of shot is a second view of an earlier clip and is never generated; the dispatch guard refuses its id before the run, check-probe in the first step"
   },
   "PROMPT_TOO_LONG": {
    "class": "A",

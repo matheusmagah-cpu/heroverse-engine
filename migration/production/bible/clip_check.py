@@ -24,6 +24,11 @@ evidence/pavo, 28 genesis-09 candidates) at most 1.62 over their frames (genesis
 one mid-pan frame of a genesis-09 candidate read 3.47 alone, hence every frame. Fixtures: bible/fixtures/clip_check.
 A turned close-up with no horizon has no such profile and is still the review's to see.
 
+E127 (review of #468): the long asks Pavo for 16:9 and the Shorts for 9:16; a clip returned at another shape (a
+9:16 clip in the 16:9 long, a square) would be cropped or padded by the compose and seen only at the review.
+CLIP_ASPECT_MISMATCH: the returned width / height differs from the plan's aspect_ratio by more than ASPECT_TOL (Pavo
+16:9 is 1280x720, 9:16 720x1280: exact). Checked by the build's own check on every probed, adopted and shipped clip.
+
 usage: clip_check.py CLIP.mp4 [CLIP.mp4 ...]       prints one JSON line per clip; exit 1 when any clip is flagged
        clip_check.py --composed FILE.mp4 [DIP_S ...]  the composed Short: exit 1 on a black frame that is not at an
                                                      intended dip_to_black (seconds, +-0.5 s)
@@ -46,6 +51,7 @@ BAR_SHARE = 0.04     # more than 4 % of the side, at BOTH opposite edges, in eve
 BAR_FRAMES = 5       # frames sampled evenly across the clip
 BAR_GRID = 90        # the short side of the sampled frame (the long side keeps the clip's ratio)
 ROT_SPREAD = 30      # ROTATED_PICTURE (E117): the column means' standard deviation over this (s-board r1: 53-54)
+ASPECT_TOL = 0.02    # CLIP_ASPECT_MISMATCH (E127): |w/h - W/H| over this share of W/H
 ROT_RATIO = 3.0      # and over 3x the row means' (s-board r1: 4.56-5.31; good clips at most 1.71), in every frame
 
 
@@ -149,7 +155,16 @@ def letterboxed(b):
     return bool(b) and (min(b["top"], b["bottom"]) > BAR_SHARE or min(b["left"], b["right"]) > BAR_SHARE)
 
 
-def flags(info, head, tail, edges=None, turn=None):
+def aspect_mismatch(info, aspect):
+    """E127: True when the clip's width / height is not the requested W:H (None asks nothing)."""
+    if not aspect:
+        return False
+    w, h = (int(x) for x in str(aspect).split(":"))
+    want = w / h
+    return abs(info["width"] / max(1, info["height"]) - want) > ASPECT_TOL * want
+
+
+def flags(info, head, tail, edges=None, turn=None, aspect=None):
     out = []
     if head and min(head) < BLACK_LUMA:
         out.append("BLACK_START")
@@ -163,10 +178,12 @@ def flags(info, head, tail, edges=None, turn=None):
         out.append("LETTERBOX_BARS")
     if rotated(turn):
         out.append("ROTATED_PICTURE")
+    if aspect_mismatch(info, aspect):
+        out.append("CLIP_ASPECT_MISMATCH")
     return out
 
 
-def check(path):
+def check(path, aspect=None):
     info = probe(path)
     head = lumas(path, 0, EDGE_SECONDS)
     tail = lumas(path, info["seconds"] - EDGE_SECONDS, EDGE_SECONDS)
@@ -174,7 +191,7 @@ def check(path):
     edges, turn = bars_of(frames, w, h), turn_of(frames, w, h)
     return dict(info, clip=path, head_min_luma=round(min(head), 1) if head else None,
                 tail_min_luma=round(min(tail), 1) if tail else None, bars=edges, turn=turn,
-                flags=flags(info, head, tail, edges, turn))
+                flags=flags(info, head, tail, edges, turn, aspect))
 
 
 def black_runs(path):
