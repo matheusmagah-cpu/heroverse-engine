@@ -125,8 +125,8 @@ def compose_long_shots(plan, layout, clips, clip_seconds):
         last = r == len(runs) - 1
         end = total if last else lines[runs[r + 1][2][0]]["start"]
         s = shots[a]
-        if pc.voiceover(s):
-            raise SystemExit(f"LONG_VOICEOVER_UNSUPPORTED {s['id']} (long_plan_check refuses a voice-over Keeper)")
+        # E129: a voice-over Keeper (plan B) is cut like a scene run: his silent clip covers his line from its first
+        # word to the next run (slowed with its parts at most MAX_SLOW), his words play from the voice track
         if pc.talking(s):
             kind = "keeper" if s["kind"] == "keeper" else "speaker"
             start, stop = lines[ln[0]]["start"], lines[ln[-1]]["end"]
@@ -152,13 +152,14 @@ def compose_long_shots(plan, layout, clips, clip_seconds):
         for m in members:
             src = m.get("window_of") or m["id"]
             out.append({"clip": clips[src], "start": round(t, 3), "end": round(t + share, 3), "shot": m["id"],
-                        "source": src, "kind": "window" if eb.is_window(m) else "scene"})
+                        "source": src, "kind": "window" if eb.is_window(m) else
+                        ("keeper_vo" if pc.voiceover(m) else "scene")})
             t += share
         out[-1]["end"] = round(end, 3)
         cursor = end
     parts = {}
     for c in out:
-        if c["kind"] in ("scene", "window"):
+        if c["kind"] in ("scene", "window", "keeper_vo"):
             parts.setdefault(c["source"], []).append(c)
     for src, cs in parts.items():   # the source and its windows: distinct parts of one clip, in order
         shown = sum(c["end"] - c["start"] for c in cs)

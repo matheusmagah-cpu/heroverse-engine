@@ -81,6 +81,23 @@ VERSION = "bible-long-plan-v1"
 STRUCTURE = script_check.STRUCTURE
 QA = ROOT / "migration" / "production" / "qa_criteria_story_v3.json"
 QA_SHA256 = "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"   # frozen 2026-10-26 (owner)
+# owner 27/10 (~20:40-22:50 UTC): Pavo's native speech kept per clip under checks, free fallbacks for non-spoken shots;
+# v3 with rights.ai_video.audio changed and rows added only (test_long_plan_check holds every other value equal). A
+# plan is measured by v4 only when it says "criteria": "story-qa-criteria-v4"; every other long keeps v3.
+QA_V4 = ROOT / "migration" / "production" / "qa_criteria_story_v4.json"
+QA_V4_SHA256 = "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"   # frozen 2026-10-27 (owner)
+V3, V4 = "story-qa-criteria-v3", "story-qa-criteria-v4"
+
+
+def criteria_files():
+    """{version: (file, pinned sha256)}, read at call time (a test may pin another hash)."""
+    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256)}
+
+
+# E129: the long's Keeper at 16:9, framed from the chest up (a "Medium close-up" with his seated wardrobe drew him
+# full body and the landmarker lost his face)
+KEEPER_FRAMING = "Close-up from the chest up, his face large in the centre of the frame"
+KEEPER_FRAMING_OFF = re.compile(r"(?i)\b(?:medium close-up|medium shot|full[- ]body|full shot|wide shot)\b")
 FACELESS = ("its",)         # characters.json pronoun of a speaker with no human face (lipsync_check cannot judge it)
 ARCS = HERE / "arcs.json"
 # the build holds the cold open's last frame (under the music) until the Keeper starts at gate.cold_open_s; more than
@@ -134,6 +151,17 @@ def qa(path=QA):
     return json.loads(Path(path).read_text())
 
 
+def criteria_version(plan):
+    """The frozen story QA a long is measured by: its `criteria`, v3 when it names none."""
+    return (plan or {}).get("criteria") or V3
+
+
+def qa_for(plan):
+    """The plan's frozen story QA (v3 or v4), or None for a version that is not one of them (CRITERIA_UNKNOWN)."""
+    found = criteria_files().get(criteria_version(plan))
+    return qa(found[0]) if found else None
+
+
 def arcs(path=ARCS):
     return {a["id"]: a for a in json.loads(Path(path).read_text())["arcs"]}
 
@@ -159,9 +187,13 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     arcs())."""
     chars = chars if chars is not None else ch.registry()
     g = gate_values if gate_values is not None else gate()
-    q = criteria if criteria is not None else qa()
-    arc_map = arc_table if arc_table is not None else arcs()
     problems, pending = [], []
+    q = criteria if criteria is not None else qa_for(plan)
+    if q is None:
+        problems.append(f"CRITERIA_UNKNOWN {criteria_version(plan)!r} (a long is measured by "
+                        f"{' or '.join(criteria_files())})")
+        q = qa()
+    arc_map = arc_table if arc_table is not None else arcs()
 
     # the long as a whole
     if plan.get("version") != VERSION:
@@ -288,17 +320,37 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"HOLD_OVER_QA shot {i} {sid} (~{hold[i]:.1f}-{h_max:.1f} s on screen; story QA holds "
                             f"{lo:g}-{hi:g} s: split it into more cuts or shorter lines)")
         if s["kind"] == "keeper":
-            if s.get("voiceover") is True:
-                # the voice-over Keeper (plan B, PR #423) is built and checked for the Short only (episode_build,
-                # lipsync_check --still-mouth); the long has no such path yet
-                problems.append(f"LONG_VOICEOVER_UNSUPPORTED shot {i} {sid} (a voice-over Keeper exists for the Short "
-                                "only; the long's Keeper talks until a long voice-over path is built and tested)")
             if beat not in ("keeper_promise", "keeper_insight", "keeper_close"):
                 problems.append(f"KEEPER_OUT_OF_BEAT shot {i} {sid} (the Keeper: promise, insight and close only)")
-            if slowest > pc.TALK_LINE_MAX:
-                problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {sid} (~{slowest:.1f} s at the slowest pace)")
-            if span < pc.talk_min(gaps):
-                problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
+            if pc.voiceover(s):
+                # E129: the voice-over Keeper (plan B, #423, owner-approved for the Shorts) in the long: his line plays
+                # from the voice track while one silent clip of him covers his run (its line and the gap or tail
+                # after: long_build cuts a run from its first word), at most one 12 s clip slowed MAX_SLOW; his
+                # still mouth is judged by lipsync_check --still-mouth (episode_build.shot_runner)
+                covered = pc.vo_covered(slowest, shots, i, long=True)
+                if covered > pc.VO_LINE_MAX + 1e-9:
+                    problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {sid} (~{covered:.1f} s with the gap or tail after, "
+                                    f"at the slowest pace; one {pc.TALK_CLIP[1]} s clip slowed at most {pc.MAX_SLOW} "
+                                    f"covers {pc.VO_LINE_MAX:.1f} s)")
+                if span < pc.VO_LINE_MIN:
+                    problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (~{span:.1f} s; a Keeper line is at least "
+                                    f"{pc.VO_LINE_MIN:.1f} s)")
+                if keeper and not keeper.get("talk_refs"):
+                    problems.append(f"KEEPER_VO_NO_TALK_REF shot {i} {sid} (a voice-over Keeper is generated from his "
+                                    "`talk_refs` frame; the front view lost his face 4 of 4)")
+            else:
+                if slowest > pc.TALK_LINE_MAX:
+                    problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {sid} (~{slowest:.1f} s at the slowest pace)")
+                if span < pc.talk_min(gaps):
+                    problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
+            if q.get("version") == V4 and plan.get("aspect_ratio") == "16:9" and (
+                    KEEPER_FRAMING not in s.get("prompt", "") or KEEPER_FRAMING_OFF.search(s.get("prompt", ""))):
+                # E129: at 16:9 "Medium close-up" with his seated wardrobe drew him full body, his face too small for
+                # the landmarker (FACE_NOT_FOUND on the arc-01 long's Keeper probes); the long's Keeper is framed
+                # from the chest up
+                problems.append(f"KEEPER_FRAMING_16X9 shot {i} {sid} (a 16:9 Keeper shot says \"{KEEPER_FRAMING}\" and "
+                                "no medium, full or wide framing: his face must fill enough of the frame for the face "
+                                "landmarker)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
                 problems.append(f"KEEPER_SHOT_FIELDS shot {i} {sid} (characters and seconds come from the line)")
             problems += pc.prompt_problems(i, s)
@@ -534,6 +586,29 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         pending.append(f"CHARACTER_PENDING {cid} ({(chars.get(cid) or {}).get('status')}): Claude reviews its "
                        "reference sheet and sets APPROVED with kept refs, by PR, before any generation")
 
+    # owner 27/10 (R2, R4): Pavo's own speech for the spoken shots, only under the frozen QA that allows it (v4);
+    # each spoken shot's speaker has its fixed Pavo voice description, the plan names the ambience under the voice,
+    # and a line Pavo's prompt filter refuses is voiced by Kokoro (pavo_native.route)
+    import pavo_native as pn
+    route = plan.get("audio_route")
+    if route not in (None, pn.KOKORO, pn.NATIVE):
+        problems.append(f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})")
+    if route == pn.NATIVE and q.get("version") != V4:
+        problems.append(f"AUDIO_ROUTE_NEEDS_V4 (Pavo's own speech is measured only by {V4}; {q.get('version')} "
+                        "removes Pavo's audio)")
+    routes = {}
+    if pn.native_plan(plan) and q.get("version") == V4:
+        voices = pn.load_voices()
+        if not pn.ambience(plan, {}):
+            problems.append("AMBIENCE_MISSING (the plan's `ambience`: the natural sound Pavo lays under the voice)")
+        for i, s in enumerate(shots):
+            if s.get("window_of") is not None or not pn.spoken(s):
+                continue
+            who = pn.speaker(s)
+            if not (voices.get(who) or {}).get("pavo_voice"):
+                problems.append(f"PAVO_VOICE_UNDESCRIBED shot {i} {s['id']} ({who}: production/bible/voices.json)")
+            routes[s["id"]] = pn.route(plan, s, i)
+
     gens = [s for s in shots if s.get("window_of") is None]
     talk = [i for i, s in enumerate(shots) if s.get("window_of") is None and pc.talking(s)]
     god = [s for s in gens if pc.speaking(s) and s["speaker"] == ch.GOD]
@@ -552,24 +627,34 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                     for c in chapters],
                 "generations": {"scene": len(scenes) - len(god), "god": len(god), "talking": len(talk),
                                 "windows": sum(len(v) for v in windows.values()), "total": len(gens)},
-                "clip_seconds": clip_seconds,
+                "clip_seconds": clip_seconds, "criteria": q.get("version"),
+                "audio_routes": {"pavo_native": sorted(k for k, v in routes.items() if v == pn.NATIVE),
+                                 "kokoro_prompt_filter": sorted(k for k, v in routes.items() if v == pn.KOKORO)},
                 "pavo_minutes_sequential": round((len(scenes) * PAVO_SCENE_S + len(talk) * PAVO_TALK_S) / 60),
                 "upscale_minutes_1440p": round(clip_seconds * UPSCALE_S_PER_CLIP_S / 60)}
     return {"problems": problems, "pending": pending, "estimate": estimate}
 
 
-def frozen_qa_problem(path=QA):
-    """None when story QA v3 is the frozen file (its pinned sha256), else the reason."""
+def frozen_qa_problem(path=QA, plan=None):
+    """None when the frozen story QA a plan is measured by (v3 by default; `plan`: its own criteria) is the frozen
+    file (its pinned sha256), else the reason."""
+    sha = QA_SHA256
+    if plan is not None:
+        found = criteria_files().get(criteria_version(plan))
+        if not found:
+            return f"CRITERIA_UNKNOWN {criteria_version(plan)!r}"
+        path, sha = found
     got = hashlib.sha256(Path(path).read_bytes()).hexdigest()
-    return None if got == QA_SHA256 else f"QA_NOT_FROZEN {Path(path).name} sha256 {got}"
+    return None if got == sha else f"QA_NOT_FROZEN {Path(path).name} sha256 {got}"
 
 
 def main(argv):
     args = [a for a in argv[1:] if a != "--strict"]
     if len(args) != 1:
         raise SystemExit(__doc__)
-    result = check(json.loads(Path(args[0]).read_text()))
-    frozen = frozen_qa_problem()
+    plan = json.loads(Path(args[0]).read_text())
+    result = check(plan)
+    frozen = frozen_qa_problem(plan=plan)
     if frozen:
         result["problems"].append(frozen)
     print(json.dumps(dict(plan=args[0], **result), indent=1))

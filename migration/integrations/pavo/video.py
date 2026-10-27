@@ -29,6 +29,13 @@ PATHS = {
     "inspect": "/v1/file/inspect",
 }
 UPLOAD_HEADERS = re.compile(r"[A-Za-z0-9-]{1,64}")
+# E128: Pavo's prompt filter (native-audio probe of 2026-10-27, PR #473) refused prompts holding the KJV word "naked"
+# before any generation: an assistant block "PromptSafetyBlocked" with the reason "text_rejected_porn", nothing
+# deducted, no media and no failure block. The read-back said only "incomplete", so the build polled
+# INCOMPLETE_POLLS times and spent a regeneration on the same refused words. A safety block is now its own status,
+# "blocked" (code PAVO_PROMPT_BLOCKED), with the reason code only, never the block's text.
+SAFETY_BLOCK = re.compile(r"(?i)safety|blocked|rejected|moderat")
+SAFETY_REASON = re.compile(r"\b((?:text|image|audio|video|prompt)_rejected_[a-z_]{1,40})\b")
 VIDEO_PATH = r"/[A-Za-z0-9_./%+-]+\.mp4"
 
 
@@ -329,9 +336,12 @@ class PavoVideoClient(PavoClient):
 
     def job(self, job):
         job, running, status, videos, turns = self._history(job, MODEL, VIDEO_PATH)
-        return {"conversation_id": job, "running": running, "status": status, "videos": videos,
-                "turn_count": turns, "published": False,
-                "conversation_url": "https://app.pavo-ai.work/chat?conversationId=" + job}
+        result = {"conversation_id": job, "running": running, "status": status, "videos": videos,
+                  "turn_count": turns, "published": False,
+                  "conversation_url": "https://app.pavo-ai.work/chat?conversationId=" + job}
+        if status == "blocked":   # E128: the words were refused; the same prompt is never submitted again
+            result.update(code="PAVO_PROMPT_BLOCKED", blocked_reason=getattr(self, "_blocked_reason", None))
+        return result
 
     def _history(self, job, model, path_pattern, url_keys=("url",)):
         """(job, running, status, media, turn count): the last turn's media of MODEL on the fixed CDN; read-only."""
@@ -341,7 +351,7 @@ class PavoVideoClient(PavoClient):
         data = self._video_json("history", job=job)
         if not isinstance(data, dict) or type(data.get("is_running")) is not bool or not isinstance(data.get("turns"), list):
             raise PavoError("PAVO_HISTORY_SCHEMA_CHANGED")
-        videos, failed = [], False
+        videos, failed, blocked = [], False, None
         turns = data["turns"]
         if turns:
             turn = turns[-1]
@@ -353,6 +363,10 @@ class PavoVideoClient(PavoClient):
                 kind = block.get("type")
                 if kind in ("Error", "error", "GenerationFailed", "GenerationFailure", "TaskFailed"):
                     failed = True
+                if isinstance(kind, str) and kind != "GenerationSuccess" and SAFETY_BLOCK.search(kind):
+                    found = SAFETY_REASON.search(json.dumps(block.get("data"), default=str)[:20000])
+                    blocked = found.group(1).lower() if found else "unknown"
+                    continue
                 if kind != "GenerationSuccess":
                     continue
                 wrapper = block.get("data")
@@ -377,5 +391,7 @@ class PavoVideoClient(PavoClient):
                         raise PavoError("PAVO_MEDIA_URL_REFUSED")
                     videos.append({"url": url, "seconds": number(item.get("duration")),
                                    "width": number(item.get("width")), "height": number(item.get("height"))})
-        status = "running" if data["is_running"] else "completed" if videos else "failed" if failed else "incomplete"
+        status = ("running" if data["is_running"] else "completed" if videos else "blocked" if blocked
+                  else "failed" if failed else "incomplete")
+        self._blocked_reason = blocked if status == "blocked" else None
         return job, data["is_running"], status, videos, len(data["turns"])

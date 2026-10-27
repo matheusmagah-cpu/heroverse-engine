@@ -160,7 +160,7 @@ def check_plan(plan, chars=None):
         return plan_check.check(plan, chars)
     import long_plan_check
     result = long_plan_check.check(plan, chars)
-    frozen = long_plan_check.frozen_qa_problem()
+    frozen = long_plan_check.frozen_qa_problem(plan=plan)
     if frozen:
         result["problems"].append(frozen)
     if plan.get("episode") != plan.get("long"):   # shot-probe.yml, the dispatch guard and shots/ key on `episode`
@@ -302,7 +302,7 @@ def plan_layout(plan, layout, voice_seconds=None, problems=()):
         if plan_check.voiceover(s):
             # review of #423: his clip covers the gap before (after a talking shot), the line and the gap or tail
             # after (plan_check.vo_cover, the compose's own run logic): that whole time is capped, the line floored
-            covered = plan_check.vo_covered(seconds, shots, i)
+            covered = plan_check.vo_covered(seconds, shots, i, is_long(plan))
             if not plan_check.VO_LINE_MIN <= seconds or covered > plan_check.VO_LINE_MAX + 1e-9:
                 problems.append(f"{code} {s['id']} {seconds:.2f} s, {covered:.2f} s with the gap before and the gap or "
                                 f"tail after (line >= {plan_check.VO_LINE_MIN:.1f} s, all <= "
@@ -708,7 +708,8 @@ def shot_seconds(shot, index, plan, layout, slack=0.0):
     """Clip seconds a shot is generated at. A voice-over or talking shot's come from its measured line (minus
     `slack`: E118's coverage tolerance), a scene's from the plan."""
     if plan_check.voiceover(shot):   # the gap before, his line, the gap or tail after (plan_check.vo_cover)
-        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"] - slack, plan["shots"], index)
+        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"] - slack, plan["shots"], index,
+                                        is_long(plan))
         return plan_check.vo_clip_seconds(covered)
     if not plan_check.talking(shot):
         return shot["seconds"]

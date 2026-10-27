@@ -232,6 +232,21 @@ class Video(unittest.TestCase):
         payload = {"is_running": False, "turns": [{"assistant": []}]}
         self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["status"], "incomplete")
 
+    def test_a_prompt_filter_block_is_its_own_status_never_incomplete(self):
+        # E128 (native-audio probe, PR #473): "naked" was refused with PromptSafetyBlocked text_rejected_porn and the
+        # read-back said "incomplete"; the build then waited and regenerated the same words
+        payload = {"is_running": False, "turns": [{"assistant": [{"type": "PromptSafetyBlocked", "data": {
+            "reason": "text_rejected_porn", "message": "This text contains inappropriate sexual content " + self.token}}]}]}
+        result = PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")
+        self.assertEqual((result["status"], result["code"], result["blocked_reason"]),
+                         ("blocked", "PAVO_PROMPT_BLOCKED", "text_rejected_porn"))
+        self.assertNotIn(self.token, json.dumps(result))   # the reason code only, never the block's text
+        payload["turns"][0]["assistant"][0]["data"] = {"message": "refused"}
+        self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["blocked_reason"],
+                         "unknown")
+        payload["turns"][0]["assistant"] = [{"type": "QuotaTryDeduct", "data": {"required_amount": 0}}]
+        self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["status"], "incomplete")
+
 
 def png(width=720, height=1280):
     import struct, zlib
