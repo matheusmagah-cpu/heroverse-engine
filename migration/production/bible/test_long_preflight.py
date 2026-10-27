@@ -79,8 +79,8 @@ class Preflight(Scratch):
         lp.REGISTRY.write_text(json.dumps(registry()))
         r = pf.preflight(self.plan_path, setups=[], today_images=0)
         self.assertFalse([b for b in r["blockers"] if b.startswith("LONG_REVIEW_OPEN")])
-        # and on main today the long is blocked by its open rows (the other slice closes them)
-        self.assertTrue(lp.open_rows(json.loads(self.saved[1].read_text())))
+        # #469 (E126) closed every long review row: on main the long is no longer blocked by them
+        self.assertEqual(lp.open_rows(json.loads(self.saved[1].read_text())), [])
 
     def test_the_long_plan_is_checked_by_long_plan_check_strict_and_the_frozen_qa(self):
         r = pf.preflight(LONG, setups=[], today_images=0)
