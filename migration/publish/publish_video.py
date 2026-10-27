@@ -248,8 +248,28 @@ def check_new_upload(manifest_path, manifest, video):
         raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
 
 
+def bible_thumb_problems(package, thumbnail):
+    """Owner, 27/10: a Bible-series long (package `series` "bible") uploads only the thumbnail approved in
+    bible/thumbs/<thumb_episode>.json (the story character, reviewed before publish); the prayer pilots keep theirs.
+    Every reason is THUMB_NOT_APPROVED (or the spec's own code); preflight.check (approve.yml, prepublish_gate) runs
+    this before any upload."""
+    if package.get("series") != "bible":
+        return []
+    episode = package.get("thumb_episode")
+    if not isinstance(episode, str) or not episode:
+        return ["THUMB_NOT_APPROVED (a Bible long's package names its thumb_episode)"]
+    code = str(Path(__file__).resolve().parents[1] / "production" / "bible")
+    if code not in sys.path:
+        sys.path.insert(0, code)
+    import thumbs
+    return thumbs.publish_problems(episode, "long", thumbnail)
+
+
 def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_path, publish_at=None):
     package = json.loads(Path(package_path).read_text())
+    bad_thumb = bible_thumb_problems(package, thumbnail)
+    if bad_thumb:
+        raise SystemExit("THUMB_NOT_APPROVED " + "; ".join(bad_thumb))
     manifest = json.loads(Path(manifest_path).read_text())
     ledger_path = Path(ledger_path)
     ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"version": "publish-ledger-v1", "entries": {}}

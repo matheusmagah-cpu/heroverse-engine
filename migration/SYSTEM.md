@@ -185,6 +185,7 @@ The long video is published by `approve.yml` → `prepublish_gate.py` → `publi
 Each video ships the full package, and `preflight.py` checks every measurable item:
 - **title**: the structure's measured pattern; ≤ 100 characters (Help); the promise matches the first 30 s;
 - **thumbnail**: 1280×720, under the Help size limit; the structure's measured pattern (#173 item 5); a clear subject and readable text at small size;
+  for the Bible series (owner, 27/10) it is the story character (APPROVED, made with its reference images), a close-up face with a clear emotion and our own text of at most 4 words, no Keeper face; a candidate reviewed with the episode's stills BEFORE publish (`production/bible/thumbs.py`), and publish uploads only the approved image (THUMB_NOT_APPROVED in check-record and the long's preflight);
 - **description**:
   - the promise in its first lines;
   - **chapters** (Help rules: start at 0:00, at least 3, each ≥ 10 s);
