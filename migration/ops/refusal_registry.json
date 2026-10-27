@@ -1665,6 +1665,17 @@
    ],
    "note": "Image first (owner, 27/10): a still whose own prompt fails the scene rules (E108 period, E110 writing, E113 ark), checked by the same period_problems / writing_problems / prop_problems; scene_stills.py prepare refuses it before any image too; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
   },
+  "STILL_PROP_UNREFERENCED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def frame_problems(",
+    "migration/production/bible/plan_check.py::def prop_reference_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/scene_stills.py::plan_check.prop_references(rec[\"prompt\"])",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "E121: a still whose prompt names a prop (the ark, its setting sentence too) made without every approved reference image of that prop (props.json, by sha256), or while the prop is still DRAFT; scene_stills.py prepare refuses it before any image, finalize and approve refuse the candidate, plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.prop_reference_problems"
+  },
   "STILL_SHA256_MISMATCH": {
    "class": "A",
    "early": [

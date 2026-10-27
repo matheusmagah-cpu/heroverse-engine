@@ -17,6 +17,8 @@ sys.path.insert(0, str(HERE.parents[2] / "migration" / "integrations" / "pavo"))
 import episode_build as eb  # noqa: E402
 import plan_check as pc  # noqa: E402
 import scene_stills as ss  # noqa: E402
+sys.path.insert(0, str(HERE.parents[1] / "characters"))
+import props as pr  # noqa: E402
 
 PLAN = json.loads((HERE / "plans" / "genesis-08-short.json").read_text())
 
@@ -41,12 +43,32 @@ class Stills(unittest.TestCase):
         self.still = self.shot.setdefault("first_frame", "genesis-08-s-dust")
         real = json.loads((HERE / "stills" / f"{self.still}.json").read_text())
         ss.save(self.dir / f"{self.still}.json", real)
+        # E121: s-dust names the ark, so its still is made with the ark's approved references; here an APPROVED ark
+        # of the test's own (the committed one is DRAFT until Claude's review)
+        self.saved_props = (pr.PROPS_FILE, pr.IMAGES_DIR)
+        self.arkrefs = self.approved_ark()
+
+    def approved_ark(self, status="APPROVED"):
+        props = self.dir / "props.json"
+        ss.save(props, {"props": {"ark": {"status": status, "views": ["side", "three-quarter"],
+                                          "refs": ["side", "three-quarter"]}}})
+        refs = []
+        for k, view in enumerate(("side", "three-quarter")):
+            img = self.dir / "refs" / f"pr-ark-{view}.jpg"
+            img.parent.mkdir(parents=True, exist_ok=True)
+            jpeg(img, size=(1600, 900), colour=(60 + k, 40, 20))
+            ss.save(self.dir / "images" / f"pr-ark-{view}.json",
+                    {"id": f"pr-ark-{view}", "repo_path": ss.rel(img), "sha256": ss.sha256(img)})
+            refs.append({"record": f"pr-ark-{view}", "repo_path": ss.rel(img), "sha256": ss.sha256(img)})
+        pr.PROPS_FILE, pr.IMAGES_DIR = props, self.dir / "images"
+        return refs
 
     def tearDown(self):
         pc.STILLS_DIR = self.saved
+        pr.PROPS_FILE, pr.IMAGES_DIR = self.saved_props
         shutil.rmtree(self.dir)
 
-    def candidate(self, run="123", n=1, colour=(90, 70, 50), prompt=None):
+    def candidate(self, run="123", n=1, colour=(90, 70, 50), prompt=None, references=None):
         cid = f"{self.still}-{run}-{n}"
         img = self.dir / "candidates" / f"{cid}.jpg"
         img.parent.mkdir(parents=True, exist_ok=True)
@@ -54,7 +76,8 @@ class Stills(unittest.TestCase):
         rec = pc.still_record(self.still, self.dir)
         ss.save(img.with_suffix(".json"), {"id": cid, "still": self.still, "status": "DRAFT",
                                            "prompt": prompt or rec["prompt"], "size": list(ss.SIDE),
-                                           "repo_path": ss.rel(img), "sha256": ss.sha256(img)})
+                                           "repo_path": ss.rel(img), "sha256": ss.sha256(img),
+                                           "references": self.arkrefs if references is None else references})
         return cid
 
     def approve(self, cid, score=9.6):
@@ -175,7 +198,8 @@ class Stills(unittest.TestCase):
         img = self.dir / "img"
         img.mkdir()
         Image.new("RGB", (1024, 1024), (200, 100, 50)).save(img / f"{self.still}-77-1.png")
-        (img / f"{self.still}-77-1.json").write_text(json.dumps({"prompt": "x", "engine": "flux"}))
+        (img / f"{self.still}-77-1.json").write_text(json.dumps({"prompt": "x", "engine": "flux",
+                                                                 "references": self.arkrefs}))
         ss.crop(img)
         with Image.open(img / f"{self.still}-77-1.png") as im:
             self.assertEqual(im.size, (576, 1024))
@@ -189,7 +213,7 @@ class Stills(unittest.TestCase):
         (img / f"{self.still}-77-2.json").write_text(json.dumps({
             "prompt": "x", "engine": "pavo", "source": "pavo-agnes-image-2.5-flash", "conversation_id": "9",
             "quote": {"required_credits": 0, "final_points": 0, "is_estimate": False},
-            "upscaler": "none (native 1472x2624), Lanczos to 1080x1920"}))
+            "upscaler": "none (native 1472x2624), Lanczos to 1080x1920", "references": self.arkrefs}))
         self.assertEqual(ss.finalize(img, "77", stills_dir=self.dir), [f"{self.still}-77-1", f"{self.still}-77-2"])
         pavo = json.loads((self.dir / "candidates" / f"{self.still}-77-2.json").read_text())
         self.assertEqual((pavo["source"], pavo["size"], pavo["status"], pavo["quote"]["required_credits"]),
@@ -199,6 +223,55 @@ class Stills(unittest.TestCase):
         out = self.dir / "sheet.jpg"
         self.assertEqual(ss.sheet("77", out, stills_dir=self.dir), [f"{self.still}-77-1", f"{self.still}-77-2"])
         self.assertTrue(out.is_file())
+
+    def test_a_still_naming_the_ark_is_made_only_with_the_arks_approved_reference_images(self):
+        # E121: genesis-09's 64 Pavo stills carried ARK_LOOK and ARK_EXCLUDE word for word and still drew a tower at
+        # one end, a gabled barn or a ship's bow: text alone does not hold a prop. Like a character's face, the ark
+        # is held by its approved reference images, sent by sha256 with every still that names it.
+        prompt = pc.still_record(self.still, self.dir)["prompt"]
+        self.assertEqual(pc.prop_references("A camp of goat-hair tents at dusk.")[1], [])
+        need, missing = pc.prop_references(prompt)
+        self.assertEqual((need, missing), (self.arkrefs, []))
+        # the flood's setting sentence alone names the ark (and Pavo draws it): it needs the references too
+        self.assertEqual(pc.prop_references(pc.PERIODS["the-flood"]["setting"])[0], self.arkrefs)
+        # prepare hands the references (repository paths Pavo takes) with every candidate
+        spec = ss.prepare(self.plan, ["s-dust"], 1, "123", stills_dir=self.dir)
+        self.assertEqual(spec["images"][0]["references"], [r["repo_path"] for r in self.arkrefs])
+        # a candidate made from text alone, or without one of the views, or with another image, is refused
+        for refs in ([], self.arkrefs[:1], [dict(self.arkrefs[0], sha256="0" * 64), self.arkrefs[1]]):
+            with self.assertRaises(SystemExit) as err:
+                self.approve(self.candidate(n=4, references=refs))
+            self.assertIn("STILL_PROP_UNREFERENCED", str(err.exception))
+        from PIL import Image
+        img = self.dir / "img"
+        img.mkdir()
+        Image.new("RGB", (1472, 2624), (90, 80, 70)).save(img / f"{self.still}-78-1.jpg", "JPEG")
+        (img / f"{self.still}-78-1.json").write_text(json.dumps({"prompt": "x", "source": "pavo-agnes-image-2.5-flash"}))
+        with self.assertRaises(SystemExit) as err:
+            ss.finalize(img, "78", stills_dir=self.dir)
+        self.assertIn("STILL_PROP_UNREFERENCED", str(err.exception))
+        # an approved still whose record lost its references (or a hand-made record) is refused by plan_check and
+        # the build alike
+        rec = self.approve(self.candidate())
+        self.assertEqual(self.codes(), [])
+        ss.save(self.dir / f"{self.still}.json", dict(rec, references=[]))
+        self.assertEqual(self.codes(), ["STILL_PROP_UNREFERENCED"])
+        with self.assertRaises(SystemExit) as err:
+            eb.request(self.shot, self.i, self.plan, {}, {})
+        self.assertTrue(str(err.exception).startswith("STILL_PROP_UNREFERENCED s-dust"))
+        ss.save(self.dir / f"{self.still}.json", rec)
+        # a reference image changed by hand is no reference
+        jpeg(self.dir / "refs" / "pr-ark-side.jpg", size=(1600, 900), colour=(1, 1, 1))
+        self.assertEqual(self.codes(), ["STILL_PROP_UNREFERENCED"])
+        # while the ark is DRAFT (as committed until Claude's review) every still naming it is refused, even an
+        # approved one made with the references
+        self.approved_ark(status="DRAFT")
+        self.assertEqual(self.codes(), ["STILL_PROP_UNREFERENCED"])
+        with self.assertRaises(SystemExit) as err:
+            ss.prepare(self.plan, ["s-dust"], 1, "123", stills_dir=self.dir)
+        self.assertIn("STILL_PROP_UNREFERENCED", str(err.exception))
+        pr.PROPS_FILE, pr.IMAGES_DIR = self.saved_props
+        self.assertEqual(pr.registry()["ark"]["status"] == "APPROVED", not pc.prop_references(prompt)[1])
 
     def test_the_build_lists_every_frame_refusal_plan_check_raises(self):
         src = (HERE / "plan_check.py").read_text()

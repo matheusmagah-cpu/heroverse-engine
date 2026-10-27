@@ -113,5 +113,95 @@ class RepoReference(unittest.TestCase):
         self.assertEqual(hashlib.sha256(img.read_bytes()).hexdigest(), rec["sha256"])
 
 
+class Props(unittest.TestCase):
+    """E121: the ark is a referenced prop like a character: DRAFT candidates with sha256 and a 0-credit quote, approved
+    only by `props.py approve` (>= 9.5), APPROVED only when every view has its image."""
+
+    def setUp(self):
+        import props as pr
+        import shutil
+        self.pr, self.shutil = pr, shutil
+        sys.path.insert(0, str(pr.REPO / "migration" / "production" / "bible"))
+        import plan_check
+        self.look = plan_check.ARK_LOOK + " " + plan_check.ARK_EXCLUDE
+        self.d = Path(tempfile.mkdtemp(prefix=".test-props-", dir=pr.HERE))   # inside the repository
+        self.file = self.d / "props.json"
+        pr.save(self.file, {"props": {"ark": {"status": "DRAFT", "views": ["side", "three-quarter"], "refs": []}}})
+        self.props = pr.registry(self.file)
+
+    def tearDown(self):
+        self.shutil.rmtree(self.d)
+
+    def image(self, name, colour):
+        from PIL import Image
+        path = self.d / name
+        Image.new("RGB", (64, 36), colour).save(path, "JPEG")
+        return path
+
+    def meta(self, prompt=None, credits=0.0):
+        return {"prompt": prompt or f"Prop reference image, side elevation. {self.look} No text.",
+                "conversation_id": "1", "quote": {"required_credits": credits, "final_points": 0.0,
+                                                  "is_estimate": False}}
+
+    def finalize(self, view, n, colour, **kw):
+        return self.pr.finalize("ark", view, "9", n, self.image(f"{view}-{n}.jpg", colour), self.meta(**kw),
+                                cand_dir=self.d / "candidates", props=self.props)
+
+    def approve(self, view, cid, score=9.6):
+        return self.pr.approve("ark", view, cid, score, "one box, flat square ends", cand_dir=self.d / "candidates",
+                               props_file=self.file, images_dir=self.d / "images", refs_dir=self.d / "refs",
+                               today="2026-10-27")
+
+    def test_candidates_carry_the_look_a_zero_quote_and_their_sha256(self):
+        rec = self.finalize("side", 1, (90, 60, 30))
+        self.assertEqual((rec["status"], rec["id"]), ("DRAFT", "pr-ark-side-9-1"))
+        self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]))
+        for kw, code in (({"prompt": "a long wooden ship"}, "PROP_PROMPT_REFUSED"), ({"credits": 2.0},
+                                                                                     "PROP_QUOTE_NOT_ZERO")):
+            with self.assertRaises(SystemExit) as err:
+                self.finalize("side", 2, (1, 2, 3), **kw)
+            self.assertIn(code, str(err.exception))
+        with self.assertRaises(SystemExit):
+            self.finalize("top", 1, (1, 2, 3))
+        self.assertEqual(self.pr.sheet("ark", "9", self.d / "sheet.jpg", cand_dir=self.d / "candidates"),
+                         ["pr-ark-side-9-1"])
+
+    def test_the_prop_is_approved_only_with_every_view_and_its_images_by_sha256(self):
+        side = self.finalize("side", 1, (90, 60, 30))["id"]
+        tq = self.finalize("three-quarter", 1, (80, 50, 20))["id"]
+        with self.assertRaises(SystemExit) as err:
+            self.approve("side", side, score=9.4)
+        self.assertIn("PROP_SCORE_BELOW_FLOOR", str(err.exception))
+        with self.assertRaises(SystemExit):
+            self.approve("three-quarter", side)   # a side candidate is no three-quarter view
+        self.approve("side", side)
+        props = self.pr.registry(self.file)
+        self.assertEqual((props["ark"]["status"], props["ark"]["refs"]), ("DRAFT", ["side"]))
+        self.assertEqual(self.pr.approved_refs("ark", props, self.d / "images")[0], [])
+        self.approve("three-quarter", tq)
+        props = self.pr.registry(self.file)
+        self.assertEqual(props["ark"]["status"], "APPROVED")
+        refs, why = self.pr.approved_refs("ark", props, self.d / "images")
+        self.assertIsNone(why)
+        self.assertEqual([r["record"] for r in refs], ["pr-ark-side", "pr-ark-three-quarter"])
+        from PIL import Image
+        Image.new("RGB", (64, 36), (1, 1, 1)).save(self.d / "refs" / "pr-ark-side.jpg", "JPEG")
+        self.assertIn("sha256", self.pr.approved_refs("ark", props, self.d / "images")[1])
+
+    def test_the_committed_ark_candidates_are_recorded_and_unapproved_until_review(self):
+        props = self.pr.registry()
+        ark = props["ark"]
+        if ark["status"] != "APPROVED":
+            self.assertEqual(self.pr.approved_refs("ark", props)[0], [])
+        for meta in sorted(self.pr.CANDIDATES_DIR.glob("pr-ark-*.json")):
+            rec = json.loads(meta.read_text())
+            self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]), meta.name)
+            self.assertIn(self.look, rec["prompt"], meta.name)
+            self.assertEqual((rec["quote"]["required_credits"], rec["quote"]["is_estimate"]), (0.0, False))
+        for view in ark.get("refs") or []:
+            rec = json.loads(self.pr.record_path("ark", view).read_text())
+            self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]))
+
+
 if __name__ == "__main__":
     unittest.main()

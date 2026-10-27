@@ -77,6 +77,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   (STILL_NOT_APPROVED), its image is the one approved (STILL_PATH_REFUSED, STILL_SHA256_MISMATCH,
   STILL_PROMPT_CHANGED) at the plan's aspect (STILL_ASPECT_MISMATCH), and its own prompt passes the period, writing
   and ark rules above (STILL_PROMPT_REFUSED). episode_build.request (frame_refusal) refuses by the same function.
+- a still whose prompt names a prop (the ark, anywhere, the flood's setting sentence too) was made with every
+  approved reference image of that prop (props.json, props.py; E121), recorded by sha256 in its record:
+  STILL_PROP_UNREFERENCED (also while the prop is still DRAFT). scene_stills.py prepare, finalize and approve
+  refuse the same by prop_reference_problems.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -100,6 +104,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration" / "production" / "characters"))
 sys.path.insert(0, str(ROOT / "migration" / "publish"))
 import characters as ch  # noqa: E402
+import props as prop_refs  # noqa: E402  (E121: a prop's approved reference images)
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
 from voice_pace import SHORT_PACE, VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (one measured table, Short and long)
@@ -728,6 +733,33 @@ def still_prompt_problems(label, prompt, plan):
     return found
 
 
+def prop_references(prompt, props=None):
+    """E121: (the approved reference images a still must be made with, the problems). A prompt that names a prop
+    (PROPS `mentions`, anywhere: the flood's setting sentence names "the great wooden ark", and Pavo draws it) needs
+    every approved reference of that prop (props.json, props.py); a prop not APPROVED yet is a problem. Text alone did
+    not hold the ark's shape (genesis-09: a tower, a barn, a ship's bow under the same two sentences)."""
+    refs, out = [], []
+    for name, spec in PROPS.items():
+        if not isinstance(prompt, str) or not any(re.search(rf"(?i)\b(?:{a})\b", prompt) for a in spec["mentions"]):
+            continue
+        got, why = prop_refs.approved_refs(name, props)
+        if why:
+            out.append(f"names the {name}: {why}")
+        refs += got
+    return refs, out
+
+
+def prop_reference_problems(prompt, references, props=None):
+    """E121: what keeps a still (its prompt, the references it was made with: [{record, sha256}]) from showing a prop's
+    one look: the prop is not APPROVED, or an approved reference (by sha256) was not sent. [] when it names none."""
+    need, out = prop_references(prompt, props)
+    sent = {r.get("sha256") for r in references or [] if isinstance(r, dict)}
+    missing = [r["record"] for r in need if r["sha256"] not in sent]
+    if missing:
+        out.append(f"made without the approved reference images {missing} (sent {sorted(x for x in sent if x)})")
+    return out
+
+
 def _image_size(path):
     """(width, height) of a PNG or JPEG, read from its header (no imaging library at plan time)."""
     data = Path(path).read_bytes()
@@ -790,6 +822,8 @@ def frame_problems(i, shot, plan, stills_dir=None):
                 or src.suffix.lower() not in (".jpg", ".jpeg", ".png"):
             out.append(f"STILL_PATH_REFUSED shot {i} {sid} ({f} {still}: a PNG/JPEG inside the repository)")
             continue
+        out += [f"STILL_PROP_UNREFERENCED shot {i} {sid} ({f} {still}: {p}; E121)"
+                for p in prop_reference_problems(rec.get("prompt"), rec.get("references"))]
         if hashlib.sha256(src.read_bytes()).hexdigest() != rec.get("sha256"):
             out.append(f"STILL_SHA256_MISMATCH shot {i} {sid} ({f} {still}: the image is not the one approved)")
         approved = rec.get("approved") or {}

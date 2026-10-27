@@ -1929,6 +1929,7 @@
     "migration/production/bible/kjv_check.py",
     "migration/production/bible/voice_pace.py",
     "migration/production/characters/characters.py",
+    "migration/production/characters/props.py",
     "migration/publish/publish_episode.py"
    ],
    "called_by_workflows": [
@@ -1941,7 +1942,9 @@
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/scene_stills.py",
     "migration/production/bible/test_plan_check.py",
-    "migration/production/bible/test_scene_stills.py"
+    "migration/production/bible/test_scene_stills.py",
+    "migration/production/characters/props.py",
+    "migration/production/characters/test_characters.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
    "is_test": false
@@ -2108,7 +2111,8 @@
     "migration/integrations/pavo/images.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/plan_check.py",
-    "migration/production/bible/scene_stills.py"
+    "migration/production/bible/scene_stills.py",
+    "migration/production/characters/props.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
@@ -2157,11 +2161,28 @@
    "test": "migration/production/characters/test_characters.py",
    "is_test": false
   },
+  "migration/production/characters/props.py": {
+   "purpose": "Props with approved reference images, like a character's (E121).",
+   "dir": "migration/production/characters",
+   "local_imports": [
+    "migration/production/bible/plan_check.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/test_scene_stills.py",
+    "migration/production/characters/test_characters.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
   "migration/production/characters/test_characters.py": {
    "purpose": "Offline: a character is only used approved and always with the same look and reference images.",
    "dir": "migration/production/characters",
    "local_imports": [
-    "migration/production/characters/characters.py"
+    "migration/production/bible/plan_check.py",
+    "migration/production/characters/characters.py",
+    "migration/production/characters/props.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"

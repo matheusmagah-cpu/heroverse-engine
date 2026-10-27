@@ -745,7 +745,8 @@ def prop_refusal(plan, shot):
 # image first (owner, 27/10): the refusals frame_refusal passes on, each raised by plan_check.frame_problems
 FRAME_REFUSALS = ("FRAMES_NOT_SCENE", "FRAME_FIELD_INVALID", "FRAME_LAST_WITHOUT_FIRST", "FRAMES_WITH_REFERENCES",
                   "FRAMES_WITH_AUDIO", "STILL_MISSING", "STILL_NOT_APPROVED", "STILL_PATH_REFUSED",
-                  "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED")
+                  "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED",
+                  "STILL_PROP_UNREFERENCED")
 
 
 def frame_refusal(plan, shot):

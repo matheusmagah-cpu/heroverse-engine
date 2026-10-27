@@ -1,0 +1,26 @@
+{
+ "id": "pr-ark-side-2026102701-1",
+ "prop": "ark",
+ "view": "side",
+ "run": "2026102701",
+ "status": "DRAFT",
+ "prompt": "Prop reference image, side elevation: the whole ark seen exactly side-on at eye level from a distance, the full length of the hull inside the frame from end to end, resting on level bare earth on an empty flat plain under a plain overcast sky, soft even daylight, no people, no animals, nothing else in view. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. No text, no logos.",
+ "source": "pavo-agnes-image-2.5-flash",
+ "model": "agnes-image",
+ "ratio": "16:9",
+ "resolution": "hd",
+ "conversation_id": "373466105375099584",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "size": [
+  2624,
+  1472
+ ],
+ "repo_path": "migration/production/characters/props/candidates/pr-ark-side-2026102701-1.jpg",
+ "sha256": "f4d507dbaa5acab4744e049b2580df93186ff003221b4a488ebee6d71d33d56d",
+ "generated_by": "HeroVerse pipeline (AI-generated image)"
+}
