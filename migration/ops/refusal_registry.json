@@ -1348,6 +1348,10 @@
    "class": "I",
    "guard": "migration/production/bible/test_episode_preflight.py::def test_a_crafted_episode_id_is_refused_before_any_path"
   },
+  "ROTATED_PICTURE": {
+   "class": "C",
+   "probe": "shot-probe: clip_check on each generation (ROTATED_PICTURE: the column means spread over ROT_SPREAD and over ROT_RATIO times the row means in every sampled frame), regenerated within the shot's attempts; E117: Pavo turned genesis-08 s-board round 1 by 90 degrees inside the 9:16 frame with no prompt asking for it, so only the clip shows it"
+  },
   "ROUTE_NOT_ALLOWED": {
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
@@ -1829,7 +1833,8 @@
       "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS",
       "migration/production/bible/plan_check.py::PROMPT_NO_CINEMATOGRAPHY",
       "migration/production/bible/episode_build.py::BLACK_FRAMES",
-      "migration/production/bible/clip_check.py::LETTERBOX_BARS"
+      "migration/production/bible/clip_check.py::LETTERBOX_BARS",
+      "migration/production/bible/clip_check.py::ROTATED_PICTURE"
      ],
      "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
     },

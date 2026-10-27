@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline: a clip that opens on black, is low resolution or low frame rate, or carries letterbox bars inside the
-frame (E109), is flagged before the compose."""
+frame (E109), or a picture turned 90 degrees (E117), is flagged before the compose."""
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -12,6 +13,7 @@ import clip_check as cc  # noqa: E402
 
 EVIDENCE = Path(__file__).resolve().parents[2] / "evidence" / "pavo"
 LAMP = EVIDENCE / "20261025" / "genesis-06" / "lamp.mp4"            # a real Pavo night shot: oil lamp in a dark tent
+FIXTURES = Path(__file__).resolve().parent / "fixtures" / "clip_check"   # real sampled frames, manifest.json
 DARKEST = EVIDENCE / "20261026" / "keeper-vo" / "probe-k-insight-1-373107010075637504.mp4"  # mean luma 48, night
 
 
@@ -89,6 +91,44 @@ class ClipCheck(unittest.TestCase):
                             "-an", "-pix_fmt", "yuv420p", night], check=True)
             r = cc.check(night)
             self.assertNotIn("LETTERBOX_BARS", r["flags"], r.get("bars"))
+
+    def test_a_picture_turned_90_degrees_is_refused_and_every_reviewed_fixture_holds(self):
+        # E117: genesis-08 s-board round 1 (shot-probe run 40477936323) came back turned 90 degrees inside the 9:16
+        # frame (horizon running down the frame) with flags [] and only Claude's review caught it. Class-level
+        # (review-after-build): every clip the review rejected for a measurable picture defect is a fixture of real
+        # sampled frames with the flag it must raise, and every approved fixture must raise none.
+        manifest = json.loads((FIXTURES / "manifest.json").read_text())["fixtures"]
+        self.assertEqual(sorted(f["file"] for f in manifest), sorted(p.name for p in FIXTURES.glob("*.jpg")))
+        self.assertGreaterEqual(sum(1 for f in manifest if f["verdict"] == "approved"), 10)
+        self.assertTrue(any("ROTATED_PICTURE" in f["flags"] for f in manifest))
+        w, h = cc.BAR_GRID, cc.BAR_GRID * 16 // 9
+        for f in manifest:
+            raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(FIXTURES / f["file"]), "-f", "rawvideo",
+                                  "-pix_fmt", "gray", "-"], capture_output=True, check=True).stdout
+            self.assertEqual(len(raw), w * h * cc.BAR_FRAMES, f["file"])
+            frames = [raw[i * w * h:(i + 1) * w * h] for i in range(cc.BAR_FRAMES)]
+            got = [n for n, hit in (("LETTERBOX_BARS", cc.letterboxed(cc.bars_of(frames, w, h))),
+                                    ("ROTATED_PICTURE", cc.rotated(cc.turn_of(frames, w, h)))) if hit]
+            self.assertEqual(got, f["flags"], (f["file"], cc.turn_of(frames, w, h)))
+        self.assertFalse(cc.rotated(None))
+        ok = {"width": 720, "height": 1280, "fps": 24}
+        self.assertEqual(cc.flags(ok, [90], [90], None, {"cols": 53.2, "rows": 11.7, "ratio": 4.56}),
+                         ["ROTATED_PICTURE"])                                                    # s-board round 1
+        self.assertEqual(cc.flags(ok, [90], [90], None, {"cols": 33.3, "rows": 20.5, "ratio": 1.62}), [])  # the lamp
+        # the whole clip path: the rejected frames as a clip are refused; the approved round 3 is clean upright and
+        # refused once turned 90 or 270 degrees
+        with tempfile.TemporaryDirectory() as t:
+            def as_clip(name, still, vf):
+                out = str(Path(t, name))
+                subprocess.run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "24", "-t", "4", "-i",
+                                str(FIXTURES / still), "-vf", f"crop={w}:{h}:0:{2 * h},{vf}scale=720:1280,"
+                                "format=yuv420p", "-an", out], check=True)
+                return cc.check(out)["flags"]
+            self.assertEqual(as_clip("bad.mp4", "g08-s-board-r1-rotated.jpg", ""), ["ROTATED_PICTURE"])
+            self.assertEqual(as_clip("up.mp4", "g08-s-board-r3.jpg", ""), [])
+            self.assertEqual(as_clip("cw.mp4", "g08-s-board-r3.jpg", "transpose=1,"), ["ROTATED_PICTURE"])
+            self.assertEqual(as_clip("ccw.mp4", "g08-s-board-r3.jpg", "transpose=2,"), ["ROTATED_PICTURE"])
+            self.assertEqual(cc.check(str(LAMP))["flags"], [])
 
 
 if __name__ == "__main__":

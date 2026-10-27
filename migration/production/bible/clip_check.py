@@ -13,6 +13,17 @@ E111 (genesis-07 run 40389124871, s-still): with BAR_LUMA 24 a dusk camp under a
 ground read as bars at both edges, and all three new generations were refused. Measured: s-well's bars read luma 1 and
 the night sky 14-24, so a bar is now a row at or under luma 8.
 
+E117 (genesis-08 shot-probe run 40477936323, s-board round 1): Pavo returned the picture turned 90 degrees inside the
+9:16 frame (the horizon ran down the frame, the people lay on their sides), clip_check passed it and only Claude's
+review saw it. ROTATED_PICTURE: a landscape's sky-to-ground change runs down the frame, so the mean luma of the rows
+spreads far more than the mean luma of the columns; turned 90 or 270 degrees it is the other way round. A clip is
+flagged when, in every sampled picture frame, the column means spread (standard deviation) over ROT_SPREAD and over
+ROT_RATIO times the row means' spread. Measured on the 90x160 grid: s-board round 1 column/row 4.56-5.31 (column
+spread 53-54); 94 good clips (the 32 approved genesis-08 shots and its 5 other probe rounds, the 29 Pavo clips in
+evidence/pavo, 28 genesis-09 candidates) at most 1.62 over their frames (genesis-06's lamp, spread 33), most under 1;
+one mid-pan frame of a genesis-09 candidate read 3.47 alone, hence every frame. Fixtures: bible/fixtures/clip_check.
+A turned close-up with no horizon has no such profile and is still the review's to see.
+
 usage: clip_check.py CLIP.mp4 [CLIP.mp4 ...]       prints one JSON line per clip; exit 1 when any clip is flagged
        clip_check.py --composed FILE.mp4 [DIP_S ...]  the composed Short: exit 1 on a black frame that is not at an
                                                      intended dip_to_black (seconds, +-0.5 s)
@@ -34,6 +45,8 @@ BAR_LUMA = 8         # a letterbox bar: every pixel of the row (column) at or un
 BAR_SHARE = 0.04     # more than 4 % of the side, at BOTH opposite edges, in every sampled frame: LETTERBOX_BARS
 BAR_FRAMES = 5       # frames sampled evenly across the clip
 BAR_GRID = 90        # the short side of the sampled frame (the long side keeps the clip's ratio)
+ROT_SPREAD = 30      # ROTATED_PICTURE (E117): the column means' standard deviation over this (s-board r1: 53-54)
+ROT_RATIO = 3.0      # and over 3x the row means' (s-board r1: 4.56-5.31; good clips at most 1.71), in every frame
 
 
 def probe(path):
@@ -74,33 +87,69 @@ def frame_bars(raw, w, h):
     return (edge_runs(rows) / h, edge_runs(rows[::-1]) / h, edge_runs(cols) / w, edge_runs(cols[::-1]) / w)
 
 
-def bars(path, info):
-    """The smallest bar share at each edge over BAR_FRAMES frames: {"top", "bottom", "left", "right"} or None when
-    no frame shows a picture."""
+def samples(path, info):
+    """The grey frames (BAR_FRAMES, sampled evenly across the clip, on the BAR_GRID grid): (frames, w, h)."""
     portrait = info["height"] >= info["width"]
     short, long_ = BAR_GRID, max(BAR_GRID, round(BAR_GRID * max(info["width"], info["height"])
                                                  / max(1, min(info["width"], info["height"]))))
     w, h = (short, long_) if portrait else (long_, short)
-    found = []
+    frames = []
     for k in range(BAR_FRAMES):
         t = info["seconds"] * (k + 0.5) / BAR_FRAMES
         raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", path, "-frames:v", "1", "-vf",
                               f"scale={w}:{h}:flags=area,format=gray", "-f", "rawvideo", "-"],
                              capture_output=True, check=True).stdout
         if len(raw) == w * h:
-            one = frame_bars(raw, w, h)
-            if one:
-                found.append(one)
+            frames.append(raw)
+    return frames, w, h
+
+
+def bars_of(frames, w, h):
+    """The smallest bar share at each edge over the sampled frames: {"top", "bottom", "left", "right"} or None when
+    no frame shows a picture."""
+    found = [one for one in (frame_bars(raw, w, h) for raw in frames) if one]
     if not found:
         return None
     return {side: round(min(f[i] for f in found), 3) for i, side in enumerate(("top", "bottom", "left", "right"))}
+
+
+def bars(path, info):
+    return bars_of(*samples(path, info))
+
+
+def _spread(values):
+    mean = sum(values) / len(values)
+    return (sum((v - mean) ** 2 for v in values) / len(values)) ** 0.5
+
+
+def frame_turn(raw, w, h):
+    """(column spread, row spread) of one grey frame: the standard deviation of its column means and of its row
+    means; None when the whole frame is black."""
+    if max(raw) <= BAR_LUMA:
+        return None
+    rows = [sum(raw[y * w:(y + 1) * w]) / w for y in range(h)]
+    cols = [sum(raw[x::w]) / h for x in range(w)]
+    return _spread(cols), _spread(rows)
+
+
+def turn_of(frames, w, h):
+    """{"cols", "rows", "ratio"} of the sampled frame that looks least turned (lowest column/row ratio), or None."""
+    found = [one for one in (frame_turn(raw, w, h) for raw in frames) if one]
+    if not found:
+        return None
+    cols, rows = min(found, key=lambda f: f[0] / max(f[1], 1.0))
+    return {"cols": round(cols, 1), "rows": round(rows, 1), "ratio": round(cols / max(rows, 1.0), 2)}
+
+
+def rotated(turn):
+    return bool(turn) and turn["cols"] > ROT_SPREAD and turn["ratio"] > ROT_RATIO
 
 
 def letterboxed(b):
     return bool(b) and (min(b["top"], b["bottom"]) > BAR_SHARE or min(b["left"], b["right"]) > BAR_SHARE)
 
 
-def flags(info, head, tail, edges=None):
+def flags(info, head, tail, edges=None, turn=None):
     out = []
     if head and min(head) < BLACK_LUMA:
         out.append("BLACK_START")
@@ -112,6 +161,8 @@ def flags(info, head, tail, edges=None):
         out.append("LOW_FPS")
     if letterboxed(edges):
         out.append("LETTERBOX_BARS")
+    if rotated(turn):
+        out.append("ROTATED_PICTURE")
     return out
 
 
@@ -119,9 +170,11 @@ def check(path):
     info = probe(path)
     head = lumas(path, 0, EDGE_SECONDS)
     tail = lumas(path, info["seconds"] - EDGE_SECONDS, EDGE_SECONDS)
-    edges = bars(path, info)
+    frames, w, h = samples(path, info)
+    edges, turn = bars_of(frames, w, h), turn_of(frames, w, h)
     return dict(info, clip=path, head_min_luma=round(min(head), 1) if head else None,
-                tail_min_luma=round(min(tail), 1) if tail else None, bars=edges, flags=flags(info, head, tail, edges))
+                tail_min_luma=round(min(tail), 1) if tail else None, bars=edges, turn=turn,
+                flags=flags(info, head, tail, edges, turn))
 
 
 def black_runs(path):
