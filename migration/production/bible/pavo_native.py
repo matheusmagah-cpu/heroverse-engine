@@ -62,12 +62,12 @@ def native_plan(plan):
     return isinstance(plan, dict) and (plan.get("criteria") == V4 or plan.get("audio_route") == NATIVE)
 
 
-def load_voices(path=VOICES):
-    return json.loads(Path(path).read_text())["voices"]
+def load_voices(path=None):
+    return json.loads(Path(path or VOICES).read_text())["voices"]
 
 
-def load_blocks(path=BLOCKS):
-    p = Path(path)
+def load_blocks(path=None):
+    p = Path(path or BLOCKS)
     return json.loads(p.read_text()) if p.exists() else {"words": [], "lines": []}
 
 
@@ -144,6 +144,23 @@ def sound_sentence(plan, shot, index, chars=None, voices=None):
     return " ".join(parts)
 
 
+# Pavo's own pace, measured on the native-audio probe (PR #473, medium.en speech spans): the Keeper 2.63-2.83 words/s,
+# Adam 3.36, God 1.77; the first word came at 0-1.5 s. A native clip is asked long enough for its line at that pace.
+NATIVE_PACE = {"keeper": 2.6, "god": 1.75}
+NATIVE_PACE_DEFAULT = 2.6
+NATIVE_ONSET_S = 1.5
+CLIP_SECONDS = (4, 12)   # the adapter's clip range (plan_check.TALK_CLIP)
+
+
+def native_seconds(shot, index, plan):
+    """Clip seconds a native spoken shot asks Pavo for: its words at the speaker's measured Pavo pace plus the onset,
+    whole seconds, 4-12."""
+    import math
+    n = len(words(shot_line(plan, index)))
+    pace = NATIVE_PACE.get(speaker(shot), NATIVE_PACE_DEFAULT)
+    return int(min(CLIP_SECONDS[1], max(CLIP_SECONDS[0], math.ceil(n / pace + NATIVE_ONSET_S - 1e-6))))
+
+
 def native_request(req, plan, shot, index, chars=None, voices=None):
     """The native request from the build's own request: the same references and frames, the plan's prompt word for
     word (no audio binding clause: no input audio) with the SOUND sentence, Pavo's sound on, no input audio."""
@@ -154,7 +171,7 @@ def native_request(req, plan, shot, index, chars=None, voices=None):
     return out
 
 
-def record_block(shot_id, line, reason, conversation_id, path=BLOCKS, today=None):
+def record_block(shot_id, line, reason, conversation_id, path=None, today=None):
     """A read-back PAVO_PROMPT_BLOCKED, kept by the line's words so no plan sends that line to Pavo's speech again
     (route() sends it to Kokoro). The reason code only; never the block's text."""
     import time
@@ -165,7 +182,7 @@ def record_block(shot_id, line, reason, conversation_id, path=BLOCKS, today=None
         data["lines"].append({"line_sha256": digest, "shot": shot_id, "reason": reason,
                               "conversation_id": str(conversation_id),
                               "date": today or time.strftime("%Y-%m-%d", time.gmtime())})
-        Path(path).write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
+        Path(path or BLOCKS).write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     return data
 
 
@@ -226,6 +243,121 @@ def speech_verdict(measures, line, crit=None):
     else:
         flags += list(lips)
     return flags
+
+
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def measure(clip, whisper_dir, yamnet, references, speaker_id, lips, run=None):
+    """The measures speech_verdict judges, on one native clip (episode_build.py speech-check; Claude's session or a
+    runner with faster-whisper 1.2.1, resemblyzer 0.1.4 and the YAMNet model): the pinned ASR's words and speech span,
+    YAMNet's music and singing shares, the speech span's integrated loudness, the speaker cosines against every
+    reference clip in `references` ({speaker: wav}), and `lips` (the flags of its lips / still-mouth / face check)."""
+    import subprocess
+    run = run or subprocess.run
+    sys.path.insert(0, str(REPO / "migration" / "diagnostics" / "av-semantic"))
+    import av_semantic
+    from faster_whisper import WhisperModel
+    model = WhisperModel(str(whisper_dir), device="cpu", compute_type="int8", local_files_only=True)
+    segments, _ = model.transcribe(str(clip), language="en", beam_size=5, condition_on_previous_text=False)
+    segments = list(segments)
+    text = " ".join(s.text.strip() for s in segments)
+    span = [round(segments[0].start, 3), round(segments[-1].end, 3)] if segments else None
+    shares = av_semantic.analyze(str(clip), str(yamnet))["presence_fraction"]
+    lufs = None
+    if span:
+        done = run(["ffmpeg", "-nostdin", "-v", "info", "-i", str(clip), "-af",
+                    f"atrim={span[0]}:{span[1]},ebur128", "-f", "null", "-"], capture_output=True, text=True)
+        found = re.findall(r"I:\s+(-?[0-9.]+) LUFS", done.stderr)
+        lufs = float(found[-1]) if found else None
+    voice = {"reference": None, "same": None, "others": []}
+    if references.get(speaker_id):
+        from resemblyzer import VoiceEncoder, preprocess_wav
+        enc = VoiceEncoder("cpu")
+        mine = enc.embed_utterance(preprocess_wav(str(clip)))
+
+        def cos(path):
+            other = enc.embed_utterance(preprocess_wav(str(path)))
+            return round(float((mine * other).sum()), 4)   # embeddings are L2-normalised
+        voice = {"reference": sha256_file(references[speaker_id]), "same": cos(references[speaker_id]),
+                 "others": [cos(p) for who, p in sorted(references.items()) if who != speaker_id]}
+    return {"asr": {"model_bin_sha256": sha256_file(Path(whisper_dir) / "model.bin"), "text": text,
+                    "speech_span": span},
+            "music": shares.get("music"), "singing": shares.get("singing"), "lufs": lufs, "voice": voice,
+            "lips": list(lips) if lips is not None else None}
+
+
+def speech_record(clip_sha, measures, line, crit=None):
+    """What approve-shot copies into a native clip's approval: the verdict recomputed from the measures (never a
+    recorded `flags` field), the speech span and the one gain to the common level."""
+    crit = criteria() if crit is None else crit
+    flags = speech_verdict(measures, line, crit)
+    onset, end = speech_span(measures) if not flags else ((measures.get("asr") or {}).get("speech_span") or [None, None])
+    return {"clip_sha256": clip_sha, "flags": flags, "onset": onset, "end": end, "lufs": measures.get("lufs"),
+            "gain_db": clip_gain_db(measures.get("lufs"), crit["rights"]["ai_video"]["speech_checks"]),
+            "criteria": crit["version"]}
+
+
+# ---------- the mix (story QA v4 grammar.spoken_audio_mix; the #473 "mix b" that measured -15.0 LUFS, LRA 5.9) ----------
+
+XFADE_S = 0.08        # a short fade at each end of a speech clip: no click at the cut (<= audio_crossfade_seconds_max)
+BED_DB = -30.0        # brown noise 60-900 Hz under every cut, about -40 dBFS: no cut drops to digital silence
+BED_BAND = (60, 900)
+
+
+def placements(plan, layout, spans, clips, approvals):
+    """Each native speech clip's audio in the voice track: from its speech onset to its end, at its run's first line,
+    with its approval's one gain to the common level."""
+    out = []
+    for sid, (idx, onset, end) in sorted(spans.items(), key=lambda kv: kv[1][0][0]):
+        gain = ((approvals.get(sid) or {}).get("speech") or {}).get("gain_db")
+        if not isinstance(gain, (int, float)):
+            raise SystemExit(f"SPEECH_UNCHECKED {sid} (no gain recorded with its approval)")
+        if sid not in clips or not Path(clips[sid]).is_file():
+            raise SystemExit(f"NATIVE_CLIP_MISSING {sid} (the approved clip with its own audio)")
+        out.append({"shot": sid, "clip": str(clips[sid]), "at": float(layout["lines"][idx[0]]["start"]),
+                    "src_start": onset, "seconds": round(end - onset, 3), "gain_db": float(gain)})
+    return out
+
+
+def premix_filter(places, total):
+    """The ffmpeg graph: input 0 our voice track (silence where Pavo speaks), inputs 1.. the speech clips; each clip's
+    speech trimmed, one static gain, XFADE_S fades, delayed to its place; a continuous low ambience bed; summed with
+    no normalisation (the build's two-pass loudnorm comes after the music)."""
+    parts, labels = ["[0:a]aresample=48000,aformat=channel_layouts=stereo[v]"], ["[v]"]
+    for k, p in enumerate(places, start=1):
+        d = p["seconds"]
+        ms = int(round(p["at"] * 1000))
+        parts.append(f"[{k}:a]atrim=start={p['src_start']:.3f}:duration={d:.3f},asetpts=PTS-STARTPTS,"
+                     f"aresample=48000,aformat=channel_layouts=stereo,volume={p['gain_db']:.2f}dB,"
+                     f"afade=t=in:d={XFADE_S},afade=t=out:st={max(0.0, d - XFADE_S):.3f}:d={XFADE_S},"
+                     f"adelay={ms}|{ms}[s{k}]")
+        labels.append(f"[s{k}]")
+    parts.append(f"anoisesrc=color=brown:sample_rate=48000:duration={total:.3f},highpass=f={BED_BAND[0]},"
+                 f"lowpass=f={BED_BAND[1]},volume={BED_DB}dB,aformat=channel_layouts=stereo[bed]")
+    labels.append("[bed]")
+    parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0:duration=longest,"
+                 f"atrim=duration={total:.3f}[a]")
+    return ";".join(parts)
+
+
+def premix(voice_wav, places, out_wav, total, run=None):
+    """Our voice track with Pavo's speech laid in and the bed under it, to out_wav (48 kHz stereo PCM)."""
+    import subprocess
+    run = run or subprocess.run
+    args = ["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(voice_wav)]
+    for p in places:
+        args += ["-i", p["clip"]]
+    args += ["-filter_complex", premix_filter(places, total), "-map", "[a]", "-c:a", "pcm_s16le", str(out_wav)]
+    done = run(args, capture_output=True, text=True)
+    if done.returncode:
+        raise SystemExit(f"PREMIX_FAILED {done.stderr.strip()[-400:]}")
+    return out_wav
 
 
 def speech_span(measures):

@@ -70,6 +70,8 @@ def review_rows(registry=None):
     data = json.loads(REGISTRY.read_text()) if registry is None else registry
     review = data["review"]
     rows = {f"story_qa_v3.{k}": v for k, v in review["story_qa_v3"].items()}
+    # owner 27/10: story QA v4's own rows (the ones v3 does not have, and its changed ai_video row)
+    rows.update({f"story_qa_v4.{k}": v for k, v in (review.get("story_qa_v4") or {}).items()})
     rows.update({f"rubric.{k}.long": v["long"] for k, v in review["rubric"].items() if isinstance(v.get("long"), dict)})
     return rows
 
@@ -155,21 +157,33 @@ def batch_budget():
     return PROBE_BATCH_SHARE * PROBE_JOB_MINUTES - PROBE_SETUP_MINUTES
 
 
-def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_ROUNDS, max_units=None):
+def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_ROUNDS, max_units=None,
+          existing=None):
     """The shots still to probe and approve (no approved clip, or one of another request or too short), in
     risk_order, cut into shot-probe.yml batches: one rank per batch, each fitting max_minutes (default:
     batch_budget(), PROBE_BATCH_SHARE of the job's timeout less its setup) and max_units (E128: the free-model units a
     day allows, default the quota cap), each with its expected units (pavo_units_est). Resume is this list: an
-    approved shot leaves it, a changed request comes back."""
+    approved shot leaves it, a changed request comes back. Owner 27/10 (R1): a shot with a clean clip of its request
+    already made (`existing`: shot_sources.awaiting_review, the shot-probe records on main and on their branches, the
+    clip inventories) is listed for Claude's review and never queued for a new generation; a fallback approval
+    (licensed footage, a still in motion: R3) is approved for its own request."""
+    import shot_sources
     max_minutes = max_minutes or batch_budget()
     max_units = max_units or quota.QuotaGuard(actions=None).cap()
     approvals = approvals or {}
-    todo = []
+    existing = existing or {}
+    todo, review = [], {}
     for i, s in eb.risk_order(plan["shots"]):
         a = approvals.get(s["id"])
         need = (needs or {}).get(s["id"])
+        if a and a.get("source") in shot_sources.FALLBACKS and a.get("request_sha256") == \
+                shot_sources.expected_request(plan, s, i, a, digests):
+            continue
         if a and a.get("request_sha256") == digests.get(s["id"]) and (
                 need is None or (isinstance(a.get("clip_seconds"), (int, float)) and a["clip_seconds"] >= need)):
+            continue
+        if existing.get(s["id"]):
+            review[s["id"]] = [c.get("asset") or c.get("url") for c in existing[s["id"]]]
             continue
         todo.append(s)
     batches, cur, used, rank = [], [], 0.0, None
@@ -188,7 +202,8 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
         close()
     generated = [s for s in plan["shots"] if not eb.is_window(s)]
     return {"episode": plan.get("episode"), "generated_shots": len(generated),
-            "approved": len(generated) - len(todo), "to_probe": len(todo), "batches": batches,
+            "approved": len(generated) - len(todo) - len(review), "awaiting_review": review,
+            "to_probe": len(todo), "batches": batches,
             "probe_minutes_est": round(sum(b["minutes_est"] for b in batches))}
 
 
@@ -197,9 +212,20 @@ def queue_main(plan_path, max_minutes=None):
     if report is None:
         raise SystemExit(f"PREFLIGHT_MISSING {path.name} (the queue reads the committed preflight's request digests)")
     requests = report.get("requests") or {}
-    result = queue(plan, requests.get("digests") or {}, eb.load_approvals(plan), requests.get("needs"),
-                   float(max_minutes) if max_minutes else None)
+    import shot_sources
+    digests, approvals = requests.get("digests") or {}, eb.load_approvals(plan)
+    branch = shot_sources.branch_clips(plan)   # R1: clips on claude/shot-probe-* branches, awaiting review
+    result = queue(plan, digests, approvals, requests.get("needs"), float(max_minutes) if max_minutes else None,
+                   existing=shot_sources.awaiting_review(plan, digests, approvals, branch))
     result["pavo_budget"] = budget_today(result["batches"])
+    if branch is None:
+        result["branch_records"] = "UNREAD (git did not answer): a clip on a shot-probe branch may be queued again"
+    # R2/R3: today's per-shot sources (spoken shots first on the budget, free fallbacks for the silent rest)
+    sources = shot_sources.sources_report(plan, digests, approvals, branch=branch)
+    result["sources"] = {"counts": sources["counts"], "pavo_budget": sources["pavo_budget"],
+                         "fallback": {k: v for k, v in sources["shots"].items() if v["state"] == "fallback"},
+                         "waiting": sorted(k for k, v in sources["shots"].items()
+                                           if v["source"] == "WAIT_PAVO_BUDGET")}
     print(json.dumps(result, indent=1))
     return 0
 

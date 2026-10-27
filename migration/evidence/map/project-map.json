@@ -351,6 +351,7 @@
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_short_engine.py",
+    "migration/production/bible/test_shot_sources.py",
     "migration/production/bible/test_thumbs.py",
     "migration/production/characters/test_characters.py",
     "migration/production/footage/test_assign.py",
@@ -761,6 +762,7 @@
    "imported_by": [
     "migration/diagnostics/av-profile/profile_openings.py",
     "migration/diagnostics/av-semantic/qualify_semantic.py",
+    "migration/production/bible/pavo_native.py",
     "migration/production/qa_pilot.py"
    ],
    "test": null,
@@ -907,6 +909,7 @@
    "local_imports": [
     "migration/integrations/pavo/client.py",
     "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/quota.py",
     "migration/integrations/pavo/video.py"
    ],
    "called_by_workflows": [],
@@ -935,15 +938,25 @@
    "is_test": false
   },
   "migration/integrations/pavo/quota.py": {
-   "purpose": "Free agnes-image quota guard (E124): a daily cap before any call, and a stop after failed read-backs.",
+   "purpose": "Pavo's free-model quota guard (E124, E128): one budget for every Pavo generation, image and video, MCP and Actions.",
    "dir": "migration/integrations/pavo",
    "local_imports": [
     "migration/integrations/pavo/client.py"
    ],
    "called_by_workflows": [],
    "imported_by": [
+    "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/server.py",
-    "migration/integrations/pavo/test_image_gen.py"
+    "migration/integrations/pavo/test_image_gen.py",
+    "migration/integrations/pavo/video.py",
+    "migration/ops/dispatch_guard.py",
+    "migration/ops/test_dispatch_guard.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
+    "migration/production/bible/shot_sources.py",
+    "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_long_preflight.py",
+    "migration/production/bible/test_shot_sources.py"
    ],
    "test": null,
    "is_test": false
@@ -982,7 +995,8 @@
     "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/images.py",
     "migration/integrations/pavo/quota.py",
-    "migration/integrations/pavo/test_video.py"
+    "migration/integrations/pavo/test_video.py",
+    "migration/integrations/pavo/video.py"
    ],
    "called_by_workflows": [
     "pavo-mcp.yml"
@@ -1025,11 +1039,13 @@
    "local_imports": [
     "migration/integrations/pavo/audio.py",
     "migration/integrations/pavo/client.py",
-    "migration/integrations/pavo/images.py"
+    "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/quota.py"
    ],
    "called_by_workflows": [],
    "imported_by": [
     "migration/integrations/pavo/image_gen.py",
+    "migration/integrations/pavo/test_image_gen.py",
     "migration/integrations/pavo/test_video.py",
     "migration/production/bible/episode_build.py"
    ],
@@ -1552,7 +1568,9 @@
    "purpose": "One dispatch guard for every expensive workflow (E116; generalises E106's preflight and E112's order).",
    "dir": "migration/ops",
    "local_imports": [
+    "migration/integrations/pavo/quota.py",
     "migration/production/bible/episode_order.py",
+    "migration/production/bible/long_preflight.py",
     "migration/production/imagegen/cf_allocation.py"
    ],
    "called_by_workflows": [
@@ -1700,6 +1718,7 @@
    "purpose": "E116: one dispatch guard runs first in every expensive workflow (inputs, capacity, one run per subject, no re-run",
    "dir": "migration/ops",
    "local_imports": [
+    "migration/integrations/pavo/quota.py",
     "migration/ops/dispatch_guard.py",
     "migration/production/bible/episode_order.py",
     "migration/production/bible/episode_preflight.py"
@@ -1898,14 +1917,17 @@
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/integrations/pavo/client.py",
+    "migration/integrations/pavo/quota.py",
     "migration/integrations/pavo/video.py",
     "migration/production/bible/clip_check.py",
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/long_preflight.py",
+    "migration/production/bible/pavo_native.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/short_engine.py",
+    "migration/production/bible/shot_sources.py",
     "migration/production/characters/characters.py",
     "migration/production/footage/pavo_footage.py"
    ],
@@ -1920,11 +1942,13 @@
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/rekey_shots_e118.py",
+    "migration/production/bible/shot_sources.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_preflight.py",
     "migration/production/bible/test_plan_check.py",
-    "migration/production/bible/test_scene_stills.py"
+    "migration/production/bible/test_scene_stills.py",
+    "migration/production/bible/test_shot_sources.py"
    ],
    "test": "migration/production/bible/test_episode_build.py",
    "is_test": false
@@ -2006,6 +2030,7 @@
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/short_engine.py",
+    "migration/production/bible/shot_sources.py",
     "migration/production/footage/pavo_footage.py",
     "migration/publish/captions.py"
    ],
@@ -2023,6 +2048,7 @@
    "purpose": "Check a Bible-story long's shot plan (`bible-long-plan-v1`) before anything is voiced or generated (owner,",
    "dir": "migration/production/bible",
    "local_imports": [
+    "migration/production/bible/pavo_native.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/voice_pace.py",
     "migration/production/script_check.py"
@@ -2035,6 +2061,7 @@
     "migration/production/bible/episode_build.py",
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
+    "migration/production/bible/plan_check.py",
     "migration/production/bible/test_long_build.py",
     "migration/production/bible/test_long_plan_check.py",
     "migration/production/bible/test_long_preflight.py",
@@ -2047,18 +2074,43 @@
    "purpose": "The Bible-story long's no-rework contract (E127, owner 27/10: \"no rework, ever\"). The Shorts had it since E106/E114",
    "dir": "migration/production/bible",
    "local_imports": [
+    "migration/integrations/pavo/quota.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/long_plan_check.py",
-    "migration/production/bible/plan_check.py"
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/shot_sources.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/ops/dispatch_guard.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py",
+    "migration/production/bible/shot_sources.py",
+    "migration/production/bible/test_long_preflight.py",
+    "migration/production/bible/test_shot_sources.py"
+   ],
+   "test": "migration/production/bible/test_long_preflight.py",
+   "is_test": false
+  },
+  "migration/production/bible/pavo_native.py": {
+   "purpose": "Pavo's own speech for the spoken shots (owner, 27/10 ~20:40-22:50 UTC, R2 and R4; story QA v4).",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/diagnostics/av-semantic/av_semantic.py",
+    "migration/production/bible/plan_check.py",
+    "migration/production/characters/characters.py"
    ],
    "called_by_workflows": [],
    "imported_by": [
     "migration/production/bible/episode_build.py",
-    "migration/production/bible/episode_preflight.py",
-    "migration/production/bible/test_long_preflight.py"
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/shot_sources.py",
+    "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_shot_sources.py"
    ],
-   "test": "migration/production/bible/test_long_preflight.py",
+   "test": null,
    "is_test": false
   },
   "migration/production/bible/plan_check.py": {
@@ -2067,6 +2119,8 @@
    "local_imports": [
     "migration/production/bible/episode_build.py",
     "migration/production/bible/kjv_check.py",
+    "migration/production/bible/long_plan_check.py",
+    "migration/production/bible/pavo_native.py",
     "migration/production/bible/voice_pace.py",
     "migration/production/characters/characters.py",
     "migration/production/characters/props.py",
@@ -2082,7 +2136,9 @@
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/long_preflight.py",
+    "migration/production/bible/pavo_native.py",
     "migration/production/bible/scene_stills.py",
+    "migration/production/bible/shot_sources.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_thumbs.py",
@@ -2135,6 +2191,30 @@
    "test": "migration/production/bible/test_short_engine.py",
    "is_test": false
   },
+  "migration/production/bible/shot_sources.py": {
+   "purpose": "Where each shot's picture comes from, so a video is produced without stalling (owner, 27/10 ~22:50 UTC, for the",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/integrations/pavo/quota.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
+    "migration/production/bible/pavo_native.py",
+    "migration/production/bible/plan_check.py",
+    "migration/production/footage/footage.py",
+    "migration/production/footage/pavo_footage.py",
+    "migration/production/motion.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_build.py",
+    "migration/production/bible/long_preflight.py",
+    "migration/production/bible/test_episode_build.py",
+    "migration/production/bible/test_shot_sources.py"
+   ],
+   "test": "migration/production/bible/test_shot_sources.py",
+   "is_test": false
+  },
   "migration/production/bible/syncnet.py": {
    "purpose": "SyncNet (Chung & Zisserman, \"Out of time: automated lip sync in the wild\", ACCV 2016) on CPU in numpy: the",
    "dir": "migration/production/bible",
@@ -2168,8 +2248,11 @@
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/integrations/pavo/client.py",
+    "migration/integrations/pavo/quota.py",
     "migration/production/bible/episode_build.py",
-    "migration/production/bible/short_engine.py"
+    "migration/production/bible/pavo_native.py",
+    "migration/production/bible/short_engine.py",
+    "migration/production/bible/shot_sources.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
@@ -2257,6 +2340,7 @@
    "purpose": "E127: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the",
    "dir": "migration/production/bible",
    "local_imports": [
+    "migration/integrations/pavo/quota.py",
     "migration/ops/dispatch_guard.py",
     "migration/production/bible/clip_check.py",
     "migration/production/bible/episode_build.py",
@@ -2320,6 +2404,23 @@
    "test": null,
    "is_test": true
   },
+  "migration/production/bible/test_shot_sources.py": {
+   "purpose": "Owner 27/10 ~22:50 UTC (R1-R4, the long and the Shorts, \"em qualquer situação\"): no stall. Offline: every clip",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/integrations/pavo/quota.py",
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/long_preflight.py",
+    "migration/production/bible/pavo_native.py",
+    "migration/production/bible/shot_sources.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
   "migration/production/bible/test_thumbs.py": {
    "purpose": "Offline: the character-first thumbnail (owner, 27/10) is refused unless its spec keeps the rules, and a publish",
    "dir": "migration/production/bible",
@@ -2374,6 +2475,7 @@
    "imported_by": [
     "migration/production/agnes_clip.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/pavo_native.py",
     "migration/production/bible/plan_check.py",
     "migration/production/characters/test_characters.py"
    ],
@@ -2448,6 +2550,7 @@
     "footage.yml"
    ],
    "imported_by": [
+    "migration/production/bible/shot_sources.py",
     "migration/production/footage/test_footage.py"
    ],
    "test": "migration/production/footage/test_footage.py",
@@ -2465,6 +2568,7 @@
    "imported_by": [
     "migration/production/bible/episode_build.py",
     "migration/production/bible/long_build.py",
+    "migration/production/bible/shot_sources.py",
     "migration/production/footage/test_pavo_footage.py"
    ],
    "test": "migration/production/footage/test_pavo_footage.py",
@@ -2609,6 +2713,7 @@
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
+    "migration/production/bible/shot_sources.py",
     "migration/production/still_render.py"
    ],
    "test": null,

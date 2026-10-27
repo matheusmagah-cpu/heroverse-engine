@@ -57,6 +57,7 @@ def caption_tracks(s, vid):
 
 
 V3_LONG = "story-qa-criteria-v3"
+STORY_LONGS = (V3_LONG, "story-qa-criteria-v4")   # v4 (owner 27/10) keeps v3's .srt rows unchanged
 
 
 def caption_track_missing(manifest_path, manifest, package=None, pilot_dir=None):
@@ -71,7 +72,7 @@ def caption_track_missing(manifest_path, manifest, package=None, pilot_dir=None)
         qa = json.loads((Path(manifest_path).parent / "qa.json").read_text())
     except (OSError, ValueError):
         qa = None
-    if isinstance(qa, dict) and qa.get("criteria_version") == V3_LONG:
+    if isinstance(qa, dict) and qa.get("criteria_version") in STORY_LONGS:
         return True
     return bible_long(package or {}, pilot_dir)
 

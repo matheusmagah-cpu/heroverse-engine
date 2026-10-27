@@ -42,12 +42,16 @@ FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e513512
                           "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360",
                           # owner, 2026-10-26 ("Sim, régua nova"): the acted Bible-story long; 2026-10-27 Pavo freed,
                           # no real-footage minimum (v3 has none); v1/v2 stay frozen and unchanged
-                          "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"}
+                          "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc",
+                          # owner, 2026-10-27 (R1-R4): v3 + Pavo's speech kept per clip under checks, the pinned
+                          # medium.en ASR, free fallbacks for non-spoken shots; v3 stays frozen and unchanged
+                          "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
                   "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json",
                   "story-qa-criteria-v1": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v1.json",
-                  "story-qa-criteria-v3": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v3.json"}
+                  "story-qa-criteria-v3": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v3.json",
+                  "story-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v4.json"}
 STANDARD_VERSIONS = tuple(CRITERIA_FILES)  # STANDARD.md renders: the only ones approved or published
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
@@ -91,21 +95,23 @@ DIMENSIONS_STORY_V1 = {**DIMENSIONS_V4,
                                  "review": DIMENSIONS_V4["image"]["review"]},
                        "rights": {"qa": DIMENSIONS_V4["rights"]["qa"] + ["ai_video_source_and_licence"], "review": []}}
 STORY_V3 = "story-qa-criteria-v3"
+STORY_V4 = "story-qa-criteria-v4"
+STORY_VERSIONS = (STORY_V3, STORY_V4)
 
 
-def story_v3_rows():
-    """qa_pilot.STORY_V3_ROWS: every row of the frozen story QA v3 and the qa checks that measure it. Imported here,
-    not at module level (qa_pilot's instruments load only in its main)."""
+def story_v3_rows(version=STORY_V3):
+    """qa_pilot.STORY_ROWS[version]: every row of the frozen story QA (v3, or v4 for a plan that declares it) and the
+    qa checks that measure it. Imported here, not at module level (qa_pilot's instruments load only in its main)."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
     import qa_pilot
-    return qa_pilot.STORY_V3_ROWS
+    return qa_pilot.STORY_ROWS[version]
 
 
-def dimensions_story_v3():
+def dimensions_story_v3(version=STORY_V3):
     """story v3 (the acted long): v1's title card, figure, footage-share and burned-caption rows are gone; each
     dimension lists the checks of its v3 rows (STORY_V3_ROWS), so no row is left out. The review items are
-    v3's (the watched review, overall >= 9.5 in owner_quality_policy)."""
-    rows = story_v3_rows()
+    v3's (the watched review, overall >= 9.5 in owner_quality_policy). v4: the same, over v4's rows."""
+    rows = story_v3_rows(version)
 
     def checks(prefixes):
         out = []
@@ -118,7 +124,8 @@ def dimensions_story_v3():
     return {"technical": {"qa": checks(("technical",)), "review": []},
             "audio": {"qa": ["integrated_lufs", "true_peak", "speech_presence", "no_singing"],
                       "review": ["audio_clarity_and_mix"]},
-            "transcript": {"qa": ["wer_vs_script", "words_per_minute", "first_word_onset", "hook_second_person"],
+            "transcript": {"qa": ["wer_vs_script", "words_per_minute", "first_word_onset", "hook_second_person"]
+                                 + [n for n in checks(("speech.asr_model",)) if n not in ("wer_vs_script",)],
                            "review": []},
             "captions": {"qa": checks(caps), "review": ["captions_readable_and_synced"]},
             "sync": {"qa": ["srt_coverage_of_speech", "first_word_onset"], "review": ["captions_readable_and_synced"]},
@@ -127,18 +134,19 @@ def dimensions_story_v3():
             "content_and_policy": DIMENSIONS["content_and_policy"]}
 
 
-def story_v3_row_items(qa, sha):
-    """One item per row of the frozen story QA v3 (PASS / FAIL / UNKNOWN from its checks; UNKNOWN when the QA is
+def story_v3_row_items(qa, sha, version=STORY_V3):
+    """One item per row of the frozen story QA v3 / v4 (PASS / FAIL / UNKNOWN from its checks; UNKNOWN when the QA is
     not for this file or a check is absent): every row is evaluated, none is skipped."""
-    rows = story_v3_rows()
+    rows = story_v3_rows(version)
+    name = "story_qa_" + version.rsplit("-", 1)[-1]
     if qa is None or qa.get("output_sha256") != sha:
-        return [item("story_qa_v3", r, "UNKNOWN", "no QA for this file") for r in rows]
+        return [item(name, r, "UNKNOWN", "no QA for this file") for r in rows]
     checks = qa.get("checks") or {}
     out = []
     for r, names in rows.items():
         values = [checks.get(n) for n in names]
         state = "FAIL" if any(v is False for v in values) else ("PASS" if all(v is True for v in values) else "UNKNOWN")
-        out.append(item("story_qa_v3", r, state, {n: checks.get(n, "absent") for n in names}))
+        out.append(item(name, r, state, {n: checks.get(n, "absent") for n in names}))
     return out
 
 
@@ -252,11 +260,12 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     sha = (manifest or {}).get("output_sha256")
     dims = {"binding": binding(d, qa, manifest, review, video), "format": format_items(d)}
     version = (qa or {}).get("criteria_version")
-    spec_by_dim = dimensions_story_v3() if version == STORY_V3 else DIMENSIONS_BY_VERSION.get(version, DIMENSIONS)
+    spec_by_dim = (dimensions_story_v3(version) if version in STORY_VERSIONS
+                   else DIMENSIONS_BY_VERSION.get(version, DIMENSIONS))
     for name, spec in spec_by_dim.items():
         dims[name] = qa_items(qa, spec["qa"], sha) + review_items(review, spec["review"], sha)
-    if version == STORY_V3:
-        dims["story_qa_v3"] = story_v3_row_items(qa, sha)
+    if version in STORY_VERSIONS:
+        dims["story_qa_" + version.rsplit("-", 1)[-1]] = story_v3_row_items(qa, sha, version)
     # whole-video watched review: its overall score is a gate of its own
     w = (review or {}).get("watched_review") or {}
     if review is None or review.get("output_sha256") != sha or review.get("status") not in ("PASS", "FAIL"):

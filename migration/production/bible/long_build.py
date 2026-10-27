@@ -257,7 +257,7 @@ def upscale_ids(plan, done_names=(), approvals=None):
         a = approvals.get(s["id"])
         if not a:
             raise SystemExit(f"SHOT_NOT_REVIEWED {s['id']}")
-        if artifact_name(plan["episode"], s["id"], a["clip_sha256"]) not in done:
+        if artifact_name(plan["episode"], s["id"], a.get("clip_sha256") or a.get("still_sha256")) not in done:
             todo.append(s["id"])
     return todo
 
@@ -276,23 +276,37 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
         raise SystemExit(f"SHOT_NOT_REVIEWED {shot_id}")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
+    import shot_sources
     src = out / f"{shot_id}.src.mp4"
-    eb.fetch_shot_clip(a, src, fetch)
-    if frame_fn is None:
-        frame_fn = pavo_footage.real_esrgan(weights)
-        upscaler = AI["upscaler"]
-    else:
-        upscaler = "stub (tests only)"
     dst = out / f"{shot_id}.mp4"
-    try:
-        w, h, fps, seconds = pavo_footage.render(src, dst, frame_fn)
-    finally:
-        src.unlink(missing_ok=True)
-    rec = {"version": UP_RECORD, "episode": plan["episode"], "shot": shot_id, "source_asset": a["asset"],
-           "source_sha256": a["clip_sha256"], "source": {"width": w, "height": h, "fps": round(fps, 3),
-                                                          "seconds": round(seconds, 3)},
+    kind = a.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved for this shot
+    if kind == "footage":            # a licensed library clip is already 2560x1440 30 fps: never resized again
+        shot_sources.fetch_source(a, dst, fetch)
+        upscaler = "none (licensed footage at 2560x1440)"
+        w, h = frame_of(dst)
+        fps, seconds = FPS, probe(dst)["seconds"]
+    elif kind == "still_motion":     # an approved still in camera motion, rendered at the QA's frame
+        shot_sources.still_motion_clip(eb.REPO / a["repo_path"], dst, a["clip_seconds"], tuple(FRAME))
+        upscaler = "none (approved still, camera motion at 2560x1440)"
+        w, h = frame_of(dst)
+        fps, seconds = FPS, probe(dst)["seconds"]
+    else:
+        shot_sources.fetch_source(a, src, fetch)
+        if frame_fn is None:
+            frame_fn = pavo_footage.real_esrgan(weights)
+            upscaler = AI["upscaler"]
+        else:
+            upscaler = "stub (tests only)"
+        try:
+            w, h, fps, seconds = pavo_footage.render(src, dst, frame_fn)
+        finally:
+            src.unlink(missing_ok=True)
+    key = a.get("clip_sha256") or a.get("still_sha256")
+    rec = {"version": UP_RECORD, "episode": plan["episode"], "shot": shot_id, "source_asset": a.get("asset"),
+           "source_kind": kind, "source_sha256": a.get("clip_sha256"),
+           "source": {"width": w, "height": h, "fps": round(fps, 3), "seconds": round(seconds, 3)},
            "frame": frame_of(dst), "fps": FPS, "upscaler": upscaler, "sha256": eb.sha256(dst),
-           "artifact": artifact_name(plan["episode"], shot_id, a["clip_sha256"])}
+           "artifact": artifact_name(plan["episode"], shot_id, key)}
     eb.save(out / f"{shot_id}.json", rec)
     print(json.dumps({"shot": shot_id, "sha256": rec["sha256"], "artifact": rec["artifact"]}))
     return rec
@@ -479,23 +493,56 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
                       "kind": "footage", "motion": True, "beat": shot.get("beat"), "chapter": shot.get("chapter"),
                       "characters": who, "shot": c["shot"], "shot_kind": "keeper" if src["kind"] == "keeper" else
                       ("window" if c["kind"] == "window" else "scene"), "speed": c["speed"]})
-    clips = []
+    q = lpc.qa_for(plan) or QA
+    ai = q["rights"]["ai_video"]
+    clips, images, speech, kinds = [], {}, {}, {}
     for s in generated(plan):
         entry = (report.get("shots") or {}).get(s["id"]) or {}
+        approved = entry.get("approved") or {}
         flags = (entry.get("checks") or {}).get("flags")
         ok = "PASS" if flags == [] else ("FAIL" if flags else None)
         talking = pc.talking(s)
         f, rec = ups[s["id"]]
-        clips.append({"id": s["id"], "source": AI["source"], "licence": AI["licence"], "model": AI["model"],
-                      "upscaler": rec["upscaler"], "audio": AI["audio"], "vetting": AI["vetting_required"]
-                      if (entry.get("approved") or {}).get("clip_sha256") == rec["source_sha256"] else "PENDING",
-                      "credit": "AI video: Pavo (Agnes Video Flash), owner-owned output", "sha256": rec["sha256"],
-                      "source_sha256": rec["source_sha256"], "approved_asset": rec["source_asset"],
-                      "clip_check": ok, "talking": talking, "lipsync_check": ok if talking else None,
-                      "voiceover": "god" if s["id"] in gods else None, "face_check": ok if s["id"] in gods else None})
+        kind = rec.get("source_kind") or approved.get("source") or "pavo"
+        kinds[s["id"]] = kind
+        vetted = approved.get("clip_sha256") == rec["source_sha256"] and approved.get("source", "pavo") == kind
+        base = {"id": s["id"], "source_kind": kind, "upscaler": rec["upscaler"], "sha256": rec["sha256"],
+                "source_sha256": rec["source_sha256"], "approved_asset": rec["source_asset"], "clip_check": ok}
+        if kind == "footage":   # owner 27/10 (R3): a licensed library clip, vetted and credited (v3 rights rows)
+            clips.append(dict(base, source="footage", licence=approved.get("licence"), credit=approved.get("credit"),
+                              vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False))
+            continue
+        if kind == "still_motion":   # an approved FLUX still in camera motion: an image with its model and licence
+            still = pc.still_record(approved.get("still")) or {}
+            src = still.get("source") or {}
+            images[s["id"]] = {"still": approved.get("still"), "sha256": approved.get("still_sha256"),
+                               "models": {"still": {"license": src.get("license") or approved.get("licence"),
+                                                    "revision": src.get("revision") or src.get("model")}}}
+            clips.append(dict(base, source="still", licence=approved.get("licence"), credit="Still: FLUX.1 [schnell] "
+                              "(Apache-2.0) on Workers AI, approved scene still", vetting="APPROVED", audio="removed",
+                              talking=False))
+            continue
+        native = isinstance(approved.get("speech"), dict)
+        if native:
+            speech[s["id"]] = {k: approved["speech"].get(k) for k in ("gain_db", "lufs", "onset", "end", "flags")}
+        clips.append(dict(base, source=ai["source"], licence=ai["licence"], model=ai["model"],
+                          audio=ai["audio"] if native else ai.get("audio_silent_shots", ai["audio"]),
+                          vetting=ai["vetting_required"] if vetted else "PENDING", reuse=kind == "pavo_reuse",
+                          credit="AI video: Pavo (Agnes Video Flash), owner-owned output", talking=talking,
+                          lipsync_check=ok if talking else None, voiceover="god" if s["id"] in gods else None,
+                          face_check=ok if s["id"] in gods else None,
+                          speech_checks=("PASS" if speech[s["id"]]["flags"] == [] else "FAIL") if native else None))
+    for h in holds:
+        h["source_kind"] = kinds.get(by_id[h["shot"]].get("window_of") or h["shot"])
     return {"version": "bible-long-manifest-v1", "pilot_id": plan.get("pilot"), "long": plan["episode"],
-            "criteria_version": QA["version"], "output_sha256": out_sha, "output_seconds": seconds,
-            "frame": list(FRAME), "holds": holds, "sentences": timeline["sentences"], "clips": clips, "images": {},
+            "criteria_version": q["version"], "output_sha256": out_sha, "output_seconds": seconds,
+            "frame": list(FRAME), "holds": holds, "sentences": timeline["sentences"], "clips": clips, "images": images,
+            "spoken_audio_mix": {"per_clip_gain_db": {k: v["gain_db"] for k, v in speech.items()},
+                                 "audio_crossfade_seconds": eb.pavo_native.XFADE_S if speech else None,
+                                 "ambience_bed": {"band_hz": list(eb.pavo_native.BED_BAND),
+                                                  "gain_db": eb.pavo_native.BED_DB} if speech else None,
+                                 "music": "owned, ducked (sidechaincompress)", "speech": speech},
+            "spoken_shots": [{"shot": s["id"]} for s in plan["shots"] if eb.pavo_native.spoken(s)],
             "music": {"file": "original-rest-music.lossless.flac", "sha256": music_sha,
                       "offset_seconds": float(plan.get("music_offset", 600.0))}, "voice": {"voice_id": eb.VOICE["voice_id"], "speed": eb.VOICE["speed"]},
             "crossfade_seconds": 0.0, "persistent_overlays": [], "cta": [], "scripture_cards": [],
@@ -528,8 +575,13 @@ def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, r
         problems.append(f"DURATION_UNDER_QA {layout['total']:.1f} s (story QA v3 duration_seconds_min {min_seconds})")
     if problems:
         raise SystemExit("LONG_COMPOSE_REFUSED " + "; ".join(problems))
-    cuts = compose_long_shots(plan, layout, {k: str(f) for k, (f, _) in ups.items()}, seconds)
-    cplan = {"voice": str(work / "narration.wav"), "timeline": str(work / "compose-timeline.json"),
+    # story QA v4 (owner 27/10, R4): Pavo's own speech laid into the voice track from the approved 720p clips (the
+    # upscale carries no audio), one gain each, short fades, a continuous bed; talking cuts start at the speech onset
+    voice, seconds, onsets = eb.native_voice(plan, work, layout,
+                                             {s["id"]: str(work / "clips" / f"{s['id']}.mp4") for s in generated(plan)},
+                                             seconds, approvals)
+    cuts = eb.shift_onsets(compose_long_shots(plan, layout, {k: str(f) for k, (f, _) in ups.items()}, seconds), onsets)
+    cplan = {"voice": voice, "timeline": str(work / "compose-timeline.json"),
              "music": str(music), "music_offset": float(plan.get("music_offset", 600.0)), "tail": eb.TAIL,
              "frame": list(frame), "shots": cuts}
     eb.save(work / "compose-plan.json", cplan)

@@ -44,6 +44,11 @@ script_check.structure_problems reads for the long's script) and the frozen stor
   CHARACTER_LOOK_CHANGED), the same entry as in the Shorts; a character named in a prompt is listed in that shot's
   `characters`, so its references go in (CHARACTER_NOT_LISTED); a DRAFT character is ONE pending row each
   (CHARACTER_PENDING) until Claude approves its sheet by PR.
+- the frozen QA a plan declares (`criteria`: story v3 by default, story v4 by choice, owner 27/10; CRITERIA_UNKNOWN):
+  under v4 the spoken shots keep Pavo's own speech (each speaker's Pavo voice in voices.json: PAVO_VOICE_UNDESCRIBED;
+  the plan's `ambience`: AMBIENCE_MISSING; `audio_route` pavo_native only under v4: AUDIO_ROUTE_NEEDS_V4) and a 16:9
+  Keeper prompt is framed from the chest up (KEEPER_FRAMING_16X9, E130); a voice-over Keeper (plan B, E130) has the
+  Short's prompt, talk_refs and line rules over the long's cover (KEEPER_VO_*, KEEPER_LINE_TOO_LONG/SHORT).
 - the frozen QA (story v3, owner 2026-10-26 "Sim, régua nova"): every cut a 4-7 s hold (grammar.scene_seconds:
   HOLD_UNDER_QA / HOLD_OVER_QA, a talking line at its slowest pace), "you" within 8 s (HOOK_SECOND_PERSON), 115-165
   words a minute (WORDS_PER_MINUTE_EST), speech presence >= 0.85 (SPEECH_PRESENCE_EST); its three acted-long rows:

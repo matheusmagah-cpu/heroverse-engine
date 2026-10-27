@@ -1089,7 +1089,26 @@ def check(plan, chars=None):
     problems += shape
     if bad_lines:
         return {"problems": problems, "pending": pending, "estimate": {}}
+    problems += audio_route_problems(plan, shots)
     return _check_shots(plan, chars, narration, shots, problems, pending)
+
+
+def audio_route_problems(plan, shots):
+    """Owner 27/10 (R4): a Short may keep Pavo's own speech (`"audio_route": "pavo_native"`; no frozen criteria file
+    of the Shorts forbids it): every spoken shot's speaker has its fixed Pavo voice (voices.json) and the plan names
+    the ambience under the voice. A line Pavo's filter refuses goes to Kokoro on its own (pavo_native.route)."""
+    import pavo_native as pn
+    route = plan.get("audio_route")
+    if route not in (None, pn.KOKORO, pn.NATIVE):
+        return [f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})"]
+    if route != pn.NATIVE:
+        return []
+    out = [] if pn.ambience(plan, {}) else ["AMBIENCE_MISSING (the plan's `ambience`: the natural sound under the voice)"]
+    voices = pn.load_voices()
+    for i, s in enumerate(shots):
+        if isinstance(s, dict) and pn.spoken(s) and not (voices.get(pn.speaker(s)) or {}).get("pavo_voice"):
+            out.append(f"PAVO_VOICE_UNDESCRIBED shot {i} {s.get('id')} ({pn.speaker(s)}: production/bible/voices.json)")
+    return out
 
 
 def narration_problems(narration, kinds=KINDS):

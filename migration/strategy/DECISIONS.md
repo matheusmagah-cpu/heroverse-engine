@@ -572,3 +572,36 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   (`evidence/long/20261027/arc-01-long-production-estimate.json`, `publish.proposed_date`) puts the earliest date at
   02/11 if every step passes the first time, and proposes 04/11 (direct talking probes, ~21 shot-probe runs, 330 frame
   reviews, the 1440p upscale and the 9.5 review). The later arcs' long slots are unchanged here.
+
+## Owner decision: no stall, Pavo speech kept, free fallbacks for silent shots (2026-10-27)
+- **Owner, 27/10 ~20:40-21:00 UTC (R4).** Keep Pavo's own audio for the talking shots: the speech of the characters
+  and the Keeper plus the natural ambience, in one pass; no music from Pavo (our one owned track goes under the cut);
+  judged clip by clip: the exact KJV words (by ASR, medium.en: base.en mis-hears "gavest"), one consistent voice per
+  character against a reference clip, lip sync, diction. Our Kokoro voice only for a line Pavo refuses (its prompt
+  filter, e.g. "naked"): the hybrid route of PR #473.
+- **Owner, 27/10 ~22:50 UTC, for the long and the Shorts, "em qualquer situação":**
+  - **R1.** Use every Pavo clip already generated that fits a shot (same shot and request, passing its checks and
+    Claude's review >= 9.5); never regenerate what exists.
+  - **R2.** Pavo's budget goes first to the spoken scenes (characters and the Keeper speaking, with Pavo's own speech
+    and ambient audio; no Pavo music).
+  - **R3.** When Pavo's free quota runs out, the remaining non-spoken scenes are filled from other free sources
+    coherent with the narration (licensed footage under the frozen licence list via the footage library, or free FLUX
+    stills with motion), so the video is produced without stalling. The 9.5 floor is unchanged; every fallback shot
+    still matches its line, the period rules and the canonical look rules.
+- **What it became** (branch `claude/owner-no-stall`):
+  - a new frozen `production/qa_criteria_story_v4.json`: story QA v3 with only `rights.ai_video.audio` changed
+    ("removed" -> "pavo speech+ambient kept per clip under checks") and rows added (the pinned medium.en ASR, the
+    per-clip speech checks, the Kokoro voice for refused lines, the fallback sources and shots, the spoken audio mix);
+    every v3 number unchanged, v3 untouched. A long is measured by v4 only when its plan says
+    `"criteria": "story-qa-criteria-v4"`; a Short opts in with `"audio_route": "pavo_native"` (the Shorts have no
+    frozen criteria file that forbids Pavo's audio, so no new Short criteria file was needed);
+  - R1: probe-queue lists a shot with a clean clip of its request (main's shot-probe records, the claude/shot-probe-*
+    branches, clip inventories) as awaiting review, never as a new generation; a spoken shot with a clean clip of its
+    Kokoro-route request keeps that route (R1 wins over R4);
+  - R2/R3: `episode_build.py sources PLAN` spends the shared Pavo budget (quota.py, #475) on the risk order (talking
+    shots first), gives a silent, character-free shot the budget does not reach a footage or still-in-motion
+    candidate, and leaves a spoken shot or a shot with a character waiting (no free source keeps its voice or its
+    canonical look); `approve-source` records Claude's review (>= 9.5) of a fallback, never automatically;
+  - R4: native requests (prompt A of #473), PAVO_PROMPT_BLOCKED from the adapter with an automatic Kokoro retry, the
+    speech checks before approve-shot, and the build's mix (one gain per clip to -18 LUFS, 80 ms fades, a continuous
+    ambience bed, the owned music ducked, -15 LUFS loudnorm).

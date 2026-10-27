@@ -67,6 +67,21 @@ def sha(path):
 
 
 class Cut(unittest.TestCase):
+    def test_e130_a_voiceover_keeper_is_one_silent_clip_over_his_run(self):
+        # E130: compose_long_shots refused plan B (LONG_VOICEOVER_UNSUPPORTED) although the owner approved it and the
+        # long's talking Keeper failed FACE_NOT_FOUND; his clip now covers his line from its first word to the next run
+        plan = tiny_plan()
+        plan["shots"][2]["voiceover"] = True
+        cuts = lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, CLIPS)
+        k = cuts[2]
+        self.assertEqual((k["shot"], k["kind"], k["start"], k["end"]), ("k-1", "keeper_vo", 8.0, 12.6))
+        self.assertNotIn("talk", k)                               # no lips on his words: the track carries them
+        self.assertAlmostEqual(k["speed"], 4.6 / 4.5, places=3)    # slowed at most MAX_SLOW to cover the gap
+        short = dict(CLIPS, **{"k-1": 3.0})
+        with self.assertRaises(SystemExit) as err:
+            lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, short)
+        self.assertIn("FOOTAGE_SHORT k-1", str(err.exception))
+
     def test_one_cut_a_shot_and_a_window_shows_the_next_part_of_its_source_clip(self):
         plan = tiny_plan()
         cuts = lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, CLIPS)

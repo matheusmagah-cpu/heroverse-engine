@@ -1606,5 +1606,129 @@ class SharedQuotaStop(unittest.TestCase):
         self.assertIn("PAVO_BUDGET_USED: ${{ steps.guard.outputs.pavo_used }}", wf)
 
 
+def native_plan():
+    """The dialogue plan on Pavo's own speech (owner 27/10, R4): a Short that says so."""
+    p = dialogue_plan()
+    p["audio_route"] = "pavo_native"
+    p["ambience"] = "the garden at dusk: a soft evening wind through the leaves"
+    return p
+
+
+class NativeSpeech(unittest.TestCase):
+    """Owner 27/10 (R1, R2, R4): spoken shots keep Pavo's own speech and ambience on a plan that opts in; a line
+    Pavo's prompt filter refuses goes to our Kokoro voice by itself (E129); a clip already made is never made again."""
+    def setUp(self):
+        import pavo_native
+        import shot_sources
+        self.pn, self.ss = pavo_native, shot_sources
+        self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, pavo_native.BLOCKS, eb.own_track)
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-native-"))
+        pavo_native.BLOCKS = self.work / "prompt-blocks.json"
+        pavo_native.BLOCKS.write_text(json.dumps({"words": ["naked"], "lines": []}))
+        shot_sources._CACHE.clear()
+        self.layout = layout_for(native_plan(), [2.4, 3.0, 2.5, 3.1])
+        (self.work / "layout.json").write_text(json.dumps(self.layout))
+        (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"], "keeper:talk": ["kt.jpg"]}))
+        self.refs = json.loads((self.work / "refs.json").read_text())
+        self.lip = []
+        eb.clip_flags = lambda path, aspect=None: []
+        eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append(Path(wav).name) or [], {"audio": {}, "mouth": {}})
+        eb.face_flags = lambda py, model, clip: ([], {"faces": {"frames_sampled": 40, "faces_found": 0}})
+        eb.run = lambda args, **kw: Path(str(args[-1])).write_bytes(b"v")
+        eb.own_track = lambda clip: Path(clip).with_suffix(".own.wav")
+
+    def tearDown(self):
+        eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, self.pn.BLOCKS, eb.own_track = self.saved
+        self.ss._CACHE.clear()
+        shutil.rmtree(self.work)
+
+    def req(self, plan, sid):
+        i = next(k for k, s in enumerate(plan["shots"]) if s["id"] == sid)
+        return eb.request(plan["shots"][i], i, plan, self.layout, self.refs), eb.request_identity(
+            plan["shots"][i], i, plan, self.layout, self.refs)
+
+    def test_a_native_spoken_shot_asks_pavo_for_its_own_speech_and_ambience_no_music(self):
+        native, kokoro = native_plan(), dialogue_plan()
+        (req, (sha, canon)), (old, (old_sha, _)) = self.req(native, "s-eve"), self.req(kokoro, "s-eve")
+        self.assertEqual((req["sound"], req["audios"]), (True, None))
+        self.assertTrue(old["audios"] and old["sound"] is False)                 # the Kokoro route is unchanged
+        self.assertIn('Eve says exactly these words and nothing else, once, in English: "Why do you hide?"',
+                      req["prompt"])
+        self.assertIn("the natural ambient sound of the garden at dusk", req["prompt"])
+        self.assertNotIn("music", req["prompt"].lower())                         # excluded in positive words only
+        self.assertNotIn(eb.BOUND_AUDIO.format(pronoun="her"), req["prompt"])    # no input audio to bind
+        self.assertEqual(canon["audio"]["route"], "pavo_native")
+        self.assertNotEqual(sha, old_sha)
+        god, _ = self.req(native, "s-god")
+        self.assertIn("off screen as a voice-over", god["prompt"])
+        # a scene that speaks no line is generated exactly as before: its approval stays valid
+        self.assertEqual(self.req(native, "s-a")[1][0], self.req(kokoro, "s-a")[1][0])
+
+    def test_a_short_opts_in_with_a_described_voice_and_an_ambience(self):
+        self.assertEqual(eb.plan_check.audio_route_problems(native_plan(), native_plan()["shots"]), [])
+        p = native_plan()
+        del p["ambience"]
+        p["shots"][0]["speaker"] = "noah-unknown"
+        found = [x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])]
+        self.assertEqual(found, ["AMBIENCE_MISSING", "PAVO_VOICE_UNDESCRIBED"])
+        p["audio_route"] = "pavo"
+        self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],
+                         ["AUDIO_ROUTE_UNKNOWN"])
+        self.assertEqual(eb.plan_check.audio_route_problems(dialogue_plan(), []), [])   # today's plans: untouched
+
+    def test_e129_a_prompt_filter_block_is_surfaced_and_never_waited_out(self):
+        c = FakeClient([], {"5": [{"status": "blocked", "code": "PAVO_PROMPT_BLOCKED",
+                                   "blocked_reason": "text_rejected_porn"}]})
+        with self.assertRaises(eb.ShotFailed) as err:
+            eb.wait_job(c, "5", sleep=lambda s: self.fail("a block is not waited out"))
+        self.assertEqual(str(err.exception), "PAVO_PROMPT_BLOCKED 5 text_rejected_porn")
+        self.assertEqual(c.reads, ["5"])
+
+    def test_e129_a_blocked_line_goes_to_kokoro_by_itself_and_stays_there(self):
+        plan = native_plan()
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"},
+                             {"conversation_id": "2", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}], "2": [done("2")]})
+        report = eb.generate_clips(plan, self.work, "py", "model", ids=["s-eve"], client=client,
+                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        entry = report["shots"]["s-eve"]
+        self.assertEqual((entry["route"], entry["prompt_blocked"]["reason"]), ("kokoro", "text_rejected_porn"))
+        self.assertEqual([c["sound"] for c in client.calls], [True, False])      # Pavo's speech, then our voice
+        self.assertTrue(client.calls[1]["audios"])
+        self.assertEqual(len(client.calls), 2)                                   # the refused words never sent again
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "kokoro")     # learned for every later run
+        # a word the filter is known to refuse never reaches Pavo's speech at all
+        plan["shots"][0]["line"] = "I was naked; and I hid myself."
+        self.pn.BLOCKS.write_text(json.dumps({"words": ["naked"], "lines": []}))
+        self.assertFalse(self.req(plan, "s-eve")[0]["sound"])
+
+    def test_r1_a_clip_already_made_keeps_its_route_and_is_never_made_again(self):
+        plan = native_plan()
+        kokoro_sha = self.req(dialogue_plan(), "s-god")[1][0]
+        self.ss._CACHE[plan["episode"]] = {"s-god": [{"request_sha256": kokoro_sha, "from": "record"}]}
+        req, (sha, _) = self.req(plan, "s-god")
+        self.assertFalse(req["sound"])                          # God's existing clip is reused (R1 over R4)
+        self.assertEqual(sha, kokoro_sha)
+        self.assertTrue(self.req(plan, "s-eve")[0]["sound"])     # the others still get Pavo's speech
+
+    def test_a_native_approval_ships_only_with_its_speech_checks_on_that_clip(self):
+        self.assertEqual(eb.speech_record_flags({}, "a"), ["SPEECH_UNCHECKED"])
+        ok = {"speech": {"clip_sha256": "a", "flags": [], "gain_db": 2.5}}
+        self.assertEqual(eb.speech_record_flags(ok, "a"), [])
+        self.assertEqual(eb.speech_record_flags(ok, "b"), ["SPEECH_UNCHECKED"])   # another clip
+        bad = {"speech": {"clip_sha256": "a", "flags": ["VOICE_NOT_DISTINCT"], "gain_db": 2.5}}
+        self.assertEqual(eb.speech_record_flags(bad, "a"), ["SPEECH_UNCHECKED"])
+
+    def test_native_lines_take_their_clip_time_and_talking_cuts_start_at_the_speech(self):
+        plan = native_plan()
+        approvals = {"s-eve": {"speech": {"onset": 1.16, "end": 4.5, "gain_db": 1.0, "flags": []}}}
+        spans = eb.native_spans(plan, approvals)
+        self.assertEqual(spans, {"s-eve": ([0], 1.16, 4.5)})
+        self.assertEqual(eb.native_spans(dialogue_plan(), approvals), {})          # v3 / Kokoro plans: unchanged
+        cuts = eb.shift_onsets([{"shot": "s-eve", "talk": {}, "src_start": 0.0}, {"shot": "s-a", "src_start": 0.0}],
+                               {"s-eve": 1.16, "s-a": 0.5})
+        self.assertEqual([c["src_start"] for c in cuts], [1.16, 0.0])             # only a talking cut follows the lips
+
+
 if __name__ == "__main__":
     unittest.main()

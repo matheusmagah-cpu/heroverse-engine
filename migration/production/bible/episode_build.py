@@ -89,6 +89,7 @@ sys.path.insert(0, str(REPO / "migration" / "production" / "footage"))
 sys.path.insert(0, str(REPO / "migration" / "integrations" / "pavo"))
 import plan_check  # noqa: E402
 import characters as ch  # noqa: E402
+import pavo_native  # noqa: E402  (owner 27/10: Pavo's own speech, story QA v4)
 
 VOICE = {"voice_id": "am_michael", "speed": 1.0}   # the pinned engine voice (qa_pilot.voice_model_pinned)
 LINE_GAP = plan_check.LINE_GAP
@@ -329,6 +330,7 @@ def plan_layout(plan, layout, voice_seconds=None, problems=()):
     total = round(voice_seconds + TAIL, 3)
     keeper, speakers, voice_over, keeper_seconds = {}, {}, {}, 0.0
     shots = plan["shots"]
+    native = native_spans(plan)
     refused = {p.split()[1] for p in problems}
     for i, s in enumerate(shots):
         if (s["kind"] != "keeper" and not plan_check.speaking(s)) or s["id"] in refused:
@@ -354,10 +356,12 @@ def plan_layout(plan, layout, voice_seconds=None, problems=()):
                                 f"tail after (line >= {plan_check.VO_LINE_MIN:.1f} s, all <= "
                                 f"{plan_check.VO_LINE_MAX:.1f} s)")
                 continue
+        elif s["id"] in native:   # Pavo's own speech, its length its approved clip's (story QA v4): Pavo made it
+            pass
         elif not low <= seconds <= limit + (1e-3 if talks else 0.0):
             problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.2f} s)")
             continue
-        if talks:
+        if talks and s["id"] not in native:
             # its clip is ceil(speech) seconds with the speech 0.25-0.65 s shorter (E95): refused here, before any
             # Pavo clip, when no 4-12 s clip can carry it
             need = talk_need(seconds)
@@ -551,6 +555,22 @@ def write_wav(path, params, frames):
         w.writeframes(frames)
 
 
+def native_spans(plan, approvals=None):
+    """{shot id: (line indices, onset, end)} of the spoken shots whose approved clip keeps Pavo's own speech (story QA
+    v4): the speech span its approval measured. {} on any other plan."""
+    if not pavo_native.native_plan(plan):
+        return {}
+    approvals = load_approvals(plan) if approvals is None else approvals
+    _, carried = plan_check.sequence(plan)
+    out = {}
+    for i, s in enumerate(plan["shots"]):
+        speech = (approvals.get(s["id"]) or {}).get("speech") or {}
+        if pavo_native.spoken(s) and not is_window(s) and isinstance(speech.get("onset"), (int, float)) and \
+                isinstance(speech.get("end"), (int, float)) and speech["end"] > speech["onset"]:
+            out[s["id"]] = (carried[i], float(speech["onset"]), float(speech["end"]))
+    return out
+
+
 def lines_step(plan, work):
     """Cut each line of the voice track out of pilot_render's voice.wav, rebuild the track from the line WAVs in
     order, write each talking clip's input audio (the Keeper's lines, a character's spoken line) and the compose
@@ -577,7 +597,22 @@ def lines_step(plan, work):
     # the captions, the input audio and the lips check all use the same retimed words
     retimes = {}
     scale = [1.0] * n
+    # story QA v4 (owner 27/10, R4): a line Pavo speaks itself takes the time its approved clip speaks it (the
+    # approval's measured speech span); its place in our track is silence, Pavo's own speech is laid there at the
+    # compose (long_build.premix). Before any approval the Kokoro length predicts it.
+    native = native_spans(plan)
+    for sid, (idx, onset, end) in native.items():
+        gaps = line_gap(plan) * (len(idx) - 1)
+        spoken = sum(durations[k] for k in idx)
+        factor = max(0.05, (end - onset) - gaps) / spoken if spoken else 1.0
+        for k in idx:
+            want = int(round(durations[k] * factor * rate)) * width
+            pieces[k] = b"\x00" * want
+            scale[k] = factor
+            durations[k] = want / width / rate
     stretches, problems = retime_plan(plan, durations)   # E106: the same rule plan_check and preflight predict with
+    stretches = {k: v for k, v in stretches.items() if k not in native}
+    problems = [p for p in problems if p.split()[1] not in native] if native else problems
     for sid, (idx, gaps, stretch) in stretches.items():
         if stretch == 1.0:
             continue
@@ -889,7 +924,7 @@ def frame_refusal(plan, shot):
     return f"{code} {shot['id']} {found[0].split(' ', 4)[-1]}"
 
 
-def request(shot, index, plan, layout, refs, chars=None):
+def request(shot, index, plan, layout, refs, chars=None, route=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
     voice-over Keeper shot (plan B) sends his `talk_refs` frame alone (keeper-vo/calibration.json: with the
@@ -923,7 +958,25 @@ def request(shot, index, plan, layout, refs, chars=None):
         req["first_frame"] = first
         if last:
             req["last_frame"] = last
+    if (route or audio_route(shot, index, plan, req, chars)) == pavo_native.NATIVE:
+        req = pavo_native.native_request(req, plan, shot, index, chars)
+        req["seconds"] = max(req["seconds"] if not plan_check.talking(shot) and not plan_check.voiceover(shot) else 0,
+                             pavo_native.native_seconds(shot, index, plan))
     return req
+
+
+def audio_route(shot, index, plan, kokoro_req, chars=None):
+    """Owner 27/10: None for a shot that speaks no line; "pavo_native" (R2/R4: Pavo's own speech) on a native plan,
+    "kokoro" for a line Pavo's prompt filter refuses (E129) and on every other plan. R1 wins over R4: a spoken shot
+    that already has a clean clip of its Kokoro-route request (approved, in a committed shot-probe record, or in a
+    clip inventory) keeps that route, so the clip is reused and never generated again."""
+    chosen = pavo_native.route(plan, shot, index)
+    if chosen != pavo_native.NATIVE:
+        return chosen
+    import shot_sources
+    words = plan_spoken(shot, index, plan) if kokoro_req["audios"] else None
+    kokoro = request_digest(kokoro_req, shot, words, chars)[0]
+    return pavo_native.KOKORO if shot_sources.clean_clip(plan, shot["id"], kokoro) else chosen
 
 
 WORD = re.compile(r"[a-z0-9']+")
@@ -951,8 +1004,13 @@ def request_identity(shot, index, plan, layout, refs, chars=None):
     shot its speaker, voice and spoken words. shot-probe.yml records it with every clip, approve-shot copies it, the
     preflight computes it from the plan now (verify-preflight) and the build again before using an approved clip."""
     req = request(shot, index, plan, layout, refs, chars)
-    words = plan_spoken(shot, index, plan) if req["audios"] else None
+    words = plan_spoken(shot, index, plan) if req["audios"] or native_speech(req, shot) else None
     return request_digest(req, shot, words, chars)
+
+
+def native_speech(req, shot):
+    """The request asks Pavo for its own speech (story QA v4, owner 27/10): a spoken shot with Pavo's sound on."""
+    return bool(req.get("sound")) and pavo_native.spoken(shot)
 
 
 def request_digest(req, shot, words=None, chars=None):
@@ -967,6 +1025,8 @@ def request_digest(req, shot, words=None, chars=None):
     if req["audios"]:
         who = speaker_of(shot)
         audio = {"speaker": who, "voice": voice_of(who, chars), "words": list(words or [])}
+    elif native_speech(req, shot):   # Pavo speaks the line itself (its voice description is in the prompt)
+        audio = {"route": pavo_native.NATIVE, "speaker": pavo_native.speaker(shot), "words": list(words or [])}
     # E118: no `seconds`: a voice-over or talking shot's clip seconds are derived from measured line timing, which
     # differs between machines across a rounding boundary (genesis-08 k-insight, run 40483267526)
     canonical = {"prompt": req["prompt"], "aspect_ratio": req["aspect_ratio"], "sound": req["sound"],
@@ -991,7 +1051,12 @@ def review_problems(plan, digests, approvals=None, needs=None):
     approvals = load_approvals(plan) if approvals is None else approvals
     ids = [s["id"] for s in plan["shots"] if not is_window(s)]   # a window ships its source's approved clip
     missing = [i for i in ids if i not in approvals]
-    changed = [i for i in ids if i in approvals and approvals[i].get("request_sha256") != digests.get(i)]
+    # owner 27/10 (R3): a fallback shot (licensed footage, a still in motion) is approved for its own request, the
+    # shot and its exact source (shot_sources.expected_request); every other shot for the request the plan sends now
+    import shot_sources
+    index = {s["id"]: k for k, s in enumerate(plan["shots"])}
+    changed = [i for i in ids if i in approvals and approvals[i].get("request_sha256") != shot_sources.expected_request(
+        plan, plan["shots"][index[i]], index[i], approvals[i], digests)]
     out = []
     if missing:
         out.append("SHOT_NOT_REVIEWED " + " ".join(missing) + " (shot-probe.yml, Claude's frame review >= 9.5, "
@@ -1056,6 +1121,8 @@ def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
             continue
         if job["status"] == "completed":
             return job["videos"][0]
+        if job["status"] == "blocked":   # E129: the prompt filter refused the words; never the same prompt again
+            raise ShotFailed(f"PAVO_PROMPT_BLOCKED {cid} {job.get('blocked_reason') or 'unknown'}")
         if job["status"] == "failed":
             return None
         if job["status"] == "incomplete":
@@ -1194,6 +1261,7 @@ def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_pyt
     (E114: a probe generates exactly what the build would, with the same checks)."""
     req = request(shot, index, plan, layout, refs)
     talks = plan_check.talking(shot)
+    native = native_speech(req, shot)   # owner 27/10 (R4): Pavo's own speech and ambience are the clip's track
     raw = work / "clips" / f"{shot['id']}-raw.mp4"
     final = work / "clips" / f"{shot['id']}.mp4"
     raw.parent.mkdir(parents=True, exist_ok=True)
@@ -1210,9 +1278,9 @@ def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_pyt
         download(video["url"], raw)
         record["source"] = {"width": video.get("width"), "height": video.get("height"),
                             "seconds": video.get("seconds")}
-        if not talks:   # Pavo adds an AAC track even with sound false: strip it
+        if not talks and not native:   # Pavo adds an AAC track even with sound false: strip it
             run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", raw, "-an", "-c:v", "copy", final])
-        else:           # a talking clip keeps our line as its track for lipsync_check
+        else:           # a talking clip keeps our line (or Pavo's own speech) as its track
             shutil.copyfile(raw, final)
         return record, final
 
@@ -1231,10 +1299,64 @@ def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_pyt
             return flags + more, measures
         if not talks:   # scenes: no lipsync check
             return flags, None
-        more, measures = lipsync_flags(lip_python, face_model, path, REPO / talk_record(layout, shot)["wav"])
+        # a native clip is judged against its own soundtrack (story QA v4 speech_checks.lipsync); its words, voice,
+        # level and music are measured by speech-check before approve-shot (pavo_native.speech_verdict)
+        wav = own_track(path) if native else REPO / talk_record(layout, shot)["wav"]
+        more, measures = lipsync_flags(lip_python, face_model, path, wav)
         return flags + more, measures
 
     return req, attempt, check, raw, final
+
+
+def speech_check_step(plan_path, record_path, shot_id, clip, whisper_dir, yamnet, lip_python, face_model,
+                      refs_json=None, measure=None):
+    """Story QA v4: measure one probed native clip (its record under evidence/shots, the clip by its sha256) and write
+    the sidecar approve-shot reads, migration/evidence/shots/<episode>/speech/<clip sha256>.json. The verdict is
+    recomputed at approval; nothing is approved here."""
+    plan = load(plan_path)
+    root = (REPO / "migration" / "evidence" / "shots").resolve()
+    if root not in Path(record_path).resolve().parents:   # sweep H1: the sidecar path comes from the record
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (a shot-probe record under migration/evidence/shots/)")
+    record = load(record_path)
+    if not plan_check.EPISODE_ID.fullmatch(str(record.get("episode"))) or record.get("episode") != plan.get("episode"):
+        raise SystemExit(f"PROBE_EPISODE_MISMATCH {record.get('episode')!r} != {plan.get('episode')!r}")
+    entry = (record.get("shots") or {}).get(shot_id) or {}
+    clip_sha = sha256(clip)
+    if not any(c.get("clip_sha256") == clip_sha for c in entry.get("clips") or []):
+        raise SystemExit(f"SHOT_CLIP_NOT_IN_RECORD {shot_id} {clip_sha}")
+    shot = next(s for s in plan["shots"] if s["id"] == shot_id)
+    if plan_check.talking(shot):
+        lips, _ = lipsync_flags(lip_python, face_model, clip, own_track(clip))
+    elif plan_check.voiceover(shot):
+        lips, _ = still_mouth_flags(lip_python, face_model, clip)
+    else:
+        lips, _ = face_flags(lip_python, face_model, clip)
+    refs = load(refs_json) if refs_json else {}
+    measures = (measure or pavo_native.measure)(clip, whisper_dir, yamnet, refs, pavo_native.speaker(shot), lips)
+    out = REPO / "migration" / "evidence" / "shots" / str(record["episode"]) / "speech" / f"{clip_sha}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    words = " ".join(((entry.get("request") or {}).get("audio") or {}).get("words") or [])
+    save(out, {"shot": shot_id, "clip_sha256": clip_sha, "measures": measures,
+               "verdict": pavo_native.speech_verdict(measures, words)})
+    return {"shot": shot_id, "sidecar": rel(out), "verdict": pavo_native.speech_verdict(measures, words)}
+
+
+def speech_record_flags(approved, clip_sha):
+    """A native speech clip ships only with the speech checks its approval recorded for this exact clip, all passed
+    (story QA v4 rights.ai_video.speech_checks): SPEECH_UNCHECKED otherwise."""
+    speech = approved.get("speech") or {}
+    if speech.get("clip_sha256") != clip_sha or speech.get("flags") != [] or not isinstance(speech.get("gain_db"),
+                                                                                           (int, float)):
+        return ["SPEECH_UNCHECKED"]
+    return []
+
+
+def own_track(clip):
+    """A native clip's own soundtrack as the mono 44.1 kHz WAV lipsync_check reads, beside the clip."""
+    wav = Path(clip).with_suffix(".own.wav")
+    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", clip, "-vn", "-ac", "1", "-ar", "44100", "-c:a",
+         "pcm_s16le", wav])
+    return wav
 
 
 def fetch_shot_clip(approved, dst, fetch=fetch_release_asset):
@@ -1283,7 +1405,22 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
         if plan_check.speaking(shot):
             entry.update(speaker=shot["speaker"], line=shot["line"])
         try:
-            _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
+            try:
+                _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
+            except ShotFailed as exc:
+                if not (str(exc).startswith("PAVO_PROMPT_BLOCKED") and native_speech(req, shot)):
+                    raise
+                # E129 / owner R4: Pavo's filter refused the line's words; the block is kept by the line's words, so
+                # the route is Kokoro from now on (pavo_native.route), and the shot goes again at once on that route
+                code, cid, reason = (str(exc).split() + ["", "", ""])[:3]
+                pavo_native.record_block(shot["id"], pavo_native.shot_line(plan, index), reason, cid)
+                entry["prompt_blocked"] = {"conversation_id": cid, "reason": reason,
+                                           "attempts": getattr(exc, "records", None)}
+                req, attempt, check, raw, final = shot_runner(shot, index, plan, layout, refs, work, client, download,
+                                                              lip_python, face_model, sleep)
+                entry["request"] = {k: v for k, v in req.items()}
+                entry["route"] = pavo_native.KOKORO
+                _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
         except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
             if getattr(exc, "records", None):
@@ -1321,10 +1458,20 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
         entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
         if plan_check.speaking(shot):
             entry.update(speaker=shot["speaker"], line=shot["line"])
-        if not (final.exists() and sha256(final) == approved["clip_sha256"]):
-            fetch_shot_clip(approved, final, fetch)
-        flags, measures = check(final)
-        entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score")}
+        import shot_sources
+        source = approved.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved, recorded per shot
+        if not (final.exists() and approved.get("clip_sha256") and sha256(final) == approved["clip_sha256"]):
+            shot_sources.fetch_source(approved, final, fetch)
+        if source in shot_sources.FALLBACKS:   # a licensed clip or a still in motion: no person, no speech
+            flags, measures = clip_flags(final, plan.get("aspect_ratio", "9:16")), None
+        else:
+            flags, measures = check(final)
+            if native_speech(req, shot):   # story QA v4: the speech checks Claude's approval was given on
+                flags = flags + speech_record_flags(approved, sha256(final))
+        entry["source"] = source
+        entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score", "source",
+                                                          "footage", "still", "url", "licence", "credit", "speech")
+                             if k in approved}
         entry["checks"] = {"flags": flags, "measures": measures}
         report["shots"][shot["id"]] = entry
         if flags:
@@ -1389,7 +1536,7 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
                                         download=download, sleep=sleep, validate=False,
                                         report_path=work / f"probe-{sid}-{n}.json")
             except SystemExit as exc:
-                if not str(exc).startswith(("SHOT_FAILED", "PAVO_REFUSED", "PAVO_JOB")):
+                if not str(exc).startswith(("SHOT_FAILED", "PAVO_REFUSED", "PAVO_JOB", "PAVO_PROMPT_BLOCKED")):
                     raise   # a broken tool or a refused request stops the probe (E89)
                 failed = load(work / f"probe-{sid}-{n}.json")["shots"].get(sid, {})
                 entry["clips"].append({"round": n, "error": str(exc), "generations": failed.get("attempts", [])})
@@ -1401,6 +1548,10 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
                     raise SystemExit(f"{stop} probe stopped at {sid} round {n}: {exc}")
                 continue
             built = report["shots"][sid]
+            if built.get("prompt_blocked"):   # E129: made on the Kokoro route after the filter's block
+                sha, canonical = request_identity(shot, index[sid], plan, layout, refs)
+                entry.update(request_sha256=sha, request=canonical, prompt_blocked=built["prompt_blocked"],
+                             clip_seconds=shot_seconds(shot, index[sid], plan, layout))
             path = work / "clips" / built["clip"]
             clip_sha = sha256(path)
             asset = shot_asset_name(plan["episode"], sid, clip_sha)
@@ -1548,6 +1699,19 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
     seconds = entry.get("clip_seconds", (entry.get("request") or {}).get("seconds"))
     if not isinstance(seconds, int) or isinstance(seconds, bool) or seconds <= 0:
         raise SystemExit(f"SHOT_CLIP_SECONDS_UNKNOWN {shot_id} (the probe record holds no clip seconds)")
+    speech = None
+    audio = (entry.get("request") or {}).get("audio") or {}
+    if audio.get("route") == pavo_native.NATIVE:
+        # story QA v4 (owner 27/10, R4): a clip that keeps Pavo's speech is approved only with its speech checks
+        # measured on this exact clip (episode_build.py speech-check) and passed, the verdict recomputed here
+        side = root / str(record["episode"]) / "speech" / f"{clip['clip_sha256']}.json"
+        if not side.is_file():
+            raise SystemExit(f"SPEECH_UNCHECKED {shot_id} {asset} (episode_build.py speech-check first: "
+                             f"{rel(side)})")
+        speech = pavo_native.speech_record(clip["clip_sha256"], load(side).get("measures") or {},
+                                           " ".join(audio.get("words") or []))
+        if speech["flags"]:
+            raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"
     data = load(path) if path.exists() else {"episode": record["episode"], "shots": {}}
     data["shots"][shot_id] = {"asset": asset, "clip_sha256": clip["clip_sha256"],
@@ -1555,6 +1719,8 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
                               "probe_record": rel(record_path), "run_id": record.get("run_id"),
                               "source_run": clip.get("source_run"),
                               "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}
+    if speech:
+        data["shots"][shot_id]["speech"] = speech
     data["shots"] = dict(sorted(data["shots"].items()))
     save(path, data)
     return data["shots"][shot_id]
@@ -1670,6 +1836,31 @@ def compose_shots(plan, layout, clips, clip_seconds):
     return out
 
 
+def native_voice(plan, work, layout, audio_clips, seconds, approvals=None):
+    """Story QA v4 (owner 27/10): (voice track, clip seconds from each speech onset, {shot: onset}). Our track with
+    each approved native clip's own speech and ambience laid at its line (one gain to the common level, short fades,
+    a continuous ambience bed: pavo_native.premix); a talking cut then starts its clip at the speech onset so the lips
+    meet the words. Any other plan: our track as it is."""
+    work = Path(work)
+    spans = native_spans(plan, approvals)
+    if not spans:
+        return str(work / "narration.wav"), seconds, {}
+    approvals = load_approvals(plan) if approvals is None else approvals
+    places = pavo_native.placements(plan, layout, spans, audio_clips, approvals)
+    mixed = work / "narration-native.wav"
+    pavo_native.premix(work / "narration.wav", places, mixed, layout["total"])
+    onsets = {sid: onset for sid, (_, onset, _) in spans.items()}
+    return str(mixed), {k: v - onsets.get(k, 0.0) for k, v in seconds.items()}, onsets
+
+
+def shift_onsets(cuts, onsets):
+    """A native talking cut plays its clip from the speech onset (pavo_native: the first word came at 0-1.5 s)."""
+    for c in cuts:
+        if "talk" in c and c.get("shot") in onsets:
+            c["src_start"] = round(onsets[c["shot"]], 3)
+    return cuts
+
+
 def measure_lufs(path):
     done = subprocess.run(["ffmpeg", "-nostdin", "-v", "info", "-i", str(path), "-af", "ebur128", "-f", "null", "-"],
                           capture_output=True, text=True)
@@ -1684,8 +1875,9 @@ def compose_step(plan, work, music, out):
     layout = load(work / "layout.json")
     clips = {s["id"]: str(work / "clips" / f"{s['id']}.mp4") for s in plan["shots"]}
     seconds = {k: short_engine.duration(v) for k, v in clips.items()}
-    shots = compose_shots(plan, layout, clips, seconds)
-    compose_plan = {"voice": str(work / "narration.wav"), "timeline": str(work / "compose-timeline.json"),
+    voice, seconds, onsets = native_voice(plan, work, layout, clips, seconds)
+    shots = shift_onsets(compose_shots(plan, layout, clips, seconds), onsets)
+    compose_plan = {"voice": voice, "timeline": str(work / "compose-timeline.json"),
                     "music": str(music), "music_offset": float(plan.get("music_offset", 600.0)), "tail": TAIL,
                     "shots": shots}
     save(work / "compose-plan.json", compose_plan)
@@ -1759,6 +1951,12 @@ def main(argv):
             if refused:
                 raise SystemExit(refused)
         print(json.dumps({"shots": ids, "attempts": n}))
+        return 0
+    if cmd in ("sources", "approve-source"):   # owner 27/10 (R1-R3): per-shot sources, Claude's approval of one
+        import shot_sources
+        return shot_sources.main(argv)
+    if cmd == "speech-check" and len(argv) in (10, 11):   # story QA v4: PLAN RECORD SHOT CLIP WHISPER YAMNET LIP FACE [REFS]
+        print(json.dumps(speech_check_step(*argv[2:10], refs_json=argv[10] if len(argv) == 11 else None)))
         return 0
     if cmd in ("preflight", "verify-preflight", "check-record"):   # E106: before any dispatch (episode_preflight.py)
         import episode_preflight
