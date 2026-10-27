@@ -22,11 +22,11 @@ SHORT_UNITS = 1650
 DAY_UNITS = 10000
 
 
-def caption_problems(man):
-    """E107: the exact SRT publish_video will upload (from the loaded manifest), validated strictly against the
-    video's length."""
-    text = captions.srt(man.get("sentences") or [])
-    return [f"CAPTIONS_SRT {p}" for p in captions.problems(text.encode("utf-8"), man.get("output_seconds"))]
+def caption_problems(man, base=None):
+    """E107: the exact SRT publish_video will upload (captions.manifest_srt: the acted long's short cues when its
+    manifest records a caption_track), validated strictly against the video's length, with that track's hash and
+    written file (`base`, the manifest's folder)."""
+    return [f"CAPTIONS_SRT {p}" for p in captions.manifest_problems(man, base)]
 
 
 def when(s):
@@ -105,7 +105,7 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
     if not sentences or any(not s.get("text") or s["end"] <= s["start"] for s in sentences):
         problems.append("CAPTIONS_TIMELINE (missing or invalid sentences)")
     else:
-        problems += caption_problems(man)
+        problems += caption_problems(man, d / "out")
     sched_path = d / "schedule.json"
     sched = json.loads(sched_path.read_text()) if sched_path.exists() else {}
     if publish_at is None:  # not given: the schedule's time; "" means publish now (a late approval)

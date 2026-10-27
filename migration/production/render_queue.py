@@ -47,7 +47,10 @@ STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only rende
 # v4 (owner, 2026-10-23: licensed real footage) is the same standard with the footage grammar; both may publish
 STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
                 "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
-                "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360"}
+                "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360",
+                # the acted Bible-story long (owner, 2026-10-26; no real-footage minimum, 2026-10-27): qa_pilot and
+                # prepublish_gate read its rows (STORY_V3_ROWS)
+                "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 

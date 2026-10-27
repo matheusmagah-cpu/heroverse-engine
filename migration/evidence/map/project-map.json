@@ -344,6 +344,7 @@
     "migration/production/test_long_review.py",
     "migration/production/test_no_live_pilot_data.py",
     "migration/production/test_preview_gate.py",
+    "migration/production/test_qa_pilot.py",
     "migration/production/test_render_queue.py",
     "migration/production/test_reviewer_calibration.py",
     "migration/production/test_script_check.py",
@@ -1945,6 +1946,7 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/production/bible/plan_check.py",
+    "migration/production/qa_pilot.py",
     "migration/production/script_check.py",
     "migration/production/test_script_check.py"
    ],
@@ -2593,7 +2595,9 @@
    "local_imports": [
     "migration/diagnostics/av-profile/av_profile.py",
     "migration/diagnostics/av-semantic/av_semantic.py",
-    "migration/diagnostics/av-semantic/qualify_semantic.py"
+    "migration/diagnostics/av-semantic/qualify_semantic.py",
+    "migration/production/bible/kjv_check.py",
+    "migration/publish/captions.py"
    ],
    "called_by_workflows": [
     "pilot-preview.yml",
@@ -2601,9 +2605,11 @@
     "render-smoke.yml"
    ],
    "imported_by": [
-    "migration/production/test_still_render.py"
+    "migration/production/test_qa_pilot.py",
+    "migration/production/test_still_render.py",
+    "migration/publish/prepublish_gate.py"
    ],
-   "test": null,
+   "test": "migration/production/test_qa_pilot.py",
    "is_test": false
   },
   "migration/production/render_queue.py": {
@@ -2624,6 +2630,7 @@
     "migration/ops/runner_dispatch.py",
     "migration/ops/runway.py",
     "migration/production/test_preview_gate.py",
+    "migration/production/test_qa_pilot.py",
     "migration/production/test_render_queue.py",
     "migration/publish/pending_shorts.py",
     "migration/publish/prepublish_gate.py"
@@ -2915,6 +2922,22 @@
    "test": null,
    "is_test": true
   },
+  "migration/production/test_qa_pilot.py": {
+   "purpose": "Offline: qa_pilot.py reads the frozen story QA v3 for the acted Bible-story long (E126). Every v3 row maps to a",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/qa_pilot.py",
+    "migration/production/render_queue.py",
+    "migration/publish/captions.py",
+    "migration/publish/prepublish_gate.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
   "migration/production/test_render_queue.py": {
    "purpose": "Offline checks of the nightly queue (images, then renders).",
    "dir": "migration/production",
@@ -3168,6 +3191,8 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/channel/captions_audit.py",
+    "migration/production/qa_pilot.py",
+    "migration/production/test_qa_pilot.py",
     "migration/publish/preflight.py",
     "migration/publish/publish_video.py",
     "migration/publish/test_captions.py",
@@ -3270,6 +3295,7 @@
    "dir": "migration/publish",
    "local_imports": [
     "migration/mining/market_evidence.py",
+    "migration/production/qa_pilot.py",
     "migration/production/render_queue.py",
     "migration/publish/preflight.py",
     "migration/publish/three_stage.py"
@@ -3279,6 +3305,7 @@
    ],
    "imported_by": [
     "migration/production/test_long_review.py",
+    "migration/production/test_qa_pilot.py",
     "migration/publish/publication_binding.py",
     "migration/publish/test_prepublish_gate.py"
    ],
