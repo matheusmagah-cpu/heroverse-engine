@@ -5,14 +5,17 @@
   "ark": {
    "name": "The ark (Genesis 6-9)",
    "first_story": "Genesis 6",
-   "status": "DRAFT",
+   "status": "APPROVED",
    "look": "plan_check.ARK_LOOK + plan_check.ARK_EXCLUDE (word for word; one source)",
    "views": [
     "side",
     "three-quarter"
    ],
-   "refs": [],
-   "reviewed": "DRAFT (2026-10-27): run 2026102701 (8 Pavo agnes-image text-to-image candidates, 0 credits) reviewed by Claude: none >= 9.5 (side-3 closest but its end boards rise and lower ends round; every three-quarter has a tall end block and a ship's bow). Run 2026102702: 7 frames of genesis-08 shot clips approved at 9.5 (s-board, s-ridge, s-scorn; props/sheets/ark-2026102702.jpg) await Claude's review."
+   "refs": [
+    "side",
+    "three-quarter"
+   ],
+   "reviewed": "2026-10-27: side pr-ark-side-2026102702-2 kept (9.5): Frame of genesis-08 s-board (approved clip, 9.5) at 0.5 s: the same finished box along its long side, flat roof and square end visible, no tower or bow. No true side elevation exists in approved clips; this oblique long-side view is the nearest and matches the three-quarter reference."
   }
  }
 }
