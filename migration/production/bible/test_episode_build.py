@@ -560,6 +560,165 @@ class Gating(unittest.TestCase):
         self.assertEqual(client.calls, [])
         self.assertNotIn("regenerated", last)
 
+    def approvals(self, clip=b"approved clip"):
+        layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
+        sha = hashlib.sha256(clip).hexdigest()
+        return {s["id"]: {"asset": eb.shot_asset_name(self.plan["episode"], s["id"], sha), "clip_sha256": sha,
+                          "request_sha256": eb.request_identity(s, i, self.plan, layout, refs)[0], "score": 9.6}
+                for i, s in enumerate(self.plan["shots"])}
+
+    def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
+        # E113 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
+        # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
+        approvals, fetched, checked = self.approvals(), [], []
+        eb.clip_flags = lambda path: checked.append(Path(path).name) or []
+
+        def fetch(name, dst):
+            fetched.append(name)
+            Path(dst).write_bytes(b"approved clip")
+        client = FakeClient([])
+        report = eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals,
+                                  fetch=fetch, download=lambda url, dst: None, sleep=lambda s: None, regenerate=[])
+        self.assertEqual(client.calls, [])
+        self.assertEqual(sorted(fetched), sorted(a["asset"] for a in approvals.values()))
+        self.assertEqual(sorted(checked), sorted(f"{s['id']}.mp4" for s in self.plan["shots"]))
+        self.assertTrue(all(v["approved"]["asset"] == approvals[k]["asset"] for k, v in report["shots"].items()))
+        self.assertTrue(len(self.lip) > 0)                                       # talking clips lip-checked again
+        # a resume keeps an approved clip already on disk (same sha256) without downloading it again
+        fetched.clear()
+        eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
+                         download=lambda url, dst: None, sleep=lambda s: None, regenerate=[])
+        self.assertEqual((fetched, client.calls), ([], []))
+        # a regenerate of an approved shot is refused: a rejected clip is replaced by shot-probe.yml + a new approval
+        sid = self.plan["shots"][0]["id"]
+        with self.assertRaises(SystemExit) as err:
+            eb.regenerate_ids(self.plan, sid, "40341856955", approvals)
+        self.assertTrue(str(err.exception).startswith(f"SHOT_APPROVED_USE_PROBE {sid}"))
+        with self.assertRaises(SystemExit) as err:
+            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
+                             regenerate=[sid], download=lambda url, dst: None, sleep=lambda s: None)
+        self.assertTrue(str(err.exception).startswith("SHOT_APPROVED_USE_PROBE"))
+        # a clip approved for another request is never shipped
+        changed = dict(approvals, **{sid: dict(approvals[sid], request_sha256="0" * 64)})
+        with self.assertRaises(SystemExit) as err:
+            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=changed, fetch=fetch,
+                             regenerate=[], download=lambda url, dst: None, sleep=lambda s: None)
+        self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {sid}")
+        # another file under the asset's name is refused; an approved clip failing the checks stops the run, never
+        # a generation in its place
+        for f in (self.work / "clips").glob("*.mp4"):
+            f.unlink()
+        with self.assertRaises(SystemExit) as err:
+            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals,
+                             fetch=lambda name, dst: Path(dst).write_bytes(b"other"), regenerate=[],
+                             download=lambda url, dst: None, sleep=lambda s: None)
+        self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
+        eb.clip_flags = lambda path: ["BLACK_FRAMES"]
+        with self.assertRaises(SystemExit) as err:
+            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
+                             regenerate=[], download=lambda url, dst: None, sleep=lambda s: None)
+        self.assertIn("SHOT_APPROVED_CLIP_FAILED", str(err.exception))
+        self.assertEqual(client.calls, [])
+
+    def test_a_probe_generates_the_build_request_and_approval_copies_its_hashes(self):
+        # E113: shot-probe.yml generates exactly the request the build sends, with the build's checks; approve-shot
+        # copies the reviewed clip's hashes from the probe record (nobody hand-edits them), only at >= 9.5
+        ids, n = eb.probe_ids(self.plan, f" {self.plan['shots'][0]['id']} ", "2")
+        for text, attempts in (("", "2"), ("x;y", "2"), ("no-such-shot", "2"), (ids[0], "0"), (ids[0], "7")):
+            with self.assertRaises(SystemExit):
+                eb.probe_ids(self.plan, text, attempts)
+        client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
+                            {str(i): [done(str(i))] for i in range(n)})
+        out = self.work / "out"
+        sheets = []
+        record = eb.probe_step(self.plan, self.work, "py", "model", out, ids, n, client=client,
+                               download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                               sheet=lambda video, sheet: sheets.append(Path(sheet).name))
+        layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
+        build_req = eb.request(self.plan["shots"][0], 0, self.plan, layout, refs)
+        self.assertEqual(client.calls, [build_req, build_req])
+        entry = record["shots"][ids[0]]
+        self.assertEqual(entry["request_sha256"], eb.request_identity(self.plan["shots"][0], 0, self.plan, layout, refs)[0])
+        self.assertEqual(len(entry["clips"]), 2)
+        self.assertEqual(len(sheets), 2)
+        clip = entry["clips"][0]
+        self.assertEqual(clip["clip_sha256"], eb.sha256(out / clip["asset"]))
+        self.assertTrue(eb.SHOT_ASSET.fullmatch(clip["asset"]))
+        records = eb.REPO / "migration" / "evidence" / "shots"
+        rec = Path(tempfile.mkdtemp(dir=records.parent, prefix=".test-shots-"))
+        try:
+            with self.assertRaises(SystemExit) as err:                             # outside evidence/shots/
+                eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+            self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
+            records.mkdir(parents=True, exist_ok=True)
+            path = records / f".test-{os.getpid()}.json"
+            shutil.copyfile(out / "probe.json", path)
+            try:
+                for score, note, code in (("9.4", "ok", "SHOT_SCORE_UNDER_FLOOR"), ("9.6", " ", "SHOT_NOTE_MISSING"),
+                                          ("x", "ok", "SHOT_SCORE_INVALID")):
+                    with self.assertRaises(SystemExit) as err:
+                        eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec)
+                    self.assertTrue(str(err.exception).startswith(code), err.exception)
+                approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean",
+                                           shots_dir=rec)
+                self.assertEqual((approved["clip_sha256"], approved["request_sha256"], approved["asset"]),
+                                 (clip["clip_sha256"], entry["request_sha256"], clip["asset"]))
+                self.assertEqual(eb.load_approvals(self.plan, rec / f"{self.plan['episode']}.json")[ids[0]], approved)
+                failed = json.loads(path.read_text())
+                failed["shots"][ids[0]]["clips"][0]["flags"] = ["FREEZE"]
+                path.write_text(json.dumps(failed))
+                with self.assertRaises(SystemExit) as err:
+                    eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec)
+                self.assertTrue(str(err.exception).startswith("SHOT_CHECKS_FAILED"))
+            finally:
+                path.unlink()
+        finally:
+            shutil.rmtree(rec)
+
+    def test_a_clip_a_build_made_and_claude_approved_is_adopted_without_a_generation(self):
+        # E113: genesis-08's clips approved inside build runs 40438106839/40460764662 are adopted from the run's
+        # artifact: the recorded request must equal the plan's request now, the build's checks run again
+        _, report = self.generate()
+        run = self.work / "run"
+        (run / "clips").mkdir(parents=True)
+        for name in ("report.json", "layout.json"):
+            shutil.copyfile(self.work / name, run / name)
+        for f in (self.work / "clips").glob("*.mp4"):
+            shutil.copyfile(f, run / "clips" / f.name)
+        layout = json.loads((self.work / "layout.json").read_text())
+        made = []
+        for s in self.plan["shots"]:
+            if eb.plan_check.talking(s):
+                wav = eb.REPO / eb.talk_record(layout, s)["wav"]
+                (run / "clips" / wav.name).write_bytes(b"wav")
+                if not wav.exists():
+                    made.append(wav)
+        saved = eb.ref_paths
+        eb.ref_paths = lambda plan, work, chars=None: json.loads((self.work / "refs.json").read_text())
+        try:
+            ids = [s["id"] for s in self.plan["shots"]]
+            out = self.work / "adopted"
+            record = eb.adopt_step(self.plan, run, "py", "model", out, ids, "40460764662",
+                                   sheet=lambda video, sheet: None)
+            self.assertEqual(set(record["shots"]), set(ids))
+            sid = ids[0]
+            clip = record["shots"][sid]["clips"][0]
+            self.assertEqual((clip["source_run"], clip["clip_sha256"]),
+                             ("40460764662", eb.sha256(run / "clips" / f"{sid}.mp4")))
+            self.assertEqual(record["shots"][sid]["request_sha256"], eb.request_identity(
+                self.plan["shots"][0], 0, self.plan, layout, json.loads((self.work / "refs.json").read_text()))[0])
+            # a clip made from another request is never adopted
+            older = json.loads((run / "report.json").read_text())
+            older["shots"][sid]["request"]["prompt"] = "an older prompt"
+            (run / "report.json").write_text(json.dumps(older))
+            with self.assertRaises(SystemExit) as err:
+                eb.adopt_step(self.plan, run, "py", "model", out, ids, "40460764662", sheet=lambda video, sheet: None)
+            self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {sid}")
+        finally:
+            eb.ref_paths = saved
+            for wav in made:
+                wav.unlink(missing_ok=True)
+
     def test_regenerate_names_shots_of_this_plan_and_only_on_a_resume(self):
         plan = dialogue_plan()
         self.assertEqual(eb.regenerate_ids(plan, "", ""), [])

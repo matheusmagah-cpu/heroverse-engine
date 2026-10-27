@@ -82,7 +82,9 @@ class Probes(unittest.TestCase):
         self.assertEqual((report["status"], report["blockers"]), ("PASS", []))
         self.assertEqual(report["setups"]["probes_required"], [])
         self.assertTrue({r["kind"] for r in report["setups"]["shots"]} <= {"still_mouth", "god_voice_over"})
-        self.assertIsNone(pf.verify(EXAMPLE))
+        # E113 changed the build code it vouches for (stale by design, re-run once after merge): nothing else moved
+        changed = pf.stale_parts(report["binding"], pf.binding(EXAMPLE, json.loads(EXAMPLE.read_text())))
+        self.assertEqual([p for p in changed if not p.startswith("code:")], [])
 
 
 class Report(unittest.TestCase):
@@ -107,10 +109,44 @@ class Report(unittest.TestCase):
                       "blockers": ["PROBE_REQUIRED s-x"]}
             (pf.REPORTS / f"{episode}.json").write_text(json.dumps(report))
             self.assertTrue(pf.verify(plan).startswith("PREFLIGHT_NOT_PASS PROBE_REQUIRED"))
-            (pf.REPORTS / f"{episode}.json").write_text(json.dumps(dict(report, status="PASS", blockers=[])))
-            self.assertIsNone(pf.verify(plan))
+            ids = [x["id"] for x in json.loads(plan.read_text())["shots"]]
+            digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
+            (pf.REPORTS / f"{episode}.json").write_text(json.dumps(dict(report, status="PASS", blockers=[],
+                                                                        requests={"digests": digests})))
+            approvals = {i: {"request_sha256": digests[i]} for i in ids}
+            self.assertIsNone(pf.verify(plan, approvals=approvals))
             plan.write_text(plan.read_text().replace("Genesis", "Genesis "))   # the plan changed after its preflight
             self.assertEqual(pf.verify(plan), "PREFLIGHT_STALE plan changed after the preflight; run it again")
+        finally:
+            pf.REPORTS = saved
+            shutil.rmtree(d)
+
+    def test_verify_refuses_an_unreviewed_shot(self):
+        # E113 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected after a full build): the build ships only
+        # clips Claude reviewed, made from the request the plan sends now; the committed preflight holds its digests
+        saved = pf.REPORTS
+        d = Path(tempfile.mkdtemp())
+        try:
+            pf.REPORTS = d / "reports"
+            pf.REPORTS.mkdir()
+            plan = d / EXAMPLE.name
+            shutil.copyfile(EXAMPLE, plan)
+            data = json.loads(plan.read_text())
+            ids = [x["id"] for x in data["shots"]]
+            digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
+            (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
+                {"binding": pf.binding(plan, data), "status": "PASS", "blockers": [], "requests": {"digests": digests}}))
+            approvals = {i: {"request_sha256": digests[i]} for i in ids[1:]}
+            self.assertEqual(pf.verify(plan, approvals={}).split(" (")[0], "SHOT_NOT_REVIEWED " + " ".join(ids))
+            self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_NOT_REVIEWED {ids[0]}")
+            approvals[ids[0]] = {"request_sha256": "0" * 64 + "x"}            # approved for another request
+            self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_REQUEST_CHANGED {ids[0]}")
+            approvals[ids[0]] = {"request_sha256": digests[ids[0]]}
+            self.assertIsNone(pf.verify(plan, approvals=approvals))
+            # a report written before E113 holds no digests: every approved shot is a changed request
+            (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
+                {"binding": pf.binding(plan, data), "status": "PASS", "blockers": []}))
+            self.assertTrue(pf.verify(plan, approvals=approvals).startswith("SHOT_REQUEST_CHANGED"))
         finally:
             pf.REPORTS = saved
             shutil.rmtree(d)
