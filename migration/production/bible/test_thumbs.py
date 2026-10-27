@@ -98,6 +98,44 @@ class Pipeline(unittest.TestCase):
         (self.dir / f"{ep}.json").write_text(json.dumps(spec))
         self.assertTrue(any("changed after its approval" in p for p in thumbs.publish_problems(ep, "short", None, self.dir)))
 
+    def test_an_approval_written_by_hand_is_refused(self):
+        """Review of #460: publish re-checks what `approve` checks (score, note, a recorded candidate with these bytes,
+        this spec and R16 PASS), so a spec edited to APPROVED does not pass."""
+        import shutil
+        from PIL import Image
+        ep = "genesis-09-short"
+        grey = self.dir / "grey.jpg"
+        Image.new("RGB", (1080, 1920), (128, 128, 128)).save(grey, "JPEG")
+        shutil.copyfile(grey, self.dir / f"{ep}.jpg")
+        forged = dict(self.spec, status="APPROVED", approved={
+            "sha256": thumbs.sha256(grey), "spec_sha256": thumbs.digest(self.spec), "candidate": f"{ep}-7-1",
+            "score": 1, "note": ""})
+        (self.dir / f"{ep}.json").write_text(json.dumps(forged))
+        found = " ".join(thumbs.publish_problems(ep, "short", None, self.dir))
+        for reason in ("score 1", "no review note", "not a recorded candidate"):
+            self.assertIn(reason, found)
+        rec = thumbs.finalize(self.dir / f"{ep}.json", grey, "7", "1", {}, self.dir)   # grey: R16 FAIL
+        forged["approved"].update(sha256=rec["sha256"], candidate=rec["id"], score=9.6, note="x")
+        shutil.copyfile(thumbs.REPO / rec["repo_path"], self.dir / f"{ep}.jpg")
+        (self.dir / f"{ep}.json").write_text(json.dumps(forged))
+        self.assertIn("R16 PASS", " ".join(thumbs.publish_problems(ep, "short", None, self.dir)))
+
+    def test_an_approved_spec_is_not_another_episodes(self):
+        import shutil
+        ep = "genesis-09-short"
+        rec = thumbs.finalize(self.dir / f"{ep}.json", self.img, "7", "1", {}, self.dir)
+        thumbs.approve(ep, rec["id"], 9.6, "ok", self.dir)
+        shutil.copyfile(self.dir / f"{ep}.json", self.dir / "genesis-10-short.json")
+        shutil.copyfile(self.dir / f"{ep}.jpg", self.dir / "genesis-10-short.jpg")
+        found = thumbs.publish_problems("genesis-10-short", "short", None, self.dir)
+        self.assertTrue(any("genesis-09-short'" in p for p in found), found)
+        self.assertTrue(any("not a recorded candidate" in p for p in found), found)
+
+    def test_an_episode_name_is_never_a_path(self):
+        self.assertTrue(thumbs.publish_problems("../../x", "short", None, self.dir)[0].startswith("THUMB_NOT_APPROVED"))
+        with self.assertRaises(SystemExit):
+            thumbs.approved_image("../genesis-09-short")
+
     def test_a_candidate_of_another_spec_is_refused(self):
         rec = thumbs.finalize(self.dir / "genesis-09-short.json", self.img, "7", "2", {}, self.dir)
         spec = dict(self.spec, emotion="dread")
@@ -118,6 +156,13 @@ class Publish(unittest.TestCase):
         self.assertEqual(pv.bible_thumb_problems({"pilot_id": "pilot-015"}, None), [])
         self.assertTrue(pv.bible_thumb_problems({"series": "bible"}, None)[0].startswith("THUMB_NOT_APPROVED"))
         self.assertTrue(pv.bible_thumb_problems({"series": "bible", "thumb_episode": "arc-01-long"}, None))
+
+    def test_a_story_long_needs_it_without_a_series_key(self):
+        """Review of #460: no package writer sets `series`, so the pilot's script.json (bible-story-long) decides."""
+        with tempfile.TemporaryDirectory() as t:
+            self.assertEqual(pv.bible_thumb_problems({}, None, t), [])   # no script: not a story long
+            (Path(t) / "script.json").write_text(json.dumps({"archetype": "bible-story-long"}))
+            self.assertTrue(pv.bible_thumb_problems({}, None, t)[0].startswith("THUMB_NOT_APPROVED"))
 
 
 if __name__ == "__main__":

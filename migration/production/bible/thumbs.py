@@ -53,6 +53,7 @@ DESIGN = ("episode", "format", "story", "character", "emotion", "framing", "scen
           "variant")              # the fields a review approves; approval fields are outside the digest
 CID = re.compile(r"^([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9]{1,20})-([1-9])$")
 WORD = re.compile(r"[A-Za-z0-9']+")
+EPISODE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")   # a name, never a path
 
 
 def sha256(path):
@@ -75,7 +76,14 @@ def rel(path):
 
 
 def spec_path(episode, thumbs_dir=None):
+    if not isinstance(episode, str) or not EPISODE.fullmatch(episode):
+        raise SystemExit(f"THUMB_EPISODE_INVALID {episode!r} (lower-case words joined by '-')")
     return Path(thumbs_dir or THUMBS) / f"{episode}.json"
+
+
+def image_path(episode, thumbs_dir=None):
+    """The approved image is always bible/thumbs/<episode>.jpg (never a path the spec names)."""
+    return spec_path(episode, thumbs_dir).with_suffix(".jpg")
 
 
 def load(episode, thumbs_dir=None):
@@ -148,7 +156,12 @@ def spec_problems(spec, chars=None):
 
 def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=None):
     """What a publish refuses: no spec, a spec with problems, not APPROVED, changed after approval, an image that is not
-    the approved one; each THUMB_NOT_APPROVED with its reason (the spec's own problems by their code)."""
+    the approved one, an approval that `approve` could not have written (another episode's spec, a score below the
+    floor, no note, no recorded candidate with these bytes, this spec's digest and R16 PASS); each THUMB_NOT_APPROVED
+    with its reason (the spec's own problems by their code). Stdlib only: publish-episode.yml has no PIL."""
+    if not isinstance(episode, str) or not EPISODE.fullmatch(episode):
+        return [f"THUMB_NOT_APPROVED {episode!r}: not an episode name"]
+    thumbs_dir = Path(thumbs_dir or THUMBS)
     spec = load(episode, thumbs_dir)
     if spec is None:
         return [f"THUMB_NOT_APPROVED {episode}: no spec bible/thumbs/{episode}.json"]
@@ -158,10 +171,25 @@ def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=
     a = spec.get("approved") or {}
     if spec.get("status") != "APPROVED" or not a.get("sha256"):
         return out + [f"THUMB_NOT_APPROVED {episode}: status {spec.get('status')} (thumbs.py approve after review)"]
+    if spec.get("episode") != episode:
+        out.append(f"THUMB_NOT_APPROVED {episode}: the spec is {spec.get('episode')!r}'s")
     if a.get("spec_sha256") != digest(spec):
         out.append(f"THUMB_NOT_APPROVED {episode}: the spec changed after its approval")
-    img = REPO / spec.get("repo_path", "")
-    if not spec.get("repo_path") or not img.is_file() or sha256(img) != a["sha256"]:
+    score = a.get("score")
+    if isinstance(score, bool) or not isinstance(score, (int, float)) or not FLOOR <= score <= 10:
+        out.append(f"THUMB_NOT_APPROVED {episode}: score {score!r} (overall >= {FLOOR})")
+    if not isinstance(a.get("note"), str) or not a["note"].strip():
+        out.append(f"THUMB_NOT_APPROVED {episode}: no review note")
+    m = CID.fullmatch(a.get("candidate") or "") if isinstance(a.get("candidate"), str) else None
+    rec_path = thumbs_dir / "candidates" / f"{a.get('candidate')}.json"
+    rec = json.loads(rec_path.read_text()) if m and m.group(1) == episode and rec_path.is_file() else None
+    if rec is None:
+        out.append(f"THUMB_NOT_APPROVED {episode}: candidate {a.get('candidate')!r} is not a recorded candidate of it")
+    elif (rec.get("sha256") != a["sha256"] or rec.get("spec_sha256") != a.get("spec_sha256")
+          or (rec.get("r16") or {}).get("status") != "PASS"):
+        out.append(f"THUMB_NOT_APPROVED {episode}: candidate {a['candidate']} is not these bytes, this spec and R16 PASS")
+    img = image_path(episode, thumbs_dir)
+    if not img.is_file() or sha256(img) != a["sha256"]:
         out.append(f"THUMB_NOT_APPROVED {episode}: the image is not the approved one (sha256)")
     elif thumbnail is not None and sha256(thumbnail) != a["sha256"]:
         out.append(f"THUMB_NOT_APPROVED {episode}: the thumbnail to upload is not the approved one (sha256)")
@@ -169,8 +197,7 @@ def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=
 
 
 def approved_image(episode, thumbs_dir=None):
-    spec = load(episode, thumbs_dir)
-    return REPO / spec["repo_path"]
+    return image_path(episode, thumbs_dir)
 
 
 def reference_inputs(spec, src_dir, out_dir, chars=None):
@@ -323,7 +350,9 @@ def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=
     check = r16(src)
     if check["fails"]:
         raise SystemExit(f"THUMB_R16_FAIL {candidate} " + "; ".join(check["fails"]))
-    dst = thumbs_dir / f"{episode}.jpg"
+    if meta.get("episode") != episode or spec.get("episode") != episode:
+        raise SystemExit(f"THUMB_CANDIDATE_UNKNOWN {candidate} (the spec and candidate are {episode}'s)")
+    dst = image_path(episode, thumbs_dir)
     shutil.copyfile(src, dst)
     spec.update({"status": "APPROVED", "repo_path": rel(dst),
                  "approved": {"sha256": sha256(dst), "spec_sha256": digest(spec), "candidate": candidate,

@@ -1737,6 +1737,10 @@
    ],
    "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
   },
+  "THUMB_EPISODE_INVALID": {
+   "class": "N",
+   "why": "thumbs.py spec_path: an episode name that is a path (a programming error, never data the early stage produces); publish_problems refuses it as THUMB_NOT_APPROVED first"
+  },
   "THUMB_FACE_MISSING": {
    "class": "A",
    "early": [
@@ -1782,7 +1786,7 @@
    "early": [
     "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
     "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
-    "migration/publish/preflight.py::problems += publish_video.bible_thumb_problems(pkg, thumbnail)"
+    "migration/publish/preflight.py::problems += publish_video.bible_thumb_problems(pkg, thumbnail, d)"
    ],
    "note": "Owner, 27/10: publish uploads only the approved thumbnail (spec APPROVED, unchanged since, image sha256 equal). A Short from part 9: episode_build.py check-record runs publish_episode.problems before publish-episode.yml; a Bible long (package series bible): publish/preflight.py in approve.yml and prepublish_gate, before publish.yml"
   },
