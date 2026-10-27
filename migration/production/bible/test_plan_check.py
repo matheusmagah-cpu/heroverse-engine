@@ -1192,11 +1192,10 @@ class ArkLook(unittest.TestCase):
         for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 22)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
-        # genesis-08's three shots still rejected carry the look (in the still they start from), meaning and seconds kept
+        # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
         shots = {s["id"]: s for s in json.loads((HERE / "plans" / "genesis-08-short.json").read_text())["shots"]}
         for sid in ("s-ridge", "s-dust", "s-board"):
             self.assertTrue(shown(shots[sid]), sid)
-            self.assertEqual(shots[sid]["first_frame"], f"genesis-08-{sid}")
         self.assertEqual(shots["s-board"]["seconds"], 8)
 
     def test_only_genesis_08s_approved_shots_are_grandfathered(self):

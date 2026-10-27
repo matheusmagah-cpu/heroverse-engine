@@ -36,7 +36,9 @@ class Stills(unittest.TestCase):
         self.index = {s["id"]: i for i, s in enumerate(self.plan["shots"])}
         self.i = self.index["s-dust"]
         self.shot = self.plan["shots"][self.i]
-        self.still = self.shot["first_frame"]
+        # the feature is tested on a copy: genesis-08's s-dust starts from its registered still here, whatever the
+        # live plan uses (the 6 FLUX candidates were rejected on 27/10 and the shot went back to text)
+        self.still = self.shot.setdefault("first_frame", "genesis-08-s-dust")
         real = json.loads((HERE / "stills" / f"{self.still}.json").read_text())
         ss.save(self.dir / f"{self.still}.json", real)
 
@@ -62,19 +64,18 @@ class Stills(unittest.TestCase):
     def codes(self, shot=None):
         return [p.split()[0] for p in pc.frame_problems(self.i, shot or self.shot, self.plan)]
 
-    def test_genesis_08_s_dust_s_ridge_s_board_start_from_their_stills_and_the_others_are_untouched(self):
-        framed = {s["id"]: s["first_frame"] for s in PLAN["shots"] if "first_frame" in s}
-        self.assertEqual(framed, {"s-dust": "genesis-08-s-dust", "s-ridge": "genesis-08-s-ridge",
-                                  "s-board": "genesis-08-s-board"})
-        for sid, still in framed.items():
-            rec = pc.still_record(still, HERE / "stills")
+    def test_genesis_08s_registered_stills_obey_the_rules_and_the_live_plan_starts_from_none(self):
+        # 27/10: the six FLUX candidates for s-dust, s-ridge and s-board were rejected at review and the shots went
+        # back to their canonical-ark text; the three still records stay registered (DRAFT) and keep obeying the rules
+        for sid in ("s-dust", "s-ridge", "s-board"):
+            rec = pc.still_record(f"genesis-08-{sid}", HERE / "stills")
             self.assertEqual((rec["episode"], rec["shot"]), ("genesis-08-short", sid))
             self.assertEqual(pc.still_prompt_problems(sid, rec["prompt"], PLAN), [])
             for sentence in (pc.ARK_LOOK, pc.ARK_EXCLUDE, pc.PERIOD_SETTING, pc.PERIOD_EXCLUDE):
                 self.assertIn(sentence, rec["prompt"])
+        self.assertEqual([s["id"] for s in PLAN["shots"] if "first_frame" in s], [])
         pc.STILLS_DIR = self.saved   # the registry as committed
-        found = pc.check(PLAN)["problems"]
-        self.assertEqual(sorted(p.split()[0] for p in found if "STILL" in p.split()[0]), ["STILL_NOT_APPROVED"] * 3)
+        self.assertEqual([p for p in pc.check(PLAN)["problems"] if "STILL" in p.split()[0]], [])
 
     def test_a_draft_or_missing_still_is_refused_by_plan_check_and_the_request_alike(self):
         self.assertEqual(self.codes(), ["STILL_NOT_APPROVED"])
