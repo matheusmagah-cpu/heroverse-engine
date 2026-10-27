@@ -286,7 +286,8 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
         w, h = frame_of(dst)
         fps, seconds = FPS, probe(dst)["seconds"]
     elif kind == "still_motion":     # an approved still in camera motion, rendered at the QA's frame
-        shot_sources.still_motion_clip(eb.REPO / a["repo_path"], dst, a["clip_seconds"], tuple(FRAME))
+        # review of #476: through fetch_source, so the still is the approved one (sha256) inside the repository
+        shot_sources.fetch_source(a, dst, fetch, frame=tuple(FRAME))
         upscaler = "none (approved still, camera motion at 2560x1440)"
         w, h = frame_of(dst)
         fps, seconds = FPS, probe(dst)["seconds"]

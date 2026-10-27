@@ -200,7 +200,7 @@ def allocate(plan, todo, remaining, rounds=None):
     rounds = rounds or long_preflight.PROBE_ROUNDS
     out = []
     for s in todo:
-        units = long_preflight.planned_units([s], rounds)
+        units = long_preflight.planned_units([s], rounds, worst=True)   # the dispatch guard's bound (#475 review)
         if units <= remaining:
             remaining -= units
             out.append((s, "pavo"))
@@ -317,13 +317,16 @@ def sources_report(plan, digests, approvals, guard=None, branch=None, lib=None, 
 def fallback_digest(plan, shot, index, source, item, sha):
     """The request of a fallback shot: the shot, what it must show (its prompt and line words) and the exact source."""
     import pavo_native
-    canonical = {"shot": shot["id"], "prompt": shot.get("prompt"), "words": pavo_native.words(
+    canonical = {"shot": shot["id"], "kind": shot.get("kind"), "speaker": shot.get("speaker"),
+                 "voiceover": shot.get("voiceover"), "characters": sorted(shot.get("characters") or []),
+                 "prompt": shot.get("prompt"), "words": pavo_native.words(
         pavo_native.shot_line(plan, index)) if shot.get("lines") is not None else [], "source": source,
                  "item": item, "sha256": sha}
     return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=None, shots_dir=None, today=None):
+def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=None, shots_dir=None, today=None,
+                   speech_dir=None, inventories=INVENTORIES):
     """Claude's review of one fallback or inventory candidate (>= 9.5), into shots/<episode>.json with its `source`.
     Refused: a spoken shot or a shot with a character on a free fallback (SOURCE_SPOKEN_SHOT, SOURCE_CHARACTER_SHOT), a
     library clip not vetted, outside the licence list or clashing with the period (FOOTAGE_NOT_USABLE), one sharing
@@ -375,17 +378,30 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     else:   # pavo_reuse: a clean clip of an inventory, of the request the plan sends now
         path, _, sha = str(item).partition("#")
-        found = [c for c in committed_clips(plan, approvals={}).get(shot_id, [])
+        found = [c for c in committed_clips(plan, inventories=inventories, approvals={}).get(shot_id, [])
                  if c.get("url") and c.get("from") == f"{path}#{sha}"]
         if not found:
             raise SystemExit(f"REUSE_NOT_CLEAN {shot_id} {item} (a clean inventory clip of this shot)")
         clip = found[0]
-        if digests is not None and clip.get("request_sha256") != digests.get(shot_id):
+        if digests is None:   # review of #476: never approved without the request the plan sends now
+            raise SystemExit(f"REUSE_PREFLIGHT_MISSING {shot_id} (the committed preflight's request digests)")
+        if clip.get("request_sha256") != digests.get(shot_id):
             raise SystemExit(f"REUSE_REQUEST_CHANGED {shot_id} (made from another request than the plan sends now)")
         if not CDN.fullmatch(str(clip.get("url"))):
             raise SystemExit(f"REUSE_URL_REFUSED {shot_id}")
         entry.update(url=clip["url"], clip_sha256=clip["clip_sha256"], request_sha256=clip["request_sha256"],
                      clip_seconds=float(clip.get("seconds") or 0.0), inventory=f"{path}#{sha}")
+        if pavo_native.native_plan(plan) and pavo_native.route(plan, shot, i) == pavo_native.NATIVE:
+            # review of #476: a reused clip that keeps Pavo's speech passes the same speech checks as a probed one
+            side = (speech_dir or RECORDS / str(plan["episode"]) / "speech") / f"{clip['clip_sha256']}.json"
+            if not Path(side).is_file():
+                raise SystemExit(f"REUSE_SPEECH_UNCHECKED {shot_id} (episode_build.py speech-check on the clip first)")
+            speech = pavo_native.speech_record(clip["clip_sha256"], json.loads(Path(side).read_text()).get(
+                "measures") or {}, pavo_native.shot_line(plan, i),
+                reference=pavo_native.voice_reference(pavo_native.speaker(shot)))
+            if speech["flags"]:
+                raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
+            entry["speech"] = speech
     out = Path(shots_dir or eb.SHOTS_DIR) / f"{plan['episode']}.json"
     data = eb.load(out) if out.exists() else {"episode": plan["episode"], "shots": {}}
     data["shots"][shot_id] = entry
@@ -426,7 +442,7 @@ def still_motion_clip(still, out, seconds, frame=FRAME, motion="push_in", fps=30
     return out
 
 
-def fetch_source(approval, dst, fetch=None, download=None):
+def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME):
     """The approved clip of a shot by its source, its sha256 checked: a probed clip or a library clip from the release
     by content-hash name, an inventory clip from Pavo's CDN, a still rendered in motion (its still's sha256)."""
     import episode_build as eb
@@ -434,10 +450,12 @@ def fetch_source(approval, dst, fetch=None, download=None):
     dst = Path(dst)
     dst.parent.mkdir(parents=True, exist_ok=True)
     if src == "still_motion":
-        still = REPO / approval["repo_path"]
-        if REPO.resolve() not in still.resolve().parents or eb.sha256(still) != approval.get("still_sha256"):
+        still = REPO / str(approval.get("repo_path") or "")
+        if REPO.resolve() not in still.resolve().parents or not still.is_file():
+            raise SystemExit(f"STILL_PATH_REFUSED {approval.get('still')}")
+        if eb.sha256(still) != approval.get("still_sha256"):
             raise SystemExit(f"STILL_SHA256_MISMATCH {approval.get('still')}")
-        return still_motion_clip(still, dst, approval["clip_seconds"])
+        return still_motion_clip(still, dst, approval["clip_seconds"], frame)
     if src == "pavo_reuse" and approval.get("url"):
         if not CDN.fullmatch(approval["url"]):
             raise SystemExit("REUSE_URL_REFUSED")

@@ -1664,17 +1664,65 @@ class NativeSpeech(unittest.TestCase):
         # a scene that speaks no line is generated exactly as before: its approval stays valid
         self.assertEqual(self.req(native, "s-a")[1][0], self.req(kokoro, "s-a")[1][0])
 
-    def test_a_short_opts_in_with_a_described_voice_and_an_ambience(self):
-        self.assertEqual(eb.plan_check.audio_route_problems(native_plan(), native_plan()["shots"]), [])
+    def test_a_short_on_pavos_own_speech_is_refused_until_its_criteria_exist(self):
+        # review of #476: no Short criteria file holds the speech-check rows yet, so the plan check refuses it
+        found = [x.split()[0] for x in eb.plan_check.audio_route_problems(native_plan(), native_plan()["shots"])]
+        self.assertEqual(found, ["AUDIO_ROUTE_SHORT_UNSUPPORTED"])
         p = native_plan()
-        del p["ambience"]
-        p["shots"][0]["speaker"] = "noah-unknown"
-        found = [x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])]
-        self.assertEqual(found, ["AMBIENCE_MISSING", "PAVO_VOICE_UNDESCRIBED"])
         p["audio_route"] = "pavo"
         self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],
                          ["AUDIO_ROUTE_UNKNOWN"])
         self.assertEqual(eb.plan_check.audio_route_problems(dialogue_plan(), []), [])   # today's plans: untouched
+        # and a v4 long that says "kokoro" keeps our voice
+        self.assertTrue(self.pn.native_plan({"criteria": self.pn.V4}))
+        self.assertFalse(self.pn.native_plan({"criteria": self.pn.V4, "audio_route": "kokoro"}))
+
+    def probe(self, plan, ids, rounds, client):
+        return eb.probe_step(plan, self.work, "py", "model", self.work / "out", ids, rounds, client=client,
+                             download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                             sheet=lambda video, sheet: None)
+
+    def test_a_prompt_block_stops_that_shot_for_the_rest_of_the_run(self):
+        # review of #476: a blocked scene (or a blocked Kokoro-route shot) is never resubmitted with the same prompt
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}]})
+        rec = self.probe(dialogue_plan(), ["s-a"], 3, client)
+        self.assertEqual(len(client.calls), 1)                      # 3 rounds asked, one submission
+        self.assertTrue(rec["shots"]["s-a"]["blocked"].startswith("PAVO_PROMPT_BLOCKED"))
+        # a native line blocked, then blocked again on the Kokoro route: two submissions in all, never a third
+        client = FakeClient([{"conversation_id": "3", "status": "submitted"}, {"conversation_id": "4",
+                                                                               "status": "submitted"}],
+                            {"3": [{"status": "blocked", "blocked_reason": "x"}],
+                             "4": [{"status": "blocked", "blocked_reason": "x"}]})
+        rec = self.probe(native_plan(), ["s-eve"], 3, client)
+        self.assertEqual([c["sound"] for c in client.calls], [True, False])
+        self.assertIn("blocked", rec["shots"]["s-eve"])
+
+    def test_blocks_learned_in_actions_persist_with_the_record_and_bind_the_preflight(self):
+        # review of #476: the block lives in the probe record; the record job merges it into prompt-blocks.json and
+        # commits it, so the next run routes the line to Kokoro and the preflight (which binds the file) agrees
+        import episode_preflight as pf
+        plan = native_plan()
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"},
+                             {"conversation_id": "2", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}], "2": [done("2")]})
+        rec = self.probe(plan, ["s-eve"], 1, client)
+        self.assertEqual(len(rec["prompt_blocks"]), 1)
+        self.assertIsNone(rec["shots"]["s-eve"]["request"]["audio"].get("route"))   # recorded with the Kokoro request
+        fresh = self.work / "main-blocks.json"                                      # main's file, in the record job
+        fresh.write_text(json.dumps({"words": [], "lines": []}))
+        self.pn.BLOCKS = fresh
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "pavo_native")
+        (self.work / "plan.json").write_text(json.dumps(plan))
+        before = pf.binding(self.work / "plan.json", plan)["prompt_blocks"]
+        self.assertEqual(self.pn.merge_blocks(dict(rec, run_id="40600000000"), fresh),
+                         [rec["prompt_blocks"][0]["line_sha256"]])
+        self.assertEqual(self.pn.merge_blocks(rec, fresh), [])           # merged once
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "kokoro")   # the next run's route
+        self.assertNotEqual(pf.binding(self.work / "plan.json", plan)["prompt_blocks"], before)   # preflight stale
+        wf = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()
+        self.assertIn('merge-blocks "$d/$GITHUB_RUN_ID.json" migration/evidence/pavo/prompt-blocks.json', wf)
+        self.assertIn('git add "$d" migration/evidence/pavo/prompt-blocks.json', wf)
 
     def test_e129_a_prompt_filter_block_is_surfaced_and_never_waited_out(self):
         c = FakeClient([], {"5": [{"status": "blocked", "code": "PAVO_PROMPT_BLOCKED",

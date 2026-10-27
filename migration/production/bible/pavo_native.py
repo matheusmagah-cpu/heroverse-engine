@@ -58,8 +58,12 @@ def criteria(path=QA_V4):
 
 
 def native_plan(plan):
-    """The plan opts into Pavo's own speech: a long measured by story QA v4, or a Short that says so."""
-    return isinstance(plan, dict) and (plan.get("criteria") == V4 or plan.get("audio_route") == NATIVE)
+    """The plan opts into Pavo's own speech: a long measured by story QA v4 (unless it says "audio_route": "kokoro",
+    review of #476), or a plan that says "audio_route": "pavo_native" (a Short is refused by plan_check until a Short
+    criteria file with the speech rows exists)."""
+    if not isinstance(plan, dict) or plan.get("audio_route") == KOKORO:
+        return False
+    return plan.get("criteria") == V4 or plan.get("audio_route") == NATIVE
 
 
 def load_voices(path=None):
@@ -237,11 +241,19 @@ def clip_gain_db(lufs, checks):
     return round(gain, 2) if gain <= checks["clip_gain_db_max"] + 1e-9 else None
 
 
-def speech_verdict(measures, line, crit=None):
+def voice_reference(speaker_id, voices=None):
+    """The clip sha256 voices.json holds as this speaker's reference (episode_build.py voice-reference), or None."""
+    voices = load_voices() if voices is None else voices
+    ref = (voices.get(speaker_id) or {}).get("reference")
+    return ref.get("clip_sha256") if isinstance(ref, dict) else None
+
+
+def speech_verdict(measures, line, crit=None, reference=None):
     """Flags of one Pavo speech clip under story QA v4 (empty: it passes). `measures`: asr {model_bin_sha256, text},
     voice {reference (sha256 or None), same (cosine to its character's reference), others (cosines to the other
     characters' references)}, lufs (integrated, the clip's speech), music, singing (YAMNet shares), lips (the flags of
-    lipsync_check / --still-mouth / --faces by its kind). A missing measure is a flag, never a pass."""
+    lipsync_check / --still-mouth / --faces by its kind). A missing measure is a flag, never a pass. `reference`: the
+    speaker's reference clip sha256 in voices.json; the measure must be against exactly it (review of #476)."""
     crit = criteria() if crit is None else crit
     checks = crit["rights"]["ai_video"]["speech_checks"]
     pinned = crit["speech"]["asr_model"]["model_bin_sha256"]
@@ -254,8 +266,12 @@ def speech_verdict(measures, line, crit=None):
     elif wer(line, asr["text"]) > checks["exact_words_wer_max"] + 1e-9:
         flags.append("SPEECH_WORDS_NOT_EXACT")
     voice = measures.get("voice") or {}
-    if not voice.get("reference"):
+    if not voice.get("reference") or not reference:
         flags.append("VOICE_REFERENCE_MISSING")
+    elif voice["reference"] != reference:
+        flags.append("VOICE_REFERENCE_MISMATCH")
+    elif not voice.get("others"):   # distinct from whom? every other speaker's reference is measured
+        flags.append("VOICE_OTHERS_MISSING")
     elif not isinstance(voice.get("same"), (int, float)) or voice["same"] < checks["voice_same_character_cosine_min"]:
         flags.append("VOICE_NOT_CONSISTENT")
     elif max(voice.get("others") or [-1.0]) > voice["same"] - checks["voice_other_character_margin_min"] + 1e-9:
@@ -322,11 +338,11 @@ def measure(clip, whisper_dir, yamnet, references, speaker_id, lips, run=None):
             "lips": list(lips) if lips is not None else None}
 
 
-def speech_record(clip_sha, measures, line, crit=None):
+def speech_record(clip_sha, measures, line, crit=None, reference=None):
     """What approve-shot copies into a native clip's approval: the verdict recomputed from the measures (never a
     recorded `flags` field), the speech span and the one gain to the common level."""
     crit = criteria() if crit is None else crit
-    flags = speech_verdict(measures, line, crit)
+    flags = speech_verdict(measures, line, crit, reference)
     onset, end = speech_span(measures) if not flags else ((measures.get("asr") or {}).get("speech_span") or [None, None])
     return {"clip_sha256": clip_sha, "flags": flags, "onset": onset, "end": end, "lufs": measures.get("lufs"),
             "gain_db": clip_gain_db(measures.get("lufs"), crit["rights"]["ai_video"]["speech_checks"]),

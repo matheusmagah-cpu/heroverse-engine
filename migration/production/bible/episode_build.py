@@ -1334,14 +1334,84 @@ def speech_check_step(plan_path, record_path, shot_id, clip, whisper_dir, yamnet
         lips, _ = still_mouth_flags(lip_python, face_model, clip)
     else:
         lips, _ = face_flags(lip_python, face_model, clip)
-    refs = load(refs_json) if refs_json else {}
-    measures = (measure or pavo_native.measure)(clip, whisper_dir, yamnet, refs, pavo_native.speaker(shot), lips)
+    who = pavo_native.speaker(shot)
+    refs = voice_references(load(refs_json) if refs_json else {})
+    measures = (measure or pavo_native.measure)(clip, whisper_dir, yamnet, refs, who, lips)
     out = REPO / "migration" / "evidence" / "shots" / str(record["episode"]) / "speech" / f"{clip_sha}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     words = " ".join(((entry.get("request") or {}).get("audio") or {}).get("words") or [])
-    save(out, {"shot": shot_id, "clip_sha256": clip_sha, "measures": measures,
-               "verdict": pavo_native.speech_verdict(measures, words)})
-    return {"shot": shot_id, "sidecar": rel(out), "verdict": pavo_native.speech_verdict(measures, words)}
+    verdict = pavo_native.speech_verdict(measures, words, reference=pavo_native.voice_reference(who))
+    save(out, {"shot": shot_id, "clip_sha256": clip_sha, "measures": measures, "verdict": verdict})
+    return {"shot": shot_id, "sidecar": rel(out), "verdict": verdict}
+
+
+def voice_references(given, voices=None):
+    """Review of #476: {speaker: local clip} for the voice measure, each the exact clip voices.json holds as that
+    speaker's reference (sha256), and every reference voices.json holds given (so "others" is every other speaker):
+    VOICE_REFERENCE_UNSET (a file for a speaker with none), VOICE_REFERENCE_FILE_MISMATCH (another file),
+    VOICE_REFERENCE_FILES_MISSING (a set reference not given). A caller's file never replaces the recorded one."""
+    voices = pavo_native.load_voices() if voices is None else voices
+    out = {}
+    for who, path in (given or {}).items():
+        want = pavo_native.voice_reference(who, voices)
+        if not want:
+            raise SystemExit(f"VOICE_REFERENCE_UNSET {who} (episode_build.py voice-reference first)")
+        if not Path(path).is_file() or sha256(path) != want:
+            raise SystemExit(f"VOICE_REFERENCE_FILE_MISMATCH {who} (not the clip voices.json holds: {want[:12]})")
+        out[who] = path
+    missing = sorted(w for w in voices if pavo_native.voice_reference(w, voices) and w not in out)
+    if missing:
+        raise SystemExit("VOICE_REFERENCE_FILES_MISSING " + " ".join(missing) + " (every reference is measured)")
+    return out
+
+
+VOICE_FLAGS = ("VOICE_REFERENCE_MISSING", "VOICE_OTHERS_MISSING", "VOICE_NOT_CONSISTENT", "VOICE_NOT_DISTINCT")
+
+
+def voice_reference_step(record_path, shot_id, asset, score, note, voices_path=None, today=None):
+    """Review of #476 (the command voices.json names): Claude's review (>= 9.5) chooses one probed native clip as its
+    speaker's reference voice, by PR. The clip is in a sealed shot-probe record, uploaded, passed the build's checks
+    and every speech check but the voice ones (no reference exists yet to judge them); its sha256 is copied from the
+    record, never typed. A reference replaced keeps the one before under `previous`."""
+    record_path = Path(record_path)
+    root = (REPO / "migration" / "evidence" / "shots").resolve()
+    if root not in record_path.resolve().parents:
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (a shot-probe record under migration/evidence/shots/)")
+    record = load(record_path)
+    if not re.fullmatch(r"[0-9]{6,20}", str(record.get("run_id") or "")):
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (no shot-probe.yml run id)")
+    entry = (record.get("shots") or {}).get(shot_id) or {}
+    clip = next((c for c in entry.get("clips", []) if c.get("asset") == asset), None)
+    if not clip or clip.get("uploaded") is not True or clip.get("flags"):
+        raise SystemExit(f"SHOT_CLIP_NOT_IN_RECORD {shot_id} {asset} (an uploaded clip that passed its checks)")
+    audio = (entry.get("request") or {}).get("audio") or {}
+    if audio.get("route") != pavo_native.NATIVE:
+        raise SystemExit(f"VOICE_REFERENCE_NOT_NATIVE {shot_id} (Pavo's own speech only)")
+    try:
+        score = float(score)
+    except (TypeError, ValueError):
+        raise SystemExit(f"SHOT_SCORE_INVALID {score!r}") from None
+    if not (math.isfinite(score) and SHOT_REVIEW_MIN <= score <= 10) or not (note or "").strip():
+        raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {SHOT_REVIEW_MIN}-10 and a note)")
+    side = root / str(record["episode"]) / "speech" / f"{clip['clip_sha256']}.json"
+    if not side.is_file():
+        raise SystemExit(f"SPEECH_UNCHECKED {shot_id} (episode_build.py speech-check first)")
+    flags = pavo_native.speech_verdict(load(side).get("measures") or {}, " ".join(audio.get("words") or []))
+    left = [f for f in flags if f not in VOICE_FLAGS]
+    if left:
+        raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(left)}")
+    path = Path(voices_path or pavo_native.VOICES)
+    data = load(path)
+    who = audio.get("speaker")
+    if who not in data["voices"]:
+        raise SystemExit(f"PAVO_VOICE_UNDESCRIBED {who}")
+    old = data["voices"][who].get("reference")
+    data["voices"][who]["reference"] = {
+        "clip_sha256": clip["clip_sha256"], "asset": asset, "episode": record["episode"], "shot": shot_id,
+        "run_id": record["run_id"], "score": score, "note": note.strip(),
+        "chosen_at": today or time.strftime("%Y-%m-%d", time.gmtime()), **({"previous": old} if old else {})}
+    save(path, data)
+    return data["voices"][who]["reference"]
 
 
 def speech_record_flags(approved, clip_sha):
@@ -1474,6 +1544,11 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
             entry.update(speaker=shot["speaker"], line=shot["line"])
         import shot_sources
         source = approved.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved, recorded per shot
+        if source in shot_sources.FALLBACKS:   # review of #476: the plan may have changed the shot since
+            if pavo_native.spoken(shot):
+                raise SystemExit(f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)")
+            if shot_sources.has_character(shot):
+                raise SystemExit(f"SOURCE_CHARACTER_SHOT {shot['id']} (a character's look needs its references)")
         if not (final.exists() and approved.get("clip_sha256") and sha256(final) == approved["clip_sha256"]):
             shot_sources.fetch_source(approved, final, fetch)
         if source in shot_sources.FALLBACKS:   # a licensed clip or a still in motion: no person, no speech
@@ -1747,7 +1822,8 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
             raise SystemExit(f"SPEECH_UNCHECKED {shot_id} {asset} (episode_build.py speech-check first: "
                              f"{rel(side)})")
         speech = pavo_native.speech_record(clip["clip_sha256"], load(side).get("measures") or {},
-                                           " ".join(audio.get("words") or []))
+                                           " ".join(audio.get("words") or []),
+                                           reference=pavo_native.voice_reference(audio.get("speaker")))
         if speech["flags"]:
             raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"
@@ -1989,6 +2065,9 @@ def main(argv):
             if refused:
                 raise SystemExit(refused)
         print(json.dumps({"shots": ids, "attempts": n}))
+        return 0
+    if cmd == "voice-reference" and len(argv) == 7:   # RECORD SHOT ASSET SCORE NOTE (review of #476)
+        print(json.dumps(voice_reference_step(*argv[2:7]), ensure_ascii=False))
         return 0
     if cmd == "merge-blocks" and len(argv) == 4:   # shot-probe.yml's record job: PROBE_JSON BLOCKS_FILE (E129)
         print(json.dumps({"added": pavo_native.merge_blocks(load(argv[2]), argv[3])}))
