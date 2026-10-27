@@ -1,4 +1,5 @@
 name: HeroVerse pilot preview (opening + every footage clip + thumbnail, before the full render)
+run-name: "pilot-preview: pilot=${{ inputs.pilot }}"
 # Owner, 2026-10-24: "the structure must already produce only 9.5 and up". A ~15 min preview of the current script is
 # reviewed by Claude (ops/CLAUDE_REVIEW.md); the full render (pilot-render-stills.yml) refuses to start without that
 # review at the floor (preview_gate.py). Dispatched by the heartbeat from render_queue.py preview.
@@ -9,12 +10,16 @@ on:
         description: Pilot directory under migration/production (e.g. pilot-008)
         required: true
 permissions:
+  actions: read   # E116: the dispatch guard reads runs (read-only)
   contents: write
 concurrency:
   group: heroverse-pilot-preview
   cancel-in-progress: false
 jobs:
   preview:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: heroverse-subject-${{ inputs.pilot }}
+      cancel-in-progress: false
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
@@ -27,6 +32,12 @@ jobs:
       OMP_NUM_THREADS: '2'
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run pilot-preview.yml
       # the cache key is the venv pin lines of render_pilot.sh only: a new pin is a new cache, nothing older is reused
       - id: pins
         run: echo "hash=$(grep -E '^setup [a-z]+ venv ' migration/ci/render_pilot.sh | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"

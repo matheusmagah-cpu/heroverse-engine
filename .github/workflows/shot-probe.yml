@@ -1,4 +1,5 @@
 name: HeroVerse shot probe (a shot's exact build request on Pavo, the build's checks, clips for Claude's review; nothing published)
+run-name: "shot-probe: plan=${{ inputs.plan }} shots=${{ inputs.shots }} attempts=${{ inputs.attempts }} adopt_run=${{ inputs.adopt_run }}"
 # E114 (owner, 27/10: "no rework, ever"): the probe used to vouch for a prompt's wording while the build generated a
 # NEW clip for it, so Claude's >= 9.5 frame review met each shot only after a ~3 h build (genesis-07: 8 builds;
 # genesis-08: 7 of 29 shots rejected). Here each listed shot gets exactly the request episode_build sends (the same
@@ -31,6 +32,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   probe:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: heroverse-subject-${{ inputs.plan }}
+      cancel-in-progress: false
     # the Pavo secret only on a manual run of main
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
@@ -51,6 +55,12 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run shot-probe.yml
       - id: plan
         name: The plan (path checked, plan_check strict) and the shots to probe (ids of this plan, 1-6 attempts)
         run: |

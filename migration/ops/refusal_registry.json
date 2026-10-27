@@ -473,13 +473,81 @@
    "class": "I",
    "guard": "migration/publish/test_publication_binding.py::def test_"
   },
+  "GH_TOKEN": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
   "GITHUB_ENV": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "GITHUB_OUTPUT": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
+  "GITHUB_REPOSITORY": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
+  "GITHUB_RUN_ATTEMPT": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
+  "GITHUB_RUN_ID": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
+  "GITHUB_SHA": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
   "GOD_SHOT_FACE": {
    "class": "C",
    "probe": "plan_check GOD_SHOT_WITH_A_PERSON refuses the words that put a person in God's shot; risk_order generates God's shots right after the talking ones, with the face check"
+  },
+  "GUARD_API_UNAVAILABLE": {
+   "class": "D",
+   "resume": "E116: the GitHub API did not answer after 3 tries; dispatch again (nothing ran)"
+  },
+  "GUARD_ASSETS_FULL": {
+   "class": "D",
+   "resume": "E85/E116: add a new tag at the front of migration/ci/assets.sh TAGS by PR, then dispatch again; refused before any work"
+  },
+  "GUARD_CF_ALLOCATION_USED": {
+   "class": "D",
+   "resume": "E62/E116: the Cloudflare free allocation renews at 00:00 UTC; dispatch then"
+  },
+  "GUARD_IMPORT_UNRESOLVED": {
+   "class": "A",
+   "early": "migration/ops/test_dispatch_guard.py::def test_every_guarded_workflow_resolves_its_imports"
+  },
+  "GUARD_INPUTS": {
+   "class": "N",
+   "why": "E116: an environment variable name ops/dispatch_guard.py reads (the run, its commit, its token, its inputs), not a refusal"
+  },
+  "GUARD_INPUT_INVALID": {
+   "class": "N",
+   "why": "E116: dispatch_guard refuses an input outside its workflow's rule as the first step, before any secret, generation or render; nothing is lost"
+  },
+  "GUARD_INPUT_MISSING": {
+   "class": "N",
+   "why": "E116: dispatch_guard refuses an input naming a file that is not on main, as the first step; nothing is lost"
+  },
+  "GUARD_OK": {
+   "class": "N",
+   "why": "E116: the dispatch guard's pass line"
+  },
+  "GUARD_RECORD_OVER_LIMIT": {
+   "class": "N",
+   "why": "E116/E52: dispatch_guard refuses an episode record whose title or description is over YouTube's limit before publish-episode fetches or uploads anything; nothing is lost"
+  },
+  "GUARD_RERUN_WITHOUT_FIX": {
+   "class": "D",
+   "resume": "E116: merge the fix that touches what the failed run depends on, or record the external cause in migration/evidence/dispatch/retries.json by PR, then dispatch"
+  },
+  "GUARD_WORKFLOW_UNKNOWN": {
+   "class": "I",
+   "guard": "migration/ops/test_dispatch_guard.py::def test_every_expensive_workflow_runs_the_guard_before_any_secret"
   },
   "HERO_DEPTH_MODEL": {
    "class": "N",

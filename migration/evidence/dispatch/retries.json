@@ -1,0 +1,4 @@
+{
+  "about": "E116: a failed run whose cause was external (an outage, a quota, a platform limit, no file of ours at fault) may be dispatched again with the same inputs and no new commit only when it is listed here by PR: {\"run\": <failed run id>, \"reason\": \"<the external cause, with its evidence>\"}. ops/dispatch_guard.py reads it (GUARD_RERUN_WITHOUT_FIX).",
+  "retries": []
+}

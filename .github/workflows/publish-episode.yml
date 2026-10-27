@@ -1,4 +1,5 @@
 name: HeroVerse publish a Bible-series episode (hash-verified, idempotent)
+run-name: "publish-episode: episode=${{ inputs.episode }} source_url=${{ inputs.source_url }} publish_at=${{ inputs.publish_at }}"
 on:
   workflow_dispatch:
     inputs:
@@ -12,12 +13,16 @@ on:
         description: RFC3339 UTC go-public time; empty = public now
         required: false
 permissions:
+  actions: read   # E116: the dispatch guard reads runs (read-only)
   contents: write
 concurrency:
   group: heroverse-publish
   cancel-in-progress: false
 jobs:
   publish:
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: ${{ format('heroverse-subject-migration/production/bible/plans/{0}.json', inputs.episode) }}
+      cancel-in-progress: false
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -28,6 +33,12 @@ jobs:
       PUBLISH_AT: ${{ inputs.publish_at }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run publish-episode.yml
       - name: Publication hold (owner pause, migration/ops/PUBLICATION_HOLD)
         run: |
           if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi

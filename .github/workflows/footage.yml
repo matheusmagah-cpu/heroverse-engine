@@ -1,4 +1,5 @@
 name: HeroVerse footage library (licensed real footage, no paid call)
+run-name: "footage: queries=${{ inputs.queries }} per_theme=${{ inputs.per_theme }}"
 on:
   workflow_dispatch:
     inputs:
@@ -11,22 +12,47 @@ on:
         required: false
         default: migration/production/footage/queries.json
 permissions:
+  actions: read   # E116: the dispatch guard reads runs (read-only)
   contents: write
 concurrency:
   group: heroverse-footage
   cancel-in-progress: false
 jobs:
+  guard:
+    # E116: before any job that holds a secret; its subject names the library job's concurrency group
+    outputs:
+      subject: ${{ steps.guard.outputs.subject }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read   # the runs, jobs and compare the guard reads (read-only)
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        id: guard
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run footage.yml
+
   library:
+    needs: guard
+    concurrency:   # E116: one run per subject across the guarded workflows
+      group: heroverse-subject-${{ needs.guard.outputs.subject }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 300
     env:
       GH_TOKEN: ${{ github.token }}
-      PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-      PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a6384d28432b16b02970b4ffe92731ce' }}  # account id is an identifier, not a credential
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard, re-run attempt (no secret in this job's env; E116)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py attempt footage.yml
       - name: Search, download and normalise (1920x1080, 30 fps, no audio)
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg tesseract-ocr python3-pil python3-numpy >/dev/null
@@ -36,6 +62,10 @@ jobs:
         env:
           QUERIES: ${{ inputs.queries || 'migration/production/footage/queries.json' }}
           PER_THEME: ${{ inputs.per_theme || '3' }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a6384d28432b16b02970b4ffe92731ce' }}  # account id is an identifier, not a credential
       - name: Release assets, records and frame sheet for vetting
         run: |
           lib=migration/production/footage/library; mkdir -p "$lib/sheets" "$RUNNER_TEMP/frames"
