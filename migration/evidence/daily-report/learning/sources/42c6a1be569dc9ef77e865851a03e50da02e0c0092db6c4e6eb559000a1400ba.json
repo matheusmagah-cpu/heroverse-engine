@@ -1,0 +1,4251 @@
+{
+  "additional_api_calls": 0,
+  "analytics_source_status": "OBSERVED",
+  "captured_at": "2026-10-27T10:55:15.748313+00:00",
+  "coverage": {
+    "analytics_list_limit": 200,
+    "effective_complete_through": null,
+    "exact_checkpoint": false,
+    "public_list_limit": 50,
+    "requested_end": "2026-10-27",
+    "requested_start": "2025-10-27"
+  },
+  "data_api_units": 3,
+  "owned_private": [
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 103.22,
+            "estimatedMinutesWatched": 16,
+            "subscribersGained": 0,
+            "views": 237
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "-LaDjuPUER8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 31.920000000000005,
+            "estimatedMinutesWatched": 57,
+            "subscribersGained": 1,
+            "views": 535
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "-pFb7CBOMbI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 691.91,
+            "estimatedMinutesWatched": 78,
+            "subscribersGained": 0,
+            "views": 23
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "06WN0acBHV0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 33.85,
+            "estimatedMinutesWatched": 21,
+            "subscribersGained": 0,
+            "views": 334
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "0e4q0UP0mBQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 17.22,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 114
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "1BYHtZ8yftE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 52.99,
+            "estimatedMinutesWatched": 110,
+            "subscribersGained": 4,
+            "views": 422
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "1EKs4d1X1-I"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 51.47999999999999,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 0,
+            "views": 29
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "1PBzy2mq0gE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 35.72,
+            "estimatedMinutesWatched": 133,
+            "subscribersGained": 0,
+            "views": 27
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "1bT9pEROuhI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 168.36,
+            "estimatedMinutesWatched": 28,
+            "subscribersGained": 0,
+            "views": 611
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "28ejTLbNJY0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 42.49,
+            "estimatedMinutesWatched": 104,
+            "subscribersGained": 1,
+            "views": 979
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "2lzdvqVdLVo"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 67.11,
+            "estimatedMinutesWatched": 2,
+            "subscribersGained": 0,
+            "views": 69
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "3kqSOD2vKh0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 10.02,
+            "estimatedMinutesWatched": 2,
+            "subscribersGained": 0,
+            "views": 88
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "3px82ScNj5w"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 33.33,
+            "estimatedMinutesWatched": 105,
+            "subscribersGained": 0,
+            "views": 1319
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "4qHma1PUCfc"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 157.11,
+            "estimatedMinutesWatched": 18,
+            "subscribersGained": 0,
+            "views": 405
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "6KucJ2RNlCs"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 57.50999999999999,
+            "estimatedMinutesWatched": 11,
+            "subscribersGained": 0,
+            "views": 318
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "6N5D_l7F5MA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 49.42,
+            "estimatedMinutesWatched": 103,
+            "subscribersGained": 0,
+            "views": 1235
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "6xo9d91kpjg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 19.2,
+            "estimatedMinutesWatched": 5,
+            "subscribersGained": 0,
+            "views": 127
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "7bj3F4KLClM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 32.83,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 1,
+            "views": 93
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "7dw7hYq_P6M"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 38.07,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 105
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "82fA5j2f7Sg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 55.65,
+            "estimatedMinutesWatched": 13,
+            "subscribersGained": 2,
+            "views": 157
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "84YxlPaRDtU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 52.44,
+            "estimatedMinutesWatched": 13,
+            "subscribersGained": 0,
+            "views": 114
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "8CNl9LAC4J8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 16.78,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 12
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "8tJIVjIPN2Q"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 13.94,
+            "estimatedMinutesWatched": 41,
+            "subscribersGained": 0,
+            "views": 18
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "9g2MeIit9ys"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 55.91,
+            "estimatedMinutesWatched": 9,
+            "subscribersGained": 0,
+            "views": 104
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "9mFditYFeNo"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 92.55,
+            "estimatedMinutesWatched": 66,
+            "subscribersGained": 0,
+            "views": 998
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "9weESfLQWzQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 55.669999999999995,
+            "estimatedMinutesWatched": 83,
+            "subscribersGained": 8,
+            "views": 240
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "BaNsd7j64YI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 28.4,
+            "estimatedMinutesWatched": 6,
+            "subscribersGained": 0,
+            "views": 73
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "CMQ-VAN7R3k"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 47.12,
+            "estimatedMinutesWatched": 73,
+            "subscribersGained": 1,
+            "views": 379
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "DLAuMbdphn8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 49.09,
+            "estimatedMinutesWatched": 133,
+            "subscribersGained": 1,
+            "views": 929
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "EHcBsHzVZCM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 46.43,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 7
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ElLDYV5WA8w"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 58.01,
+            "estimatedMinutesWatched": 11,
+            "subscribersGained": 0,
+            "views": 226
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "EvRaVAkYHMw"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 63.56,
+            "estimatedMinutesWatched": 15,
+            "subscribersGained": 0,
+            "views": 260
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "FFS9uLSMLis"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 9.64,
+            "estimatedMinutesWatched": 190,
+            "subscribersGained": 0,
+            "views": 11
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "FifnlNUQKNk"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 33.29,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 0,
+            "views": 223
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "HAUUs2dr3wU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 26.649999999999995,
+            "estimatedMinutesWatched": 8,
+            "subscribersGained": 0,
+            "views": 226
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "HhdbkhCmDxQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 28.050000000000004,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 19
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Hy54XVINoiQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 42.72,
+            "estimatedMinutesWatched": 8,
+            "subscribersGained": 0,
+            "views": 116
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "I7dCCMILl6w"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 88.9,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 15
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "IEBgXBM02I8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 21.84,
+            "estimatedMinutesWatched": 93,
+            "subscribersGained": 0,
+            "views": 37
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Iegu_RD_wbE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 72.09,
+            "estimatedMinutesWatched": 15,
+            "subscribersGained": 0,
+            "views": 86
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "IibBSGe8nZg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 22.07,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 1,
+            "views": 104
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "JBLHw1ST7zo"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 33.57,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 17
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "KN8DvgCebE0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 43.81,
+            "estimatedMinutesWatched": 5,
+            "subscribersGained": 0,
+            "views": 191
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "NBG3n4b7biQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 34.09,
+            "estimatedMinutesWatched": 794,
+            "subscribersGained": 3,
+            "views": 96
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "NGfnyTul-K0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 62.82,
+            "estimatedMinutesWatched": 14,
+            "subscribersGained": 1,
+            "views": 159
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "NnCixw61xzA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 81.64,
+            "estimatedMinutesWatched": 16,
+            "subscribersGained": 0,
+            "views": 162
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "NrcIhXBb0ko"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 14.180000000000001,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 21
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Oa3Unyg3jCU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 31.71,
+            "estimatedMinutesWatched": 65,
+            "subscribersGained": 1,
+            "views": 639
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ObTo2Y8mBls"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 24.81,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 77
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "PLZytCBqQFw"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 21.14,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 17
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "PckGlcLLo64"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 35.12,
+            "estimatedMinutesWatched": 7,
+            "subscribersGained": 0,
+            "views": 103
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Pfe3CcD47rc"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 89.2,
+            "estimatedMinutesWatched": 2,
+            "subscribersGained": 0,
+            "views": 69
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "PkG-MIo5Hh4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 37.99,
+            "estimatedMinutesWatched": 8,
+            "subscribersGained": 0,
+            "views": 162
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "PkxoHcPnCjc"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 45.77,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 0,
+            "views": 136
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Qc4WfrVLoIs"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 225.55999999999997,
+            "estimatedMinutesWatched": 377,
+            "subscribersGained": 7,
+            "views": 435
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "RI-uNS8jhfU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 88.48,
+            "estimatedMinutesWatched": 19,
+            "subscribersGained": 0,
+            "views": 160
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "RXMoDBTy6-k"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 24.8,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 75
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Rd7g2I7ziMs"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 189.86,
+            "estimatedMinutesWatched": 96,
+            "subscribersGained": 4,
+            "views": 210
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "SsgCGkM6knQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 65.49,
+            "estimatedMinutesWatched": 304,
+            "subscribersGained": 0,
+            "views": 4397
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "SwqYQKZFvTQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 35.44,
+            "estimatedMinutesWatched": 18,
+            "subscribersGained": 0,
+            "views": 277
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "TRQUE6Xgrz0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 69.77,
+            "estimatedMinutesWatched": 73,
+            "subscribersGained": 0,
+            "views": 869
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "TS9e9e5CpMk"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 41.98,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 8
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "U-jwOCJ85j8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 96.36,
+            "estimatedMinutesWatched": 5,
+            "subscribersGained": 1,
+            "views": 26
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "VEbS6pvirTA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 17.16,
+            "estimatedMinutesWatched": 6,
+            "subscribersGained": 0,
+            "views": 64
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "VZs3RQ9xNVE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 105.10999999999999,
+            "estimatedMinutesWatched": 23,
+            "subscribersGained": 0,
+            "views": 469
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "W3NBRjTOitI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 17.5,
+            "estimatedMinutesWatched": 9,
+            "subscribersGained": 0,
+            "views": 212
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "XC8KtfE5PIc"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 28.98,
+            "estimatedMinutesWatched": 49,
+            "subscribersGained": 0,
+            "views": 8
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "XDwxi4pvllM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 36.04,
+            "estimatedMinutesWatched": 11,
+            "subscribersGained": 0,
+            "views": 133
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Y6-QvWxk0R4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 27.529999999999998,
+            "estimatedMinutesWatched": 63,
+            "subscribersGained": 2,
+            "views": 676
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Y6uS9MuP2xQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 21.78,
+            "estimatedMinutesWatched": 11,
+            "subscribersGained": 0,
+            "views": 310
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "YEzPbOrF9Vg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 146.21,
+            "estimatedMinutesWatched": 102,
+            "subscribersGained": 0,
+            "views": 1901
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "YQbkEC7ifK0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 77.87,
+            "estimatedMinutesWatched": 154,
+            "subscribersGained": 9,
+            "views": 391
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "YeasXxVErNg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 62.91,
+            "estimatedMinutesWatched": 6,
+            "subscribersGained": 0,
+            "views": 44
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Z1ohsB0VGIM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 120.30000000000001,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 6
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ZYYxyFqzmUM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 20.58,
+            "estimatedMinutesWatched": 2,
+            "subscribersGained": 0,
+            "views": 91
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "Zle-Y5cC9No"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 13.81,
+            "estimatedMinutesWatched": 12,
+            "subscribersGained": 0,
+            "views": 356
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "_Zc1JLjiLo4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 22.15,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 71
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "__wto_r22v8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 260.55,
+            "estimatedMinutesWatched": 276,
+            "subscribersGained": 5,
+            "views": 292
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "_sUdOLxWy5c"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 31.06,
+            "estimatedMinutesWatched": 7,
+            "subscribersGained": 0,
+            "views": 176
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "_z2kvnufvHk"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 56.91,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 1,
+            "views": 40
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "bAsb6Ov0A-A"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 18.61,
+            "estimatedMinutesWatched": 19,
+            "subscribersGained": 1,
+            "views": 549
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "bgC1xOfQkzA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 19.48,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 91
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "cWn8j_eo1QU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 26.75,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 102
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ctfH7D-g6ZU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 68.1,
+            "estimatedMinutesWatched": 102,
+            "subscribersGained": 2,
+            "views": 976
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "dFU_kfP79VE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 38.37,
+            "estimatedMinutesWatched": 25,
+            "subscribersGained": 0,
+            "views": 284
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "dHPZ-lY_opA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 71.08,
+            "estimatedMinutesWatched": 31,
+            "subscribersGained": 0,
+            "views": 306
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "dW6dfCEGeKM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 19.76,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 97
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "fYN7X_QWg68"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 54.28999999999999,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 9
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "g8WWPCvf-fY"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 111.46000000000001,
+            "estimatedMinutesWatched": 104,
+            "subscribersGained": 0,
+            "views": 1449
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "gRpg9YOUp0M"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 78.91,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 17
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "g_UUFkdlPwI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 40.72,
+            "estimatedMinutesWatched": 0,
+            "subscribersGained": 0,
+            "views": 9
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "gmaxaeWKI8U"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 90.61,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 105
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "grKDTIgMHQM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 30.659999999999997,
+            "estimatedMinutesWatched": 136,
+            "subscribersGained": 1,
+            "views": 468
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "gxlUunQlgpQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 68.37,
+            "estimatedMinutesWatched": 50,
+            "subscribersGained": 9,
+            "views": 283
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "hhJGujSiScM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 88.41,
+            "estimatedMinutesWatched": 96,
+            "subscribersGained": 5,
+            "views": 240
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "hwq4qgjreh0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 17.59,
+            "estimatedMinutesWatched": 12,
+            "subscribersGained": 0,
+            "views": 27
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "iK_5edYQtx8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 56.82000000000001,
+            "estimatedMinutesWatched": 73,
+            "subscribersGained": 12,
+            "views": 367
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "imfvOr3Q0aI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 27.36,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 0,
+            "views": 257
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "jp2GOsLN0J4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 28.95,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 103
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "kWHN8HWSkCQ"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 23.91,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 76
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "k_x6UagYdQ0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 116.01000000000002,
+            "estimatedMinutesWatched": 64,
+            "subscribersGained": 1,
+            "views": 121
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ku2MTQKmXaU"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 61.92999999999999,
+            "estimatedMinutesWatched": 17,
+            "subscribersGained": 1,
+            "views": 394
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "l1MnAjlO55Y"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 30.95,
+            "estimatedMinutesWatched": 19,
+            "subscribersGained": 1,
+            "views": 364
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "le9Il94s-mY"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 45.47,
+            "estimatedMinutesWatched": 10,
+            "subscribersGained": 0,
+            "views": 273
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "lkuFDIOausw"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 259.28,
+            "estimatedMinutesWatched": 2,
+            "subscribersGained": 0,
+            "views": 12
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ltn5D1Jz_O4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 48.8,
+            "estimatedMinutesWatched": 59,
+            "subscribersGained": 0,
+            "views": 460
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "mJ9rZS6npAA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 56.79,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 11
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "mdhtMEIfsn8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 42.86,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 23
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "nkAjzvd9rR4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 61.46,
+            "estimatedMinutesWatched": 57,
+            "subscribersGained": 6,
+            "views": 254
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "o1hHZgYzUZA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 35.23,
+            "estimatedMinutesWatched": 19,
+            "subscribersGained": 0,
+            "views": 246
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "qdsaMEK5Q8s"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 14.89,
+            "estimatedMinutesWatched": 6,
+            "subscribersGained": 0,
+            "views": 135
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "qeovLqujR60"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 40.26,
+            "estimatedMinutesWatched": 13,
+            "subscribersGained": 0,
+            "views": 371
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "qoySvyBIwdg"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 18.22,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 101
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "s6zpsF3HUj4"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 172.31,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 12
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "sSBHh3G24-A"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 96.59,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 23
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "srpAI5uGR3E"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 85.78,
+            "estimatedMinutesWatched": 13,
+            "subscribersGained": 0,
+            "views": 293
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "tBEvsFwK8S0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 37.12,
+            "estimatedMinutesWatched": 7,
+            "subscribersGained": 0,
+            "views": 103
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "tMFGym1G-aA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 110.35,
+            "estimatedMinutesWatched": 95,
+            "subscribersGained": 2,
+            "views": 1244
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "tVP1R9TH3lE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 29.94,
+            "estimatedMinutesWatched": 91,
+            "subscribersGained": 0,
+            "views": 14
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "tri-CUwy_m0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 23.49,
+            "estimatedMinutesWatched": 7,
+            "subscribersGained": 0,
+            "views": 12
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "ucf6p67sijw"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 31.209999999999997,
+            "estimatedMinutesWatched": 100,
+            "subscribersGained": 0,
+            "views": 1997
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "uf23o3bYvEI"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 23.83,
+            "estimatedMinutesWatched": 67,
+            "subscribersGained": 0,
+            "views": 885
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "uwr_rIM_340"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 8.25,
+            "estimatedMinutesWatched": 55,
+            "subscribersGained": 0,
+            "views": 41
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "v4zN53ZiUIs"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 106.06,
+            "estimatedMinutesWatched": 130,
+            "subscribersGained": 11,
+            "views": 1379
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "v9lGlFmBHNs"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 22.82,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 36
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "vXsR9GRp21E"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 133.99,
+            "estimatedMinutesWatched": 85,
+            "subscribersGained": 13,
+            "views": 1155
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "va3xfGCwIX8"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 79.86,
+            "estimatedMinutesWatched": 205,
+            "subscribersGained": 2,
+            "views": 1020
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "wHQ81IfBsF0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 21.77,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 50
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "wnz5wFFn_U0"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 59.06,
+            "estimatedMinutesWatched": 11,
+            "subscribersGained": 0,
+            "views": 220
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "xOCNezmMbOM"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 20.68,
+            "estimatedMinutesWatched": 4,
+            "subscribersGained": 0,
+            "views": 107
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "xuyS06s1alA"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 23,
+            "estimatedMinutesWatched": 1,
+            "subscribersGained": 0,
+            "views": 15
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "xvCy9HfYhNE"
+    },
+    {
+      "basic": {
+        "rows": [
+          {
+            "averageViewPercentage": 34.25,
+            "estimatedMinutesWatched": 3,
+            "subscribersGained": 0,
+            "views": 76
+          }
+        ],
+        "status": "OBSERVED"
+      },
+      "date_window": {
+        "end": "2026-10-27",
+        "start": "2025-10-27"
+      },
+      "reach": {
+        "ctr": null,
+        "impressions": null
+      },
+      "retention": {
+        "rows": [],
+        "status": "UNAVAILABLE"
+      },
+      "video_id": "zaMQ3IT3uU0"
+    }
+  ],
+  "owned_videos": [
+    {
+      "id": "06WN0acBHV0",
+      "snippet": {
+        "publishedAt": "2026-07-12T01:41:09Z"
+      },
+      "statistics": {
+        "commentCount": "6",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "6",
+        "viewCount": "23"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "1EKs4d1X1-I",
+      "snippet": {
+        "publishedAt": "2026-07-10T11:52:30Z"
+      },
+      "statistics": {
+        "commentCount": "8",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "47",
+        "viewCount": "422"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "1bT9pEROuhI",
+      "snippet": {
+        "publishedAt": "2026-10-20T00:30:19Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "27"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "53Xysf9x46c",
+      "snippet": {
+        "publishedAt": "2026-10-26T10:00:38Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "1",
+        "viewCount": "21"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "8heTdP0LllM",
+      "snippet": {
+        "publishedAt": "2026-10-25T14:41:37Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "2"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "8tJIVjIPN2Q",
+      "snippet": {
+        "publishedAt": "2026-07-02T10:00:08Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "2",
+        "viewCount": "12"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "9g2MeIit9ys",
+      "snippet": {
+        "publishedAt": "2026-10-24T00:00:27Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "20"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "BaNsd7j64YI",
+      "snippet": {
+        "publishedAt": "2026-07-12T10:18:33Z"
+      },
+      "statistics": {
+        "commentCount": "14",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "43",
+        "viewCount": "240"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "ElLDYV5WA8w",
+      "snippet": {
+        "publishedAt": "2026-06-30T22:00:36Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "4",
+        "viewCount": "7"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "F8u5dTT_2mM",
+      "snippet": {
+        "publishedAt": "2026-10-25T10:00:39Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "3"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "FifnlNUQKNk",
+      "snippet": {
+        "publishedAt": "2026-10-10T18:45:40Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "1",
+        "viewCount": "10"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "Hy54XVINoiQ",
+      "snippet": {
+        "publishedAt": "2026-07-19T19:39:13Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "4",
+        "viewCount": "21"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "IEBgXBM02I8",
+      "snippet": {
+        "publishedAt": "2026-07-05T11:13:47Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "2",
+        "viewCount": "15"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "Iegu_RD_wbE",
+      "snippet": {
+        "publishedAt": "2026-10-19T20:16:11Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "37"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "K_ZwsCt-Wg4",
+      "snippet": {
+        "publishedAt": "2026-10-25T13:30:21Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "6",
+        "viewCount": "124"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "NGfnyTul-K0",
+      "snippet": {
+        "publishedAt": "2026-10-21T10:00:21Z"
+      },
+      "statistics": {
+        "commentCount": "3",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "2",
+        "viewCount": "94"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "NnCixw61xzA",
+      "snippet": {
+        "publishedAt": "2026-04-22T00:14:39Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "25",
+        "viewCount": "159"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "OYijqQdQq0o",
+      "snippet": {
+        "publishedAt": "2026-10-26T13:30:12Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "5",
+        "viewCount": "181"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "PckGlcLLo64",
+      "snippet": {
+        "publishedAt": "2026-07-07T10:04:40Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "2",
+        "viewCount": "17"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "RI-uNS8jhfU",
+      "snippet": {
+        "publishedAt": "2026-07-11T11:23:58Z"
+      },
+      "statistics": {
+        "commentCount": "15",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "75",
+        "viewCount": "439"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "SsgCGkM6knQ",
+      "snippet": {
+        "publishedAt": "2026-10-19T20:17:45Z"
+      },
+      "statistics": {
+        "commentCount": "2",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "16",
+        "viewCount": "212"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "VEbS6pvirTA",
+      "snippet": {
+        "publishedAt": "2026-10-20T21:31:00Z"
+      },
+      "statistics": {
+        "commentCount": "2",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "6",
+        "viewCount": "28"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "Vvfw4W4nV7M",
+      "snippet": {
+        "publishedAt": "2026-10-26T21:06:50Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "2"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "XDwxi4pvllM",
+      "snippet": {
+        "publishedAt": "2026-10-20T10:00:06Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "8"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "YeasXxVErNg",
+      "snippet": {
+        "publishedAt": "2026-07-10T16:48:29Z"
+      },
+      "statistics": {
+        "commentCount": "6",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "43",
+        "viewCount": "393"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "Z1ohsB0VGIM",
+      "snippet": {
+        "publishedAt": "2026-07-09T10:11:33Z"
+      },
+      "statistics": {
+        "commentCount": "4",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "4",
+        "viewCount": "44"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "ZPSxpF-zBl8",
+      "snippet": {
+        "publishedAt": "2026-10-26T00:00:34Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "3"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "_sUdOLxWy5c",
+      "snippet": {
+        "publishedAt": "2026-10-18T14:00:27Z"
+      },
+      "statistics": {
+        "commentCount": "6",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "33",
+        "viewCount": "293"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "bAsb6Ov0A-A",
+      "snippet": {
+        "publishedAt": "2026-07-14T13:04:56Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "5",
+        "viewCount": "41"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "dyuqBS_FXew",
+      "snippet": {
+        "publishedAt": "2026-10-26T23:30:16Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "19",
+        "viewCount": "139"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "g8WWPCvf-fY",
+      "snippet": {
+        "publishedAt": "2026-06-29T22:00:11Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "3",
+        "viewCount": "9"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "gRpg9YOUp0M",
+      "snippet": {
+        "publishedAt": "2026-04-13T11:38:48Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "31",
+        "viewCount": "1449"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "gmaxaeWKI8U",
+      "snippet": {
+        "publishedAt": "2026-06-29T01:05:36Z"
+      },
+      "statistics": {
+        "commentCount": "2",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "3",
+        "viewCount": "9"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "hhJGujSiScM",
+      "snippet": {
+        "publishedAt": "2026-07-12T22:39:41Z"
+      },
+      "statistics": {
+        "commentCount": "5",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "49",
+        "viewCount": "283"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "hwq4qgjreh0",
+      "snippet": {
+        "publishedAt": "2026-10-24T23:30:02Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "32",
+        "viewCount": "302"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "iK_5edYQtx8",
+      "snippet": {
+        "publishedAt": "2026-09-04T18:45:51Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "1",
+        "viewCount": "27"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "imfvOr3Q0aI",
+      "snippet": {
+        "publishedAt": "2026-07-18T20:53:00Z"
+      },
+      "statistics": {
+        "commentCount": "8",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "50",
+        "viewCount": "370"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "jPNjgf-PWHM",
+      "snippet": {
+        "publishedAt": "2026-10-27T10:27:11Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "0"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "ku2MTQKmXaU",
+      "snippet": {
+        "publishedAt": "2026-10-24T14:44:52Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "11",
+        "viewCount": "135"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "ltn5D1Jz_O4",
+      "snippet": {
+        "publishedAt": "2026-07-01T22:00:18Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "2",
+        "viewCount": "12"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "mdhtMEIfsn8",
+      "snippet": {
+        "publishedAt": "2026-06-29T15:08:58Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "3",
+        "viewCount": "11"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "nkAjzvd9rR4",
+      "snippet": {
+        "publishedAt": "2026-07-06T09:39:10Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "1",
+        "viewCount": "23"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "o1hHZgYzUZA",
+      "snippet": {
+        "publishedAt": "2026-07-13T10:08:00Z"
+      },
+      "statistics": {
+        "commentCount": "7",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "31",
+        "viewCount": "255"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "s9YK37YErRc",
+      "snippet": {
+        "publishedAt": "2026-10-25T23:30:08Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "9",
+        "viewCount": "130"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "tBEvsFwK8S0",
+      "snippet": {
+        "publishedAt": "2026-04-24T10:01:33Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "4",
+        "viewCount": "293"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "tri-CUwy_m0",
+      "snippet": {
+        "publishedAt": "2026-10-21T00:00:02Z"
+      },
+      "statistics": {
+        "commentCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "15"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "ucf6p67sijw",
+      "snippet": {
+        "publishedAt": "2026-07-12T16:49:03Z"
+      },
+      "statistics": {
+        "commentCount": "3",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "1",
+        "viewCount": "12"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "v4zN53ZiUIs",
+      "snippet": {
+        "publishedAt": "2026-10-18T10:00:39Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "42"
+      },
+      "status": {
+        "privacyStatus": "public"
+      }
+    },
+    {
+      "id": "v9lGlFmBHNs",
+      "snippet": {
+        "publishedAt": "2026-04-22T20:06:54Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "2",
+        "favoriteCount": "0",
+        "likeCount": "106",
+        "viewCount": "1379"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    },
+    {
+      "id": "va3xfGCwIX8",
+      "snippet": {
+        "publishedAt": "2026-04-23T10:01:33Z"
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "108",
+        "viewCount": "1155"
+      },
+      "status": {
+        "privacyStatus": "private"
+      }
+    }
+  ],
+  "version": "owned-existing-capture-v1"
+}

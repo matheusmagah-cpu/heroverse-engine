@@ -1,14 +1,14 @@
 {
   "additional_api_calls": 0,
   "brief": {
-    "path": "migration/evidence/daily-report/learning/briefs/197eaf2e858b5c9013bef074e6b13dc8b1aa6af49cf15c58089752b7c4b977ba.json",
-    "sha256": "001bbb0d55e29b40d1d686952d2266bd03ae9c9fb6a470f2765e50a0aad17558"
+    "path": "migration/evidence/daily-report/learning/briefs/d5a0ae37012a2250064b93e5fca096b40ccf2e8e6dcf855f6ccf9a941ac96e30.json",
+    "sha256": "c2abcb42a7945014e4119c7eab2f367eb287c0460a91aa3678583539d2cf94e5"
   },
   "capture": {
-    "path": "migration/evidence/daily-report/learning/captures/b4e35c3bf3cfac264357632d54966c5e0182cffadd90cd54ef632c4a32a57bb5.json",
-    "sha256": "b4e35c3bf3cfac264357632d54966c5e0182cffadd90cd54ef632c4a32a57bb5"
+    "path": "migration/evidence/daily-report/learning/captures/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
+    "sha256": "42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba"
   },
-  "captured_at": "2026-10-26T08:53:04.079790+00:00",
+  "captured_at": "2026-10-27T10:55:15.748313+00:00",
   "decision": {
     "causal_claim": null,
     "evidence_decision": "HOLD",
@@ -22,23 +22,23 @@
     ]
   },
   "report": {
-    "path": "migration/evidence/daily-report/learning/reports/1cbefcdc926d247367f11c50938eb6ac02cc4d711a635e399a75cdf1ec7bd416.json.gz",
-    "sha256": "a38815006eacc07fa3323c02a454afb5180f05ef4c45d4413b55ff72f3accfdb",
-    "uncompressed_sha256": "1cbefcdc926d247367f11c50938eb6ac02cc4d711a635e399a75cdf1ec7bd416"
+    "path": "migration/evidence/daily-report/learning/reports/f95bf3231ab6bab837b9fbc7de971b94886b24a64b2883eb90283329dcd331ca.json.gz",
+    "sha256": "f5d2b977fd893f9828e2642934e84d22756cbc535790d31494defb4ff9b4539a",
+    "uncompressed_sha256": "f95bf3231ab6bab837b9fbc7de971b94886b24a64b2883eb90283329dcd331ca"
   },
   "report_only": true,
   "source_records": {
     "ledger": {
       "hash_method": "EXACT_FILE_BYTES",
       "origin_path": "migration/publish/ledger.json",
-      "path": "migration/evidence/daily-report/learning/sources/4328d1da4a50d4958d18cdd67d67af56babe1afbcddf46ec0b2e9441693ceb5e.json",
-      "sha256": "4328d1da4a50d4958d18cdd67d67af56babe1afbcddf46ec0b2e9441693ceb5e"
+      "path": "migration/evidence/daily-report/learning/sources/1d8db84682d76074ca250648f883a2648e74cc490f40be4264c2224b508e0924.json",
+      "sha256": "1d8db84682d76074ca250648f883a2648e74cc490f40be4264c2224b508e0924"
     },
     "snapshot": {
       "hash_method": "EXACT_FILE_BYTES",
-      "origin_path": "migration/evidence/daily-report/learning/captures/b4e35c3bf3cfac264357632d54966c5e0182cffadd90cd54ef632c4a32a57bb5.json",
-      "path": "migration/evidence/daily-report/learning/sources/b4e35c3bf3cfac264357632d54966c5e0182cffadd90cd54ef632c4a32a57bb5.json",
-      "sha256": "b4e35c3bf3cfac264357632d54966c5e0182cffadd90cd54ef632c4a32a57bb5"
+      "origin_path": "migration/evidence/daily-report/learning/captures/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
+      "path": "migration/evidence/daily-report/learning/sources/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
+      "sha256": "42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba"
     },
     "structure": {
       "hash_method": "EXACT_FILE_BYTES",

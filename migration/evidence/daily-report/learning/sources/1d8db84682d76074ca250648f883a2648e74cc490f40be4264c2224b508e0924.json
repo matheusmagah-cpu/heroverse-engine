@@ -1,0 +1,281 @@
+{
+ "version": "publish-ledger-v1",
+ "entries": {
+  "pilot-002:d0c35d58ebd63824bc90bda17383c2a2e197a00ab0541356c4a89c77d44ef321": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0"
+   },
+   "video_id": "v4zN53ZiUIs",
+   "uploaded_at": "2026-10-17T22:40:41.769491+00:00"
+  },
+  "short:pilot-002:6361e55f6c56c19c86c41665ea02d95c3321100c6e6be15db5011b03c73b65db": {
+   "steps": {},
+   "video_id": "_sUdOLxWy5c",
+   "uploaded_at": "2026-10-18T08:01:16.945824+00:00",
+   "long_video_id": "v4zN53ZiUIs",
+   "slot": "2026-10-18T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 53.07,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
+  },
+  "pilot-004:3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist_error": "PLAYLIST_ITEMS_HTTP_404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The playlist identified with the request's \\u003ccode\\u003eplaylistId\\u003c/code\\u003e parameter cannot be found.\",\n    \"errors"
+   },
+   "video_id": "Iegu_RD_wbE",
+   "uploaded_at": "2026-10-19T12:56:36.796658+00:00"
+  },
+  "short:pilot-004:01cb68d9bf1471155b276916d903c25c91745605193ea3f7deb41faada01705c": {
+   "steps": {},
+   "video_id": "SsgCGkM6knQ",
+   "uploaded_at": "2026-10-19T12:57:06.731212+00:00",
+   "long_video_id": "Iegu_RD_wbE",
+   "slot": "2026-10-20T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 43.67,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
+  },
+  "pilot-012:82276559bdfdb5600e7e0ae13b5e7b337611fdacf0d2c2cc25d3533957e9dbfe": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "Ugz55NP038soIEFpewV4AaABAg"
+   },
+   "video_id": "1bT9pEROuhI",
+   "uploaded_at": "2026-10-19T19:38:13.007108+00:00"
+  },
+  "pilot-005:c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "Ugwys8eExMeuYnTC8xF4AaABAg"
+   },
+   "video_id": "XDwxi4pvllM",
+   "uploaded_at": "2026-10-20T01:26:51.273208+00:00"
+  },
+  "pilot-007:25231edcdc2ed15687c7c5cb9fb774b19a44c4d171ace6e756917fa09d488dde": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "UgzCqSyqlQxFZinshON4AaABAg"
+   },
+   "video_id": "NGfnyTul-K0",
+   "uploaded_at": "2026-10-20T07:22:45.905535+00:00"
+  },
+  "pilot-006:240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "UgzwsCGUItDFhNNfpdp4AaABAg"
+   },
+   "video_id": "tri-CUwy_m0",
+   "uploaded_at": "2026-10-20T16:00:32.286443+00:00"
+  },
+  "short:pilot-005:cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f": {
+   "steps": {},
+   "video_id": "VEbS6pvirTA",
+   "uploaded_at": "2026-10-20T21:30:35.248088+00:00",
+   "long_video_id": "XDwxi4pvllM",
+   "slot": "2026-10-20T20:00:00Z",
+   "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-00.mp4",
+    "seconds": 40.31,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "owner_exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+   "verification": {
+    "status": "VERIFICATION_UNKNOWN",
+    "reason": "MISSING_CONTAINS_SYNTHETIC_MEDIA",
+    "observation": {
+     "video_id": "VEbS6pvirTA",
+     "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+     "title": "A Prayer for Peace in Your Relationships #shorts",
+     "description": "\u25b6 Full prayer: https://youtu.be/XDwxi4pvllM\nMorning Prayer for Protection | Psalm 91 Over You and Your Family\n\nPray this with me and type AMEN if you receive it.\n\n#prayer #morningprayer #jesus #faith #shorts",
+     "default_language": "en",
+     "default_audio_language": "en",
+     "upload_status": "uploaded",
+     "privacy_status": "public",
+     "publish_at": null,
+     "license": "youtube",
+     "contains_synthetic_media": null,
+     "processing_status": "processing",
+     "observed_at": "2026-10-20T21:30:35.259035+00:00",
+     "unknown_fields": {
+      "publish_at": "MISSING_OR_INVALID_FIELD",
+      "contains_synthetic_media": "MISSING_OR_INVALID_FIELD"
+     }
+    }
+   }
+  },
+  "pilot-010:c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "UgyIkJwK2RdfCxJkKfZ4AaABAg"
+   },
+   "video_id": "9g2MeIit9ys",
+   "uploaded_at": "2026-10-23T22:55:24.585736+00:00"
+  },
+  "bible:genesis-01-short:de79d9a703f86754222c209d42b31ca2882bd6a49abee34b2e4d1d8e9d8666c8": {
+   "steps": {
+    "first_comment": "Ugwe6UuXrxHETAU-eQF4AaABAg"
+   },
+   "video_id": "ku2MTQKmXaU",
+   "uploaded_at": "2026-10-24T14:44:22.626318+00:00"
+  },
+  "bible:genesis-02-short:48ce69512a8562373b98b623eb21e1b8627ee797bce550b178cdce4f7bf737dd": {
+   "steps": {
+    "first_comment": "UgxOoL7vILBGZ1k-5lt4AaABAg"
+   },
+   "video_id": "hwq4qgjreh0",
+   "uploaded_at": "2026-10-24T15:02:57.139170+00:00"
+  },
+  "bible:genesis-03-short:9b10e1a0bedc00577d43021e52ecfe0c568230110b9a92b2f3aad231f6cf40bf": {
+   "steps": {
+    "first_comment": "Ugw1or5KKeqbCC4mwC14AaABAg"
+   },
+   "video_id": "K_ZwsCt-Wg4",
+   "uploaded_at": "2026-10-24T15:24:24.863465+00:00"
+  },
+  "bible:genesis-04-short:c3784ad58400989feca750772c53ac2b97c0e5a86c412c94b3dc625ae913707b": {
+   "steps": {
+    "first_comment": "UgybROFXRHo4f2VspHt4AaABAg"
+   },
+   "video_id": "s9YK37YErRc",
+   "uploaded_at": "2026-10-24T15:35:45.150170+00:00"
+  },
+  "pilot-011:072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "UgwtWSMZIX8fxWBTXGp4AaABAg"
+   },
+   "video_id": "F8u5dTT_2mM",
+   "uploaded_at": "2026-10-25T00:52:53.104067+00:00"
+  },
+  "bible:genesis-05-short:d3b092a48f077869fa364b62e753ba660f494596f4b0837f51cc5887a0088b3d": {
+   "steps": {
+    "first_comment": "UgwATsYCRR7DJdYbxUJ4AaABAg"
+   },
+   "video_id": "OYijqQdQq0o",
+   "uploaded_at": "2026-10-25T01:59:04.971463+00:00"
+  },
+  "pilot-014:f4567d73e791e83b367a416b05344664eacb3665faf134759321f198c2450e1f": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "UgzVVu-89QLp_tHUC6N4AaABAg"
+   },
+   "video_id": "53Xysf9x46c",
+   "uploaded_at": "2026-10-25T08:24:54.682333+00:00"
+  },
+  "pilot-013:71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "Ugy8gXU37i46NT5W4qd4AaABAg"
+   },
+   "video_id": "ZPSxpF-zBl8",
+   "uploaded_at": "2026-10-25T12:24:01.485276+00:00"
+  },
+  "pilot-008:a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "PENDING: HTTP_403 forbidden: The comment thread could not be created due to insufficient permissions. The request might not be properly authorized."
+   },
+   "video_id": "8heTdP0LllM",
+   "uploaded_at": "2026-10-25T14:44:24.363108+00:00"
+  },
+  "bible:genesis-06-short:e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609": {
+   "steps": {
+    "first_comment": "Ugx9d1hQ6Jfgcjj70o14AaABAg"
+   },
+   "video_id": "dyuqBS_FXew",
+   "uploaded_at": "2026-10-26T19:32:12.413101+00:00"
+  },
+  "bible:genesis-07-short:da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea": {
+   "steps": {
+    "first_comment": "PENDING: HTTP_403 forbidden: The comment thread could not be created due to insufficient permissions. The request might not be properly authorized."
+   },
+   "video_id": "Vvfw4W4nV7M",
+   "uploaded_at": "2026-10-26T21:06:54.201300+00:00"
+  },
+  "bible:genesis-08-short:00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23": {
+   "steps": {
+    "first_comment": "PENDING: HTTP_403 forbidden: The comment thread could not be created due to insufficient permissions. The request might not be properly authorized."
+   },
+   "video_id": "jPNjgf-PWHM",
+   "uploaded_at": "2026-10-27T10:27:14.119989+00:00"
+  }
+ },
+ "owner_exceptions": {
+  "owner-temporal-pilot005-cb3ce331-20261020": {
+   "state": "CONSUMED",
+   "run_key": "39500765705:1",
+   "binding": {
+    "version": "owner-publication-exception-binding-v1",
+    "exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+    "receipt_sha256": "dd2990b2ecebe3a7a4ed93d842d248f8e9ea9c3a2ecbfb6921d7b91d3f4db5f2",
+    "pilot": "pilot-005",
+    "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+    "scope": "temporal_only",
+    "baseline_cutoff": "2026-10-20T19:30:00Z",
+    "target_slot": "2026-10-20T20:00:00Z",
+    "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00"
+   },
+   "video_id": "VEbS6pvirTA"
+  }
+ }
+}
