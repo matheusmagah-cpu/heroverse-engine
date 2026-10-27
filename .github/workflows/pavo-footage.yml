@@ -1,4 +1,5 @@
 name: HeroVerse Pavo clips to 1440p library footage (Real-ESRGAN on CPU, no paid call)
+run-name: "pavo-footage: list=${{ inputs.list }}"
 # Owner, 2026-10-25 (DECISIONS.md "Pavo is the first source of AI video"): the long mixes ~50 % Pavo clips with
 # licensed footage. Each listed 720p Pavo clip is downloaded from the public Pavo CDN (no secret), stripped of its
 # audio, super-resolved frame by frame to 2560x1440 and recorded in the footage library with vetting PENDING; Claude
@@ -10,6 +11,7 @@ on:
         description: Pavo clip list (migration/production/pilot-NNN/pavo.json or pavo-N.json)
         required: true
 permissions:
+  actions: read   # E116: the dispatch guard reads runs (read-only)
   contents: read
 concurrency:
   group: heroverse-pavo-footage
@@ -22,6 +24,11 @@ jobs:
       ids: ${{ steps.plan.outputs.ids }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run pavo-footage.yml
       - id: plan
         name: Validate the list (Pavo CDN only) and keep the clips not yet in the library
         env:

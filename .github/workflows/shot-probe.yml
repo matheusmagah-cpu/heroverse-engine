@@ -1,4 +1,5 @@
 name: HeroVerse shot probe (a shot's exact build request on Pavo, the build's checks, clips for Claude's review; nothing published)
+run-name: "shot-probe: plan=${{ inputs.plan }} shots=${{ inputs.shots }} attempts=${{ inputs.attempts }} adopt_run=${{ inputs.adopt_run }}"
 # E114 (owner, 27/10: "no rework, ever"): the probe used to vouch for a prompt's wording while the build generated a
 # NEW clip for it, so Claude's >= 9.5 frame review met each shot only after a ~3 h build (genesis-07: 8 builds;
 # genesis-08: 7 of 29 shots rejected). Here each listed shot gets exactly the request episode_build sends (the same
@@ -51,6 +52,11 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run shot-probe.yml
       - id: plan
         name: The plan (path checked, plan_check strict) and the shots to probe (ids of this plan, 1-6 attempts)
         run: |

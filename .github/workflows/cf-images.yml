@@ -1,4 +1,5 @@
 name: HeroVerse images on Cloudflare Workers AI (free allocation)
+run-name: "cf-images: pilot=${{ inputs.pilot }} engine=${{ inputs.engine }} only=${{ inputs.only }}"
 on:
   workflow_dispatch:
     inputs:
@@ -16,7 +17,25 @@ on:
 permissions:
   contents: write
 jobs:
+  guard:
+    # E116: before any job that holds a secret
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read   # the runs, jobs and compare the guard reads (read-only)
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run cf-images.yml
+
   images:
+    needs: guard
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 30

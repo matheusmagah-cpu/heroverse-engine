@@ -1,4 +1,5 @@
 name: HeroVerse footage library (licensed real footage, no paid call)
+run-name: "footage: queries=${{ inputs.queries }} per_theme=${{ inputs.per_theme }}"
 on:
   workflow_dispatch:
     inputs:
@@ -16,7 +17,25 @@ concurrency:
   group: heroverse-footage
   cancel-in-progress: false
 jobs:
+  guard:
+    # E116: before any job that holds a secret
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read   # the runs, jobs and compare the guard reads (read-only)
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run footage.yml
+
   library:
+    needs: guard
     runs-on: ubuntu-24.04
     timeout-minutes: 300
     env:

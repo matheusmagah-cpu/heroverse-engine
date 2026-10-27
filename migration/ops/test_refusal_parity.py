@@ -43,6 +43,7 @@ LATER = [
     ".github/workflows/pavo-footage.yml", ".github/workflows/footage.yml", ".github/workflows/approve.yml",
     ".github/workflows/publish.yml", ".github/workflows/shorts.yml", ".github/workflows/publish-shorts.yml",
     ".github/workflows/tiktok.yml", ".github/workflows/agnes-clip.yml",
+    "migration/ops/dispatch_guard.py",   # E116: refuses at dispatch, before any secret or work
 ]
 # any later build added beside the Short's (a long build, a new engine) is scanned without being listed
 LATER_GLOBS = ["migration/production/bible/*_build.py", "migration/production/bible/*_engine.py"]

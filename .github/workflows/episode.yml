@@ -1,4 +1,5 @@
 name: HeroVerse episode build (plan -> Keeper + Pavo scenes -> composed Short, checked; nothing published)
+run-name: "episode: plan=${{ inputs.plan }} resume_run=${{ inputs.resume_run }}"
 # Owner, 2026-10-26 (DECISIONS.md "The Keeper narrates every video"): a Short is built from its plan with no chat
 # session (Shorts v2, DECISIONS.md 2026-10-26): the conflict opens spoken, characters speak their own Kokoro lines and the
 # Keeper closes (Pavo input audio, lips checked by lipsync_check; God only as a voice-over), the story is acted
@@ -47,6 +48,11 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run episode.yml
       - id: plan
         name: The plan (path checked, plan_check strict, a PASS preflight of this exact plan, E106)
         run: |

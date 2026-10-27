@@ -1,4 +1,5 @@
 name: HeroVerse pilot render (figure + backgrounds + captions) and QA
+run-name: "pilot-render-stills: pilot=${{ inputs.pilot }}"
 on:
   workflow_dispatch:
     inputs:
@@ -22,6 +23,11 @@ jobs:
       OMP_NUM_THREADS: '2'
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (inputs, capacity, one run per subject, no re-run without a fix, imports; E116)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run pilot-render-stills.yml
       # the cache key is the venv pin lines of render_pilot.sh only: a new pin is a new cache, nothing older is reused
       - id: pins
         run: echo "hash=$(grep -E '^setup [a-z]+ venv ' migration/ci/render_pilot.sh | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"

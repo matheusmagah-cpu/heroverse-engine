@@ -14,6 +14,46 @@ DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDA
              "migration/strategy/BEAT_THE_REFERENCE_RULE.md", "migration/strategy/FORMAT_OPINION_AND_CRITIQUE.md",
              "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
              "migration/strategy/MARKET_FORECAST_TIME_TO_YPP_20261017.md"}  # registered forecast (evidence of DECISIONS)
+# E115: failure classes (rework audit 2026-10-27). An entry's `class` is one of these, or a list of them
+CLASSES = {"cheap-vs-expensive", "env-vs-test", "review-after-build", "random", "no-data", "threshold", "external",
+           "order", "drift", "silent", "direction", "pr-late", "capacity", "rerun-without-fix", "recurrence",
+           "fragile-input"}
+CLASSED_FROM = 115   # E100-E114 were backfilled with their class; from E115 on every entry is classified
+
+
+def _num(eid):
+    return int(eid[1:]) if eid[1:].isdigit() else 0
+
+
+def _classes(value):
+    return [value] if isinstance(value, str) else list(value or [])
+
+
+def class_problems(errors):
+    """E115: a recurring class names its prior entries and an antidote that covers the class, not the instance."""
+    bad, seen = [], {}
+    for e in errors:
+        cls = _classes(e.get("class"))
+        if _num(e["id"]) >= CLASSED_FROM and not cls:
+            bad.append(f"{e['id']}: no class (one of test_errors_register.CLASSES)")
+        for c in cls:
+            if c not in CLASSES:
+                bad.append(f"{e['id']}: class {c!r} is not in CLASSES")
+        prior = _classes(e.get("prior"))
+        for pid in prior:
+            if not set(seen.get(pid, ())) & set(cls):
+                bad.append(f"{e['id']}: prior {pid} is not an earlier entry of its class")
+        if _num(e["id"]) >= CLASSED_FROM:
+            covers = _classes(e.get("antidote", {}).get("covers"))
+            for c in cls:
+                earlier = [eid for eid, ecls in seen.items() if c in ecls]
+                missing = [eid for eid in earlier if eid not in prior]
+                if missing:
+                    bad.append(f"{e['id']}: class {c} recurred: `prior` must name {missing}")
+                if c not in covers:
+                    bad.append(f"{e['id']}: its antidote must be class-level: antidote.covers names {c!r}")
+        seen[e["id"]] = cls
+    return bad
 
 
 class Register(unittest.TestCase):
@@ -73,6 +113,23 @@ class Register(unittest.TestCase):
             f = ROOT / e["antidote"]["file"]
             self.assertTrue(f.exists(), f"{e['id']}: {f} missing")
             self.assertIn(e["antidote"]["contains"], f.read_text(), f"{e['id']}: antidote not found")
+
+    def test_a_recurring_class_names_its_prior_and_a_class_level_antidote(self):
+        # E115: E08 -> E86 -> E90, E10 -> E63 -> E112, E54 -> E73 -> E81 -> E89 ... each antidote fixed the instance;
+        # a classified entry whose class already has one names it (`prior`) and its antidote states the class it covers
+        reg = json.loads((ROOT / "migration/ops/ERRORS.json").read_text())
+        self.assertEqual(class_problems(reg["errors"]), [])
+        a = {"id": "E200", "class": "order", "antidote": {"covers": "order"}}
+        b = {"id": "E201", "class": "order", "antidote": {"covers": "order"}}
+        self.assertEqual(class_problems([a]), [])
+        self.assertTrue(any("prior` must name ['E200']" in x for x in class_problems([a, b])))
+        self.assertEqual(class_problems([a, dict(b, prior=["E200"])]), [])
+        self.assertTrue(any("class-level" in x for x in class_problems([a, dict(b, prior="E200", antidote={})])))
+        self.assertTrue(any("not an earlier entry" in x for x in class_problems([a, dict(b, prior="E999")])))
+        self.assertTrue(any("no class" in x for x in class_problems([{"id": "E202", "antidote": {}}])))
+        self.assertTrue(any("not in CLASSES" in x for x in class_problems([dict(a, **{"class": "oops"})])))
+        old = [{"id": "E100", "class": "drift"}, {"id": "E102", "class": "drift"}]   # backfilled history stays as is
+        self.assertEqual(class_problems(old), [])
 
     def test_validated_structures_count_only_winners_above_the_breakout_bar(self):
         # E88: Steelshort (breakout 6.2) and two prayer Shorts (46.41, 13.34) were counted as winners; SYSTEM.md 1.1
