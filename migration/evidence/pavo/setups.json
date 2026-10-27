@@ -88,6 +88,110 @@
    "passed": 2,
    "evidence": "migration/evidence/pavo/20261026/keeper-vo/calibration.json",
    "note": "genesis-07 k-close voice-over: build_probes, the plan's prompt as episode_build.request sends it"
+  },
+  {
+   "speaker": "eve",
+   "references": {
+    "ch-eve-full": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "He says you will not die. He says your eyes will be opened, and you will see.",
+   "generations": 4,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-open (16:9): lipsync_check 0 of 4"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "I keep the old stories. Tonight I will tell you one of them, whole.",
+   "generations": 1,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long k-promise-1 (16:9): lipsync_check 0 of 1"
+  },
+  {
+   "speaker": "adam",
+   "references": {
+    "ch-adam-front": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman,",
+   "generations": 3,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-c2-adam (16:9): lipsync_check 0 of 3"
+  },
+  {
+   "speaker": "eve",
+   "references": {
+    "ch-eve-full": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+   "generations": 4,
+   "passed": 1,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-c3-eve (16:9): lipsync_check 1 of 4"
+  },
+  {
+   "speaker": "adam",
+   "references": {
+    "ch-adam-front": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.",
+   "generations": 3,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-c4-adam (16:9): lipsync_check 0 of 3"
+  },
+  {
+   "speaker": "adam",
+   "references": {
+    "ch-adam-front": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+   "generations": 3,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-c4-blame (16:9): lipsync_check 0 of 3"
+  },
+  {
+   "speaker": "eve",
+   "references": {
+    "ch-eve-full": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "It was the serpent. He twisted every word. The serpent beguiled me, and I did eat.",
+   "generations": 3,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long s-c4-eve (16:9): lipsync_check 0 of 3"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "It began with a voice that made God sound like He was holding back.",
+   "generations": 1,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
+   "kind": "talk",
+   "note": "arc-01-long k-insight-2 (16:9): lipsync_check 0 of 1"
   }
  ]
 }

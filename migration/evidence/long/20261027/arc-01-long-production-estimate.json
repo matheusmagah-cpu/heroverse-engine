@@ -5,8 +5,8 @@
  "episode": "arc-01-long",
  "generation": "none (an estimate: no Pavo, no FLUX, no Actions run)",
  "shots": {
-  "holds": 175,
-  "generated": 165,
+  "holds": 174,
+  "generated": 164,
   "windows": 10,
   "talking_character_reference_video": {
    "n": 6,
@@ -55,7 +55,7 @@
    "how": "text to video, no person, face check"
   },
   "character_reference_video": {
-   "n": 114,
+   "n": 113,
    "how": "references (characters' approved sheets, <= 5); cannot take a still (Pavo: frames and references are exclusive)"
   },
   "image_first_still_needed": {
@@ -86,13 +86,13 @@
  "pavo": {
   "model": "agnes-video-new-flash",
   "resolution": "720p (1280x720 at 16:9, measured 2026-10-26)",
-  "clip_seconds": "4-12 a clip (adapter); the plan's scenes are 4-8 s, talking clips 4-12 s after the retime",
+  "clip_seconds": "4-12 a clip (adapter); the plan's scenes are 4-9 s, talking clips 4-12 s after the retime",
   "aspect": "16:9 honoured (evidence/pavo/20261026/long-16x9-and-concurrency.json)",
   "inputs": "<= 5 reference images or first(+last) frame, never both; <= 3 input audios 2-12 s in all",
   "price": "every generation at a fresh exact 0-credit quote (refused otherwise)",
   "free_limits": "no free VIDEO quota is documented (integrations/pavo/README.md) or recorded in evidence/pavo; the limits seen are concurrency (PAVO_RATE_LIMITED while jobs run; two at once measured) and, for IMAGES only, the free agnes-image quota (~180 a day, then 'try again in 3 hours'; E124 cap 120/day in quota.py). E124's lesson holds for video too: a 0 quote does not prove free quota, so a `failed` read-back is a stop signal",
-  "jobs_first_pass": 165,
-  "jobs_expected_probe": 448,
+  "jobs_first_pass": 164,
+  "jobs_expected_probe": 446,
   "jobs_direct_talking_probes": "20 lines x 6 generations = 120 (the preflight's PROBE_REQUIRED: >= 6 direct 0-credit generations a line, evidence/pavo/setups.json; none recorded for the long's lines yet)",
   "stills": {
    "candidates": 18,
@@ -101,14 +101,14 @@
   }
  },
  "time": {
-  "probe_minutes_sequential": 2330,
-  "probe_hours_sequential": 38.8,
-  "shot_probe_runs": 21,
+  "probe_minutes_sequential": 2319,
+  "probe_hours_sequential": 38.6,
+  "shot_probe_runs": 20,
   "why_sequential": "shot-probe.yml has one workflow-level concurrency group (heroverse-shot-probe) and generate_clips submits one job and polls it to the end before the next",
-  "with_two_pavo_jobs_at_once": 19.4,
+  "with_two_pavo_jobs_at_once": 19.3,
   "direct_talking_probe_hours": 6.6,
-  "upscale_cpu_minutes_1440p": 1490,
-  "reviews": "330 clip frame sheets for Claude (>= 9.5 each, approve-shot by PR)"
+  "upscale_cpu_minutes_1440p": 1483,
+  "reviews": "328 clip frame sheets for Claude (>= 9.5 each, approve-shot by PR)"
  },
  "publish": {
   "as_of": "2026-10-27 (the proposal of that day; rerun estimates keep it until a new one is written)",
@@ -118,7 +118,7 @@
    "27-28/10: this contract (claude/long-preflight) and the story QA v3 reader, .srt writer and the 25 open review rows (claude/long-qa-v3-gates) merged: until then LONG_REVIEW_OPEN blocks the build",
    "28/10: the local preflight with the pinned Kokoro (--voice --refs --write, 0 credits): the measured length and every request digest; a 16:9 still path in scene_stills.py for the 9 image-first shots",
    "28-29/10: 120 direct 0-credit talking probes (20 lines x 6), about 6.6 h at two Pavo jobs at once; the main risk: genesis-07's Keeper lines passed 1 in 33, so a Keeper line under 0.9 goes to plan B (voice-over Keeper, still mouth) before any shot-probe run",
-   "29/10-01/11: 21 shot-probe.yml runs (~39 h one after another, probe-queue order) with Claude's frame reviews and approve-shot PRs as each run lands; about 15 % re-probed",
+   "29/10-01/11: 20 shot-probe.yml runs (~39 h one after another, probe-queue order) with Claude's frame reviews and approve-shot PRs as each run lands; about 15 % re-probed",
    "in parallel: LONG_DESIGN slice 3, the long's build (16:9 compose at LONG_LINE_GAP, .srt, owned music at -15 LUFS, the Real-ESRGAN matrix), which ships approved clips only (verify-preflight first)",
    "02/11: the build, the preview gate and Claude's long review (>= 9.5); 03/11 approve.yml -> prepublish_gate.py; 04/11 publication (day 30 of the goal is 16/11)"
   ]

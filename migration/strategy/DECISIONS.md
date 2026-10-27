@@ -564,3 +564,11 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   chosen on public evidence (`strategy/LIPSYNC_TOOLS.md` to come), decisive test on the 3 lines running.
 - **Why:** each repeated build costs a slot anyway (genesis-07: 8 builds; genesis-08: 7 shots rejected after a full
   build). Fixing the cause once is faster than producing more. No vidIQ calls today (0 credits).
+
+## Owner decision: the arc-01 long first; its slot moves to 04/11 (2026-10-27)
+- **Owner, 27/10.** "Prioriza o longo agora."
+- **Slot.** `arcs.json` arc-01 long (pilot-015) moves from 2026-10-28T10:00:00Z to 2026-11-04T10:00:00Z, and the
+  SERIES.md calendar row with it. 28/10 was not reachable: the production estimate
+  (`evidence/long/20261027/arc-01-long-production-estimate.json`, `publish.proposed_date`) puts the earliest date at
+  02/11 if every step passes the first time, and proposes 04/11 (direct talking probes, ~21 shot-probe runs, 330 frame
+  reviews, the 1440p upscale and the 9.5 review). The later arcs' long slots are unchanged here.
