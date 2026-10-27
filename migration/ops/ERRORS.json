@@ -1135,6 +1135,30 @@
      "recurrence"
     ]
    }
+  },
+  {
+   "id": "E123",
+   "date": "2026-10-27",
+   "class": [
+    "no-data",
+    "recurrence"
+   ],
+   "prior": [
+    "E108",
+    "E113",
+    "E115",
+    "E122"
+   ],
+   "error": "Claude's review of genesis-09 run 2026102704 (PR #461, stills/sheets/genesis-09-short-2026102704.jpg): the 64 Pavo agnes-image stills made WITH the ark's two approved references (E122's fix, input_images 2 read back) still drew curved ship hulls with raised bows or prows, deckhouses and smoking funnels in most ark stills (only s-birds and s-feet-2 held the box), and drew an ark into stills that show none (s-carry, s-climb, s-feet). Root cause, probed (evidence/pavo/20261027/genesis-09-ark-probe/probes.json, 9 new images at 0 credits): with E113's wording (V1: 'The ark is one long, low, box-shaped wooden hull ...' and 'The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it ...') plus the references, 0 of 3 held the box; the same stills with the ark described only positively, without the words ark/hull/ship/boat/vessel or any negation, the flood period sentence without 'the great wooden ark', plus the references (V2), 3 of 3; V2 without references (V3) drew a crate or shed at the wrong scale, 0 of 3. An image model reads a negated list as things to draw and 'ark'/'hull' pull its ship prior; the flood period sentence named the ark in every still, so every still was sent the references and drew one. The class recurs: E113 and E122 each fixed the ark's look with wording or references while the wording itself kept priming the ship.",
+   "fix": "plan_check: from part 9 (ark_e123: every plan but a published Short with an int part below 9; a long or a thumbnail without a part too) the ark is named only by ARK_PHRASE 'a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle', word for word (first letter in either case), and a scene, still or thumbnail prompt says none of ARK_WORDS (ARK_MENTION + ARK_AVOID + figurehead, smokestack, funnel, chimney, 'no smoke', 'smoke rising from it', waterline, deckhouse, cabin, bowsprit, oar, rudder) anywhere, period sentences included: ARK_LOOK_CONFLICT; 'crate' without the phrase is ARK_LOOK_NOT_CANONICAL (prop_problems_e123, reached through prop_problems(plan=...) by plan_check, long_plan_check, still_prompt_problems (scene_stills, thumbs) and episode_build.prop_refusal). The flood period sentence becomes 'The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth.' (E113's kept as PERIOD_SETTING_FLOOD_E113). prop_references (the references a still needs) fire on the phrase (E113's names still count for parts 1-8), so a still that does not show the ark is made without them; PROP_SHOT_WITHOUT_STILL detects the phrase too. Parts 1-8 keep E113's rule (genesis-07/08 plans pass unchanged). Review of #465: E123 is the ark stories' rule only (ark_period: a period before-the-flood or the-flood, or a passage reaching Genesis 6-10 or resolving to those periods; a long and a thumbnail by their period or passage), so Jonah's ship, a fishing boat, Moses' ark of bulrushes, a clay vessel or a crate of figs pass elsewhere, and only the phrase makes a part-9+ still need the ark's references; inside the ark stories ARK_WORDS also holds galley, keelless, deck, floating box/house/structure and enclosure ('bow' never: Genesis 9:13). No word list closes every synonym: Claude's 9.5 frame review of every still and clip stays the final guard. The genesis-09 thumbnail spec (DRAFT) is reworded; genesis-09's plan and stills are reworded in #461. PROMPT_GUIDE's ark section states the phrase and the positive phrasing for people near it.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "class ArkPositiveWording",
+    "covers": [
+     "no-data",
+     "recurrence"
+    ]
+   }
   }
  ]
 }

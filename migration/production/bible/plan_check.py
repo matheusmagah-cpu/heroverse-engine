@@ -69,6 +69,12 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   sentences carries ARK_LOOK and ARK_EXCLUDE word for word (PROPS; ARK_LOOK_NOT_CANONICAL) and, with them and the
   period sentences taken out, names no ship, boat, mast, sail, prow, funnel... (ARK_LOOK_CONFLICT). plan_check,
   long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function.
+- E123, from part 9 in the ark's stories (ark_period: before-the-flood / the-flood, or Genesis 6-10; a long or a
+  thumbnail by its period or passage): the ark is named only by ARK_PHRASE, word
+  for word, in positive words; no scene, still or thumbnail prompt says ark, hull, keel, ship, boat, vessel, mast,
+  sail, prow, figurehead, funnel, smokestack or "no smoke" (ARK_WORDS: ARK_LOOK_CONFLICT; the negated words of
+  ARK_EXCLUDE primed the image model to draw them), and "crate" without the phrase is ARK_LOOK_NOT_CANONICAL. The
+  flood's period sentence names no ark. A still shows the ark when its prompt holds the phrase (prop_references).
 - image first (owner, 27/10): a scene shot may declare `first_frame` (and `last_frame`), the id of a scene still
   (bible/stills/<id>.json, scene_stills.py). Pavo then animates that still (frames_to_video) and the shot's prompt
   says the motion and camera. Frames go only on a scene with no characters and no input audio (Pavo: frames and
@@ -77,7 +83,7 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   (STILL_NOT_APPROVED), its image is the one approved (STILL_PATH_REFUSED, STILL_SHA256_MISMATCH,
   STILL_PROMPT_CHANGED) at the plan's aspect (STILL_ASPECT_MISMATCH), and its own prompt passes the period, writing
   and ark rules above (STILL_PROMPT_REFUSED). episode_build.request (frame_refusal) refuses by the same function.
-- a still whose prompt names a prop (the ark, anywhere, the flood's setting sentence too) was made with every
+- a still whose prompt names a prop (its E123 phrase; for parts 1-8 the ark anywhere) was made with every
   approved reference image of that prop (props.json, props.py; E122), recorded by sha256 in its record:
   STILL_PROP_UNREFERENCED (also while the prop is still DRAFT). scene_stills.py prepare, finalize and approve
   refuse the same by prop_reference_problems.
@@ -183,9 +189,13 @@ PERIOD_AVOID = (r"streets?", r"roads?", r"cobbl\w*", r"pavements?", r"lanterns?"
                 r"towns?", r"villages?", r"cit(?:y|ies)", r"lanes?", r"buildings?", r"(?:mud-)?bricks?",
                 r"(?<!tent )(?<!goat-hair )walls?", r"houses?", r"rooms?", r"tables?",
                 r"coats?", r"hats?", r"(?:peaked|flat|baseball|cloth) caps?")
-# the flood and the new earth (genesis-08 to 10: the ark, the waters, Ararat): the same exclusions
-PERIOD_SETTING_FLOOD = ("The ancient Near East in the days of the flood: the great wooden ark, the open water, the "
-                        "mountains of Ararat and the empty new earth.")
+# the flood and the new earth (genesis-09 to 10: the waters, Ararat): the same exclusions. E123: the sentence names no
+# ark (its first wording, PERIOD_SETTING_FLOOD_E113, "the great wooden ark", drew an ark into stills that show none, and
+# the word pulled the ship prior: evidence/pavo/20261027/genesis-09-ark-probe/)
+PERIOD_SETTING_FLOOD_E113 = ("The ancient Near East in the days of the flood: the great wooden ark, the open water, the "
+                             "mountains of Ararat and the empty new earth.")
+PERIOD_SETTING_FLOOD = ("The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the "
+                        "empty new earth.")
 # the making of the world and Eden (the arc-01 long, Genesis 1-3): no human work at all
 PERIOD_SETTING_EDEN = ("The world at its making and the garden of Eden: untouched wild land, rivers, trees and open "
                        "sky.")
@@ -239,9 +249,71 @@ ARK_GRANDFATHERED = {"genesis-08-short": {
     "s-torches": "df0e0000fbc0843843d62c4c8ddecb5e5ef541745f1e10f284c71c8eee0c31cb",
     "s-finished": "10072ac8e1eba68d02b3982ae679030690d02ad52efc399c5952c1c27f4730c9",
     "s-silent": "a55447837347eaf90133a0403d46dc5f65d6198acffb9c025dbe8c5a1f43e6cf"}}
-# props: a thing seen in many shots, with one look stated word for word wherever a prompt names it
+# E123 (Claude's review of genesis-09 run 2026102704 and the probe evidence/pavo/20261027/genesis-09-ark-probe/): the
+# 64 stills made WITH the ark's approved references still drew curved bows, prows, cabins and smoking funnels. With
+# ARK_LOOK + ARK_EXCLUDE (V1) 0 of 3 held the box; with the ark described only positively, no negation and none of the
+# words ark/hull/ship/boat/vessel, plus the references (V2), 3 of 3 held it (without references, V3, the box shrank to
+# a crate or a shed). An image model reads "no mast, sail, prow, funnel or smokestack, no smoke rising" as a list of
+# things to draw, and "ark"/"hull" pull its ship prior. From part 9 (ARK_E123_FROM_PART) the ark is named only by
+# ARK_PHRASE, word for word (a noun phrase that sits in the shot's own sentence; its first letter may be capital), and
+# a scene, still or thumbnail prompt holds none of ARK_WORDS (ARK_LOOK_CONFLICT); "crate" without the phrase is
+# ARK_LOOK_NOT_CANONICAL. The phrase is how a still is known to show the ark (prop_references: the references go with
+# it, and only with it). Parts 1-8 are published and keep E113's rule.
+ARK_PHRASE = ("a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat "
+              "square ends, as tall at both ends as in the middle")
+ARK_WORDS = tuple(dict.fromkeys(ARK_MENTION + ARK_AVOID + (
+    r"figureheads?", r"smokestacks?", r"funnels?", r"chimneys?", r"no smoke", r"smoke rising from it", r"waterlines?",
+    r"deckhouses?", r"cabins?", r"bowsprits?", r"oars?", r"rudders?",
+    # review of #465: the cheap bypasses inside the ark's stories ("bow" never: Genesis 9:13, the rainbow)
+    r"galleys?", r"keelless", r"decks?", r"floating (?:box(?:es)?|houses?|structures?)", r"(?:wooden |timber |plank )?enclosures?")))
+ARK_E123_FROM_PART = 9
+# props: a thing seen in many shots, with one look stated word for word wherever a prompt names it (E113: `look` and
+# `exclude`, parts 1-8; E123: `phrase`, the only name it has, and `words`, what no prompt says, from part 9)
 PROPS = {"ark": {"look": ARK_LOOK, "exclude": ARK_EXCLUDE, "mentions": list(ARK_MENTION),
-                 "avoid": list(ARK_AVOID)}}
+                 "avoid": list(ARK_AVOID), "phrase": ARK_PHRASE, "words": list(ARK_WORDS), "noun": r"crates?"}}
+
+
+# review of #465: the ark's words belong to the ark's stories. Elsewhere Jonah's ship, the fishermen's boat, Moses' ark of
+# bulrushes, a clay vessel or a crate of figs are what they say; inside them, the 9.5 frame review stays the last guard
+# against a synonym no list holds.
+ARK_PERIODS = ("before-the-flood", "the-flood")
+ARK_CHAPTERS = ("Genesis", 6, 10)
+
+
+def ark_period(plan):
+    """Whether a plan (a Short, a long, a thumbnail's {"period"}) tells an ark story: its `period` is one of
+    ARK_PERIODS, or its passage resolves to one of them (STORY_PERIODS) or reaches Genesis 6-10."""
+    if not isinstance(plan, dict):
+        return False
+    given = plan.get("period")
+    if isinstance(given, str):
+        return given in ARK_PERIODS
+    found = passage_chapters(plan.get("passage"))
+    if found:
+        book, first, last = found
+        if book == ARK_CHAPTERS[0] and first <= ARK_CHAPTERS[2] and last >= ARK_CHAPTERS[1]:
+            return True
+        names = {next((n for b, lo, hi, n in STORY_PERIODS if b == book and lo <= c <= hi), None)
+                 for c in range(first, last + 1)}
+        return bool(names & set(ARK_PERIODS))
+    return False
+
+
+def ark_e113(plan):
+    """Parts 1-8 (published Shorts, an int `part` below ARK_E123_FROM_PART) keep E113's rule."""
+    part = plan.get("part") if isinstance(plan, dict) else None
+    return type(part) is int and part < ARK_E123_FROM_PART
+
+
+def ark_e123(plan):
+    """E123: whether a plan's prompts follow the positive wording (ARK_PHRASE, no ARK_WORDS): an ark story (ark_period)
+    that is not a published Short; a thumbnail's or a long's plan without a part too, scoped by its period."""
+    return isinstance(plan, dict) and not ark_e113(plan) and ark_period(plan)
+
+
+def has_phrase(prompt, phrase):
+    """The prop's canonical phrase in a prompt, word for word (its first letter in either case)."""
+    return isinstance(prompt, str) and (phrase in prompt or phrase[:1].upper() + phrase[1:] in prompt)
 # "Genesis 6:5-13" (chapter 6), "Genesis 6:14-7:5" (6 to 7), "Genesis 6-8", "Genesis 7"; the end chapter matters (a
 # passage may cross the flood)
 PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)(:\d+)?"
@@ -645,16 +717,18 @@ def plan_period_problems(plan, shots):
     return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in period_problems(i, s, per)]
 
 
-def prop_problems(i, shot, per=None):
-    """E113: a scene prompt that names a prop (PROPS: the ark, a hull, keel, ship, boat or vessel), outside the period
+def prop_problems(i, shot, per=None, plan=None):
+    """E123: with a plan from part 9 (ark_e123), prop_problems_e123. E113: a scene prompt that names a prop (PROPS: the ark, a hull, keel, ship, boat or vessel), outside the period
     sentences, carries the prop's look and exclusion sentences word for word (ARK_LOOK_NOT_CANONICAL; one of the two
     alone is refused too); with those and the period sentences taken out, it names nothing the prop's look rules out
     (ARK_LOOK_CONFLICT: ship, boat, mast, prow, funnel...). [] for a Keeper shot."""
     if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
         return []
+    if plan is not None and not ark_e113(plan):   # from part 9: E123 in the ark's stories, nothing elsewhere
+        return prop_problems_e123(i, shot) if ark_e123(plan) else []
     sid, p = shot.get("id"), shot["prompt"]
     rest = p
-    for w in [per or {}] + list(PERIODS.values()):    # the flood's setting sentence names "the great wooden ark"
+    for w in [per or {}, {"setting": PERIOD_SETTING_FLOOD_E113}] + list(PERIODS.values()):   # "the great wooden ark"
         for k in ("exclude", "setting"):
             if isinstance(w.get(k), str) and w[k]:
                 rest = rest.replace(w[k], " ")
@@ -671,6 +745,25 @@ def prop_problems(i, shot, per=None):
         if hits:
             out.append(f"{tag}_LOOK_CONFLICT shot {i} {sid} (names what the {name}'s look rules out: {', '.join(hits)}; "
                        "the shot says only its state, the look sentence gives its shape; E113)")
+    return out
+
+
+def prop_problems_e123(i, shot):
+    """E123: a scene (still, thumbnail) prompt names the prop only by its phrase, word for word, and says none of its
+    ship-prior or negated words anywhere, the period sentences included (ARK_LOOK_CONFLICT); its noun ("crate")
+    without the phrase is ARK_LOOK_NOT_CANONICAL. [] for a Keeper shot."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+        return []
+    sid, p, out = shot.get("id"), shot["prompt"], []
+    for name, prop in PROPS.items():
+        tag = name.upper()
+        hits = sorted({m.group(0).lower() for a in prop["words"] for m in re.finditer(rf"(?i)\b(?:{a})\b", p)})
+        if hits:
+            out.append(f"{tag}_LOOK_CONFLICT shot {i} {sid} (says what pulls a ship or primes what it negates: "
+                       f"{', '.join(hits)}; name the {name} only as '{prop['phrase']}', in positive words; E123)")
+        if not has_phrase(p, prop["phrase"]) and re.search(rf"(?i)\b(?:{prop['noun']})\b", p):
+            out.append(f"{tag}_LOOK_NOT_CANONICAL shot {i} {sid} (names the {name} without its phrase, word for word: "
+                       f"'{prop['phrase']}'; E123)")
     return out
 
 
@@ -705,16 +798,17 @@ def ark_grandfathered(plan, shots):
 PROP_STILL_FROM_PART = 9
 
 
-def _named_outside_period(prompt, per=None):
+def _named_outside_period(prompt, per=None, mentions=True):
     """The prop names a prompt holds outside the period sentences (the flood's setting names "the great wooden ark"
     in every shot of the period; that sentence alone does not make a shot show the ark)."""
     rest = prompt
-    for w in [per or {}] + list(PERIODS.values()):
+    for w in [per or {}, {"setting": PERIOD_SETTING_FLOOD_E113}] + list(PERIODS.values()):
         for k in ("exclude", "setting"):
             if isinstance(w.get(k), str) and w[k]:
                 rest = rest.replace(w[k], " ")
     return [name for name, prop in PROPS.items()
-            if any(re.search(rf"(?i)\b(?:{a})\b", rest) for a in prop["mentions"])]
+            if has_phrase(rest, prop["phrase"]) or (mentions and any(re.search(rf"(?i)\b(?:{a})\b", rest)
+                                                                     for a in prop["mentions"]))]
 
 
 def prop_shot_problems(i, shot, plan, per=None):
@@ -726,7 +820,7 @@ def prop_shot_problems(i, shot, plan, per=None):
     if type(part) is not int or part < PROP_STILL_FROM_PART or shot.get("kind") != "scene" \
             or not isinstance(shot.get("prompt"), str) or shot.get("first_frame"):
         return []
-    named = _named_outside_period(shot["prompt"], per)
+    named = _named_outside_period(shot["prompt"], per, mentions=ark_period(plan))
     if not named:
         return []
     how = ("a character shot cannot take a still (Pavo: frames and references are exclusive): leave the "
@@ -742,7 +836,7 @@ def plan_prop_problems(plan, shots):
     per = period(plan) if isinstance(plan, dict) else None
     exempt, out = ark_grandfathered(plan, shots)
     return out + [p for i, s in enumerate(shots) if isinstance(s, dict) and s.get("id") not in exempt
-                  for p in prop_problems(i, s, per) + prop_shot_problems(i, s, plan, per)]
+                  for p in prop_problems(i, s, per, plan) + prop_shot_problems(i, s, plan, per)]
 
 
 STILLS_DIR = HERE / "stills"          # scene stills: <id>.json records, candidates/ (scene_stills.py)
@@ -769,18 +863,22 @@ def still_prompt_problems(label, prompt, plan):
         found.append(problem)
     else:
         found += period_problems(0, pseudo, per)
-    found += writing_problems(0, pseudo) + prop_problems(0, pseudo, per)
+    found += writing_problems(0, pseudo) + prop_problems(0, pseudo, per, plan if isinstance(plan, dict) else {})
     return found
 
 
-def prop_references(prompt, props=None):
+def prop_references(prompt, props=None, plan=None):
     """E122: (the approved reference images a still must be made with, the problems). A prompt that names a prop
     (PROPS `mentions`, anywhere: the flood's setting sentence names "the great wooden ark", and Pavo draws it) needs
     every approved reference of that prop (props.json, props.py); a prop not APPROVED yet is a problem. Text alone did
     not hold the ark's shape (genesis-09: a tower, a barn, a ship's bow under the same two sentences)."""
     refs, out = [], []
     for name, spec in PROPS.items():
-        if not isinstance(prompt, str) or not any(re.search(rf"(?i)\b(?:{a})\b", prompt) for a in spec["mentions"]):
+        # E123: the phrase is the ark (from part 9 nothing else may name it: with a plan past part 8 only the phrase
+        # counts, so Jonah's ship takes no ark reference); E113's names still count for parts 1-8 and without a plan
+        phrase_only = plan is not None and not ark_e113(plan)
+        if not has_phrase(prompt, spec["phrase"]) and (phrase_only or not isinstance(prompt, str) or not any(
+                re.search(rf"(?i)\b(?:{a})\b", prompt) for a in spec["mentions"])):
             continue
         got, why = prop_refs.approved_refs(name, props)
         if why:
@@ -812,11 +910,11 @@ def pavo_proof_problems(pavo, count):
     return []
 
 
-def prop_reference_problems(prompt, references, props=None, pavo=None):
+def prop_reference_problems(prompt, references, props=None, pavo=None, plan=None):
     """E122: what keeps a still (its prompt, the references it was made with: [{record, sha256}], the Pavo read-back)
     from showing a prop's one look: the prop is not APPROVED, the references are not exactly its approved ones (by
     sha256), or Pavo's own answer does not show that many input images. [] when it names none."""
-    need, out = prop_references(prompt, props)
+    need, out = prop_references(prompt, props, plan)
     if out or not need:
         return out
     sent = [r.get("sha256") for r in references or [] if isinstance(r, dict)]
@@ -890,7 +988,8 @@ def frame_problems(i, shot, plan, stills_dir=None):
             out.append(f"STILL_PATH_REFUSED shot {i} {sid} ({f} {still}: a PNG/JPEG inside the repository)")
             continue
         out += [f"STILL_PROP_UNREFERENCED shot {i} {sid} ({f} {still}: {p}; E122)"
-                for p in prop_reference_problems(rec.get("prompt"), rec.get("references"), pavo=rec.get("pavo"))]
+                for p in prop_reference_problems(rec.get("prompt"), rec.get("references"), pavo=rec.get("pavo"),
+                                                 plan=plan)]
         if (rec.get("approved") or {}).get("references_sha256") != reference_digest(rec.get("references")):
             out.append(f"STILL_PROMPT_CHANGED shot {i} {sid} ({f} {still}: its references are not the ones its image "
                        "was approved with; E122)")

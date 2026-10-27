@@ -134,6 +134,9 @@ Produce the master and package, retain provenance, and deliver the frozen techni
   carried the sentences and still drew a tower, a barn or a bow). A still whose prompt names the prop is made with
   every approved reference of it, recorded by sha256 with Pavo's read-back (STILL_PROP_UNREFERENCED in scene_stills
   and plan_check); from part 9 a scene shot that names it starts from such a still (PROP_SHOT_WITHOUT_STILL).
+  From part 9 the words are positive only (E123: E113's negated sentences primed bows and funnels even with the
+  references): the ark is named only by `plan_check.ARK_PHRASE`, no prompt says ark/hull/ship/mast/funnel... (ARK_WORDS),
+  and the flood's period sentence names no ark; the phrase is what makes a still need the references.
 - An episode record is checked with `episode_build.py check-record <episodes/<id>.json>` (publish_episode's own rules) before `publish-episode.yml` is dispatched.
 - `shot-probe.yml` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - **Every expensive workflow runs `ops/dispatch_guard.py` first** (E116; episode, shot-probe, cf-images, pilot render and preview, footage, pavo-footage, agnes-clip, publish-episode), before any secret: its inputs (and E112's order), capacity (assets in the newest release + the run's uploads <= 1000, the Cloudflare allocation for FLUX runs, YouTube's record limits), one run per episode / pilot / library (a shared job-level concurrency group `heroverse-subject-<subject>`), no new dispatch on a subject whose last run of that workflow failed unless main has a commit since that touches what the run depends on (or `evidence/dispatch/retries.json` records an external cause), and the imports of every script it calls in the job's environment. `ops/test_dispatch_guard.py` fails a new `workflow_dispatch` workflow that is neither guarded nor exempted with its reason.

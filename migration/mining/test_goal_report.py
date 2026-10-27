@@ -28,6 +28,17 @@ class Eligible(unittest.TestCase):
         self.assertEqual((e["public_long_form_watch_hours_365d"], e["public_shorts_views_90d"]), (2.0, 5))
 
 
+class VideoIndex(unittest.TestCase):
+    def test_every_public_video_is_indexed_not_only_the_20_newest(self):
+        # review of #463: reach_report classified impressions from `videos`, which keeps the 20 newest
+        videos = [{"id": f"V{i}", "title": "t", "published": "2026-10-01T00:00", "views": i, "short": i % 2 == 0,
+                   "likes": 0, "content_type": "SHORTS" if i == 3 else None} for i in range(25)]
+        idx = gr.video_index(videos)
+        self.assertEqual(len(idx), 25)
+        self.assertEqual(idx["V3"], {"title": "t", "published": "2026-10-01T00:00", "views": 3, "short": False,
+                                     "content_type": "SHORTS"})
+
+
 class Funnel(unittest.TestCase):
     """Short -> long funnel of a long video, from its Analytics rows by traffic source (owner, 2026-10-26: measured)."""
     def test_share_and_watch_time_of_viewers_who_came_from_shorts(self):

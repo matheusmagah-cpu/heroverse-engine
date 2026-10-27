@@ -1150,6 +1150,7 @@ class ArkLook(unittest.TestCase):
         import episode_build as eb
         p = self.with_body("The ark stands on the hill.", ark=True)
         self.assertNotIn("PROP_SHOT_WITHOUT_STILL", codes(pc.check(p, CHARS)))      # part 7
+        p = self.with_body(f"{ARK_PHRASE[:1].upper()}{ARK_PHRASE[1:]} stands on the hill.")   # E123's name, part 9
         p["part"] = 9
         self.assertIn("PROP_SHOT_WITHOUT_STILL", codes(pc.check(p, CHARS)))
         shot = p["shots"][1]
@@ -1160,10 +1161,13 @@ class ArkLook(unittest.TestCase):
         # the flood's period sentence alone ("the great wooden ark") does not make a shot show the ark
         flood = f"{pc.PERIODS['the-flood']['setting']} {pc.PERIODS['the-flood']['exclude']}"
         self.assertEqual(pc.prop_shot_problems(1, dict(shot, prompt=f"Rain on the tents. {flood}"), p), [])
-        # genesis-09-short on main is refused for exactly this until #461's image-first plan lands
+        # genesis-09-short on main is refused for exactly this until #461's image-first plan lands, and for E123's
+        # wording (E113's ark sentences and flood sentence) until it is reworded
+        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
         g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
         if not all(s.get("first_frame") for s in g09["shots"] if s["kind"] == "scene" and not s.get("characters")):
-            self.assertEqual(set(codes(pc.check(g09))), {"PROP_SHOT_WITHOUT_STILL"})
+            self.assertLessEqual(set(codes(pc.check(g09))),
+                                 {"PROP_SHOT_WITHOUT_STILL", "ARK_LOOK_CONFLICT", "SCENE_PERIOD_MISSING"})
 
     def test_the_look_is_the_shape_so_the_shot_names_no_ship_beside_it(self):
         for body in ("The ark, a long, low wooden ship, stands on the hill.", "The ark's mast leans in the wind.",
@@ -1208,7 +1212,8 @@ class ArkLook(unittest.TestCase):
         arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
         i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
         arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". A boat drifts past. ", 1)
-        self.assertIn("ARK_LOOK_NOT_CANONICAL", [x.split()[0] for x in lc.check(arc)["problems"]])
+        arc["period"] = "the-flood"   # E123 is the ark's periods' rule (Eden keeps its boats)
+        self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])   # a long: E123
 
     def test_every_plan_shows_the_ark_by_its_one_look(self):
         for folder in ("plans", "drafts", "episodes"):
@@ -1221,15 +1226,22 @@ class ArkLook(unittest.TestCase):
                     if f.name == "genesis-09-short.json" and not all(s.get("first_frame") for s in pl["shots"]
                                                                     if s["kind"] == "scene" and not s.get("characters")):
                         got = [x for x in got if not x.startswith("PROP_SHOT_WITHOUT_STILL")]
+                    if f.name == "genesis-09-short.json" and any(ARK_LOOK in (s.get("prompt") or "")
+                                                                for s in pl["shots"]):
+                        # E123: on main genesis-09 still holds E113's wording; refused until it is reworded.
+                        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
+                        got = [x for x in got if not x.startswith("ARK_LOOK_CONFLICT")]
                     self.assertEqual(got, [], f.name)
         def shown(s):
             # image first (owner, 27/10): a shot that starts from a still shows the ark the still's prompt draws (its
             # own prompt gives the motion); plan_check refuses that still prompt without the look (STILL_PROMPT_REFUSED)
             still = pc.still_record(s.get("first_frame"), HERE / "stills") if s.get("first_frame") else None
-            return ARK in s["prompt"] or bool(still and ARK in still["prompt"])
-        # genesis-09: 20 stills draw the ark; s-noah-door and s-noah-ramp are Noah's reference shots, which cannot
-        # take a still, so their words leave the ark out (E122, PROP_SHOT_WITHOUT_STILL)
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 20)):
+            def ark(prompt):   # E113's sentences (parts 1-8) or E123's phrase (part 9 on)
+                return ARK in prompt or pc.has_phrase(prompt, pc.ARK_PHRASE)
+            return ark(s["prompt"]) or bool(still and ark(still["prompt"]))
+        # genesis-09 (E123): 17 stills name the ark by its phrase; the interiors (s-inside, s-lamp, s-hull) show a
+        # plank hold, and s-noah-door / s-noah-ramp are Noah's reference shots, which cannot take a still (E122)
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 17)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
@@ -1264,7 +1276,7 @@ class ArkLook(unittest.TestCase):
         g09["shots"][0]["prompt"] = g09["shots"][0]["prompt"].replace(ARK, "")
         got = codes(pc.check(g09))
         self.assertIn("ARK_GRANDFATHER_REFUSED", got)
-        self.assertIn("ARK_LOOK_NOT_CANONICAL", got)
+        self.assertIn("ARK_LOOK_CONFLICT", got)    # part 9: E123, the word "ark" itself is refused
         p = self.with_body("The distant hull stands far off.")
         p["ark_look_grandfathered"] = ["s-a"]
         self.assertIn("ARK_GRANDFATHER_REFUSED", codes(pc.check(p, CHARS)))
@@ -1273,6 +1285,140 @@ class ArkLook(unittest.TestCase):
         scorn = next(x for x in g08["shots"] if x["id"] == "s-scorn")
         self.assertIsNone(eb.prop_refusal(g08, scorn))
         self.assertTrue(eb.prop_refusal(bare, scorn).startswith("ARK_LOOK_NOT_CANONICAL s-scorn"))
+
+
+# E123 (Claude's review of genesis-09 run 2026102704; probe evidence/pavo/20261027/genesis-09-ark-probe/): with the
+# ark's references sent, E113's two sentences (V1) drew a curved bow, a cabin and a smoking funnel in 3 of 3 stills;
+# the ark described only positively, without ark/hull/ship words or any negation, plus the references (V2), held the
+# box in 3 of 3. The phrase, written out here so the test fails while plan_check has no such rule:
+ARK_PHRASE = ("a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat "
+              "square ends, as tall at both ends as in the middle")
+PROBE = HERE.parents[2] / "migration" / "evidence" / "pavo" / "20261027" / "genesis-09-ark-probe" / "probes.json"
+FLOOD_E123 = ("The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new "
+              "earth.")
+
+
+class ArkPositiveWording(unittest.TestCase):
+    def part9(self, body):
+        p = plan()
+        p["part"] = 9
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace(PERIOD, f"{body} {PERIOD}")
+        return p
+
+    def test_e113s_wording_is_refused_from_part_9_and_kept_before(self):
+        v1 = f"The vast ark, its whole hull smeared pitch-black, stands on the hill. {ARK}"
+        self.assertNotIn("ARK_LOOK_CONFLICT", codes(pc.check(self.with_part(v1, 7), CHARS)))   # published parts
+        got = codes(pc.check(self.part9(v1), CHARS))
+        self.assertIn("ARK_LOOK_CONFLICT", got)
+        # each negated word alone primes the model: refused even inside a negation
+        for body in ("No mast rises from it.", "There is no funnel.", "No smoke rises, no smokestack.",
+                     "A wooden ship sails by.", "Its hull is black."):
+            self.assertIn("ARK_LOOK_CONFLICT", codes(pc.check(self.part9(body), CHARS)), body)
+        # the build, the long, the stills and the thumbnails refuse it by the same function
+        import episode_build as eb
+        import long_plan_check as lc
+        p = self.part9(v1)
+        self.assertTrue(eb.prop_refusal(p, p["shots"][1]).startswith("ARK_LOOK_CONFLICT s-a"))
+        self.assertIn("ARK_LOOK_CONFLICT", " ".join(pc.still_prompt_problems("x", v1, {"period": "the-flood"})))
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
+        arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", f". {ARK_EXCLUDE} ", 1)
+        arc["period"] = "the-flood"
+        self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])
+        import thumbs
+        spec = json.loads((HERE / "thumbs" / "genesis-09-short.json").read_text())
+        self.assertNotIn("THUMB_PROMPT_REFUSED", codes({"problems": thumbs.spec_problems(spec)}))
+        self.assertIn("THUMB_PROMPT_REFUSED", codes({"problems": thumbs.spec_problems(
+            dict(spec, prompt=spec["prompt"] + " " + ARK_EXCLUDE))}))
+
+    def with_part(self, body, part):
+        p = self.part9(body)
+        p["part"] = part
+        return p
+
+    def test_the_positive_phrase_passes_and_is_how_a_still_shows_the_ark(self):
+        self.assertEqual(pc.ARK_PHRASE, ARK_PHRASE)
+        body = f"The crowd laughs up at {ARK_PHRASE}, resting flat on the hilltop."
+        p = self.part9(body)
+        got = codes(pc.check(p, CHARS))
+        self.assertNotIn("ARK_LOOK_CONFLICT", got)
+        self.assertNotIn("ARK_LOOK_NOT_CANONICAL", got)
+        self.assertIn("PROP_SHOT_WITHOUT_STILL", got)             # from part 9 it starts from a still...
+        self.assertIn("character shot", pc.prop_shot_problems(1, dict(p["shots"][1], characters=["eve"]), p)[0])
+        refs, why = pc.prop_references(body)                       # ...made with the ark's references
+        self.assertTrue(refs or why)
+        cap = f"Wide shot. {ARK_PHRASE[:1].upper()}{ARK_PHRASE[1:]} sits level in the floodwater."
+        self.assertEqual(pc.prop_references(cap), pc.prop_references(body))
+        # a still that does not show the ark needs no reference, and the crate without its phrase is not the ark
+        self.assertEqual(pc.prop_references(f"Rain on the tents. {FLOOD_E123} {EXCLUDE}"), ([], []))
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(self.part9("The crate stands on the hill."), CHARS)))
+        self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(self.part9(body.replace("rough", "dark")), CHARS)))
+
+    def test_the_flood_period_sentence_names_no_ark(self):
+        self.assertEqual(pc.PERIODS["the-flood"]["setting"], FLOOD_E123)
+        for name, per in pc.PERIODS.items():
+            for sentence in (per["setting"], per["exclude"]):
+                self.assertEqual(pc.prop_problems_e123(0, {"kind": "scene", "id": "x", "prompt": sentence}), [], name)
+                self.assertEqual(pc.prop_references(sentence), ([], []), name)
+
+    # review of #465: the ark's words belong to the ark's stories (Genesis 4-10: before the flood, the flood); other
+    # stories keep their ships, boats, vessels and crates
+    OTHER = ("Jonah sleeps in the ship's hold.", "Fishermen haul nets from a boat.",
+             "Moses lies in an ark of bulrushes among the reeds.", "A clay vessel stands by the fire.",
+             "A chimney of rock rises from the cliff.", "There is no smoke in the sky.",
+             "A wooden crate of figs sits by the tent.")
+    ARKCODES = {"ARK_LOOK_CONFLICT", "ARK_LOOK_NOT_CANONICAL", "PROP_SHOT_WITHOUT_STILL"}
+
+    def elsewhere(self, body):
+        p = self.part9(body)
+        p.update(part=20, passage="Jonah 1:1-17 (KJV)", period={"setting": SETTING, "exclude": EXCLUDE})
+        return p
+
+    def test_scoped_to_the_arks_periods(self):
+        for body in self.OTHER:
+            self.assertFalse(self.ARKCODES & set(codes(pc.check(self.elsewhere(body), CHARS))), body)
+            self.assertTrue(self.ARKCODES & set(codes(pc.check(self.part9(body), CHARS))), body)
+            self.assertEqual(pc.prop_references(body, plan=self.elsewhere(body)), ([], []), body)
+        self.assertTrue(pc.ark_period(self.part9("x")))
+        for passage in ("Genesis 7 (KJV)", "Genesis 9:1-17 (KJV)", "Genesis 4:1-16 (KJV)"):
+            self.assertTrue(pc.ark_period({"passage": passage}), passage)
+        for passage in ("Genesis 1:1-31 (KJV)", "Genesis 12:1-9 (KJV)", "Jonah 1 (KJV)", "Exodus 2:1-10 (KJV)"):
+            self.assertFalse(pc.ark_period({"passage": passage}), passage)
+        self.assertTrue(pc.ark_period({"period": "the-flood"}))
+        self.assertFalse(pc.ark_period({"period": "eden"}))
+        # a long and a thumbnail are scoped by their passage or period the same way
+        import long_plan_check as lc
+        import thumbs
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
+        arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". A boat drifts past. ", 1)
+        self.assertFalse(self.ARKCODES & {x.split()[0] for x in lc.check(arc)["problems"]})        # Eden
+        arc["period"] = "the-flood"
+        self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in lc.check(arc)["problems"]])
+        spec = json.loads((HERE / "thumbs" / "genesis-09-short.json").read_text())
+        boat = dict(spec, prompt=spec["prompt"] + " A boat drifts past.")
+        self.assertIn("ARK_LOOK_CONFLICT", " ".join(thumbs.spec_problems(boat)))
+        self.assertNotIn("ARK_LOOK", " ".join(thumbs.spec_problems(dict(boat, period="eden"))))
+
+    def test_inside_the_arks_periods_the_cheap_bypasses_are_closed(self):
+        for body in ("A galley drifts on the water.", "Its keelless shape floats.", "Men stand on its deck.",
+                     "A floating box drifts by.", "A wooden enclosure stands on the hill."):
+            self.assertIn("ARK_LOOK_CONFLICT", codes(pc.check(self.part9(body), CHARS)), body)
+        # the rainbow is "my bow in the cloud" (Genesis 9:13): never refused
+        self.assertFalse(self.ARKCODES & set(codes(pc.check(self.part9("A bow of colours arches in the cloud."),
+                                                          CHARS))))
+
+    def test_the_probe_that_found_it(self):
+        probe = json.loads(PROBE.read_text())
+        rows = {(r["variant"], r["shot"]): r for r in probe["probes"]}
+        for shot in ("s-laugh", "s-enter", "s-lift"):
+            v1, v2 = rows[("V1", shot)], rows[("V2", shot)]
+            self.assertEqual((v1["box_held"], v2["box_held"]), ("no", "yes"), shot)
+            self.assertIn("ARK_LOOK_CONFLICT", [x.split()[0] for x in pc.prop_problems_e123(
+                0, {"kind": "scene", "id": shot, "prompt": v1["prompt"]})])
+            self.assertEqual(pc.prop_problems_e123(0, {"kind": "scene", "id": shot, "prompt": v2["prompt"]}), [])
+            self.assertTrue(pc.has_phrase(v2["prompt"], ARK_PHRASE))
+            self.assertEqual(len(v2["references"]), 2)
 
 
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
