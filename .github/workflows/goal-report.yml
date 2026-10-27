@@ -22,6 +22,16 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/goal_report.py migration/production migration/publish/ledger.json migration/evidence/daily-report
+      - name: Impressions and CTR (YouTube Reporting API reach reports; PENDING or UNKNOWN with a reason, never fails the report)
+        # bounded and never failing, with no step-level error masking (test_learning_loop forbids it here):
+        # the run is killed after 150 s, and any non-zero exit becomes an UNKNOWN row in latest.md
+        timeout-minutes: 3
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          rc=0
+          timeout 150 "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/reach_report.py migration/evidence/daily-report migration/publish/ledger.json || rc=$?
+          [ "$rc" = 0 ] || python3 -I -B migration/mining/reach_report.py --step-failed "$rc" migration/evidence/daily-report
       - name: Scheduler health (every task of the heartbeat, the heartbeat itself, the render runner)
         env:
           GH_TOKEN: ${{ github.token }}
