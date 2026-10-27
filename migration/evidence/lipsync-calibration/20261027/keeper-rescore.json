@@ -1,0 +1,425 @@
+{
+ "date": "2026-10-27",
+ "note": "Existing Keeper outputs re-scored with no new generation: each mp4 from the claude/musetalk-probe-* and claude/latentsync-probe-* branches through the current lipsync_check (mediapipe 0.10.35, pinned model) against its own soundtrack (the line). neg_max = best mouth corr of the same picture with its audio shifted +-300/+-500 ms (circular) or with another line's audio. Re-measured corr differs from the runner check.json by up to 0.03 in corr and 0.15 in face share (decoder/build); every verdict matches it.",
+ "clips": {
+  "run-40421369397-ine-01": {
+   "line": "line-01",
+   "mouth": {
+    "corr": 0.493,
+    "lag_ms": 42,
+    "speak_to_pause": 3.99,
+    "face_frames": 1.0
+   },
+   "flags": [],
+   "neg_max": 0.481
+  },
+  "run-40421369397-k-insight": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.232,
+    "lag_ms": 42,
+    "speak_to_pause": 1.63,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.221
+  },
+  "run-40421369397-uestion": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.457,
+    "lag_ms": 0,
+    "speak_to_pause": 2.46,
+    "face_frames": 1.0
+   },
+   "flags": [],
+   "neg_max": 0.295
+  },
+  "run-40424942367-k-close-lipsdetail": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.394,
+    "lag_ms": 42,
+    "speak_to_pause": 1.66,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.343
+  },
+  "run-40424942367-k-close-refr1-lipsdetail": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.532,
+    "lag_ms": 83,
+    "speak_to_pause": 1.88,
+    "face_frames": 1.0
+   },
+   "flags": [],
+   "neg_max": 0.513
+  },
+  "run-40424942367-k-close-refr1": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.463,
+    "lag_ms": 83,
+    "speak_to_pause": 1.26,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.436
+  },
+  "run-40424942367-k-insight-lipsdetail": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.282,
+    "lag_ms": 42,
+    "speak_to_pause": 1.71,
+    "face_frames": 0.96
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.251
+  },
+  "run-40424942367-k-insight-refr1-lipsdetail": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.348,
+    "lag_ms": 42,
+    "speak_to_pause": 1.5,
+    "face_frames": 0.88
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.325
+  },
+  "run-40424942367-k-insight-refr1": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.332,
+    "lag_ms": 42,
+    "speak_to_pause": 1.22,
+    "face_frames": 0.99
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.28
+  },
+  "run-40424942367-k-question-lipsdetail": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.403,
+    "lag_ms": 0,
+    "speak_to_pause": 2.42,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.252
+  },
+  "run-40424942367-k-question-refr1-lipsdetail": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.432,
+    "lag_ms": 42,
+    "speak_to_pause": 1.66,
+    "face_frames": 0.95
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.383
+  },
+  "run-40424942367-k-question-refr1": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.314,
+    "lag_ms": 83,
+    "speak_to_pause": 1.27,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.337
+  },
+  "run-40433105910-k-close-r1-lips-24": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.527,
+    "lag_ms": 83,
+    "speak_to_pause": 1.94,
+    "face_frames": 1.0
+   },
+   "flags": [],
+   "neg_max": 0.518
+  },
+  "run-40433105910-k-close-r1-lips-25": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.52,
+    "lag_ms": 40,
+    "speak_to_pause": 2.74,
+    "face_frames": 1.0
+   },
+   "flags": [],
+   "neg_max": 0.44
+  },
+  "run-40433105910-k-close-r2-lips-25": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.421,
+    "lag_ms": 0,
+    "speak_to_pause": 2.37,
+    "face_frames": 0.8
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.343
+  },
+  "run-40433105910-k-insight-r1-lips-24": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.285,
+    "lag_ms": 83,
+    "speak_to_pause": 1.31,
+    "face_frames": 0.93
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.335
+  },
+  "run-40433105910-k-insight-r1-lips-25": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.313,
+    "lag_ms": 0,
+    "speak_to_pause": 1.66,
+    "face_frames": 0.89
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.298
+  },
+  "run-40433105910-k-insight-r2-lips-25": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.134,
+    "lag_ms": -40,
+    "speak_to_pause": 1.33,
+    "face_frames": 0.85
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.159
+  },
+  "run-40433105910-k-question-r1-lips-24": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.346,
+    "lag_ms": 0,
+    "speak_to_pause": 1.62,
+    "face_frames": 0.94
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.333
+  },
+  "run-40433105910-k-question-r1-lips-25": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.402,
+    "lag_ms": -40,
+    "speak_to_pause": 1.62,
+    "face_frames": 0.99
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.338
+  },
+  "run-40433105910-k-question-r2-lips-25": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.242,
+    "lag_ms": -80,
+    "speak_to_pause": 1.34,
+    "face_frames": 0.97
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.262
+  },
+  "run-40442652320-k-insight-lit-r1-lips-24": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.372,
+    "lag_ms": 0,
+    "speak_to_pause": 1.21,
+    "face_frames": 0.39
+   },
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.289
+  },
+  "run-40442652320-k-insight-lit-r1-lips-25": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.189,
+    "lag_ms": -40,
+    "speak_to_pause": 1.12,
+    "face_frames": 0.37
+   },
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.237
+  },
+  "run-40442652320-k-insight-p2-r1-lips-24": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.365,
+    "lag_ms": 250,
+    "speak_to_pause": 1.36,
+    "face_frames": 0.99
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.425
+  },
+  "run-40442652320-k-insight-p2-r1-lips-25": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.326,
+    "lag_ms": 240,
+    "speak_to_pause": 1.5,
+    "face_frames": 0.96
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.348
+  },
+  "run-40442652320-k-question-lit-r1-lips-24": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.326,
+    "lag_ms": 0,
+    "speak_to_pause": 1.26,
+    "face_frames": 0.65
+   },
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.25
+  },
+  "run-40442652320-k-question-lit-r1-lips-25": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.472,
+    "lag_ms": -40,
+    "speak_to_pause": 1.59,
+    "face_frames": 0.71
+   },
+   "flags": [
+    "FACE_NOT_FOUND"
+   ],
+   "neg_max": 0.485
+  },
+  "run-40442652320-k-question-p2-r1-lips-24": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.373,
+    "lag_ms": 42,
+    "speak_to_pause": 1.48,
+    "face_frames": 0.98
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "neg_max": 0.373
+  },
+  "run-40442652320-k-question-p2-r1-lips-25": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.406,
+    "lag_ms": 0,
+    "speak_to_pause": 1.83,
+    "face_frames": 0.99
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.338
+  },
+  "run-40474743697-k-close-ls15": {
+   "line": "k-close",
+   "mouth": {
+    "corr": 0.303,
+    "lag_ms": 120,
+    "speak_to_pause": 1.55,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.21
+  },
+  "run-40474743697-k-insight-ls15": {
+   "line": "k-insight",
+   "mouth": {
+    "corr": 0.246,
+    "lag_ms": 40,
+    "speak_to_pause": 1.62,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.178
+  },
+  "run-40474743697-k-question-ls15": {
+   "line": "k-question",
+   "mouth": {
+    "corr": 0.371,
+    "lag_ms": 0,
+    "speak_to_pause": 2.2,
+    "face_frames": 1.0
+   },
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "neg_max": 0.234
+  }
+ }
+}
