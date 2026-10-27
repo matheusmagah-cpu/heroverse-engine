@@ -53,5 +53,6 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 
 ## Documents
 `SYSTEM.md` (the four-stage delivery contract), `STANDARD.md` (production standard), `strategy/DECISIONS.md`
-(measurements and decisions), `strategy/MODELING_SPEC.md`, `strategy/VIDIQ.md`, `ops/RUNNER_WAKEUP.md`,
+(measurements and decisions), `strategy/MODELING_SPEC.md`, `strategy/VIDIQ.md`, `strategy/LIPSYNC_TOOLS.md` (Keeper lip-sync
+tool decision: LatentSync 1.5, fallback KeySync; decisive test `latentsync-probe.yml`), `ops/RUNNER_WAKEUP.md`,
 `ops/ERRORS.json` (regression register).

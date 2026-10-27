@@ -1,0 +1,131 @@
+name: Keeper lip sync decisive test (LatentSync 1.5 on CPU over silent Keeper clips, our Kokoro lines; nothing published)
+# Owner-approved 2026-10-27: the decisive test of the tool chosen in migration/strategy/LIPSYNC_TOOLS.md (LatentSync 1.5,
+# 256 px, Apache-2.0 code, free GitHub CPU, 0 credits; fallback KeySync). Same inputs as MuseTalk rounds 1-4: the three
+# silent plan-B probes and their genesis-07 Keeper WAVs.
+#   step 1  LatentSync's own face stage (InsightFace detector + affine warp) on every frame of the 25 fps source;
+#           detected/total per clip. A clip that misses any frame is recorded and not run (inference would raise).
+#   step 2  LatentSync 1.5 with its defaults (20 steps, guidance 1.5, DeepCache) through latentsync_sync.py (CPU patch
+#           documented there), judged by lipsync_check.py with thresholds unchanged; frame sheets and mouth crops.
+# Results go to claude/latentsync-probe-<run>-<line>. No secret, no paid call, no publication.
+on:
+  push:
+    branches: [claude/keeper-latentsync-probe]
+    paths: ['.github/workflows/latentsync-probe.yml', 'migration/production/bible/latentsync_sync.py']
+permissions:
+  contents: read
+concurrency:
+  group: latentsync-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-22.04     # system Python 3.10: decord 0.6.0 (a LatentSync requirement) has no wheel past 3.10
+    timeout-minutes: 350      # under the 6 h job limit
+    strategy:
+      fail-fast: false
+      matrix:
+        pair:
+          - {name: k-close, clip: probe-k-close-1-373107379233670656.mp4, wav: genesis07/k-close.wav}
+          - {name: k-insight, clip: probe-k-insight-1-373107010075637504.mp4, wav: genesis07/k-insight.wav}
+          - {name: k-question, clip: probe-k-question-1-373107181912649792.mp4, wav: genesis07/k-question.wav}
+    permissions:
+      contents: write   # the results branch only; no secret in this job
+    env:
+      LATENTSYNC_SHA: a229c3948406bc2cf6eaf4873e662e70c6a04746     # bytedance/LatentSync main, 2025-06-20
+      LS15_REV: 32a20d29aead0498e3e885e90dbbe8027da1b61b           # huggingface ByteDance/LatentSync-1.5
+      UNET_SHA: 6440b49a7ccceff56cdc001f5f17605216337f5bbd66fa360139768926e23f51
+      WHISPER_SHA: 65147644a518d12f04e32d6f3b26facc3f8dd46e5390956a9424a650c0ce22b9
+      VAE_REV: 31f26fdeee1355a5c34592e401dd41e45d25a493            # huggingface stabilityai/sd-vae-ft-mse
+      VAE_SHA: a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815
+      BUFFALO_SHA: 80ffe37d8a5940d59a7384c201a2a38d4741f2f3c51eef46ebb28218a7b0ca2f   # insightface v0.7 buffalo_l.zip
+      FACE_SHA: 64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff      # mediapipe landmarker (lipsync_check)
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools (ffmpeg, CPU torch, LatentSync at a pinned commit, 1.5 weights with their sha256)
+        run: |
+          set -eo pipefail
+          timeout 600s sudo apt-get update -qq
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg libegl1 libgles2 python3-dev python3-venv time >/dev/null
+          python3 --version
+          python3 -m venv "$RUNNER_TEMP/ls"; P="$RUNNER_TEMP/ls/bin/pip"
+          "$P" install -q --disable-pip-version-check torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
+          "$P" install -q --disable-pip-version-check --extra-index-url https://download.pytorch.org/whl/cpu \
+            torch==2.5.1 torchvision==0.20.1 diffusers==0.32.2 transformers==4.48.0 decord==0.6.0 accelerate==0.26.1 \
+            einops==0.7.0 omegaconf==2.3.0 opencv-python==4.9.0.80 python_speech_features==0.6 librosa==0.10.1 \
+            imageio==2.31.1 imageio-ffmpeg==0.5.1 huggingface-hub==0.30.2 numpy==1.26.4 kornia==0.8.0 \
+            insightface==0.7.3 onnxruntime==1.21.0 DeepCache==0.1.1 ffmpeg-python==0.2.0 soundfile==0.12.1 matplotlib==3.9.2
+          python3 -m venv "$RUNNER_TEMP/chk"   # the judge keeps its own mediapipe, apart from LatentSync's pins
+          "$RUNNER_TEMP/chk/bin/pip" install -q --disable-pip-version-check mediapipe==0.10.35 numpy
+          L="$RUNNER_TEMP/LatentSync"
+          git clone -q https://github.com/bytedance/LatentSync "$L"
+          git -C "$L" checkout -q "$LATENTSYNC_SHA"
+          H="$RUNNER_TEMP/ls/bin/huggingface-cli"
+          "$H" download ByteDance/LatentSync-1.5 --revision "$LS15_REV" --local-dir "$L/checkpoints" \
+            --include latentsync_unet.pt whisper/tiny.pt >/dev/null
+          "$H" download stabilityai/sd-vae-ft-mse --revision "$VAE_REV" --local-dir "$RUNNER_TEMP/sd-vae" \
+            --include config.json diffusion_pytorch_model.safetensors >/dev/null
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/buffalo_l.zip" https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+          printf '%s  %s\n' "$UNET_SHA" "$L/checkpoints/latentsync_unet.pt" "$WHISPER_SHA" "$L/checkpoints/whisper/tiny.pt" \
+            "$VAE_SHA" "$RUNNER_TEMP/sd-vae/diffusion_pytorch_model.safetensors" "$BUFFALO_SHA" "$RUNNER_TEMP/buffalo_l.zip" \
+            "$FACE_SHA" "$RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          mkdir -p "$L/checkpoints/auxiliary/models/buffalo_l"
+          unzip -q -o "$RUNNER_TEMP/buffalo_l.zip" -d "$L/checkpoints/auxiliary/models/buffalo_l"
+          mkdir -p "$RUNNER_TEMP/out"
+          { echo "# LatentSync $LATENTSYNC_SHA; ByteDance/LatentSync-1.5@$LS15_REV; stabilityai/sd-vae-ft-mse@$VAE_REV"
+            (cd "$L/checkpoints" && find . -type f ! -path '*/.cache/*' -exec sha256sum {} \;)
+            (cd "$RUNNER_TEMP" && sha256sum sd-vae/config.json sd-vae/diffusion_pytorch_model.safetensors buffalo_l.zip face_landmarker.task)
+          } | tee "$RUNNER_TEMP/out/weights.sha256"
+          nproc; free -g | head -2; df -h / | tail -1
+      - name: Step 1, LatentSync's face stage on every frame of the 25 fps source
+        id: detect
+        env:
+          NAME: ${{ matrix.pair.name }}
+          CLIP: ${{ matrix.pair.clip }}
+        run: |
+          set +e -o pipefail
+          out="$RUNNER_TEMP/out"; V=migration/evidence/pavo/20261026/keeper-vo
+          ffmpeg -nostdin -v error -y -i "$V/$CLIP" -vf fps=25 -c:v libx264 -crf 12 -an "$RUNNER_TEMP/src25.mp4"
+          "$RUNNER_TEMP/ls/bin/python" -B migration/production/bible/latentsync_sync.py detect \
+            --latentsync "$RUNNER_TEMP/LatentSync" "$RUNNER_TEMP/src25.mp4" "$out/$NAME.detect.json" \
+            < /dev/null 2>"$out/$NAME.detect.log"
+          rc=$?; grep -v -E "^(W0000|I0000|INFO|WARNING)" "$out/$NAME.detect.log" | tail -15
+          [ "$rc" = 0 ] || { echo "detect rc=$rc"; echo "ok=false" >> "$GITHUB_OUTPUT"; exit 0; }
+          ok=$(python3 -c "import json,sys;print(str(json.load(open(sys.argv[1]))['all_detected']).lower())" "$out/$NAME.detect.json")
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+      - name: Step 2, LatentSync 1.5 on the line, judge, sheets
+        if: steps.detect.outputs.ok == 'true'
+        env:
+          NAME: ${{ matrix.pair.name }}
+          WAV: ${{ matrix.pair.wav }}
+        run: |
+          set +e -o pipefail
+          out="$RUNNER_TEMP/out"; W=migration/evidence/pavo/20261026/keeper; FM="$RUNNER_TEMP/face_landmarker.task"
+          n="$NAME-ls15"; L="$RUNNER_TEMP/LatentSync"
+          /usr/bin/time -o "$out/$n.time.json" -f '{"cpu_user_s": %U, "cpu_sys_s": %S, "wall_s": %e, "max_rss_kb": %M}' \
+            "$RUNNER_TEMP/ls/bin/python" -B migration/production/bible/latentsync_sync.py sync --latentsync "$L" \
+            --ckpt "$L/checkpoints/latentsync_unet.pt" --vae "$RUNNER_TEMP/sd-vae" --temp-dir "$RUNNER_TEMP/ls-temp" \
+            "$RUNNER_TEMP/src25.mp4" "$W/$WAV" "$out/$n.mp4" < /dev/null 2>"$out/$n.log" | tail -1 > "$out/$n.run.json"
+          rc=$?; echo "== $n latentsync rc=$rc"; grep -v -E "it/s\]|s/it\]|^(W0000|I0000|INFO|WARNING)" "$out/$n.log" | tail -20
+          cat "$out/$n.time.json"
+          [ "$rc" = 0 ] && [ -s "$out/$n.mp4" ] || exit 0
+          "$RUNNER_TEMP/chk/bin/python" -I -B migration/production/bible/lipsync_check.py "$out/$n.mp4" "$W/$WAV" "$FM" < /dev/null 2>/dev/null | tail -1 > "$out/$n.check.json"
+          ffmpeg -nostdin -v error -y -i "$out/$n.mp4" -vf "fps=3,scale=240:-1,tile=6x3" -frames:v 1 "$out/$n-sheet.jpg"
+          ffmpeg -nostdin -v error -y -ss 1.5 -i "$out/$n.mp4" -frames:v 1 -vf "crop=300:340:235:200" "$out/$n-face.png"
+          ffmpeg -nostdin -v error -y -i "$out/$n.mp4" -vf "fps=6,crop=iw/2:ih/4:iw/4:ih/6,scale=200:-1,tile=8x4" -frames:v 1 "$out/$n-mouth.jpg"
+          cat "$out/$n.run.json" "$out/$n.check.json"
+      - name: Results to claude/latentsync-probe-<run>-<line>
+        if: always()
+        env:
+          NAME: ${{ matrix.pair.name }}
+        run: |
+          d="migration/evidence/pavo/20261027/latentsync/run-$GITHUB_RUN_ID"; mkdir -p "$d"
+          cp "$RUNNER_TEMP"/out/* "$d"/ 2>/dev/null || true
+          branch="claude/latentsync-probe-$GITHUB_RUN_ID-$NAME"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "LatentSync 1.5 lip sync decisive test (run $GITHUB_RUN_ID, $NAME): face stage, clip, sheets and lipsync_check measures"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"
