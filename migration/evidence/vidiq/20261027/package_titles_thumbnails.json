@@ -1,0 +1,1817 @@
+{
+ "date": "2026-10-27",
+ "focus": "publication package (title + thumbnail) of winners vs weak, Bible-story Shorts and longs (owner 26/10: titles and thumbnails make all the difference)",
+ "source": "vidIQ: vidiq_get_videos_by_ids x1 (21 recorded videoIds of 20261026: exact titles, metadata, breakout), vidiq_outliers short x1 (25 Bible-story Shorts, breakout >= 50, last 3 months); thumbnails fetched from i.ytimg.com hqdefault (free) and counted by Claude by eye",
+ "instruments": {
+  "title": "deterministic regex coder over the exact title (hashtags stripped); lexicons below, fixed before counting",
+  "thumbnail": "Claude visual count of the hqdefault image: presence/absence and word counts only, no quality score. Shorts: hqdefault is the frame shown in the Shorts feed, not a designed 16:9 thumbnail",
+  "lexicons": {
+   "OPP": "\\b(vs\\.?|versus|against|tried to stop|responded to|rebel\\w*|battle|fight\\w*|strikes?|threw|dragged|tempt\\w*|stolen|to die|faces? off)\\b",
+   "ANT": "\\b(goliath|giant|satan\\w*|devil|demons?|pharaoh|nebuchadnezzar|serpent|lions?)",
+   "REV": "(…|\\.\\.\\.|\\bbut\\b|\\buntil\\b|\\bthen\\b)",
+   "SHOCK": "\\b(final|last|never|secret|shocking|terrifying|impossible|forbidden|wicked|death|die|falls?)\\b"
+  },
+  "known_judgment_calls": [
+   "'lion(s)' counts as an opponent and 'fish' does not (Daniel vs Jonah). Flipped (fish in, lion out): Shorts opponent-or-question 13/27 vs 1/3, 9/18 vs 1/3, longs 1/7 vs 1/3, all still free; only the 6-winner 26/10 subset changes (driver 5/6 vs 0/3 becomes free 4/6 vs 1/3), so that earlier reading depended on this call",
+   "tvSiYmlGVNM thumbnail antagonist inferred (a scheming official)",
+   "NJQW8oJNFsk frame shows a presenter (host format, kept as a winner by breakout)"
+  ],
+  "reproduce": "every row carries its title_coded and thumb_coded values; the title coder is the lexicons above applied to the title with hashtags stripped (counts recomputable from rows)"
+ },
+ "validation_rule": "SYSTEM.md 1.5: >= 6 winners (breakout >= 50) from >= 4 channels, no channel > 1/3, >= 3 weak contrasts; labels driver >= 70 % winners and <= 30 % weak; hygiene >= 70 % both; anti >= 50 % weak and <= 20 % winners",
+ "summary": {
+  "short": {
+   "sample": {
+    "winners": 27,
+    "channels": 27,
+    "max_channel_share": 0.037,
+    "min_breakout": 51,
+    "weak": 3,
+    "weak_channels": 2
+   },
+   "labels": {
+    "title_opponent_or_opposition": {
+     "winners": "13/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_question": {
+     "winners": "2/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_opponent_or_question": {
+     "winners": "14/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_label_only": {
+     "winners": "13/27",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "title_reversal_marker": {
+     "winners": "4/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_number": {
+     "winners": "8/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_all_caps_segment": {
+     "winners": "7/27",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "title_emoji": {
+     "winners": "8/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_character_named": {
+     "winners": "23/27",
+     "weak": "3/3",
+     "label": "hygiene"
+    },
+    "title_shock_word": {
+     "winners": "5/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_pipe_series_tag": {
+     "winners": "14/27",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "title_le_60_chars": {
+     "winners": "17/27",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "thumb_face_closeup_emotion": {
+     "winners": "15/27",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_antagonist_visible": {
+     "winners": "10/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_designed_text": {
+     "winners": "5/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_text_le_4_words": {
+     "winners": "3/27",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_frozen_action": {
+     "winners": "7/27",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_single_figure": {
+     "winners": "15/27",
+     "weak": "2/3",
+     "label": "free"
+    },
+    "thumb_symbol_object": {
+     "winners": "14/27",
+     "weak": "3/3",
+     "label": "free"
+    }
+   },
+   "best_winner": {
+    "videoId": "vE_XJw7nU34",
+    "channel": "Nancy Essien Global",
+    "title": "WHAT IF YOUR DOUBT COULD MEET THE EVIDENCE OF GOD’S POWER? 🔥#shorts#BibleStories #GodsPower #Jesus",
+    "breakout": 1511
+   }
+  },
+  "long": {
+   "sample": {
+    "winners": 7,
+    "channels": 7,
+    "max_channel_share": 0.143,
+    "min_breakout": 67.74,
+    "weak": 3,
+    "weak_channels": 3
+   },
+   "labels": {
+    "title_opponent_or_opposition": {
+     "winners": "1/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "title_question": {
+     "winners": "0/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_opponent_or_question": {
+     "winners": "1/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "title_label_only": {
+     "winners": "6/7",
+     "weak": "2/3",
+     "label": "free"
+    },
+    "title_reversal_marker": {
+     "winners": "0/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_number": {
+     "winners": "0/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_all_caps_segment": {
+     "winners": "2/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_emoji": {
+     "winners": "0/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_character_named": {
+     "winners": "7/7",
+     "weak": "3/3",
+     "label": "hygiene"
+    },
+    "title_shock_word": {
+     "winners": "2/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "title_pipe_series_tag": {
+     "winners": "6/7",
+     "weak": "2/3",
+     "label": "free"
+    },
+    "title_le_60_chars": {
+     "winners": "1/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_face_closeup_emotion": {
+     "winners": "6/7",
+     "weak": "3/3",
+     "label": "hygiene"
+    },
+    "thumb_antagonist_visible": {
+     "winners": "2/7",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_designed_text": {
+     "winners": "7/7",
+     "weak": "3/3",
+     "label": "hygiene"
+    },
+    "thumb_text_le_4_words": {
+     "winners": "4/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_frozen_action": {
+     "winners": "1/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_single_figure": {
+     "winners": "3/7",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_symbol_object": {
+     "winners": "6/7",
+     "weak": "2/3",
+     "label": "free"
+    }
+   },
+   "best_winner": {
+    "videoId": "q5FW9qWzPSc",
+    "channel": "Forgotten Reality",
+    "title": "The LAST NIGHT of SODOM | FULL MOVIE | Inside the Wicked City",
+    "breakout": 1224.49
+   }
+  },
+  "short_20261026_subset": {
+   "sample": {
+    "winners": 6,
+    "channels": 6,
+    "max_channel_share": 0.167,
+    "min_breakout": 51.71,
+    "weak": 3,
+    "weak_channels": 2
+   },
+   "labels": {
+    "title_opponent_or_opposition": {
+     "winners": "5/6",
+     "weak": "0/3",
+     "label": "driver"
+    },
+    "title_opponent_or_question": {
+     "winners": "5/6",
+     "weak": "0/3",
+     "label": "driver"
+    },
+    "title_label_only": {
+     "winners": "1/6",
+     "weak": "3/3",
+     "label": "anti"
+    }
+   }
+  },
+  "short_ge_60s": {
+   "sample": {
+    "winners": 18,
+    "channels": 18,
+    "max_channel_share": 0.056,
+    "min_breakout": 51.71,
+    "weak": 3,
+    "weak_channels": 2
+   },
+   "labels": {
+    "title_opponent_or_opposition": {
+     "winners": "9/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_question": {
+     "winners": "2/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_opponent_or_question": {
+     "winners": "10/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_label_only": {
+     "winners": "8/18",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "title_reversal_marker": {
+     "winners": "3/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_number": {
+     "winners": "5/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_all_caps_segment": {
+     "winners": "5/18",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "title_emoji": {
+     "winners": "6/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_character_named": {
+     "winners": "17/18",
+     "weak": "3/3",
+     "label": "hygiene"
+    },
+    "title_shock_word": {
+     "winners": "2/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "title_pipe_series_tag": {
+     "winners": "11/18",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "title_le_60_chars": {
+     "winners": "11/18",
+     "weak": "3/3",
+     "label": "free"
+    },
+    "thumb_face_closeup_emotion": {
+     "winners": "11/18",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_antagonist_visible": {
+     "winners": "7/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_designed_text": {
+     "winners": "5/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_text_le_4_words": {
+     "winners": "3/18",
+     "weak": "0/3",
+     "label": "free"
+    },
+    "thumb_frozen_action": {
+     "winners": "2/18",
+     "weak": "1/3",
+     "label": "free"
+    },
+    "thumb_single_figure": {
+     "winners": "11/18",
+     "weak": "2/3",
+     "label": "free"
+    },
+    "thumb_symbol_object": {
+     "winners": "7/18",
+     "weak": "3/3",
+     "label": "free"
+    }
+   },
+   "note": "same form as ours (story Shorts of 60-180 s); 11-29 s clips excluded"
+  }
+ },
+ "verdict": {
+  "lead_conflict_or_question": "NOT VALIDATED. In the 26/10 subset (6 Shorts winners) it read as a driver (5/6 vs 0/3) and label-only as anti (1/6 vs 3/3); the larger fresh sample refutes it: opponent-or-question in 14/27 Shorts winners (52 %), 10/18 same-form 60-180 s winners (56 %), 1/7 long winners (14 %, weak 1/3). Label-only titles win too (13/27 Shorts, 6/7 longs). No title rule is proposed.",
+  "validated_hygiene": [
+   "title names the story's character or place (Shorts 17/18 same-form winners and 3/3 weak; longs 7/7 and 3/3)",
+   "long thumbnail carries designed text repeating the title's story name (7/7, 3/3)",
+   "long thumbnail shows a close-up face with readable emotion (6/7, 3/3)"
+  ],
+  "no_driver": "No title or thumbnail attribute separates winners from weak in either form at the counted thresholds. The weak side (3 per form) is the limiting sample: Shorts weak come from 2 channels.",
+  "missing_sample": "to test packaging drivers: >= 6 more weak contrasts per form from >= 4 channels (same form, at or below channel norm), taken from the winners' own channels with vidiq_channel_videos, so title/thumbnail is compared within channel (package effect, not channel size)",
+  "best_measured_winners": {
+   "short_same_form": "vE_XJw7nU34 breakout 1511: a question title in CAPS (WHAT IF YOUR DOUBT COULD MEET THE EVIDENCE OF GOD'S POWER?) with a 13-word designed text box on the frame; single video, hypothesis only",
+   "long": "q5FW9qWzPSc breakout 1224: 'The LAST NIGHT of SODOM' (deadline framing, CAPS on 3 key words), thumbnail one big word + small tagline, no face, muted palette; single video, hypothesis only (it breaks the face hygiene)"
+  }
+ },
+ "rows": [
+  {
+   "videoId": "ltB8Lx0IZWI",
+   "channel": "Passover Connect",
+   "form": "short",
+   "class": "winner",
+   "title": "THE LITTLE BOY WITH A BIG GOD | David vs Goliath #shorts",
+   "views": 2682117,
+   "breakout": 1256.48,
+   "seconds": 170,
+   "title_coded": {
+    "clean_title": "THE LITTLE BOY WITH A BIG GOD | David vs Goliath",
+    "chars": 48,
+    "words": 10,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.6,
+    "all_caps_segment": true,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "dVq-Un3LqoQ",
+   "channel": "Lusi Achampong",
+   "form": "short",
+   "class": "winner",
+   "title": "The Prayers of Daniel which the Angles tried to stop 🔥#fyp #christian #jesus #prophet #shorts",
+   "views": 691256,
+   "breakout": 403.05,
+   "seconds": 178,
+   "title_coded": {
+    "clean_title": "The Prayers of Daniel which the Angles tried to stop 🔥",
+    "chars": 54,
+    "words": 10,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 4,
+    "ant": 1,
+    "txt": 4,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "JGbu9802o9o",
+   "channel": "Apostles And Prophet Tv",
+   "form": "short",
+   "class": "winner",
+   "title": "The Moment Jesus Responded To Satan | Cinematic Bible Story",
+   "views": 522540,
+   "breakout": 208.65,
+   "seconds": 172,
+   "title_coded": {
+    "clean_title": "The Moment Jesus Responded To Satan | Cinematic Bible Story",
+    "chars": 59,
+    "words": 9,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": "earth",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "hnQUUbd0wDI",
+   "channel": "Eternal Story Light",
+   "form": "short",
+   "class": "winner",
+   "title": "Why Would God Let Satan Rebel One Last Time?",
+   "views": 62098,
+   "breakout": 293.34,
+   "seconds": 97,
+   "title_coded": {
+    "clean_title": "Why Would God Let Satan Rebel One Last Time?",
+    "chars": 44,
+    "words": 9,
+    "opponent_or_opposition": true,
+    "question": true,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 1,
+    "txt": 3,
+    "act": 1,
+    "sym": "fire",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "tvSiYmlGVNM",
+   "channel": "MYKEL",
+   "form": "short",
+   "class": "winner",
+   "title": "THE STORY OF DANIEL IN THE LION DEN.#daniel#jesuschrist",
+   "views": 32629,
+   "breakout": 51.71,
+   "seconds": 179,
+   "title_coded": {
+    "clean_title": "THE STORY OF DANIEL IN THE LION DEN.",
+    "chars": 36,
+    "words": 8,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 1.0,
+    "all_caps_segment": true,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": "torch",
+    "note": "antagonist inferred: scheming official",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "7qAPgGyzeH8",
+   "channel": "cronicas de la biblia",
+   "form": "short",
+   "class": "winner",
+   "title": "bartimeo recupera la vista #Jesús #Bartimeo #MilagrosDeJesús #Biblia #Fe #Shorts",
+   "views": 89211,
+   "breakout": 84.08,
+   "seconds": 171,
+   "language": "es",
+   "title_coded": {
+    "clean_title": "bartimeo recupera la vista",
+    "chars": 26,
+    "words": 4,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 2,
+    "ant": 0,
+    "txt": 3,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "HO8l1xMp49g",
+   "channel": "Bible Battle Arena",
+   "form": "short",
+   "class": "winner",
+   "title": "THE GIANT FALLS! 😱⚔️ DAVID’S STONE STRIKES GOLIATH | Episode 8",
+   "views": 403500,
+   "breakout": 68,
+   "seconds": 29,
+   "title_coded": {
+    "clean_title": "THE GIANT FALLS! 😱⚔️ DAVID’S STONE STRIKES GOLIATH | Episode 8",
+    "chars": 62,
+    "words": 9,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.78,
+    "all_caps_segment": true,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": "spear",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "OX3gV9DUOQg",
+   "channel": "Purestream Healing",
+   "form": "short",
+   "class": "winner",
+   "title": "David and Goliath | The Bible Story of Courage and Faith in God",
+   "views": 64700,
+   "breakout": 201,
+   "seconds": 89,
+   "title_coded": {
+    "clean_title": "David and Goliath | The Bible Story of Courage and Faith in God",
+    "chars": 63,
+    "words": 12,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "gpVJtqjPs54",
+   "channel": "Faith & Fire",
+   "form": "short",
+   "class": "winner",
+   "title": "\"THAT ALL THE EARTH MAY KNOW\" ⚡🪨 — David's Final Words to Goliath | 1 Samuel 17:46-47",
+   "views": 180400,
+   "breakout": 123,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "\"THAT ALL THE EARTH MAY KNOW\" ⚡🪨 — David's Final Words to Goliath | 1 Samuel 17:46-47",
+    "chars": 85,
+    "words": 16,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.38,
+    "all_caps_segment": true,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 1,
+    "txt": 0,
+    "act": 1,
+    "sym": "sling",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "k_D6THsODvE",
+   "channel": "Jesus Christ Is Lord",
+   "form": "short",
+   "class": "winner",
+   "title": "The Parable of the Good Samaritan (Gospel of Luke 10:25–37)",
+   "views": 312800,
+   "breakout": 67,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "The Parable of the Good Samaritan (Gospel of Luke 10:25–37)",
+    "chars": 59,
+    "words": 12,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": false,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": "donkey",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "kvY_E2utAxs",
+   "channel": "Early Church History",
+   "form": "short",
+   "class": "winner",
+   "title": "Noah’s Ark: The Great Flood & God’s Warning | Bible Story of Noah",
+   "views": 633100,
+   "breakout": 364,
+   "seconds": 149,
+   "title_coded": {
+    "clean_title": "Noah’s Ark: The Great Flood & God’s Warning | Bible Story of Noah",
+    "chars": 65,
+    "words": 11,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": "ark",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "d6zj33dUa7s",
+   "channel": "Oluwafemi Ogunlana",
+   "form": "short",
+   "class": "winner",
+   "title": "🙏 THIS BIBLICAL STORY WILL TOUCH YOUR SOUL ❤️ | NEVER LOSE YOUR FAITH IN GOD#shorts",
+   "views": 505800,
+   "breakout": 799,
+   "seconds": 169,
+   "title_coded": {
+    "clean_title": "🙏 THIS BIBLICAL STORY WILL TOUCH YOUR SOUL ❤️ | NEVER LOSE YOUR FAITH IN GOD",
+    "chars": 76,
+    "words": 13,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 1.0,
+    "all_caps_segment": true,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": "tree",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "vE_XJw7nU34",
+   "channel": "Nancy Essien Global",
+   "form": "short",
+   "class": "winner",
+   "title": "WHAT IF YOUR DOUBT COULD MEET THE EVIDENCE OF GOD’S POWER? 🔥#shorts#BibleStories #GodsPower #Jesus",
+   "views": 3600000,
+   "breakout": 1511,
+   "seconds": 117,
+   "title_coded": {
+    "clean_title": "WHAT IF YOUR DOUBT COULD MEET THE EVIDENCE OF GOD’S POWER? 🔥",
+    "chars": 60,
+    "words": 11,
+    "opponent_or_opposition": false,
+    "question": true,
+    "number": false,
+    "caps_words_share": 1.0,
+    "all_caps_segment": true,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 0,
+    "txt": 13,
+    "act": 1,
+    "sym": "water",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "ucZHiSfJT2g",
+   "channel": "ZIONA",
+   "form": "short",
+   "class": "winner",
+   "title": "Noah Finally Sees Dry Land | The Flood Ends — Part 3",
+   "views": 1300000,
+   "breakout": 599,
+   "seconds": 153,
+   "title_coded": {
+    "clean_title": "Noah Finally Sees Dry Land | The Flood Ends — Part 3",
+    "chars": 52,
+    "words": 10,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "QvqHNuSNdMM",
+   "channel": "Aletheia Bible Stories",
+   "form": "short",
+   "class": "winner",
+   "title": "The Runaway Who Gave God a Name | Hagar’s Story",
+   "views": 120600,
+   "breakout": 111,
+   "seconds": 175,
+   "title_coded": {
+    "clean_title": "The Runaway Who Gave God a Name | Hagar’s Story",
+    "chars": 47,
+    "words": 9,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 7,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "8CX1N_vNhAQ",
+   "channel": "Truth Trek Adventures",
+   "form": "short",
+   "class": "winner",
+   "title": "I Can See! | Encounters with Jesus | John 9:1-12",
+   "views": 39300,
+   "breakout": 58,
+   "seconds": 78,
+   "title_coded": {
+    "clean_title": "I Can See! | Encounters with Jesus | John 9:1-12",
+    "chars": 48,
+    "words": 10,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "N-uJPcAI0P8",
+   "channel": "Hope of the empty tomb",
+   "form": "short",
+   "class": "winner",
+   "title": "Jonah’s repentance and deliverance. #bible #God #biblestories #repentance #salvation #spiritual",
+   "views": 176700,
+   "breakout": 128,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "Jonah’s repentance and deliverance.",
+    "chars": 35,
+    "words": 4,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 6,
+    "ant": 0,
+    "txt": 0,
+    "act": 1,
+    "sym": "ship",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "yF0QIihXKCs",
+   "channel": "Abraham Aniah",
+   "form": "short",
+   "class": "winner",
+   "title": "Elijah Calls Down Fire from Heaven | The Epic Bible Story | 1 Kings 18 #shorts",
+   "views": 815200,
+   "breakout": 516,
+   "seconds": 80,
+   "title_coded": {
+    "clean_title": "Elijah Calls Down Fire from Heaven | The Epic Bible Story | 1 Kings 18",
+    "chars": 70,
+    "words": 13,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 5,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "y9PXbabBm0I",
+   "channel": "The Faith Archives",
+   "form": "short",
+   "class": "winner",
+   "title": "450 PROPHET vs ONE MAN… Then Fire Fell From Heaven 🔥 | Elijah Bible Story #shorts #trending",
+   "views": 370300,
+   "breakout": 207,
+   "seconds": 181,
+   "title_coded": {
+    "clean_title": "450 PROPHET vs ONE MAN… Then Fire Fell From Heaven 🔥 | Elijah Bible Story",
+    "chars": 73,
+    "words": 13,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.23,
+    "all_caps_segment": true,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": true,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 2,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": "altar fire",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "NJQW8oJNFsk",
+   "channel": "Zach Hinojos",
+   "form": "short",
+   "class": "winner",
+   "title": "They threw him into a den of lions… but God had other plans 🦁 #daniel #bible #lion",
+   "views": 1600000,
+   "breakout": 230,
+   "seconds": 121,
+   "title_coded": {
+    "clean_title": "They threw him into a den of lions… but God had other plans 🦁",
+    "chars": 61,
+    "words": 13,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": true,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "note": "frame shows a presenter (host format)",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "MttCj9ZvU7M",
+   "channel": "Chris and Jasmin",
+   "form": "short",
+   "class": "winner",
+   "title": "They Threw Him Into a Den Full of Lions… But God Had Other Plans 🦁🙏 #shorts #daniel #danielmovie",
+   "views": 18800000,
+   "breakout": 552,
+   "seconds": 121,
+   "title_coded": {
+    "clean_title": "They Threw Him Into a Den Full of Lions… But God Had Other Plans 🦁🙏",
+    "chars": 67,
+    "words": 14,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": true,
+    "character_named": true,
+    "reversal_marker": true,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 1,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "Mi0pBpvRTyQ",
+   "channel": "@Hope tv",
+   "form": "short",
+   "class": "winner",
+   "title": "Jesus save the woman. #inspiration #motivation #hope #jesus #help #viral #viralshorts",
+   "views": 75900,
+   "breakout": 51,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "Jesus save the woman.",
+    "chars": 21,
+    "words": 4,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 3,
+    "ant": 1,
+    "txt": 0,
+    "act": 1,
+    "sym": "stone",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "iNUAVKBUUWY",
+   "channel": "PRINCE ASAPH - MEDIA",
+   "form": "short",
+   "class": "winner",
+   "title": "The Good Samaritan | A Stranger Stopped to Help When Others Passed By.",
+   "views": 521700,
+   "breakout": 246,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "The Good Samaritan | A Stranger Stopped to Help When Others Passed By.",
+    "chars": 70,
+    "words": 12,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": false,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 0,
+    "txt": 0,
+    "act": 1,
+    "sym": "oil",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "bCaYGFJxfpc",
+   "channel": "A.I Bible Story",
+   "form": "short",
+   "class": "winner",
+   "title": "They Dragged Her Out to Die... Until HE Stepped In#shorts #jesus#bible #animation #3danimation",
+   "views": 279700,
+   "breakout": 128,
+   "seconds": 41,
+   "title_coded": {
+    "clean_title": "They Dragged Her Out to Die... Until HE Stepped In",
+    "chars": 50,
+    "words": 10,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.1,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": false,
+    "reversal_marker": true,
+    "shock_word": true,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "lTVTkd4ApYk",
+   "channel": "Ai-Jesus-facts-and-stories",
+   "form": "short",
+   "class": "winner",
+   "title": "Jesus heals a blind man using dirt and saliva",
+   "views": 1000000,
+   "breakout": 1261,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "Jesus heals a blind man using dirt and saliva",
+    "chars": 45,
+    "words": 9,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "UQcfDBDAv9E",
+   "channel": "Blessed daughter of God",
+   "form": "short",
+   "class": "winner",
+   "title": "David and Goliath #youtubeshorts #loveuponjesus #sacredscriptures #acceptthescriptures",
+   "views": 137900,
+   "breakout": 131,
+   "seconds": 11,
+   "title_coded": {
+    "clean_title": "David and Goliath",
+    "chars": 17,
+    "words": 3,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 1,
+    "sym": "sling",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "PB94aZkknfA",
+   "channel": "Bible Chronicles (LK)",
+   "form": "short",
+   "class": "winner",
+   "title": "The Bitter Water of Marah | Exodus 15:22–25 | Bible Story #biblestories #bibleshorts #bible #moses",
+   "views": 1000000,
+   "breakout": 876,
+   "seconds": 68,
+   "title_coded": {
+    "clean_title": "The Bitter Water of Marah | Exodus 15:22–25 | Bible Story",
+    "chars": 57,
+    "words": 11,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": true,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": false,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": null,
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "bx1ywMc9uKY",
+   "channel": "Apostles And Prophet Tv",
+   "form": "short",
+   "class": "weak",
+   "title": "Jonah And The Fish | Cinematic Bible Story",
+   "views": 1974,
+   "breakout": 1.93,
+   "seconds": 139,
+   "title_coded": {
+    "clean_title": "Jonah And The Fish | Cinematic Bible Story",
+    "chars": 42,
+    "words": 7,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 2,
+    "ant": 0,
+    "txt": 0,
+    "act": 1,
+    "sym": "fish",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "XoX3F4HsE-I",
+   "channel": "Passover Connect",
+   "form": "short",
+   "class": "weak",
+   "title": "NOAH'S WEATHER REPORT | Noah’s Story #shorts",
+   "views": 2903,
+   "breakout": 1.49,
+   "seconds": 147,
+   "title_coded": {
+    "clean_title": "NOAH'S WEATHER REPORT | Noah’s Story",
+    "chars": 36,
+    "words": 5,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.6,
+    "all_caps_segment": true,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": "dove",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "vlFmZLIU42g",
+   "channel": "Apostles And Prophet Tv",
+   "form": "short",
+   "class": "weak",
+   "title": "Sodom And Gomorrah | Cinematic Bible Story",
+   "views": 1582,
+   "breakout": 1.51,
+   "seconds": 107,
+   "title_coded": {
+    "clean_title": "Sodom And Gomorrah | Cinematic Bible Story",
+    "chars": 42,
+    "words": 6,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 0,
+    "txt": 0,
+    "act": 0,
+    "sym": "salt pillar",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "Xm3Y9Fns0T8",
+   "channel": "Bible Stories",
+   "form": "long",
+   "class": "winner",
+   "title": "Adam and Eve: The Beginning of Humanity | Garden of Eden & The Fall | Genesis Bible Story #jesus",
+   "views": 88499,
+   "breakout": 616.7,
+   "seconds": 857,
+   "title_coded": {
+    "clean_title": "Adam and Eve: The Beginning of Humanity | Garden of Eden & The Fall | Genesis Bible Story",
+    "chars": 89,
+    "words": 15,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 3,
+    "ant": 1,
+    "txt": 8,
+    "act": 0,
+    "sym": "apple",
+    "color": "green/gold, bright",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "FaYEXkK6RsA",
+   "channel": "Bible Stories TV 247",
+   "form": "long",
+   "class": "winner",
+   "title": "NOAH AND THE GREAT FLOOD | The Full Bible Story of Noah's Ark | Genesis 6–9",
+   "views": 304706,
+   "breakout": 207.83,
+   "seconds": 1674,
+   "title_coded": {
+    "clean_title": "NOAH AND THE GREAT FLOOD | The Full Bible Story of Noah's Ark | Genesis 6–9",
+    "chars": 75,
+    "words": 15,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.33,
+    "all_caps_segment": true,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 4,
+    "act": 0,
+    "sym": "ark",
+    "color": "brown/grey storm",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "E7yN2c5AWNw",
+   "channel": "Echoes of Faith",
+   "form": "long",
+   "class": "winner",
+   "title": "Shadrach, Meshach and Abednego: Inside the Fiery Furnace",
+   "views": 786667,
+   "breakout": 578.41,
+   "seconds": 2796,
+   "title_coded": {
+    "clean_title": "Shadrach, Meshach and Abednego: Inside the Fiery Furnace",
+    "chars": 56,
+    "words": 8,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 3,
+    "ant": 0,
+    "txt": 7,
+    "act": 0,
+    "sym": "furnace fire",
+    "color": "orange/red fire",
+    "note": "soldiers small in background",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "wFn6ZQWsVpY",
+   "channel": "HolyBibleVerse tv",
+   "form": "long",
+   "class": "winner",
+   "title": "David and Goliath: The Great Battle | Full Christian Movie Bible Story",
+   "views": 533775,
+   "breakout": 67.74,
+   "seconds": 911,
+   "title_coded": {
+    "clean_title": "David and Goliath: The Great Battle | Full Christian Movie Bible Story",
+    "chars": 70,
+    "words": 11,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 2,
+    "ant": 1,
+    "txt": 3,
+    "act": 1,
+    "sym": "sling stone",
+    "color": "tan/gold",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "SKX8Tm8k-48",
+   "channel": "Bible Chronicles",
+   "form": "long",
+   "class": "winner",
+   "title": "Noah's Ark | The Epic Story of the Great Flood (Full Bible Story)",
+   "views": 28009,
+   "breakout": 117.15,
+   "seconds": 1513,
+   "title_coded": {
+    "clean_title": "Noah's Ark | The Epic Story of the Great Flood (Full Bible Story)",
+    "chars": 65,
+    "words": 12,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 2,
+    "act": 0,
+    "sym": "ark",
+    "color": "blue storm/yellow text",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "q5FW9qWzPSc",
+   "channel": "Forgotten Reality",
+   "form": "long",
+   "class": "winner",
+   "title": "The LAST NIGHT of SODOM | FULL MOVIE | Inside the Wicked City",
+   "views": 257196,
+   "breakout": 1224.49,
+   "seconds": 1210,
+   "title_coded": {
+    "clean_title": "The LAST NIGHT of SODOM | FULL MOVIE | Inside the Wicked City",
+    "chars": 61,
+    "words": 11,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.45,
+    "all_caps_segment": true,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 0,
+    "chars": 1,
+    "ant": 0,
+    "txt": 1,
+    "act": 0,
+    "sym": "burning city",
+    "color": "muted beige, low saturation",
+    "note": "plus ~15 small tagline words",
+    "face_and_designed_text": 0
+   }
+  },
+  {
+   "videoId": "D1sGnAlAD5Q",
+   "channel": "Bible Wonders",
+   "form": "long",
+   "class": "winner",
+   "title": "The Complete Story of Joseph | From Slave to Ruler of Egypt | Full Biblical Movie",
+   "views": 73512,
+   "breakout": 333.92,
+   "seconds": 2265,
+   "title_coded": {
+    "clean_title": "The Complete Story of Joseph | From Slave to Ruler of Egypt | Full Biblical Movie",
+    "chars": 81,
+    "words": 14,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 10,
+    "ant": 0,
+    "txt": 5,
+    "act": 0,
+    "sym": null,
+    "color": "gold/red text",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "Aj6rj6OsDyc",
+   "channel": "Bible Stories",
+   "form": "long",
+   "class": "weak",
+   "title": "Jacob and Esau: The Stolen Blessing & The Birthright | Genesis Bible Story",
+   "views": 394,
+   "breakout": null,
+   "seconds": 674,
+   "title_coded": {
+    "clean_title": "Jacob and Esau: The Stolen Blessing & The Birthright | Genesis Bible Story",
+    "chars": 74,
+    "words": 11,
+    "opponent_or_opposition": true,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": false,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 3,
+    "ant": 0,
+    "txt": 8,
+    "act": 1,
+    "sym": null,
+    "color": "gold sunset",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "wvMhh2jeFX8",
+   "channel": "Bible Stories TV 247",
+   "form": "long",
+   "class": "weak",
+   "title": "The Complete Story of Joseph — From the Pit to the Palace | Bible Stories",
+   "views": 5411,
+   "breakout": null,
+   "seconds": 913,
+   "title_coded": {
+    "clean_title": "The Complete Story of Joseph — From the Pit to the Palace | Bible Stories",
+    "chars": 73,
+    "words": 13,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": false,
+    "label_only": true,
+    "pipe_series_tag": true
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 5,
+    "ant": 0,
+    "txt": 16,
+    "act": 0,
+    "sym": "prison bars",
+    "color": "gold",
+    "face_and_designed_text": 1
+   }
+  },
+  {
+   "videoId": "mYbYQhNqHlI",
+   "channel": "Echoes of Faith",
+   "form": "long",
+   "class": "weak",
+   "title": "The Story of Sodom and Gomorrah Like You’ve Never Seen Before",
+   "views": 304,
+   "breakout": null,
+   "seconds": 2976,
+   "title_coded": {
+    "clean_title": "The Story of Sodom and Gomorrah Like You’ve Never Seen Before",
+    "chars": 61,
+    "words": 11,
+    "opponent_or_opposition": false,
+    "question": false,
+    "number": false,
+    "caps_words_share": 0.0,
+    "all_caps_segment": false,
+    "emoji": false,
+    "character_named": true,
+    "reversal_marker": false,
+    "shock_word": true,
+    "label_only": true,
+    "pipe_series_tag": false
+   },
+   "thumb_coded": {
+    "face": 1,
+    "chars": 1,
+    "ant": 0,
+    "txt": 3,
+    "act": 0,
+    "sym": "fire from sky",
+    "color": "orange fire",
+    "face_and_designed_text": 1
+   }
+  }
+ ],
+ "storage": "titles are public metadata kept for the count; no transcripts or third-party text beyond titles"
+}

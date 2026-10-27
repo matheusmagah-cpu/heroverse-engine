@@ -1139,6 +1139,30 @@
    "credits": 5,
    "purpose": "funnel: Lusi Achampong longs",
    "approved": "owner 2026-10-26: extra calls now for the long-video mining and the Short-to-long funnel"
+  },
+  {
+   "date": "2026-10-27",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "budget before package mining (3,281 left; renews 2026-11-18)",
+   "saved_to": "evidence/vidiq/20261027/package_titles_thumbnails.json"
+  },
+  {
+   "date": "2026-10-27",
+   "kind": "research",
+   "tool": "vidiq_get_videos_by_ids",
+   "credits": 5,
+   "purpose": "package mining: exact titles and thumbnails of the 21 recorded 20261026 videoIds, one batched call",
+   "saved_to": "evidence/vidiq/20261027/package_titles_thumbnails.json"
+  },
+  {
+   "date": "2026-10-27",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "package mining: Bible-story Shorts outliers (breakout >= 50) to widen the winners sample",
+   "saved_to": "evidence/vidiq/20261027/package_titles_thumbnails.json"
   }
  ]
 }
