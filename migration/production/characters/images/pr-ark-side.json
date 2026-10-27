@@ -1,0 +1,20 @@
+{
+ "id": "pr-ark-side",
+ "prop": "ark",
+ "view": "side",
+ "repo_path": "migration/production/characters/refs/pr-ark-side.jpg",
+ "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860",
+ "size": [
+  720,
+  1280
+ ],
+ "candidate": "pr-ark-side-2026102702-2",
+ "prompt": null,
+ "source": "approved-clip-frame {\"approval_note\": \"Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)\", \"approved_score\": 9.5, \"asset\": \"shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4\", \"clip_sha256\": \"e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e\", \"episode\": \"genesis-08-short\", \"seconds\": 0.5, \"shot\": \"s-board\"}",
+ "approved": {
+  "date": "2026-10-27",
+  "score": 9.5,
+  "note": "Frame of genesis-08 s-board (approved clip, 9.5) at 0.5 s: the same finished box along its long side, flat roof and square end visible, no tower or bow. No true side elevation exists in approved clips; this oblique long-side view is the nearest and matches the three-quarter reference.",
+  "by": "Claude's reference review (ops/CLAUDE_REVIEW.md)"
+ }
+}

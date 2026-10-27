@@ -16,9 +16,19 @@ images' pattern:
 
 Hashes are never written by hand: scene-stills.yml records candidates, `approve` records the approved still.
 plan_check.frame_problems refuses a frame whose still is missing, not APPROVED, changed or against the scene rules.
+E122: a still whose prompt names a prop (the ark, its setting sentence too) is made with every approved reference image
+of that prop (props.json; plan_check.prop_references gives them as repository paths Pavo takes, with their sha256): the
+candidate's sidecar lists `references` [{record, sha256}] and `pavo` {generate: the pavo_generate_image answer
+(model, conversation_id, input_images), job: the pavo_image_job read-back (conversation_id, status)}, input_images
+equal to the references required; finalize and approve refuse it otherwise, and so does plan_check.frame_problems
+(STILL_PROP_UNREFERENCED), also while the prop is still DRAFT. The approval binds the references by digest
+(approved.references_sha256): references added by hand later are STILL_PROMPT_CHANGED. prepare refuses a still that
+names a prop on the FLUX engine before any image.
 
 usage:
-  scene_stills.py prepare PLAN SHOTS CANDIDATES RUN OUT_JSON   cf_images.py's input for the shots' stills (1-3 each)
+  scene_stills.py prepare PLAN SHOTS CANDIDATES RUN OUT_JSON [--engine flux|pavo]   the shots' stills (1-3 each):
+                                                                cf_images.py's input (flux), or the Pavo requests
+                                                                with each still's `references` (pavo; E122)
   scene_stills.py crop IMG_DIR                                  centre crop each FLUX PNG to 9:16 (in place)
   scene_stills.py finalize IMG_DIR RUN                          candidates (JPEG 1080x1920 + record) into stills/candidates
                                                                 (FLUX PNGs, or Pavo Agnes Image JPEGs with `source`)
@@ -76,13 +86,18 @@ def plan_stills(plan, ids):
     return out
 
 
-def prepare(plan, ids, candidates, run, stills_dir=None):
+ENGINES = ("flux", "pavo")       # cf_images.py (FLUX, text only) or Pavo agnes-image (reference images)
+
+
+def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
     """cf_images.py's input: CANDIDATES images of each named shot's stills, refused unless each still's record holds
     a prompt that passes the scene rules (STILL_PROMPT_REFUSED) and its shot may carry frames at all."""
     if not 1 <= candidates <= MAX_CANDIDATES:
         raise SystemExit(f"STILL_CANDIDATES_INVALID {candidates} (1-{MAX_CANDIDATES} a still)")
     if not RUN.fullmatch(str(run)):
         raise SystemExit(f"STILL_RUN_INVALID {run}")
+    if engine not in ENGINES:
+        raise SystemExit(f"STILL_ENGINE_INVALID {engine} ({' or '.join(ENGINES)})")
     images = []
     shots = {s.get("id"): (i, s) for i, s in enumerate(plan.get("shots") or [])}
     for sid, still in plan_stills(plan, ids):
@@ -99,9 +114,17 @@ def prepare(plan, ids, candidates, run, stills_dir=None):
         bad = plan_check.still_prompt_problems(f"{sid}/{still}", rec.get("prompt") or "", plan)
         if bad:
             raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
-        images += [{"id": f"{still}-{run}-{n}", "still": still, "prompt": rec["prompt"], "seed": None}
+        refs, missing = plan_check.prop_references(rec["prompt"])
+        if (refs or missing) and engine == "flux":   # E122: refused before any image, not in finalize
+            raise SystemExit(f"STILL_PROP_UNREFERENCED {still}: names a prop and FLUX (cf_images.py) cannot send its "
+                             "reference images; prepare with --engine pavo (E122)")
+        if missing:
+            raise SystemExit(f"STILL_PROP_UNREFERENCED {still}: " + "; ".join(missing) + " (E122)")
+        images += [{"id": f"{still}-{run}-{n}", "still": still, "prompt": rec["prompt"], "seed": None,
+                    "references": [r["repo_path"] for r in refs], "reference_records": refs}
                    for n in range(1, candidates + 1)]
-    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "style": STYLE, "negative": None,
+    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "engine": engine, "style": STYLE,
+            "negative": None,
             "width": 1024, "height": 1024, "images": images}
 
 
@@ -145,12 +168,15 @@ def finalize(img_dir, run, stills_dir=None):
         Image.open(png).convert("RGB").resize(SIDE, Image.LANCZOS).save(dst, "JPEG", quality=92)
         made = png.with_suffix(".json")
         meta = json.loads(made.read_text()) if made.is_file() else {}
+        unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"))
+        if unref:   # E122: text alone does not hold a prop's look; a FLUX or text-only image of the ark is refused
+            raise SystemExit(f"STILL_PROP_UNREFERENCED {png.stem}: " + "; ".join(unref) + " (E122)")
         save(dst.with_suffix(".json"), {
             "id": png.stem, "still": still, "episode": rec.get("episode"), "shot": rec.get("shot"), "run": str(run),
             "status": "DRAFT", "prompt": rec["prompt"], "sent_prompt": meta.get("prompt"),
             "engine": meta.get("engine"), "models": meta.get("models"), "generated_by": meta.get("generated_by"),
             "source": meta.get("source", "cf-flux"), "conversation_id": meta.get("conversation_id"),
-            "quote": meta.get("quote"),
+            "quote": meta.get("quote"), "references": meta.get("references") or [], "pavo": meta.get("pavo"),
             "upscaler": meta.get("upscaler", "Real-ESRGAN general x4v3 (bsd-3-clause), then Lanczos to 1080x1920"),
             "size": list(SIDE), "repo_path": rel(dst), "sha256": sha256(dst)})
         out.append(png.stem)
@@ -205,13 +231,18 @@ def approve(still, candidate, score, note, stills_dir=None, today=None):
     bad = plan_check.still_prompt_problems(f"{rec.get('shot')}/{still}", rec["prompt"], plan)
     if bad:
         raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
+    unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"), pavo=meta.get("pavo"))
+    if unref:
+        raise SystemExit(f"STILL_PROP_UNREFERENCED {candidate}: " + "; ".join(unref) + " (E122)")
     dst = stills_dir / f"{still}.jpg"
     shutil.copyfile(src, dst)
     rec.update({"status": "APPROVED", "repo_path": rel(dst), "sha256": sha256(dst), "size": meta.get("size"),
-                "candidate": candidate, "engine": meta.get("engine"),
+                "candidate": candidate, "engine": meta.get("engine"), "references": meta.get("references") or [],
+                "pavo": meta.get("pavo"),
                 "approved": {"date": today or datetime.now(timezone.utc).strftime("%Y-%m-%d"), "score": score,
                              "note": note.strip(), "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
-                             "prompt_sha256": hashlib.sha256(rec["prompt"].encode()).hexdigest()}})
+                             "prompt_sha256": hashlib.sha256(rec["prompt"].encode()).hexdigest(),
+                             "references_sha256": plan_check.reference_digest(meta.get("references") or [])}})
     save(stills_dir / f"{still}.json", rec)
     return rec
 
@@ -220,10 +251,10 @@ def main(argv):
     if len(argv) < 2:
         raise SystemExit(__doc__)
     cmd, args = argv[1], argv[2:]
-    if cmd == "prepare" and len(args) == 5:
+    if cmd == "prepare" and len(args) in (5, 7) and (len(args) == 5 or args[5] == "--engine"):
         plan = json.loads(Path(args[0]).read_text())
         ids = [x for x in args[1].split(",") if x]
-        spec = prepare(plan, ids, int(args[2]), args[3])
+        spec = prepare(plan, ids, int(args[2]), args[3], engine=args[6] if len(args) == 7 else "flux")
         save(args[4], spec)
         print(json.dumps({"episode": spec["episode"], "images": [x["id"] for x in spec["images"]]}))
     elif cmd == "crop" and len(args) == 1:

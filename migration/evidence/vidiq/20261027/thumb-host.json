@@ -1,0 +1,592 @@
+{
+ "date": "2026-10-27",
+ "question": "owner idea 27/10 (not a rule): should every long thumbnail feature our recurring host, the Keeper (hooded bearded storyteller), cooking-channel style (same host face + gesture + object + 2-3 words + arrow)?",
+ "form": "Bible-story LONG videos (vidIQ contentType long); Shorts only from free existing coding",
+ "source": {
+  "rows_from_20261027_package": "package_titles_thumbnails.json (7 long winners + 3 weak, no new call)",
+  "outliers call A": "vidiq_outliers long, keyword 'Bible story full movie retold from scripture', minOutlierScore 50, limit 30 (29 returned; 7 overlap; 2 excluded)",
+  "outliers call B": "vidiq_outliers long, keyword 'presenter on camera tells a Bible story, host narrator storytelling', minOutlierScore 20, limit 25 (aimed at host-led videos; 9 new Bible-story rows kept)",
+  "images": "i.ytimg.com/vi/<id>/hqdefault.jpg (free), coded by Claude by eye"
+ },
+ "excluded": {
+  "hLhsAThjo4c": "movie trailer 2:32",
+  "RzyksUiXzfs": "compilation of film scenes",
+  "Ud26sC7-2ZQ": "not Bible",
+  "4GAWBAl63iA": "lyric video",
+  "CGM5qfnhcTo": "kids songs",
+  "rUz7-fGvjU8": "kids songs"
+ },
+ "instrument": {
+  "face": "host = a recurring presenter/narrator who is not a figure of the story; character = a story figure's face readable; none = no readable face",
+  "gesture": "a hand pointing at or presenting the subject, or an object held out to the viewer; story action (reaching, fighting, blessing) not counted",
+  "arrow": "a drawn arrow graphic",
+  "words": "designed words on the art; badges, channel or series logos, 4K tags excluded; '&' not a word, 'vs' is"
+ },
+ "validation_rule": "SYSTEM.md 1.5: >= 6 winners from >= 4 channels, none > 1/3, >= 3 weak contrasts; driver >= 70 % winners and <= 30 % weak; hygiene >= 70 % both; anti >= 50 % weak and <= 20 % winners",
+ "summary": {
+  "sample": {
+   "winners": 36,
+   "winner_channels": 31,
+   "max_channel_share": "3/36",
+   "max_channel": "Bible Wonders",
+   "weak": 3,
+   "weak_channels": 3,
+   "rule_met": true
+  },
+  "face": {
+   "host": {
+    "winners": "2/36",
+    "weak": "0/3"
+   },
+   "character": {
+    "winners": "30/36",
+    "weak": "3/3"
+   },
+   "none": {
+    "winners": "4/36",
+    "weak": "0/3"
+   }
+  },
+  "gesture_presenting": {
+   "winners": "3/36",
+   "weak": "0/3"
+  },
+  "arrow": {
+   "winners": "0/36",
+   "weak": "1/3"
+  },
+  "text_words": {
+   "winners": {
+    "6+": 13,
+    "4-5": 8,
+    "1-3": 11,
+    "0": 4
+   },
+   "weak": {
+    "6+": 2,
+    "1-3": 1
+   },
+   "exactly_2_3_words": {
+    "winners": "10/36",
+    "weak": "1/3"
+   },
+   "median": {
+    "winners": 4.0,
+    "weak": 8
+   }
+  },
+  "full_host_formula_host+gesture+arrow+2_3_words": {
+   "winners": "0/36",
+   "weak": "0/3"
+  },
+  "breakout_ge_50_only": {
+   "winners": 35,
+   "host": "2/35"
+  }
+ },
+ "shorts_free": {
+  "source": "rows of package_titles_thumbnails.json (no call)",
+  "host_presenter_frame": {
+   "winners": "1/27 (NJQW8oJNFsk, presenter)",
+   "weak": "0/3"
+  },
+  "note": "Shorts hqdefault is a feed frame, not a designed thumbnail"
+ },
+ "labels": {
+  "host_face": "free (absent): not a driver",
+  "character_face": "hygiene",
+  "no_face": "free",
+  "gesture_presenting": "free",
+  "arrow": "free (0 winners; the only arrow is on a weak)",
+  "text_2_3_words": "free"
+ },
+ "verdict": "NOT VALIDATED. The sample meets the rule, but a recurring host face is almost absent from Bible-story long winners: 2/36 (both church recordings of a presenter with children, not designed story thumbnails), weak 0/3. No winner uses the cooking-host formula (0/36). Winners show the story character's face (30/36 = 83 %; weak 3/3, hygiene). The Keeper-like look exists only as a story figure (Noah x2, John of Patmos among winners; Lot on a weak). Arrows: 0/36 winners, 1/3 weak.",
+ "sample_gap": ">= 6 Bible-story long winners with a recurring host face on the thumbnail, from >= 4 channels (none > 1/3), plus >= 3 weak host thumbnails; found 2 winners from 2 channels in 36. Testing the Keeper on thumbnails would be our own A/B (Test & Compare), not a mined pattern.",
+ "limitations": [
+  "one coder, by eye, no second rater",
+  "weak side still 3 videos (as in the package mining)",
+  "breakout from vidIQ (relative to each channel's norm); 04aFpEyS8FA breakout 42 is below 50 and kept, removing it changes no label"
+ ],
+ "calls": [
+  {
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "call A"
+  },
+  {
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "call B"
+  }
+ ],
+ "rows": [
+  {
+   "videoId": "Xm3Y9Fns0T8",
+   "channel": "Bible Stories",
+   "cls": "winner",
+   "breakout": 616.7,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 8,
+   "note": "Adam, Eve; Eve reaching for fruit = story action"
+  },
+  {
+   "videoId": "FaYEXkK6RsA",
+   "channel": "Bible Stories TV 247",
+   "cls": "winner",
+   "breakout": 207.83,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": true,
+   "arrow": false,
+   "words": 4,
+   "note": "Noah (bearded elder, staff) open hand presenting the ark"
+  },
+  {
+   "videoId": "E7yN2c5AWNw",
+   "channel": "Echoes of Faith",
+   "cls": "winner",
+   "breakout": 578.41,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "three youths"
+  },
+  {
+   "videoId": "wFn6ZQWsVpY",
+   "channel": "HolyBibleVerse tv",
+   "cls": "winner",
+   "breakout": 67.74,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "David slinging, Goliath"
+  },
+  {
+   "videoId": "SKX8Tm8k-48",
+   "channel": "Bible Chronicles (US)",
+   "cls": "winner",
+   "breakout": 117.15,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 2,
+   "note": "Noah (bearded elder, staff)"
+  },
+  {
+   "videoId": "q5FW9qWzPSc",
+   "channel": "Forgotten Reality",
+   "cls": "winner",
+   "breakout": 1224.49,
+   "source": "20261027 package",
+   "face": "none",
+   "gesture": false,
+   "arrow": false,
+   "words": 18,
+   "note": "figure from behind; 1 big word + 17-word tagline"
+  },
+  {
+   "videoId": "D1sGnAlAD5Q",
+   "channel": "Bible Wonders",
+   "cls": "winner",
+   "breakout": 333.92,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 5,
+   "note": "Joseph"
+  },
+  {
+   "videoId": "wZPwAs1LhaI",
+   "channel": "Lumo Project Films",
+   "cls": "winner",
+   "breakout": 193,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 0,
+   "note": "live-action film still, apostle mid-speech"
+  },
+  {
+   "videoId": "ksPws9KybE4",
+   "channel": "The Builders Channel: Faith-Based",
+   "cls": "winner",
+   "breakout": 2256,
+   "source": "outliers call A",
+   "face": "none",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "Daniel from behind, lion"
+  },
+  {
+   "videoId": "K6IA0Uj1JdY",
+   "channel": "Saddleback Kids",
+   "cls": "winner",
+   "breakout": 328,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "kids cartoon; series logo 'Hey-O! Stories of the Bible' excluded from words (a recurring brand mark, not a host face)"
+  },
+  {
+   "videoId": "hp9uJ_tp1dA",
+   "channel": "Eternal Biblical Stories",
+   "cls": "winner",
+   "breakout": 103,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "Samson vs lion"
+  },
+  {
+   "videoId": "htFojK8epEo",
+   "channel": "JESUS LOVER'S",
+   "cls": "winner",
+   "breakout": 2799,
+   "source": "outliers call A",
+   "face": "none",
+   "gesture": false,
+   "arrow": false,
+   "words": 8,
+   "note": "statue figures, burning city; tiny verse text excluded"
+  },
+  {
+   "videoId": "3WtwSUR3tMk",
+   "channel": "Primal Echoes",
+   "cls": "winner",
+   "breakout": 160,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "hooded bearded elder close-up = John of Patmos (story figure; closest look to the Keeper)"
+  },
+  {
+   "videoId": "3g0kbWGvOGo",
+   "channel": "Biblical Tales",
+   "cls": "winner",
+   "breakout": 282,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": true,
+   "arrow": false,
+   "words": 3,
+   "note": "Moses holds the tablets out to the viewer"
+  },
+  {
+   "videoId": "zURuppTrHro",
+   "channel": "Bible Stories",
+   "cls": "winner",
+   "breakout": 178,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 23,
+   "note": "Adam, Eve; headline + subtitle + side list"
+  },
+  {
+   "videoId": "GI2gkFXmLj0",
+   "channel": "The Purpose Journey",
+   "cls": "winner",
+   "breakout": 77,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 2,
+   "note": "3D cartoon Adam, Eve"
+  },
+  {
+   "videoId": "1spqWruu064",
+   "channel": "Bible Battle Arena",
+   "cls": "winner",
+   "breakout": 671,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 18,
+   "note": "David, Goliath; headline 3 + taglines"
+  },
+  {
+   "videoId": "id7jAyYqJD0",
+   "channel": "Hope Bible stories",
+   "cls": "winner",
+   "breakout": 100,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 1,
+   "note": "Jephthah, daughter"
+  },
+  {
+   "videoId": "2KiWsSSeX64",
+   "channel": "CAVID STUDIOS",
+   "cls": "winner",
+   "breakout": 307,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 9,
+   "note": "live-action short film, Mary"
+  },
+  {
+   "videoId": "fYMoHixvvWQ",
+   "channel": "DEPTH Narratives",
+   "cls": "winner",
+   "breakout": 119,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "Jacob wrestling"
+  },
+  {
+   "videoId": "1rMPiJdOU-4",
+   "channel": "Prosperous Bible",
+   "cls": "winner",
+   "breakout": 103,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 4,
+   "note": "Joseph in pit, Joseph as ruler"
+  },
+  {
+   "videoId": "87tH2QMC0Q8",
+   "channel": "Bible Wonders",
+   "cls": "winner",
+   "breakout": 97,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 5,
+   "note": "Jesus"
+  },
+  {
+   "videoId": "MvtE7yM156s",
+   "channel": "Hineni",
+   "cls": "winner",
+   "breakout": 92,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 4,
+   "note": "Joseph, brothers; 4K badge excluded"
+  },
+  {
+   "videoId": "WHvP1kuQUe4",
+   "channel": "Hineni",
+   "cls": "winner",
+   "breakout": 198,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "David + map (dotted route, no arrow; place labels excluded)"
+  },
+  {
+   "videoId": "et-vCpWWdQU",
+   "channel": "Tales From Ancient Lands",
+   "cls": "winner",
+   "breakout": 244,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "cartoon Adam, Eve; fruit offered to Adam = story action"
+  },
+  {
+   "videoId": "grivO7uhjMM",
+   "channel": "Bible Chronicles (KR)",
+   "cls": "winner",
+   "breakout": 174,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 6,
+   "note": "drowning crowd; 4K badge excluded"
+  },
+  {
+   "videoId": "p4FrGy2Y9gg",
+   "channel": "The Great Bible Stories",
+   "cls": "winner",
+   "breakout": 134,
+   "source": "outliers call A",
+   "face": "character",
+   "gesture": true,
+   "arrow": false,
+   "words": 0,
+   "note": "king's open hand toward the furnace; faces small"
+  },
+  {
+   "videoId": "XXBCVfU4lhM",
+   "channel": "Tiara's Bible Adventures",
+   "cls": "winner",
+   "breakout": 103,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 5,
+   "note": "kids cartoon David, Goliath"
+  },
+  {
+   "videoId": "aIZZT8JUHJ0",
+   "channel": "NavB",
+   "cls": "winner",
+   "breakout": 895,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 7,
+   "note": "Joseph"
+  },
+  {
+   "videoId": "04aFpEyS8FA",
+   "channel": "The Bible in a Year",
+   "cls": "winner",
+   "breakout": 42,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 0,
+   "note": "Jesus raising the girl; PRAY.COM logo excluded; breakout 42 (< 50)"
+  },
+  {
+   "videoId": "JVLDpNBAIok",
+   "channel": "Bible Chronicles (US)",
+   "cls": "winner",
+   "breakout": 428,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "David, Goliath (small)"
+  },
+  {
+   "videoId": "ciwbx-Ay4RY",
+   "channel": "Children's Messages - Emily",
+   "cls": "winner",
+   "breakout": 323,
+   "source": "outliers call B",
+   "face": "host",
+   "gesture": false,
+   "arrow": false,
+   "words": 4,
+   "note": "church children's message: robed presenter seated with children (recorded frame, not a designed story thumbnail)"
+  },
+  {
+   "videoId": "1ND2sJqiyzc",
+   "channel": "Ken Oren",
+   "cls": "winner",
+   "breakout": 2154,
+   "source": "outliers call B",
+   "face": "host",
+   "gesture": false,
+   "arrow": false,
+   "words": 0,
+   "note": "church youth-time recording: presenter standing before children (frame, not designed)"
+  },
+  {
+   "videoId": "lkILbdmOqS8",
+   "channel": "Bible Wonders",
+   "cls": "winner",
+   "breakout": 51,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "Cain, Abel"
+  },
+  {
+   "videoId": "iwBnozkO8VM",
+   "channel": "Divine Rest Readings",
+   "cls": "winner",
+   "breakout": 60,
+   "source": "outliers call B",
+   "face": "none",
+   "gesture": false,
+   "arrow": false,
+   "words": 5,
+   "note": "sleep reading, text only"
+  },
+  {
+   "videoId": "GkW_TxDex7w",
+   "channel": "Ascendant Films",
+   "cls": "winner",
+   "breakout": 54,
+   "source": "outliers call B",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "David, Goliath"
+  },
+  {
+   "videoId": "Aj6rj6OsDyc",
+   "channel": "Bible Stories",
+   "cls": "weak",
+   "breakout": null,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 8,
+   "note": "Isaac's hand on Jacob = story action"
+  },
+  {
+   "videoId": "wvMhh2jeFX8",
+   "channel": "Bible Stories TV 247",
+   "cls": "weak",
+   "breakout": null,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": true,
+   "words": 15,
+   "note": "Joseph; 2 arrows (pit -> prison -> palace); YouTube logo excluded"
+  },
+  {
+   "videoId": "mYbYQhNqHlI",
+   "channel": "Echoes of Faith",
+   "cls": "weak",
+   "breakout": null,
+   "source": "20261027 package",
+   "face": "character",
+   "gesture": false,
+   "arrow": false,
+   "words": 3,
+   "note": "hooded bearded man with staff = Lot (story figure; closest look to the Keeper)"
+  }
+ ]
+}

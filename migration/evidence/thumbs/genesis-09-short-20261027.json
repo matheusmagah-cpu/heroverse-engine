@@ -1,0 +1,35 @@
+{
+ "date": "2026-10-27",
+ "episode": "genesis-09-short",
+ "run": "20261027",
+ "spec": "production/bible/thumbs/genesis-09-short.json",
+ "sheet": "production/bible/thumbs/sheets/genesis-09-short-20261027.jpg",
+ "status": "CANDIDATES_FOR_OWNER_REVIEW (not approved)",
+ "model": "Pavo agnes-image (Agnes Image 2.5 Flash), 9:16 hd; each generation after its own fresh exact 0-credit quote (required_credits 0, final_points 0, is_estimate false); no retry",
+ "candidates": [
+  {
+   "id": "genesis-09-short-20261027-1",
+   "conversation_id": "373460840168557632",
+   "references": "live, ONE attempt: ch-noah-front and ch-noah-three-quarter (release assets verified by sha256, sent as 2048 px JPEG)",
+   "source_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-9fac403062f7-0-c24c1d8d3bd9.jpg",
+   "source_sha256": "eda45a087c044c01a968440b1fd8da6c11a0bb93a9a9d0409f28ffc98d3f0b80",
+   "seen": "References WORKED live: the face is Noah's approved face (bald crown with short grey sides, heavy brows, dark eyes, iron-grey beard, belted brown robe with the knotted rope). But it is a half figure, not a close-up; the ark behind him is drawn as a ship with a curved prow and a smoking funnel (against ARK_EXCLUDE, E113); cold blue-grey storm: R16 FAIL (saturation 0.32). Not approvable as is.",
+   "r16": "FAIL"
+  },
+  {
+   "id": "genesis-09-short-20261027-2",
+   "conversation_id": "373460902416285504",
+   "references": "none (text-only; the look word for word in the prompt)",
+   "source_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-b4e4f8bcb0dc-0-23c7d557b824.jpg",
+   "source_sha256": "246c69647814c81d89ad262459f05619884405b8a4f38d0f56d57d5719817b99",
+   "seen": "Warm torchlight at the ark's door, R16 PASS (saturation 0.52), but the face is NOT Noah's approved face (full hair on the crown, another man) and it is a chest-up framing, not a close-up of the face; the emotion reads as worry, weakly. Not approvable as is.",
+   "r16": "PASS"
+  }
+ ],
+ "findings": [
+  "Reference images keep the character's face (candidate 1 vs 2): thumbnails go with references.",
+  "With a long prompt (look + period + ark sentences) the model ignored 'extreme close-up': both came back half or chest-up. Next spec: drop the ark from the thumbnail (no ark sentences needed), shorter prompt led by the close-up and the emotion, warm light for R16.",
+  "The ark sentences did not stop a funnel and smoke in a wide background: keep the ark out of thumbnails."
+ ],
+ "next": "owner review of the sheet; a revised spec (close-up, no ark, warm light) for 1-2 candidates with references, then thumbs.py approve by PR"
+}

@@ -97,8 +97,11 @@ NEXT = re.compile(r"(?i)\bnext\b")
 # Measured Pavo wall time a generation on episode.yml (sequential submit + poll, 2026-10-26, genesis-07-short): run
 # 40263488773 8,062 s for 28 scene submissions (288 s each); 40278642295 5 scenes + 3 talking in 2,469 s;
 # 40285879529 and 40297987571 3 talking each in 1,101 s and 1,096 s (366 s each, lipsync_check included).
+# E120 (review of #457): the SyncNet sync check adds CPU time to every talking clip. Measured 2026-10-27 on 4 cores:
+# the first check took 3.7 s and the SyncNet check 26.1 s on the 7.3 s calibration clip, and the SyncNet part alone up
+# to 29.5 s on the 32 Keeper outputs (4.5-8.5 s); a talking clip is budgeted 30 s more.
 PAVO_SCENE_S = 288
-PAVO_TALK_S = 366
+PAVO_TALK_S = 366 + 30
 # Kokoro pace by voice (voice_pace.VOICE_PACE, the table plan_check uses too): every line, the narrator's included, at
 # its voice's measured pace (the narrator am_michael 2.874 words/s over the arc-1 long). A character speaks ~35 % faster
 # than the narrator. Another voice: plan_check.WPS until measured (a talking line is then VOICE_PACE_UNMEASURED).

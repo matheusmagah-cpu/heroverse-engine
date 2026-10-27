@@ -1072,6 +1072,69 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E120",
+   "date": "2026-10-27",
+   "class": [
+    "instrument",
+    "threshold"
+   ],
+   "prior": [
+    "E104",
+    "E111",
+    "E119"
+   ],
+   "error": "lipsync_check judged lip sync with an instrument that cannot measure it: the inner-lip opening correlated with the speech envelope. On the labelled set of real speakers (E119) no rule built from its correlation, lag and speak-to-pause ratio separated a mouth's own audio from the same picture with audio shifted 300-500 ms or another speaker's (best rule 75-86 % true positives with 21-26 % false positives; with no false positive, 0-5 %). Every MuseTalk and LatentSync verdict on the Keeper rested on it.",
+   "fix": "The sync gate is now SyncNet (Chung & Zisserman; the LSE-C / LSE-D measure of the Wav2Lip, LatentSync and MuseTalk papers): production/bible/syncnet.py runs the public syncnet_v2.model (pinned by SYNCNET_SHA256, read without torch, every pickle of the file through a restricted unpickler) in numpy on CPU, on the syncnet_python face crop with the box from our pinned MediaPipe landmarker; lipsync_check decodes the clip once (complete-decode check, LIPSYNC_DECODE_FAILED; rotation-safe frame size) and flags MOUTH_NOT_IN_SYNC unless the offset is within 1.5 frames of -1.5 (what real in-sync speech reads; -3..0 at 25 fps) and confidence >= 2.7 (the lip-opening measures are still reported, MOUTH_OPEN_IN_PAUSES is gone). Calibrated on the same labelled set (evidence/lipsync-calibration/20261027/syncnet-calibration.json): 0 of 170 negatives pass; positives 14/14 clean-shaven and 14/20 bearded (the 6 misses are two sources whose own soundtrack is +3 and -5 frames off on every segment); inside the window the only negative is a swap at confidence 0.80 and the lowest positive is 3.75 (margins 1.9 and 1.05), the nearest shifted negatives read -4 and +3; a 300/500 ms shift moves the offset by the shift within half a frame in 133 of 136 cases. episode.yml and shot-probe.yml download and sha-check the weights and refuse to start (SYNC_CHECK_BLIND) unless the Pavo calibration clip passes and the same clip with its audio 400 ms late is flagged. Re-score with no generation (syncnet-keeper-rescore.json): 19 of 32 Keeper outputs pass, all 3 LatentSync among them; the still-mouth check now shares the decode and landmarker and gives identical output on 19 clips, the genesis-08 voice-over clips included. PAVO_TALK_S budgets 30 s more per talking clip.",
+   "antidote": {
+    "file": "migration/production/bible/test_lipsync_check.py",
+    "contains": "def test_the_sync_gate_separates_the_labelled_set_with_no_false_positive",
+    "covers": [
+     "instrument",
+     "threshold"
+    ]
+   }
+  },
+  {
+   "id": "E121",
+   "date": "2026-10-27",
+   "class": "silent",
+   "prior": [
+    "E107"
+   ],
+   "error": "The character-first thumbnail gate (PR #460, before merge) failed open twice: a Bible long was recognised only by a package key `series: bible` that no package writer sets, so preflight and publish_video skipped it for pilot-015; and publish trusted the spec's own status/approved fields, so a spec edited to APPROVED (score 1, no note, a grey R16-failing image) or another episode's approved spec copied under a new name passed THUMB_NOT_APPROVED.",
+   "fix": "publish_video.bible_long also reads the pilot's script.json (archetype bible-story-long, the same rule prepublish_gate uses); preflight and publish_video pass the pilot dir. thumbs.publish_problems re-checks what approve checks: the spec is this episode's, score >= 9.5, a note, a recorded candidate of this episode whose sha256, spec digest and R16 PASS match the approval; the image is always bible/thumbs/<episode>.jpg and an episode name is never a path (THUMB_EPISODE_INVALID).",
+   "antidote": {
+    "file": "migration/production/bible/test_thumbs.py",
+    "contains": "def test_an_approval_written_by_hand_is_refused",
+    "covers": [
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E122",
+   "date": "2026-10-27",
+   "class": [
+    "no-data",
+    "recurrence"
+   ],
+   "prior": [
+    "E108",
+    "E113",
+    "E115"
+   ],
+   "error": "Claude's review of PR #461 (genesis-09 image first, contact sheets stills/sheets/genesis-09-short-2026102701/02/03.jpg): the 64 Pavo agnes-image candidate stills carried plan_check's ARK_LOOK and ARK_EXCLUDE word for word (E113's fix), yet the ark changed shape from shot to shot: a tall tower or cabin block at one end (s-laugh, s-lions-1, s-music, s-shrug, s-deep, s-climb, s-tents, s-windows, s-springs), a gabled house or barn (s-enter, s-pairs, s-shut, s-windows), a curved ship's hull and bow (s-birds, s-fists-1, s-tents-2); only distant shots (s-voice, s-hills, s-finished-1) held 'one long, low, box-shaped hull'. Root cause: E113 held a prop's look with text alone, and text does not hold a shape the model's prior pulls elsewhere; a character's face was already held by approved reference images (characters.json refs; thumbs.py reference_inputs showed Pavo keeps an approved face from them), but the ark had none and no check asked for them. The class recurs: E113 itself was the ark's look left to each prompt's words.",
+   "fix": "The ark is a referenced prop like a character: production/characters/props.json (status, views side and three-quarter, refs) and props.py (finalize: a Pavo agnes-image candidate whose prompt carries ARK_LOOK and ARK_EXCLUDE word for word, after an exact 0-credit quote, recorded DRAFT with its sha256; sheet; approve: only after Claude's review >= 9.5, copies the kept candidate to characters/refs/pr-ark-<view>.jpg with its record images/pr-ark-<view>.json, and the prop is APPROVED only when every view has one; approved_refs checks each image's sha256). plan_check.prop_references / prop_reference_problems: a prompt that names a prop (PROPS mentions, anywhere: the flood's setting sentence names the ark and Pavo draws it) needs every approved reference of that prop, by sha256. scene_stills.py prepare hands them (repository paths Pavo takes) with each candidate and refuses while the prop is not APPROVED; finalize and approve refuse a candidate made without them and record its `references`; plan_check.frame_problems (so the preflight) and episode_build.request (frame_refusal) refuse an approved still whose record lacks them: STILL_PROP_UNREFERENCED, registered class A. Eight text-to-image candidates (run 2026102701, 0 credits each, characters/props/sheets/ark-2026102701.jpg) were reviewed below 9.5 (end blocks, ship bows: the same prior), so the reference is taken from material already approved: props.py `frame` cuts a candidate from a genesis-08 shot clip only when the clip's sha256 is the one Claude approved at >= 9.5 in bible/shots/genesis-08-short.json (s-board, s-ridge, s-scorn), with ffmpeg and an optional crop, recording episode, shot, asset, clip sha256 and time; any other source is refused (PROP_SOURCE_REFUSED). Seven such DRAFT candidates (run 2026102702, characters/props/sheets/ark-2026102702.jpg) await Claude's review; until the ark is APPROVED every still that names it is refused, as intended. Review of #462: approve of a clip frame needs the clip and cuts the frame again (props.cut_frame), byte for byte, else PROP_SOURCE_REFUSED (a hand-made picture whose sidecar names an approved clip was approved before); a still's references are proved by Pavo's own answer (pavo.generate.input_images == the references required, the pavo_image_job read-back completed) and bound by the approval (approved.references_sha256; added by hand later: STILL_PROMPT_CHANGED); ARK_MENTION also names barge, craft, gopher wood and a wooden/timber box, house, structure or chest (barge in ARK_AVOID); from part 9 a scene shot naming the ark outside the period sentences starts from a still (PROP_SHOT_WITHOUT_STILL, plan_check, long_plan_check and episode_build.request; genesis-09-short on main is refused for that until #461's image-first plan lands); prepare refuses such a still on FLUX before any image; props.py is in the refusal-parity scan (its PROP_* codes class N).",
+   "antidote": {
+    "file": "migration/production/bible/test_scene_stills.py",
+    "contains": "def test_a_still_naming_the_ark_is_made_only_with_the_arks_approved_reference_images",
+    "covers": [
+     "no-data",
+     "recurrence"
+    ]
+   }
   }
  ]
 }

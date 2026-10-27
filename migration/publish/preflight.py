@@ -98,6 +98,9 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
             problems.append(f"THUMBNAIL_BYTES {size} (max 2 MB)")
         if w < 1280 or abs(w / h - 16 / 9) > 0.01:
             problems.append(f"THUMBNAIL_SIZE {w}x{h} (1280x720 or larger, 16:9)")
+    if kind is not None:   # owner, 27/10: a Bible long uploads only its approved character thumbnail
+        import publish_video
+        problems += publish_video.bible_thumb_problems(pkg, thumbnail, d)
     sentences = man.get("sentences") or []
     if not sentences or any(not s.get("text") or s["end"] <= s["start"] for s in sentences):
         problems.append("CAPTIONS_TIMELINE (missing or invalid sentences)")

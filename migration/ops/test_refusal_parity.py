@@ -29,11 +29,14 @@ REGISTRY = ROOT / "migration" / "ops" / "refusal_registry.json"
 # the later, expensive stages (the early ones are plan_check.py, script_check.py, long_plan_check.py and preflight)
 LATER = [
     "migration/production/bible/episode_build.py", "migration/production/bible/short_engine.py",
-    "migration/production/bible/lipsync_check.py", "migration/production/bible/clip_check.py",
+    "migration/production/bible/lipsync_check.py", "migration/production/bible/syncnet.py",
+    "migration/production/bible/clip_check.py",
     "migration/production/render_queue.py", "migration/production/qa_pilot.py", "migration/production/still_render.py",
     "migration/production/preview_gate.py", "migration/production/pilot_render.py", "migration/production/long_review.py",
     "migration/production/footage/assign.py", "migration/production/imagegen/cf_images.py",
     "migration/production/characters/characters.py",
+    "migration/production/characters/props.py",   # E122: the prop reference registry (approve is a review gate)
+    "migration/production/bible/thumbs.py",   # the thumbnail's approve and publish refusals (owner, 27/10)
     "migration/publish/prepublish_gate.py", "migration/publish/publication_binding.py",
     "migration/publish/tiktok_publish.py", "migration/publish/arc_links.py", "migration/publish/publish_episode.py",
     "migration/publish/publish_video.py", "migration/publish/captions.py",

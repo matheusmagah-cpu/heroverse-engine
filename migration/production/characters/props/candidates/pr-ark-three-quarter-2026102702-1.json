@@ -1,0 +1,27 @@
+{
+ "id": "pr-ark-three-quarter-2026102702-1",
+ "prop": "ark",
+ "view": "three-quarter",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "source": "approved-clip-frame",
+ "clip": {
+  "episode": "genesis-08-short",
+  "shot": "s-board",
+  "asset": "shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4",
+  "clip_sha256": "e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e",
+  "seconds": 6.5,
+  "approved_score": 9.5,
+  "approval_note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)"
+ },
+ "prompt": null,
+ "quote": null,
+ "references": [],
+ "size": [
+  720,
+  1280
+ ],
+ "repo_path": "migration/production/characters/props/candidates/pr-ark-three-quarter-2026102702-1.jpg",
+ "sha256": "a84470ea1c5edb91a8c402224ba12054f77648e05c642d42bc2bdd7dd0206e62",
+ "generated_by": "HeroVerse pipeline (frame of an AI-generated clip)"
+}

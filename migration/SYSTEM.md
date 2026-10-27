@@ -129,6 +129,11 @@ Produce the master and package, retain provenance, and deliver the frozen techni
   plan's `period` or its passage; the Short and the long, `plan_period_problems`),
   and a rewritten scene prompt is probed with `shot-probe.yml` and a frame sheet before the build (E108, E114:
   genesis-07 run 40341856955 showed a European street, a glass lantern and church towers in 8 of 30 scene shots).
+- A prop seen in many shots (the ark) holds its look the way a character does: its sentences word for word (E113)
+  and its approved reference images (`production/characters/props.json`, `props.py`; E122: genesis-09's 64 stills
+  carried the sentences and still drew a tower, a barn or a bow). A still whose prompt names the prop is made with
+  every approved reference of it, recorded by sha256 with Pavo's read-back (STILL_PROP_UNREFERENCED in scene_stills
+  and plan_check); from part 9 a scene shot that names it starts from such a still (PROP_SHOT_WITHOUT_STILL).
 - An episode record is checked with `episode_build.py check-record <episodes/<id>.json>` (publish_episode's own rules) before `publish-episode.yml` is dispatched.
 - `shot-probe.yml` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - **Every expensive workflow runs `ops/dispatch_guard.py` first** (E116; episode, shot-probe, cf-images, pilot render and preview, footage, pavo-footage, agnes-clip, publish-episode), before any secret: its inputs (and E112's order), capacity (assets in the newest release + the run's uploads <= 1000, the Cloudflare allocation for FLUX runs, YouTube's record limits), one run per episode / pilot / library (a shared job-level concurrency group `heroverse-subject-<subject>`), no new dispatch on a subject whose last run of that workflow failed unless main has a commit since that touches what the run depends on (or `evidence/dispatch/retries.json` records an external cause), and the imports of every script it calls in the job's environment. `ops/test_dispatch_guard.py` fails a new `workflow_dispatch` workflow that is neither guarded nor exempted with its reason.
@@ -185,6 +190,7 @@ The long video is published by `approve.yml` → `prepublish_gate.py` → `publi
 Each video ships the full package, and `preflight.py` checks every measurable item:
 - **title**: the structure's measured pattern; ≤ 100 characters (Help); the promise matches the first 30 s;
 - **thumbnail**: 1280×720, under the Help size limit; the structure's measured pattern (#173 item 5); a clear subject and readable text at small size;
+  for the Bible series (owner, 27/10) it is the story character (APPROVED, made with its reference images), a close-up face with a clear emotion and our own text of at most 4 words, no Keeper face; a candidate reviewed with the episode's stills BEFORE publish (`production/bible/thumbs.py`), and publish uploads only the approved image (THUMB_NOT_APPROVED in check-record and the long's preflight);
 - **description**:
   - the promise in its first lines;
   - **chapters** (Help rules: start at 0:00, at least 3, each ≥ 10 s);
