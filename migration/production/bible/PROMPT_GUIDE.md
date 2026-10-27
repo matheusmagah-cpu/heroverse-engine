@@ -4,7 +4,8 @@ AI video comes from Pavo first (Agnes Flash, 720p, 4-12 s, exact zero-credit quo
 direct, then vidIQ (~15 credits/s veo-3.1-lite 1080p to ~23 credits/s minimax-h3 2k) only when both fail. Shorts are
 almost all AI; every scene still shows its words. A Pavo clip costs no credits but a miss costs a slot, so every
 prompt passes this guide before it is sent. Pavo clips carry an audio track even with no audio asked: strip it (`-an`),
-except a spoken shot of a plan on Pavo's own speech (story QA v4 / `"audio_route": "pavo_native"`, LONG_DESIGN section 9).
+except a spoken shot of a long on Pavo's own speech (story QA v4, LONG_DESIGN section 9; a Short is refused it until
+its own frozen criteria hold the speech checks).
 
 ## Structure (Google's Veo formula, five parts, in this order)
 1. **Cinematography**: shot size, lens feel, ONE camera move ("slow push-in", "static wide", "low tracking shot").

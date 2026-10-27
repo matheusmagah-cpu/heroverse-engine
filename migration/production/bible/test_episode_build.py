@@ -1668,6 +1668,9 @@ class NativeSpeech(unittest.TestCase):
         # review of #476: no Short criteria file holds the speech-check rows yet, so the plan check refuses it
         found = [x.split()[0] for x in eb.plan_check.audio_route_problems(native_plan(), native_plan()["shots"])]
         self.assertEqual(found, ["AUDIO_ROUTE_SHORT_UNSUPPORTED"])
+        # the build's own plan check (every build, probe and preflight command runs it first) refuses it
+        self.assertTrue(any(x.startswith("AUDIO_ROUTE_SHORT_UNSUPPORTED")
+                            for x in eb.check_plan(native_plan())["problems"]))
         p = native_plan()
         p["audio_route"] = "pavo"
         self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],

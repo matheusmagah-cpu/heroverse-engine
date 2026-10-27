@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Pavo's own speech for the spoken shots (owner, 27/10 ~20:40-22:50 UTC, R2 and R4; story QA v4).
 
-A plan opts in: a long with `"criteria": "story-qa-criteria-v4"`, a Short with `"audio_route": "pavo_native"`. Every
-other plan keeps today's route (our Kokoro line as Pavo input audio, Pavo's own audio stripped).
+A plan opts in: a long with `"criteria": "story-qa-criteria-v4"` (unless it says `"audio_route": "kokoro"`). A Short's
+`"audio_route": "pavo_native"` is refused by plan_check (AUDIO_ROUTE_SHORT_UNSUPPORTED, review of #476) until a frozen
+Short criteria file holds the speech-check rows. Every other plan keeps today's route (our Kokoro line as Pavo input audio, Pavo's own audio stripped).
 
 On the native route a spoken shot (a character or the Keeper on camera, God's or the Keeper's voice-over) is generated
 by Pavo with `sound: true` and the structured SOUND sentence the native-audio probe kept (PR #473, prompt A): the

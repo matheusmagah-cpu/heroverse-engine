@@ -593,8 +593,9 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
     ("removed" -> "pavo speech+ambient kept per clip under checks") and rows added (the pinned medium.en ASR, the
     per-clip speech checks, the Kokoro voice for refused lines, the fallback sources and shots, the spoken audio mix);
     every v3 number unchanged, v3 untouched. A long is measured by v4 only when its plan says
-    `"criteria": "story-qa-criteria-v4"`; a Short opts in with `"audio_route": "pavo_native"` (the Shorts have no
-    frozen criteria file that forbids Pavo's audio, so no new Short criteria file was needed);
+    `"criteria": "story-qa-criteria-v4"` (and `"audio_route": "kokoro"` keeps a v4 long on our voice); a Short's
+    `"audio_route": "pavo_native"` is refused by plan_check (AUDIO_ROUTE_SHORT_UNSUPPORTED, review of #476) until a
+    new frozen Short criteria file holds the speech-check rows v4 holds for the long;
   - R1: probe-queue lists a shot with a clean clip of its request (main's shot-probe records, the claude/shot-probe-*
     branches, clip inventories) as awaiting review, never as a new generation; a spoken shot with a clean clip of its
     Kokoro-route request keeps that route (R1 wins over R4);
