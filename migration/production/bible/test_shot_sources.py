@@ -146,6 +146,13 @@ class ApproveSource(unittest.TestCase):
         p["shots"][2]["prompt"] += " Birds rise."          # the shot changed: the approval no longer holds
         self.assertTrue(any(m.startswith("SHOT_REQUEST_CHANGED") and "s-river" in m
                             for m in eb.review_problems(p, {}, approvals)))
+        # review of #476: the shot's kind, speaker and characters are part of a fallback's request too
+        for change in ({"characters": ["eve"]}, {"speaker": "eve", "line": "Why do you hide?"}, {"kind": "keeper"},
+                       {"voiceover": True}):
+            p = plan()
+            p["shots"][2].update(change)
+            self.assertTrue(any(m.startswith("SHOT_REQUEST_CHANGED") and "s-river" in m
+                                for m in eb.review_problems(p, {}, approvals)), change)
 
     def test_a_fallback_is_refused_where_it_would_break_the_floor(self):
         for shot, item, code in (("s-eve", "clip-river-a", "SOURCE_SPOKEN_SHOT"),

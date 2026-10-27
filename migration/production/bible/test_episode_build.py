@@ -522,6 +522,29 @@ class Gating(unittest.TestCase):
                           "clip_seconds": eb.shot_seconds(s, i, self.plan, layout)}
                 for i, s in enumerate(self.plan["shots"])}
 
+    def test_a_fallback_approval_never_ships_on_a_spoken_or_character_shot(self):
+        # review of #476: generate_step checks again, at build, that a footage / still approval is on a shot with no
+        # line and no character, even when its request digest was made to match (a hand-written approval)
+        import shot_sources as ss
+        approvals, sha = self.approvals(), hashlib.sha256(b"approved clip").hexdigest()
+        for want in ("SOURCE_SPOKEN_SHOT", "SOURCE_CHARACTER_SHOT"):
+            plan = copy.deepcopy(self.plan)
+            spoken = [k for k, s in enumerate(plan["shots"]) if eb.pavo_native.spoken(s)]
+            i = spoken[0] if want == "SOURCE_SPOKEN_SHOT" else next(
+                k for k, s in enumerate(plan["shots"]) if k not in spoken and s["kind"] == "scene")
+            shot = plan["shots"][i]
+            if want == "SOURCE_CHARACTER_SHOT":
+                shot["characters"] = ["eve"]   # the plan changed the shot after a fallback was chosen for it
+            forged = dict(approvals, **{shot["id"]: dict(
+                approvals[shot["id"]], source="footage", footage="clip-river-a",
+                request_sha256=ss.fallback_digest(plan, shot, i, "footage", "clip-river-a", sha))})
+            self.assertFalse([m for m in eb.review_problems(plan, {}, {shot["id"]: forged[shot["id"]]})
+                              if m.startswith("SHOT_REQUEST_CHANGED")])   # the digest alone would let it through
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(plan, self.work, "py", "model", approvals=forged,
+                                 fetch=lambda name, dst: Path(dst).write_bytes(b"approved clip"))
+            self.assertTrue(str(err.exception).startswith(f"{want} {shot['id']}"), err.exception)
+
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
         # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
