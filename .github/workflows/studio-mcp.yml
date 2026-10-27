@@ -1,0 +1,24 @@
+name: Studio MCP checks (offline)
+# Unofficial read-only YouTube Studio analytics MCP (migration/integrations/studio). Offline only: no cookie, no
+# secret and no request to YouTube in CI; the live check is done by the owner's host (README "Live check").
+on:
+  pull_request:
+    paths:
+      - '.mcp.json'
+      - 'migration/integrations/studio/**'
+      - '.github/workflows/studio-mcp.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests (fake HTTP layer, synthetic cookies)
+        run: python3 -I -B migration/integrations/studio/test_client.py
+      - name: MCP transport smoke test (no upstream calls)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/studio-venv"
+          "$RUNNER_TEMP/studio-venv/bin/python" -m pip install --quiet 'mcp==2.3.0'
+          "$RUNNER_TEMP/studio-venv/bin/python" migration/integrations/studio/test_stdio.py

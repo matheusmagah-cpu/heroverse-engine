@@ -291,6 +291,7 @@
     "migration/ci/apt_install.sh",
     "migration/ci/test_ci_setup.py",
     "migration/ci/test_smoke.py",
+    "migration/integrations/studio/test_client.py",
     "migration/mining/test_accuracy_check.py",
     "migration/mining/test_daily_intel.py",
     "migration/mining/test_gemini_public_av.py",
@@ -526,6 +527,18 @@
     "migration/production/bible/plan_check.py",
     "migration/production/bible/syncnet.py",
     "migration/production/pilot_render.py"
+   ],
+   "dispatches": []
+  },
+  "studio-mcp.yml": {
+   "name": "Studio MCP checks (offline)",
+   "triggers": [
+    "pull_request"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/integrations/studio/test_client.py",
+    "migration/integrations/studio/test_stdio.py"
    ],
    "dispatches": []
   },
@@ -993,6 +1006,54 @@
    ],
    "test": "migration/integrations/pavo/test_video.py",
    "is_test": false
+  },
+  "migration/integrations/studio/server.py": {
+   "purpose": "Private stdio MCP that READS the owner's YouTube Studio analytics with the owner's Studio session cookies.",
+   "dir": "migration/integrations/studio",
+   "local_imports": [
+    "migration/integrations/studio/studio_client.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/integrations/studio/studio_client.py": {
+   "purpose": "Unofficial, READ-ONLY YouTube Studio analytics client (owner decision, 2026-10-27).",
+   "dir": "migration/integrations/studio",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/integrations/studio/server.py",
+    "migration/integrations/studio/test_client.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/integrations/studio/test_client.py": {
+   "purpose": "Offline tests of the read-only Studio client: allowlist, credential secrecy, SAPISIDHASH, parsing, pacing.",
+   "dir": "migration/integrations/studio",
+   "local_imports": [
+    "migration/integrations/studio/studio_client.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml",
+    "studio-mcp.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/integrations/studio/test_stdio.py": {
+   "purpose": "Real MCP subprocess smoke test; no Studio requests and no real cookies.",
+   "dir": "migration/integrations/studio",
+   "local_imports": [],
+   "called_by_workflows": [
+    "studio-mcp.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
   },
   "migration/mining/accuracy_check.py": {
    "purpose": "Accuracy of the model-reported structure mining against native audio.",
@@ -3697,6 +3758,7 @@
   "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
   "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
   "migration/integrations/pavo/server.py",
+  "migration/integrations/studio/server.py",
   "migration/production/bible/rekey_shots_e118.py",
   "migration/production/imagegen/hydrate_reused.py"
  ]

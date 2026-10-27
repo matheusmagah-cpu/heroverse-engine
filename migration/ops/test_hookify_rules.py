@@ -123,8 +123,22 @@ BLOCK = [
     ("Bash", {"command": "gh workflow run cf-images.yml -f engine=flux -f pilot='production/pilot-015'"}),
     ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "cf-images.yml",
                                           "ref": "main", "inputs": {"pilot": "migration/production/characters"}}),
+    # Studio MCP (2026-10-27): the session cookies never pass through the shell
+    ("Bash", {"command": "echo $YT_STUDIO_COOKIES"}),
+    ("Bash", {"command": "printenv YT_STUDIO_COOKIES | head -c 20"}),
+    ("Bash", {"command": "python3 -c \"import os; print(os.environ['YT_STUDIO_COOKIES'])\""}),
+    ("Bash", {"command": "echo \"${YT_STUDIO_COOKIES:0:10}\""}),
+    ("Bash", {"command": "env"}),
+    ("Bash", {"command": "env | grep -i cookie"}),
+    ("Bash", {"command": "cd /tmp && printenv > /tmp/e.txt"}),
+    ("Bash", {"command": "cat /proc/self/environ"}),
 ]
 ALLOW = [
+    ("Bash", {"command": "YT_STUDIO_COOKIES= python3 -B migration/integrations/studio/test_stdio.py"}),
+    ("Bash", {"command": "printenv PATH"}),
+    ("Bash", {"command": "env -u FOO python3 x.py"}),
+    ("Bash", {"command": "python3 -I -B migration/integrations/studio/test_client.py"}),
+    ("Write", {"file_path": "migration/integrations/studio/README.md", "content": "set YT_STUDIO_COOKIES in settings"}),
     ("Edit", {"file_path": "migration/production/pilot-008/inspection/claude_review.json", "old_string": "a", "new_string": "b"}),
     ("Write", {"file_path": "migration/production/notes.md", "content": "APPROVAL.json is written by approve.yml"}),
     ("Bash", {"command": f"cat {APPROVAL} | python3 -m json.tool"}),

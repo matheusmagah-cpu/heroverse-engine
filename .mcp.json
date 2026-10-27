@@ -4,6 +4,11 @@
       "command": "uv",
       "args": ["run", "--script", "migration/integrations/pavo/server.py"],
       "env": {"PAVO_TOKEN": "${PAVO_TOKEN:-}"}
+    },
+    "heroverse-studio": {
+      "command": "uv",
+      "args": ["run", "--script", "migration/integrations/studio/server.py"],
+      "env": {"YT_STUDIO_COOKIES": "${YT_STUDIO_COOKIES:-}"}
     }
   }
 }
