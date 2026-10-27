@@ -67,12 +67,13 @@ def load(path):
     raw = open(path, "rb").read()
     if hashlib.sha256(raw).hexdigest() != SYNCNET_SHA256:
         raise SystemExit("SYNCNET_MODEL_HASH_MISMATCH")
-    return parse(raw)
+    return _parse(raw)
 
 
-def parse(raw):
+def _parse(raw):
     """A legacy torch.save state dict (magic, protocol, sys info, the pickled dict with persistent storage ids, the
-    storage keys, then each storage as an int64 count and its raw little-endian data) without torch."""
+    storage keys, then each storage as an int64 count and its raw little-endian data) without torch. Private: its only
+    caller is load(), after the sha256 check (security sweep of #457, H1)."""
     import io
     f = io.BytesIO(raw)
 

@@ -341,7 +341,7 @@ class SyncNetUnits(unittest.TestCase):
 
     def test_the_weights_are_pinned_and_parsed_without_torch(self):
         tensors = {"a.weight": np.arange(6, dtype=np.float32).reshape(2, 3), "a.bias": np.ones(2, np.float32)}
-        w = sn.parse(_FakeTorch().save(tensors))
+        w = sn._parse(_FakeTorch().save(tensors))
         self.assertTrue(np.array_equal(w["a.weight"], tensors["a.weight"]))
         self.assertTrue(np.array_equal(w["a.bias"], tensors["a.bias"]))
         import tempfile
@@ -362,7 +362,7 @@ class SyncNetUnits(unittest.TestCase):
         for slot in range(5):
             raw = b"".join(evil if i == slot else g for i, g in enumerate(good))
             with self.assertRaises(pickle.UnpicklingError, msg=slot) as e:
-                sn.parse(raw)
+                sn._parse(raw)
             self.assertIn("SYNCNET_MODEL_FORBIDDEN", str(e.exception))
 
     def test_conv_and_pool_match_their_definition(self):
