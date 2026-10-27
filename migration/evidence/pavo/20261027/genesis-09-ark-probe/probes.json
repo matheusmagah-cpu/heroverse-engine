@@ -1,0 +1,334 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-09-short",
+ "purpose": "E122 follow-up, after Claude rejected run 2026102704 (ark stills drew curved bows, prows, cabins and smoking funnels with the ark references sent): which part of the still prompt pulls the ship. Hypotheses: (a) ARK_EXCLUDE's negated words prime what they name; (b) the words ark/hull pull the ship prior; (c) the flood period sentence 'the great wooden ark' drags an ark into stills that should not show one. Probe only: no candidate is for approval, plan_check unchanged.",
+ "how": "Direct calls from a Claude session through the heroverse-pavo MCP tools, agnes-image hd 9:16, one candidate per variant. Every pavo_generate_image came after its own pavo_quote_image (exact 0, is_estimate false; input_images 2 with the ark references, 0 without). Every submission answered 'submitted'; none uncertain, none retried; each read back with pavo_image_job (completed). Images here are 540x960 copies; originals (1472x2624) stay in the session scratchpad, their sha256 recorded. V1 reuses run 2026102704's -1 candidates (no new generation).",
+ "credits": 0,
+ "variants": {
+  "V1": "the still's current prompt (ARK_LOOK + ARK_EXCLUDE + flood period sentence) + the 2 ark references (control)",
+  "V2": "the 2 ark references; the ark described only positively ('a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle'), no ARK_LOOK/ARK_EXCLUDE, none of the words ark/hull/ship/boat/vessel, period sentence without 'the great wooden ark'",
+  "V3": "V2's prompt without references",
+  "V4": "V2 + 'It is the same wooden structure as in the reference images.'"
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+  }
+ ],
+ "sheet": "sheet.jpg",
+ "probes": [
+  {
+   "variant": "V1",
+   "shot": "s-laugh",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces not visible, stands at the foot of a hill laughing up at the vast ark, its whole hull smeared pitch-black under a flat plank roof, heads thrown back, a man in silhouette at the front with one arm flung out toward it. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "reused_candidate": "migration/production/bible/stills/candidates/genesis-09-s-laugh-2026102704-1.jpg",
+   "conversation_id": "373476636370959936",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-laugh-v1.jpg",
+   "box_held": "no",
+   "reading": "no: curved ship hull with a raised bow, a deckhouse and a smoking funnel"
+  },
+  {
+   "variant": "V2",
+   "shot": "s-laugh",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces not visible, stands at the foot of a hill laughing up at a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the hilltop, heads thrown back, a man in silhouette at the front with one arm flung out toward it. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485004011609856",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-b92cdc1d9044-0-f7936c4f19fb.jpg",
+   "original_sha256": "ddad125533f1270a83d757d48aeed16df46df7f6ee579bbf13bd5c4c1eaadb93",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-laugh-v2.jpg",
+   "box_held": "yes",
+   "reading": "yes: long low flat-roofed plank box, square end, same height end to end; no smoke"
+  },
+  {
+   "variant": "V3",
+   "shot": "s-laugh",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces not visible, stands at the foot of a hill laughing up at a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the hilltop, heads thrown back, a man in silhouette at the front with one arm flung out toward it. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [],
+   "conversation_id": "373485236699043520",
+   "input_images": 0,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-53b1d26f6b7f-0-993b350a4440.jpg",
+   "original_sha256": "ebc4c37e7205afe68e3543ce41c11ed441cce15ff61d578a51f89b865374a7dc",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-laugh-v3.jpg",
+   "box_held": "partly",
+   "reading": "partly: box shape, but it reads as a small crate or shed, not a vast vessel; scale lost"
+  },
+  {
+   "variant": "V4",
+   "shot": "s-laugh",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces not visible, stands at the foot of a hill laughing up at a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the hilltop, heads thrown back, a man in silhouette at the front with one arm flung out toward it. It is the same wooden structure as in the reference images. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485416164923072",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-9c3b95e07300-0-cd83ac4a52cc.jpg",
+   "original_sha256": "db2663a168a5169b32a0c6c59111cb60bbb45187aee2c93439cbab1d906bb60d",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-laugh-v4.jpg",
+   "box_held": "yes",
+   "reading": "yes: long low flat-roofed plank box, square end (figures on the roof, tents behind)"
+  },
+  {
+   "variant": "V1",
+   "shot": "s-enter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of the vast ark, its whole hull smeared pitch-black under a flat plank roof. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "reused_candidate": "migration/production/bible/stills/candidates/genesis-09-s-enter-2026102704-1.jpg",
+   "conversation_id": "373478203925019328",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-enter-v1.jpg",
+   "box_held": "no",
+   "reading": "no: round-bellied ship's stern seen end-on with a mast-like post and smoke rising"
+  },
+  {
+   "variant": "V2",
+   "shot": "s-enter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485085774842944",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-bf9d0c60644d-0-e31b1cdf0098.jpg",
+   "original_sha256": "0fc3740f00db40792b42d2e1af37a7caf3365ee0fe2b30babaaf3ea988594b83",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-enter-v2.jpg",
+   "box_held": "yes",
+   "reading": "yes: long flat-roofed plank box with a door in the side; no smoke"
+  },
+  {
+   "variant": "V3",
+   "shot": "s-enter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [],
+   "conversation_id": "373485268952681536",
+   "input_images": 0,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-ac6358bd49e8-0-045430e8635d.jpg",
+   "original_sha256": "de45665b6382a5f382975939a1741129b745d9bb19477a862653ebe26cc01c98",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-enter-v3.jpg",
+   "box_held": "no",
+   "reading": "no: a small plank hut with a gabled-looking eave, scale of a shed; not the ark"
+  },
+  {
+   "variant": "V4",
+   "shot": "s-enter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight seen from behind, faces not visible, an old man and his wife, three young men and their wives, carrying bundles on the earthen ramp up to the wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground. It is the same wooden structure as in the reference images. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485482610559040",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-0c8230f81823-0-f52720e08e54.jpg",
+   "original_sha256": "903b9d38aa6c34f1f43e8f46a8af11eacd09fce112892b43db4a869332ff9c35",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-enter-v4.jpg",
+   "box_held": "yes",
+   "reading": "yes: long flat-roofed plank box with a dark door at the end of the ramp; no smoke"
+  },
+  {
+   "variant": "V1",
+   "shot": "s-lift",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. The vast ark, its whole hull smeared pitch-black under a flat plank roof, stands in brown floodwater swirling around it, people in silhouette on the hillside in the foreground watching it. Grey day, rain and churning water. Mighty and terrible. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "reused_candidate": "migration/production/bible/stills/candidates/genesis-09-s-lift-2026102704-1.jpg",
+   "conversation_id": "373480080397889024",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-lift-v1.jpg",
+   "box_held": "no",
+   "reading": "no: ship with a curled prow, a cabin and a smoking funnel"
+  },
+  {
+   "variant": "V2",
+   "shot": "s-lift",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, sits level in brown floodwater swirling around it, people in silhouette on the hillside in the foreground watching it. Grey day, rain and churning water. Mighty and terrible. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485148648061632",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-baef4e2af66a-0-546709a1ff71.jpg",
+   "original_sha256": "c9cf0f9ab17dac30a18a500a4879c0b7f1bcc492dd658a7e29ace9d338f976bc",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-lift-v2.jpg",
+   "box_held": "yes",
+   "reading": "yes: long low box level in the floodwater, flat roof, square ends (figures stand on the roof)"
+  },
+  {
+   "variant": "V3",
+   "shot": "s-lift",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, sits level in brown floodwater swirling around it, people in silhouette on the hillside in the foreground watching it. Grey day, rain and churning water. Mighty and terrible. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [],
+   "conversation_id": "373485298409807616",
+   "input_images": 0,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-10c3eb515467-0-ea5620472c9d.jpg",
+   "original_sha256": "30269863090bc9e66b9bc41e9205cc708857c7091bb0d29bdff9d064082322a5",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-lift-v3.jpg",
+   "box_held": "partly",
+   "reading": "partly: box, but a cross-braced shipping crate in sections, not the referenced ark"
+  },
+  {
+   "variant": "V4",
+   "shot": "s-lift",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, sits level in brown floodwater swirling around it, people in silhouette on the hillside in the foreground watching it. It is the same wooden structure as in the reference images. Grey day, rain and churning water. Mighty and terrible. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "references": [
+    {
+     "record": "pr-ark-side",
+     "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+    },
+    {
+     "record": "pr-ark-three-quarter",
+     "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+    }
+   ],
+   "conversation_id": "373485564756002880",
+   "input_images": 2,
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-2fc4040aa9c0-0-2e6c12f349f9.jpg",
+   "original_sha256": "6738bb2221a85a0d6a6c75dc582c76e0f0b3cb28dea2227751c9e90bd1445e47",
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "job_status": "completed",
+   "image": "probe-s-lift-v4.jpg",
+   "box_held": "yes",
+   "reading": "yes: long low box level in the floodwater, flat roof, square ends (figures stand on the roof)"
+  }
+ ],
+ "reading": "V1 0/3 held the box (bow, cabin, smoking funnel in all three). V2 3/3 and V4 3/3 held the long low flat-roofed box, no smoke. V3 (no references) drew a box but at the scale of a crate or shed, 0/3 the referenced ark. So the positive description removes the ship and the funnel, the references give it its scale and proportions, and the reference sentence of V4 adds nothing visible over V2 on this sample. The evidence supports (a) and/or (b) together (V2 changed both at once; the probe does not separate them). (c) was not probed directly here (all three shots show the ark); run 2026102704's carry, climb and feet drew an ark they do not name. Side effects seen: figures standing on the roof in V2/V4 s-lift and V4 s-laugh; crowd faces visible in V1/V2/V4 s-laugh (prompt says seen from behind). One candidate per variant: a small sample."
+}
