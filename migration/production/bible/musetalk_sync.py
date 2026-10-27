@@ -126,7 +126,7 @@ def mouth_core(p, shape):
     c = lips.mean(axis=0)
     w = lips[:, 0].max() - lips[:, 0].min()
     m = np.zeros(shape[:2], np.uint8)
-    cv2.ellipse(m, (int(c[0]), int(c[1] + 0.15 * w)), (int(0.62 * w), int(0.45 * w)), 0, 0, 360, 255, -1)
+    cv2.ellipse(m, (int(c[0]), int(c[1] + 0.12 * w)), (int(0.5 * w), int(0.38 * w)), 0, 0, 360, 255, -1)
     k = int(0.3 * w) // 2 * 2 + 1
     return cv2.GaussianBlur(m, (k, k), 0).astype(np.float32) / 255.0
 

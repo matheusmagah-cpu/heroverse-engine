@@ -73,9 +73,13 @@ jobs:
             ffmpeg -nostdin -v error -y -i "$out/$n.mp4" -vf "fps=6,crop=iw/2:ih/4:iw/4:ih/6,scale=200:-1,tile=8x4" -frames:v 1 "$out/$n-mouth.jpg"
             cat "$out/$n.run.json" "$out/$n.check.json"
           }
-          run lipsdetail --mask lips --detail
-          run refr1 --ref-image "$R1"
-          run refr1-lipsdetail --ref-image "$R1" --mask lips --detail
+          R2=migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg
+          ffmpeg -nostdin -v error -y -i "$V/$CLIP" -vf fps=25 -c:v libx264 -crf 12 -an "$RUNNER_TEMP/src25.mp4"
+          mkdir -p "$RUNNER_TEMP/v25" && cp "$RUNNER_TEMP/src25.mp4" "$RUNNER_TEMP/v25/$CLIP"
+          run r1-lips-24 --ref-image "$R1" --mask lips --detail
+          V="$RUNNER_TEMP/v25"
+          run r1-lips-25 --ref-image "$R1" --mask lips --detail
+          run r2-lips-25 --ref-image "$R2" --mask lips --detail
           cp "$RUNNER_TEMP/weights.sha256" "$out/"
       - name: Results to claude/musetalk-probe-<run>-<pair>
         if: always()
