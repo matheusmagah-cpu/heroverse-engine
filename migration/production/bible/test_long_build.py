@@ -272,6 +272,27 @@ class Assemble(unittest.TestCase):
             lb.upscale_step(plan, "s-c", self.dir / "up2", "w", frame_fn=lambda x: x, approvals=approvals,
                             fetch=lambda name, dst: Path(dst).write_bytes(b"other"))
 
+    def test_an_approved_still_is_rendered_only_if_it_is_the_still_claude_approved(self):
+        # review of #476: upscale_step's still_motion goes through shot_sources.fetch_source (sha256, in-repo path)
+        plan = tiny_plan()
+        folder = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-still-"))
+        try:
+            still = folder / "still.jpg"
+            ffmpeg("-f", "lavfi", "-i", "testsrc=s=192x108:d=1", "-frames:v", "1", still)
+            approved = {"source": "still_motion", "still": "still-x", "repo_path": str(still.relative_to(eb.REPO)),
+                        "still_sha256": sha(still), "clip_seconds": 1.0}
+            still.write_bytes(still.read_bytes() + b"\0")          # the still changed after Claude's approval
+            with self.assertRaises(SystemExit) as c:
+                lb.upscale_step(plan, "s-c", self.dir / "up", "w", approvals={"s-c": approved})
+            self.assertTrue(str(c.exception).startswith("STILL_SHA256_MISMATCH"), str(c.exception))
+            outside = dict(approved, repo_path="../" * 6 + "tmp/still.jpg")
+            with self.assertRaises(SystemExit) as c:
+                lb.upscale_step(plan, "s-c", self.dir / "up", "w", approvals={"s-c": outside})
+            self.assertTrue(str(c.exception).startswith("STILL_PATH_REFUSED"), str(c.exception))
+            self.assertFalse((self.dir / "up" / "s-c.mp4").exists())
+        finally:
+            shutil.rmtree(folder)
+
 
     def stub(self, size="320x180", seconds=21.2, rate=48000, channels=2, audio="loudnorm=I=-15:TP=-2"):
         """A render_fn writing a file of the given shape (what a broken render could hand the checks)."""
