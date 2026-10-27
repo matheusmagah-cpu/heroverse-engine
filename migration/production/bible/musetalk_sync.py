@@ -27,6 +27,7 @@ import numpy as np
 OVAL_LOWER = [234, 93, 132, 58, 172, 136, 150, 149, 176, 148, 152, 377, 400, 378, 379, 365, 397, 288, 361, 323, 454]
 OVAL = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378, 400, 377, 152, 148, 176, 149,
         150, 136, 172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109]
+LIPS_OUTER = [61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291, 409, 270, 269, 267, 0, 37, 39, 40, 185]
 CHIN, NOSE_BRIDGE, NOSE_TIP = 152, 195, 1
 EXTRA_MARGIN = 10
 
@@ -102,12 +103,43 @@ def mask_for(p, box, shape):
     return cv2.GaussianBlur(m, (k, k), 0).astype(np.float32) / 255.0
 
 
+def lips_mask(p, shape, scale=1.9):
+    """Only the mouth and the beard right around it: the outer-lip hull scaled about its centre (wider downwards,
+    where the jaw opens), feathered."""
+    import cv2
+    lips = p[LIPS_OUTER]
+    c = lips.mean(axis=0)
+    w = lips[:, 0].max() - lips[:, 0].min()
+    pts = (lips - c) * scale + c
+    pts[:, 1] = np.where(pts[:, 1] > c[1], c[1] + (pts[:, 1] - c[1]) * 1.6 + 0.15 * w, pts[:, 1])
+    m = np.zeros(shape[:2], np.uint8)
+    cv2.fillPoly(m, [cv2.convexHull(pts.astype(np.int32))], 255)
+    k = int(0.35 * w) // 2 * 2 + 1
+    return cv2.GaussianBlur(m, (k, k), 0).astype(np.float32) / 255.0
+
+
+def mouth_core(p, shape):
+    """Where the mouth opens (lips width, down to ~0.7 of it below the lip line): no detail transfer there, so the
+    closed lips of the source never ghost over an open mouth."""
+    import cv2
+    lips = p[LIPS_OUTER]
+    c = lips.mean(axis=0)
+    w = lips[:, 0].max() - lips[:, 0].min()
+    m = np.zeros(shape[:2], np.uint8)
+    cv2.ellipse(m, (int(c[0]), int(c[1] + 0.15 * w)), (int(0.62 * w), int(0.45 * w)), 0, 0, 360, 255, -1)
+    k = int(0.3 * w) // 2 * 2 + 1
+    return cv2.GaussianBlur(m, (k, k), 0).astype(np.float32) / 255.0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--musetalk", required=True)
     ap.add_argument("--models", required=True)
     ap.add_argument("--face-model", required=True)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--mask", choices=["face", "lips"], default="face")
+    ap.add_argument("--detail", action="store_true", help="put the source's fine texture back outside the mouth")
+    ap.add_argument("--ref-image", default="", help="identity reference crop for every frame (a talking frame)")
     ap.add_argument("clip")
     ap.add_argument("wav")
     ap.add_argument("out")
@@ -142,11 +174,22 @@ def main():
     cyc = list(range(len(frames))) + list(range(len(frames) - 1, -1, -1))
     order = [cyc[i % len(cyc)] for i in range(n_out)]
     latents = {}
+    ref_lat = None
     with torch.no_grad():
+        if a.ref_image:
+            ref = cv2.imread(a.ref_image)
+            rp = fill_missing(landmarks([ref], fps, a.face_model))
+            rx1, ry1, rx2, ry2 = boxes(rp, ref.shape)[0]
+            ref_lat = vae.encode_latents(vae.preprocess_img(
+                cv2.resize(ref[ry1:ry2, rx1:rx2], (256, 256), interpolation=cv2.INTER_LANCZOS4), half_mask=False))
         for i in sorted(set(order)):
             x1, y1, x2, y2 = bx[i]
             crop = cv2.resize(frames[i][y1:y2, x1:x2], (256, 256), interpolation=cv2.INTER_LANCZOS4)
-            latents[i] = vae.get_latents_for_unet(crop)
+            if ref_lat is None:
+                latents[i] = vae.get_latents_for_unet(crop)
+            else:
+                masked = vae.encode_latents(vae.preprocess_img(crop, half_mask=True))
+                latents[i] = torch.cat([masked, ref_lat], dim=1)
     t_prep = time.time() - t0
 
     h, w = frames[0].shape[:2]
@@ -168,7 +211,12 @@ def main():
                 paste = frame.copy()
                 paste[y1:y2, x1:x2] = cv2.resize(face.astype(np.uint8), (x2 - x1, y2 - y1),
                                                  interpolation=cv2.INTER_LANCZOS4)
-                m = mask_for(pts[i], bx[i], frame.shape)[..., None]
+                if a.detail:
+                    core = mouth_core(pts[i], frame.shape)[..., None]
+                    hf = frame - cv2.GaussianBlur(frame, (0, 0), 2.0)
+                    paste = paste - (paste - cv2.GaussianBlur(paste, (0, 0), 2.0)) * (1 - core) + hf * (1 - core)
+                m = lips_mask(pts[i], frame.shape) if a.mask == "lips" else mask_for(pts[i], bx[i], frame.shape)
+                m = m[..., None]
                 enc.stdin.write((frame * (1 - m) + paste * m).clip(0, 255).astype(np.uint8).tobytes())
     enc.stdin.close()
     if enc.wait() != 0:
@@ -176,7 +224,8 @@ def main():
     print(json.dumps({"clip": a.clip, "wav": a.wav, "out": a.out, "frames": n_out, "fps": fps,
                       "clip_frames": len(frames), "cycled": n_out > len(frames),
                       "seconds_prep": round(t_prep, 1), "seconds_total": round(time.time() - t0, 1),
-                      "box_median": np.median(bx, axis=0).astype(int).tolist()}))
+                      "box_median": np.median(bx, axis=0).astype(int).tolist(),
+                      "mask": a.mask, "detail": a.detail, "ref_image": a.ref_image}))
 
 
 if __name__ == "__main__":
