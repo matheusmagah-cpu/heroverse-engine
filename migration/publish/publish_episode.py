@@ -4,7 +4,9 @@
 The episode record (migration/production/bible/episodes/<id>.json) holds the metadata and the hash of the exact file.
 Idempotent like publish_video: the ledger maps "bible:<id>:<sha256>" -> video_id, an existing key is never uploaded
 again and a re-run only finishes missing steps. Public at once, or private with publishAt. AI scenes and voice are
-declared (containsSyntheticMedia).
+declared (containsSyntheticMedia). From part 9 the thumbnail is the one approved in bible/thumbs/<id>.json (owner, 27/10:
+the story character, reviewed before publish): any other is THUMB_NOT_APPROVED here and in check-record, never a
+rework after the upload.
 usage: publish_episode.py EPISODE_JSON VIDEO LEDGER RECEIPT [PUBLISH_AT_ISO]
 """
 from datetime import datetime, timezone
@@ -81,10 +83,34 @@ def description_problems(description):
     return out
 
 
+THUMB_FROM_PART = 9   # owner, 2026-10-27: the approved character thumbnail (what is published stays as it is)
+THUMBS_CODE = Path(__file__).resolve().parents[1] / "production" / "bible"
+
+
+def thumbs():
+    """bible/thumbs.py, imported when first needed (plan_check imports this module)."""
+    if str(THUMBS_CODE) not in sys.path:
+        sys.path.insert(0, str(THUMBS_CODE))
+    import thumbs as t
+    return t
+
+
+def thumb_required(episode):
+    return episode.get("part", 0) >= THUMB_FROM_PART
+
+
+def thumb_problems(episode):
+    """From part 9: the approved thumbnail of this episode, its spec unchanged and its image the approved one; every
+    reason is THUMB_NOT_APPROVED (or the spec's own code), named in check-record before publish-episode.yml runs."""
+    if not thumb_required(episode):
+        return []
+    return thumbs().publish_problems(episode["id"], episode.get("format", "short"))
+
+
 def problems(episode, video=None):
     """Everything EPISODE_REFUSED names. video None: the record alone (episode_build.py check-record runs this before
     publish-episode.yml is dispatched, E106); the upload always passes the file, so its sha256 is checked there."""
-    out = short_problems(episode)
+    out = short_problems(episode) + thumb_problems(episode)
     if video is not None and sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:
@@ -119,6 +145,15 @@ def main(episode_path, video, ledger_path, receipt_path, publish_at=None):
         entry.update({"video_id": pv.upload(s, video, body)["id"], "uploaded_at": datetime.now(timezone.utc).isoformat()})
         save()   # durable before any further step
     vid = entry["video_id"]
+    if thumb_required(episode) and not entry["steps"].get("thumbnail"):
+        image = thumbs().approved_image(episode["id"])
+        bad = thumbs().publish_problems(episode["id"], episode.get("format", "short"), image)
+        if bad:   # checked again on the exact bytes uploaded
+            raise SystemExit("THUMB_NOT_APPROVED " + "; ".join(bad))
+        pv.check(s.post(pv.UPLOAD + "thumbnails/set", params={"videoId": vid}, data=image.read_bytes(),
+                        headers={"Content-Type": "image/jpeg"}), "THUMBNAIL")
+        entry["steps"]["thumbnail"] = True
+        save()
     if episode.get("first_comment") and not pv.comment_done(entry["steps"].get("first_comment")):
         entry["steps"]["first_comment"] = pv.first_comment(s, vid, episode["first_comment"])
         save()

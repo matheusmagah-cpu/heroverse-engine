@@ -1,0 +1,65 @@
+{
+ "id": "genesis-09-short-20261027-1",
+ "episode": "genesis-09-short",
+ "run": "20261027",
+ "status": "DRAFT",
+ "format": "short",
+ "size": [
+  1080,
+  1920
+ ],
+ "spec_sha256": "51e40bc95e8374f6f4ab0a24a67aa6a55708c250508db8e7326f5b84437218ef",
+ "prompt": "Extreme close-up of the face of a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his face filling the frame, wide dark eyes lifted to the sky in grief and dread as the first heavy rain of the flood streams down his weathered cheeks and grey beard, his mouth closed, behind him out of focus the dark wet planks of the ark at its open door and a black storm sky. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. Warm amber torchlight from one side on his face against the cold storm, rich saturated colour, high contrast, photorealistic cinematic film still, sharp focus on the eyes, film grain, no text, no lettering, no signature, no watermark.",
+ "text": "THE FLOOD BEGINS",
+ "text_by": "thumbs.py overlay (DejaVu Sans Bold), never the image model",
+ "source": "pavo-agnes-image-2.5-flash",
+ "model": "agnes-image",
+ "ratio": "9:16",
+ "resolution": "hd",
+ "conversation_id": "373460840168557632",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-noah-front",
+   "sha256": "4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5",
+   "sent_sha256": "50414fb9e968367841be07c9f700d86b989e44e00c70524b41c26c392747f4e8"
+  },
+  {
+   "record": "ch-noah-three-quarter",
+   "sha256": "3c5fc8f49ff36c9893fcf11a30ee58e888d5c8c6a187e2f5cbf45dc0d6c6b422",
+   "sent_sha256": "0f1a3a2d1d1f0e1aea42967cb13fe7ae2cd3c62ce4e5669d75b4e71306137494"
+  }
+ ],
+ "references_live": true,
+ "source_size": [
+  1472,
+  2624
+ ],
+ "base_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261027-1-base.jpg",
+ "base_sha256": "43b3bc759499d6e234c1d3fa1be8c0d6c7f5773233d14d427eca8deeefee52d3",
+ "repo_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261027-1.jpg",
+ "sha256": "6a12e9946452aca967aa7f3a0eb86497315b4d79a2dbdec3292d0b2d64163d2a",
+ "r16": {
+  "status": "FAIL",
+  "fails": [
+   "THUMB_NOT_SATURATED 0.32 <= 0.45 (R16)"
+  ],
+  "metrics": {
+   "brightness": 0.226,
+   "contrast": 0.203,
+   "saturation": 0.323,
+   "colourfulness": 0.103,
+   "edge_density": 0.137,
+   "warm_share": 0.129,
+   "blue_share": 0.292,
+   "dark_share": 0.419,
+   "bright_share": 0.033,
+   "yellow_text_like": 0.0
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)"
+}

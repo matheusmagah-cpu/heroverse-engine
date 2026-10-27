@@ -1,0 +1,52 @@
+{
+ "id": "genesis-09-short-20261027-2",
+ "episode": "genesis-09-short",
+ "run": "20261027",
+ "status": "DRAFT",
+ "format": "short",
+ "size": [
+  1080,
+  1920
+ ],
+ "spec_sha256": "51e40bc95e8374f6f4ab0a24a67aa6a55708c250508db8e7326f5b84437218ef",
+ "prompt": "Extreme close-up of the face of a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his face filling the frame, wide dark eyes lifted to the sky in grief and dread as the first heavy rain of the flood streams down his weathered cheeks and grey beard, his mouth closed, behind him out of focus the dark wet planks of the ark at its open door and a black storm sky. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. Warm amber torchlight from one side on his face against the cold storm, rich saturated colour, high contrast, photorealistic cinematic film still, sharp focus on the eyes, film grain, no text, no lettering, no signature, no watermark.",
+ "text": "THE FLOOD BEGINS",
+ "text_by": "thumbs.py overlay (DejaVu Sans Bold), never the image model",
+ "source": "pavo-agnes-image-2.5-flash",
+ "model": "agnes-image",
+ "ratio": "9:16",
+ "resolution": "hd",
+ "conversation_id": "373460902416285504",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "references_live": false,
+ "source_size": [
+  1472,
+  2624
+ ],
+ "base_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261027-2-base.jpg",
+ "base_sha256": "05789d6499f0b3d21e183f36c4a25fcdf45daeffc833a0e4549d3b642d8cac6d",
+ "repo_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261027-2.jpg",
+ "sha256": "e11d935775bdafdf338a95bc4af82c42ff6224d55178dfaedbdea8413ac81f67",
+ "r16": {
+  "status": "PASS",
+  "fails": [],
+  "metrics": {
+   "brightness": 0.171,
+   "contrast": 0.205,
+   "saturation": 0.522,
+   "colourfulness": 0.139,
+   "edge_density": 0.095,
+   "warm_share": 0.242,
+   "blue_share": 0.0,
+   "dark_share": 0.644,
+   "bright_share": 0.036,
+   "yellow_text_like": 0.0
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)"
+}
