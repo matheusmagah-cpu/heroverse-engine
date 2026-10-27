@@ -115,12 +115,15 @@ def shot_probe(i):
     plan = _plan(i)
     shots = ids(i.get("shots"))
     need(shots and re.fullmatch(IDS, i.get("shots", "")), "shots", i.get("shots"), "comma list of shot ids")
-    known = {s.get("id") for s in plan.get("shots", [])}
-    need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan ({len(known)} shots)")
+    # E126: a long's `window_of` shot is a second view of an earlier clip: never generated, so never probed
+    known = {s.get("id") for s in plan.get("shots", []) if s.get("window_of") is None}
+    need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan's generated shots ({len(known)} shots)")
     need(re.fullmatch(r"[1-6]", i.get("attempts") or ""), "attempts", i.get("attempts"), "1-6")
     need(re.fullmatch(r"(\d{6,20})?", i.get("adopt_run") or ""), "adopt_run", i.get("adopt_run"), "a run id or empty")
+    # E126: a long's probe also depends on its committed preflight (check-probe's LONG_PROBE_PREFLIGHT)
     return {"uploads": len(shots) * int(i["attempts"]),
-            "deps": [i["plan"], "migration/production/characters/", "migration/evidence/pavo/setups.json"]}
+            "deps": [i["plan"], "migration/production/characters/", "migration/evidence/pavo/setups.json",
+                     f"migration/evidence/preflight/{plan['episode']}.json"]}
 
 
 def cf_images(i):

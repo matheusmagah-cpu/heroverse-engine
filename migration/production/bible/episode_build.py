@@ -34,6 +34,10 @@ the episode record and dispatches publish-episode.yml.
                                                  predicted with its own functions, local Kokoro, refs and requests,
                                                  the talking setups that need a direct Pavo probe (episode_preflight.py)
   episode_build.py verify-preflight PLAN         episode.yml's first step: the committed report is PASS for this plan
+                                                 (a long: long_preflight.py, E126, also no review row open)
+  episode_build.py probe-queue PLAN [MAX_MINUTES]
+                                                 E126: the shots still without an approved clip of their request,
+                                                 riskiest first, in shot-probe.yml batches (resume)
   episode_build.py check-regenerate PLAN         episode.yml's first step: the `regenerate` input (env REGENERATE) is
                                                  refused whatever it names (E114: SHOT_APPROVED_USE_PROBE)
   episode_build.py check-probe PLAN               shot-probe.yml's first step: env SHOTS (shot ids of this plan) and
@@ -126,6 +130,44 @@ class ShotFailed(Exception):
     pass
 
 
+# E126: the Bible-story long (bible-long-plan-v1, long_plan_check.py) goes through the same no-rework contract as a
+# Short: its own preflight (long_preflight.py), shot-probe.yml, approve-shot into shots/<long>.json, a build that only
+# ships approved clips. These helpers are the only places the two plans differ in this file.
+LONG_VERSION = "bible-long-plan-v1"   # long_plan_check.VERSION (test_long_preflight holds them equal)
+
+
+def is_long(plan):
+    return isinstance(plan, dict) and plan.get("version") == LONG_VERSION
+
+
+def line_gap(plan):
+    """The silence between two voice-track lines: the Short's LINE_GAP, the long's LONG_LINE_GAP (0.6 s: at 0.35 s the
+    measured arc-1 voice ran at the QA's 165 words-a-minute ceiling)."""
+    if is_long(plan):
+        import long_plan_check
+        return long_plan_check.LONG_LINE_GAP
+    return LINE_GAP
+
+
+def is_window(shot):
+    """A long's `window_of` shot shows another part of an earlier clip: never generated, probed or approved."""
+    return shot.get("window_of") is not None
+
+
+def check_plan(plan, chars=None):
+    """plan_check for a Short, long_plan_check (and its frozen story QA) for a long: {problems, pending, ...}."""
+    if not is_long(plan):
+        return plan_check.check(plan, chars)
+    import long_plan_check
+    result = long_plan_check.check(plan, chars)
+    frozen = long_plan_check.frozen_qa_problem()
+    if frozen:
+        result["problems"].append(frozen)
+    if plan.get("episode") != plan.get("long"):   # shot-probe.yml, the dispatch guard and shots/ key on `episode`
+        result["problems"].append(f"LONG_EPISODE_ID {plan.get('episode')!r} (a long's `episode` is its `long` id)")
+    return result
+
+
 def load(path):
     return json.loads(Path(path).read_text())
 
@@ -207,7 +249,7 @@ def retime_plan(plan, durations):
         if not plan_check.talking(s):
             continue
         idx = carried[i]
-        gaps = LINE_GAP * (len(idx) - 1)
+        gaps = line_gap(plan) * (len(idx) - 1)
         words = sum(durations[k] for k in idx)
         found = plan_check.talk_retime(words, gaps)   # the cap is on the words atempo stretches, not on the gaps
         if found is None:
@@ -274,6 +316,17 @@ def plan_layout(plan, layout, voice_seconds=None, problems=()):
             record["speaker"] = s["speaker"]
         into[s["id"]] = record   # God: mixed as a voice-over in the track; no clip audio, no lipsync check
     share = keeper_seconds / total
+    if is_long(plan):   # E126: the long's own gate (structures/bible-story-long.json), measured; no lesson share
+        import long_plan_check
+        g = long_plan_check.gate()
+        if share > g["keeper_share_max"] + 1e-9:
+            problems.append(f"KEEPER_SHARE {share:.3f} > {g['keeper_share_max']} (measured)")
+        low, high = g["length_min"]
+        if not low * 60 <= total <= high * 60:
+            problems.append(f"LONG_LENGTH {total / 60:.2f} min ({low}-{high}, measured)")
+        return {"lines": [{"start": a, "end": b} for a, b in layout], "voice_seconds": voice_seconds, "total": total,
+                "keeper": keeper, "speakers": speakers, "voice_over": voice_over, "keeper_share": round(share, 3),
+                "lesson_share": None, "retimed": {}, "problems": problems}
     if share > plan_check.KEEPER_SHARE_MAX:
         problems.append(f"KEEPER_SHARE {share:.3f} > {plan_check.KEEPER_SHARE_MAX} (measured)")
     lesson = sorted({k for i, s in enumerate(shots) for k in carried[i]
@@ -330,9 +383,9 @@ def predict(plan, durations):
     for idx, _, stretch in stretches.values():
         for k in idx:
             durations[k] *= stretch
-    layout = plan_layout(plan, line_layout(durations), None, problems)
-    if layout["problems"]:
-        return layout["problems"], layout   # the compose needs every talking record
+    layout = plan_layout(plan, line_layout(durations, line_gap(plan)), None, problems)
+    if layout["problems"] or is_long(plan):   # the compose needs every talking record; the long's is slice 3
+        return layout["problems"], layout
     return compose_prediction(plan, layout), layout
 
 
@@ -409,6 +462,8 @@ def request_problems(plan, layout, refs, client=None, chars=None):
         client = PavoVideoClient(token="")
     out = []
     for index, shot in enumerate(plan["shots"]):
+        if is_window(shot):
+            continue
         try:
             req = request(shot, index, plan, layout, refs, chars)
             client.prepare_video(req["prompt"], req["seconds"], req["aspect_ratio"])
@@ -473,8 +528,8 @@ def lines_step(plan, work):
                         "atempo": round(factor, 4)}
     for k in range(n):
         write_wav(work / "lines" / f"n{k:02d}.wav", params, pieces[k])
-    layout = line_layout(durations)
-    silence = b"\x00" * (int(round(LINE_GAP * rate)) * width)
+    layout = line_layout(durations, line_gap(plan))
+    silence = b"\x00" * (int(round(line_gap(plan) * rate)) * width)
     track = silence.join(pieces)
     write_wav(work / "narration.wav", params, track)
     voice_seconds = round(len(track) / width / rate, 3)
@@ -640,7 +695,8 @@ def shot_seconds(shot, index, plan, layout, slack=0.0):
 def clip_needs(plan, layout, slack=0.0):
     """E118: {shot id: the clip seconds this machine's layout needs} (shot_seconds). The preflight records them with
     no slack; the build checks against them with MEASURE_TOLERANCE (coverage_problems)."""
-    return {s["id"]: shot_seconds(s, i, plan, layout, slack) for i, s in enumerate(plan["shots"])}
+    return {s["id"]: shot_seconds(s, i, plan, layout, slack) for i, s in enumerate(plan["shots"])
+            if not is_window(s)}
 
 
 BOUND_AUDIO = "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice"
@@ -853,7 +909,8 @@ def request_digest(req, shot, words=None, chars=None):
 
 
 def request_digests(plan, layout, refs, chars=None):
-    return {s["id"]: request_identity(s, i, plan, layout, refs, chars)[0] for i, s in enumerate(plan["shots"])}
+    return {s["id"]: request_identity(s, i, plan, layout, refs, chars)[0] for i, s in enumerate(plan["shots"])
+            if not is_window(s)}
 
 
 def review_problems(plan, digests, approvals=None, needs=None):
@@ -862,7 +919,7 @@ def review_problems(plan, digests, approvals=None, needs=None):
     shots; E118: and long enough for what the layout needs (`needs`, SHOT_CLIP_TOO_SHORT). verify-preflight runs it
     on the committed preflight's digests and needs; generate_step on the build's own."""
     approvals = load_approvals(plan) if approvals is None else approvals
-    ids = [s["id"] for s in plan["shots"]]
+    ids = [s["id"] for s in plan["shots"] if not is_window(s)]   # a window ships its source's approved clip
     missing = [i for i in ids if i not in approvals]
     changed = [i for i in ids if i in approvals and approvals[i].get("request_sha256") != digests.get(i)]
     out = []
@@ -882,6 +939,8 @@ def coverage_problems(plan, needs, approvals):
     clip_needs). A clip with no recorded clip seconds, or a shot with no need, is refused too: SHOT_CLIP_TOO_SHORT."""
     short = []
     for s in plan["shots"]:
+        if is_window(s):
+            continue
         a = approvals.get(s["id"])
         if a is None:
             continue
@@ -1023,14 +1082,28 @@ def still_mouth_flags(lip_python, face_model, clip):
                                                                "closed_opening", "face_frames", "frames")}}
 
 
+WIDE = re.compile(r"(?i)\b(?:extreme )?wide shot\b|\baerial\b")
+
+
+def risk_rank(shot):
+    """E99, E126: how likely a shot is to fail, lowest first. 0 a character speaking on screen (lipsync_check on a
+    face drawn from its sheet), 1 the Keeper speaking (genesis-07: 1 pass in 33 on his lines), 2 God's and the Keeper's
+    voice-over shots (no face, no talking mouth), 3 wide and establishing scenes (E108/E114: the European street, the
+    modern houses at the edge of the 16:9 test frame), 4 the other scenes."""
+    if plan_check.talking(shot):
+        return 1 if shot.get("kind") == "keeper" else 0
+    if plan_check.speaking(shot) or plan_check.voiceover(shot):
+        return 2
+    if shot.get("establishing") or WIDE.search(str(shot.get("prompt") or "")):
+        return 3
+    return 4
+
+
 def risk_order(shots):
-    """E99: (plan index, shot) with the shots that can fail first: the talking shots (lipsync_check), then God's
-    voice-over shots (no face may appear) and the voice-over Keeper shots (no talking mouth), then the scenes. A
-    failure costs minutes, not a whole build."""
-    def rank(item):
-        shot = item[1]
-        return 0 if plan_check.talking(shot) else 1 if plan_check.speaking(shot) or plan_check.voiceover(shot) else 2
-    return sorted(enumerate(shots), key=rank)
+    """E99: (plan index, shot) with the shots that can fail first (risk_rank), plan order within a rank. A failure
+    costs minutes, not a whole build or a day of probes. A window (a long's second view of an earlier clip) is never
+    generated, so it is left out."""
+    return sorted(((i, s) for i, s in enumerate(shots) if not is_window(s)), key=lambda item: risk_rank(item[1]))
 
 
 def in_plan_order(report, plan):
@@ -1159,7 +1232,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
     rel(work)
     approvals = load_approvals(plan) if approvals is None else approvals
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
-    digests = {s["id"]: request_identity(s, i, plan, layout, refs)[0] for i, s in enumerate(plan["shots"])}
+    digests = request_digests(plan, layout, refs)   # E126: windows ship their source clip
     bad = review_problems(plan, digests, approvals, clip_needs(plan, layout, MEASURE_TOLERANCE))
     if bad:
         raise SystemExit("; ".join(bad))
@@ -1198,6 +1271,9 @@ def probe_ids(plan, text, attempts):
     unknown = [x for x in ids if x not in {s["id"] for s in plan["shots"]}]
     if unknown:
         raise SystemExit("PROBE_UNKNOWN_SHOT " + " ".join(unknown) + f" (not a shot of {plan.get('episode')})")
+    windows = [x for x in ids if any(s["id"] == x and is_window(s) for s in plan["shots"])]
+    if windows:   # E126: a window is a second view of its source clip; the source is probed and approved
+        raise SystemExit("PROBE_WINDOW_SHOT " + " ".join(windows) + " (a window_of shot ships its source's clip)")
     if not re.fullmatch(r"[1-9][0-9]?", str(attempts).strip()) or not 1 <= int(attempts) <= PROBE_ATTEMPTS_MAX:
         raise SystemExit(f"PROBE_ATTEMPTS_REFUSED {attempts!r} (1-{PROBE_ATTEMPTS_MAX})")
     return list(dict.fromkeys(ids)), int(attempts)
@@ -1596,13 +1672,21 @@ def main(argv):
         return 0
     if cmd == "check-probe" and len(argv) == 3:    # shot-probe.yml's inputs (env SHOTS, ATTEMPTS), before any secret
         ids, n = probe_ids(load(argv[2]), os.environ.get("SHOTS", ""), os.environ.get("ATTEMPTS", ""))
+        if is_long(load(argv[2])):   # E126: a long's shots are probed only from a clean preflight of this plan
+            import long_preflight
+            refused = long_preflight.probe_gate(argv[2])
+            if refused:
+                raise SystemExit(refused)
         print(json.dumps({"shots": ids, "attempts": n}))
         return 0
     if cmd in ("preflight", "verify-preflight", "check-record"):   # E106: before any dispatch (episode_preflight.py)
         import episode_preflight
         return episode_preflight.main(argv)
+    if cmd == "probe-queue" and len(argv) in (3, 4):   # E126: the next shots to probe, riskiest first (resume)
+        import long_preflight
+        return long_preflight.queue_main(argv[2], argv[3] if len(argv) == 4 else None)
     plan = load(argv[2])
-    result = plan_check.check(plan)
+    result = check_plan(plan)   # E126: long_plan_check for a long
     if result["problems"] or result["pending"]:
         raise SystemExit("PLAN_REFUSED " + "; ".join(result["problems"] + result["pending"]))
     if cmd == "voice-script" and len(argv) == 4:

@@ -17,6 +17,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `syncnet-e120` | PR #457: syncnet.py, lipsync_check.py, episode.yml and shot-probe.yml steps. Hardening H1 applied (`parse` made private, reached only after the hash check). | 2026-10-27 | 0/3 security (none ≥ 8) |
 | `thumb-character-first` | PR #460: thumbs.py, THUMB_NOT_APPROVED in publish_episode/publish_video/preflight, pr-checks.yml test path. Integrity S4-S7 fixed in the PR (E121). | 2026-10-27 | 0/9 security (none ≥ 8) |
 | `reach-ctr` | PR (this): `mining/reach_report.py` (YouTube Reporting API reach job, report download with the owner's token), `goal-report.yml` step with `HERO_YT_AUTHORIZED_USER_JSON` via `env:`, `pr-checks.yml` test path. S3 (token only to the Reporting API host), S9 (no token on redirect), S10 (step bounded, never crashes) fixed, S8 hardened. | 2026-10-27 | 0/10 security (none ≥ 8) |
+| `long-preflight-e126` | PR (claude/long-preflight): `bible/long_preflight.py`, `episode_build.py` (check_plan, windows, risk_rank, probe-queue, the long's probe gate), `episode_preflight.py`, `dispatch_guard.py` shot-probe, `shot-probe.yml` plan step, `pr-checks.yml` test path. H1 applied (estimate path from the plan's episode id). | 2026-10-27 | 0/4 security (none ≥ 8) |
 
 ## Proposed, not yet run
 

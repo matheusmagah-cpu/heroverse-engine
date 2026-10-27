@@ -219,7 +219,7 @@ def probe_rows(plan, chars, probes=None):
     return rows, missing, low, (round(run_chance, 3) if not missing else None)
 
 
-def binding(plan_path, plan, chars_raw=None, probes=None):
+def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     """Review of #422: what a report vouches for, part by part, so a STALE refusal names what changed and a change
     the plan does not use (another character approved) leaves it valid: the plan's bytes; the characters.json
     entries it uses (God's voice included when He speaks); their image records; the setups.json probes its talking
@@ -232,8 +232,12 @@ def binding(plan_path, plan, chars_raw=None, probes=None):
     records = {p.name: sha256(p) for cid in used for p in sorted((ch.HERE / "images").glob(f"ch-{cid}-*.json"))}
     rows = probe_rows(plan, data["characters"], probes)[0]
     matched = sorted((digest(x) for r in rows for x in r.get("matched", [])))
-    return {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
-            "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
+    out = {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
+           "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
+    if eb.is_long(plan):   # E126: the long's review rows and its own code
+        import long_preflight
+        out.update(long_preflight.binding_extra(registry))
+    return out
 
 
 def stale_parts(old, new):
@@ -293,7 +297,7 @@ def voice_step(plan, voice_python, prepared, work):
     except SystemExit as exc:
         layout = json.loads((work / "layout.json").read_text()) if (work / "layout.json").exists() else None
         problems = [str(exc)]
-    if layout and not problems:
+    if layout and not problems and not eb.is_long(plan):   # the long's compose is LONG_DESIGN slice 3
         problems = [f"COMPOSE {p}" for p in eb.compose_prediction(plan, layout)]
     return {"ran": True, "problems": problems, "pace": measured_pace(plan, work),
             "measured": {k: layout[k] for k in ("total", "keeper_share", "lesson_share", "retimed")} if layout else None}
@@ -316,12 +320,12 @@ def refs_and_requests(plan, work):
             "needs": eb.clip_needs(plan, layout)}
 
 
-def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None):
+def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None, registry=None):
     plan_path = Path(plan_path)
     plan = json.loads(plan_path.read_text())
     ep = episode_id(plan_path, plan)   # before any path is built or any step runs (review of #422)
     chars = chars if chars is not None else ch.registry()
-    result = plan_check.check(plan, chars)
+    result = eb.check_plan(plan, chars)   # E126: long_plan_check --strict and the frozen story QA for a long
     report = {"plan": str(plan_path.resolve().relative_to(REPO.resolve())) if REPO.resolve() in plan_path.resolve().parents
               else str(plan_path), "episode": ep,
               "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -372,8 +376,11 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
     digests = report["requests"].get("digests")
     report["shot_review"] = (eb.review_problems(plan, digests, needs=report["requests"].get("needs") or {})
                              if digests else ["REQUESTS_NOT_CHECKED"])
-    report["binding"] = binding(plan_path, plan, probes=setups)
+    report["binding"] = binding(plan_path, plan, probes=setups, registry=registry)
     report["blockers"] = blockers
+    if eb.is_long(plan):   # E126: and no review row of the long open (long_preflight.py)
+        import long_preflight
+        long_preflight.extend(report, plan, registry)
     report["status"] = "PASS" if not blockers else "BLOCKED"
     return report
 
@@ -404,6 +411,11 @@ def verify(plan_path, approvals=None):
         return f"PREFLIGHT_STALE {', '.join(changed)} changed after the preflight; run it again"
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
+    if eb.is_long(plan):   # E126: a review row reopened after the report is refused now, not at the review
+        import long_preflight
+        rows = long_preflight.review_problems()
+        if rows:
+            return rows[0]
     # E114: every shot ships the clip Claude reviewed, made from the request this plan sends now
     # E118: and every approved clip covers the clip seconds the preflight's measured layout needs (a report without
     # them covers nothing: SHOT_CLIP_TOO_SHORT)

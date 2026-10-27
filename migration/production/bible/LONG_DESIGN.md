@@ -279,3 +279,32 @@ knows `story-qa-criteria-v3`. This PR does not wire them.
    - The .srt track and -15 LUFS.
    - The manifest the QA reads.
    - qa_pilot, render_queue and prepublish_gate learn v3.
+
+## 7. The no-rework contract of the Shorts, for the long (E126, 2026-10-27)
+
+Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes through the Shorts' own contract
+(E106, E114, E99), by the same code (`long_preflight.py` holds only what differs):
+- **Preflight before anything is built.** `episode_build.py preflight plans/arc-01-long.json --voice ... --refs --write`
+  runs long_plan_check `--strict` and the frozen story QA v3 (`episode_build.check_plan`), the pinned Kokoro voice laid
+  out at LONG_LINE_GAP against the structure's gate (length, Keeper share, measured), every request through the
+  adapter's offline checks and its digest, and every talking line's direct probe. It is BLOCKED (LONG_REVIEW_OPEN)
+  while any story QA v3 row or rubric `long` entry of `ops/refusal_registry.json` is `open`. The report binds the plan,
+  the characters' entries (look, references, voice), their image records, the matched probes, the review rows and the
+  code by sha256.
+- **The build ships approved clips only.** `verify-preflight` (the build's first step) refuses a long without a PASS
+  report bound to it, with a review row open now, or with a generated shot that has no approved clip of the request the
+  plan sends now. `generate_step` downloads those clips and generates none. A `window_of` shot is never generated:
+  it ships its source's clip, so it has no digest, probe or approval of its own.
+- **Probes.** `shot-probe.yml` takes the long's plan (long_plan_check, 16:9, its own shot ids, windows refused by the
+  dispatch guard and by `check-probe`, PROBE_WINDOW_SHOT). For a long, `check-probe` also refuses a plan without a clean
+  committed preflight of these exact bytes (LONG_PROBE_PREFLIGHT); only the open review rows and the talking probes
+  may still block that report, since neither changes a request. Claude approves one clip a shot with
+  `approve-shot` into `shots/arc-01-long.json`.
+- **Risk order and resume.** `risk_rank`: talking characters, the Keeper's talking shots, voice-overs, wide and
+  establishing scenes, then the rest. `episode_build.py probe-queue PLAN` lists the shots without an approved clip of
+  their request now, in that order, cut into batches of one rank that each fit one shot-probe run.
+- **Slice 3 changes accordingly.** "Submit and leave" applies to the probes, not to the build: the build composes
+  approved clips (16:9 at LONG_LINE_GAP, the .srt, -15 LUFS, the upscale matrix) and never holds a Pavo secret.
+
+The production estimate (no generation) is `evidence/long/20261027/arc-01-long-production-estimate.json`
+(`long_preflight.py estimate PLAN --write`).

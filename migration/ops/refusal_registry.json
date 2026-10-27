@@ -843,6 +843,18 @@
    "early": "package_pilot / script_check keeping the long's description under DESCRIPTION_MAX minus the arc block arcs.json implies",
    "open": "costs a skipped link, not a generation; the fix touches the long's package (PR #418's grammar) and migration/publish/ (security sweep), so it gets its own PR"
   },
+  "LONG_EPISODE_ID": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_preflight.py::eb.check_plan(plan, chars)",
+    "migration/production/bible/episode_build.py::def check_plan("
+   ],
+   "note": "E126: a long's `episode` must equal its `long` id (shot-probe.yml, the dispatch guard and shots/ key on it); the long's preflight runs the same check_plan before any probe or build"
+  },
+  "LONG_LENGTH": {
+   "class": "C",
+   "probe": "episode_preflight --voice on the long (E126): the pinned Kokoro voiced locally and episode_build lines laid out at LONG_LINE_GAP against the structure's gate (0 Actions, 0 credits); the same rule is predicted on the estimate by long_plan_check (LONG_LENGTH)"
+  },
   "LONG_NOT_PUBLIC": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
@@ -1233,6 +1245,14 @@
     "migration/production/bible/episode_build.py::def probe_ids("
    ],
    "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
+  "PROBE_WINDOW_SHOT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/shot-probe.yml::episode_build.py check-probe",
+    "migration/ops/dispatch_guard.py::if s.get(\"window_of\") is None"
+   ],
+   "note": "E126: a long's window_of shot is a second view of an earlier clip and is never generated; the dispatch guard refuses its id before the run, check-probe in the first step"
   },
   "PROMPT_TOO_LONG": {
    "class": "A",
