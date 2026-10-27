@@ -327,6 +327,7 @@
     "migration/production/bible/test_episode_order.py",
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_lipsync_check.py",
+    "migration/production/bible/test_long_plan_check.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_short_engine.py",
@@ -864,6 +865,7 @@
     "migration/integrations/pavo/audio.py",
     "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/quota.py",
     "migration/integrations/pavo/server.py",
     "migration/integrations/pavo/test_client.py",
     "migration/integrations/pavo/test_image_gen.py",
@@ -910,12 +912,27 @@
    "test": null,
    "is_test": false
   },
+  "migration/integrations/pavo/quota.py": {
+   "purpose": "Free agnes-image quota guard (E124): a daily cap before any call, and a stop after failed read-backs.",
+   "dir": "migration/integrations/pavo",
+   "local_imports": [
+    "migration/integrations/pavo/client.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/integrations/pavo/server.py",
+    "migration/integrations/pavo/test_image_gen.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
   "migration/integrations/pavo/server.py": {
    "purpose": "Private stdio MCP for the owner's Pavo account; generation is limited to fresh exact zero-credit quotes.",
    "dir": "migration/integrations/pavo",
    "local_imports": [
     "migration/integrations/pavo/client.py",
-    "migration/integrations/pavo/image_gen.py"
+    "migration/integrations/pavo/image_gen.py",
+    "migration/integrations/pavo/quota.py"
    ],
    "called_by_workflows": [],
    "imported_by": [],
@@ -942,6 +959,7 @@
     "migration/integrations/pavo/client.py",
     "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/quota.py",
     "migration/integrations/pavo/test_video.py"
    ],
    "called_by_workflows": [
@@ -2113,7 +2131,9 @@
     "migration/production/bible/long_plan_check.py",
     "migration/production/script_check.py"
    ],
-   "called_by_workflows": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
    "imported_by": [
     "migration/production/bible/test_plan_check.py"
    ],
@@ -2128,6 +2148,7 @@
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/plan_check.py",
     "migration/production/bible/test_long_plan_check.py",
+    "migration/production/bible/thumbs.py",
     "migration/production/bible/voice_pace.py"
    ],
    "called_by_workflows": [
@@ -2193,6 +2214,7 @@
    ],
    "called_by_workflows": [],
    "imported_by": [
+    "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_thumbs.py",
     "migration/publish/publish_episode.py",
     "migration/publish/publish_video.py"

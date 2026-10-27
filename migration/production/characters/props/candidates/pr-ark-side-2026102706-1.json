@@ -1,0 +1,69 @@
+{
+ "id": "pr-ark-side-2026102706-1",
+ "prop": "ark",
+ "view": "side",
+ "run": "2026102706",
+ "status": "DRAFT",
+ "source": "retouched-approved-reference",
+ "parent": {
+  "record": "pr-ark-side",
+  "repo_path": "migration/production/characters/refs/pr-ark-side.jpg",
+  "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860",
+  "candidate": "pr-ark-side-2026102702-2"
+ },
+ "retouch": {
+  "patches": [
+   {
+    "box": [
+     318,
+     545,
+     432,
+     628
+    ],
+    "offset": [
+     220,
+     -8
+    ],
+    "feather": 6
+   },
+   {
+    "box": [
+     322,
+     556,
+     424,
+     594
+    ],
+    "offset": [
+     -92,
+     13
+    ],
+    "feather": 5
+   },
+   {
+    "box": [
+     328,
+     628,
+     436,
+     668
+    ],
+    "offset": [
+     150,
+     -9
+    ],
+    "feather": 8
+   }
+  ],
+  "tool": "PIL: crop the box shifted by offset, paste it over the box through a mask (the rectangle inset by feather, or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in order; JPEG quality 95",
+  "pillow": "12.3.0"
+ },
+ "prompt": null,
+ "quote": null,
+ "references": [],
+ "size": [
+  720,
+  1280
+ ],
+ "repo_path": "migration/production/characters/props/candidates/pr-ark-side-2026102706-1.jpg",
+ "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4",
+ "generated_by": "HeroVerse pipeline (deterministic retouch of an approved reference)"
+}

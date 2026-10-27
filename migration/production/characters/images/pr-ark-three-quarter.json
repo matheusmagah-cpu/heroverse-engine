@@ -3,18 +3,18 @@
  "prop": "ark",
  "view": "three-quarter",
  "repo_path": "migration/production/characters/refs/pr-ark-three-quarter.jpg",
- "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee",
+ "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81",
  "size": [
   720,
   600
  ],
- "candidate": "pr-ark-three-quarter-2026102702-3",
+ "candidate": "pr-ark-three-quarter-2026102706-1",
  "prompt": null,
- "source": "approved-clip-frame {\"approval_note\": \"Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)\", \"approved_score\": 9.5, \"asset\": \"shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4\", \"clip_sha256\": \"e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e\", \"crop\": [0, 620, 720, 600], \"episode\": \"genesis-08-short\", \"seconds\": 6.5, \"shot\": \"s-board\"}",
+ "source": "retouched-approved-reference {\"parent\": {\"candidate\": \"pr-ark-three-quarter-2026102702-3\", \"record\": \"pr-ark-three-quarter\", \"repo_path\": \"migration/production/characters/refs/pr-ark-three-quarter.jpg\", \"sha256\": \"94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee\"}, \"retouch\": {\"patches\": [{\"box\": [334, 40, 470, 178], \"feather\": 8, \"offset\": [-136, 32]}], \"pillow\": \"12.3.0\", \"tool\": \"PIL: crop the box shifted by offset, paste it over the box through a mask (the rectangle inset by feather, or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in order; JPEG quality 95\"}}",
  "approved": {
   "date": "2026-10-27",
-  "score": 9.6,
-  "note": "Frame of genesis-08 s-board (approved clip, 9.5) at 6.5 s, cropped: the finished ark as published in Genesis 8 - one long straight-sided plank box, flat roof, flat square ends, same height end to end, no tower, cabin, prow, mast or funnel. Tall for 'low', but it is the look viewers already saw; continuity wins.",
+  "score": 9.5,
+  "note": "Retouch of the approved genesis-08 s-board three-quarter frame: the three figures on the roof cloned out along the roof edge's slope (they were copied into every generated still). Shape unchanged: long straight-sided plank box, flat empty roof, square ends. A slight smudge where the figures stood is invisible at the model's input size; this is a reference, the stills made from it are reviewed at 9.5.",
   "by": "Claude's reference review (ops/CLAUDE_REVIEW.md)"
  }
 }

@@ -58,7 +58,8 @@ class Stills(unittest.TestCase):
             img.parent.mkdir(parents=True, exist_ok=True)
             jpeg(img, size=(1600, 900), colour=(60 + k, 40, 20))
             ss.save(self.dir / "images" / f"pr-ark-{view}.json",
-                    {"id": f"pr-ark-{view}", "repo_path": ss.rel(img), "sha256": ss.sha256(img)})
+                    {"id": f"pr-ark-{view}", "repo_path": ss.rel(img), "sha256": ss.sha256(img),
+                     "approved": {"note": "one box, flat square ends, no people (E125)"}})
             refs.append({"record": f"pr-ark-{view}", "repo_path": ss.rel(img), "sha256": ss.sha256(img)})
         pr.PROPS_FILE, pr.IMAGES_DIR = props, self.dir / "images"
         return refs
