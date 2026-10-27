@@ -9,12 +9,14 @@ from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
 from client import PavoError
 from image_gen import PavoImageClient
-from quota import QuotaGuard
+from quota import QuotaGuard, git_actions_usage
 
-mcp = MCPServer("heroverse-pavo", version="0.5.0", log_level="CRITICAL",
+mcp = MCPServer("heroverse-pavo", version="0.6.0", log_level="CRITICAL",
                 instructions="Unofficial Pavo connection. Generate only with a fresh exact zero-credit quote. "
                              "Never retry an uncertain submission; check its conversation_id with pavo_job.")
-client = PavoImageClient(guard=QuotaGuard())   # E124: daily cap + stop after failed read-backs
+# E124/E128: one free-model budget for stills and videos, with today's shot-probe runs (their records on the local
+# origin/claude/shot-probe-* refs) counted in
+client = PavoImageClient(guard=QuotaGuard(actions=git_actions_usage))
 read = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True)
 local = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 write = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=True)
@@ -72,7 +74,8 @@ def pavo_generate_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16
     """Start one private Flash video only at a fresh exact zero-credit quote (input images, audios and sound
     counted). Text only, first_frame (+ optional last_frame) or up to 5 references, as repository image paths;
     audios (up to 3 .mp3/.wav, 2-12 s in total) only with references. A nonzero quote refuses and reports the
-    quoted number. Never retry automatically."""
+    quoted number. Counted in the shared free-model budget (E128: a video spends 2 units, a still 1; refused with
+    PAVO_DAILY_CAP / PAVO_FREE_QUOTA_SUSPECTED before any request). Never retry automatically."""
     return safe_call(client.generate_video, prompt, seconds, aspect_ratio, first_frame, last_frame, references,
                      audios, sound)
 

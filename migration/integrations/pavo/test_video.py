@@ -233,7 +233,7 @@ class Video(unittest.TestCase):
         self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["status"], "incomplete")
 
     def test_a_prompt_filter_block_is_its_own_status_never_incomplete(self):
-        # E128 (native-audio probe, PR #473): "naked" was refused with PromptSafetyBlocked text_rejected_porn and the
+        # E129 (native-audio probe, PR #473): "naked" was refused with PromptSafetyBlocked text_rejected_porn and the
         # read-back said "incomplete"; the build then waited and regenerated the same words
         payload = {"is_running": False, "turns": [{"assistant": [{"type": "PromptSafetyBlocked", "data": {
             "reason": "text_rejected_porn", "message": "This text contains inappropriate sexual content " + self.token}}]}]}

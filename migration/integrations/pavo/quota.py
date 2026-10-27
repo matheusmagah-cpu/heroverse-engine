@@ -1,12 +1,34 @@
-"""Free agnes-image quota guard (E124): a daily cap before any call, and a stop after failed read-backs.
+"""Pavo's free-model quota guard (E124, E128): one budget for every Pavo generation, image and video, MCP and Actions.
+
+E128 (2026-10-27 ~22:40 UTC): the quota E124 guards is not the image model's alone. A Flash video job makes an Agnes
+Image 2.5 Flash still inside its conversation (the owner's app showed one, "Painterly cinematic image of the Garden of
+Eden at dawn ... wide 16:9", made by shot-probe run 40592173923), so the video path spends the same free quota; E124
+counted only MCP image calls. That run read back 3 clips, then 24 submissions in a row `failed` with no video, and
+nothing stopped it. Now:
+- every generation is counted in units: an image IMAGE_UNITS, a video VIDEO_UNITS (its internal still(s), counted
+  conservatively); the MCP's pavo_generate_video and pavo_job feed the same guard as the image tools;
+- Actions (shot-probe.yml) cannot write this ledger: their usage is read from the probe records the record job pushes
+  to claude/shot-probe-<episode>-<run> (record_usage: each generation of the record counts VIDEO_UNITS; when its last
+  FAILED_STREAK or more generations, in submission order, came back with no video, that is a quota stop for
+  COOL_DOWN). The MCP guard reads them from the local remote-tracking refs (git_actions_usage; fetch them first), the
+  dispatch guard from the API, and the run itself takes a run-local ledger seeded with the day's units
+  (episode_build.py probe, PAVO_BUDGET_USED), so its own failed read-backs stop it after FAILED_STREAK;
+- check_batch refuses a planned batch whose units do not fit what is left today (PAVO_BUDGET_SHORT), so a batch never
+  starts if it cannot finish.
+Pavo exposes no remaining free quota: /v3/subscription/credits-balance answers the plan and credits only
+(total_balance, subscription_credits, daily_free_credits; read 2026-10-27 after the stop, no quota field), and the
+price quote keeps answering 0. These counts are the only gate.
+
+E124 (the image path):
 
 On 2026-10-27 Pavo's free image quota ran out after ~180 stills in one day. pavo_quote_image kept quoting an exact 0
 (the price endpoint does not see the free-generation quota) and pavo_image_job read only status "failed" with no
 reason, so 31 submissions of genesis-09 run 2026102705 were spent on nothing (the owner's app showed "the free model
 quota has been used up ... try again in 3 hours"; nothing was charged). This guard keeps that from repeating:
 
-- PAVO_DAILY_CAP: at most DAILY_CAP images a UTC day (env PAVO_IMAGE_DAILY_CAP, or the ledger's `daily_cap`), counted
-  in the ledger for every submission that created a conversation; refused before the quote, so nothing is sent.
+- PAVO_DAILY_CAP: at most DAILY_CAP units a UTC day (E128: an image 1, a video 2; env PAVO_IMAGE_DAILY_CAP, or the
+  ledger's `daily_cap`), counted in the ledger for every submission that created a conversation; refused before the
+  quote, so nothing is sent.
 - PAVO_FREE_QUOTA_SUSPECTED: FAILED_STREAK read-backs in a row that end "failed" with no image (each job counted
   once) suspend generation for COOL_DOWN from `suspended_at`. After it exactly one probe may go; every other
   submission is refused until that probe reads back: a failed probe suspends again at once, a completed one lifts the
@@ -26,6 +48,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import tempfile
 
 from client import PavoError
@@ -38,6 +61,84 @@ COOL_DOWN = timedelta(hours=3)
 KEEP_FAILED = 50
 KEEP_JOBS = 200
 DAY = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+# E128: what one generation spends of the free-model quota. A Flash video makes at least one Agnes still inside its
+# conversation; counted as two, so a cap set in images is never overrun by videos
+IMAGE_UNITS = 1
+VIDEO_UNITS = 2
+PROBE_BRANCH = re.compile(r"^claude/shot-probe-([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9]{6,20})$")
+NO_ACTIONS = {"units": 0, "failed_tail": 0, "last_at": None}
+
+
+def probe_record_path(branch):
+    """The record shot-probe.yml's record job commits on BRANCH, or None for another branch."""
+    m = PROBE_BRANCH.fullmatch(branch)
+    return "migration/evidence/shots/%s/%s.json" % (m.group(1), m.group(2)) if m else None
+
+
+def record_usage(record):
+    """(units, failed tail) of one shot-probe record: every generation it lists (each created a conversation) counts
+    VIDEO_UNITS; the failed tail is how many of its last generations, in submission order (conversation ids grow with
+    time), came back with no video."""
+    gens = []
+    for entry in (record.get("shots") or {}).values():
+        for clip in entry.get("clips") or []:
+            gens += [g for g in clip.get("generations") or [] if isinstance(g, dict)]
+
+    def order(g):
+        cid = str(g.get("conversation_id") or "")
+        return int(cid) if cid.isdigit() else 0
+    gens.sort(key=order)
+    tail = 0
+    for g in reversed(gens):
+        if "NO_VIDEO" not in (g.get("flags") or []):
+            break
+        tail += 1
+    return len(gens) * VIDEO_UNITS, tail
+
+
+def combine(records):
+    """records: [(committed_at aware datetime, record)] of one day -> {units, failed_tail (of the latest), last_at}."""
+    if not records:
+        return dict(NO_ACTIONS)
+    units = sum(record_usage(r)[0] for _, r in records)
+    at, last = max(records, key=lambda x: x[0])
+    return {"units": units, "failed_tail": record_usage(last)[1], "last_at": at.isoformat()}
+
+
+def git_actions_usage(day, repo=None, run=subprocess.run):
+    """Today's shot-probe usage from the local remote-tracking refs (origin/claude/shot-probe-*): the records committed
+    on DAY (UTC). Fetch them before an MCP generation session; a git that cannot answer fails closed."""
+    repo = str(repo or REPO)
+
+    def git(*args):
+        try:
+            return run(["git", "-C", repo, *args], capture_output=True, text=True, timeout=30)
+        except (OSError, subprocess.SubprocessError):
+            raise PavoError("PAVO_BUDGET_UNREADABLE (git did not answer)") from None
+    out = git("for-each-ref", "--format=%(refname:lstrip=3) %(committerdate:iso-strict)",
+              "refs/remotes/origin/claude/")
+    if out.returncode != 0:
+        raise PavoError("PAVO_BUDGET_UNREADABLE (git for-each-ref failed)")
+    records = []
+    for line in out.stdout.splitlines():
+        branch, _, when = line.strip().partition(" ")
+        path = probe_record_path(branch)
+        if not path:
+            continue
+        try:
+            at = datetime.fromisoformat(when).astimezone(timezone.utc)
+        except ValueError:
+            raise PavoError("PAVO_BUDGET_UNREADABLE (%s has no commit time)" % branch) from None
+        if at.strftime("%Y-%m-%d") != day:
+            continue
+        shown = git("show", "origin/%s:%s" % (branch, path))
+        if shown.returncode != 0:
+            continue   # a branch without its record: the probe job left none (NO_PROBE_RECORD)
+        try:
+            records.append((at, json.loads(shown.stdout)))
+        except ValueError:
+            raise PavoError("PAVO_BUDGET_UNREADABLE (%s: its record is not JSON)" % branch) from None
+    return combine(records)
 
 
 def _unreadable(why):
@@ -60,10 +161,13 @@ def _when(value, field):
 
 
 class QuotaGuard:
-    def __init__(self, path=None, cap=None, now=None):
+    def __init__(self, path=None, cap=None, now=None, actions=None):
+        """actions: day -> {units, failed_tail, last_at} of the Actions runs (git_actions_usage, or the dispatch
+        guard's API read); None when this ledger already holds them (shot-probe's run-local ledger)."""
         self.path = Path(path or os.environ.get("PAVO_IMAGE_LEDGER") or LEDGER)
         self._cap = cap
         self._now = now or (lambda: datetime.now(timezone.utc))
+        self._actions = actions
 
     def _load(self):
         """The ledger, checked field by field; a missing file is a fresh ledger, anything malformed fails closed."""
@@ -142,30 +246,57 @@ class QuotaGuard:
     def _day(self):
         return self._now().astimezone(timezone.utc).strftime("%Y-%m-%d")
 
-    def before_generate(self):
-        """Raise before any request when the ledger is unreadable, a quota stop is suspected (the cool-down runs, or
-        its one probe has not read back yet) or the day's cap is reached."""
-        data = self._load()
+    def _usage(self, data):
+        """(units used today: this ledger + the Actions records, the Actions part)."""
+        actions = self._actions(self._day()) if self._actions else NO_ACTIONS
+        done = (data["days"].get(self._day()) or {}).get("generated", 0)
+        return done + int(actions.get("units") or 0), actions
+
+    def _stopped(self, data, actions):
+        """Raise while a quota stop is suspected: this ledger's suspension (or its one probe not read back), or an
+        Actions run that ended with FAILED_STREAK failed read-backs less than COOL_DOWN ago."""
         until = _when(data["suspended_until"], "suspended_until")
         if until is not None:
             if self._now() < until:
                 raise PavoError("PAVO_FREE_QUOTA_SUSPECTED until=%s failed_streak=%d"
                                 % (data["suspended_until"], data["failed_streak"]))
             if data["probe"] is not None:
-                raise PavoError("PAVO_FREE_QUOTA_SUSPECTED probe=%s (read it back with pavo_image_job first)"
-                                % data["probe"]["conversation_id"])
-        done = (data["days"].get(self._day()) or {}).get("generated", 0)
-        cap = self.cap(data)
-        if done >= cap:
-            raise PavoError("PAVO_DAILY_CAP generated=%d cap=%d day=%s" % (done, cap, self._day()))
+                raise PavoError("PAVO_FREE_QUOTA_SUSPECTED probe=%s (read it back with pavo_job / pavo_image_job "
+                                "first)" % data["probe"]["conversation_id"])
+        last = _when(actions.get("last_at"), "actions.last_at")
+        if (actions.get("failed_tail") or 0) >= FAILED_STREAK and last is not None and self._now() < last + COOL_DOWN:
+            raise PavoError("PAVO_FREE_QUOTA_SUSPECTED until=%s (a shot-probe run ended with %d failed read-backs)"
+                            % ((last + COOL_DOWN).isoformat(), actions["failed_tail"]))
 
-    def submitted(self, conversation_id):
-        """Count one submission that created a conversation (whatever its acknowledgement said); after a cool-down it
-        is the one probe."""
+    def before_generate(self, units=IMAGE_UNITS):
+        """Raise before any request when the ledger is unreadable, a quota stop is suspected (the cool-down runs, or
+        its one probe has not read back yet) or this generation's units would pass the day's cap."""
+        data = self._load()
+        used, actions = self._usage(data)
+        self._stopped(data, actions)
+        cap = self.cap(data)
+        if used + units > cap:
+            raise PavoError("PAVO_DAILY_CAP generated=%d units=%d cap=%d day=%s" % (used, units, cap, self._day()))
+
+    def check_batch(self, units):
+        """E128: a planned batch (its expected units) before it starts: PAVO_BUDGET_SHORT when it does not fit what is
+        left today, so a batch never starts that cannot finish. Returns {used, planned, cap, remaining}."""
+        data = self._load()
+        used, actions = self._usage(data)
+        self._stopped(data, actions)
+        cap = self.cap(data)
+        if used + units > cap:
+            raise PavoError("PAVO_BUDGET_SHORT planned=%d used=%d cap=%d day=%s (split the batch or wait for the next "
+                            "UTC day)" % (units, used, cap, self._day()))
+        return {"used": used, "planned": units, "cap": cap, "remaining": cap - used - units}
+
+    def submitted(self, conversation_id, units=IMAGE_UNITS):
+        """Count one submission that created a conversation (whatever its acknowledgement said) as its units; after a
+        cool-down it is the one probe."""
         data = self._load()
         now = self._now()
         day = data["days"].setdefault(self._day(), {"generated": 0})
-        day["generated"] = int(day.get("generated", 0)) + 1
+        day["generated"] = int(day.get("generated", 0)) + units
         data["jobs"][conversation_id] = now.isoformat()
         if len(data["jobs"]) > KEEP_JOBS:
             data["jobs"] = dict(sorted(data["jobs"].items(), key=lambda kv: kv[1])[-KEEP_JOBS:])
@@ -175,7 +306,7 @@ class QuotaGuard:
         self._save(data)
 
     def read_back(self, conversation_id, status, images):
-        """A job read back: completed with images lifts a suspension only when the job was submitted after it began;
+        """A job read back (a still's images or a video's clips): completed with media lifts a suspension only when the job was submitted after it began;
         failed with none counts toward a stop (and a failed probe suspends again at once)."""
         if status == "completed" and images:
             data = self._load()

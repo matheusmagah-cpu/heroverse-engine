@@ -258,7 +258,7 @@ class Grammar(unittest.TestCase):
         self.assertIn("COLD_OPEN_SHORT", codes(check(p)))
 
     def test_e129_the_voiceover_keeper_plan_b_is_a_path_of_the_long_too(self):
-        # E129: plan B (owner-approved for the Shorts, #423) was refused in the long (LONG_VOICEOVER_UNSUPPORTED) while
+        # E130: plan B (owner-approved for the Shorts, #423) was refused in the long (LONG_VOICEOVER_UNSUPPORTED) while
         # the arc-01 long's talking Keeper failed FACE_NOT_FOUND; now it has the long's path: his silent clip covers his
         # line and the gap after (long_build cuts a run from its first word), the Short's prompt and talk_refs rules
         chars = dict(CHARS, keeper=dict(CHARS["keeper"], talk_refs=["talk"]))
@@ -363,7 +363,7 @@ class StoryQaV4(unittest.TestCase):
         self.assertIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
 
     def test_a_line_pavo_refuses_goes_to_kokoro_on_its_own(self):
-        # E128 (PR #473): "naked" was refused by Pavo's prompt filter; that line is voiced by Kokoro, automatically
+        # E129 (PR #473): "naked" was refused by Pavo's prompt filter; that line is voiced by Kokoro, automatically
         p = v4_plan()
         god = shot(p, "s-god")
         god["line"] = "Who told thee that thou wast naked? Hast thou eaten of the tree"

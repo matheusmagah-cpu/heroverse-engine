@@ -125,7 +125,7 @@ def compose_long_shots(plan, layout, clips, clip_seconds):
         last = r == len(runs) - 1
         end = total if last else lines[runs[r + 1][2][0]]["start"]
         s = shots[a]
-        # E129: a voice-over Keeper (plan B) is cut like a scene run: his silent clip covers his line from its first
+        # E130: a voice-over Keeper (plan B) is cut like a scene run: his silent clip covers his line from its first
         # word to the next run (slowed with its parts at most MAX_SLOW), his words play from the voice track
         if pc.talking(s):
             kind = "keeper" if s["kind"] == "keeper" else "speaker"

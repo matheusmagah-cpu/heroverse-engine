@@ -94,7 +94,7 @@ def criteria_files():
     return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256)}
 
 
-# E129: the long's Keeper at 16:9, framed from the chest up (a "Medium close-up" with his seated wardrobe drew him
+# E130: the long's Keeper at 16:9, framed from the chest up (a "Medium close-up" with his seated wardrobe drew him
 # full body and the landmarker lost his face)
 KEEPER_FRAMING = "Close-up from the chest up, his face large in the centre of the frame"
 KEEPER_FRAMING_OFF = re.compile(r"(?i)\b(?:medium close-up|medium shot|full[- ]body|full shot|wide shot)\b")
@@ -323,7 +323,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             if beat not in ("keeper_promise", "keeper_insight", "keeper_close"):
                 problems.append(f"KEEPER_OUT_OF_BEAT shot {i} {sid} (the Keeper: promise, insight and close only)")
             if pc.voiceover(s):
-                # E129: the voice-over Keeper (plan B, #423, owner-approved for the Shorts) in the long: his line plays
+                # E130: the voice-over Keeper (plan B, #423, owner-approved for the Shorts) in the long: his line plays
                 # from the voice track while one silent clip of him covers his run (its line and the gap or tail
                 # after: long_build cuts a run from its first word), at most one 12 s clip slowed MAX_SLOW; his
                 # still mouth is judged by lipsync_check --still-mouth (episode_build.shot_runner)
@@ -345,7 +345,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                     problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
             if q.get("version") == V4 and plan.get("aspect_ratio") == "16:9" and (
                     KEEPER_FRAMING not in s.get("prompt", "") or KEEPER_FRAMING_OFF.search(s.get("prompt", ""))):
-                # E129: at 16:9 "Medium close-up" with his seated wardrobe drew him full body, his face too small for
+                # E130: at 16:9 "Medium close-up" with his seated wardrobe drew him full body, his face too small for
                 # the landmarker (FACE_NOT_FOUND on the arc-01 long's Keeper probes); the long's Keeper is framed
                 # from the chest up
                 problems.append(f"KEEPER_FRAMING_16X9 shot {i} {sid} (a 16:9 Keeper shot says \"{KEEPER_FRAMING}\" and "

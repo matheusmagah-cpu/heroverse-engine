@@ -549,7 +549,7 @@ def vo_cover(shots, i, long=False):
     own run logic (review of #423: plan_check, lines_step, shot_seconds and the compose share this one helper). A
     talking shot before it ends on its last word (it covers the gap only when the next shot talks too), so the clip
     covers that gap; after scenes or a voice-over shot it starts on its first word. It ends where the next line starts
-    (the gap), or with the closing tail when it is the last shot. A long (E129, long_build.compose_long_shots) cuts
+    (the gap), or with the closing tail when it is the last shot. A long (E130, long_build.compose_long_shots) cuts
     every run from its first word to the next run's, at LONG_LINE_GAP: nothing before, the gap or tail after."""
     if long:
         import long_plan_check

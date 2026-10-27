@@ -14,7 +14,7 @@ under the cut). A non-spoken scene is generated as before (audio stripped), so i
 A line Pavo's prompt filter refuses goes to our Kokoro voice (R4: the hybrid route of #473), automatically:
   - predicted from the words the filter is known to refuse (evidence/pavo/prompt-blocks.json `words`: "naked",
     Genesis 3:7/3:10/3:11), so the plan, the preflight and the probe never send them;
-  - learned when the adapter reads a block back (PAVO_PROMPT_BLOCKED, E128): the block is recorded by the line's words
+  - learned when the adapter reads a block back (PAVO_PROMPT_BLOCKED, E129): the block is recorded by the line's words
     (`record_block`), and the probe sends that shot again on the Kokoro route at once.
 
 Each clip that keeps its speech is judged by `speech_verdict` against story QA v4 rights.ai_video.speech_checks: exact

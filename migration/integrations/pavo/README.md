@@ -152,6 +152,37 @@ charged). 31 submissions of run 2026102705 were spent on nothing. The adapter no
   recent failed conversation ids and `suspended_until`; no credential or URL. Commit it with the run's evidence.
 - Read back every job before submitting many more: a `failed` read-back is a stop signal, not noise.
 
+### Free model quota: one budget for stills and videos, MCP and Actions (E128, 2026-10-27)
+
+The free quota is the model quota, not the image tool's. A Flash video job makes an Agnes Image 2.5 Flash still inside
+its conversation: shot-probe run 40592173923 (arc-01-long, God's voice-overs) left one in the owner's app ("Painterly
+cinematic image of the Garden of Eden at dawn ... wide 16:9", shot g-c4-one-of-us's prompt rewritten by Pavo) under
+"the free model quota has been used up... try again in 4 hours"; the run read back 3 clips, then 24 video submissions
+in a row `failed` with no video and no reason. E124 counted only MCP stills. Now:
+
+- **Units.** Every generation is counted in the same ledger and against the same cap (120 units a UTC day): a still
+  1 unit, a video 2 (`quota.VIDEO_UNITS`: its internal still(s), counted conservatively). `pavo_generate_video` is
+  refused before the quote (`PAVO_DAILY_CAP`), and `pavo_job` feeds the same stop as `pavo_image_job`: two failed
+  read-backs in a row, of stills or videos, suspend both (`PAVO_FREE_QUOTA_SUSPECTED`).
+- **What Pavo exposes.** Nothing about the free quota: `pavo_account` (`/v3/subscription/credits-balance`) returns
+  the plan and `total_balance` / `subscription_credits` / `daily_free_credits` only (read after the stop: no quota
+  field, nothing changed), and the quote keeps answering 0. The counts here are the only gate.
+- **Actions (shot-probe.yml).** A run cannot write this ledger, so its usage is read from the probe record the record
+  job pushes to `claude/shot-probe-<episode>-<run>` (`quota.record_usage`: each generation 2 units; a record whose
+  last 2+ generations came back with no video is a quota stop for 3 h). The dispatch guard adds main's ledger and
+  today's records (REST), refuses a batch whose expected units (`long_preflight.planned_units`: rounds x the mean
+  generations a round x 2) do not fit what is left (`PAVO_BUDGET_SHORT`), and hands the count to the probe
+  (`pavo_used` -> `PAVO_BUDGET_USED`). `episode_build.py probe` seeds a run-local ledger with it (`PAVO_BUDGET_UNKNOWN`
+  without it) and generates only through that guarded client, so the run stops at its own second failed read-back in
+  a row, with the generations it spent in its record. A budget stop fails the run; when the cause was the quota
+  (external), record it in `evidence/dispatch/retries.json` before dispatching the batch again.
+- **The MCP side** counts today's probe records from the local remote-tracking refs (`quota.git_actions_usage`):
+  fetch them before an MCP generation session (`git fetch origin 'refs/heads/claude/shot-probe-*:refs/remotes/origin/claude/shot-probe-*'`).
+  A git that cannot answer refuses (`PAVO_BUDGET_UNREADABLE`). Commit the ledger with each session's evidence, so the
+  dispatch guard sees the MCP's usage too.
+- **Before a batch.** `episode_build.py probe-queue PLAN` cuts batches to fit a day's cap, names each batch's
+  `pavo_units_est` and says whether the next one fits today (`pavo_budget`); dispatch only a batch that fits.
+
 ## Authorization
 
 Standing owner authorization (2026-10-25): generations need no per-clip approval in the chat; every limit above

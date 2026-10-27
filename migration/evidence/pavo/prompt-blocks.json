@@ -1,6 +1,6 @@
 {
  "version": "pavo-prompt-blocks-v1",
- "about": "Words and lines Pavo's prompt filter refuses (E128). A native-route line holding one of `words`, or a line whose words digest is in `lines` (appended by pavo_native.record_block when the adapter reads back PAVO_PROMPT_BLOCKED), is voiced by the pinned Kokoro voice instead (owner 27/10 R4). Reason codes only, never the filter's text.",
+ "about": "Words and lines Pavo's prompt filter refuses (E129). A native-route line holding one of `words`, or a line whose words digest is in `lines` (appended by pavo_native.record_block when the adapter reads back PAVO_PROMPT_BLOCKED), is voiced by the pinned Kokoro voice instead (owner 27/10 R4). Reason codes only, never the filter's text.",
  "words": [
   "naked"
  ],

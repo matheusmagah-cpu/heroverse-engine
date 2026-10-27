@@ -15,6 +15,7 @@ from urllib.error import HTTPError
 
 from client import PavoError
 import images
+from quota import IMAGE_UNITS
 from video import PavoVideoClient, conversation_id, price, shown
 
 IMAGE_MODEL = "agnes-image"  # "Agnes Image 2.5 Flash", tagged Free in mode_support_models?mode_code=generate_image
@@ -26,12 +27,6 @@ IMAGE_PATH = r"/[A-Za-z0-9_./%+-]+\.(?:png|jpg|jpeg|webp)"
 
 
 class PavoImageClient(PavoVideoClient):
-    def __init__(self, token=None, opener=None, guard=None):
-        """guard: a quota.QuotaGuard (E124: the daily cap and the stop after failed read-backs); server.py always
-        passes one."""
-        super().__init__(token, opener)
-        self._guard = guard
-
     def status(self):
         result = super().status()
         result["image_model"] = IMAGE_MODEL
@@ -77,7 +72,7 @@ class PavoImageClient(PavoVideoClient):
     def generate_image(self, prompt, aspect_ratio="9:16", resolution="sd", references=None):
         prompt, aspect_ratio, resolution, refs = self.prepare_image(prompt, aspect_ratio, resolution, references)
         if self._guard is not None:   # E124: a 0 quote does not mean the free quota is there; refused before any call
-            self._guard.before_generate()
+            self._guard.before_generate(IMAGE_UNITS)
         quote = self._quote_image(aspect_ratio, resolution, len(refs))
         if not quote["zero_cost_confirmed"]:
             # Nothing was uploaded or created; the quoted price is reported, never paid.
@@ -93,7 +88,7 @@ class PavoImageClient(PavoVideoClient):
             raise PavoError("PAVO_CONVERSATION_SCHEMA_CHANGED")
         job = conversation_id(data.get("conversation_id"))
         if self._guard is not None:
-            self._guard.submitted(job)
+            self._guard.submitted(job, IMAGE_UNITS)
         result = {"conversation_id": job, "model": IMAGE_MODEL, "mode": "generate_image", "ratio": aspect_ratio,
                   "resolution": resolution, "input_images": len(refs), "quoted_credits": 0,
                   "quote": {k: quote[k] for k in ("required_credits", "final_points", "is_estimate")},
