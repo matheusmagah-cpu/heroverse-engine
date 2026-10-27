@@ -385,9 +385,11 @@ class PavoBudgetQueue(Scratch):
         for b in q["batches"]:
             shots = [s for s in self.plan["shots"] if s["id"] in b["shots"].split(",")]
             self.assertEqual(b["pavo_units_est"], lp.planned_units(shots, b["attempts"]))
-            self.assertLessEqual(b["pavo_units_est"], cap)
-        small = lp.queue(self.plan, {}, {}, max_units=10)
-        self.assertTrue(all(b["pavo_units_est"] <= 10 for b in small["batches"]), small["batches"])
+            self.assertEqual(b["pavo_units_max"], sum(b["attempts"] * eb.attempts_for(s) for s in shots) * 2)
+            self.assertLessEqual(b["pavo_units_max"], cap)      # review of #475: the worst case fits a day
+            self.assertLess(b["pavo_units_est"], b["pavo_units_max"])
+        small = lp.queue(self.plan, {}, {}, max_units=30)
+        self.assertTrue(all(b["pavo_units_max"] <= 30 for b in small["batches"]), small["batches"])
         self.assertEqual(sum(len(b["shots"].split(",")) for b in small["batches"]), q["to_probe"])
 
     def test_the_queue_says_when_the_next_batch_does_not_fit_today(self):
@@ -397,11 +399,14 @@ class PavoBudgetQueue(Scratch):
         ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}}))
         now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
         guard = quota.QuotaGuard(ledger, now=lambda: now, actions=lambda day: quota.NO_ACTIONS)
-        got = lp.budget_today([{"pavo_units_est": 10}], guard)
+        got = lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)
         self.assertEqual(got["next_batch"], "refused")
         self.assertTrue(got["refusal"].startswith("PAVO_BUDGET_SHORT"), got)
         ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}}))
-        self.assertEqual(lp.budget_today([{"pavo_units_est": 10}], guard)["remaining"], 10)
+        self.assertEqual(lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)["remaining"], 10)
+        # review of #475: the worst case is what must fit, not the mean
+        self.assertEqual(lp.budget_today([{"pavo_units_est": 10, "pavo_units_max": 21}], guard)["next_batch"],
+                         "refused")
 
 
 if __name__ == "__main__":

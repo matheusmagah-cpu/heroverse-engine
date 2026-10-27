@@ -142,9 +142,11 @@ def shot_probe(i):
         # does not, so a new Short report is no fix that lifts GUARD_RERUN_WITHOUT_FIX
         deps.append(f"migration/evidence/preflight/{plan['episode']}.json")
     sys.path.insert(0, str(ROOT / "migration" / "production" / "bible"))
-    import long_preflight  # E128: the batch's expected free-model units, with the same mean probe-queue uses
+    import long_preflight  # E128: the batch's free-model units (planned_units, as probe-queue)
     by_id = {s.get("id"): s for s in plan.get("shots", [])}
-    units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]))
+    # review of #475: the worst case (every generation make_shot may spend), so a batch never starts it cannot finish
+    units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
+                                                                      worst=True)
     return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units}
 
 
@@ -599,13 +601,22 @@ def cf_images_today(api, today):
     return used
 
 
-def pavo_actions_usage(api, today):
-    """E128: today's shot-probe usage (quota.combine) from the records the record job pushed to claude/shot-probe-*
-    branches committed today (UTC), by REST; the MCP guard reads the same records from the local refs."""
+BRANCH_PAGES = 10   # 1000 branches; more refuses PAVO_BUDGET_UNREADABLE (review of #475: never a partial count)
+
+
+def pavo_actions_usage(api, today, now=None):
+    """E128: shot-probe usage (quota.combine) from the records the record job pushed to claude/shot-probe-* branches,
+    by REST: units of the records committed today (UTC), the failed tail of those of the last quota.COOL_DOWN too (a
+    stop before midnight holds after it). The MCP guard reads the same records from the local refs. A record that
+    cannot be read, or more branches than BRANCH_PAGES pages, refuses: the count is never partial."""
     sys.path.insert(0, str(ROOT / "migration" / "integrations" / "pavo"))
     import quota
+    now = now or datetime.now(timezone.utc)
     records, page = [], 1
-    while page <= 10:
+    while True:
+        if page > BRANCH_PAGES:
+            refuse("PAVO_BUDGET_UNREADABLE", f"more than {BRANCH_PAGES * 100} branches: delete merged probe branches "
+                                             "or raise BRANCH_PAGES")
         batch = api(f"branches?per_page=100&page={page}") or []
         for b in batch:
             path = quota.probe_record_path(b.get("name", ""))
@@ -613,29 +624,32 @@ def pavo_actions_usage(api, today):
                 continue
             c = api(f"commits/{b['commit']['sha']}") or {}
             date = ((c.get("commit") or {}).get("committer") or {}).get("date", "")
-            if not date.startswith(today):
+            try:
+                at = datetime.fromisoformat(date.replace("Z", "+00:00"))
+            except ValueError:
+                refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: no commit time")
+            if not quota.wanted(at, today, now):
                 continue
             f = api(f"contents/{path}?ref={b['commit']['sha']}")
             if not f:
                 continue      # the probe job left no record (NO_PROBE_RECORD)
             try:
                 record = json.loads(base64.b64decode(f["content"]))
-                at = datetime.fromisoformat(date.replace("Z", "+00:00"))
             except (KeyError, ValueError, TypeError):
                 refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: its record cannot be read")
             records.append((at, record))
         if len(batch) < 100:
             break
         page += 1
-    return quota.combine(records)
+    return quota.combine(records, today)
 
 
 def pavo_budget(facts, api, today, now=None):
     """E128: refuse a Pavo batch that does not fit today's free-model budget (PAVO_BUDGET_SHORT) or runs into a
     suspected quota stop; returns the units used today (the probe seeds its run-local ledger with them)."""
     import quota
-    usage = pavo_actions_usage(api, today)
     when = now or datetime.now(timezone.utc)
+    usage = pavo_actions_usage(api, today, when)
     guard = quota.QuotaGuard(quota.LEDGER, now=lambda: when, actions=lambda day: usage)
     try:
         fits = guard.check_batch(facts["pavo_units"])

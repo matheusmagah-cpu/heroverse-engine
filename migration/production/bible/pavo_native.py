@@ -186,6 +186,36 @@ def record_block(shot_id, line, reason, conversation_id, path=None, today=None):
     return data
 
 
+def merge_blocks(record, path=None):
+    """shot-probe.yml's record job (review of #476): the blocks a probe run learned (its record's `prompt_blocks`)
+    into evidence/pavo/prompt-blocks.json, committed with the record, so the next run, the preflight (which binds the
+    file) and verify-preflight all send that line to Kokoro. Returns the digests added."""
+    data = load_blocks(path)
+    data.setdefault("lines", [])
+    have = {x.get("line_sha256") for x in data["lines"]}
+    added = []
+    for b in record.get("prompt_blocks") or []:
+        digest = b.get("line_sha256")
+        if not (isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)) or digest in have:
+            continue
+        reason = str(b.get("reason") or "unknown")
+        data["lines"].append({"line_sha256": digest, "shot": str(b.get("shot") or ""),
+                              "reason": reason if re.fullmatch(r"[a-z_]{1,60}", reason) else "unknown",
+                              "conversation_id": str(b.get("conversation_id") or "")[:25],
+                              "run_id": str(record.get("run_id") or "")})
+        have.add(digest)
+        added.append(digest)
+    if added:
+        Path(path or BLOCKS).write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
+    return added
+
+
+def blocks_sha256(path=None):
+    """The prompt-blocks file's sha256 (the preflight binds it: a new block changes routes and request digests)."""
+    p = Path(path or BLOCKS)
+    return sha256_file(p) if p.exists() else None
+
+
 # ---------- the clip's checks (story QA v4 rights.ai_video.speech_checks) ----------
 
 def wer(reference, heard):

@@ -1256,7 +1256,8 @@ def in_plan_order(report, plan):
     return report
 
 
-def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_python, face_model, sleep=time.sleep):
+def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_python, face_model, sleep=time.sleep,
+                progress=None):
     """One shot's request and the build's own attempt(n) and check(path), shared by generate_step and probe_step
     (E114: a probe generates exactly what the build would, with the same checks)."""
     req = request(shot, index, plan, layout, refs)
@@ -1270,6 +1271,8 @@ def shot_runner(shot, index, plan, layout, refs, work, client, download, lip_pyt
         result = submit(client, req, sleep=sleep)
         record = {"generation": n, "conversation_id": result["conversation_id"], "submission": result["status"],
                   "quoted_credits": result.get("quoted_credits")}
+        if progress is not None:   # review of #475: a submitted generation is on disk before its (long) wait
+            progress(record)
         if result["status"] == "rejected":
             return record, None
         video = wait_job(client, result["conversation_id"], sleep=sleep)
@@ -1399,8 +1402,14 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
     for index, shot in risk_order(plan["shots"]):
         if wanted is not None and shot["id"] not in wanted:
             continue
+        inflight = []
+
+        def progress(rec, sid=shot["id"]):
+            inflight.append(rec)
+            report["shots"][sid] = dict(entry, attempts=list(inflight), in_flight=True)
+            save(report_path, in_plan_order(report, plan))
         req, attempt, check, raw, final = shot_runner(shot, index, plan, layout, refs, work, client, download,
-                                                      lip_python, face_model, sleep)
+                                                      lip_python, face_model, sleep, progress)
         entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
         if plan_check.speaking(shot):
             entry.update(speaker=shot["speaker"], line=shot["line"])
@@ -1413,18 +1422,23 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
                 # E129 / owner R4: Pavo's filter refused the line's words; the block is kept by the line's words, so
                 # the route is Kokoro from now on (pavo_native.route), and the shot goes again at once on that route
                 code, cid, reason = (str(exc).split() + ["", "", ""])[:3]
-                pavo_native.record_block(shot["id"], pavo_native.shot_line(plan, index), reason, cid)
-                entry["prompt_blocked"] = {"conversation_id": cid, "reason": reason,
-                                           "attempts": getattr(exc, "records", None)}
+                line = pavo_native.shot_line(plan, index)
+                pavo_native.record_block(shot["id"], line, reason, cid)
+                # the probe record carries it too, so shot-probe.yml's record job commits it (merge-blocks)
+                entry["prompt_blocked"] = {"conversation_id": cid, "reason": reason, "shot": shot["id"],
+                                           "line_sha256": pavo_native.line_digest(line),
+                                           "attempts": list(inflight) or getattr(exc, "records", None)}
+                inflight.clear()
                 req, attempt, check, raw, final = shot_runner(shot, index, plan, layout, refs, work, client, download,
-                                                              lip_python, face_model, sleep)
+                                                              lip_python, face_model, sleep, progress)
                 entry["request"] = {k: v for k, v in req.items()}
                 entry["route"] = pavo_native.KOKORO
                 _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
         except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
-            if getattr(exc, "records", None):
-                entry["attempts"] = exc.records
+            # review of #475: every submitted generation (progress), also one whose wait was cut short
+            if inflight or getattr(exc, "records", None):
+                entry["attempts"] = list(inflight) or exc.records
             report["shots"][shot["id"]] = entry
             save(report_path, in_plan_order(report, plan))
             raise SystemExit(str(exc))
@@ -1528,38 +1542,62 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
         record["shots"][sid] = {"kind": plan["shots"][index[sid]]["kind"], "request_sha256": sha,
                                 "request": canonical, "clips": [],
                                 "clip_seconds": shot_seconds(plan["shots"][index[sid]], index[sid], plan, layout)}
-    for n in range(1, attempts + 1):
-        for _, shot in risk_order([plan["shots"][index[sid]] for sid in ids]):
-            sid, entry = shot["id"], record["shots"][shot["id"]]
-            try:
-                report = generate_clips(plan, work, lip_python, face_model, ids=[sid], client=client,
-                                        download=download, sleep=sleep, validate=False,
-                                        report_path=work / f"probe-{sid}-{n}.json")
-            except SystemExit as exc:
-                if not str(exc).startswith(("SHOT_FAILED", "PAVO_REFUSED", "PAVO_JOB", "PAVO_PROMPT_BLOCKED")):
-                    raise   # a broken tool or a refused request stops the probe (E89)
-                failed = load(work / f"probe-{sid}-{n}.json")["shots"].get(sid, {})
-                entry["clips"].append({"round": n, "error": str(exc), "generations": failed.get("attempts", [])})
-                save(out / "probe.json", record)
-                stop = budget_stop(exc)
-                if stop:   # E128: the budget is spent or a quota stop is suspected: no other shot may submit
-                    record["stopped"] = str(exc)
+    inflight = None   # review of #475: (shot, round) whose generations are not in the record yet
+    blocked = set()   # E129 (review of #476): a shot whose prompt Pavo's filter refused is never sent again this run
+    try:
+        for n in range(1, attempts + 1):
+            for _, shot in risk_order([plan["shots"][index[sid]] for sid in ids]):
+                sid, entry = shot["id"], record["shots"][shot["id"]]
+                if sid in blocked:
+                    continue
+                inflight = (sid, n)
+                try:
+                    report = generate_clips(plan, work, lip_python, face_model, ids=[sid], client=client,
+                                            download=download, sleep=sleep, validate=False,
+                                            report_path=work / f"probe-{sid}-{n}.json")
+                except SystemExit as exc:
+                    if not str(exc).startswith(("SHOT_FAILED", "PAVO_REFUSED", "PAVO_JOB", "PAVO_PROMPT_BLOCKED")):
+                        raise   # a broken tool or a refused request stops the probe (E89)
+                    failed = load(work / f"probe-{sid}-{n}.json")["shots"].get(sid, {})
+                    entry["clips"].append({"round": n, "error": str(exc), "generations": failed.get("attempts", [])})
+                    if failed.get("prompt_blocked"):
+                        record.setdefault("prompt_blocks", []).append(failed["prompt_blocked"])
+                    if str(exc).startswith("PAVO_PROMPT_BLOCKED"):   # the same prompt would be refused again
+                        blocked.add(sid)
+                        entry["blocked"] = str(exc)
+                    inflight = None
                     save(out / "probe.json", record)
-                    raise SystemExit(f"{stop} probe stopped at {sid} round {n}: {exc}")
-                continue
-            built = report["shots"][sid]
-            if built.get("prompt_blocked"):   # E129: made on the Kokoro route after the filter's block
-                sha, canonical = request_identity(shot, index[sid], plan, layout, refs)
-                entry.update(request_sha256=sha, request=canonical, prompt_blocked=built["prompt_blocked"],
-                             clip_seconds=shot_seconds(shot, index[sid], plan, layout))
-            path = work / "clips" / built["clip"]
-            clip_sha = sha256(path)
-            asset = shot_asset_name(plan["episode"], sid, clip_sha)
-            shutil.copyfile(path, out / asset)
-            sheet(out / asset, out / f"{sid}-{n}.jpg")
-            last = built["attempts"][-1]
-            entry["clips"].append({"round": n, "asset": asset, "clip_sha256": clip_sha, "flags": last["flags"],
-                                   "generations": built["attempts"], "sheet": f"{sid}-{n}.jpg"})
+                    stop = budget_stop(exc)
+                    if stop:   # E128: the budget is spent or a quota stop is suspected: no other shot may submit
+                        record["stopped"] = str(exc)
+                        save(out / "probe.json", record)
+                        raise SystemExit(f"{stop} probe stopped at {sid} round {n}: {exc}")
+                    continue
+                built = report["shots"][sid]
+                if built.get("prompt_blocked"):   # E129: made on the Kokoro route after the filter's block
+                    record.setdefault("prompt_blocks", []).append(built["prompt_blocked"])
+                    sha, canonical = request_identity(shot, index[sid], plan, layout, refs)
+                    entry.update(request_sha256=sha, request=canonical, prompt_blocked=built["prompt_blocked"],
+                                 clip_seconds=shot_seconds(shot, index[sid], plan, layout))
+                path = work / "clips" / built["clip"]
+                clip_sha = sha256(path)
+                asset = shot_asset_name(plan["episode"], sid, clip_sha)
+                shutil.copyfile(path, out / asset)
+                sheet(out / asset, out / f"{sid}-{n}.jpg")
+                last = built["attempts"][-1]
+                entry["clips"].append({"round": n, "asset": asset, "clip_sha256": clip_sha, "flags": last["flags"],
+                                       "generations": built["attempts"], "sheet": f"{sid}-{n}.jpg"})
+                inflight = None
+                save(out / "probe.json", record)
+    finally:
+        if inflight is not None:   # a timeout, a cancel or an unexpected error: what was submitted still counts
+            sid, n = inflight
+            part = work / f"probe-{sid}-{n}.json"
+            try:
+                gens = (load(part)["shots"].get(sid) or {}).get("attempts", []) if part.is_file() else []
+            except (OSError, ValueError):
+                gens = []
+            record["shots"][sid]["clips"].append({"round": n, "error": "PROBE_INTERRUPTED", "generations": gens})
             save(out / "probe.json", record)
     for sid in ids:
         print(json.dumps({"shot": sid, "clips": [c.get("asset") or c.get("error") for c in
@@ -1952,6 +1990,9 @@ def main(argv):
                 raise SystemExit(refused)
         print(json.dumps({"shots": ids, "attempts": n}))
         return 0
+    if cmd == "merge-blocks" and len(argv) == 4:   # shot-probe.yml's record job: PROBE_JSON BLOCKS_FILE (E129)
+        print(json.dumps({"added": pavo_native.merge_blocks(load(argv[2]), argv[3])}))
+        return 0
     if cmd in ("sources", "approve-source"):   # owner 27/10 (R1-R3): per-shot sources, Claude's approval of one
         import shot_sources
         return shot_sources.main(argv)
@@ -1983,6 +2024,8 @@ def main(argv):
         used = os.environ.get("PAVO_BUDGET_USED", "")
         ledger = seed_budget(argv[3], used)   # E128: before any generation; refused without the guard's count
         os.environ["PAVO_IMAGE_LEDGER"] = str(ledger)
+        import signal   # review of #475: a cancel (SIGTERM) unwinds through probe_step's finally, so the record is kept
+        signal.signal(signal.SIGTERM, lambda signum, frame: sys.exit("PROBE_TERMINATED (SIGTERM)"))
         try:
             record = probe_step(plan, argv[3], argv[4], argv[5], argv[6], ids, n)
         finally:

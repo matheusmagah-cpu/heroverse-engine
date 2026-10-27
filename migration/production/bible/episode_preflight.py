@@ -242,6 +242,9 @@ def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     if eb.is_long(plan):   # E127: the long's review rows and its own code
         import long_preflight
         out.update(long_preflight.binding_extra(registry))
+    if eb.pavo_native.native_plan(plan):   # review of #476: a learned prompt block or a voice changes the routes
+        out["prompt_blocks"] = eb.pavo_native.blocks_sha256()
+        out["voices"] = sha256(eb.pavo_native.VOICES)
     return out
 
 

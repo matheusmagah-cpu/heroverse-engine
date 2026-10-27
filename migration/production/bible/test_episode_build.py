@@ -239,7 +239,7 @@ class FakeClient:
     def job(self, cid):
         self.reads.append(cid)
         item = self.jobs[cid].pop(0)
-        if isinstance(item, Exception):
+        if isinstance(item, BaseException):   # a cancel (KeyboardInterrupt) or a SIGTERM exit too
             raise item
         return item
 
@@ -1728,6 +1728,38 @@ class NativeSpeech(unittest.TestCase):
         cuts = eb.shift_onsets([{"shot": "s-eve", "talk": {}, "src_start": 0.0}, {"shot": "s-a", "src_start": 0.0}],
                                {"s-eve": 1.16, "s-a": 0.5})
         self.assertEqual([c["src_start"] for c in cuts], [1.16, 0.0])             # only a talking cut follows the lips
+
+
+class ProbeRecordOnAnyExit(unittest.TestCase):
+    """Review of #475: a probe cancelled, timed out or crashed while a shot waited on Pavo lost that shot's submitted
+    generations from out/probe.json, so the next dispatch guard under-counted the day's units."""
+    setUp, tearDown = SharedQuotaStop.setUp, SharedQuotaStop.tearDown
+    def run_until(self, interrupt):
+        import quota
+        ledger = eb.seed_budget(self.work, "0", main_ledger=self.work / "missing-main-ledger.json")
+        cids = [str(373600000000000000 + i) for i in range(4)]
+        client = GuardedFake(quota.QuotaGuard(ledger, actions=None),
+                             [{"conversation_id": c, "status": "submitted"} for c in cids],
+                             {cids[0]: [done(cids[0])], cids[1]: [interrupt]})
+        out = self.work / "out"
+        ids = [s["id"] for s in self.plan["shots"]]
+        with self.assertRaises(type(interrupt)):
+            eb.probe_step(self.plan, self.work, "py", "model", out, ids, 1, client=client,
+                          download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                          sheet=lambda video, sheet: None)
+        record = json.loads((out / "probe.json").read_text())
+        spent = [g["conversation_id"] for e in record["shots"].values() for c in e["clips"] for g in c["generations"]]
+        self.assertEqual(spent, cids[:2])                      # the one in flight is in the record too
+        self.assertIn("PROBE_INTERRUPTED", [c.get("error") for e in record["shots"].values() for c in e["clips"]])
+        self.assertEqual(quota.record_usage(record)[0], 2 * quota.VIDEO_UNITS)
+
+    def test_a_cancel_keeps_the_in_flight_generation(self):
+        self.run_until(KeyboardInterrupt())
+
+    def test_a_terminate_or_crash_keeps_it_too(self):
+        self.run_until(SystemExit("PROBE_TERMINATED (SIGTERM)"))
+        text = (eb.HERE / "episode_build.py").read_text()
+        self.assertIn("signal.signal(signal.SIGTERM", text)
 
 
 if __name__ == "__main__":

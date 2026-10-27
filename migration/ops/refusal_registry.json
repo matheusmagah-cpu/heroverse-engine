@@ -1448,6 +1448,10 @@
    "class": "N",
    "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
   },
+  "PROBE_INTERRUPTED": {
+   "class": "N",
+   "why": "review of #475: a probe record's marker for the round a cancel, timeout or crash cut short; its submitted generations stay in the record so the budget counts them, not a refusal"
+  },
   "PROBE_RATE_LOW": {
    "class": "N",
    "why": "E127: named in long_preflight.PROBE_TOLERATED, the preflight blockers that do not stop a long's shot probe (neither changes a request); the refusal itself is the local preflight's (episode_preflight.probe_rows), before any dispatch"
@@ -1467,6 +1471,10 @@
     "migration/production/bible/episode_build.py::def probe_ids("
    ],
    "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
+  },
+  "PROBE_TERMINATED": {
+   "class": "D",
+   "resume": "review of #475: the probe got SIGTERM (a cancel or the job timeout); its record keeps every generation submitted. Read the record, then probe the shots still without a clip (probe-queue)"
   },
   "PROBE_UNKNOWN_SHOT": {
    "class": "A",

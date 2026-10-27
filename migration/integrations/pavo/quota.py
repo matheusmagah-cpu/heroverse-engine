@@ -96,18 +96,33 @@ def record_usage(record):
     return len(gens) * VIDEO_UNITS, tail
 
 
-def combine(records):
-    """records: [(committed_at aware datetime, record)] of one day -> {units, failed_tail (of the latest), last_at}."""
+def wanted(at, day, now):
+    """A record counts when committed on DAY (its units) or less than COOL_DOWN before NOW (its failed tail: a stop
+    shortly before 00:00 UTC still holds after it; review of #475)."""
+    recent = now is not None and now - COOL_DOWN <= at <= now
+    return at.astimezone(timezone.utc).strftime("%Y-%m-%d") == day or recent
+
+
+def combine(records, day=None):
+    """records: [(committed_at aware datetime, record)] -> {units (of the records committed on DAY, all when None),
+    failed_tail and last_at of the latest record WITH generations}. A record with none (an adopt_run, a run refused
+    before generating) says nothing about the quota, so it never hides an earlier run's stop (review of #475)."""
     if not records:
         return dict(NO_ACTIONS)
-    units = sum(record_usage(r)[0] for _, r in records)
-    at, last = max(records, key=lambda x: x[0])
+    units = sum(record_usage(r)[0] for at, r in records
+                if day is None or at.astimezone(timezone.utc).strftime("%Y-%m-%d") == day)
+    generating = [(at, r) for at, r in records if record_usage(r)[0]]
+    if not generating:
+        return {"units": units, "failed_tail": 0, "last_at": None}
+    at, last = max(generating, key=lambda x: x[0])
     return {"units": units, "failed_tail": record_usage(last)[1], "last_at": at.isoformat()}
 
 
-def git_actions_usage(day, repo=None, run=subprocess.run):
+def git_actions_usage(day, repo=None, run=subprocess.run, now=None):
     """Today's shot-probe usage from the local remote-tracking refs (origin/claude/shot-probe-*): the records committed
-    on DAY (UTC). Fetch them before an MCP generation session; a git that cannot answer fails closed."""
+    on DAY (UTC) for the units, and those of the last COOL_DOWN for the failed tail. Fetch them before an MCP
+    generation session; a git that cannot answer fails closed."""
+    now = now or datetime.now(timezone.utc)
     repo = str(repo or REPO)
 
     def git(*args):
@@ -129,7 +144,7 @@ def git_actions_usage(day, repo=None, run=subprocess.run):
             at = datetime.fromisoformat(when).astimezone(timezone.utc)
         except ValueError:
             raise PavoError("PAVO_BUDGET_UNREADABLE (%s has no commit time)" % branch) from None
-        if at.strftime("%Y-%m-%d") != day:
+        if not wanted(at, day, now):
             continue
         shown = git("show", "origin/%s:%s" % (branch, path))
         if shown.returncode != 0:
@@ -138,7 +153,7 @@ def git_actions_usage(day, repo=None, run=subprocess.run):
             records.append((at, json.loads(shown.stdout)))
         except ValueError:
             raise PavoError("PAVO_BUDGET_UNREADABLE (%s: its record is not JSON)" % branch) from None
-    return combine(records)
+    return combine(records, day)
 
 
 def _unreadable(why):
