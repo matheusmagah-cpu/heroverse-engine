@@ -1,0 +1,220 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-08-short",
+ "plan": "migration/production/bible/plans/genesis-08-short.json",
+ "purpose": "E108, before genesis-08's first build: the rewritten scene prompts (the period sentences added to every scene, the scoffer removed, s-feast and s-finished reworded) probed as the build sends them, with a frame sheet of each clip checked for anachronisms, writing, extra limbs, faces on anonymous figures, and the period",
+ "how": "Direct calls from a Claude session through the heroverse-pavo MCP tools, with no Actions run. Every pavo_generate_video came right after its own pavo_quote_video (9:16, text only, sound false, the plan's seconds), which read required_credits 0.0, zero_cost_confirmed true and is_estimate false. Every submission answered 'submitted': none was uncertain and none was retried. Each job was then polled with pavo_job. Clips were downloaded to the session scratchpad only and are not committed. Each probe-<shot>-<n>.jpg holds 6 frames of one clip, tiled 3x2, and Claude looked at every sheet.",
+ "credits": 0,
+ "period": {
+  "setting": "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain.",
+  "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+ },
+ "probes": [
+  {
+   "shot": "s-voice",
+   "n": 1,
+   "conversation_id": "373283452047067776",
+   "seconds": 8,
+   "sheet": "probe-s-voice-1.jpg",
+   "verdict": "superseded",
+   "current_prompt": false,
+   "note": "Period clean: goat-hair tents, fires, cracked ground, storm and lightning, no people, no writing. The hull came out as a longship with a curled prow, so the prompt now asks for a box-shaped hull (probe 2)."
+  },
+  {
+   "shot": "s-voice",
+   "n": 2,
+   "conversation_id": "373288513334676096",
+   "seconds": 8,
+   "sheet": "probe-s-voice-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Bare wooden ribs of the hull, goat-hair tents, fires and torches, cracked ground, lightning in the black clouds. No people, no writing, no anachronism. The current prompt."
+  },
+  {
+   "shot": "s-feast",
+   "n": 1,
+   "conversation_id": "373283504073262592",
+   "seconds": 6,
+   "sheet": "probe-s-feast-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "Period clean: tents, torches, rugs, clay cups, bread. But the feasters across the fire face the lens with their faces clearly visible, against figures: anonymous (PROMPT_GUIDE: seen only from behind or in silhouette). Reworded: a row of feasters seen from behind facing the tents."
+  },
+  {
+   "shot": "s-feast",
+   "n": 2,
+   "conversation_id": "373285381825425472",
+   "seconds": 6,
+   "sheet": "probe-s-feast-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Feasters seen from behind on woven rugs, clay cups and bread, goat-hair tents with torches and fires. No faces, no tables, no writing, no anachronism. The current prompt."
+  },
+  {
+   "shot": "s-torches",
+   "n": 1,
+   "conversation_id": "373283562642553536",
+   "seconds": 6,
+   "sheet": "probe-s-torches-1.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Ringleader in silhouette holding a burning torch high, the mob in silhouette with torches at the foot of the dark hull, an old man in silhouette on top hammering, a wooden ladder and a cloth awning. No faces, no writing, no anachronism. A camera cut mid-clip is left for the frame review."
+  },
+  {
+   "shot": "s-finished",
+   "n": 1,
+   "conversation_id": "373284980425824832",
+   "seconds": 8,
+   "sheet": "probe-s-finished-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "The ark came out as a sleek modern building with a glowing strip window under its roof, against PERIOD_EXCLUDE. Reworded without the opening for light."
+  },
+  {
+   "shot": "s-finished",
+   "n": 2,
+   "conversation_id": "373286859088105728",
+   "seconds": 8,
+   "sheet": "probe-s-finished-2.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A gabled wooden barn with barn doors: it reads as a building or house, not a ship. Reworded as a long, low wooden ship."
+  },
+  {
+   "shot": "s-finished",
+   "n": 3,
+   "conversation_id": "373289783067447552",
+   "seconds": 8,
+   "sheet": "probe-s-finished-3.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A wooden ship on blocks, but the lower hull has a red band like a modern ship's waterline paint, and a railed staircase leads to the door. Reworded: the whole hull pitch-black, an earthen ramp to the door."
+  },
+  {
+   "shot": "s-finished",
+   "n": 4,
+   "conversation_id": "373292014311312448",
+   "seconds": 8,
+   "sheet": "probe-s-finished-4.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A long, low, all-black wooden ship on timber blocks with a flat deck, a wooden door in the side and a ramp up to it. Goat-hair tents, fires and torches, goats; the family seen from behind. Faint foot-worn paths only. No writing, no anachronism. The current prompt."
+  },
+  {
+   "shot": "s-ribs",
+   "n": 1,
+   "conversation_id": "373285035887609344",
+   "seconds": 6,
+   "sheet": "probe-s-ribs-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A giant vertical ring of ribs between two lattice scaffold towers with pulleys. It reads as industrial steel truss towers, and it is not a hull. Reworded: lashed wooden poles along a long, low, box-shaped hull."
+  },
+  {
+   "shot": "s-ribs",
+   "n": 2,
+   "conversation_id": "373288461551309056",
+   "seconds": 6,
+   "sheet": "probe-s-ribs-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The hull seen bow-on inside scaffolds of lashed wooden poles, workers in silhouette, goat-hair tents and fire pits. No faces, no writing, no anachronism. The current prompt."
+  },
+  {
+   "shot": "s-valley",
+   "n": 1,
+   "conversation_id": "373286679026611968",
+   "seconds": 6,
+   "sheet": "probe-s-valley-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "Goat-hair tents and felled logs, but a twin-rut wheel track runs through the valley, a road against PERIOD_EXCLUDE. Reworded."
+  },
+  {
+   "shot": "s-valley",
+   "n": 2,
+   "conversation_id": "373288722416584192",
+   "seconds": 6,
+   "sheet": "probe-s-valley-2.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "The words 'unmarked by any track' drew the twin ruts even more strongly; naming a thing primes it (PROMPT_GUIDE). Reworded as a low-angle ground-level view with no mention of tracks."
+  },
+  {
+   "shot": "s-valley",
+   "n": 3,
+   "conversation_id": "373290917240780544",
+   "seconds": 6,
+   "sheet": "probe-s-valley-3.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Ground-level view: thorn bushes, a felled trunk in the foreground, bare hills, distant goat-hair tents with smoke. No track, no writing, no anachronism. The current prompt."
+  },
+  {
+   "shot": "s-watchers",
+   "n": 1,
+   "conversation_id": "373286611356282944",
+   "seconds": 6,
+   "sheet": "probe-s-watchers-1.jpg",
+   "verdict": "superseded",
+   "current_prompt": false,
+   "note": "Crowd seen from behind, goat-hair tents, fires and torches, nothing anachronistic. But the 'first wooden ribs' came out as planks laid flat on the ground, which does not read as a hull. Reworded: tall curved ribs of a long hull standing upright."
+  },
+  {
+   "shot": "s-watchers",
+   "n": 2,
+   "conversation_id": "373290724160248384",
+   "seconds": 6,
+   "sheet": "probe-s-watchers-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "Crowd seen from behind with arms raised, the curved ribs of the hull rising from the dust, goat-hair tents with torches. No faces, no writing. One wide foot-worn dirt path crosses the plain behind the camp. It has no ruts or paving, so it is judged a footpath, not a road; the frame review keeps an eye on it. The current prompt."
+  }
+ ],
+ "final_prompts_sha256": {
+  "s-voice": "23c0911b05967df9c01a15eb72bfaae456aca1ee236a0807f6dd27a200303a98",
+  "s-feast": "aa70cbb69ef41f7798393442fbe6a0cf7e5b74ea53580d32d860a462028a1204",
+  "s-torches": "df0e0000fbc0843843d62c4c8ddecb5e5ef541745f1e10f284c71c8eee0c31cb",
+  "s-finished": "10072ac8e1eba68d02b3982ae679030690d02ad52efc399c5952c1c27f4730c9",
+  "s-ribs": "81a3f45c59cea9582b75b4c5c254b7be017bd3fc4f30a2a049f0d0542cd0f201",
+  "s-valley": "6b0193e3026ed5386339d7794191ca9da7dd754ab600e5f3cc3aa91f3e179b3c",
+  "s-watchers": "053132eeae9c0a807e936b069ee68d132a94630ed70819d4986ca93db6f1b494"
+ },
+ "probed_settings": "One probe per distinct new setting: the storm over the hull (God's voice-over, also the wording of s-covenant), the night camp (s-feast, also s-wedding and s-hill), the night mob at the hull (s-torches, also s-stones, s-mob and s-steady), the day crowd at the ribs (s-watchers, also s-laugh, s-ridge, s-clods and s-scorn), the building (s-ribs, also s-timber, s-beam and s-board), the finished ark at dawn (s-finished, also s-silent), and the empty valley (s-valley, also s-axe). The remaining scene prompts kept their wording from the reviewed plan; the only change to them is the same two period sentences.",
+ "not_probed_individually": [
+  "s-axe",
+  "s-laugh",
+  "s-timber",
+  "s-pitch",
+  "s-ridge",
+  "s-dust",
+  "s-measure",
+  "s-beam",
+  "s-jeer",
+  "s-clods",
+  "s-scorn",
+  "s-wedding",
+  "s-hill",
+  "s-stones",
+  "s-rope",
+  "s-alone",
+  "s-peg",
+  "s-covenant",
+  "s-mob",
+  "s-steady",
+  "s-board",
+  "s-silent"
+ ],
+ "findings": [
+  "No probe showed writing or extra limbs.",
+  "Wide daylight shots tend to draw dirt paths. Twin wheel ruts were rejected as a road; single foot-worn paths were accepted.",
+  "Without a shape, 'ark' or 'hull' drew a longship, a ring, a modern building or a barn. Where the hull is the subject, the prompt now gives its shape (a long, low wooden hull or ship).",
+  "Naming an excluded thing primes it: 'unmarked by any track' drew the track (s-valley 2)."
+ ],
+ "residual_for_frame_review": [
+  "The hull's shape still differs from shot to shot (s-voice: a ship's ribs; s-ribs: bow-on; s-finished: a long, low black ship).",
+  "s-watchers: a wide footpath behind the camp.",
+  "s-torches: a camera cut inside the clip."
+ ]
+}
