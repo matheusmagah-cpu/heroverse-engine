@@ -1227,7 +1227,9 @@ class ArkLook(unittest.TestCase):
             # own prompt gives the motion); plan_check refuses that still prompt without the look (STILL_PROMPT_REFUSED)
             still = pc.still_record(s.get("first_frame"), HERE / "stills") if s.get("first_frame") else None
             return ARK in s["prompt"] or bool(still and ARK in still["prompt"])
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 22)):
+        # genesis-09: 20 stills draw the ark; s-noah-door and s-noah-ramp are Noah's reference shots, which cannot
+        # take a still, so their words leave the ark out (E122, PROP_SHOT_WITHOUT_STILL)
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 20)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
