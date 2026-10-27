@@ -4,6 +4,7 @@ already made is reused (R1), the Pavo budget goes first to the spoken shots (R2)
 are filled from free licensed footage or approved stills in motion, each still approved by Claude (R3), and a clip that
 keeps Pavo's speech is judged clip by clip (R4: story QA v4 speech_checks) and mixed with one gain, short fades and a
 continuous bed."""
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -171,6 +172,89 @@ class ApproveSource(unittest.TestCase):
             self.approve("s-river", item="still-x", source="still_motion")
         self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"))
         self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by any refusal
+
+
+class ApproveReuse(unittest.TestCase):
+    """R1, review of #476: an inventory clip (Pavo's CDN) is approved only for the request the committed preflight
+    says the plan sends now, clean, from the CDN, and on a native spoken shot only with its speech checks passed."""
+    URL = "https://cos-aigc-default.agnes-ai.space/v/clip-1.mp4"
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.saved = pn.VOICES
+        self.sha = "1" * 64
+        self.inv = self.dir / "inv"
+        self.inv.mkdir()
+        self.write_inventory()
+
+    def tearDown(self):
+        pn.VOICES = self.saved
+        shutil.rmtree(self.dir)
+
+    def write_inventory(self, url=None, checks=None, request="req-eve"):
+        (self.inv / "inventory.json").write_text(json.dumps({"plan": "migration/production/bible/plans/t-sources.json",
+                                                             "shots": [{"shot": "s-eve", "request_sha256": request,
+                                                                        "clips": [{"sha256": self.sha,
+                                                                                   "url": url or self.URL,
+                                                                                   "seconds": 6.0,
+                                                                                   "lipsync_check": checks or []}]}]}))
+
+    def approve(self, p=None, digests=None, item=None, **kw):
+        return ss.approve_source(p or plan(), "s-eve", "pavo_reuse", item or f"{self.inv / 'inventory.json'}#{self.sha}",
+                                 9.6, "the same take, clean", digests=digests, shots_dir=self.dir,
+                                 today="2026-10-28", inventories=self.inv, **kw)
+
+    def refused(self, code, **kw):
+        with self.assertRaises(SystemExit) as err:
+            self.approve(**kw)
+        self.assertTrue(str(err.exception).startswith(code), (code, str(err.exception)))
+        self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by a refusal
+
+    def test_a_clean_inventory_clip_of_the_request_now_is_approved(self):
+        self.refused("REUSE_PREFLIGHT_MISSING")                                    # no committed preflight digests
+        self.refused("REUSE_REQUEST_CHANGED", digests={"s-eve": "req-other"})
+        self.refused("REUSE_NOT_CLEAN", digests={"s-eve": "req-eve"}, item=f"{self.inv / 'inventory.json'}#{'2' * 64}")
+        self.write_inventory(checks=["AUDIO_NOT_OUR_LINE"])
+        self.refused("REUSE_NOT_CLEAN", digests={"s-eve": "req-eve"})
+        self.write_inventory(url="https://example.com/clip-1.mp4")
+        self.refused("REUSE_URL_REFUSED", digests={"s-eve": "req-eve"})
+        self.write_inventory()
+        a = self.approve(digests={"s-eve": "req-eve"})
+        self.assertEqual((a["url"], a["clip_sha256"], a["request_sha256"]), (self.URL, self.sha, "req-eve"))
+        self.assertNotIn("speech", a)                                               # the Kokoro route: no Pavo speech
+
+    def test_a_native_spoken_shot_reuses_a_clip_only_with_its_speech_checks(self):
+        p = dict(plan(), audio_route="pavo_native", ambience="the garden at dusk")
+        speech = self.dir / "speech"
+        speech.mkdir()
+        voices = self.dir / "voices.json"
+        voices.write_text(json.dumps({"voices": {"eve": {"pavo_voice": "x", "reference": {"clip_sha256": "e" * 64}},
+                                                 "keeper": {"pavo_voice": "y", "reference": {"clip_sha256": "k" * 64}}}}))
+        pn.VOICES = voices
+        kw = {"p": p, "digests": {"s-eve": "req-eve"}, "speech_dir": speech}
+        self.refused("REUSE_SPEECH_UNCHECKED", **kw)
+        m = {"asr": {"model_bin_sha256": V4["speech"]["asr_model"]["model_bin_sha256"], "text": "Why do you hide?",
+                     "speech_span": [1.0, 3.0]},
+             "voice": {"reference": "a" * 64, "same": 0.93, "others": [0.7], "others_references": ["k" * 64]},
+             "lufs": -24.0, "music": 0.0, "singing": 0.0, "lips": []}
+        (speech / f"{self.sha}.json").write_text(json.dumps({"measures": m}))
+        self.refused("SPEECH_CHECKS_FAILED s-eve VOICE_REFERENCE_MISMATCH", **kw)      # bound to voices.json
+        m["voice"]["reference"] = "e" * 64
+        (speech / f"{self.sha}.json").write_text(json.dumps({"measures": m}))
+        a = self.approve(**kw)
+        self.assertEqual((a["speech"]["clip_sha256"], a["speech"]["flags"]), (self.sha, []))
+
+    def test_the_build_fetches_a_reused_clip_only_from_the_cdn_and_by_its_sha256(self):
+        approval = {"source": "pavo_reuse", "url": self.URL, "clip_sha256": hashlib.sha256(b"the clip").hexdigest()}
+        dst = self.dir / "out" / "s-eve.mp4"
+        self.assertEqual(ss.fetch_source(approval, dst, download=lambda url, d: Path(d).write_bytes(b"the clip")), dst)
+        with self.assertRaises(SystemExit) as err:
+            ss.fetch_source(approval, dst, download=lambda url, d: Path(d).write_bytes(b"another clip"))
+        self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
+        with self.assertRaises(SystemExit) as err:
+            ss.fetch_source(dict(approval, url="https://example.com/x.mp4"), dst,
+                            download=lambda url, d: self.fail("never downloaded"))
+        self.assertEqual(str(err.exception), "REUSE_URL_REFUSED")
 
 
 class SpeechChecks(unittest.TestCase):

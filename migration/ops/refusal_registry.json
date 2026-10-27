@@ -1696,9 +1696,17 @@
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
+  "REUSE_PREFLIGHT_MISSING": {
+   "class": "N",
+   "why": "review of #476: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): a pavo_reuse clip is approved only against the committed preflight's request digests (the request the plan sends now); with no preflight it refuses a wrong order of steps, before any generation, voice or render"
+  },
   "REUSE_REQUEST_CHANGED": {
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "REUSE_SPEECH_UNCHECKED": {
+   "class": "N",
+   "why": "review of #476: approve-source is the review's own local command: a reused clip that keeps Pavo's speech on a native spoken shot is approved only with its story QA v4 speech checks measured on that exact clip (the sidecar episode_build.py speech-check writes) and passed, as approve-shot requires for a probed clip"
   },
   "REUSE_URL_REFUSED": {
    "class": "N",

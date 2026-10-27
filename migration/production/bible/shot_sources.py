@@ -332,7 +332,9 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     library clip not vetted, outside the licence list or clashing with the period (FOOTAGE_NOT_USABLE), one sharing
     no word with the shot (SOURCE_OFF_LINE: the picture follows the words), a still not APPROVED for this shot
     (STILL_NOT_FOR_SHOT), an inventory clip not clean or of another request (REUSE_NOT_CLEAN, REUSE_REQUEST_CHANGED),
-    a score under the floor or an empty note."""
+    or with no committed preflight to say which request the plan sends now (REUSE_PREFLIGHT_MISSING), a reused clip
+    keeping Pavo's speech on a native spoken shot without its speech checks passed on that clip (REUSE_SPEECH_UNCHECKED,
+    SPEECH_CHECKS_FAILED; review of #476), a score under the floor or an empty note."""
     import episode_build as eb
     import pavo_native
     import plan_check
