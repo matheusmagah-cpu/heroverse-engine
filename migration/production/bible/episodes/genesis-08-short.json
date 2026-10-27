@@ -1,0 +1,231 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-08-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 8,
+ "passage": "Genesis 6:14-22 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+ "seconds": 175.11,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-27T23:30:00Z",
+ "narration": [
+  {
+   "kind": "scripture",
+   "speaker": "god",
+   "reference": "Genesis 6:17 (KJV)",
+   "text": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh"
+  },
+  {
+   "kind": "story",
+   "text": "One man heard those words, and picked up an axe. On dry ground, far from any sea, he began to build a ship."
+  },
+  {
+   "kind": "story",
+   "text": "The whole valley came to laugh. How long can one family keep building while everyone they know mocks them?"
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 6:14 (KJV)",
+   "text": "Make thee an ark of gopher wood; rooms shalt thou make in the ark, and shalt pitch it within and without with pitch."
+  },
+  {
+   "kind": "story",
+   "text": "Genesis does not record what the neighbours said. It does not have to. Picture a ship going up in a dry valley, days from any water."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 6:15 (KJV)",
+   "text": "And this is the fashion which thou shalt make it of: The length of the ark shall be three hundred cubits, the breadth of it fifty cubits, and the height of it thirty cubits."
+  },
+  {
+   "kind": "story",
+   "text": "Three hundred cubits. About four hundred and fifty feet. Every beam cut by hand, and every beam a joke to the crowd."
+  },
+  {
+   "kind": "story",
+   "text": "Year after year the laughter grew louder. Men paced out the hull and shook their heads. Children threw clods of earth at the scaffolding, and their fathers cheered."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Matthew 24:38 (KJV)",
+   "text": "For as in the days that were before the flood they were eating and drinking, marrying and giving in marriage, until the day that Noe entered into the ark,"
+  },
+  {
+   "kind": "story",
+   "text": "Feasts and weddings below, music in every camp, and nobody looking up. And up on the hill, one strange family still hammering."
+  },
+  {
+   "kind": "story",
+   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold in the dark. And still the ark grew taller."
+  },
+  {
+   "kind": "scripture",
+   "reference": "1 Peter 3:20 (KJV)",
+   "text": "When once the longsuffering of God waited in the days of Noah, while the ark was a preparing,"
+  },
+  {
+   "kind": "story",
+   "text": "Waited. Every hammer blow was one more day of mercy, one more open door, even for the people throwing stones."
+  },
+  {
+   "kind": "scripture",
+   "speaker": "god",
+   "reference": "Genesis 6:18 (KJV)",
+   "text": "But with thee will I establish my covenant; and thou shalt come into the ark,"
+  },
+  {
+   "kind": "story",
+   "text": "One night the crowd came up the hill with torches, shouting at the hull. And the old man on the scaffold did not answer them with words."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 6:22 (KJV)",
+   "text": "Thus did Noah; according to all that God commanded him, so did he."
+  },
+  {
+   "kind": "story",
+   "text": "No argument. No speech. Only obedience, one board at a time, until the last peg was driven."
+  },
+  {
+   "kind": "story",
+   "text": "At dawn it stood as it was told: a window above, a door in the side, three decks within. The valley that laughed went quiet, and nobody threw another stone."
+  },
+  {
+   "kind": "insight",
+   "text": "Until the flood is over, Noah never speaks a word. Peter calls him a preacher of righteousness. His sermon was the ark."
+  },
+  {
+   "kind": "cta",
+   "text": "Could you keep building while everyone you know laughs? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part nine tomorrow: The flood."
+  }
+ ],
+ "scripture": [
+  {
+   "reference": "Genesis 6:17 (KJV)",
+   "text": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh"
+  },
+  {
+   "reference": "Genesis 6:14 (KJV)",
+   "text": "Make thee an ark of gopher wood; rooms shalt thou make in the ark, and shalt pitch it within and without with pitch."
+  },
+  {
+   "reference": "Genesis 6:15 (KJV)",
+   "text": "And this is the fashion which thou shalt make it of: The length of the ark shall be three hundred cubits, the breadth of it fifty cubits, and the height of it thirty cubits."
+  },
+  {
+   "reference": "Matthew 24:38 (KJV)",
+   "text": "For as in the days that were before the flood they were eating and drinking, marrying and giving in marriage, until the day that Noe entered into the ark,"
+  },
+  {
+   "reference": "1 Peter 3:20 (KJV)",
+   "text": "When once the longsuffering of God waited in the days of Noah, while the ark was a preparing,"
+  },
+  {
+   "reference": "Genesis 6:18 (KJV)",
+   "text": "But with thee will I establish my covenant; and thou shalt come into the ark,"
+  },
+  {
+   "reference": "Genesis 6:22 (KJV)",
+   "text": "Thus did Noah; according to all that God commanded him, so did he."
+  }
+ ],
+ "review": {
+  "overall": 9.5,
+  "reviewer": "claude-session-reviewer",
+  "process": "built from its plan by episode.yml run 40486288284 (episode_build.py, no chat session) after preflight PASS (#454): narration passed plan_check and kjv_check.py before the voice; assembly only from the 32 approved clips (E114: the clip Claude reviewed is the clip the build ships), 29 adopted from run 40460764662 (adopt run 40474519661, #443) and s-dust, s-ridge, s-board from shot-probe run 40477936323 (#449), each a Pavo generation at an exact zero-credit quote, audio stripped, clip_check clean (letterbox and rotated-picture refusal per clip); composed by the engine (short_engine.py: cuts only, 60 cuts, captions, owned music, fade-out at the end); final -14.5 LUFS, Keeper share 0.11, lesson share 0.114, establishing share 0.011; Claude's visual review: frame reviews of runs 40438106839, 40460764662 and 40477936323 (every shot checked frame by frame, >= 9.5) and confirmation of the composed run 40486288284 with its 20-frame sheet (sheet-40486288284.jpg): period-accurate (goat-hair tents, fires, torches only), the ark one long low box-shaped hull with no mast or sail, no letterbox, no on-screen writing, God never shown (His Genesis 6:17 and 6:18 lines as voice-over over storm and lightning), Noah only seen from behind or in silhouette, the mockers in silhouette, Keeper voice-over close",
+  "black_check": {
+   "black_starts": [],
+   "unexpected": [],
+   "intended_dips": [
+    174.31
+   ]
+  },
+  "issues": [
+   "ASR word-error check not run in this session; the voice is the same pinned Kokoro adapter the long videos pass WER with",
+   "Noah is APPROVED in characters.json but no talking shot is used: he never speaks on screen, shown only from behind or in silhouette, as the plan intends (his sermon was the ark)"
+  ]
+ },
+ "title": "Noah Built a Ship on Dry Ground 🔨 | Noah Builds the Ark, Bible Story (KJV) #shorts",
+ "description": "Genesis 6, Noah builds the ark, read from the King James Version. Part 8 of a journey through the whole Bible, one story at a time.\n\nLord, when everyone around me laughs, help me keep building what You asked of me. Type Amen if you prayed this with me 🙏\n\nPart 7: God sees the earth corrupt. Next: Part 9, the flood.\n\nScripture: King James Version (public domain).\nVisuals: AI-generated scenes (Pavo). Narration: AI voice. Music: original, owned.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "noah",
+  "noahs ark",
+  "genesis 6",
+  "noah builds the ark",
+  "ark of gopher wood",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts",
+  "bible stories"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 8 of the whole Bible, one story at a time. Part 9 tomorrow: the flood 🌊",
+ "sources": {
+  "voice": "engine Kokoro v1.0 am_michael (the Keeper's narration) and am_onyx (God's voice-over lines), pilot_render.py voice, hash-pinned",
+  "music": "original-rest-music.lossless.flac (owned)",
+  "ai_video": [
+   "s-voice (Pavo, clip sha256 16664d5c5581, approved from run 40460764662)",
+   "s-axe (Pavo, clip sha256 1037ff2c136d, approved from run 40460764662)",
+   "s-valley (Pavo, clip sha256 ee00ba649088, approved from run 40460764662)",
+   "s-watchers (Pavo, clip sha256 013b3b083767, approved from run 40460764662)",
+   "s-laugh (Pavo, clip sha256 f720a68183e7, approved from run 40460764662)",
+   "s-timber (Pavo, clip sha256 7be6a4c29a95, approved from run 40460764662)",
+   "s-pitch (Pavo, clip sha256 cc36c90147ff, approved from run 40460764662)",
+   "s-ridge (Pavo, clip sha256 86cc59f21723, approved from run 40477936323)",
+   "s-dust (Pavo, clip sha256 fcbbe284e55c, approved from run 40477936323)",
+   "s-measure (Pavo, clip sha256 138660c39fa7, approved from run 40460764662)",
+   "s-ribs (Pavo, clip sha256 2e0da53e2c9d, approved from run 40460764662)",
+   "s-beam (Pavo, clip sha256 50bb1b3bbb3f, approved from run 40460764662)",
+   "s-jeer (Pavo, clip sha256 8b477a0f0b4c, approved from run 40460764662)",
+   "s-clods (Pavo, clip sha256 a4376e8e2fc4, approved from run 40460764662)",
+   "s-scorn (Pavo, clip sha256 f3fceda82760, approved from run 40460764662)",
+   "s-feast (Pavo, clip sha256 3f4dc3522e41, approved from run 40460764662)",
+   "s-wedding (Pavo, clip sha256 aa0be47285ec, approved from run 40460764662)",
+   "s-hill (Pavo, clip sha256 f9fc2a594a03, approved from run 40460764662)",
+   "s-stones (Pavo, clip sha256 1a44a03549bd, approved from run 40460764662)",
+   "s-rope (Pavo, clip sha256 347a638a03e2, approved from run 40460764662)",
+   "s-alone (Pavo, clip sha256 13d6cc4565c5, approved from run 40460764662)",
+   "s-peg (Pavo, clip sha256 97bd5e03f1cc, approved from run 40460764662)",
+   "s-covenant (Pavo, clip sha256 66fed9e1f02f, approved from run 40460764662)",
+   "s-torches (Pavo, clip sha256 5286a7520c5c, approved from run 40460764662)",
+   "s-mob (Pavo, clip sha256 bf81488faeeb, approved from run 40460764662)",
+   "s-steady (Pavo, clip sha256 27a5326bec44, approved from run 40460764662)",
+   "s-board (Pavo, clip sha256 e3ff62584cfa, approved from run 40477936323)",
+   "s-finished (Pavo, clip sha256 62edb01f8741, approved from run 40460764662)",
+   "s-silent (Pavo, clip sha256 188b748855e6, approved from run 40460764662)",
+   "k-insight (Pavo, clip sha256 1621259a0ae9, approved from run 40460764662)",
+   "k-question (Pavo, clip sha256 0977ad37cde5, approved from run 40460764662)",
+   "k-close (Pavo, clip sha256 34378dece51a, approved from run 40460764662)"
+  ],
+  "stock": "none",
+  "compose": "migration/production/bible/short_engine.py (episode_build.py compose, run 40486288284)",
+  "release_asset": "v0.0.0-cloud-assets-20261025/bible-genesis-08-short-sha256-00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23.mp4",
+  "report": "migration/evidence/episodes/genesis-08-short/report-40486288284.json"
+ },
+ "credits": {
+  "vidiq": 0,
+  "pavo": 0
+ },
+ "attributes": {
+  "hook_type": "god_voice_cold_open",
+  "hook_line": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh",
+  "title_pattern": "hook_emoji_pipe_story_kjv",
+  "first_visual": "ai_storm_over_ark_ribs",
+  "ai_scenes": 32,
+  "slot_utc": "23:30",
+  "transition": "cut",
+  "seconds": 175.11,
+  "voice": "kokoro_am_michael",
+  "compose": "engine",
+  "structure": "bible-story-short"
+ }
+}
