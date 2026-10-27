@@ -508,3 +508,17 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - **Measured the same day** (`evidence/pavo/20261026/long-16x9-and-concurrency.json`, two direct 0-credit Pavo
   requests from a Claude session, no Actions run): a 16:9 request returns 1280x720 at 24 fps, and two submissions in a
   row ran at the same time (both done within 7 min of the first, the second first), so submit-and-leave works.
+
+## Daily analysis 2026-10-27 (day 10 of 14, max 30)
+- **Pace** (latest report 26/10 08:53, [official] subscribers, [own] hours): 285 / 1,000 subscribers (119/day needed
+  to day 14); public long-form watch hours 21.6 / 4,000 (663/day needed). Bible Shorts draw 110-300 views each; the
+  prayer longs draw 0-78 views and no Shorts traffic (funnel NO_SHORTS_TRAFFIC on all 10). [plan] Day 14 (31/10) is out
+  of reach on both counters; day 30 (16/11) depends on the arc-01 long, which is not built yet (slice 3 open).
+- **Decision (owner, 27/10: no rework, solve the open problems before producing more):** no new episode builds until
+  three system fixes land: one episode in flight (E112, merged #438), one canonical ark look (plan_check rule, in
+  progress) and the reviewed probe clip becoming the build clip (in progress). Genesis 8 ships only at 9.5: 26 of 29
+  shots and the Keeper approved; s-dust, s-ridge and s-board go through the new reviewed-clip path, slot 23:30 today
+  if ready, else the next slot. Genesis 9 (plan merged #436) waits for Genesis 8's record. Keeper lip sync: LatentSync
+  chosen on public evidence (`strategy/LIPSYNC_TOOLS.md` to come), decisive test on the 3 lines running.
+- **Why:** each repeated build costs a slot anyway (genesis-07: 8 builds; genesis-08: 7 shots rejected after a full
+  build). Fixing the cause once is faster than producing more. No vidIQ calls today (0 credits).
