@@ -26,6 +26,12 @@ IMAGE_PATH = r"/[A-Za-z0-9_./%+-]+\.(?:png|jpg|jpeg|webp)"
 
 
 class PavoImageClient(PavoVideoClient):
+    def __init__(self, token=None, opener=None, guard=None):
+        """guard: a quota.QuotaGuard (E124: the daily cap and the stop after failed read-backs); server.py always
+        passes one."""
+        super().__init__(token, opener)
+        self._guard = guard
+
     def status(self):
         result = super().status()
         result["image_model"] = IMAGE_MODEL
@@ -70,6 +76,8 @@ class PavoImageClient(PavoVideoClient):
 
     def generate_image(self, prompt, aspect_ratio="9:16", resolution="sd", references=None):
         prompt, aspect_ratio, resolution, refs = self.prepare_image(prompt, aspect_ratio, resolution, references)
+        if self._guard is not None:   # E124: a 0 quote does not mean the free quota is there; refused before any call
+            self._guard.before_generate()
         quote = self._quote_image(aspect_ratio, resolution, len(refs))
         if not quote["zero_cost_confirmed"]:
             # Nothing was uploaded or created; the quoted price is reported, never paid.
@@ -84,6 +92,8 @@ class PavoImageClient(PavoVideoClient):
         if not isinstance(data, dict):
             raise PavoError("PAVO_CONVERSATION_SCHEMA_CHANGED")
         job = conversation_id(data.get("conversation_id"))
+        if self._guard is not None:
+            self._guard.submitted(job)
         result = {"conversation_id": job, "model": IMAGE_MODEL, "mode": "generate_image", "ratio": aspect_ratio,
                   "resolution": resolution, "input_images": len(refs), "quoted_credits": 0,
                   "quote": {k: quote[k] for k in ("required_credits", "final_points", "is_estimate")},
@@ -108,6 +118,8 @@ class PavoImageClient(PavoVideoClient):
 
     def image_job(self, job):
         job, running, status, media, turns = self._history(job, IMAGE_MODEL, IMAGE_PATH, ("url", "image_url"))
+        if self._guard is not None:
+            self._guard.read_back(job, status, media)
         return {"conversation_id": job, "running": running, "status": status,
                 "images": [{"url": m["url"], "width": m["width"], "height": m["height"]} for m in media],
                 "turn_count": turns, "published": False,
