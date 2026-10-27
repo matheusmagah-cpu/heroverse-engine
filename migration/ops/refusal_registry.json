@@ -125,7 +125,7 @@
   },
   "CAPTIONS_BOUNDARY_IN_CONTENT": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "CAPTIONS_DELETE": {
@@ -142,8 +142,60 @@
   },
   "CAPTIONS_SRT_INVALID": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "CAPTIONS_TRACK_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::return checks, {\"caption_track\": \"CAPTION_TRACK_MISSING\"}"
+   ],
+   "note": "E126: a story QA v3 render with no caption_track already fails qa_pilot's caption rows (qa.json FAIL), so prepublish_gate never passes it; publish_video refuses it again before any upload"
+  },
+  "CAPTION_TRACK_FILE_DIFFERS": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate)"
+  },
+  "CAPTION_TRACK_FILE_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate)"
+  },
+  "CAPTION_TRACK_INVALID": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate)"
+  },
+  "CAPTION_TRACK_LIMITS": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate); review of #469: the track is always built at the frozen v3 limits, a record naming others is refused"
+  },
+  "CAPTION_TRACK_MISSING": {
+   "class": "B",
+   "early": "migration/publish/captions.py::def write_long",
+   "open": "the acted long's build (LONG_DESIGN slice 3, not built yet) must run `captions.py long` on its compose timeline and record caption_track in its manifest before the render; until it does, a v3 render without it fails here, in render QA"
+  },
+  "CAPTION_TRACK_SHA256": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate)"
   },
   "CF_ACCOUNT_ID_UNRESOLVED": {
    "class": "D",
@@ -1664,77 +1716,77 @@
   },
   "SRT_BOM": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_CONTROL_CHARACTERS": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_CR": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_ARROW_IN_TEXT": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_BLANK_LINE_INSIDE": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_EMPTY_OR_SHORT": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_NOT_POSITIVE": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_NUMBER": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_OVERLAPS_PREVIOUS": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_PAST_VIDEO_END": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_CUE_{}_TIMING_FORMAT": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_EMPTY": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_NOT_UTF8": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_NO_FINAL_NEWLINE": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "SRT_STRAY_BLANK_LINES": {
    "class": "A",
-   "early": "migration/publish/preflight.py::captions.problems(",
+   "early": "migration/publish/preflight.py::captions.manifest_problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
   },
   "STILL_ASPECT_MISMATCH": {
@@ -2273,11 +2325,13 @@
      "residual": "none: the cards are drawn from the voice timeline the lines step measured"
     },
     "long": {
-     "class": "open",
+     "class": "render_qa",
      "checks": [
-      "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS"
+      "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS",
+      "migration/production/qa_pilot.py::\"grammar.caption_track\": [\"caption_track\"]",
+      "migration/publish/captions.py::def long_track"
      ],
-     "reason": "the .srt rows of story v3 (coverage, cue length, chars, words) have no writer or check yet: the acted long has no build; the build that writes the .srt must check them before the render (left open, stated)"
+     "residual": "whether the words read well on screen (YouTube draws them); the track's form, words and timing are measured (E126)"
     }
    },
    "audio_clarity_and_mix": {
@@ -2292,15 +2346,15 @@
      "residual": "none: the mix is measured (LUFS) and a talking clip's audio is our line (lipsync_check audio)"
     },
     "long": {
-     "class": "open",
+     "class": "render_qa",
      "checks": [
       "migration/production/qa_pilot.py::integrated_lufs",
       "migration/production/qa_pilot.py::true_peak_dbtp_max",
       "migration/production/qa_pilot.py::speech_presence_min",
-      "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST"
+      "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST",
+      "migration/production/qa_pilot.py::\"technical.integrated_lufs\": [\"integrated_lufs\"]"
      ],
-     "residual": "measured by the frozen QA on the render; estimated at plan time (SPEECH_PRESENCE_EST)",
-     "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+     "residual": "measured by the frozen QA on the render; estimated at plan time (SPEECH_PRESENCE_EST)"
     }
    },
    "pacing_and_visual_variety": {
@@ -2440,18 +2494,18 @@
   },
   "story_qa_v3": {
    "technical.full_decode_without_errors": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::full_decode_without_errors"
+     "migration/production/qa_pilot.py::\"technical.full_decode_without_errors\": [\"full_decode_without_errors\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "technical.video": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::frame"
+     "migration/production/qa_pilot.py::\"technical.video\": [\"video_format\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "technical.duration_seconds_min": {
     "class": "plan",
@@ -2460,26 +2514,26 @@
     ]
    },
    "technical.integrated_lufs": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::integrated_lufs"
+     "migration/production/qa_pilot.py::\"technical.integrated_lufs\": [\"integrated_lufs\"]"
     ],
     "residual": "the mix normalises to it (loudnorm)",
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "technical.true_peak_dbtp_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::true_peak_dbtp_max"
+     "migration/production/qa_pilot.py::\"technical.true_peak_dbtp_max\": [\"true_peak\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "technical.frame": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::frame"
+     "migration/production/qa_pilot.py::\"technical.frame\": [\"video_format\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "speech.speech_presence_min": {
     "class": "plan",
@@ -2488,20 +2542,20 @@
     ]
    },
    "speech.singing_presence_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::singing_presence_max"
+     "migration/production/qa_pilot.py::\"speech.singing_presence_max\": [\"no_singing\"]"
     ],
     "residual": "no singing voice is ever made (Kokoro speech only)",
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "speech.wer_vs_script_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::wer_vs_script_max"
+     "migration/production/qa_pilot.py::\"speech.wer_vs_script_max\": [\"wer_vs_script\"]"
     ],
     "residual": "the voice is the script's own words (pilot_render voice)",
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "speech.accepted_words_per_minute": {
     "class": "plan",
@@ -2522,25 +2576,25 @@
     ]
    },
    "rights.every_image_generated_by_allowed_open_licence_model_with_revision": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::allowed_model_licences"
+     "migration/production/qa_pilot.py::\"rights.every_image_generated_by_allowed_open_licence_model_with_revision\": [\"images_open_licence_with_revision\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "rights.allowed_model_licences": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::allowed_model_licences"
+     "migration/production/qa_pilot.py::\"rights.allowed_model_licences\": [\"images_open_licence_with_revision\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "rights.music_owned_generator_with_hash": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::music_owned"
+     "migration/production/qa_pilot.py::\"rights.music_owned_generator_with_hash\": [\"music_owned\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "rights.voice_model_hash_pinned": {
     "class": "build_gate",
@@ -2597,12 +2651,12 @@
     ]
    },
    "grammar.every_scene_in_motion": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::every_scene_in_motion"
+     "migration/production/qa_pilot.py::\"grammar.every_scene_in_motion\": [\"every_scene_in_motion\"]"
     ],
     "residual": "every shot is a Pavo clip (motion by construction)",
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.scene_seconds": {
     "class": "plan",
@@ -2612,18 +2666,18 @@
     ]
    },
    "grammar.crossfade_seconds_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::crossfade_seconds_max"
+     "migration/production/qa_pilot.py::\"grammar.crossfade_seconds_max\": [\"crossfade_seconds_max\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.image_repeat_gap_seconds_min": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::image_repeat_gap_seconds_min"
+     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.burned_captions": {
     "class": "plan",
@@ -2632,64 +2686,94 @@
     ]
    },
    "grammar.caption_track": {
-    "class": "open",
-    "checks": [],
-    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::\"grammar.caption_track\": [\"caption_track\"]",
+     "migration/publish/captions.py::def long_track",
+     "migration/publish/captions.py::def track_record",
+     "migration/publish/publish_video.py::captions.track_srt(sentences, track)"
+    ],
+    "residual": "E126: the SRT is built from the voice timeline by captions.py (`captions.py long`, cues <= 7 words and <= 44 characters by construction, the script's words exact) and is the one publish_video uploads (captions.manifest_srt); the long's build (LONG_DESIGN slice 3) writes it and records caption_track before the render",
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.srt_coverage_of_speech_min": {
-    "class": "open",
-    "checks": [],
-    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::\"grammar.srt_coverage_of_speech_min\": [\"srt_coverage_of_speech\"]",
+     "migration/publish/captions.py::def long_track",
+     "migration/publish/captions.py::def track_record",
+     "migration/publish/publish_video.py::captions.track_srt(sentences, track)"
+    ],
+    "residual": "E126: the SRT is built from the voice timeline by captions.py (`captions.py long`, cues <= 7 words and <= 44 characters by construction, the script's words exact) and is the one publish_video uploads (captions.manifest_srt); the long's build (LONG_DESIGN slice 3) writes it and records caption_track before the render",
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.srt_cue_seconds_median": {
-    "class": "open",
-    "checks": [],
-    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::\"grammar.srt_cue_seconds_median\": [\"srt_cue_seconds_median\"]",
+     "migration/publish/captions.py::def long_track",
+     "migration/publish/captions.py::def track_record",
+     "migration/publish/publish_video.py::captions.track_srt(sentences, track)"
+    ],
+    "residual": "E126: the SRT is built from the voice timeline by captions.py (`captions.py long`, cues <= 7 words and <= 44 characters by construction, the script's words exact) and is the one publish_video uploads (captions.manifest_srt); the long's build (LONG_DESIGN slice 3) writes it and records caption_track before the render",
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.srt_cue_chars_max": {
-    "class": "open",
-    "checks": [],
-    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::\"grammar.srt_cue_chars_max\": [\"srt_cue_chars_max\"]",
+     "migration/publish/captions.py::def long_track",
+     "migration/publish/captions.py::def track_record",
+     "migration/publish/publish_video.py::captions.track_srt(sentences, track)"
+    ],
+    "residual": "E126: the SRT is built from the voice timeline by captions.py (`captions.py long`, cues <= 7 words and <= 44 characters by construction, the script's words exact) and is the one publish_video uploads (captions.manifest_srt); the long's build (LONG_DESIGN slice 3) writes it and records caption_track before the render",
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.srt_cue_words_max": {
-    "class": "open",
-    "checks": [],
-    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::\"grammar.srt_cue_words_max\": [\"srt_cue_words_max\"]",
+     "migration/publish/captions.py::def long_track",
+     "migration/publish/captions.py::def track_record",
+     "migration/publish/publish_video.py::captions.track_srt(sentences, track)"
+    ],
+    "residual": "E126: the SRT is built from the voice timeline by captions.py (`captions.py long`, cues <= 7 words and <= 44 characters by construction, the script's words exact) and is the one publish_video uploads (captions.manifest_srt); the long's build (LONG_DESIGN slice 3) writes it and records caption_track before the render",
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.scripture_card_only_while_read": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::scripture_card_only_while_read"
+     "migration/production/qa_pilot.py::\"grammar.scripture_card_only_while_read\": [\"scripture_card_only_while_read\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.cta_mid_video_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::cta_mid_video_max"
+     "migration/production/qa_pilot.py::\"grammar.cta_mid_video_max\": [\"cta_count\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.cta_seconds_max": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::cta_seconds_max"
+     "migration/production/qa_pilot.py::\"grammar.cta_seconds_max\": [\"cta_short_and_not_early\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.cta_first_start_seconds_min": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::cta_first_start_seconds_min"
+     "migration/production/qa_pilot.py::\"grammar.cta_first_start_seconds_min\": [\"cta_short_and_not_early\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.persistent_overlays_allowed": {
-    "class": "open",
+    "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::persistent_overlays_allowed"
+     "migration/production/qa_pilot.py::\"grammar.persistent_overlays_allowed\": [\"persistent_overlays_only_brand\"]"
     ],
-    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
    "grammar.ai_video_picture_share_max": {
     "class": "plan",

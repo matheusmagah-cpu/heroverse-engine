@@ -211,23 +211,31 @@ Everything else is v2's, unchanged: audio, loudness, pace, the 4-7 s holds, the 
 Claude review. v2 is v1 with the burned captions replaced by an .srt track. v1 and v2 stay frozen and byte-identical,
 and a test asserts all three.
 
-**Build blocker: v3 cannot be measured yet.** v2 and v3 rename keys that the readers index directly:
-- `qa_pilot.py` reads `caption_coverage_of_speech_min`, `caption_hold_seconds_median`, `caption_chars_max`,
-  `caption_words_max` and `caption_box`; v2 replaced them with the `srt_*` rows.
-- It also reads `title_card_seconds`, `footage_picture_share_min` and `ai_video_picture_share_max` (0.55); v3
-  replaced them with `first_shot`, `figures_allowed`, `ai_video_picture_share_max` 1.0 and `ai_video_clip_checks`.
-- `prepublish_gate.py` knows only `story-qa-criteria-v1`: its hash, its file and its review dimensions.
-- `render_queue.py` pins only v1's hash.
-
-A render measured against v3 today would fail with a KeyError, or fall back to the wrong grammar. No long can be
-rendered, measured or approved until slice 3 teaches these readers v3's keys. A test (`test_long_plan_check.py`
-NoRendererReadsTheNewQaYet) fails any change that points a renderer, gate or workflow at v2 or v3 before
-`qa_pilot.py` reads `srt_coverage_of_speech_min`, `figures_allowed` and `first_shot`, and before `prepublish_gate.py`
-knows `story-qa-criteria-v3`. This PR does not wire them.
+**v3's readers (E126, 2026-10-27).** v2 and v3 renamed keys that the readers indexed directly, so until E126 no
+long could be measured or approved. Now:
+- `qa_pilot.py` reads v3 by its own rows: `STORY_V3_ROWS` maps every row of technical, speech, rights and grammar to
+  the checks that measure it (`grammar_checks_story_v3`: the acted cold open, approved figures with the Keeper only in
+  his beats, every Pavo clip's clip_check / lipsync_check / face_check, AI share up to 1.0, no footage minimum, no
+  burned captions, the .srt rows). A check whose evidence is missing is UNKNOWN, never a pass. The older pilots keep
+  their frozen criteria and grammar.
+- `prepublish_gate.py` pins v3's hash and file and adds one item per v3 row (PASS / FAIL / UNKNOWN); `render_queue.py`
+  pins v3.
+- The .srt track: `captions.py long <compose-timeline.json> <out>/captions.srt` writes it from the voice timeline
+  (cues of at most 7 words and 44 characters, the sentence's words unchanged, timed inside its voice span) and prints
+  the `caption_track` record the manifest carries. `captions.manifest_srt` is the one track publish_video uploads
+  (YouTube captions, never burned in), preflight checks and qa_pilot measures against the script words, the voice
+  timeline and the words heard. A v3 long without its recorded track is refused (CAPTIONS_TRACK_MISSING).
+- The render manifest the long's build writes (slice 3) carries, beside v4's fields: `holds[].beat`,
+  `holds[].characters`, `holds[].shot_kind`; `sentences[].speaker` on spoken lines; per clip `source`, `licence`,
+  `model`, `upscaler`, `audio`, `vetting`, `credit`, `sha256`, `clip_check`, `talking`, `lipsync_check`,
+  `voiceover`, `face_check`; `burned_captions: false`; `caption_track`.
+- Antidote: `test_qa_pilot.py` fails when a frozen QA a plan check reads is not pinned, with the same hash, by
+  prepublish_gate and render_queue and read by qa_pilot.
 
 ## 4. What is still open, or not resolved here (no gate loosened)
 
-0. **v3's readers** (the build blocker above). Slice 3 has to come first.
+0. **v3's readers**: done (E126, above). The long's build (slice 3) still has to write the manifest fields and the
+   `caption_track` listed there.
 
 1. **Cutting.** The QA's 4-7 s holds replace the Shorts' 2-4 s, so the long cuts slower and its talking lines are
    sized to fit them (section 3). Settled by the frozen QA; noted here because it differs from the Shorts.

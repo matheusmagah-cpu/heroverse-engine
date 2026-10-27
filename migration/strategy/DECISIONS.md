@@ -533,16 +533,13 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   three things: v3 has no footage-share row, its AI share is 1.0 with both clip checks, and the arc-01 plan raises no
   QA_CONFLICT_REAL_FOOTAGE or QA_CONFLICT_AI_SHARE.
 - **Still open for the arc-01 long (rework audit, fix 3; not fixed here).**
-  - `qa_pilot.py` and `prepublish_gate.py` still read the story v1 keys. `qa_pilot` still requires
-    `footage_picture_share_min` 0.4. The v3 reader is slice 3, and its rows must not bring back a footage minimum.
-  - Nothing writes or checks the .srt track.
-  - 23 `refusal_registry.json` review rows for `long` are `open`.
-  - Fixed by E127 (claude/long-preflight, 27/10): the long's preflight refuses while those rows are open
-    (LONG_REVIEW_OPEN), and the long has the Shorts' risk order, resume (`probe-queue`) and approved-shot contract
-    (LONG_DESIGN.md section 7).
+  - Done (E126): `qa_pilot.py` and `prepublish_gate.py` read story QA v3 by its own rows, with no footage minimum;
+    `captions.py long` writes the .srt track, qa_pilot checks it and publish_video uploads it; the 23 open
+    `refusal_registry.json` story_qa_v3 rows are `render_qa`.
+  - Done (E127): the long's preflight refuses while any review row is open (LONG_REVIEW_OPEN), and the long has the
+    Shorts' risk order, resume (`probe-queue`) and approved-shot contract (LONG_DESIGN.md section 7).
   - The preview gate has not run on the real opening.
-  - SERIES.md should point its long paragraph only to LONG_DESIGN.md. The old footage lines are now marked as
-    superseded but not yet removed.
+  - Done (E126): SERIES.md points its long paragraph only to LONG_DESIGN.md; the old footage lines are removed.
 - **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
 
 ## Owner decision: the repository stays public; optimise the long for wall-clock time (2026-10-26)
