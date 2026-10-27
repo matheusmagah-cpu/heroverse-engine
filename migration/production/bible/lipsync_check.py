@@ -5,17 +5,23 @@
 Two measures, both on the delivered file:
   audio   - the clip's soundtrack against the narration WAV we sent: RMS envelopes (40 ms hops) cross-correlated;
             the clip must carry our line (correlation >= AUDIO_CORR_MIN) with no offset (|lag| <= LAG_MAX_MS).
-  mouth   - the lip opening (inner-lip landmarks 13/14 over the face height, MediaPipe Face Landmarker, model pinned
-            by sha256) against the clip's own speech envelope: the lips open with the voice (correlation >=
-            MOUTH_CORR_MIN at a lag within +-LAG_MAX_MS), open wider while speaking than in pauses, and the face is
-            found in most frames. (An OpenCV Haar mouth-motion measure was tried first: the hood and beard hid the
-            face in 70 % of the frames, so it could not judge.)
+  mouth   - SyncNet (syncnet.py: Chung & Zisserman, the LSE-C / LSE-D measure of the Wav2Lip, LatentSync and
+            MuseTalk papers; public syncnet_v2.model pinned by syncnet.SYNCNET_SHA256, CPU, numpy) on the face crop
+            (box from the MediaPipe Face Landmarker, model pinned by MODEL_SHA256) against the clip's own soundtrack:
+            the AV offset within +-SYNC_OFFSET_MAX frames at 25 fps and the confidence >= SYNC_CONF_MIN, and the face
+            found in most frames (E120). The lip-opening correlation of the first version (inner-lip landmarks 13/14
+            over the face height against the speech envelope) is still reported (corr, lag_ms, speak_to_pause) but no
+            longer judges: on the labelled set of real speakers (evidence/lipsync-calibration/20261027) it could not
+            separate a mouth's own audio from audio shifted 300-500 ms or another speaker's (E119). (An OpenCV Haar
+            mouth-motion measure was tried before that: the hood and beard hid the face in 70 % of the frames.)
 Calibration 2026-10-26 (evidence/pavo/20261026/keeper): our Kokoro line sent as Pavo input audio came back with
 audio corr 0.89 at 0 ms and lips corr 0.52 at 0 ms, open 1.98x more while speaking; a clip with Pavo's own voice
 had lips at 208 ms (out of sync) and audio corr 0.14 against our line.
 A clip that fails is not composed; it is regenerated (PROMPT_GUIDE "Built for 9.5").
 
-usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task   prints one JSON line; exit 1 on any failure
+usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task [SYNCNET.model]
+                                                 prints one JSON line; exit 1 on any failure (SyncNet weights default
+                                                 to syncnet_v2.model next to the face model)
        lipsync_check.py --faces CLIP.mp4 FACE_LANDMARKER.task    God's voice-over shot: sampled frames, any face found
                                                                   flags GOD_SHOT_FACE (exit 1)
        lipsync_check.py --still-mouth CLIP.mp4 FACE_LANDMARKER.task
@@ -26,6 +32,7 @@ usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task   prints one JSON
 (model: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
 """
 import json
+from pathlib import Path
 import subprocess
 import sys
 
@@ -33,7 +40,7 @@ import numpy as np
 
 HOP_S = 0.04
 AUDIO_CORR_MIN = 0.85
-MOUTH_CORR_MIN = 0.45
+MOUTH_CORR_MIN = 0.45      # E119: reported only, no longer a gate (it cannot separate real speech from shifted audio)
 SPEAK_TO_PAUSE_MIN = 1.5
 FACE_FRAMES_MIN = 0.8
 LAG_MAX_MS = 84            # two frames at 24 fps
@@ -59,6 +66,14 @@ STILL_MOUTH_WINDOW_S = 1.0
 STILL_MOUTH_WINDOW_MOTION_MAX = 0.0063
 STILL_MOUTH_SETTLE_S = 2.5
 STILL_MOUTH_CLOSED_MAX = 0.013
+# E120 SyncNet sync gate (syncnet.py), calibrated 2026-10-27 on the labelled set of real speakers
+# (evidence/lipsync-calibration/20261027/syncnet-calibration.json, replayed by test_lipsync_check): the 34 positives
+# read offset -2..-1 frames, except the two sources whose own soundtrack sits +3 and -5 frames away on every one of
+# their segments; a shift of +-300/+-500 ms moves the offset by 7-8/12-13 frames (133 of 136 within half a frame);
+# another speaker's audio reads confidence 0.47-2.60. Within +-2 frames the highest negative confidence is 1.66 (a
+# swap) and the lowest positive 3.75: SYNC_CONF_MIN sits in the middle, 1.05 from each.
+SYNC_OFFSET_MAX = 2
+SYNC_CONF_MIN = 2.7
 MODEL_SHA256 = "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
 
 
@@ -241,6 +256,86 @@ def still_mouth(clip, model):
     return dict({"clip": clip}, **still_mouth_verdict(opening, share, fps))
 
 
+def _syncnet():
+    """syncnet.py next to this file (the checks run with python -I, which leaves the script's folder off sys.path)."""
+    if "syncnet" not in sys.modules:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("syncnet", Path(__file__).resolve().with_name("syncnet.py"))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["syncnet"] = module
+        spec.loader.exec_module(module)
+    return sys.modules["syncnet"]
+
+
+def frames25(clip):
+    """The clip's frames at syncnet.FPS (ffmpeg fps filter), BGR, one at a time."""
+    syncnet = _syncnet()
+    size = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                           "-of", "csv=p=0", clip], capture_output=True, text=True, check=True).stdout
+    w, h = (int(v) for v in size.strip().splitlines()[0].split(",")[:2])
+    proc = subprocess.Popen(["ffmpeg", "-nostdin", "-v", "error", "-i", clip, "-an", "-vf", f"fps={syncnet.FPS}",
+                             "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], stdout=subprocess.PIPE)
+    try:
+        while True:
+            raw = proc.stdout.read(w * h * 3)
+            if len(raw) < w * h * 3:
+                break
+            yield np.frombuffer(raw, np.uint8).reshape(h, w, 3)
+    finally:
+        proc.stdout.close()
+        proc.wait()
+
+
+def face_track(clip, model):
+    """One pass of the pinned landmarker over the 25 fps frames: the lip opening (as lip_opening) and the face box
+    (x0, y0, x1, y1 of all landmarks, NaN where no face) per frame."""
+    import mediapipe as mp
+    from mediapipe.tasks.python import vision
+    syncnet = _syncnet()
+    lm = landmarker(model, vision.RunningMode.VIDEO)
+    opening, boxes = [], []
+    for i, frame in enumerate(frames25(clip)):
+        h, w = frame.shape[:2]
+        image = mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(frame[:, :, ::-1]))
+        found = lm.detect_for_video(image, int(i * 1000 / syncnet.FPS)).face_landmarks
+        if found:
+            p = found[0]
+            opening.append(abs(p[14].y - p[13].y) / max(abs(p[152].y - p[10].y), 1e-6))
+            xs, ys = [q.x * w for q in p], [q.y * h for q in p]
+            boxes.append([min(xs), min(ys), max(xs), max(ys)])
+        else:
+            opening.append(np.nan)
+            boxes.append([np.nan] * 4)
+    lm.close()
+    return np.array(opening), np.array(boxes, dtype=float).reshape(-1, 4)
+
+
+def syncnet_path(face_model, given=None):
+    return Path(given) if given else Path(face_model).with_name("syncnet_v2.model")
+
+
+def sync_measure(clip, boxes, weights_path):
+    """SyncNet AV offset (frames at 25 fps), confidence (LSE-C) and min distance (LSE-D) of the clip's face crop
+    against its own soundtrack; None when no frame has a face or the clip is too short."""
+    syncnet = _syncnet()
+    weights = syncnet.load(weights_path)
+    track = syncnet.crop_boxes(boxes)
+    if track is None:
+        return None
+    crops = np.stack([syncnet.crop(f, *track[i]) for i, f in enumerate(frames25(clip)) if i < len(track)])
+    samples, rate = pcm(clip)
+    lip, aud = syncnet.embed(weights, crops, samples * 32768.0, rate)
+    result = syncnet.measure(syncnet.distances(lip, aud))
+    return dict(result, windows=len(lip)) if result else None
+
+
+def sync_verdict(sync):
+    """E120: the sync gate on SyncNet, calibrated on the labelled set (evidence/lipsync-calibration/20261027,
+    syncnet-calibration.json): in sync when the offset is within SYNC_OFFSET_MAX frames and the confidence is at
+    least SYNC_CONF_MIN; nothing measured is never in sync."""
+    return (sync is None or abs(sync["offset"]) > SYNC_OFFSET_MAX or sync["conf"] < SYNC_CONF_MIN)
+
+
 def verdict(audio, mouth):
     flags = []
     if audio["corr"] < AUDIO_CORR_MIN:
@@ -249,18 +344,21 @@ def verdict(audio, mouth):
         flags.append("AUDIO_OFFSET")
     if mouth["face_frames"] < FACE_FRAMES_MIN:
         flags.append("FACE_NOT_FOUND")
-    if mouth["corr"] < MOUTH_CORR_MIN or abs(mouth["lag_ms"]) > LAG_MAX_MS:
+    if sync_verdict(mouth.get("sync")):
         flags.append("MOUTH_NOT_IN_SYNC")
-    if mouth["speak_to_pause"] < SPEAK_TO_PAUSE_MIN:
-        flags.append("MOUTH_OPEN_IN_PAUSES")
     return flags
 
 
-def check(clip, line, model):
+def check(clip, line, model, weights=None):
+    weights = syncnet_path(model, weights)
+    if not weights.exists():
+        raise SystemExit(f"SYNCNET_MODEL_MISSING {weights}")
     audio, clip_env = audio_match(clip, line)
-    opening, fps, share = lip_opening(clip, model)
-    corr, lag, ratio = mouth_sync(opening, fps, clip_env)
-    mouth = {"corr": corr, "lag_ms": lag, "speak_to_pause": ratio, "face_frames": round(share, 2)}
+    opening, boxes = face_track(clip, model)
+    share = float((~np.isnan(opening)).mean()) if len(opening) else 0.0
+    corr, lag, ratio = mouth_sync(opening, 25.0, clip_env)
+    mouth = {"corr": corr, "lag_ms": lag, "speak_to_pause": ratio, "face_frames": round(share, 2),
+             "sync": sync_measure(clip, boxes, weights)}
     return {"clip": clip, "line": line, "audio": audio, "mouth": mouth, "flags": verdict(audio, mouth)}
 
 
@@ -273,8 +371,8 @@ if __name__ == "__main__":
         result = faces(sys.argv[2], sys.argv[3])
         print(json.dumps(result))
         sys.exit(1 if result["flags"] else 0)
-    if len(sys.argv) != 4:
+    if len(sys.argv) not in (4, 5) or sys.argv[1].startswith("--"):
         raise SystemExit(__doc__)
-    result = check(sys.argv[1], sys.argv[2], sys.argv[3])
+    result = check(*sys.argv[1:])
     print(json.dumps(result))
     sys.exit(1 if result["flags"] else 0)

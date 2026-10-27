@@ -75,7 +75,7 @@ jobs:
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/probe-$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only
           echo "OUT=$RUNNER_TEMP/out" >> "$GITHUB_ENV"
-      - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256)
+      - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
         run: |
           timeout 300s sudo apt-get update -qq
           timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
@@ -86,8 +86,16 @@ jobs:
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
           sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          # E120: the sync gate is SyncNet (CPU, numpy, no torch); its public weights sit next to the face model
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
+          sha=$(python3 -I -c "import re,sys;print(re.search(r'SYNCNET_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/syncnet.py)
+          echo "$sha  $RUNNER_TEMP/syncnet_v2.model" | sha256sum -c -
           # the lips check must work before any Pavo generation is spent (E89): the calibration clip must pass
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
+          # E120: and the same clip with its audio 400 ms late must be flagged MOUTH_NOT_IN_SYNC (the gate can see a shift)
+          ffmpeg -nostdin -v error -y -i migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 -af adelay=400:all=1 -c:v copy -shortest "$RUNNER_TEMP/late.mp4"
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py "$RUNNER_TEMP/late.mp4" migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/late.json" || true
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if 'MOUTH_NOT_IN_SYNC' in r['flags'] else 'SYNC_CHECK_BLIND')" "$RUNNER_TEMP/late.json"
           # and the face check of God's voice-over shots must see the Keeper's face in the same clip
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
           python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"

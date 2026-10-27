@@ -57,7 +57,7 @@ SHEET_IMAGES = len(ch.REF_ORDER)   # a character's reference sheet: front, three
 WORK_ROOT = REPO / ".episode"   # the only place preflight creates or removes a work directory
 # the code a report vouches for: a change to any of them can change what the build refuses
 CODE = [HERE / "episode_build.py", HERE / "plan_check.py", HERE / "voice_pace.py", HERE / "lipsync_check.py",
-        HERE / "episode_preflight.py"]
+        HERE / "syncnet.py", HERE / "episode_preflight.py"]
 
 
 def sha256(path):

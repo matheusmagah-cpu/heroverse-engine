@@ -1072,6 +1072,29 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E120",
+   "date": "2026-10-27",
+   "class": [
+    "instrument",
+    "threshold"
+   ],
+   "prior": [
+    "E104",
+    "E111",
+    "E119"
+   ],
+   "error": "lipsync_check judged lip sync with an instrument that cannot measure it: the inner-lip opening correlated with the speech envelope. On the labelled set of real speakers (E119) no rule built from its correlation, lag and speak-to-pause ratio separated a mouth's own audio from the same picture with audio shifted 300-500 ms or another speaker's (best rule 75-86 % true positives with 21-26 % false positives; with no false positive, 0-5 %). Every MuseTalk and LatentSync verdict on the Keeper rested on it.",
+   "fix": "The sync gate is now SyncNet (Chung & Zisserman; the LSE-C / LSE-D measure of the Wav2Lip, LatentSync and MuseTalk papers): production/bible/syncnet.py runs the public syncnet_v2.model (pinned by SYNCNET_SHA256, read without torch by a restricted unpickler) in numpy on CPU, on the syncnet_python face crop with the box from our pinned MediaPipe landmarker; lipsync_check flags MOUTH_NOT_IN_SYNC unless |offset| <= 2 frames at 25 fps and confidence >= 2.7 (the lip-opening measures are still reported, MOUTH_OPEN_IN_PAUSES is gone). Calibrated on the same labelled set (evidence/lipsync-calibration/20261027/syncnet-calibration.json): 0 of 170 negatives pass; positives 14/14 clean-shaven and 14/20 bearded (the 6 misses are two sources whose own soundtrack is +3 and -5 frames off on every segment); within +-2 frames the highest negative confidence is 1.66 and the lowest positive 3.75, margin 1.05 each side; a 300/500 ms shift moves the offset by the shift within half a frame in 133 of 136 cases. episode.yml and shot-probe.yml download and sha-check the weights and refuse to start (SYNC_CHECK_BLIND) unless the Pavo calibration clip passes and the same clip with its audio 400 ms late is flagged. Re-score with no generation (syncnet-keeper-rescore.json): 20 of 32 Keeper outputs pass, all 3 LatentSync among them; the still-mouth check of plan B is unchanged and still passes the genesis-08 voice-over clips.",
+   "antidote": {
+    "file": "migration/production/bible/test_lipsync_check.py",
+    "contains": "def test_the_sync_gate_separates_the_labelled_set_with_no_false_positive",
+    "covers": [
+     "instrument",
+     "threshold"
+    ]
+   }
   }
  ]
 }

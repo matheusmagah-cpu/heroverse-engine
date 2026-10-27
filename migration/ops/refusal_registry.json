@@ -879,10 +879,6 @@
    "class": "C",
    "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
-  "MOUTH_OPEN_IN_PAUSES": {
-   "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
-  },
   "MOUTH_TALKING": {
    "class": "C",
    "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
@@ -1673,6 +1669,26 @@
     "migration/production/bible/episode_build.py::def frame_refusal("
    ],
    "note": "Image first (owner, 27/10): an approved still whose image is not the one approved; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "SYNCNET_MODEL_FORBIDDEN": {
+   "class": "I",
+   "guard": "migration/production/bible/test_lipsync_check.py::def test_a_weights_file_cannot_run_code"
+  },
+  "SYNCNET_MODEL_HASH_MISMATCH": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::syncnet_v2.model\" | sha256sum -c"
+  },
+  "SYNCNET_MODEL_MISSING": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::E120: the sync gate is SyncNet"
+  },
+  "SYNCNET_SHA256": {
+   "class": "N",
+   "why": "E120: the name of the pinned SyncNet weights hash read by the workflows (like MODEL_SHA256), not a refusal"
+  },
+  "SYNC_CHECK_BLIND": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::SYNC_CHECK_BLIND"
   },
   "TALK_LINE_RETIME_OVER": {
    "class": "C",
