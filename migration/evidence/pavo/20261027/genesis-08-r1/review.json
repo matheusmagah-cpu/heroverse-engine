@@ -1,0 +1,30 @@
+{
+ "version": "frame-review-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-08-short",
+ "run": 40438106839,
+ "evidence_branch": "claude/episode-genesis-08-short-40438106839",
+ "composed": {
+  "release_tag": "v0.0.0-cloud-assets-20261025",
+  "release_asset": "bible-genesis-08-short-sha256-40e902e4c1333abd11fa929ab95a53253a25c782572920de60ef2fc80e9e3739.mp4",
+  "sha256": "40e902e4c1333abd11fa929ab95a53253a25c782572920de60ef2fc80e9e3739",
+  "seconds": 175.06,
+  "how": "downloaded from the release's public download URL; frames of every timeline segment (report-40438106839.json composed.timeline) tiled into sheets and close-ups, looked at by Claude (the orchestrator) at the 9.5 floor"
+ },
+ "floor": 9.5,
+ "rejected": {
+  "s-watchers": {"at": "14.1-17.9 s", "seen": "two separate giant curved rib arcs facing each other like a sculpture or gateway, a road running between them; not one hull under construction", "prompt_cause": "'the first tall curved wooden ribs of a long hull standing upright': ribs with no hull to join them"},
+  "s-ridge": {"at": "29.5-34.4 s", "seen": "a hull with a tall spiked prow or mast, seen bow-on against the sunset: a Viking longship", "prompt_cause": "'a huge wooden frame' with no shape, silhouetted against the sky"},
+  "s-dust": {"at": "34.4-39.4 s", "seen": "a modern steamship with a smoking funnel on the horizon (anachronism)", "prompt_cause": "'the distant hull' with no shape"},
+  "s-jeer": {"at": "56.2-59.7 s", "seen": "an ornate ship with a curled dragon-like prow and tent roofs on deck: a longship or galleon", "prompt_cause": "'the towering hull' with no shape"},
+  "s-scorn": {"at": "65.0-70.4 s", "seen": "a tall wooden platform with a man standing in it, against the sun: reads as a gallows", "prompt_cause": "'shouts up at the scaffold': a lone scaffold with no hull"},
+  "s-board": {"at": "134.3-143.0 s", "seen": "the hull reads as a round vat or tower with a chimney-like post", "prompt_cause": "'high on the side of the hull' with no shape; 'the torches below burned out to smoke'"},
+  "s-silent": {"at": "149.0-154.0 s", "seen": "the ark on a hilltop with smoke rising from it: reads as a smoking steamship", "prompt_cause": "'looking up at the ark' with no shape; 'drifting smoke'"}
+ },
+ "accepted_residual": [
+  "The hull's shape varies between shots.",
+  "s-finished: a small mast or flag on the ark."
+ ],
+ "passed": "every other shot of the run",
+ "fix": "the seven prompts reworded in migration/production/bible/plans/genesis-08-short.json (one ark description: a long, low, box-shaped wooden hull; no scaffold alone in frame; no smoke in the light line), each probed with direct 0-credit Pavo clips (probes.json here) before `episode.yml -f resume_run=40438106839 -f regenerate=<the seven ids>`"
+}

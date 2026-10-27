@@ -1,0 +1,246 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-08-short",
+ "plan": "migration/production/bible/plans/genesis-08-short.json",
+ "purpose": "E108, before genesis-08's resume of run 40438106839: the seven scene prompts whose clips the frame review rejected (review.json here) reworded with one ark description (a long, low, box-shaped wooden hull; no scaffold alone in frame; no smoke in the light line) and probed as the build sends them, each frame sheet checked for the rejected cause, anachronisms, writing, extra limbs, faces on anonymous figures and the period",
+ "how": "Direct calls from a Claude session through the heroverse-pavo MCP tools, with no Actions run. Every pavo_generate_video came right after its own pavo_quote_video (9:16, text only, sound false, the plan's seconds), which read required_credits 0.0, zero_cost_confirmed true and is_estimate false. Every submission but one answered 'submitted'; s-scorn 8 answered 'unknown' and was checked with pavo_job (running, then completed), never resubmitted. Two jobs ended 'failed' at Pavo with no video (s-ridge 2, s-silent 1); each next generation was a new submission at its own fresh quote. Each job was then polled with pavo_job. Clips were downloaded to the session scratchpad only and are not committed. Each probe-<shot>-<n>.jpg holds 6 frames of one clip, tiled 3x2, and Claude looked at every sheet.",
+ "credits": 0,
+ "period": {
+  "setting": "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain.",
+  "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+ },
+ "probes": [
+  {
+   "shot": "s-watchers",
+   "n": 1,
+   "conversation_id": "373343863089924736",
+   "seconds": 6,
+   "sheet": "probe-s-watchers-1.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "One continuous long, low hull seen side-on, planked sides topped by a row of upright ribs, ladders and lashed poles; crowd seen from behind with arms raised, goat-hair tents, fires and torches. No gateway arcs, no road, no writing, no anachronism. The current prompt.",
+   "prompt_sha256": "4e0bcd51714662592612f88a5f30adb5bb2d2565a0f5735fc588dde6cea00385"
+  },
+  {
+   "shot": "s-ridge",
+   "n": 1,
+   "conversation_id": "373343913907657280",
+   "seconds": 6,
+   "sheet": "probe-s-ridge-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "Onlookers from behind on the ridge, tents and fires, but against the orange sky the hull came out with tall curled ends: the longship profile again. Reworded: seen from high above at an angle, flat square ends the same height as the sides, light raking across the valley floor instead of a sky behind the hull."
+  },
+  {
+   "shot": "s-ridge",
+   "n": 2,
+   "conversation_id": "373345615830923968",
+   "seconds": 6,
+   "verdict": "failed",
+   "current_prompt": true,
+   "note": "Pavo answered 'submitted'; pavo_job then read 'failed' with no video. No clip, nothing to judge; the next generation was a new submission at a fresh 0-credit quote.",
+   "prompt_sha256": "139ebd3699558f89873c521e08992654fa75de9eee8141411baa0aa4acf05746"
+  },
+  {
+   "shot": "s-ridge",
+   "n": 3,
+   "conversation_id": "373348442976339456",
+   "seconds": 6,
+   "sheet": "probe-s-ridge-3.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "From high above: a long, low, box-shaped half-built hull with flat square ends and open deck beams, onlookers in silhouette from behind on the ridge, goat-hair tents with fires. No prow, mast or smoke from the hull. The current prompt.",
+   "prompt_sha256": "139ebd3699558f89873c521e08992654fa75de9eee8141411baa0aa4acf05746"
+  },
+  {
+   "shot": "s-dust",
+   "n": 1,
+   "conversation_id": "373343959797468224",
+   "seconds": 6,
+   "sheet": "probe-s-dust-1.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The man seen from behind (a sliver of his bearded cheek, no face) throws the dust toward a long, low wooden hull with upright ribs along its top, far off beyond the goat-hair tents and torches. No funnel, no smoke from the hull, no anachronism. The current prompt.",
+   "prompt_sha256": "de7e992b4980082792c121085a64084021ada60824b634fd27a2e2a7ab5c1aea"
+  },
+  {
+   "shot": "s-jeer",
+   "n": 1,
+   "conversation_id": "373344007139178240",
+   "seconds": 6,
+   "sheet": "probe-s-jeer-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "The hull came out as a curved bow overhead with blocks along its rim, and the man bowing in the background turned his laughing face to the lens. Reworded: the flat, straight side of the hull, the two others beside him also seen from behind."
+  },
+  {
+   "shot": "s-jeer",
+   "n": 2,
+   "conversation_id": "373345667390935296",
+   "seconds": 6,
+   "sheet": "probe-s-jeer-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A plain planked hull side rising over the mocker, who points up seen from behind; the two others beside him bow, seen from behind (one turns briefly to a three-quarter profile, face in shadow). Goat-hair tents and torches. No ornate prow, no tent roofs on deck. The current prompt.",
+   "prompt_sha256": "838c315a5613ab4ce5f883ac3f1c0b936b8811809cc89377a11673ae6df2704b"
+  },
+  {
+   "shot": "s-scorn",
+   "n": 1,
+   "conversation_id": "373344056728435392",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "No gallows platform any more, but the hull silhouetted against the sun had a tall post at each end, one reading as a chimney in the dust: a steamship look. Reworded."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 2,
+   "conversation_id": "373345790380511488",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-2.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "'fills the whole top of the frame' drew the hull as a flat plank ceiling over the camera; it does not read as a hull. Reworded."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 3,
+   "conversation_id": "373347823389055552",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-3.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "At dusk the hull silhouetted on the horizon came out with curled longship ends. Reworded: no backlight."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 4,
+   "conversation_id": "373350204063954688",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-4.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "From high above: a tapered rowboat-scale hull with a stem post. Reworded."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 5,
+   "conversation_id": "373351535306083392",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-5.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A rowboat with curled ends in hard side light. Reworded."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 6,
+   "conversation_id": "373351597486651136",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-6.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A crowd pressing toward the hull turned it bow-on, with a tall stem post. Reworded: the crowd stands along its side, the side across the whole width of the frame."
+  },
+  {
+   "shot": "s-scorn",
+   "n": 7,
+   "conversation_id": "373352821112500288",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-7.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A huge box-shaped planked hull seen side-on with a flat square end, the crowd seen from behind with fists and staffs raised in hard afternoon light, goat-hair tents and torches. No platform, prow, mast or smoke. The current prompt.",
+   "prompt_sha256": "8ecdcb486035b2fa6b262bcfe84af17fd12323e57b47f3c4698320400ee1f999"
+  },
+  {
+   "shot": "s-scorn",
+   "n": 8,
+   "conversation_id": "373352881824468032",
+   "seconds": 6,
+   "sheet": "probe-s-scorn-8.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "pavo_generate_video answered 'unknown'; pavo_job showed the job running and then completed, so it was not resubmitted. A long, straight, box-shaped planked hull with open deck beams, the crowd from behind with arms raised; a short square post at its far end (small, no smoke): left for the frame review. The current prompt.",
+   "prompt_sha256": "8ecdcb486035b2fa6b262bcfe84af17fd12323e57b47f3c4698320400ee1f999"
+  },
+  {
+   "shot": "s-board",
+   "n": 1,
+   "conversation_id": "373344114240199232",
+   "seconds": 8,
+   "sheet": "probe-s-board-1.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "A box-shaped hull with a deckhouse and the four men on the roof, but a tall stem post at one end reads as a chimney, the very cause of the rejection. Reworded: flat square ends no higher than the roof."
+  },
+  {
+   "shot": "s-board",
+   "n": 2,
+   "conversation_id": "373346775488269376",
+   "seconds": 8,
+   "sheet": "probe-s-board-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "A long, low, box-shaped hull with a flat plank roof, the four men in silhouette carrying the last plank on the roof at grey dawn, the camp of goat-hair tents below. No post, chimney, prow or smoke from the hull. Residual: the plain box reads close to a long timber building; the frame review keeps an eye on it. The current prompt.",
+   "prompt_sha256": "2631a214a5ba85123cc8d2757c2f7e3b7e78636f39f0bd47d9e708c0092e8699"
+  },
+  {
+   "shot": "s-board",
+   "n": 3,
+   "conversation_id": "373348557258037824",
+   "seconds": 8,
+   "sheet": "probe-s-board-3.jpg",
+   "verdict": "reject",
+   "current_prompt": false,
+   "note": "Adding 'resting on timber blocks' and 'smeared pitch-black' drew curled longship ends and a red waterline. The wording of s-board 2 was restored as the plan's."
+  },
+  {
+   "shot": "s-silent",
+   "n": 1,
+   "conversation_id": "373344164119375936",
+   "seconds": 6,
+   "verdict": "failed",
+   "current_prompt": true,
+   "note": "Pavo answered 'submitted'; pavo_job then read 'failed' with no video. No clip; a new submission at a fresh 0-credit quote followed.",
+   "prompt_sha256": "a55447837347eaf90133a0403d46dc5f65d6198acffb9c025dbe8c5a1f43e6cf"
+  },
+  {
+   "shot": "s-silent",
+   "n": 2,
+   "conversation_id": "373347710260790784",
+   "seconds": 6,
+   "sheet": "probe-s-silent-2.jpg",
+   "verdict": "pass",
+   "current_prompt": true,
+   "note": "The crowd from behind at the foot of the hill (torches still lit), the finished ark on the hilltop: a long, low, pitch-black hull with a plank roof and slightly raised ends. No smoke from the ark, no funnel, mast or chimney; the only smoke is a campfire's in the foreground. The current prompt.",
+   "prompt_sha256": "a55447837347eaf90133a0403d46dc5f65d6198acffb9c025dbe8c5a1f43e6cf"
+  }
+ ],
+ "final_prompts_sha256": {
+  "s-watchers": "4e0bcd51714662592612f88a5f30adb5bb2d2565a0f5735fc588dde6cea00385",
+  "s-ridge": "139ebd3699558f89873c521e08992654fa75de9eee8141411baa0aa4acf05746",
+  "s-dust": "de7e992b4980082792c121085a64084021ada60824b634fd27a2e2a7ab5c1aea",
+  "s-jeer": "838c315a5613ab4ce5f883ac3f1c0b936b8811809cc89377a11673ae6df2704b",
+  "s-scorn": "8ecdcb486035b2fa6b262bcfe84af17fd12323e57b47f3c4698320400ee1f999",
+  "s-board": "2631a214a5ba85123cc8d2757c2f7e3b7e78636f39f0bd47d9e708c0092e8699",
+  "s-silent": "a55447837347eaf90133a0403d46dc5f65d6198acffb9c025dbe8c5a1f43e6cf"
+ },
+ "probed_settings": "Each of the seven rejected shots probed with its own reworded prompt until a passing clip; none of the other 25 prompts changed.",
+ "findings": [
+  "Any hull silhouetted against a bright sky (dusk, sunset, backlight) came out with curled or spiked longship ends or tall posts (s-ridge 1, s-scorn 1 and 3): the passing wordings light the hull from the side or show it from above.",
+  "A crowd pressing toward the hull turned it bow-on with a stem post (s-scorn 6); standing along its side with the side 'stretching across the whole width of the frame' kept it side-on and box-shaped (s-scorn 7, 8).",
+  "'flat square ends no higher than the roof' removed the chimney-like end post (s-board 1 to 2); adding 'pitch-black' and 'timber blocks' brought the curled ends back (s-board 3).",
+  "A clear description of the finished ark (long, low, box-shaped, flat plank roof, pitch-black) and no smoke in the light line removed the smoking-steamship reading (s-silent 2).",
+  "No probe showed writing or extra limbs; anonymous figures were seen from behind (one brief three-quarter profile in s-jeer 2)."
+ ],
+ "residual_for_frame_review": [
+  "s-board: the plain box hull reads close to a long timber building.",
+  "s-scorn: a short square post at the far end of the hull in one of two passing clips.",
+  "s-silent: the torches are still lit rather than burnt out.",
+  "The hull's shape still varies between shots (box hull under construction, black ark with a plank roof)."
+ ]
+}

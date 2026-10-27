@@ -1,7 +1,7 @@
 {
  "plan": "migration/production/bible/plans/genesis-08-short.json",
  "episode": "genesis-08-short",
- "checked_at": "2026-10-27T02:16:32Z",
+ "checked_at": "2026-10-27T06:15:56Z",
  "plan_check": {
   "problems": [],
   "pending": [],
@@ -57,9 +57,9 @@
     2.71,
     3.04,
     2.49,
-    2.81,
+    2.82,
     3.12,
-    2.39,
+    2.41,
     3.07,
     2.52,
     2.05,
@@ -70,7 +70,7 @@
    ]
   },
   "measured": {
-   "total": 175.129,
+   "total": 175.065,
    "keeper_share": 0.11,
    "lesson_share": 0.114,
    "retimed": {}
@@ -142,7 +142,7 @@
   "run_chance_all_talking_shots": 0.999
  },
  "binding": {
-  "plan": "8807c577c39c502579255f15f3389862ea5989c3d7db92b28acfde35e41db2fe",
+  "plan": "c481d770bdb4d2187bbd541c35e9481986b53acaf429dbb32d9381c4ed3f04cc",
   "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
   "image_records": {
    "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
