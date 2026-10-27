@@ -17,6 +17,7 @@ from urllib.parse import urlsplit
 from client import MAX_BYTES, ORIGIN, PavoClient, PavoError, number
 import audio
 import images
+from quota import VIDEO_UNITS
 
 MODEL = "agnes-video-new-flash"
 STREAM_SECONDS = 30
@@ -61,6 +62,13 @@ def shown(value):
 
 
 class PavoVideoClient(PavoClient):
+    def __init__(self, token=None, opener=None, guard=None):
+        """guard: a quota.QuotaGuard, the one free-model budget of every Pavo generation (E124 images, E128 videos: a
+        Flash video makes an Agnes still inside its conversation and spends the same quota). server.py and
+        episode_build.py's shot-probe always pass one."""
+        super().__init__(token, opener)
+        self._guard = guard
+
     def status(self):
         result = super().status()
         result.update(generation_enabled=self._valid_token(),
@@ -297,6 +305,8 @@ class PavoVideoClient(PavoClient):
                        audios=None, sound=False):
         prompt = self.prepare_video(prompt, seconds, aspect_ratio)["brief"]["prompt"]
         mode, inputs, sounds = self._plan(first_frame, last_frame, references, audios, sound)
+        if self._guard is not None:   # E128: the shared free-model budget, before the quote (nothing is sent)
+            self._guard.before_generate(VIDEO_UNITS)
         quote = self._quote(seconds, aspect_ratio, mode, len(inputs), sounds, sound)
         if not quote["zero_cost_confirmed"]:
             # The quoted price is not account data; nothing was uploaded or created.
@@ -313,6 +323,8 @@ class PavoVideoClient(PavoClient):
         if not isinstance(data, dict):
             raise PavoError("PAVO_CONVERSATION_SCHEMA_CHANGED")
         job = conversation_id(data.get("conversation_id"))
+        if self._guard is not None:
+            self._guard.submitted(job, VIDEO_UNITS)
         result = {"conversation_id": job, "model": MODEL, "mode": mode, "input_images": len(inputs),
                   "input_audios": len(sounds), "sound": sound, "quoted_credits": 0, "retry_submission": False, "published": False}
         try:
@@ -329,6 +341,8 @@ class PavoVideoClient(PavoClient):
 
     def job(self, job):
         job, running, status, videos, turns = self._history(job, MODEL, VIDEO_PATH)
+        if self._guard is not None:   # E128: a failed video read-back is a quota stop signal too
+            self._guard.read_back(job, status, videos)
         return {"conversation_id": job, "running": running, "status": status, "videos": videos,
                 "turn_count": turns, "published": False,
                 "conversation_url": "https://app.pavo-ai.work/chat?conversationId=" + job}

@@ -14,7 +14,9 @@ sys.path.insert(0, str(HERE))
 from client import ORIGIN, PavoError
 from image_gen import IMAGE_MODEL, IMAGE_RATIOS, PavoImageClient
 import images
-from quota import COOL_DOWN, DAILY_CAP, FAILED_STREAK, LEDGER, QuotaGuard
+from quota import (COOL_DOWN, DAILY_CAP, FAILED_STREAK, IMAGE_UNITS, LEDGER, NO_ACTIONS, VIDEO_UNITS, QuotaGuard,
+                   combine, git_actions_usage, probe_record_path, record_usage)
+from video import MODEL as VIDEO_MODEL
 from test_video import Responses, envelope, quote, started
 
 CDN = "https://cos-aigc-default.agnes-ai.space/pixa/ugc_image/x/still.png"
@@ -298,10 +300,154 @@ class FreeQuota(unittest.TestCase):
 
     def test_the_server_wires_the_guard_and_the_readme_warns_the_quote_is_not_the_quota(self):
         src = (HERE / "server.py").read_text()
-        self.assertIn("PavoImageClient(guard=QuotaGuard())", src)
+        self.assertIn("PavoImageClient(guard=QuotaGuard(actions=git_actions_usage))", src)   # E128: Actions too
         self.assertIn("A 0 quote does not mean the free quota is available", (HERE / "README.md").read_text())
         self.assertEqual(QuotaGuard().path, LEDGER)
         self.assertEqual((FAILED_STREAK, COOL_DOWN), (2, timedelta(hours=3)))
+
+
+def video_failed():
+    return envelope({"is_running": False, "turns": [{"assistant": [{"type": "GenerationFailed", "data": {}}]}]})
+
+
+def probe_record(outcomes):
+    """A shot-probe record shaped like run 40592173923's: {shot: clips: [{generations: [...]}]}; OUTCOMES is
+    [(shot, conversation id, got a video)] in any order (the record lists shots in risk order, not by time)."""
+    shots = {}
+    for shot, cid, ok in outcomes:
+        clips = shots.setdefault(shot, {"clips": [{"round": 1, "generations": []}]})["clips"]
+        clips[0]["generations"].append({"conversation_id": cid, "submission": "submitted",
+                                        "flags": [] if ok else ["NO_VIDEO"]})
+    return {"episode": "arc-01-long", "shots": shots}
+
+
+class SharedBudget(unittest.TestCase):
+    """E128 (2026-10-27 ~22:40 UTC): a Flash video job makes an Agnes Image 2.5 Flash still inside its conversation
+    (the owner's app: "Painterly cinematic image of the Garden of Eden at dawn ... wide 16:9", shot-probe run
+    40592173923), so videos spend the free-model quota E124 counted for MCP stills only. That run read back 3 clips and
+    then 24 submissions in a row failed with no video. One budget now counts every generation, image and video, MCP
+    and Actions, and two failed video read-backs stop generation like two failed stills."""
+    token = "synthetic-offline-pavo-credential"
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.ledger = Path(self.tmp.name) / "image-ledger.json"
+        self.t = datetime(2026, 10, 27, 22, 0, tzinfo=timezone.utc)
+        self.actions = dict(NO_ACTIONS)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def guard(self, cap=None):
+        return QuotaGuard(self.ledger, cap=cap, now=lambda: self.t, actions=lambda day: self.actions)
+
+    def video(self, *responses, cap=None):
+        return PavoImageClient(self.token, Responses(*responses), guard=self.guard(cap))
+
+    def submit_video(self, cid="901", cap=None):
+        return self.video(quote(), envelope({"conversation_id": cid}), started(VIDEO_MODEL),
+                          cap=cap).generate_video("Mist drifts through a garden at dawn.", 8, "16:9")
+
+    def submit_image(self, cid="777", cap=None):
+        return self.video(quote(), envelope({"conversation_id": cid}), started(IMAGE_MODEL),
+                          cap=cap).generate_image("A dry plain at dusk.")
+
+    def test_a_video_spends_the_same_budget_as_a_still_and_is_refused_before_any_request(self):
+        self.assertEqual(self.submit_image(cap=5)["status"], "submitted")              # 1 unit
+        self.assertEqual(self.submit_video(cap=5)["status"], "submitted")              # 2 units
+        self.assertEqual(self.submit_video("902", cap=5)["status"], "submitted")       # 2 units: 5 of 5
+        for make in (lambda c: c.generate_video("Mist at dawn.", 8, "16:9"), lambda c: c.generate_image("A plain.")):
+            fake = Responses()
+            with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
+                make(PavoImageClient(self.token, fake, guard=self.guard(cap=5)))
+            self.assertEqual(fake.calls, [])                                           # nothing sent, not even a quote
+        self.assertEqual(json.loads(self.ledger.read_text())["days"]["2026-10-27"]["generated"], 5)
+        self.assertEqual((IMAGE_UNITS, VIDEO_UNITS), (1, 2))
+        fake = Responses()                                                             # 4 used, a video needs 2: no
+        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 4}}}))
+        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
+            PavoImageClient(self.token, fake, guard=self.guard(cap=5)).generate_video("Mist at dawn.", 8, "16:9")
+        self.assertEqual(fake.calls, [])
+
+    def test_two_failed_video_read_backs_stop_videos_and_stills(self):
+        for cid in ("373600417911467520", "373600509753560128"):
+            self.assertEqual(self.video(video_failed()).job(cid)["status"], "failed")
+        for make in (lambda c: c.generate_video("Mist at dawn.", 8, "16:9"), lambda c: c.generate_image("A plain.")):
+            fake = Responses()
+            with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+                make(PavoImageClient(self.token, fake, guard=self.guard()))
+            self.assertEqual(fake.calls, [])
+        self.t += timedelta(hours=3, minutes=1)                                       # one probe, then it must read back
+        probe = self.submit_video("903")["conversation_id"]
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.video().generate_image("A plain.")
+        done = envelope({"is_running": False, "turns": [{"assistant": [{"type": "GenerationSuccess", "data": {"data": {
+            "model_code": VIDEO_MODEL, "results": [{"url": "https://cos-aigc-default.agnes-ai.space/pavo/v/x.mp4"}]}}}]}]})
+        self.assertEqual(self.video(done).job(probe)["status"], "completed")
+        self.assertEqual(self.submit_image()["status"], "submitted")
+
+    def test_todays_shot_probe_runs_count_and_their_failed_tail_stops_generation(self):
+        self.actions = {"units": 119, "failed_tail": 0, "last_at": None}
+        self.assertEqual(self.submit_image()["status"], "submitted")                  # 119 + 1 = the cap
+        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
+            self.video().generate_image("A plain.")
+        self.ledger.unlink()
+        self.actions = {"units": 54, "failed_tail": 24, "last_at": (self.t - timedelta(hours=1)).isoformat()}
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.video().generate_video("Mist at dawn.", 8, "16:9")
+        self.t += timedelta(hours=2, minutes=1)                                       # the run's stop is 3 h old
+        self.assertEqual(self.submit_video()["status"], "submitted")
+
+    def test_a_batch_that_does_not_fit_the_day_is_refused_before_it_starts(self):
+        self.actions = {"units": 54, "failed_tail": 0, "last_at": None}
+        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 40}}}))
+        self.assertEqual(self.guard().check_batch(26), {"used": 94, "planned": 26, "cap": DAILY_CAP, "remaining": 0})
+        with self.assertRaisesRegex(PavoError, "PAVO_BUDGET_SHORT planned=27 used=94 cap=120"):
+            self.guard().check_batch(27)
+
+    def test_a_probe_record_counts_every_generation_and_its_failed_tail_in_submission_order(self):
+        # run 40592173923: 3 clips, then 24 failed; the record lists shots in risk order, the ids give the time
+        outcomes = [("g-c1-lights", "373595250617019904", True), ("g-c1-image", "373596512523709952", True),
+                    ("g-c2-command", "373597833729489600", True)]
+        outcomes += [("g-c4-serpent", str(373599328776227520 + k), False) for k in range(24)]
+        record = probe_record(list(reversed(outcomes)))
+        self.assertEqual(record_usage(record), (27 * VIDEO_UNITS, 24))
+        record = probe_record(outcomes + [("g-c4-dust", "373700000000000000", True)])
+        self.assertEqual(record_usage(record), (28 * VIDEO_UNITS, 0))
+        at = datetime(2026, 10, 27, 22, 41, tzinfo=timezone.utc)
+        self.assertEqual(combine([(at - timedelta(hours=9), probe_record(outcomes[:3])), (at, probe_record(outcomes))]),
+                         {"units": 30 * VIDEO_UNITS, "failed_tail": 24, "last_at": at.isoformat()})
+        self.assertEqual(probe_record_path("claude/shot-probe-arc-01-long-40592173923"),
+                         "migration/evidence/shots/arc-01-long/40592173923.json")
+        self.assertIsNone(probe_record_path("claude/stills-genesis-09-short-3"))
+
+    def test_the_local_guard_reads_todays_probe_records_from_the_origin_refs(self):
+        import os
+        import subprocess
+        repo = Path(self.tmp.name) / "repo"
+        env = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid", "GIT_COMMITTER_NAME": "t",
+               "GIT_COMMITTER_EMAIL": "t@example.invalid", "HOME": self.tmp.name, "PATH": os.environ["PATH"],
+               "GIT_CONFIG_NOSYSTEM": "1"}
+
+        def vcs(*args, date="2026-10-27T22:41:00+00:00"):
+            return subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True, text=True,
+                                  env=dict(env, GIT_COMMITTER_DATE=date, GIT_AUTHOR_DATE=date)).stdout.strip()
+        repo.mkdir()
+        vcs("init", "-q")
+        failed = [("g-c4-serpent", str(373599328776227520 + k), False) for k in range(3)]
+        for run, date in (("40592173923", "2026-10-27T22:41:00+00:00"),
+                          ("40400000000", "2026-10-26T10:00:00+00:00")):     # yesterday's run: not counted today
+            path = repo / "migration" / "evidence" / "shots" / "arc-01-long" / f"{run}.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(probe_record(failed)))
+            vcs("add", "-A")
+            vcs("commit", "-q", "-m", run, date=date)
+            vcs("update-ref", f"refs/remotes/origin/claude/shot-probe-arc-01-long-{run}", "HEAD")
+        usage = git_actions_usage("2026-10-27", repo=repo)
+        self.assertEqual((usage["units"], usage["failed_tail"]), (3 * VIDEO_UNITS, 3))
+        self.assertEqual(git_actions_usage("2026-10-25", repo=repo), NO_ACTIONS)
+        with self.assertRaisesRegex(PavoError, "PAVO_BUDGET_UNREADABLE"):
+            git_actions_usage("2026-10-27", repo=Path(self.tmp.name) / "not-a-repo")
 
 
 if __name__ == "__main__":

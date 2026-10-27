@@ -374,5 +374,35 @@ class Contract(unittest.TestCase):
                 self.assertNotIn("PAVO_TOKEN", text, w.name)
 
 
+class PavoBudgetQueue(Scratch):
+    """E128: probe-queue cut batches by minutes only; a batch could plan more Pavo generations than the free-model
+    quota left that day (run 40592173923 burned 24 submissions on a spent quota). Each batch now names its expected
+    units, none is larger than a day's cap, and the queue says whether the next one fits today's budget."""
+    def test_every_batch_names_its_units_and_fits_a_day(self):
+        import quota
+        q = lp.queue(self.plan, {}, {})
+        cap = quota.QuotaGuard(actions=None).cap()
+        for b in q["batches"]:
+            shots = [s for s in self.plan["shots"] if s["id"] in b["shots"].split(",")]
+            self.assertEqual(b["pavo_units_est"], lp.planned_units(shots, b["attempts"]))
+            self.assertLessEqual(b["pavo_units_est"], cap)
+        small = lp.queue(self.plan, {}, {}, max_units=10)
+        self.assertTrue(all(b["pavo_units_est"] <= 10 for b in small["batches"]), small["batches"])
+        self.assertEqual(sum(len(b["shots"].split(",")) for b in small["batches"]), q["to_probe"])
+
+    def test_the_queue_says_when_the_next_batch_does_not_fit_today(self):
+        import quota
+        from datetime import datetime, timezone
+        ledger = self.dir / "ledger.json"
+        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}}))
+        now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
+        guard = quota.QuotaGuard(ledger, now=lambda: now, actions=lambda day: quota.NO_ACTIONS)
+        got = lp.budget_today([{"pavo_units_est": 10}], guard)
+        self.assertEqual(got["next_batch"], "refused")
+        self.assertTrue(got["refusal"].startswith("PAVO_BUDGET_SHORT"), got)
+        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}}))
+        self.assertEqual(lp.budget_today([{"pavo_units_est": 10}], guard)["remaining"], 10)
+
+
 if __name__ == "__main__":
     unittest.main()

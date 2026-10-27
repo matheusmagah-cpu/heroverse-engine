@@ -1197,6 +1197,22 @@
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_BUDGET_SHORT": {
+   "class": "D",
+   "resume": "E128: the batch's expected free-model units (long_preflight.planned_units) do not fit what is left today of the shared Pavo budget (main's quota ledger + today's shot-probe records); nothing was generated. Split the batch (probe-queue cuts batches to a day's cap) or dispatch it after 00:00 UTC; clips already approved are kept"
+  },
+  "PAVO_BUDGET_UNKNOWN": {
+   "class": "I",
+   "guard": "migration/production/bible/test_episode_build.py::def test_the_run_ledger_is_seeded_from_the_guard_count_and_never_missing"
+  },
+  "PAVO_BUDGET_UNREADABLE": {
+   "class": "D",
+   "resume": "E128: today's shot-probe records could not be read (the local origin/claude/shot-probe-* refs for the MCP, the REST API in the dispatch guard); nothing was sent. Fetch those refs (or wait for the API), then generate again"
+  },
+  "PAVO_BUDGET_USED": {
+   "class": "N",
+   "why": "an environment variable name (the dispatch guard's count of today's free-model units, seeding shot-probe's run-local ledger), not a refusal"
+  },
   "PAVO_CONVERSATION_SCHEMA_CHANGED": {
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
@@ -1207,11 +1223,11 @@
   },
   "PAVO_DAILY_CAP": {
    "class": "D",
-   "resume": "E124: the day's free-image cap (quota.py, 120 a UTC day) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
+   "resume": "E124/E128: the day's free-model cap (quota.py, 120 units a UTC day: a still 1, a video 2, MCP and shot-probe alike) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
   },
   "PAVO_FREE_QUOTA_SUSPECTED": {
    "class": "D",
-   "resume": "E124: two failed read-backs in a row suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
+   "resume": "E124/E128: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
   },
   "PAVO_HISTORY_SCHEMA_CHANGED": {
    "class": "D",

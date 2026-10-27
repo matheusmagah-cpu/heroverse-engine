@@ -48,7 +48,10 @@ the episode record and dispatches publish-episode.yml.
                                                  fresh exact 0-credit quote, the build's checks, a failed clip a NEW
                                                  generation, at most 2 more, 5 for a talking clip) on the named shots;
                                                  each clean clip in OUT under its content-hash asset name with a frame
-                                                 sheet, OUT/probe.json
+                                                 sheet, OUT/probe.json. E128: env PAVO_BUDGET_USED (the dispatch
+                                                 guard's count of today's free-model units) seeds a run-local quota
+                                                 ledger; every generation is counted and two failed read-backs in a
+                                                 row stop the run (PAVO_FREE_QUOTA_SUSPECTED), as the cap does
   episode_build.py probe-assets OUT EP [RUN_ID DST]
                                                  shot-probe.yml's record job: each clip checked against its name and
                                                  sha256 (names printed); with RUN_ID DST, after the upload, the record
@@ -128,6 +131,49 @@ MEASURE_TOLERANCE = 0.1
 
 class ShotFailed(Exception):
     pass
+
+
+# E128: a refusal of the shared free-model budget (quota.py) stops the whole probe run: every later submission would
+# be refused the same way (or, without the guard, burned on a spent quota: run 40592173923, 24 failed in a row)
+BUDGET_STOPS = ("PAVO_DAILY_CAP", "PAVO_FREE_QUOTA_SUSPECTED", "PAVO_LEDGER_UNREADABLE", "PAVO_BUDGET_UNREADABLE")
+RUN_LEDGER = "pavo-ledger.json"
+
+
+def budget_stop(text):
+    """The budget code a probe's SHOT_FAILED / PAVO_REFUSED message carries, or None."""
+    return next((c for c in BUDGET_STOPS if c in str(text).split()), None)
+
+
+def seed_budget(work, used, main_ledger=None, now=None):
+    """E128, shot-probe.yml: the run-local quota ledger WORK/RUN_LEDGER, seeded with USED (the dispatch guard's units
+    of today: main's ledger + today's shot-probe records) and main's suspension, so this run's own generations and
+    failed read-backs count against the same budget. Returns its path (PAVO_IMAGE_LEDGER for the run)."""
+    from datetime import datetime, timezone
+    import quota
+    if not re.fullmatch(r"[0-9]{1,6}", str(used or "").strip()):
+        raise SystemExit(f"PAVO_BUDGET_UNKNOWN {used!r} (the dispatch guard's pavo_used output; never generate "
+                         "without it)")
+    base = quota.QuotaGuard(main_ledger or quota.LEDGER, actions=None)._load()   # fails closed if unreadable
+    day = (now or datetime.now(timezone.utc)).astimezone(timezone.utc).strftime("%Y-%m-%d")
+    seeded = {k: base[k] for k in ("version", "failed_streak", "failed_jobs", "jobs", "suspended_at",
+                                   "suspended_until", "probe")}
+    if base.get("daily_cap") is not None:
+        seeded["daily_cap"] = base["daily_cap"]
+    seeded["days"] = {day: {"generated": int(used), "note": "seeded by the dispatch guard (E128)"}}
+    path = Path(work) / RUN_LEDGER
+    path.parent.mkdir(parents=True, exist_ok=True)
+    save(path, seeded)
+    return path
+
+
+def budget_client():
+    """The Pavo client of a shot-probe run: always guarded by the run-local ledger (PAVO_IMAGE_LEDGER, seed_budget)."""
+    import quota
+    from video import PavoVideoClient
+    ledger = os.environ.get("PAVO_IMAGE_LEDGER", "")
+    if not ledger or not Path(ledger).is_file():
+        raise SystemExit("PAVO_BUDGET_UNKNOWN (no run-local quota ledger: episode_build.py probe seeds it)")
+    return PavoVideoClient(guard=quota.QuotaGuard(ledger, actions=None))
 
 
 # E127: the Bible-story long (bible-long-plan-v1, long_plan_check.py) goes through the same no-rework contract as a
@@ -1030,7 +1076,11 @@ def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
     generation, at most attempts - 1 times; then the run fails naming the shot. Returns (kept path, records)."""
     records = []
     for n in range(1, attempts + 1):
-        record, path = attempt(n)
+        try:
+            record, path = attempt(n)
+        except ShotFailed as exc:   # E128: a refusal mid-shot keeps the generations already spent in the report
+            exc.records = records
+            raise
         if path is not None:
             record["flags"], measures = check(path)
             if measures:
@@ -1216,8 +1266,7 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
         if bad:
             raise SystemExit("REQUESTS_REFUSED " + "; ".join(bad))
     if client is None:
-        from video import PavoVideoClient
-        client = PavoVideoClient()
+        client = budget_client()   # E128: the shared free-model budget, never an unguarded client
     if download is None:
         import pavo_footage
         download = pavo_footage.download
@@ -1344,6 +1393,11 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
                 failed = load(work / f"probe-{sid}-{n}.json")["shots"].get(sid, {})
                 entry["clips"].append({"round": n, "error": str(exc), "generations": failed.get("attempts", [])})
                 save(out / "probe.json", record)
+                stop = budget_stop(exc)
+                if stop:   # E128: the budget is spent or a quota stop is suspected: no other shot may submit
+                    record["stopped"] = str(exc)
+                    save(out / "probe.json", record)
+                    raise SystemExit(f"{stop} probe stopped at {sid} round {n}: {exc}")
                 continue
             built = report["shots"][sid]
             path = work / "clips" / built["clip"]
@@ -1727,9 +1781,18 @@ def main(argv):
         if not os.environ.get("PAVO_TOKEN"):
             raise SystemExit("PAVO_CREDENTIAL_REQUIRED")
         ids, n = probe_ids(plan, os.environ.get("SHOTS", ""), os.environ.get("ATTEMPTS", ""))
-        record = probe_step(plan, argv[3], argv[4], argv[5], argv[6], ids, n)
-        record["plan_sha256"] = sha256(argv[2])
-        save(Path(argv[6]) / "probe.json", record)
+        used = os.environ.get("PAVO_BUDGET_USED", "")
+        ledger = seed_budget(argv[3], used)   # E128: before any generation; refused without the guard's count
+        os.environ["PAVO_IMAGE_LEDGER"] = str(ledger)
+        try:
+            record = probe_step(plan, argv[3], argv[4], argv[5], argv[6], ids, n)
+        finally:
+            out = Path(argv[6]) / "probe.json"
+            if out.is_file():
+                rec = load(out)
+                spent = sum(d.get("generated", 0) for d in load(ledger)["days"].values()) - int(used)
+                rec.update(plan_sha256=sha256(argv[2]), pavo_budget={"units_before": int(used), "units_this_run": spent})
+                save(out, rec)
     elif cmd == "adopt" and len(argv) == 8:       # E114: ADOPT PLAN RUN_DIR LIP FACE OUT SOURCE_RUN (env SHOTS)
         ids, _ = probe_ids(plan, os.environ.get("SHOTS", ""), 1)
         if not re.fullmatch(r"[0-9]{6,20}", argv[7]):
