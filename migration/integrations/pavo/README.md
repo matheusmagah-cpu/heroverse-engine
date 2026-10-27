@@ -144,7 +144,10 @@ charged). 31 submissions of run 2026102705 were spent on nothing. The adapter no
 - `PAVO_DAILY_CAP`: at most 120 images a UTC day (env `PAVO_IMAGE_DAILY_CAP`, or `daily_cap` in the ledger), counted
   for every submission that created a conversation, refused before the quote (nothing is sent).
 - `PAVO_FREE_QUOTA_SUSPECTED`: two read-backs in a row that end `failed` with no image (each job once) suspend
-  generation for 3 hours; then one probe may go: a failed read-back suspends again at once, a completed one lifts it.
+  generation for 3 hours; then exactly one probe may go, and every other call is refused until that probe reads back:
+  failed suspends again at once, completed lifts it. Only a job submitted after the suspension began can lift it.
+- `PAVO_LEDGER_UNREADABLE`: a ledger that cannot be read (merge-conflict markers, a naive or garbage time, a
+  non-integer count) fails closed; fix it by PR. A missing ledger is a fresh one.
 - The ledger is `migration/evidence/pavo/image-ledger.json` (env `PAVO_IMAGE_LEDGER`): day counts, the failed streak,
   recent failed conversation ids and `suspended_until`; no credential or URL. Commit it with the run's evidence.
 - Read back every job before submitting many more: a `failed` read-back is a stop signal, not noise.

@@ -217,12 +217,14 @@ class FreeQuota(unittest.TestCase):
         with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
             self.client().generate_image("A dry plain at dusk.")
         self.t += timedelta(minutes=2)                    # the cool-down passed: one probe may go
-        self.assertEqual(self.submit()["status"], "submitted")
-        self.client(failed_history()).image_job("13")     # the probe failed too: suspended again at once
+        probe = self.submit()["conversation_id"]
+        self.client(failed_history()).image_job(probe)    # the probe failed too: suspended again at once
         with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
             self.client().generate_image("A dry plain at dusk.")
-        ok = self.client(history([{"url": CDN, "width": 768, "height": 1344}])).image_job("10")
-        self.assertEqual(ok["status"], "completed")       # a job that completes lifts the suspension
+        self.t += timedelta(hours=3, minutes=1)
+        probe = self.submit()["conversation_id"]
+        ok = self.client(history([{"url": CDN, "width": 768, "height": 1344}])).image_job(probe)
+        self.assertEqual(ok["status"], "completed")       # the probe completed: the suspension is lifted
         self.assertEqual(self.submit()["status"], "submitted")
 
     def test_one_failure_alone_does_not_suspend(self):
@@ -230,6 +232,69 @@ class FreeQuota(unittest.TestCase):
         self.client(history([{"url": CDN}])).image_job("12")
         self.client(failed_history()).image_job("14")
         self.assertEqual(self.submit()["status"], "submitted")
+
+    def suspend(self):
+        for job in ("11", "12"):
+            self.client(failed_history()).image_job(job)
+
+    def test_after_the_cool_down_exactly_one_probe_goes_until_it_reads_back(self):
+        # review of #466: every submission went through once suspended_until had passed
+        self.suspend()
+        self.t += timedelta(hours=3, minutes=1)
+        probe = self.submit()
+        self.assertEqual(probe["status"], "submitted")
+        for _ in range(3):
+            with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+                self.client().generate_image("A dry plain at dusk.")
+        self.client(history([], running=True)).image_job(probe["conversation_id"])   # still running: no change
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.client().generate_image("A dry plain at dusk.")
+        self.client(history([{"url": CDN}])).image_job(probe["conversation_id"])     # the probe completed
+        self.assertEqual(self.submit()["status"], "submitted")
+        self.assertEqual(self.submit()["status"], "submitted")
+
+    def test_only_a_job_submitted_after_the_suspension_lifts_it(self):
+        old = self.submit()["conversation_id"]                                       # submitted before the stop
+        self.t += timedelta(minutes=1)
+        self.suspend()
+        self.client(history([{"url": CDN}])).image_job(old)                          # an older job completing
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.client().generate_image("A dry plain at dusk.")
+
+    def test_an_unreadable_ledger_fails_closed(self):
+        day = self.t.strftime("%Y-%m-%d")
+        for text in ("<<<<<<< HEAD\n{}\n=======\n{}\n>>>>>>> main\n", "[]", "{",
+                     json.dumps({"days": {}, "suspended_until": "garbage"}),
+                     json.dumps({"days": {}, "suspended_until": "2026-10-28T00:00:00"}),      # naive
+                     json.dumps({"days": {day: {"generated": "500"}}}),
+                     json.dumps({"days": {day: {"generated": -1}}}),
+                     json.dumps({"days": [], "failed_streak": 0}),
+                     json.dumps({"days": {}, "failed_streak": "2"})):
+            self.ledger.write_text(text)
+            fake = Responses()
+            with self.subTest(text=text), self.assertRaisesRegex(PavoError, "PAVO_LEDGER_UNREADABLE"):
+                PavoImageClient(self.token, fake, guard=self.guard()).generate_image("A dry plain at dusk.")
+            self.assertEqual(fake.calls, [])
+        self.ledger.unlink()                                                         # no ledger yet: a fresh day
+        self.assertEqual(self.submit()["status"], "submitted")
+
+    def test_the_env_cap_never_crashes_and_the_write_is_atomic_under_a_unique_name(self):
+        import os
+        saved = os.environ.get("PAVO_IMAGE_DAILY_CAP")
+        try:
+            for bad in ("\u00b2", "-3", "abc", "1e3", ""):
+                os.environ["PAVO_IMAGE_DAILY_CAP"] = bad
+                self.assertEqual(QuotaGuard(self.ledger).cap(), DAILY_CAP, bad)
+            os.environ["PAVO_IMAGE_DAILY_CAP"] = "7"
+            self.assertEqual(QuotaGuard(self.ledger).cap(), 7)
+        finally:
+            if saved is None:
+                os.environ.pop("PAVO_IMAGE_DAILY_CAP", None)
+            else:
+                os.environ["PAVO_IMAGE_DAILY_CAP"] = saved
+        src = (HERE / "quota.py").read_text()
+        self.assertNotIn('with_suffix(".tmp")', src)
+        self.assertIn("tempfile.mkstemp", src)
 
     def test_the_server_wires_the_guard_and_the_readme_warns_the_quote_is_not_the_quota(self):
         src = (HERE / "server.py").read_text()

@@ -1057,6 +1057,10 @@
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_LEDGER_UNREADABLE": {
+   "class": "D",
+   "resume": "E124: the image ledger (migration/evidence/pavo/image-ledger.json) cannot be read or holds malformed fields; nothing was sent. Fix it by PR (resolve a merge conflict, restore the time zone or counts), then generate the missing candidates; the ones already made are kept"
+  },
   "PAVO_MEDIA_URL_REFUSED": {
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
