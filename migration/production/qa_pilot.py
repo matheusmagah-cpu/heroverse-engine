@@ -252,6 +252,15 @@ def first_shot(criteria, manifest, first_word):
             and first_word is not None and first_word <= criteria["speech"]["first_word_onset_seconds_max"])
 
 
+def overlays_allowed(recorded, allowed):
+    """grammar.persistent_overlays_allowed (story v3): True when every recorded overlay is in the allowed list (an
+    empty list included), False on any other overlay or a value that is not a list, None (UNKNOWN) when the manifest
+    does not record its overlays."""
+    if recorded is None:
+        return None
+    return isinstance(recorded, list) and all(o in allowed for o in recorded)
+
+
 def ai_clip_checks(manifest, ai):
     """grammar.ai_video_clip_checks: every Pavo clip records clip_check PASS, every talking clip lipsync_check
     PASS, every God voice-over clip face_check PASS (lipsync_check --faces, no face). None when no clip is listed."""
@@ -308,7 +317,9 @@ def grammar_checks_story_v3(criteria, manifest, script=None, words=None, first_w
         "cta_count": len(cta) <= g["cta_mid_video_max"],
         "cta_short_and_not_early": all(c["end"] - c["start"] <= g["cta_seconds_max"]
                                        and c["start"] >= g["cta_first_start_seconds_min"] for c in cta),
-        "persistent_overlays_only_brand": manifest.get("persistent_overlays") == g["persistent_overlays_allowed"],
+        # v3's key is an allowed list: every overlay recorded must be in it ([] passes); not recorded is UNKNOWN
+        "persistent_overlays_only_brand": overlays_allowed(manifest.get("persistent_overlays"),
+                                                           g["persistent_overlays_allowed"]),
         "images_open_licence_with_revision": (bool(models) or all(h.get("kind") == "footage" for h in holds))
                                              and all(str(m.get("license")).lower() in allowed and m.get("revision")
                                                      for m in models),
