@@ -1,0 +1,421 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-27",
+ "episode": "genesis-09-short",
+ "run": "2026102705",
+ "what": "Scene stills of genesis-09 reworded to E123 (#465): 2 candidates per still planned (64), Pavo agnes-image hd 9:16, references only on the 17 stills that hold ARK_PHRASE.",
+ "outcome": "34 submitted in order, each right after its own pavo_quote_image (exact 0, is_estimate false) and each answered 'submitted' (none uncertain, none retried). Read back with pavo_image_job: 3 completed (s-voice-1, s-voice-2, s-laugh-1), 31 failed with status 'failed' and no images and no error text. The owner's Pavo app showed every failing generation as 'the free model quota has been used up ... try again in 3 hours', credits refunded. pavo_quote_image kept quoting required_credits 0.0, is_estimate false, zero_cost_confirmed true throughout: the quote does not see the free-generation quota. Generation was stopped after the 34th submission on the coordinator's order; 30 candidates were never submitted.",
+ "credits": 0,
+ "submitted": 34,
+ "completed": 3,
+ "jobs": [
+  {
+   "candidate": "genesis-09-s-voice-2026102705-1",
+   "conversation_id": "373492631261189824",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "completed"
+  },
+  {
+   "candidate": "genesis-09-s-voice-2026102705-2",
+   "conversation_id": "373492698000997056",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "completed"
+  },
+  {
+   "candidate": "genesis-09-s-laugh-2026102705-1",
+   "conversation_id": "373492790137253376",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "completed"
+  },
+  {
+   "candidate": "genesis-09-s-laugh-2026102705-2",
+   "conversation_id": "373492859393620672",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-finished-2026102705-1",
+   "conversation_id": "373492919749085248",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-finished-2026102705-2",
+   "conversation_id": "373492985691932736",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-sky-2026102705-1",
+   "conversation_id": "373493099634363456",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-sky-2026102705-2",
+   "conversation_id": "373493128776916736",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-lions-2026102705-1",
+   "conversation_id": "373493158099348992",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-lions-2026102705-2",
+   "conversation_id": "373493183806238208",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-pairs-2026102705-1",
+   "conversation_id": "373493376253460032",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-pairs-2026102705-2",
+   "conversation_id": "373493444876467776",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-birds-2026102705-1",
+   "conversation_id": "373493516715984960",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-birds-2026102705-2",
+   "conversation_id": "373493580302203584",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-shrug-2026102705-1",
+   "conversation_id": "373493651273973312",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-shrug-2026102705-2",
+   "conversation_id": "373493708819830464",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-music-2026102705-1",
+   "conversation_id": "373493906426074816",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-music-2026102705-2",
+   "conversation_id": "373493981503588416",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-enter-2026102705-1",
+   "conversation_id": "373494050877926912",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-enter-2026102705-2",
+   "conversation_id": "373494121153437440",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-wife-2026102705-1",
+   "conversation_id": "373494188513430144",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-wife-2026102705-2",
+   "conversation_id": "373494253781256896",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-shut-2026102705-1",
+   "conversation_id": "373494451945664000",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-shut-2026102705-2",
+   "conversation_id": "373494524900837440",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-latecomer-2026102705-1",
+   "conversation_id": "373494590940704256",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-latecomer-2026102705-2",
+   "conversation_id": "373494660032891520",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-deep-2026102705-1",
+   "conversation_id": "373494729713466048",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-deep-2026102705-2",
+   "conversation_id": "373494794360273600",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-windows-2026102705-1",
+   "conversation_id": "373494937582570112",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-windows-2026102705-2",
+   "conversation_id": "373494971259190848",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-springs-2026102705-1",
+   "conversation_id": "373495006155848384",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-springs-2026102705-2",
+   "conversation_id": "373495035095943808",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-tents-2026102705-1",
+   "conversation_id": "373495068046998208",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  },
+  {
+   "candidate": "genesis-09-s-tents-2026102705-2",
+   "conversation_id": "373495096538335296",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   },
+   "generate_status": "submitted",
+   "job_status": "failed"
+  }
+ ]
+}
