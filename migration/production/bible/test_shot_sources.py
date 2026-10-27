@@ -91,7 +91,10 @@ class Allocation(unittest.TestCase):
         p = plan()
         todo = [s for _, s in eb.risk_order(p["shots"])]
         self.assertEqual([s["id"] for s in todo][:2], ["s-eve", "s-god"])   # probe-queue's order: talking first
-        one = long_preflight.planned_units([p["shots"][0]])
+        # review of #476: the dispatch guard's worst-case bound, not the expected mean (which would let s-god, s-river
+        # and s-pair in too and stop the batch half-way)
+        one = long_preflight.planned_units([p["shots"][0]], worst=True)
+        self.assertGreater(one, long_preflight.planned_units(p["shots"][:3]))
         got = dict((s["id"], c) for s, c in ss.allocate(p, todo, one))
         self.assertEqual(got, {"s-eve": "pavo", "s-god": "WAIT_PAVO_BUDGET", "s-river": "fallback",
                                "s-pair": "WAIT_PAVO_BUDGET"})
