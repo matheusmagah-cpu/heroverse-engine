@@ -328,6 +328,7 @@
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py",
     "migration/production/bible/test_short_engine.py",
+    "migration/production/bible/test_thumbs.py",
     "migration/production/characters/test_characters.py",
     "migration/production/footage/test_assign.py",
     "migration/production/footage/test_footage.py",
@@ -1941,7 +1942,9 @@
     "migration/production/bible/long_plan_check.py",
     "migration/production/bible/scene_stills.py",
     "migration/production/bible/test_plan_check.py",
-    "migration/production/bible/test_scene_stills.py"
+    "migration/production/bible/test_scene_stills.py",
+    "migration/production/bible/test_thumbs.py",
+    "migration/production/bible/thumbs.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
    "is_test": false
@@ -2129,6 +2132,38 @@
    "imported_by": [],
    "test": null,
    "is_test": true
+  },
+  "migration/production/bible/test_thumbs.py": {
+   "purpose": "Offline: the character-first thumbnail (owner, 27/10) is refused unless its spec keeps the rules, and a publish",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/plan_check.py",
+    "migration/production/bible/thumbs.py",
+    "migration/publish/publish_episode.py",
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/bible/thumbs.py": {
+   "purpose": "Episode thumbnails, character first (owner, 27/10; evidence/vidiq/20261027/thumb-host.json, PR #458).",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/plan_check.py",
+    "migration/production/thumb_check.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/bible/test_thumbs.py",
+    "migration/publish/publish_episode.py",
+    "migration/publish/publish_video.py"
+   ],
+   "test": "migration/production/bible/test_thumbs.py",
+   "is_test": false
   },
   "migration/production/bible/voice_pace.py": {
    "purpose": "Kokoro pace by speaker, in words a second: the one table plan_check (Shorts) and long_plan_check (longs) time a",
@@ -2956,6 +2991,7 @@
     "render-smoke.yml"
    ],
    "imported_by": [
+    "migration/production/bible/thumbs.py",
     "migration/production/test_thumb_check.py"
    ],
    "test": "migration/production/test_thumb_check.py",
@@ -3089,7 +3125,8 @@
    "purpose": "Pre-upload checks of everything YouTube would reject or silently degrade, so a",
    "dir": "migration/publish",
    "local_imports": [
-    "migration/publish/captions.py"
+    "migration/publish/captions.py",
+    "migration/publish/publish_video.py"
    ],
    "called_by_workflows": [
     "approve.yml",
@@ -3159,6 +3196,7 @@
    "purpose": "Publish one Bible-series episode (owner, 2026-10-24: Bible stories from Genesis, one at a time; Shorts first).",
    "dir": "migration/publish",
    "local_imports": [
+    "migration/production/bible/thumbs.py",
     "migration/publish/publish_video.py"
    ],
    "called_by_workflows": [
@@ -3166,6 +3204,7 @@
    ],
    "imported_by": [
     "migration/production/bible/plan_check.py",
+    "migration/production/bible/test_thumbs.py",
     "migration/publish/arc_links.py",
     "migration/publish/test_publish_episode.py"
    ],
@@ -3196,6 +3235,7 @@
    "purpose": "Publish one rendered HeroVerse video to the exact channel.",
    "dir": "migration/publish",
    "local_imports": [
+    "migration/production/bible/thumbs.py",
     "migration/publish/captions.py",
     "migration/publish/owner_quality_policy.py"
    ],
@@ -3204,9 +3244,11 @@
    ],
    "imported_by": [
     "migration/channel/captions_audit.py",
+    "migration/production/bible/test_thumbs.py",
     "migration/publish/arc_links.py",
     "migration/publish/channel_config.py",
     "migration/publish/first_comment.py",
+    "migration/publish/preflight.py",
     "migration/publish/publish_episode.py",
     "migration/publish/publish_shorts.py",
     "migration/publish/refresh_description.py",

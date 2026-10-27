@@ -118,7 +118,9 @@ because the Cloudflare FLUX stills of genesis-08 fell below 9.5 (`evidence/shots
 - Live, 2026-10-27: 9:16 sd and hd quoted exactly 0 (`is_estimate: false`); six 9:16 hd stills of genesis-08 (s-dust,
   s-ridge, s-board, two each), each after its own fresh zero quote, came back as 1472x2624 JPEGs on the CDN
   (stills registry run `20261027`, `source: pavo-agnes-image-2.5-flash`, contact sheet
-  `production/bible/stills/sheets/genesis-08-short-20261027.jpg`). Text-only; references are offline-tested only.
+  `production/bible/stills/sheets/genesis-08-short-20261027.jpg`). Text-only. References live, 2026-10-27: one 9:16 hd thumbnail candidate of genesis-09 with Noah's two approved
+  references (quoted exactly 0 with 2 input images) kept his approved face; the text-only twin drew another man
+  (`evidence/thumbs/genesis-09-short-20261027.json`).
 
 ## Authorization
 

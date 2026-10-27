@@ -1095,6 +1095,23 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E121",
+   "date": "2026-10-27",
+   "class": "silent",
+   "prior": [
+    "E107"
+   ],
+   "error": "The character-first thumbnail gate (PR #460, before merge) failed open twice: a Bible long was recognised only by a package key `series: bible` that no package writer sets, so preflight and publish_video skipped it for pilot-015; and publish trusted the spec's own status/approved fields, so a spec edited to APPROVED (score 1, no note, a grey R16-failing image) or another episode's approved spec copied under a new name passed THUMB_NOT_APPROVED.",
+   "fix": "publish_video.bible_long also reads the pilot's script.json (archetype bible-story-long, the same rule prepublish_gate uses); preflight and publish_video pass the pilot dir. thumbs.publish_problems re-checks what approve checks: the spec is this episode's, score >= 9.5, a note, a recorded candidate of this episode whose sha256, spec digest and R16 PASS match the approval; the image is always bible/thumbs/<episode>.jpg and an episode name is never a path (THUMB_EPISODE_INVALID).",
+   "antidote": {
+    "file": "migration/production/bible/test_thumbs.py",
+    "contains": "def test_an_approval_written_by_hand_is_refused",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

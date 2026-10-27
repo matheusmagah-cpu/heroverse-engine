@@ -1714,6 +1714,203 @@
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
   },
+  "THUMB_BYTES": {
+   "class": "C",
+   "probe": "thumbs.py finalize measures the JPEG size of every candidate (YouTube takes 2 MB) before it is recorded"
+  },
+  "THUMB_CANDIDATE_NAME_REFUSED": {
+   "class": "N",
+   "why": "a malformed run or number given to thumbs.py finalize, a local review tool"
+  },
+  "THUMB_CANDIDATE_SHA256_MISMATCH": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command run by PR: the candidate's bytes are not the recorded ones"
+  },
+  "THUMB_CANDIDATE_UNKNOWN": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command: no such candidate"
+  },
+  "THUMB_CHARACTER_NOT_APPROVED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_CHARACTER_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_EMOTION_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_EPISODE_INVALID": {
+   "class": "N",
+   "why": "thumbs.py spec_path: an episode name that is a path (a programming error, never data the early stage produces); publish_problems refuses it as THUMB_NOT_APPROVED first"
+  },
+  "THUMB_FACE_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_FORMAT_INVALID": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_KEEPER_FACE": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_LOOK_CHANGED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_NOTE_MISSING": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command: the review note is required"
+  },
+  "THUMB_NOT_APPROVED": {
+   "class": "A",
+   "early": [
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+    "migration/publish/preflight.py::problems += publish_video.bible_thumb_problems(pkg, thumbnail, d)"
+   ],
+   "note": "Owner, 27/10: publish uploads only the approved thumbnail (spec APPROVED, unchanged since, image sha256 equal). A Short from part 9: episode_build.py check-record runs publish_episode.problems before publish-episode.yml; a Bible long (package series bible): publish/preflight.py in approve.yml and prepublish_gate, before publish.yml"
+  },
+  "THUMB_PROMPT_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_PROMPT_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_R16_FAIL": {
+   "class": "C",
+   "probe": "thumbs.py finalize measures R16 (thumb_check.py) on every candidate and the contact sheet shows it, before any review or approval"
+  },
+  "THUMB_REFERENCE_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/bible/thumbs.py::THUMB_REFERENCE_MISMATCH",
+   "note": "the reference images sent are the approved records' release assets, verified by sha256 before any upload"
+  },
+  "THUMB_SCENE_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_SCORE_BELOW_FLOOR": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command: the review scored under 9.5, so nothing is approved"
+  },
+  "THUMB_SHEET_EMPTY": {
+   "class": "N",
+   "why": "thumbs.py sheet, a local review tool: no candidate in that run"
+  },
+  "THUMB_SPEC_CHANGED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def digest(spec)",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)"
+   ],
+   "note": "approve refuses a candidate made from another spec; publish_problems (check-record) names a spec changed after approval"
+  },
+  "THUMB_SPEC_INVALID": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_SPEC_MISSING": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command: no spec for the episode"
+  },
+  "THUMB_SPEC_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_TEXT_IN_PROMPT": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_TEXT_NOT_STORY": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
+  "THUMB_TEXT_WORDS": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/thumbs.py::def spec_problems(",
+    "migration/publish/publish_episode.py::out = short_problems(episode) + thumb_problems(episode)",
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)"
+   ],
+   "note": "Owner, 27/10 (character-first thumbnail): the spec's own rule, by thumbs.spec_problems, refused by `thumbs.py check` before any candidate is generated, by finalize and approve, and in check-record (publish_episode.problems) before publish-episode.yml is dispatched"
+  },
   "TIKTOK_LEDGER_NOT_PUSHED": {
    "class": "D",
    "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"

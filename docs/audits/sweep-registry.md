@@ -15,6 +15,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `captions-e107` | PR #424: `channel-privacy.yml` captions-audit/captions-repair modes, `channel/captions_audit.py`, `publish/captions.py`, `publish_video.py` caption verification, `preflight.py`. Hardening H1 recorded (repair's `item["manifest"]` has no repository containment check). | 2026-10-26 | 0/5 security (none ≥ 8); 8 review fixes |
 | `refusal-parity-e106` | PR #422: `episode.yml` verify-preflight and still-mouth checks, `pr-checks.yml`, `bible/episode_preflight.py`, `episode_build.py`, `plan_check.py`, `publish/publish_episode.py`, hookify rules. Noted S2 (report binding) and S3 (episode id on `--write`), both fixed. | 2026-10-26 | 0/5 security (none ≥ 8); 10 review fixes |
 | `syncnet-e120` | PR #457: syncnet.py, lipsync_check.py, episode.yml and shot-probe.yml steps. Hardening H1 applied (`parse` made private, reached only after the hash check). | 2026-10-27 | 0/3 security (none ≥ 8) |
+| `thumb-character-first` | PR #460: thumbs.py, THUMB_NOT_APPROVED in publish_episode/publish_video/preflight, pr-checks.yml test path. Integrity S4-S7 fixed in the PR (E121). | 2026-10-27 | 0/9 security (none ≥ 8) |
 
 ## Proposed, not yet run
 

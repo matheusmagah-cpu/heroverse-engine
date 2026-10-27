@@ -248,8 +248,40 @@ def check_new_upload(manifest_path, manifest, video):
         raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
 
 
+def bible_long(package, pilot_dir=None):
+    """A Bible-series long: the package says `series` "bible", or the pilot's script.json is a bible-story-long (no
+    package writer sets `series`, so the script decides; only story longs publish since 2026-10-26)."""
+    if package.get("series") == "bible":
+        return True
+    try:
+        script = json.loads((Path(pilot_dir) / "script.json").read_text()) if pilot_dir is not None else None
+    except (FileNotFoundError, json.JSONDecodeError):
+        return False
+    return isinstance(script, dict) and script.get("archetype") == "bible-story-long"
+
+
+def bible_thumb_problems(package, thumbnail, pilot_dir=None):
+    """Owner, 27/10: a Bible-series long (bible_long) uploads only the thumbnail approved in
+    bible/thumbs/<thumb_episode>.json (the story character, reviewed before publish); the prayer pilots keep theirs.
+    Every reason is THUMB_NOT_APPROVED (or the spec's own code); preflight.check (approve.yml, prepublish_gate) runs
+    this before any upload."""
+    if not bible_long(package, pilot_dir):
+        return []
+    episode = package.get("thumb_episode")
+    if not isinstance(episode, str) or not episode:
+        return ["THUMB_NOT_APPROVED (a Bible long's package names its thumb_episode)"]
+    code = str(Path(__file__).resolve().parents[1] / "production" / "bible")
+    if code not in sys.path:
+        sys.path.insert(0, code)
+    import thumbs
+    return thumbs.publish_problems(episode, "long", thumbnail)
+
+
 def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_path, publish_at=None):
     package = json.loads(Path(package_path).read_text())
+    bad_thumb = bible_thumb_problems(package, thumbnail, Path(package_path).resolve().parent.parent)
+    if bad_thumb:
+        raise SystemExit("THUMB_NOT_APPROVED " + "; ".join(bad_thumb))
     manifest = json.loads(Path(manifest_path).read_text())
     ledger_path = Path(ledger_path)
     ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"version": "publish-ledger-v1", "entries": {}}

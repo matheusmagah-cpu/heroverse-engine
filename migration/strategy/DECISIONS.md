@@ -500,6 +500,24 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   serpent silent, God as a voice, the Keeper), no Cain or Abel for now. It passes `long_plan_check.py --strict`.
 - **Kind.** Rule decisions, not failures: no `ERRORS.json` entry.
 
+## Owner decision: thumbnails show the story character, approved before publish (2026-10-27)
+- **Owner.** The thumbnail shows the STORY CHARACTER (APPROVED in characters.json, by reference: the same look every
+  time), a close-up face with a clear emotion, text of at most 4 words, no Keeper/host face by default. Built for no
+  rework: the thumbnail is a candidate reviewed BEFORE publish, with the episode's stills, and the publish step only
+  uploads an approved thumbnail.
+- **Evidence (PR #458, `evidence/vidiq/20261027/thumb-host.json`).** Bible-story long winners (36 from 31 channels,
+  max 3/36): story-character face 30/36 vs weak 3/3, host face 2/36 (both church recordings), presenting gesture
+  3/36, arrow 0/36, the host formula 0/36. The host idea is NOT validated (`structures/bible-story-long.json`
+  package.not_validated.thumbnail_recurring_host); only our own A/B could test it, so the Keeper is allowed only as a
+  spec's `variant {ab: true, owner_approved: ...}`. Character face is hygiene (6/7 vs 3/3 in the package block), not a
+  validated driver; text <= 4 words is free (4/7 vs 1/3) and kept as the owner's rule.
+- **How.** `production/bible/thumbs.py` (spec, check, refs, finalize, sheet, approve, verify); refusals class A in
+  `ops/refusal_registry.json` (THUMB_*); `publish_episode.problems` from part 9 and `publish_video.bible_thumb_problems`
+  for a Bible long (both reached early by check-record and `publish/preflight.py`). Published parts 1-8 keep theirs.
+- **First candidates.** genesis-09-short run 20261027, 2 candidates, not approved
+  (`evidence/thumbs/genesis-09-short-20261027.json`).
+- **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
+
 ## Owner decision: Pavo freed in the long, no real-footage minimum (2026-10-27)
 - **Owner.** "Libera o pavo no longo." The Bible-story long may be 100 % Pavo AI video, with no real licensed footage.
   Every Pavo clip meets the same checks as in the Shorts: clip_check, lipsync_check where someone talks, the reviewed
