@@ -1,14 +1,14 @@
 {
   "additional_api_calls": 0,
   "brief": {
-    "path": "migration/evidence/daily-report/learning/briefs/d5a0ae37012a2250064b93e5fca096b40ccf2e8e6dcf855f6ccf9a941ac96e30.json",
-    "sha256": "c2abcb42a7945014e4119c7eab2f367eb287c0460a91aa3678583539d2cf94e5"
+    "path": "migration/evidence/daily-report/learning/briefs/7ab938cc9f6e0af5efb6407e9bb5e31af8a442a81601454cd8db2892b8253219.json",
+    "sha256": "5c5c6c3e0a1c9771d398ad7de2095929fae2e0e411d300cd3c4e7693284a3458"
   },
   "capture": {
-    "path": "migration/evidence/daily-report/learning/captures/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
-    "sha256": "42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba"
+    "path": "migration/evidence/daily-report/learning/captures/5fa86a9a8e67225a302bf6dfa737edd584ca21c93ab25a8bdff09068cc5d4c46.json",
+    "sha256": "5fa86a9a8e67225a302bf6dfa737edd584ca21c93ab25a8bdff09068cc5d4c46"
   },
-  "captured_at": "2026-10-27T10:55:15.748313+00:00",
+  "captured_at": "2026-10-27T14:54:50.401306+00:00",
   "decision": {
     "causal_claim": null,
     "evidence_decision": "HOLD",
@@ -22,9 +22,9 @@
     ]
   },
   "report": {
-    "path": "migration/evidence/daily-report/learning/reports/f95bf3231ab6bab837b9fbc7de971b94886b24a64b2883eb90283329dcd331ca.json.gz",
-    "sha256": "f5d2b977fd893f9828e2642934e84d22756cbc535790d31494defb4ff9b4539a",
-    "uncompressed_sha256": "f95bf3231ab6bab837b9fbc7de971b94886b24a64b2883eb90283329dcd331ca"
+    "path": "migration/evidence/daily-report/learning/reports/b41c7aca35d6a1405e55ccf9b131e3dd9debea4060676827cd39b0137a2dea5f.json.gz",
+    "sha256": "b2bfef2bbbaf44c3fa0f26cf6ba3233c2d821ce43269b113c834ab9ac855c8a0",
+    "uncompressed_sha256": "b41c7aca35d6a1405e55ccf9b131e3dd9debea4060676827cd39b0137a2dea5f"
   },
   "report_only": true,
   "source_records": {
@@ -36,9 +36,9 @@
     },
     "snapshot": {
       "hash_method": "EXACT_FILE_BYTES",
-      "origin_path": "migration/evidence/daily-report/learning/captures/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
-      "path": "migration/evidence/daily-report/learning/sources/42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba.json",
-      "sha256": "42c6a1be569dc9ef77e865851a03e50da02e0c0092db6c4e6eb559000a1400ba"
+      "origin_path": "migration/evidence/daily-report/learning/captures/5fa86a9a8e67225a302bf6dfa737edd584ca21c93ab25a8bdff09068cc5d4c46.json",
+      "path": "migration/evidence/daily-report/learning/sources/5fa86a9a8e67225a302bf6dfa737edd584ca21c93ab25a8bdff09068cc5d4c46.json",
+      "sha256": "5fa86a9a8e67225a302bf6dfa737edd584ca21c93ab25a8bdff09068cc5d4c46"
     },
     "structure": {
       "hash_method": "EXACT_FILE_BYTES",
