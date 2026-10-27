@@ -113,6 +113,7 @@
     "migration/production/bible/episode_order.py",
     "migration/production/bible/lipsync_check.py",
     "migration/production/bible/plan_check.py",
+    "migration/production/bible/syncnet.py",
     "migration/production/pilot_render.py"
    ],
    "dispatches": []
@@ -522,6 +523,7 @@
     "migration/production/bible/episode_build.py",
     "migration/production/bible/lipsync_check.py",
     "migration/production/bible/plan_check.py",
+    "migration/production/bible/syncnet.py",
     "migration/production/pilot_render.py"
    ],
    "dispatches": []
@@ -1984,6 +1986,20 @@
    "test": "migration/production/bible/test_short_engine.py",
    "is_test": false
   },
+  "migration/production/bible/syncnet.py": {
+   "purpose": "SyncNet (Chung & Zisserman, \"Out of time: automated lip sync in the wild\", ACCV 2016) on CPU in numpy: the",
+   "dir": "migration/production/bible",
+   "local_imports": [],
+   "called_by_workflows": [
+    "episode.yml",
+    "shot-probe.yml"
+   ],
+   "imported_by": [
+    "migration/production/bible/test_lipsync_check.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
   "migration/production/bible/test_clip_check.py": {
    "purpose": "Offline: a clip that opens on black, is low resolution or low frame rate, or carries letterbox bars inside the",
    "dir": "migration/production/bible",
@@ -2040,10 +2056,11 @@
    "is_test": true
   },
   "migration/production/bible/test_lipsync_check.py": {
-   "purpose": "lipsync_check.py: thresholds calibrated on the 2026-10-26 Keeper test (no model needed for these cases).",
+   "purpose": "lipsync_check.py and syncnet.py: the sync gate (SyncNet, E120) calibrated on the labelled set of real speakers, the",
    "dir": "migration/production/bible",
    "local_imports": [
-    "migration/production/bible/lipsync_check.py"
+    "migration/production/bible/lipsync_check.py",
+    "migration/production/bible/syncnet.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
