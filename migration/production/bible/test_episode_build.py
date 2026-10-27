@@ -568,7 +568,7 @@ class Gating(unittest.TestCase):
                 for i, s in enumerate(self.plan["shots"])}
 
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
-        # E113 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
+        # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
         approvals, fetched, checked = self.approvals(), [], []
         eb.clip_flags = lambda path: checked.append(Path(path).name) or []
@@ -621,7 +621,7 @@ class Gating(unittest.TestCase):
         self.assertEqual(client.calls, [])
 
     def test_a_probe_generates_the_build_request_and_approval_copies_its_hashes(self):
-        # E113: shot-probe.yml generates exactly the request the build sends, with the build's checks; approve-shot
+        # E114: shot-probe.yml generates exactly the request the build sends, with the build's checks; approve-shot
         # copies the reviewed clip's hashes from the probe record (nobody hand-edits them), only at >= 9.5
         ids, n = eb.probe_ids(self.plan, f" {self.plan['shots'][0]['id']} ", "2")
         for text, attempts in (("", "2"), ("x;y", "2"), ("no-such-shot", "2"), (ids[0], "0"), (ids[0], "7")):
@@ -676,7 +676,7 @@ class Gating(unittest.TestCase):
             shutil.rmtree(rec)
 
     def test_a_clip_a_build_made_and_claude_approved_is_adopted_without_a_generation(self):
-        # E113: genesis-08's clips approved inside build runs 40438106839/40460764662 are adopted from the run's
+        # E114: genesis-08's clips approved inside build runs 40438106839/40460764662 are adopted from the run's
         # artifact: the recorded request must equal the plan's request now, the build's checks run again
         _, report = self.generate()
         run = self.work / "run"

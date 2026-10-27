@@ -1,5 +1,5 @@
 name: HeroVerse shot probe (a shot's exact build request on Pavo, the build's checks, clips for Claude's review; nothing published)
-# E113 (owner, 27/10: "no rework, ever"): the probe used to vouch for a prompt's wording while the build generated a
+# E114 (owner, 27/10: "no rework, ever"): the probe used to vouch for a prompt's wording while the build generated a
 # NEW clip for it, so Claude's >= 9.5 frame review met each shot only after a ~3 h build (genesis-07: 8 builds;
 # genesis-08: 7 of 29 shots rejected). Here each listed shot gets exactly the request episode_build sends (the same
 # request(), references, input audio and checks: clip_check, lipsync_check on a talking shot, the face check on God's
@@ -108,7 +108,7 @@ jobs:
           python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
       - name: Approved reference images (sha256 checked, <= 1536 px JPEG)
         run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
-      - name: Adopt the listed shots' clips from a build run (E113; no generation, the build's checks again), frame sheets
+      - name: Adopt the listed shots' clips from a build run (E114; no generation, the build's checks again), frame sheets
         if: inputs.adopt_run != ''
         run: |
           gh run download "$ADOPT_RUN" --repo "$GITHUB_REPOSITORY" -n "episode-$EP-$ADOPT_RUN" -D "$RUNNER_TEMP/adopt"

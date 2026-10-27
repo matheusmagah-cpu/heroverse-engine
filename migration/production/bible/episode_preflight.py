@@ -5,7 +5,7 @@ generation, with the build's own functions, and says which new setups need a dir
 
   episode_build.py preflight PLAN [--voice VOICE_PYTHON PREPARED_WORK] [--refs] [--write]
   episode_build.py verify-preflight PLAN       exit 0 only when the committed report is PASS for this exact plan
-                                               and every shot has an approved clip of its request (E113)
+                                               and every shot has an approved clip of its request (E114)
 
 Steps (each one is the build's own code, not a copy):
   1. plan_check --strict: the grammar, the path episode.yml takes, and the build predicted on the estimate
@@ -298,7 +298,7 @@ def refs_and_requests(plan, work):
         return {"ran": False, "problems": [f"REFS {exc}"]}
     layout = json.loads((Path(work) / "layout.json").read_text())
     problems = eb.request_problems(plan, layout, refs)
-    # E113: the sha256 of every shot's request, machine-independent (episode_build.request_identity); verify-preflight
+    # E114: the sha256 of every shot's request, machine-independent (episode_build.request_identity); verify-preflight
     # compares the approved clips of shots/<episode>.json with these
     return {"ran": True, "problems": problems, "digests": {} if problems else eb.request_digests(plan, layout, refs)}
 
@@ -354,7 +354,7 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
         blockers += [f"PROBE_RATE_LOW {r['shot']} ({'still mouth' if r.get('kind') == 'still_mouth' else 'lips'} passed "
                      f"{r['passed']}: {r['shot_chance']} within {eb.TALK_ATTEMPTS} attempts < {MIN_SHOT_CHANCE})"
                      for r in rows if r.get("shot") in low]
-    # E113: which shots still need a probed, reviewed and approved clip (shot-probe.yml, approve-shot). Not a blocker
+    # E114: which shots still need a probed, reviewed and approved clip (shot-probe.yml, approve-shot). Not a blocker
     # of this report (an approval comes after it, by its own PR); verify-preflight refuses the build until none is left
     digests = report["requests"].get("digests")
     report["shot_review"] = eb.review_problems(plan, digests) if digests else ["REQUESTS_NOT_CHECKED"]
@@ -390,7 +390,7 @@ def verify(plan_path, approvals=None):
         return f"PREFLIGHT_STALE {', '.join(changed)} changed after the preflight; run it again"
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
-    # E113: every shot ships the clip Claude reviewed, made from the request this plan sends now
+    # E114: every shot ships the clip Claude reviewed, made from the request this plan sends now
     review = eb.review_problems(plan, (report.get("requests") or {}).get("digests") or {}, approvals)
     return "; ".join(review) if review else None
 

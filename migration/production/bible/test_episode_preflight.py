@@ -82,7 +82,7 @@ class Probes(unittest.TestCase):
         self.assertEqual((report["status"], report["blockers"]), ("PASS", []))
         self.assertEqual(report["setups"]["probes_required"], [])
         self.assertTrue({r["kind"] for r in report["setups"]["shots"]} <= {"still_mouth", "god_voice_over"})
-        # E113 changed the build code it vouches for (stale by design, re-run once after merge): nothing else moved
+        # E114 changed the build code it vouches for (stale by design, re-run once after merge): nothing else moved
         changed = pf.stale_parts(report["binding"], pf.binding(EXAMPLE, json.loads(EXAMPLE.read_text())))
         self.assertEqual([p for p in changed if not p.startswith("code:")], [])
 
@@ -122,7 +122,7 @@ class Report(unittest.TestCase):
             shutil.rmtree(d)
 
     def test_verify_refuses_an_unreviewed_shot(self):
-        # E113 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected after a full build): the build ships only
+        # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected after a full build): the build ships only
         # clips Claude reviewed, made from the request the plan sends now; the committed preflight holds its digests
         saved = pf.REPORTS
         d = Path(tempfile.mkdtemp())
@@ -143,7 +143,7 @@ class Report(unittest.TestCase):
             self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_REQUEST_CHANGED {ids[0]}")
             approvals[ids[0]] = {"request_sha256": digests[ids[0]]}
             self.assertIsNone(pf.verify(plan, approvals=approvals))
-            # a report written before E113 holds no digests: every approved shot is a changed request
+            # a report written before E114 holds no digests: every approved shot is a changed request
             (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
                 {"binding": pf.binding(plan, data), "status": "PASS", "blockers": []}))
             self.assertTrue(pf.verify(plan, approvals=approvals).startswith("SHOT_REQUEST_CHANGED"))
