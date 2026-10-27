@@ -132,6 +132,23 @@ because the Cloudflare FLUX stills of genesis-08 fell below 9.5 (`evidence/shots
   number of required references (STILL_PROP_UNREFERENCED); FLUX (`scene-stills.yml`) cannot send references and
   `prepare` refuses such a still on it.
 
+### Free image quota (E124, 2026-10-27)
+
+A 0 quote does not mean the free quota is available. Pavo's free `agnes-image` quota ran out after ~180 stills in one
+day (genesis-09 runs 2026102701-05, the ark props and probes); `pavo_quote_image` kept answering an exact 0
+(`required_credits` 0.0, `is_estimate` false) and `pavo_image_job` read back only `status: failed`, with no image and no
+reason, while the owner's app showed "the free model quota has been used up ... try again in 3 hours" (nothing was
+charged). 31 submissions of run 2026102705 were spent on nothing. The adapter now guards it (`quota.py`, wired in
+`server.py`):
+
+- `PAVO_DAILY_CAP`: at most 120 images a UTC day (env `PAVO_IMAGE_DAILY_CAP`, or `daily_cap` in the ledger), counted
+  for every submission that created a conversation, refused before the quote (nothing is sent).
+- `PAVO_FREE_QUOTA_SUSPECTED`: two read-backs in a row that end `failed` with no image (each job once) suspend
+  generation for 3 hours; then one probe may go: a failed read-back suspends again at once, a completed one lifts it.
+- The ledger is `migration/evidence/pavo/image-ledger.json` (env `PAVO_IMAGE_LEDGER`): day counts, the failed streak,
+  recent failed conversation ids and `suspended_until`; no credential or URL. Commit it with the run's evidence.
+- Read back every job before submitting many more: a `failed` read-back is a stop signal, not noise.
+
 ## Authorization
 
 Standing owner authorization (2026-10-25): generations need no per-clip approval in the chat; every limit above

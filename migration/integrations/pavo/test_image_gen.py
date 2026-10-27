@@ -1,4 +1,5 @@
 """Agnes Image 2.5 Flash stills: price, submission recovery and credential regressions; no network or real secrets."""
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import struct
@@ -8,10 +9,12 @@ import unittest
 import zlib
 from urllib.error import URLError
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
 from client import ORIGIN, PavoError
 from image_gen import IMAGE_MODEL, IMAGE_RATIOS, PavoImageClient
 import images
+from quota import COOL_DOWN, DAILY_CAP, FAILED_STREAK, LEDGER, QuotaGuard
 from test_video import Responses, envelope, quote, started
 
 CDN = "https://cos-aigc-default.agnes-ai.space/pixa/ugc_image/x/still.png"
@@ -159,6 +162,81 @@ class Image(unittest.TestCase):
             PavoImageClient(self.token, Responses()).image_job("12&x=1")
         running = PavoImageClient(self.token, Responses(history([], running=True))).image_job("12")
         self.assertEqual(running["status"], "running")
+
+
+def failed_history():
+    return envelope({"is_running": False, "turns": [{"assistant": [{"type": "GenerationFailed", "data": {}}]}]})
+
+
+class FreeQuota(unittest.TestCase):
+    """E124 (2026-10-27): the free agnes-image quota ran out after ~180 stills in one day; pavo_quote_image kept
+    quoting an exact 0 and pavo_image_job only read "failed" with no reason, so 31 submissions of genesis-09 run
+    2026102705 were spent on nothing. The guard stops the burn: a daily cap before any call, and two failed read-backs
+    in a row suspend generation (a possible quota stop) for a cool-down or until a job reads back completed."""
+    token = "synthetic-offline-pavo-credential"
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.ledger = Path(self.tmp.name) / "image-ledger.json"
+        self.t = datetime(2026, 10, 27, 15, 0, tzinfo=timezone.utc)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def guard(self, cap=None):
+        return QuotaGuard(self.ledger, cap=cap, now=lambda: self.t)
+
+    def client(self, *responses, cap=None):
+        return PavoImageClient(self.token, Responses(*responses), guard=self.guard(cap))
+
+    def submit(self, cap=None):
+        return self.client(quote(), envelope({"conversation_id": "777"}), started(IMAGE_MODEL),
+                           cap=cap).generate_image("A dry plain at dusk.")
+
+    def test_a_daily_cap_refuses_before_any_request_and_is_counted_in_the_ledger(self):
+        self.assertEqual(self.submit(cap=2)["status"], "submitted")
+        self.assertEqual(self.submit(cap=2)["status"], "submitted")
+        fake = Responses()
+        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
+            PavoImageClient(self.token, fake, guard=self.guard(cap=2)).generate_image("A dry plain at dusk.")
+        self.assertEqual(fake.calls, [])                  # refused before the quote: nothing sent
+        self.assertEqual(json.loads(self.ledger.read_text())["days"]["2026-10-27"]["generated"], 2)
+        self.t += timedelta(days=1)                       # a new day starts from zero
+        self.assertEqual(self.submit(cap=2)["status"], "submitted")
+        self.assertEqual(DAILY_CAP, 120)
+
+    def test_two_failed_read_backs_suspend_generation_until_a_cool_down_or_a_success(self):
+        for job in ("11", "12"):
+            self.assertEqual(self.client(failed_history()).image_job(job)["status"], "failed")
+        self.client(failed_history()).image_job("12")     # the same job read twice counts once
+        fake = Responses()
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            PavoImageClient(self.token, fake, guard=self.guard()).generate_image("A dry plain at dusk.")
+        self.assertEqual(fake.calls, [])
+        self.t += timedelta(hours=2, minutes=59)
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.client().generate_image("A dry plain at dusk.")
+        self.t += timedelta(minutes=2)                    # the cool-down passed: one probe may go
+        self.assertEqual(self.submit()["status"], "submitted")
+        self.client(failed_history()).image_job("13")     # the probe failed too: suspended again at once
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.client().generate_image("A dry plain at dusk.")
+        ok = self.client(history([{"url": CDN, "width": 768, "height": 1344}])).image_job("10")
+        self.assertEqual(ok["status"], "completed")       # a job that completes lifts the suspension
+        self.assertEqual(self.submit()["status"], "submitted")
+
+    def test_one_failure_alone_does_not_suspend(self):
+        self.client(failed_history()).image_job("11")
+        self.client(history([{"url": CDN}])).image_job("12")
+        self.client(failed_history()).image_job("14")
+        self.assertEqual(self.submit()["status"], "submitted")
+
+    def test_the_server_wires_the_guard_and_the_readme_warns_the_quote_is_not_the_quota(self):
+        src = (HERE / "server.py").read_text()
+        self.assertIn("PavoImageClient(guard=QuotaGuard())", src)
+        self.assertIn("A 0 quote does not mean the free quota is available", (HERE / "README.md").read_text())
+        self.assertEqual(QuotaGuard().path, LEDGER)
+        self.assertEqual((FAILED_STREAK, COOL_DOWN), (2, timedelta(hours=3)))
 
 
 if __name__ == "__main__":
