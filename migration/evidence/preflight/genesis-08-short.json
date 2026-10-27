@@ -1,0 +1,162 @@
+{
+ "plan": "migration/production/bible/plans/genesis-08-short.json",
+ "episode": "genesis-08-short",
+ "checked_at": "2026-10-27T02:16:32Z",
+ "plan_check": {
+  "problems": [],
+  "pending": [],
+  "estimate": {
+   "seconds": 173.5,
+   "keeper_share": 0.103,
+   "lesson_share": 0.107,
+   "establishing_share": 0.012,
+   "lines": 21,
+   "shots": 32,
+   "spoken_lines": 2,
+   "words": 458
+  }
+ },
+ "characters": [
+  {
+   "id": "keeper",
+   "status": "APPROVED",
+   "refs": [
+    "front"
+   ],
+   "talk_refs": [
+    "talk"
+   ],
+   "voice": "am_michael",
+   "image_records": [
+    "ch-keeper-front",
+    "ch-keeper-talk"
+   ]
+  }
+ ],
+ "cf_images": {
+  "recorded_today": 6,
+  "daily_allocation": 44,
+  "sheets_needed": {},
+  "fits_today": true
+ },
+ "voice": {
+  "ran": true,
+  "problems": [],
+  "pace": {
+   "god": [
+    3.09,
+    2.55
+   ],
+   "narration": [
+    3.02,
+    2.71,
+    3.02,
+    2.71,
+    3.18,
+    2.47,
+    2.71,
+    3.04,
+    2.49,
+    2.81,
+    3.12,
+    2.39,
+    3.07,
+    2.52,
+    2.05,
+    2.81,
+    2.55,
+    2.9,
+    2.27
+   ]
+  },
+  "measured": {
+   "total": 175.129,
+   "keeper_share": 0.11,
+   "lesson_share": 0.114,
+   "retimed": {}
+  }
+ },
+ "requests": {
+  "ran": true,
+  "problems": []
+ },
+ "setups": {
+  "shots": [
+   {
+    "kind": "god_voice_over",
+    "shot": "s-voice",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "god_voice_over",
+    "shot": "s-covenant",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-insight",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-question",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   },
+   {
+    "kind": "still_mouth",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "shot": "k-close",
+    "check": "lipsync_check --still-mouth",
+    "probe": [
+     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
+    ],
+    "passed": "2 of 2",
+    "shot_chance": 1.0
+   }
+  ],
+  "probes_required": [],
+  "rate_low": [],
+  "talk_attempts": 6,
+  "min_shot_chance": 0.9,
+  "run_chance_all_talking_shots": 0.999
+ },
+ "binding": {
+  "plan": "8807c577c39c502579255f15f3389862ea5989c3d7db92b28acfde35e41db2fe",
+  "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
+  "image_records": {
+   "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
+   "ch-keeper-talk.json": "c431a6013669385cb236c64158160cc6966337cdfb8ada711ed98f58b509b6cc"
+  },
+  "setups": "386110cf6909cea8ed1edcfe0f6476ea1b4ae528e6a3399e1861a7396d808a95",
+  "code": {
+   "episode_build.py": "9177a6a37e85ff550944543d83686fefbdfa247a4761941724d2cf077f809e3e",
+   "plan_check.py": "2ad651a45682b354e8ac7cabba8db6d3963e796cc0fe276b24e7c5a56b27e916",
+   "voice_pace.py": "53ca18e54b2b7472b296f9a9dddba8e1df98f95bf9de924dd5be80bcddff01e5",
+   "lipsync_check.py": "a8bf2c564253bd4021bbf9f67bef305ae327fc5f4114c96cacf34ac191de7835",
+   "episode_preflight.py": "d486f36f092df36fc615abeb6a021ef00783f1d6bde83dff19ed21a0d71328da"
+  }
+ },
+ "blockers": [],
+ "status": "PASS"
+}
