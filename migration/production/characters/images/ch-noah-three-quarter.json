@@ -1,6 +1,6 @@
 {
  "id": "ch-noah-three-quarter",
- "prompt": "character reference portrait, three-quarter view, head and shoulders: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "prompt": "character reference portrait, three-quarter view, head and shoulders: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his long beard dark iron-grey and streaked with black, never white, a bald crown with short grey hair at the sides, the coarse undyed robe worn directly over his skin with a bare neck and no garment beneath, the knotted rope belt visible at his waist, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
  "negative": null,
  "seed": null,
  "size": [
@@ -15,7 +15,7 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 37.2,
+ "seconds": 2.6,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
   "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
@@ -23,7 +23,7 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "characters-img-ch-noah-three-quarter-sha256-0eb16bcfbcbd6adcf7d1f3b1de58bb00a4eace64f3f7e31bdbf01ab9b10619ea.png",
- "sha256": "0eb16bcfbcbd6adcf7d1f3b1de58bb00a4eace64f3f7e31bdbf01ab9b10619ea",
+ "release_asset": "characters-img-ch-noah-three-quarter-sha256-3c5fc8f49ff36c9893fcf11a30ee58e888d5c8c6a187e2f5cbf45dc0d6c6b422.png",
+ "sha256": "3c5fc8f49ff36c9893fcf11a30ee58e888d5c8c6a187e2f5cbf45dc0d6c6b422",
  "release_tag": "v0.0.0-cloud-assets-20261025"
 }
