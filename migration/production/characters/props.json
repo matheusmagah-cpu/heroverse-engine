@@ -1,6 +1,6 @@
 {
  "version": "props-v1",
- "rule": "E121 (2026-10-27): a prop seen in many shots holds one look the way a character does: its look and exclusion sentences word for word (plan_check.PROPS) AND its approved reference images. genesis-09's 64 Pavo stills carried the ark's two sentences word for word and still drew a tower at one end, a gabled barn or a ship's curved bow from shot to shot. A still whose prompt names a prop is made only with every approved reference of that prop (props.py, plan_check.prop_references; STILL_PROP_UNREFERENCED). A prop is APPROVED only when Claude kept an image for every view (props.py approve, by PR).",
+ "rule": "E122 (2026-10-27): a prop seen in many shots holds one look the way a character does: its look and exclusion sentences word for word (plan_check.PROPS) AND its approved reference images. genesis-09's 64 Pavo stills carried the ark's two sentences word for word and still drew a tower at one end, a gabled barn or a ship's curved bow from shot to shot. A still whose prompt names a prop is made only with every approved reference of that prop (props.py, plan_check.prop_references; STILL_PROP_UNREFERENCED). A prop is APPROVED only when Claude kept an image for every view (props.py approve, by PR).",
  "props": {
   "ark": {
    "name": "The ark (Genesis 6-9)",
@@ -12,7 +12,7 @@
     "three-quarter"
    ],
    "refs": [],
-   "reviewed": "DRAFT (2026-10-27): candidates of run 2026102701 (Pavo agnes-image, 0 credits each) on props/sheets/ark-2026102701.jpg await Claude's review"
+   "reviewed": "DRAFT (2026-10-27): run 2026102701 (8 Pavo agnes-image text-to-image candidates, 0 credits) reviewed by Claude: none >= 9.5 (side-3 closest but its end boards rise and lower ends round; every three-quarter has a tall end block and a ship's bow). Run 2026102702: 7 frames of genesis-08 shot clips approved at 9.5 (s-board, s-ridge, s-scorn; props/sheets/ark-2026102702.jpg) await Claude's review."
   }
  }
 }

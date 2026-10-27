@@ -16,7 +16,7 @@ images' pattern:
 
 Hashes are never written by hand: scene-stills.yml records candidates, `approve` records the approved still.
 plan_check.frame_problems refuses a frame whose still is missing, not APPROVED, changed or against the scene rules.
-E121: a still whose prompt names a prop (the ark, its setting sentence too) is made with every approved reference image
+E122: a still whose prompt names a prop (the ark, its setting sentence too) is made with every approved reference image
 of that prop (props.json; plan_check.prop_references gives them as repository paths Pavo takes, with their sha256): the
 candidate's sidecar lists `references` [{record, sha256}], finalize and approve refuse it otherwise, and so does
 plan_check.frame_problems (STILL_PROP_UNREFERENCED), also while the prop is still DRAFT.
@@ -105,7 +105,7 @@ def prepare(plan, ids, candidates, run, stills_dir=None):
             raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
         refs, missing = plan_check.prop_references(rec["prompt"])
         if missing:
-            raise SystemExit(f"STILL_PROP_UNREFERENCED {still}: " + "; ".join(missing) + " (E121)")
+            raise SystemExit(f"STILL_PROP_UNREFERENCED {still}: " + "; ".join(missing) + " (E122)")
         images += [{"id": f"{still}-{run}-{n}", "still": still, "prompt": rec["prompt"], "seed": None,
                     "references": [r["repo_path"] for r in refs], "reference_records": refs}
                    for n in range(1, candidates + 1)]
@@ -154,8 +154,8 @@ def finalize(img_dir, run, stills_dir=None):
         made = png.with_suffix(".json")
         meta = json.loads(made.read_text()) if made.is_file() else {}
         unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"))
-        if unref:   # E121: text alone does not hold a prop's look; a FLUX or text-only image of the ark is refused
-            raise SystemExit(f"STILL_PROP_UNREFERENCED {png.stem}: " + "; ".join(unref) + " (E121)")
+        if unref:   # E122: text alone does not hold a prop's look; a FLUX or text-only image of the ark is refused
+            raise SystemExit(f"STILL_PROP_UNREFERENCED {png.stem}: " + "; ".join(unref) + " (E122)")
         save(dst.with_suffix(".json"), {
             "id": png.stem, "still": still, "episode": rec.get("episode"), "shot": rec.get("shot"), "run": str(run),
             "status": "DRAFT", "prompt": rec["prompt"], "sent_prompt": meta.get("prompt"),
@@ -218,7 +218,7 @@ def approve(still, candidate, score, note, stills_dir=None, today=None):
         raise SystemExit(f"STILL_PROMPT_REFUSED {still}: " + "; ".join(bad))
     unref = plan_check.prop_reference_problems(rec["prompt"], meta.get("references"))
     if unref:
-        raise SystemExit(f"STILL_PROP_UNREFERENCED {candidate}: " + "; ".join(unref) + " (E121)")
+        raise SystemExit(f"STILL_PROP_UNREFERENCED {candidate}: " + "; ".join(unref) + " (E122)")
     dst = stills_dir / f"{still}.jpg"
     shutil.copyfile(src, dst)
     rec.update({"status": "APPROVED", "repo_path": rel(dst), "sha256": sha256(dst), "size": meta.get("size"),

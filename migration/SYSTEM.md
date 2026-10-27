@@ -130,7 +130,7 @@ Produce the master and package, retain provenance, and deliver the frozen techni
   and a rewritten scene prompt is probed with `shot-probe.yml` and a frame sheet before the build (E108, E114:
   genesis-07 run 40341856955 showed a European street, a glass lantern and church towers in 8 of 30 scene shots).
 - A prop seen in many shots (the ark) holds its look the way a character does: its sentences word for word (E113)
-  and its approved reference images (`production/characters/props.json`, `props.py`; E121: genesis-09's 64 stills
+  and its approved reference images (`production/characters/props.json`, `props.py`; E122: genesis-09's 64 stills
   carried the sentences and still drew a tower, a barn or a bow). A still whose prompt names the prop is made with
   every approved reference of it, recorded by sha256 (STILL_PROP_UNREFERENCED in scene_stills and plan_check).
 - An episode record is checked with `episode_build.py check-record <episodes/<id>.json>` (publish_episode's own rules) before `publish-episode.yml` is dispatched.

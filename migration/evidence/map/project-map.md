@@ -345,7 +345,7 @@ flowchart LR
 | module | purpose | run by | imports | test |
 |---|---|---|---|---|
 | `characters.py` | The character bible (owner, 2026-10-25: "if Moses appears once, he is the same Moses 100 videos later"). | - | - | yes |
-| `props.py` | Props with approved reference images, like a character's (E121). | - | plan_check | **no** |
+| `props.py` | Props with approved reference images, like a character's (E122). | - | plan_check | **no** |
 
 ### `migration/production/footage`
 

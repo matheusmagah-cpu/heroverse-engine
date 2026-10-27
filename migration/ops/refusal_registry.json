@@ -1674,7 +1674,7 @@
     "migration/production/bible/scene_stills.py::plan_check.prop_references(rec[\"prompt\"])",
     "migration/production/bible/episode_build.py::def frame_refusal("
    ],
-   "note": "E121: a still whose prompt names a prop (the ark, its setting sentence too) made without every approved reference image of that prop (props.json, by sha256), or while the prop is still DRAFT; scene_stills.py prepare refuses it before any image, finalize and approve refuse the candidate, plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.prop_reference_problems"
+   "note": "E122: a still whose prompt names a prop (the ark, its setting sentence too) made without every approved reference image of that prop (props.json, by sha256), or while the prop is still DRAFT; scene_stills.py prepare refuses it before any image, finalize and approve refuse the candidate, plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.prop_reference_problems"
   },
   "STILL_SHA256_MISMATCH": {
    "class": "A",

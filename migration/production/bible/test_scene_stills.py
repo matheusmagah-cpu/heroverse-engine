@@ -43,7 +43,7 @@ class Stills(unittest.TestCase):
         self.still = self.shot.setdefault("first_frame", "genesis-08-s-dust")
         real = json.loads((HERE / "stills" / f"{self.still}.json").read_text())
         ss.save(self.dir / f"{self.still}.json", real)
-        # E121: s-dust names the ark, so its still is made with the ark's approved references; here an APPROVED ark
+        # E122: s-dust names the ark, so its still is made with the ark's approved references; here an APPROVED ark
         # of the test's own (the committed one is DRAFT until Claude's review)
         self.saved_props = (pr.PROPS_FILE, pr.IMAGES_DIR)
         self.arkrefs = self.approved_ark()
@@ -225,7 +225,7 @@ class Stills(unittest.TestCase):
         self.assertTrue(out.is_file())
 
     def test_a_still_naming_the_ark_is_made_only_with_the_arks_approved_reference_images(self):
-        # E121: genesis-09's 64 Pavo stills carried ARK_LOOK and ARK_EXCLUDE word for word and still drew a tower at
+        # E122: genesis-09's 64 Pavo stills carried ARK_LOOK and ARK_EXCLUDE word for word and still drew a tower at
         # one end, a gabled barn or a ship's bow: text alone does not hold a prop. Like a character's face, the ark
         # is held by its approved reference images, sent by sha256 with every still that names it.
         prompt = pc.still_record(self.still, self.dir)["prompt"]

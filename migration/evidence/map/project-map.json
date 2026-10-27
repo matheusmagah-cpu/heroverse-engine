@@ -2162,7 +2162,7 @@
    "is_test": false
   },
   "migration/production/characters/props.py": {
-   "purpose": "Props with approved reference images, like a character's (E121).",
+   "purpose": "Props with approved reference images, like a character's (E122).",
    "dir": "migration/production/characters",
    "local_imports": [
     "migration/production/bible/plan_check.py"
