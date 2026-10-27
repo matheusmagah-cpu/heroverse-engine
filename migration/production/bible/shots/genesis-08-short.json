@@ -67,6 +67,17 @@
    "source_run": "40460764662",
    "approved_at": "2026-10-27"
   },
+  "s-board": {
+   "asset": "shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4",
+   "clip_sha256": "e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e",
+   "request_sha256": "82094099b661bf0a09ac08d00c802581f5f9db2c1198c4178668bd42abb2bcce",
+   "score": 9.5,
+   "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
+   "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
+   "run_id": "40477936323",
+   "source_run": null,
+   "approved_at": "2026-10-27"
+  },
   "s-clods": {
    "asset": "shot-genesis-08-short-s-clods-sha256-a4376e8e2fc43fa13b8e7e732ce15236195d109375056dc3ceb0a8a2744ed7a7.mp4",
    "clip_sha256": "a4376e8e2fc43fa13b8e7e732ce15236195d109375056dc3ceb0a8a2744ed7a7",
@@ -87,6 +98,17 @@
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
+   "approved_at": "2026-10-27"
+  },
+  "s-dust": {
+   "asset": "shot-genesis-08-short-s-dust-sha256-fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c.mp4",
+   "clip_sha256": "fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c",
+   "request_sha256": "89597a6e039fbcaaaf8e753a02f9f3a959d6c1b27940d565ce3a312034469ee9",
+   "score": 9.5,
+   "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
+   "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
+   "run_id": "40477936323",
+   "source_run": null,
    "approved_at": "2026-10-27"
   },
   "s-feast": {
@@ -197,6 +219,17 @@
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
+   "approved_at": "2026-10-27"
+  },
+  "s-ridge": {
+   "asset": "shot-genesis-08-short-s-ridge-sha256-86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0.mp4",
+   "clip_sha256": "86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0",
+   "request_sha256": "44f6d4f538e7bd2a7732d32b0f09ac1527876837cfcc7a891415e0158e11e539",
+   "score": 9.5,
+   "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
+   "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
+   "run_id": "40477936323",
+   "source_run": null,
    "approved_at": "2026-10-27"
   },
   "s-rope": {
