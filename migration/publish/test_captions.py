@@ -114,13 +114,15 @@ class FakeYouTube:
         return R(200, {"id": "VID123"})
 
 
-def publish(d, fake, sentences=SENTENCES, ledger=None, duration=None):
+def publish(d, fake, sentences=SENTENCES, ledger=None, duration=None, extra=None, qa=None):
     pkg, man = d / "p.json", d / "m.json"
     pkg.write_text(json.dumps({"pilot_id": "pilot-x", "title": "T", "description": "D", "tags": ["a"]}))
-    m = {"output_sha256": VIDEO_SHA, "sentences": sentences}
+    m = {"output_sha256": VIDEO_SHA, "sentences": sentences, **(extra or {})}
     if duration:
         m["output_seconds"] = duration
     man.write_text(json.dumps(m))
+    if qa is not None:
+        (d / "qa.json").write_text(json.dumps(qa))
     (d / "review.json").write_text(json.dumps({"status": "PASS", "output_sha256": VIDEO_SHA, "watched_review": {
         "status": "PASS", "model": "claude-session-reviewer", "overall": 9.6}}))
     (d / "v.mp4").write_bytes(VIDEO_BYTES)
@@ -519,6 +521,135 @@ class SharedUploads(unittest.TestCase):
             cp.plan(Path(t) / "plan.json")
             self.assertEqual(shared.call_count, 1)
             self.assertEqual(json.loads((Path(t) / "plan.json").read_text())["uploads"], 2)
+
+
+LONG = [{"segment": "n00", "speaker": "eve", "start": 0.0, "end": 5.8,
+         "text": "He says you will not die. He says your eyes will be opened, and you will see."},
+        {"segment": "n01", "start": 6.4, "end": 10.6, "text": "In the beginning God created the heaven and the earth."}]
+
+
+class LongTrack(unittest.TestCase):
+    """E126: the acted Bible long (story QA v3) uploads an .srt of short cues (<= 7 words, <= 44 characters), the
+    script's words exact, on their voice timings; publish_video uploads exactly the recorded track."""
+
+    def test_cues_keep_every_word_and_stay_inside_their_sentence(self):
+        words_max, chars_max = captions.v3_limits()
+        self.assertEqual((words_max, chars_max), (7, 44))                 # the frozen v3 rows
+        got = captions.cues(LONG, words_max, chars_max)
+        self.assertEqual(" ".join(c["text"] for c in got).split(), " ".join(s["text"] for s in LONG).split())
+        self.assertTrue(all(len(c["text"].split()) <= 7 and len(c["text"]) <= 44 for c in got))
+        for c in got:
+            self.assertTrue(any(s["start"] <= c["start"] < c["end"] <= s["end"] for s in LONG), c)
+        text, rec = captions.track_record(LONG)
+        self.assertEqual(captions.problems(text), [])
+        self.assertEqual((rec["sha256"], rec["words_max"], rec["chars_max"], rec["burned"]),
+                         (hashlib.sha256(text.encode()).hexdigest(), 7, 44, False))
+        self.assertEqual(captions.manifest_srt({"sentences": LONG, "caption_track": rec}), text)
+        self.assertEqual(captions.manifest_srt({"sentences": LONG}), captions.srt(LONG))   # prayer longs unchanged
+
+    def test_the_long_writer_writes_the_srt_and_its_record(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            (d / "timeline.json").write_text(json.dumps({"sentences": LONG}))
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(captions.write_long(d / "timeline.json", d / "captions.srt"), 0)
+            rec = json.loads(out.getvalue())["caption_track"]
+            self.assertEqual(hashlib.sha256((d / "captions.srt").read_bytes()).hexdigest(), rec["sha256"])
+            man = {"sentences": LONG, "caption_track": rec}
+            self.assertEqual(captions.manifest_problems(man, d), [])
+            (d / "captions.srt").write_text("1\n00:00:00,000 --> 00:00:01,000\nx\n")
+            self.assertTrue(any(p.startswith("CAPTION_TRACK_FILE_DIFFERS") for p in captions.manifest_problems(man, d)))
+            for name in ("../captions.srt", "/etc/hostname", "sub/captions.srt", ".."):   # never a path out
+                self.assertTrue(any(p.startswith("CAPTION_TRACK_FILE_MISSING") for p in captions.manifest_problems(
+                    {"sentences": LONG, "caption_track": {**rec, "file": name}}, d)), name)
+            self.assertTrue(any(p.startswith("CAPTION_TRACK_SHA256") for p in captions.manifest_problems(
+                {"sentences": LONG, "caption_track": {**rec, "sha256": "0" * 64}})))
+
+    def test_the_cue_limits_are_the_frozen_ones_never_the_records(self):
+        # review of #469: the record cannot loosen v3's limits, and a record without them is a refusal, not a KeyError
+        text, rec = captions.track_record(LONG)
+        for loose in ({**rec, "words_max": 20, "chars_max": 120}, {k: v for k, v in rec.items() if k != "words_max"}):
+            man = {"sentences": LONG, "caption_track": loose}
+            self.assertEqual(captions.manifest_srt(man), text)                 # built at the frozen 7 / 44
+            self.assertTrue(any(p.startswith("CAPTION_TRACK_LIMITS") for p in captions.manifest_problems(man)), loose)
+        self.assertEqual(captions.track_srt(LONG, {}), text)
+
+    def test_an_over_long_word_is_its_own_cue_and_no_cue_is_too_short(self):
+        # review of #469: one word over 44 characters split the whole sentence into one-word cues; a short voice
+        # span gave cues of 0 ms
+        word = "x" * 50
+        sent = [{"start": 0.0, "end": 6.0, "text": f"In the beginning God created {word} and the heaven and the earth."}]
+        got = captions.cues(sent, 7, 44)
+        self.assertIn(word, [c["text"] for c in got])
+        self.assertLessEqual(len(got), 4)
+        self.assertEqual(" ".join(c["text"] for c in got).split(), sent[0]["text"].split())
+        tight = [{"start": 1.0, "end": 1.6, "text": "And God said, Let there be light: and there was light, and it was good."}]
+        got = captions.cues(tight, 7, 44)
+        self.assertTrue(all(c["end"] - c["start"] >= captions.CUE_MIN_SECONDS - 1e-9 for c in got), got)
+        self.assertEqual(" ".join(c["text"] for c in got).split(), tight[0]["text"].split())
+        self.assertEqual(captions.problems(captions.srt(got)), [])
+
+    def test_publish_uploads_the_recorded_short_cue_track(self):
+        text, rec = captions.track_record(LONG)
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            (d / "captions.srt").write_text(text)
+            fake = FakeYouTube()
+            error, steps, _, _ = publish(d, fake, sentences=LONG, extra={"caption_track": rec},
+                                         qa={"criteria_version": "story-qa-criteria-v3"})
+            self.assertIsNone(error)
+            self.assertEqual(captions.parts(fake.bodies[0][1])[1][1], text.encode())
+            self.assertNotEqual(text, captions.srt(LONG))                    # not the one-cue-per-sentence track
+            self.assertEqual(steps["captions_track"], "CAP-NEW")
+
+    def test_a_v3_long_without_its_track_or_with_another_file_is_never_uploaded(self):
+        with tempfile.TemporaryDirectory() as t:
+            fake = FakeYouTube()
+            error, steps, _, _ = publish(Path(t), fake, sentences=LONG, qa={"criteria_version": "story-qa-criteria-v3"})
+            self.assertIn("CAPTIONS_TRACK_MISSING", error)
+            self.assertEqual((fake.calls, steps), ([], None))
+        text, rec = captions.track_record(LONG)
+        with tempfile.TemporaryDirectory() as t:
+            fake = FakeYouTube()                                          # the record names a file that is not there
+            error, _, _, _ = publish(Path(t), fake, sentences=LONG, extra={"caption_track": rec},
+                                     qa={"criteria_version": "story-qa-criteria-v3"})
+            self.assertIn("CAPTION_TRACK_FILE_MISSING", error)
+            self.assertEqual(fake.calls, [])
+        with tempfile.TemporaryDirectory() as t:                           # older criteria: the old track, as before
+            fake = FakeYouTube()
+            error, _, _, _ = publish(Path(t), fake, sentences=LONG, qa={"criteria_version": "story-qa-criteria-v1"})
+            self.assertIsNone(error)
+            self.assertEqual(captions.parts(fake.bodies[0][1])[1][1], captions.srt(LONG).encode())
+
+    def test_a_bible_long_without_its_track_is_refused_even_without_qa(self):
+        # review of #469: the refusal no longer depends on out/qa.json being readable
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t) / "pilot-015"
+            (d / "out").mkdir(parents=True)
+            (d / "script.json").write_text(json.dumps({"archetype": "bible-story-long"}))
+            man = d / "out" / "manifest.json"
+            self.assertTrue(pv.caption_track_missing(man, {"sentences": LONG}, {}, d))
+            self.assertTrue(pv.caption_track_missing(man, {"sentences": LONG}, {"series": "bible"}))
+            _, rec = captions.track_record(LONG)
+            self.assertFalse(pv.caption_track_missing(man, {"sentences": LONG, "caption_track": rec}, {}, d))
+            (d / "script.json").write_text(json.dumps({"archetype": "prayer"}))
+            self.assertFalse(pv.caption_track_missing(man, {"sentences": LONG}, {}, d))
+        with tempfile.TemporaryDirectory() as t:                 # through main: refused before any call
+            fake = FakeYouTube()
+            with patch.object(pv, "bible_thumb_problems", return_value=[]), \
+                    patch.object(pv, "bible_long", return_value=True):
+                error, steps, _, _ = publish(Path(t), fake, sentences=LONG)
+            self.assertIn("CAPTIONS_TRACK_MISSING", error)
+            self.assertEqual((fake.calls, steps), ([], None))
+
+    def test_preflight_checks_the_track_publish_will_send(self):
+        text, rec = captions.track_record(LONG)
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            man = {"sentences": LONG, "caption_track": rec, "output_seconds": 11.0}
+            self.assertTrue(any("CAPTION_TRACK_FILE_MISSING" in p for p in pf.caption_problems(man, d)))
+            (d / "captions.srt").write_text(text)
+            self.assertEqual(pf.caption_problems(man, d), [])
 
 
 if __name__ == "__main__":
