@@ -17,7 +17,7 @@ DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDA
 # E115: failure classes (rework audit 2026-10-27). An entry's `class` is one of these, or a list of them
 CLASSES = {"cheap-vs-expensive", "env-vs-test", "review-after-build", "random", "no-data", "threshold", "external",
            "order", "drift", "silent", "direction", "pr-late", "capacity", "rerun-without-fix", "recurrence",
-           "fragile-input"}
+           "fragile-input", "instrument"}   # E120 instrument: the instrument cannot measure the property it gates
 CLASSED_FROM = 115   # E100-E114 were backfilled with their class; from E115 on every entry is classified
 
 
