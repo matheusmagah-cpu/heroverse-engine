@@ -1219,6 +1219,64 @@
    "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
    "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
   },
+  "PROP_CANDIDATE_NAME_REFUSED": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a malformed run or candidate number; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_CANDIDATE_SHA256_MISMATCH": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses an approval of a candidate whose image is not the one recorded; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_CANDIDATE_UNKNOWN": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses an approval naming no candidate of that prop and view; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_CROP_REFUSED": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a crop outside the frame or under 64 px; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_FRAME_TIME_REFUSED": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a frame time outside the approved clip; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_NOTE_MISSING": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses an approval without what the review saw; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_PROMPT_REFUSED": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a Pavo candidate whose prompt lacks the prop's look or exclusion sentence word for word; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_QUOTE_NOT_ZERO": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a Pavo candidate without an exact 0-credit quote (no spending); it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_SCORE_BELOW_FLOOR": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses an approval under the 9.5 floor; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_SHEET_EMPTY": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a contact sheet asked for a run with no candidates; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_SHOT_WITHOUT_STILL": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def prop_shot_problems(",
+    "migration/production/bible/plan_check.py::problems += plan_prop_problems(plan, shots)",
+    "migration/production/bible/long_plan_check.py::pc.plan_prop_problems(plan, plan[\"shots\"])",
+    "migration/production/bible/episode_build.py::def prop_refusal("
+   ],
+   "note": "E122: from part 9 a scene shot naming a prop outside the period sentences without first_frame (the still made with the prop's approved references); plan_check (and the preflight, which runs it strict), long_plan_check and episode_build.request (prop_refusal) by the same function, plan_check.prop_shot_problems"
+  },
+  "PROP_SOURCE_REFUSED": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a candidate neither a Pavo still with its look and 0-credit quote nor the frame cut again, byte for byte, from a clip Claude approved at >= 9.5; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
+  "PROP_VIEW_UNKNOWN": {
+   "class": "N",
+   "why": "E122: props.py, the prop reference registry, refuses a view the prop does not list (props.json views); it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
+  },
   "PUBLICATION_HOLD": {
    "class": "D",
    "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"

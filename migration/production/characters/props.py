@@ -27,7 +27,9 @@ usage:
                                                        >= 9.5 (bible/shots/<episode>.json: the clip's sha256 must be
                                                        the approved one; ffmpeg takes the frame here, never by hand)
   props.py sheet PROP RUN OUT_JPG                      that run's contact sheet
-  props.py approve PROP VIEW CANDIDATE --score S --note TEXT   after Claude's review (>= 9.5), by PR
+  props.py approve PROP VIEW CANDIDATE --score S --note TEXT [--clip CLIP]   after Claude's review (>= 9.5), by PR;
+                                                       a clip frame needs its approved clip: the frame is cut again
+                                                       and must be byte for byte the candidate (E122)
 """
 from datetime import datetime, timezone
 import hashlib
@@ -142,13 +144,52 @@ def source_problems(prop, meta, shots_dir=None):
     return [f"source {src!r} is neither {PAVO} nor {CLIP_FRAME}"]
 
 
+def cut_frame(clip, seconds, crop, dst):
+    """The one way a reference frame is made: ffmpeg's frame at SECONDS, optionally cut to CROP (x, y, w, h), saved as
+    JPEG quality 95 at DST. `frame` makes candidates with it and `approve` remakes them with it (identical bytes)."""
+    import subprocess
+    import tempfile
+    from PIL import Image
+    Path(dst).parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        png = Path(tmp) / "f.png"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{float(seconds):.3f}", "-i", str(clip), "-frames:v",
+                        "1", str(png)], check=True)
+        with Image.open(png) as im:
+            im = im.convert("RGB")
+            if crop:
+                x, y, w, h = (int(v) for v in crop)
+                if x < 0 or y < 0 or w < 64 or h < 64 or x + w > im.size[0] or y + h > im.size[1]:
+                    raise SystemExit(f"PROP_CROP_REFUSED {list(crop)} (inside the {im.size} frame)")
+                im = im.crop((x, y, x + w, y + h))
+            im.save(dst, "JPEG", quality=95)
+            return list(im.size)
+
+
+def frame_problems(meta, path, clip, shots_dir=None):
+    """E122 (review of #462): a clip-frame candidate is the frame cut from the approved clip, not a picture whose
+    sidecar names one. CLIP must be the clip Claude approved (sha256 in bible/shots/<episode>.json, >= 9.5) and the
+    frame recut at the recorded time and crop must be byte for byte the candidate at PATH."""
+    import tempfile
+    c = meta.get("clip") or {}
+    if clip is None or not Path(clip).is_file():
+        return ["the approved clip itself is needed to remake the frame (approve ... --clip CLIP)"]
+    digest = sha256(clip)
+    if digest != c.get("clip_sha256") or not _approved_clip(c.get("episode"), c.get("shot"), digest, shots_dir):
+        return [f"the clip {digest} is not the approved clip of {c.get('episode')} {c.get('shot')}"]
+    with tempfile.TemporaryDirectory() as tmp:
+        again = Path(tmp) / "again.jpg"
+        cut_frame(clip, c.get("seconds"), c.get("crop"), again)
+        if again.read_bytes() != Path(path).read_bytes():
+            return [f"the image is not the frame of {c.get('shot')} at {c.get('seconds')} s (crop {c.get('crop')})"]
+    return []
+
+
 def finalize_frame(prop, view, run, n, clip, episode, shot, seconds, crop=None, cand_dir=None, props=None,
                    shots_dir=None):
     """One candidate cut from an approved shot clip: the clip's sha256 must be the one Claude approved for SHOT in
     bible/shots/<episode>.json (>= 9.5); ffmpeg takes the frame at SECONDS (PNG -> JPEG), optionally cut to CROP
     (x, y, w, h in the frame's pixels: the ark without the crowd); status DRAFT."""
-    import subprocess
-    import tempfile
     props = registry() if props is None else props
     if prop not in props or view not in (props[prop].get("views") or []):
         raise SystemExit(f"PROP_VIEW_UNKNOWN {prop} {view}")
@@ -163,21 +204,7 @@ def finalize_frame(prop, view, run, n, clip, episode, shot, seconds, crop=None, 
         raise SystemExit(f"PROP_FRAME_TIME_REFUSED {seconds}")
     cid = f"pr-{prop}-{view}-{run}-{n}"
     dst = Path(cand_dir or CANDIDATES_DIR) / f"{cid}.jpg"
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    from PIL import Image
-    with tempfile.TemporaryDirectory() as tmp:
-        png = Path(tmp) / "f.png"
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{seconds:.3f}", "-i", str(clip), "-frames:v", "1",
-                        str(png)], check=True)
-        with Image.open(png) as im:
-            im = im.convert("RGB")
-            if crop:
-                x, y, w, h = (int(v) for v in crop)
-                if x < 0 or y < 0 or w < 64 or h < 64 or x + w > im.size[0] or y + h > im.size[1]:
-                    raise SystemExit(f"PROP_CROP_REFUSED {crop} (inside the {im.size} frame)")
-                im = im.crop((x, y, x + w, y + h))
-            size = list(im.size)
-            im.save(dst, "JPEG", quality=95)
+    size = cut_frame(clip, seconds, crop, dst)
     rec = {"id": cid, "prop": prop, "view": view, "run": str(run), "status": "DRAFT", "source": CLIP_FRAME,
            "clip": {"episode": episode, "shot": shot, "asset": approval.get("asset"), "clip_sha256": digest,
                     "seconds": seconds, "crop": list(crop) if crop else None, "approved_score": approval.get("score"), "approval_note": approval.get("note")},
@@ -246,7 +273,7 @@ def sheet(prop, run, out_jpg, cand_dir=None):
 
 
 def approve(prop, view, candidate, score, note, cand_dir=None, props_file=None, images_dir=None, refs_dir=None,
-            today=None, shots_dir=None):
+            today=None, shots_dir=None, clip=None):
     """Claude's review kept CANDIDATE as the prop's VIEW reference (overall >= 9.5): its image becomes
     refs/pr-<prop>-<view>.jpg, the record images/pr-<prop>-<view>.json holds the sha256 computed here, and the prop
     is APPROVED once every view has one."""
@@ -268,6 +295,8 @@ def approve(prop, view, candidate, score, note, cand_dir=None, props_file=None, 
     if sha256(src) != meta.get("sha256"):
         raise SystemExit(f"PROP_CANDIDATE_SHA256_MISMATCH {candidate}")
     bad = source_problems(prop, meta, shots_dir)
+    if not bad and meta.get("source") == CLIP_FRAME:
+        bad = frame_problems(meta, src, clip, shots_dir)
     if bad:
         raise SystemExit(f"PROP_SOURCE_REFUSED {candidate}: " + "; ".join(bad))
     dst = Path(refs_dir or REFS_DIR) / f"pr-{prop}-{view}.jpg"
@@ -303,8 +332,9 @@ def main(argv):
         print(json.dumps({"candidate": rec["id"], "sha256": rec["sha256"], "clip": rec["clip"]["clip_sha256"]}))
     elif cmd == "sheet" and len(args) == 3:
         print(json.dumps({"sheet": args[2], "candidates": sheet(args[0], args[1], args[2])}))
-    elif cmd == "approve" and len(args) == 7 and args[3] == "--score" and args[5] == "--note":
-        rec = approve(args[0], args[1], args[2], float(args[4]), args[6])
+    elif cmd == "approve" and len(args) in (7, 9) and args[3] == "--score" and args[5] == "--note" \
+            and (len(args) == 7 or args[7] == "--clip"):
+        rec = approve(args[0], args[1], args[2], float(args[4]), args[6], clip=args[8] if len(args) == 9 else None)
         print(json.dumps({"reference": rec["id"], "sha256": rec["sha256"]}))
     else:
         raise SystemExit(__doc__)

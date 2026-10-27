@@ -211,8 +211,11 @@ ARK_LOOK = ("The ark is one long, low, box-shaped wooden hull with straight side
             "the same low height from end to end.")
 ARK_EXCLUDE = ("The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band "
                "along its waterline.")
-ARK_MENTION = (r"arks?", r"hulls?", r"keels?", r"ships?", r"boats?", r"vessels?")
-ARK_AVOID = (r"ships?", r"boats?", r"vessels?", r"galleons?", r"longships?", r"masts?", r"sails?", r"rigging",
+# E122 (review of #462): the ark is also named without these words ("A huge timber box of rough planks", "a great
+# wooden barge", "Noah's great gopher-wood house"); each such name needs the look and the references the same way
+ARK_MENTION = (r"arks?", r"hulls?", r"keels?", r"ships?", r"boats?", r"vessels?", r"barges?", r"crafts?",
+               r"gopher[- ]?wood", r"(?:wooden|timber|plank) (?:box(?:es)?|houses?|structures?|chests?)")
+ARK_AVOID = (r"ships?", r"boats?", r"vessels?", r"barges?", r"galleons?", r"longships?", r"masts?", r"sails?", r"rigging",
              r"prows?", r"figureheads?", r"funnels?", r"smokestacks?", r"(?:gently )?curved sides")
 # E113, the one narrow exemption (orchestrator, 2026-10-27): genesis-08's shots whose clips were already approved at
 # 9.5 in runs 40438106839/40460764662 keep main's prompt at E113 time (a new prompt is a new request, regenerated:
@@ -696,13 +699,50 @@ def ark_grandfathered(plan, shots):
     return ok, out
 
 
+# E122: from this part on a scene shot that names a prop is made from an approved still (first_frame), the still made
+# with the prop's approved references: text-to-video alone drifts the ark's shape as text-to-image did. Parts 1-8 are
+# published or scheduled and stay as they are.
+PROP_STILL_FROM_PART = 9
+
+
+def _named_outside_period(prompt, per=None):
+    """The prop names a prompt holds outside the period sentences (the flood's setting names "the great wooden ark"
+    in every shot of the period; that sentence alone does not make a shot show the ark)."""
+    rest = prompt
+    for w in [per or {}] + list(PERIODS.values()):
+        for k in ("exclude", "setting"):
+            if isinstance(w.get(k), str) and w[k]:
+                rest = rest.replace(w[k], " ")
+    return [name for name, prop in PROPS.items()
+            if any(re.search(rf"(?i)\b(?:{a})\b", rest) for a in prop["mentions"])]
+
+
+def prop_shot_problems(i, shot, plan, per=None):
+    """E122: from part PROP_STILL_FROM_PART on, a scene shot whose prompt names a prop (outside the period sentences)
+    starts from an approved still (`first_frame`, whose own check, frame_problems, asks for the prop's references):
+    PROP_SHOT_WITHOUT_STILL. A shot with characters cannot take a still (frames and references are exclusive), so its
+    words leave the prop out."""
+    part = plan.get("part") if isinstance(plan, dict) else None
+    if type(part) is not int or part < PROP_STILL_FROM_PART or shot.get("kind") != "scene" \
+            or not isinstance(shot.get("prompt"), str) or shot.get("first_frame"):
+        return []
+    named = _named_outside_period(shot["prompt"], per)
+    if not named:
+        return []
+    how = ("a character shot cannot take a still (Pavo: frames and references are exclusive): leave the "
+           f"{', '.join(named)} out of its words" if shot.get("characters") else
+           "give it `first_frame`, a still made with the prop's approved references")
+    return [f"PROP_SHOT_WITHOUT_STILL shot {i} {shot.get('id')} (names the {', '.join(named)} with no still: {how}; "
+            "E122)"]
+
+
 def plan_prop_problems(plan, shots):
     """E113, shared by plan_check and long_plan_check: every scene prompt's own prop problems, but for the shots
-    ark_grandfathered exempts (and its refusals)."""
+    ark_grandfathered exempts (and its refusals); E122: from part 9, a scene naming a prop starts from its still."""
     per = period(plan) if isinstance(plan, dict) else None
     exempt, out = ark_grandfathered(plan, shots)
     return out + [p for i, s in enumerate(shots) if isinstance(s, dict) and s.get("id") not in exempt
-                  for p in prop_problems(i, s, per)]
+                  for p in prop_problems(i, s, per) + prop_shot_problems(i, s, plan, per)]
 
 
 STILLS_DIR = HERE / "stills"          # scene stills: <id>.json records, candidates/ (scene_stills.py)
@@ -749,15 +789,42 @@ def prop_references(prompt, props=None):
     return refs, out
 
 
-def prop_reference_problems(prompt, references, props=None):
-    """E122: what keeps a still (its prompt, the references it was made with: [{record, sha256}]) from showing a prop's
-    one look: the prop is not APPROVED, or an approved reference (by sha256) was not sent. [] when it names none."""
+def reference_digest(references):
+    """E122: the digest an approval binds a still's references with (record and sha256 of each, in order)."""
+    rows = [{"record": r.get("record"), "sha256": r.get("sha256")} for r in references or [] if isinstance(r, dict)]
+    return hashlib.sha256(json.dumps(rows, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+PAVO_IMAGE_MODEL = "agnes-image"
+
+
+def pavo_proof_problems(pavo, count):
+    """E122: the Pavo read-back that proves COUNT reference images went with the still: the generate call's own
+    answer (model agnes-image, conversation_id, input_images == COUNT) and the job read back by pavo_image_job (the
+    same conversation_id, status completed). A sidecar that only declares `references` proves nothing."""
+    g = (pavo or {}).get("generate") or {}
+    j = (pavo or {}).get("job") or {}
+    if g.get("model") != PAVO_IMAGE_MODEL or not g.get("conversation_id") or g.get("input_images") != count \
+            or j.get("conversation_id") != g.get("conversation_id") or j.get("status") != "completed":
+        return [f"no Pavo read-back proving {count} reference image(s) were sent (pavo.generate: model "
+                f"{PAVO_IMAGE_MODEL}, conversation_id, input_images {count}; pavo.job: the same conversation_id, "
+                f"status completed); got generate {g.get('model')}/{g.get('input_images')}, job {j.get('status')}"]
+    return []
+
+
+def prop_reference_problems(prompt, references, props=None, pavo=None):
+    """E122: what keeps a still (its prompt, the references it was made with: [{record, sha256}], the Pavo read-back)
+    from showing a prop's one look: the prop is not APPROVED, the references are not exactly its approved ones (by
+    sha256), or Pavo's own answer does not show that many input images. [] when it names none."""
     need, out = prop_references(prompt, props)
-    sent = {r.get("sha256") for r in references or [] if isinstance(r, dict)}
-    missing = [r["record"] for r in need if r["sha256"] not in sent]
-    if missing:
-        out.append(f"made without the approved reference images {missing} (sent {sorted(x for x in sent if x)})")
-    return out
+    if out or not need:
+        return out
+    sent = [r.get("sha256") for r in references or [] if isinstance(r, dict)]
+    if sorted(sent) != sorted(r["sha256"] for r in need):
+        out.append(f"made without exactly the approved reference images {[r['record'] for r in need]} "
+                   f"(sent {sorted(x for x in sent if x)})")
+        return out
+    return pavo_proof_problems(pavo, len(need))
 
 
 def _image_size(path):
@@ -823,7 +890,10 @@ def frame_problems(i, shot, plan, stills_dir=None):
             out.append(f"STILL_PATH_REFUSED shot {i} {sid} ({f} {still}: a PNG/JPEG inside the repository)")
             continue
         out += [f"STILL_PROP_UNREFERENCED shot {i} {sid} ({f} {still}: {p}; E122)"
-                for p in prop_reference_problems(rec.get("prompt"), rec.get("references"))]
+                for p in prop_reference_problems(rec.get("prompt"), rec.get("references"), pavo=rec.get("pavo"))]
+        if (rec.get("approved") or {}).get("references_sha256") != reference_digest(rec.get("references")):
+            out.append(f"STILL_PROMPT_CHANGED shot {i} {sid} ({f} {still}: its references are not the ones its image "
+                       "was approved with; E122)")
         if hashlib.sha256(src.read_bytes()).hexdigest() != rec.get("sha256"):
             out.append(f"STILL_SHA256_MISMATCH shot {i} {sid} ({f} {still}: the image is not the one approved)")
         approved = rec.get("approved") or {}

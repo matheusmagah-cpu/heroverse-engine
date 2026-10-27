@@ -35,6 +35,7 @@ LATER = [
     "migration/production/preview_gate.py", "migration/production/pilot_render.py", "migration/production/long_review.py",
     "migration/production/footage/assign.py", "migration/production/imagegen/cf_images.py",
     "migration/production/characters/characters.py",
+    "migration/production/characters/props.py",   # E122: the prop reference registry (approve is a review gate)
     "migration/publish/prepublish_gate.py", "migration/publish/publication_binding.py",
     "migration/publish/tiktok_publish.py", "migration/publish/arc_links.py", "migration/publish/publish_episode.py",
     "migration/publish/publish_video.py", "migration/publish/captions.py",

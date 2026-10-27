@@ -1133,6 +1133,38 @@ class ArkLook(unittest.TestCase):
         p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("box-shaped", "boxy")
         self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(p, CHARS)))
 
+    def test_the_ark_named_by_another_word_needs_its_look_too(self):
+        # E122 (review of #462): the ark called a box, a barge, a craft or gopher wood is still the ark
+        for body in ("A huge timber box of rough planks stands on the plain.", "A great wooden barge waits on the plain.",
+                     "Noah's great gopher-wood house stands on the plain.", "The great craft waits.",
+                     "A wooden structure rises over the tents.", "Beams of gopher wood lie stacked."):
+            self.assertIn("ARK_LOOK_NOT_CANONICAL", codes(pc.check(self.with_body(body), CHARS)), body)
+        got = codes(pc.check(self.with_body("A barge floats by the ark.", ark=True), CHARS))
+        self.assertIn("ARK_LOOK_CONFLICT", got)
+        refs, why = pc.prop_references("Noah's great gopher-wood house")
+        self.assertTrue(refs or why)   # a still so named needs the ark's references
+        self.assertEqual(pc.prop_references("A camp of tents and a wooden table"), ([], []))
+
+    def test_from_part_9_a_scene_that_names_the_ark_starts_from_its_still(self):
+        # E122 (review of #462): text-to-video drifts the ark the way text-to-image did; parts 1-8 stay as they are
+        import episode_build as eb
+        p = self.with_body("The ark stands on the hill.", ark=True)
+        self.assertNotIn("PROP_SHOT_WITHOUT_STILL", codes(pc.check(p, CHARS)))      # part 7
+        p["part"] = 9
+        self.assertIn("PROP_SHOT_WITHOUT_STILL", codes(pc.check(p, CHARS)))
+        shot = p["shots"][1]
+        self.assertTrue(eb.prop_refusal(p, shot).startswith("PROP_SHOT_WITHOUT_STILL"))
+        self.assertEqual(pc.prop_shot_problems(1, dict(shot, first_frame="genesis-09-s-x"), p), [])
+        talk = pc.prop_shot_problems(1, dict(shot, characters=["noah"]), p)
+        self.assertIn("character shot", talk[0])
+        # the flood's period sentence alone ("the great wooden ark") does not make a shot show the ark
+        flood = f"{pc.PERIODS['the-flood']['setting']} {pc.PERIODS['the-flood']['exclude']}"
+        self.assertEqual(pc.prop_shot_problems(1, dict(shot, prompt=f"Rain on the tents. {flood}"), p), [])
+        # genesis-09-short on main is refused for exactly this until #461's image-first plan lands
+        g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
+        if not all(s.get("first_frame") for s in g09["shots"] if s["kind"] == "scene" and not s.get("characters")):
+            self.assertEqual(set(codes(pc.check(g09))), {"PROP_SHOT_WITHOUT_STILL"})
+
     def test_the_look_is_the_shape_so_the_shot_names_no_ship_beside_it(self):
         for body in ("The ark, a long, low wooden ship, stands on the hill.", "The ark's mast leans in the wind.",
                      "The ark with gently curved sides stands on the hill.", "A boat floats by the ark."):
@@ -1183,7 +1215,13 @@ class ArkLook(unittest.TestCase):
             for f in sorted((HERE / folder).glob("*.json")):
                 pl = json.loads(f.read_text())
                 if isinstance(pl.get("shots"), list):
-                    self.assertEqual(pc.plan_prop_problems(pl, pl["shots"]), [], f.name)
+                    # E122: genesis-09-short on main still makes its ark shots from text; it is refused (only for
+                    # that) until #461's image-first plan gives each a still made with the ark's references
+                    got = pc.plan_prop_problems(pl, pl["shots"])
+                    if f.name == "genesis-09-short.json" and not all(s.get("first_frame") for s in pl["shots"]
+                                                                    if s["kind"] == "scene" and not s.get("characters")):
+                        got = [x for x in got if not x.startswith("PROP_SHOT_WITHOUT_STILL")]
+                    self.assertEqual(got, [], f.name)
         def shown(s):
             # image first (owner, 27/10): a shot that starts from a still shows the ark the still's prompt draws (its
             # own prompt gives the motion); plan_check refuses that still prompt without the look (STILL_PROMPT_REFUSED)

@@ -229,10 +229,85 @@ class Props(unittest.TestCase):
                             images_dir=self.d / "images", refs_dir=self.d / "refs", shots_dir=shots)
         self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
         self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": digest, "score": 9.5}}})
-        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "box", cand_dir=self.d / "candidates",
-                              props_file=self.file, images_dir=self.d / "images", refs_dir=self.d / "refs",
-                              shots_dir=shots)
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs", "shots_dir": shots}
+        with self.assertRaises(SystemExit) as err:    # E122: the clip itself is needed to remake the frame
+            self.pr.approve("ark", "side", rec["id"], 9.6, "box", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "box", clip=clip, **kw)
         self.assertIn("approved-clip-frame", ref["source"])
+
+    def test_a_hand_made_picture_naming_an_approved_clip_is_not_approved(self):
+        # E122 (review of #462): a red JPEG with a sidecar naming the approved clip's sha256 was approved; approve now
+        # cuts the frame again from the clip and requires the same bytes
+        import subprocess
+        clip = self.d / "clip.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc=s=144x256:d=2:r=10",
+                        "-pix_fmt", "yuv420p", str(clip)], check=True)
+        digest = self.pr.sha256(clip)
+        shots = self.d / "shots"
+        self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": digest, "score": 9.5, "clip_seconds": 2}}})
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs", "shots_dir": shots}
+        real = self.pr.finalize_frame("ark", "side", "9", 1, clip, "ep-a", "s-box", 1.0, cand_dir=self.d / "candidates",
+                                      props=self.props, shots_dir=shots)
+        forged = self.d / "candidates" / "pr-ark-side-9-2.jpg"
+        from PIL import Image
+        Image.new("RGB", (144, 256), (255, 0, 0)).save(forged, "JPEG")
+        self.pr.save(forged.with_suffix(".json"), dict(real, id="pr-ark-side-9-2", repo_path=self.pr.rel(forged),
+                                                       sha256=self.pr.sha256(forged)))
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", "pr-ark-side-9-2", 9.6, "box", clip=clip, **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        # the right picture with another time or crop in its sidecar is refused the same way
+        moved = dict(real, clip=dict(real["clip"], seconds=1.5))
+        self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", moved)
+        with self.assertRaises(SystemExit):
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)
+        self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", real)
+        other = self.d / "other.mp4"
+        other.write_bytes(clip.read_bytes() + b"x")
+        with self.assertRaises(SystemExit):
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=other, **kw)
+        self.assertEqual(self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)["sha256"],
+                         real["sha256"])
+
+    def test_every_refusal_of_the_registry_tool(self):
+        # E122 (review of #462): each PROP_* code of props.py is reached
+        def refused(code, fn, *a, **k):
+            with self.assertRaises(SystemExit) as err:
+                fn(*a, **k)
+            self.assertIn(code, str(err.exception))
+        cands = self.d / "candidates"
+        img = self.image("i.jpg", (9, 9, 9))
+        refused("PROP_VIEW_UNKNOWN", self.pr.finalize, "ark", "top", "9", 1, img, self.meta(), cand_dir=cands,
+                props=self.props)
+        refused("PROP_VIEW_UNKNOWN", self.pr.finalize, "boat", "side", "9", 1, img, self.meta(), cand_dir=cands,
+                props=self.props)
+        refused("PROP_CANDIDATE_NAME_REFUSED", self.pr.finalize, "ark", "side", "9x", 1, img, self.meta(),
+                cand_dir=cands, props=self.props)
+        refused("PROP_CANDIDATE_NAME_REFUSED", self.pr.finalize, "ark", "side", "9", 10, img, self.meta(),
+                cand_dir=cands, props=self.props)
+        refused("PROP_SHEET_EMPTY", self.pr.sheet, "ark", "9", self.d / "s.jpg", cand_dir=cands)
+        cid = self.finalize("side", 1, (90, 60, 30))["id"]
+        ak = {"cand_dir": cands, "props_file": self.file, "images_dir": self.d / "images", "refs_dir": self.d / "refs"}
+        refused("PROP_VIEW_UNKNOWN", self.pr.approve, "ark", "top", cid, 9.6, "x", **ak)
+        refused("PROP_NOTE_MISSING", self.pr.approve, "ark", "side", cid, 9.6, "  ", **ak)
+        refused("PROP_SCORE_BELOW_FLOOR", self.pr.approve, "ark", "side", cid, 10.5, "x", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "pr-ark-side-9-7", 9.6, "x", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "../x", 9.6, "x", **ak)
+        Image = __import__("PIL.Image", fromlist=["Image"])
+        Image.new("RGB", (64, 36), (0, 0, 0)).save(cands / f"{cid}.jpg", "JPEG")
+        refused("PROP_CANDIDATE_SHA256_MISMATCH", self.pr.approve, "ark", "side", cid, 9.6, "x", **ak)
+        import subprocess
+        clip = self.d / "c.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=gray:s=144x256:d=1:r=10",
+                        "-pix_fmt", "yuv420p", str(clip)], check=True)
+        shots = self.d / "shots"
+        self.pr.save(shots / "e.json", {"shots": {"s": {"clip_sha256": self.pr.sha256(clip), "score": 9.6}}})
+        for crop in ([0, 0, 200, 100], [-1, 0, 100, 100], [0, 0, 32, 32]):
+            refused("PROP_CROP_REFUSED", self.pr.finalize_frame, "ark", "side", "9", 3, clip, "e", "s", 0.5,
+                    crop=crop, cand_dir=cands, props=self.props, shots_dir=shots)
 
     def test_the_committed_ark_candidates_are_recorded_and_unapproved_until_review(self):
         props = self.pr.registry()
