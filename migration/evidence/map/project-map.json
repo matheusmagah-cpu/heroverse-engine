@@ -9,6 +9,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/agnes_clip.py",
     "migration/production/bible/clip_check.py"
    ],
@@ -56,6 +57,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/imagegen/cf_images.py",
     "migration/production/imagegen/upscale.py"
    ],
@@ -106,6 +108,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/episode_order.py",
     "migration/production/bible/lipsync_check.py",
@@ -133,6 +136,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/footage/footage.py"
    ],
    "dispatches": []
@@ -229,6 +233,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/footage/pavo_footage.py"
    ],
    "dispatches": []
@@ -256,7 +261,8 @@
    ],
    "cron": [],
    "calls": [
-    "migration/ci/render_pilot.sh"
+    "migration/ci/render_pilot.sh",
+    "migration/ops/dispatch_guard.py"
    ],
    "dispatches": []
   },
@@ -267,7 +273,8 @@
    ],
    "cron": [],
    "calls": [
-    "migration/ci/render_pilot.sh"
+    "migration/ci/render_pilot.sh",
+    "migration/ops/dispatch_guard.py"
    ],
    "dispatches": [
     "approve.yml"
@@ -299,6 +306,7 @@
     "migration/mining/test_structure_mining.py",
     "migration/mining/test_thumb_study.py",
     "migration/mining/test_video_analysis_card.py",
+    "migration/ops/test_dispatch_guard.py",
     "migration/ops/test_engine_fallback.py",
     "migration/ops/test_errors_register.py",
     "migration/ops/test_heartbeat.py",
@@ -310,6 +318,7 @@
     "migration/ops/test_release_video.py",
     "migration/ops/test_runner_dispatch.py",
     "migration/ops/test_runway.py",
+    "migration/ops/test_schedules.py",
     "migration/production/bible/test_clip_check.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_episode_order.py",
@@ -353,6 +362,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/publish/publish_episode.py"
    ],
    "dispatches": []
@@ -461,6 +471,7 @@
    ],
    "cron": [],
    "calls": [
+    "migration/ops/dispatch_guard.py",
     "migration/production/bible/scene_stills.py",
     "migration/production/imagegen/cf_images.py",
     "migration/production/imagegen/upscale.py"
@@ -507,6 +518,7 @@
    "cron": [],
    "calls": [
     "migration/ci/assets.sh",
+    "migration/ops/dispatch_guard.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/lipsync_check.py",
     "migration/production/bible/plan_check.py",
@@ -1462,6 +1474,31 @@
    "test": null,
    "is_test": false
   },
+  "migration/ops/dispatch_guard.py": {
+   "purpose": "One dispatch guard for every expensive workflow (E116; generalises E106's preflight and E112's order).",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/production/bible/episode_order.py",
+    "migration/production/imagegen/cf_allocation.py"
+   ],
+   "called_by_workflows": [
+    "agnes-clip.yml",
+    "cf-images.yml",
+    "episode.yml",
+    "footage.yml",
+    "pavo-footage.yml",
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "publish-episode.yml",
+    "scene-stills.yml",
+    "shot-probe.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_dispatch_guard.py"
+   ],
+   "test": "migration/ops/test_dispatch_guard.py",
+   "is_test": false
+  },
   "migration/ops/engine_fallback.py": {
    "purpose": "E57: when the runner cannot be woken (HERO_RUNNER_PAT rejected or missing), render on the engine itself.",
    "dir": "migration/ops",
@@ -1582,6 +1619,21 @@
    ],
    "test": "migration/ops/test_runway.py",
    "is_test": false
+  },
+  "migration/ops/test_dispatch_guard.py": {
+   "purpose": "E116: one dispatch guard runs first in every expensive workflow (inputs, capacity, one run per subject, no re-run",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/dispatch_guard.py",
+    "migration/production/bible/episode_order.py",
+    "migration/production/bible/episode_preflight.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
   },
   "migration/ops/test_engine_fallback.py": {
    "purpose": "Offline: E57 engine render fallback when the runner cannot be woken.",
@@ -1723,6 +1775,17 @@
    "test": null,
    "is_test": true
   },
+  "migration/ops/test_schedules.py": {
+   "purpose": "E08 / E86 / E90 class (E115 sweep): GitHub drops and delays cron triggers, so only heartbeat.yml may rely on a",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
   "migration/production/agnes_clip.py": {
    "purpose": "One AI clip from Agnes Video 2.5 Flash (owner, 2026-10-25: \"this video AI is very good\"), TEST ONLY until its terms",
    "dir": "migration/production",
@@ -1772,6 +1835,7 @@
    "imported_by": [
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/plan_check.py",
+    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py"
@@ -1787,6 +1851,8 @@
     "episode.yml"
    ],
    "imported_by": [
+    "migration/ops/dispatch_guard.py",
+    "migration/ops/test_dispatch_guard.py",
     "migration/production/bible/test_episode_order.py"
    ],
    "test": "migration/production/bible/test_episode_order.py",
@@ -1797,11 +1863,14 @@
    "dir": "migration/production/bible",
    "local_imports": [
     "migration/production/bible/episode_build.py",
-    "migration/production/bible/plan_check.py"
+    "migration/production/bible/plan_check.py",
+    "migration/production/imagegen/cf_allocation.py"
    ],
    "called_by_workflows": [],
    "imported_by": [
+    "migration/ops/test_dispatch_guard.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_preflight.py"
    ],
    "test": "migration/production/bible/test_episode_preflight.py",
@@ -1873,6 +1942,18 @@
     "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/rekey_shots_e118.py": {
+   "purpose": "E118 one-off migration: re-key every approved clip in shots/*.json to the request digest without `seconds`.",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
    "is_test": false
   },
   "migration/production/bible/scene_stills.py": {
@@ -2169,6 +2250,18 @@
    "imported_by": [],
    "test": null,
    "is_test": true
+  },
+  "migration/production/imagegen/cf_allocation.py": {
+   "purpose": "The one predicate for \"a FLUX image recorded on main\" (E116): cf-images.yml commits each run's records as",
+   "dir": "migration/production/imagegen",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/ops/dispatch_guard.py",
+    "migration/production/bible/episode_preflight.py"
+   ],
+   "test": null,
+   "is_test": false
   },
   "migration/production/imagegen/cf_images.py": {
    "purpose": "Image generation on Cloudflare Workers AI (free daily allocation; the free",
@@ -3524,6 +3617,7 @@
   "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
   "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
   "migration/integrations/pavo/server.py",
+  "migration/production/bible/rekey_shots_e118.py",
   "migration/production/imagegen/hydrate_reused.py"
  ]
 }

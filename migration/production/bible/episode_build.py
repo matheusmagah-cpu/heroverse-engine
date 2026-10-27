@@ -21,7 +21,8 @@ the episode record and dispatches publish-episode.yml.
   episode_build.py generate PLAN WORK LIP_PYTHON FACE_MODEL
                                                  E114: no generation and no Pavo secret. Every shot ships the clip
                                                  Claude approved (shots/<episode>.json), made from the request the
-                                                 plan sends now (else SHOT_NOT_REVIEWED / SHOT_REQUEST_CHANGED),
+                                                 plan sends now (else SHOT_NOT_REVIEWED / SHOT_REQUEST_CHANGED)
+                                                 and covering its layout (SHOT_CLIP_TOO_SHORT, E118),
                                                  downloaded by its content hash (sha256 checked) and checked again:
                                                  clip_check, lipsync_check on a talking clip, the face check on God's
                                                  voice-over, still-mouth on a voice-over Keeper (plan B)
@@ -114,6 +115,11 @@ SHOTS_DIR = HERE / "shots"
 SHOT_REVIEW_MIN = 9.5      # the owner's floor, the same as the review's
 PROBE_ATTEMPTS_MAX = 6     # generations one shot-probe run may spend on one shot (TALK_ATTEMPTS)
 SHOT_ASSET = re.compile(r"^shot-[a-z0-9]+(-[a-z0-9]+)*-sha256-[0-9a-f]{64}\.mp4$")
+# E118: Kokoro measures the same voice a few hundredths of a second apart on two machines (genesis-08: 174.0 s local,
+# 173.929 s on the runner, run 40483267526). The build accepts an approved clip that covers what this machine would
+# request for a measurement up to MEASURE_TOLERANCE shorter, so a clip the local preflight found covering (its own
+# measurement, no slack) still covers on a runner that measures within it; the compose slows a clip at most MAX_SLOW.
+MEASURE_TOLERANCE = 0.1
 
 
 class ShotFailed(Exception):
@@ -620,13 +626,21 @@ def retime(piece, params, factor, stem):
     return frames[:want] + b"\x00" * max(0, want - len(frames))
 
 
-def shot_seconds(shot, index, plan, layout):
+def shot_seconds(shot, index, plan, layout, slack=0.0):
+    """Clip seconds a shot is generated at. A voice-over or talking shot's come from its measured line (minus
+    `slack`: E118's coverage tolerance), a scene's from the plan."""
     if plan_check.voiceover(shot):   # the gap before, his line, the gap or tail after (plan_check.vo_cover)
-        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"], plan["shots"], index)
+        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"] - slack, plan["shots"], index)
         return plan_check.vo_clip_seconds(covered)
     if not plan_check.talking(shot):
         return shot["seconds"]
-    return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"]))
+    return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"] - slack))
+
+
+def clip_needs(plan, layout, slack=0.0):
+    """E118: {shot id: the clip seconds this machine's layout needs} (shot_seconds). The preflight records them with
+    no slack; the build checks against them with MEASURE_TOLERANCE (coverage_problems)."""
+    return {s["id"]: shot_seconds(s, i, plan, layout, slack) for i, s in enumerate(plan["shots"])}
 
 
 BOUND_AUDIO = "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice"
@@ -802,8 +816,8 @@ def plan_spoken(shot, index, plan):
 
 def request_identity(shot, index, plan, layout, refs, chars=None):
     """E114: (sha256, canonical form) of the request a shot sends, independent of the machine: only what decides the
-    clip. The prompt, the clip seconds and aspect as sent to Pavo (discrete values, never a measured float), the
-    sound flag, each reference image by its record id and the sha256 its approved record holds, and for a talking
+    clip. The prompt, the aspect, the sound flag (E118: never the clip seconds, nor anything else derived from a
+    measured voice or layout: those are checked as coverage, coverage_problems), each reference image by its record id and the sha256 its approved record holds, and for a talking
     shot its speaker, voice and spoken words. shot-probe.yml records it with every clip, approve-shot copies it, the
     preflight computes it from the plan now (verify-preflight) and the build again before using an approved clip."""
     req = request(shot, index, plan, layout, refs, chars)
@@ -823,8 +837,10 @@ def request_digest(req, shot, words=None, chars=None):
     if req["audios"]:
         who = speaker_of(shot)
         audio = {"speaker": who, "voice": voice_of(who, chars), "words": list(words or [])}
-    canonical = {"prompt": req["prompt"], "seconds": req["seconds"], "aspect_ratio": req["aspect_ratio"],
-                 "sound": req["sound"], "references": references, "audio": audio}
+    # E118: no `seconds`: a voice-over or talking shot's clip seconds are derived from measured line timing, which
+    # differs between machines across a rounding boundary (genesis-08 k-insight, run 40483267526)
+    canonical = {"prompt": req["prompt"], "aspect_ratio": req["aspect_ratio"], "sound": req["sound"],
+                 "references": references, "audio": audio}
     frames = [req[f] for f in plan_check.FRAME_FIELDS if req.get(f)]
     if frames:   # image first: each still by its id and approved sha256 (a request without frames digests as before)
         canonical["frames"] = [{"still": Path(p).stem, "sha256": (plan_check.still_record(Path(p).stem) or {}).get(
@@ -836,10 +852,11 @@ def request_digests(plan, layout, refs, chars=None):
     return {s["id"]: request_identity(s, i, plan, layout, refs, chars)[0] for i, s in enumerate(plan["shots"])}
 
 
-def review_problems(plan, digests, approvals=None):
+def review_problems(plan, digests, approvals=None, needs=None):
     """E114: a build runs only when every shot has an approved clip made from the request the plan sends now:
     SHOT_NOT_REVIEWED (no approved clip) and SHOT_REQUEST_CHANGED (approved for another request), each naming its
-    shots. verify-preflight runs it on the committed preflight's digests; generate_step on the build's own."""
+    shots; E118: and long enough for what the layout needs (`needs`, SHOT_CLIP_TOO_SHORT). verify-preflight runs it
+    on the committed preflight's digests and needs; generate_step on the build's own."""
     approvals = load_approvals(plan) if approvals is None else approvals
     ids = [s["id"] for s in plan["shots"]]
     missing = [i for i in ids if i not in approvals]
@@ -851,7 +868,24 @@ def review_problems(plan, digests, approvals=None):
     if changed:
         out.append("SHOT_REQUEST_CHANGED " + " ".join(changed) + " (the plan's request is no longer the one the "
                    "approved clip was made from: probe and approve again)")
+    if needs is not None:
+        out += coverage_problems(plan, needs, {k: v for k, v in approvals.items() if k not in changed})
     return out
+
+
+def coverage_problems(plan, needs, approvals):
+    """E118: every approved clip is at least as long as the clip seconds the layout needs for its shot (`needs`:
+    clip_needs). A clip with no recorded clip seconds, or a shot with no need, is refused too: SHOT_CLIP_TOO_SHORT."""
+    short = []
+    for s in plan["shots"]:
+        a = approvals.get(s["id"])
+        if a is None:
+            continue
+        have, need = a.get("clip_seconds"), needs.get(s["id"])
+        if not isinstance(have, (int, float)) or not isinstance(need, (int, float)) or have < need:
+            short.append(f"{s['id']}({have}<{need})")
+    return [("SHOT_CLIP_TOO_SHORT " + " ".join(short) + " (the approved clip is shorter than the clip seconds this "
+             "layout needs: probe at the new length and approve again)")] if short else []
 
 
 def submit(client, req, sleep=time.sleep, log=print):
@@ -1122,7 +1156,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
     approvals = load_approvals(plan) if approvals is None else approvals
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
     digests = {s["id"]: request_identity(s, i, plan, layout, refs)[0] for i, s in enumerate(plan["shots"])}
-    bad = review_problems(plan, digests, approvals)
+    bad = review_problems(plan, digests, approvals, clip_needs(plan, layout, MEASURE_TOLERANCE))
     if bad:
         raise SystemExit("; ".join(bad))
     report_path = work / "report.json"
@@ -1189,7 +1223,8 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
     for sid in ids:
         sha, canonical = request_identity(plan["shots"][index[sid]], index[sid], plan, layout, refs)
         record["shots"][sid] = {"kind": plan["shots"][index[sid]]["kind"], "request_sha256": sha,
-                                "request": canonical, "clips": []}
+                                "request": canonical, "clips": [],
+                                "clip_seconds": shot_seconds(plan["shots"][index[sid]], index[sid], plan, layout)}
     for n in range(1, attempts + 1):
         for _, shot in risk_order([plan["shots"][index[sid]] for sid in ids]):
             sid, entry = shot["id"], record["shots"][shot["id"]]
@@ -1308,7 +1343,7 @@ def adopt_step(plan, run_dir, lip_python, face_model, out, ids, source_run, shee
         shutil.copyfile(clip, out / asset)
         sheet(out / asset, out / f"{sid}-adopted.jpg")
         record["shots"][sid] = {"kind": shot["kind"], "request_sha256": now, "request": canonical,
-                                "clips": [{"round": "adopted", "source_run": str(source_run), "asset": asset,
+                                "clip_seconds": sent.get("seconds"), "clips": [{"round": "adopted", "source_run": str(source_run), "asset": asset,
                                            "clip_sha256": clip_sha, "flags": flags, "measures": measures,
                                            "sheet": f"{sid}-adopted.jpg"}]}
         print(json.dumps({"shot": sid, "adopted": asset, "flags": flags}))
@@ -1347,10 +1382,15 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
         raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {SHOT_REVIEW_MIN}-10)")
     if not (note or "").strip():
         raise SystemExit(f"SHOT_NOTE_MISSING {shot_id} (what the frame review saw)")
+    # E118: the seconds the clip was generated at (coverage_problems); a record from before E118 kept them in its
+    # request's canonical form
+    seconds = entry.get("clip_seconds", (entry.get("request") or {}).get("seconds"))
+    if not isinstance(seconds, int) or isinstance(seconds, bool) or seconds <= 0:
+        raise SystemExit(f"SHOT_CLIP_SECONDS_UNKNOWN {shot_id} (the probe record holds no clip seconds)")
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"
     data = load(path) if path.exists() else {"episode": record["episode"], "shots": {}}
     data["shots"][shot_id] = {"asset": asset, "clip_sha256": clip["clip_sha256"],
-                              "request_sha256": entry["request_sha256"], "score": score, "note": note.strip(),
+                              "request_sha256": entry["request_sha256"], "clip_seconds": seconds, "score": score, "note": note.strip(),
                               "probe_record": rel(record_path), "run_id": record.get("run_id"),
                               "source_run": clip.get("source_run"),
                               "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}

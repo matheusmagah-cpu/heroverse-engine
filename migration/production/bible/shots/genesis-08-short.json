@@ -4,354 +4,418 @@
   "k-close": {
    "asset": "shot-genesis-08-short-k-close-sha256-34378dece51a5f2ffa96d4509e89e3d11f4ab4aedc15c8c0cef7db6da567680c.mp4",
    "clip_sha256": "34378dece51a5f2ffa96d4509e89e3d11f4ab4aedc15c8c0cef7db6da567680c",
-   "request_sha256": "509944b499994f4d9c996175e85842c4b6fe0e1d552597324e668b12a114116a",
+   "request_sha256": "fcd3f420eadf01dfbccbc5a6fc7758f45d036e077daf293f6eaf8bcf637723e3",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 7,
+   "rekeyed_from": "509944b499994f4d9c996175e85842c4b6fe0e1d552597324e668b12a114116a"
   },
   "k-insight": {
    "asset": "shot-genesis-08-short-k-insight-sha256-1621259a0ae93c701b23c74c168b3ca742451b6ace5638398ec91093f104b9dc.mp4",
    "clip_sha256": "1621259a0ae93c701b23c74c168b3ca742451b6ace5638398ec91093f104b9dc",
-   "request_sha256": "ac9df47595fdda96537399d0f9b090d31f96c9050d3a214a12407452c008ee8d",
+   "request_sha256": "d6139213b1d6fe3a9d7059b65000d7155f2a3e532042a29bb222fee8836f587e",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 10,
+   "rekeyed_from": "ac9df47595fdda96537399d0f9b090d31f96c9050d3a214a12407452c008ee8d"
   },
   "k-question": {
    "asset": "shot-genesis-08-short-k-question-sha256-0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead.mp4",
    "clip_sha256": "0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead",
-   "request_sha256": "28f0a3b68b297e9309f980a04f31f7c00a94f7e04dd65f2fbbaa64cf07b810f8",
+   "request_sha256": "9915d0105b03aee1fb2b3e1bafcd66bbc5bb82d434d570cc24430d2f3e06ff99",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "28f0a3b68b297e9309f980a04f31f7c00a94f7e04dd65f2fbbaa64cf07b810f8"
   },
   "s-alone": {
    "asset": "shot-genesis-08-short-s-alone-sha256-13d6cc4565c564cc43161be821cbf43a595601071df7f54fa32fe9fa21fa749c.mp4",
    "clip_sha256": "13d6cc4565c564cc43161be821cbf43a595601071df7f54fa32fe9fa21fa749c",
-   "request_sha256": "aba6254b6b4062b7277d0170fa65da65825d9bc65f4dcb7b1e8615fe5d71ed24",
+   "request_sha256": "0dbc46d992f8367b151e642eaf41169b3e450ec329dad34866dcf7bce77b4c99",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "aba6254b6b4062b7277d0170fa65da65825d9bc65f4dcb7b1e8615fe5d71ed24"
   },
   "s-axe": {
    "asset": "shot-genesis-08-short-s-axe-sha256-1037ff2c136dd47edc8b57beb604f6c259d239227e2946c85bb393d372d9c069.mp4",
    "clip_sha256": "1037ff2c136dd47edc8b57beb604f6c259d239227e2946c85bb393d372d9c069",
-   "request_sha256": "e5d5ae0bcd9b228c3f3066b5d5a9483258aa260c9b29a692ec9a4a0a67611802",
+   "request_sha256": "4ab596e67a089505691816042abcbd5a1fbaf1a8fc25581d7474315baddebeec",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "e5d5ae0bcd9b228c3f3066b5d5a9483258aa260c9b29a692ec9a4a0a67611802"
   },
   "s-beam": {
    "asset": "shot-genesis-08-short-s-beam-sha256-50bb1b3bbb3f088672d33e1722110808f76059b76c85f6e26e194b206d80064a.mp4",
    "clip_sha256": "50bb1b3bbb3f088672d33e1722110808f76059b76c85f6e26e194b206d80064a",
-   "request_sha256": "fa0e9a19f3e784cff2c6000f99aa09fe9abc6d17defd3dd54d885d724ed730ab",
+   "request_sha256": "2072178efe6de7aef5535e97e1b0aa65255d5fdc08028fd5d530a1286f208b5e",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "fa0e9a19f3e784cff2c6000f99aa09fe9abc6d17defd3dd54d885d724ed730ab"
   },
   "s-board": {
    "asset": "shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4",
    "clip_sha256": "e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e",
-   "request_sha256": "82094099b661bf0a09ac08d00c802581f5f9db2c1198c4178668bd42abb2bcce",
+   "request_sha256": "a3d59bae9de0e531e055e1e510f69eae6e655ed74213b42f7c9a539792b0f5ed",
    "score": 9.5,
    "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
    "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
    "run_id": "40477936323",
    "source_run": null,
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "82094099b661bf0a09ac08d00c802581f5f9db2c1198c4178668bd42abb2bcce"
   },
   "s-clods": {
    "asset": "shot-genesis-08-short-s-clods-sha256-a4376e8e2fc43fa13b8e7e732ce15236195d109375056dc3ceb0a8a2744ed7a7.mp4",
    "clip_sha256": "a4376e8e2fc43fa13b8e7e732ce15236195d109375056dc3ceb0a8a2744ed7a7",
-   "request_sha256": "836c5506cba35abef3edcbf0f91600149a0a95974ac99232413ff430ad68a9c2",
+   "request_sha256": "cf6c5bd66264905460b80ad04ebe17a45104e53e4a3d022a54a88e1f56ca9de6",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "836c5506cba35abef3edcbf0f91600149a0a95974ac99232413ff430ad68a9c2"
   },
   "s-covenant": {
    "asset": "shot-genesis-08-short-s-covenant-sha256-66fed9e1f02f8bbd59b5feec720293b0d38a86d5fc9c104571ec9155f9e69f7c.mp4",
    "clip_sha256": "66fed9e1f02f8bbd59b5feec720293b0d38a86d5fc9c104571ec9155f9e69f7c",
-   "request_sha256": "290ab34af4e3d8feaa84e2e3a2d243c9546a3e5946b713fd83022a5db8962fee",
+   "request_sha256": "946ac8ed87815296731003d17f9f15a04fe18900c4e4cd6b47396a43ce5b7ca6",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "290ab34af4e3d8feaa84e2e3a2d243c9546a3e5946b713fd83022a5db8962fee"
   },
   "s-dust": {
    "asset": "shot-genesis-08-short-s-dust-sha256-fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c.mp4",
    "clip_sha256": "fcbbe284e55c03e3435a56986a5b8e4c96df08de36fd81f1f875c3d902dd2d9c",
-   "request_sha256": "89597a6e039fbcaaaf8e753a02f9f3a959d6c1b27940d565ce3a312034469ee9",
+   "request_sha256": "8bcd18024d25e7803aff394d49fc3da0c1e5fd1857235c707fc13ae7cd7f200a",
    "score": 9.5,
    "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
    "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
    "run_id": "40477936323",
    "source_run": null,
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "89597a6e039fbcaaaf8e753a02f9f3a959d6c1b27940d565ce3a312034469ee9"
   },
   "s-feast": {
    "asset": "shot-genesis-08-short-s-feast-sha256-3f4dc3522e41f8d5046ee4a55a16691f3a446063dd85bd8d8009d56e6e5f46c3.mp4",
    "clip_sha256": "3f4dc3522e41f8d5046ee4a55a16691f3a446063dd85bd8d8009d56e6e5f46c3",
-   "request_sha256": "8e43def4f85f28a2fd585352d91fb66265b96c51044acc9a3b6063706d20e01a",
+   "request_sha256": "98f65c5d646ba1496c62b1bd879bee4466039687231a08f623b160e8a627b9fa",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "8e43def4f85f28a2fd585352d91fb66265b96c51044acc9a3b6063706d20e01a"
   },
   "s-finished": {
    "asset": "shot-genesis-08-short-s-finished-sha256-62edb01f87413fac816a8cd5cb6b408051f397e650bc1b218d00bf0f26dcd772.mp4",
    "clip_sha256": "62edb01f87413fac816a8cd5cb6b408051f397e650bc1b218d00bf0f26dcd772",
-   "request_sha256": "42e1b148ada6cc3e161c8ff9632fca009d56c9ff50473029c2a07e40ffa3e87b",
+   "request_sha256": "fb44959878c11850f61a2c9344196d9885ec2bd255e7247b92b4377b644961df",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "42e1b148ada6cc3e161c8ff9632fca009d56c9ff50473029c2a07e40ffa3e87b"
   },
   "s-hill": {
    "asset": "shot-genesis-08-short-s-hill-sha256-f9fc2a594a03b69859af788c66b975322a353a4230357e4652d7d5ab66ba51fe.mp4",
    "clip_sha256": "f9fc2a594a03b69859af788c66b975322a353a4230357e4652d7d5ab66ba51fe",
-   "request_sha256": "ccbb655df87c4fbd204c4e69cbd1175f9f32e79b449131a39c3fa60bb111d6de",
+   "request_sha256": "88cf896c63c5a82f593c089c9c0aa8b16e174072ff138830170c7646d1f4bb16",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "ccbb655df87c4fbd204c4e69cbd1175f9f32e79b449131a39c3fa60bb111d6de"
   },
   "s-jeer": {
    "asset": "shot-genesis-08-short-s-jeer-sha256-8b477a0f0b4c9a7afa6b05287c50cff57ed3961383743a7b65e2ce5aeec7bd21.mp4",
    "clip_sha256": "8b477a0f0b4c9a7afa6b05287c50cff57ed3961383743a7b65e2ce5aeec7bd21",
-   "request_sha256": "f2cc0e4c984add5b3e175c83a6addffefea5660a7968e45f9aec799d894810e1",
+   "request_sha256": "a538dce8752dc43981be496376bc264e2e76cc18046ea9145479c6c328b4222e",
    "score": 9.5,
    "note": "Claude frame review of composed run 40460764662 (regenerated shot): passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "f2cc0e4c984add5b3e175c83a6addffefea5660a7968e45f9aec799d894810e1"
   },
   "s-laugh": {
    "asset": "shot-genesis-08-short-s-laugh-sha256-f720a68183e79e1fd27a40a620cd6a5cc823d7f6d490aa53a1772a4bd2651576.mp4",
    "clip_sha256": "f720a68183e79e1fd27a40a620cd6a5cc823d7f6d490aa53a1772a4bd2651576",
-   "request_sha256": "c52340b14e02c38fc46b6f7ad6109263ab5c85388184a54546d9ab74f8e77425",
+   "request_sha256": "67abc0bd187eaae55247d1f41acb44f51fecbab4acb10b6e552c689f7f133276",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "c52340b14e02c38fc46b6f7ad6109263ab5c85388184a54546d9ab74f8e77425"
   },
   "s-measure": {
    "asset": "shot-genesis-08-short-s-measure-sha256-138660c39fa7473fe71a9b7affffb625ae5270e8cd5b00d5443693637ca850b1.mp4",
    "clip_sha256": "138660c39fa7473fe71a9b7affffb625ae5270e8cd5b00d5443693637ca850b1",
-   "request_sha256": "09fe2e7fb25f2fa3f94ade21d8558a26ed3ce2dbd7e5393fbbd1a9286a66446d",
+   "request_sha256": "778dfbc3bc63774a4b0e8971e52d214f1ba58b3d692989f54658a3d6ef4d77fc",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "09fe2e7fb25f2fa3f94ade21d8558a26ed3ce2dbd7e5393fbbd1a9286a66446d"
   },
   "s-mob": {
    "asset": "shot-genesis-08-short-s-mob-sha256-bf81488faeeb03c3962ac717f5986e70cb35bc17d73feeb066b2dd22fe26f40e.mp4",
    "clip_sha256": "bf81488faeeb03c3962ac717f5986e70cb35bc17d73feeb066b2dd22fe26f40e",
-   "request_sha256": "929e5f18c01d70fab57361f06142b1d6535294d716cdefa30a7a8d84d830bddd",
+   "request_sha256": "cd411028320e5ec4694a266cd8b20737b56886ecdbd2802c221de408166f390d",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "929e5f18c01d70fab57361f06142b1d6535294d716cdefa30a7a8d84d830bddd"
   },
   "s-peg": {
    "asset": "shot-genesis-08-short-s-peg-sha256-97bd5e03f1cc8c8e3a4eb359d3b052d49a69275e6401bfb53e1723a2292efb85.mp4",
    "clip_sha256": "97bd5e03f1cc8c8e3a4eb359d3b052d49a69275e6401bfb53e1723a2292efb85",
-   "request_sha256": "c85607d41dd2bcc359c27c6ced7840bbf0f64520d197bdaa2c8fa573a7adab4a",
+   "request_sha256": "e21e0b545db957e0d55182d0a4be7c095ad74b207b9600e01bfa9fbe8c781229",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "c85607d41dd2bcc359c27c6ced7840bbf0f64520d197bdaa2c8fa573a7adab4a"
   },
   "s-pitch": {
    "asset": "shot-genesis-08-short-s-pitch-sha256-cc36c90147ff2679cef3bb6ac08fc6229d61f445a7a85117c55a8e72728e1d48.mp4",
    "clip_sha256": "cc36c90147ff2679cef3bb6ac08fc6229d61f445a7a85117c55a8e72728e1d48",
-   "request_sha256": "13cdf224a90440f5bb63dbcb1ac3e9c61506414cf2ad554b976fb7f48b0e2feb",
+   "request_sha256": "1c1280dfb7a4b1287d5b04cbea22627158aee409b36d6dbe76b0d9926857347e",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "13cdf224a90440f5bb63dbcb1ac3e9c61506414cf2ad554b976fb7f48b0e2feb"
   },
   "s-ribs": {
    "asset": "shot-genesis-08-short-s-ribs-sha256-2e0da53e2c9d27a5d32d9b1f962a8392df72689e0e6bbdffecf48a9710de07e2.mp4",
    "clip_sha256": "2e0da53e2c9d27a5d32d9b1f962a8392df72689e0e6bbdffecf48a9710de07e2",
-   "request_sha256": "eab1c5e569713cdbe0591b03717fc9617d32299758002c9fea60d744137fbc77",
+   "request_sha256": "4a65c2bcc35c69445dd557ec7b520fc34b65e1b791608b434561dd2e5c3eb2b8",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "eab1c5e569713cdbe0591b03717fc9617d32299758002c9fea60d744137fbc77"
   },
   "s-ridge": {
    "asset": "shot-genesis-08-short-s-ridge-sha256-86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0.mp4",
    "clip_sha256": "86cc59f21723dc8fd1b1a21c210e4d457dd1a73044858e0f6d370a35cb0071a0",
-   "request_sha256": "44f6d4f538e7bd2a7732d32b0f09ac1527876837cfcc7a891415e0158e11e539",
+   "request_sha256": "f04248a992e8b565ce8505a7d6a91600731621d2a41d1745b65456e869faff3c",
    "score": 9.5,
    "note": "Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)",
    "probe_record": "migration/evidence/shots/genesis-08-short/40477936323.json",
    "run_id": "40477936323",
    "source_run": null,
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "44f6d4f538e7bd2a7732d32b0f09ac1527876837cfcc7a891415e0158e11e539"
   },
   "s-rope": {
    "asset": "shot-genesis-08-short-s-rope-sha256-347a638a03e2de473be17bf35d916f8915a4d95ecc6df748718454b041ff9dc0.mp4",
    "clip_sha256": "347a638a03e2de473be17bf35d916f8915a4d95ecc6df748718454b041ff9dc0",
-   "request_sha256": "63c0394b7fa2d35baef2f1d1394d705b5a4f656f62040f3296e873835ca083cc",
+   "request_sha256": "e5f188e97952b33ed7db14ff812c7a5c2296facc2377a32d4521dd9b17a5c6ce",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "63c0394b7fa2d35baef2f1d1394d705b5a4f656f62040f3296e873835ca083cc"
   },
   "s-scorn": {
    "asset": "shot-genesis-08-short-s-scorn-sha256-f3fceda82760232322c14ac7e99ee6e2c17a0443ff229d83fc4193add35d01fa.mp4",
    "clip_sha256": "f3fceda82760232322c14ac7e99ee6e2c17a0443ff229d83fc4193add35d01fa",
-   "request_sha256": "d18cf0648996fce1e4f01b701ee51b4d8d0f191aa12c53fa9fc90ad2916eb88a",
+   "request_sha256": "93d059b83131c91990b536bf5c0c4791acfc03dffac3dc0bf8321c1defad9e45",
    "score": 9.5,
    "note": "Claude frame review of composed run 40460764662 (regenerated shot): passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "d18cf0648996fce1e4f01b701ee51b4d8d0f191aa12c53fa9fc90ad2916eb88a"
   },
   "s-silent": {
    "asset": "shot-genesis-08-short-s-silent-sha256-188b748855e628a221720cd7fcc444c97eb9ce87aa4374b39978a963973aba5a.mp4",
    "clip_sha256": "188b748855e628a221720cd7fcc444c97eb9ce87aa4374b39978a963973aba5a",
-   "request_sha256": "8c38813f53bf77408e77457efbf685c6ade96b2ba14b8f5df2a9197cb3bd5a95",
+   "request_sha256": "fdee76ffa740343875300f21956e8b8d8e468d524c1efc86cbfd38fbe0635a2b",
    "score": 9.5,
    "note": "Claude frame review of composed run 40460764662 (regenerated shot): passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "8c38813f53bf77408e77457efbf685c6ade96b2ba14b8f5df2a9197cb3bd5a95"
   },
   "s-steady": {
    "asset": "shot-genesis-08-short-s-steady-sha256-27a5326bec44678bd4818de43b6fcfbe22489b162516832ef741c2fa9699ead4.mp4",
    "clip_sha256": "27a5326bec44678bd4818de43b6fcfbe22489b162516832ef741c2fa9699ead4",
-   "request_sha256": "77e3042438cc64cda6e099a264cc2557e7b3eabaa780ffddfbc3cc271bdcf32c",
+   "request_sha256": "afa91f13a537a8d180001a641e9ffed6956334bad20eb12afb240968c6c0dc9b",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "77e3042438cc64cda6e099a264cc2557e7b3eabaa780ffddfbc3cc271bdcf32c"
   },
   "s-stones": {
    "asset": "shot-genesis-08-short-s-stones-sha256-1a44a03549bdf277047a0d35647313ed1805d44d70db2ef630a267ff3a3cf4da.mp4",
    "clip_sha256": "1a44a03549bdf277047a0d35647313ed1805d44d70db2ef630a267ff3a3cf4da",
-   "request_sha256": "4d4d16f17b11c2ea9a6cd4b24b554798577b067fde8c0f38ebeff8b31d944d80",
+   "request_sha256": "bfee6ac5366129e186b302efe720916b658f86476daa7e2554db930fa4ccb614",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "4d4d16f17b11c2ea9a6cd4b24b554798577b067fde8c0f38ebeff8b31d944d80"
   },
   "s-timber": {
    "asset": "shot-genesis-08-short-s-timber-sha256-7be6a4c29a954965364c39d236c4fa00837fba94d423dffd2cbb02e4571fd0a3.mp4",
    "clip_sha256": "7be6a4c29a954965364c39d236c4fa00837fba94d423dffd2cbb02e4571fd0a3",
-   "request_sha256": "6054c678ac603f54ae34c044db0b9885df5fa719450e2fd8c761a5130ee017a1",
+   "request_sha256": "91cb890395606052b6daf6eb8e82149b9f22d89a018ec9d282e497ea1a46873f",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "6054c678ac603f54ae34c044db0b9885df5fa719450e2fd8c761a5130ee017a1"
   },
   "s-torches": {
    "asset": "shot-genesis-08-short-s-torches-sha256-5286a7520c5c45441a724fff2a8431206898d107eac8ae246c2c39dbffef824e.mp4",
    "clip_sha256": "5286a7520c5c45441a724fff2a8431206898d107eac8ae246c2c39dbffef824e",
-   "request_sha256": "cdf798d1b6b057cbaad628da7976de5c0b2c69c98000d5c789b64a2cd1054fa3",
+   "request_sha256": "9c54da64c39a50b91bd289317fc3334912fbb8d43333ceff6c8b29e0f5cf2393",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "cdf798d1b6b057cbaad628da7976de5c0b2c69c98000d5c789b64a2cd1054fa3"
   },
   "s-valley": {
    "asset": "shot-genesis-08-short-s-valley-sha256-ee00ba649088ac091d0ada31db57ca0ed80316f4856f1be784e39cd0fc0be223.mp4",
    "clip_sha256": "ee00ba649088ac091d0ada31db57ca0ed80316f4856f1be784e39cd0fc0be223",
-   "request_sha256": "610634e4fdfb88b10bd1f2aba721e5f8ddeb9129a6b0398aa22a943d5bebb876",
+   "request_sha256": "5e17106650459570dfce811d6dd9a0f2691c1fbbdd8febee331a3f9f4fb9eebb",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "610634e4fdfb88b10bd1f2aba721e5f8ddeb9129a6b0398aa22a943d5bebb876"
   },
   "s-voice": {
    "asset": "shot-genesis-08-short-s-voice-sha256-16664d5c5581cb1f1333f4516ce1c634dc84eeed2b813cce550ec0eb68ff58cd.mp4",
    "clip_sha256": "16664d5c5581cb1f1333f4516ce1c634dc84eeed2b813cce550ec0eb68ff58cd",
-   "request_sha256": "a68f0514765aa40a98a40de0bfb39ed444a041ea3acce42d5b7ac3b771f1003d",
+   "request_sha256": "0fb3b5fc66a2de9d90ef33aec052117c67acc206ac7d669a76770cdde2647925",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 8,
+   "rekeyed_from": "a68f0514765aa40a98a40de0bfb39ed444a041ea3acce42d5b7ac3b771f1003d"
   },
   "s-watchers": {
    "asset": "shot-genesis-08-short-s-watchers-sha256-013b3b0837672fc32b9a693d6b23021d6841e78afc5c45a57bbbb58ea3a5606d.mp4",
    "clip_sha256": "013b3b0837672fc32b9a693d6b23021d6841e78afc5c45a57bbbb58ea3a5606d",
-   "request_sha256": "6b9f583c163e21b78787dd5baf08a339a9203194c2ccf60e8de26714c1ccbe80",
+   "request_sha256": "1c489286c3d359f25f7f460b6c75a7e306eeeea84a1e050ece05aeefd12e2f27",
    "score": 9.5,
    "note": "Claude frame review of composed run 40460764662 (regenerated shot): passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "6b9f583c163e21b78787dd5baf08a339a9203194c2ccf60e8de26714c1ccbe80"
   },
   "s-wedding": {
    "asset": "shot-genesis-08-short-s-wedding-sha256-aa0be47285ecaaf33e943719a9b4b242dff88dc66a335a11b4358609de371c66.mp4",
    "clip_sha256": "aa0be47285ecaaf33e943719a9b4b242dff88dc66a335a11b4358609de371c66",
-   "request_sha256": "17215d990cda0a980d96be0a43f4606d0619f45bed6b356bf107c4c7e7db4845",
+   "request_sha256": "1a4ce311479c4c55a3c20e91e460a63413a5307a283e14af8b840031b6d891b3",
    "score": 9.5,
    "note": "Claude frame review of composed run 40438106839: passes the 9.5 floor",
    "probe_record": "migration/evidence/shots/genesis-08-short/40474519661.json",
    "run_id": "40474519661",
    "source_run": "40460764662",
-   "approved_at": "2026-10-27"
+   "approved_at": "2026-10-27",
+   "clip_seconds": 6,
+   "rekeyed_from": "17215d990cda0a980d96be0a43f4606d0619f45bed6b356bf107c4c7e7db4845"
   }
  }
 }

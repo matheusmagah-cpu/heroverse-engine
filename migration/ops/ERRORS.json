@@ -1015,6 +1015,29 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E118",
+   "date": "2026-10-27",
+   "class": [
+    "env-vs-test",
+    "random"
+   ],
+   "prior": [
+    "E105",
+    "E114",
+    "E116"
+   ],
+   "error": "episode.yml run 40483267526 (genesis-08-short, all 32 shots approved, preflight PASS locally) stopped in generate with SHOT_REQUEST_CHANGED k-insight. Local Kokoro measured the voice at 174.0 s, the runner at 173.929 s; k-insight is a voice-over Keeper shot whose clip seconds are derived from its measured line (shot_seconds: ceil of the time it covers), so the integer seconds in its request digest flipped across a rounding boundary between machines. Root cause: E114's request identity (and the #442 review fix, which removed only the measured floats) still held a value derived from a measurement: the digest was machine-dependent by construction.",
+   "fix": "The request digest holds nothing derived from a measurement: `seconds` left episode_build.request_digest's canonical form (prompt, aspect, sound, references by record sha256, speaker/voice/words, frames remain). Length is checked as coverage instead: approve-shot records the seconds a clip was generated at (`clip_seconds`, from the probe record), the preflight records the clip seconds its measured layout needs per shot (requests.needs, clip_needs), verify-preflight refuses SHOT_CLIP_TOO_SHORT when an approved clip is shorter, and the build checks again against its own layout with MEASURE_TOLERANCE (0.1 s) of slack, so a runner measuring within it of the local preflight never refuses what verify passed (class A in refusal_registry). The existing genesis-08 approvals were re-keyed by rekey_shots_e118.py from the current plan, each only when its old digest equals both its probe record's form and the committed preflight's digest and the new form equals the old one without `seconds`.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_the_request_digest_holds_nothing_derived_from_a_measurement",
+    "covers": [
+     "env-vs-test",
+     "random"
+    ]
+   }
   }
  ]
 }
