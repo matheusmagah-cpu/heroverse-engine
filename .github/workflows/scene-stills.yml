@@ -1,0 +1,79 @@
+name: HeroVerse scene stills (image first; FLUX on the Workers AI free allocation; candidates for Claude's review)
+# Owner, 27/10: a scene shot may start from an APPROVED still (`first_frame`, Pavo frames_to_video), so Claude reviews
+# cheap stills of a whole episode before any video. This makes 1-3 candidates of each named shot's stills from the
+# prompt in bible/stills/<still-id>.json (scene_stills.py prepare refuses one that fails the scene rules), crops
+# FLUX's square to 9:16, upscales on CPU and pushes the candidates and a contact sheet to branch
+# claude/stills-<episode>-<run>. Nothing is approved here: `scene_stills.py approve`, by PR, after Claude's review.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Plan path (migration/production/bible/plans/<episode-id>.json)
+        required: true
+      shots:
+        description: Comma list of the plan's shot ids whose first_frame/last_frame stills to make
+        required: true
+      candidates:
+        description: Candidates per still (1-3; each is one FLUX image of the ~44 a day)
+        required: false
+        default: "2"
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-scene-stills
+  cancel-in-progress: false
+jobs:
+  stills:
+    # the Cloudflare secret only on a manual run of main
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions:
+      contents: write   # the review branch only
+    env:
+      PLAN: ${{ inputs.plan }}
+      SHOTS: ${{ inputs.shots }}
+      CANDIDATES: ${{ inputs.candidates }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a6384d28432b16b02970b4ffe92731ce' }}  # account id is an identifier, not a credential
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - id: plan
+        name: Inputs checked; the candidates' prompts through the scene rules
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          echo "episode=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+          test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
+          [[ "$SHOTS" =~ ^[a-z0-9][a-z0-9-]{0,40}(,[a-z0-9][a-z0-9-]{0,40}){0,19}$ ]] || { echo "SHOTS_REFUSED"; exit 1; }
+          [[ "$CANDIDATES" =~ ^[1-3]$ ]] || { echo "STILL_CANDIDATES_INVALID"; exit 1; }
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo CLOUDFLARE_API_TOKEN_MISSING; exit 1; }
+          python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/bible/scene_stills.py prepare "$PLAN" "$SHOTS" "$CANDIDATES" "$GITHUB_RUN_ID" "$RUNNER_TEMP/stills.json"
+      - name: Generate (FLUX schnell, square) and crop to 9:16
+        run: |
+          set -o pipefail   # E54
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "$RUNNER_TEMP/stills.json" "$RUNNER_TEMP/img" flux | tee "$RUNNER_TEMP/gen.log"
+          ls "$RUNNER_TEMP"/img/*.png >/dev/null 2>&1 || { grep -q CF_ALLOCATION_EXHAUSTED_DEFERRED "$RUNNER_TEMP/gen.log" && echo "CF_ALLOCATION_EXHAUSTED_DEFERRED (E62): dispatch again after 00:00 UTC"; echo NO_IMAGE_MADE; exit 1; }
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/bible/scene_stills.py crop "$RUNNER_TEMP/img"
+      - name: Super-resolution on CPU (Real-ESRGAN general x4v3 compact, BSD-3)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/up"
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/realesr-general-x4v3.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+          echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/realesr-general-x4v3.pth" "$RUNNER_TEMP"/img/*.png
+      - name: Candidates, contact sheet, review branch
+        env:
+          EPISODE: ${{ steps.plan.outputs.episode }}
+        run: |
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/bible/scene_stills.py finalize "$RUNNER_TEMP/img" "$GITHUB_RUN_ID"
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/bible/scene_stills.py sheet "$GITHUB_RUN_ID" "migration/production/bible/stills/sheets/$EPISODE-$GITHUB_RUN_ID.jpg"
+          branch="claude/stills-$EPISODE-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add migration/production/bible/stills
+          git commit -q -m "Record scene stills images from Cloudflare Workers AI (flux, run $GITHUB_RUN_ID; candidates for Claude's review)"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "::notice::candidates and sheet on branch $branch"
