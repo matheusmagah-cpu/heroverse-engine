@@ -854,6 +854,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "NO_PROBE_RECORD": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
   "NO_RENDER_ADDED": {
    "class": "D",
    "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
@@ -1068,6 +1072,14 @@
    ],
    "note": "E114: shot-probe.yml's inputs checked by probe_ids in its first step, before any secret"
   },
+  "PROBE_EPISODE_MISMATCH": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
+  "PROBE_RUN_REFUSED": {
+   "class": "N",
+   "why": "E114: shot-probe.yml's record job (no secret) checks its own probe job's record before any upload; it stops no generation, voice or render"
+  },
   "PROBE_SHOTS_REFUSED": {
    "class": "A",
    "early": [
@@ -1172,30 +1184,6 @@
    ],
    "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
   },
-  "REGENERATE_REFUSED": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
-  "REGENERATE_UNKNOWN_SHOT": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
-  "REGENERATE_WITHOUT_RESUME": {
-   "class": "A",
-   "early": [
-    ".github/workflows/episode.yml::episode_build.py check-regenerate",
-    "migration/production/bible/episode_build.py::def regenerate_ids("
-   ],
-   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
-  },
   "RENDER_HOLD": {
    "class": "D",
    "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
@@ -1224,10 +1212,6 @@
   "RESUMED_FROM": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
-  "RESUME_RUN": {
-   "class": "N",
-   "why": "an environment variable: episode.yml passes its resume_run input through the env (review of #426), read by regenerate_ids"
   },
   "RESUME_RUN_REFUSED": {
    "class": "A",
@@ -1306,18 +1290,22 @@
     ".github/workflows/episode.yml::episode_build.py check-regenerate",
     "migration/production/bible/episode_build.py::def regenerate_ids("
    ],
-   "note": "E114: episode.yml's `regenerate` never names a shot with an approved clip; check-regenerate runs the same regenerate_ids in the plan step before any secret; a rejected clip is replaced by shot-probe.yml and a new approval"
+   "note": "E114: the build generates nothing, so episode.yml's `regenerate` input is refused whatever it names; check-regenerate runs the same regenerate_ids in the plan step before any secret. A rejected clip is replaced by shot-probe.yml and a new approval"
   },
   "SHOT_ASSET_NAME_REFUSED": {
    "class": "I",
-   "guard": ".github/workflows/shot-probe.yml::SHOT_ASSET_NAME_REFUSED",
-   "note": "E114: approve-shot copies the asset name from the probe record, which shot-probe.yml writes as shot-<episode>-<shot>-sha256-<sha>.mp4 (shot_asset_name) and checks before the upload; fetch_shot_clip refuses any other name before a download"
+   "guard": "migration/production/bible/episode_build.py::def probe_assets(",
+   "note": "E114: approve-shot copies the asset name from the sealed probe record, whose names probe_assets checks against shot_asset_name and the clip's sha256 before the upload; fetch_shot_clip refuses any other name before a download"
   },
   "SHOT_CHECKS_FAILED": {
    "class": "N",
    "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },
   "SHOT_CLIP_NOT_IN_RECORD": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
+  "SHOT_CLIP_NOT_UPLOADED": {
    "class": "N",
    "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },
@@ -1366,7 +1354,7 @@
    "class": "N",
    "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },
-  "SHOT_SCORE_UNDER_FLOOR": {
+  "SHOT_SCORE_OUT_OF_RANGE": {
    "class": "N",
    "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },

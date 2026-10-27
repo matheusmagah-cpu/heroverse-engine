@@ -473,7 +473,7 @@ class Compose(unittest.TestCase):
 
 
 class Gating(unittest.TestCase):
-    """generate_step with a stubbed Pavo, download, clip_check, lipsync_check and face check: every talking clip is
+    """generate_clips (shot-probe.yml's generation engine, E114) with a stubbed Pavo, download, clip_check, lipsync_check and face check: every talking clip is
     judged against its own line's WAV; God's voice-over shot is not lip-checked but must show no face; scenes and
     God's shot lose Pavo's audio track."""
     def setUp(self):
@@ -499,8 +499,8 @@ class Gating(unittest.TestCase):
         n = len(self.plan["shots"]) + extra
         client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
                             {str(i): [done(str(i))] for i in range(n)})
-        report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
-                                  download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        report = eb.generate_clips(self.plan, self.work, "py", "model", client=client,
+                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
         return client, report
 
     def test_an_invalid_request_is_refused_before_any_generation(self):
@@ -508,57 +508,11 @@ class Gating(unittest.TestCase):
         # the shots generated before it; now every request is validated offline first
         client = FakeClient([{"conversation_id": "0", "status": "submitted"}], {"0": [done("0")]})
         with self.assertRaises(SystemExit) as err:
-            eb.generate_step(self.plan, self.work, "py", "model", client=client, validate=True,
-                             download=lambda url, dst: None, sleep=lambda s: None)
+            eb.generate_clips(self.plan, self.work, "py", "model", client=client, validate=True,
+                              download=lambda url, dst: None, sleep=lambda s: None)
         self.assertTrue(str(err.exception).startswith("REQUESTS_REFUSED"), err.exception)
         self.assertIn("INPUT_IMAGE_PATH_REFUSED", str(err.exception))
         self.assertEqual(client.calls, [])
-
-    def test_a_rerun_keeps_the_clips_already_made_and_regenerates_only_the_rest(self):
-        # E93: run 40263488773 lost 25 good clips when Pavo went unreachable at shot 26; a resumed run starts there
-        first, report = self.generate()
-        kept = self.plan["shots"][0]["id"]
-        report["shots"].pop(self.plan["shots"][-1]["id"])                       # the shot the outage stopped
-        (self.work / "clips" / f"{self.plan['shots'][-1]['id']}.mp4").unlink()
-        (self.work / "report.json").write_text(json.dumps(report))
-        client, again = self.generate()
-        self.assertEqual(len(client.calls), 1)                                   # only the missing shot
-        self.assertEqual(again["shots"][kept], report["shots"][kept])
-        changed = json.loads((self.work / "report.json").read_text())
-        changed["shots"][kept]["request"]["prompt"] = "an older prompt"         # a changed request is regenerated
-        (self.work / "report.json").write_text(json.dumps(changed))
-        client, _ = self.generate()
-        self.assertEqual(len(client.calls), 1)
-
-    def test_regenerate_forces_only_the_named_shots_of_a_resume_and_records_them(self):
-        # review of #426: after Claude's frame review rejects a clip, a resume redoes only that shot, its prompt
-        # unchanged (episode.yml `regenerate`), instead of editing prompts to force it
-        first, report = self.generate()
-        forced = self.plan["shots"][1]["id"]
-        n = len(self.plan["shots"])
-        client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
-                            {str(i): [done(str(i))] for i in range(n)})
-        again = eb.generate_step(self.plan, self.work, "py", "model", client=client, regenerate=[forced],
-                                 download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
-        self.assertEqual(len(client.calls), 1)                                   # only the forced shot
-        self.assertEqual(again["regenerated"], [forced])
-        self.assertTrue(again["shots"][forced]["regenerated"])
-        self.assertEqual(again["shots"][forced]["attempts"][0]["conversation_id"], "0")
-        self.assertFalse(any(v.get("regenerated") for k, v in again["shots"].items() if k != forced))
-        saved = json.loads((self.work / "report.json").read_text())
-        self.assertEqual(saved["regenerated"], [forced])
-        # the same through the env, as episode.yml passes it
-        old = {k: os.environ.get(k) for k in ("REGENERATE", "RESUME_RUN")}
-        os.environ.update(REGENERATE=f" {forced} ", RESUME_RUN="40341856955")
-        try:
-            client, _ = self.generate()
-        finally:
-            for k, v in old.items():
-                os.environ.pop(k, None) if v is None else os.environ.__setitem__(k, v)
-        self.assertEqual(len(client.calls), 1)
-        client, last = self.generate()                                           # no input: every clip kept
-        self.assertEqual(client.calls, [])
-        self.assertNotIn("regenerated", last)
 
     def approvals(self, clip=b"approved clip"):
         layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
@@ -576,53 +530,75 @@ class Gating(unittest.TestCase):
         def fetch(name, dst):
             fetched.append(name)
             Path(dst).write_bytes(b"approved clip")
-        client = FakeClient([])
-        report = eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals,
-                                  fetch=fetch, download=lambda url, dst: None, sleep=lambda s: None, regenerate=[])
-        self.assertEqual(client.calls, [])
-        self.assertEqual(sorted(fetched), sorted(a["asset"] for a in approvals.values()))
-        self.assertEqual(sorted(checked), sorted(f"{s['id']}.mp4" for s in self.plan["shots"]))
-        self.assertTrue(all(v["approved"]["asset"] == approvals[k]["asset"] for k, v in report["shots"].items()))
-        self.assertTrue(len(self.lip) > 0)                                       # talking clips lip-checked again
-        # a resume keeps an approved clip already on disk (same sha256) without downloading it again
-        fetched.clear()
-        eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
-                         download=lambda url, dst: None, sleep=lambda s: None, regenerate=[])
-        self.assertEqual((fetched, client.calls), ([], []))
-        # a regenerate of an approved shot is refused: a rejected clip is replaced by shot-probe.yml + a new approval
-        sid = self.plan["shots"][0]["id"]
-        with self.assertRaises(SystemExit) as err:
-            eb.regenerate_ids(self.plan, sid, "40341856955", approvals)
-        self.assertTrue(str(err.exception).startswith(f"SHOT_APPROVED_USE_PROBE {sid}"))
-        with self.assertRaises(SystemExit) as err:
-            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
-                             regenerate=[sid], download=lambda url, dst: None, sleep=lambda s: None)
-        self.assertTrue(str(err.exception).startswith("SHOT_APPROVED_USE_PROBE"))
-        # a clip approved for another request is never shipped
-        changed = dict(approvals, **{sid: dict(approvals[sid], request_sha256="0" * 64)})
-        with self.assertRaises(SystemExit) as err:
-            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=changed, fetch=fetch,
-                             regenerate=[], download=lambda url, dst: None, sleep=lambda s: None)
-        self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {sid}")
-        # another file under the asset's name is refused; an approved clip failing the checks stops the run, never
-        # a generation in its place
-        for f in (self.work / "clips").glob("*.mp4"):
-            f.unlink()
-        with self.assertRaises(SystemExit) as err:
-            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals,
-                             fetch=lambda name, dst: Path(dst).write_bytes(b"other"), regenerate=[],
-                             download=lambda url, dst: None, sleep=lambda s: None)
-        self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
-        eb.clip_flags = lambda path: ["BLACK_FRAMES"]
-        with self.assertRaises(SystemExit) as err:
-            eb.generate_step(self.plan, self.work, "py", "model", client=client, approvals=approvals, fetch=fetch,
-                             regenerate=[], download=lambda url, dst: None, sleep=lambda s: None)
-        self.assertIn("SHOT_APPROVED_CLIP_FAILED", str(err.exception))
-        self.assertEqual(client.calls, [])
+        saved = eb.submit
+        eb.submit = lambda *a, **k: self.fail("the build submitted a generation")
+        try:
+            with self.assertRaises(SystemExit) as err:                # no approved clip: refused before any fetch
+                eb.generate_step(self.plan, self.work, "py", "model", approvals={}, fetch=fetch)
+            self.assertTrue(str(err.exception).startswith("SHOT_NOT_REVIEWED"), err.exception)
+            self.assertEqual(fetched, [])
+            report = eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals, fetch=fetch)
+            self.assertEqual(sorted(fetched), sorted(a["asset"] for a in approvals.values()))
+            self.assertEqual(sorted(checked), sorted(f"{s['id']}.mp4" for s in self.plan["shots"]))
+            self.assertTrue(all(v["approved"]["asset"] == approvals[k]["asset"] for k, v in report["shots"].items()))
+            self.assertTrue(len(self.lip) > 0)                                   # talking clips lip-checked again
+            # a resume keeps an approved clip already on disk (same sha256) without downloading it again
+            fetched.clear()
+            eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals, fetch=fetch)
+            self.assertEqual(fetched, [])
+            # a clip approved for another request is never shipped
+            sid = self.plan["shots"][0]["id"]
+            changed = dict(approvals, **{sid: dict(approvals[sid], request_sha256="0" * 64)})
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(self.plan, self.work, "py", "model", approvals=changed, fetch=fetch)
+            self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {sid}")
+            # another file under the asset's name is refused; an approved clip failing the checks stops the run
+            for f in (self.work / "clips").glob("*.mp4"):
+                f.unlink()
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals,
+                                 fetch=lambda name, dst: Path(dst).write_bytes(b"other"))
+            self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
+            eb.clip_flags = lambda path: ["BLACK_FRAMES"]
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals, fetch=fetch)
+            self.assertIn("SHOT_APPROVED_CLIP_FAILED", str(err.exception))
+        finally:
+            eb.submit = saved
+        # the build step holds no Pavo secret and constructs no client
+        src = (eb.HERE / "episode_build.py").read_text()
+        build = src[src.index("def generate_step("):src.index("# ---------- shot probe and approval")]
+        self.assertNotIn("PavoVideoClient", build)
+        wf = (eb.REPO / ".github/workflows/episode.yml").read_text()
+        self.assertNotIn("PAVO_TOKEN", wf)
+
+    def test_the_request_digest_ignores_measured_seconds_but_not_the_words(self):
+        # E114 (review of #442): Kokoro measures differ between the local preflight and the runners by a few ms; the
+        # digest covers what decides the clip (the clip seconds sent, discrete) and the words, never a measured float
+        layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
+        moved = copy.deepcopy(layout)
+        for group in ("keeper", "speakers"):
+            for rec in moved.get(group, {}).values():
+                for k in ("start", "end", "seconds"):
+                    if isinstance(rec.get(k), (int, float)):
+                        rec[k] = round(rec[k] + 0.04, 3)
+        talk = [(i, s) for i, s in enumerate(self.plan["shots"]) if eb.plan_check.talking(s)]
+        self.assertTrue(talk)
+        for i, s in talk:
+            a = eb.request_identity(s, i, self.plan, layout, refs)
+            b = eb.request_identity(s, i, self.plan, moved, refs)
+            self.assertEqual(a[1]["seconds"], b[1]["seconds"])
+            self.assertEqual(a[0], b[0], s["id"])
+            self.assertNotIn("seconds", a[1]["audio"])
+        i, s = next((i, s) for i, s in talk if eb.plan_check.speaking(s))
+        edited = copy.deepcopy(self.plan)
+        edited["shots"][i]["line"] = edited["shots"][i]["line"] + " Amen"
+        self.assertNotEqual(eb.request_identity(edited["shots"][i], i, edited, layout, refs)[0],
+                            eb.request_identity(s, i, self.plan, layout, refs)[0])
 
     def test_a_probe_generates_the_build_request_and_approval_copies_its_hashes(self):
         # E114: shot-probe.yml generates exactly the request the build sends, with the build's checks; approve-shot
-        # copies the reviewed clip's hashes from the probe record (nobody hand-edits them), only at >= 9.5
+        # copies the reviewed clip's hashes from the sealed probe record (nobody hand-edits them), only at 9.5-10
         ids, n = eb.probe_ids(self.plan, f" {self.plan['shots'][0]['id']} ", "2")
         for text, attempts in (("", "2"), ("x;y", "2"), ("no-such-shot", "2"), (ids[0], "0"), (ids[0], "7")):
             with self.assertRaises(SystemExit):
@@ -639,46 +615,58 @@ class Gating(unittest.TestCase):
         self.assertEqual(client.calls, [build_req, build_req])
         entry = record["shots"][ids[0]]
         self.assertEqual(entry["request_sha256"], eb.request_identity(self.plan["shots"][0], 0, self.plan, layout, refs)[0])
-        self.assertEqual(len(entry["clips"]), 2)
-        self.assertEqual(len(sheets), 2)
+        self.assertEqual((len(entry["clips"]), len(sheets)), (2, 2))
         clip = entry["clips"][0]
         self.assertEqual(clip["clip_sha256"], eb.sha256(out / clip["asset"]))
-        self.assertTrue(eb.SHOT_ASSET.fullmatch(clip["asset"]))
+        self.assertEqual(clip["asset"], eb.shot_asset_name(self.plan["episode"], ids[0], clip["clip_sha256"]))
+        self.assertEqual(eb.probe_assets(out, self.plan["episode"]), [clip["asset"]])
+        with self.assertRaises(SystemExit) as err:
+            eb.probe_assets(self.work / "nothing", self.plan["episode"])
+        self.assertTrue(str(err.exception).startswith("NO_PROBE_RECORD"))
         records = eb.REPO / "migration" / "evidence" / "shots"
         rec = Path(tempfile.mkdtemp(dir=records.parent, prefix=".test-shots-"))
+        records.mkdir(parents=True, exist_ok=True)
+        unsealed, path = records / f".test-{os.getpid()}-raw.json", records / f".test-{os.getpid()}.json"
         try:
             with self.assertRaises(SystemExit) as err:                             # outside evidence/shots/
                 eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
             self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
-            records.mkdir(parents=True, exist_ok=True)
-            path = records / f".test-{os.getpid()}.json"
-            shutil.copyfile(out / "probe.json", path)
-            try:
-                for score, note, code in (("9.4", "ok", "SHOT_SCORE_UNDER_FLOOR"), ("9.6", " ", "SHOT_NOTE_MISSING"),
-                                          ("x", "ok", "SHOT_SCORE_INVALID")):
-                    with self.assertRaises(SystemExit) as err:
-                        eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec)
-                    self.assertTrue(str(err.exception).startswith(code), err.exception)
-                approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean",
-                                           shots_dir=rec)
-                self.assertEqual((approved["clip_sha256"], approved["request_sha256"], approved["asset"]),
-                                 (clip["clip_sha256"], entry["request_sha256"], clip["asset"]))
-                self.assertEqual(eb.load_approvals(self.plan, rec / f"{self.plan['episode']}.json")[ids[0]], approved)
-                failed = json.loads(path.read_text())
-                failed["shots"][ids[0]]["clips"][0]["flags"] = ["FREEZE"]
-                path.write_text(json.dumps(failed))
+            shutil.copyfile(out / "probe.json", unsealed)                          # not from shot-probe's record job
+            with self.assertRaises(SystemExit) as err:
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+            self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
+            no_upload = dict(json.loads(unsealed.read_text()), run_id="40500000001")
+            unsealed.write_text(json.dumps(no_upload))
+            with self.assertRaises(SystemExit) as err:
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+            self.assertTrue(str(err.exception).startswith("SHOT_CLIP_NOT_UPLOADED"))
+            eb.probe_assets(out, self.plan["episode"], "40500000001", path)       # sealed after the upload
+            for score, note, code in (("9.4", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("10.5", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
+                                      ("nan", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("inf", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
+                                      ("9.6", " ", "SHOT_NOTE_MISSING"), ("x", "ok", "SHOT_SCORE_INVALID")):
                 with self.assertRaises(SystemExit) as err:
-                    eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec)
-                self.assertTrue(str(err.exception).startswith("SHOT_CHECKS_FAILED"))
-            finally:
-                path.unlink()
+                    eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec)
+                self.assertTrue(str(err.exception).startswith(code), (score, err.exception))
+            approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean", shots_dir=rec)
+            self.assertEqual((approved["clip_sha256"], approved["request_sha256"], approved["asset"], approved["run_id"]),
+                             (clip["clip_sha256"], entry["request_sha256"], clip["asset"], "40500000001"))
+            self.assertEqual(eb.load_approvals(self.plan, rec / f"{self.plan['episode']}.json")[ids[0]], approved)
+            failed = json.loads(path.read_text())
+            failed["shots"][ids[0]]["clips"][0]["flags"] = ["FREEZE"]
+            path.write_text(json.dumps(failed))
+            with self.assertRaises(SystemExit) as err:
+                eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec)
+            self.assertTrue(str(err.exception).startswith("SHOT_CHECKS_FAILED"))
         finally:
+            for f in (path, unsealed):
+                f.unlink(missing_ok=True)
             shutil.rmtree(rec)
 
     def test_a_clip_a_build_made_and_claude_approved_is_adopted_without_a_generation(self):
         # E114: genesis-08's clips approved inside build runs 40438106839/40460764662 are adopted from the run's
-        # artifact: the recorded request must equal the plan's request now, the build's checks run again
-        _, report = self.generate()
+        # artifact: what the run sent (its recorded request, the words of its input audio) must equal the plan's
+        # request now; a line edited after the run is refused; the build's checks run again
+        self.generate()
         run = self.work / "run"
         (run / "clips").mkdir(parents=True)
         for name in ("report.json", "layout.json"):
@@ -686,13 +674,18 @@ class Gating(unittest.TestCase):
         for f in (self.work / "clips").glob("*.mp4"):
             shutil.copyfile(f, run / "clips" / f.name)
         layout = json.loads((self.work / "layout.json").read_text())
-        made = []
-        for s in self.plan["shots"]:
+        items, carried = eb.plan_check.sequence(self.plan)
+        sentences, made = [], []
+        for i, s in enumerate(self.plan["shots"]):
             if eb.plan_check.talking(s):
-                wav = eb.REPO / eb.talk_record(layout, s)["wav"]
+                rec = eb.talk_record(layout, s)
+                sentences.append({"segment": "n", "text": " ".join(items[k]["text"] for k in carried[i]),
+                                  "start": rec["start"], "end": rec["end"]})
+                wav = eb.REPO / rec["wav"]
                 (run / "clips" / wav.name).write_bytes(b"wav")
                 if not wav.exists():
                     made.append(wav)
+        (run / "compose-timeline.json").write_text(json.dumps({"sentences": sentences}))
         saved = eb.ref_paths
         eb.ref_paths = lambda plan, work, chars=None: json.loads((self.work / "refs.json").read_text())
         try:
@@ -705,9 +698,15 @@ class Gating(unittest.TestCase):
             clip = record["shots"][sid]["clips"][0]
             self.assertEqual((clip["source_run"], clip["clip_sha256"]),
                              ("40460764662", eb.sha256(run / "clips" / f"{sid}.mp4")))
-            self.assertEqual(record["shots"][sid]["request_sha256"], eb.request_identity(
-                self.plan["shots"][0], 0, self.plan, layout, json.loads((self.work / "refs.json").read_text()))[0])
-            # a clip made from another request is never adopted
+            # a spoken line edited after the run: what the run sent no longer matches the plan
+            i, talker = next((i, s) for i, s in enumerate(self.plan["shots"]) if eb.plan_check.speaking(s)
+                             and eb.plan_check.talking(s))
+            edited = copy.deepcopy(self.plan)
+            edited["shots"][i]["line"] = talker["line"] + " Amen"
+            with self.assertRaises(SystemExit) as err:
+                eb.adopt_step(edited, run, "py", "model", out, ids, "40460764662", sheet=lambda video, sheet: None)
+            self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {talker['id']}")
+            # a prompt edited after the run
             older = json.loads((run / "report.json").read_text())
             older["shots"][sid]["request"]["prompt"] = "an older prompt"
             (run / "report.json").write_text(json.dumps(older))
@@ -719,27 +718,22 @@ class Gating(unittest.TestCase):
             for wav in made:
                 wav.unlink(missing_ok=True)
 
-    def test_regenerate_names_shots_of_this_plan_and_only_on_a_resume(self):
+    def test_regenerate_is_refused_whatever_it_names(self):
+        # E114: the build generates nothing; a rejected clip is replaced by shot-probe.yml and a new approval
         plan = dialogue_plan()
-        self.assertEqual(eb.regenerate_ids(plan, "", ""), [])
-        self.assertEqual(eb.regenerate_ids(plan, "s-a, s-god,s-a", "123456789"), ["s-a", "s-god"])
-        for text, code in (("s-a;rm -rf", "REGENERATE_REFUSED"), ("S-A", "REGENERATE_REFUSED"), ("s-a,", "REGENERATE_REFUSED"),
-                           ("$(id)", "REGENERATE_REFUSED"), ("s-zzz", "REGENERATE_UNKNOWN_SHOT")):
+        self.assertEqual(eb.regenerate_ids(plan, " ", "123456789"), [])
+        for text in ("s-a", "s-a,s-god", "$(id)"):
             with self.assertRaises(SystemExit) as err:
                 eb.regenerate_ids(plan, text, "123456789")
-            self.assertTrue(str(err.exception).startswith(code), (text, err.exception))
-        with self.assertRaises(SystemExit) as err:
-            eb.regenerate_ids(plan, "s-a", "")
-        self.assertTrue(str(err.exception).startswith("REGENERATE_WITHOUT_RESUME"))
-        # the CLI step episode.yml runs before any secret
-        with tempfile.TemporaryDirectory() as d:
+            self.assertTrue(str(err.exception).startswith("SHOT_APPROVED_USE_PROBE"), err.exception)
+        with tempfile.TemporaryDirectory() as d:                 # the CLI step episode.yml runs before any secret
             path = Path(d) / "plan.json"
             path.write_text(json.dumps(plan))
-            env = dict(os.environ, REGENERATE="s-zzz", RESUME_RUN="123456789")
+            env = dict(os.environ, REGENERATE="s-a", RESUME_RUN="123456789")
             r = subprocess.run([sys.executable, "-I", "-B", str(HERE / "episode_build.py"), "check-regenerate", str(path)],
                                capture_output=True, text=True, env=env)
             self.assertNotEqual(r.returncode, 0)
-            self.assertIn("REGENERATE_UNKNOWN_SHOT", r.stderr)
+            self.assertIn("SHOT_APPROVED_USE_PROBE", r.stderr)
 
     def test_episode_yml_passes_regenerate_through_the_env_and_checks_it_first(self):
         wf = (HERE.parents[2] / ".github" / "workflows" / "episode.yml").read_text()
@@ -1326,7 +1320,7 @@ class KeeperVoiceover(unittest.TestCase):
 
 
 class StillMouthGate(unittest.TestCase):
-    """generate_step on a voice-over Keeper shot: Pavo's audio stripped, no lipsync, the still-mouth check instead;
+    """generate_clips (shot-probe.yml's engine) on a voice-over Keeper shot: Pavo's audio stripped, no lipsync, the still-mouth check instead;
     MOUTH_TALKING is a failed generation (regenerated at most twice); a broken check stops the run."""
     def setUp(self):
         self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.still_mouth_flags, eb.run)
@@ -1353,8 +1347,8 @@ class StillMouthGate(unittest.TestCase):
         n = len(self.plan["shots"]) + extra
         client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
                             {str(i): [done(str(i))] for i in range(n)})
-        report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
-                                  download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        report = eb.generate_clips(self.plan, self.work, "py", "model", client=client,
+                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
         return client, report
 
     def test_a_voiceover_clip_is_still_mouth_checked_never_lip_checked_and_loses_pavos_audio(self):
@@ -1421,11 +1415,20 @@ class Workflow(unittest.TestCase):
         jobs = text.split("\n  record:\n")
         build, record = jobs[0], jobs[1]
         self.assertIn("github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'", build)
-        self.assertEqual(text.count("secrets."), 1)
-        self.assertNotIn("secrets.", record)
-        step = [s for s in build.split("\n      - ") if "secrets.PAVO_TOKEN" in s][0]
-        self.assertIn("episode_build.py generate", step)
+        self.assertEqual(text.count("secrets."), 0)    # E114: the build generates nothing and holds no Pavo secret
         self.assertIn("persist-credentials: false", build)
+        # the Pavo secret lives in shot-probe.yml's one generation step, a main-only manual run, never its record job
+        probe = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()
+        pjob, precord = probe.split("\n  record:\n")
+        self.assertIn("github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'", pjob)
+        self.assertEqual(probe.count("secrets."), 1)
+        self.assertNotIn("secrets.", precord)
+        step = [s for s in pjob.split("\n      - ") if "secrets.PAVO_TOKEN" in s][0]
+        self.assertIn("episode_build.py probe ", step)
+        self.assertIn("if: inputs.adopt_run == ''", step)
+        self.assertIn("persist-credentials: false", pjob)
+        for block in re.findall(r"run: \|\n((?:          .*\n?)+)", probe):
+            self.assertNotIn("${{", block)
         for line in text.splitlines():
             if "uses:" in line:
                 self.assertRegex(line, r"@[0-9a-f]{40}$", line)

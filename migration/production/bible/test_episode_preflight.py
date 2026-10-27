@@ -213,8 +213,9 @@ class Report(unittest.TestCase):
     def test_the_workflow_runs_verify_before_any_secret(self):
         wf = (pf.REPO / ".github" / "workflows" / "episode.yml").read_text()
         verify = wf.index("episode_build.py verify-preflight")
-        self.assertLess(verify, wf.index("secrets.PAVO_TOKEN"))
+        self.assertNotIn("secrets.", wf)                  # E114: the build holds no Pavo secret at all
         self.assertLess(verify, wf.index("pilot_render.py voice"))
+        self.assertLess(verify, wf.index("episode_build.py generate"))
 
     def test_the_still_mouth_negative_control_requires_mouth_talking(self):
         # review of #422: any nonzero exit counted as "flagged"; only MOUTH_TALKING proves the check sees a mouth

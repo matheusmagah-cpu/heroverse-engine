@@ -97,6 +97,7 @@ jobs:
           PY
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
+        if: inputs.adopt_run == ''   # an adopted clip is checked with its own run's layout and audio
         run: |
           python3 -I -B migration/production/bible/episode_build.py voice-script "$PLAN" "$WORK"
           python3 -I -B migration/production/pilot_render.py prepare "$WORK" HeroVerse_Linux_Source_Ready_20261013_v2.zip
@@ -107,6 +108,7 @@ jobs:
           "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$WORK" "$WORK/voice-script.json"
           python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
       - name: Approved reference images (sha256 checked, <= 1536 px JPEG)
+        if: inputs.adopt_run == ''   # an adopted clip is checked with its own run's layout and audio
         run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
       - name: Adopt the listed shots' clips from a build run (E114; no generation, the build's checks again), frame sheets
         if: inputs.adopt_run != ''
@@ -138,42 +140,31 @@ jobs:
       EP: ${{ needs.probe.outputs.episode }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - id: artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        continue-on-error: true   # no artifact: NO_PROBE_RECORD below, by name
         with:
           name: shot-probe-${{ needs.probe.outputs.episode }}-${{ github.run_id }}
           path: ${{ runner.temp }}/out
       - name: Every clip into the release under its content-hash name; sheets and record on claude/shot-probe-<id>-<run>
+        env:
+          ARTIFACT: ${{ steps.artifact.outcome }}
         run: |
           [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
           out="$RUNNER_TEMP/out"
-          [ -f "$out/probe.json" ] || { echo "NO_PROBE_RECORD"; exit 1; }
+          if [ ! -f "$out/probe.json" ]; then
+            echo "::error::NO_PROBE_RECORD: the probe job left no record (artifact download: $ARTIFACT); read the probe job's log"
+            exit 1
+          fi
           d="migration/evidence/shots/$EP"; mkdir -p "$d"
-          # each clip's sha256 is checked against the record and its name before it is uploaded
-          python3 -I - "$out" "$EP" "$GITHUB_RUN_ID" "$d/$GITHUB_RUN_ID.json" > "$RUNNER_TEMP/assets.txt" <<'PY'
-          import hashlib, json, re, sys
-          from pathlib import Path
-          out, ep, run_id, dst = Path(sys.argv[1]), sys.argv[2], sys.argv[3], sys.argv[4]
-          record = json.loads((out / "probe.json").read_text())
-          if record.get("episode") != ep:
-              sys.exit("PROBE_EPISODE_MISMATCH")
-          record["run_id"] = run_id
-          for sid, entry in record["shots"].items():
-              for clip in entry["clips"]:
-                  if not clip.get("asset"):
-                      continue
-                  name = clip["asset"]
-                  if not re.fullmatch(rf"shot-{re.escape(ep)}-{re.escape(sid)}-sha256-{clip['clip_sha256']}\.mp4", name):
-                      sys.exit(f"SHOT_ASSET_NAME_REFUSED {name}")
-                  if hashlib.sha256((out / name).read_bytes()).hexdigest() != clip["clip_sha256"]:
-                      sys.exit(f"SHOT_CLIP_SHA256_MISMATCH {name}")
-                  clip["sheet"] = f"{run_id}-{clip['sheet']}"   # the name it is pushed under
-                  print(name)
-          Path(dst).write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n")
-          PY
+          # episode_build's own names and sha256 (shot_asset_name), checked before the upload
+          python3 -I -B migration/production/bible/episode_build.py probe-assets "$out" "$EP" > "$RUNNER_TEMP/assets.txt"
           while read -r name; do
             [ -n "$name" ] || continue
             bash migration/ci/assets.sh upload "$out/$name" --repo "$GITHUB_REPOSITORY" --clobber
-          done < <(sort -u "$RUNNER_TEMP/assets.txt")
+          done < "$RUNNER_TEMP/assets.txt"
+          # sealed only after every upload: the run id and each uploaded clip (the only record approve-shot accepts)
+          python3 -I -B migration/production/bible/episode_build.py probe-assets "$out" "$EP" "$GITHUB_RUN_ID" "$d/$GITHUB_RUN_ID.json" >/dev/null
           for f in "$out"/*.jpg; do
             [ -f "$f" ] && cp "$f" "$d/$GITHUB_RUN_ID-$(basename "$f")"
           done

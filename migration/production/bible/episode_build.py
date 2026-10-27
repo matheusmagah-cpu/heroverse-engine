@@ -19,18 +19,12 @@ the episode record and dispatches publish-episode.yml.
                                                  checked), as JPEG <= 1536 px in WORK/refs; a talking speaker's
                                                  `talk_refs` speaking frame as "<id>:talk" (E95)
   episode_build.py generate PLAN WORK LIP_PYTHON FACE_MODEL
-                                                 one Pavo generation per shot, in order (PAVO_TOKEN from the env):
-                                                 fresh exact 0-credit quote (the adapter refuses any other price),
-                                                 poll job() until completed/failed, download from the Pavo CDN only,
-                                                 clip_check on every clip, lipsync_check on every talking clip (the
-                                                 Keeper, a character speaking; not God's voice-over shot), the
-                                                 still-mouth check on a voice-over Keeper clip (plan B, `"voiceover":
-                                                 true`: his line plays from the voice track); a failed shot is
-                                                 regenerated as a NEW generation at most 2 times, then the run fails
-                                                 naming the shot. E114: a shot with an approved clip
-                                                 (shots/<episode>.json) is never generated: that exact asset is
-                                                 downloaded (sha256) and checked again; the real run refuses a shot
-                                                 with none (SHOT_NOT_REVIEWED) or approved for another request
+                                                 E114: no generation and no Pavo secret. Every shot ships the clip
+                                                 Claude approved (shots/<episode>.json), made from the request the
+                                                 plan sends now (else SHOT_NOT_REVIEWED / SHOT_REQUEST_CHANGED),
+                                                 downloaded by its content hash (sha256 checked) and checked again:
+                                                 clip_check, lipsync_check on a talking clip, the face check on God's
+                                                 voice-over, still-mouth on a voice-over Keeper (plan B)
   episode_build.py compose PLAN WORK MUSIC OUT   short_engine.py (cuts only, captions, owned music, -14 LUFS), then
                                                  clip_check --composed; WORK/report.json gets the timeline and checks
   episode_build.py sheet VIDEO SHEET.jpg         20 frames of the composed Short on one sheet (5 x 4)
@@ -39,14 +33,21 @@ the episode record and dispatches publish-episode.yml.
                                                  predicted with its own functions, local Kokoro, refs and requests,
                                                  the talking setups that need a direct Pavo probe (episode_preflight.py)
   episode_build.py verify-preflight PLAN         episode.yml's first step: the committed report is PASS for this plan
-  episode_build.py check-regenerate PLAN         episode.yml's first step: the `regenerate` input (env REGENERATE, a
-                                                 comma list of shot ids, only with RESUME_RUN) names shots of this plan
+  episode_build.py check-regenerate PLAN         episode.yml's first step: the `regenerate` input (env REGENERATE) is
+                                                 refused whatever it names (E114: SHOT_APPROVED_USE_PROBE)
   episode_build.py check-probe PLAN               shot-probe.yml's first step: env SHOTS (shot ids of this plan) and
                                                  ATTEMPTS (1-6)
   episode_build.py probe PLAN WORK LIP_PYTHON FACE_MODEL OUT
-                                                 E114, shot-probe.yml: each named shot's exact build request generated
-                                                 ATTEMPTS times with the build's checks; every clip in OUT under its
-                                                 content-hash asset name with a frame sheet, OUT/probe.json
+                                                 E114, shot-probe.yml (PAVO_TOKEN): ATTEMPTS rounds of the build's
+                                                 generation engine (generate_clips: one Pavo generation per shot at a
+                                                 fresh exact 0-credit quote, the build's checks, a failed clip a NEW
+                                                 generation, at most 2 more, 5 for a talking clip) on the named shots;
+                                                 each clean clip in OUT under its content-hash asset name with a frame
+                                                 sheet, OUT/probe.json
+  episode_build.py probe-assets OUT EP [RUN_ID DST]
+                                                 shot-probe.yml's record job: each clip checked against its name and
+                                                 sha256 (names printed); with RUN_ID DST, after the upload, the record
+                                                 sealed (run id, uploaded clips) to DST
   episode_build.py adopt PLAN RUN_DIR LIP_PYTHON FACE_MODEL OUT SOURCE_RUN
                                                  E114, shot-probe.yml with adopt_run: clips a build run made and
                                                  Claude approved, as a probe record (request recomputed and equal to
@@ -660,33 +661,14 @@ SHOT_ID_INPUT = re.compile(r"^[a-z0-9-]+$")
 
 
 def regenerate_ids(plan, text, resume_run="", approvals=None):
-    """Review of #426: episode.yml's `regenerate` input, a comma list of shot ids that a resume generates again even
-    though their request is unchanged (a clip Claude's frame review rejected), so only those shots are redone and no
-    prompt is edited to force it. Each id is ^[a-z0-9-]+$ and a shot of this plan; only with a resume_run (a build
-    from the start generates every shot anyway). [] when empty."""
+    """E114: the build generates no shot (each ships the clip Claude approved), so episode.yml's `regenerate` input
+    is refused whatever it names: a rejected clip is replaced only by shot-probe.yml and a new approval. [] when
+    empty. check-regenerate runs it in the plan step, before any secret."""
     text = (text or "").strip()
-    if not text:
-        return []
-    ids = [x.strip() for x in text.split(",")]
-    bad = [x for x in ids if not SHOT_ID_INPUT.fullmatch(x)]
-    if bad:
-        raise SystemExit("REGENERATE_REFUSED " + " ".join(repr(x) for x in bad) + " (shot ids: ^[a-z0-9-]+$, comma "
-                         "separated)")
-    known = {s.get("id") for s in plan["shots"]}
-    unknown = [x for x in ids if x not in known]
-    if unknown:
-        raise SystemExit("REGENERATE_UNKNOWN_SHOT " + " ".join(unknown) + f" (not a shot of {plan.get('episode')})")
-    approvals = load_approvals(plan) if approvals is None else approvals
-    approved = [x for x in ids if x in approvals]
-    if approved:
-        # E114: an approved clip is the clip Claude reviewed; a rejected one is replaced only by shot-probe.yml and a
-        # new approval (approve-shot), never by a generation inside the build
-        raise SystemExit("SHOT_APPROVED_USE_PROBE " + " ".join(sorted(set(approved))) + " (shot-probe.yml, then "
-                         "episode_build.py approve-shot; the build ships the approved clip)")
-    if not (resume_run or "").strip():
-        raise SystemExit("REGENERATE_WITHOUT_RESUME (regenerate names shots of a resume_run; a build from the start "
-                         "generates every shot)")
-    return sorted(set(ids))
+    if text:
+        raise SystemExit("SHOT_APPROVED_USE_PROBE " + text[:200] + " (the build generates nothing: shot-probe.yml, "
+                         "then episode_build.py approve-shot; the build ships the approved clip)")
+    return []
 
 
 def digest(value):
@@ -775,19 +757,38 @@ def request(shot, index, plan, layout, refs, chars=None):
             "audios": audios or None, "sound": False}
 
 
+WORD = re.compile(r"[a-z0-9']+")
+
+
+def spoken_words(text):
+    """The words of a spoken text, lower case, no punctuation: what the input audio says, whoever split it."""
+    return WORD.findall(text.lower())
+
+
+def voice_of(who, chars=None):
+    return dict(VOICE) if who == ch.NARRATOR else ch.voice(who, chars)
+
+
+def plan_spoken(shot, index, plan):
+    """The words a talking shot's input audio carries in the plan now (plan_check.sequence)."""
+    items, carried = plan_check.sequence(plan)
+    return spoken_words(" ".join(items[k]["text"] for k in carried[index]))
+
+
 def request_identity(shot, index, plan, layout, refs, chars=None):
-    """E114: (sha256, canonical form) of the request a shot sends, independent of the machine and work directory:
-    the prompt, seconds, aspect and sound as sent; each reference image by its record id and the sha256 its
-    approved record holds; a talking shot's input audio by the words it carries, their voices and its measured
-    seconds (0.01 s). shot-probe.yml records it with every clip, approve-shot copies it, the preflight computes it
-    from the plan now (verify-preflight) and generate_step again before using an approved clip: a changed request
-    is never shipped with a clip made for another."""
-    return request_digest(request(shot, index, plan, layout, refs, chars), shot, index, plan, layout, chars)
+    """E114: (sha256, canonical form) of the request a shot sends, independent of the machine: only what decides the
+    clip. The prompt, the clip seconds and aspect as sent to Pavo (discrete values, never a measured float), the
+    sound flag, each reference image by its record id and the sha256 its approved record holds, and for a talking
+    shot its speaker, voice and spoken words. shot-probe.yml records it with every clip, approve-shot copies it, the
+    preflight computes it from the plan now (verify-preflight) and the build again before using an approved clip."""
+    req = request(shot, index, plan, layout, refs, chars)
+    words = plan_spoken(shot, index, plan) if req["audios"] else None
+    return request_digest(req, shot, words, chars)
 
 
-def request_digest(req, shot, index, plan, layout, chars=None):
-    """(sha256, canonical form) of one request as sent (request_identity's rules): also used on the request a
-    build run recorded in its report.json, to adopt a clip that run made (adopt)."""
+def request_digest(req, shot, words=None, chars=None):
+    """(sha256, canonical form) of one request as sent (request_identity's rules); `words` are the spoken words of
+    its input audio (None when it sends none). Also run on the request a build run recorded (adopt)."""
     references = []
     for path in req["references"] or []:
         rid = Path(path).stem
@@ -795,11 +796,8 @@ def request_digest(req, shot, index, plan, layout, chars=None):
         references.append({"image": rid, "sha256": load(rec).get("sha256") if rec.exists() else None})
     audio = None
     if req["audios"]:
-        items, carried = plan_check.sequence(plan)
-        audio = {"seconds": round(talk_record(layout, shot)["seconds"], 2),
-                 "lines": [{"text": items[k]["text"],
-                            "voice": ch.voice(items[k]["speaker"], chars) if items[k].get("speaker") else VOICE}
-                           for k in carried[index]]}
+        who = speaker_of(shot)
+        audio = {"speaker": who, "voice": voice_of(who, chars), "words": list(words or [])}
     canonical = {"prompt": req["prompt"], "seconds": req["seconds"], "aspect_ratio": req["aspect_ratio"],
                  "sound": req["sound"], "references": references, "audio": audio}
     return digest(canonical), canonical
@@ -1034,17 +1032,14 @@ def fetch_shot_clip(approved, dst, fetch=fetch_release_asset):
     return dst
 
 
-def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep, validate=None,
-                  regenerate=None, approvals=None, fetch=fetch_release_asset):
+def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, download=None, sleep=time.sleep,
+                   validate=None, report_path=None):
+    """shot-probe.yml's generation engine (E114: the build itself generates nothing): the named shots (all when
+    None) in risk_order (E99), each through shot_runner (the build's own request and checks) and make_shot (a
+    failed clip is a NEW generation, attempts_for(shot) in all, each refused one kept beside the shot, E94); the
+    report in plan order. A shot that fails all its generations stops with SHOT_FAILED naming it."""
     work = Path(work)
     rel(work)
-    approvals = load_approvals(plan) if approvals is None else approvals
-    if regenerate is None:   # episode.yml passes the input through the env, never inline in the step
-        regenerate = regenerate_ids(plan, os.environ.get("REGENERATE", ""), os.environ.get("RESUME_RUN", ""),
-                                    approvals)
-    forced = set(regenerate)
-    if forced & set(approvals):   # the same refusal as check-regenerate, for a caller that passes the list
-        raise SystemExit("SHOT_APPROVED_USE_PROBE " + " ".join(sorted(forced & set(approvals))))
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
     if validate is None:
         validate = client is None   # the real run; tests with a fake client pass validate=True to check it
@@ -1054,60 +1049,23 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
         bad = request_problems(plan, layout, refs)
         if bad:
             raise SystemExit("REQUESTS_REFUSED " + "; ".join(bad))
-    # E114: every approved clip must belong to the request the build sends now (verify-preflight predicted it on
-    # the preflight's digests); the real run also refuses a shot with no approved clip, before any generation
-    digests = {s["id"]: request_identity(s, i, plan, layout, refs)[0]
-               for i, s in enumerate(plan["shots"]) if s["id"] in approvals or validate}
-    bad = review_problems(plan, digests, approvals) if validate else \
-        [p for p in review_problems(plan, digests, approvals) if p.startswith("SHOT_REQUEST_CHANGED")]
-    if bad:
-        raise SystemExit("; ".join(bad))
     if client is None:
         from video import PavoVideoClient
         client = PavoVideoClient()
     if download is None:
         import pavo_footage
         download = pavo_footage.download
-    report_path = work / "report.json"
-    report = load(report_path) if report_path.exists() else {}
-    report.update(episode=plan["episode"], shots=report.get("shots", {}))
-    if forced:
-        report["regenerated"] = sorted(forced)   # the shots this resume generated again on Claude's review
-    else:
-        report.pop("regenerated", None)
+    report_path = Path(report_path) if report_path else work / "report.json"
+    report = {"episode": plan["episode"], "shots": {}}
+    wanted = None if ids is None else set(ids)
     for index, shot in risk_order(plan["shots"]):
+        if wanted is not None and shot["id"] not in wanted:
+            continue
         req, attempt, check, raw, final = shot_runner(shot, index, plan, layout, refs, work, client, download,
                                                       lip_python, face_model, sleep)
         entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
         if plan_check.speaking(shot):
             entry.update(speaker=shot["speaker"], line=shot["line"])
-        approved = approvals.get(shot["id"])
-        if approved:
-            # E114: the clip Claude reviewed, downloaded by its content hash and checked again; never generated
-            if not (final.exists() and sha256(final) == approved["clip_sha256"]):
-                fetch_shot_clip(approved, final, fetch)
-            flags, measures = check(final)
-            entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score")}
-            entry["checks"] = {"flags": flags, "measures": measures}
-            report["shots"][shot["id"]] = entry
-            save(report_path, in_plan_order(report, plan))
-            if flags:
-                entry["error"] = f"SHOT_APPROVED_CLIP_FAILED {shot['id']} {','.join(flags)}"
-                save(report_path, in_plan_order(report, plan))
-                raise SystemExit(entry["error"])
-            print(json.dumps({"shot": shot["id"], "approved_clip": approved["asset"]}))
-            continue
-        if shot["id"] in forced:
-            entry["regenerated"] = True       # its kept clip is not reused (episode.yml `regenerate`)
-        done = report["shots"].get(shot["id"], {})
-        if (shot["id"] not in forced and done.get("attempts") and done.get("request") == entry["request"]
-                and final.exists()):
-            # E93: a re-run restored from a failed run (episode.yml resume_run) keeps the clips already made, after
-            # the same checks again; a changed request (plan, voice, references) is generated anew
-            flags, _ = check(final)
-            if not flags:
-                print(json.dumps({"shot": shot["id"], "resumed": True}))
-                continue
         try:
             _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
         except (ShotFailed, SystemExit) as exc:
@@ -1118,9 +1076,47 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             save(report_path, in_plan_order(report, plan))
             raise SystemExit(str(exc))
         entry["attempts"] = records
+        entry["clip"] = final.name
         report["shots"][shot["id"]] = entry
         save(report_path, in_plan_order(report, plan))
         print(json.dumps({"shot": shot["id"], "generations": len(records)}))
+    return report
+
+
+def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetch_release_asset):
+    """episode.yml's shots step (E114): every shot ships the clip Claude approved in shots/<episode>.json, made from
+    the request the plan sends now (SHOT_NOT_REVIEWED / SHOT_REQUEST_CHANGED, as verify-preflight predicted),
+    downloaded by its content hash (sha256 checked) and checked again with the build's own checks. No Pavo client,
+    no generation. A clip already in WORK with the approved sha256 (episode.yml resume_run) is kept as it is."""
+    work = Path(work)
+    rel(work)
+    approvals = load_approvals(plan) if approvals is None else approvals
+    layout, refs = load(work / "layout.json"), load(work / "refs.json")
+    digests = {s["id"]: request_identity(s, i, plan, layout, refs)[0] for i, s in enumerate(plan["shots"])}
+    bad = review_problems(plan, digests, approvals)
+    if bad:
+        raise SystemExit("; ".join(bad))
+    report_path = work / "report.json"
+    report = {"episode": plan["episode"], "shots": {}}
+    for index, shot in risk_order(plan["shots"]):
+        req, _, check, _, final = shot_runner(shot, index, plan, layout, refs, work, None, None, lip_python,
+                                              face_model)
+        approved = approvals[shot["id"]]
+        entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
+        if plan_check.speaking(shot):
+            entry.update(speaker=shot["speaker"], line=shot["line"])
+        if not (final.exists() and sha256(final) == approved["clip_sha256"]):
+            fetch_shot_clip(approved, final, fetch)
+        flags, measures = check(final)
+        entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score")}
+        entry["checks"] = {"flags": flags, "measures": measures}
+        report["shots"][shot["id"]] = entry
+        if flags:
+            entry["error"] = f"SHOT_APPROVED_CLIP_FAILED {shot['id']} {','.join(flags)}"
+            save(report_path, in_plan_order(report, plan))
+            raise SystemExit(entry["error"])
+        save(report_path, in_plan_order(report, plan))
+        print(json.dumps({"shot": shot["id"], "approved_clip": approved["asset"]}))
     return report
 
 
@@ -1146,61 +1142,105 @@ def shot_asset_name(episode, shot_id, clip_sha):
 
 def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=None, download=None,
                sleep=time.sleep, sheet=None):
-    """E114, shot-probe.yml: for each named shot, the build's own request (shot_runner) generated `attempts` times
-    with the build's own checks; every clip is kept in OUT with its content-hash asset name, a frame sheet and its
-    checks, and OUT/probe.json records the shot's request sha256 beside each clip. Nothing is approved here."""
+    """E114, shot-probe.yml: `attempts` rounds of the build's own generation engine (generate_clips: the same
+    request, checks and regenerations) on the named shots. Each round's clean clip is kept in OUT under its
+    content-hash asset name with a frame sheet; every generation's checks, refused ones included, and the shot's
+    request sha256 go to OUT/probe.json. A shot that fails a round is recorded and the others go on. Nothing is
+    approved here."""
     work, out = Path(work), Path(out)
-    rel(work)
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
-    bad = request_problems(plan, layout, refs) if client is None else []
-    if bad:
-        raise SystemExit("REQUESTS_REFUSED " + "; ".join(bad))
     if client is None:
-        from video import PavoVideoClient
-        client = PavoVideoClient()
-    if download is None:
-        import pavo_footage
-        download = pavo_footage.download
+        bad = request_problems(plan, layout, refs)
+        if bad:
+            raise SystemExit("REQUESTS_REFUSED " + "; ".join(bad))
     sheet = sheet or sheet_step
     out.mkdir(parents=True, exist_ok=True)
     record = {"episode": plan["episode"], "plan_sha256": None, "attempts": attempts, "shots": {}}
     index = {s["id"]: i for i, s in enumerate(plan["shots"])}
     for sid in ids:
-        shot = plan["shots"][index[sid]]
-        sha, canonical = request_identity(shot, index[sid], plan, layout, refs)
-        req, attempt, check, raw, final = shot_runner(shot, index[sid], plan, layout, refs, work, client, download,
-                                                      lip_python, face_model, sleep)
-        entry = {"kind": shot["kind"], "request_sha256": sha, "request": canonical, "clips": []}
-        record["shots"][sid] = entry
-        for n in range(1, attempts + 1):
+        sha, canonical = request_identity(plan["shots"][index[sid]], index[sid], plan, layout, refs)
+        record["shots"][sid] = {"kind": plan["shots"][index[sid]]["kind"], "request_sha256": sha,
+                                "request": canonical, "clips": []}
+    for n in range(1, attempts + 1):
+        for _, shot in risk_order([plan["shots"][index[sid]] for sid in ids]):
+            sid, entry = shot["id"], record["shots"][shot["id"]]
             try:
-                rec, path = attempt(n)
-            except ShotFailed as exc:
-                entry["clips"].append({"generation": n, "error": str(exc)})
-                break
-            if path is None:
-                entry["clips"].append(dict(rec, flags=["NO_VIDEO"]))
+                report = generate_clips(plan, work, lip_python, face_model, ids=[sid], client=client,
+                                        download=download, sleep=sleep, validate=False,
+                                        report_path=work / f"probe-{sid}-{n}.json")
+            except SystemExit as exc:
+                if not str(exc).startswith(("SHOT_FAILED", "PAVO_REFUSED", "PAVO_JOB")):
+                    raise   # a broken tool or a refused request stops the probe (E89)
+                failed = load(work / f"probe-{sid}-{n}.json")["shots"].get(sid, {})
+                entry["clips"].append({"round": n, "error": str(exc), "generations": failed.get("attempts", [])})
+                save(out / "probe.json", record)
                 continue
-            rec["flags"], rec["measures"] = check(path)
+            built = report["shots"][sid]
+            path = work / "clips" / built["clip"]
             clip_sha = sha256(path)
             asset = shot_asset_name(plan["episode"], sid, clip_sha)
             shutil.copyfile(path, out / asset)
             sheet(out / asset, out / f"{sid}-{n}.jpg")
-            rec.update(asset=asset, clip_sha256=clip_sha, sheet=f"{sid}-{n}.jpg")
-            entry["clips"].append(rec)
+            last = built["attempts"][-1]
+            entry["clips"].append({"round": n, "asset": asset, "clip_sha256": clip_sha, "flags": last["flags"],
+                                   "generations": built["attempts"], "sheet": f"{sid}-{n}.jpg"})
             save(out / "probe.json", record)
-        print(json.dumps({"shot": sid, "clips": [c.get("asset") for c in entry["clips"]],
-                          "flags": [c.get("flags") for c in entry["clips"]]}))
+    for sid in ids:
+        print(json.dumps({"shot": sid, "clips": [c.get("asset") or c.get("error") for c in
+                                                 record["shots"][sid]["clips"]]}))
     save(out / "probe.json", record)
     return record
 
 
+def probe_assets(out, episode, run_id=None, dst=None):
+    """shot-probe.yml's record job (no secret): every clip of OUT/probe.json is checked against its name
+    (shot_asset_name) and its sha256: [asset names]. With run_id and dst, after the upload: the record marked with
+    the run and each uploaded clip, written to dst (the only record approve-shot accepts)."""
+    out = Path(out)
+    if not (out / "probe.json").is_file():
+        raise SystemExit("NO_PROBE_RECORD (the probe job left no record: read its log)")
+    record = load(out / "probe.json")
+    if record.get("episode") != episode:
+        raise SystemExit(f"PROBE_EPISODE_MISMATCH {record.get('episode')} != {episode}")
+    names = []
+    for sid, entry in record["shots"].items():
+        for clip in entry["clips"]:
+            if not clip.get("asset"):
+                continue
+            if clip["asset"] != shot_asset_name(episode, sid, clip.get("clip_sha256")) or \
+                    sha256(out / clip["asset"]) != clip["clip_sha256"]:
+                raise SystemExit(f"SHOT_CLIP_SHA256_MISMATCH {clip['asset']}")
+            names.append(clip["asset"])
+            if run_id:
+                clip["uploaded"] = True
+                clip["sheet"] = f"{run_id}-{clip['sheet']}"   # the name it is pushed under
+    if run_id and dst:
+        if not re.fullmatch(r"[0-9]{6,20}", str(run_id)):
+            raise SystemExit("PROBE_RUN_REFUSED")
+        record["run_id"] = str(run_id)
+        save(dst, record)
+    return sorted(set(names))
+
+
+def run_spoken(run_dir, layout, shot):
+    """The words a build run actually sent as a talking shot's input audio: the run's compose-timeline sentences
+    inside that shot's line (layout start..end), in order. None when the run kept no timeline."""
+    path = Path(run_dir) / "compose-timeline.json"
+    if not path.is_file():
+        return None
+    rec = talk_record(layout, shot)
+    texts = [x["text"] for x in load(path)["sentences"]
+             if rec["start"] - 1e-6 <= (x["start"] + x["end"]) / 2 <= rec["end"] + 1e-6]
+    return spoken_words(" ".join(texts))
+
+
 def adopt_step(plan, run_dir, lip_python, face_model, out, ids, source_run, sheet=None):
     """E114: clips a build run already made and Claude's review approved (genesis-08 runs 40438106839, 40460764662),
-    turned into a probe record without generating them again: for each named shot, the clip of that run's artifact
-    (report.json, layout.json, clips/), its recorded request recomputed with request_digest and refused unless it
-    equals the request the plan sends now (SHOT_REQUEST_CHANGED), the build's checks run again, the clip kept under
-    its content-hash asset name with a frame sheet. approve-shot then approves it like any probed clip."""
+    turned into a probe record without generating them again. For each named shot, the request that run recorded
+    in its report.json (prompt, seconds, references) and the words its input audio carried (its compose-timeline)
+    are digested and refused unless they equal the request the plan sends now (SHOT_REQUEST_CHANGED: a line or a
+    prompt edited after the run); the build's checks run again; the clip is kept under its content-hash name with
+    a frame sheet. approve-shot then approves it like any probed clip."""
     run_dir, out = Path(run_dir), Path(out)
     report, layout = load(run_dir / "report.json"), load(run_dir / "layout.json")
     if report.get("episode") != plan["episode"]:
@@ -1218,7 +1258,11 @@ def adopt_step(plan, run_dir, lip_python, face_model, out, ids, source_run, shee
         clip = run_dir / "clips" / f"{sid}.mp4"
         if built.get("error") or not built.get("request") or not clip.is_file():
             raise SystemExit(f"ADOPT_CLIP_MISSING {sid} (no clean clip of this shot in run {source_run})")
-        made = request_digest(built["request"], shot, i, plan, layout)[0]
+        sent = built["request"]
+        words = run_spoken(run_dir, layout, shot) if sent.get("audios") else None
+        if sent.get("audios") and words is None:
+            raise SystemExit(f"ADOPT_CLIP_MISSING {sid} (run {source_run} kept no compose-timeline.json)")
+        made = request_digest(sent, shot, words)[0]
         now, canonical = request_identity(shot, i, plan, layout, refs)
         if made != now:
             changed.append(sid)
@@ -1235,7 +1279,7 @@ def adopt_step(plan, run_dir, lip_python, face_model, out, ids, source_run, shee
         shutil.copyfile(clip, out / asset)
         sheet(out / asset, out / f"{sid}-adopted.jpg")
         record["shots"][sid] = {"kind": shot["kind"], "request_sha256": now, "request": canonical,
-                                "clips": [{"generation": "adopted", "source_run": str(source_run), "asset": asset,
+                                "clips": [{"round": "adopted", "source_run": str(source_run), "asset": asset,
                                            "clip_sha256": clip_sha, "flags": flags, "measures": measures,
                                            "sheet": f"{sid}-adopted.jpg"}]}
         print(json.dumps({"shot": sid, "adopted": asset, "flags": flags}))
@@ -1255,18 +1299,23 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
     if root not in record_path.resolve().parents:
         raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (a shot-probe record under migration/evidence/shots/)")
     record = load(record_path)
+    if not re.fullmatch(r"[0-9]{6,20}", str(record.get("run_id") or "")):
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (no shot-probe.yml run id: only its record job's "
+                         "record is approved)")
     entry = (record.get("shots") or {}).get(shot_id)
     clip = next((c for c in (entry or {}).get("clips", []) if c.get("asset") == asset), None)
     if not clip:
         raise SystemExit(f"SHOT_CLIP_NOT_IN_RECORD {shot_id} {asset}")
+    if clip.get("uploaded") is not True:
+        raise SystemExit(f"SHOT_CLIP_NOT_UPLOADED {shot_id} {asset} (shot-probe.yml's record job uploads every clip)")
     if clip.get("flags"):
         raise SystemExit(f"SHOT_CHECKS_FAILED {shot_id} {','.join(clip['flags'])} (the build would refuse this clip)")
     try:
         score = float(score)
     except (TypeError, ValueError):
         raise SystemExit(f"SHOT_SCORE_INVALID {score!r}") from None
-    if not score >= SHOT_REVIEW_MIN:
-        raise SystemExit(f"SHOT_SCORE_UNDER_FLOOR {shot_id} {score} < {SHOT_REVIEW_MIN}")
+    if not (math.isfinite(score) and SHOT_REVIEW_MIN <= score <= 10):
+        raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {SHOT_REVIEW_MIN}-10)")
     if not (note or "").strip():
         raise SystemExit(f"SHOT_NOTE_MISSING {shot_id} (what the frame review saw)")
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"
@@ -1462,8 +1511,12 @@ def main(argv):
     if cmd == "sheet" and len(argv) == 4:
         return sheet_step(argv[2], argv[3])
     if cmd == "check-regenerate" and len(argv) == 3:
-        ids = regenerate_ids(load(argv[2]), os.environ.get("REGENERATE", ""), os.environ.get("RESUME_RUN", ""))
-        print(json.dumps({"regenerate": ids}))
+        regenerate_ids(load(argv[2]), os.environ.get("REGENERATE", ""))   # E114: any value is refused
+        print(json.dumps({"regenerate": []}))
+        return 0
+    if cmd == "probe-assets" and len(argv) in (4, 6):   # shot-probe.yml's record job: OUT EP [RUN_ID DST]
+        for name in probe_assets(argv[2], argv[3], *(argv[4:6] if len(argv) == 6 else ())):
+            print(name)
         return 0
     if cmd == "approve-shot" and len(argv) == 7:   # E114: RECORD SHOT ASSET SCORE NOTE
         print(json.dumps(approve_shot(argv[2], argv[3], argv[4], argv[5], argv[6]), ensure_ascii=False))
@@ -1485,9 +1538,7 @@ def main(argv):
         lines_step(plan, argv[3])
     elif cmd == "refs" and len(argv) == 4:
         refs_step(plan, argv[3])
-    elif cmd == "generate" and len(argv) == 6:
-        if not os.environ.get("PAVO_TOKEN"):
-            raise SystemExit("PAVO_CREDENTIAL_REQUIRED")
+    elif cmd == "generate" and len(argv) == 6:   # E114: the approved clips only; no Pavo, no secret
         generate_step(plan, argv[3], argv[4], argv[5])
     elif cmd == "probe" and len(argv) == 7:       # E114: shot-probe.yml (PAVO_TOKEN, SHOTS, ATTEMPTS from the env)
         if not os.environ.get("PAVO_TOKEN"):
