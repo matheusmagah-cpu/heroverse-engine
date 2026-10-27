@@ -1,7 +1,7 @@
 {
  "plan": "migration/production/bible/plans/genesis-08-short.json",
  "episode": "genesis-08-short",
- "checked_at": "2026-10-27T06:15:56Z",
+ "checked_at": "2026-10-27T09:40:00Z",
  "plan_check": {
   "problems": [],
   "pending": [],
@@ -57,20 +57,20 @@
     2.71,
     3.04,
     2.49,
-    2.82,
+    2.81,
     3.12,
     2.41,
     3.07,
     2.52,
     2.05,
-    2.81,
-    2.55,
+    2.82,
+    2.54,
     2.9,
     2.27
    ]
   },
   "measured": {
-   "total": 175.065,
+   "total": 175.044,
    "keeper_share": 0.11,
    "lesson_share": 0.114,
    "retimed": {}
@@ -78,7 +78,41 @@
  },
  "requests": {
   "ran": true,
-  "problems": []
+  "problems": [],
+  "digests": {
+   "s-voice": "a68f0514765aa40a98a40de0bfb39ed444a041ea3acce42d5b7ac3b771f1003d",
+   "s-axe": "e5d5ae0bcd9b228c3f3066b5d5a9483258aa260c9b29a692ec9a4a0a67611802",
+   "s-valley": "610634e4fdfb88b10bd1f2aba721e5f8ddeb9129a6b0398aa22a943d5bebb876",
+   "s-watchers": "6b9f583c163e21b78787dd5baf08a339a9203194c2ccf60e8de26714c1ccbe80",
+   "s-laugh": "c52340b14e02c38fc46b6f7ad6109263ab5c85388184a54546d9ab74f8e77425",
+   "s-timber": "6054c678ac603f54ae34c044db0b9885df5fa719450e2fd8c761a5130ee017a1",
+   "s-pitch": "13cdf224a90440f5bb63dbcb1ac3e9c61506414cf2ad554b976fb7f48b0e2feb",
+   "s-ridge": "44f6d4f538e7bd2a7732d32b0f09ac1527876837cfcc7a891415e0158e11e539",
+   "s-dust": "89597a6e039fbcaaaf8e753a02f9f3a959d6c1b27940d565ce3a312034469ee9",
+   "s-measure": "09fe2e7fb25f2fa3f94ade21d8558a26ed3ce2dbd7e5393fbbd1a9286a66446d",
+   "s-ribs": "eab1c5e569713cdbe0591b03717fc9617d32299758002c9fea60d744137fbc77",
+   "s-beam": "fa0e9a19f3e784cff2c6000f99aa09fe9abc6d17defd3dd54d885d724ed730ab",
+   "s-jeer": "f2cc0e4c984add5b3e175c83a6addffefea5660a7968e45f9aec799d894810e1",
+   "s-clods": "836c5506cba35abef3edcbf0f91600149a0a95974ac99232413ff430ad68a9c2",
+   "s-scorn": "d18cf0648996fce1e4f01b701ee51b4d8d0f191aa12c53fa9fc90ad2916eb88a",
+   "s-feast": "8e43def4f85f28a2fd585352d91fb66265b96c51044acc9a3b6063706d20e01a",
+   "s-wedding": "17215d990cda0a980d96be0a43f4606d0619f45bed6b356bf107c4c7e7db4845",
+   "s-hill": "ccbb655df87c4fbd204c4e69cbd1175f9f32e79b449131a39c3fa60bb111d6de",
+   "s-stones": "4d4d16f17b11c2ea9a6cd4b24b554798577b067fde8c0f38ebeff8b31d944d80",
+   "s-rope": "63c0394b7fa2d35baef2f1d1394d705b5a4f656f62040f3296e873835ca083cc",
+   "s-alone": "aba6254b6b4062b7277d0170fa65da65825d9bc65f4dcb7b1e8615fe5d71ed24",
+   "s-peg": "c85607d41dd2bcc359c27c6ced7840bbf0f64520d197bdaa2c8fa573a7adab4a",
+   "s-covenant": "290ab34af4e3d8feaa84e2e3a2d243c9546a3e5946b713fd83022a5db8962fee",
+   "s-torches": "cdf798d1b6b057cbaad628da7976de5c0b2c69c98000d5c789b64a2cd1054fa3",
+   "s-mob": "929e5f18c01d70fab57361f06142b1d6535294d716cdefa30a7a8d84d830bddd",
+   "s-steady": "77e3042438cc64cda6e099a264cc2557e7b3eabaa780ffddfbc3cc271bdcf32c",
+   "s-board": "82094099b661bf0a09ac08d00c802581f5f9db2c1198c4178668bd42abb2bcce",
+   "s-finished": "42e1b148ada6cc3e161c8ff9632fca009d56c9ff50473029c2a07e40ffa3e87b",
+   "s-silent": "8c38813f53bf77408e77457efbf685c6ade96b2ba14b8f5df2a9197cb3bd5a95",
+   "k-insight": "ac9df47595fdda96537399d0f9b090d31f96c9050d3a214a12407452c008ee8d",
+   "k-question": "28f0a3b68b297e9309f980a04f31f7c00a94f7e04dd65f2fbbaa64cf07b810f8",
+   "k-close": "509944b499994f4d9c996175e85842c4b6fe0e1d552597324e668b12a114116a"
+  }
  },
  "setups": {
   "shots": [
@@ -141,8 +175,9 @@
   "min_shot_chance": 0.9,
   "run_chance_all_talking_shots": 0.999
  },
+ "shot_review": [],
  "binding": {
-  "plan": "c481d770bdb4d2187bbd541c35e9481986b53acaf429dbb32d9381c4ed3f04cc",
+  "plan": "e865d4d488ec7dda3f8402ec8dda9a608006d6010e7080330605c8a09796d6dd",
   "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
   "image_records": {
    "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
@@ -150,11 +185,11 @@
   },
   "setups": "386110cf6909cea8ed1edcfe0f6476ea1b4ae528e6a3399e1861a7396d808a95",
   "code": {
-   "episode_build.py": "9177a6a37e85ff550944543d83686fefbdfa247a4761941724d2cf077f809e3e",
-   "plan_check.py": "2ad651a45682b354e8ac7cabba8db6d3963e796cc0fe276b24e7c5a56b27e916",
+   "episode_build.py": "8e6d6ef828e968a093c31d5baec2a1d7e063824147b69c97da6bb0e18e2e3ed7",
+   "plan_check.py": "6a856a76650da1f64c76a808e1318fbd0bbab64a68c194562ba3a1a139e38259",
    "voice_pace.py": "53ca18e54b2b7472b296f9a9dddba8e1df98f95bf9de924dd5be80bcddff01e5",
    "lipsync_check.py": "a8bf2c564253bd4021bbf9f67bef305ae327fc5f4114c96cacf34ac191de7835",
-   "episode_preflight.py": "d486f36f092df36fc615abeb6a021ef00783f1d6bde83dff19ed21a0d71328da"
+   "episode_preflight.py": "f00710b938a9454dd3997f15b63dfc7ab0f8b2ea8959ba767e1f4d21919c4c3a"
   }
  },
  "blockers": [],
