@@ -71,34 +71,86 @@ def cues(sentences, words_max, chars_max):
     """Short cues for the acted long: each sentence is cut into the fewest balanced runs of its own words with at
     most `words_max` words and `chars_max` characters each, timed inside that sentence's voice span in proportion to
     their characters. The words are the sentence's words, unchanged (KJV text exact): only the whitespace between
-    cues differs. A single word longer than chars_max stays one cue (long_track names it)."""
+    cues differs. A single word longer than chars_max is a cue of its own (long_track names it) and the words around
+    it are cut as usual (review of #469). No cue is shorter than CUE_MIN_SECONDS: a cue the voice span leaves shorter
+    is merged into its shorter neighbour (the merged cue may then exceed a limit, which long_track measures)."""
     out = []
     for s in sentences:
         words = text_of(s).split()
         if not words:
             continue
-        n = len(words)
-        k = max(1, -(-n // words_max))
-        while True:
-            bounds = [round(i * n / k) for i in range(k + 1)]
-            runs = [words[a:b] for a, b in zip(bounds, bounds[1:])]
-            if k >= n or all(len(" ".join(r)) <= chars_max for r in runs):
-                break
-            k += 1
-        weights = [len(" ".join(r)) + 1 for r in runs]
-        total, start, span, acc = sum(weights), float(s["start"]), float(s["end"]) - float(s["start"]), 0
-        for r, w in zip(runs, weights):
-            a = start + span * acc / total
-            acc += w
-            out.append({"start": round(a, 3), "end": round(start + span * acc / total, 3), "text": " ".join(r)})
+        runs, group = [], []
+        for w in words + [None]:
+            if w is None or len(w) > chars_max:
+                runs += balanced(group, words_max, chars_max)
+                group = []
+                if w is not None:
+                    runs.append([w])
+            else:
+                group.append(w)
+        start, span = float(s["start"]), float(s["end"]) - float(s["start"])
+        runs = merge_short(runs, start, span)
+        for r, (a, b) in zip(runs, spans_of(runs, start, span)):
+            out.append({"start": a, "end": b, "text": " ".join(r)})
     return out
+
+
+CUE_MIN_SECONDS = 0.5
+
+
+def balanced(words, words_max, chars_max):
+    """The fewest balanced runs of `words` (each word <= chars_max) with <= words_max words and <= chars_max chars."""
+    n = len(words)
+    if not n:
+        return []
+    k = max(1, -(-n // words_max))
+    while True:
+        bounds = [round(i * n / k) for i in range(k + 1)]
+        runs = [words[a:b] for a, b in zip(bounds, bounds[1:])]
+        if k >= n or all(len(" ".join(r)) <= chars_max for r in runs):
+            return runs
+        k += 1
+
+
+def spans_of(runs, start, span):
+    """Each run's [start, end] inside the voice span, in proportion to its characters, rounded to the ms."""
+    weights = [len(" ".join(r)) + 1 for r in runs]
+    total, acc, out = sum(weights), 0, []
+    for w in weights:
+        a = start + span * acc / total
+        acc += w
+        out.append((round(a, 3), round(start + span * acc / total, 3)))
+    return out
+
+
+def merge_short(runs, start, span):
+    """Merge the shortest cue under CUE_MIN_SECONDS into its shorter neighbour until none is left (or one cue)."""
+    runs = [list(r) for r in runs]
+    while len(runs) > 1:
+        spans = spans_of(runs, start, span)
+        short = [i for i, (a, b) in enumerate(spans) if b - a < CUE_MIN_SECONDS - 1e-9]
+        if not short:
+            break
+        i = min(short, key=lambda j: spans[j][1] - spans[j][0])
+        if i == 0:
+            j = 1
+        elif i == len(runs) - 1:
+            j = i - 1
+        else:
+            j = i - 1 if len(" ".join(runs[i - 1])) <= len(" ".join(runs[i + 1])) else i + 1
+        a, b = min(i, j), max(i, j)
+        runs[a:b + 1] = [runs[a] + runs[b]]
+    return runs
 
 
 def track_srt(sentences, track=None):
     """The SRT a video uploads: one cue per sentence (prayer longs, unchanged), or, when the manifest records a
-    `caption_track` (the acted long), the short cues of cues() at the limits it records."""
+    `caption_track` (the acted long), the short cues of cues() at the frozen story QA v3's limits. The record's own
+    words_max / chars_max are never used to build (review of #469): manifest_problems refuses a record whose limits
+    are not the frozen ones (CAPTION_TRACK_LIMITS)."""
     if isinstance(track, dict):
-        return srt(cues(sentences, int(track["words_max"]), int(track["chars_max"])))
+        words_max, chars_max = v3_limits()
+        return srt(cues(sentences, words_max, chars_max))
     return srt(sentences)
 
 
@@ -131,6 +183,9 @@ def manifest_problems(manifest, base=None):
     if track is not None and not isinstance(track, dict):
         return out + ["CAPTION_TRACK_INVALID (caption_track is a record)"]
     if isinstance(track, dict):
+        if (track.get("words_max"), track.get("chars_max")) != v3_limits():
+            out.append(f"CAPTION_TRACK_LIMITS {track.get('words_max')}/{track.get('chars_max')} (story QA v3: "
+                       f"{'/'.join(str(x) for x in v3_limits())})")
         if hashlib.sha256(text.encode("utf-8")).hexdigest() != track.get("sha256"):
             out.append("CAPTION_TRACK_SHA256 (the recorded track is not the one the manifest builds)")
         if base is not None:

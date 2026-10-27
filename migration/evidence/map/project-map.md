@@ -350,7 +350,7 @@ flowchart LR
 | `lipsync_check.py` | Check that a talking clip (the Keeper, Pavo audio-input mode) says OUR narration line, in sync (owner, 2026-10 | episode.yml, long-build.yml, shot-probe.yml | - | yes |
 | `long_build.py` | The Bible-story long's build (LONG_DESIGN.md slice 3 and section 7; owner 27/10: arc-01's long publishable wit | long-build.yml | clip_check, episode_build, episode_preflight, long_plan_check, plan_check, short_engine, pavo_footage, captions | yes |
 | `long_plan_check.py` | Check a Bible-story long's shot plan (`bible-long-plan-v1`) before anything is voiced or generated (owner, | long-build.yml, shot-probe.yml | plan_check, voice_pace, script_check | yes |
-| `long_preflight.py` | The Bible-story long's no-rework contract (E126, owner 27/10: "no rework, ever"). The Shorts had it since E106 | - | episode_build, episode_preflight, long_plan_check, plan_check | yes |
+| `long_preflight.py` | The Bible-story long's no-rework contract (E127, owner 27/10: "no rework, ever"). The Shorts had it since E106 | - | episode_build, episode_preflight, long_plan_check, plan_check | yes |
 | `plan_check.py` | Check a Short's plan (`bible-plan-v2`) before anything is voiced or generated (owner, 2026-10-26, after the mi | episode.yml, shot-probe.yml | episode_build, kjv_check, voice_pace, characters, props, publish_episode | yes |
 | `rekey_shots_e118.py` | E118 one-off migration: re-key every approved clip in shots/*.json to the request digest without `seconds`. | - | episode_build, episode_preflight | **no** |
 | `scene_stills.py` | Scene stills, "image first" (owner, 27/10): Claude reviews cheap stills of a whole episode before any video. | scene-stills.yml | plan_check | yes |

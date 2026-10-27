@@ -68,7 +68,7 @@ jobs:
           ep="${BASH_REMATCH[1]}"
           test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
-          # E126: a Bible-story long (bible-long-plan-v1, 16:9) is checked by long_plan_check and its frozen story QA;
+          # E127: a Bible-story long (bible-long-plan-v1, 16:9) is checked by long_plan_check and its frozen story QA;
           # check-probe then also asks for a clean committed preflight of this exact plan (LONG_PROBE_PREFLIGHT)
           if python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('version')=='bible-long-plan-v1' else 1)" "$PLAN"; then
             python3 -I -B migration/production/bible/long_plan_check.py "$PLAN" --strict

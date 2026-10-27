@@ -59,16 +59,21 @@ def caption_tracks(s, vid):
 V3_LONG = "story-qa-criteria-v3"
 
 
-def caption_track_missing(manifest_path, manifest):
+def caption_track_missing(manifest_path, manifest, package=None, pilot_dir=None):
     """Story QA v3 (the acted long) carries its words only as the uploaded .srt (no burned captions): a v3 render
     whose manifest records no `caption_track` would go up with the one-cue-per-sentence prayer track, outside v3's
-    cue limits. The QA beside the manifest names the criteria; qa_pilot fails that render first (caption_track)."""
+    cue limits. It is a v3 long when the QA beside the manifest names v3, or (review of #469: whatever qa.json says
+    or whether it can be read) when the pilot is a Bible-story long (bible_long: the package or the pilot's
+    script.json archetype; only those publish since 2026-10-26). qa_pilot fails that render first."""
+    if isinstance(manifest.get("caption_track"), dict):
+        return False
     try:
         qa = json.loads((Path(manifest_path).parent / "qa.json").read_text())
     except (OSError, ValueError):
-        return False
-    return isinstance(qa, dict) and qa.get("criteria_version") == V3_LONG and not isinstance(
-        manifest.get("caption_track"), dict)
+        qa = None
+    if isinstance(qa, dict) and qa.get("criteria_version") == V3_LONG:
+        return True
+    return bible_long(package or {}, pilot_dir)
 
 
 def insert_captions(s, vid, sentences, duration=None, track=None):
@@ -309,7 +314,8 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
     bad_srt = srt_problems(manifest, Path(manifest_path).parent) if manifest.get("sentences") else []
     if "video_id" not in entry and bad_srt:  # a new upload never goes up with captions it cannot carry (E107)
         raise SystemExit("CAPTIONS_SRT_INVALID: " + "; ".join(bad_srt[:5]))
-    if "video_id" not in entry and caption_track_missing(manifest_path, manifest):
+    if "video_id" not in entry and caption_track_missing(manifest_path, manifest, package,
+                                                         Path(package_path).resolve().parent.parent):
         raise SystemExit("CAPTIONS_TRACK_MISSING: a story QA v3 long uploads its recorded .srt track (caption_track)")
     s = session()
     if [c["id"] for c in check(s.get(API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [CHANNEL]:

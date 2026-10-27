@@ -234,7 +234,7 @@ def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     matched = sorted((digest(x) for r in rows for x in r.get("matched", [])))
     out = {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
            "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
-    if eb.is_long(plan):   # E126: the long's review rows and its own code
+    if eb.is_long(plan):   # E127: the long's review rows and its own code
         import long_preflight
         out.update(long_preflight.binding_extra(registry))
     return out
@@ -325,7 +325,7 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
     plan = json.loads(plan_path.read_text())
     ep = episode_id(plan_path, plan)   # before any path is built or any step runs (review of #422)
     chars = chars if chars is not None else ch.registry()
-    result = eb.check_plan(plan, chars)   # E126: long_plan_check --strict and the frozen story QA for a long
+    result = eb.check_plan(plan, chars)   # E127: long_plan_check --strict and the frozen story QA for a long
     report = {"plan": str(plan_path.resolve().relative_to(REPO.resolve())) if REPO.resolve() in plan_path.resolve().parents
               else str(plan_path), "episode": ep,
               "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -378,7 +378,7 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
                              if digests else ["REQUESTS_NOT_CHECKED"])
     report["binding"] = binding(plan_path, plan, probes=setups, registry=registry)
     report["blockers"] = blockers
-    if eb.is_long(plan):   # E126: and no review row of the long open (long_preflight.py)
+    if eb.is_long(plan):   # E127: and no review row of the long open (long_preflight.py)
         import long_preflight
         long_preflight.extend(report, plan, registry)
     report["status"] = "PASS" if not blockers else "BLOCKED"
@@ -411,7 +411,7 @@ def verify(plan_path, approvals=None):
         return f"PREFLIGHT_STALE {', '.join(changed)} changed after the preflight; run it again"
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
-    if eb.is_long(plan):   # E126: a review row reopened after the report is refused now, not at the review
+    if eb.is_long(plan):   # E127: a review row reopened after the report is refused now, not at the review
         import long_preflight
         rows = long_preflight.review_problems()
         if rows:

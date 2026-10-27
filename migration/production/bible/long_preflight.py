@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The Bible-story long's no-rework contract (E126, owner 27/10: "no rework, ever"). The Shorts had it since E106/E114
+"""The Bible-story long's no-rework contract (E127, owner 27/10: "no rework, ever"). The Shorts had it since E106/E114
 (a preflight before any build, every shot probed by shot-probe.yml and approved by Claude before the build, a build
 that only assembles approved clips); the long (`bible-long-plan-v1`, arc-01-long) had none of it, so its first build
 would have generated ~165 clips that Claude met only after hours of Actions. This module is what differs for the long;
@@ -28,6 +28,7 @@ everything else is the Short's own code (episode_preflight.py, episode_build.py)
   estimate PLAN [--write]
       the production estimate (no generation): shots by kind, image-first candidates, Pavo jobs and run time.
 """
+from datetime import datetime, timezone
 import json
 import math
 from pathlib import Path
@@ -52,6 +53,9 @@ PROBE_STALE_TOLERATED = ("setups", "review")   # a new direct probe or a closed 
 # runs at ~12 min and doubled for the long's 123 lines
 PROBE_JOB_MINUTES = 240
 PROBE_SETUP_MINUTES = 30
+# review of #468: a batch is packed to this share of the job's timeout, so a batch whose shots regenerate more than
+# the average (GENERATIONS_PER_ROUND is a mean) still ends before the timeout kills the run
+PROBE_BATCH_SHARE = 0.7
 PROBE_ROUNDS = 2              # shot-probe.yml's default attempts: two clean candidates for Claude to choose from
 # expected generations a round makes for one shot (make_shot regenerates a failed clip): a scene ~1.2 (E108/E114 frame
 # misses happen after the checks, at the review), a talking clip 1 / its lips pass rate, ~0.4 (keeper-lipsync-rate)
@@ -138,11 +142,17 @@ def shot_minutes(shot, rounds=PROBE_ROUNDS):
     return rounds * GENERATIONS_PER_ROUND[kind] * each / 60
 
 
+def batch_budget():
+    """Expected minutes of generation one shot-probe run is packed with: PROBE_BATCH_SHARE of its timeout, less setup."""
+    return PROBE_BATCH_SHARE * PROBE_JOB_MINUTES - PROBE_SETUP_MINUTES
+
+
 def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_ROUNDS):
     """The shots still to probe and approve (no approved clip, or one of another request or too short), in
-    risk_order, cut into shot-probe.yml batches: one rank per batch, each fitting max_minutes (default: the job's
-    timeout less its setup). Resume is this list: an approved shot leaves it, a changed request comes back."""
-    max_minutes = max_minutes or PROBE_JOB_MINUTES - PROBE_SETUP_MINUTES
+    risk_order, cut into shot-probe.yml batches: one rank per batch, each fitting max_minutes (default:
+    batch_budget(), PROBE_BATCH_SHARE of the job's timeout less its setup). Resume is this list: an approved shot
+    leaves it, a changed request comes back."""
+    max_minutes = max_minutes or batch_budget()
     approvals = approvals or {}
     todo = []
     for i, s in eb.risk_order(plan["shots"]):
@@ -194,8 +204,9 @@ def motion_words(prompt):
     return parts[2] if len(parts) > 2 else ""
 
 
-def estimate(plan, today="2026-10-27"):
+def estimate(plan, today=None):
     """Shots by how they are made, the image-first candidates, Pavo jobs and probe time for a long plan."""
+    today = today or datetime.now(timezone.utc).strftime("%Y-%m-%d")
     gens = [(i, s) for i, s in enumerate(plan["shots"]) if not eb.is_window(s)]
     windows = [s["id"] for s in plan["shots"] if eb.is_window(s)]
     talking_char = [s["id"] for _, s in gens if plan_check.talking(s) and s["kind"] != "keeper"]
@@ -269,6 +280,7 @@ def estimate(plan, today="2026-10-27"):
             "upscale_cpu_minutes_1440p": round(sum(clip_s) * lpc.UPSCALE_S_PER_CLIP_S / 60),
             "reviews": f"{len(gens) * rounds} clip frame sheets for Claude (>= 9.5 each, approve-shot by PR)"},
         "publish": {
+            "as_of": "2026-10-27 (the proposal of that day; rerun estimates keep it until a new one is written)",
             "proposed_date": "2026-11-04", "earliest_if_every_step_passes_first_time": "2026-11-02",
             "critical_path": [
                 "27-28/10: this contract (claude/long-preflight) and the story QA v3 reader, .srt writer and the 25 "
@@ -293,12 +305,12 @@ def estimate(plan, today="2026-10-27"):
 def main(argv):
     if len(argv) >= 3 and argv[1] == "estimate":
         plan = json.loads(Path(argv[2]).read_text())
-        result = estimate(plan)
+        result = estimate(plan, datetime.now(timezone.utc).strftime("%Y-%m-%d"))
         print(json.dumps(result, indent=1, ensure_ascii=False))
         if "--write" in argv:
             if not plan_check.EPISODE_ID.fullmatch(str(plan.get("episode"))):   # the file name comes from the plan
                 raise SystemExit(f"EPISODE_ID_REFUSED {plan.get('episode')!r}")
-            out =ESTIMATES / result["date"].replace("-", "") / f"{plan['episode']}-production-estimate.json"
+            out = ESTIMATES / result["date"].replace("-", "") / f"{plan['episode']}-production-estimate.json"
             out.parent.mkdir(parents=True, exist_ok=True)
             eb.save(out, result)
         return 0

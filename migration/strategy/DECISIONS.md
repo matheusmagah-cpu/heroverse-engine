@@ -536,9 +536,8 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   - Done (E126): `qa_pilot.py` and `prepublish_gate.py` read story QA v3 by its own rows, with no footage minimum;
     `captions.py long` writes the .srt track, qa_pilot checks it and publish_video uploads it; the 23 open
     `refusal_registry.json` story_qa_v3 rows are `render_qa`.
-  - Fixed by E126 (claude/long-preflight, 27/10): the long's preflight refuses while review rows are open
-    (LONG_REVIEW_OPEN), and the long has the Shorts' risk order, resume (`probe-queue`) and approved-shot contract
-    (LONG_DESIGN.md section 7).
+  - Done (E127): the long's preflight refuses while any review row is open (LONG_REVIEW_OPEN), and the long has the
+    Shorts' risk order, resume (`probe-queue`) and approved-shot contract (LONG_DESIGN.md section 7).
   - The preview gate has not run on the real opening.
   - Done (E126): SERIES.md points its long paragraph only to LONG_DESIGN.md; the old footage lines are removed.
 - **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.

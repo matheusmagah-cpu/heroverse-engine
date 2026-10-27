@@ -167,8 +167,8 @@ class StoryV3Rows(unittest.TestCase):
             text, rec = captions.track_record(m["sentences"], 20, 120)
             (Path(d) / rec["file"]).write_text(text)
             m["caption_track"] = rec
-        self.assertFalse(check(loose, "srt_cue_words_max"))
-        self.assertFalse(check(loose, "srt_cue_chars_max"))
+        self.assertFalse(check(loose))                         # the record may not loosen the frozen limits
+        self.assertTrue(check(loose, "srt_cue_words_max"))     # the track itself is always built at 7 / 44
         # coverage of the words heard: speech outside the timeline's cues is not covered
         def late_voice(m, d, s):
             m["sentences"] = [dict(x, start=x["start"], end=x["start"] + 0.5) for x in m["sentences"]]
@@ -176,6 +176,26 @@ class StoryV3Rows(unittest.TestCase):
             (Path(d) / rec["file"]).write_text(text)
             m["caption_track"] = rec
         self.assertFalse(check(late_voice, "srt_coverage_of_speech"))
+
+    def test_persistent_overlays_are_an_allowed_list(self):
+        # review of #469: v3's persistent_overlays_allowed is a whitelist; the long's build renders no brand mark
+        # and records [] honestly
+        def overlay(value):
+            with tempfile.TemporaryDirectory() as d:
+                m = manifest(d)
+                if value is None:
+                    m.pop("persistent_overlays")
+                else:
+                    m["persistent_overlays"] = value
+                checks, _ = q.grammar_checks_story_v3(V3, m, script(), asr(m["sentences"]), 0.0, None, d, APPROVED)
+            return checks["persistent_overlays_only_brand"]
+
+        self.assertIs(overlay([]), True)
+        self.assertIs(overlay(["brand"]), True)
+        self.assertIs(overlay(["subscribe"]), False)
+        self.assertIs(overlay(["brand", "subscribe"]), False)
+        self.assertIs(overlay("brand"), False)
+        self.assertIsNone(overlay(None))
 
     def test_row_states_never_pass_a_missing_or_unknown_check(self):
         rows = {"a.x": ["one", "two"], "a.y": ["three"], "a.z": ["four"]}

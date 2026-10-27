@@ -1211,6 +1211,26 @@
    "id": "E126",
    "date": "2026-10-27",
    "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102"
+   ],
+   "error": "Rework audit of the arc-01 long (pilot-015, plans/arc-01-long.json): the acted Bible-story long could be planned but never measured, approved or published. Root cause: story QA v3 was frozen (#418, 2026-10-26) and long_plan_check.py checked plans against it, but the readers that measure and gate the render were not moved with it: qa_pilot.py indexed story v1's keys (title_card_seconds, footage_picture_share_min 0.4, caption_* rows) and fell back to the v2 figure grammar for any other version, prepublish_gate.py and render_queue.py pinned only story-qa-criteria-v1, and nothing wrote or checked the .srt track v3 requires (publish_video uploaded one cue per sentence, outside v3's 7-word, 44-character cue rows). A guard (test_long_plan_check NoRendererReadsTheNewQaYet) kept anything from pointing at v3 early, so the gap was known, but no test tied a frozen QA a plan is checked against to the readers of the render: 23 story_qa_v3 review rows stayed open.",
+   "fix": "qa_pilot.py reads story QA v3 by its own rows (STORY_V3_ROWS: every v3 row of technical, speech, rights and grammar mapped to its checks; grammar_checks_story_v3 for the acted cold open, approved figures, the Keeper only in his beats, every Pavo clip's clip_check / lipsync_check / face_check, AI share up to 1.0, no footage minimum, no burned captions, and the .srt rows; None is UNKNOWN, never a pass; the KJV check runs again on the voiced script). prepublish_gate.py pins v3's hash and file, builds its dimensions from STORY_V3_ROWS and adds one item per v3 row (PASS/FAIL/UNKNOWN). render_queue.py pins v3. captions.py writes the long's .srt from the compose timeline (`captions.py long`, cues <= 7 words and <= 44 characters, the sentence's words unchanged, timed inside its voice span) with a caption_track record; manifest_srt is the one track publish_video, preflight, captions-audit and qa_pilot all use; qa_pilot measures it against the script words, the voice timeline and the words heard (ASR); publish_video refuses a v3 long without its recorded track (CAPTIONS_TRACK_MISSING). Older pilots keep their frozen criteria and grammar unchanged; no frozen file was edited.",
+   "antidote": {
+    "file": "migration/production/test_qa_pilot.py",
+    "contains": "def test_the_criteria_a_plan_is_checked_against_are_the_ones_the_gates_read",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E127",
+   "date": "2026-10-27",
+   "class": [
     "review-after-build",
     "cheap-vs-expensive"
    ],
@@ -1228,26 +1248,6 @@
     "covers": [
      "review-after-build",
      "cheap-vs-expensive"
-    ]
-   }
-  },
-  {
-   "id": "E127",
-   "date": "2026-10-27",
-   "class": [
-    "drift"
-   ],
-   "prior": [
-    "E100",
-    "E102"
-   ],
-   "error": "Rework audit of the arc-01 long (pilot-015, plans/arc-01-long.json): the acted Bible-story long could be planned but never measured, approved or published. Root cause: story QA v3 was frozen (#418, 2026-10-26) and long_plan_check.py checked plans against it, but the readers that measure and gate the render were not moved with it: qa_pilot.py indexed story v1's keys (title_card_seconds, footage_picture_share_min 0.4, caption_* rows) and fell back to the v2 figure grammar for any other version, prepublish_gate.py and render_queue.py pinned only story-qa-criteria-v1, and nothing wrote or checked the .srt track v3 requires (publish_video uploaded one cue per sentence, outside v3's 7-word, 44-character cue rows). A guard (test_long_plan_check NoRendererReadsTheNewQaYet) kept anything from pointing at v3 early, so the gap was known, but no test tied a frozen QA a plan is checked against to the readers of the render: 23 story_qa_v3 review rows stayed open.",
-   "fix": "qa_pilot.py reads story QA v3 by its own rows (STORY_V3_ROWS: every v3 row of technical, speech, rights and grammar mapped to its checks; grammar_checks_story_v3 for the acted cold open, approved figures, the Keeper only in his beats, every Pavo clip's clip_check / lipsync_check / face_check, AI share up to 1.0, no footage minimum, no burned captions, and the .srt rows; None is UNKNOWN, never a pass; the KJV check runs again on the voiced script). prepublish_gate.py pins v3's hash and file, builds its dimensions from STORY_V3_ROWS and adds one item per v3 row (PASS/FAIL/UNKNOWN). render_queue.py pins v3. captions.py writes the long's .srt from the compose timeline (`captions.py long`, cues <= 7 words and <= 44 characters, the sentence's words unchanged, timed inside its voice span) with a caption_track record; manifest_srt is the one track publish_video, preflight, captions-audit and qa_pilot all use; qa_pilot measures it against the script words, the voice timeline and the words heard (ASR); publish_video refuses a v3 long without its recorded track (CAPTIONS_TRACK_MISSING). Older pilots keep their frozen criteria and grammar unchanged; no frozen file was edited.",
-   "antidote": {
-    "file": "migration/production/test_qa_pilot.py",
-    "contains": "def test_the_criteria_a_plan_is_checked_against_are_the_ones_the_gates_read",
-    "covers": [
-     "drift"
     ]
    }
   }

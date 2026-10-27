@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""E126: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the
+"""E127: the Bible-story long gets the Shorts' no-rework contract. A long preflight (long_plan_check --strict, the
 frozen story QA, the plan, characters, references, voices and probes bound by sha256, and no review row open) is
 required before its build; its shots are probed by shot-probe.yml (16:9, its own shot ids, windows excluded) and
 approved into shots/<long>.json; the build ships approved clips only; the riskiest shots go first and the queue
@@ -79,7 +79,7 @@ class Preflight(Scratch):
         lp.REGISTRY.write_text(json.dumps(registry()))
         r = pf.preflight(self.plan_path, setups=[], today_images=0)
         self.assertFalse([b for b in r["blockers"] if b.startswith("LONG_REVIEW_OPEN")])
-        # the other slice (#469, story QA v3's readers and the .srt) closed every row: none is open now
+        # #469 (E126) closed every long review row: on main the long is no longer blocked by them
         self.assertEqual(lp.open_rows(json.loads(self.saved[1].read_text())), [])
 
     def test_the_long_plan_is_checked_by_long_plan_check_strict_and_the_frozen_qa(self):
@@ -249,9 +249,107 @@ class RiskAndResume(Scratch):
         self.assertEqual(json.loads(written.read_text())["shots"], s)   # the committed estimate is this plan's
 
 
+class ReviewOf468(Scratch):
+    def run_cli(self, *args, env=None):
+        import subprocess
+        return subprocess.run([sys.executable, "-I", "-B", str(HERE / "episode_build.py"), *args],
+                              capture_output=True, text=True, env=dict(os.environ, **(env or {})), cwd=str(ROOT))
+
+    def test_only_a_long_probe_depends_on_its_preflight_report(self):
+        # a Short's new preflight report is no fix that lifts GUARD_RERUN_WITHOUT_FIX for its probes
+        import dispatch_guard as g
+        probe = g.WORKFLOWS["shot-probe.yml"][1]
+        short = probe({"plan": "migration/production/bible/plans/genesis-09-short.json", "shots": "s-voice",
+                       "attempts": "2"})
+        self.assertFalse([d for d in short["deps"] if "evidence/preflight" in d])
+        long_ = probe({"plan": "migration/production/bible/plans/arc-01-long.json", "shots": "s-open", "attempts": "2"})
+        self.assertIn("migration/evidence/preflight/arc-01-long.json", long_["deps"])
+
+    def test_a_batch_is_packed_to_seventy_percent_of_the_probe_timeout(self):
+        self.assertLessEqual(lp.batch_budget(), 0.7 * lp.PROBE_JOB_MINUTES - lp.PROBE_SETUP_MINUTES)
+        q = lp.queue(self.plan, {}, {})
+        self.assertTrue(all(b["minutes_est"] <= lp.batch_budget() for b in q["batches"]), q["batches"])
+        # a batch whose shots all regenerate 1.4x the mean still ends inside the job's timeout
+        self.assertTrue(all(b["minutes_est"] * 1.4 + lp.PROBE_SETUP_MINUTES <= lp.PROBE_JOB_MINUTES
+                            for b in q["batches"]))
+
+    def test_a_clip_of_another_shape_than_the_plan_asks_is_refused(self):
+        import clip_check
+        info = {"width": 720, "height": 1280, "fps": 24.0}
+        self.assertIn("CLIP_ASPECT_MISMATCH", clip_check.flags(info, [80], [80], aspect="16:9"))
+        self.assertNotIn("CLIP_ASPECT_MISMATCH", clip_check.flags(info, [80], [80], aspect="9:16"))
+        self.assertNotIn("CLIP_ASPECT_MISMATCH", clip_check.flags(dict(info, width=1280, height=720), [80], [80],
+                                                                  aspect="16:9"))
+        self.assertNotIn("CLIP_ASPECT_MISMATCH", clip_check.flags(info, [80], [80]))
+        # the build's own check (probe, adopt, ship) asks for the plan's aspect
+        seen = []
+        saved = eb.clip_flags
+        eb.clip_flags = lambda path, aspect=None: seen.append(aspect) or []
+        try:
+            i, shot = next((i, s) for i, s in enumerate(self.plan["shots"]) if s["id"] == "s-c1-light")
+            check = eb.shot_runner(shot, i, self.plan, {}, {}, ROOT / ".episode" / "unused", None, None, "py",
+                                   "face")[2]
+            self.assertEqual(check("clip.mp4"), ([], None))
+        finally:
+            eb.clip_flags = saved
+            shutil.rmtree(ROOT / ".episode" / "unused", ignore_errors=True)
+        self.assertEqual(seen, ["16:9"])
+
+    def test_the_estimate_is_dated_today_by_default(self):
+        from datetime import datetime, timezone
+        self.assertEqual(lp.estimate(self.plan)["date"], datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        self.assertEqual(lp.estimate(self.plan, "2026-10-27")["date"], "2026-10-27")
+
+    def test_estimate_write_refuses_an_episode_id_that_is_not_a_file_name(self):
+        bad = dict(self.plan, episode="../../escape")
+        self.plan_path.write_text(json.dumps(bad))
+        with self.assertRaises(SystemExit) as c:
+            lp.main(["long_preflight.py", "estimate", str(self.plan_path), "--write"])
+        self.assertTrue(str(c.exception).startswith("EPISODE_ID_REFUSED"))
+        self.assertFalse((lp.ESTIMATES.parent / "escape-production-estimate.json").exists())
+
+    def test_the_probe_gate_refuses_a_report_without_request_digests(self):
+        report = {"binding": pf.binding(self.plan_path, self.plan), "status": "BLOCKED",
+                  "blockers": ["LONG_REVIEW_OPEN 25 rows: ..."], "requests": {"ran": False}}
+        (pf.REPORTS / "arc-01-long.json").write_text(json.dumps(report))
+        self.assertTrue(lp.probe_gate(self.plan_path).startswith("LONG_PROBE_PREFLIGHT no request digests"))
+
+    def test_the_long_layout_refuses_a_keeper_share_over_its_gate(self):
+        saved = lpc.gate
+        lpc.gate = lambda: dict(saved(), keeper_share_max=0.01)
+        try:
+            problems, _ = eb.predict(self.plan, estimate_durations(self.plan))
+        finally:
+            lpc.gate = saved
+        self.assertTrue(any(p.startswith("KEEPER_SHARE") and p.endswith("(measured)") for p in problems), problems)
+
+    def test_an_unfrozen_story_qa_blocks_the_long_preflight(self):
+        saved = lpc.QA_SHA256
+        lpc.QA_SHA256 = "0" * 64
+        try:
+            r = pf.preflight(LONG, setups=[], today_images=0)
+        finally:
+            lpc.QA_SHA256 = saved
+        self.assertTrue(any(b.startswith("PLAN QA_NOT_FROZEN") for b in r["blockers"]), r["blockers"])
+
+    def test_check_probe_and_probe_queue_are_wired_for_the_long(self):
+        plan = "migration/production/bible/plans/arc-01-long.json"
+        if (ROOT / "migration" / "evidence" / "preflight" / "arc-01-long.json").exists():
+            self.skipTest("a committed long preflight exists: the refusals below need none")
+        done = self.run_cli("check-probe", plan, env={"SHOTS": "s-open", "ATTEMPTS": "2"})
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("LONG_PROBE_PREFLIGHT", done.stderr)
+        done = self.run_cli("check-probe", plan, env={"SHOTS": "s-ki-trees", "ATTEMPTS": "2"})   # a window
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("PROBE_WINDOW_SHOT", done.stderr)
+        done = self.run_cli("probe-queue", plan)
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("PREFLIGHT_MISSING", done.stderr)
+
+
 class Contract(unittest.TestCase):
     def test_every_plan_kind_in_plans_has_the_preflight_and_approved_shot_contract(self):
-        # E126 (class review-after-build, cheap-vs-expensive): the long existed beside the Shorts with none of their
+        # E127 (class review-after-build, cheap-vs-expensive): the long existed beside the Shorts with none of their
         # no-rework contract (E106 preflight, E114 approved shots, E99 risk order). Every kind of plan in plans/ must
         # be one the engine's plan check, preflight, verify-preflight, shot-probe.yml and approve-shot all take.
         contract = {"bible-plan-v2": "plan_check.py", eb.LONG_VERSION: "long_plan_check.py"}
