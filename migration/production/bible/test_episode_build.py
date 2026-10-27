@@ -1744,6 +1744,12 @@ class NativeSpeech(unittest.TestCase):
         self.assertEqual(self.pn.merge_blocks(dict(rec, run_id="40600000000"), fresh),
                          [rec["prompt_blocks"][0]["line_sha256"]])
         self.assertEqual(self.pn.merge_blocks(rec, fresh), [])           # merged once
+        odd = {"run_id": "1", "prompt_blocks": [{"line_sha256": "f" * 64, "shot": "$(x)\n", "reason": "a b",
+                                                 "conversation_id": "1;rm"}]}
+        self.pn.merge_blocks(odd, fresh)                                   # sweep H2: only plain ids are copied
+        kept = json.loads(fresh.read_text())["lines"][-1]
+        self.assertEqual((kept["shot"], kept["reason"], kept["conversation_id"]), ("", "unknown", ""))
+        fresh.write_text(json.dumps({"words": [], "lines": json.loads(fresh.read_text())["lines"][:-1]}))
         self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "kokoro")   # the next run's route
         self.assertNotEqual(pf.binding(self.work / "plan.json", plan)["prompt_blocks"], before)   # preflight stale
         wf = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()

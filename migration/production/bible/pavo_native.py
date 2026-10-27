@@ -204,9 +204,11 @@ def merge_blocks(record, path=None):
         if not (isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)) or digest in have:
             continue
         reason = str(b.get("reason") or "unknown")
-        data["lines"].append({"line_sha256": digest, "shot": str(b.get("shot") or ""),
+        shot, cid = str(b.get("shot") or ""), str(b.get("conversation_id") or "")
+        # sweep H2 (review of #476): the record comes from the probe job's artifact; only plain ids are copied
+        data["lines"].append({"line_sha256": digest, "shot": shot if re.fullmatch(r"[a-z0-9-]{1,80}", shot) else "",
                               "reason": reason if re.fullmatch(r"[a-z_]{1,60}", reason) else "unknown",
-                              "conversation_id": str(b.get("conversation_id") or "")[:25],
+                              "conversation_id": cid if re.fullmatch(r"[A-Za-z0-9_-]{1,40}", cid) else "",
                               "run_id": str(record.get("run_id") or "")})
         have.add(digest)
         added.append(digest)
