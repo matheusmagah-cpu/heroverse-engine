@@ -111,9 +111,10 @@ class Report(unittest.TestCase):
             self.assertTrue(pf.verify(plan).startswith("PREFLIGHT_NOT_PASS PROBE_REQUIRED"))
             ids = [x["id"] for x in json.loads(plan.read_text())["shots"]]
             digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
+            needs = {i: 6 for i in ids}
             (pf.REPORTS / f"{episode}.json").write_text(json.dumps(dict(report, status="PASS", blockers=[],
-                                                                        requests={"digests": digests})))
-            approvals = {i: {"request_sha256": digests[i]} for i in ids}
+                                                                        requests={"digests": digests, "needs": needs})))
+            approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids}
             self.assertIsNone(pf.verify(plan, approvals=approvals))
             plan.write_text(plan.read_text().replace("Genesis", "Genesis "))   # the plan changed after its preflight
             self.assertEqual(pf.verify(plan), "PREFLIGHT_STALE plan changed after the preflight; run it again")
@@ -134,15 +135,28 @@ class Report(unittest.TestCase):
             data = json.loads(plan.read_text())
             ids = [x["id"] for x in data["shots"]]
             digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
+            needs = {i: 6 for i in ids}
             (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
-                {"binding": pf.binding(plan, data), "status": "PASS", "blockers": [], "requests": {"digests": digests}}))
-            approvals = {i: {"request_sha256": digests[i]} for i in ids[1:]}
+                {"binding": pf.binding(plan, data), "status": "PASS", "blockers": [],
+                 "requests": {"digests": digests, "needs": needs}}))
+            approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids[1:]}
             self.assertEqual(pf.verify(plan, approvals={}).split(" (")[0], "SHOT_NOT_REVIEWED " + " ".join(ids))
             self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_NOT_REVIEWED {ids[0]}")
             approvals[ids[0]] = {"request_sha256": "0" * 64 + "x"}            # approved for another request
             self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_REQUEST_CHANGED {ids[0]}")
-            approvals[ids[0]] = {"request_sha256": digests[ids[0]]}
+            approvals[ids[0]] = {"request_sha256": digests[ids[0]], "clip_seconds": 6}
             self.assertIsNone(pf.verify(plan, approvals=approvals))
+            # E118: a clip shorter than the preflight's measured layout needs is refused before any secret (and one
+            # with no recorded clip seconds, or a report with no needs, covers nothing)
+            approvals[ids[0]] = dict(approvals[ids[0]], clip_seconds=5)
+            self.assertEqual(pf.verify(plan, approvals=approvals).split(" (")[0], f"SHOT_CLIP_TOO_SHORT {ids[0]}(5<6)")
+            approvals[ids[0]] = {"request_sha256": digests[ids[0]]}
+            self.assertTrue(pf.verify(plan, approvals=approvals).startswith(f"SHOT_CLIP_TOO_SHORT {ids[0]}(None<6)"))
+            approvals[ids[0]] = {"request_sha256": digests[ids[0]], "clip_seconds": 7}   # longer covers
+            self.assertIsNone(pf.verify(plan, approvals=approvals))
+            (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
+                {"binding": pf.binding(plan, data), "status": "PASS", "blockers": [], "requests": {"digests": digests}}))
+            self.assertTrue(pf.verify(plan, approvals=approvals).startswith("SHOT_CLIP_TOO_SHORT"))
             # a report written before E114 holds no digests: every approved shot is a changed request
             (pf.REPORTS / f"{data['episode']}.json").write_text(json.dumps(
                 {"binding": pf.binding(plan, data), "status": "PASS", "blockers": []}))

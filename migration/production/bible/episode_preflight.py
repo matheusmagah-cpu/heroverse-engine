@@ -308,8 +308,12 @@ def refs_and_requests(plan, work):
     layout = json.loads((Path(work) / "layout.json").read_text())
     problems = eb.request_problems(plan, layout, refs)
     # E114: the sha256 of every shot's request, machine-independent (episode_build.request_identity); verify-preflight
-    # compares the approved clips of shots/<episode>.json with these
-    return {"ran": True, "problems": problems, "digests": {} if problems else eb.request_digests(plan, layout, refs)}
+    # compares the approved clips of shots/<episode>.json with these. E118: and the clip seconds this measured layout
+    # needs per shot (no slack; the build allows MEASURE_TOLERANCE), which the approved clips must cover
+    if problems:
+        return {"ran": True, "problems": problems, "digests": {}, "needs": {}}
+    return {"ran": True, "problems": problems, "digests": eb.request_digests(plan, layout, refs),
+            "needs": eb.clip_needs(plan, layout)}
 
 
 def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None):
@@ -366,7 +370,8 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
     # E114: which shots still need a probed, reviewed and approved clip (shot-probe.yml, approve-shot). Not a blocker
     # of this report (an approval comes after it, by its own PR); verify-preflight refuses the build until none is left
     digests = report["requests"].get("digests")
-    report["shot_review"] = eb.review_problems(plan, digests) if digests else ["REQUESTS_NOT_CHECKED"]
+    report["shot_review"] = (eb.review_problems(plan, digests, needs=report["requests"].get("needs") or {})
+                             if digests else ["REQUESTS_NOT_CHECKED"])
     report["binding"] = binding(plan_path, plan, probes=setups)
     report["blockers"] = blockers
     report["status"] = "PASS" if not blockers else "BLOCKED"
@@ -400,7 +405,10 @@ def verify(plan_path, approvals=None):
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
     # E114: every shot ships the clip Claude reviewed, made from the request this plan sends now
-    review = eb.review_problems(plan, (report.get("requests") or {}).get("digests") or {}, approvals)
+    # E118: and every approved clip covers the clip seconds the preflight's measured layout needs (a report without
+    # them covers nothing: SHOT_CLIP_TOO_SHORT)
+    requests = report.get("requests") or {}
+    review = eb.review_problems(plan, requests.get("digests") or {}, approvals, requests.get("needs") or {})
     return "; ".join(review) if review else None
 
 

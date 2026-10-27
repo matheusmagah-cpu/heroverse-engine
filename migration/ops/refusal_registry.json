@@ -1435,10 +1435,23 @@
    "class": "N",
    "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
   },
+  "SHOT_CLIP_SECONDS_UNKNOWN": {
+   "class": "N",
+   "why": "E114: approve-shot is the review's own local command (Claude, after the frame review, before the PR): it stops no generation, voice or render, and refuses only a wrong argument"
+  },
   "SHOT_CLIP_SHA256_MISMATCH": {
    "class": "I",
    "guard": "migration/production/bible/test_episode_build.py::def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip",
    "note": "E114: the approved clip is fetched by its content-hash name and its sha256 checked (fetch_shot_clip; shot-probe.yml's record job checks it before the upload); another file under the name stops the run, never shipped"
+  },
+  "SHOT_CLIP_TOO_SHORT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py verify-preflight",
+    "migration/production/bible/episode_preflight.py::eb.clip_needs(plan, layout)",
+    "migration/production/bible/episode_build.py::def coverage_problems("
+   ],
+   "note": "E118: an approved clip's recorded clip_seconds must cover the clip seconds the layout needs (clip_needs); verify-preflight checks them against the committed preflight's measured needs (no slack) before any secret, the build against its own layout with MEASURE_TOLERANCE of slack, so a runner measuring within it of the local preflight never refuses what verify passed"
   },
   "SHOT_FAILED": {
    "class": "C",
@@ -1474,7 +1487,7 @@
     "migration/production/bible/episode_preflight.py::eb.review_problems(",
     "migration/production/bible/episode_build.py::def request_identity("
    ],
-   "note": "E114: an approved clip belongs to one request (request_identity: prompt, seconds, references by record sha256, input audio by words, voice and seconds); verify-preflight compares the approvals with the preflight's digests of the plan now, the build with its own"
+   "note": "E114: an approved clip belongs to one request (request_identity: prompt, aspect, sound, references by record sha256, input audio by speaker, voice and words; E118: never the clip seconds or anything else derived from a measurement); verify-preflight compares the approvals with the preflight's digests of the plan now, the build with its own"
   },
   "SHOT_SCORE_INVALID": {
    "class": "N",

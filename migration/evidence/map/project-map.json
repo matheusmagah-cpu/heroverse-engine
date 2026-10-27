@@ -1835,6 +1835,7 @@
    "imported_by": [
     "migration/production/bible/episode_preflight.py",
     "migration/production/bible/plan_check.py",
+    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_plan_check.py",
     "migration/production/bible/test_scene_stills.py"
@@ -1869,6 +1870,7 @@
    "imported_by": [
     "migration/ops/test_dispatch_guard.py",
     "migration/production/bible/episode_build.py",
+    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_preflight.py"
    ],
    "test": "migration/production/bible/test_episode_preflight.py",
@@ -1940,6 +1942,18 @@
     "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/rekey_shots_e118.py": {
+   "purpose": "E118 one-off migration: re-key every approved clip in shots/*.json to the request digest without `seconds`.",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/episode_build.py",
+    "migration/production/bible/episode_preflight.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
    "is_test": false
   },
   "migration/production/bible/scene_stills.py": {
@@ -3603,6 +3617,7 @@
   "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
   "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
   "migration/integrations/pavo/server.py",
+  "migration/production/bible/rekey_shots_e118.py",
   "migration/production/imagegen/hydrate_reused.py"
  ]
 }

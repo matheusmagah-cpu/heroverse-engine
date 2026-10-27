@@ -518,7 +518,8 @@ class Gating(unittest.TestCase):
         layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
         sha = hashlib.sha256(clip).hexdigest()
         return {s["id"]: {"asset": eb.shot_asset_name(self.plan["episode"], s["id"], sha), "clip_sha256": sha,
-                          "request_sha256": eb.request_identity(s, i, self.plan, layout, refs)[0], "score": 9.6}
+                          "request_sha256": eb.request_identity(s, i, self.plan, layout, refs)[0], "score": 9.6,
+                          "clip_seconds": eb.shot_seconds(s, i, self.plan, layout)}
                 for i, s in enumerate(self.plan["shots"])}
 
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
@@ -552,6 +553,13 @@ class Gating(unittest.TestCase):
             with self.assertRaises(SystemExit) as err:
                 eb.generate_step(self.plan, self.work, "py", "model", approvals=changed, fetch=fetch)
             self.assertEqual(str(err.exception).split(" (")[0], f"SHOT_REQUEST_CHANGED {sid}")
+            # E118: a clip shorter than this machine's layout needs is never shipped, refused before any download
+            fetched.clear()
+            short = dict(approvals, **{sid: dict(approvals[sid], clip_seconds=approvals[sid]["clip_seconds"] - 1)})
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(self.plan, self.work, "py", "model", approvals=short, fetch=fetch)
+            self.assertTrue(str(err.exception).startswith(f"SHOT_CLIP_TOO_SHORT {sid}("), err.exception)
+            self.assertEqual(fetched, [])
             # another file under the asset's name is refused; an approved clip failing the checks stops the run
             for f in (self.work / "clips").glob("*.mp4"):
                 f.unlink()
@@ -572,9 +580,58 @@ class Gating(unittest.TestCase):
         wf = (eb.REPO / ".github/workflows/episode.yml").read_text()
         self.assertNotIn("PAVO_TOKEN", wf)
 
+    def test_the_request_digest_holds_nothing_derived_from_a_measurement(self):
+        # E118 (genesis-08 run 40483267526: SHOT_REQUEST_CHANGED k-insight, Kokoro 174.0 s local vs 173.929 s on the
+        # runner): the derived clip seconds of a voice-over or talking shot flipped across a rounding boundary. Class
+        # level: every shot of every kind, with every measured value of the layout moved so the derived clip seconds
+        # cross a boundary, digests the same; coverage (not the digest) checks the clip's length
+        layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
+        vo = copy.deepcopy(self.plan)
+        k = next(i for i, s in enumerate(vo["shots"]) if s["kind"] == "keeper")
+        vo["shots"][k]["voiceover"] = True
+        refs = dict(refs, **{"keeper:talk": ["k-talk.jpg"]})
+        for plan in (self.plan, vo):
+            moved = copy.deepcopy(layout)
+            for rec in moved["lines"]:
+                rec["start"], rec["end"] = round(rec["start"] + 1.003, 3), round(rec["end"] + 1.003, 3)
+            moved["total"] = layout["total"] + 1.003
+            for group in ("keeper", "speakers"):
+                for rec in moved.get(group, {}).values():
+                    for key in ("start", "end", "seconds"):
+                        if isinstance(rec.get(key), (int, float)):
+                            rec[key] = round(rec[key] + 1.003, 3)
+            crossed = 0
+            for i, s in enumerate(plan["shots"]):
+                a = eb.request_identity(s, i, plan, layout, refs)
+                b = eb.request_identity(s, i, plan, moved, refs)
+                self.assertEqual(a[0], b[0], s["id"])
+                self.assertNotIn("seconds", a[1])
+                self.assertNotIn("seconds", a[1]["audio"] or {})
+                crossed += eb.shot_seconds(s, i, plan, layout) != eb.shot_seconds(s, i, plan, moved)
+            self.assertGreater(crossed, 0)       # the move did cross a rounding boundary of the derived seconds
+            # and coverage refuses the clip made for the shorter layout once the layout needs more
+            needs = eb.clip_needs(plan, moved)
+            have = {s["id"]: {"clip_seconds": eb.shot_seconds(s, i, plan, layout)} for i, s in enumerate(plan["shots"])}
+            short = eb.coverage_problems(plan, needs, have)
+            self.assertTrue(short and short[0].startswith("SHOT_CLIP_TOO_SHORT"), short)
+            self.assertEqual(eb.coverage_problems(plan, eb.clip_needs(plan, layout), have), [])
+            # a measurement within MEASURE_TOLERANCE above the one the clip was made for still covers it (the runner
+            # measures a few hundredths apart from the local preflight)
+            near = copy.deepcopy(layout)
+            for group in ("keeper", "speakers"):
+                for rec in near.get(group, {}).values():
+                    rec["seconds"] = round(rec["seconds"] + eb.MEASURE_TOLERANCE * 0.9, 3)
+            self.assertEqual(eb.coverage_problems(plan, eb.clip_needs(plan, near, eb.MEASURE_TOLERANCE), have), [])
+
+    def test_every_committed_approval_records_its_clip_seconds(self):
+        # E118: coverage reads the seconds an approved clip was generated at; an approval without them covers nothing
+        for path in sorted(eb.SHOTS_DIR.glob("*.json")):
+            for sid, a in json.loads(path.read_text())["shots"].items():
+                self.assertTrue(isinstance(a.get("clip_seconds"), int) and a["clip_seconds"] > 0, f"{path.name} {sid}")
+
     def test_the_request_digest_ignores_measured_seconds_but_not_the_words(self):
         # E114 (review of #442): Kokoro measures differ between the local preflight and the runners by a few ms; the
-        # digest covers what decides the clip (the clip seconds sent, discrete) and the words, never a measured float
+        # digest covers what decides the clip and the words, never a measured value (E118: nor the derived seconds)
         layout, refs = json.loads((self.work / "layout.json").read_text()), json.loads((self.work / "refs.json").read_text())
         moved = copy.deepcopy(layout)
         for group in ("keeper", "speakers"):
@@ -587,7 +644,6 @@ class Gating(unittest.TestCase):
         for i, s in talk:
             a = eb.request_identity(s, i, self.plan, layout, refs)
             b = eb.request_identity(s, i, self.plan, moved, refs)
-            self.assertEqual(a[1]["seconds"], b[1]["seconds"])
             self.assertEqual(a[0], b[0], s["id"])
             self.assertNotIn("seconds", a[1]["audio"])
         i, s = next((i, s) for i, s in talk if eb.plan_check.speaking(s))
