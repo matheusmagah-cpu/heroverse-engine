@@ -71,10 +71,11 @@ class Voices(unittest.TestCase):
         self.assertEqual(ch.voice("eve"), {"voice_id": voices["eve"], "speed": 1.0})
         self.assertIsNone(ch.voice("moses"))
 
-    def test_noah_waits_as_a_draft_with_a_fixed_look_and_his_reference_prompts(self):
+    def test_noah_is_approved_with_his_kept_references_and_a_fixed_look(self):
+        # 2026-10-27: front and three-quarter kept by Claude's review (characters.json "reviewed")
         noah = ch.registry()["noah"]
-        self.assertEqual(noah["status"], "DRAFT")
-        self.assertEqual(noah["refs"], [])
+        self.assertEqual(noah["status"], "APPROVED")
+        self.assertEqual(noah["refs"], ["front", "three-quarter"])
         self.assertIn("about seventy", noah["look"])
         self.assertIn("long grey beard", noah["look"])
         self.assertGreaterEqual(len(noah["wardrobe"]), 2)
@@ -82,8 +83,7 @@ class Voices(unittest.TestCase):
         spec = json.loads((ch.HERE / "images.json").read_text())
         self.assertEqual(sorted(i["id"] for i in spec["images"] if i["character"] == "noah"),
                          ["ch-noah-front", "ch-noah-full", "ch-noah-three-quarter"])
-        self.assertTrue(ch.problems([{"prompt": noah["look"], "characters": ["noah"]}])[0]
-                        .startswith("CHARACTER_NOT_APPROVED"))
+        self.assertEqual(ch.problems([{"prompt": noah["look"], "characters": ["noah"]}]), [])
 
     def test_scoffer_waits_as_a_draft_antagonist_with_his_own_face_voice_and_reference_prompts(self):
         chars = ch.registry()

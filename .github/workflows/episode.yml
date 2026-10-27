@@ -16,6 +16,10 @@ on:
         description: Run id of a failed build of the same plan whose clips are kept (E93); empty = from the start
         required: false
         default: ""
+      regenerate:
+        description: With resume_run, a comma list of shot ids generated again although their request is unchanged (clips Claude's review rejected); empty = none
+        required: false
+        default: ""
 permissions:
   contents: read
 concurrency:
@@ -35,18 +39,26 @@ jobs:
     env:
       PLAN: ${{ inputs.plan }}
       GH_TOKEN: ${{ github.token }}
+      # review of #426: the inputs reach the steps through the env only, never inline in a run script
+      RESUME_RUN: ${{ inputs.resume_run }}
+      REGENERATE: ${{ inputs.regenerate }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
       - id: plan
-        name: The plan (path checked, plan_check strict)
+        name: The plan (path checked, plan_check strict, a PASS preflight of this exact plan, E106)
         run: |
           [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
           ep="${BASH_REMATCH[1]}"
           test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
           python3 -I -B migration/production/bible/plan_check.py "$PLAN" --strict
+          # E106: the committed preflight (local Kokoro, refs, requests, every talking setup probed) is PASS for this
+          # plan and character bible; else the build stops here, before any secret, voice or Pavo call
+          python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
+          # review of #426: the shots to generate again (ids of this plan, only with resume_run), before any secret
+          python3 -I -B migration/production/bible/episode_build.py check-regenerate "$PLAN"
           echo "episode=$ep" >> "$GITHUB_OUTPUT"
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only
@@ -67,6 +79,20 @@ jobs:
           # and the face check of God's voice-over shots must see the Keeper's face in the same clip
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
           python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
+          # E106: the still-mouth check of a voice-over Keeper must work before any generation too: a probe clip that
+          # passed it (keeper-vo/calibration.json) passes again, and the talking calibration clip is flagged
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper-vo/probe-k-close-1-373107379233670656.mp4 "$RUNNER_TEMP/face_landmarker.task"
+          # review of #422: the talking clip must be flagged MOUTH_TALKING itself, not merely fail in some way
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/still.json" || true
+          python3 -I - "$RUNNER_TEMP/still.json" <<'PY'
+          import json, sys
+          lines = open(sys.argv[1]).read().strip().splitlines()
+          try:
+              flags = json.loads(lines[-1]).get("flags", [])
+          except (IndexError, ValueError, AttributeError):
+              flags = []
+          sys.exit(0 if "MOUTH_TALKING" in flags else "STILL_MOUTH_CHECK_BLIND")
+          PY
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |
@@ -91,7 +117,7 @@ jobs:
           cp "$RUNNER_TEMP/prev/report.json" "$WORK/report.json"
           find "$RUNNER_TEMP/prev/clips" -maxdepth 1 -name '*.mp4' ! -name '*-raw.mp4' -exec cp {} "$WORK/clips/" \;
           echo "RESUMED_FROM $RESUME"
-      - name: Pavo shots in order (0-credit quote each), clip_check and lipsync_check, at most 2 regenerations (5 for a talking clip, E98)
+      - name: Pavo shots, talking and God voice-over first (E99; 0-credit quote each), clip_check and lipsync_check, at most 2 regenerations (5 for a talking clip, E98)
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
         run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"

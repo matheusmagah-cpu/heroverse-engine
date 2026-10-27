@@ -1,0 +1,29 @@
+{
+ "id": "ch-scoffer-full",
+ "prompt": "character reference, full figure standing, front view: a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, a lean narrow bony face with hollow cheeks, his black beard short and close to the jaw ending in a sharp point, a scornful half-smile, the headcloth striped only crimson and black with no gold, a plain woven crimson tunic with no armour on the shoulders, his bare forearms each ringed by one thin plain bronze band, nothing around his neck, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "characters-img-ch-scoffer-full-sha256-70da22c97fe462779cf29ea9308c0e163a11ba30d4577a8c3dc5c083bb20e614.png",
+ "sha256": "70da22c97fe462779cf29ea9308c0e163a11ba30d4577a8c3dc5c083bb20e614",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

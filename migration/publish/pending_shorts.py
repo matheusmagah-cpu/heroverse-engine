@@ -13,6 +13,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import owner_quality_policy
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+import render_queue  # noqa: E402  (story_pilot: prayer longs are retired, owner 2026-10-26)
 
 DENIED_NEW_006 = frozenset({
     "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
@@ -124,6 +126,8 @@ def pending(production, ledger, now=None):
         shorts_path, manifest = d / "shorts" / "shorts.json", d / "out" / "manifest.json"
         if not shorts_path.exists() or not manifest.exists():
             continue
+        if (d / "script.json").exists() and not render_queue.story_pilot(d):
+            continue  # owner, 2026-10-26: no Short of a retired prayer long is published
         spec = json.loads(shorts_path.read_text())
         ok = [s for s in spec["shorts"] if approved(s)]
         todo = [s for s in ok if "video_id" not in entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})]

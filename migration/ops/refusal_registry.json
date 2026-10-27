@@ -1,0 +1,2032 @@
+{
+ "about": "E106: every refusal code a later, expensive stage can raise (test_refusal_parity.LATER), with its class: A predicted early by the same function or constant (`early`: path::needle), B a rework hole (`early`: the cheap check that would catch it, `open`: why it is still open), C knowable only after a generation, voice or render (`probe`: the cheapest earlier probe), D external or transient (`resume`), I an engine invariant no plan can break (`guard`), N not a refusal (`why`). `was`: B means the hole was closed by E106. A new later-stage code fails migration/ops/test_refusal_parity.py until it is classified here.",
+ "codes": {
+  "ALREADY_ABSENT": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "ALREADY_APPROVED": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "APPROVED_MANIFEST_CHANGED": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "ASPECT_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "ASSET_RELEASE_TAG": {
+   "class": "I",
+   "guard": "migration/publish/test_tiktok_publish.py::def test_"
+  },
+  "ASSET_RELEASE_TAG_INVALID": {
+   "class": "I",
+   "guard": "migration/publish/test_tiktok_publish.py::def test_"
+  },
+  "AUDIO_AND_FRAMES_EXCLUSIVE": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "AUDIO_NEEDS_REFERENCES": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "AUDIO_NOT_OUR_LINE": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "AUDIO_OFFSET": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "AUTH_FAILED": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "AWAITING_REVIEW": {
+   "class": "D",
+   "resume": "waits for Claude's review (ops/CLAUDE_REVIEW.md); the render or preview is kept"
+  },
+  "BAD_RECORD_NAME": {
+   "class": "A",
+   "early": ".github/workflows/pavo-footage.yml::LIST_PATH_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "BELOW_OWNER_FLOOR": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "BLACK_END": {
+   "class": "C",
+   "probe": "one clip: clip_check on each generation, regenerated within the shot's attempts"
+  },
+  "BLACK_FRAMES": {
+   "class": "C",
+   "probe": "clip_check on every clip before the compose (BLACK_START/END regenerate the shot); ESTABLISHING_SHARE inside COMPOSE_REFUSED is predicted (compose_prediction); LOUDNESS is set by loudnorm in the mix"
+  },
+  "BLACK_START": {
+   "class": "C",
+   "probe": "one clip: clip_check on each generation, regenerated within the shot's attempts"
+  },
+  "BUFFER_API_KEY": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "BUFFER_CHANNELS": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "BUFFER_NOT_CONFIGURED": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "BUFFER_ORGANIZATIONS": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "BUFFER_TIKTOK_CHANNEL": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "CAPTIONS_BOUNDARY_IN_CONTENT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "CAPTIONS_DELETE": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_FAILED": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_LIST": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_SRT_INVALID": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "CF_ACCOUNT_ID_UNRESOLVED": {
+   "class": "D",
+   "resume": "a secret's configuration: set it, dispatch again (nothing was generated)"
+  },
+  "CF_ALLOCATION_EXHAUSTED_DEFERRED": {
+   "class": "D",
+   "resume": "the made images are kept and the rest wait for the next nightly slot (E62); episode_preflight reports today's images against the ~44 a day before a sheet is dispatched"
+  },
+  "CF_DAILY_ALLOCATION_EXHAUSTED": {
+   "class": "D",
+   "resume": "the made images are kept and the rest wait for the next nightly slot (E62); episode_preflight reports today's images against the ~44 a day before a sheet is dispatched"
+  },
+  "CF_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
+  "CF_NO_IMAGE": {
+   "class": "C",
+   "probe": "one image (ONLY=<id>) before a batch"
+  },
+  "CHANNEL_IDENTITY_MISMATCH": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "CHARACTERS_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "CHARACTER_LOOK_CHANGED": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def character_problems(",
+   "note": "plan_check.character_problems holds the same rules and words as characters.problems; the Keeper while DRAFT is CHARACTER_PENDING (strict)"
+  },
+  "CHARACTER_NOT_APPROVED": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def character_problems(",
+   "note": "plan_check.character_problems holds the same rules and words as characters.problems; the Keeper while DRAFT is CHARACTER_PENDING (strict)"
+  },
+  "CHARACTER_UNKNOWN": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def character_problems(",
+   "note": "plan_check.character_problems holds the same rules and words as characters.problems; the Keeper while DRAFT is CHARACTER_PENDING (strict)"
+  },
+  "CLAUDE_REVIEW_EVIDENCE": {
+   "class": "D",
+   "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
+  },
+  "CLAUDE_REVIEW_MISSING": {
+   "class": "D",
+   "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
+  },
+  "CLAUDE_REVIEW_MODEL": {
+   "class": "D",
+   "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
+  },
+  "CLAUDE_REVIEW_NOT_FOR_THIS_FILE": {
+   "class": "D",
+   "resume": "waits for Claude's review bound to this file (ops/CLAUDE_REVIEW.md); the render is kept"
+  },
+  "CLIP_TOO_SHORT": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "CLOUDFLARE_ACCOUNT_ID": {
+   "class": "N",
+   "why": "environment variable names"
+  },
+  "CLOUDFLARE_API_TOKEN": {
+   "class": "N",
+   "why": "environment variable names"
+  },
+  "CLOUDFLARE_API_TOKEN_MISSING": {
+   "class": "D",
+   "resume": "a secret's configuration: set it, dispatch again (nothing was generated)"
+  },
+  "COMMAND_FAILED": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2"
+  },
+  "COMPOSE_REFUSED": {
+   "class": "C",
+   "probe": "clip_check on every clip before the compose (BLACK_START/END regenerate the shot); ESTABLISHING_SHARE inside COMPOSE_REFUSED is predicted (compose_prediction); LOUDNESS is set by loudnorm in the mix"
+  },
+  "CORRECTION_MEASUREMENTS_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "CREDENTIAL_IN_CONVERSATION_ID_REFUSED": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "CREDENTIAL_IN_PROMPT_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "CTA_NOT_TO_THE_LONG": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
+   "note": "the same function at plan time"
+  },
+  "DESCRIPTION_LENGTH": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
+   "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
+  },
+  "DISCLOSURE_MISSING": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
+   "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
+  },
+  "ENGINE_INVALID": {
+   "class": "A",
+   "early": [
+    ".github/workflows/cf-images.yml::PILOT_INVALID: pass pilot-NNN or characters",
+    ".claude/hookify.block-cf-images-bad-pilot.local.md::pilot-[0-9]{3}|characters"
+   ],
+   "note": "the first step, 0 s, nothing spent (E96); the hookify rule refuses the bad input before the dispatch"
+  },
+  "EPISODE_ID_REFUSED": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::EPISODE_ID = re.compile"
+  },
+  "EPISODE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
+   "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
+  },
+  "ESPEAK_DATA_MISSING": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::FACE_CHECK_BLIND"
+  },
+  "ESTABLISHING_SHARE": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "EVIDENCE_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "EVIDENCE_UNREADABLE": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "EXCEPTION_REMOTE_HEAD_CHANGED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "EXCEPTION_RESERVATION_PERSISTENCE_UNCONFIRMED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "EXCEPTION_SLOT_MISMATCH_BEFORE_RESERVATION": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "FACE_CHECK_BLIND": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::FACE_CHECK_BLIND"
+  },
+  "FACE_MODEL_HASH_MISMATCH": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::sha256sum -c"
+  },
+  "FACE_NOT_FOUND": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "FACE_TOOL_BROKEN": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::the lips check must work before any Pavo generation is spent (E89)"
+  },
+  "FAILED_FINAL": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "FAILED_SHOT": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "FETCH_HEAD": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "FFMPEG_FAILED": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2"
+  },
+  "FIRST_FRAME_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "FOOTAGE_HASH_MISMATCH": {
+   "class": "D",
+   "resume": "a changed release asset: restore it (assets.sh) and the render runs again; nothing is published"
+  },
+  "FOOTAGE_SHORTAGE": {
+   "class": "A",
+   "early": "migration/production/script_check.py::TOO_FEW_FOOTAGE"
+  },
+  "FRAMES_AND_REFERENCES_EXCLUSIVE": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "FRAME_TAG": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "FRAME_TAG_MISSING": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "FRESH_ZERO_CREDIT_QUOTE_REQUIRED": {
+   "class": "D",
+   "resume": "a nonzero price spends nothing and stops the shot; quote it in the session first (pavo_quote_video, 0 credits) and wait for a free quote, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "FROM_RELEASE": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "GATE_CANONICAL_DIMENSIONS_MISSING": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_CANONICAL_ITEMS_MISSING": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_DIMENSIONS_MISSING": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_DIMENSION_ITEMS_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_DIMENSION_NOT_PASS": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "GATE_ITEMS_EMPTY": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_ITEMS_MISSING": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_ITEM_NOT_PASS": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "GATE_NOT_ELIGIBLE": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GATE_NOT_PASS": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "GATE_SCHEMA_INVALID": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "GITHUB_ENV": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "GOD_SHOT_FACE": {
+   "class": "C",
+   "probe": "plan_check GOD_SHOT_WITH_A_PERSON refuses the words that put a person in God's shot; risk_order generates God's shots right after the talking ones, with the face check"
+  },
+  "HERO_DEPTH_MODEL": {
+   "class": "N",
+   "why": "environment variables, a format word, a log line and an API enum value"
+  },
+  "HERO_FRAME": {
+   "class": "N",
+   "why": "environment variables, a format word, a log line and an API enum value"
+  },
+  "HERO_YT_AUTHORIZED_USER_JSON": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
+  "IMAGE_BELOW_FRAME": {
+   "class": "B",
+   "early": "render_queue.needed_images (or script_check) reading each image record's `size` against the frame the QA version renders at",
+   "open": "prayer longs are stopped and the story long renders footage/Pavo clips (PR #418 redesigns its plan); left for the long-plan PR so the queue rule is written once for the new grammar"
+  },
+  "INPUT_AUDIOS_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_DURATION_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_DURATION_UNMEASURABLE": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_INVALID": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_PATH_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_SIZE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_TOTAL_DURATION_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_AUDIO_TYPE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_ASPECT_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_INVALID": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_PATH_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_SIDE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_SIZE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_IMAGE_TYPE_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INPUT_REFERENCES_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INSIGHT_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
+   "note": "the same function at plan time"
+  },
+  "INVALID_ASPECT_RATIO": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INVALID_CONVERSATION_ID": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "INVALID_DURATION": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INVALID_EPISODE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::EPISODE_ID = re.compile"
+  },
+  "INVALID_MODE": {
+   "class": "A",
+   "early": ".github/workflows/tiktok.yml::INVALID_MODE",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "INVALID_OUTPUT_SHA256": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "INVALID_PAVO_REQUEST": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "INVALID_PAVO_RESPONSE": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "INVALID_PROMPT": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "INVALID_SLOTS": {
+   "class": "A",
+   "early": ".github/workflows/publish-shorts.yml::INVALID_SLOTS",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "INVALID_SOUND_FLAG": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "KEEPER_AUDIO": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "KEEPER_CLIP_SHORT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "plan B (#423): the voice-over Keeper's run in compose_shots, predicted by compose_prediction at plan time and on the measured voice"
+  },
+  "KEEPER_SHARE": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "KEEPER_VO_NOT_ON_HIS_LINE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "plan B (#423): the voice-over Keeper's run in compose_shots, predicted by compose_prediction at plan time and on the measured voice"
+  },
+  "KEEPER_VO_NO_TALK_REF": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+   "note": "reference_keys sends a voice-over Keeper his talk_refs frame only; reference_problems refuses its absence at plan time"
+  },
+  "LAST_FRAME_NEEDS_FIRST_FRAME": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
+  },
+  "LESSON_SHARE": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "LETTERBOX_BARS": {
+   "class": "C",
+   "probe": "one clip: clip_check on each generation (bars: black rows or columns at both opposite edges over BAR_SHARE in every sampled frame), regenerated within the shot's attempts; E109: Pavo letterboxed a wide picture inside the 9:16 frame for genesis-07 s-well with no prompt asking for it, so only the clip shows it"
+  },
+  "LINES_REFUSED": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "LIPSYNC_TOOL_BROKEN": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::the lips check must work before any Pavo generation is spent (E89)"
+  },
+  "LIST_PATH_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/pavo-footage.yml::LIST_PATH_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "LONG_DESCRIPTION_LENGTH": {
+   "class": "B",
+   "early": "package_pilot / script_check keeping the long's description under DESCRIPTION_MAX minus the arc block arcs.json implies",
+   "open": "costs a skipped link, not a generation; the fix touches the long's package (PR #418's grammar) and migration/publish/ (security sweep), so it gets its own PR"
+  },
+  "LONG_NOT_PUBLIC": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "LONG_NOT_QUALIFIED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "LONG_NOT_UPLOADED": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "LOW_FPS": {
+   "class": "C",
+   "probe": "one clip of a new model or resolution (Agnes Flash 720p 24 fps passes, measured 2026-10-25)"
+  },
+  "LOW_RES": {
+   "class": "C",
+   "probe": "one clip of a new model or resolution (Agnes Flash 720p 24 fps passes, measured 2026-10-25)"
+  },
+  "MANIFEST_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_video.py::def test_"
+  },
+  "MEDIA_RESOLUTION_LOW": {
+   "class": "N",
+   "why": "environment variables, a format word, a log line and an API enum value"
+  },
+  "MODEL_SHA256": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "MOUTH_NOT_CLOSED": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
+  },
+  "MOUTH_NOT_IN_SYNC": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "MOUTH_OPEN_IN_PAUSES": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "MOUTH_TALKING": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
+  },
+  "MOUTH_UNMEASURED": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
+  },
+  "MULTIPART_MEDIA_PART_DIFFERS_FROM_SRT": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_NO_CLOSE_DELIMITER": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_NO_OPENING_DELIMITER": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_PART_MALFORMED": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "NARRATION_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
+   "note": "the same function at plan time"
+  },
+  "NEXT_NOT_PUBLIC": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "NON_NULL": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NOTHING_PENDING": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NOTHING_TO_CHECK": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NOT_APPROVED": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "NOT_ATTEMPTED": {
+   "class": "N",
+   "why": "a ledger state word"
+  },
+  "NOT_IN_ARCS_TABLE": {
+   "class": "I",
+   "guard": "migration/publish/test_arc_links.py::def test_"
+  },
+  "NOT_PUBLIC": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "NOT_STORY_LONG": {
+   "class": "A",
+   "early": "migration/production/render_queue.py::def story_pilot"
+  },
+  "NO_APPROVAL_IN_PUSH": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "NO_FRAMES": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "NO_IMAGES": {
+   "class": "N",
+   "why": "environment variable names"
+  },
+  "NO_IMAGE_MADE": {
+   "class": "C",
+   "probe": "one image (ONLY=<id>) before a batch"
+  },
+  "NO_NEW_CLIPS": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NO_PILOT": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NO_RENDER_ADDED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "NO_REPORT": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "NO_SHORTS_SLOTS": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "NO_UPLOADED_TRACK": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "NO_VIDEO": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "ORIGINAL_SHARE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
+   "note": "the same function at plan time"
+  },
+  "OUTPUT_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "OWNER_FLOOR": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "OWNER_QUALITY_POLICY_BLOCKED": {
+   "class": "C",
+   "probe": "the review score of the render; its cheap probe is the preview review at >= 9.5 before the render (preview_gate)"
+  },
+  "PAVO_ACCESS_REFUSED": {
+   "class": "D",
+   "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_BALANCE_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_CONVERSATION_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_CREDENTIAL_REQUIRED": {
+   "class": "D",
+   "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_HISTORY_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_INTERNAL_ERROR": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_JOB": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_MEDIA_URL_REFUSED": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_MODELS_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_QUOTE_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_RATE_LIMITED": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_REFUSED": {
+   "class": "D",
+   "resume": "the transient codes are waited out (TRANSIENT, ~33 min); a request the adapter refuses is now caught before any generation (REQUESTS_REFUSED); the rest is upstream: resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_REQUEST_INVALID": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: every request through the adapter's own offline checks before the first generation and in preflight --refs"
+  },
+  "PAVO_REQUEST_REFUSED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_RESULT_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_SESSION_EXPIRED": {
+   "class": "D",
+   "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_SUBMISSION_AND_PRICE_CONTRACT_UNVERIFIED": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "PAVO_SUBMISSION_STATE_UNKNOWN": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_TOKEN": {
+   "class": "N",
+   "why": "the environment variable holding the Pavo secret"
+  },
+  "PAVO_UNREACHABLE": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UPLOAD_HOST_UNREACHABLE": {
+   "class": "D",
+   "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UPLOAD_REFUSED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UPLOAD_SCHEMA_CHANGED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_ZERO_CREDIT_QUOTE_REQUIRED": {
+   "class": "D",
+   "resume": "a nonzero price spends nothing and stops the shot; quote it in the session first (pavo_quote_video, 0 credits) and wait for a free quote, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PCM_16": {
+   "class": "N",
+   "why": "environment variables, a format word, a log line and an API enum value"
+  },
+  "PER_THEME_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/footage.yml::QUERIES_PATH_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "PILOT_INVALID": {
+   "class": "A",
+   "early": [
+    ".github/workflows/cf-images.yml::PILOT_INVALID: pass pilot-NNN or characters",
+    ".claude/hookify.block-cf-images-bad-pilot.local.md::pilot-[0-9]{3}|characters"
+   ],
+   "note": "the first step, 0 s, nothing spent (E96); the hookify rule refuses the bad input before the dispatch"
+  },
+  "PLAN_EPISODE_MISMATCH": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::def path_problems(path, plan)",
+   "note": "E106: plan_check --strict refuses the path and episode episode.yml would refuse"
+  },
+  "PLAN_MISSING": {
+   "class": "A",
+   "early": ".claude/hookify.require-episode-preflight.local.md::verify-preflight",
+   "note": "the dispatch must chain verify-preflight, which reads the same plan path"
+  },
+  "PLAN_PATH_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::def path_problems(path, plan)",
+   "note": "E106: plan_check --strict refuses the path and episode episode.yml would refuse"
+  },
+  "PLAN_REFUSED": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None)",
+   "note": "episode_build runs plan_check itself; short_engine's PLAN_REFUSED is check_shots/talk_problems, predicted by compose_prediction"
+  },
+  "PLAYLIST_ADD": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "PLAYLIST_CREATE": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "PLAYLIST_ITEMS": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "PREFLIGHT_ERROR": {
+   "class": "A",
+   "early": "migration/publish/prepublish_gate.py::preflight_problems",
+   "note": "publish/preflight.py crashing is reported as a failed row, never a pass"
+  },
+  "PREVIEW_APPROVED": {
+   "class": "N",
+   "why": "a state word of the preview gate"
+  },
+  "PREVIEW_BELOW_FLOOR": {
+   "class": "C",
+   "probe": "the preview itself is the cheap probe of the 2.5 h render (preview_gate before any render)"
+  },
+  "PREVIEW_REVIEW_REQUIRED": {
+   "class": "D",
+   "resume": "waits for Claude's review (ops/CLAUDE_REVIEW.md); the render or preview is kept"
+  },
+  "PROMPT_TOO_LONG": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "PUBLICATION_HOLD": {
+   "class": "D",
+   "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
+  },
+  "PUBLICATION_PERSISTENCE_UNCONFIRMED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "PUBLISH_AT": {
+   "class": "A",
+   "early": ".github/workflows/publish.yml::preflight.py",
+   "note": "publish/preflight.py checks the time before any upload"
+  },
+  "QA_CRITERIA_VERSION_UNKNOWN": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "QA_FAIL": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "QA_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "QA_NOT_PASS": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "QA_PASS": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "QUERIES_PATH_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/footage.yml::QUERIES_PATH_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "REDIRECT_REFUSED": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "REFERENCES_OVER_{}": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+   "note": "REFERENCES_OVER_5: reference_problems counts the images as request() sends them"
+  },
+  "REFERENCE_ASSET_NAME_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+    "migration/production/bible/episode_preflight.py::eb.refs_step(plan, work)"
+   ],
+   "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
+  },
+  "REFERENCE_PATH_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+    "migration/production/bible/episode_preflight.py::eb.refs_step(plan, work)"
+   ],
+   "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
+  },
+  "REFERENCE_RECORD_MISSING": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+    "migration/production/bible/episode_preflight.py::eb.refs_step(plan, work)"
+   ],
+   "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
+  },
+  "REFERENCE_SHA256_MISMATCH": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+    "migration/production/bible/episode_preflight.py::eb.refs_step(plan, work)"
+   ],
+   "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
+  },
+  "REGENERATE_REFUSED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
+  "REGENERATE_UNKNOWN_SHOT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
+  "REGENERATE_WITHOUT_RESUME": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
+  "RENDER_HOLD": {
+   "class": "D",
+   "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
+  },
+  "REPEAT_GAP_VIOLATION": {
+   "class": "A",
+   "early": "migration/production/script_check.py::breaks REPEAT_GAP mid-render"
+  },
+  "REPORT_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publication_binding.py::def test_"
+  },
+  "REQUESTS_REFUSED": {
+   "class": "A",
+   "was": "B",
+   "early": [
+    "migration/production/bible/episode_build.py::bad = request_problems(plan, layout, refs)",
+    "migration/production/bible/episode_preflight.py::eb.request_problems(plan, layout, refs)"
+   ],
+   "note": "E106: every request through the adapter's own offline checks before the first generation and in preflight --refs"
+  },
+  "RESPONSE_TOO_LARGE": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "RESUMED_FROM": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "RESUME_RUN": {
+   "class": "N",
+   "why": "an environment variable: episode.yml passes its resume_run input through the env (review of #426), read by regenerate_ids"
+  },
+  "RESUME_RUN_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/episode.yml::RESUME_RUN_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run)"
+  },
+  "RETIME_TRIM_OVER": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "REVIEW_NOT_PASS_FOR_THIS_FILE": {
+   "class": "C",
+   "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "RMTREE_REFUSED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_episode_preflight.py::def test_a_crafted_episode_id_is_refused_before_any_path"
+  },
+  "ROUTE_NOT_ALLOWED": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_video.py::def test_"
+  },
+  "SCENE_PERIOD_CONFLICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def period_problems(",
+   "note": "E108: with the setting and exclusion sentences taken out, a scene prompt names nothing the period excludes (PERIOD_AVOID: city, lane, room, street, road, building, brick, wall, house, dome, tower, church, town, village, lantern, glass lantern or jar, coat, hat, peaked cap...); plan_check, long_plan_check and episode_build.request (period_refusal) by the same function"
+  },
+  "SCENE_PERIOD_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def plan_period_problems(",
+   "note": "E108: every scene prompt states its story's period word for word, setting and exclusions; plan_check and long_plan_check refuse a prompt without them (plan_period_problems), and a story with no period once (missing_period, the one message; a malformed `period` is PERIOD_INVALID, a passage across the flood PERIOD_AMBIGUOUS); episode_build.request refuses the same by period_refusal, which calls resolve_period and period_problems"
+  },
+  "SCENE_WRITING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def writing_problems(",
+   "note": "E110: a scene prompt asks for nothing written (WRITING: scroll, ink, letters, inscription, writing, script, text, tablet, parchment, book, page, glyphs, runes, symbols...) outside a negation (\"No text\"); plan_check and long_plan_check (plan_writing_problems) and episode_build.request (writing_refusal) by the same function; the Keeper's scroll is his look, not a scene"
+  },
+  "SCOPE_MISSING": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "SECONDS_REFUSED": {
+   "class": "A",
+   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
+   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "SHORT_DESCRIPTION": {
+   "class": "A",
+   "early": "migration/publish/arc_links.py::pe.description_problems",
+   "note": "the same description rules publish_episode applied at upload"
+  },
+  "SHORT_LENGTH": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "SHORT_NOT_PUBLIC": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "SHOTS_END_{}_NOT_{}": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "SHOT_FAILED": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "SHOT_GAP_OR_OVERLAP": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "SHOT_TOO_SHORT": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "SOURCE_ARCHIVE_IDENTITY_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "SOURCE_MANIFEST_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "SOURCE_TRANSFER_REPORT": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "SPEAKER_AUDIO": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "SPEAKER_NO_VOICE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::SPEAKER_NO_VOICE",
+   "note": "characters.voice, the same function"
+  },
+  "SRT_BOM": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CONTROL_CHARACTERS": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CR": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_ARROW_IN_TEXT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_BLANK_LINE_INSIDE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_EMPTY_OR_SHORT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_NOT_POSITIVE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_NUMBER": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_OVERLAPS_PREVIOUS": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_PAST_VIDEO_END": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_TIMING_FORMAT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_EMPTY": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_NOT_UTF8": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_NO_FINAL_NEWLINE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_STRAY_BLANK_LINES": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "STILL_MOUTH_CHECK_BLIND": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
+  },
+  "STILL_MOUTH_TOOL_BROKEN": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
+  },
+  "TALK_LINE_RETIME_OVER": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "TALK_LINE_TOO_LONG": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "TALK_NOT_ALIGNED": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "TALK_NOT_ON_THE_VOICE": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "E106: compose_shots, short_engine.check_shots / talk_problems / speed and the composed establishing share run at plan time on the planned clip lengths (compose_prediction) and in preflight on the measured voice; residual: Pavo's clip a few hundredths shorter than asked (clip_check measures it)"
+  },
+  "TIKTOK_LEDGER_NOT_PUSHED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "TITLE_LENGTH": {
+   "class": "A",
+   "was": "B",
+   "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
+   "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
+  },
+  "TOKENINFO_FAILED": {
+   "class": "D",
+   "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
+  },
+  "TOO_FEW_BACKGROUNDS": {
+   "class": "A",
+   "early": "migration/production/script_check.py::TOO_FEW_BACKGROUNDS",
+   "note": "BACKGROUNDS_MIN 18 keeps REPEAT_GAP (E46)"
+  },
+  "TOP_LEVEL_REVIEW_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_video.py::def test_"
+  },
+  "TOP_LEVEL_REVIEW_NOT_PASS": {
+   "class": "C",
+   "probe": "the review score of the render; its cheap probe is the preview review at >= 9.5 before the render (preview_gate)"
+  },
+  "UNSAFE_SOURCE_MEMBER": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "UPDATE_DESCRIPTION": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "UPLOAD_INIT_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
+  "UPLOAD_NOT_COMPLETED": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "UPLOAD_NOT_CONFIRMED": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "UPSCALE_SECONDS": {
+   "class": "N",
+   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "UPSTREAM_HTTP_REFUSED": {
+   "class": "D",
+   "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "VERIFICATION_UNKNOWN": {
+   "class": "D",
+   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
+  },
+  "VERIFY_DESCRIPTION": {
+   "class": "D",
+   "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "VOICE_ASSET_IDENTITY_MISMATCH": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "VOICE_CLIPPING": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "VOICE_FAILED": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "VOICE_LINE_MISSING": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "VOICE_RETRY": {
+   "class": "N",
+   "why": "environment variables, a format word, a log line and an API enum value"
+  },
+  "VOICE_SAMPLE_WIDTH": {
+   "class": "I",
+   "guard": "migration/production/pilot_render.py::subtype=\"PCM_16\""
+  },
+  "WORK_OUTSIDE_REPOSITORY": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::inside the checkout: Pavo reads repo paths only"
+  },
+  "{}_CLIP_SHORT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "{}_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
+  "{}_NOT_ON_HIS_LINE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  }
+ },
+ "review": {
+  "about": "E106 (owner, 2026-10-26: \"Production has to come out at 9.5 already; the review only confirms. Never produce loosely and fix it later.\"): every item the review scores and every row it relies on, mapped to the earlier check that guarantees it. class plan (plan_check / long_plan_check / script_check), preflight, build_gate (episode_build, short_engine, clip_check, lipsync_check, still-mouth, LUFS), render_qa (the frozen QA on the render; earlier only by estimate), open (no earlier check yet: `reason`), review_only (no tool can measure it: `reason`). `checks` are path::needle, each held by its file (test_refusal_parity). `residual`: what the review still has to see.",
+  "rubric": {
+   "opening_and_promise": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::OPEN_NOT_SPOKEN",
+      "migration/production/bible/plan_check.py::KEEPER_OPENS",
+      "migration/production/bible/plan_check.py::CLIMAX_MISSING"
+     ],
+     "residual": "whether the first spoken line lands as a conflict is a judgement on the words; plan_check fixes its form (a character's or God's line from 0 s, never the Keeper or narration first)"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT",
+      "migration/production/bible/long_plan_check.py::HOOK_SECOND_PERSON",
+      "migration/production/bible/long_plan_check.py::KEEPER_PROMISE_MISSING",
+      "migration/production/preview_gate.py::def approved"
+     ],
+     "residual": "the preview review of the real opening (preview_gate) before the 2.5 h render"
+    }
+   },
+   "picture_quality": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/clip_check.py::MIN_SHORT_SIDE = 720",
+      "migration/production/bible/clip_check.py::BLACK_LUMA",
+      "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS",
+      "migration/production/bible/plan_check.py::PROMPT_NO_CINEMATOGRAPHY",
+      "migration/production/bible/episode_build.py::BLACK_FRAMES",
+      "migration/production/bible/clip_check.py::LETTERBOX_BARS"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "long": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/qa_pilot.py::frame",
+      "migration/production/bible/long_plan_check.py::TALKING_WITHOUT_A_FACE",
+      "migration/production/preview_gate.py::def approved"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    }
+   },
+   "figure_and_background_integrity": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::def character_problems",
+      "migration/production/bible/plan_check.py::GOD_AS_A_FIGURE",
+      "migration/production/bible/plan_check.py::GOD_SHOT_WITH_A_PERSON",
+      "migration/production/bible/plan_check.py::FIGURES_NOT_ANONYMOUS",
+      "migration/production/bible/episode_build.py::def face_flags",
+      "migration/production/bible/episode_build.py::def still_mouth_flags",
+      "migration/production/bible/episode_build.py::def lipsync_flags",
+      "migration/production/bible/episode_preflight.py::def probe_rows"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::CHARACTER_NOT_LISTED",
+      "migration/production/bible/long_plan_check.py::QA_CONFLICT_FIGURES",
+      "migration/production/bible/plan_check.py::def character_problems"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "period_accuracy": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::PERIOD_SETTING",
+      "migration/production/bible/plan_check.py::PERIOD_EXCLUDE",
+      "migration/production/bible/plan_check.py::PERIOD_AVOID",
+      "migration/production/bible/plan_check.py::SCENE_PERIOD_MISSING",
+      "migration/production/bible/plan_check.py::SCENE_PERIOD_CONFLICT",
+      "migration/production/bible/plan_check.py::PERIOD_INVALID",
+      "migration/production/bible/plan_check.py::PERIOD_AMBIGUOUS",
+      "migration/production/bible/long_plan_check.py::pc.plan_period_problems",
+      "migration/production/bible/episode_build.py::def period_refusal",
+      "migration/production/bible/plan_check.py::SCENE_WRITING",
+      "migration/production/bible/long_plan_check.py::pc.plan_writing_problems",
+      "migration/production/bible/episode_build.py::def writing_refusal"
+     ],
+     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot; E110: no scene prompt asks for writing (SCENE_WRITING), since Pavo draws any asked-for writing as AI text"
+    }
+   },
+   "captions_readable_and_synced": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/short_engine.py::FONT_SIZE = 132",
+      "migration/production/bible/short_engine.py::CAPTION_WORDS = 2",
+      "migration/production/bible/short_engine.py::def build_ass",
+      "migration/production/bible/episode_build.py::compose-timeline.json"
+     ],
+     "residual": "none: the cards are drawn from the voice timeline the lines step measured"
+    },
+    "long": {
+     "class": "open",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS"
+     ],
+     "reason": "the .srt rows of story v3 (coverage, cue length, chars, words) have no writer or check yet: the acted long has no build; the build that writes the .srt must check them before the render (left open, stated)"
+    }
+   },
+   "audio_clarity_and_mix": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/episode_build.py::LUFS = (-15.0, -13.0)",
+      "migration/production/bible/short_engine.py::loudnorm=I=-14",
+      "migration/production/bible/short_engine.py::sidechaincompress",
+      "migration/production/bible/lipsync_check.py::AUDIO_CORR_MIN"
+     ],
+     "residual": "none: the mix is measured (LUFS) and a talking clip's audio is our line (lipsync_check audio)"
+    },
+    "long": {
+     "class": "open",
+     "checks": [
+      "migration/production/qa_pilot.py::integrated_lufs",
+      "migration/production/qa_pilot.py::true_peak_dbtp_max",
+      "migration/production/qa_pilot.py::speech_presence_min",
+      "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST"
+     ],
+     "residual": "measured by the frozen QA on the render; estimated at plan time (SPEECH_PRESENCE_EST)",
+     "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    }
+   },
+   "pacing_and_visual_variety": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/episode_build.py::CUT_MAX = 4.0",
+      "migration/production/bible/plan_check.py::PROMPT_REPEATED",
+      "migration/production/bible/plan_check.py::ESTABLISHING_SHARE",
+      "migration/production/bible/plan_check.py::KEEPER_SHARE",
+      "migration/production/bible/plan_check.py::LESSON_SHARE",
+      "migration/production/bible/episode_build.py::def compose_prediction"
+     ],
+     "residual": "two different prompts can still look alike; seen on the frame sheet"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::REHOOK_GAP",
+      "migration/production/bible/long_plan_check.py::HOLD_OVER_QA",
+      "migration/production/bible/long_plan_check.py::HOLD_UNDER_QA",
+      "migration/production/bible/long_plan_check.py::WORDS_PER_MINUTE_EST"
+     ]
+    }
+   },
+   "scripture_on_screen": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::KJV_UNREFERENCED",
+      "migration/production/bible/plan_check.py::SCRIPTURE_REFERENCE_MISSING",
+      "migration/production/bible/kjv_check.py::def problem"
+     ],
+     "residual": "none: every scripture line is the KJV word for word and the captions are its words"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/script_check.py::REFERENCE_NOT_KJV",
+      "migration/production/qa_pilot.py::scripture_card_only_while_read"
+     ]
+    }
+   },
+   "policy_safe": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::GOD_AS_A_FIGURE",
+      "migration/publish/publish_episode.py::DISCLOSURE_MISSING",
+      "migration/production/bible/kjv_check.py::def problem"
+     ],
+     "residual": "fear-bait, prophecy and health/wealth wording (SERIES.md) has no word list for the Short yet; the long has script_check POLICY_WORDING"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/script_check.py::POLICY_WORDING",
+      "migration/production/script_check.py::NOT_ORIGINAL",
+      "migration/production/script_check.py::FOOTAGE_RIGHTS"
+     ]
+    }
+   },
+   "overall": {
+    "short": {
+     "class": "review_only",
+     "checks": [],
+     "reason": "the overall score is the reviewer's judgement over the items above; the gates make every measurable item pass, the residuals are what remains to see"
+    },
+    "long": {
+     "class": "review_only",
+     "checks": [],
+     "reason": "as for the Short: a judgement over the items, never a measure"
+    }
+   }
+  },
+  "short_built_for_9_5": {
+   "1": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::def character_problems",
+     "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS"
+    ],
+    "residual": "stock clips are no longer used in a Bible Short (every shot is Pavo); a modern object in a generated frame is seen on the sheet"
+   },
+   "2": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::SHOT_LINES",
+     "migration/production/bible/episode_build.py::def compose_prediction"
+    ],
+    "residual": "whether a picture shows what its words say is a judgement (no tool matches picture to words)"
+   },
+   "3": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/short_engine.py::FONT_SIZE = 132",
+     "migration/production/bible/episode_build.py::LUFS = (-15.0, -13.0)"
+    ]
+   },
+   "4": {
+    "class": "review_only",
+    "checks": [],
+    "reason": "the frame sheet review is the confirmation itself"
+   },
+   "5": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def clip_flags",
+     "migration/production/bible/clip_check.py::MIN_FPS = 24"
+    ]
+   },
+   "6": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/short_engine.py::Every scene change is a cut"
+    ]
+   },
+   "7": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::clip_check.unexpected(runs, [dip], length)"
+    ]
+   },
+   "8": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::_kjv_problem(",
+     "migration/production/bible/kjv_check.py::def problem"
+    ]
+   },
+   "9": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::publish_episode.short_problems("
+    ]
+   }
+  },
+  "story_qa_v3": {
+   "technical.full_decode_without_errors": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::full_decode_without_errors"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.video": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::frame"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.duration_seconds_min": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::LONG_LENGTH"
+    ]
+   },
+   "technical.integrated_lufs": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::integrated_lufs"
+    ],
+    "residual": "the mix normalises to it (loudnorm)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.true_peak_dbtp_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::true_peak_dbtp_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.frame": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::frame"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.speech_presence_min": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST"
+    ]
+   },
+   "speech.singing_presence_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::singing_presence_max"
+    ],
+    "residual": "no singing voice is ever made (Kokoro speech only)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.wer_vs_script_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::wer_vs_script_max"
+    ],
+    "residual": "the voice is the script's own words (pilot_render voice)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.accepted_words_per_minute": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::WORDS_PER_MINUTE_EST"
+    ]
+   },
+   "speech.first_word_onset_seconds_max": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT"
+    ]
+   },
+   "speech.hook_second_person_within_seconds": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::HOOK_SECOND_PERSON"
+    ]
+   },
+   "rights.every_image_generated_by_allowed_open_licence_model_with_revision": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::allowed_model_licences"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.allowed_model_licences": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::allowed_model_licences"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.music_owned_generator_with_hash": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::music_owned"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.voice_model_hash_pinned": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/pilot_render.py::VOICE_ASSET_IDENTITY_MISMATCH"
+    ]
+   },
+   "rights.script_original_with_public_domain_scripture_only": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::NOT_ORIGINAL",
+     "migration/production/script_check.py::REFERENCE_NOT_KJV"
+    ]
+   },
+   "rights.footage_licensed_vetted_and_credited": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_NOT_VETTED",
+     "migration/production/script_check.py::FOOTAGE_RIGHTS"
+    ]
+   },
+   "rights.allowed_footage_licences": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_RIGHTS"
+    ]
+   },
+   "rights.footage_vetting_required": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_NOT_VETTED"
+    ]
+   },
+   "rights.ai_video": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_AI_SHARE",
+     "migration/production/qa_pilot.py::ai_video"
+    ]
+   },
+   "grammar.first_shot": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT",
+     "migration/production/bible/long_plan_check.py::KEEPER_IN_COLD_OPEN",
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_TITLE_CARD"
+    ]
+   },
+   "grammar.figures_allowed": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_FIGURES",
+     "migration/production/bible/plan_check.py::def character_problems"
+    ]
+   },
+   "grammar.every_scene_in_motion": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::every_scene_in_motion"
+    ],
+    "residual": "every shot is a Pavo clip (motion by construction)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.scene_seconds": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::HOLD_UNDER_QA",
+     "migration/production/bible/long_plan_check.py::HOLD_OVER_QA"
+    ]
+   },
+   "grammar.crossfade_seconds_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::crossfade_seconds_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.image_repeat_gap_seconds_min": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::image_repeat_gap_seconds_min"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.burned_captions": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS"
+    ]
+   },
+   "grammar.caption_track": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_coverage_of_speech_min": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_seconds_median": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_chars_max": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_words_max": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.scripture_card_only_while_read": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::scripture_card_only_while_read"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_mid_video_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_mid_video_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_seconds_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_seconds_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_first_start_seconds_min": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_first_start_seconds_min"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.persistent_overlays_allowed": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::persistent_overlays_allowed"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.ai_video_picture_share_max": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_AI_SHARE"
+    ]
+   },
+   "grammar.ai_video_clip_checks": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def clip_flags",
+     "migration/production/bible/episode_build.py::def lipsync_flags",
+     "migration/production/bible/episode_build.py::def face_flags"
+    ],
+    "residual": "the Short's build runs them; the long's build must call the same functions"
+   }
+  }
+ }
+}

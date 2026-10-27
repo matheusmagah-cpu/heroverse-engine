@@ -78,6 +78,7 @@ class Tests(unittest.TestCase):
             d=Path(tmp)
             for p,doc in zip(binding.FILES,documents()):
                 f=d/p;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(doc))
+            (d/'script.json').write_text(json.dumps({'archetype':'bible-story-long'}))  # only a story long publishes
             def run():return subprocess.run([sys.executable,'-I','-O','-B',binding.__file__,str(d)],capture_output=True,text=True)
             self.assertEqual(run().returncode,0)
             gate=d/binding.FILES[-1];gate.write_text('{bad');self.assertNotEqual(run().returncode,0)
@@ -88,6 +89,32 @@ class Tests(unittest.TestCase):
         self.assertEqual(text.count(invocation),1);self.assertNotIn('startswith("HeroVerse automatic gates")',text)
         self.assertLess(text.index(invocation),text.index('      - name: Preflight'))
         self.assertLess(text.index('PUBLICATION_HOLD'),text.index(invocation))
+
+
+class RetiredPrayerLongs(unittest.TestCase):
+    """Owner, 2026-10-26: "stop the prayer videos". publish.yml runs this binding before any upload or resume, so a
+    prayer pilot is refused here even with a recorded approval and a PASS gate (pilot-012 holds both)."""
+    def run_main(self, archetype):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp) / 'pilot-012'
+            for p, doc in zip(binding.FILES, documents()):
+                f = d / p; f.parent.mkdir(parents=True, exist_ok=True); f.write_text(json.dumps(doc))
+            if archetype is not None:
+                (d / 'script.json').write_text(json.dumps({'archetype': archetype}))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = binding.main(d)
+            return code, json.loads(out.getvalue())
+
+    def test_prayer_pilot_is_refused_even_when_approved(self):
+        for archetype in ('migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md', None):
+            code, out = self.run_main(archetype)
+            self.assertEqual((code, 'NOT_STORY_LONG' in out['problems']), (1, True), archetype)
+
+    def test_story_long_passes_its_format_row(self):
+        self.assertEqual(self.run_main('bible-story-long'), (0, {'status': 'PASS', 'problems': [],
+                                                                  'output_sha256': documents()[0]['output_sha256']}))
 
 
 if __name__=='__main__':unittest.main()

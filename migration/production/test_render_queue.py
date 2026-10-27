@@ -17,10 +17,10 @@ rq.RENDER_HOLD = Path(tempfile.gettempdir()) / "no-such-render-hold-file"
 NOW = datetime(2026, 10, 18, 1, 0, tzinfo=timezone.utc)
 
 
-def pilot(root, name, publish_at, images_done=True, rendered=False, previewed=True):
+def pilot(root, name, publish_at, images_done=True, rendered=False, previewed=True, archetype=rq.STORY_LONG):
     d = Path(root) / name
     (d / "images").mkdir(parents=True)
-    script = {"backgrounds": ["bg-a", "bg-b"], "figure": "figure-a", "overlay": {"title_image": "bg-a"}}
+    script = {"archetype": archetype, "backgrounds": ["bg-a", "bg-b"], "figure": "figure-a", "overlay": {"title_image": "bg-a"}}
     (d / "script.json").write_text(json.dumps(script))
     (d / "schedule.json").write_text(json.dumps({"publish_at": publish_at}))
     (d / "images.json").write_text(json.dumps({"images": [{"id": "bg-b"}]}))
@@ -207,6 +207,35 @@ class Queue(unittest.TestCase):
             self.assertEqual(rq.pending_comments(t, ledger, NOW), ["pilot-006"])
         wf = (Path(rq.__file__).resolve().parents[2] / ".github/workflows/reconcile.yml").read_text()
         self.assertIn("comment) gh workflow run first-comment.yml", wf)
+
+    def test_prayer_pilots_are_retired_from_every_queue(self):
+        # owner, 2026-10-26: "stop the prayer videos"; only a Bible-story long is imaged, previewed, rendered,
+        # reviewed, approved, published, given Shorts, rescheduled or retried for its first comment
+        import contextlib, io
+        from unittest.mock import patch
+        prayer = "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md"   # pilots 002-014
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, "pilot-014", "2026-10-19T00:00:00Z", images_done=False, archetype=prayer)
+            pilot(t, "pilot-016", "2026-10-19T10:00:00Z", rendered=True, archetype=prayer)
+            pilot(t, "pilot-017", "2026-10-17T10:00:00Z", archetype=prayer)                 # slot passed, no video
+            pilot(t, "pilot-015", "2026-10-19T10:00:00Z", images_done=False)                # the story long
+            self.assertEqual([r["pilot"] for r in rq.due(t, {}, NOW, 72)], ["pilot-015"])
+            self.assertEqual(rq.stale(t, {}, NOW), [])
+            self.assertFalse(rq.story_pilot(Path(t) / "pilot-014"))
+            self.assertTrue(rq.story_pilot(Path(t) / "pilot-015"))
+            self.assertFalse(rq.story_pilot(Path(t) / "pilot-099"))                         # no script: not a long
+            ledger = {"entries": {"pilot-017:" + "a" * 64: {"video_id": "v17", "steps": {"first_comment": "PENDING: x"}}}}
+            self.assertEqual(rq.pending_comments(t, ledger, NOW), [])
+            (Path(t) / "pilot-016" / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "a" * 64}))
+            for mode, hours in (("images", "72"), ("render", "48"), ("reconcile", "48"), ("review", "48"), ("preview", "72")):
+                buf = io.StringIO()
+                with patch.object(rq, "datetime") as dt, contextlib.redirect_stdout(buf):
+                    dt.now.return_value = NOW
+                    dt.fromisoformat = datetime.fromisoformat
+                    rq.main(t, str(Path(t) / "none.json"), mode, hours)
+                self.assertNotIn("pilot-014", buf.getvalue(), mode)
+                self.assertNotIn("pilot-016", buf.getvalue(), mode)
+            self.assertEqual(rq.STORY_LONG, __import__("script_check").STORY)   # one name for the story format
 
     def test_pending_episode_comments_are_retried_once_public(self):
         # E70: the Genesis 2 Short was scheduled and its first comment came back PENDING (HTTP 403)

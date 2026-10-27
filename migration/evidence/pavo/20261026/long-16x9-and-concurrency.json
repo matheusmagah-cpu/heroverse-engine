@@ -1,0 +1,36 @@
+{
+ "version": "pavo-test-v1",
+ "date": "2026-10-26",
+ "purpose": "LONG_DESIGN.md section 2: before the long's build, (1) does Pavo honour a 16:9 request, and (2) do two submissions in a row run at the same time (submit and leave) or one after the other?",
+ "how": "Direct calls through the heroverse-pavo MCP tools from a Claude session (no GitHub Actions run, no dispatch): pavo_quote_video first (16:9, 6 s, text only: required_credits 0.0, zero_cost_confirmed true, is_estimate false), then two pavo_generate_video calls back to back, each at its own fresh exact zero-credit quote, both answered 'submitted' (no uncertain submission, nothing retried), then pavo_job polls. Clips downloaded from the Pavo CDN into the session scratchpad only (not committed) and probed with ffprobe.",
+ "quote": {"model": "agnes-video-new-flash", "seconds": 6, "aspect_ratio": "16:9", "resolution": "720p",
+           "required_credits": 0.0, "final_points": 0.0, "is_estimate": false, "zero_cost_confirmed": true},
+ "submissions": [
+  {"name": "A", "conversation_id": "373074273726124672", "aspect_ratio": "16:9", "seconds": 6,
+   "prompt": "the draft's s-c1-light: clouds part over a dark sea, sunbeams on the water (no people)",
+   "submitted_after_utc": "2026-10-26T11:43:56Z", "quoted_credits": 0, "status": "submitted"},
+  {"name": "B", "conversation_id": "373074296937705536", "aspect_ratio": "16:9", "seconds": 6,
+   "prompt": "the draft's s-c2-river: a river parting into four streams, aerial (no people)",
+   "submitted_before_utc": "2026-10-26T11:44:07Z", "quoted_credits": 0, "status": "submitted"}
+ ],
+ "polls": [
+  {"at_utc": "about 11:44:10", "A": "running", "B": "running"},
+  {"at_utc": "about 11:47 (time not stamped)", "A": "running", "B": "running"},
+  {"at_utc": "2026-10-26T11:50:11Z (stamped right after)", "A": "running", "B": "completed"},
+  {"at_utc": "2026-10-26T11:50:54Z (stamped right after)", "A": "completed", "B": "completed"}
+ ],
+ "results": {
+  "A": {"width": 1280, "height": 720, "fps": "24/1", "video_seconds": 6.583, "audio": "aac (Pavo adds a track even with sound false: strip it, PROMPT_GUIDE)",
+        "sha256": "01311c9f9e5a60219b82118ac44039a1c7c2c8ffb0d9ceb053818a361e461d50",
+        "frame_at_3s": "full 16:9 frame, no letterbox: sunbeams through dark clouds onto the sea, as prompted"},
+  "B": {"width": 1280, "height": 720, "fps": "24/1", "video_seconds": 6.583, "audio": "aac",
+        "sha256": "284df0ddc8af1b69e290479590b51e8304cd1cd62ceeb834a8e733c784cbe99b",
+        "frame_at_3s": "full 16:9 frame: a braided misty river from the air, as prompted; but small modern houses and a road at the right edge: it would fail Claude's vetting (no modern objects); the prompt needs a stated period setting"}
+ },
+ "findings": {
+  "aspect_16_9": "YES: a 16:9 request returns 1280x720 at 24 fps (the 9:16 clips are 720x1280), the full frame used, at an exact 0-credit quote. 6 s asked, 6.58 s delivered.",
+  "concurrency": "YES, at least two at once: both clips were done within 6 min 58 s of the first submission, while one after the other they would need about 9.6 min at the measured 288 s a scene generation (episode.yml, 2026-10-26); and B, submitted 11 s after A, finished first, so Pavo does not run them strictly in order. One test of two clips: the limit on simultaneous jobs is not measured yet (the next test: 4 at once).",
+  "for_the_design": "Submit and leave works: a long's clips can be submitted chapter by chapter and collected later, the runner waiting for none of them. Each clip still needs Claude's frame check (B shows why)."
+ },
+ "spent": {"pavo_credits": 0, "vidiq_credits": 0, "actions_minutes": 0}
+}

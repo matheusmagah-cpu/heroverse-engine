@@ -51,30 +51,41 @@ def language(video):
     return "unknown"
 
 
-def plan(out):
-    tok = token()
-    me = call(tok, "GET", "channels", {"part": "contentDetails", "mine": "true"})["items"]
+def channel_uploads(get, parts):
+    """Every upload of the exact channel, as videos.list items with `parts`; shared by plan() and
+    captions_audit.py (review of #424). `get(endpoint, params)` returns the decoded answer. Returns (videos, calls),
+    each call 1 Data API unit. Refuses any other channel (CHANNEL_IDENTITY_MISMATCH)."""
+    me = get("channels", {"part": "id,contentDetails", "mine": "true"})["items"]
     if [c["id"] for c in me] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
     playlist = me[0]["contentDetails"]["relatedPlaylists"]["uploads"]
-    ids, page = [], None
+    ids, page, calls = [], None, 1
     while True:
         params = {"part": "contentDetails", "playlistId": playlist, "maxResults": 50}
         if page:
             params["pageToken"] = page
-        res = call(tok, "GET", "playlistItems", params)
+        res = get("playlistItems", params)
+        calls += 1
         ids += [i["contentDetails"]["videoId"] for i in res.get("items", [])]
         page = res.get("nextPageToken")
         if not page:
             break
     videos = []
     for start in range(0, len(ids), 50):
-        res = call(tok, "GET", "videos", {"part": "snippet,status,statistics,contentDetails", "id": ",".join(ids[start:start + 50])})
-        for v in res.get("items", []):
-            videos.append({"video_id": v["id"], "title": v["snippet"]["title"], "published_at": v["snippet"]["publishedAt"],
-                           "privacy": v["status"]["privacyStatus"], "language": language(v),
-                           "declared_language": v["snippet"].get("defaultAudioLanguage") or v["snippet"].get("defaultLanguage"),
-                           "views": int(v.get("statistics", {}).get("viewCount", 0)), "duration": v["contentDetails"].get("duration")})
+        videos += get("videos", {"part": parts, "id": ",".join(ids[start:start + 50])}).get("items", [])
+        calls += 1
+    return videos, calls
+
+
+def plan(out):
+    tok = token()
+    raw, _ = channel_uploads(lambda endpoint, params: call(tok, "GET", endpoint, params),
+                             "snippet,status,statistics,contentDetails")
+    videos = [{"video_id": v["id"], "title": v["snippet"]["title"], "published_at": v["snippet"]["publishedAt"],
+               "privacy": v["status"]["privacyStatus"], "language": language(v),
+               "declared_language": v["snippet"].get("defaultAudioLanguage") or v["snippet"].get("defaultLanguage"),
+               "views": int(v.get("statistics", {}).get("viewCount", 0)), "duration": v["contentDetails"].get("duration")}
+              for v in raw]
     to_hide = [v["video_id"] for v in videos if v["language"] == "pt" and v["privacy"] != "private"]
     record = {"version": "channel-privacy-plan-v1", "channel_id": CHANNEL, "uploads": len(videos),
               "by_language": {k: sum(v["language"] == k for v in videos) for k in ("pt", "en", "unknown")},
@@ -119,7 +130,10 @@ def apply(plan_path, out):
 def unschedule(plan_path, out):
     """Owner hold: each listed video becomes private with no pending publishAt (a scheduled upload already is
     private, so apply() would skip it and it would still go public at its time). Reversible: the receipt keeps
-    the old publishAt."""
+    the old publishAt.
+    A hold only stops what is not public yet (owner, 2026-10-26: the scheduled prayer longs): a video that is already
+    public is never changed here (SKIPPED_ALREADY_PUBLIC; hiding a public video is apply() with its own reviewed
+    plan), and one already private with no publishAt is left as it is (ALREADY_UNSCHEDULED, no write)."""
     plan_record = json.loads(Path(plan_path).read_text())
     if plan_record["channel_id"] != CHANNEL:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -132,6 +146,12 @@ def unschedule(plan_path, out):
             continue
         status = current[0]["status"]
         before = {"privacy": status["privacyStatus"], "publishAt": status.get("publishAt")}
+        if before["privacy"] == "public":
+            receipt.append({"video_id": vid, "before": before, "result": "SKIPPED_ALREADY_PUBLIC"})
+            continue
+        if before["privacy"] == "private" and not before["publishAt"]:
+            receipt.append({"video_id": vid, "before": before, "result": "ALREADY_UNSCHEDULED"})
+            continue
         body = {"id": vid, "status": {"privacyStatus": "private", "embeddable": status.get("embeddable", True),
                                       "license": status.get("license", "youtube"),
                                       "publicStatsViewable": status.get("publicStatsViewable", True),
@@ -140,12 +160,18 @@ def unschedule(plan_path, out):
         ok = after["privacyStatus"] == "private" and not after.get("publishAt")
         receipt.append({"video_id": vid, "before": before, "after": {"privacy": after["privacyStatus"],
                         "publishAt": after.get("publishAt")}, "result": "UNSCHEDULED" if ok else "UNEXPECTED"})
+    public = [r["video_id"] for r in receipt if r["result"] == "SKIPPED_ALREADY_PUBLIC"]
     Path(out).write_text(json.dumps({"version": "channel-unschedule-receipt-v1", "channel_id": CHANNEL,
                                      "plan": Path(plan_path).name, "undo": "set each video back to its 'before'",
+                                     "already_public_not_changed": public,
                                      "changes": receipt}, indent=1) + "\n")
+    for vid in public:   # a skip, never a hide: stated plainly in the log and as an Actions warning
+        print(f"HELD_VIDEO_ALREADY_PUBLIC {vid}: it was public before this run; left public, not changed "
+              f"(hiding it is channel_privacy.py apply with a reviewed plan)")
+        print(f"::warning::HELD_VIDEO_ALREADY_PUBLIC {vid} was already public; the hold did not change it")
     print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt),
-                      "changes": receipt}))  # public ids and statuses only
-    if any(r["result"] != "UNSCHEDULED" for r in receipt):
+                      "already_public_not_changed": public, "changes": receipt}))  # public ids and statuses only
+    if any(r["result"] not in ("UNSCHEDULED", "ALREADY_UNSCHEDULED", "SKIPPED_ALREADY_PUBLIC") for r in receipt):
         raise SystemExit("UNSCHEDULE_INCOMPLETE")
 
 

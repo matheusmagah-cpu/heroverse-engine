@@ -1,50 +1,117 @@
 #!/usr/bin/env python3
-"""Offline checks of the content runway."""
+"""Offline checks of the long runway: Bible-story longs only, one every other day at 10:00 UTC (owner, 2026-10-26)."""
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
 import runway as r  # noqa: E402
+from test_script_check import structured_story  # noqa: E402  (a script on the registered beat map)
 
-NOW = datetime(2026, 10, 21, 12, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc)
+PRAYER = "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md"
+REAL_CHECK = r.script_check.check
 
 
-def pilot(prod, name, at, rendered=False, approved=False):
+def pilot(prod, name, at, rendered=False, approved=False, script=None):
     d = prod / name
     (d / "out").mkdir(parents=True)
     (d / "inspection").mkdir()
     (d / "schedule.json").write_text(json.dumps({"publish_at": at}))
+    (d / "script.json").write_text(script if isinstance(script, str) else json.dumps(structured_story() if script is None else script))
     if rendered:
         (d / "out" / "manifest.json").write_text("{}")
     if approved:
         (d / "inspection" / "APPROVAL.json").write_text("{}")
 
 
-class Runway(unittest.TestCase):
-    def test_every_slot_listed_and_gaps_alerted(self):
-        with tempfile.TemporaryDirectory() as t:
-            prod = Path(t)
-            pilot(prod, "pilot-008", "2026-10-22T00:00:00Z", rendered=True, approved=True)
-            pilot(prod, "pilot-009", "2026-10-22T10:00:00Z", rendered=True, approved=True)  # 22 h left, approved
-            pilot(prod, "pilot-010", "2026-10-23T00:00:00Z", rendered=True)         # 36 h left, rendered: fine
-            rows, alerts = r.check(prod, {}, NOW)
-            self.assertEqual(len(rows), 8)                                          # 4 days x 2 slots
-            self.assertEqual([x["stage"] for x in rows[:3]], ["approved", "approved", "rendered"])
-            self.assertTrue(any("2026-10-23 10:00" in a and "NO PILOT" in a for a in alerts))  # 46 h, no script
-            self.assertFalse(any("pilot-009" in a or "pilot-010" in a for a in alerts))
+def structure_only(d, production=None):
+    """Stands in for script_check.check in tests whose pilots carry only a script: the structure decides."""
+    return r.script_check.structure_problems(json.loads((Path(d) / "script.json").read_text())), {}
 
-    def test_late_render_and_late_approval(self):
+
+class Runway(unittest.TestCase):
+    def setUp(self):
+        p = patch.object(r.script_check, "check", structure_only)
+        p.start()
+        self.addCleanup(p.stop)
+
+    def test_slots_are_the_bible_story_long_cadence(self):
+        got = r.slots(NOW)
+        self.assertEqual([t.strftime("%d/%m %H:%M") for t in got], ["28/10 10:00", "30/10 10:00", "01/11 10:00"])
+        self.assertEqual(r.slots(datetime(2026, 10, 28, 10, 0, tzinfo=timezone.utc))[0].strftime("%d/%m"), "30/10")
+        self.assertTrue(all(b - a == timedelta(days=2) for a, b in zip(got, got[1:])))   # never 2+ days without
+        self.assertNotIn(0, {t.hour for t in r.slots(NOW, 20)})                       # the night slots retired
+        arcs = json.loads((Path(r.__file__).resolve().parents[1] / "production/bible/arcs.json").read_text())["arcs"]
+        long_slots = [r.ts(a["long"]["slot"]) for a in arcs]
+        self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if t <= long_slots[-1]])  # = SERIES.md calendar
+
+    def test_every_slot_listed_and_gaps_alerted(self):
+        # E15: every long slot of the next days is listed and a gap alerts; a prayer pilot never fills one (2026-10-26)
         with tempfile.TemporaryDirectory() as t:
             prod = Path(t)
-            pilot(prod, "pilot-008", "2026-10-22T00:00:00Z", rendered=True)         # 12 h left, still not approved
-            pilot(prod, "pilot-009", "2026-10-22T10:00:00Z")                        # 22 h... script only
-            alerts = r.check(prod, {}, datetime(2026, 10, 21, 19, 0, tzinfo=timezone.utc))[1]
-            self.assertTrue(any("pilot-008" in a and "rendered" in a for a in alerts))
-            self.assertTrue(any("pilot-009" in a and "script" in a for a in alerts))
+            pilot(prod, "pilot-016", "2026-10-28T10:00:00Z", rendered=True, approved=True, script={"archetype": PRAYER})
+            rows, alerts = r.check(prod, {}, NOW)
+            self.assertEqual([x["slot"] for x in rows], ["2026-10-28T10:00Z", "2026-10-30T10:00Z", "2026-11-01T10:00Z"])
+            self.assertEqual(rows[0], {"slot": "2026-10-28T10:00Z", "pilot": None, "stage": "missing", "late": True})
+            self.assertTrue(any("2026-10-28 10:00" in a and "NO BIBLE-STORY LONG" in a for a in alerts))
+
+    def test_a_scheduled_prayer_long_alerts_instead_of_dropping_out(self):
+        # review of #415: a forgotten prayer schedule.json must be seen, not silently skipped
+        with tempfile.TemporaryDirectory() as t:
+            prod = Path(t)
+            pilot(prod, "pilot-008", "2026-10-27T00:00:00Z", rendered=True, approved=True, script={"archetype": PRAYER})
+            pilot(prod, "pilot-013", "2026-10-26T00:00:00Z", rendered=True, script={"archetype": PRAYER})  # passed
+            alerts = r.check(prod, {"entries": {"pilot-008:a": {"video_id": "8heTdP0LllM"}}}, NOW)[1]
+            self.assertIn("PRAYER_LONG_SCHEDULED pilot-008 at 2026-10-27 00:00 UTC (uploaded; prayer longs stopped "
+                          "2026-10-26: hold the upload with channel-privacy.yml unschedule and retire its schedule.json)",
+                          alerts)
+            self.assertFalse(any("pilot-013" in a for a in alerts))
+
+    def test_a_story_script_counts_only_when_the_full_script_check_passes(self):
+        # review of #415: structure alone is not enough; the whole script_check decides "script"
+        with tempfile.TemporaryDirectory() as t:
+            prod = Path(t)
+            pilot(prod, "pilot-015", "2026-10-28T10:00:00Z")                             # on the beat map
+            self.assertEqual(r.long_stage(prod / "pilot-015", {}), ("script", []))
+            with patch.object(r.script_check, "check", lambda d, p=None: (["MISSING images.json"], {})):
+                self.assertEqual(r.long_stage(prod / "pilot-015", {}), ("script-fail", ["MISSING images.json"]))
+                rows, alerts = r.check(prod, {}, NOW)
+            self.assertEqual(rows[0]["stage"], "script-fail")
+            self.assertTrue(any("pilot-015" in a and "script-fail" in a for a in alerts))
+        with tempfile.TemporaryDirectory() as t, patch.object(r.script_check, "check", REAL_CHECK):   # no stub
+            prod = Path(t)
+            pilot(prod, "pilot-015", "2026-10-28T10:00:00Z")
+            st, problems = r.long_stage(prod / "pilot-015", {})
+            self.assertEqual(st, "script-fail")
+            self.assertIn("MISSING images.json", problems)
+
+    def test_off_structure_and_unreadable_scripts_fail_without_crashing(self):
+        with tempfile.TemporaryDirectory() as t:
+            prod = Path(t)
+            pilot(prod, "pilot-015", "2026-10-28T10:00:00Z", script=structured_story(burned_captions=True))
+            pilot(prod, "pilot-017", "2026-10-30T10:00:00Z", script="{not json")
+            st, problems = r.long_stage(prod / "pilot-015", {})
+            self.assertEqual(st, "script-fail")
+            self.assertTrue(any(p.startswith("STORY_BURNED_CAPTIONS") for p in problems))
+            self.assertEqual(r.long_stage(prod / "pilot-017", {})[0], "script-fail")
+            r.check(prod, {}, NOW)                                                      # no exception
+
+    def test_a_rendered_approved_or_uploaded_long_keeps_its_stage(self):
+        # review of #415: a long past the script stage never drops out because of later gate fields
+        with tempfile.TemporaryDirectory() as t:
+            prod = Path(t)
+            off = structured_story(burned_captions=True)
+            pilot(prod, "pilot-015", "2026-10-28T10:00:00Z", rendered=True, script=off)
+            pilot(prod, "pilot-017", "2026-10-30T10:00:00Z", rendered=True, approved=True, script=off)
+            pilot(prod, "pilot-019", "2026-11-01T10:00:00Z", script=off)
+            ledger = {"entries": {"pilot-019:abc": {"video_id": "x"}}}
+            self.assertEqual([x["stage"] for x in r.check(prod, ledger, NOW)[0]], ["rendered", "approved", "uploaded"])
 
     def test_approval_one_day_ahead(self):
         # E24: pilot-003 had 3 h between the quota reset and its slot and missed it on a provider error
@@ -52,22 +119,13 @@ class Runway(unittest.TestCase):
         self.assertGreater(r.RENDER_LEAD, r.APPROVAL_LEAD)
         with tempfile.TemporaryDirectory() as t:
             prod = Path(t)
-            pilot(prod, "pilot-008", "2026-10-22T10:00:00Z", rendered=True)         # 22 h left, not approved: late
-            pilot(prod, "pilot-009", "2026-10-23T00:00:00Z", rendered=True)         # 36 h left, not approved: fine
-            pilot(prod, "pilot-010", "2026-10-23T10:00:00Z")                        # 46 h left, script only: fine
-            pilot(prod, "pilot-011", "2026-10-22T00:00:00Z")                        # 12 h, script only: late
-            alerts = r.check(prod, {}, NOW)[1]
-            self.assertTrue(any("pilot-008" in a and "rendered" in a for a in alerts))
-            self.assertTrue(any("pilot-011" in a and "script" in a for a in alerts))
-            self.assertFalse(any("pilot-009" in a or "pilot-010" in a for a in alerts))
-
-    def test_uploaded_counts_and_format_start(self):
-        with tempfile.TemporaryDirectory() as t:
-            prod = Path(t)
-            pilot(prod, "pilot-003", "2026-10-19T10:00:00Z", rendered=True)
-            rows = r.check(prod, {"entries": {"pilot-003:abc": {"video_id": "x"}}}, datetime(2026, 10, 18, 15, 0, tzinfo=timezone.utc))[0]
-            self.assertEqual(rows[0], {"slot": "2026-10-19T10:00Z", "pilot": "pilot-003", "stage": "uploaded", "late": False})
-            self.assertNotIn("2026-10-19T00:00Z", [x["slot"] for x in rows])       # before the two-a-day format
+            pilot(prod, "pilot-015", "2026-10-28T10:00:00Z")                             # 30 h, script: render late
+            pilot(prod, "pilot-017", "2026-10-30T10:00:00Z", rendered=True)              # 78 h, rendered: fine
+            rows, alerts = r.check(prod, {}, datetime(2026, 10, 27, 4, 0, tzinfo=timezone.utc))
+            self.assertTrue(any("pilot-015" in a and "'script'" in a for a in alerts))
+            self.assertFalse(any("pilot-017" in a for a in alerts))
+            alerts = r.check(prod, {}, datetime(2026, 10, 29, 14, 0, tzinfo=timezone.utc))[1]   # 20 h, not approved
+            self.assertTrue(any("pilot-017" in a and "rendered" in a for a in alerts))
 
 
 if __name__ == "__main__":

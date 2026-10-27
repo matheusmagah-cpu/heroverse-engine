@@ -29,6 +29,24 @@ Then: duration and aspect come from the tool fields, not the text.
   clouds parting).
 - **Real-world phenomena look real.** Sunbeams through clouds, mist on water, an eagle in flight read as footage;
   invented spectacle (beams of power, glowing portals) reads as cheap CGI.
+- **State the period in every scene (E108).** genesis-07 run 40341856955 asked for "a torch-lit lane", "the road out
+  of the city", "a dusty lane", "a quiet room" with no age named, and got a cobbled European street with a man in a long
+  coat and a glass kerosene lantern, a town with church towers, a stone village with chimneys, a peaked cap, glass jars
+  (8 of 30 scene shots). Every scene prompt (God's voice-over and a speaking character's shot too; not the Keeper; the
+  long's scenes too) carries its story's period word for word before the standard tail: for Genesis before the flood
+  `plan_check.PERIOD_SETTING` "The ancient Near East before the flood: only goat-hair tents, open fires and torches on
+  the open plain." and `PERIOD_EXCLUDE` "No stone buildings, towers, churches, glass lanterns, modern clothing or
+  roads." (SCENE_PERIOD_MISSING). With both sentences taken out it names nothing the period excludes
+  (`PERIOD_AVOID`: city, lane, room, table, street, road, building, brick, wall, house, dome, tower, church, town,
+  village, lantern, coat, hat, peaked cap...: SCENE_PERIOD_CONFLICT); say "a camp of tents", "a path between the
+  tents", "inside a goat-hair tent", "a dusty track across the open plain", "a clay oil lamp". The period is the plan's
+  `period` (a preset: `eden`, `before-the-flood`, `the-flood`; or its own setting and exclusions, a malformed one is
+  PERIOD_INVALID) or its passage's (Genesis 1-3, 4-6, 7-9); a passage across two periods is PERIOD_AMBIGUOUS until the
+  plan sets one. Probed before genesis-07's rebuild (`evidence/pavo/20261026/period/probes.json`): "tents, mud-brick
+  and the open plain" put a mud-brick tower or a domed tower behind 4 of 8 probes; "...clay lamps, fires and torches"
+  none, but a small metal-and-glass candle lantern in 3 of 11 night shots; "...open fires and torches" none of either
+  in the probes that followed. Look for a stray prop on the frame sheet anyway; `episode.yml` `regenerate` redoes that
+  shot alone.
 - **People and God.** No face of God. Biblical people only when the story needs them, then from a fixed reference
   image (character sheet) so the same face returns in every episode.
 
@@ -154,9 +172,15 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   face, hands, robe or throne (best: do not name Him in a prompt at all; show what He does).
 
 **Length: 170-179 s from part 7** (5/6 winners ran 170-179 s, 0/3 weak; measured with the tail, below YouTube's
-180 s Shorts limit). plan_check estimates at 2.75 words a second (Kokoro, measured on Genesis 7 v2); the band is
-narrow, so the measured length in `episode_build lines` decides; measure a new plan locally (`pilot_render.py voice`)
-before dispatching. Genesis 7 v2: 466 words, 24 lines, estimate 174.3 s, measured 173.9 s.
+180 s Shorts limit). plan_check estimates the narration at 2.75 words a second (Kokoro, 2.756 measured over the
+genesis-07 to 10 Shorts) and each speaker's line between its voice's two measured bounds (`voice_pace.py`, E104): the
+fastest run for a line too short (God in a Short 3.072, Adam 3.975, Eve 3.732, Noah 2.970, the scoffer 3.579, the
+serpent 2.728) and the slower of the slowest run x 2.25/2.75 and the slowest line for a line too long or unreachable. A
+talking voice not in it is VOICE_PACE_UNMEASURED. One talking line that reaches a clip at every pace between them: the
+Keeper and the serpent 12-25 words, Noah 13-27, the scoffer 15-32, Eve 16-32, Adam 17-35 (a character's 12 words would
+be ~3.2 s, under the 4 s clip). The band is narrow, so the measured length in `episode_build lines` decides; measure a
+new plan locally (`pilot_render.py voice`) before dispatching. Genesis 7 v2: 466 words, 24 lines, estimate 172.8 s,
+measured 173.8-173.9 s.
 
 **The checks, in order** (each stops the run): `plan_check.py --strict` (KJV word for word, the Short rules on the
 estimated length, every rule above; the Keeper while DRAFT is one pending row) → Kokoro line by line, each line in its
@@ -167,3 +191,55 @@ speaking); a failed shot is a NEW generation at most 2 times (5 for a talking cl
 clip's picture spans exactly its line's audio, from the start of its clip at normal speed, its last frame held for the
 gap or tail; `short_engine.talk_problems` refuses it off its line) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
 Claude's review at 9.5.
+
+## Keeper voice-over: the owner-approved fallback (plan B, owner 2026-10-26)
+The owner's decision for genesis-07 (26/10, as relayed): "If the last test fails, genesis-07 publishes 27/10 13:30 UTC
+with the Keeper ON SCREEN at the close in calm, mouth-closed shots: looking into the fire, closing the scroll, looking
+at the camera at the very end. His narration plays as a voice-over, so nobody appears to speak with a still mouth and
+there is no wrong lip sync. The check must confirm that no mouth is talking in those shots." The test failed: his
+lip-synced lines passed 1 time in 45 (PR #419, `evidence/pavo/20261026/keeper-line-length.json`).
+
+An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-synced, as above.
+- **The plan:** a `keeper` shot may carry `"voiceover": true` (a keeper shot only, true or false, else
+  `VOICEOVER_FIELD`). It is not a talking shot: no input audio, no `TALK_*` retime, no `KEEPER_POSE`. Its prompt says
+  his mouth stays closed ("his lips closed, silent") and names no speech (speaks, talking, says, lips moving, words,
+  audio...), else `KEEPER_VO_PROMPT`; he faces the lens on a static camera ("static camera", "looks straight into the
+  camera"; nothing that turns his eyes or head off the lens: looking or glancing down, into or at the fire, flames,
+  embers or scroll, eyes on the flames, eyes raised from the fire, head bowed, lowered eyes, profile, reading the
+  scroll, push-in or lean), else `KEEPER_VO_POSE`. His character entry needs a `talk_refs` frame, else
+  `KEEPER_VO_NO_TALK_REF` (also refused by `episode_build refs` and the request: never the front view in its place).
+  His `look` and one `wardrobe` variant stay word for word; Keeper <= 25 %, lesson <= 25 %, only after the climax,
+  never opens, closes: all count these shots. His line is narration in am_michael carried by the voice track, at
+  least 2.0 s (`VO_LINE_MIN`, the floor `episode_build lines` holds a Keeper line to). One helper,
+  `plan_check.vo_cover`, gives what his clip covers besides the line, by the compose's own run logic: the 0.35 s gap
+  before it when a talking shot comes first, and the 0.35 s gap or the 1.2 s closing tail after it. plan_check (at
+  the slowest pace), `episode_build lines` (measured) and the compose all cap that whole time at 15.6 s (one 12 s clip
+  slowed 1.3), and the clip is ceil(it) seconds, 4-12 (`vo_clip_seconds`). The long has no voice-over path yet:
+  `LONG_VOICEOVER_UNSUPPORTED`.
+- **The build:** the request sends his `talk_refs` frame alone (else his approved refs), no audio, no speech clause;
+  Pavo's audio is stripped. `lipsync_check.py --still-mouth` (the same pinned landmarker and inner-lip opening as the
+  lips check) flags `MOUTH_TALKING` when any 1 s of the clip moves fast (mean frame-to-frame change > 0.0063 of the
+  face height; or the whole clip is wide and fast, the first rule), `MOUTH_NOT_CLOSED` when any 1 s after the first
+  2.5 s is open (median > 0.013; the talking frame's open mouth may settle closed within those 2.5 s, no longer), and
+  `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; every measure goes into report.json; 6
+  generations like a talking shot (`attempts_for`: Pavo is free and 1 in 6 passed before the prompts were settled),
+  generated right after the talking shots (E99). The compose plays his clip unbroken from its 0 s over
+  his line (slowed at most 1.3, never cut or held); his words and captions come from the voice track.
+- **Why these rules** (`evidence/pavo/20261026/keeper-vo/calibration.json`, 14 direct 0-credit closed-mouth Pavo clips
+  and 42 talking clips, their per-frame series in `opening-series.json`, replayed by test_lipsync_check): 42 talking
+  clips (the Keeper's, passing and failing the lips alike, and the genesis-06 narrator) move 0.0091-0.026 in their
+  fastest second and open 0.039-0.084 in their most open second after 2.5 s, all `MOUTH_TALKING`; the closed clips
+  0.0005-0.0043 and 0.0011-0.0046. A whole-clip mean (the first rule) would let 2.5 s of talking in a 12 s clip pass,
+  and a still open mouth passed it (review of #423). With the mouth-closed front reference his face was found in
+  2-27 % of the frames (4 of 4 `FACE_NOT_FOUND`, whatever the gaze or light); with his talking frame facing the lens,
+  100 %, the mouth settling closed within 2.5 s from the reference's open mouth and staying closed (spread 0.041,
+  motion 0.0006: passes); looking down into the fire, 17 % (`FACE_NOT_FOUND`). So the owner's "into the fire" and
+  "closing the scroll" are the fire beside him and the scroll rolled closed while he faces the camera.
+- **genesis-07 is built this way:** `plans/genesis-07-short.json` now has its three Keeper shots as voice-over (prompts
+  rewritten, lines unchanged); every scene and God shot is byte-identical to the plan run 40307414749 built from
+  (commit 1c1ed79, tested), so its resume keeps the 30 clips (E93: the same request). Each Keeper prompt was probed as
+  the build sends it before the build (2 direct 0-credit clips each, `calibration.json` "build_probes"): k-question 2/2,
+  k-close 2/2 (word for word the clip that first passed); k-insight 0/2 with "his eyes sad and kind, breathing slowly
+  as the flames flicker beside him" (face 0.68, 0.60), 2/2 once rewritten as clip 5 ("a calm kind look, breathing
+  slowly"). Rule from it: a voice-over Keeper prompt stays close to the passing wording; a new one is probed first.
+  Measured locally with Kokoro: 173.8 s (the Keeper's lines no longer retimed), Keeper 11.0 %, lesson 11.4 %.

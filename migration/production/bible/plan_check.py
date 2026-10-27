@@ -55,10 +55,25 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   establishing shot (`establishing: true`), held at most 2 s on screen, all of them together at most 15 %.
 - God the Father is never a visible figure: a prompt that names Him must show Him only as light, wind, fire or a
   voice, and never with a body, face, hands, robe or throne.
+- the period (E108): every scene prompt states its story's period word for word, the setting and the exclusions
+  (PERIOD_SETTING / PERIOD_EXCLUDE for Genesis before the flood), and names nothing the period excludes outside the
+  setting and exclusion sentences (SCENE_PERIOD_CONFLICT: city, lane, room, street, tower, lantern...); the period
+  is the plan's `period` (a malformed or unknown one is PERIOD_INVALID) or its passage's (a passage across the
+  flood is PERIOD_AMBIGUOUS); none is SCENE_PERIOD_MISSING. episode_build.request refuses the same by period_refusal,
+  long_plan_check by plan_period_problems.
+- no writing (E110): a scene prompt asks for nothing written (scroll, ink, letters, inscription, writing, script,
+  text, tablet, parchment, book, page, glyphs, runes, symbols...) outside a negation ("No text", "without
+  letters"): SCENE_WRITING. The Keeper's own scroll is his look, not a scene. plan_check, long_plan_check
+  (plan_writing_problems) and episode_build.request (writing_refusal) by the same function.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
+A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
+records, shares, length, the compose's cuts and holds on the planned clip lengths) and reference_problems (kept
+reference records and images, counted as the request sends them); their refusals come back as "BUILD <code> ...".
+
 usage: plan_check.py PLAN.json [--strict]   prints JSON {problems, pending, estimate}; exit 1 on a problem
-                                            (--strict: also on a pending row; episode_build runs it strict)
+                                            (--strict: also on a pending row and on a path episode.yml would refuse,
+                                            PLAN_PATH / PLAN_EPISODE_MISMATCH; episode_build runs it strict)
 """
 import json
 import math
@@ -74,19 +89,25 @@ sys.path.insert(0, str(ROOT / "migration" / "publish"))
 import characters as ch  # noqa: E402
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
+from voice_pace import SHORT_PACE, VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (one measured table, Short and long)
 
 VERSION = "bible-plan-v2"
 KINDS = ("story", "scripture", "insight", "cta")
 LESSON_KINDS = ("insight", "cta")
 EPISODE_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 SHOT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
+# episode.yml's plan input, character for character (test_refusal_parity checks the workflow holds this pattern)
+PLAN_PATH = re.compile(r"^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$")
 RATIOS = ("9:16",)                   # Shorts only
-# Kokoro pace, words a second: am_michael on Genesis 6 (evidence/pavo/20261025/genesis-06/compose/timeline.json)
-# 2.30-2.98; on the Genesis 7 v2 plan (2026-10-26, measured locally with the preserved model) 2.18-3.63 a line, 2.75
-# over the whole track, God's am_onyx at speed 0.9 at the same pace as the narrator. Estimates use 2.75 (the 170-179 s
-# band is narrow: the measured length decides, episode_build lines); the talking-clip ceilings use the slowest.
+# Kokoro pace of the narration (the Keeper, am_michael), words a second: 2.30-2.98 on Genesis 6
+# (evidence/pavo/20261025/genesis-06/compose/timeline.json), 2.756 over the 82 lines of genesis-07 to 10, 1.99-3.63 a
+# line (evidence/voice/20261026/kokoro-pace.json). Estimates use 2.75 (the 170-179 s band is narrow: the measured length
+# decides, episode_build lines); the talking-clip ceilings use the slowest. Every other voice (a character's, God's)
+# has its own two measured bounds in voice_pace.py (E104): at 2.75 a 12-word line of Eve's passed here and died at
+# the build.
 WPS = 2.75
 WPS_SLOWEST = 2.25
+SLOW_RATIO = WPS_SLOWEST / WPS       # the slowest pace, as a share of the normal one
 LINE_GAP = 0.35                      # silence between lines (episode_build.LINE_GAP)
 TAIL = 1.2                           # short_engine tail after the last word
 KEEPER_AUDIO = (2.0, 12.0)           # Flash input audio, per request
@@ -123,6 +144,58 @@ KEEPER_POSE = ("static camera", "looks straight into the camera")
 KEEPER_POSE_OFF = re.compile(r"(?i)push-in|pull(?:s|ing)?[ -]back|\bleans?\b|\bbow(?:s|ing)?\b|tracking shot|\borbit")
 # a line without a `reference` that quotes the KJV anyway: 8 consecutive words of the KJV (kjv_check's text)
 KJV_RUN = 8
+# E108 (review of genesis-07 run 40341856955): no scene prompt stated its period, so Pavo filled a lane or a horizon
+# with whatever it knows best: a cobbled European street with a man in a long coat and a glass kerosene lantern
+# (s-walker), a town of stone with church towers (s-family, s-wind), a stone village with chimneys (s-theft), a
+# peaked cap, glass jars. Every scene prompt (God's voice-over and a speaking character's shot are scenes too; the
+# Keeper's own campfire is not) states its story's period word for word: the setting and the exclusions. The owner
+# asked for both, although PROMPT_GUIDE warns that naming a thing can prime it; the probes of the rewritten shots
+# (evidence/pavo/20261026/period/) are the measure. A story's period comes from the plan (`period`: a preset name or
+# its own {"setting", "exclude", "avoid"?}) or, when the plan names none, from its passage (STORY_PERIODS); a story with
+# neither is SCENE_PERIOD_MISSING, so a later story cannot slip through without one.
+PERIOD_SETTING = "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain."
+PERIOD_EXCLUDE = "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+# what the rest of the prompt (the setting and exclusion sentences taken out) may not ask for: words that put a later
+# age or a built town on screen. Review of #426: "city of tents", "lane" and "room" are the words that drew the
+# street, the town and the house in run 40341856955, so they are refused too; a tent's or goat-hair wall is not a
+# built wall; "glass" and "cap" only as the object ("still as glass" and "snow caps" are not refused)
+PERIOD_AVOID = (r"streets?", r"roads?", r"cobbl\w*", r"pavements?", r"lanterns?", r"kerosene",
+                r"glass (?:lanterns?|lamps?|jars?|bottles?|windows?|panes?|cups?)", r"windows?",
+                r"towers?", r"church\w*", r"steeples?", r"spires?", r"chimneys?", r"castles?", r"domes?",
+                r"towns?", r"villages?", r"cit(?:y|ies)", r"lanes?", r"buildings?", r"(?:mud-)?bricks?",
+                r"(?<!tent )(?<!goat-hair )walls?", r"houses?", r"rooms?", r"tables?",
+                r"coats?", r"hats?", r"(?:peaked|flat|baseball|cloth) caps?")
+# the flood and the new earth (genesis-08 to 10: the ark, the waters, Ararat): the same exclusions
+PERIOD_SETTING_FLOOD = ("The ancient Near East in the days of the flood: the great wooden ark, the open water, the "
+                        "mountains of Ararat and the empty new earth.")
+# the making of the world and Eden (the arc-01 long, Genesis 1-3): no human work at all
+PERIOD_SETTING_EDEN = ("The world at its making and the garden of Eden: untouched wild land, rivers, trees and open "
+                       "sky.")
+PERIODS = {"eden": {"setting": PERIOD_SETTING_EDEN, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)},
+           "before-the-flood": {"setting": PERIOD_SETTING, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)},
+           "the-flood": {"setting": PERIOD_SETTING_FLOOD, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)}}
+# (book, first chapter, last chapter, period) for a plan with no `period`: Cain's city to the eve of the flood (Genesis
+# 6:14-22, the ark commanded, is still before it), then the flood to the covenant of the rainbow (7-9)
+STORY_PERIODS = (("Genesis", 1, 3, "eden"), ("Genesis", 4, 6, "before-the-flood"), ("Genesis", 7, 9, "the-flood"))
+# "Genesis 6:5-13" (chapter 6), "Genesis 6:14-7:5" (6 to 7), "Genesis 6-8", "Genesis 7"; the end chapter matters (a
+# passage may cross the flood)
+PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)(:\d+)?"
+                     r"(?:\s*[-\u2013]\s*(\d+)(:\d+)?)?")
+
+
+def passage_chapters(passage):
+    """(book, first chapter, last chapter) of a passage, or None."""
+    m = PASSAGE.match(passage or "")
+    if not m:
+        return None
+    first = int(m.group(2))
+    if m.group(4) is None:
+        last = first
+    elif m.group(3) and not m.group(5):   # 6:5-13: a verse range inside chapter 6
+        last = first
+    else:                                  # 6:14-7:5 or 6-8
+        last = int(m.group(4))
+    return m.group(1), first, max(first, last)
 # E95 (measured 2026-10-26, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when
 # the clip it is asked for is at most ~0.65 s longer than the speech; at 1.6 s or more it makes its own track. A talking
 # clip is ceil(speech) seconds (4-12), the speech 0.25-0.65 s shorter than it: episode_build retimes a line that misses
@@ -138,6 +211,31 @@ TALK_CLIP_MAX = float(TALK_CLIP[1])
 TALK_LINE_MAX = TALK_CLIP[1] - TALK_PAD_TARGET                              # 11.55 s
 TALK_MIN = (TALK_CLIP[0] - TALK_PAD_TARGET) / (1 + TALK_RETIME_MAX)         # 3.23 s: one line retimed into a 4 s
 #                                                                             clip (a shot of several: talk_min)
+# Plan B (owner, 2026-10-26, PROMPT_GUIDE "Keeper voice-over"): an opt-in `"voiceover": true` Keeper shot shows him on
+# screen with his mouth closed while his line plays from the voice track, so no one appears to speak with a still mouth
+# and there is no lip sync to miss. Its prompt says his lips stay closed and names no speech; lipsync_check
+# --still-mouth confirms the clip (MOUTH_TALKING). The default Keeper shot still talks, lip-synced.
+VO_SILENT = (re.compile(r"(?i)\blips (?:stay |remain |kept |pressed )?closed\b"), re.compile(r"(?i)\bsilent\b"))
+VO_SPEECH = re.compile(r"(?i)\b(speak\w*|spoke|talk\w*|says|saying|said|tells?|telling|whisper\w*|sings?|singing|"
+                       r"chant\w*|recit\w*|narrates|narrating|words|audio|lip[- ]?sync\w*|"
+                       r"lips (?:moving|move|moves|part|parts|parting|open\w*)|mouth (?:moving|moves|move|open\w*)|"
+                       r"opens? his mouth|open mouth)\b")
+# the still-mouth check needs his face in 80 % of the frames, as the lips check does: in the direct closed-mouth clips
+# (evidence/pavo/20261026/keeper-vo/calibration.json) the face was found only when he faced the lens; looking down
+# into the fire (2 % and 17 % of frames), "raises his eyes from the fire" (18 %) and "his eyes sad and kind ... the
+# flames flicker beside him" (0.68, 0.60) lost it, so a voice-over Keeper holds the talking pose too (KEEPER_POSE words)
+# and no phrasing that turns his eyes or head off the lens (review of #423)
+_LOOK = r"(?:looks?|looking|gazes?|gazing|glances?|glancing|stares?|staring|peers?|peering)"
+_OFF_LENS = r"(?:the |his )?(?:camp)?(?:fire|flames?|embers?|coals?|scroll|ground|hands?|sky|stars|sand|side)"
+VO_GAZE_OFF = re.compile(
+    rf"(?i)\b{_LOOK} (?:down|away|aside|up|off|sideways)\b|\b{_LOOK} (?:in)?to {_OFF_LENS}\b|\b{_LOOK} at {_OFF_LENS}\b|"
+    rf"\beyes (?:on|to|toward|towards) {_OFF_LENS}\b|\beyes (?:\w+ )?from {_OFF_LENS}\b|"
+    r"\blower(?:s|ing|ed)? his (?:eyes|gaze|head)\b|\b(?:eyes|gaze|head) (?:lowered|downcast|cast down|bowed|down)\b|"
+    r"\bhead (?:tilted|turned|bent)\b|\bturns? (?:his head|away|aside)\b|\bdowncast\b|\bprofile\b|"
+    r"\bfrom the side\b|\bthree-quarter\b|\breads?(?:ing)? (?:the |his )?scroll\b|\beyes (?:closed|shut)\b|"
+    r"\bcloses his eyes\b")
+VO_LINE_MAX = TALK_CLIP[1] * MAX_SLOW   # gap before + line + gap or tail after on one 12 s clip, slowed at most MAX_SLOW
+VO_LINE_MIN = KEEPER_AUDIO[0]           # the floor lines_step holds a Keeper line to (2.0 s), voice-over or not
 _KJV_TEXT = []
 
 
@@ -145,8 +243,18 @@ def words(text):
     return len(text.split())
 
 
-def estimate_seconds(text, wps=WPS):
-    return words(text) / wps
+def pace(item):
+    """Words a second of the voice that speaks this line, at its fastest: the narration (the Keeper's) at WPS, a
+    speaker's line at its voice's fastest measured run in a Short (SHORT_PACE, else VOICE_PACE; WPS until measured,
+    and a talking line is then VOICE_PACE_UNMEASURED)."""
+    who = item.get("speaker")
+    return WPS if who in (None, ch.NARRATOR) else SHORT_PACE.get(who, VOICE_PACE.get(who, WPS))
+
+
+def slowest_pace(item):
+    """The same voice at its slowest: WPS_SLOWEST for the narration, VOICE_SLOWEST for a speaker (E104)."""
+    who = item.get("speaker")
+    return WPS_SLOWEST if who in (None, ch.NARRATOR) else VOICE_SLOWEST.get(who, WPS_SLOWEST)
 
 
 def _plain(text):
@@ -293,10 +401,40 @@ def talk_retime(words, gaps=0.0):
     return (round(best, 3), stretch) if abs(stretch - 1) <= TALK_RETIME_MAX + 1e-9 else None
 
 
+def voiceover(shot):
+    """Plan B (owner, 2026-10-26): a Keeper shot flagged `"voiceover": true` shows him silent, mouth closed, while his
+    line plays from the voice track (no input audio, no retime, no lipsync; lipsync_check --still-mouth instead)."""
+    return isinstance(shot, dict) and shot.get("kind") == "keeper" and shot.get("voiceover") is True
+
+
+def vo_cover(shots, i):
+    """(before, after): the seconds a voice-over Keeper clip covers around its line, by episode_build.compose_shots'
+    own run logic (review of #423: plan_check, lines_step, shot_seconds and the compose share this one helper). A
+    talking shot before it ends on its last word (it covers the gap only when the next shot talks too), so the clip
+    covers that gap; after scenes or a voice-over shot it starts on its first word. It ends where the next line starts
+    (the gap), or with the closing tail when it is the last shot."""
+    before = LINE_GAP if i > 0 and talking(shots[i - 1]) else 0.0
+    after = TAIL if i == len(shots) - 1 else LINE_GAP
+    return before, after
+
+
+def vo_covered(seconds, shots, i):
+    """The time a voice-over Keeper clip covers: the gap before, his line's `seconds` and the gap or tail after."""
+    before, after = vo_cover(shots, i)
+    return before + seconds + after
+
+
+def vo_clip_seconds(covered):
+    """Clip seconds of a voice-over Keeper shot for the time it covers (vo_covered): ceil, 4-12 s; the compose slows
+    a clip at most MAX_SLOW to cover more (VO_LINE_MAX)."""
+    return int(min(TALK_CLIP[1], max(TALK_CLIP[0], math.ceil(covered - 1e-6))))
+
+
 def talking(shot):
     """A shot whose clip carries its own words with the speaker's lips on them (Pavo input audio, lipsync_check):
-    the Keeper, or a scene where a character speaks. God's line is a voice-over: not a talking clip."""
-    return shot["kind"] == "keeper" or (speaking(shot) and shot["speaker"] != ch.GOD)
+    the Keeper (unless his shot is a voice-over, plan B), or a scene where a character speaks. God's line is a
+    voice-over: not a talking clip."""
+    return (shot["kind"] == "keeper" and not voiceover(shot)) or (speaking(shot) and shot["speaker"] != ch.GOD)
 
 
 def god_problem(prompt):
@@ -321,6 +459,125 @@ def prompt_problems(i, shot):
     if god:
         out.append(f"{god} shot {i} {shot['id']}")
     return out
+
+
+def _given_period(given):
+    """The plan's own `period`: (period, None) or (None, the reason it is refused)."""
+    if isinstance(given, str):
+        if given in PERIODS:
+            return PERIODS[given], None
+        return None, f"unknown preset {given!r}; one of {sorted(PERIODS)} or its own setting and exclusions"
+    if not isinstance(given, dict):
+        return None, f"a preset name or {{setting, exclude, avoid?}}, not {type(given).__name__}"
+    for k in ("setting", "exclude"):
+        if not isinstance(given.get(k), str) or not given[k].strip():
+            return None, f"`{k}` is missing or empty"
+    avoid = given.get("avoid", list(PERIOD_AVOID))   # no `avoid`: the shared list, never none
+    if not isinstance(avoid, list) or not avoid or not all(isinstance(a, str) and a for a in avoid):
+        return None, "`avoid` is a non-empty list of regular expressions"
+    for a in avoid:
+        try:
+            re.compile(rf"(?i)\b(?:{a})\b")
+        except re.error as exc:
+            return None, f"`avoid` {a!r} is not a regular expression ({exc})"
+    return {"setting": given["setting"].strip(), "exclude": given["exclude"].strip(), "avoid": avoid}, None
+
+
+def resolve_period(plan):
+    """E108: (period, problem). The period {"setting", "exclude", "avoid"} comes from the plan's `period` (a PERIODS
+    name or its own wording; a malformed or unknown one is PERIOD_INVALID, never passed over for the passage) or,
+    when the plan names none, from every chapter of its passage (STORY_PERIODS): chapters in two periods, or partly
+    in none, are PERIOD_AMBIGUOUS until the plan sets `period`; none is SCENE_PERIOD_MISSING (missing_period, the
+    one message)."""
+    if "period" in plan:
+        per, why = _given_period(plan["period"])
+        return (per, None) if per else (None, f"PERIOD_INVALID (the plan's `period`: {why}; E108)")
+    passage = plan.get("passage") or ""
+    found = passage_chapters(passage)
+    if found:
+        book, first, last = found
+        names = {next((n for b, lo, hi, n in STORY_PERIODS if b == book and lo <= c <= hi), None)
+                 for c in range(first, last + 1)}
+        if len(names) > 1:
+            return None, (f"PERIOD_AMBIGUOUS ({passage} spans {sorted(str(n) for n in names)}: set the plan's "
+                          "`period`; E108)")
+        if names != {None}:
+            return PERIODS[names.pop()], None
+    return None, missing_period(plan)
+
+
+def missing_period(plan):
+    """The one SCENE_PERIOD_MISSING message for a story with no period (plan_check, long_plan_check, the build)."""
+    return (f"SCENE_PERIOD_MISSING (no period for {plan.get('passage') or 'this story'}: the plan's `period` names one "
+            f"of {sorted(PERIODS)} or gives its own setting and exclusions; E108)")
+
+
+def period(plan):
+    """The story's period, or None (resolve_period says why)."""
+    return resolve_period(plan)[0]
+
+
+def period_problems(i, shot, per):
+    """E108: a scene prompt states its period word for word (setting and exclusions) and, with both sentences taken
+    out, names nothing the period excludes. [] for a Keeper shot (his own campfire, his own look) and a window."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str) or per is None:
+        return []
+    sid, p = shot.get("id"), shot["prompt"]
+    out = []
+    missing = [w for w in (per["setting"], per["exclude"]) if w not in p]
+    if missing:
+        out.append(f"SCENE_PERIOD_MISSING shot {i} {sid} (the prompt states, word for word: "
+                   + " ".join(f"'{w}'" for w in missing) + ")")
+    rest = p.replace(per["exclude"], " ").replace(per["setting"], " ")
+    hits = sorted({m.group(0).lower() for a in per.get("avoid") or PERIOD_AVOID
+                   for m in re.finditer(rf"(?i)\b(?:{a})\b", rest)})
+    if hits:
+        out.append(f"SCENE_PERIOD_CONFLICT shot {i} {sid} (names what the period excludes: {', '.join(hits)})")
+    return out
+
+
+# E110 (review of genesis-07 run 40357197063): s-scroll asked for "an old scroll ... the ink lines catching the light"
+# beside "No text", and Pavo drew lines of legible Arabic-looking script: AI text on screen and a later age's writing in
+# the days before the flood. A prompt that asks for writing gets writing, whatever its exclusions say, so a scene prompt
+# may not ask for it. Negated mentions ("No text, no logos.", "without letters") are what the prompt keeps out. The
+# Keeper's rolled scroll is his approved look (CHARACTER_LOOK_CHANGED keeps it word for word), not a scene; a carved
+# idol is not writing.
+WRITING = (r"scrolls?", r"ink", r"inked", r"letters?", r"lettering", r"inscri\w+", r"(?:hand)?writing", r"written",
+           r"writes?", r"wrote", r"scripts?", r"texts?", r"tablets?", r"parchments?", r"papyr\w+", r"manuscripts?",
+           r"books?", r"pages?", r"calligraph\w*", r"glyphs?", r"hieroglyph\w*", r"runes?", r"alphabets?",
+           r"symbols?", r"signs? (?:board|post)s?", r"signboards?", r"notes?")
+WRITING_RE = re.compile(rf"(?i)\b(?:{'|'.join(WRITING)})\b")
+# a negation keeps the next words out: "No people, no text", "without any letters", "never a written word"
+WRITING_NEGATED = re.compile(rf"(?i)\b(?:no|without|never)\s+(?:(?:any|a|an|legible|visible|written|carved|"
+                             rf"painted)\s+)*(?:{'|'.join(WRITING)})\b")
+
+
+def writing_problems(i, shot):
+    """E110: a scene prompt that asks for writing (outside a negation) is SCENE_WRITING. [] for a Keeper shot."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+        return []
+    rest = WRITING_NEGATED.sub(" ", shot["prompt"])
+    hits = sorted({m.group(0).lower() for m in WRITING_RE.finditer(rest)})
+    if not hits:
+        return []
+    return [f"SCENE_WRITING shot {i} {shot.get('id')} (asks for writing, which Pavo draws as AI text: "
+            f"{', '.join(hits)}; show the line without anything written)"]
+
+
+def plan_writing_problems(shots):
+    """E110, shared by plan_check and long_plan_check: every scene prompt's own SCENE_WRITING."""
+    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in writing_problems(i, s)]
+
+
+def plan_period_problems(plan, shots):
+    """E108, shared by plan_check and long_plan_check: the plan-level period refusal (once) when any shot is a
+    scene, else every scene prompt's own."""
+    if not any(isinstance(s, dict) and s.get("kind") == "scene" for s in shots):
+        return []
+    per, problem = resolve_period(plan)
+    if problem:
+        return [problem]
+    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in period_problems(i, s, per)]
 
 
 def _speaker_problems(i, s, chars, span, span_slowest):
@@ -353,6 +610,9 @@ def _speaker_problems(i, s, chars, span, span_slowest):
         out.append(f"SPEAKER_NOT_APPROVED shot {i} {sid}: {who} ({c.get('status')})")
     if not ch.voice(who, chars):
         out.append(f"SPEAKER_NO_VOICE shot {i} {sid}: {who} (characters.json `voice`)")
+    elif who not in VOICE_PACE:
+        out.append(f"VOICE_PACE_UNMEASURED shot {i} {sid}: {who} (measure its Kokoro voice into voice_pace.py before "
+                   "its first talking line)")
     if who not in (s.get("characters") or []):
         out.append(f"SPEAKER_NOT_IN_SHOT shot {i} {sid}: {who} (in `characters`, its look in the prompt)")
     if s.get("seconds") is not None:
@@ -377,9 +637,28 @@ def check(plan, chars=None):
     narration = plan.get("narration")
     if not isinstance(narration, list) or not narration:
         return {"problems": problems + ["NARRATION_MISSING"], "pending": pending, "estimate": {}}
+    problems += narration_problems(narration)
+    if problems and any(p.startswith("NARRATION_LINE") for p in problems):
+        return {"problems": problems, "pending": pending, "estimate": {}}
+
+    n = len(narration)
+    shots = plan.get("shots")
+    if not isinstance(shots, list) or not shots:
+        return {"problems": problems + ["SHOTS_MISSING"], "pending": pending, "estimate": {}}
+    shape, bad_lines = shot_shape_problems(shots, n)
+    problems += shape
+    if bad_lines:
+        return {"problems": problems, "pending": pending, "estimate": {}}
+    return _check_shots(plan, chars, narration, shots, problems, pending)
+
+
+def narration_problems(narration, kinds=KINDS):
+    """Each narration line: a known kind and text; Scripture with its reference, the KJV word for word; no unreferenced
+    KJV quotation (shared with long_plan_check, the long's plan)."""
+    problems = []
     for k, line in enumerate(narration):
-        if not isinstance(line, dict) or line.get("kind") not in KINDS or not str(line.get("text", "")).strip():
-            problems.append(f"NARRATION_LINE {k} (kind {'/'.join(KINDS)} and text)")
+        if not isinstance(line, dict) or line.get("kind") not in kinds or not str(line.get("text", "")).strip():
+            problems.append(f"NARRATION_LINE {k} (kind {'/'.join(kinds)} and text)")
             continue
         if line.get("reference") is not None and not isinstance(line["reference"], str):
             problems.append(f"REFERENCE_NOT_TEXT line {k} (a reference such as \"Genesis 6:5 (KJV)\")")
@@ -396,13 +675,14 @@ def check(plan, chars=None):
             if quoted:
                 problems.append(f"KJV_UNREFERENCED line {k} (quotes {quoted[0]}: \"{quoted[1]}\"; make it kind "
                                 "scripture with its reference, KJV word for word)")
-    if problems and any(p.startswith("NARRATION_LINE") for p in problems):
-        return {"problems": problems, "pending": pending, "estimate": {}}
+    return problems
 
-    n = len(narration)
-    shots = plan.get("shots")
-    if not isinstance(shots, list) or not shots:
-        return {"problems": problems + ["SHOTS_MISSING"], "pending": pending, "estimate": {}}
+
+def shot_shape_problems(shots, n):
+    """(problems, bad_lines): each shot a keeper or scene with a unique id; a speaking scene carries its own line (KJV
+    word for word when it has a reference), every other shot consecutive narration indices (shared with
+    long_plan_check). bad_lines: the voice track cannot be laid out, so nothing after this is checked."""
+    problems = []
     seen, bad_lines = set(), False
     for i, s in enumerate(shots):
         if not isinstance(s, dict) or s.get("kind") not in ("keeper", "scene"):
@@ -412,6 +692,9 @@ def check(plan, chars=None):
         if not isinstance(s.get("id"), str) or not SHOT_ID.fullmatch(s["id"]) or s["id"] in seen:
             problems.append(f"SHOT_ID shot {i} (unique, a-z 0-9 -)")
         seen.add(s.get("id"))
+        if "voiceover" in s and (s["kind"] != "keeper" or type(s["voiceover"]) is not bool):
+            problems.append(f"VOICEOVER_FIELD shot {i} {s.get('id')} (`voiceover`: true or false, on a keeper shot "
+                            "only)")
         if speaking(s):
             if s["kind"] != "scene" or s.get("lines") not in (None, []):
                 problems.append(f"SPEAKER_SHOT_KIND shot {i} {s.get('id')} (a scene that carries its own `line`, "
@@ -438,24 +721,138 @@ def check(plan, chars=None):
         if lp:
             problems.append(lp)
             bad_lines = True
-    if bad_lines:
-        return {"problems": problems, "pending": pending, "estimate": {}}
+    return problems, bad_lines
 
-    expect = 0
+
+def keeper_prompt_problems(i, s, keeper):
+    """A Keeper shot's prompt: his look and one wardrobe variant word for word, he speaks, and he faces the lens on a
+    static camera (E98) (shared with long_plan_check)."""
+    problems = []
+    if keeper["look"] not in s.get("prompt", ""):
+        problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: keeper (the prompt must carry its look word for word)")
+    if not any(w in s.get("prompt", "") for w in keeper.get("wardrobe", {}).values()):
+        problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
+    if voiceover(s):
+        return problems + vo_prompt_problems(i, s)
+    if not SPEAKS.search(s.get("prompt", "")):
+        problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
+    prompt_lc = s.get("prompt", "").lower()
+    if not all(w in prompt_lc for w in KEEPER_POSE) or KEEPER_POSE_OFF.search(prompt_lc):
+        problems.append(f"KEEPER_POSE shot {i} {s['id']} (a talking Keeper faces the lens on a static camera: "
+                        f"{' and '.join(repr(w) for w in KEEPER_POSE)}, no push-in, pull-back, tracking, orbit, lean or bow; those "
+                        "lost the face or the lips, E98)")
+    return problems
+
+
+def vo_prompt_problems(i, s):
+    """Plan B: a voice-over Keeper's prompt says his lips stay closed ("his lips closed, silent") and names no speech
+    (speaks, talking, says, lips moving...), so Pavo makes no talking mouth under a line he does not lip-sync; and he
+    faces the lens on a static camera (KEEPER_POSE words, no look down into the fire), so the still-mouth check finds
+    his face."""
+    p = s.get("prompt", "")
+    out, speech = [], VO_SPEECH.search(p)
+    if not all(r.search(p) for r in VO_SILENT) or speech:
+        why = f"names speech: {speech.group(0)!r}" if speech else "say \"his lips closed, silent\""
+        out.append(f"KEEPER_VO_PROMPT shot {i} {s['id']} (a voice-over Keeper is silent on screen, mouth closed; {why})")
+    low, off = p.lower(), VO_GAZE_OFF.search(p) or KEEPER_POSE_OFF.search(p.lower())
+    if not all(w in low for w in KEEPER_POSE) or off:
+        why = f"not {off.group(0)!r}" if off else " and ".join(repr(w) for w in KEEPER_POSE)
+        out.append(f"KEEPER_VO_POSE shot {i} {s['id']} (he faces the lens on a static camera so the still-mouth check "
+                   f"finds his face; {why})")
+    return out
+
+
+def talk_reach_problems(i, s, span, slowest, gaps):
+    """review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches neither, so
+    episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after the plan had passed; judged at every pace from
+    the normal to the slowest, since the build retimes the measured length (shared with long_plan_check)."""
+    if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
+        miss = talk_reach_gap(span - gaps, slowest - gaps, gaps)
+        if miss is not None:
+            return [f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f}-{slowest:.2f} s from the "
+                    f"normal to the slowest pace: at ~{miss + gaps:.2f} s no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
+                    f"clip is within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)"]
+    return []
+
+
+def lines_order_problems(shots, n):
+    """The narration lines carried in order, each once, every one of them; a keeper shot speaks its own lines (shared
+    with long_plan_check)."""
+    problems, expect = [], 0
     for a, b, lines in groups(shots):
         if lines is None:
             continue
         if lines[0] != expect:
             problems.append(f"LINES_OUT_OF_ORDER shot {a} {shots[a]['id']} (next line is {expect})")
         expect = lines[-1] + 1
-        kinds = {shots[j]["kind"] for j in range(a, b + 1)}
-        if "keeper" in kinds and b > a:
+        if b > a and any(shots[j]["kind"] == "keeper" for j in range(a, b + 1)):
             problems.append(f"KEEPER_LINES_SHARED shot {a} {shots[a]['id']} (a keeper shot speaks its own lines)")
     if expect != n:
         problems.append(f"LINES_NOT_CARRIED from line {expect}")
+    return problems
+
+
+def character_problems(i, cids, prompt, chars, drafts=None):
+    """Each character a characters.json entry with a `look`, APPROVED, its look word for word in the prompt (the same
+    rules and words as characters.problems). drafts: a set that collects DRAFT ids as pending rows (the long), and
+    then an APPROVED character with no kept references is CHARACTER_NO_REFS; without it a DRAFT one is
+    CHARACTER_NOT_APPROVED (the Short). Shared with long_plan_check."""
+    out = []
+    for cid in cids:
+        if cid == ch.NARRATOR:
+            continue
+        c = chars.get(cid)
+        if not c:
+            out.append(f"CHARACTER_UNKNOWN shot {i}: {cid} (add it to characters.json first)")
+        elif not isinstance(c.get("look"), str) or not c["look"].strip():
+            out.append(f"CHARACTER_NO_LOOK shot {i}: {cid} (characters.json `look`: the fixed words every prompt "
+                       "carries)")
+        elif c.get("status") == "APPROVED" or (drafts is not None and c.get("status") == "DRAFT"):
+            if c["look"] not in prompt:
+                out.append(f"CHARACTER_LOOK_CHANGED shot {i}: {cid} (the prompt must carry its look word for word)")
+            elif c.get("status") == "DRAFT":
+                drafts.add(cid)
+            elif drafts is not None and not c.get("refs"):
+                out.append(f"CHARACTER_NO_REFS shot {i}: {cid} (APPROVED with no kept reference image: the same face "
+                           "cannot go in; keep its reviewed refs)")
+        else:
+            out.append(f"CHARACTER_NOT_APPROVED shot {i}: {cid} ({c.get('status')}; review its reference sheet)")
+    return out
+
+
+def scene_seconds_problems(i, s):
+    """A scene clip (not a talking one) is 4-12 s of Pavo video."""
+    if type(s.get("seconds")) is not int or not SCENE_SECONDS[0] <= s["seconds"] <= SCENE_SECONDS[1]:
+        return [f"SCENE_SECONDS shot {i} {s['id']} (4-12)"]
+    return []
+
+
+def figures_problems(i, s, cids):
+    """A scene with no character: anonymous figures seen from behind or in silhouette, or an establishing shot; an
+    establishing shot shows no character (shared with long_plan_check)."""
+    if cids:
+        return [f"ESTABLISHING_WITH_CHARACTERS shot {i} {s['id']}"] if s.get("establishing") else []
+    if s.get("establishing") is True:
+        return []
+    if s.get("figures") == "anonymous":
+        if not ANONYMOUS.search(s.get("prompt", "")):
+            return [f"FIGURES_NOT_ANONYMOUS shot {i} {s['id']} (seen from behind or in silhouette)"]
+        return []
+    return [f"SCENE_WITHOUT_CHARACTERS shot {i} {s['id']} (act it out with the bible's people, anonymous figures from "
+            "behind, or mark an establishing shot)"]
+
+
+def establishing_only(members, span, hold_cap=ESTABLISHING_HOLD):
+    """Words carried by establishing shots alone, longer than they may hold (the Short: 2 s each; the long, whose
+    holds are 4-7 s: any words at all, hold_cap 0)."""
+    return all(m.get("establishing") for m in members) and span > hold_cap * len(members) + 0.5
+
+
+def _check_shots(plan, chars, narration, shots, problems, pending):
+    problems += lines_order_problems(shots, len(narration))
 
     items, carried = sequence(plan)
-    est = [estimate_seconds(x["text"]) for x in items]
+    est = [words(x["text"]) / pace(x) for x in items]
     total = sum(est) + LINE_GAP * (len(items) - 1) + TAIL
     # a line that quotes the KJV is Scripture for the >= 40 % share of our own words, whatever its kind says
     problems += [f"SHORT {p}" for p in publish_episode.short_problems(
@@ -486,22 +883,23 @@ def check(plan, chars=None):
     keeper = chars.get(ch.NARRATOR)
     keeper_seconds, establishing_seconds, keeper_used = 0.0, 0.0, False
     lesson = set()
+    first_prompt = {}
+    problems += plan_period_problems(plan, shots)
+    problems += plan_writing_problems(shots)
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
+        # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,
+        # made a plan rule: one prompt is one picture, so the same prompt twice shows the same shot twice
+        if isinstance(s.get("prompt"), str):
+            if s["prompt"] in first_prompt:
+                problems.append(f"PROMPT_REPEATED shot {i} {s['id']} (the same prompt as {first_prompt[s['prompt']]}: "
+                                "the same picture twice; change the shot size, the action or the angle)")
+            first_prompt.setdefault(s["prompt"], s["id"])
         idx = carried[i]
-        span_words = " ".join(items[k]["text"] for k in idx)
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = words(span_words) / WPS_SLOWEST + gaps
-        if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
-            # review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches
-            # neither, so episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after this plan had passed;
-            # judged at every pace from the normal to the slowest, since the build retimes the measured length
-            miss = talk_reach_gap(span - gaps, slowest - gaps, gaps)
-            if miss is not None:
-                problems.append(f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f}-{slowest:.2f} s from the "
-                                f"normal to the slowest pace: at ~{miss + gaps:.2f} s no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
-                                f"clip is within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)")
+        slowest = sum(words(items[k]["text"]) / slowest_pace(items[k]) for k in idx) + gaps
+        problems += talk_reach_problems(i, s, span, slowest, gaps)
         if s["kind"] == "keeper":
             keeper_used = True
             keeper_seconds += span
@@ -511,10 +909,22 @@ def check(plan, chars=None):
             if any(items[k]["kind"] not in LESSON_KINDS for k in idx):
                 problems.append(f"KEEPER_LINE_KIND shot {i} {s['id']} (the Keeper speaks only the insight and the "
                                 "close)")
-            if slowest > TALK_LINE_MAX:
+            if voiceover(s):
+                covered = vo_covered(slowest, shots, i)
+                if covered > VO_LINE_MAX + 1e-9:
+                    problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{covered:.1f} s with the gap before and "
+                                    f"the gap or tail after, at the slowest pace; one {TALK_CLIP[1]} s clip slowed at "
+                                    f"most {MAX_SLOW} covers {VO_LINE_MAX:.1f} s)")
+                if span < VO_LINE_MIN:
+                    problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (~{span:.1f} s; a Keeper line is at least "
+                                    f"{VO_LINE_MIN:.1f} s, as episode_build lines holds it)")
+                if keeper and not keeper.get("talk_refs"):
+                    problems.append(f"KEEPER_VO_NO_TALK_REF shot {i} {s['id']} (a voice-over Keeper is generated from his "
+                                    "`talk_refs` frame; the front view lost his face 4 of 4, keeper-vo/calibration.json)")
+            elif slowest > TALK_LINE_MAX:
                 problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{slowest:.1f} s at the slowest pace; "
                                 f"Pavo input audio <= {TALK_LINE_MAX:.2f} s)")
-            if span < talk_min(gaps):
+            if not voiceover(s) and span < talk_min(gaps):
                 problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= {talk_min(gaps):.2f} s: it "
                                 "fills a 4 s clip, its gaps never stretched, E95)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
@@ -522,17 +932,7 @@ def check(plan, chars=None):
             if not keeper:
                 problems.append("CHARACTER_UNKNOWN keeper (characters.json)")
                 continue
-            if keeper["look"] not in s.get("prompt", ""):
-                problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: keeper (the prompt must carry its look word for word)")
-            if not any(w in s.get("prompt", "") for w in keeper.get("wardrobe", {}).values()):
-                problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
-            if not SPEAKS.search(s.get("prompt", "")):
-                problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
-            prompt_lc = s.get("prompt", "").lower()
-            if not all(w in prompt_lc for w in KEEPER_POSE) or KEEPER_POSE_OFF.search(prompt_lc):
-                problems.append(f"KEEPER_POSE shot {i} {s['id']} (a talking Keeper faces the lens on a static camera: "
-                                f"{' and '.join(repr(w) for w in KEEPER_POSE)}, no push-in, pull-back, tracking, orbit, lean or bow; those "
-                                "lost the face or the lips, E98)")
+            problems += keeper_prompt_problems(i, s, keeper)
             continue
         lesson.update(k for k in idx if items[k]["kind"] in LESSON_KINDS)
         cids = s.get("characters", [])
@@ -543,36 +943,26 @@ def check(plan, chars=None):
             problems.append(f"KEEPER_IN_SCENE shot {i} {s['id']} (the Keeper narrates; he never acts in the story)")
         if speaking(s):
             problems += _speaker_problems(i, s, chars, span, slowest)
-        problems += ch.problems([{"prompt": s.get("prompt", ""), "characters": [c for c in cids if c != ch.NARRATOR]}],
-                                chars)
+        problems += character_problems(i, cids, s.get("prompt", ""), chars)
         refs = sum(len(chars.get(c, {}).get("refs") or []) for c in cids if c != ch.NARRATOR)
         if refs > ch.MAX_REFS:
             problems.append(f"REFERENCES_OVER_{ch.MAX_REFS} shot {i} {s['id']} ({refs} approved images)")
         if talking(s):
             continue   # its clip's length comes from its line
-        if type(s.get("seconds")) is not int or not SCENE_SECONDS[0] <= s["seconds"] <= SCENE_SECONDS[1]:
-            problems.append(f"SCENE_SECONDS shot {i} {s['id']} (4-12)")
+        problems += scene_seconds_problems(i, s)
         if speaking(s):
             continue   # God's voice-over shot: no one on screen (checked above)
-        if not cids:
-            if s.get("establishing") is True:
-                establishing_seconds += ESTABLISHING_HOLD
-            elif s.get("figures") == "anonymous":
-                if not ANONYMOUS.search(s.get("prompt", "")):
-                    problems.append(f"FIGURES_NOT_ANONYMOUS shot {i} {s['id']} (seen from behind or in silhouette)")
-            else:
-                problems.append(f"SCENE_WITHOUT_CHARACTERS shot {i} {s['id']} (act it out with the bible's people, "
-                                "anonymous figures from behind, or mark a <= 2 s establishing shot)")
-        elif s.get("establishing"):
-            problems.append(f"ESTABLISHING_WITH_CHARACTERS shot {i} {s['id']}")
+        if not cids and s.get("establishing") is True:
+            establishing_seconds += ESTABLISHING_HOLD
+        problems += figures_problems(i, s, cids)
 
     # Enough footage for every run of scenes (establishing shots hold 2 s; a clip may be slowed MAX_SLOW at most)
     for a, b, idx in groups(shots, carried):
-        if talking(shots[a]):
-            continue
+        if talking(shots[a]) or voiceover(shots[a]):
+            continue   # a voice-over Keeper's clip length comes from his line (vo_clip_seconds)
         span = sum(est[k] for k in idx) + LINE_GAP * len(idx)
         members = [shots[j] for j in range(a, b + 1)]
-        if all(m.get("establishing") for m in members) and span > ESTABLISHING_HOLD * len(members) + 0.5:
+        if establishing_only(members, span):
             problems.append(f"ESTABLISHING_ONLY shot {a} {shots[a]['id']} (~{span:.1f} s of words over landscape)")
         footage = sum(ESTABLISHING_HOLD if m.get("establishing") else m.get("seconds") or 0 for m in members)
         if footage * MAX_SLOW < span:
@@ -586,6 +976,14 @@ def check(plan, chars=None):
     est_share = establishing_seconds / total if total else 0
     if est_share > ESTABLISHING_SHARE_MAX:
         problems.append(f"ESTABLISHING_SHARE {est_share:.2f} > {ESTABLISHING_SHARE_MAX}")
+    if all(p.split()[0] in ("SPEAKER_NOT_APPROVED", "CHARACTER_NOT_APPROVED") for p in problems):
+        # E106: the build's own refusals, predicted here (also while a character awaits approval) with the build's
+        # own functions: episode_build.predict (retime, talking records, shares, length, compose cuts and holds) on
+        # this estimate, and reference_problems (the kept reference records and images, counted as the request
+        # sends them). A plan that passes is not refused later by lines, refs or compose for a reason it holds.
+        import episode_build
+        problems += [f"BUILD {p}" for p in episode_build.predict(plan, est)[0]]
+        problems += [f"BUILD {p}" for p in episode_build.reference_problems(plan, chars)]
     if keeper_used and keeper and (keeper.get("status") != "APPROVED" or not keeper.get("refs")):
         pending.append(f"CHARACTER_PENDING keeper ({keeper.get('status')}): Claude reviews his reference sheet and "
                        "sets APPROVED with kept refs, by PR, before episode.yml can generate")
@@ -596,11 +994,29 @@ def check(plan, chars=None):
     return {"problems": problems, "pending": pending, "estimate": estimate}
 
 
+def path_problems(path, plan):
+    """E106: episode.yml takes a plan only at plans/<episode>.json with that same `episode` (PLAN_PATH_REFUSED,
+    PLAN_EPISODE_MISMATCH in its first step); checked here so a plan is never dispatched to be refused there."""
+    try:
+        name = Path(path).resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        name = str(path)
+    m = PLAN_PATH.fullmatch(name)
+    if not m:
+        return [f"PLAN_PATH {name} (episode.yml takes migration/production/bible/plans/<episode-id>.json)"]
+    if plan.get("episode") != m.group(1):
+        return [f"PLAN_EPISODE_MISMATCH {name} (`episode` must be {m.group(1)})"]
+    return []
+
+
 def main(argv):
     args = [a for a in argv[1:] if a != "--strict"]
     if len(args) != 1:
         raise SystemExit(__doc__)
-    result = check(json.loads(Path(args[0]).read_text()))
+    plan = json.loads(Path(args[0]).read_text())
+    result = check(plan)
+    if "--strict" in argv:   # strict = ready to dispatch: the path episode.yml will take (a draft may live anywhere)
+        result["problems"] = path_problems(args[0], plan) + result["problems"]
     print(json.dumps(dict(plan=args[0], **result), indent=1))
     if result["problems"] or ("--strict" in argv and result["pending"]):
         return 1

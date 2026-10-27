@@ -4,13 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "plan (read-only list), apply (set the reviewed plan videos to private) or unschedule (hold-plan.json - private, no publishAt)"
+        description: "plan (read-only list), apply (set the reviewed plan videos to private), unschedule (hold-plan.json - private, no publishAt), captions-audit (read-only: every caption track and its status) or captions-repair (re-upload the tracks of the reviewed captions-repair-plan.json)"
         required: true
         default: plan
       max_changes:
         description: maximum privacy updates in this run (50 Data API units each)
         required: false
         default: '40'
+      captions_scope:
+        description: "captions-audit only: engine (the ledger's videos), english (every upload not in Portuguese) or all"
+        required: false
+        default: engine
+      captions_units_max:
+        description: "captions-audit only: Data API units the audit may spend (captions.list is 50 a video)"
+        required: false
+        default: '3000'
 permissions:
   contents: write
 concurrency:
@@ -20,10 +28,12 @@ jobs:
   privacy:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 30   # captions-repair waits up to ~4 min per track for it to serve (E107)
     env:
       MODE: ${{ inputs.mode || 'apply' }}
       MAX_CHANGES: ${{ inputs.max_changes || '60' }}
+      CAPTIONS_SCOPE: ${{ inputs.captions_scope || 'engine' }}
+      CAPTIONS_UNITS_MAX: ${{ inputs.captions_units_max || '3000' }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Plan or apply
@@ -38,6 +48,13 @@ jobs:
                    "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py apply migration/channel/privacy-plan.json "migration/channel/privacy-receipt-$GITHUB_RUN_ID.json" ;;
             unschedule) test -f migration/channel/hold-plan.json
                    "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py unschedule migration/channel/hold-plan.json "migration/channel/unschedule-receipt-$GITHUB_RUN_ID.json" ;;
+            # E107: read-only (GET only); the receipt holds ids, statuses and counts, never the token
+            captions-audit) "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/captions_audit.py audit \
+                   "migration/channel/captions-audit-$GITHUB_RUN_ID.json" migration/publish/ledger.json "$CAPTIONS_SCOPE" "$CAPTIONS_UNITS_MAX" ;;
+            # E107: writes only the tracks a reviewed plan lists (merged by PR from an audit); never on a clock
+            captions-repair) test -f migration/channel/captions-repair-plan.json
+                   "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/captions_audit.py repair migration/channel/captions-repair-plan.json \
+                   "migration/channel/captions-repair-receipt-$GITHUB_RUN_ID.json" migration/publish/ledger.json ;;
             *) exit 1 ;;
           esac
       - name: Commit plan or receipt
@@ -45,6 +62,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add migration/channel
+          git add migration/channel migration/publish/ledger.json   # captions-repair updates the ledger (E107)
           git commit -q -m "Channel privacy $MODE (run $GITHUB_RUN_ID)" || exit 0
           git pull --rebase -q origin main && git push -q origin HEAD:main

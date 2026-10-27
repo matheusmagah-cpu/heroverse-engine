@@ -427,3 +427,84 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   daily vidIQ mining moves to the long's package (title, thumbnail) with more weak contrasts.
 - **Execution today.** E93 (Pavo outage waited out, resume), E94 (failure evidence), E95 (talking-clip binding: clip
   length ~ speech, prompt binding, speaking reference) in progress; heartbeat driven by the hourly clock.
+
+## Owner decision: prayer videos stop; the long cadence counts Bible-story longs only (2026-10-26)
+- **Owner.** "Stop the prayer videos; the channel is going in another direction." And: the long must stand on its own,
+  Shorts traffic only a plus, following its own registered structure, `structures/bible-story-long.json`.
+- **Kind.** A direction change, not a failure: no `ERRORS.json` entry for it (the review of #415 found two real bugs, E100 and E101). It replaces the 2026-10-25 "what stays" rule
+  (prayer longs already made keep their slots).
+- **Stopped at the source (code).** `render_queue.story_pilot` (archetype `bible-story-long`) is the one test of a long:
+  a prayer pilot no longer enters `due()` (so no images, preview, render, Claude review, approval, publish or Shorts
+  from the heartbeat, runner, engine fallback or reconcile), is never reported stale for rescheduling, gets no
+  first-comment retries, and `pending_shorts.py` publishes no Short of it. The publication gate refuses it too:
+  `prepublish_gate.py` has a `format` row (FAIL `NOT_STORY_LONG`), and `publication_binding.py`, which publish.yml
+  runs before any upload or resume, refuses `NOT_STORY_LONG` even with an older approval and a PASS gate.
+- **Long cadence rewritten.** The old runway demanded a long at every 00:00 and 10:00 UTC slot (two prayer longs a
+  day, never a day without one). `ops/runway.py` now checks one Bible-story long every 2 days at 10:00 UTC from 28/10
+  (= `production/bible/arcs.json`). One stage rule (`runway.long_stage`, also used by the daily report): uploaded,
+  approved, rendered, then "script" only when the full `script_check` passes, including the structure's gate
+  (`script.gate`, `script_check.structure_problems`: 14-18 min, an APPROVED character or God's voice speaks the
+  conflict in the first 30 s, >= 6 re-hooks, one climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in
+  the cold open, no burned captions), else "script-fail" with its problems. A prayer pilot still scheduled ahead
+  alerts `PRAYER_LONG_SCHEDULED`. The daily report's runway alert asks for Bible-story long scripts ("LONG SCRIPT
+  RUNWAY"), not pilots.
+- **Already uploaded.** pilot-008 (`8heTdP0LllM`, 27/10 00:00) and pilot-014 (`53Xysf9x46c`, 26/10 10:00) are listed in
+  `channel/hold-plan.json` for `channel-privacy.yml` mode `unschedule` (private, publishAt cleared, nothing deleted,
+  the receipt keeps the old publishAt for the undo). A video already public is skipped, never hidden, and named in
+  the log (`HELD_VIDEO_ALREADY_PUBLIC`, an Actions warning) and in the receipt (`already_public_not_changed`). It runs
+  only when dispatched.
+- **Measured.** The daily report's long runway and the arc funnel; pilot-015 is the first long on this rule.
+
+## Owner decision: story QA v2, no burned captions on the long (2026-10-26)
+- **Owner.** "Nova régua, sem legenda." The Bible-story long carries no captions burned into the picture (the mined
+  structure: burned captions read anti, winners 1/7, weak 2/3; `script.gate.burned_captions` false), and the frozen
+  story QA v1 demanded burned-caption coverage >= 0.95, so only a new frozen version could change it.
+- **Done.** `production/qa_criteria_story_v2.json`, frozen before the first Bible-story long render: v1 unchanged
+  except the caption rows, replaced by an uploaded .srt track (YouTube closed captions) held to the same numbers
+  (coverage >= 0.95, cue median 1.5-5 s, <= 44 characters, <= 7 words). `qa_criteria_story_v1.json` stays frozen and
+  byte-identical (sha256 5dcf63f9...); `bible/test_long_plan_check.py` asserts both. Its sha256 is pinned in
+  `bible/long_plan_check.py`; `qa_pilot.py`, `render_queue.py` and `prepublish_gate.py` learn v2 with the long's
+  build (publishing code untouched here).
+- **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
+- **Still open for the owner** (`production/bible/LONG_DESIGN.md` section 4): v2 keeps v1's no figure on screen,
+  >= 40 % real licensed footage, <= 55 % AI video and a 4-7 s title card first; the acted long with the Keeper on
+  screen meets none of them, so its first render needs one more frozen version decided by the owner. Also: the arc-1
+  long's scope (Genesis 1-7, as asked, vs arcs.json arc-01 Genesis 1-3) and the 1440p upscaling cost (~1,300-1,600
+  runner-minutes a long). All three decided the same day (next two entries).
+
+## Owner decision: story QA v3 for the acted Bible long; the long follows arcs.json (2026-10-26)
+- **Owner.** "Sim, régua nova": a new frozen `production/qa_criteria_story_v3.json` for the acted Bible long. It is v2
+  with only the three conflicting rules replaced by the structure's own: (1) figures: approved characters on screen
+  are allowed (v2: none); (2) AI share: 100 % Pavo is allowed, provided each clip passes clip_check and every talking
+  clip passes lipsync_check (v2: >= 40 % real licensed footage, <= 55 % Pavo); (3) the first shot: the acted
+  cold-open conflict replaces the 4-7 s title card. Everything else is v2's, unchanged: audio, loudness, pace, the
+  4-7 s holds, the .srt track, the 9.5 floor and the Claude review. Frozen before any render; v1 and v2 stay
+  byte-identical (`bible/test_long_plan_check.py` asserts all three).
+- **The exact rows (v2 -> v3, `grammar` only; v3's `basis` points to this entry).** This relaxes three v2 rows, by the
+  owner's explicit decision of 2026-10-26 ("Sim, régua nova", relayed and recorded by the coordinator):
+  | v2 row | v3 row |
+  |---|---|
+  | `title_card_seconds` [4.0, 7.0] | `first_shot`: the acted cold-open conflict, spoken from 0 s, never the Keeper |
+  | `figure_present_fraction_max` 0.0 | `figures_allowed`: characters.json APPROVED only (look word for word, approved references), the Keeper only in his shots, anonymous figures from behind |
+  | `footage_picture_share_min` 0.4, `footage_picture_share_counts`, `ai_video_picture_share_max` 0.55 | `ai_video_picture_share_max` 1.0 and `ai_video_clip_checks`: clip_check on every Pavo clip, lipsync_check on every talking clip, the face check on God's voice-over clips |
+
+  Every other key of v3 equals v2's (version, frozen_at_utc and basis aside); the test refuses any other difference.
+- **Not yet readable (build blocker).** `qa_pilot.py` and `prepublish_gate.py` index v1's keys directly and the gate
+  knows only `story-qa-criteria-v1`; no renderer or gate may point at v2/v3 until they read the new keys (slice 3,
+  guarded by `bible/test_long_plan_check.py` NoRendererReadsTheNewQaYet).
+- **Done.** `long_plan_check.py` checks the plan against v3 (sha256 pinned): the QA_CONFLICT_* owner rows of v2 became
+  checks (the cold open, approved characters only with DRAFT ones pending, every talking speaker a human face:
+  TALKING_WITHOUT_A_FACE, so the serpent stays silent and the Keeper narrates its words).
+- **Scope.** The coordinator's "Genesis 1 to 7" was a mistake: the long follows `bible/arcs.json`. arc-01 is Genesis
+  1-3, Shorts 1-4, one complete story; `bible/plans/arc-01-long.json` is rewritten for that scope (Adam, Eve, the
+  serpent silent, God as a voice, the Keeper), no Cain or Abel for now. It passes `long_plan_check.py --strict`.
+- **Kind.** Rule decisions, not failures: no `ERRORS.json` entry.
+
+## Owner decision: the repository stays public; optimise the long for wall-clock time (2026-10-26)
+- **Owner.** "Manter público." The repository is public, so GitHub's standard hosted runners cost nothing: Actions
+  minutes are not the constraint for the long. Parallel jobs (a matrix for the 1440p Real-ESRGAN upscale) and
+  submit-and-leave for Pavo are fine; the long is optimised for wall-clock time. (`ops/minutes.py` still reports
+  minutes against its 7,000-minute paid budget; it should be read as a usage report, not a bill.)
+- **Measured the same day** (`evidence/pavo/20261026/long-16x9-and-concurrency.json`, two direct 0-credit Pavo
+  requests from a Claude session, no Actions run): a 16:9 request returns 1280x720 at 24 fps, and two submissions in a
+  row ran at the same time (both done within 7 min of the first, the second first), so submit-and-leave works.

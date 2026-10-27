@@ -1,8 +1,20 @@
 {
  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
- "reason": "owner publication hold 2026-10-19",
+ "reason": "owner, 2026-10-26: \"stop the prayer videos; the channel is going in another direction.\" The prayer longs already uploaded and scheduled stay private with no publishAt (nothing deleted; the receipt keeps each old publishAt for the undo). A video already public is never changed by this plan.",
+ "videos": {
+  "8heTdP0LllM": "pilot-008, Night Prayer with Psalm 23, scheduled 2026-10-27T00:00:00Z (publish/ledger.json)",
+  "53Xysf9x46c": "pilot-014, Morning Prayer for Your Family, scheduled 2026-10-26T10:00:00Z (publish/ledger.json)"
+ },
  "to_unschedule": [
-  "Iegu_RD_wbE",
-  "SsgCGkM6knQ"
- ]
+  "8heTdP0LllM",
+  "53Xysf9x46c"
+ ],
+ "previous": {
+  "reason": "owner publication hold 2026-10-19",
+  "to_unschedule": [
+   "Iegu_RD_wbE",
+   "SsgCGkM6knQ"
+  ],
+  "receipt": "unschedule-receipt-39272411835.json"
+ }
 }

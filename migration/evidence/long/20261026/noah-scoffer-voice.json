@@ -1,0 +1,169 @@
+{
+ "version": "voice-pace-measure-v1",
+ "date": "2026-10-26",
+ "how": "Voiced locally in a Claude session, no Actions run, 0 credits: kokoro-onnx 0.4.9, onnxruntime 1.20.1 (episode.yml's pins), the hash-pinned Kokoro v1.0 assets (kokoro-v1.0.fp16.onnx f3a290d3..., voices-v1.0.bin bca610b8..., verify_public_voice_asset.ASSETS) through pilot_render.py prepare + voice, each line one segment in its speaker's characters.json voice at speed 1.0. A line is its sentences from the first word's start to the last word's end in timeline.json (the arc-1 method); a voice's pace is its words over its seconds; words are plan_check.words (split on spaces).",
+ "calibration": "Adam's and Eve's three final arc-1 lines in the same run: 3.798 and 3.566 words/s, the arc-1 measurement's second run to the third decimal (evidence/long/20261026/arc-01-voice.json), so the method and the model are the same.",
+ "lines_chosen": "Noah: three KJV lines (Genesis 9:25-27) and three short dramatic lines of his warning; the scoffer: six mocking and pleading lines as a Genesis 6-7 Short would give him. 11-16 words each, the talking-line range.",
+ "voices": {
+  "eve": {
+   "voice_id": "af_heart",
+   "speed": 1.0
+  },
+  "adam": {
+   "voice_id": "am_fenrir",
+   "speed": 1.0
+  },
+  "noah": {
+   "voice_id": "bm_george",
+   "speed": 1.0
+  },
+  "scoffer": {
+   "voice_id": "am_puck",
+   "speed": 1.0
+  }
+ },
+ "pace_by_voice_words_per_s": {
+  "eve": {
+   "lines": 3,
+   "pace": 3.566,
+   "line_min": 2.886,
+   "line_max": 4.087,
+   "each": [
+    {
+     "line": "He says you will not die. He says your eyes will be opened, and you will see.",
+     "words": 17,
+     "seconds": 4.319,
+     "pace": 3.936
+    },
+    {
+     "line": "God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+     "words": 17,
+     "seconds": 4.16,
+     "pace": 4.087
+    },
+    {
+     "line": "It was the serpent. He twisted every word. The serpent beguiled me, and I did eat.",
+     "words": 16,
+     "seconds": 5.544,
+     "pace": 2.886
+    }
+   ]
+  },
+  "adam": {
+   "lines": 3,
+   "pace": 3.798,
+   "line_min": 3.5,
+   "line_max": 4.086,
+   "each": [
+    {
+     "line": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman,",
+     "words": 17,
+     "seconds": 4.404,
+     "pace": 3.86
+    },
+    {
+     "line": "I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.",
+     "words": 19,
+     "seconds": 5.428,
+     "pace": 3.5
+    },
+    {
+     "line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+     "words": 19,
+     "seconds": 4.65,
+     "pace": 4.086
+    }
+   ]
+  },
+  "noah": {
+   "lines": 6,
+   "pace": 2.97,
+   "line_min": 2.599,
+   "line_max": 3.371,
+   "each": [
+    {
+     "line": "The Lord hath commanded it. The flood is coming, and the door is still open.",
+     "words": 15,
+     "seconds": 4.98,
+     "pace": 3.012
+    },
+    {
+     "line": "Come into the ark, all of you. There is room for every one who will turn.",
+     "words": 16,
+     "seconds": 4.746,
+     "pace": 3.371
+    },
+    {
+     "line": "Blessed be the Lord God of Shem; and Canaan shall be his servant.",
+     "words": 13,
+     "seconds": 4.638,
+     "pace": 2.803
+    },
+    {
+     "line": "I have built this ark for a hundred years. Every board is a warning to you.",
+     "words": 16,
+     "seconds": 5.279,
+     "pace": 3.031
+    },
+    {
+     "line": "Cursed be Canaan; a servant of servants shall he be unto his brethren.",
+     "words": 13,
+     "seconds": 5.001,
+     "pace": 2.599
+    },
+    {
+     "line": "God shall enlarge Japheth, and he shall dwell in the tents of Shem.",
+     "words": 13,
+     "seconds": 4.31,
+     "pace": 3.016
+    }
+   ]
+  },
+  "scoffer": {
+   "lines": 6,
+   "pace": 3.425,
+   "line_min": 2.835,
+   "line_max": 4.065,
+   "each": [
+    {
+     "line": "Rain? Look up, old man. There has never been a cloud like that in your sky.",
+     "words": 16,
+     "seconds": 4.477,
+     "pace": 3.574
+    },
+    {
+     "line": "A boat in the middle of dry land! Noah, you have lost your mind.",
+     "words": 14,
+     "seconds": 3.444,
+     "pace": 4.065
+    },
+    {
+     "line": "Where is your flood? We eat, we drink, we marry, and nothing ever changes.",
+     "words": 14,
+     "seconds": 4.233,
+     "pace": 3.307
+    },
+    {
+     "line": "Your God is late again. Go on, preach to the animals; they will listen.",
+     "words": 14,
+     "seconds": 4.222,
+     "pace": 3.316
+    },
+    {
+     "line": "Open the door, Noah! The water is rising! Open the door!",
+     "words": 11,
+     "seconds": 3.88,
+     "pace": 2.835
+    },
+    {
+     "line": "We laughed at you for years. Let us in. Please, let us in.",
+     "words": 13,
+     "seconds": 3.688,
+     "pace": 3.525
+    }
+   ]
+  }
+ },
+ "used_by": "migration/production/bible/voice_pace.py VOICE_PACE noah 2.970, scoffer 3.425 (plan_check and long_plan_check). Adam and Eve keep the arc-1 first run's 3.975 and 3.732 (the faster: a line is judged from that pace to SLOW_RATIO of it).",
+ "reading": "Noah (bm_george) speaks near the narrator (2.97 vs 2.874); the scoffer (am_puck) ~19 % faster than the narrator. At plan_check.WPS 2.75 a 12-word scoffer line estimated 4.36 s would measure ~3.50 s, inside the 4 s clip only by the retime."
+}

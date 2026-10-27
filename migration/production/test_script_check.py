@@ -377,6 +377,130 @@ class StoryRules(unittest.TestCase):
         self.assertFalse([p for p in out if "PRAYER" in p], out)
 
 
+def structured_story(**over):
+    """A story long on the registered beat map (structures/bible-story-long.json): ~16 min, the serpent speaks the
+    conflict in the cold open, the Keeper from 30 s, 6 chapters with a re-hook each, the climax at ~0.7."""
+    segs = [{"id": "hook", "text": "Before you judge Eve, hear what the serpent really said.", "pause_after": 1.0},
+            {"id": "peak", "text": "Yea, hath God said, Ye shall not eat of every tree of the garden?",
+             "reference": "Genesis 3:1 (KJV)", "speaker": "serpent", "conflict": True, "pause_after": 1.0},
+            {"id": "roadmap", "text": "Today you hear creation, the garden, the serpent and the gate. " + "word " * 25,
+             "pause_after": 3.0},
+            {"id": "keeper-promise", "keeper": True, "speaker": "keeper",
+             "text": "word " * 30, "pause_after": 1.0}]
+    for k in range(1, 7):
+        segs += [{"id": f"rehook-{k}", "text": "Keep listening, the next part changes everything.", "pause_after": 1.0},
+                 {"id": f"chapter-{k}", "text": "word " * 300, "pause_after": 1.0}]
+        if k == 5:
+            segs.append({"id": "climax", "climax": True, "text": "word " * 40, "pause_after": 1.0})
+    segs += [{"id": "reflection", "keeper": True, "text": "word " * 120, "pause_after": 1.0},
+             {"id": "prayer-close", "text": "Lord, thank you. Amen.", "pause_after": 1.0},
+             {"id": "cta", "keeper": True, "text": "What would you have answered? The next story is Cain and Abel.",
+              "pause_after": 1.0}]
+    s = {"archetype": sc.STORY, "segments": segs, "burned_captions": False}
+    s.update(over)
+    return s
+
+
+class StoryStructure(unittest.TestCase):
+    """Owner, 2026-10-26: prayer longs stop; the Bible-story long follows structures/bible-story-long.json. Each
+    target of its gate fails a script that misses it."""
+    def segs(self, fn):
+        return [fn(dict(x)) for x in structured_story()["segments"]]
+
+    def test_a_long_on_the_beat_map_passes(self):
+        self.assertEqual(sc.structure_problems(structured_story()), [])
+        starts, total = sc.timeline(structured_story())
+        self.assertTrue(14 <= total / 60 <= 18, total / 60)
+        self.assertTrue(0.6 <= starts["climax"] / total <= 0.85, starts["climax"] / total)
+
+    def test_targets_come_from_the_registered_structure(self):
+        g = sc.story_gate()
+        self.assertEqual((g["length_min"], g["cold_open_s"], g["rehooks_min"], g["climax_at"], g["keeper_share_max"],
+                          g["keeper_in_cold_open"], g["burned_captions"]),
+                         ([14, 18], 30, 6, [0.6, 0.85], 0.25, False, False))
+        st = json.loads(sc.STRUCTURE.read_text())
+        self.assertEqual(g["length_min"], st["script"]["length_min"])
+        beats = {b["beat"]: b for b in st["script"]["beats"]}
+        self.assertEqual(g["cold_open_s"], beats["cold_open"]["at_s"][1])
+        self.assertEqual(g["climax_at"], beats["climax"]["at"])
+
+    def test_length_outside_14_18_fails(self):
+        short = self.segs(lambda x: dict(x, text="word " * 150) if x["id"].startswith("chapter-") else x)
+        self.assertTrue(any(p.startswith("STORY_LENGTH") for p in sc.structure_problems(structured_story(segments=short))))
+        long_ = self.segs(lambda x: dict(x, text="word " * 420) if x["id"].startswith("chapter-") else x)
+        self.assertTrue(any(p.startswith("STORY_LENGTH") for p in sc.structure_problems(structured_story(segments=long_))))
+
+    def test_cold_open_without_a_spoken_conflict_fails(self):
+        for change in (lambda x: {k: v for k, v in x.items() if k != "conflict"},
+                       lambda x: {k: v for k, v in x.items() if k != "speaker"},
+                       lambda x: dict(x, speaker="keeper")):
+            segs = self.segs(lambda x: change(x) if x["id"] == "peak" else x)
+            out = sc.structure_problems(structured_story(segments=segs))
+            self.assertTrue(any(p.startswith("STORY_COLD_OPEN_CONFLICT") for p in out), out)
+
+    def test_conflict_speaker_is_an_approved_character_or_god(self):
+        # review of #415: "narrator", the Keeper, an unknown name or a DRAFT character never speaks the conflict
+        for speaker, ok in (("serpent", True), ("god", True), ("eve", True), ("narrator", False), ("keeper", False),
+                            ("goliath", False), ("noah", True), ("scoffer", False)):
+            segs = self.segs(lambda x: dict(x, speaker=speaker) if x["id"] == "peak" else x)
+            out = sc.structure_problems(structured_story(segments=segs))
+            self.assertEqual(not any(p.startswith("STORY_COLD_OPEN_CONFLICT") for p in out), ok, (speaker, out))
+
+    def test_story_gate_is_read_once(self):
+        # review of #415: the structure file is cached, not re-read for every pilot
+        self.assertIs(sc.story_gate(), sc.story_gate())
+
+    def test_check_feeds_the_same_timeline_to_every_story_rule(self):
+        # review of #415: check() built its own starts without the v4 sentence breath that timeline() and the
+        # length use; a roadmap at ~28 s by words alone starts at ~34 s with it, which is late (R13: 30 s)
+        def to_story(s, d):
+            s.update(story_script())
+            s["segments"][1] = dict(s["segments"][1], text="Go. " * 50)
+        with tempfile.TemporaryDirectory() as t:
+            problems = sc.check(make(t, to_story))[0]
+        self.assertIn(f"ROADMAP_MISSING_OR_LATE (R13: within {sc.ROADMAP_MAX_S} s)", problems)
+
+    def test_keeper_missing_in_the_cold_open_or_over_25_percent_fails(self):
+        none = self.segs(lambda x: {k: v for k, v in x.items() if k not in ("keeper", "speaker")} if x.get("keeper") else x)
+        self.assertIn("STORY_KEEPER_MISSING (the Keeper appears in every long)",
+                      sc.structure_problems(structured_story(segments=none)))
+        early = self.segs(lambda x: dict(x, keeper=True) if x["id"] == "roadmap" else x)
+        self.assertTrue(any(p.startswith("STORY_KEEPER_IN_COLD_OPEN ['roadmap']")
+                            for p in sc.structure_problems(structured_story(segments=early))))
+        heavy = self.segs(lambda x: dict(x, keeper=True) if x["id"] in ("chapter-1", "chapter-2") else x)
+        self.assertTrue(any(p.startswith("STORY_KEEPER_SHARE") for p in sc.structure_problems(structured_story(segments=heavy))))
+
+    def test_fewer_than_6_rehooks_fails(self):
+        segs = [x for x in structured_story()["segments"] if x["id"] != "rehook-6"]
+        self.assertIn("STORY_REHOOKS 5 < 6 (a re-hook at every chapter end)", sc.structure_problems(structured_story(segments=segs)))
+
+    def test_climax_missing_doubled_or_out_of_place_fails(self):
+        none = self.segs(lambda x: {k: v for k, v in x.items() if k != "climax"})
+        self.assertTrue(any(p.startswith("STORY_CLIMAX_COUNT 0") for p in sc.structure_problems(structured_story(segments=none))))
+        two = self.segs(lambda x: dict(x, climax=True) if x["id"] == "chapter-2" else x)
+        self.assertTrue(any(p.startswith("STORY_CLIMAX_COUNT 2") for p in sc.structure_problems(structured_story(segments=two))))
+        early = self.segs(lambda x: {k: v for k, v in x.items() if k != "climax"} if x["id"] == "climax" else
+                          (dict(x, climax=True) if x["id"] == "chapter-2" else x))
+        self.assertTrue(any(p.startswith("STORY_CLIMAX_POSITION") for p in sc.structure_problems(structured_story(segments=early))))
+
+    def test_burned_captions_fail(self):
+        for value in (True, None):
+            s = structured_story(burned_captions=value)
+            if value is None:
+                del s["burned_captions"]
+            self.assertTrue(any(p.startswith("STORY_BURNED_CAPTIONS") for p in sc.structure_problems(s)))
+
+    def test_check_runs_the_structure_on_a_story_pilot(self):
+        def to_story(s, d):
+            s.update(story_script(footage=[]))
+        with tempfile.TemporaryDirectory() as t:
+            problems = sc.check(make(t, to_story))[0]
+        for row in ("STORY_LENGTH", "STORY_COLD_OPEN_CONFLICT", "STORY_KEEPER_MISSING", "STORY_REHOOKS",
+                    "STORY_CLIMAX_COUNT", "STORY_BURNED_CAPTIONS"):
+            self.assertTrue(any(p.startswith(row) for p in problems), (row, problems))
+        self.assertFalse([p for p in problems if p.startswith("LENGTH ")], problems)   # one length rule per format
+
+
 class KjvQuotation(unittest.TestCase):
     """Narrated Scripture is the KJV word for word; our own lead-ins and reflection are left alone."""
     PASS = [  # exact, partial, lead-ins, our own words after, ellipsis, chapters, ranges, lists

@@ -1,0 +1,102 @@
+{
+ "version": "story-qa-criteria-v3",
+ "frozen_at_utc": "2026-10-26T12:30:00Z",
+ "basis": "Owner, 2026-10-26: 'Sim, régua nova'. The acted Bible-story long (production/bible/LONG_DESIGN.md: the Keeper narrating on screen, the arc's approved characters acting, every shot a Pavo clip, the cold open spoken at 0 s) is measured by story-qa-criteria-v2 with only its three conflicting rules replaced by the registered structure's own (structures/bible-story-long.json): figures (v2: none on screen; here approved characters and the Keeper on screen), the AI share (v2: >= 40 % real licensed footage and <= 55 % Pavo; here up to 100 % Pavo, each clip passing clip_check and each talking clip lipsync_check) and the first shot (v2: a 4-7 s title card; here the acted cold-open conflict). Every other row is v2's, unchanged: technical, loudness, speech, pace, rights, 4-7 s holds, the .srt track, the 9.5 floor and the Claude review. v1 and v2 stay frozen and unchanged. Frozen before the first acted Bible-story long render. The owner's decision and the exact rows replaced: migration/strategy/DECISIONS.md, 'Owner decision: story QA v3 for the acted Bible long; the long follows arcs.json (2026-10-26)'.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "2560x1440, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "duration_seconds_min": 601,
+  "integrated_lufs": [
+   -16.0,
+   -14.0
+  ],
+  "true_peak_dbtp_max": -1.0,
+  "frame": [
+   2560,
+   1440
+  ]
+ },
+ "speech": {
+  "speech_presence_min": 0.85,
+  "singing_presence_max": 0.0,
+  "wer_vs_script_max": 0.1,
+  "accepted_words_per_minute": [
+   115,
+   165
+  ],
+  "first_word_onset_seconds_max": 1.5,
+  "hook_second_person_within_seconds": 8
+ },
+ "rights": {
+  "every_image_generated_by_allowed_open_licence_model_with_revision": true,
+  "allowed_model_licences": [
+   "openrail++",
+   "openrail++-m",
+   "creativeml-openrail-m",
+   "apache-2.0",
+   "mit"
+  ],
+  "music_owned_generator_with_hash": true,
+  "voice_model_hash_pinned": true,
+  "script_original_with_public_domain_scripture_only": true,
+  "footage_licensed_vetted_and_credited": true,
+  "allowed_footage_licences": [
+   "Pexels License",
+   "Pixabay Content License",
+   "CC0",
+   "Public domain",
+   "CC BY 2.0",
+   "CC BY 2.5",
+   "CC BY 3.0",
+   "CC BY 4.0",
+   "Pavo generated (owner-owned)"
+  ],
+  "footage_vetting_required": "APPROVED",
+  "ai_video": {
+   "source": "pavo",
+   "licence": "Pavo generated (owner-owned)",
+   "model": "agnes-video-new-flash",
+   "upscaler": "Real-ESRGAN general x4v3 (bsd-3-clause) to 2560x1440",
+   "audio": "removed",
+   "vetting_required": "APPROVED",
+   "disclosure": "altered or synthetic content on, AI visuals named in the description"
+  }
+ },
+ "failure_policy": "Any FAIL blocks approval; criteria are not edited after results to pass.",
+ "not_claimed": [
+  "Audience response, CTR, retention or revenue",
+  "Perceptual approval by a human",
+  "Publication authority"
+ ],
+ "grammar": {
+  "first_shot": "the acted cold-open conflict: a scene whose spoken line (a character's or God's voice-over) starts within first_word_onset_seconds_max, no title card, never the Keeper (structure script.gate cold_open_s, keeper_in_cold_open false)",
+  "figures_allowed": "characters.json entries with status APPROVED, each prompt carrying the look word for word and its approved references (the Keeper only in his own shots), plus anonymous figures seen from behind or in silhouette; no other person, and God never as a figure",
+  "every_scene_in_motion": true,
+  "scene_seconds": [
+   4.0,
+   7.0
+  ],
+  "crossfade_seconds_max": 1.0,
+  "image_repeat_gap_seconds_min": 300.0,
+  "burned_captions": false,
+  "caption_track": "uploaded .srt (YouTube closed captions): the script's words on their voice timings",
+  "srt_coverage_of_speech_min": 0.95,
+  "srt_cue_seconds_median": [
+   1.5,
+   5.0
+  ],
+  "srt_cue_chars_max": 44,
+  "srt_cue_words_max": 7,
+  "scripture_card_only_while_read": true,
+  "cta_mid_video_max": 2,
+  "cta_seconds_max": 10.0,
+  "cta_first_start_seconds_min": 45.0,
+  "persistent_overlays_allowed": [
+   "brand"
+  ],
+  "ai_video_picture_share_max": 1.0,
+  "ai_video_clip_checks": "every Pavo clip passes clip_check.py; every talking clip (the Keeper, a character speaking) passes lipsync_check.py; God's voice-over clips pass lipsync_check.py --faces with no face"
+ },
+ "perceptual_review_required_before_approval": "Watched review (long_review.watch); owner floor: overall >= 9.5 for new uploads.",
+ "frozen_before_first_story_render": true
+}

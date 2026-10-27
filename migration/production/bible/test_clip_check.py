@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Offline: a clip that opens on black, or is low resolution or low frame rate, is flagged before the compose."""
+"""Offline: a clip that opens on black, is low resolution or low frame rate, or carries letterbox bars inside the
+frame (E109), is flagged before the compose."""
 from pathlib import Path
 import subprocess
 import sys
@@ -8,6 +9,10 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import clip_check as cc  # noqa: E402
+
+EVIDENCE = Path(__file__).resolve().parents[2] / "evidence" / "pavo"
+LAMP = EVIDENCE / "20261025" / "genesis-06" / "lamp.mp4"            # a real Pavo night shot: oil lamp in a dark tent
+DARKEST = EVIDENCE / "20261026" / "keeper-vo" / "probe-k-insight-1-373107010075637504.mp4"  # mean luma 48, night
 
 
 def clip(path, fade_in=False, size="1080x1920", fps=30):
@@ -42,6 +47,48 @@ class ClipCheck(unittest.TestCase):
                             out], check=True)
             self.assertEqual(cc.main(["--composed", out]), 1)          # a fade from black between scenes is a flash
             self.assertEqual(cc.main(["--composed", out, "3.0"]), 0)   # unless it is an intended dip_to_black
+
+
+    def test_a_letterboxed_clip_is_refused_and_a_dark_night_clip_is_not(self):
+        # E109: genesis-07 s-well (run 40357197063) was a wide picture with ~22 % black above and below inside the
+        # 9:16 frame and passed. The bars are refused; a real night shot, the same shot darkened to near black, and a
+        # black sky over a lit camp (one dark edge) are not.
+        self.assertFalse(cc.letterboxed({"top": 0.0, "bottom": 0.044, "left": 0.0, "right": 0.0}))   # one edge only
+        self.assertTrue(cc.letterboxed({"top": 0.223, "bottom": 0.223, "left": 0.0, "right": 0.0}))   # s-well's 428/1920
+        self.assertTrue(cc.letterboxed({"top": 0.0, "bottom": 0.0, "left": 0.05, "right": 0.05}))     # pillarbox
+        self.assertFalse(cc.letterboxed(None))                                                       # no picture at all
+        with tempfile.TemporaryDirectory() as t:
+            boxed, pillar, darker, sky = (str(Path(t, n)) for n in ("boxed.mp4", "pillar.mp4", "darker.mp4", "sky.mp4"))
+            ff = ["ffmpeg", "-v", "error", "-y", "-i", str(LAMP), "-an", "-pix_fmt", "yuv420p", "-vf"]
+            subprocess.run(ff + ["scale=720:720,pad=720:1280:0:280:black", boxed], check=True)   # s-well's shape
+            subprocess.run(ff + ["scale=400:1280,pad=720:1280:160:0:black", pillar], check=True)
+            subprocess.run(ff + ["eq=brightness=-0.35", darker], check=True)                   # a deep night
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=720x560:r=30:d=3",
+                            "-i", str(LAMP), "-filter_complex", "[1:v]trim=0:3,setpts=PTS-STARTPTS,crop=720:720:0:560"
+                            "[g];[0:v][g]vstack", "-an", "-pix_fmt", "yuv420p", sky], check=True)   # black sky, lit camp
+            r = cc.check(boxed)
+            self.assertIn("LETTERBOX_BARS", r["flags"])
+            self.assertGreater(min(r["bars"]["top"], r["bars"]["bottom"]), 0.2)
+            self.assertIn("LETTERBOX_BARS", cc.check(pillar)["flags"])
+            for clean in (str(LAMP), str(DARKEST), darker, sky):
+                self.assertNotIn("LETTERBOX_BARS", cc.check(clean)["flags"], clean)
+            self.assertEqual(cc.check(str(LAMP))["flags"], [])
+            self.assertEqual(cc.main([boxed]), 1)
+
+    def test_a_dark_sky_over_dark_ground_is_not_a_letterbox(self):
+        # E111: genesis-07 s-still (run 40389124871), a dusk camp under a black sky (rows 14-24) over dark ground,
+        # was refused as LETTERBOX_BARS three times with BAR_LUMA 24. Bars read luma 1; a night sky is not a bar.
+        # (geq writes video-range Y: 28 reads as grey 14 in the check, the measured sky.)
+        with tempfile.TemporaryDirectory() as t:
+            night = str(Path(t, "night.mp4"))
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=720x300:r=30:d=3",
+                            "-i", str(LAMP), "-f", "lavfi", "-i", "color=c=black:s=720x260:r=30:d=3", "-filter_complex",
+                            "[0:v]format=yuv444p,geq=lum='28+Y/300*40':cb=128:cr=128[s];"
+                            "[1:v]trim=0:3,setpts=PTS-STARTPTS,crop=720:720:0:560,format=yuv444p[g];"
+                            "[2:v]format=yuv444p,geq=lum='max(1,10-Y/12)':cb=128:cr=128[d];[s][g][d]vstack=3",
+                            "-an", "-pix_fmt", "yuv420p", night], check=True)
+            r = cc.check(night)
+            self.assertNotIn("LETTERBOX_BARS", r["flags"], r.get("bars"))
 
 
 if __name__ == "__main__":

@@ -37,8 +37,9 @@ repeatable shape of a video:
 - calls to action;
 - title and thumbnail.
 
-The format may change whenever mining proves a better structure **in the same line** (English
-Christian prayer and devotion) that does not conflict with the channel. No format is frozen.
+The format may change whenever mining proves a better structure **in the same line** (the English KJV Bible
+series, story by story, `production/bible/SERIES.md`; prayer longs stopped by the owner on 2026-10-26) that does not
+conflict with the channel. No format is frozen.
 
 Every stage, **from the channel configuration to the pinned comment**, is held to the same bar:
 - **ultra-professional and measured;**
@@ -60,7 +61,7 @@ Nothing else is added unless a stage cannot meet its bar without it, and that is
 
 ## Channel configuration (setup, then maintained by live intelligence)
 
-The channel is configured as a top Christian prayer channel, and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
+The channel is configured as a top KJV Bible-story channel (SERIES.md; formerly prayer), and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
 - **the official YouTube Help pages**, with source and verification date;
 - **what the validated winners' channels do**, measured with vidIQ.
 
@@ -114,6 +115,37 @@ A validated structure becomes three things:
 The direction specifies the viewer's need, the original idea and the intended progression: what the opening promises, what each beat adds and how the ending resolves it. Voice delivery, pauses, pictures, motion, captions and music must serve that progression. Resolve known script, source and feasibility problems before rendering.
 
 Produce the master and package, retain provenance, and deliver the frozen technical QA and signal scan with the file identity. Stage 3 judges the actual result through the designated audiovisual review and comparison with the mined references; a production task cannot approve its own output by declaring it complete.
+
+### No rework (owner, 2026-10-26: "these repetitions are horrible for the project"; E99)
+
+- A plan is checked against its validated structure (`plan_check.py --strict`) before any build. `plan_check` also runs the build's own functions on its estimate (`episode_build.predict`, `reference_problems`: "BUILD ..."), so a refusal the plan already holds is never met in the build (E106).
+- **Every build is preceded by a preflight** (E106): `episode_build.py preflight <plan> --voice <Kokoro python> <prepared work> --refs --write`, locally, with 0 Actions minutes and 0 credits: plan_check --strict, each character's status and next step, cf-images used today against the free allocation, the pinned Kokoro voice and `episode_build lines` on it (retime, talking lines, shares, measured length), the compose on that layout, the reference images and every Pavo request through the adapter's own checks, and each talking line against `evidence/pavo/setups.json`. Its report `evidence/preflight/<episode>.json` goes in by PR; `episode.yml` stops in its first step unless that report is PASS for the exact plan and `characters.json` (`verify-preflight`), and hookify blocks a dispatch not chained to `verify-preflight`.
+- Every talking line (its words, with its speaker, reference and prompt binding) is first tested with direct 0-credit Pavo calls and `lipsync_check.py`, with the pass rate recorded in `evidence/pavo/` and its entry in `evidence/pavo/setups.json` (generations, passes, evidence file). The rate belongs to the line, not to the setup (#419: line-01 7 of 14, genesis-07's Keeper lines 1 of 33 with everything else equal), so a probe on one line never vouches for another. The preflight refuses a talking shot whose line has fewer than 6 recorded generations (PROBE_REQUIRED) or whose chance of passing within its 6 attempts is under 0.9 (PROBE_RATE_LOW). Only then is a build dispatched.
+- Every refusal a later stage can raise is classified in `ops/refusal_registry.json` (A predicted early by the same function, B a hole with its open reason, C knowable only after a generation with its cheapest probe, D external with its resume path, I invariant, N not a refusal); `ops/test_refusal_parity.py` fails a PR that adds a later-stage refusal without saying how the early stage predicts it, or why it cannot.
+- A voice-over Keeper shot (plan B, #423) needs no talking probe; its exact prompt and talking frame need still-mouth probes in `evidence/pavo/setups.json` (`lipsync_check --still-mouth`, at least 2 generations, read by the rule of succession), and `episode.yml` checks the still-mouth tool on a passing and a talking clip before any generation.
+- **Production comes out at 9.5; the review only confirms** (owner, 2026-10-26: "never produce loosely and fix it later"). `ops/refusal_registry.json` `review` maps every rubric item of `ops/CLAUDE_REVIEW.md` (Short and long), every "Built for 9.5" item of PROMPT_GUIDE and every row of story QA v3 to the earlier check that guarantees it (plan, preflight, build gate, render QA), or states it `open` or `review_only` with its reason and the `residual` the review still has to see; `ops/test_refusal_parity.py` fails when one has no mapping. A rubric item that can become a plan rule becomes one (visual variety: `PROMPT_REPEATED`).
+- Every scene prompt states its story's period word for word, the setting and the exclusions (`plan_check`
+  PERIOD_SETTING / PERIOD_EXCLUDE, SCENE_PERIOD_MISSING, SCENE_PERIOD_CONFLICT, PERIOD_INVALID, PERIOD_AMBIGUOUS; the
+  plan's `period` or its passage; the Short and the long, `plan_period_problems`),
+  and a rewritten scene prompt is probed with direct 0-credit Pavo clips and a frame sheet before the build (E108:
+  genesis-07 run 40341856955 showed a European street, a glass lantern and church towers in 8 of 30 scene shots).
+- An episode record is checked with `episode_build.py check-record <episodes/<id>.json>` (publish_episode's own rules) before `publish-episode.yml` is dispatched.
+- `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
+- A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
+- A clip Claude's frame review rejects is redone alone: `episode.yml` `regenerate` (a comma list of shot ids, only with `resume_run`, checked against the plan by `episode_build.py check-regenerate` before any secret) generates those shots again with their request unchanged and keeps every other clip; `report.json` records them (`regenerated`). No prompt is edited only to force a new clip.
+- An engine PR is reviewed before merge, not after.
+- Actions minutes cost nothing: the engine repository is public, and standard GitHub-hosted runners are free for public repositories (owner, 2026-10-26: it stays public; E102). The daily report (`ops/minutes.py`) lists minutes per workflow as a speed and wall-clock measure only. A repeated build is still the first thing to cut, because it delays the work.
+
+### Token budget (owner, 2026-10-26: "never run out of tokens; manage them intelligently")
+
+The biggest cost is context re-read on every turn, not output. Rules for every session:
+- **One orchestrator, kept small.** When the main session's context passes ~400k tokens (get_session `context_usage.used_tokens`), it writes a handoff (`evidence/handoff/<date>-<n>.md`: in-flight PRs, agents, tasks, decisions) and a fresh orchestrator session continues from it. Triggers are re-pointed to the new session id.
+- **Model by task.** Mechanical checks (light clock, sweeps of small diffs, CI reading) on Haiku; reviews, fixes and plans on Sonnet when the work is routine; Opus only for design, diagnosis and the 9.5 review. Never more than 3 agents at once, and never two on the same subject.
+- **Briefs closed.** Every agent gets a bounded brief (files, limits, generation cap, stop rule) and reports once; follow-ups go to the same agent, never a new one.
+- **One review pass** (code-review low) per PR, plus a security sweep only when workflows, secrets or `migration/publish/` change. Fixes from review go back to the same author in one message.
+- **No polling.** Unsubscribe from a PR at merge; one self check-in per waiting item; the light clock pings the orchestrator only on failures.
+- **No rework** (section above): a probe or preflight before any build, so a failure costs one cheap call, not a build plus its review.
+- **Rate limit.** Before a fan-out, read `rate_limit_info`; when the five-hour window is close to its limit, defer non-urgent work to after `resetsAt`.
 
 ### Shorts are a production delivery, with their own review
 
