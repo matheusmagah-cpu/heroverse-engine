@@ -176,6 +176,14 @@
    ],
    "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate)"
   },
+  "CAPTION_TRACK_LIMITS": {
+   "class": "A",
+   "early": [
+    "migration/production/qa_pilot.py::captions.manifest_problems(manifest, base)",
+    "migration/publish/preflight.py::captions.manifest_problems("
+   ],
+   "note": "E126: the acted long's recorded .srt track (caption_track): the same captions.manifest_problems runs in qa_pilot.py (render QA, before any approval) and in publish/preflight.py (approve.yml, prepublish_gate); review of #469: the track is always built at the frozen v3 limits, a record naming others is refused"
+  },
   "CAPTION_TRACK_MISSING": {
    "class": "B",
    "early": "migration/publish/captions.py::def write_long",

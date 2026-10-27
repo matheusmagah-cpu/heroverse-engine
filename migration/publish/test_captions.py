@@ -563,7 +563,31 @@ class LongTrack(unittest.TestCase):
                 self.assertTrue(any(p.startswith("CAPTION_TRACK_FILE_MISSING") for p in captions.manifest_problems(
                     {"sentences": LONG, "caption_track": {**rec, "file": name}}, d)), name)
             self.assertTrue(any(p.startswith("CAPTION_TRACK_SHA256") for p in captions.manifest_problems(
-                {"sentences": LONG, "caption_track": {**rec, "words_max": 3}})))
+                {"sentences": LONG, "caption_track": {**rec, "sha256": "0" * 64}})))
+
+    def test_the_cue_limits_are_the_frozen_ones_never_the_records(self):
+        # review of #469: the record cannot loosen v3's limits, and a record without them is a refusal, not a KeyError
+        text, rec = captions.track_record(LONG)
+        for loose in ({**rec, "words_max": 20, "chars_max": 120}, {k: v for k, v in rec.items() if k != "words_max"}):
+            man = {"sentences": LONG, "caption_track": loose}
+            self.assertEqual(captions.manifest_srt(man), text)                 # built at the frozen 7 / 44
+            self.assertTrue(any(p.startswith("CAPTION_TRACK_LIMITS") for p in captions.manifest_problems(man)), loose)
+        self.assertEqual(captions.track_srt(LONG, {}), text)
+
+    def test_an_over_long_word_is_its_own_cue_and_no_cue_is_too_short(self):
+        # review of #469: one word over 44 characters split the whole sentence into one-word cues; a short voice
+        # span gave cues of 0 ms
+        word = "x" * 50
+        sent = [{"start": 0.0, "end": 6.0, "text": f"In the beginning God created {word} and the heaven and the earth."}]
+        got = captions.cues(sent, 7, 44)
+        self.assertIn(word, [c["text"] for c in got])
+        self.assertLessEqual(len(got), 4)
+        self.assertEqual(" ".join(c["text"] for c in got).split(), sent[0]["text"].split())
+        tight = [{"start": 1.0, "end": 1.6, "text": "And God said, Let there be light: and there was light, and it was good."}]
+        got = captions.cues(tight, 7, 44)
+        self.assertTrue(all(c["end"] - c["start"] >= captions.CUE_MIN_SECONDS - 1e-9 for c in got), got)
+        self.assertEqual(" ".join(c["text"] for c in got).split(), tight[0]["text"].split())
+        self.assertEqual(captions.problems(captions.srt(got)), [])
 
     def test_publish_uploads_the_recorded_short_cue_track(self):
         text, rec = captions.track_record(LONG)
@@ -596,6 +620,27 @@ class LongTrack(unittest.TestCase):
             error, _, _, _ = publish(Path(t), fake, sentences=LONG, qa={"criteria_version": "story-qa-criteria-v1"})
             self.assertIsNone(error)
             self.assertEqual(captions.parts(fake.bodies[0][1])[1][1], captions.srt(LONG).encode())
+
+    def test_a_bible_long_without_its_track_is_refused_even_without_qa(self):
+        # review of #469: the refusal no longer depends on out/qa.json being readable
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t) / "pilot-015"
+            (d / "out").mkdir(parents=True)
+            (d / "script.json").write_text(json.dumps({"archetype": "bible-story-long"}))
+            man = d / "out" / "manifest.json"
+            self.assertTrue(pv.caption_track_missing(man, {"sentences": LONG}, {}, d))
+            self.assertTrue(pv.caption_track_missing(man, {"sentences": LONG}, {"series": "bible"}))
+            _, rec = captions.track_record(LONG)
+            self.assertFalse(pv.caption_track_missing(man, {"sentences": LONG, "caption_track": rec}, {}, d))
+            (d / "script.json").write_text(json.dumps({"archetype": "prayer"}))
+            self.assertFalse(pv.caption_track_missing(man, {"sentences": LONG}, {}, d))
+        with tempfile.TemporaryDirectory() as t:                 # through main: refused before any call
+            fake = FakeYouTube()
+            with patch.object(pv, "bible_thumb_problems", return_value=[]), \
+                    patch.object(pv, "bible_long", return_value=True):
+                error, steps, _, _ = publish(Path(t), fake, sentences=LONG)
+            self.assertIn("CAPTIONS_TRACK_MISSING", error)
+            self.assertEqual((fake.calls, steps), ([], None))
 
     def test_preflight_checks_the_track_publish_will_send(self):
         text, rec = captions.track_record(LONG)

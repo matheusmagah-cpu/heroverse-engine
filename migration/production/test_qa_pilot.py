@@ -167,8 +167,8 @@ class StoryV3Rows(unittest.TestCase):
             text, rec = captions.track_record(m["sentences"], 20, 120)
             (Path(d) / rec["file"]).write_text(text)
             m["caption_track"] = rec
-        self.assertFalse(check(loose, "srt_cue_words_max"))
-        self.assertFalse(check(loose, "srt_cue_chars_max"))
+        self.assertFalse(check(loose))                         # the record may not loosen the frozen limits
+        self.assertTrue(check(loose, "srt_cue_words_max"))     # the track itself is always built at 7 / 44
         # coverage of the words heard: speech outside the timeline's cues is not covered
         def late_voice(m, d, s):
             m["sentences"] = [dict(x, start=x["start"], end=x["start"] + 0.5) for x in m["sentences"]]

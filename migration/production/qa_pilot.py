@@ -175,6 +175,9 @@ STORY_V3_ROWS = {
     "rights.footage_vetting_required": ["footage_licensed_vetted_and_credited"],
     "rights.ai_video": ["ai_video_source_and_licence"],
     "grammar.first_shot": ["first_shot_cold_open"],
+    # figures_allowed measures who is on screen (APPROVED entries, the Keeper in his beats, never God); the "look
+    # word for word and approved references" part is enforced at plan time by plan_check.character_problems
+    # (CHARACTER_LOOK_CHANGED, CHARACTER_NO_REFS, via long_plan_check) and by the build's reference binding
     "grammar.figures_allowed": ["figures_allowed"],
     "grammar.every_scene_in_motion": ["every_scene_in_motion"],
     "grammar.scene_seconds": ["scene_seconds"],
