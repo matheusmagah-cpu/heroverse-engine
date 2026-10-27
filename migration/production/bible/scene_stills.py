@@ -161,22 +161,31 @@ def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
 
 def crop(img_dir, stills_dir=None):
     """Each FLUX PNG (1024 square) cut to its plan's aspect, in place: the centre 9:16 column of a Short's still, the
-    centre 16:9 band of a long's (still_aspect: the candidate's still's episode plan)."""
+    centre 16:9 band of a long's (still_aspect: the candidate's still's episode plan). A native source's JPEG (Pavo
+    agnes-image, made at the plan's ratio: 1472x2624 at 9:16) is never cut: at another aspect it is refused
+    (STILL_ASPECT_MISMATCH), so a wrong-ratio request is generated again, not cropped into another picture."""
     from PIL import Image
-    # FLUX PNGs from scene-stills.yml, or a native source's JPEG/PNG whose sidecar names its `source` and
-    # `upscaler` (pavo-agnes-image-2.5-flash: 1472x2624 JPEG at 9:16, Lanczos to 1080x1920)
     for png in sorted(p for p in Path(img_dir).iterdir() if p.suffix in (".png", ".jpg")):
         parts = split_candidate(png.stem)
-        side = SIDES[still_aspect(parts[0], stills_dir) if parts else "9:16"]
+        aspect = still_aspect(parts[0], stills_dir) if parts else "9:16"
+        side = SIDES[aspect]
         im = Image.open(png).convert("RGB")
         w, h = im.size
-        cw, chh = round(h * side[0] / side[1]), round(w * side[1] / side[0])
-        if cw < w:
-            left = (w - cw) // 2
-            im.crop((left, 0, left + cw, h)).save(png)
-        elif chh < h:
-            top = (h - chh) // 2
-            im.crop((0, top, w, top + chh)).save(png)
+        if png.suffix == ".jpg":
+            if not at_aspect(im.size, aspect):
+                raise SystemExit(f"STILL_ASPECT_MISMATCH {png.stem} ({[w, h]} is not {aspect}: a native source is "
+                                 "made at the plan's ratio, never cropped)")
+            continue
+        if side[0] < side[1]:   # 9:16: the centre column, as before
+            cw = round(h * side[0] / side[1])
+            if cw < w:
+                left = (w - cw) // 2
+                im.crop((left, 0, left + cw, h)).save(png)
+        else:                   # 16:9: the centre band
+            chh = round(w * side[1] / side[0])
+            if chh < h:
+                top = (h - chh) // 2
+                im.crop((0, top, w, top + chh)).save(png)
 
 
 def split_candidate(cid):

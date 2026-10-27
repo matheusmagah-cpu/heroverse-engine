@@ -42,7 +42,6 @@ jobs:
       ids: ${{ steps.ids.outputs.ids }}
     env:
       PLAN: ${{ inputs.plan }}
-      GH_TOKEN: ${{ github.token }}
       RESUME_RUN: ${{ inputs.resume_run }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -99,20 +98,24 @@ jobs:
           "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$WORK" "$WORK/voice-script.json"
           python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
       - name: Approved reference images (sha256 checked; the requests are recomputed from them)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
       - name: Approved clips (E114, E126; shots/<long>.json, sha256 checked), clip_check, lipsync_check, face check again; no generation, no secret
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"
       - name: The long's cuts on the approved clips (one cut a shot, story QA v3 holds, windows on their source), before any upscale
         run: python3 -I -B migration/production/bible/long_build.py timeline "$PLAN" "$WORK"
       - id: ids
         name: The clips to upscale (resume_run keeps the upscaled clips of the approved clips they were made from)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           : > "$RUNNER_TEMP/done.txt"
           if [ -n "$RESUME_RUN" ]; then
-            src=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN" --jq '[.path, .event, .head_branch] | join(" ")')
-            # sweep H2: only an earlier long-build of main may lend its upscales (never a pull request run's artifacts)
-            [ "$src" = ".github/workflows/long-build.yml workflow_dispatch main" ] || { echo "RESUME_RUN_NOT_A_LONG_BUILD $src"; exit 1; }
-            gh api --paginate "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN/artifacts?per_page=100" --jq '.artifacts[] | select(.expired == false) | .name' > "$RUNNER_TEMP/done.txt"
+            # sweep H2: only an earlier long-build of main lends its upscales (RESUME_RUN_NOT_A_LONG_BUILD otherwise)
+            python3 -I -B migration/production/bible/long_build.py resume-names "$RESUME_RUN" "$GITHUB_REPOSITORY" "$EP" "$RUNNER_TEMP/done.txt"
           fi
           ids=$(python3 -I -B migration/production/bible/long_build.py upscale-ids "$PLAN" "$RUNNER_TEMP/done.txt")
           echo "UPSCALE $ids"
@@ -145,7 +148,6 @@ jobs:
       matrix:
         shot: ${{ fromJSON(needs.prepare.outputs.ids) }}
     env:
-      GH_TOKEN: ${{ github.token }}
       PLAN: ${{ inputs.plan }}
       SHOT: ${{ matrix.shot }}
     steps:
@@ -174,6 +176,8 @@ jobs:
           echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
       - id: up
         name: The approved clip (sha256 checked) to 2560x1440 30 fps, every native frame through the model (timed)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           start=$(date +%s)
           "$RUNNER_TEMP/up/bin/python" -I -B migration/production/bible/long_build.py upscale "$PLAN" "$SHOT" "$RUNNER_TEMP/up-out" "$RUNNER_TEMP/realesr-general-x4v3.pth"
@@ -197,7 +201,6 @@ jobs:
     outputs:
       episode: ${{ needs.prepare.outputs.episode }}
     env:
-      GH_TOKEN: ${{ github.token }}
       PLAN: ${{ inputs.plan }}
       EP: ${{ needs.prepare.outputs.episode }}
       RESUME_RUN: ${{ inputs.resume_run }}
@@ -221,18 +224,16 @@ jobs:
           path: ${{ runner.temp }}/up
       - name: Upscaled clips of resume_run (kept only when made from the clip approved now; long_build checks each record)
         if: inputs.resume_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          [[ "$RESUME_RUN" =~ ^[0-9]{6,20}$ ]] || { echo "RESUME_RUN_REFUSED"; exit 1; }
           [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
-          src=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RESUME_RUN" --jq '[.path, .event, .head_branch] | join(" ")')
-          # sweep H2: only an earlier long-build of main may lend its upscales (never a pull request run's artifacts)
-          [ "$src" = ".github/workflows/long-build.yml workflow_dispatch main" ] || { echo "RESUME_RUN_NOT_A_LONG_BUILD $src"; exit 1; }
-          mkdir -p "$RUNNER_TEMP/up" "$RUNNER_TEMP/prev"
-          gh run download "$RESUME_RUN" --repo "$GITHUB_REPOSITORY" -p "long-up-$EP--*" -D "$RUNNER_TEMP/prev"
-          # this run's upscales win; a clip of resume_run fills only a shot this run did not upscale
-          find "$RUNNER_TEMP/prev" -type f \( -name '*.mp4' -o -name '*.json' \) -exec cp -n {} "$RUNNER_TEMP/up/" \;
-          echo "RESUMED_FROM $RESUME_RUN"
+          # sweep H2 and review of #470: provenance checked, nothing downloaded when the run kept no upscale of this
+          # long, "no artifact matches" tolerated; this run's upscales win (no clobber); assemble refuses a missing shot
+          python3 -I -B migration/production/bible/long_build.py resume-download "$RESUME_RUN" "$GITHUB_REPOSITORY" "$EP" "$RUNNER_TEMP/up"
       - name: Assemble (one cut a shot, owned music, -15 LUFS, the .srt by captions.py, the manifest), 20-frame sheet
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
           [[ "$PLAN" =~ ^migration/production/bible/plans/[a-z0-9]+(-[a-z0-9]+)*-long\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }   # sweep H1
@@ -261,7 +262,6 @@ jobs:
     permissions:
       contents: write   # release assets (assets.sh) and the evidence branch; no secret in this job
     env:
-      GH_TOKEN: ${{ github.token }}
       EP: ${{ needs.assemble.outputs.episode }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -270,6 +270,8 @@ jobs:
           name: long-out-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
           path: ${{ runner.temp }}/out
       - name: The long and its .srt into the release by the file's sha256; sheet, manifest and report on claude/long-<id>-<run>
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
           out="$RUNNER_TEMP/out"; mp4="$out/$EP.mp4"

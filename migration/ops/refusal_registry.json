@@ -340,6 +340,11 @@
    "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
    "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
   },
+  "DURATION_UNDER_QA": {
+   "class": "A",
+   "early": "migration/production/bible/episode_build.py::LONG_LENGTH",
+   "note": "review of #470: story QA v3 duration_seconds_min 601 s; the long's gate (14-18 min) is measured on the voice by the preflight's lines step (LONG_LENGTH), and the assembly checks the floor again before the render and on the file"
+  },
   "ENGINE_INVALID": {
    "class": "A",
    "early": [
@@ -1045,6 +1050,11 @@
    "class": "I",
    "guard": "migration/publish/test_captions.py::def test_"
   },
+  "MUSIC_SHORT": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_build.py::def test_the_music_and_the_qa_floor_are_checked_before_the_render",
+   "note": "review of #470: the owned music (sha256-pinned release FLAC, ~3 h) covers the offset plus the long; checked before the render, never met as silence after it"
+  },
   "NARRATION_MISSING": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
@@ -1562,6 +1572,10 @@
   "RESUMED_FROM": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "RESUME_DOWNLOAD_FAILED": {
+   "class": "D",
+   "resume": "the artifact listing or download of resume_run failed (not \"no artifact matches\", which is tolerated): dispatch again; without resume_run every shot is upscaled again"
   },
   "RESUME_RUN_NOT_A_LONG_BUILD": {
    "class": "N",

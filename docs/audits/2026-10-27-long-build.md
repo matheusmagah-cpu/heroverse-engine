@@ -28,7 +28,9 @@ a release, path containment of files written from plan or matrix data, write per
 | S5 files written outside their folder | long-build | FALSE POSITIVE | < 8 | Yes | `upscale_step` writes `OUT/<shot>.mp4` only for a generated shot id of the plan (UPSCALE_SHOT_REFUSED otherwise); the resume copy uses `find -exec cp -n` into one folder; the record job writes under `evidence/episodes/<EP>` with `$EP` regex-checked. | `long_build.upscale_step`, `long-build.yml` record job |
 | S6 write permission wider than needed | long-build | FALSE POSITIVE | < 8 | Yes | `contents: write` only in the record job (release assets and the evidence branch), which holds no secret and runs after the assembly's checks; it verifies the report, manifest and .srt hashes against the file before any upload. | `long-build.yml` record job |
 
-0 of 6 claimed findings at 8 or above; 2 hardenings applied in the PR (H1, H2).
+| H3 the token in every step's env | long-build | HARDENING, APPLIED (review of #470) | - | Yes | `GH_TOKEN` is no longer in any job's `env:`: only the steps that call `gh` or `ci/assets.sh` (the guard, refs, generate, the resume steps, upscale, assemble, record) get it. The resume provenance check (H2) moved into `long_build.py resume-names` / `resume-download`, tested with a fake `gh`. | `test_long_build.test_long_build_yml_ships_approved_clips_only_and_resumes`, `Resume` |
+
+0 of 6 claimed findings at 8 or above; 3 hardenings applied in the PR (H1, H2, H3).
 
 Note outside this PR's scope (not a security finding): `episode.yml`'s `resume_run` has the same shape as S3 (any run
 id's `episode-*` artifact); its clips are then checked by sha256 against `shots/<episode>.json`, which closes it there.

@@ -144,7 +144,8 @@ class Assemble(unittest.TestCase):
 
     def fixture(self):
         plan = tiny_plan()
-        work, up = self.dir / "work", self.dir / "up"
+        base = Path(tempfile.mkdtemp(dir=self.dir))   # one fixture a call (a test may build several)
+        work, up = base / "work", base / "up"
         work.mkdir()
         up.mkdir()
         approvals, report = {}, {"episode": plan["episode"], "shots": {}}
@@ -168,7 +169,7 @@ class Assemble(unittest.TestCase):
                                                  "voice_id": "am_michael", "speed": 1.0, "sample_rate": 24000})
         ffmpeg("-f", "lavfi", "-i", f"sine=frequency=220:sample_rate=24000:duration={layout['voice_seconds']}",
                "-af", "volume=0.3", work / "narration.wav")
-        music = self.dir / "music.flac"
+        music = base / "music.flac"
         ffmpeg("-f", "lavfi", "-i", "anoisesrc=color=pink:sample_rate=48000:duration=30:amplitude=0.2",
                "-ac", "2", music)
         return plan, work, up, music, approvals
@@ -177,7 +178,7 @@ class Assemble(unittest.TestCase):
         import captions
         plan, work, up, music, approvals = self.fixture()
         out = self.dir / "out"
-        lb.assemble_step(plan, work, up, music, out, frame=(320, 180), approvals=approvals)
+        lb.assemble_step(plan, work, up, music, out, frame=(320, 180), approvals=approvals, min_seconds=10)
         video = out / "test-long.mp4"
         info = lb.probe(video)
         v = info["video"][0]
@@ -209,8 +210,21 @@ class Assemble(unittest.TestCase):
         plan, work, up, music, approvals = self.fixture()
         approvals["s-b"] = dict(approvals["s-b"], clip_sha256="f" * 64)   # approved again since the upscale
         with self.assertRaises(SystemExit) as c:
-            lb.assemble_step(plan, work, up, music, self.dir / "out", frame=(320, 180), approvals=approvals)
+            lb.assemble_step(plan, work, up, music, self.dir / "out", frame=(320, 180), approvals=approvals,
+                             min_seconds=10)
         self.assertEqual(str(c.exception), "UPSCALE_SOURCE_MISMATCH s-b")
+        approvals["s-b"] = dict(approvals["s-b"], clip_sha256=f"{1:064x}")
+        # review of #470: the frame is measured on the file, not taken from its record
+        rec = json.loads((up / "s-a.json").read_text())
+        (up / "s-a.json").write_text(json.dumps(dict(rec, frame=list(lb.FRAME))))
+        with self.assertRaises(SystemExit) as c:
+            lb.upscaled(plan, up, approvals)
+        self.assertIn("UPSCALE_FRAME s-a [320, 180]", str(c.exception))
+        with open(up / "s-b.mp4", "ab") as f:   # a file changed after its record
+            f.write(b"x")
+        with self.assertRaises(SystemExit) as c:
+            lb.upscaled(plan, up, approvals, (320, 180))
+        self.assertIn("UPSCALE_SHA256_MISMATCH s-b", str(c.exception))
         (up / "s-c.mp4").unlink()
         with self.assertRaises(SystemExit) as c:
             lb.upscaled(plan, up, approvals, (320, 180))
@@ -236,9 +250,156 @@ class Assemble(unittest.TestCase):
         with self.assertRaises(SystemExit) as c:   # a window is never upscaled: it reuses its source's picture
             lb.upscale_step(plan, "s-w", self.dir / "up", "w", frame_fn=lambda x: x, approvals=approvals)
         self.assertTrue(str(c.exception).startswith("UPSCALE_SHOT_REFUSED s-w"))
+        with self.assertRaises(SystemExit) as c:   # a matrix value that is not a shot id
+            lb.upscale_step(plan, "../s-c", self.dir / "up", "w", frame_fn=lambda x: x, approvals=approvals)
+        self.assertTrue(str(c.exception).startswith("SHOT_ID_REFUSED"))
         with self.assertRaises(SystemExit):        # a fetched file that is not the approved clip
             lb.upscale_step(plan, "s-c", self.dir / "up2", "w", frame_fn=lambda x: x, approvals=approvals,
                             fetch=lambda name, dst: Path(dst).write_bytes(b"other"))
+
+
+    def stub(self, size="320x180", seconds=21.2, rate=48000, channels=2, audio="loudnorm=I=-15:TP=-2"):
+        """A render_fn writing a file of the given shape (what a broken render could hand the checks)."""
+        def render_fn(cplan, out, frame):
+            ffmpeg("-f", "lavfi", "-i", f"testsrc2=size={size}:rate=30:duration={seconds}", "-f", "lavfi", "-i",
+                   f"sine=frequency=330:sample_rate={rate}:duration={seconds}", "-af", audio, "-ac", channels,
+                   "-ar", rate, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", out)
+            return 21.2
+        return render_fn
+
+    def refused(self, render_fn, code, **kw):
+        plan, work, up, music, approvals = self.fixture()
+        plan.update(kw.pop("plan", {}))
+        with self.assertRaises(SystemExit) as c:
+            lb.assemble_step(plan, work, up, music, self.dir / "out", frame=(320, 180), approvals=approvals,
+                             render_fn=render_fn, **dict({"min_seconds": 10}, **kw))
+        self.assertTrue(str(c.exception).startswith("LONG_COMPOSE_REFUSED"), str(c.exception))
+        self.assertIn(code, str(c.exception))
+        return str(c.exception)
+
+    def test_the_composed_file_is_refused_outside_the_frozen_qa(self):
+        self.refused(self.stub(size="320x200"), "FRAME 320x200")
+        self.refused(self.stub(seconds=15), "LENGTH video 15.")
+        self.refused(self.stub(audio="volume=0.01"), "LOUDNESS")
+        self.refused(self.stub(audio="volume=16"), "TRUE_PEAK")
+        self.refused(self.stub(rate=44100, channels=1), "AUDIO_FORMAT")
+
+    def test_the_music_and_the_qa_floor_are_checked_before_the_render(self):
+        never = lambda *a: self.fail("rendered")   # noqa: E731
+        self.refused(never, "MUSIC_SHORT", plan={"music_offset": 20.0})   # 30 s of music for 20 + 21.2 s
+        self.refused(never, "DURATION_UNDER_QA", min_seconds=lb.MIN_SECONDS)
+        self.assertEqual(lb.MIN_SECONDS, 601)
+
+
+class Refusals(unittest.TestCase):
+    def test_the_timeline_leaves_a_frame_for_the_upscale(self):
+        plan, work = tiny_plan(), Path(tempfile.mkdtemp())
+        try:
+            eb.save(work / "layout.json", tiny_layout())
+            close = dict(CLIPS, **{"k-1": 4.02})   # covers its 4.0 s line by 0.02 s: one 30 fps frame is 0.033 s
+            self.assertEqual(lb.compose_problems(plan, tiny_layout(), close), [])
+            saved = lb.durations
+            lb.durations = lambda folder, p: dict(close)
+            try:
+                with self.assertRaises(SystemExit) as c:
+                    lb.timeline_step(plan, work)
+            finally:
+                lb.durations = saved
+            self.assertTrue(str(c.exception).startswith("LONG_TIMELINE_REFUSED KEEPER_CLIP_SHORT k-1"), str(c.exception))
+            self.assertEqual(json.loads((work / "long-timeline.json").read_text())["frame_margin"], 1 / 30)
+        finally:
+            shutil.rmtree(work)
+
+    def test_a_talking_shot_off_its_line_and_a_hold_over_seven_seconds_are_refused(self):
+        plan = tiny_plan()
+        plan["shots"] = [dict(plan["shots"][2], lines=[0]), dict(plan["shots"][4], lines=[1])]
+        layout = {"lines": [{"start": 0.5, "end": 4.5}, {"start": 5.1, "end": 10.0}], "total": 11.2}
+        self.assertTrue(lb.compose_problems(plan, layout, {"k-1": 4.5, "s-c": 7.0})[0]
+                        .startswith("KEEPER_NOT_ON_HIS_LINE k-1"))
+        plan = tiny_plan()
+        layout = tiny_layout(27.8)
+        layout["lines"] = [{"start": 0.0, "end": 14.0}, {"start": 14.6, "end": 18.6}, {"start": 19.2, "end": 26.6}]
+        bad = lb.compose_problems(plan, layout, dict(CLIPS, **{"s-a": 12.0, "s-b": 7.0, "s-c": 7.0}))
+        self.assertTrue(any(p.startswith("HOLD_OVER_QA cut 0 s-a") for p in bad), bad)
+
+
+class Resume(unittest.TestCase):
+    """sweep H2 and review of #470: provenance first, nothing downloaded when nothing was kept, "no artifact
+    matches" tolerated, this run's upscales never replaced."""
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.gh = self.dir / "gh"
+        self.gh.write_text(f"#!{sys.executable}\n" + """import json, os, sys
+d = os.environ["FAKE_GH"]
+args = sys.argv[1:]
+open(os.path.join(d, "calls.txt"), "a").write(json.dumps(args) + "\\n")
+def text(name):
+    p = os.path.join(d, name)
+    return open(p).read() if os.path.exists(p) else ""
+if args[:1] == ["api"] and "--paginate" not in args:
+    print(text("run"))
+elif args[:1] == ["api"]:
+    print(text("artifacts"))
+elif args[:2] == ["run", "download"]:
+    mode = text("download")
+    if mode == "nomatch":
+        sys.stderr.write("no artifact matches any of the names or patterns provided\\n"); sys.exit(1)
+    if mode == "error":
+        sys.stderr.write("HTTP 502\\n"); sys.exit(1)
+    dest = args[args.index("-D") + 1]
+    sub = os.path.join(dest, "long-up-test-long--s-a-" + "0" * 16)
+    os.makedirs(sub, exist_ok=True)
+    for f in ("s-a.mp4", "s-a.json", "s-b.mp4"):
+        open(os.path.join(sub, f), "w").write("prev " + f)
+""")
+        self.gh.chmod(0o755)
+        os.environ["FAKE_GH"] = str(self.dir)
+        (self.dir / "run").write_text(lb.LONG_BUILD_RUN)
+        (self.dir / "artifacts").write_text("long-up-test-long--s-a-" + "0" * 16 + "\nlong-prep-test-long-1\n"
+                                            "long-up-other-long--s-a-" + "1" * 16)
+
+    def tearDown(self):
+        os.environ.pop("FAKE_GH", None)
+        shutil.rmtree(self.dir)
+
+    def call(self, fn, *args):
+        return fn(*args, gh_bin=str(self.gh))
+
+    def calls(self):
+        p = self.dir / "calls.txt"
+        return [json.loads(x) for x in p.read_text().splitlines()] if p.exists() else []
+
+    def test_only_an_earlier_long_build_of_main_lends_its_upscales(self):
+        with self.assertRaises(SystemExit) as c:
+            self.call(lb.resume_names, "x1", "o/r", "test-long")
+        self.assertTrue(str(c.exception).startswith("RESUME_RUN_REFUSED"))
+        self.assertEqual(self.calls(), [])
+        self.assertEqual(self.call(lb.resume_names, "1234567", "o/r", "test-long"),
+                         ["long-up-test-long--s-a-" + "0" * 16])   # this long's upscales only
+        (self.dir / "run").write_text(".github/workflows/pr-checks.yml pull_request claude/x")
+        with self.assertRaises(SystemExit) as c:
+            self.call(lb.resume_names, "1234567", "o/r", "test-long")
+        self.assertTrue(str(c.exception).startswith("RESUME_RUN_NOT_A_LONG_BUILD 1234567"))
+
+    def test_the_download_is_skipped_tolerant_and_never_replaces_this_runs_upscales(self):
+        up = self.dir / "up"
+        up.mkdir()
+        (up / "s-a.mp4").write_text("this run")
+        (self.dir / "artifacts").write_text("long-prep-test-long-1")
+        self.assertEqual(self.call(lb.resume_download, "1234567", "o/r", "test-long", up), [])
+        self.assertFalse(any(c[:2] == ["run", "download"] for c in self.calls()))   # nothing kept: no download
+        (self.dir / "artifacts").write_text("long-up-test-long--s-a-" + "0" * 16)
+        (self.dir / "download").write_text("nomatch")
+        self.assertEqual(self.call(lb.resume_download, "1234567", "o/r", "test-long", up), [])
+        (self.dir / "download").write_text("error")
+        with self.assertRaises(SystemExit) as c:
+            self.call(lb.resume_download, "1234567", "o/r", "test-long", up)
+        self.assertTrue(str(c.exception).startswith("RESUME_DOWNLOAD_FAILED"))
+        (self.dir / "download").write_text("ok")
+        self.assertEqual(self.call(lb.resume_download, "1234567", "o/r", "test-long", up), ["s-a.json", "s-b.mp4"])
+        self.assertEqual((up / "s-a.mp4").read_text(), "this run")
+        self.assertEqual((up / "s-b.mp4").read_text(), "prev s-b.mp4")
 
 
 class Contract(unittest.TestCase):
@@ -285,12 +446,16 @@ class Contract(unittest.TestCase):
         self.assertIn("long_plan_check.py \"$PLAN\" --strict", text)
         for step in ("long_build.py upscale-ids", "long_build.py upscale ", "long_build.py assemble",
                      "long_build.py sheet", "resume_run", "max-parallel: 20", "sha256sum -c -",
-                     "RESUME_RUN_NOT_A_LONG_BUILD"):   # sweep H2: never a pull request run's artifacts
+                     "long_build.py resume-names", "long_build.py resume-download"):   # sweep H2, review of #470
             self.assertIn(step, text, step)
         # the composed file and its .srt go to the release under their content hash, like the Shorts
         self.assertIn('asset="bible-$EP-sha256-$sha.mp4"', text)
         self.assertIn('srt_asset="bible-$EP-sha256-$sha.srt"', text)
         self.assertIn("REPORT_SHA256_MISMATCH", text)
+        # review of #470: the token only on the steps that call gh or assets.sh, never in a job's env
+        tokens = [ln for ln in text.splitlines() if "GH_TOKEN:" in ln]
+        self.assertTrue(tokens)
+        self.assertTrue(all(ln.startswith(" " * 10 + "GH_TOKEN:") for ln in tokens), tokens)
         self.assertRegex(text, r"(?m)^concurrency:\n  group: heroverse-long-build\n")
 
 

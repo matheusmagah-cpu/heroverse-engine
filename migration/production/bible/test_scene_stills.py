@@ -419,5 +419,20 @@ class LongStills(unittest.TestCase):
         self.assertEqual(ss.aspect_of({}), "9:16")
 
 
+    def test_crop_cuts_flux_pngs_only_and_refuses_a_native_source_at_the_wrong_aspect(self):
+        from PIL import Image
+        img = self.dir / "img"
+        img.mkdir()
+        good = img / f"{self.still}-57-1.jpg"
+        Image.new("RGB", (2624, 1472), (90, 80, 70)).save(good, "JPEG")   # Pavo at 16:9: never cut
+        before = ss.sha256(good)
+        ss.crop(img)
+        self.assertEqual(ss.sha256(good), before)
+        Image.new("RGB", (1472, 2624), (90, 80, 70)).save(img / f"{self.still}-57-2.jpg", "JPEG")   # 9:16 in a long
+        with self.assertRaises(SystemExit) as c:
+            ss.crop(img)
+        self.assertTrue(str(c.exception).startswith(f"STILL_ASPECT_MISMATCH {self.still}-57-2"), str(c.exception))
+
+
 if __name__ == "__main__":
     unittest.main()

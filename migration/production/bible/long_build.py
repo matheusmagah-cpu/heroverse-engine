@@ -28,6 +28,9 @@ usage (long-build.yml runs them in order; each refuses a plan long_plan_check --
 upscale-ids, a plan without a PASS preflight bound to it now):
   long_build.py timeline PLAN WORK              after episode_build generate: the long's cuts on the approved 720p
                                                 clips (WORK/long-timeline.json), refused before any upscale
+  long_build.py resume-names RUN REPO EP OUT    resume_run's upscale artifact names of this long (an earlier
+                                                long-build of main only: RESUME_RUN_NOT_A_LONG_BUILD), to OUT
+  long_build.py resume-download RUN REPO EP DEST  those upscales into DEST without replacing this run's
   long_build.py upscale-ids PLAN [NAMES_FILE]   the generated shots still to upscale, as JSON: all of them, less those
                                                 whose artifact (artifact_name) is listed in NAMES_FILE (resume_run)
   long_build.py upscale PLAN SHOT OUT WEIGHTS   one approved clip (sha256 checked) to OUT/<shot>.mp4 + .json at
@@ -64,6 +67,14 @@ FADE_OUT = eb.FADE_OUT
 MUSIC_DB = -22.0                                 # short_engine.MUSIC_DB (test_long_build holds them equal)
 AI = QA["rights"]["ai_video"]
 UP_RECORD = "long-upscale-v1"
+MIN_SECONDS = QA["technical"]["duration_seconds_min"]   # 601 s: the frozen QA's floor, checked at build time
+# review of #470: the upscale resamples 24 fps to 30 fps, so a clip can come back up to one frame shorter; the timeline
+# step on the 720p clips leaves that frame of margin, so a cut that passes there cannot fail after the upscale
+FRAME_MARGIN = 1 / FPS
+SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+RUN_ID = re.compile(r"^[0-9]{6,20}$")
+# sweep H2: the only runs whose upscales a resume may borrow (never a pull request run's artifacts)
+LONG_BUILD_RUN = ".github/workflows/long-build.yml workflow_dispatch main"
 ARTIFACT = re.compile(r"^long-up-([a-z0-9]+(?:-[a-z0-9]+)*)--([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9a-f]{16})$")
 
 
@@ -222,10 +233,11 @@ def timeline_step(plan, work):
     """After episode_build generate: the long's cuts on the approved 720p clips, refused before hours of upscaling."""
     work = Path(work)
     layout = eb.load(work / "layout.json")
-    seconds = durations(work / "clips", plan)
+    seconds = {k: v - FRAME_MARGIN for k, v in durations(work / "clips", plan).items()}   # the upscale's frame
     problems = compose_problems(plan, layout, seconds)
     cuts = [] if problems else compose_long_shots(plan, layout, {k: k for k in seconds}, seconds)
-    eb.save(work / "long-timeline.json", {"clip_seconds": seconds, "cuts": cuts, "problems": problems})
+    eb.save(work / "long-timeline.json", {"clip_seconds": seconds, "frame_margin": FRAME_MARGIN, "cuts": cuts,
+                                          "problems": problems})
     print(json.dumps({"cuts": len(cuts), "problems": problems[:5]}))
     if problems:
         raise SystemExit("LONG_TIMELINE_REFUSED " + "; ".join(problems))
@@ -253,6 +265,8 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
     """One approved clip (by its content hash, sha256 checked) to OUT/<shot>.mp4 at 2560x1440 30 fps and its record
     OUT/<shot>.json binding it to the approved clip."""
     import pavo_footage
+    if not isinstance(shot_id, str) or not SLUG.fullmatch(shot_id):
+        raise SystemExit(f"SHOT_ID_REFUSED {shot_id!r}")
     approvals = eb.load_approvals(plan) if approvals is None else approvals
     if shot_id not in {s["id"] for s in generated(plan)}:
         raise SystemExit(f"UPSCALE_SHOT_REFUSED {shot_id} (a generated shot of {plan['episode']})")
@@ -276,7 +290,7 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
     rec = {"version": UP_RECORD, "episode": plan["episode"], "shot": shot_id, "source_asset": a["asset"],
            "source_sha256": a["clip_sha256"], "source": {"width": w, "height": h, "fps": round(fps, 3),
                                                           "seconds": round(seconds, 3)},
-           "frame": list(FRAME), "fps": FPS, "upscaler": upscaler, "sha256": eb.sha256(dst),
+           "frame": frame_of(dst), "fps": FPS, "upscaler": upscaler, "sha256": eb.sha256(dst),
            "artifact": artifact_name(plan["episode"], shot_id, a["clip_sha256"])}
     eb.save(out / f"{shot_id}.json", rec)
     print(json.dumps({"shot": shot_id, "sha256": rec["sha256"], "artifact": rec["artifact"]}))
@@ -299,13 +313,71 @@ def upscaled(plan, up, approvals, frame=FRAME):
             problems.append(f"UPSCALE_SOURCE_MISMATCH {sid}")
         elif eb.sha256(f) != rec.get("sha256"):
             problems.append(f"UPSCALE_SHA256_MISMATCH {sid}")
-        elif tuple(rec.get("frame") or ()) != tuple(frame):
-            problems.append(f"UPSCALE_FRAME {sid} {rec.get('frame')}")
+        elif tuple(rec.get("frame") or ()) != tuple(frame) or tuple(frame_of(f)) != tuple(frame):
+            problems.append(f"UPSCALE_FRAME {sid} {frame_of(f)} (the QA's {list(frame)})")
         else:
             out[sid] = (f, rec)
     if problems:
         raise SystemExit("; ".join(problems))
     return out
+
+
+def frame_of(path):
+    """[width, height] of a file's video stream, measured (ffprobe)."""
+    v = probe(path)["video"]
+    return [v[0].get("width"), v[0].get("height")] if v else None
+
+
+# ---------- resume (sweep H2, review of #470) ----------
+
+def gh(args, gh_bin="gh"):
+    return subprocess.run([gh_bin, *args], capture_output=True, text=True)
+
+
+def resume_names(run_id, repo, episode, gh_bin="gh"):
+    """The upscale artifacts of this long that an earlier long-build of main kept: RESUME_RUN_REFUSED (not a run id),
+    RESUME_RUN_NOT_A_LONG_BUILD (any other run: a pull request run can upload artifacts of any name)."""
+    if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
+        raise SystemExit(f"RESUME_RUN_REFUSED {run_id!r}")
+    if not SLUG.fullmatch(episode or "") or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo or ""):
+        raise SystemExit(f"RESUME_RUN_REFUSED {repo!r} {episode!r}")
+    done = gh(["api", f"repos/{repo}/actions/runs/{run_id}", "--jq", '[.path, .event, .head_branch] | join(" ")'],
+              gh_bin)
+    source = done.stdout.strip()
+    if done.returncode or source != LONG_BUILD_RUN:
+        raise SystemExit(f"RESUME_RUN_NOT_A_LONG_BUILD {run_id}: {source or done.stderr.strip()[-200:]}")
+    done = gh(["api", "--paginate", f"repos/{repo}/actions/runs/{run_id}/artifacts?per_page=100", "--jq",
+               ".artifacts[] | select(.expired == false) | .name"], gh_bin)
+    if done.returncode:
+        raise SystemExit(f"RESUME_DOWNLOAD_FAILED {run_id}: {done.stderr.strip()[-300:]}")
+    return [n for n in done.stdout.split() if (ARTIFACT.fullmatch(n) or [None, None])[1] == episode]
+
+
+def resume_download(run_id, repo, episode, dest, gh_bin="gh"):
+    """resume_run's upscales into DEST without replacing this run's: nothing is downloaded when the run kept none of
+    this long's, and "no artifact matches" (expired since) is no failure; assemble refuses any shot still missing."""
+    names = resume_names(run_id, repo, episode, gh_bin)
+    dest = Path(dest)
+    dest.mkdir(parents=True, exist_ok=True)
+    if not names:
+        print(json.dumps({"resumed_from": run_id, "kept": []}))
+        return []
+    prev = dest.parent / f"resume-{run_id}"
+    done = gh(["run", "download", run_id, "--repo", repo, "-p", f"long-up-{episode}--*", "-D", str(prev)], gh_bin)
+    if done.returncode:
+        if "no artifact matches" in (done.stderr + done.stdout).lower():
+            print(json.dumps({"resumed_from": run_id, "kept": [], "note": "no artifact matches"}))
+            return []
+        raise SystemExit(f"RESUME_DOWNLOAD_FAILED {run_id}: {done.stderr.strip()[-300:]}")
+    kept = []
+    for f in sorted(prev.rglob("*")):
+        if f.is_file() and f.suffix in (".mp4", ".json") and not f.is_symlink() and SLUG.fullmatch(f.stem):
+            target = dest / f.name
+            if not target.exists():   # this run's upscale wins
+                target.write_bytes(f.read_bytes())
+                kept.append(f.name)
+    print(json.dumps({"resumed_from": run_id, "kept": kept}))
+    return kept
 
 
 # ---------- the render (16:9, no burned captions, -15 LUFS) ----------
@@ -383,7 +455,8 @@ def render(cplan, out, frame=FRAME):
 
 def probe(path):
     info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                                      "stream=codec_type,codec_name,width,height,avg_frame_rate,sample_rate,channels:"
+                                      "stream=codec_type,codec_name,width,height,avg_frame_rate,sample_rate,channels,"
+                                      "duration:"
                                       "format=duration", "-of", "json", str(path)],
                                      capture_output=True, text=True, check=True).stdout)
     v = [s for s in info["streams"] if s["codec_type"] == "video"]
@@ -429,7 +502,8 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
             "keeper_share": layout.get("keeper_share"), "line_gap": eb.line_gap(plan)}
 
 
-def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, render_fn=render):
+def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, render_fn=render,
+                  min_seconds=MIN_SECONDS):
     """The composed long from the upscaled approved clips: OUT/<long>.mp4, captions.srt, manifest.json, report.json.
     Refused (LONG_COMPOSE_REFUSED) on a frame, length, black frame or loudness outside the frozen QA."""
     import captions
@@ -445,6 +519,12 @@ def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, r
     import short_engine
     seconds = {k: short_engine.duration(f) for k, (f, _) in ups.items()}
     problems = compose_problems(plan, layout, seconds)
+    offset = float(plan.get("music_offset", 600.0))
+    music_seconds = short_engine.duration(music)
+    if music_seconds + 1e-3 < offset + layout["total"]:   # review of #470: the bed under every second, never silence
+        problems.append(f"MUSIC_SHORT {music_seconds:.1f} s of music for offset {offset:.1f} s + {layout['total']:.1f} s")
+    if layout["total"] < min_seconds:
+        problems.append(f"DURATION_UNDER_QA {layout['total']:.1f} s (story QA v3 duration_seconds_min {min_seconds})")
     if problems:
         raise SystemExit("LONG_COMPOSE_REFUSED " + "; ".join(problems))
     cuts = compose_long_shots(plan, layout, {k: str(f) for k, (f, _) in ups.items()}, seconds)
@@ -489,8 +569,12 @@ def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, r
                         f"(QA: {frame[0]}x{frame[1]} H.264 30 fps)")
     if a.get("codec_name") != "aac" or a.get("sample_rate") != "48000" or a.get("channels") != 2:
         problems.append(f"AUDIO_FORMAT {a}")
-    if abs(info["seconds"] - total) > 0.1:
-        problems.append(f"LENGTH {info['seconds']:.2f} s (the timeline: {total:.2f} s)")
+    # review of #470: the picture's own length (the video stream), not the container's, which the audio can carry
+    shown = float(v.get("duration") or 0.0)
+    if abs(shown - total) > 0.1 or abs(info["seconds"] - total) > 0.1:
+        problems.append(f"LENGTH video {shown:.2f} s, file {info['seconds']:.2f} s (the timeline: {total:.2f} s)")
+    if info["seconds"] < min_seconds:
+        problems.append(f"DURATION_UNDER_QA {info['seconds']:.1f} s (story QA v3 duration_seconds_min {min_seconds})")
     if bad_black:
         problems.append(f"BLACK_FRAMES {bad_black}")
     if lufs is None or not LUFS_BAND[0] <= lufs <= LUFS_BAND[1]:
@@ -543,6 +627,12 @@ def main(argv):
         plan = checked_plan(argv[2], verify=False)
         names = Path(argv[3]).read_text().split() if len(argv) == 4 else []
         print(json.dumps(upscale_ids(plan, names)))
+        return 0
+    if len(argv) == 6 and argv[1] == "resume-names":   # RUN REPO EP OUT: the artifact names a resume keeps
+        Path(argv[5]).write_text("".join(f"{n}\n" for n in resume_names(argv[2], argv[3], argv[4])))
+        return 0
+    if len(argv) == 6 and argv[1] == "resume-download":   # RUN REPO EP DEST
+        resume_download(argv[2], argv[3], argv[4], argv[5])
         return 0
     if len(argv) == 4 and argv[1] == "timeline":
         timeline_step(checked_plan(argv[2]), argv[3])
