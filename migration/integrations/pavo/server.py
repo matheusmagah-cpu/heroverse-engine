@@ -8,12 +8,12 @@ from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
 from client import PavoError
-from video import PavoVideoClient
+from image_gen import PavoImageClient
 
-mcp = MCPServer("heroverse-pavo", version="0.4.0", log_level="CRITICAL",
+mcp = MCPServer("heroverse-pavo", version="0.5.0", log_level="CRITICAL",
                 instructions="Unofficial Pavo connection. Generate only with a fresh exact zero-credit quote. "
                              "Never retry an uncertain submission; check its conversation_id with pavo_job.")
-client = PavoVideoClient()
+client = PavoImageClient()
 read = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=True)
 local = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 write = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=True)
@@ -80,6 +80,29 @@ def pavo_generate_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16
 def pavo_job(conversation_id: str) -> dict:
     """Read a previously submitted job. An uncertain submission must be checked here before any new one."""
     return safe_call(client.job, conversation_id)
+
+
+@mcp.tool(annotations=read)
+def pavo_quote_image(aspect_ratio: str = "9:16", resolution: str = "sd", references: list[str] | None = None) -> dict:
+    """Quote one Agnes Image 2.5 Flash still (agnes-image, the only free image model) with its reference images
+    counted. Never generate or treat the quote as permanent pricing. resolution: sd (1K), hd (2K) or uhd (4K);
+    references: up to 6 repository image paths (PNG/JPEG)."""
+    return safe_call(client.quote_image, aspect_ratio, resolution, references)
+
+
+@mcp.tool(annotations=write)
+def pavo_generate_image(prompt: str, aspect_ratio: str = "9:16", resolution: str = "sd",
+                        references: list[str] | None = None) -> dict:
+    """Start one private Agnes Image 2.5 Flash still only at a fresh exact zero-credit quote (references counted).
+    No other image model is ever used. A nonzero quote refuses and reports the quoted number. Never retry
+    automatically; read the result with pavo_image_job."""
+    return safe_call(client.generate_image, prompt, aspect_ratio, resolution, references)
+
+
+@mcp.tool(annotations=read)
+def pavo_image_job(conversation_id: str) -> dict:
+    """Read a previously submitted still and its image URLs. An uncertain submission is checked here, never resent."""
+    return safe_call(client.image_job, conversation_id)
 
 
 if __name__ == "__main__":

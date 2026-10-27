@@ -243,6 +243,7 @@
    "calls": [
     "migration/integrations/pavo/client.py",
     "migration/integrations/pavo/test_client.py",
+    "migration/integrations/pavo/test_image_gen.py",
     "migration/integrations/pavo/test_stdio.py",
     "migration/integrations/pavo/test_video.py"
    ],
@@ -844,9 +845,11 @@
    ],
    "imported_by": [
     "migration/integrations/pavo/audio.py",
+    "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/images.py",
     "migration/integrations/pavo/server.py",
     "migration/integrations/pavo/test_client.py",
+    "migration/integrations/pavo/test_image_gen.py",
     "migration/integrations/pavo/test_video.py",
     "migration/integrations/pavo/video.py",
     "migration/production/bible/episode_build.py",
@@ -855,6 +858,22 @@
     "migration/production/bible/test_scene_stills.py"
    ],
    "test": "migration/integrations/pavo/test_client.py",
+   "is_test": false
+  },
+  "migration/integrations/pavo/image_gen.py": {
+   "purpose": "Bounded, unofficial Agnes Image 2.5 Flash still generation. A fresh, exact zero-credit quote is mandatory.",
+   "dir": "migration/integrations/pavo",
+   "local_imports": [
+    "migration/integrations/pavo/client.py",
+    "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/video.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/integrations/pavo/server.py",
+    "migration/integrations/pavo/test_image_gen.py"
+   ],
+   "test": "migration/integrations/pavo/test_image_gen.py",
    "is_test": false
   },
   "migration/integrations/pavo/images.py": {
@@ -866,6 +885,8 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/integrations/pavo/audio.py",
+    "migration/integrations/pavo/image_gen.py",
+    "migration/integrations/pavo/test_image_gen.py",
     "migration/integrations/pavo/video.py",
     "migration/production/bible/test_scene_stills.py"
    ],
@@ -877,7 +898,7 @@
    "dir": "migration/integrations/pavo",
    "local_imports": [
     "migration/integrations/pavo/client.py",
-    "migration/integrations/pavo/video.py"
+    "migration/integrations/pavo/image_gen.py"
    ],
    "called_by_workflows": [],
    "imported_by": [],
@@ -889,6 +910,22 @@
    "dir": "migration/integrations/pavo",
    "local_imports": [
     "migration/integrations/pavo/client.py"
+   ],
+   "called_by_workflows": [
+    "pavo-mcp.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/integrations/pavo/test_image_gen.py": {
+   "purpose": "Agnes Image 2.5 Flash stills: price, submission recovery and credential regressions; no network or real secrets.",
+   "dir": "migration/integrations/pavo",
+   "local_imports": [
+    "migration/integrations/pavo/client.py",
+    "migration/integrations/pavo/image_gen.py",
+    "migration/integrations/pavo/images.py",
+    "migration/integrations/pavo/test_video.py"
    ],
    "called_by_workflows": [
     "pavo-mcp.yml"
@@ -919,7 +956,9 @@
    "called_by_workflows": [
     "pavo-mcp.yml"
    ],
-   "imported_by": [],
+   "imported_by": [
+    "migration/integrations/pavo/test_image_gen.py"
+   ],
    "test": null,
    "is_test": true
   },
@@ -933,7 +972,7 @@
    ],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/integrations/pavo/server.py",
+    "migration/integrations/pavo/image_gen.py",
     "migration/integrations/pavo/test_video.py",
     "migration/production/bible/episode_build.py"
    ],

@@ -668,6 +668,11 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::EPISODE_ID = re.compile"
   },
+  "INVALID_IMAGE_RESOLUTION": {
+   "class": "I",
+   "guard": "migration/integrations/pavo/test_image_gen.py::INVALID_IMAGE_RESOLUTION",
+   "note": "pavo_generate_image / pavo_quote_image only (no build stage calls them yet): checked offline against the agnes-image spec before any request"
+  },
   "INVALID_MODE": {
    "class": "A",
    "early": ".github/workflows/tiktok.yml::INVALID_MODE",

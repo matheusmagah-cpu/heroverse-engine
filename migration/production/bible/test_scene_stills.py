@@ -182,8 +182,21 @@ class Stills(unittest.TestCase):
         meta = json.loads((self.dir / "candidates" / f"{self.still}-77-1.json").read_text())
         self.assertEqual((meta["status"], meta["size"]), ("DRAFT", [1080, 1920]))
         self.assertEqual(meta["sha256"], ss.sha256(self.dir / "candidates" / f"{self.still}-77-1.jpg"))
+        self.assertEqual(meta["source"], "cf-flux")
+        # Pavo's Agnes Image 2.5 Flash: a native 9:16 JPEG with its source, quote and job in the sidecar
+        Image.new("RGB", (1472, 2624), (90, 80, 70)).save(img / f"{self.still}-77-2.jpg", "JPEG")
+        (img / f"{self.still}-77-2.json").write_text(json.dumps({
+            "prompt": "x", "engine": "pavo", "source": "pavo-agnes-image-2.5-flash", "conversation_id": "9",
+            "quote": {"required_credits": 0, "final_points": 0, "is_estimate": False},
+            "upscaler": "none (native 1472x2624), Lanczos to 1080x1920"}))
+        self.assertEqual(ss.finalize(img, "77", stills_dir=self.dir), [f"{self.still}-77-1", f"{self.still}-77-2"])
+        pavo = json.loads((self.dir / "candidates" / f"{self.still}-77-2.json").read_text())
+        self.assertEqual((pavo["source"], pavo["size"], pavo["status"], pavo["quote"]["required_credits"]),
+                         ("pavo-agnes-image-2.5-flash", [1080, 1920], "DRAFT", 0))
+        with Image.open(self.dir / "candidates" / f"{self.still}-77-2.jpg") as im:
+            self.assertEqual(im.size, (1080, 1920))
         out = self.dir / "sheet.jpg"
-        self.assertEqual(ss.sheet("77", out, stills_dir=self.dir), [f"{self.still}-77-1"])
+        self.assertEqual(ss.sheet("77", out, stills_dir=self.dir), [f"{self.still}-77-1", f"{self.still}-77-2"])
         self.assertTrue(out.is_file())
 
     def test_the_build_lists_every_frame_refusal_plan_check_raises(self):
