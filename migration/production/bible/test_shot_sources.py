@@ -203,6 +203,58 @@ class ApproveSource(unittest.TestCase):
         self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"))
         self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by any refusal
 
+    def test_e139_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap(self):
+        """E139 (found designing arc-02, 28/10): story QA's image_repeat_gap_seconds_min was measured on the hold's
+        `image`, `<shot id>#<src_start>`, so the same library clip or still approved for two shots counted as two
+        pictures; approve-source let it in and qa_pilot passed it. A fallback's picture is its source's sha256: a
+        second shot of the plan within the gap is refused at approval (SOURCE_IMAGE_REPEAT), and qa_pilot keys a
+        fallback hold by that sha256 (a still is one picture whatever part is shown; footage by its part too)."""
+        import long_plan_check as lpc
+        sys.path.insert(0, str(HERE.parent))
+        import qa_pilot
+        # a Short is shorter than the gap: the same clip on two of its shots is a repeat
+        p = plan()
+        p["shots"].append(dict(p["shots"][2], id="s-river2", lines=[1]))
+        p["shots"].pop(3)
+        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "the river", lib=self.lib, shots_dir=self.dir)
+        with self.assertRaises(SystemExit) as err:
+            ss.approve_source(p, "s-river2", "footage", "clip-river-a", 9.6, "the river", lib=self.lib,
+                              shots_dir=self.dir)
+        self.assertTrue(str(err.exception).startswith("SOURCE_IMAGE_REPEAT s-river2"), str(err.exception))
+        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "approved again", lib=self.lib,
+                          shots_dir=self.dir)                       # the same shot again is not a repeat
+        # the long: the gap is measured on the plan's own timeline
+        arc = json.loads((HERE / "plans" / "arc-02-long.json").read_text())
+        gap = lpc.qa_for(arc)["grammar"]["image_repeat_gap_seconds_min"]
+        tl = lpc.timeline(arc)
+        at = {s["id"]: (tl["begin"][i], tl["end"][i]) for i, s in enumerate(arc["shots"])}
+        foot = arc["source_design"]["footage"]
+        first = foot[0]
+        near = next(x for x in foot[1:] if at[x][0] - at[first][1] < gap)
+        far = next(x for x in reversed(foot) if at[x][0] - at[first][1] >= gap)
+        ids = [s["id"] for s in arc["shots"]]
+        said = {w for x in (first, near, far) for w in ss.subject(arc, arc["shots"][ids.index(x)], ids.index(x))}
+        title = " ".join(sorted(w for w in said if not ss.period_clash(arc, {"title": w, "query": ""})))
+        lib = [clip("clip-any", theme="sky", title=title)]
+        d = self.dir / "long"
+        ss.approve_source(arc, first, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
+        ss.approve_source(arc, far, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)   # far enough apart
+        with self.assertRaises(SystemExit) as err:
+            ss.approve_source(arc, near, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
+        self.assertTrue(str(err.exception).startswith(f"SOURCE_IMAGE_REPEAT {near}"), str(err.exception))
+        # qa_pilot: two holds of different shots showing one still (or one footage part) are the same picture
+        holds = [{"start": 0.0, "end": 5.0, "image": "s-a#0.000"}, {"start": 30.0, "end": 35.0, "image": "s-b#0.000"},
+                 {"start": 60.0, "end": 65.0, "image": "s-c#2.000"}, {"start": 90.0, "end": 95.0, "image": "s-d#0.000"}]
+        manifest = {"holds": holds, "images": {"s-a": {"sha256": "a" * 64}, "s-b": {"sha256": "a" * 64}},
+                    "clips": [{"id": "s-c", "source": "footage", "source_sha256": "c" * 64},
+                              {"id": "s-d", "source": "footage", "source_sha256": "c" * 64}]}
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [25.0])     # the still twice; footage parts differ
+        manifest["holds"][3]["image"] = "s-d#2.000"
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [25.0, 25.0])
+        manifest["images"]["s-b"]["sha256"] = "b" * 64
+        manifest["clips"][1]["source_sha256"] = "d" * 64
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [])           # different pictures: no repeat
+
 
 class OwnerException(unittest.TestCase):
     """Owner 28/10 ~02:30 UTC ("tem que ser amanhã"): for the arc-01 long ONLY, a silent shot with characters may be a

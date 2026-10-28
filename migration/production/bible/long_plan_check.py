@@ -200,6 +200,46 @@ def _people(s, shots_by_id):
     return bool(src.get("characters")) or src.get("figures") == "anonymous"
 
 
+def timeline(plan, g=None):
+    """The long's estimated layout: the voice items each shot carries, each line at its voice's pace with LONG_LINE_GAP
+    between lines and the Short's TAIL after the last, the cold open's last frame held until gate.cold_open_s, and each
+    shot's begin, hold and end (the shots of one voice run share it equally). check() and approve-source's repeat gap
+    (shot_sources, E139) read this one layout."""
+    g = g if g is not None else gate()
+    shots = plan["shots"]
+    items, carried = pc.sequence(plan)
+    for i, s in enumerate(shots):
+        if pc.speaking(s) and s.get("rehook"):
+            items[carried[i][0]]["rehook"] = True
+    est = [pc.words(x["text"]) / pace(x) for x in items]
+    start, t = [], 0.0
+    for e in est:
+        start.append(t)
+        t += e + LONG_LINE_GAP
+    total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
+    # the cold open ends where the first line after it starts; the Keeper never starts before cold_open_s, so the
+    # build holds the cold open's last frame (under the music) until then (COLD_OPEN_HOLD_MAX at most)
+    cold = g["cold_open_s"]
+    after = next((i for i, s in enumerate(shots) if s.get("beat") != "cold_open"), None)
+    cold_voice = start[carried[after][0]] if after is not None else total
+    cold_hold = 0.0
+    if after is not None and shots[0].get("beat") == "cold_open" and cold_voice < cold:
+        cold_hold = cold - cold_voice
+        k0 = carried[after][0]
+        start = start[:k0] + [x + cold_hold for x in start[k0:]]
+        total += cold_hold
+    begin, hold = [0.0] * len(shots), [0.0] * len(shots)
+    for a, b, idx in pc.groups(shots, carried):
+        t0 = start[idx[0]]
+        t1 = start[idx[-1] + 1] if idx[-1] + 1 < len(items) else total
+        for j in range(a, b + 1):
+            hold[j] = (t1 - t0) / (b - a + 1)
+            begin[j] = t0 + (j - a) * hold[j]
+    end = [begin[i] + hold[i] for i in range(len(shots))]
+    return {"items": items, "carried": carried, "est": est, "start": start, "total": total, "cold_voice": cold_voice,
+            "cold_hold": cold_hold, "begin": begin, "hold": hold, "end": end}
+
+
 def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     """{"problems": [...], "pending": [...], "estimate": {...}} for a long plan. gate_values: the structure's
     script.gate (default gate()); criteria: the frozen story QA (default qa()); arc_table: arcs.json by id (default
@@ -268,36 +308,11 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         return {"problems": problems, "pending": pending, "estimate": {}}
     problems += pc.lines_order_problems(shots, len(narration))
 
-    # the voice track and its timeline (the Short's estimate: WPS, LINE_GAP between lines, TAIL after the last)
-    items, carried = pc.sequence(plan)
-    for i, s in enumerate(shots):
-        if pc.speaking(s) and s.get("rehook"):
-            items[carried[i][0]]["rehook"] = True
-    est = [pc.words(x["text"]) / pace(x) for x in items]
-    start, t = [], 0.0
-    for e in est:
-        start.append(t)
-        t += e + LONG_LINE_GAP
-    total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
-    # the cold open ends where the first line after it starts; the Keeper never starts before cold_open_s, so the
-    # build holds the cold open's last frame (under the music) until then (COLD_OPEN_HOLD_MAX at most)
-    cold = g["cold_open_s"]
-    after = next((i for i, s in enumerate(shots) if s.get("beat") != "cold_open"), None)
-    cold_voice = start[carried[after][0]] if after is not None else total
-    cold_hold = 0.0
-    if after is not None and shots[0].get("beat") == "cold_open" and cold_voice < cold:
-        cold_hold = cold - cold_voice
-        k0 = carried[after][0]
-        start = start[:k0] + [x + cold_hold for x in start[k0:]]
-        total += cold_hold
-    begin, hold = [0.0] * len(shots), [0.0] * len(shots)
-    for a, b, idx in pc.groups(shots, carried):
-        t0 = start[idx[0]]
-        t1 = start[idx[-1] + 1] if idx[-1] + 1 < len(items) else total
-        for j in range(a, b + 1):
-            hold[j] = (t1 - t0) / (b - a + 1)
-            begin[j] = t0 + (j - a) * hold[j]
-    end = [begin[i] + hold[i] for i in range(len(shots))]
+    # the voice track and its timeline (timeline(): the one layout the check and approve-source read)
+    tl = timeline(plan, g)
+    items, carried, est, start, total = tl["items"], tl["carried"], tl["est"], tl["start"], tl["total"]
+    cold, cold_voice, cold_hold = g["cold_open_s"], tl["cold_voice"], tl["cold_hold"]
+    begin, hold, end = tl["begin"], tl["hold"], tl["end"]
 
     # every shot
     by_id = {s["id"]: s for s in shots}

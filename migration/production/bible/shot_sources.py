@@ -534,10 +534,49 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
             entry["speech"] = speech
     out = Path(shots_dir or eb.SHOTS_DIR) / f"{plan['episode']}.json"
     data = eb.load(out) if out.exists() else {"episode": plan["episode"], "shots": {}}
+    if source in FALLBACKS:
+        repeat = image_repeat_refusal(plan, shot_id, entry, data["shots"])
+        if repeat:
+            raise SystemExit(repeat)
     data["shots"][shot_id] = entry
     data["shots"] = dict(sorted(data["shots"].items()))
     eb.save(out, data)
     return entry
+
+
+def picture_sha256(approval):
+    """E139: what a fallback shows, by content: a still's sha256 (one picture whatever part is shown) or a library
+    clip's; None for a Pavo clip (each generation is its own picture)."""
+    a = approval or {}
+    if a.get("source") == "still_motion":
+        return a.get("still_sha256")
+    if a.get("source") == "footage":
+        return a.get("clip_sha256")
+    return None
+
+
+def image_repeat_refusal(plan, shot_id, entry, approvals):
+    """E139: story QA's image_repeat_gap_seconds_min for a fallback: the same still or library clip (by sha256)
+    approved for another shot of the plan whose hold is nearer than the gap is SOURCE_IMAGE_REPEAT. A long is measured
+    on its own timeline (long_plan_check.timeline); a Short is shorter than the gap, so any other shot is near."""
+    import long_plan_check as lpc
+    sha = picture_sha256(entry)
+    others = [k for k, a in (approvals or {}).items() if k != shot_id and sha and picture_sha256(a) == sha]
+    if not others:
+        return None
+    gap = (lpc.qa_for(plan) or lpc.qa())["grammar"]["image_repeat_gap_seconds_min"]
+    near = others
+    if plan.get("version") == lpc.VERSION:
+        tl = lpc.timeline(plan)
+        at = {s["id"]: (tl["begin"][i], tl["end"][i]) for i, s in enumerate(plan["shots"])}
+        mine = at.get(shot_id)
+        near = [k for k in others if k not in at or mine is None
+                or max(at[k][0] - mine[1], mine[0] - at[k][1]) < gap]
+    if not near:
+        return None
+    return (f"SOURCE_IMAGE_REPEAT {shot_id} ({entry.get('footage') or entry.get('still')} is already approved for "
+            f"{', '.join(sorted(near))}, within story QA's image_repeat_gap_seconds_min {gap:g} s: a picture is its "
+            "sha256, not its shot; choose another source)")
 
 
 def expected_request(plan, shot, index, approval, digests):

@@ -598,6 +598,10 @@
    "class": "N",
    "why": "E116: the dispatch guard's pass line"
   },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
+  },
   "GUARD_RECORD_OVER_LIMIT": {
    "class": "N",
    "why": "E116/E52: dispatch_guard refuses an episode record whose title or description is over YouTube's limit before publish-episode fetches or uploads anything; nothing is lost"
@@ -1254,6 +1258,10 @@
    "class": "D",
    "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_SHORTS_SHARE": {
+   "class": "D",
+   "resume": "E138: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
+  },
   "PAVO_SINGING": {
    "class": "C",
    "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
@@ -1273,6 +1281,10 @@
   "PAVO_UNREACHABLE": {
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UNREAD_JOBS": {
+   "class": "D",
+   "resume": "E136: two of today's jobs are not read back yet; read them with pavo_job / pavo_image_job (never resubmit), then submit the next. Nothing was sent."
   },
   "PAVO_UPLOAD_HOST_UNREACHABLE": {
    "class": "D",
@@ -1854,9 +1866,9 @@
    ],
    "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
   },
-  "VOICE_AUDIO_DECODE_FAILED": {
+  "SOURCE_IMAGE_REPEAT": {
    "class": "N",
-   "why": "E137: speech-check is the review's own local measure (Claude, before approve-shot): ffmpeg could not decode the probed clip's soundtrack; it stops no generation or render and the clip is simply not approved"
+   "why": "E139: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it stops no generation, voice or render, and refuses only a fallback whose picture (sha256) another shot of the plan already shows within story QA's image_repeat_gap_seconds_min"
   },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
@@ -2411,6 +2423,10 @@
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
   },
+  "VOICE_AUDIO_DECODE_FAILED": {
+   "class": "N",
+   "why": "E137: speech-check is the review's own local measure (Claude, before approve-shot): ffmpeg could not decode the probed clip's soundtrack; it stops no generation or render and the clip is simply not approved"
+  },
   "VOICE_CLIPPING": {
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
@@ -2496,18 +2512,6 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
-  },
-  "PAVO_UNREAD_JOBS": {
-   "class": "D",
-   "resume": "E136: two of today's jobs are not read back yet; read them with pavo_job / pavo_image_job (never resubmit), then submit the next. Nothing was sent."
-  },
-  "PAVO_SHORTS_SHARE": {
-   "class": "D",
-   "resume": "E138: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
-  },
-  "GUARD_PLAN_NOT_STRICT": {
-   "class": "A",
-   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
   }
  },
  "review": {
@@ -2967,7 +2971,8 @@
    "grammar.image_repeat_gap_seconds_min": {
     "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]"
+     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]",
+     "migration/production/bible/shot_sources.py::SOURCE_IMAGE_REPEAT"
     ],
     "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },

@@ -1497,6 +1497,27 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E139",
+   "date": "2026-10-28",
+   "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120",
+    "E131",
+    "E137"
+   ],
+   "error": "Found designing the arc-02 long (#491, before any build): story QA's image_repeat_gap_seconds_min (300 s) was measured on each hold's manifest `image`, `<shot id>#<src_start>`, so one library clip or one still approved for two shots counted as two pictures. approve-source accepted the same footage clip or still for any number of shots of a plan, and qa_pilot would have passed the repeat. Root cause: the instrument keyed a picture by the shot that shows it, not by what it shows; a fallback (R3) is the first source that can put one picture on two shots.",
+   "fix": "shot_sources.approve_source refuses a footage clip or a still already approved for another shot of the plan whose hold is nearer than the gap (SOURCE_IMAGE_REPEAT, keyed by clip/still sha256; a long on long_plan_check.timeline, the check's own layout, a Short always near); qa_pilot.repeat_gaps keys a fallback hold by its source sha256 (a still one picture whatever part is shown, footage by part) and story QA v3/v4 read it. Class antidote: a gate on a property of the picture keys it by the picture's content, never by the slot that shows it.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e139_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }
