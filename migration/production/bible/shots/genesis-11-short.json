@@ -1,0 +1,53 @@
+{
+ "episode": "genesis-11-short",
+ "shots": {
+  "k-close": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5), the closer crop; Kokoro voice-over.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-3",
+   "still": "arc-01-long-k-promise-3",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
+   "clip_sha256": null,
+   "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "0ca2a272696d44e73d6dd1a85cf8dacf137e544e36057b3711075038392c2679"
+  },
+  "k-insight": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5), 9:16 centre crop; Kokoro voice-over.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-2",
+   "still": "arc-01-long-k-promise-2",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
+   "clip_sha256": null,
+   "still_sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "25a69f4d064ff1c188a96df25251e9c4c4e2ca8457948e8b76c89b2943214e4c"
+  },
+  "k-question": {
+   "source": "pavo_reuse",
+   "score": 9.5,
+   "note": "genesis-08's approved Keeper voice-over clip, 6 s for the shortened question's 6 s; repeat judged at the confirmation review.",
+   "approved_at": "2026-10-28",
+   "clip_from": "genesis-08-short#k-question",
+   "asset": "shot-genesis-08-short-k-question-sha256-0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead.mp4",
+   "clip_sha256": "0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead",
+   "clip_seconds": 6,
+   "from_score": 9.5,
+   "request_sha256": "63d1b4761b0cc9bddd9563a4e795275bfd8cac9379784c02d5d79c1affdc8385"
+  }
+ }
+}
