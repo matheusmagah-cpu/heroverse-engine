@@ -80,5 +80,56 @@ class ShortRules(unittest.TestCase):
         self.assertFalse([p for p in pe.short_problems(ep6) if p.startswith("SHORT_LENGTH")])
 
 
+class FakeResponse:
+    def __init__(self, payload):
+        self.payload = payload
+
+
+class VideoIdRecorded(unittest.TestCase):
+    def test_e140_the_upload_writes_its_video_id_into_the_episode_record(self):
+        """E140: the ledger got genesis-05..08's video ids but their episode records never did, so live_intel skipped
+        them without a word. The publish step writes the id into the record it published (the workflow commits it)."""
+        with tempfile.TemporaryDirectory() as d:
+            v = Path(d, "v.mp4")
+            v.write_bytes(b"video")
+            rec = Path(d, "genesis-99-short.json")
+            rec.write_text(json.dumps({"id": "genesis-99-short", "part": 8, "format": "short", "title": "T 🐑",
+                                       "description": "D", "tags": [], "output_sha256": pe.sha256_file(v)}, indent=1,
+                                      ensure_ascii=False) + "\n")
+            ledger = Path(d, "ledger.json")
+            ledger.write_text(json.dumps({"entries": {}}))
+
+            def get(url, params=None):
+                if url.endswith("channels"):
+                    return FakeResponse({"items": [{"id": pe.pv.CHANNEL}]})
+                return FakeResponse({"items": [{"snippet": {"channelId": pe.pv.CHANNEL, "title": "T"},
+                                                "status": {"privacyStatus": "public", "uploadStatus": "processed"}}]})
+            fake = type("S", (), {"get": staticmethod(get)})()
+            saved = (pe.problems, pe.pv.session, pe.pv.check, pe.pv.upload)
+            try:
+                pe.problems = lambda episode, video=None: []
+                pe.pv.session = lambda: fake
+                pe.pv.check = lambda response, what: response.payload
+                pe.pv.upload = lambda s, path, body: {"id": "VID12345678"}
+                pe.main(str(rec), str(v), str(ledger), str(Path(d, "receipt.json")))
+                text = rec.read_text()
+                self.assertEqual(json.loads(text)["video_id"], "VID12345678")
+                self.assertTrue(text.endswith("\n"))
+                self.assertIn("🐑", text)   # the record stays readable UTF-8
+                pe.main(str(rec), str(v), str(ledger), str(Path(d, "receipt.json")))   # a re-run is idempotent
+                self.assertEqual(rec.read_text(), text)
+                rec.write_text(json.dumps(dict(json.loads(text), video_id="OTHER000000")))
+                with self.assertRaises(SystemExit) as e:   # a record naming another video is never overwritten
+                    pe.main(str(rec), str(v), str(ledger), str(Path(d, "receipt.json")))
+                self.assertIn("EPISODE_VIDEO_ID_MISMATCH", str(e.exception))
+            finally:
+                pe.problems, pe.pv.session, pe.pv.check, pe.pv.upload = saved
+
+    def test_e140_the_publish_workflow_commits_the_episode_record(self):
+        wf = (ROOT.parent / ".github/workflows/publish-episode.yml").read_text()
+        record_step = wf.split("Record ledger and receipt", 1)[1].split("git commit", 1)[0]
+        self.assertIn("migration/production/bible/episodes/$EPISODE.json", record_step)
+
+
 if __name__ == "__main__":
     unittest.main()
