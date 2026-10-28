@@ -36,6 +36,7 @@ for _p in (HERE, REPO / "migration" / "production" / "characters"):
         sys.path.insert(0, str(_p))
 V4 = "story-qa-criteria-v4"
 V4X = "story-qa-criteria-v4-owner-exception-arc01"   # the owner's arc-01 exception (long_plan_check.V4X)
+V5 = "story-qa-criteria-v5"   # the general rule since 28/10 (long_plan_check.V5)
 QA_V4 = REPO / "migration" / "production" / "qa_criteria_story_v4.json"
 NATIVE = "pavo_native"
 KOKORO = "kokoro"
@@ -65,7 +66,7 @@ def native_plan(plan):
     criteria file with the speech rows exists)."""
     if not isinstance(plan, dict) or plan.get("audio_route") == KOKORO:
         return False
-    return plan.get("criteria") in (V4, V4X) or plan.get("audio_route") == NATIVE
+    return plan.get("criteria") in (V4, V4X, V5) or plan.get("audio_route") == NATIVE
 
 
 def load_voices(path=None):

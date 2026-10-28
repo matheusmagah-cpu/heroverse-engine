@@ -369,6 +369,46 @@ class OwnerException(unittest.TestCase):
             finally:
                 shutil.rmtree(d)
 
+    def test_v5_is_v4_with_only_the_source_rows_and_the_agreed_values_changed(self):
+        """Owner 28/10 ("destrave todos os vídeos.. tanto os longos.. tanto os shorts"): story QA v5 is the general rule
+        of the integrated source plan, for any plan that names it; v4 copied, then only the source order (Pavo assets,
+        Pavo video, faceless footage, animated stills, Kokoro), the 12 s hold and the measured character-free share."""
+        import long_build
+        import long_plan_check as lpc
+        ss.owner_exception = self.saved[0]
+        self.assertIsNone(lpc.frozen_qa_problem(plan={"criteria": lpc.V5}))
+        v4, v5 = lpc.qa(lpc.QA_V4), lpc.qa(lpc.QA_V5)
+        self.assertNotIn("owner_exception", v5)                       # general: bound to no plan
+        self.assertEqual(v5["grammar"]["scene_seconds"], [4.0, 12.0])
+        self.assertEqual(v5["grammar"]["image_repeat_gap_seconds_min"], 300.0)
+        self.assertTrue(v5["grammar"]["every_scene_in_motion"])
+        self.assertLess(v5["grammar"]["establishing_share_max"], 0.2)
+        for key in set(v4) | set(v5):
+            if key in ("version", "frozen_at_utc", "owner_v5"):
+                continue
+            if key in ("rights", "grammar"):
+                skip = ("fallback_sources", "fallback_shots", "scene_seconds", "establishing_share_max")
+                self.assertEqual({k: v for k, v in v4[key].items() if k not in skip},
+                                 {k: v for k, v in v5[key].items() if k not in skip}, key)
+            else:
+                self.assertEqual(v4.get(key), v5.get(key), key)
+        for episode in ("arc-01-long", "arc-02-long", "genesis-10-short"):
+            self.assertTrue(lpc.owner_exception({"criteria": lpc.V5, "episode": episode}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4, "episode": "arc-01-long"}))
+        self.assertEqual(long_build.plan_holds({"criteria": lpc.V5, "version": lpc.VERSION}), (4.0, 12.0))
+        self.assertEqual(lpc.establishing_share_max(v4), __import__("plan_check").ESTABLISHING_SHARE_MAX)
+        # faceless footage: only on a v5 shot of anonymous figures; text, branding and the modern world stay refused
+        anon = {"id": "s-x", "kind": "scene", "characters": [], "figures": "anonymous"}
+        v5plan = {"criteria": lpc.V5, "passage": "Genesis 3"}
+        self.assertTrue(ss.faceless_shot(v5plan, anon))
+        self.assertFalse(ss.faceless_shot({"criteria": lpc.V4, "passage": "Genesis 3"}, anon))
+        self.assertFalse(ss.faceless_shot(v5plan, dict(anon, characters=["eve"])))
+        rec = {"title": "woman walking barefoot on grass", "query": "bare feet grass"}
+        self.assertTrue(ss.period_clash(v5plan, rec))
+        self.assertFalse(ss.period_clash(v5plan, rec, faceless=True))
+        self.assertTrue(ss.period_clash(v5plan, {"title": "woman walking in the city street", "query": "x"},
+                                        faceless=True))
+
     def test_the_exception_is_bound_to_the_arc01_plan(self):
         import long_plan_check as lpc
         ss.owner_exception = self.saved[0]
@@ -388,6 +428,122 @@ class OwnerException(unittest.TestCase):
                 self.assertEqual(a, b, key)
             else:
                 self.assertEqual(v4.get(key), v4x.get(key), key)
+
+
+class ShortsV5OptIn(unittest.TestCase):
+    """Story QA v5 for the Shorts (owner 28/10: "destrave todos os vídeos... utilize tudo que o Pavo tem"): a Short
+    that says `"criteria": "story-qa-criteria-v5"` (and the Kokoro route) may show an approved still of another plan
+    (`still_from`: the arc-01 long's Keeper stills) at its own 1080x1920 frame, and adopt another episode's approved
+    Pavo clip (`clip_from`), each by Claude's review; nothing changes for a plan under older criteria."""
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.dir)
+
+    def short(self, **over):
+        p = {"episode": "t-short", "aspect_ratio": "9:16", "criteria": "story-qa-criteria-v5", "audio_route": "kokoro",
+             "narration": [{"kind": "story", "text": "The camp danced on."}, {"kind": "insight", "text": "Most miss it."}],
+             "shots": [{"id": "s-music", "kind": "scene", "lines": [0], "seconds": 8, "characters": [],
+                        "figures": "anonymous", "clip_from": "g08#s-wedding",
+                        "prompt": f"{STYLE}. Wide shot. Silhouettes dance around the fire"},
+                       {"id": "k-insight", "kind": "keeper", "voiceover": True, "lines": [1],
+                        "still_from": "arc-k-promise-2", "prompt": f"{STYLE}. Medium shot. The narrator by the fire"}]}
+        p.update(over)
+        return p
+
+    def test_a_v5_short_borrows_a_named_still_of_another_plan_at_its_own_frame(self):
+        import plan_check
+        rec = {"id": "arc-k-promise-2", "episode": "arc-long", "shot": "k-promise-2", "status": "APPROVED",
+               "repo_path": "migration/production/bible/stills/arc.jpg", "sha256": "c" * 64}
+        keep, refusal = plan_check.still_record, ss.fallback_refusal
+        plan_check.still_record = lambda i: rec if i == "arc-k-promise-2" else None
+        ss.fallback_refusal = lambda *a, **k: None          # the keeper's own references: tested in OwnerException
+        try:
+            a = ss.approve_source(self.short(), "k-insight", "still_motion", "arc-k-promise-2", 9.5, "crop holds the face",
+                                  shots_dir=self.dir, today="2026-10-28")
+            self.assertEqual((a["still_from"], a["frame"]), ("arc-k-promise-2", [1080, 1920]))
+            for plan, item in ((self.short(criteria="story-qa-criteria-v4"), "arc-k-promise-2"),   # older criteria
+                               (self.short(), "arc-k-promise-3")):                                 # not the named one
+                with self.assertRaises(SystemExit) as err:
+                    ss.approve_source(plan, "k-insight", "still_motion", item, 9.5, "x", shots_dir=self.dir)
+                self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
+        finally:
+            plan_check.still_record, ss.fallback_refusal = keep, refusal
+
+    def test_a_v5_short_adopts_another_episodes_approved_clip_by_its_sha256(self):
+        sha = "b" * 64
+        (self.dir / "g08.json").write_text(json.dumps({"episode": "g08", "shots": {"s-wedding": {
+            "asset": f"shot-g08-s-wedding-sha256-{sha}.mp4", "clip_sha256": sha, "clip_seconds": 8, "score": 9.5}}}))
+        src = {"episode": "g08", "aspect_ratio": "9:16", "shots": [{"id": "s-wedding", "kind": "scene", "characters": []}]}
+        plans = ss.HERE / "plans"
+        real = plans / "g08.json"
+        self.assertFalse(real.exists())
+        real.write_text(json.dumps(src))
+        try:
+            a = ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "not read as recycled",
+                                  shots_dir=self.dir, today="2026-10-28")
+            self.assertEqual((a["clip_from"], a["clip_sha256"], a["clip_seconds"]), ("g08#s-wedding", sha, 8))
+            p = self.short()
+            approvals = json.loads((self.dir / "t-short.json").read_text())["shots"]
+            self.assertFalse([m for m in eb.review_problems(p, {}, approvals) if "s-music" in m
+                              and m.startswith("SHOT_REQUEST_CHANGED")])
+            p["shots"][0]["prompt"] += " Drums."              # the shot changed: approve again
+            self.assertTrue([m for m in eb.review_problems(p, {}, approvals) if m.startswith("SHOT_REQUEST_CHANGED")])
+            for plan, code in ((self.short(criteria="story-qa-criteria-v4"), "REUSE_NOT_NAMED"),):
+                with self.assertRaises(SystemExit) as err:
+                    ss.approve_source(plan, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+                self.assertTrue(str(err.exception).startswith(code), str(err.exception))
+            other = self.short()
+            other["shots"][0]["characters"] = ["noah"]
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(other, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+            self.assertTrue(str(err.exception).startswith("REUSE_CHARACTERS_DIFFER"))
+            real.write_text(json.dumps(dict(src, aspect_ratio="16:9")))
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+            self.assertTrue(str(err.exception).startswith("REUSE_FRAME_MISMATCH"))
+        finally:
+            real.unlink()
+
+
+class ShortsV5Footage(unittest.TestCase):
+    """Owner 28/10 ("Preciso de Short HOJE... pegar vídeos disponíveis, coerentes"): a v5 Short may use a 16:9 library
+    clip, centre-cropped to 1080x1920 at the build; a Short under older criteria still may not (E132)."""
+    def test_a_v5_short_takes_a_16x9_clip_cropped_to_its_frame(self):
+        lib = [clip("clip-river-a")]
+        v5 = {"episode": "t-v5", "aspect_ratio": "9:16", "criteria": "story-qa-criteria-v5", "audio_route": "kokoro",
+              "narration": plan()["narration"], "shots": plan()["shots"]}
+        old = dict(v5, criteria="story-qa-criteria-v4")
+        self.assertEqual([c["item"] for c in ss.footage_candidates(v5, v5["shots"][2], 2, lib)], ["clip-river-a"])
+        self.assertEqual(ss.footage_candidates(old, old["shots"][2], 2, lib), [])
+        with tempfile.TemporaryDirectory() as d:
+            a = ss.approve_source(v5, "s-river", "footage", "clip-river-a", 9.6, "the river, cropped", lib=lib,
+                                  shots_dir=d, today="2026-10-28")
+            self.assertEqual(a["crop_to"], [1080, 1920])
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(old, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d)
+            self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_USABLE"))
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_the_build_crops_the_clip_after_its_sha256_check(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            src = d / "src.mp4"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc=s=320x180:d=1", "-pix_fmt", "yuv420p",
+                            str(src)], check=True)
+            sha = hashlib.sha256(src.read_bytes()).hexdigest()
+            approval = {"source": "footage", "asset": f"footage-clip-river-a-sha256-{sha}.mp4", "clip_sha256": sha,
+                        "crop_to": [108, 192]}
+            out = ss.fetch_source(approval, d / "out.mp4", fetch=lambda name, dst: shutil.copy(src, dst))
+            info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-of", "json", str(out)],
+                                             capture_output=True, text=True).stdout)
+            v = [s for s in info["streams"] if s["codec_type"] == "video"][0]
+            self.assertEqual((v["width"], v["height"]), (108, 192))
+            with self.assertRaises(SystemExit) as err:     # another file in its place is refused before any crop
+                ss.fetch_source(dict(approval, clip_sha256="0" * 64), d / "bad.mp4",
+                                fetch=lambda name, dst: shutil.copy(src, dst))
+            self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
 
 
 class VoiceAudio(unittest.TestCase):

@@ -245,6 +245,14 @@ class Inputs(unittest.TestCase):
         self.refused("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "7"}, "GUARD_INPUT_INVALID")
         self.refused("cf-images.yml", {"pilot": "migration/production/pilot-010", "engine": "flux"}, "GUARD_INPUT_INVALID")
         self.refused("footage.yml", {"queries": "/etc/passwd", "per_theme": "3"}, "GUARD_INPUT_INVALID")
+        # owner 28/10: a Short's own queries file (footage/queries-<name>.json) feeds the same library
+        self.refused("footage.yml", {"queries": "migration/production/footage/queries-../x.json"}, "GUARD_INPUT_INVALID")
+        self.refused("footage.yml", {"queries": "migration/production/footage/queries-nope-99.json"}, "GUARD_INPUT_MISSING")
+        named = {"queries": "migration/production/footage/queries-shorts-g09.json", "per_theme": "2"}
+        self.assertEqual(g.WORKFLOWS["footage.yml"][1](named)["uploads"], 2 * 17)
+        self.assertEqual(g.subject_of("footage.yml", named), "footage-library")
+        wf = (g.WF_DIR / "footage.yml").read_text()
+        self.assertIn("footage/queries(-[a-z0-9]+)*|", wf)   # the workflow's own path check agrees
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
         self.refused("pilot-render-stills.yml", {"pilot": "pilot-999"}, "GUARD_INPUT_MISSING")
         # LONG_DESIGN slice 3: the long's build takes a long plan only

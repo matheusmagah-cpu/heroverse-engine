@@ -9,7 +9,7 @@
  "passage": "Genesis 1:1-3:24 (KJV, public domain)",
  "aspect_ratio": "16:9",
  "burned_captions": false,
- "criteria": "story-qa-criteria-v4-owner-exception-arc01",
+ "criteria": "story-qa-criteria-v5",
  "ambience": "the wild open land of the garden: a soft wind through the trees and a few distant birds",
  "people": "Adam, Eve and the serpent are APPROVED and appear with their look word for word, the same entries as the Shorts. God speaks only as a voice-over over storm, light, rain or wind. The serpent is silent on screen: its words are the Keeper's narration (story QA v3: every talking clip passes lipsync_check, which reads a human face). The Keeper narrates and is on screen only for the promise, the insight and the close.",
  "chapters": [
@@ -522,7 +522,7 @@
   {
    "id": "s-co-adam",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam"
    ],
@@ -536,7 +536,7 @@
   {
    "id": "s-co-hide",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -551,7 +551,7 @@
   {
    "id": "s-co-gate",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A great flaming sword turns slowly in the air before the dark entrance of the garden, thick trees on either side. Dawn, firelight on the leaves. Final and holy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -565,7 +565,7 @@
   {
    "id": "s-co-exile",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "adam",
     "eve"
@@ -917,7 +917,7 @@
   {
    "id": "s-c1-pause",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "adam"
    ],
@@ -931,7 +931,7 @@
   {
    "id": "s-c1-hush",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. The wind dies away and the whole valley falls still, every leaf motionless. Late morning. Hushed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -1004,7 +1004,7 @@
   {
    "id": "s-c1-bless",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -1020,7 +1020,7 @@
   {
    "id": "s-c1-laugh",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -1033,24 +1033,9 @@
    "chapter": "c1"
   },
   {
-   "id": "s-c1-run",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, runs through tall grass beside a herd of horses. Bright morning. Freedom. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    24,
-    25
-   ],
-   "chapter": "c1"
-  },
-  {
    "id": "s-c1-valley",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "adam"
    ],
@@ -1065,7 +1050,7 @@
   {
    "id": "s-c1-pair",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "adam",
     "eve"
@@ -1079,24 +1064,9 @@
    "chapter": "c1"
   },
   {
-   "id": "s-c1-rest",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, rest in the shade of a great tree by the river. Warm still afternoon light. Rest and peace. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    28
-   ],
-   "chapter": "c1"
-  },
-  {
    "id": "s-c1-eye",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "serpent"
    ],
@@ -1110,7 +1080,7 @@
   {
    "id": "s-c2-dust",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. Fine red earth on a riverbank shifts and darkens as a warm wind passes over it. Early morning, soft side light. Humble and alive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -1125,7 +1095,7 @@
   {
    "id": "s-c2-breath",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam"
    ],
@@ -1138,24 +1108,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-wake",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, rises slowly to his feet and looks around the garden. A green garden glade at sunrise. Wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    29,
-    30
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-mud",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "adam"
    ],
@@ -1167,23 +1122,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-look",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, turns slowly, taking in the trees around him. Dappled light. First sight. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    31
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-river",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. A broad river winds through a green valley and parts into four bright streams. Clear morning light, mist over the water. Abundant and calm. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -1198,26 +1139,11 @@
   {
    "id": "s-c2-garden",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, low tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks beneath fruit trees, touching the leaves as he passes. Dappled sunlight in the orchard. Free and unhurried. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    32,
-    33
-   ],
-   "chapter": "c2"
-  },
-  {
-   "id": "s-c2-work",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, kneels to clear stones from a stream so the water runs freely. Midday light on the water. Content and purposeful. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     32,
@@ -1314,7 +1240,7 @@
   {
    "id": "s-c2-tree",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 12,
    "characters": [
     "adam"
    ],
@@ -1326,23 +1252,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-orchard",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, turns toward hundreds of fruit trees in every direction. Bright noon. Freedom. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    37
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-name",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam"
    ],
@@ -1357,7 +1269,7 @@
   {
    "id": "s-c2-lion",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam"
    ],
@@ -1370,24 +1282,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-eagle",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, raises his arm as an eagle lands on a branch above him. Bright midday sky. Dominion and delight. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    38,
-    39
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-alone",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam"
    ],
@@ -1402,7 +1299,7 @@
   {
    "id": "s-c2-pairs",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam"
    ],
@@ -1417,7 +1314,7 @@
   {
    "id": "s-c2-sleep",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam"
    ],
@@ -1432,7 +1329,7 @@
   {
    "id": "s-c2-meet",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "eve"
    ],
@@ -1445,24 +1342,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-see",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wakes and stares in wonder. Morning light through the leaves. Amazement. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    42,
-    43
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-side",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam",
     "eve"
@@ -1478,26 +1360,11 @@
   {
    "id": "s-c2-face",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks at him for the first time. Soft morning light. Wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    44,
-    45
-   ],
-   "chapter": "c2"
-  },
-  {
-   "id": "s-c2-step",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, steps toward her, smiling. Morning light through leaves. Joy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     44,
@@ -1522,7 +1389,7 @@
   {
    "id": "s-c2-walk",
    "kind": "scene",
-   "seconds": 8,
+   "seconds": 12,
    "characters": [
     "adam",
     "eve"
@@ -1538,7 +1405,7 @@
   {
    "id": "s-c2-hands",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -1551,25 +1418,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-together",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, sit close together under a flowering tree. Warm afternoon. One flesh. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    46,
-    47
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c2-open",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -1585,7 +1436,7 @@
   {
    "id": "s-c2-sun",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -1598,25 +1449,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-rest2",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wades into a clear shallow river as silver fish dart around his legs. Bright morning light on the water. Joy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    48,
-    49
-   ],
-   "chapter": "c2",
-   "still_of": "s-c1-sea-life"
-  },
-  {
    "id": "s-c2-coil",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "serpent"
    ],
@@ -1628,23 +1463,9 @@
    "chapter": "c2"
   },
   {
-   "id": "s-c2-watch",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, walks alone toward the center of the garden. Noon light. Unaware. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    50
-   ],
-   "chapter": "c2"
-  },
-  {
    "id": "s-c3-branch",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "serpent"
    ],
@@ -1657,24 +1478,9 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-eve-near",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, walks toward the great tree, curious, brushing aside the leaves. Warm noon light in the garden. Innocent and drawn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    51,
-    52
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-face",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "eve",
     "serpent"
@@ -1690,7 +1496,7 @@
   {
    "id": "s-c3-tongue",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "serpent"
    ],
@@ -1705,7 +1511,7 @@
   {
    "id": "s-c3-orchard",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "eve"
    ],
@@ -1718,43 +1524,13 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-eve-doubt",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, frowns slightly, glancing back at the orchard. Noon light through leaves. A first shadow of doubt. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    53,
-    54
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-answer",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 12,
    "characters": [
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, lifts her chin and points toward the orchard. Noon light. Certain, for now. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    55,
-    56
-   ],
-   "chapter": "c3"
-  },
-  {
-   "id": "s-c3-wait",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, waits, perfectly still. Deep shade. Patient. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     55,
@@ -1780,7 +1556,7 @@
   {
    "id": "s-c3-touch",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -1795,7 +1571,7 @@
   {
    "id": "s-c3-hiss",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "serpent"
    ],
@@ -1808,25 +1584,9 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-wide",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve",
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane down. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stands beneath the great tree as The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, hangs above her. The clearing at noon, everything else very still. Fateful. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    57,
-    58
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-fruit",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. A single ripe red fruit hangs from a dark branch, a drop of dew sliding down its skin. Noon light behind it. Tempting and still. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -1841,7 +1601,7 @@
   {
    "id": "s-c3-eve-eyes",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "eve"
    ],
@@ -1854,24 +1614,9 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-coils",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides along the branch toward the fruit. Dappled light through leaves. Patient and sure. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    59,
-    60
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-look",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "eve"
    ],
@@ -1886,7 +1631,7 @@
   {
    "id": "s-c3-reach",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "eve"
    ],
@@ -1899,24 +1644,9 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-watch",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, perfectly still, watching her. Deep shade in the branches. Cold patience. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    61,
-    62
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-turn",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "eve"
    ],
@@ -1929,24 +1659,9 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-listen",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, lowers its head close beside the fruit. Deep shade. Persuasion. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-near",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "adam"
    ],
@@ -1958,23 +1673,6 @@
    ],
    "chapter": "c3",
    "still_of": "s-co-adam"
-  },
-  {
-   "id": "s-c3-both-tree",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve",
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand beneath the branch where The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, waits. Noon light. Fateful. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c3"
   },
   {
    "id": "s-c3-take",
@@ -1989,33 +1687,17 @@
     65,
     66
    ],
-   "chapter": "c3",
-   "still_of": "s-open"
+   "chapter": "c3"
   },
   {
    "id": "s-c3-give",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, holds out the fruit to Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, who takes it without a word. The shade of the great tree. Silent and heavy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    65,
-    66
-   ],
-   "chapter": "c3"
-  },
-  {
-   "id": "s-c3-adam-eat",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, bites the fruit and freezes. Shade, a cloud passing over the sun. Something breaks. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     65,
@@ -2042,7 +1724,7 @@
   {
    "id": "s-c3-leaves",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -2055,43 +1737,14 @@
    "chapter": "c3"
   },
   {
-   "id": "s-c3-sew",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, ties fig leaves together with shaking fingers. Grey light. Covering. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    67,
-    68
-   ],
-   "chapter": "c3"
-  },
-  {
    "id": "s-c3-cover",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "adam",
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hold fig leaf aprons against themselves, not looking at each other. Grey light. Covered and alone. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    69
-   ],
-   "chapter": "c3"
-  },
-  {
-   "id": "s-c3-back",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, backs slowly into the thick trees. Late afternoon shadows. Retreat. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     69
@@ -2130,7 +1783,7 @@
   {
    "id": "s-c4-evening",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Evening wind moves through the dark trees of the garden, leaves turning silver. The cool of the day. A presence. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -2143,25 +1796,9 @@
    "chapter": "c4"
   },
   {
-   "id": "s-c4-crouch",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, crouch among the leaves, holding their breath. Dusk shadows. Hiding. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    71,
-    72
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-hide",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -2178,7 +1815,7 @@
   {
    "id": "s-c4-trees",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 12,
    "characters": [
     "adam"
    ],
@@ -2191,42 +1828,13 @@
    "chapter": "c4"
   },
   {
-   "id": "s-c4-step",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, steps slowly out from behind the tree. Evening light. Caught. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    73,
-    74
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-face",
    "kind": "scene",
-   "seconds": 8,
+   "seconds": 11,
    "characters": [
     "adam"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts his face toward the voice, trembling. Dusk. Seen. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    75
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-eve-hide",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, presses herself against a tree trunk. Dusk shadows. Afraid. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     75
@@ -2264,25 +1872,11 @@
   {
    "id": "s-c4-point",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 11,
    "characters": [
     "adam"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lowers his eyes and turns his head toward the woman. Dim evening light. Guilty. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    76
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-eve-hurt",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks at him, stunned. Dusk. Betrayed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     76
@@ -2318,24 +1912,9 @@
    "audio_route": "kokoro"
   },
   {
-   "id": "s-c4-apart",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand apart from each other, eyes on the ground. Dusk in the garden. Broken trust. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    77
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-shadow",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 12,
    "characters": [
     "serpent"
    ],
@@ -2364,7 +1943,7 @@
   {
    "id": "s-c4-dust",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "serpent"
    ],
@@ -2379,7 +1958,7 @@
   {
    "id": "s-c4-heel",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "eve"
    ],
@@ -2390,23 +1969,6 @@
     79
    ],
    "chapter": "c4"
-  },
-  {
-   "id": "s-c4-sky",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, sit together in the grass watching the sun go down. Warm dusk light over the valley. Content and unaware. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    78,
-    79
-   ],
-   "chapter": "c4",
-   "still_of": "s-c1-pair"
   },
   {
    "id": "s-c4-ground-c",
@@ -2452,23 +2014,9 @@
    "audio_route": "kokoro"
   },
   {
-   "id": "s-c4-eve-rain",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, rain on her face, her eyes closed. Night rain. Grief. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    81
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-adam-wait",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 12,
    "characters": [
     "adam"
    ],
@@ -2497,27 +2045,12 @@
   {
    "id": "s-c4-kneel",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 11,
    "characters": [
     "adam"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, falls to his knees in the mud as the ground splits open around him. Night, lightning and rain. Devastation. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "climax": true,
-   "beat": "chapter",
-   "lines": [
-    82
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-hold",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, cling to each other in the storm. Night, white lightning. Terror. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     82
@@ -2541,7 +2074,7 @@
   {
    "id": "s-c4-name",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "adam",
     "eve"
@@ -2558,7 +2091,7 @@
   {
    "id": "s-c4-eve-look",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 7,
    "characters": [
     "eve"
    ],
@@ -2590,26 +2123,11 @@
   {
    "id": "s-c4-leaves2",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Torn fig leaves lie scattered on the wet ground. Dawn. Not enough. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "first_frame": "arc-01-long-s-c4-leaves2",
-   "beat": "payoff",
-   "lines": [
-    85,
-    86
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-warm",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, wraps the garment around her shoulders. Dawn light. Covered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "payoff",
    "lines": [
     85,
@@ -2663,7 +2181,7 @@
   {
    "id": "s-c4-gate",
    "kind": "scene",
-   "seconds": 8,
+   "seconds": 9,
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A great flaming sword turns slowly in the air before the dark entrance of the garden, thick trees on either side. Dawn, fire light on the leaves. Final and holy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
@@ -2678,7 +2196,7 @@
   {
    "id": "s-c4-leave",
    "kind": "scene",
-   "seconds": 8,
+   "seconds": 9,
    "characters": [
     "adam",
     "eve"
@@ -2693,43 +2211,14 @@
    "still_of": "s-co-exile"
   },
   {
-   "id": "s-c4-field",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, drives a wooden digging stick into hard dry ground. Harsh midday sun over a stony field. Toil. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    88,
-    89
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-road",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 9,
    "characters": [
     "adam",
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow crane up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, are two small figures on a long dusty track across a barren plain. Evening light. The long way out. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    90
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-look-east",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, looks back west toward the distant garden. Dusk. Memory. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "payoff",
    "lines": [
     90
@@ -2805,8 +2294,7 @@
    "beat": "keeper_insight",
    "lines": [
     94
-   ],
-   "still_of": "s-c3-eve-eyes"
+   ]
   },
   {
    "id": "k-insight-3",
@@ -2821,26 +2309,12 @@
   {
    "id": "s-ki-coats",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "adam",
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, stand shoulder to shoulder in the rough hide garments, their eyes lowered. Cold grey dawn. Humbled and covered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "keeper_insight",
-   "lines": [
-    96
-   ]
-  },
-  {
-   "id": "s-ki-garden",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, stand small at the edge of a dusty plain, the green garden far behind them. Cold dawn light. Grief. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     96
@@ -2880,23 +2354,9 @@
    ]
   },
   {
-   "id": "s-ki-shame",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hold broad fig leaves against themselves, their eyes cast down. The light in the garden suddenly grey and flat. Shame. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "beat": "keeper_insight",
-   "lines": [
-    99
-   ]
-  },
-  {
    "id": "s-ki-face",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 10,
    "characters": [
     "adam"
    ],
@@ -2968,8 +2428,7 @@
     104
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro",
-   "still_of": "k-promise-1"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-insight-5",
@@ -3002,5 +2461,495 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
    "audio_route": "kokoro"
   }
- ]
+ ],
+ "source_design": {
+  "pavo_talking": [
+   "s-open",
+   "k-promise-1",
+   "s-c2-adam",
+   "s-c4-adam",
+   "s-c4-blame",
+   "k-insight-1",
+   "k-insight-2",
+   "k-insight-3",
+   "k-insight-7",
+   "k-insight-8",
+   "k-insight-6",
+   "k-insight-9",
+   "k-close-1",
+   "k-close-2"
+  ],
+  "pavo_voice_over": [
+   "g-c1-lights",
+   "g-c1-image",
+   "g-c2-command",
+   "g-c4-naked",
+   "g-c4-serpent",
+   "g-c4-woman",
+   "g-c4-ground",
+   "g-c4-dust",
+   "g-c4-one-of-us"
+  ],
+  "pavo_scene": [
+   "s-c1-sea-life",
+   "s-c1-animals",
+   "s-c1-meadow",
+   "s-c1-pause",
+   "s-c1-bless",
+   "s-c1-laugh",
+   "s-c1-valley",
+   "s-c1-pair",
+   "s-c2-breath",
+   "s-c2-mud",
+   "s-c2-garden",
+   "s-c2-life",
+   "s-c2-swim",
+   "s-c2-tree",
+   "s-c2-name",
+   "s-c2-lion",
+   "s-c2-alone",
+   "s-c2-pairs",
+   "s-c2-sleep",
+   "s-c2-side",
+   "s-c2-face",
+   "s-c2-walk",
+   "s-c2-hands",
+   "s-c2-open",
+   "s-c2-sun",
+   "s-c2-coil",
+   "s-c3-branch",
+   "s-c3-face",
+   "s-c3-tongue",
+   "s-c3-orchard",
+   "s-c3-answer",
+   "s-c3-touch",
+   "s-c3-hiss",
+   "s-c3-eve-eyes",
+   "s-c3-look",
+   "s-c3-reach",
+   "s-c3-turn",
+   "s-c3-take",
+   "s-c3-give",
+   "s-c3-shame",
+   "s-c3-leaves",
+   "s-c3-cover",
+   "s-c3-listen2",
+   "s-c4-trees",
+   "s-c4-face",
+   "s-c4-point",
+   "s-c4-dust",
+   "s-c4-heel",
+   "s-c4-kept",
+   "s-c4-kneel",
+   "s-c4-coats",
+   "s-c4-last",
+   "s-c4-road",
+   "s-c4-horizon",
+   "s-ki-bite",
+   "s-ki-coats",
+   "s-ki-leave"
+  ],
+  "window": [
+   "s-ki-trees",
+   "s-ki-valley",
+   "s-ki-light"
+  ],
+  "footage": [
+   "s-c1-light",
+   "s-c1-divide"
+  ],
+  "still_motion": [
+   "s-co-adam",
+   "s-co-hide",
+   "s-co-gate",
+   "s-co-exile",
+   "k-promise-2",
+   "k-promise-3",
+   "s-c1-deep",
+   "s-c1-shore",
+   "s-c1-wind",
+   "s-c1-land",
+   "s-c1-adam-light",
+   "s-c1-dawn",
+   "s-c1-river",
+   "s-c1-sky",
+   "s-c1-grass",
+   "s-c1-stars",
+   "s-c1-moon",
+   "s-c1-birds",
+   "s-c1-whale",
+   "s-c1-herd",
+   "s-c1-fox",
+   "s-c1-hush",
+   "s-c1-adam-hands",
+   "s-c1-eve",
+   "s-c1-both",
+   "s-c1-eye",
+   "s-c2-dust",
+   "s-c2-river",
+   "s-c2-two",
+   "s-c2-four",
+   "s-c2-gold",
+   "s-c2-meet",
+   "s-c3-eve",
+   "s-c3-fruit",
+   "s-c3-near",
+   "s-c3-wind",
+   "s-c4-evening",
+   "s-c4-hide",
+   "s-c4-eve",
+   "s-c4-shadow",
+   "s-c4-ground-c",
+   "s-c4-adam-wait",
+   "s-c4-name",
+   "s-c4-eve-look",
+   "s-c4-leaves2",
+   "s-c4-life",
+   "s-c4-gate",
+   "s-c4-leave",
+   "s-c4-sword2",
+   "k-insight-4",
+   "s-ki-gate",
+   "s-ki-face",
+   "k-insight-5"
+  ],
+  "note": "owner 28/10 (integrated plan): Pavo assets where they serve best, Pavo video for the shots still to make (key beats first, each with a named fallback in `fallbacks`), animated stills for the rest (approved Pavo stills and FLUX frames, continuous motion), licensed footage; Kokoro voices every line without a native clip"
+ },
+ "fallbacks": {
+  "s-open": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c2-meet",
+   "still_of": "s-c2-meet",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "k-promise-1": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c1-sea-life": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "g-c1-lights": {
+   "source": "still_motion",
+   "item": null,
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c1-animals": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c1-meadow": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c4-eve",
+   "still_of": "s-c4-eve",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "s-c1-pause": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "g-c1-image": {
+   "source": "still_motion",
+   "item": null,
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c1-bless": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c1-laugh": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c1-valley": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c1-pair": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-breath": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-mud": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-garden": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-life": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-swim": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "g-c2-command": {
+   "source": "still_motion",
+   "item": null,
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c2-tree": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-name": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-lion": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-alone": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-pairs": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-sleep": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-side": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-face": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-walk": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-co-exile",
+   "still_of": "s-co-exile",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "s-c2-hands": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-open": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-sun": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c2-coil": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-branch": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-face": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-tongue": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-orchard": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-answer": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-touch": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-hiss": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-eve-eyes": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-look": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-reach": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-turn": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-take": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-give": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-shame": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-leaves": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-cover": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c3-listen2": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c4-trees": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c1-adam-light",
+   "still_of": "s-c1-adam-light",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "s-c4-face": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c1-dawn",
+   "still_of": "s-c1-dawn",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "s-c4-adam": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c1-river",
+   "still_of": "s-c1-river",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "g-c4-naked": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-naked",
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c4-point": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c1-sky",
+   "still_of": "s-c1-sky",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "g-c4-serpent": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-serpent",
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c4-dust": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c4-heel": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c4-kept": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "g-c4-woman": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-woman",
+   "why": "God's FLUX frame in motion"
+  },
+  "g-c4-ground": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-ground",
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c4-kneel": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c1-grass",
+   "still_of": "s-c1-grass",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "g-c4-dust": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-dust",
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c4-coats": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "g-c4-one-of-us": {
+   "source": "still_motion",
+   "item": "arc-01-long-g-c4-one-of-us",
+   "why": "God's FLUX frame in motion"
+  },
+  "s-c4-last": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c4-road": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-c4-horizon": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-insight-2": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-ki-bite": {
+   "source": "still_motion",
+   "item": "arc-01-long-s-c2-meet",
+   "still_of": "s-c2-meet",
+   "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
+  },
+  "k-insight-3": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-ki-coats": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-insight-7": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "s-ki-leave": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-insight-8": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-insight-6": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-insight-9": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-close-1": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  },
+  "k-close-2": {
+   "source": "merge",
+   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+  }
+ }
 }

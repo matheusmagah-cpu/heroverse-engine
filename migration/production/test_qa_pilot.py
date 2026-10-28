@@ -277,7 +277,7 @@ class StoryV4Rows(unittest.TestCase):
         self.assertEqual(sorted(q.STORY_V4_ROWS), rows)
         for row, names in q.STORY_V3_ROWS.items():
             self.assertTrue(set(names) <= set(q.STORY_V4_ROWS[row]), row)
-        self.assertRegex((HERE / "qa_pilot.py").read_text(), r'criteria\["version"\] in \(STORY_V4, STORY_V4X\)')
+        self.assertRegex((HERE / "qa_pilot.py").read_text(), r'criteria\["version"\] in \(STORY_V4, STORY_V4X, STORY_V5\)')
 
     def test_kept_speech_needs_its_checks_and_the_mix(self):
         pinned = V4["speech"]["asr_model"]["model_bin_sha256"]

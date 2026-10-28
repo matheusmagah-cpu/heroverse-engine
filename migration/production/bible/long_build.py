@@ -175,6 +175,11 @@ def compose_long_shots(plan, layout, clips, clip_seconds):
     return out
 
 
+def plan_holds(plan):
+    """The hold band of the criteria the plan names (v5: up to 12 s), else the module's frozen v3 band."""
+    return tuple(((lpc.qa_for(plan) or QA).get("grammar") or {}).get("scene_seconds") or HOLDS)
+
+
 def hold_problems(cuts, holds=HOLDS):
     """story QA v3 grammar.scene_seconds, as qa_pilot measures it: every cut but the last inside the band, the last
     at least its floor."""
@@ -205,12 +210,12 @@ def compose_problems(plan, layout, clip_seconds):
         return [str(exc) if isinstance(exc, SystemExit) else f"CLIP_MISSING {exc}"]
     sentences = [{"start": x["start"], "end": x["end"]} for x in layout["lines"]]
     problems = (short_engine.check_shots(cuts, layout["total"]) + short_engine.talk_problems(cuts, sentences)
-                + hold_problems(cuts))
+                + hold_problems(cuts, plan_holds(plan)))
     for i, c in enumerate(cuts):
         if short_engine.explicit_speed(c, clip_seconds[c["source"]]) is None:
             problems.append(f"CLIP_TOO_SHORT cut {i} {c['shot']}")
     share = establishing_share(plan, cuts, layout["total"])
-    if share > pc.ESTABLISHING_SHARE_MAX:
+    if share > lpc.establishing_share_max(lpc.qa_for(plan)) + 1e-9:
         problems.append(f"ESTABLISHING_SHARE {share:.3f} (composed)")
     return problems
 

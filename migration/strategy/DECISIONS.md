@@ -746,4 +746,16 @@ latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has 
   hypothesis at a time). The packaging follows the validated hygiene rows only; no driver is validated
   (package mining 27/10). vidIQ: 40 credits (balance 3,261 before), no generation.
 
+## Story QA v5: one source rule for longs and Shorts (owner, 2026-10-28)
+- **Owner:** "Só com isso aí já dá pra terminar o vídeo.. faça desse jeito e destrave todos os vídeos.. tanto os
+  longos.. tanto os shorts.. utilize tudo que o Pavo tem, e o resto faça como te falei sem retrabalho".
+- **Rule** (`production/qa_criteria_story_v5.json`, frozen): v4 copied; only the source rows and two values change.
+  - Source order: (1) every existing Pavo asset; (2) Pavo video with references for the key beats when the quota
+    allows; (3) licensed faceless stock video coherent with the line; (4) animated stills (approved Pavo stills ≥ 300 s
+    apart, FLUX/SDXL frames); (5) Kokoro for every line without a native clip, God always Kokoro.
+  - Longest hold 12 s, always in continuous motion; character-free share ≤ 0.17 (0.165 measured on the arc-01 map).
+  - Unchanged: the 300 s repeat rule, exact KJV, the structure, audio/loudness/captions, the 9.5 reviews.
+- **arc-01** moves to v5 with an integrated source map (`source_design` + named `fallbacks`); the arc-01 exception
+  file stays as it was. The Shorts opt in by naming v5 in their plan (their own frame, E132).
+
 - **2026-10-28, Gemini image free tier = 0, route not kept.** Every image model on the free AI Studio key answered 429 with limit 0 (`evidence/gemini-image/20261028-free-tier.json`); stills from ChatGPT run on the owner's PC (`integrations/chatgpt-local/`).

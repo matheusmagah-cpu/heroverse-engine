@@ -97,16 +97,31 @@ V3, V4 = "story-qa-criteria-v3", "story-qa-criteria-v4"
 QA_V4X = ROOT / "migration" / "production" / "qa_criteria_story_v4_owner_exception_arc01.json"
 QA_V4X_SHA256 = "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388"   # frozen 2026-10-28 (owner)
 V4X = "story-qa-criteria-v4-owner-exception-arc01"
-V4_FAMILY = (V4, V4X)
+# owner 28/10 ~10:00-12:30 UTC ("destrave todos os vídeos.. tanto os longos.. tanto os shorts"): v5, the general
+# rule of the integrated source plan (v4 with only the source rows, holds up to 12 s in continuous motion and the
+# measured character-free share changed); any plan that names it, long or Short
+QA_V5 = ROOT / "migration" / "production" / "qa_criteria_story_v5.json"
+QA_V5_SHA256 = "d75998f8dffc0e8ad378360d2f897db2d110459beca2097059f32dc6594396ce"   # frozen 2026-10-28 (owner)
+V5 = "story-qa-criteria-v5"
+V4_FAMILY = (V4, V4X, V5)
 
 
 def criteria_files():
     """{version: (file, pinned sha256)}, read at call time (a test may pin another hash)."""
-    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256), V4X: (QA_V4X, QA_V4X_SHA256)}
+    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256), V4X: (QA_V4X, QA_V4X_SHA256),
+            V5: (QA_V5, QA_V5_SHA256)}
+
+
+def establishing_share_max(q):
+    """plan_check's ESTABLISHING_SHARE_MAX, or the criteria's own grammar.establishing_share_max (v5)."""
+    return ((q or {}).get("grammar") or {}).get("establishing_share_max", pc.ESTABLISHING_SHARE_MAX)
 
 
 def owner_exception(plan):
-    """True when the plan is measured by the owner's exception criteria and is the plan that file names."""
+    """True when the plan is measured by v5 (the general rule since 28/10), or by the owner's arc-01 exception and is
+    the plan that file names: character stills by reference, plan B voices and faceless footage are then allowed."""
+    if criteria_version(plan) == V5:
+        return True
     if criteria_version(plan) != V4X:
         return False
     q = qa_for(plan) or {}
@@ -579,8 +594,9 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                             f"<= {slow} s)")
             break
     est_seconds = sum(hold[i] for i, s in enumerate(shots) if s.get("establishing"))
-    if est_seconds / total > pc.ESTABLISHING_SHARE_MAX:
-        problems.append(f"ESTABLISHING_SHARE {est_seconds / total:.2f} > {pc.ESTABLISHING_SHARE_MAX}")
+    est_max = establishing_share_max(q)
+    if est_seconds / total > est_max + 1e-9:
+        problems.append(f"ESTABLISHING_SHARE {est_seconds / total:.3f} > {est_max}")
 
     # the frozen QA's speech rows on the estimate
     sp = q["speech"]

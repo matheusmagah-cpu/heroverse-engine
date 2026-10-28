@@ -35,6 +35,20 @@ BLOCK = re.compile(r"(?i)\b(people|person|man|men|woman|women|girl|boy|child|chi
                    r"advert|commercial|drone pilot|vlog|car|traffic|city|street|police|military|war|skyline|building|"
                    r"rocket|launch|satellite|map|trailer|documentary|presents|rafting|kayak|boat|hurricane|storm|"
                    r"vigil|memorial|movie|film)s?\b|\b(18|19)\d\d\b")
+# story QA v5 (owner 28/10, "vídeos ... onde não mostra o rosto"): a faceless figure (hands, feet, a figure from
+# behind or in silhouette) may stand in a story shot; the title filter then keeps refusing text, branding, the modern
+# world and crowds, and Claude's per-clip review (approve-source >= 9.5) refuses any visible face or period clash
+FACE_WORDS = re.compile(r"(?i)\b(people|person|man|men|woman|women|girl|boy|child|children|kid|selfie|interview|"
+                        r"portrait|face)s?\b")
+BLOCK_FACELESS = re.compile(BLOCK.pattern.replace("people|person|man|men|woman|women|girl|boy|child|children|kid|", "")
+                            .replace("selfie|", "").replace("interview|portrait|face|", ""), BLOCK.flags)
+
+
+def blocked(title, faceless=False):
+    """The title announces what the library refuses (BLOCK); a faceless-figure query (v5) allows figure words."""
+    return bool((BLOCK_FACELESS if faceless else BLOCK).search(title or ""))
+
+
 COMMONS_OK = re.compile(r"(?i)^(cc0|cc-zero|public domain|pd|cc by \d(\.\d)?( \w+)?)$")
 
 
@@ -69,13 +83,13 @@ def licence_ok(source, licence):
     return canonical(source, licence) is not None
 
 
-def eligible(c):
+def eligible(c, faceless=False):
     """A candidate is usable when its licence is accepted, it is at least 1080p and 8 s, and its title does not
     announce people, text or branding."""
     # E51: a vertical 1080x1920 source passed the height check and was blown up 2.4x to fill the frame
     return (licence_ok(c["source"], c["licence"]) and (c.get("height") or 0) >= MIN_HEIGHT
             and (c.get("width") or 0) >= W
-            and (c.get("seconds") or 0) >= MIN_SECONDS and not BLOCK.search(c.get("title", "")))
+            and (c.get("seconds") or 0) >= MIN_SECONDS and not blocked(c.get("title", ""), faceless))
 
 
 def strip_html(s):
@@ -288,7 +302,7 @@ def main(queries_path, out_dir, per_theme="3"):
                 print(json.dumps({"pixabay_unavailable": theme["theme"], "reason": type(e).__name__}))
         cands += commons_search(theme["query"])
         picked = tried = 0
-        for c in sorted((c for c in cands if eligible(c)), key=lambda c: (c["source"] == "commons", -(c["seconds"]))):
+        for c in sorted((c for c in cands if eligible(c, bool(theme.get("faceless")))), key=lambda c: (c["source"] == "commons", -(c["seconds"]))):
             cid = f"clip-{theme['theme']}-{slug(c['title'])}"
             if cid in have or picked >= int(per_theme) or c["page"] in seen_pages:
                 continue
