@@ -1,0 +1,57 @@
+{
+ "id": "genesis-09-s-shut-2026102806-1",
+ "still": "genesis-09-s-shut",
+ "episode": "genesis-09-short",
+ "shot": "s-shut",
+ "run": "2026102806",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot from the side. The wide wooden door in the long side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, its bottom planks sitting directly on the dry earth of the hilltop, the roof empty and flat, swings shut on its hinges at the top of the earthen ramp, and onlookers in ankle-length rough wool robes and head-cloths stand in silhouette at the foot of the ramp, their backs to the camera. Grey dusk, wind and the first heavy rain streaking across the black pitch. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot from the side. The wide wooden door in the long side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, its bottom planks sitting directly on the dry earth of the hilltop, the roof empty and flat, swings shut on its hinges at the top of the earthen ramp, and onlookers in ankle-length rough wool robes and head-cloths stand in silhouette at the foot of the ramp, their backs to the camera. Grey dusk, wind and the first heavy rain streaking across the black pitch. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373671398575216320",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373671398575216320",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373671398575216320",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-ee0639e5457c-0-53720a9dd2e5.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-shut-2026102806-1.jpg",
+ "sha256": "1ede6118cc27087b104d877ca352eeedf7fb1ae8c06e1ff8704a14a862edd6f8"
+}
