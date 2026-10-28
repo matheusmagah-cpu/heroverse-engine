@@ -36,6 +36,15 @@ def claude(sha="abc", **over):
 
 
 class Review(unittest.TestCase):
+    def test_e208_malformed_review_evidence_never_becomes_a_verdict(self):
+        for field, values in {
+                "evidence": ("viewed", True, {"file": "x"}, [None], [""], ["   "]),
+                "issues": ("none", [None], [True], [{}], [" "]),
+        }.items():
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    self.assertIn("CLAUDE_REVIEW_EVIDENCE", lr.claude_problems(claude(**{field: value}), "abc"))
+
     def test_story_reads_real_sentence_ids_and_its_existing_story_band_not_prayer_density(self):
         script = {'archetype': 'bible-story-long', 'criteria_version': 'story-qa-criteria-v5',
                   'segments': [{'id': 'n00', 'reference': 'Genesis 1:1 (KJV)'}, {'id': 'n01'}]}
