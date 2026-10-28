@@ -1,0 +1,25 @@
+{
+ "version": "footage-queries-v1",
+ "library": "migration/production/footage/library",
+ "note": "genesis-10-short (the dove, Genesis 8) and genesis-11-short (the rainbow, Genesis 8:18-9:16) under story QA v5 (owner 28/10: video first, coherent with the line, public libraries allowed): period-coherent stock, no face shown; `faceless` themes may show a figure from behind, hands or feet; every clip vetted on its frame sheet and reviewed >= 9.5 per shot; 16:9 clips centre-cropped to 1080x1920.",
+ "themes": [
+  {"theme": "dove-flight", "query": "white dove flying"},
+  {"theme": "dove-flight", "query": "pigeon flying over sea"},
+  {"theme": "dove-hands", "query": "hands releasing white dove", "faceless": true},
+  {"theme": "raven", "query": "black raven flying"},
+  {"theme": "olive", "query": "olive branch leaves"},
+  {"theme": "olive", "query": "olive tree wind"},
+  {"theme": "calm-sea", "query": "calm sea horizon grey"},
+  {"theme": "receding", "query": "water receding rocks"},
+  {"theme": "mountain-dawn", "query": "mountain peak sunrise mist"},
+  {"theme": "wind-water", "query": "wind waves open sea"},
+  {"theme": "dry-land", "query": "dry cracked earth sun"},
+  {"theme": "rainbow", "query": "rainbow over valley"},
+  {"theme": "rainbow", "query": "rainbow after rain"},
+  {"theme": "clouds-break", "query": "sun rays through clouds"},
+  {"theme": "altar-smoke", "query": "smoke rising fire stones"},
+  {"theme": "herd", "query": "sheep flock grazing hillside"},
+  {"theme": "barefoot", "query": "barefoot walking wet grass", "faceless": true},
+  {"theme": "family-back", "query": "family walking field back view", "faceless": true}
+ ]
+}
