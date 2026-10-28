@@ -285,6 +285,35 @@ def ai_clip_checks(manifest, ai):
                and (c.get("voiceover") != "god" or c.get("face_check") == "PASS") for c in clips)
 
 
+def repeat_gaps(manifest):
+    """The seconds between two holds of one picture (story QA image_repeat_gap_seconds_min). A hold's `image` is
+    `<source shot>#<src_start>` (long_build); E135: a fallback is keyed by what it shows, its sha256, not by its shot,
+    so one still or library clip approved for two shots is a repeat: a still is one picture whatever part is shown,
+    a footage clip one picture per part. A Pavo clip keeps its shot key (a window shows another part of it)."""
+    pic = {}
+    for c in manifest.get("clips") or []:
+        if c.get("source") == "footage" and c.get("source_sha256"):
+            pic[c.get("id")] = (f"footage:{c['source_sha256']}", True)
+    for sid, im in (manifest.get("images") or {}).items():
+        if isinstance(im, dict) and im.get("sha256"):
+            pic[sid] = (f"still:{im['sha256']}", False)
+
+    def key(h):
+        src, _, part = str(h["image"]).partition("#")
+        if src not in pic:
+            return h["image"]
+        k, by_part = pic[src]
+        return f"{k}#{part}" if by_part else k
+
+    last_seen, gaps = {}, []
+    for h in manifest["holds"]:
+        k = key(h)
+        if k in last_seen:
+            gaps.append(h["start"] - last_seen[k])
+        last_seen[k] = h["end"]
+    return gaps
+
+
 def grammar_checks_story_v3(criteria, manifest, script=None, words=None, first_word=None, duration=None,
                             base=None, approved=None):
     """story-qa-criteria-v3 (owner, 2026-10-26; Pavo freed, no real-footage minimum, 2026-10-27): the acted
@@ -299,11 +328,7 @@ def grammar_checks_story_v3(criteria, manifest, script=None, words=None, first_w
     ai = r["ai_video"]
     holds = manifest["holds"]
     inner = [h["end"] - h["start"] for h in holds[:-1]] or [holds[0]["end"] - holds[0]["start"]]
-    last_seen, gaps = {}, []
-    for h in holds:
-        if h["image"] in last_seen:
-            gaps.append(h["start"] - last_seen[h["image"]])
-        last_seen[h["image"]] = h["end"]
+    gaps = repeat_gaps(manifest)
     seg_end = {}
     for s in manifest.get("sentences") or []:
         seg_end[s.get("segment")] = max(seg_end.get(s.get("segment"), 0.0), s["end"])

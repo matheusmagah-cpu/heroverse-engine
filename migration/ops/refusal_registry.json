@@ -1854,6 +1854,10 @@
    ],
    "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
   },
+  "SOURCE_IMAGE_REPEAT": {
+   "class": "N",
+   "why": "E135: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it stops no generation, voice or render, and refuses only a fallback whose picture (sha256) another shot of the plan already shows within story QA's image_repeat_gap_seconds_min"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
@@ -2951,7 +2955,8 @@
    "grammar.image_repeat_gap_seconds_min": {
     "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]"
+     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]",
+     "migration/production/bible/shot_sources.py::SOURCE_IMAGE_REPEAT"
     ],
     "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },
