@@ -1,6 +1,7 @@
 {
  "still": "migration/production/bible/stills/arc-01-long-s-c3-eve-near.json",
  "subject": "the same woman, Eve",
+ "model": "gemini-3.1-flash-lite-image",
  "refs": [
   "migration/production/bible/stills/arc-01-long-s-c1-eve.json",
   "migration/production/bible/stills/arc-01-long-s-c3-eve.json",
