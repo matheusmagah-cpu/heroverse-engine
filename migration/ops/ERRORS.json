@@ -1387,6 +1387,31 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E135",
+   "date": "2026-10-28",
+   "class": [
+    "instrument",
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E120",
+    "E131"
+   ],
+   "error": "episode_build.py speech-check failed on all four native clips of shot-probe run 40616795532 (arc-01 long, the first story QA v4 voice measure with references): soundfile.LibsndfileError 'Format not recognised' on the .mp4. Root cause: pavo_native.measure handed the clip path to resemblyzer.preprocess_wav, which loads with librosa; librosa >= 0.11 reads only what soundfile reads (no MP4 container, the audioread fallback is gone), so the voice instrument could not read the very clips it gates. #473 measured on WAVs extracted by hand, so no test fed it an MP4. (A second, environment-only snag on the way: PyAV 19 dropped av.open(metadata_errors=...) that faster-whisper 1.2.1 passes; the measuring environment installs av 16.0.1.)",
+   "fix": "pavo_native.voice_wav decodes the clip's soundtrack with ffmpeg to a 16 kHz mono WAV and measure() embeds that WAV for the clip and for every reference clip (VOICE_AUDIO_DECODE_FAILED when it cannot).",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e135_the_voice_encoder_reads_a_wav_decoded_from_the_clip",
+    "covers": [
+     "instrument",
+     "env-vs-test"
+    ]
+   }
   }
  ]
 }
