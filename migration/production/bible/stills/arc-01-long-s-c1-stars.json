@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-s-c1-stars",
+ "episode": "arc-01-long",
+ "shot": "s-c1-stars",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, lies on his back in the grass gazing up at a sky dense with stars. A clear night in the valley, starlight on the leaves. Awe and stillness. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-stars.jpg",
+ "sha256": "be0b5cda512f273b00774512ba3a1cfef34112ee057610f5f90a6aaef48eb789",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c1-stars-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373671842009120576",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373671842009120576",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.6,
+  "note": "Adam lies in the grass under a sky dense with stars over a quiet valley; awe and stillness, the same face and garment, period clean.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "d97527515927b7f305137fc8c1d61a8ccedbcba3c7691a5b3abcf674dea835c7",
+  "references_sha256": "7c4e71ad8c08559c3dcd89ba9bddc60793dcd4150485a8d359026935e6a3f94d"
+ }
+}

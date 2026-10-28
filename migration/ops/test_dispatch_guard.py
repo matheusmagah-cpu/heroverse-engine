@@ -267,6 +267,28 @@ class Inputs(unittest.TestCase):
                 'b = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-not-a-shot"}\n')
             self.assertEqual(hand_copied_shot_ids(d), [("migration/ops/test_x.py", 2, ["s-a"])])
 
+    def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run(self):
+        """E135: run 40626005505 passed the guard and stopped in shot-probe's next step (plan_check --strict: 11
+        STILL_NOT_APPROVED). The guard runs that same check first."""
+        import subprocess as sp
+
+        def ran(code, out):
+            return lambda cmd, **kw: sp.CompletedProcess(cmd, code, out, "")
+        bad = ran(1, json.dumps({"problems": ["STILL_NOT_APPROVED shot 4 s-pairs (...)"]}))
+        self.assertEqual(g.plan_strict_problems(PLAN, run=bad), ["STILL_NOT_APPROVED shot 4 s-pairs (...)"])
+        self.assertEqual(g.plan_strict_problems(PLAN, run=ran(0, "{}")), [])
+        self.assertTrue(g.plan_strict_problems(PLAN, run=ran(2, "Traceback")))    # a crash is never a pass
+        seen = []
+        with mock.patch.object(g, "plan_strict_problems", lambda p: seen.append(p) or ["STILL_NOT_APPROVED x"]):
+            with self.assertRaises(g.Refusal) as c:
+                g.check_local("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "1", "adopt_run": ""})
+            self.assertTrue(str(c.exception).startswith("GUARD_PLAN_NOT_STRICT"), str(c.exception))
+            g.check_local("scene-stills.yml", {"plan": PLAN, "shots": S1, "candidates": "1"})   # stills come first
+        self.assertEqual(seen, [PLAN])
+        long_cmd = []
+        g.plan_strict_problems(LONG_PLAN, run=lambda cmd, **kw: long_cmd.append(cmd) or sp.CompletedProcess(cmd, 0, "", ""))
+        self.assertTrue(long_cmd[0][3].endswith("long_plan_check.py"))
+
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
         self.assertEqual(f["uploads"], 6)
@@ -501,14 +523,30 @@ class PavoBudget(unittest.TestCase):
         self.ledger.write_text(json.dumps({"days": {"2026-10-28": {"generated": 100}}}))
         api = self.api(ok=4, date="2026-10-28T00:30:00Z")                 # 8 units on Actions today
         facts = {"uploads": 0, "pavo_units": 13}
+        # E138: 108 used today no longer refuses (a rolling quota); a batch larger than one window does
+        self.assertEqual(g.pavo_budget(facts, api, "2026-10-28", now=now), 108)
         with self.assertRaises(g.Refusal) as c:
-            g.pavo_budget(facts, api, "2026-10-28", now=now)
-        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_SHORT planned=13 used=108 cap=120"), c.exception)
-        self.assertEqual(g.pavo_budget(dict(facts, pavo_units=12), api, "2026-10-28", now=now), 108)
+            g.pavo_budget(dict(facts, pavo_units=self.quota.DAILY_CAP + 1), api, "2026-10-28", now=now)
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_SHORT"), c.exception)
         api = self.api(failed=2, date="2026-10-28T00:30:00Z")              # the last run ended on 2 failed read-backs
         with self.assertRaises(g.Refusal) as c:
             g.pavo_budget(dict(facts, pavo_units=2), api, "2026-10-28", now=now)
         self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
+
+    def test_e138_the_shorts_take_at_most_their_share_and_the_long_the_rest(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 28, 1, 0, tzinfo=timezone.utc)
+        usage = {"units": 60, "failed_tail": 0, "last_at": None, "short_units": 2 * 20}   # 20 Short jobs today
+        with mock.patch.object(g, "pavo_actions_usage", return_value=usage):
+            with self.assertRaises(g.Refusal) as c:
+                g.pavo_budget({"uploads": 0, "pavo_units": 12, "short": True}, None, "2026-10-28", now=now)
+            self.assertTrue(str(c.exception).startswith("PAVO_SHORTS_SHARE"), c.exception)
+            g.pavo_budget({"uploads": 0, "pavo_units": 10, "short": True}, None, "2026-10-28", now=now)   # 25 of 25
+            g.pavo_budget({"uploads": 0, "pavo_units": 100, "short": False}, None, "2026-10-28", now=now)  # the long
+        self.assertTrue(g.shot_probe({"plan": PLAN, "shots": S1, "attempts": "1", "adopt_run": ""})["short"])
+        self.assertFalse(g.shot_probe({"plan": LONG_PLAN, "shots": L1, "attempts": "1", "adopt_run": ""})["short"])
+        api = self.api(ok=4, date="2026-10-28T00:30:00Z")
+        self.assertEqual(g.pavo_actions_usage(api, "2026-10-28", now)["short_units"], 0)   # an arc-01-long record
 
     def test_capacity_checks_the_budget_and_the_probe_gets_the_count(self):
         with mock.patch.object(g, "pavo_budget", return_value=57) as budget:

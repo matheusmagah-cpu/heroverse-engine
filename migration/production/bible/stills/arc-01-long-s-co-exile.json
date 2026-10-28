@@ -1,0 +1,44 @@
+{
+ "id": "arc-01-long-s-co-exile",
+ "episode": "arc-01-long",
+ "shot": "s-co-exile",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into an empty plain of dust and dry grass with a few bare thorn trees. Cold dawn, wind and dust. Exile. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-co-exile.jpg",
+ "sha256": "4dee48faa110087798d099132e03f74157c4f8bdc5939afb878557205498d959",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-co-exile-2026102801-2",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  },
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373663837167844928",
+   "input_images": 2
+  },
+  "job": {
+   "conversation_id": "373663837167844928",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Adam and Eve in tan hide garments walk out across a dusty plain with bare thorn trees at a cold dawn; the exile reads; a small belt fitting on Adam is the only detail to watch.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "d79daca6535da8394b321745c8e254bb8222b82b0bf52f5906f94a8194d85431",
+  "references_sha256": "adfe5674fdea26d67f8b1dd0ebb225ee344023d299575c725f22677a109e0ec9"
+ }
+}

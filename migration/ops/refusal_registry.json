@@ -598,6 +598,10 @@
    "class": "N",
    "why": "E116: the dispatch guard's pass line"
   },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
+  },
   "GUARD_RECORD_OVER_LIMIT": {
    "class": "N",
    "why": "E116/E52: dispatch_guard refuses an episode record whose title or description is over YouTube's limit before publish-episode fetches or uploads anything; nothing is lost"
@@ -1151,7 +1155,7 @@
   },
   "PAVO_BUDGET_SHORT": {
    "class": "D",
-   "resume": "E128: the batch's expected free-model units (long_preflight.planned_units) do not fit what is left today of the shared Pavo budget (main's quota ledger + today's shot-probe records); nothing was generated. Split the batch (probe-queue cuts batches to a day's cap) or dispatch it after 00:00 UTC; clips already approved are kept"
+   "resume": "E128/E138: the batch's worst-case units are larger than one rolling window of Pavo's quota (quota.DAILY_CAP, the largest batch one run may plan) or pass an owner's explicit daily cap; nothing was generated. Split the batch (probe-queue cuts batches to one window); clips already approved are kept"
   },
   "PAVO_BUDGET_UNKNOWN": {
    "class": "I",
@@ -1175,11 +1179,11 @@
   },
   "PAVO_DAILY_CAP": {
    "class": "D",
-   "resume": "E124/E128: the day's free-model cap (quota.py, 120 units a UTC day: a still 1, a video 2, MCP and shot-probe alike) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
+   "resume": "E138: only an owner's explicit PAVO_IMAGE_DAILY_CAP caps a day now (Pavo's quota is a rolling window, not a UTC day); nothing was sent; wait for the next UTC day or the owner lifts it"
   },
   "PAVO_FREE_QUOTA_SUSPECTED": {
    "class": "D",
-   "resume": "E124/E128: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
+   "resume": "E124/E128/E138: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation for 3 h (Pavo's quota returns ~35-50 jobs about 3 h after a stop); then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
   },
   "PAVO_HISTORY_SCHEMA_CHANGED": {
    "class": "D",
@@ -1254,6 +1258,10 @@
    "class": "D",
    "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_SHORTS_SHARE": {
+   "class": "D",
+   "resume": "E138: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
+  },
   "PAVO_SINGING": {
    "class": "C",
    "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
@@ -1273,6 +1281,10 @@
   "PAVO_UNREACHABLE": {
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UNREAD_JOBS": {
+   "class": "D",
+   "resume": "E136: two of today's jobs are not read back yet; read them with pavo_job / pavo_image_job (never resubmit), then submit the next. Nothing was sent."
   },
   "PAVO_UPLOAD_HOST_UNREACHABLE": {
    "class": "D",
@@ -1856,7 +1868,7 @@
   },
   "SOURCE_IMAGE_REPEAT": {
    "class": "N",
-   "why": "E135: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it stops no generation, voice or render, and refuses only a fallback whose picture (sha256) another shot of the plan already shows within story QA's image_repeat_gap_seconds_min"
+   "why": "E139: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it stops no generation, voice or render, and refuses only a fallback whose picture (sha256) another shot of the plan already shows within story QA's image_repeat_gap_seconds_min"
   },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
@@ -2410,6 +2422,10 @@
   "VOICE_ASSET_IDENTITY_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "VOICE_AUDIO_DECODE_FAILED": {
+   "class": "N",
+   "why": "E137: speech-check is the review's own local measure (Claude, before approve-shot): ffmpeg could not decode the probed clip's soundtrack; it stops no generation or render and the clip is simply not approved"
   },
   "VOICE_CLIPPING": {
    "class": "C",

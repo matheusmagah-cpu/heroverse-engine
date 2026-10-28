@@ -204,7 +204,7 @@ def timeline(plan, g=None):
     """The long's estimated layout: the voice items each shot carries, each line at its voice's pace with LONG_LINE_GAP
     between lines and the Short's TAIL after the last, the cold open's last frame held until gate.cold_open_s, and each
     shot's begin, hold and end (the shots of one voice run share it equally). check() and approve-source's repeat gap
-    (shot_sources, E135) read this one layout."""
+    (shot_sources, E139) read this one layout."""
     g = g if g is not None else gate()
     shots = plan["shots"]
     items, carried = pc.sequence(plan)

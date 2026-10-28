@@ -413,14 +413,19 @@ class PavoBudgetQueue(Scratch):
         ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}}))
         now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
         guard = quota.QuotaGuard(ledger, now=lambda: now, actions=lambda day: quota.NO_ACTIONS)
+        # E138: Pavo's quota is a rolling window; 251 units used today no longer refuse the next batch
         got = lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)
+        self.assertEqual(got["next_batch"], "fits", got)
+        self.assertEqual(got["remaining"], quota.DAILY_CAP - 10)
+        # review of #475: the worst case is what must fit (one window), not the mean
+        got = lp.budget_today([{"pavo_units_est": 10, "pavo_units_max": quota.DAILY_CAP + 1}], guard)
         self.assertEqual(got["next_batch"], "refused")
         self.assertTrue(got["refusal"].startswith("PAVO_BUDGET_SHORT"), got)
-        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}}))
-        self.assertEqual(lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)["remaining"], 10)
-        # review of #475: the worst case is what must fit, not the mean
-        self.assertEqual(lp.budget_today([{"pavo_units_est": 10, "pavo_units_max": 21}], guard)["next_batch"],
-                         "refused")
+        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}, "failed_streak": 2,
+                                      "suspended_at": "2026-10-27T22:00:00+00:00",
+                                      "suspended_until": "2026-10-28T01:00:00+00:00"}))
+        self.assertTrue(lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)["refusal"].startswith(
+            "PAVO_FREE_QUOTA_SUSPECTED"))                 # a stop is what refuses now
 
 
 if __name__ == "__main__":

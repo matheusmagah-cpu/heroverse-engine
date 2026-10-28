@@ -287,7 +287,7 @@ def ai_clip_checks(manifest, ai):
 
 def repeat_gaps(manifest):
     """The seconds between two holds of one picture (story QA image_repeat_gap_seconds_min). A hold's `image` is
-    `<source shot>#<src_start>` (long_build); E135: a fallback is keyed by what it shows, its sha256, not by its shot,
+    `<source shot>#<src_start>` (long_build); E139: a fallback is keyed by what it shows, its sha256, not by its shot,
     so one still or library clip approved for two shots is a repeat: a still is one picture whatever part is shown,
     a footage clip one picture per part. A Pavo clip keeps its shot key (a window shows another part of it)."""
     pic = {}

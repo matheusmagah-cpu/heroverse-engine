@@ -319,6 +319,21 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+def voice_wav(path, run=None):
+    """E137: the clip's soundtrack as a 16 kHz mono WAV for the voice encoder. resemblyzer.preprocess_wav reads a file
+    with librosa, and librosa >= 0.11 reads only what soundfile reads (no MP4): speech-check died on every clip
+    (arc-01 long, 28/10). Decoded once with ffmpeg into a temporary file beside nothing else."""
+    import subprocess
+    import tempfile
+    run = run or subprocess.run
+    out = Path(tempfile.mkdtemp()) / (Path(str(path)).stem + ".wav")
+    done = run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(path), "-vn", "-ac", "1", "-ar", "16000",
+                str(out)], capture_output=True, text=True)
+    if getattr(done, "returncode", 1) != 0:
+        raise SystemExit(f"VOICE_AUDIO_DECODE_FAILED {Path(str(path)).name}")
+    return str(out)
+
+
 def measure(clip, whisper_dir, yamnet, references, speaker_id, lips, run=None):
     """The measures speech_verdict judges, on one native clip (episode_build.py speech-check; Claude's session or a
     runner with faster-whisper 1.2.1, resemblyzer 0.1.4 and the YAMNet model): the pinned ASR's words and speech span,
@@ -345,10 +360,10 @@ def measure(clip, whisper_dir, yamnet, references, speaker_id, lips, run=None):
     if references.get(speaker_id):
         from resemblyzer import VoiceEncoder, preprocess_wav
         enc = VoiceEncoder("cpu")
-        mine = enc.embed_utterance(preprocess_wav(str(clip)))
+        mine = enc.embed_utterance(preprocess_wav(voice_wav(clip, run)))
 
         def cos(path):
-            other = enc.embed_utterance(preprocess_wav(str(path)))
+            other = enc.embed_utterance(preprocess_wav(voice_wav(path, run)))
             return round(float((mine * other).sum()), 4)   # embeddings are L2-normalised
         rest = [p for who, p in sorted(references.items()) if who != speaker_id]
         voice = {"reference": sha256_file(references[speaker_id]), "same": cos(references[speaker_id]),

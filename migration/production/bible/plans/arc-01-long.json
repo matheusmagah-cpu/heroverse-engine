@@ -585,7 +585,7 @@
     4
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-promise-2",
@@ -614,6 +614,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Static wide shot. Dark deep ocean water under a black sky; slow heavy swells roll across the surface and faint mist drifts low. Night before dawn, a faint grey glow on the horizon. Primeval and silent. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-deep",
    "beat": "chapter",
    "lines": [
     7,
@@ -643,6 +644,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low tracking shot just above the water. A strong wind moves across a dark calm sea, drawing long ripples and thin veils of mist over the surface. Early twilight, soft grey-blue light. Mysterious and alive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-wind",
    "beat": "chapter",
    "lines": [
     9,
@@ -657,6 +659,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. Green hills rise out of a calm sea as the water draws back from new land. Soft morning light and mist. Creation unfolding. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-land",
    "beat": "chapter",
    "lines": [
     9,
@@ -814,6 +817,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A full moon rises over still water, its light laid across the surface. Night. Quiet. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-moon",
    "beat": "chapter",
    "lines": [
     16
@@ -931,6 +935,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. The wind dies away and the whole valley falls still, every leaf motionless. Late morning. Hushed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-hush",
    "beat": "chapter",
    "lines": [
     21
@@ -1182,6 +1187,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. A broad river winds through a green valley and parts into four bright streams. Clear morning light, mist over the water. Abundant and calm. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c2-river",
    "beat": "chapter",
    "lines": [
     32,
@@ -1254,6 +1260,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow push-in. Four bright rivers branch out from one great river across a green land. Morning light, mist on the water. Abundance. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c2-four",
    "beat": "chapter",
    "lines": [
     35,
@@ -2124,6 +2131,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Evening wind moves through the dark trees of the garden, leaves turning silver. The cool of the day. A presence. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c4-evening",
    "beat": "chapter",
    "lines": [
     71,
@@ -2244,6 +2252,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A cool wind rolls through the darkening garden and the leaves of every tree turn silver in a sudden low light. The cool of the day, evening light. Grave and searching. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-naked",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2342,6 +2351,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-serpent",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2399,6 +2409,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Cracks spread across dry earth as the grass withers. Night, lightning flicker. Cursed ground. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c4-ground-c",
    "beat": "chapter",
    "lines": [
     80
@@ -2429,6 +2440,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Rain begins to fall in grey sheets across the dark garden, the leaves bowing under it. Night. Sorrow. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-woman",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2470,6 +2482,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the garden. Night, heavy rain sweeping across the trees. Terrible and grand. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-ground",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2513,6 +2526,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Heavy grey clouds roll over a barren plain of cracked dry earth and thorn bushes. Dawn, cold wind and dust. Heavy and final. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-dust",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2603,6 +2617,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Mist drifts through the garden at dawn and soft light glows on a second great tree at its heart. Dawn. Solemn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-one-of-us",
    "beat": "payoff",
    "chapter": "c4",
    "audio_route": "kokoro"

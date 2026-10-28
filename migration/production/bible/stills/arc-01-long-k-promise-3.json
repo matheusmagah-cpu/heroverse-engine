@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-k-promise-3",
+ "episode": "arc-01-long",
+ "shot": "k-promise-3",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, his face and silver beard filling most of the frame, the scroll held low and out of view, looks straight into the camera with his mouth gently closed, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
+ "sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-k-promise-3-2026102801-3",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-keeper-front",
+   "sha256": "eea5e96cd78f5dadc98b87f93384fc90cc6172b2021be2711ee7ebf568816098"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373663884764253248",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373663884764253248",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "A tight close-up of the same Keeper still (his face and beard fill the frame), so the promise cuts from k-promise-2's chest-up to his face instead of repeating the framing; mouth closed, stars behind.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "dda91b8c32105b1731eecd23997cd8eaac61a99de5b151ac36243559bfd3e7cb",
+  "references_sha256": "7b032aa4aa71714631d2a59653f855ca58d50340d1b092028fdec18003d012b3"
+ }
+}

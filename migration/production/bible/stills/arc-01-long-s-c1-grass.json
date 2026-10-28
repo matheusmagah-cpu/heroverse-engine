@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-s-c1-grass",
+ "episode": "arc-01-long",
+ "shot": "s-c1-grass",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange wool cloak draped over one shoulder and wrapped around his body, a thick rope cord across his chest, runs his hand through tall green grass and flowers. Warm sunlight. Alive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-grass.jpg",
+ "sha256": "dbc0d794e01bf12e7d03efcf26657d3dbcfdbb686e4dbe45c6c862a15e89609a",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c1-grass-2026102801-2",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373672807504838208",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373672807504838208",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.6,
+  "note": "Adam in the rust wool cloak with the rope cord runs his hand through grass and wild flowers by a river in warm sun; the cloak wording fixes the tee-like garment of the first tries.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "6c71636d5243fd6aa9ac3eadeb7fd7880f0745faa956934e91477d5034444c1f",
+  "references_sha256": "7c4e71ad8c08559c3dcd89ba9bddc60793dcd4150485a8d359026935e6a3f94d"
+ }
+}

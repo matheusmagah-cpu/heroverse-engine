@@ -57,7 +57,7 @@ STOP = {"a", "an", "the", "and", "of", "to", "in", "on", "at", "his", "her", "it
         "shot", "camera", "slow", "wide", "close", "up", "light", "painterly", "cinematic", "realism", "grain", "film"}
 
 
-MAX_STILL_CLIP_SECONDS = 12.0   # plan_check.SCENE_SECONDS[1]: a still in motion for a shot that names no seconds
+MAX_STILL_CLIP_SECONDS = 12     # plan_check.SCENE_SECONDS[1]: a still in motion for a shot that names no seconds
 PAVO_STILL_LICENCE = "Pavo generated (owner-owned)"   # story QA v4 rights.ai_video.licence
 
 
@@ -493,7 +493,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
         if not set(subject(plan, shot, i)) & set(words(f"{rec.get('theme')} {rec.get('query')} {rec.get('title')}")):
             raise SystemExit(f"SOURCE_OFF_LINE {shot_id} {item} (the clip shares no word with what the shot shows)")
         entry.update(footage=item, asset=rec["release_asset"], clip_sha256=rec["sha256"], licence=rec["licence"],
-                     credit=rec.get("credit"), clip_seconds=float(rec.get("seconds") or 0.0),
+                     credit=rec.get("credit"), clip_seconds=int(float(rec.get("seconds") or 0)),
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     elif source == "still_motion":
         rec = plan_check.still_record(item)
@@ -504,7 +504,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                      frame=list(plan_frame(plan)),   # E132: rendered at the frame of the plan that ships it
                      licence=still_licence(rec),
                      # a spoken shot has no `seconds` (its line decides): the longest clip the adapter makes covers it
-                     clip_seconds=float(shot.get("seconds") or MAX_STILL_CLIP_SECONDS),
+                     clip_seconds=int(shot.get("seconds") or MAX_STILL_CLIP_SECONDS),   # E118: whole seconds, like a Pavo clip
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     else:   # pavo_reuse: a clean clip of an inventory, of the request the plan sends now
         path, _, sha = str(item).partition("#")
@@ -545,7 +545,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
 
 
 def picture_sha256(approval):
-    """E135: what a fallback shows, by content: a still's sha256 (one picture whatever part is shown) or a library
+    """E139: what a fallback shows, by content: a still's sha256 (one picture whatever part is shown) or a library
     clip's; None for a Pavo clip (each generation is its own picture)."""
     a = approval or {}
     if a.get("source") == "still_motion":
@@ -556,7 +556,7 @@ def picture_sha256(approval):
 
 
 def image_repeat_refusal(plan, shot_id, entry, approvals):
-    """E135: story QA's image_repeat_gap_seconds_min for a fallback: the same still or library clip (by sha256)
+    """E139: story QA's image_repeat_gap_seconds_min for a fallback: the same still or library clip (by sha256)
     approved for another shot of the plan whose hold is nearer than the gap is SOURCE_IMAGE_REPEAT. A long is measured
     on its own timeline (long_plan_check.timeline); a Short is shorter than the gap, so any other shot is near."""
     import long_plan_check as lpc

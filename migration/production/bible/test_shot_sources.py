@@ -203,8 +203,8 @@ class ApproveSource(unittest.TestCase):
         self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"))
         self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by any refusal
 
-    def test_e135_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap(self):
-        """E135 (found designing arc-02, 28/10): story QA's image_repeat_gap_seconds_min was measured on the hold's
+    def test_e139_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap(self):
+        """E139 (found designing arc-02, 28/10): story QA's image_repeat_gap_seconds_min was measured on the hold's
         `image`, `<shot id>#<src_start>`, so the same library clip or still approved for two shots counted as two
         pictures; approve-source let it in and qa_pilot passed it. A fallback's picture is its source's sha256: a
         second shot of the plan within the gap is refused at approval (SOURCE_IMAGE_REPEAT), and qa_pilot keys a
@@ -326,6 +326,33 @@ class OwnerException(unittest.TestCase):
                 self.assertEqual(a, b, key)
             else:
                 self.assertEqual(v4.get(key), v4x.get(key), key)
+
+
+class VoiceAudio(unittest.TestCase):
+    """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
+    which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_e137_the_voice_encoder_reads_a_wav_decoded_from_the_clip(self):
+        import inspect
+        import wave
+        d = Path(tempfile.mkdtemp())
+        try:
+            clip = d / "c.mp4"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=64x36:d=1",
+                            "-f", "lavfi", "-i", "sine=f=220:d=1", "-shortest", "-c:v", "libx264", "-c:a", "aac",
+                            str(clip)], check=True)
+            out = pn.voice_wav(clip)
+            with wave.open(out) as w:
+                self.assertEqual((w.getnchannels(), w.getframerate()), (1, 16000))
+                self.assertGreater(w.getnframes(), 8000)
+            with self.assertRaises(SystemExit):
+                pn.voice_wav(d / "missing.mp4")
+        finally:
+            shutil.rmtree(d)
+        src = inspect.getsource(pn.measure)
+        self.assertNotIn("preprocess_wav(str(", src)          # never the clip path itself
+        self.assertEqual(src.count("preprocess_wav(voice_wav("), 2)   # the clip and every reference
 
 
 class ApproveReuse(unittest.TestCase):
