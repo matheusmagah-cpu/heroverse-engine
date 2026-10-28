@@ -1342,6 +1342,28 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E132",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130"
+   ],
+   "error": "Shorts runway refill (28/10, owner 'utiliza o que tem; o que não tem, faz de outra forma'): genesis-09-short has 31 silent shots for the R3 free fallbacks, and `episode_build.py sources` offered them the 16:9 footage library (2560x1440) while still_motion rendered every approved still at the long's 2560x1440. episode_build.generate_step fetched each fallback with shot_sources.fetch_source's default frame and then ran clip_check with the plan's 9:16 aspect, so every approved Short fallback would have failed its own build (CLIP_ASPECT_MISMATCH) after Claude's review: a 9:16 still cropped into 16:9 and a landscape clip in a vertical Short. Root cause: R1-R4 (#476) were built and tested on the long; shot_sources.FRAME (the long's frame) was the only frame, and the test plan had no aspect, so the Short path was never exercised.",
+   "fix": "shot_sources.plan_frame(plan): 1080x1920 for a 9:16 plan (the default of episode_build), 2560x1440 for a 16:9 long; footage_ok, footage_candidates and approve_source take the plan's frame (a 16:9 library clip is not offered to, and is refused for, a Short: FOOTAGE_NOT_USABLE names the frame), and approve_source records the plan's frame in a still_motion approval, which fetch_source renders at (the build calls it unchanged, so no committed preflight goes stale). Class antidote: a fallback is made and offered only at the frame of the plan that ships it, tested on a Short and a long.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_a_short_fallback_is_made_at_the_shorts_frame",
+    "covers": [
+     "drift"
+    ]
+   }
   }
  ]
 }

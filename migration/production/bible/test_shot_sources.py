@@ -25,7 +25,7 @@ V4 = pn.criteria()
 
 
 def plan():
-    return {"episode": "t-sources", "narration": [{"kind": "story", "text": "The river ran through the garden."},
+    return {"episode": "t-sources", "aspect_ratio": "16:9", "narration": [{"kind": "story", "text": "The river ran through the garden."},
                                                   {"kind": "story", "text": "And the waters parted below."}],
             "shots": [{"id": "s-eve", "kind": "scene", "speaker": "eve", "line": "Why do you hide?",
                        "characters": ["eve"], "prompt": f"{STYLE}. Close-up. Eve speaks"},
@@ -333,6 +333,60 @@ class Mix(unittest.TestCase):
             self.assertGreater(quiet, -80.0)    # the bed: no digital silence between the clips
             self.assertLess(quiet, -30.0)       # and low
             self.assertGreater(loud, quiet + 15)   # the speech sits where its line is
+
+    def test_a_short_fallback_is_made_at_the_shorts_frame(self):
+        """E132: shot_sources rendered every still in motion at the long's 2560x1440 and offered the 16:9 library to a
+        9:16 Short, so a Short's approved fallback would fail its own build (CLIP_ASPECT_MISMATCH). The frame is the
+        plan's: 1080x1920 for a Short, 2560x1440 for a long; the library offers only clips at that frame."""
+        short = dict(plan(), aspect_ratio="9:16")
+        self.assertEqual(ss.plan_frame(short), (1080, 1920))
+        self.assertEqual(ss.plan_frame({"aspect_ratio": "16:9"}), ss.FRAME)
+        self.assertEqual(ss.plan_frame({}), (1080, 1920))   # a plan with no aspect is a Short (episode_build)
+        lib = [clip("clip-river-a"), clip("clip-river-v", frame=[1080, 1920])]
+        self.assertEqual([c["item"] for c in ss.footage_candidates(short, short["shots"][2], 2, lib)],
+                         ["clip-river-v"])
+        self.assertEqual([c["item"] for c in ss.footage_candidates(plan(), plan()["shots"][2], 2, lib)],
+                         ["clip-river-a"])
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(short, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d)
+            self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_USABLE"))
+        # a still in motion is approved with the Short's frame and the build's fetch renders it there
+        # (episode_build.generate_step calls fetch_source with no frame: the approval carries it)
+        import plan_check
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            (d / "still.jpg").write_bytes(b"jpeg")
+            rec = {"id": "st-river", "episode": "t-sources", "shot": "s-river", "status": "APPROVED",
+                   "repo_path": "still.jpg", "sha256": hashlib.sha256(b"jpeg").hexdigest()}
+            keep = plan_check.still_record
+            plan_check.still_record = lambda i: rec if i == "st-river" else None
+            try:
+                a = ss.approve_source(short, "s-river", "still_motion", "st-river", 9.6, "x", shots_dir=d)
+            finally:
+                plan_check.still_record = keep
+            self.assertEqual(a["frame"], [1080, 1920])
+            seen = {}
+            keep_repo, keep_clip = ss.REPO, ss.still_motion_clip
+            ss.REPO = d
+            ss.still_motion_clip = lambda s, o, sec, frame=ss.FRAME: seen.update(frame=frame) or o
+            try:
+                ss.fetch_source(dict(a, clip_seconds=1.0), d / "out.mp4")
+            finally:
+                ss.REPO, ss.still_motion_clip = keep_repo, keep_clip
+            self.assertEqual(seen["frame"], (1080, 1920))
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_a_shorts_still_in_motion_is_vertical(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc=s=108x192:d=1", "-frames:v", "1",
+                            str(d / "still.jpg")], check=True)
+            ss.still_motion_clip(d / "still.jpg", d / "out.mp4", 1.0, frame=ss.plan_frame({"aspect_ratio": "9:16"}))
+            info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-of", "json",
+                                              str(d / "out.mp4")], capture_output=True, text=True).stdout)
+            v = [s for s in info["streams"] if s["codec_type"] == "video"][0]
+            self.assertEqual((v["width"], v["height"]), (1080, 1920))
 
     @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
     def test_an_approved_still_moves_at_the_qa_frame(self):
