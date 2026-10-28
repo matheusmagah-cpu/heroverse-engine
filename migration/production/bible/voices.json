@@ -1,0 +1,26 @@
+{
+ "version": "pavo-voices-v1",
+ "about": "Pavo's native speech (story QA v4, owner 27/10 R4): each speaker's fixed voice description, sent word for word in every native request (pavo_native.sound_sentence), and its reference clip, against which every later speech clip of that speaker is judged (rights.ai_video.speech_checks: cosine >= voice_same_character_cosine_min, and that much closer to it than to any other speaker's reference by voice_other_character_margin_min). A reference is chosen by Claude's review of a clip that passed every other check, by PR (episode_build.py voice-reference); it is never written by hand. Descriptions from the native-audio probe (evidence/pavo/20261027/native-audio-probe, PR #473, prompt A).",
+ "voices": {
+  "keeper": {
+   "pavo_voice": "a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction",
+   "reference": null,
+   "measured": "PR #473: Keeper vs Keeper cosine 0.932 across two clips"
+  },
+  "god": {
+   "pavo_voice": "a deep, resonant, grave older man's voice, slow and calm, clear English diction",
+   "reference": null,
+   "measured": "PR #473: one clip; distinct from the Keeper (0.64-0.72)"
+  },
+  "adam": {
+   "pavo_voice": "a young man's light, bright tenor voice, youthful and eager, a quick lively pace, clear English diction",
+   "reference": null,
+   "measured": "PR #473 (old description \"a young man's warm baritone voice, calm, measured pace, clear English diction\"): Adam vs Adam 0.880-0.893 across scenes, 0.957 within one; NOT distinct from the Keeper (0.852-0.890). Owner 28/10: described younger, brighter and faster than the Keeper's deep, calm, measured voice; not probed yet"
+  },
+  "eve": {
+   "pavo_voice": "a young woman's warm, clear voice, calm, measured pace, clear English diction",
+   "reference": null,
+   "measured": "not probed yet"
+  }
+ }
+}

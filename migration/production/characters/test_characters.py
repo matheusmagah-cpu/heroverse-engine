@@ -148,7 +148,7 @@ class Props(unittest.TestCase):
                                 cand_dir=self.d / "candidates", props=self.props)
 
     def approve(self, view, cid, score=9.6):
-        return self.pr.approve("ark", view, cid, score, "one box, flat square ends", cand_dir=self.d / "candidates",
+        return self.pr.approve("ark", view, cid, score, "one box, flat square ends, no people", cand_dir=self.d / "candidates",
                                props_file=self.file, images_dir=self.d / "images", refs_dir=self.d / "refs",
                                today="2026-10-27")
 
@@ -188,6 +188,141 @@ class Props(unittest.TestCase):
         Image.new("RGB", (64, 36), (1, 1, 1)).save(self.d / "refs" / "pr-ark-side.jpg", "JPEG")
         self.assertIn("sha256", self.pr.approved_refs("ark", props, self.d / "images")[1])
 
+    def test_a_retouched_approved_reference_is_rederived_byte_for_byte_on_approve(self):
+        # E122 follow-up (review of genesis-09 run 2026102705): both approved ark references (frames of genesis-08
+        # s-board) show figures standing on the roof, and every still made with them copied the figures. A
+        # retouched derivative of an APPROVED reference is a source only when approve can remake it from that exact
+        # parent (sha256) with the recorded patches, byte for byte
+        from PIL import Image
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs"}
+        src = self.d / "side-1.jpg"
+        im = Image.new("RGB", (64, 36), (90, 60, 30))
+        im.paste((250, 250, 250), (10, 5, 20, 15))          # the "figure" to paint out
+        im.save(src, "JPEG")
+        side = self.pr.finalize("ark", "side", "9", 1, src, self.meta(), cand_dir=self.d / "candidates",
+                                props=self.props)["id"]
+        parent = self.approve("side", side)
+        patches = [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 2}]
+        rec = self.pr.finalize_retouch("ark", "side", "9", 2, patches, cand_dir=self.d / "candidates",
+                                       props=self.props, images_dir=self.d / "images")
+        self.assertEqual((rec["source"], rec["status"]), ("retouched-approved-reference", "DRAFT"))
+        self.assertEqual(rec["parent"]["sha256"], parent["sha256"])
+        self.assertEqual(rec["retouch"]["patches"], patches)
+        out = self.pr.REPO / rec["repo_path"]
+        with Image.open(out) as done:
+            self.assertLess(sum(done.convert("RGB").getpixel((15, 10))), 400)   # the white figure is gone
+        for bad in ([{"box": [60, 3, 70, 17], "offset": [0, 0], "feather": 0}],      # outside the image
+                    [{"box": [8, 3, 22, 17], "offset": [60, 0], "feather": 0}],      # source outside
+                    [{"box": [8, 3, 22, 17], "offset": [0, 0], "feather": 0}],       # copies itself
+                    [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 9}], []):  # feather too wide; nothing
+            with self.assertRaises(SystemExit) as err:
+                self.pr.finalize_retouch("ark", "side", "9", 3, bad, cand_dir=self.d / "candidates",
+                                         props=self.props, images_dir=self.d / "images")
+            self.assertIn("PROP_RETOUCH_REFUSED", str(err.exception))
+        poly = [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 1, "polygon": [[8, 3], [22, 3], [22, 17]]}]
+        self.assertEqual(self.pr.finalize_retouch("ark", "side", "9", 5, poly, cand_dir=self.d / "candidates",
+                                                  props=self.props, images_dir=self.d / "images")["status"], "DRAFT")
+        with self.assertRaises(SystemExit) as err:     # a polygon outside its box
+            self.pr.finalize_retouch("ark", "side", "9", 6, [dict(poly[0], polygon=[[0, 0], [30, 3], [22, 17]])],
+                                     cand_dir=self.d / "candidates", props=self.props, images_dir=self.d / "images")
+        self.assertIn("PROP_RETOUCH_REFUSED", str(err.exception))
+        # a picture edited by hand under the retouch's sidecar is refused: approve remakes it from the parent
+        forged = self.d / "candidates" / "pr-ark-side-9-4.jpg"
+        with Image.open(out) as done:
+            hand = done.convert("RGB")
+        hand.putpixel((40, 30), (0, 255, 0))
+        hand.save(forged, "JPEG", quality=95)
+        self.pr.save(forged.with_suffix(".json"), dict(rec, id="pr-ark-side-9-4", repo_path=self.pr.rel(forged),
+                                                       sha256=self.pr.sha256(forged)))
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", "pr-ark-side-9-4", 9.6, "clean roof, no people", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        # the real one is approved and becomes the reference, its record naming the parent and the patches
+        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "clean roof, no people", **kw)
+        self.assertIn("retouched-approved-reference", ref["source"])
+        self.assertIn(parent["sha256"], ref["source"])
+        # once the reference changed, a retouch of the old parent is refused
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", rec["id"], 9.6, "again, no people", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+
+    def test_a_retouch_whose_parent_is_not_the_approved_reference_is_refused(self):
+        # review of #467: a sidecar claiming the true parent's sha256 with repo_path pointing at any other image (a
+        # rogue picture in the repository, or outside it) got approved through a lineage shortcut
+        from PIL import Image
+        kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
+              "refs_dir": self.d / "refs"}
+        src = self.d / "side-1.jpg"
+        Image.new("RGB", (64, 36), (90, 60, 30)).save(src, "JPEG")
+        side = self.pr.finalize("ark", "side", "9", 1, src, self.meta(), cand_dir=self.d / "candidates",
+                                props=self.props)["id"]
+        self.approve("side", side)
+        patches = [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 2}]
+        rec = self.pr.finalize_retouch("ark", "side", "9", 2, patches, cand_dir=self.d / "candidates",
+                                       props=self.props, images_dir=self.d / "images")
+        rogue = self.d / "rogue.png"
+        Image.new("RGB", (64, 36), (255, 0, 0)).save(rogue)
+
+        def forge(n, parent_path):
+            forged = self.d / "candidates" / f"pr-ark-side-9-{n}.jpg"
+            self.pr.retouch_image(rogue, patches, forged)
+            self.pr.save(forged.with_suffix(".json"), dict(rec, id=f"pr-ark-side-9-{n}", repo_path=self.pr.rel(forged),
+                                                           sha256=self.pr.sha256(forged),
+                                                           parent=dict(rec["parent"], repo_path=parent_path)))
+            return f"pr-ark-side-9-{n}"
+        for n, path in ((7, self.pr.rel(rogue)), (8, "../../../../../tmp/x.png"), (9, str(rogue))):
+            with self.assertRaises(SystemExit) as err:     # while the parent is still the approved reference
+                self.pr.approve("ark", "side", forge(n, path), 9.6, "forged, no people", **kw)
+            self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        self.pr.approve("ark", "side", rec["id"], 9.6, "clean roof, no people", **kw)
+        with self.assertRaises(SystemExit) as err:         # and after the retouch became the reference
+            self.pr.approve("ark", "side", forge(6, self.pr.rel(rogue)), 9.6, "forged, no people", **kw)
+        self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
+        with Image.open(self.d / "refs" / "pr-ark-side.jpg") as im:
+            self.assertNotEqual(im.convert("RGB").getpixel((50, 30))[:2], (255, 0))
+
+    def test_a_pillow_version_mismatch_is_named_when_the_retouch_does_not_rederive(self):
+        from PIL import Image
+        src = self.d / "side-1.jpg"
+        Image.new("RGB", (64, 36), (90, 60, 30)).save(src, "JPEG")
+        side = self.pr.finalize("ark", "side", "9", 1, src, self.meta(), cand_dir=self.d / "candidates",
+                                props=self.props)["id"]
+        self.approve("side", side)
+        rec = self.pr.finalize_retouch("ark", "side", "9", 2, [{"box": [8, 3, 22, 17], "offset": [24, 0], "feather": 2}],
+                                       cand_dir=self.d / "candidates", props=self.props, images_dir=self.d / "images")
+        out = self.pr.REPO / rec["repo_path"]
+        meta = dict(rec, retouch=dict(rec["retouch"], pillow="0.0.1"))
+        self.assertEqual(self.pr.retouch_problems(meta, out), [])        # same bytes: the version does not matter
+        with Image.open(out) as im:
+            other = im.convert("RGB")
+        other.putpixel((1, 1), (0, 0, 255))
+        other.save(out, "JPEG", quality=95)
+        found = " ".join(self.pr.retouch_problems(meta, out))
+        self.assertIn("Pillow 0.0.1", found)
+        self.assertIn("this Pillow", found)
+
+    def test_a_reference_is_approved_only_when_the_review_states_it_shows_no_people(self):
+        # E125: both approved ark references showed figures standing on the roof and every still copied them; a
+        # reference is the prop alone, so approve and approved_refs require the review to say no people/figures remain
+        side = self.finalize("side", 1, (90, 60, 30))["id"]
+        with self.assertRaises(SystemExit) as err:
+            self.pr.approve("ark", "side", side, 9.6, "one box, flat square ends", cand_dir=self.d / "candidates",
+                            props_file=self.file, images_dir=self.d / "images", refs_dir=self.d / "refs")
+        self.assertIn("PROP_NOTE_FIGURES_UNCHECKED", str(err.exception))
+        for note in ("one box, no people", "No figures on the roof.", "the three figures on the roof cloned out",
+                     "figures removed from the roof"):
+            self.assertTrue(self.pr.FIGURES_CHECKED.search(note), note)
+        self.approve("side", side)
+        self.approve("three-quarter", self.finalize("three-quarter", 1, (80, 50, 20))["id"])
+        props = self.pr.registry(self.file)
+        self.assertIsNone(self.pr.approved_refs("ark", props, self.d / "images")[1])
+        rp = self.pr.record_path("ark", "side", self.d / "images")
+        rec = json.loads(rp.read_text())
+        rec["approved"]["note"] = "one box"                       # an older record without the check is no reference
+        self.pr.save(rp, rec)
+        self.assertIn("no people", self.pr.approved_refs("ark", props, self.d / "images")[1])
+
     def test_a_frame_is_cut_only_from_a_clip_claude_approved(self):
         import subprocess
         clip = self.d / "clip.mp4"
@@ -225,16 +360,16 @@ class Props(unittest.TestCase):
         # approve re-checks the approval: a clip no longer approved refuses its frame
         self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": "0" * 64, "score": 9.5}}})
         with self.assertRaises(SystemExit) as err:
-            self.pr.approve("ark", "side", rec["id"], 9.6, "box", cand_dir=self.d / "candidates", props_file=self.file,
+            self.pr.approve("ark", "side", rec["id"], 9.6, "box, no people", cand_dir=self.d / "candidates", props_file=self.file,
                             images_dir=self.d / "images", refs_dir=self.d / "refs", shots_dir=shots)
         self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
         self.pr.save(shots / "ep-a.json", {"shots": {"s-box": {"clip_sha256": digest, "score": 9.5}}})
         kw = {"cand_dir": self.d / "candidates", "props_file": self.file, "images_dir": self.d / "images",
               "refs_dir": self.d / "refs", "shots_dir": shots}
         with self.assertRaises(SystemExit) as err:    # E122: the clip itself is needed to remake the frame
-            self.pr.approve("ark", "side", rec["id"], 9.6, "box", **kw)
+            self.pr.approve("ark", "side", rec["id"], 9.6, "box, no people", **kw)
         self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
-        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "box", clip=clip, **kw)
+        ref = self.pr.approve("ark", "side", rec["id"], 9.6, "box, no people", clip=clip, **kw)
         self.assertIn("approved-clip-frame", ref["source"])
 
     def test_a_hand_made_picture_naming_an_approved_clip_is_not_approved(self):
@@ -257,19 +392,19 @@ class Props(unittest.TestCase):
         self.pr.save(forged.with_suffix(".json"), dict(real, id="pr-ark-side-9-2", repo_path=self.pr.rel(forged),
                                                        sha256=self.pr.sha256(forged)))
         with self.assertRaises(SystemExit) as err:
-            self.pr.approve("ark", "side", "pr-ark-side-9-2", 9.6, "box", clip=clip, **kw)
+            self.pr.approve("ark", "side", "pr-ark-side-9-2", 9.6, "box, no people", clip=clip, **kw)
         self.assertIn("PROP_SOURCE_REFUSED", str(err.exception))
         # the right picture with another time or crop in its sidecar is refused the same way
         moved = dict(real, clip=dict(real["clip"], seconds=1.5))
         self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", moved)
         with self.assertRaises(SystemExit):
-            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box, no people", clip=clip, **kw)
         self.pr.save(self.d / "candidates" / "pr-ark-side-9-1.json", real)
         other = self.d / "other.mp4"
         other.write_bytes(clip.read_bytes() + b"x")
         with self.assertRaises(SystemExit):
-            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=other, **kw)
-        self.assertEqual(self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box", clip=clip, **kw)["sha256"],
+            self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box, no people", clip=other, **kw)
+        self.assertEqual(self.pr.approve("ark", "side", "pr-ark-side-9-1", 9.6, "box, no people", clip=clip, **kw)["sha256"],
                          real["sha256"])
 
     def test_every_refusal_of_the_registry_tool(self):
@@ -293,12 +428,13 @@ class Props(unittest.TestCase):
         ak = {"cand_dir": cands, "props_file": self.file, "images_dir": self.d / "images", "refs_dir": self.d / "refs"}
         refused("PROP_VIEW_UNKNOWN", self.pr.approve, "ark", "top", cid, 9.6, "x", **ak)
         refused("PROP_NOTE_MISSING", self.pr.approve, "ark", "side", cid, 9.6, "  ", **ak)
+        refused("PROP_NOTE_FIGURES_UNCHECKED", self.pr.approve, "ark", "side", cid, 9.6, "x", **ak)
         refused("PROP_SCORE_BELOW_FLOOR", self.pr.approve, "ark", "side", cid, 10.5, "x", **ak)
-        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "pr-ark-side-9-7", 9.6, "x", **ak)
-        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "../x", 9.6, "x", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "pr-ark-side-9-7", 9.6, "x, no people", **ak)
+        refused("PROP_CANDIDATE_UNKNOWN", self.pr.approve, "ark", "side", "../x", 9.6, "x, no people", **ak)
         Image = __import__("PIL.Image", fromlist=["Image"])
         Image.new("RGB", (64, 36), (0, 0, 0)).save(cands / f"{cid}.jpg", "JPEG")
-        refused("PROP_CANDIDATE_SHA256_MISMATCH", self.pr.approve, "ark", "side", cid, 9.6, "x", **ak)
+        refused("PROP_CANDIDATE_SHA256_MISMATCH", self.pr.approve, "ark", "side", cid, 9.6, "x, no people", **ak)
         import subprocess
         clip = self.d / "c.mp4"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=gray:s=144x256:d=1:r=10",
@@ -317,7 +453,15 @@ class Props(unittest.TestCase):
         for meta in sorted(self.pr.CANDIDATES_DIR.glob("pr-ark-*.json")):
             rec = json.loads(meta.read_text())
             self.assertEqual(rec["sha256"], self.pr.sha256(self.pr.REPO / rec["repo_path"]), meta.name)
-            # a Pavo still with the look and an exact 0-credit quote, or a frame of a clip approved at >= 9.5
+            # a Pavo still with the look and an exact 0-credit quote, or a frame of a clip approved at >= 9.5, or a
+            # retouch of the reference approved then: once that retouch (or a sibling) became the reference, its
+            # parent is the one recorded in the approved record's source (valid when approved; approve refuses it now)
+            if rec["source"] == self.pr.RETOUCHED:
+                ref = json.loads(self.pr.record_path("ark", rec["view"]).read_text())
+                src = str(ref.get("source") or "")
+                if src.startswith(self.pr.RETOUCHED + " ") and (json.loads(src[len(self.pr.RETOUCHED) + 1:]).get(
+                        "parent") or {}).get("sha256") == rec["parent"]["sha256"]:
+                    continue
             self.assertEqual(self.pr.source_problems("ark", rec), [], meta.name)
             if rec["source"] == self.pr.PAVO:
                 self.assertIn(self.look, rec["prompt"], meta.name)

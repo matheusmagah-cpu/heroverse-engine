@@ -4,7 +4,7 @@ Owner, 2026-10-24: "replace gemini-3.8-flash; I cannot have this in the system; 
 candidate failed the calibration (`evidence/reviewer-calibration/`), so Claude reviews.
 
 ## When
-Every clock run: `render_queue.py migration/production migration/publish/ledger.json review 72` lists due renders
+Every main-clock run: `render_queue.py migration/production migration/publish/ledger.json review 72` lists due renders
 with QA PASS and no Claude review for their hash. Each one is reviewed in the same run.
 
 ## What is looked at (evidence)
@@ -34,7 +34,7 @@ Gate: items ≥ 7 and overall ≥ 8; publication needs overall ≥ 9.5 (owner fl
 
 ## Preview review, before the full render (owner, 2026-10-24: "built for 9.5, no rework")
 A full render takes about 2.5 h, so every script is previewed first (`pilot-preview.yml`, ~15 min, dispatched by the
-heartbeat from `render_queue.py ... preview 72`). Every clock run lists the previews to review with
+heartbeat from `render_queue.py ... preview 72`). Every main-clock run lists the previews to review with
 `render_queue.py migration/production migration/publish/ledger.json preview-review 72` and reviews each one:
 - `inspection/preview/opening-sheet.jpg`: the opening rendered for real, every 2.5 s for 60 s (hook, captions, mood).
 - `inspection/preview/footage-sheet-NN.jpg`: every footage clip of the FULL video in pages of 12, three frames each
@@ -49,5 +49,5 @@ the eight scores, `overall`, `issues` (each with the clip number or the second),
 branch, PR and squash merge. Below 9.5, fix the cause in the script (e.g. reassign footage, rewrite the hook): the
 changed script is previewed again automatically. `render_pilot.sh` refuses a full render unless this review of the
 current script is at 9.5 or more (`preview_gate.py gate`), on the engine and on the public runner alike.
-Every clock run also runs `render_queue.py ... reassign 168`: a pilot listed there still names clips the library no
+Every main-clock run also runs `render_queue.py ... reassign 168`: a pilot listed there still names clips the library no
 longer approves, so preview and render skip it (E78) until `footage/assign.py PILOT_DIR` reassigns it (PR as above).

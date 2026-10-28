@@ -31,6 +31,9 @@ LATER = [
     "migration/production/bible/episode_build.py", "migration/production/bible/short_engine.py",
     "migration/production/bible/lipsync_check.py", "migration/production/bible/syncnet.py",
     "migration/production/bible/clip_check.py",
+    "migration/production/bible/long_preflight.py",   # E127: the long's verify-preflight and shot-probe gate
+    "migration/production/bible/shot_sources.py",   # owner 27/10 (R1-R3): per-shot sources, approve-source, fetch
+    "migration/production/bible/pavo_native.py",    # owner 27/10 (R4): native speech requests, checks and mix
     "migration/production/render_queue.py", "migration/production/qa_pilot.py", "migration/production/still_render.py",
     "migration/production/preview_gate.py", "migration/production/pilot_render.py", "migration/production/long_review.py",
     "migration/production/footage/assign.py", "migration/production/imagegen/cf_images.py",
@@ -43,10 +46,10 @@ LATER = [
     "migration/integrations/pavo/client.py", "migration/integrations/pavo/video.py",
     "migration/integrations/pavo/images.py", "migration/integrations/pavo/audio.py",
     "migration/integrations/pavo/image_gen.py",
-    ".github/workflows/episode.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
+    "migration/integrations/pavo/quota.py",   # E124: the free-image daily cap and quota stop
+    ".github/workflows/episode.yml", ".github/workflows/long-build.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
     ".github/workflows/pavo-footage.yml", ".github/workflows/footage.yml", ".github/workflows/approve.yml",
-    ".github/workflows/publish.yml", ".github/workflows/shorts.yml", ".github/workflows/publish-shorts.yml",
-    ".github/workflows/tiktok.yml", ".github/workflows/agnes-clip.yml",
+    ".github/workflows/publish.yml", ".github/workflows/tiktok.yml",
     "migration/ops/dispatch_guard.py",   # E116: refuses at dispatch, before any secret or work
 ]
 # any later build added beside the Short's (a long build, a new engine) is scanned without being listed
@@ -187,11 +190,23 @@ class RefusalParity(unittest.TestCase):
         self.assertEqual(sorted(r["short_built_for_9_5"], key=int), built_items())
         self.assertEqual(sorted(r["story_qa_v3"]), story_v3_rows())
 
+    def test_every_story_v4_row_that_is_not_v3s_is_mapped(self):
+        # owner 27/10: v4 = v3 + Pavo's kept speech and free fallbacks; its new or changed rows need their earlier check
+        prod = ROOT / "migration" / "production"
+        v3 = json.loads((prod / "qa_criteria_story_v3.json").read_text())
+        v4 = json.loads((prod / "qa_criteria_story_v4.json").read_text())
+        own = sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in v4[s]
+                     if v3[s].get(k) != v4[s][k])
+        self.assertEqual(sorted(review()["story_qa_v4"]), own)
+        for name, e in review()["story_qa_v4"].items():
+            self.assertNotEqual(e["class"], "open", name)   # an open row would block every long (LONG_REVIEW_OPEN)
+
     def test_each_review_mapping_names_a_real_check_or_its_reason(self):
         r = review()
         entries = [(f"rubric {k}/{f}", e) for k, v in r["rubric"].items() for f, e in v.items()]
         entries += [(f"built {k}", e) for k, e in r["short_built_for_9_5"].items()]
         entries += [(f"v3 {k}", e) for k, e in r["story_qa_v3"].items()]
+        entries += [(f"v4 {k}", e) for k, e in r["story_qa_v4"].items()]
         for name, e in entries:
             self.assertIn(e["class"], REVIEW_CLASSES, name)
             if e["class"] in ("review_only", "open"):

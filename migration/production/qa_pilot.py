@@ -15,9 +15,9 @@ HERE = Path(__file__).resolve().parent
 DIAG = HERE.parent / "diagnostics"
 for sub in ("av-event-meter", "av-semantic", "av-profile"):
     sys.path.insert(0, str(DIAG / sub))
-import av_profile  # noqa: E402
-import av_semantic  # noqa: E402
-from qualify_semantic import wer  # noqa: E402
+sys.path.insert(0, str(HERE.parent / "publish"))   # captions.py: the one SRT builder (the long's .srt track)
+CHARACTERS = HERE / "characters" / "characters.json"
+KJV_CHECK = HERE / "bible"
 
 OWNED_MUSIC_SHA256 = "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"
 
@@ -147,7 +147,287 @@ def grammar_checks_story_v1(criteria, manifest):
     return checks
 
 
+STORY_V3 = "story-qa-criteria-v3"
+# Every row of the frozen story QA v3 (technical, speech, rights, grammar) and the qa.json checks that measure it.
+# A row is PASS only when every check it names is True, FAIL when one is False, UNKNOWN when one is absent or None
+# (evidence missing): never skipped (prepublish_gate reads the rows through this table; test_qa_pilot holds it equal
+# to the frozen file). There is no footage minimum: v3 has no footage_picture_share row (owner, 2026-10-27).
+STORY_V3_ROWS = {
+    "technical.full_decode_without_errors": ["full_decode_without_errors"],
+    "technical.video": ["video_format"],
+    "technical.duration_seconds_min": ["duration_min"],
+    "technical.integrated_lufs": ["integrated_lufs"],
+    "technical.true_peak_dbtp_max": ["true_peak"],
+    "technical.frame": ["video_format"],
+    "speech.speech_presence_min": ["speech_presence"],
+    "speech.singing_presence_max": ["no_singing"],
+    "speech.wer_vs_script_max": ["wer_vs_script"],
+    "speech.accepted_words_per_minute": ["words_per_minute"],
+    "speech.first_word_onset_seconds_max": ["first_word_onset"],
+    "speech.hook_second_person_within_seconds": ["hook_second_person"],
+    "rights.every_image_generated_by_allowed_open_licence_model_with_revision": ["images_open_licence_with_revision"],
+    "rights.allowed_model_licences": ["images_open_licence_with_revision"],
+    "rights.music_owned_generator_with_hash": ["music_owned"],
+    "rights.voice_model_hash_pinned": ["voice_model_pinned"],
+    "rights.script_original_with_public_domain_scripture_only": ["scripture_kjv_exact"],
+    "rights.footage_licensed_vetted_and_credited": ["footage_licensed_vetted_and_credited"],
+    "rights.allowed_footage_licences": ["footage_licensed_vetted_and_credited"],
+    "rights.footage_vetting_required": ["footage_licensed_vetted_and_credited"],
+    "rights.ai_video": ["ai_video_source_and_licence"],
+    "grammar.first_shot": ["first_shot_cold_open"],
+    # figures_allowed measures who is on screen (APPROVED entries, the Keeper in his beats, never God); the "look
+    # word for word and approved references" part is enforced at plan time by plan_check.character_problems
+    # (CHARACTER_LOOK_CHANGED, CHARACTER_NO_REFS, via long_plan_check) and by the build's reference binding
+    "grammar.figures_allowed": ["figures_allowed"],
+    "grammar.every_scene_in_motion": ["every_scene_in_motion"],
+    "grammar.scene_seconds": ["scene_seconds"],
+    "grammar.crossfade_seconds_max": ["crossfade_seconds_max"],
+    "grammar.image_repeat_gap_seconds_min": ["image_repeat_gap"],
+    "grammar.burned_captions": ["no_burned_captions"],
+    "grammar.caption_track": ["caption_track"],
+    "grammar.srt_coverage_of_speech_min": ["srt_coverage_of_speech"],
+    "grammar.srt_cue_seconds_median": ["srt_cue_seconds_median"],
+    "grammar.srt_cue_chars_max": ["srt_cue_chars_max"],
+    "grammar.srt_cue_words_max": ["srt_cue_words_max"],
+    "grammar.scripture_card_only_while_read": ["scripture_card_only_while_read"],
+    "grammar.cta_mid_video_max": ["cta_count"],
+    "grammar.cta_seconds_max": ["cta_short_and_not_early"],
+    "grammar.cta_first_start_seconds_min": ["cta_short_and_not_early"],
+    "grammar.persistent_overlays_allowed": ["persistent_overlays_only_brand"],
+    "grammar.ai_video_picture_share_max": ["ai_video_picture_share"],
+    "grammar.ai_video_clip_checks": ["ai_video_clip_checks"],
+}
+KEEPER = "keeper"
+# story-qa-criteria-v4 (owner, 2026-10-27, R1-R4): v3's rows, the ai_video row also judging Pavo's kept speech, and the
+# rows v4 adds. A plan is measured by v4 only when it declares it (long_plan_check.criteria_version).
+STORY_V4 = "story-qa-criteria-v4"
+STORY_V4_ROWS = {**STORY_V3_ROWS,
+                 "rights.ai_video": ["ai_video_source_and_licence", "pavo_speech_clip_checks"],
+                 "speech.asr_model": ["asr_model_pinned"],
+                 "rights.fallback_sources": ["fallback_shots"],
+                 "grammar.ai_video_speech_checks": ["pavo_speech_clip_checks"],
+                 "grammar.spoken_audio_mix": ["spoken_audio_mix"],
+                 "grammar.fallback_shots": ["fallback_shots"]}
+STORY_ROWS = {STORY_V3: STORY_V3_ROWS, STORY_V4: STORY_V4_ROWS}
+KEEPER_BEATS = ("keeper_promise", "keeper_insight", "keeper_close")
+
+
+def row_states(checks, rows=STORY_V3_ROWS):
+    """PASS / FAIL / UNKNOWN for each row from its checks (True / False / absent or None)."""
+    out = {}
+    for row, names in rows.items():
+        values = [checks.get(n) for n in names]
+        out[row] = "FAIL" if any(v is False for v in values) else (
+            "PASS" if values and all(v is True for v in values) else "UNKNOWN")
+    return out
+
+
+def approved_characters(path=CHARACTERS):
+    try:
+        reg = json.loads(Path(path).read_text())
+    except (OSError, ValueError):
+        return None
+    return {k for k, v in (reg.get("characters") or {}).items() if isinstance(v, dict) and v.get("status") == "APPROVED"}
+
+
+def is_keeper(hold):
+    return hold.get("shot_kind") == KEEPER or KEEPER in (hold.get("characters") or [])
+
+
+def figures_allowed(manifest, approved):
+    """grammar.figures_allowed on the manifest's holds: every named figure an APPROVED characters.json entry, the
+    Keeper only in his own beats, God never a figure; None (UNKNOWN) when the registry cannot be read or a hold does
+    not say who is on screen."""
+    if approved is None or any(not isinstance(h.get("characters"), list) for h in manifest["holds"]):
+        return None
+    for h in manifest["holds"]:
+        who = set(h["characters"])
+        if "god" in who or not who <= approved:
+            return False
+        if is_keeper(h) and h.get("beat") not in KEEPER_BEATS:
+            return False
+    return True
+
+
+def first_shot(criteria, manifest, first_word):
+    """grammar.first_shot: the first hold is the acted cold open (beat cold_open, no title card, never the Keeper),
+    and the first voiced sentence is a character's or God's (never the Keeper or the narrator), heard within
+    first_word_onset_seconds_max."""
+    holds, sents = manifest["holds"], manifest.get("sentences") or []
+    if not holds or not sents:
+        return False
+    h, s = holds[0], min(sents, key=lambda x: x["start"])
+    speaker = s.get("speaker")
+    return (h.get("beat") == "cold_open" and not h.get("title_card") and not is_keeper(h) and h["start"] <= 1e-6
+            and bool(speaker) and speaker != KEEPER
+            and first_word is not None and first_word <= criteria["speech"]["first_word_onset_seconds_max"])
+
+
+def overlays_allowed(recorded, allowed):
+    """grammar.persistent_overlays_allowed (story v3): True when every recorded overlay is in the allowed list (an
+    empty list included), False on any other overlay or a value that is not a list, None (UNKNOWN) when the manifest
+    does not record its overlays."""
+    if recorded is None:
+        return None
+    return isinstance(recorded, list) and all(o in allowed for o in recorded)
+
+
+def ai_clip_checks(manifest, ai):
+    """grammar.ai_video_clip_checks: every Pavo clip records clip_check PASS, every talking clip lipsync_check
+    PASS, every God voice-over clip face_check PASS (lipsync_check --faces, no face). None when no clip is listed."""
+    clips = [c for c in manifest.get("clips") or [] if c.get("source") == ai["source"]]
+    if not clips:
+        return None
+    return all(c.get("clip_check") == "PASS"
+               and (not c.get("talking") or c.get("lipsync_check") == "PASS")
+               and (c.get("voiceover") != "god" or c.get("face_check") == "PASS") for c in clips)
+
+
+def grammar_checks_story_v3(criteria, manifest, script=None, words=None, first_word=None, duration=None,
+                            base=None, approved=None):
+    """story-qa-criteria-v3 (owner, 2026-10-26; Pavo freed, no real-footage minimum, 2026-10-27): the acted
+    Bible-story long. v1's title card, figure ban and footage share are gone; the v3 rows are the acted cold open,
+    approved figures, AI share up to 1.0 with each clip's checks, and the uploaded .srt track (no burned captions).
+    The manifest (the long's build, LONG_DESIGN.md slice 3) carries, beside v4's fields: holds[].beat,
+    holds[].characters, holds[].shot_kind; sentences[].speaker on spoken lines; clips[] with source, licence, model,
+    upscaler, audio, vetting, credit, sha256, clip_check, talking, lipsync_check, voiceover, face_check;
+    burned_captions false; caption_track (captions.track_record). A value None is UNKNOWN (evidence absent)."""
+    import captions
+    g, r = criteria["grammar"], criteria["rights"]
+    ai = r["ai_video"]
+    holds = manifest["holds"]
+    inner = [h["end"] - h["start"] for h in holds[:-1]] or [holds[0]["end"] - holds[0]["start"]]
+    last_seen, gaps = {}, []
+    for h in holds:
+        if h["image"] in last_seen:
+            gaps.append(h["start"] - last_seen[h["image"]])
+        last_seen[h["image"]] = h["end"]
+    seg_end = {}
+    for s in manifest.get("sentences") or []:
+        seg_end[s.get("segment")] = max(seg_end.get(s.get("segment"), 0.0), s["end"])
+    cta = manifest.get("cta", [])
+    allowed = set(r["allowed_model_licences"])
+    models = [m for i in (manifest.get("images") or {}).values() for m in i["models"].values()]
+    clips = {c.get("id"): c for c in manifest.get("clips") or []}
+    span = sum(h["end"] - h["start"] for h in holds)
+    shown = [(h["end"] - h["start"], h["image"].partition("#")[0]) for h in holds if h.get("kind") == "footage"]
+    is_ai = {i for i, c in clips.items() if c.get("source") == ai["source"] or c.get("licence") == ai["licence"]}
+    used = {i for _, i in shown}
+    flicences = set(r["allowed_footage_licences"])
+    checks = {
+        "first_shot_cold_open": first_shot(criteria, manifest, first_word),
+        "figures_allowed": figures_allowed(manifest, approved),
+        "every_scene_in_motion": all(h.get("motion") for h in holds),
+        "scene_seconds": all(within(x, g["scene_seconds"]) for x in inner)
+                         and holds[-1]["end"] - holds[-1]["start"] >= g["scene_seconds"][0],
+        "crossfade_seconds_max": manifest.get("crossfade_seconds", 99) <= g["crossfade_seconds_max"],
+        "image_repeat_gap": all(x >= g["image_repeat_gap_seconds_min"] for x in gaps),
+        "no_burned_captions": manifest.get("burned_captions") is g["burned_captions"] and not manifest.get("captions"),
+        "scripture_card_only_while_read": all(c["end"] <= seg_end.get(c["segment"], -1) + 1e-6 and c["end"] > c["start"]
+                                              for c in manifest.get("scripture_cards", [])),
+        "cta_count": len(cta) <= g["cta_mid_video_max"],
+        "cta_short_and_not_early": all(c["end"] - c["start"] <= g["cta_seconds_max"]
+                                       and c["start"] >= g["cta_first_start_seconds_min"] for c in cta),
+        # v3's key is an allowed list: every overlay recorded must be in it ([] passes); not recorded is UNKNOWN
+        "persistent_overlays_only_brand": overlays_allowed(manifest.get("persistent_overlays"),
+                                                           g["persistent_overlays_allowed"]),
+        "images_open_licence_with_revision": (bool(models) or all(h.get("kind") == "footage" for h in holds))
+                                             and all(str(m.get("license")).lower() in allowed and m.get("revision")
+                                                     for m in models),
+        "footage_licensed_vetted_and_credited": bool(clips) and used <= set(clips) and all(
+            c.get("licence") in flicences and c.get("vetting") == r["footage_vetting_required"] and c.get("credit")
+            and c.get("sha256") for c in clips.values()),
+        "ai_video_source_and_licence": all(clips[i].get("source") == ai["source"] and clips[i].get("licence") == ai["licence"]
+                                           and clips[i].get("model") == ai["model"]
+                                           and clips[i].get("upscaler") == ai["upscaler"]
+                                           and clips[i].get("audio") == ai["audio"]
+                                           and clips[i].get("vetting") == ai["vetting_required"] for i in is_ai),
+        "ai_video_picture_share": span > 0 and sum(t for t, i in shown if i in is_ai) / span <= g["ai_video_picture_share_max"],
+        "ai_video_clip_checks": ai_clip_checks(manifest, ai),
+    }
+    # the .srt track: the one publish_video uploads (captions.manifest_srt), its record, file and v3's caption rows
+    track = manifest.get("caption_track")
+    if not isinstance(track, dict) or not manifest.get("sentences"):
+        for k in ("caption_track", "srt_coverage_of_speech", "srt_cue_seconds_median", "srt_cue_chars_max",
+                  "srt_cue_words_max"):
+            checks[k] = False
+        return checks, {"caption_track": "CAPTION_TRACK_MISSING"}
+    text = captions.manifest_srt(manifest)
+    script_text = " ".join(s["text"] for s in (script or {}).get("segments", []))
+    rows = captions.long_track(text, manifest["sentences"], script_text, g, words, duration)
+    recorded = captions.manifest_problems(manifest, base)
+    checks["caption_track"] = rows["caption_track"][0] and not recorded and track.get("burned") is False
+    checks["srt_coverage_of_speech"] = rows["srt_coverage_of_speech_min"][0]
+    checks["srt_cue_seconds_median"] = rows["srt_cue_seconds_median"][0]
+    checks["srt_cue_chars_max"] = rows["srt_cue_chars_max"][0]
+    checks["srt_cue_words_max"] = rows["srt_cue_words_max"][0]
+    return checks, {"caption_track": {**rows["caption_track"][1], "recorded_problems": recorded[:5]},
+                    **{k: v[1] for k, v in rows.items() if k != "caption_track"}}
+
+
+def grammar_checks_story_v4(criteria, manifest, script=None, words=None, first_word=None, duration=None,
+                            base=None, approved=None, asr_sha256=None):
+    """story-qa-criteria-v4 (owner, 2026-10-27): every v3 row unchanged, with
+    - rights.ai_video: a Pavo clip keeps its speech (audio = the kept value) only with its speech checks PASS, and a
+      non-spoken one has its audio removed (audio_silent_shots); source, licence, model, upscaler and vetting as v3;
+    - speech.asr_model: the ASR that measured the words is the pinned medium.en (its model.bin sha256);
+    - fallback_sources / fallback_shots: every licensed-footage or still clip sits on a shot with no character and no
+      speech, APPROVED; a footage clip under the frozen licence list and credited, a still's model licence recorded;
+    - spoken_audio_mix: with any kept speech, one gain per speech clip within clip_gain_db_max, fades within
+      audio_crossfade_seconds_max, a continuous ambience bed and the owned music."""
+    g, r = criteria["grammar"], criteria["rights"]
+    ai = r["ai_video"]
+    checks, measures = grammar_checks_story_v3(criteria, manifest, script, words, first_word, duration, base, approved)
+    clips = manifest.get("clips") or []
+    pavo = [c for c in clips if c.get("source") == ai["source"]]
+    kept = [c for c in pavo if c.get("audio") == ai["audio"]]
+    checks["ai_video_source_and_licence"] = all(
+        c.get("licence") == ai["licence"] and c.get("model") == ai["model"] and c.get("upscaler") == ai["upscaler"]
+        and c.get("vetting") == ai["vetting_required"] and c.get("audio") in (ai["audio"], ai["audio_silent_shots"])
+        for c in pavo)
+    checks["pavo_speech_clip_checks"] = all(c.get("speech_checks") == "PASS" for c in kept)
+    fallbacks = [c for c in clips if c.get("source") in ("footage", "still")]
+    holds = {h.get("shot"): h for h in manifest.get("holds") or []}
+    spoken = {s.get("shot") for s in manifest.get("spoken_shots") or []}
+    flic, mlic = set(r["allowed_footage_licences"]), {x.lower() for x in r["allowed_model_licences"]}
+    checks["fallback_shots"] = all(
+        c.get("vetting") == "APPROVED" and c.get("sha256") and not (holds.get(c.get("id")) or {}).get("characters")
+        and c.get("id") not in spoken and c.get("audio") == "removed"
+        and ((c["source"] == "footage" and c.get("licence") in flic and c.get("credit"))
+             or (c["source"] == "still" and str(c.get("licence")).lower() in mlic)) for c in fallbacks)
+    # v3's footage row reads every clip as footage; a still is an image (images_open_licence_with_revision)
+    used = {h["image"].partition("#")[0] for h in manifest.get("holds") or [] if h.get("kind") == "footage"}
+    movie = [c for c in clips if c.get("source") != "still"]
+    checks["footage_licensed_vetted_and_credited"] = bool(movie) and used <= {c.get("id") for c in clips} and all(
+        c.get("licence") in flic and c.get("vetting") == r["footage_vetting_required"] and c.get("credit")
+        and c.get("sha256") for c in movie)
+    mix = manifest.get("spoken_audio_mix") or {}
+    sm, sc = g["spoken_audio_mix"], ai["speech_checks"]
+    gains = mix.get("per_clip_gain_db") or {}
+    checks["spoken_audio_mix"] = not kept or (
+        set(gains) >= {c.get("id") for c in kept}
+        and all(isinstance(v, (int, float)) and v <= sc["clip_gain_db_max"] for v in gains.values())
+        and isinstance(mix.get("audio_crossfade_seconds"), (int, float))
+        and mix["audio_crossfade_seconds"] <= sm["audio_crossfade_seconds_max"]
+        and bool(mix.get("ambience_bed")) and bool(mix.get("music")))
+    asr = criteria["speech"]["asr_model"]["model_bin_sha256"]
+    checks["asr_model_pinned"] = None if asr_sha256 is None else asr_sha256 == asr
+    return checks, measures
+
+
+def scripture_kjv_exact(script):
+    """rights.script_original_with_public_domain_scripture_only, read again on the script that was voiced: every
+    referenced quotation is the KJV word for word (bible/kjv_check.py, the same check script_check runs)."""
+    if str(KJV_CHECK) not in sys.path:
+        sys.path.insert(0, str(KJV_CHECK))
+    import kjv_check
+    return not kjv_check.script_problems(script or {})
+
+
 def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out):
+    import av_profile
+    import av_semantic
+    from qualify_semantic import wer
     criteria = json.loads(Path(criteria_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
     script = json.loads(Path(script_path).read_text())
@@ -197,15 +477,31 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         clips = manifest["clips"]
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
+    elif criteria["version"] == STORY_V4:
+        # owner 27/10: v3's rows plus Pavo's kept speech, the pinned ASR, the fallback shots and the spoken mix
+        model_bin = Path(whisper) / "model.bin"
+        v3, srt_measures = grammar_checks_story_v4(criteria, manifest, script, words, first, duration,
+                                                   Path(manifest_path).parent, approved_characters(),
+                                                   av_semantic.sha256(model_bin) if model_bin.is_file() else None)
+        checks.update(v3)
+        checks["scripture_kjv_exact"] = scripture_kjv_exact(script)
+    elif criteria["version"] == STORY_V3:
+        # the acted Bible-story long: every v3 row through STORY_V3_ROWS, the .srt track measured against the
+        # script and the words heard in the audio
+        v3, srt_measures = grammar_checks_story_v3(criteria, manifest, script, words, first, duration,
+                                                   Path(manifest_path).parent, approved_characters())
+        checks.update(v3)
+        checks["scripture_kjv_exact"] = scripture_kjv_exact(script)
     else:
         grammar = {"pilot-qa-criteria-v3": grammar_checks_v3, "pilot-qa-criteria-v4": grammar_checks_v4,
                    "story-qa-criteria-v1": grammar_checks_story_v1}
         checks.update(grammar.get(criteria["version"], grammar_checks)(criteria, manifest))
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
-    checks = {k: bool(v) for k, v in checks.items()}  # numpy bools are not JSON serializable
+    # numpy bools are not JSON serializable; under v3 None stays None (UNKNOWN: evidence absent, never a pass)
+    checks = {k: (None if v is None and criteria["version"] in STORY_ROWS else bool(v)) for k, v in checks.items()}
     result = {"version": "pilot-qa-v1", "pilot_id": manifest["pilot_id"], "output_sha256": manifest["output_sha256"],
-              "status": "PASS" if all(checks.values()) else "FAIL", "checks": checks,
+              "status": "PASS" if all(v is True for v in checks.values()) else "FAIL", "checks": checks,
               "criteria_version": criteria["version"],
               "measurements": {"duration_seconds": round(duration, 2), "loudness": loud,
                                "speech_presence": presence["speech"], "music_presence": presence["music"],
@@ -217,6 +513,9 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
               "criteria_sha256": av_semantic.sha256(criteria_path),
               "human_review": "PENDING (D-076 calibration by sampling)",
               "upload_performed": False, "publication_performed": False}
+    if criteria["version"] in STORY_ROWS:
+        result["rows"] = row_states(checks, STORY_ROWS[criteria["version"]])
+        result["measurements"]["srt"] = srt_measures
     Path(out).write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps({"status": result["status"], "failed": [k for k, ok in checks.items() if not ok],
                       **{k: result["measurements"][k] for k in ("duration_seconds", "wer_vs_script",

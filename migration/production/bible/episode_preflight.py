@@ -144,7 +144,7 @@ def line_words(text):
     return " ".join(plan_check._plain(text))
 
 
-def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
+def setup_key(shot, chars, line, images_dir=ch.HERE / "images", binding=None):
     """A talking shot's probe key: who speaks, the reference images its request sends for the speaker (record id
     and sha256), the prompt binding and the line itself. PR #419 measured that the lips pass rate belongs to the line
     (line-01 7 of 14, genesis-07's Keeper lines 1 of 39 with the same speaker, reference, pose and binding), so a
@@ -155,7 +155,10 @@ def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
                    or eb.reference_records(who, chars, images_dir))
     except SystemExit:
         records = []
-    return {"speaker": who, "references": {rid: m.get("sha256") for rid, m in records}, "binding": eb.BOUND_AUDIO,
+    # owner 27/10 (R4): a line Pavo speaks itself is probed on its own binding (a probe of our audio binding never
+    # vouches for it, nor the other way round)
+    return {"speaker": who, "references": {rid: m.get("sha256") for rid, m in records},
+            "binding": binding or eb.BOUND_AUDIO,
             "line": line_words(line)}
 
 
@@ -187,7 +190,9 @@ def probe_rows(plan, chars, probes=None):
         talks, silent = plan_check.talking(s), plan_check.voiceover(s)
         if talks or silent:
             if talks:
-                key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]))
+                key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]),
+                                binding=eb.pavo_native.NATIVE_BINDING if eb.pavo_native.route(plan, s, i) ==
+                                eb.pavo_native.NATIVE else None)
                 found = [x for x in probes if x.get("kind", "talk") == "talk" and all(
                     (line_words(x.get("line", "")) if k == "line" else x.get(k)) == v for k, v in key.items())]
                 row, minimum = dict(key, shot=s["id"], kind="talk"), MIN_PROBE_GENERATIONS
@@ -219,7 +224,7 @@ def probe_rows(plan, chars, probes=None):
     return rows, missing, low, (round(run_chance, 3) if not missing else None)
 
 
-def binding(plan_path, plan, chars_raw=None, probes=None):
+def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     """Review of #422: what a report vouches for, part by part, so a STALE refusal names what changed and a change
     the plan does not use (another character approved) leaves it valid: the plan's bytes; the characters.json
     entries it uses (God's voice included when He speaks); their image records; the setups.json probes its talking
@@ -232,8 +237,15 @@ def binding(plan_path, plan, chars_raw=None, probes=None):
     records = {p.name: sha256(p) for cid in used for p in sorted((ch.HERE / "images").glob(f"ch-{cid}-*.json"))}
     rows = probe_rows(plan, data["characters"], probes)[0]
     matched = sorted((digest(x) for r in rows for x in r.get("matched", [])))
-    return {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
-            "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
+    out = {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
+           "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
+    if eb.is_long(plan):   # E127: the long's review rows and its own code
+        import long_preflight
+        out.update(long_preflight.binding_extra(registry))
+    if eb.pavo_native.native_plan(plan):   # review of #476: a learned prompt block or a voice changes the routes
+        out["prompt_blocks"] = eb.pavo_native.blocks_sha256()
+        out["voices"] = sha256(eb.pavo_native.VOICES)
+    return out
 
 
 def stale_parts(old, new):
@@ -293,7 +305,7 @@ def voice_step(plan, voice_python, prepared, work):
     except SystemExit as exc:
         layout = json.loads((work / "layout.json").read_text()) if (work / "layout.json").exists() else None
         problems = [str(exc)]
-    if layout and not problems:
+    if layout and not problems:   # a long's compose too (long_build.compose_problems, LONG_DESIGN slice 3)
         problems = [f"COMPOSE {p}" for p in eb.compose_prediction(plan, layout)]
     return {"ran": True, "problems": problems, "pace": measured_pace(plan, work),
             "measured": {k: layout[k] for k in ("total", "keeper_share", "lesson_share", "retimed")} if layout else None}
@@ -316,12 +328,12 @@ def refs_and_requests(plan, work):
             "needs": eb.clip_needs(plan, layout)}
 
 
-def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None):
+def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None, registry=None):
     plan_path = Path(plan_path)
     plan = json.loads(plan_path.read_text())
     ep = episode_id(plan_path, plan)   # before any path is built or any step runs (review of #422)
     chars = chars if chars is not None else ch.registry()
-    result = plan_check.check(plan, chars)
+    result = eb.check_plan(plan, chars)   # E127: long_plan_check --strict and the frozen story QA for a long
     report = {"plan": str(plan_path.resolve().relative_to(REPO.resolve())) if REPO.resolve() in plan_path.resolve().parents
               else str(plan_path), "episode": ep,
               "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -372,8 +384,11 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
     digests = report["requests"].get("digests")
     report["shot_review"] = (eb.review_problems(plan, digests, needs=report["requests"].get("needs") or {})
                              if digests else ["REQUESTS_NOT_CHECKED"])
-    report["binding"] = binding(plan_path, plan, probes=setups)
+    report["binding"] = binding(plan_path, plan, probes=setups, registry=registry)
     report["blockers"] = blockers
+    if eb.is_long(plan):   # E127: and no review row of the long open (long_preflight.py)
+        import long_preflight
+        long_preflight.extend(report, plan, registry)
     report["status"] = "PASS" if not blockers else "BLOCKED"
     return report
 
@@ -404,6 +419,11 @@ def verify(plan_path, approvals=None):
         return f"PREFLIGHT_STALE {', '.join(changed)} changed after the preflight; run it again"
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
+    if eb.is_long(plan):   # E127: a review row reopened after the report is refused now, not at the review
+        import long_preflight
+        rows = long_preflight.review_problems()
+        if rows:
+            return rows[0]
     # E114: every shot ships the clip Claude reviewed, made from the request this plan sends now
     # E118: and every approved clip covers the clip seconds the preflight's measured layout needs (a report without
     # them covers nothing: SHOT_CLIP_TOO_SHORT)

@@ -1,0 +1,48 @@
+{
+ "daily_cap": 120,
+ "days": {
+  "2026-10-27": {
+   "generated": 251,
+   "note": "reconstructed at E124: 147 Pavo stills recorded in the repo (genesis-09 runs 2026102701-05, genesis-08 run 20261027, ark props run 2026102701, 2 thumbnail candidates), 9 ark-probe stills (evidence/pavo/20261027/genesis-09-ark-probe) and the 31 failed submissions of run 2026102705; E128 (units: an image 1, a video 2): +64 for the ~32 MCP Flash video jobs of the evening (22 talking probes with our audio, ~10 native-audio probes). Today's shot-probe run 40592173923 (27 video jobs) is counted from its record on claude/shot-probe-arc-01-long-40592173923, not here"
+  }
+ },
+ "failed_jobs": [
+  "373492859393620672",
+  "373492919749085248",
+  "373492985691932736",
+  "373493099634363456",
+  "373493128776916736",
+  "373493158099348992",
+  "373493183806238208",
+  "373493376253460032",
+  "373493444876467776",
+  "373493516715984960",
+  "373493580302203584",
+  "373493651273973312",
+  "373493708819830464",
+  "373493906426074816",
+  "373493981503588416",
+  "373494050877926912",
+  "373494121153437440",
+  "373494188513430144",
+  "373494253781256896",
+  "373494451945664000",
+  "373494524900837440",
+  "373494590940704256",
+  "373494660032891520",
+  "373494729713466048",
+  "373494794360273600",
+  "373494937582570112",
+  "373494971259190848",
+  "373495006155848384",
+  "373495035095943808",
+  "373495068046998208",
+  "373495096538335296"
+ ],
+ "failed_streak": 31,
+ "jobs": {},
+ "probe": null,
+ "suspended_at": "2026-10-27T15:41:16+00:00",
+ "suspended_until": "2026-10-27T18:41:16+00:00",
+ "version": "pavo-image-ledger-v1"
+}

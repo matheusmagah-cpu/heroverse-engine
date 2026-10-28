@@ -1,0 +1,1409 @@
+{
+ "version": "pavo-native-audio-probe-v1",
+ "date": "2026-10-27",
+ "owner_decision": "27/10 ~20:40 UTC: keep Pavo's own audio (speech and sound in one pass) if every clip keeps the same voice; refined: speech + natural ambience from Pavo, NO music from Pavo (our one owned track under the cut); verify diction, exact KJV words and continuity; a structured prompt.",
+ "scope": "Evidence only. No engine, QA, plan or ledger change. Direct heroverse-pavo MCP calls from a Claude session; each generation after its own fresh exact 0-credit quote; every job read back by id.",
+ "window": {
+  "plan": "migration/production/bible/plans/arc-01-long.json",
+  "shots": "117-122 (s-c4-eve-hide, s-c4-adam, g-c4-naked, s-c4-point, s-c4-eve-hurt, s-c4-blame)",
+  "why": "the only six consecutive shots holding two lines of one character (Adam: 118, 122), two Keeper narration lines (75 on 117, 76 on 120), one God voice-over (119) and a scene with no speech (121: line 76 is spoken whole on 120, so 121 carries ambience only)",
+  "deviation": "118 and 119 contain the KJV word 'naked' (Genesis 3:10, 3:11); Pavo's prompt filter refuses them (text_rejected_porn). They were replaced for measurement by Adam's other line (s-c2-adam, Genesis 2:23) and the next God line (g-c4-serpent, Genesis 3:14); the concatenation therefore breaks story continuity at 10 s and 26 s."
+ },
+ "prompt_structure": {
+  "A": "plan's visual prompt verbatim + ' SOUND. {Name}'s voice: {fixed voice description}. {on camera: lips in sync | off screen voice-over, every mouth on screen stays closed}. {Name} says exactly these words and nothing else, once, in English: \"{KJV line}\" Pronunciation: {hints for thy/thee/thou/wast/hast/gavest}. The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.' (music excluded in positive words only)",
+  "voices": {
+   "adam": "a young man's warm baritone voice, calm, measured pace, clear English diction",
+   "keeper": "a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction",
+   "god": "a deep, resonant, grave older man's voice, slow and calm, clear English diction"
+  },
+  "B": "one iteration on s-c4-blame: 'Dialogue, word for word, from the King James Bible' first, the voice in parentheses, the line, 'every word exactly as written ... nothing added and nothing left out', an explicit gavest/gave contrast, a breath before and a pause after.",
+  "result": "A already gave exact words on every clip Pavo generated; B changed nothing measurable (same words, Adam A vs B speaker cosine 0.957). A is the structure to keep."
+ },
+ "references": {
+  "ch-adam-front": "sha256 37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e",
+  "ch-eve-full": "sha256 b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc",
+  "how": "the plan's characters' kept refs (characters.json refs; Adam and Eve have no talk_refs), downloaded from the release by asset id and sent as Pavo references"
+ },
+ "jobs": [
+  {
+   "key": "a1",
+   "shot": "s-c4-eve-hide",
+   "plan_index": 117,
+   "attempt": "A",
+   "conversation_id": "373579731729940032",
+   "seconds": 10,
+   "references": [
+    "ch-eve-full"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. The narrator's voice: a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction. The narrator is heard off screen as a voice-over; no one on screen speaks, every mouth on screen stays closed. The narrator says exactly these words and nothing else, once, in English: \"Where art thou is the first question God asks in the Bible, and He asks it of a man who is hiding. It is still being asked.\" Pronunciation: \"thou\" rhymes with \"now\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 10,
+    "input_images": 1,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "524eebfa839686d7fa544aea291d4fda6689663e03c4b1e83167adee32d1e126"
+  },
+  {
+   "key": "x2",
+   "shot": "s-c4-adam",
+   "plan_index": 118,
+   "attempt": "A",
+   "conversation_id": "373579864789748416",
+   "seconds": 8,
+   "references": [
+    "ch-adam-front"
+   ],
+   "submit": "unknown (stream ended without acknowledgement)",
+   "read_back": "incomplete; history: PromptSafetyBlocked text_rejected_porn ('This text contains inappropriate sexual content'), no generation, nothing deducted",
+   "sound_prompt": "SOUND. Adam's voice: a young man's warm baritone voice, calm, measured pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.\" Pronunciation: \"thy\" rhymes with \"high\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 1,
+    "mode": "omni_to_video"
+   }
+  },
+  {
+   "key": "x3",
+   "shot": "g-c4-naked",
+   "plan_index": 119,
+   "attempt": "A",
+   "conversation_id": "373580017764743872",
+   "seconds": 8,
+   "references": [],
+   "submit": "unknown",
+   "read_back": "incomplete; PromptSafetyBlocked text_rejected_porn",
+   "sound_prompt": "SOUND. God's voice: a deep, resonant, grave older man's voice, slow and calm, clear English diction. God is heard off screen as a voice-over; no one on screen speaks, every mouth on screen stays closed. God says exactly these words and nothing else, once, in English: \"Who told thee that thou wast naked? Hast thou eaten of the tree\" Pronunciation: \"thee\" rhymes with \"see\"; \"thou\" rhymes with \"now\"; \"wast\" rhymes with \"lost\"; \"hast\" rhymes with \"last\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 0,
+    "mode": "frames_to_video"
+   }
+  },
+  {
+   "key": "x2b",
+   "shot": "s-c4-adam",
+   "plan_index": 118,
+   "attempt": "A (second submission, made only before the history was read and showed a deterministic block; not a blind retry of an uncertain job: the first was already read back terminal)",
+   "conversation_id": "373582120410712128",
+   "seconds": 8,
+   "references": [
+    "ch-adam-front"
+   ],
+   "submit": "unknown",
+   "read_back": "incomplete; PromptSafetyBlocked text_rejected_porn (turn 0); a turn 1 with the same block appeared ~2 min later with duration/ratio 'auto' (not sent by us)",
+   "sound_prompt": "SOUND. Adam's voice: a young man's warm baritone voice, calm, measured pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.\" Pronunciation: \"thy\" rhymes with \"high\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 1,
+    "mode": "omni_to_video"
+   }
+  },
+  {
+   "key": "a4",
+   "shot": "s-c4-point",
+   "plan_index": 120,
+   "attempt": "A",
+   "conversation_id": "373584418306793216",
+   "seconds": 12,
+   "references": [
+    "ch-adam-front"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. The narrator's voice: a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction. The narrator is heard off screen as a voice-over; no one on screen speaks, every mouth on screen stays closed. The narrator says exactly these words and nothing else, once, in English: \"Then comes the blame. The man points at the woman, and, if you listen closely, he points at God Himself as well. Who gave her to him?\" The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 12,
+    "input_images": 1,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "d4d0c2070f5a782fbb13b3b08ade11bc01c1d5872d1b6f453540ae251bd1abb2"
+  },
+  {
+   "key": "a5",
+   "shot": "s-c4-eve-hurt",
+   "plan_index": 121,
+   "attempt": "A",
+   "conversation_id": "373584539731364928",
+   "seconds": 6,
+   "references": [
+    "ch-eve-full"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. The soundtrack is only the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling; everyone stays silent.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 6,
+    "input_images": 1,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "f64a1ce48bf9e6324686c46c7b0dca77e56106b13aa7ce8d15b92c421162100e"
+  },
+  {
+   "key": "a6",
+   "shot": "s-c4-blame",
+   "plan_index": 122,
+   "attempt": "A",
+   "conversation_id": "373584690680233792",
+   "seconds": 8,
+   "references": [
+    "ch-adam-front",
+    "ch-eve-full"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. Adam's voice: a young man's warm baritone voice, calm, measured pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.\" Pronunciation: \"thou\" rhymes with \"now\"; \"gavest\" is \"GAV-est\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 2,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "81656783cd179e4ec4dde914e52275734c9631958986fef3ffbfebabe72e46ab"
+  },
+  {
+   "key": "a3s",
+   "shot": "g-c4-serpent",
+   "plan_index": 126,
+   "attempt": "A (substitute for the blocked g-c4-naked: the next God voice-over line of the chapter)",
+   "conversation_id": "373584828110736000",
+   "seconds": 8,
+   "references": [],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. God's voice: a deep, resonant, grave older man's voice, slow and calm, clear English diction. God is heard off screen as a voice-over; no one on screen speaks, every mouth on screen stays closed. God says exactly these words and nothing else, once, in English: \"Because thou hast done this, thou art cursed above all cattle\" Pronunciation: \"thou\" rhymes with \"now\"; \"hast\" rhymes with \"last\". The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 0,
+    "mode": "frames_to_video"
+   },
+   "clip_sha256": "e10c561b621c95ed1e0e0659e898d0e420b341105be9f97ef70e5751e3c75e38"
+  },
+  {
+   "key": "a2s",
+   "shot": "s-c2-adam",
+   "plan_index": 70,
+   "attempt": "A (substitute for the blocked s-c4-adam: Adam's other spoken line)",
+   "conversation_id": "373584950274066496",
+   "seconds": 8,
+   "references": [
+    "ch-adam-front",
+    "ch-eve-full"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. Adam's voice: a young man's warm baritone voice, calm, measured pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"This is now bone of my bones, and flesh of my flesh: she shall be called Woman,\" The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 2,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "bfd2cd71271fcf7afa94cbaacfcdb158fa1e7434c2e02b19089538f903adea0a"
+  },
+  {
+   "key": "b6",
+   "shot": "s-c4-blame",
+   "plan_index": 122,
+   "attempt": "B (one iteration, different structure, after base.en/small.en heard 'gave us' for 'gavest')",
+   "conversation_id": "373588084388069184",
+   "seconds": 8,
+   "references": [
+    "ch-adam-front",
+    "ch-eve-full"
+   ],
+   "submit": "submitted",
+   "read_back": "completed",
+   "sound_prompt": "SOUND. Dialogue, word for word, from the King James Bible. Adam (a young man's warm baritone voice, calm, measured pace, clear English diction), on camera, his lips in sync: \"The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.\" Every word is spoken exactly as written, in the old English of the King James Bible, with nothing added and nothing left out. Two different words follow each other: \"thou gavest\" is \"thow GAV-ist\", and \"gavest\" ends with a clear \"st\" sound; later \"she gave me\" uses the plain word \"gave\". A short breath before the first word and a short pause after the last word. The soundtrack is only the voice and the natural ambient sound of the garden at dusk: a soft evening wind through the leaves and a few distant birds settling.",
+   "quote": {
+    "model": "agnes-video-new-flash",
+    "resolution": "720p",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false,
+    "zero_cost_confirmed": true,
+    "seconds": 8,
+    "input_images": 2,
+    "mode": "omni_to_video"
+   },
+   "clip_sha256": "86a4d3d182910b525b353e42d78636216d99571108112c91cbcbe5e88bd91c15"
+  }
+ ],
+ "spend": {
+  "generations_submitted": 10,
+  "completed": 7,
+  "blocked_by_prompt_filter": 3,
+  "every_quote": "required_credits 0.0, final_points 0.0, is_estimate false",
+  "history_quota_blocks": "QuotaTryDeduct required_amount 0, expense_transaction_id 0 on the completed jobs",
+  "account_after": "total_balance 1500.0 (unchanged plan credits; nothing bought)"
+ },
+ "tools": {
+  "asr": [
+   "faster-whisper 1.2.1 base.en (the repo's preserved model, sha256-checked zip, release asset 638696861)",
+   "small.en and medium.en (Systran CTranslate2 conversions, free download)"
+  ],
+  "sound_classes": "YAMNet TFLite (av_semantic.SoundClasses, hash-pinned release asset)",
+  "speaker": "resemblyzer 0.1.4 VoiceEncoder (GE2E), cosine of utterance embeddings on the ASR speech span",
+  "speaker_baseline": "the same lines in our pinned Kokoro voices (am_michael keeper, am_fenrir adam, am_onyx 0.9 god; voices-v1.0.bin sha256 bca610b8...)",
+  "lips": "lipsync_check.py (SyncNet gate, MediaPipe model sha-pinned) against each clip's own soundtrack; --still-mouth on voice-over clips with a face; --faces on God's clip",
+  "loudness": "ffmpeg ebur128 peak=true",
+  "clip_check": "clip_check.py: no flags on all 7 clips"
+ },
+ "clips": [
+  {
+   "key": "a1",
+   "shot": "s-c4-eve-hide",
+   "speaker": "keeper",
+   "kjv_line": "Where art thou is the first question God asks in the Bible, and He asks it of a man who is hiding. It is still being asked.",
+   "seconds": 10.144,
+   "loudness_ebur128": {
+    "integrated_lufs": -14.7,
+    "lra_lu": 1.9,
+    "true_peak_dbtp": -1.0
+   },
+   "yamnet_share": {
+    "speech": 0.952,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.0,
+    "silence": 0.0
+   },
+   "music_max_score": 0.004,
+   "asr": {
+    "base.en": {
+     "text": "Where art thou is the first question God asks in the Bible, and he asks it of a man who is hiding. It is still being asked.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.956,
+     "speech_span": [
+      0.0,
+      9.32
+     ],
+     "low_confidence": []
+    },
+    "small.en": {
+     "text": "Where art thou is the first question God asks in the Bible, and He asks it of a man who is hiding. It is still being asked.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.928,
+     "speech_span": [
+      0.0,
+      9.48
+     ],
+     "low_confidence": [
+      {
+       "w": "Where",
+       "start": 0.0,
+       "end": 0.82,
+       "p": 0.362
+      },
+      {
+       "w": "is",
+       "start": 1.56,
+       "end": 2.02,
+       "p": 0.555
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "Where art thou? is the first question God asks in the Bible, and he asks it of a man who is hiding. It is still being asked.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.928,
+     "speech_span": [
+      0.0,
+      9.54
+     ],
+     "low_confidence": [
+      {
+       "w": "Where",
+       "start": 0.0,
+       "end": 0.84,
+       "p": 0.253
+      },
+      {
+       "w": "he",
+       "start": 5.26,
+       "end": 5.44,
+       "p": 0.561
+      }
+     ]
+    }
+   },
+   "lipsync_check": {
+    "mode": "still",
+    "opening_range": 0.0262,
+    "opening_motion": 0.00045,
+    "window_motion": 0.00109,
+    "closed_opening": 0.02864,
+    "face_frames": 1.0,
+    "frames": 243,
+    "flags": [
+     "MOUTH_NOT_CLOSED"
+    ]
+   }
+  },
+  {
+   "key": "a2s",
+   "shot": "s-c2-adam (for blocked s-c4-adam)",
+   "speaker": "adam",
+   "kjv_line": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman,",
+   "seconds": 8.0,
+   "loudness_ebur128": {
+    "integrated_lufs": -17.3,
+    "lra_lu": 5.7,
+    "true_peak_dbtp": -3.1
+   },
+   "yamnet_share": {
+    "speech": 0.938,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.0,
+    "silence": 0.062
+   },
+   "music_max_score": 0.004,
+   "asr": {
+    "base.en": {
+     "text": "This is now bone of my bones and flesh of my flesh. She shall be called woman.\"",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.883,
+     "speech_span": [
+      0.0,
+      7.9
+     ],
+     "low_confidence": [
+      {
+       "w": "bone",
+       "start": 1.34,
+       "end": 1.7,
+       "p": 0.272
+      },
+      {
+       "w": "and",
+       "start": 2.5,
+       "end": 3.62,
+       "p": 0.527
+      },
+      {
+       "w": "woman.\"",
+       "start": 7.14,
+       "end": 7.9,
+       "p": 0.532
+      }
+     ]
+    },
+    "small.en": {
+     "text": "this is now bone of my bones and flesh of my flesh she shall be called woman",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.917,
+     "speech_span": [
+      0.0,
+      7.54
+     ],
+     "low_confidence": [
+      {
+       "w": "this",
+       "start": 0.0,
+       "end": 0.92,
+       "p": 0.065
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "This is now bone of my bones and flesh of my flesh.",
+     "wer": 0.294,
+     "exact": false,
+     "errors": [
+      {
+       "op": "dropped",
+       "kjv": "she"
+      },
+      {
+       "op": "dropped",
+       "kjv": "shall"
+      },
+      {
+       "op": "dropped",
+       "kjv": "be"
+      },
+      {
+       "op": "dropped",
+       "kjv": "called"
+      },
+      {
+       "op": "dropped",
+       "kjv": "woman"
+      }
+     ],
+     "mean_word_prob": 0.939,
+     "speech_span": [
+      0.0,
+      5.06
+     ],
+     "low_confidence": []
+    },
+    "medium.en_no_timestamps": {
+     "text": "This is now bone of my bones and flesh of my flesh. She shall be called woman.",
+     "wer": 0.0,
+     "exact": true
+    }
+   },
+   "lipsync_check": {
+    "mode": "talk",
+    "audio": {
+     "corr": 1.0,
+     "lag_ms": 0
+    },
+    "mouth": {
+     "corr": -0.097,
+     "lag_ms": -80,
+     "speak_to_pause": 0.83,
+     "face_frames": 1.0,
+     "sync": {
+      "offset": -2,
+      "conf": 8.081,
+      "min_dist": 6.658,
+      "windows": 195
+     }
+    },
+    "flags": []
+   }
+  },
+  {
+   "key": "a3s",
+   "shot": "g-c4-serpent (for blocked g-c4-naked)",
+   "speaker": "god",
+   "kjv_line": "Because thou hast done this, thou art cursed above all cattle",
+   "seconds": 8.0,
+   "loudness_ebur128": {
+    "integrated_lufs": -27.6,
+    "lra_lu": 1.4,
+    "true_peak_dbtp": -13.2
+   },
+   "yamnet_share": {
+    "speech": 0.75,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.0,
+    "silence": 0.0
+   },
+   "music_max_score": 0.004,
+   "asr": {
+    "base.en": {
+     "text": "Because thou hast done this, thou art cursed above all cattle.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.952,
+     "speech_span": [
+      1.46,
+      7.36
+     ],
+     "low_confidence": []
+    },
+    "small.en": {
+     "text": "Because thou hast done this, thou art cursed above all cattle.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.926,
+     "speech_span": [
+      1.5,
+      7.48
+     ],
+     "low_confidence": [
+      {
+       "w": "Because",
+       "start": 1.5,
+       "end": 2.34,
+       "p": 0.531
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "Because thou hast done this, thou art cursed above all cattle.",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.927,
+     "speech_span": [
+      1.46,
+      7.66
+     ],
+     "low_confidence": [
+      {
+       "w": "Because",
+       "start": 1.46,
+       "end": 2.38,
+       "p": 0.395
+      }
+     ]
+    }
+   },
+   "lipsync_check": {
+    "mode": "faces",
+    "frames_sampled": 48,
+    "faces_found": 0,
+    "face_frames": [],
+    "flags": []
+   }
+  },
+  {
+   "key": "a4",
+   "shot": "s-c4-point",
+   "speaker": "keeper",
+   "kjv_line": "Then comes the blame. The man points at the woman, and, if you listen closely, he points at God Himself as well. Who gave her to him?",
+   "seconds": 12.256,
+   "loudness_ebur128": {
+    "integrated_lufs": -15.7,
+    "lra_lu": 3.9,
+    "true_peak_dbtp": -2.7
+   },
+   "yamnet_share": {
+    "speech": 0.8,
+    "singing": 0.0,
+    "music": 0.04,
+    "other": 0.0,
+    "silence": 0.12
+   },
+   "music_max_score": 0.586,
+   "asr": {
+    "base.en": {
+     "text": "Then comes the blame. The man points at the woman, and if you listen closely, he points at God himself as well. Who gave her to him?",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.978,
+     "speech_span": [
+      1.08,
+      11.34
+     ],
+     "low_confidence": []
+    },
+    "small.en": {
+     "text": "Then comes the blame. The man points at the woman, and if you listen closely he points at God Himself as well. Who gave her to him?",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.93,
+     "speech_span": [
+      1.14,
+      11.44
+     ],
+     "low_confidence": [
+      {
+       "w": "he",
+       "start": 6.94,
+       "end": 7.18,
+       "p": 0.465
+      },
+      {
+       "w": "him?",
+       "start": 11.18,
+       "end": 11.44,
+       "p": 0.582
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "Then comes the blame. The man points at the woman, and if you listen closely he points at God himself as well. Who gave her to him?",
+     "wer": 0.0,
+     "exact": true,
+     "errors": [],
+     "mean_word_prob": 0.968,
+     "speech_span": [
+      1.14,
+      11.42
+     ],
+     "low_confidence": []
+    },
+    "medium.en_no_timestamps": {
+     "text": "Then comes the blame. The man points at the woman, and if you listen closely he points at God himself as well. Who gave her to him?",
+     "wer": 0.0,
+     "exact": true
+    }
+   },
+   "lipsync_check": {
+    "mode": "still",
+    "opening_range": 0.0269,
+    "opening_motion": 0.00035,
+    "window_motion": 0.00113,
+    "closed_opening": 0.01822,
+    "face_frames": 1.0,
+    "frames": 294,
+    "flags": [
+     "MOUTH_NOT_CLOSED"
+    ]
+   }
+  },
+  {
+   "key": "a5",
+   "shot": "s-c4-eve-hurt",
+   "speaker": null,
+   "kjv_line": null,
+   "seconds": 6.592,
+   "loudness_ebur128": {
+    "integrated_lufs": -43.4,
+    "lra_lu": 9.8,
+    "true_peak_dbtp": -28.2
+   },
+   "yamnet_share": {
+    "speech": 0.0,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.385,
+    "silence": 0.0
+   },
+   "music_max_score": 0.0,
+   "asr": {
+    "base.en": {
+     "text": "I'm so sorry.",
+     "words_heard": 3
+    },
+    "small.en": {
+     "text": ". . . .",
+     "words_heard": 0
+    },
+    "medium.en": {
+     "text": "you",
+     "words_heard": 1
+    }
+   },
+   "lipsync_check": {
+    "mode": "still",
+    "opening_range": 0.0445,
+    "opening_motion": 0.00074,
+    "window_motion": 0.00147,
+    "closed_opening": 0.04351,
+    "face_frames": 1.0,
+    "frames": 158,
+    "flags": [
+     "MOUTH_NOT_CLOSED"
+    ]
+   }
+  },
+  {
+   "key": "a6",
+   "shot": "s-c4-blame",
+   "speaker": "adam",
+   "kjv_line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+   "seconds": 8.0,
+   "loudness_ebur128": {
+    "integrated_lufs": -17.4,
+    "lra_lu": 4.0,
+    "true_peak_dbtp": -3.7
+   },
+   "yamnet_share": {
+    "speech": 0.812,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.062,
+    "silence": 0.0
+   },
+   "music_max_score": 0.059,
+   "asr": {
+    "base.en": {
+     "text": "The woman whom thou gave us to be with me, she gave me of the tree, and I did eat.",
+     "wer": 0.105,
+     "exact": false,
+     "errors": [
+      {
+       "op": "added",
+       "heard": "gave"
+      },
+      {
+       "op": "substituted",
+       "kjv": "gavest",
+       "heard": "us"
+      }
+     ],
+     "mean_word_prob": 0.96,
+     "speech_span": [
+      1.12,
+      7.54
+     ],
+     "low_confidence": []
+    },
+    "small.en": {
+     "text": "The woman whom thou gave us to be with me, she gave me of the tree, and I did eat.",
+     "wer": 0.105,
+     "exact": false,
+     "errors": [
+      {
+       "op": "added",
+       "heard": "gave"
+      },
+      {
+       "op": "substituted",
+       "kjv": "gavest",
+       "heard": "us"
+      }
+     ],
+     "mean_word_prob": 0.941,
+     "speech_span": [
+      1.16,
+      7.64
+     ],
+     "low_confidence": [
+      {
+       "w": "The",
+       "start": 1.16,
+       "end": 1.68,
+       "p": 0.581
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "The woman whom thou gavest to be with me,",
+     "wer": 0.526,
+     "exact": false,
+     "errors": [
+      {
+       "op": "dropped",
+       "kjv": "me"
+      },
+      {
+       "op": "dropped",
+       "kjv": "she"
+      },
+      {
+       "op": "dropped",
+       "kjv": "gave"
+      },
+      {
+       "op": "dropped",
+       "kjv": "of"
+      },
+      {
+       "op": "dropped",
+       "kjv": "the"
+      },
+      {
+       "op": "dropped",
+       "kjv": "tree"
+      },
+      {
+       "op": "dropped",
+       "kjv": "and"
+      },
+      {
+       "op": "dropped",
+       "kjv": "i"
+      },
+      {
+       "op": "dropped",
+       "kjv": "did"
+      },
+      {
+       "op": "dropped",
+       "kjv": "eat"
+      }
+     ],
+     "mean_word_prob": 0.931,
+     "speech_span": [
+      1.04,
+      4.04
+     ],
+     "low_confidence": []
+    },
+    "medium.en_no_timestamps": {
+     "text": "The woman whom thou gavest to be with me, She gave me of the tree, and I did eat.",
+     "wer": 0.0,
+     "exact": true
+    }
+   },
+   "lipsync_check": {
+    "mode": "talk",
+    "audio": {
+     "corr": 1.0,
+     "lag_ms": 0
+    },
+    "mouth": {
+     "corr": 0.057,
+     "lag_ms": -80,
+     "speak_to_pause": 1.0,
+     "face_frames": 1.0,
+     "sync": {
+      "offset": -2,
+      "conf": 6.611,
+      "min_dist": 7.02,
+      "windows": 195
+     }
+    },
+    "flags": []
+   }
+  },
+  {
+   "key": "b6",
+   "shot": "s-c4-blame (attempt B)",
+   "speaker": "adam",
+   "kjv_line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+   "seconds": 8.0,
+   "loudness_ebur128": {
+    "integrated_lufs": -16.9,
+    "lra_lu": 4.1,
+    "true_peak_dbtp": -3.2
+   },
+   "yamnet_share": {
+    "speech": 0.938,
+    "singing": 0.0,
+    "music": 0.0,
+    "other": 0.062,
+    "silence": 0.0
+   },
+   "music_max_score": 0.004,
+   "asr": {
+    "base.en": {
+     "text": "The woman whom thou gave us to be with me, she gave me of the tree, and I did eat.",
+     "wer": 0.105,
+     "exact": false,
+     "errors": [
+      {
+       "op": "added",
+       "heard": "gave"
+      },
+      {
+       "op": "substituted",
+       "kjv": "gavest",
+       "heard": "us"
+      }
+     ],
+     "mean_word_prob": 0.952,
+     "speech_span": [
+      0.64,
+      7.4
+     ],
+     "low_confidence": []
+    },
+    "small.en": {
+     "text": "The woman whom thou gave us to be with me, she gave me of the tree, and I did eat.",
+     "wer": 0.105,
+     "exact": false,
+     "errors": [
+      {
+       "op": "added",
+       "heard": "gave"
+      },
+      {
+       "op": "substituted",
+       "kjv": "gavest",
+       "heard": "us"
+      }
+     ],
+     "mean_word_prob": 0.927,
+     "speech_span": [
+      0.68,
+      7.52
+     ],
+     "low_confidence": [
+      {
+       "w": "The",
+       "start": 0.68,
+       "end": 1.2,
+       "p": 0.541
+      }
+     ]
+    },
+    "medium.en": {
+     "text": "The woman whom thou gavest to be with me,",
+     "wer": 0.526,
+     "exact": false,
+     "errors": [
+      {
+       "op": "dropped",
+       "kjv": "me"
+      },
+      {
+       "op": "dropped",
+       "kjv": "she"
+      },
+      {
+       "op": "dropped",
+       "kjv": "gave"
+      },
+      {
+       "op": "dropped",
+       "kjv": "of"
+      },
+      {
+       "op": "dropped",
+       "kjv": "the"
+      },
+      {
+       "op": "dropped",
+       "kjv": "tree"
+      },
+      {
+       "op": "dropped",
+       "kjv": "and"
+      },
+      {
+       "op": "dropped",
+       "kjv": "i"
+      },
+      {
+       "op": "dropped",
+       "kjv": "did"
+      },
+      {
+       "op": "dropped",
+       "kjv": "eat"
+      }
+     ],
+     "mean_word_prob": 0.928,
+     "speech_span": [
+      0.64,
+      3.74
+     ],
+     "low_confidence": []
+    },
+    "medium.en_no_timestamps": {
+     "text": "The woman whom thou gavest to be with me, She gave me of the tree, and I did eat.",
+     "wer": 0.0,
+     "exact": true
+    }
+   },
+   "lipsync_check": {
+    "mode": "talk",
+    "audio": {
+     "corr": 1.0,
+     "lag_ms": 0
+    },
+    "mouth": {
+     "corr": 0.084,
+     "lag_ms": -40,
+     "speak_to_pause": 1.07,
+     "face_frames": 1.0,
+     "sync": {
+      "offset": -2,
+      "conf": 7.329,
+      "min_dist": 6.761,
+      "windows": 195
+     }
+    },
+    "flags": []
+   }
+  }
+ ],
+ "speaker_similarity": {
+  "pavo": [
+   {
+    "a": "s-c4-eve-hide",
+    "b": "s-c2-adam (for blocked s-c4-adam)",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "cosine": 0.852
+   },
+   {
+    "a": "s-c4-eve-hide",
+    "b": "g-c4-serpent (for blocked g-c4-naked)",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "god"
+    ],
+    "cosine": 0.723
+   },
+   {
+    "a": "s-c4-eve-hide",
+    "b": "s-c4-point",
+    "same_character": true,
+    "speakers": [
+     "keeper",
+     "keeper"
+    ],
+    "cosine": 0.932
+   },
+   {
+    "a": "s-c4-eve-hide",
+    "b": "s-c4-blame",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "cosine": 0.878
+   },
+   {
+    "a": "s-c4-eve-hide",
+    "b": "s-c4-blame (attempt B)",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "cosine": 0.863
+   },
+   {
+    "a": "s-c2-adam (for blocked s-c4-adam)",
+    "b": "g-c4-serpent (for blocked g-c4-naked)",
+    "same_character": false,
+    "speakers": [
+     "adam",
+     "god"
+    ],
+    "cosine": 0.644
+   },
+   {
+    "a": "s-c2-adam (for blocked s-c4-adam)",
+    "b": "s-c4-point",
+    "same_character": false,
+    "speakers": [
+     "adam",
+     "keeper"
+    ],
+    "cosine": 0.884
+   },
+   {
+    "a": "s-c2-adam (for blocked s-c4-adam)",
+    "b": "s-c4-blame",
+    "same_character": true,
+    "speakers": [
+     "adam",
+     "adam"
+    ],
+    "cosine": 0.893
+   },
+   {
+    "a": "s-c2-adam (for blocked s-c4-adam)",
+    "b": "s-c4-blame (attempt B)",
+    "same_character": true,
+    "speakers": [
+     "adam",
+     "adam"
+    ],
+    "cosine": 0.88
+   },
+   {
+    "a": "g-c4-serpent (for blocked g-c4-naked)",
+    "b": "s-c4-point",
+    "same_character": false,
+    "speakers": [
+     "god",
+     "keeper"
+    ],
+    "cosine": 0.681
+   },
+   {
+    "a": "g-c4-serpent (for blocked g-c4-naked)",
+    "b": "s-c4-blame",
+    "same_character": false,
+    "speakers": [
+     "god",
+     "adam"
+    ],
+    "cosine": 0.661
+   },
+   {
+    "a": "g-c4-serpent (for blocked g-c4-naked)",
+    "b": "s-c4-blame (attempt B)",
+    "same_character": false,
+    "speakers": [
+     "god",
+     "adam"
+    ],
+    "cosine": 0.64
+   },
+   {
+    "a": "s-c4-point",
+    "b": "s-c4-blame",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "cosine": 0.89
+   },
+   {
+    "a": "s-c4-point",
+    "b": "s-c4-blame (attempt B)",
+    "same_character": false,
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "cosine": 0.886
+   },
+   {
+    "a": "s-c4-blame",
+    "b": "s-c4-blame (attempt B)",
+    "same_character": true,
+    "speakers": [
+     "adam",
+     "adam"
+    ],
+    "cosine": 0.957
+   }
+  ],
+  "kokoro_baseline": [
+   {
+    "a": "kokoro s-c4-eve-hide",
+    "b": "kokoro s-c2-adam (for blocked s-c4-adam)",
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "same_character": false,
+    "cosine": 0.547
+   },
+   {
+    "a": "kokoro s-c4-eve-hide",
+    "b": "kokoro g-c4-serpent (for blocked g-c4-naked)",
+    "speakers": [
+     "keeper",
+     "god"
+    ],
+    "same_character": false,
+    "cosine": 0.737
+   },
+   {
+    "a": "kokoro s-c4-eve-hide",
+    "b": "kokoro s-c4-point",
+    "speakers": [
+     "keeper",
+     "keeper"
+    ],
+    "same_character": true,
+    "cosine": 0.953
+   },
+   {
+    "a": "kokoro s-c4-eve-hide",
+    "b": "kokoro s-c4-blame",
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "same_character": false,
+    "cosine": 0.562
+   },
+   {
+    "a": "kokoro s-c2-adam (for blocked s-c4-adam)",
+    "b": "kokoro g-c4-serpent (for blocked g-c4-naked)",
+    "speakers": [
+     "adam",
+     "god"
+    ],
+    "same_character": false,
+    "cosine": 0.607
+   },
+   {
+    "a": "kokoro s-c2-adam (for blocked s-c4-adam)",
+    "b": "kokoro s-c4-point",
+    "speakers": [
+     "adam",
+     "keeper"
+    ],
+    "same_character": false,
+    "cosine": 0.524
+   },
+   {
+    "a": "kokoro s-c2-adam (for blocked s-c4-adam)",
+    "b": "kokoro s-c4-blame",
+    "speakers": [
+     "adam",
+     "adam"
+    ],
+    "same_character": true,
+    "cosine": 0.924
+   },
+   {
+    "a": "kokoro g-c4-serpent (for blocked g-c4-naked)",
+    "b": "kokoro s-c4-point",
+    "speakers": [
+     "god",
+     "keeper"
+    ],
+    "same_character": false,
+    "cosine": 0.72
+   },
+   {
+    "a": "kokoro g-c4-serpent (for blocked g-c4-naked)",
+    "b": "kokoro s-c4-blame",
+    "speakers": [
+     "god",
+     "adam"
+    ],
+    "same_character": false,
+    "cosine": 0.628
+   },
+   {
+    "a": "kokoro s-c4-point",
+    "b": "kokoro s-c4-blame",
+    "speakers": [
+     "keeper",
+     "adam"
+    ],
+    "same_character": false,
+    "cosine": 0.559
+   }
+  ],
+  "reading": "Kokoro: same voice 0.924-0.953, different voices 0.52-0.74. Pavo: Keeper vs Keeper 0.932 (same voice); Adam vs Adam across scenes 0.880-0.893, within one scene 0.957; but Adam vs Keeper 0.852-0.890, i.e. Pavo's Adam and narrator are as close to each other as Adam is to himself; God is distinct (0.64-0.72)."
+ },
+ "concat": {
+  "order": [
+   "s-c4-eve-hide",
+   "s-c2-adam (for blocked s-c4-adam)",
+   "g-c4-serpent (for blocked g-c4-naked)",
+   "s-c4-point",
+   "s-c4-eve-hurt",
+   "s-c4-blame"
+  ],
+  "durations": [
+   10.0,
+   8.0,
+   8.0,
+   12.0,
+   6.0,
+   8.0
+  ],
+  "cuts_at_seconds": [
+   10.0,
+   18.0,
+   26.0,
+   38.0,
+   44.0
+  ],
+  "total_seconds": 52.0,
+  "level_gain_db": [
+   -3.2,
+   -0.7,
+   9.6,
+   -2.3,
+   0.0,
+   -0.6
+  ],
+  "mix_b": {
+   "voice_level": "static gain per speech clip to -18 LUFS (cap +12 dB), no-speech clip unchanged",
+   "join_crossfade_s": 0.08,
+   "bed": "brown noise 60-900 Hz, continuous, about -40 dBFS (generated)",
+   "music": "owned original-rest-music.lossless.flac from 0 s at -22.0 dB, sidechain duck threshold 0.03 ratio 6 attack 20 release 400 (long_build.render)",
+   "loudnorm": "two-pass I=-15.0 TP=-1.5 LRA=11 linear"
+  },
+  "a-pavo-audio": {
+   "file": "concat-a-pavo-audio.mp4",
+   "loudness": {
+    "integrated_lufs": -16.5,
+    "lra_lu": 12.8,
+    "true_peak_dbtp": -1.0
+   }
+  },
+  "b-with-owned-music": {
+   "file": "concat-b-with-owned-music.mp4",
+   "loudness": {
+    "integrated_lufs": -15.0,
+    "lra_lu": 5.9,
+    "true_peak_dbtp": -1.5
+   }
+  }
+ },
+ "concat_files_local": {
+  "a": "/tmp/claude-0/-home-user-heroverse-engine/557626cd-d3a1-54f6-8106-2212b4b60767/scratchpad/np/render/pavo-native-audio-probe-20261027-concat-a-pavo-audio.mp4",
+  "a_sha256": "1ae7c2916c95339ef9177b6f951c06fec2c36b2fcb466a78865a306c4dc3d9c6",
+  "b": "/tmp/claude-0/-home-user-heroverse-engine/557626cd-d3a1-54f6-8106-2212b4b60767/scratchpad/np/render/pavo-native-audio-probe-20261027-concat-b-with-owned-music.mp4",
+  "b_sha256": "dfd135ae70f8f09e73b46c7de36ed7a709961b9ea14d7d9a796a0d9262518abd",
+  "release_asset": "not uploaded: from this session gh release upload needs GraphQL and the uploads endpoint is refused by the proxy (HTTP 415/403)"
+ },
+ "findings": [
+  "Prompt filter: Pavo refuses any prompt containing the KJV word 'naked' (text_rejected_porn) - Genesis 3:7, 3:10, 3:11 cannot be spoken by Pavo verbatim. The adapter reports this as status 'incomplete' (submission 'unknown'); the block is only visible in the conversation history. It is not the E124 quota signal.",
+  "Exact words: every generated speech clip says the KJV/narration words exactly (WER 0.0 on base.en, small.en and medium.en without timestamps; 5 of 5 clips, plus B). base.en and small.en hear 'gavest' as 'gave us' (WER 0.105) on Pavo AND on our own Kokoro rendition; medium.en hears 'gavest' on both: an ASR limit, not Pavo. The QA's base.en would score that line 0.105 (> 0.1) for Kokoro too.",
+  "Diction: mean word probability 0.88-0.98; low-confidence words are sentence-initial function words only ('Where', 'this', 'Because'); the archaic words actually spoken (art, thou, hast, gavest) were recognised (gavest by medium.en). thy/thee/wast were only in the two blocked lines, and no generated line names Eden/Adam/Eve, so their pronunciation is untested. No mispronounced word found by any model.",
+  "Music: none. YAMNet music share 0.0 on 6 of 7 clips, 0.04 (one frame) on s-c4-point; the positive 'only the voice and natural ambient sound' wording worked.",
+  "Ambience: inconsistent. Talking/narration clips are almost dry (gaps near -100 dBFS), God's clip has full-band wind, the silent clip has birds at -43 LUFS: at a cut the room tone jumps.",
+  "Voice consistency: one voice for the Keeper across clips (0.932). Adam is self-consistent within a scene (0.957) and fairly across scenes (0.88-0.89), but not distinct from the narrator (0.85-0.89 vs 0.52-0.56 for our Kokoro pair): a viewer may hear Adam and the Keeper as the same man.",
+  "Loudness per clip varies 13 LU among speech clips (-14.7 to -27.6 LUFS integrated; God -27.6). Concat (a), raw: -16.5 LUFS, LRA 12.8, TP -1.0 (outside -16..-14, TP at the -1 limit). Concat (b), static per-clip voice gain + 80 ms crossfades + continuous wind bed + owned music ducked + loudnorm: -15.0 LUFS, LRA 5.9, TP -1.4 (inside the band).",
+  "Lip sync with Pavo's own audio: both Adam talking clips pass the SyncNet gate with margin (conf 8.08, 6.61, 7.33 vs min 2.7; offset -2 in -3..0). Voice-over clips: no MOUTH_TALKING (the on-screen face does not mouth the narration), but MOUTH_NOT_CLOSED (lips parted, as in 'afraid/stunned'); God's clip: no face.",
+  "Timing: the first word starts at 0.0 s in 2 clips and speech ends 0.1-0.5 s before the clip end; no breath before or after (prompt B's 'short breath before' did not help: B starts at 0.68 s, A at 1.16 s). Pace 1.9-3.0 words/s.",
+  "Picture: golden glyph-like streaks on Eve's hair in both Adam-and-Eve two-shots (s-c2-adam, s-c4-blame, contact.jpg at 12 s and 46-50 s); clip_check finds no flag, Claude's vetting would."
+ ],
+ "added_for_9_5_in_mix_b": [
+  "one static voice gain per speech clip to -18 LUFS (no compression, so Pavo's dynamics stay), no gain on the ambience-only clip",
+  "80 ms triangular audio crossfade at each cut (no click; the picture still cuts)",
+  "one continuous low wind bed (generated brown noise 60-900 Hz) so no cut drops to digital silence",
+  "owned music ducked under the voice exactly as long_build.render",
+  "two-pass loudnorm -15 LUFS / -1.5 dBTP as long_build.render"
+ ],
+ "verdict": "Not yet at 9.5 as a whole, but closer than expected. Exact KJV words, clear archaic diction, no music and lip sync all pass with the structured prompt A. Blockers: (1) Pavo's filter refuses lines with 'naked' - those lines need another source (our Kokoro + Pavo audio-input binding); (2) Adam's voice is not distinct from the Keeper's - a character-voice identity cannot be pinned by words alone; (3) ambience and level differ per clip and need the mix-b treatment; (4) the two-shot glyph artifacts. A hybrid is the realistic path: Pavo native speech for the Keeper and for lines that pass the filter, measured per clip (WER with medium.en, SyncNet, speaker cosine against an anchor clip of that character), with a fallback to our Kokoro voice for refused lines - which reintroduces two voices for one character unless the anchor is chosen from Pavo."
+}

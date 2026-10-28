@@ -133,8 +133,3 @@ jobs:
         if: env.SKIP != '1' && env.STATUS == 'PASS'
         # a push made with this job's token does not start workflows, so publish.yml is dispatched explicitly
         run: gh workflow run publish.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$PILOT" -f publish_at=""
-      - name: Shorts only after the long qualifies
-        if: env.SKIP != '1' && env.STATUS == 'PASS'
-        run: |
-          python3 -I -B migration/publish/shorts_prerequisite.py "migration/production/$PILOT"
-          gh workflow run shorts.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$PILOT"

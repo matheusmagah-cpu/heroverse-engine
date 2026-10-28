@@ -12,9 +12,19 @@ quality and accessibility failure. Before E107 the publisher sent the SRT, saw H
 - tracks()         reads a captions.list answer (status serving/syncing/failed, failureReason, trackKind, isDraft);
 - ours()           our standard English track (never the automatic ASR one);
 - wait()           polls captions.list until our track is serving or failed, with a bounded number of calls.
+The acted Bible long (story QA v3, `grammar.caption_track`: an uploaded .srt, the script's words on their voice
+timings, never burned in):
+- cues()           cuts each voiced sentence into short cues (<= srt_cue_words_max words, <= srt_cue_chars_max
+                   characters), the sentence's own words unchanged (KJV text exact), timed inside its voice span;
+- track_record()   the SRT and the `caption_track` record the long's build writes into its manifest;
+- manifest_srt()   the one SRT a manifest uploads (publish_video, preflight and qa_pilot all call it);
+- long_track()     v3's caption rows measured on that SRT (qa_pilot.py).
 No network here: callers pass the listing function.
 usage: captions.py MANIFEST_JSON   (prints the SRT's problems; exit 1 when there is any)
+       captions.py long TIMELINE_JSON OUT_SRT   (writes the long's SRT from the compose timeline's sentences at
+                                                 story QA v3's cue limits; prints its caption_track record)
 """
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -51,6 +61,196 @@ def srt(sentences):
     kept = [(s, text_of(s)) for s in sentences]
     kept = [(s, t) for s, t in kept if t]
     return "\n".join(f"{i}\n{stamp(s['start'])} --> {stamp(s['end'])}\n{t}\n" for i, (s, t) in enumerate(kept, 1))
+
+
+# ---------- the acted Bible long's track (story QA v3: an uploaded .srt, never burned captions) ----------
+QA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v3.json"
+
+
+def cues(sentences, words_max, chars_max):
+    """Short cues for the acted long: each sentence is cut into the fewest balanced runs of its own words with at
+    most `words_max` words and `chars_max` characters each, timed inside that sentence's voice span in proportion to
+    their characters. The words are the sentence's words, unchanged (KJV text exact): only the whitespace between
+    cues differs. A single word longer than chars_max is a cue of its own (long_track names it) and the words around
+    it are cut as usual (review of #469). No cue is shorter than CUE_MIN_SECONDS: a cue the voice span leaves shorter
+    is merged into its shorter neighbour (the merged cue may then exceed a limit, which long_track measures)."""
+    out = []
+    for s in sentences:
+        words = text_of(s).split()
+        if not words:
+            continue
+        runs, group = [], []
+        for w in words + [None]:
+            if w is None or len(w) > chars_max:
+                runs += balanced(group, words_max, chars_max)
+                group = []
+                if w is not None:
+                    runs.append([w])
+            else:
+                group.append(w)
+        start, span = float(s["start"]), float(s["end"]) - float(s["start"])
+        runs = merge_short(runs, start, span)
+        for r, (a, b) in zip(runs, spans_of(runs, start, span)):
+            out.append({"start": a, "end": b, "text": " ".join(r)})
+    return out
+
+
+CUE_MIN_SECONDS = 0.5
+
+
+def balanced(words, words_max, chars_max):
+    """The fewest balanced runs of `words` (each word <= chars_max) with <= words_max words and <= chars_max chars."""
+    n = len(words)
+    if not n:
+        return []
+    k = max(1, -(-n // words_max))
+    while True:
+        bounds = [round(i * n / k) for i in range(k + 1)]
+        runs = [words[a:b] for a, b in zip(bounds, bounds[1:])]
+        if k >= n or all(len(" ".join(r)) <= chars_max for r in runs):
+            return runs
+        k += 1
+
+
+def spans_of(runs, start, span):
+    """Each run's [start, end] inside the voice span, in proportion to its characters, rounded to the ms."""
+    weights = [len(" ".join(r)) + 1 for r in runs]
+    total, acc, out = sum(weights), 0, []
+    for w in weights:
+        a = start + span * acc / total
+        acc += w
+        out.append((round(a, 3), round(start + span * acc / total, 3)))
+    return out
+
+
+def merge_short(runs, start, span):
+    """Merge the shortest cue under CUE_MIN_SECONDS into its shorter neighbour until none is left (or one cue)."""
+    runs = [list(r) for r in runs]
+    while len(runs) > 1:
+        spans = spans_of(runs, start, span)
+        short = [i for i, (a, b) in enumerate(spans) if b - a < CUE_MIN_SECONDS - 1e-9]
+        if not short:
+            break
+        i = min(short, key=lambda j: spans[j][1] - spans[j][0])
+        if i == 0:
+            j = 1
+        elif i == len(runs) - 1:
+            j = i - 1
+        else:
+            j = i - 1 if len(" ".join(runs[i - 1])) <= len(" ".join(runs[i + 1])) else i + 1
+        a, b = min(i, j), max(i, j)
+        runs[a:b + 1] = [runs[a] + runs[b]]
+    return runs
+
+
+def track_srt(sentences, track=None):
+    """The SRT a video uploads: one cue per sentence (prayer longs, unchanged), or, when the manifest records a
+    `caption_track` (the acted long), the short cues of cues() at the frozen story QA v3's limits. The record's own
+    words_max / chars_max are never used to build (review of #469): manifest_problems refuses a record whose limits
+    are not the frozen ones (CAPTION_TRACK_LIMITS)."""
+    if isinstance(track, dict):
+        words_max, chars_max = v3_limits()
+        return srt(cues(sentences, words_max, chars_max))
+    return srt(sentences)
+
+
+def manifest_srt(manifest):
+    """The one SRT this manifest uploads (publish_video, preflight, captions-audit and qa_pilot all read it)."""
+    return track_srt(manifest.get("sentences") or [], manifest.get("caption_track"))
+
+
+def v3_limits():
+    g = json.loads(QA_V3.read_text())["grammar"]
+    return g["srt_cue_words_max"], g["srt_cue_chars_max"]
+
+
+def track_record(sentences, words_max=None, chars_max=None, file="captions.srt"):
+    """The long's SRT and the `caption_track` record its build writes beside it and into its manifest. The limits
+    default to the frozen story QA v3's (srt_cue_words_max, srt_cue_chars_max)."""
+    if words_max is None or chars_max is None:
+        words_max, chars_max = v3_limits()
+    text = track_srt(sentences, {"words_max": words_max, "chars_max": chars_max})
+    return text, {"file": file, "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                  "words_max": words_max, "chars_max": chars_max, "cues": text.count(" --> "), "burned": False}
+
+
+def manifest_problems(manifest, base=None):
+    """Every reason the track this manifest uploads is not clean: the strict SRT problems and, for a recorded
+    `caption_track`, its hash and (with `base`, the manifest's folder) the written file."""
+    text = manifest_srt(manifest)
+    out = problems(text.encode("utf-8"), manifest.get("output_seconds"))
+    track = manifest.get("caption_track")
+    if track is not None and not isinstance(track, dict):
+        return out + ["CAPTION_TRACK_INVALID (caption_track is a record)"]
+    if isinstance(track, dict):
+        if (track.get("words_max"), track.get("chars_max")) != v3_limits():
+            out.append(f"CAPTION_TRACK_LIMITS {track.get('words_max')}/{track.get('chars_max')} (story QA v3: "
+                       f"{'/'.join(str(x) for x in v3_limits())})")
+        if hashlib.sha256(text.encode("utf-8")).hexdigest() != track.get("sha256"):
+            out.append("CAPTION_TRACK_SHA256 (the recorded track is not the one the manifest builds)")
+        if base is not None:
+            name = str(track.get("file") or "")
+            f = Path(base) / name
+            # a bare file name beside the manifest: never a path out of the pilot (sweep H1)
+            if not name or Path(name).name != name or name in (".", "..") or not f.is_file():
+                out.append(f"CAPTION_TRACK_FILE_MISSING {track.get('file')} (a file beside the manifest)")
+            elif f.read_bytes() != text.encode("utf-8"):
+                out.append(f"CAPTION_TRACK_FILE_DIFFERS {track.get('file')}")
+    return out
+
+
+def parse(text):
+    """The cues of a valid SRT: [{"start", "end", "text"}]."""
+    out = []
+    for block in text.replace("\r\n", "\n").strip("\n").split("\n\n"):
+        lines = block.split("\n")
+        m = TIMING.match(lines[1]) if len(lines) >= 3 else None
+        if m:
+            out.append({"start": seconds(m, 0), "end": seconds(m, 4), "text": " ".join(lines[2:])})
+    return out
+
+
+def long_track(text, sentences, script_text, grammar, asr_words=None, duration=None):
+    """Story QA v3's caption rows measured on the SRT the long uploads: {row: (ok, value)} for caption_track,
+    srt_coverage_of_speech_min, srt_cue_seconds_median, srt_cue_chars_max and srt_cue_words_max.
+    caption_track: a valid SRT whose words are the script's words in order (KJV exact) and whose cues sit, in order,
+    inside the voice span of the sentence they come from. Coverage: the share of the voice timeline under a cue and,
+    with `asr_words` (the words heard in the audio), the share whose onset falls under a cue (0.25 s slack); the
+    lower one counts."""
+    import statistics
+    bad = problems(text.encode("utf-8"), duration)
+    got = parse(text) if not bad else []
+    spoken = [s for s in sentences if text_of(s)]
+    joined = " ".join(c["text"] for c in got).split()
+    script_ok = bool(got) and joined == " ".join(text_of(s) for s in spoken).split() == str(script_text).split()
+    on_line, i = bool(got), 0
+    for s in spoken:
+        want, have = text_of(s).split(), []
+        while i < len(got) and len(have) < len(want):
+            c = got[i]
+            if c["start"] < s["start"] - 0.002 or c["end"] > s["end"] + 0.002:
+                on_line = False
+            have += c["text"].split()
+            i += 1
+        on_line = on_line and have == want
+    on_line = on_line and i == len(got)
+    total = sum(s["end"] - s["start"] for s in spoken)
+    covered = sum(max(0.0, min(s["end"], c["end"]) - max(s["start"], c["start"])) for s in spoken for c in got)
+    cover = covered / total if total > 0 and got else 0.0
+    if asr_words:
+        heard = [w for w in asr_words if any(c["start"] - 0.25 <= w["start_seconds"] <= c["end"] + 0.25 for c in got)]
+        cover = min(cover, len(heard) / len(asr_words))
+    med = statistics.median(c["end"] - c["start"] for c in got) if got else None
+    chars = max((len(c["text"]) for c in got), default=None)
+    words = max((len(c["text"].split()) for c in got), default=None)
+    lo, hi = grammar["srt_cue_seconds_median"]
+    return {"caption_track": (not bad and script_ok and on_line,
+                              {"problems": bad[:5], "script_words_exact": script_ok, "on_timeline": on_line}),
+            "srt_coverage_of_speech_min": (bool(got) and cover >= grammar["srt_coverage_of_speech_min"],
+                                           round(cover, 4)),
+            "srt_cue_seconds_median": (med is not None and lo <= med <= hi, None if med is None else round(med, 3)),
+            "srt_cue_chars_max": (chars is not None and chars <= grammar["srt_cue_chars_max"], chars),
+            "srt_cue_words_max": (words is not None and words <= grammar["srt_cue_words_max"], words)}
 
 
 def problems(data, duration=None):
@@ -185,8 +385,8 @@ def wait(list_tracks, track_id=None, calls=WAIT_CALLS, pause=WAIT_SECONDS, sleep
 
 def main(manifest_path):
     man = json.loads(Path(manifest_path).read_text())
-    text = srt(man.get("sentences") or [])
-    found = problems(text.encode("utf-8"), man.get("output_seconds"))
+    text = manifest_srt(man)
+    found = manifest_problems(man, Path(manifest_path).parent)
     meta = {"snippet": {"videoId": "VIDEO", "language": TRACK_LANGUAGE, "name": TRACK_NAME, "isDraft": False}}
     framed = parts(multipart(meta, text))
     if framed[1][1] != text.encode("utf-8"):
@@ -196,7 +396,21 @@ def main(manifest_path):
     return 1 if found else 0
 
 
+def write_long(timeline_path, out_srt):
+    """The acted long's SRT from its compose timeline (episode_build's compose-timeline.json `sentences`), at story
+    QA v3's limits; the caption_track record goes into the long's manifest. Exit 1 when the track has a problem."""
+    sentences = json.loads(Path(timeline_path).read_text()).get("sentences") or []
+    text, record = track_record(sentences, file=Path(out_srt).name)
+    found = problems(text.encode("utf-8"))
+    if not found:
+        Path(out_srt).write_bytes(text.encode("utf-8"))
+    print(json.dumps({"caption_track": record, "problems": found}))
+    return 1 if found else 0
+
+
 if __name__ == "__main__":
+    if len(sys.argv) == 4 and sys.argv[1] == "long":
+        sys.exit(write_long(sys.argv[2], sys.argv[3]))
     if len(sys.argv) != 2:
         raise SystemExit(__doc__)
     sys.exit(main(sys.argv[1]))

@@ -1,0 +1,1520 @@
+{
+ "date": "2026-10-27",
+ "plan": "migration/production/bible/plans/arc-01-long.json",
+ "about": "Every Pavo clip that exists for an arc-01-long shot (owner 27/10: reuse the generated clips, generate only what is missing). same_request: made from the request the plan sends now (request_sha256 from the preflight). Other repository clips searched: pilot-015/pavo-1.json (15 clips of 24/10, photoreal documentary prompts of the old footage long, no characters: no shot's request), the Shorts' clips (9:16, LONG_DESIGN section 2: not reusable at 16:9), the two 16:9 tests of 26/10 (below). A window ships its source's clip.",
+ "shots_with_a_same_request_clip": [
+  "k-insight-2",
+  "k-promise-1",
+  "s-c2-adam",
+  "s-c3-eve",
+  "s-c4-adam",
+  "s-c4-blame",
+  "s-c4-eve",
+  "s-open"
+ ],
+ "shots_with_no_clip": [
+  "s-co-adam",
+  "s-co-hide",
+  "s-co-gate",
+  "s-co-exile",
+  "k-promise-2",
+  "k-promise-3",
+  "s-c1-deep",
+  "s-c1-shore",
+  "s-c1-wind",
+  "s-c1-land",
+  "s-c1-sea-life",
+  "s-c1-light",
+  "s-c1-adam-light",
+  "s-c1-dawn",
+  "s-c1-divide",
+  "s-c1-river",
+  "s-c1-sky",
+  "s-c1-grass",
+  "g-c1-lights",
+  "s-c1-stars",
+  "s-c1-moon",
+  "s-c1-birds",
+  "s-c1-animals",
+  "s-c1-whale",
+  "s-c1-herd",
+  "s-c1-fox",
+  "s-c1-meadow",
+  "s-c1-pause",
+  "s-c1-hush",
+  "g-c1-image",
+  "s-c1-adam-hands",
+  "s-c1-eve",
+  "s-c1-both",
+  "s-c1-bless",
+  "s-c1-laugh",
+  "s-c1-run",
+  "s-c1-valley",
+  "s-c1-pair",
+  "s-c1-rest",
+  "s-c1-eye",
+  "s-c2-dust",
+  "s-c2-breath",
+  "s-c2-wake",
+  "s-c2-mud",
+  "s-c2-look",
+  "s-c2-river",
+  "s-c2-garden",
+  "s-c2-work",
+  "s-c2-life",
+  "s-c2-two",
+  "s-c2-four",
+  "s-c2-gold",
+  "s-c2-swim",
+  "g-c2-command",
+  "s-c2-tree",
+  "s-c2-orchard",
+  "s-c2-name",
+  "s-c2-lion",
+  "s-c2-eagle",
+  "s-c2-alone",
+  "s-c2-pairs",
+  "s-c2-sleep",
+  "s-c2-meet",
+  "s-c2-see",
+  "s-c2-side",
+  "s-c2-face",
+  "s-c2-step",
+  "s-c2-walk",
+  "s-c2-hands",
+  "s-c2-together",
+  "s-c2-open",
+  "s-c2-sun",
+  "s-c2-rest2",
+  "s-c2-coil",
+  "s-c2-watch",
+  "s-c3-branch",
+  "s-c3-eve-near",
+  "s-c3-face",
+  "s-c3-tongue",
+  "s-c3-orchard",
+  "s-c3-eve-doubt",
+  "s-c3-answer",
+  "s-c3-wait",
+  "s-c3-touch",
+  "s-c3-hiss",
+  "s-c3-wide",
+  "s-c3-fruit",
+  "s-c3-eve-eyes",
+  "s-c3-coils",
+  "s-c3-look",
+  "s-c3-reach",
+  "s-c3-watch",
+  "s-c3-turn",
+  "s-c3-listen",
+  "s-c3-near",
+  "s-c3-both-tree",
+  "s-c3-take",
+  "s-c3-give",
+  "s-c3-adam-eat",
+  "s-c3-shame",
+  "s-c3-leaves",
+  "s-c3-sew",
+  "s-c3-cover",
+  "s-c3-back",
+  "s-c3-wind",
+  "s-c3-listen2",
+  "s-c4-evening",
+  "s-c4-crouch",
+  "s-c4-hide",
+  "s-c4-trees",
+  "s-c4-step",
+  "s-c4-face",
+  "s-c4-eve-hide",
+  "g-c4-naked",
+  "s-c4-point",
+  "s-c4-eve-hurt",
+  "s-c4-apart",
+  "s-c4-shadow",
+  "g-c4-serpent",
+  "s-c4-dust",
+  "s-c4-heel",
+  "s-c4-sky",
+  "s-c4-ground-c",
+  "s-c4-kept",
+  "g-c4-woman",
+  "s-c4-eve-rain",
+  "s-c4-adam-wait",
+  "g-c4-ground",
+  "s-c4-kneel",
+  "s-c4-hold",
+  "g-c4-dust",
+  "s-c4-name",
+  "s-c4-eve-look",
+  "s-c4-coats",
+  "s-c4-leaves2",
+  "s-c4-warm",
+  "g-c4-one-of-us",
+  "s-c4-life",
+  "s-c4-last",
+  "s-c4-gate",
+  "s-c4-leave",
+  "s-c4-field",
+  "s-c4-road",
+  "s-c4-look-east",
+  "s-c4-sword2",
+  "s-c4-horizon",
+  "k-insight-1",
+  "k-insight-3",
+  "k-insight-4",
+  "k-insight-7",
+  "k-insight-8",
+  "k-insight-6",
+  "k-insight-9",
+  "k-insight-5",
+  "k-close-1",
+  "k-close-2"
+ ],
+ "shots": [
+  {
+   "shot": "s-open",
+   "window_of": null,
+   "request_sha256": "df7f3ed167015f822603db72a9f3078d3eb59ebbf1a7506cbe3755688adeb50d",
+   "clips": [
+    {
+     "conversation_id": "373572838868944960",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-1983d9d4a0ad-0-4417092c3aca.mp4",
+     "sha256": "b0b0b5f7eea80ffe869320442f6ee9bedbad4ad867f3da6a9b768f8f027c2e14",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373574444096716352",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-71cb603e1617-0-0512bc2cc150.mp4",
+     "sha256": "e49204f2fe590fccbdc26ee686f87b192990996448c94721d4749fa5244fd416",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    },
+    {
+     "conversation_id": "373579376144681600",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-e8d35c22fa30-0-cb00dfd688f1.mp4",
+     "sha256": "6129a4bdf1565e007540edce448f4bd97b16905a0cfd39f4388178c1f755f778",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373584601035865664",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-7dd4b03d4d1b-0-59c368b48019.mp4",
+     "sha256": "65fb70577d9db5ac0e5484f12c15d91786991e6724214ae9d87ba1a37ee3b39e",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-co-adam",
+   "window_of": null,
+   "request_sha256": "76c8047807bd68ba7a818070f749db4d33fe6a505c04b92ae95609848ceb4bcb",
+   "clips": []
+  },
+  {
+   "shot": "s-co-hide",
+   "window_of": null,
+   "request_sha256": "e13e1533cbf6a46997caf96745a8459a5e167ac6a4d833873efad89748b05de1",
+   "clips": []
+  },
+  {
+   "shot": "s-co-gate",
+   "window_of": null,
+   "request_sha256": "665aa1d038c0a1131f2d5f53a76074c3732b217c28d0f9df4ee77072c622c602",
+   "clips": []
+  },
+  {
+   "shot": "s-co-exile",
+   "window_of": null,
+   "request_sha256": "4f89b1308b4a891236aea7286cc9204e3e5fc98a548e985f9a3721ab0e0d6970",
+   "clips": []
+  },
+  {
+   "shot": "k-promise-1",
+   "window_of": null,
+   "request_sha256": "80485f2816ff3e2aa05592e26c31acfb8cef72b101408b7ff24ba3c224af8a29",
+   "clips": [
+    {
+     "conversation_id": "373586864504650432",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-e5d9f4e05dea-0-c4b0d7947a93.mp4",
+     "sha256": "34715398b4c556f0965e8dfb9b8aaee8b1d839674bacde86c88aeac740256b1a",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "FACE_NOT_FOUND",
+      "MOUTH_NOT_IN_SYNC"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "k-promise-2",
+   "window_of": null,
+   "request_sha256": "229cfb0f006ce3f0bb7157e107a160e4f418c8b9351654d8e21e9e4d779c5938",
+   "clips": []
+  },
+  {
+   "shot": "k-promise-3",
+   "window_of": null,
+   "request_sha256": "a5aa741f0cb692377cfaa679dfd9a2213aa99f89348456ff773c31591a793b6f",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-deep",
+   "window_of": null,
+   "request_sha256": "e14dbef7f15f8550f0886213f2e954d42ad73ddde32bde5578f38b30287e7fad",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-shore",
+   "window_of": null,
+   "request_sha256": "7f46e4d0597564836777753e6b1e716ad2acb9ad70e8e1f4229016f1ee4b2242",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-wind",
+   "window_of": null,
+   "request_sha256": "6684b23cfbf713a11ee0721f349824b6e808ba462740ce3ff62dff0cba170c23",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-land",
+   "window_of": null,
+   "request_sha256": "15691e21c09b4f0e1b40edebe13312facbcce974c34f909c4c0ec0339cfaf4ce",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-sea-life",
+   "window_of": null,
+   "request_sha256": "6ca3943e037231b03964a211dce20a0ae2004b854da043cfda7b57a58ce5855e",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-light",
+   "window_of": null,
+   "request_sha256": "bafb00a90c06eb00d1acd667b85aa0fed6c6c66691d73d98f6bcce2627ecee15",
+   "clips": [
+    {
+     "conversation_id": "373074273726124672",
+     "source": "evidence/pavo/20261026/long-16x9-and-concurrency.json (A)",
+     "aspect": "16:9",
+     "seconds": 6.58,
+     "same_request": false,
+     "note": "the draft's earlier prompt (clouds part over a dark sea), text only: not this request; s-c1-light is image-first now"
+    }
+   ]
+  },
+  {
+   "shot": "s-c1-adam-light",
+   "window_of": null,
+   "request_sha256": "b549920d7971bc1acac51657f954a98e178bcfd8acd3c3f1c6b547dcdd4b0188",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-dawn",
+   "window_of": null,
+   "request_sha256": "c9af2d74e321fa9f9a10e81b35e7b258e48a50efdf3c7f4d30417b52bdb392d5",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-divide",
+   "window_of": null,
+   "request_sha256": "c3704aea5971f7f1001db963e78066de17405064bc6548e46559f19a9057d071",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-river",
+   "window_of": null,
+   "request_sha256": "f65d8e71894f678965f1b6b53fa3cbb84162bc82c935a74a4b8e4c65878d24fa",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-sky",
+   "window_of": null,
+   "request_sha256": "bf8fae916bdab92e4d7953c871e7f2c5e9a76a1146eeeecda94fc14de4d498dc",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-grass",
+   "window_of": null,
+   "request_sha256": "9360ec95a1938b72c33c38a738c3b20b4e178ce24624e102de5bae9eb7435793",
+   "clips": []
+  },
+  {
+   "shot": "g-c1-lights",
+   "window_of": null,
+   "request_sha256": "7baa48f18ca33e47d047ad691b97396d85b438d7491b16c3021480db3cf926f2",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-stars",
+   "window_of": null,
+   "request_sha256": "97fe41c936e75aee1b486ea5493e029bc5228857ee826c24ccd78162497babd9",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-moon",
+   "window_of": null,
+   "request_sha256": "487dff6c04c64ff30f1cb52ccd77d3c029df4c93c78ebe168fe08665f3627852",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-birds",
+   "window_of": null,
+   "request_sha256": "3eda732889594ea0c9beff5d69df24ebde8b200d76203568ef4495aec11f8dba",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-animals",
+   "window_of": null,
+   "request_sha256": "2bb6755c89b93ff142330dcfe0799f26194b68f2b999fa797533a3bc8b00a198",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-whale",
+   "window_of": null,
+   "request_sha256": "e32e00130a7cef8bf5c3fc30d5e291fa35719fd6379bab03b84bfb25ff727145",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-herd",
+   "window_of": null,
+   "request_sha256": "e4915cc06bd954ec04d84591a01dde87ee5e05a3de7e62b5af6f9b76994b874c",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-fox",
+   "window_of": null,
+   "request_sha256": "5109d9589d281015ab642c4cb80f020ee4f0845e17f64cba6103713d76d56fc4",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-meadow",
+   "window_of": null,
+   "request_sha256": "50d824a42fdd3b8eb08f5e4f82d0de0831fc99480db1fcefdcf928d2b6124321",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-pause",
+   "window_of": null,
+   "request_sha256": "514d011322a99282110054910a0b0e7716dda752461a5fdab9c7e0a10a2fc9bd",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-hush",
+   "window_of": null,
+   "request_sha256": "c1935a2746d5e07e014896a1f365b88175abe3bc9c29d8243cd7592941fd276f",
+   "clips": []
+  },
+  {
+   "shot": "g-c1-image",
+   "window_of": null,
+   "request_sha256": "4c755d9737ba49a111641d1052e1beb76997237bdedaadc8b46d751f9891206f",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-adam-hands",
+   "window_of": null,
+   "request_sha256": "0701d7cba12e8cffcb98e472fb8cbad4278bee623e4eb00454d17877c4381c6c",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-eve",
+   "window_of": null,
+   "request_sha256": "ed717e0035c83b784c93bf31ac720e25d6d65c10b217f58d00315f6a7e89c84f",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-both",
+   "window_of": null,
+   "request_sha256": "d8d17ea1c41bf99f88c3da8f7ff0338e1d15cc96812f70eda02878676495d906",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-bless",
+   "window_of": null,
+   "request_sha256": "f8bd27f400c71bec821c52752074987b82efc9b9ea06fb8f6058e1eeb9f4fc01",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-laugh",
+   "window_of": null,
+   "request_sha256": "01aad2b50b5b88f17c136b34bd862c4d4533290b073da1721ba7a0fa2822c6ed",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-run",
+   "window_of": null,
+   "request_sha256": "79d9286d6f0df89229ff1779f74a31e02ba587543bd5c4d1e7a0ab188b242dae",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-valley",
+   "window_of": null,
+   "request_sha256": "7df54e4e87e06abbab966984e42a7267dfac8c55bdcf8a00b5b57b526ac00b4f",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-pair",
+   "window_of": null,
+   "request_sha256": "32521a9291152dd0839831a917eb6ab99623ce3828f5bf50f5264a933c213da5",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-rest",
+   "window_of": null,
+   "request_sha256": "11ff2f8900f56bdd35032f7172c98eb872f891519d462c2233d125a0341b69e0",
+   "clips": []
+  },
+  {
+   "shot": "s-c1-eye",
+   "window_of": null,
+   "request_sha256": "7f5accd88ffb6043a2cb80b75112ad5fdbebd511c36a2f1576ab4e2867f71b15",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-dust",
+   "window_of": null,
+   "request_sha256": "ae21ba6c2cf82adeb1af995d89ce09ac262f3f7a785ed3e70853cc11791006b9",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-breath",
+   "window_of": null,
+   "request_sha256": "ee8fd15e416d5ad7a795f462bff73e9fbdd2ebe27be0538d81b92a4ce37a1d26",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-wake",
+   "window_of": null,
+   "request_sha256": "bfce38396a8b59cc82f7de4736337475302cea838146c1a239365e15bed599ba",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-mud",
+   "window_of": null,
+   "request_sha256": "9cbc27e44dd9d6e2f09dce499097123b67270ebb42304fe300af136f423ea0cb",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-look",
+   "window_of": null,
+   "request_sha256": "3d11e28d0e56686605a36bd336e5bc13d1686aff6ae196a47b793aaba788db93",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-river",
+   "window_of": null,
+   "request_sha256": "d4ba5c0d5cd4f600a782a2659a4ecbceb66ec8f09d8b4f99d1281d44e347dea9",
+   "clips": [
+    {
+     "conversation_id": "373074296937705536",
+     "source": "evidence/pavo/20261026/long-16x9-and-concurrency.json (B)",
+     "aspect": "16:9",
+     "same_request": false,
+     "note": "modern houses at the frame edge: unusable"
+    }
+   ]
+  },
+  {
+   "shot": "s-c2-garden",
+   "window_of": null,
+   "request_sha256": "17d93a0c8b2d12c5398fd586abb483d29e085ea8d4a7856bd4182b31ee4eb418",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-work",
+   "window_of": null,
+   "request_sha256": "fb6208b61d550aec9f96f1289d5a273bd2702746957f4d4700a6a6ff7651487c",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-life",
+   "window_of": null,
+   "request_sha256": "e231080f2ff939b3be8e94715585241b8fd41e4379d2abc4f1cea84af96c9f45",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-two",
+   "window_of": null,
+   "request_sha256": "d872f9abb9cde42385b8c200ccd336b3caa9d2d1f0f5cac105b8516b79016119",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-four",
+   "window_of": null,
+   "request_sha256": "bb125585b0f376c0d7817ef894464fee0c366cf0a77d36109faa7cd717203dfb",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-gold",
+   "window_of": null,
+   "request_sha256": "f57770ec1e33d26219754396c58488ec67178b8f8958e98048369d5e8ecf0aee",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-swim",
+   "window_of": null,
+   "request_sha256": "d26ab11df8544ee5b2370d6319ab29bc365263c9d2aa7087edfc439a58d47ef7",
+   "clips": []
+  },
+  {
+   "shot": "g-c2-command",
+   "window_of": null,
+   "request_sha256": "d07b835f18002e7cfbe8444b8f3f87fde72857a49ca00b97c7216f7b8eb0f947",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-tree",
+   "window_of": null,
+   "request_sha256": "073e2919950743985ee47948770b77f98934ebc22b23189642150292cb31c307",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-orchard",
+   "window_of": null,
+   "request_sha256": "27cfade6adfcdbc21cb29a304bbf2a77ebeea3cb9d710a8c6ad0be99d217db5f",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-name",
+   "window_of": null,
+   "request_sha256": "ef4889a4e232ef6135eb9fecf6806b504e15bb38ffd280dbd3dceaf1cbeab05a",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-lion",
+   "window_of": null,
+   "request_sha256": "d3332c1e8e5563b954241059a5e1fdb9052a5d080bb24757bb13bad0b69a7bb5",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-eagle",
+   "window_of": null,
+   "request_sha256": "4e4d0794114080264f0d24c101cbdb0a02056738a96c458893bca18fa8322c11",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-alone",
+   "window_of": null,
+   "request_sha256": "bc9c87e813df0b95c567567f543ef1fc76f5000673f6c4d2314a0b1b60b5e409",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-pairs",
+   "window_of": null,
+   "request_sha256": "7e63504dcf092f904217c09dd2a399f3ffdab022e572427add8ff10acba36342",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-sleep",
+   "window_of": null,
+   "request_sha256": "7bfe7fdab417c8c3fdb4dd40e524c19e56f3a6eb3b5c3d99c6f25001136bcd66",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-meet",
+   "window_of": null,
+   "request_sha256": "1e7fa89bf81fa95a7b261ea967590a003da039e846d4871f9cf8fa134526aaad",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-see",
+   "window_of": null,
+   "request_sha256": "971a68ff7d67003c60242f72549a76d5e645024bd05d432013d1b148112bf9fd",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-side",
+   "window_of": null,
+   "request_sha256": "a1998a103328e7b6b32cedeb8329e4d1dc402989b602ab851607ae63e409f8d3",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-face",
+   "window_of": null,
+   "request_sha256": "06362bb635ff9309618ca0db595b0fb24591181a26e20bc5f12667fb1ed6ae3d",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-step",
+   "window_of": null,
+   "request_sha256": "23cd1db18480d4179e96e5124dab8e4db9d8c5345aad41de7f53e8c8a4a55959",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-adam",
+   "window_of": null,
+   "request_sha256": "1e8ba9a6c2275e3368c63e6e97d64571618bef1dab350454ed1b06a3e6f16ec4",
+   "clips": [
+    {
+     "conversation_id": "373574884389560064",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-6543edd7972a-0-e85797519583.mp4",
+     "sha256": "d34752fa5913add0c290c21951ade2da7b21d6639db907dc89a31ca23f5f1f33",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "MOUTH_NOT_IN_SYNC"
+     ]
+    },
+    {
+     "conversation_id": "373577086629899776",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-f971c0408c04-0-cf185b39b6cf.mp4",
+     "sha256": "eaf6e8db4dcdea79c3ee0128907a0ebc51ca65e0bd9145d8ee989e29e68f1372",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "MOUTH_NOT_IN_SYNC"
+     ]
+    },
+    {
+     "conversation_id": "373582066556078784",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-cdfddcdcc169-0-3d89b343f5d4.mp4",
+     "sha256": "dbd4de17892affee61e012485a7b99d4c6a27e0f3f2689149bc3e3fb88925cf4",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "ROTATED_PICTURE",
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-c2-walk",
+   "window_of": null,
+   "request_sha256": "eb75ed3af6a3339d5772947eb16dc8d01b3eefd9813766bb8eb8461f0a1276bd",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-hands",
+   "window_of": null,
+   "request_sha256": "fcd69ac415935bf3def702412ab4127aa8cd082920e570b2305cb6bf4a306057",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-together",
+   "window_of": null,
+   "request_sha256": "5b931b237dd273c43f736b291141f9de3b67ff263b5413a74a21b9d6846d95e4",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-open",
+   "window_of": null,
+   "request_sha256": "e04c3966b6e581c4282ef3fb71e749960382c0881c446cb4aa446ac1ff8c24d3",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-sun",
+   "window_of": null,
+   "request_sha256": "934f372434a1c641d89e786229bed30ff97704d246717bb0c13e480ca984653d",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-rest2",
+   "window_of": null,
+   "request_sha256": "a0c1f3e38dc3f1d5ec0c30d15a89aa6715897cffaf1d4e045a594cbb412aadcb",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-coil",
+   "window_of": null,
+   "request_sha256": "0b1da3869f4d00c193b903deea4da418d274adc4ee34a1dbfd83e25cdbc94e3f",
+   "clips": []
+  },
+  {
+   "shot": "s-c2-watch",
+   "window_of": null,
+   "request_sha256": "84865340e5fb67baeffa06141b9c8ccc5ac99782c06c09985d0514de8bae352d",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-branch",
+   "window_of": null,
+   "request_sha256": "661539ad98fc9f435b7e997d5f84e1fc7af90edf0a077b28340bc71c24cdead6",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-eve-near",
+   "window_of": null,
+   "request_sha256": "1498985e4f62074884da10dad11e2f50f735ac0b4f284febb1216a6238dbd138",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-face",
+   "window_of": null,
+   "request_sha256": "65907dd8ca7d348ea4d8a97912cf495bf55f0e96f0294499bc0c20457b2fa47c",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-tongue",
+   "window_of": null,
+   "request_sha256": "a010fea5c88e070bc4e8e8557baafaa31d3c626e7667bae873c9e56416bdc7fb",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-orchard",
+   "window_of": null,
+   "request_sha256": "e9dca42a3171b5914ebba34f0796475e07c94b0b920151b48a3bed89206caf6f",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-eve-doubt",
+   "window_of": null,
+   "request_sha256": "23199434a9047ec4d34d9ca7073afbb1ba9e1c386f8d009e88f3055455d459d6",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-answer",
+   "window_of": null,
+   "request_sha256": "3d521b46d707bcc6959f3f1da32cfe79dc33247347dcede098d0638b6c35b5f7",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-wait",
+   "window_of": null,
+   "request_sha256": "c574621ee70ffc8cdcf1d1a3c2bb813ba8a009f5ff1f213bf0f6f685e4ec9571",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-eve",
+   "window_of": null,
+   "request_sha256": "ca360390ccf8c0da0f41d64c8c53bd988071873190fae1879c93543294979e0c",
+   "clips": [
+    {
+     "conversation_id": "373575025913838272",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-f9fba6381e6a-0-fdd8f375582c.mp4",
+     "sha256": "c315b4fde40d07633c520c056fcf89f44d7876eb849f0c79fd517ef87c9c7113",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373577218271774784",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-4954eebae0b6-0-f049ede5b7bf.mp4",
+     "sha256": "f45e84a2947868b977c021291c6fa57bef660bbf50136d36ed39344e3ee7fb1b",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": "PASS"
+    },
+    {
+     "conversation_id": "373579779905161856",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-4d12dfe8e9d5-0-3e7d27ea0732.mp4",
+     "sha256": "4ea904fe6d0cf95bd0899175022b3b9ec9ec8d142ca724d79f294d6c56d13728",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    },
+    {
+     "conversation_id": "373584743436126848",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-3d6056878b61-0-1c1e844e5670.mp4",
+     "sha256": "6908129ff3160fdea6730406b1915565baf6c2c1ef89f004693c03a2f54fc88f",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-c3-touch",
+   "window_of": null,
+   "request_sha256": "7068a93bffe1c801dab95275552b37d6f88aff73c13d35eeb6b1e86c012e8c34",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-hiss",
+   "window_of": null,
+   "request_sha256": "0d171a9fad013f0ba2958b18e308303bb34b367585578da9f344aa467e6ac0a5",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-wide",
+   "window_of": null,
+   "request_sha256": "0f3b3478078ca885fd4af322be2c470588f5354f453577366ecdac26bf2d9a93",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-fruit",
+   "window_of": null,
+   "request_sha256": "af3e3675adcf33af02535bedaa500a108ef909f167d0c25b16bd31f13fa2abb1",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-eve-eyes",
+   "window_of": null,
+   "request_sha256": "6760aadbb21ad4cef45229f6c33ea2df391f2585305adf72fcdcaef504b1ef2f",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-coils",
+   "window_of": null,
+   "request_sha256": "738df9451014e6d18b175f56781714ac45d7f130d1f320c330455a2aca77a4c9",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-look",
+   "window_of": null,
+   "request_sha256": "ddee352e40904cc997640d22a15c2d2ecfb09371479154c7977268ab6de01b59",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-reach",
+   "window_of": null,
+   "request_sha256": "6fed9ef9c2b1385e098787d1f8f36082b95ec9eddf73385a88e9f792f4275281",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-watch",
+   "window_of": null,
+   "request_sha256": "ec9349466f6130fd225330fb26a0d53850f571a9e76159d8c7c624df8da37e8a",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-turn",
+   "window_of": null,
+   "request_sha256": "cd306addbcd0f4d1c78b8c8b521ad46eb38b452faea3b2495d07c6199960123b",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-listen",
+   "window_of": null,
+   "request_sha256": "2c28b5ec34746a56e8b88c19dd4092a1f403731590e023a7138c336f7310d8e5",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-near",
+   "window_of": null,
+   "request_sha256": "b88b675655fb34bad5ee97b3cb7be6152312d796f1103923b4a1244aa656b33e",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-both-tree",
+   "window_of": null,
+   "request_sha256": "ab26f3406433471e5b0eacaea10b67740915aae63e6025e03074f4b57987b159",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-take",
+   "window_of": null,
+   "request_sha256": "8c9617131159af8bb926877dbe017810a22056db0c479c5b08172bca52adc8a4",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-give",
+   "window_of": null,
+   "request_sha256": "533bfa036e56f17e4f103b141926db83eac9e6f8ed699319312c1309ef604da4",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-adam-eat",
+   "window_of": null,
+   "request_sha256": "996229563d618ef895e1a8f1570d721782acfe83d6e25e3222c6c77fc6724728",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-shame",
+   "window_of": null,
+   "request_sha256": "35ccda1f8dce7bd997f42638da35b25742860ff755ff0c9b5d78aaf3501c1c7f",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-leaves",
+   "window_of": null,
+   "request_sha256": "3f5c524d16c76f10a05ff6262307ecb7acbb984cdb904328370bd9fbead5144c",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-sew",
+   "window_of": null,
+   "request_sha256": "67d25c3b8701de7a0eb1f2e11a70421c59c513a290e9ee054792476faa7e72ed",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-cover",
+   "window_of": null,
+   "request_sha256": "5b928b51a8894c50fc1e961690b4d88f4207c4fa2bd5b9b3333d6131d664e2fe",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-back",
+   "window_of": null,
+   "request_sha256": "aad895b498c4a2ea7acc4fc6ec04f2d4ca57437a8744a823639f77957f1891eb",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-wind",
+   "window_of": null,
+   "request_sha256": "df34e8dc37eaad5755bd40f4761f09fc2369954a8ca6815d3c1e3c178f46e66b",
+   "clips": []
+  },
+  {
+   "shot": "s-c3-listen2",
+   "window_of": null,
+   "request_sha256": "429dcaf814dc35f8afe7f5d9cf4707f332d28647cd07960c06b18f5a201f1917",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-evening",
+   "window_of": null,
+   "request_sha256": "04e499f51b15c9fcb4de6d98aa94bac93f5f90bb601f54520c35889052e95c6c",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-crouch",
+   "window_of": null,
+   "request_sha256": "00330dcd584cf8265873aa864dad3c8945ae7110c945153ab49c8c2ddbd2808d",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-hide",
+   "window_of": null,
+   "request_sha256": "970610fafc441a02e72a30bf98e28e6090a0fba19013d0af2f4b2775286d4ca6",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-trees",
+   "window_of": null,
+   "request_sha256": "6a6d74e140098a67f7f72f0269ad1d12f84541017949997a74c1f319c5ef6098",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-step",
+   "window_of": null,
+   "request_sha256": "540d6061d01d52a06ec76a5d5a7ec3beeebb2497c488fa093aa4f2cb7643e810",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-face",
+   "window_of": null,
+   "request_sha256": "b56ce30cf191fbdf1811a7b316a07ddf4218b67c2ea1504b58b1d2c502849764",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-eve-hide",
+   "window_of": null,
+   "request_sha256": "81b4ffda076027d86f1b56a77906a07c3497afd1691922f1074ce5755896d3e8",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-adam",
+   "window_of": null,
+   "request_sha256": "b51dec0af285a82ad61d6f7915df1e9a8486e40bebecd531b1ee0979891405f0",
+   "clips": [
+    {
+     "conversation_id": "373572972377803392",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-f3bdba22e7fc-0-75eda81934d2.mp4",
+     "sha256": "1f6ec814f8ceba8e3ba2edc3e48d0a9e63c205ea63a35af3a41baab96066b3d9",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373576708525924096",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-b1dca7bf26fc-0-3f2b021a602d.mp4",
+     "sha256": "af65c764df25b76db69196cd8e48a7b898776feb5a5c1e8ba0191b6f4a24d805",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373581933965740736",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-3c0faca715e5-0-7ded07ec82ab.mp4",
+     "sha256": "f3256d07cd1526e13dd530285535fb83f88cd2a30847245e63e3118208adcd6a",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "g-c4-naked",
+   "window_of": null,
+   "request_sha256": "b4dda97c542899d1e8150cfb89c359c19551a6c7b89ae9dc13163e00dc3eb448",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-point",
+   "window_of": null,
+   "request_sha256": "bf28d923b3090a70f9430a545e078be2099cabbd5ae3c3e1e65913332451ca60",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-eve-hurt",
+   "window_of": null,
+   "request_sha256": "07512f9ab12c369eef565727bbbc65e0ee8571aa30ecf360cbd2019b90eae998",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-blame",
+   "window_of": null,
+   "request_sha256": "594660a57954eca66d8ee6a78f5cd81554a35422a8895e384c94a6fb6c54eccb",
+   "clips": [
+    {
+     "conversation_id": "373575154783780416",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-69512ddc9b61-0-36bf3094f48b.mp4",
+     "sha256": "013202e62b244bc7d138e08e069e44a0f3d1adf233438174497307bb0b9da471",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "MOUTH_NOT_IN_SYNC"
+     ]
+    },
+    {
+     "conversation_id": "373579539643448000",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-60671162c569-0-4382211a9cdc.mp4",
+     "sha256": "cfc277c0e2669fe060798bb056dd27fd0cd7148969218cfb2fc1dcbf33a95e73",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    },
+    {
+     "conversation_id": "373582177696546624",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-0abac00074fe-0-3743b60c0f44.mp4",
+     "sha256": "c9b5e7a1b76fde04c2ac7b92d1d2d42b8996501ce860528a5638d356238caa84",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-c4-eve",
+   "window_of": null,
+   "request_sha256": "a4e04de866cae917d6ba281d5bc264f409d4710a20aed305e6a9f26edf84a8c9",
+   "clips": [
+    {
+     "conversation_id": "373576595908364352",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-7b72a5967d29-0-16347c76fb45.mp4",
+     "sha256": "6baf8d0671fba096f616f2aadaae478b9f6be7dac1bf5d9aec81e156ccd7dfc2",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373579640251648064",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-f6d32c3d5e81-0-7a1816912bed.mp4",
+     "sha256": "ca1636e2bc59455e00f4998a89ba8d3ff701813190c7907b51d14da496a674e1",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    },
+    {
+     "conversation_id": "373584506055899840",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-9cc195ded736-0-d2c0053b54b1.mp4",
+     "sha256": "3245a4a65cfb86445334b3fdebb0f6b21f27742a88bb4350903e27fbd5eba419",
+     "seconds": 6.583,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "AUDIO_OFFSET"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-c4-apart",
+   "window_of": null,
+   "request_sha256": "3435fef690409495e1b9f5c9feab8b21c26743710b4c1261a4433e1b2b981f14",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-shadow",
+   "window_of": null,
+   "request_sha256": "f57a1da5b733dc0f8231d14cdb8a03b52ea5d9bddc1ab734772d2b280a87ab1e",
+   "clips": []
+  },
+  {
+   "shot": "g-c4-serpent",
+   "window_of": null,
+   "request_sha256": "91b737dbc24759796c00c866a405c12f7cc8334976aadbb31d50a19321a13cdf",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-dust",
+   "window_of": null,
+   "request_sha256": "fe7ff369a9c1624cd518b6cef1b24b377895222e1f5461930aff7e583494190c",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-heel",
+   "window_of": null,
+   "request_sha256": "4455ac661f75f5f3c013a58b1f91fdb1965022dd1542e359e0f845d6a14db551",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-sky",
+   "window_of": null,
+   "request_sha256": "a4c9b17114d107ce64fb98f2341daf8edd866732115cad728473899961077f76",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-ground-c",
+   "window_of": null,
+   "request_sha256": "d781f1a9b205ee0ab0c756a007cc4eba08715fc9fa7f92ae33fa1765d3af9d5e",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-kept",
+   "window_of": null,
+   "request_sha256": "edbd45cd2252207177762143d7a80d3bbf02636dcc8222ae2891b1877d4c220d",
+   "clips": []
+  },
+  {
+   "shot": "g-c4-woman",
+   "window_of": null,
+   "request_sha256": "31d2459df463d1b19214542584e1bbb3ce9a369d6abcc95cd2278d189cfa7aa1",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-eve-rain",
+   "window_of": null,
+   "request_sha256": "810d6492879aa5cca705e21dabe1eac75d9995374ce2cad829dab790c557dbcd",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-adam-wait",
+   "window_of": null,
+   "request_sha256": "a40b52135ad215ed574c22343ec4334ee239aae42db34c0e178f82425a6d8ced",
+   "clips": []
+  },
+  {
+   "shot": "g-c4-ground",
+   "window_of": null,
+   "request_sha256": "3f791c48e4c75e690e93c9264a3efc5d0534d7a06ac20042cf065d8638e134f7",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-kneel",
+   "window_of": null,
+   "request_sha256": "4406523fb65613af67063f6c69eed0b8105fd961608d21dc6209319cc0b662c7",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-hold",
+   "window_of": null,
+   "request_sha256": "25edc6d20589b6c083314332c9ff8c06b0f91f35cfcb1cb16906fee19ec3eb39",
+   "clips": []
+  },
+  {
+   "shot": "g-c4-dust",
+   "window_of": null,
+   "request_sha256": "4c2a065aa0675b93c138f2d5a40fccb21a3b07cc8def23faf406fad03d018cc3",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-name",
+   "window_of": null,
+   "request_sha256": "b78dad46a2c7723ded1122babceddd8f1e8f3f1a3cab6c820f4d750154b4be7d",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-eve-look",
+   "window_of": null,
+   "request_sha256": "0cf63d0d1531811c32c2274d55cbaaf4c0983d5158217fd533f1edff862680aa",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-coats",
+   "window_of": null,
+   "request_sha256": "dffbe7fd9260be113d7a1e34d9ee70c749bc2c24c2960c69fa769e9069cdeca7",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-leaves2",
+   "window_of": null,
+   "request_sha256": "243e69e676e496ff8ce6f0dbd42763535c764b9498a6dbb0ae44ec3d51662740",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-warm",
+   "window_of": null,
+   "request_sha256": "68706ffc4d77f79aa77d8bf247e151033e0252be739a062896a05d37c1d575ce",
+   "clips": []
+  },
+  {
+   "shot": "g-c4-one-of-us",
+   "window_of": null,
+   "request_sha256": "c38bc09285e97dd2cdac12cac64066fba39b9e7af7a279f66b30c6a2dfe6741d",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-life",
+   "window_of": null,
+   "request_sha256": "251c133ae622bf6c04c77c96f872fdeb60878d0ed7604c1929944a70d4c558b5",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-last",
+   "window_of": null,
+   "request_sha256": "bb47a975f6cf05a2f9bf24f937caa91cc731462ae6b06d97019805ce09382c4c",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-gate",
+   "window_of": null,
+   "request_sha256": "82e06ed10eff780e958e33e3db048d05d3d51620921c79ae0e57fd14f90e2ffd",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-leave",
+   "window_of": null,
+   "request_sha256": "4f89b1308b4a891236aea7286cc9204e3e5fc98a548e985f9a3721ab0e0d6970",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-field",
+   "window_of": null,
+   "request_sha256": "b53729fd8b2acc427425c4663acb325e27862d67e3be5669096dfa9c6a633845",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-road",
+   "window_of": null,
+   "request_sha256": "59b564d62b30d0c146f1d2ee7e128a6daee5af1bc13f9d4bbc841859dcf799b5",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-look-east",
+   "window_of": null,
+   "request_sha256": "fc1603390d6889d19a28a1965431e87a1bd3c7f5170b380bbceff39f2cf573cb",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-sword2",
+   "window_of": null,
+   "request_sha256": "d3941a14e08d53d6b02131996f97f4dd13b01e9f1e1d8b59e79cd7630f28eea4",
+   "clips": []
+  },
+  {
+   "shot": "s-c4-horizon",
+   "window_of": null,
+   "request_sha256": "fff1d09455625e76c49707726b735df5127263299a2111f1290c7e059392bbc1",
+   "clips": []
+  },
+  {
+   "shot": "k-insight-1",
+   "window_of": null,
+   "request_sha256": "5a2a804ee376f892401c8d2e65cae8ba40592c8cba9466720146a95c01e03e76",
+   "clips": []
+  },
+  {
+   "shot": "k-insight-2",
+   "window_of": null,
+   "request_sha256": "5e0ebbd7c498c35ed2e80fcbf21f7d5fe7dc4df8bc8c84188cc836babf404b2e",
+   "clips": [
+    {
+     "conversation_id": "373586961866987200",
+     "url": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-c7e3e6acae07-0-7dd471f4ea86.mp4",
+     "sha256": "2b56f4fab0a8612509ff95cf8ae4807d63800d0bb149ababbf6ebf05cc95ca9c",
+     "seconds": 5.167,
+     "aspect": "1280x720",
+     "pavo_audio": true,
+     "same_request": true,
+     "lipsync_check": [
+      "AUDIO_NOT_OUR_LINE",
+      "FACE_NOT_FOUND"
+     ]
+    }
+   ]
+  },
+  {
+   "shot": "s-ki-trees",
+   "window_of": "s-c2-walk",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-bite",
+   "window_of": "s-c3-take",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "k-insight-3",
+   "window_of": null,
+   "request_sha256": "96637bc6ec84b4d1d52e6af7af042ef2c790f3f05cd4c52efcdb74c1f88ba66e",
+   "clips": []
+  },
+  {
+   "shot": "s-ki-coats",
+   "window_of": "s-c4-coats",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-garden",
+   "window_of": "s-c4-last",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "k-insight-4",
+   "window_of": null,
+   "request_sha256": "796256836738597fe081133b86886cc92c50f901404571a41346a2249b21c7f2",
+   "clips": []
+  },
+  {
+   "shot": "s-ki-valley",
+   "window_of": "s-c1-both",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-gate",
+   "window_of": "s-c4-gate",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-shame",
+   "window_of": "s-c3-shame",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-face",
+   "window_of": "s-c4-face",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "k-insight-7",
+   "window_of": null,
+   "request_sha256": "5b212cb2ee21cd9cace5e7a4c9697d7e34438e075d7301919892239a0354afa5",
+   "clips": []
+  },
+  {
+   "shot": "s-ki-leave",
+   "window_of": "s-c4-leave",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "s-ki-light",
+   "window_of": "s-c1-adam-light",
+   "request_sha256": null,
+   "clips": []
+  },
+  {
+   "shot": "k-insight-8",
+   "window_of": null,
+   "request_sha256": "461e24c84f52f5bab3c94600a575654cff85d81ccb0bf95e5b35ffb35f8e6add",
+   "clips": []
+  },
+  {
+   "shot": "k-insight-6",
+   "window_of": null,
+   "request_sha256": "2b769c9c446e8d100516f9b744b41064585bb3b696c6cdc9e344c2f71029c49c",
+   "clips": []
+  },
+  {
+   "shot": "k-insight-9",
+   "window_of": null,
+   "request_sha256": "efd907d8cc6df3fb6f7edb677d0fc11390a9c6b1170c5cf11da8df1233f73e1c",
+   "clips": []
+  },
+  {
+   "shot": "k-insight-5",
+   "window_of": null,
+   "request_sha256": "57b593bbe8ab53434fe87a0264dcc06d7178eefaaef04f1d53faeea05cb746b3",
+   "clips": []
+  },
+  {
+   "shot": "k-close-1",
+   "window_of": null,
+   "request_sha256": "535c560d43034dcc48f556824071c5b6a677dc0b8f4c5312e4bc204966e17f76",
+   "clips": []
+  },
+  {
+   "shot": "k-close-2",
+   "window_of": null,
+   "request_sha256": "824d20c116e6eab12663c7e68908e83e482b28d24544d99fb73365eb0d2290c8",
+   "clips": []
+  }
+ ]
+}

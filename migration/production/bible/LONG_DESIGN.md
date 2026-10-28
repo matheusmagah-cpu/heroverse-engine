@@ -211,23 +211,31 @@ Everything else is v2's, unchanged: audio, loudness, pace, the 4-7 s holds, the 
 Claude review. v2 is v1 with the burned captions replaced by an .srt track. v1 and v2 stay frozen and byte-identical,
 and a test asserts all three.
 
-**Build blocker: v3 cannot be measured yet.** v2 and v3 rename keys that the readers index directly:
-- `qa_pilot.py` reads `caption_coverage_of_speech_min`, `caption_hold_seconds_median`, `caption_chars_max`,
-  `caption_words_max` and `caption_box`; v2 replaced them with the `srt_*` rows.
-- It also reads `title_card_seconds`, `footage_picture_share_min` and `ai_video_picture_share_max` (0.55); v3
-  replaced them with `first_shot`, `figures_allowed`, `ai_video_picture_share_max` 1.0 and `ai_video_clip_checks`.
-- `prepublish_gate.py` knows only `story-qa-criteria-v1`: its hash, its file and its review dimensions.
-- `render_queue.py` pins only v1's hash.
-
-A render measured against v3 today would fail with a KeyError, or fall back to the wrong grammar. No long can be
-rendered, measured or approved until slice 3 teaches these readers v3's keys. A test (`test_long_plan_check.py`
-NoRendererReadsTheNewQaYet) fails any change that points a renderer, gate or workflow at v2 or v3 before
-`qa_pilot.py` reads `srt_coverage_of_speech_min`, `figures_allowed` and `first_shot`, and before `prepublish_gate.py`
-knows `story-qa-criteria-v3`. This PR does not wire them.
+**v3's readers (E126, 2026-10-27).** v2 and v3 renamed keys that the readers indexed directly, so until E126 no
+long could be measured or approved. Now:
+- `qa_pilot.py` reads v3 by its own rows: `STORY_V3_ROWS` maps every row of technical, speech, rights and grammar to
+  the checks that measure it (`grammar_checks_story_v3`: the acted cold open, approved figures with the Keeper only in
+  his beats, every Pavo clip's clip_check / lipsync_check / face_check, AI share up to 1.0, no footage minimum, no
+  burned captions, the .srt rows). A check whose evidence is missing is UNKNOWN, never a pass. The older pilots keep
+  their frozen criteria and grammar.
+- `prepublish_gate.py` pins v3's hash and file and adds one item per v3 row (PASS / FAIL / UNKNOWN); `render_queue.py`
+  pins v3.
+- The .srt track: `captions.py long <compose-timeline.json> <out>/captions.srt` writes it from the voice timeline
+  (cues of at most 7 words and 44 characters, the sentence's words unchanged, timed inside its voice span) and prints
+  the `caption_track` record the manifest carries. `captions.manifest_srt` is the one track publish_video uploads
+  (YouTube captions, never burned in), preflight checks and qa_pilot measures against the script words, the voice
+  timeline and the words heard. A v3 long without its recorded track is refused (CAPTIONS_TRACK_MISSING).
+- The render manifest the long's build writes (slice 3) carries, beside v4's fields: `holds[].beat`,
+  `holds[].characters`, `holds[].shot_kind`; `sentences[].speaker` on spoken lines; per clip `source`, `licence`,
+  `model`, `upscaler`, `audio`, `vetting`, `credit`, `sha256`, `clip_check`, `talking`, `lipsync_check`,
+  `voiceover`, `face_check`; `burned_captions: false`; `caption_track`.
+- Antidote: `test_qa_pilot.py` fails when a frozen QA a plan check reads is not pinned, with the same hash, by
+  prepublish_gate and render_queue and read by qa_pilot.
 
 ## 4. What is still open, or not resolved here (no gate loosened)
 
-0. **v3's readers** (the build blocker above). Slice 3 has to come first.
+0. **v3's readers**: done (E126, above). The long's build (slice 3) still has to write the manifest fields and the
+   `caption_track` listed there.
 
 1. **Cutting.** The QA's 4-7 s holds replace the Shorts' 2-4 s, so the long cuts slower and its talking lines are
    sized to fit them (section 3). Settled by the frozen QA; noted here because it differs from the Shorts.
@@ -264,6 +272,21 @@ knows `story-qa-criteria-v3`. This PR does not wire them.
 
   The first voicing, before the talking lines were lengthened and with the 0.35 s gap, measured 13.97 min and 164.5
   words a minute.
+- **The local preflight (27/10, `evidence/preflight/arc-01-long.json`)** compose-predicted the measured voice with the
+  long's own cut (#470) and found four plan problems the estimate missed, fixed in the plan without touching a gate:
+  - FOOTAGE_SHORT s-c1-both: its 8 s clip had to cover 10.55 s (its own hold and the s-ki-valley window), 1.32x > 1.3:
+    it is now a 9 s clip.
+  - HOLD_UNDER_QA s-co-adam, s-co-eye, s-co-hide (3.86 s each on lines 0-1): three cuts did not fit those two lines,
+    and two lines more would make one 25 s voice run (SLOW_STRETCH). s-co-eye (the serpent's eye) is cut; s-co-adam
+    and s-co-hide hold lines 0-1, s-co-gate and s-co-exile lines 2-3.
+  - HOLD_UNDER_QA s-c3-turn, s-c3-listen (3.90 s on line 63): the four shots of lines 63 and 64 now share both lines
+    (about 4.3 s each).
+  - HOLD_OVER_QA g-c4-woman (8.12 s): Kokoro pauses at the semicolon of "I will greatly multiply thy sorrow and thy
+    conception; in sorrow thou shalt bring forth children". The first clause alone reads under 4 s at God's fastest
+    pace; the line is now "in sorrow thou shalt bring forth children, and thy desire shall be to thy husband" (Genesis
+    3:16 word for word, kjv_check PASS, one comma for the semicolon so it is one sentence).
+  The draft is now 174 holds, 164 generations (135 scenes); measured 14.54 min (872.6 s), Keeper 7.5 %. Plan, voice
+  and every request digest are clean; only the talking-line probes block (`evidence/pavo/20261027/arc-01-long-talk`).
 
 ## 6. Slices
 1. (This PR.)
@@ -279,3 +302,102 @@ knows `story-qa-criteria-v3`. This PR does not wire them.
    - The .srt track and -15 LUFS.
    - The manifest the QA reads.
    - qa_pilot, render_queue and prepublish_gate learn v3.
+
+## 7. The no-rework contract of the Shorts, for the long (E127, 2026-10-27)
+
+Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes through the Shorts' own contract
+(E106, E114, E99), by the same code (`long_preflight.py` holds only what differs):
+- **Preflight before anything is built.** `episode_build.py preflight plans/arc-01-long.json --voice ... --refs --write`
+  runs long_plan_check `--strict` and the frozen story QA v3 (`episode_build.check_plan`), the pinned Kokoro voice laid
+  out at LONG_LINE_GAP against the structure's gate (length, Keeper share, measured), every request through the
+  adapter's offline checks and its digest, and every talking line's direct probe. It is BLOCKED (LONG_REVIEW_OPEN)
+  while any story QA v3 row or rubric `long` entry of `ops/refusal_registry.json` is `open`. The report binds the plan,
+  the characters' entries (look, references, voice), their image records, the matched probes, the review rows and the
+  code by sha256.
+- **The build ships approved clips only.** `verify-preflight` (the build's first step) refuses a long without a PASS
+  report bound to it, with a review row open now, or with a generated shot that has no approved clip of the request the
+  plan sends now. `generate_step` downloads those clips and generates none. A `window_of` shot is never generated:
+  it ships its source's clip, so it has no digest, probe or approval of its own.
+- **Probes.** `shot-probe.yml` takes the long's plan (long_plan_check, 16:9, its own shot ids, windows refused by the
+  dispatch guard and by `check-probe`, PROBE_WINDOW_SHOT). For a long, `check-probe` also refuses a plan without a clean
+  committed preflight of these exact bytes (LONG_PROBE_PREFLIGHT); only the open review rows and the talking probes
+  may still block that report, since neither changes a request. Claude approves one clip a shot with
+  `approve-shot` into `shots/arc-01-long.json`.
+- **Risk order and resume.** `risk_rank`: talking characters, the Keeper's talking shots, voice-overs, wide and
+  establishing scenes, then the rest. `episode_build.py probe-queue PLAN` lists the shots without an approved clip of
+  their request now, in that order, cut into batches of one rank that each fit one shot-probe run.
+- **Slice 3 changes accordingly.** "Submit and leave" applies to the probes, not to the build: the build composes
+  approved clips (16:9 at LONG_LINE_GAP, the .srt, -15 LUFS, the upscale matrix) and never holds a Pavo secret.
+
+The production estimate (no generation) is `evidence/long/20261027/arc-01-long-production-estimate.json`
+(`long_preflight.py estimate PLAN --write`).
+
+## 8. The long's build (slice 3, 2026-10-27)
+
+`long-build.yml` (manual, main only, inputs `plan` and `resume_run`; no Pavo secret, nothing generated) runs
+`long_build.py` around the Short's own steps:
+1. **prepare**: the dispatch guard, `long_plan_check --strict`, `episode_build.py verify-preflight` (PASS report bound
+   to this plan, no review row open, every generated shot approved for its request now), then episode_build's
+   voice-script, Kokoro, `lines`, `refs` and `generate` (approved clips by sha256, clip_check / lipsync_check / face
+   check again). `lines` lays the voice at LONG_LINE_GAP and holds the cold open's last frame in silence until the
+   Keeper at exactly 30 s, re-checked on the measured voice (`episode_build.voice_layout` →
+   `long_build.cold_open_layout`: COLD_OPEN_LENGTH, COLD_OPEN_SHORT; the preflight predicts the same).
+   `long_build.py timeline` cuts the long on the 720p clips before any upscale.
+2. **upscale** (matrix, 20 at once): each approved clip through Real-ESRGAN general x4v3 to 2560x1440 30 fps
+   (`pavo_footage.render`), recorded with the approved clip's sha256. A window is never upscaled: it reuses its
+   source's picture.
+3. **assemble**: one cut a shot, every cut 4-7 s (story QA v3 `grammar.scene_seconds`: HOLD_UNDER_QA, HOLD_OVER_QA);
+   the shots of one voice run share it equally (long_plan_check's model); a talking shot from its first word at
+   normal speed to the next line, its last frame held for the gap; a window shows the next unseen part of its
+   source clip (source and windows slowed together, at most 1.3x: FOOTAGE_SHORT). No burned captions; the owned
+   music ducked under the voice; two-pass loudnorm to -15 LUFS / -1.5 dBTP, measured again on the file. The .srt
+   comes from `captions.track_record` (the writer of #469, `captions.py long`), and `manifest.json` carries the
+   fields qa_pilot reads for v3 (section 3). The preflight now predicts this compose too (`compose_problems`).
+4. **record**: `bible-<long>-sha256-<sha>.mp4` and `bible-<long>-sha256-<sha>.srt` into the release; the report,
+   manifest, .srt and a 16:9 sheet on `claude/long-<long>-<run>` for Claude's review (>= 9.5).
+
+`resume_run` keeps the upscaled clips of an earlier run whose artifact (`long-up-<long>--<shot>-<sha16>`) is of the
+clip approved now; a shot approved again since is upscaled again.
+
+The 9 image-first shots get 16:9 stills: `scene_stills.py` prepares, crops, finalizes (1920x1080), sheets and
+approves at the plan's aspect, and refuses a picture at another aspect instead of stretching it
+(STILL_ASPECT_MISMATCH). Pavo agnes-image at 16:9 quoted 0 credits (`evidence/pavo/20261027/agnes-image-16x9-quote.json`).
+
+## 9. No stall: Pavo's own speech, reuse, the budget and free fallbacks (owner, 27/10; story QA v4)
+
+Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent shots"), for the long and the Shorts:
+- **Which QA.** A long declares `"criteria": "story-qa-criteria-v4"` (`qa_criteria_story_v4.json`: v3 with only
+  `rights.ai_video.audio` changed and rows added; every v3 number unchanged). Without it a long stays on v3 exactly as
+  before. long_plan_check, qa_pilot (STORY_V4_ROWS), prepublish_gate and render_queue pin both files.
+- **R4, Pavo's speech.** On v4 (a long's `"audio_route": "kokoro"` keeps our voice; a Short's `"audio_route":
+  "pavo_native"` is refused, AUDIO_ROUTE_SHORT_UNSUPPORTED, until a frozen Short criteria file holds the speech-check
+  rows) every spoken shot is generated with Pavo's
+  sound on and the SOUND sentence of #473's prompt A (`pavo_native.sound_sentence`: the speaker's fixed voice from
+  `voices.json`, on camera or off screen, the exact line once, pronunciation hints, the plan's `ambience`, no music).
+  A silent scene's request is unchanged, so its approval stays valid. Each kept clip is measured
+  (`episode_build.py speech-check`: medium.en words, YAMNet music and singing, loudness, the speaker cosine against
+  `voices.json` references, its lips / still mouth / no face) and approve-shot refuses it unless
+  `pavo_native.speech_verdict` passes (exact words WER 0, consistent and distinct voice, one gain to -18 LUFS within
+  +12 dB, no music, no singing). The voice is bound to `voices.json` by sha256 (review of #476): measured against
+  exactly the speaker's recorded reference (VOICE_REFERENCE_MISSING / _MISMATCH; a REFS file that is not that clip is
+  refused, VOICE_REFERENCE_FILE_MISMATCH) and against every other speaker's reference (VOICE_OTHERS_MISSING when there
+  is none, VOICE_OTHERS_MISMATCH when one is left out). A reference is chosen by Claude's review (>= 9.5) of a probed
+  native clip that passed every other check: `episode_build.py voice-reference RECORD SHOT ASSET SCORE NOTE`, by PR. The build lays each clip's speech into the voice track at its line
+  (`pavo_native.premix`: one gain, 80 ms fades, a continuous 60-900 Hz bed), starts the talking cut at the speech
+  onset, then ducks the owned music and loudnorms as before; a native line's layout takes its approved clip's speech
+  span.
+- **Refused words.** A line holding a word Pavo's filter refuses (`evidence/pavo/prompt-blocks.json`) is voiced by
+  Kokoro (today's input-audio route); a new block read back (PAVO_PROMPT_BLOCKED, E129) is recorded and the shot goes
+  again at once on the Kokoro route.
+- **R1, reuse.** probe-queue lists a shot with a clean clip of its request (main's records, the shot-probe branches,
+  clip inventories) under `awaiting_review`, never in a batch; a spoken shot with a clean clip of its Kokoro request
+  keeps that route. An inventory clip on Pavo's CDN is approved with `approve-source ... pavo_reuse` and fetched by
+  sha256.
+- **R2/R3, budget and fallbacks.** `episode_build.py sources PLAN [--write]` (and probe-queue's `sources`) spends the
+  shared budget (quota.py, #475) in risk order, the spoken shots first; a silent, character-free shot it does not
+  reach gets licensed-footage candidates (APPROVED, seen, frozen licence list, 2560x1440, sharing words with its
+  subject and line, no period clash or person) or an APPROVED still of the shot in camera motion; a spoken shot or a
+  shot with a character waits. Claude approves a candidate with `approve-source` (>= 9.5, a note); the build ships
+  that source (footage at its frame, a still rendered in motion at 2560x1440) and the manifest names it per shot.
+- **The Keeper at 16:9 (E130).** Plan B (the voice-over Keeper) is a path of the long; under v4 a 16:9 Keeper prompt
+  says "Close-up from the chest up, his face large in the centre of the frame" (KEEPER_FRAMING_16X9).

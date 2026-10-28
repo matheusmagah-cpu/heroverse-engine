@@ -1159,6 +1159,189 @@
      "recurrence"
     ]
    }
+  },
+  {
+   "id": "E124",
+   "date": "2026-10-27",
+   "class": [
+    "capacity",
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E116",
+    "E121"
+   ],
+   "error": "genesis-09 run 2026102705 (#461): 31 of 34 Pavo agnes-image submissions failed. Pavo's free image quota ran out after ~156 completed stills that day (genesis-09 runs 2026102701-05, genesis-08 run 20261027, the ark props, the ark probe, two thumbnail candidates); the owner's app showed 'the free model quota has been used up ... try again in 3 hours' (refunded, nothing spent). Root cause: the adapter's only spending check was the price quote, and /v1/aigc/credits/calculate kept answering required_credits 0.0, is_estimate false for every call after the quota was gone: the price does not see the free-generation quota. pavo_image_job returned only status 'failed' with no images and no reason, and nothing counted the day's generations or stopped after a failed read-back, so the session kept submitting in batches (31 burned, the run left with 3 of 64 candidates).",
+   "fix": "migration/integrations/pavo/quota.py QuotaGuard, wired in server.py (PavoImageClient(guard=QuotaGuard())): PAVO_DAILY_CAP refuses before the quote (nothing sent) once the UTC day's submissions reach the cap (120; env PAVO_IMAGE_DAILY_CAP or the ledger's daily_cap); every submission that created a conversation is counted in migration/evidence/pavo/image-ledger.json (env PAVO_IMAGE_LEDGER; counts and conversation ids only). pavo_image_job feeds the guard: two read-backs in a row that end failed with no image (each job once) suspend generation for 3 h (PAVO_FREE_QUOTA_SUSPECTED); after the cool-down one probe may go, a failed read-back suspends again at once, a completed one lifts it. The ledger is seeded with 2026-10-27's reconstructed count (187 submissions) and the 31 failed jobs. README 'Free image quota': a 0 quote does not mean the free quota is available; read back jobs before submitting many more. Codes registered class D (quota.py in the refusal-parity scan). Review of #466: after the cool-down exactly one probe is allowed and every other call is refused until it reads back; only a job submitted after suspended_at lifts the suspension; a ledger that cannot be read or holds malformed fields fails closed (PAVO_LEDGER_UNREADABLE); a malformed env cap is ignored for the default; the ledger is written through a unique tempfile.mkstemp file.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "class FreeQuota",
+    "covers": [
+     "capacity",
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E125",
+   "date": "2026-10-27",
+   "class": [
+    "fragile-input",
+    "recurrence"
+   ],
+   "prior": [
+    "E101",
+    "E115",
+    "E122",
+    "E123"
+   ],
+   "error": "Claude's review of genesis-09 run 2026102705 and of the E123 probe (evidence/pavo/20261027/genesis-09-ark-probe): every still made with the ark's approved references drew three figures standing on the ark's roof, even s-voice with 'No people' and 'its roof empty and flat' in the prompt. Root cause: both approved references (pr-ark-side, pr-ark-three-quarter; E122) are frames of genesis-08 s-board, a scene in which three people stand on the roof, and Pavo copies a reference image whole, people included. The reference review (props.py approve, notes 'the same finished box...') judged the prop's shape only; nothing asked whether anything else was in the picture. The class recurs: E113 and E122 each fixed the ark's look while the input that carries it (the wording, then the image) still carried something else into every still.",
+   "fix": "props.py `retouch` (finalize_retouch, retouch_image: a deterministic PIL clone through feathered masks from the APPROVED reference, recorded with the parent's sha256, the patches and the Pillow version; approve remakes it from the parent inside the repository that is the reference approved now, byte for byte, else PROP_SOURCE_REFUSED, naming a Pillow mismatch when the versions differ) made clean views (run 2026102706), approved by Claude (9.5/9.5, ec8823bc). Class antidote: a reference is the prop alone. props.approve refuses a review note that does not state that no people or figures remain or that they were removed (FIGURES_CHECKED; PROP_NOTE_FIGURES_UNCHECKED, class N), and approved_refs refuses any approved record whose note lacks it, so no still is made from an unchecked reference whatever its source (a Pavo prop still, a clip frame, a retouch). Chosen over a lineage rule (only retouched refs) because the class is any extra subject in any reference, not the clip frame alone; a word list cannot see the picture, so the note is the reviewer's explicit check, and the stills are still reviewed at 9.5. Review of #467: the lineage shortcut in source_problems (8e6dc837) is reverted; the listing test handles lineage itself.",
+   "antidote": {
+    "file": "migration/production/characters/test_characters.py",
+    "contains": "def test_a_reference_is_approved_only_when_the_review_states_it_shows_no_people",
+    "covers": [
+     "fragile-input",
+     "recurrence"
+    ]
+   }
+  },
+  {
+   "id": "E126",
+   "date": "2026-10-27",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102"
+   ],
+   "error": "Rework audit of the arc-01 long (pilot-015, plans/arc-01-long.json): the acted Bible-story long could be planned but never measured, approved or published. Root cause: story QA v3 was frozen (#418, 2026-10-26) and long_plan_check.py checked plans against it, but the readers that measure and gate the render were not moved with it: qa_pilot.py indexed story v1's keys (title_card_seconds, footage_picture_share_min 0.4, caption_* rows) and fell back to the v2 figure grammar for any other version, prepublish_gate.py and render_queue.py pinned only story-qa-criteria-v1, and nothing wrote or checked the .srt track v3 requires (publish_video uploaded one cue per sentence, outside v3's 7-word, 44-character cue rows). A guard (test_long_plan_check NoRendererReadsTheNewQaYet) kept anything from pointing at v3 early, so the gap was known, but no test tied a frozen QA a plan is checked against to the readers of the render: 23 story_qa_v3 review rows stayed open.",
+   "fix": "qa_pilot.py reads story QA v3 by its own rows (STORY_V3_ROWS: every v3 row of technical, speech, rights and grammar mapped to its checks; grammar_checks_story_v3 for the acted cold open, approved figures, the Keeper only in his beats, every Pavo clip's clip_check / lipsync_check / face_check, AI share up to 1.0, no footage minimum, no burned captions, and the .srt rows; None is UNKNOWN, never a pass; the KJV check runs again on the voiced script). prepublish_gate.py pins v3's hash and file, builds its dimensions from STORY_V3_ROWS and adds one item per v3 row (PASS/FAIL/UNKNOWN). render_queue.py pins v3. captions.py writes the long's .srt from the compose timeline (`captions.py long`, cues <= 7 words and <= 44 characters, the sentence's words unchanged, timed inside its voice span) with a caption_track record; manifest_srt is the one track publish_video, preflight, captions-audit and qa_pilot all use; qa_pilot measures it against the script words, the voice timeline and the words heard (ASR); publish_video refuses a v3 long without its recorded track (CAPTIONS_TRACK_MISSING). Older pilots keep their frozen criteria and grammar unchanged; no frozen file was edited.",
+   "antidote": {
+    "file": "migration/production/test_qa_pilot.py",
+    "contains": "def test_the_criteria_a_plan_is_checked_against_are_the_ones_the_gates_read",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E127",
+   "date": "2026-10-27",
+   "class": [
+    "review-after-build",
+    "cheap-vs-expensive"
+   ],
+   "prior": [
+    "E106",
+    "E109",
+    "E110",
+    "E117"
+   ],
+   "error": "Rework audit of the arc-01 long (pilot-015, plans/arc-01-long.json, DECISIONS 'Still open for the arc-01 long'): the Shorts had a no-rework contract (E106 preflight before any build, E114 every shot probed by shot-probe.yml and approved by Claude before the build, the build shipping only approved clips, E99 risk order) and the long, a second kind of plan beside them, had none of it. long_plan_check passed with --strict, but nothing bound the long's plan, characters, references, voices or probes to a report, nothing refused its build while 25 of its review rows (story QA v3, rubric long) had no earlier check, shot-probe.yml refused its plan (plan_check: PLAN_VERSION) and its windows had no place in the request digests, so its first build would have generated ~165 clips that Claude met only at the review (the genesis-07/-08 rework, at 6x the size). Root cause: the contract was written for the Short's plan kind and nothing required a new plan kind to carry it.",
+   "fix": "long_preflight.py and the long's path through the Short's own code: episode_build.check_plan (long_plan_check --strict + the frozen story QA + LONG_EPISODE_ID), the long layout (LONG_LINE_GAP, the structure gate's length and Keeper share, measured), windows excluded from request digests, clip needs, review_problems, risk_order and probes (PROBE_WINDOW_SHOT; the dispatch guard too); episode_preflight runs on the long and adds LONG_REVIEW_OPEN while any long review row is open, binds the review rows and the long's code, verify-preflight refuses an open row now; shot-probe.yml takes the long (long_plan_check) and check-probe refuses a long without a clean preflight of the exact plan (LONG_PROBE_PREFLIGHT); risk_rank puts talking characters, the Keeper, voice-overs and wide/establishing scenes first; probe-queue resumes from the approvals in run-sized batches; the production estimate is written to evidence/long/20261027. Class antidote: every plan kind in plans/ must be one the plan check, preflight, verify-preflight, shot-probe.yml and approve-shot all take, and any workflow that ships clips runs verify-preflight first and holds no Pavo secret.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_preflight.py",
+    "contains": "def test_every_plan_kind_in_plans_has_the_preflight_and_approved_shot_contract",
+    "covers": [
+     "review-after-build",
+     "cheap-vs-expensive"
+    ]
+   }
+  },
+  {
+   "id": "E128",
+   "date": "2026-10-27",
+   "class": [
+    "capacity",
+    "recurrence",
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E115",
+    "E116",
+    "E121",
+    "E122",
+    "E123",
+    "E124",
+    "E125"
+   ],
+   "error": "arc-01-long shot-probe run 40592173923 (God's voice-overs, 8 shots x 2 rounds, dispatched ~22:12 UTC, cancelled 22:41): 3 clips read back, then 24 Flash video submissions in a row came back `failed` with no video (pavo_job: status failed, no reason), and the owner's Pavo app showed 'the free model quota has been used up... try again in 4 hours' on an Agnes Image 2.5 Flash generation titled 'Painterly cinematic image of the Garden of Eden at dawn ... wide 16:9' (shot g-c4-one-of-us's prompt, rewritten by Pavo) made inside that run. Root cause: a Flash video job makes an Agnes still inside its conversation, so Pavo's video path spends the same free-model quota as pavo_generate_image; E124's guard (quota.py, 120 a UTC day in evidence/pavo/image-ledger.json) was wired into the MCP image calls only: pavo_generate_video, pavo_job, episode_build.generate_clips (an unguarded PavoVideoClient()) and shot-probe.yml counted nothing and had no stop after failed read-backs, so make_shot regenerated each failed clip and probe_step went on to the next shot. The day had already spent ~187 stills, 22 talking probes, ~10 native-audio probes. Pavo exposes no remaining free quota: pavo_account (credits-balance) returns only plan, total_balance, subscription_credits, daily_free_credits (read after the stop: no quota field), and the quote still answers 0. Owner: 'muito retrabalho... tem que ter menos retrabalho'.",
+   "fix": "One budget for every Pavo generation (quota.py): an image 1 unit, a video VIDEO_UNITS=2 (its internal still(s), conservative), same cap and ledger. PavoVideoClient takes the guard (generate_video: before_generate(2) before the quote, submitted(2) once a conversation exists; job: read_back), so two failed video read-backs suspend videos and stills (PAVO_FREE_QUOTA_SUSPECTED) and the MCP server's guard also counts today's shot-probe runs from their records on the local origin/claude/shot-probe-* refs (git_actions_usage; PAVO_BUDGET_UNREADABLE when git cannot answer). Actions: dispatch_guard reads main's ledger + today's probe records on their branches by REST (pavo_actions_usage, record_usage: every generation 2 units, a run that ended on >= 2 failed read-backs is a quota stop for 3 h), refuses a batch whose expected units (long_preflight.planned_units: rounds x GENERATIONS_PER_ROUND x 2, the mean probe-queue uses) do not fit what is left today (PAVO_BUDGET_SHORT) and outputs pavo_used; shot-probe.yml passes it as PAVO_BUDGET_USED; episode_build.py probe seeds a run-local ledger with it (seed_budget, PAVO_BUDGET_UNKNOWN without it) and generate_clips uses only budget_client() (never an unguarded client), so the run's own second failed read-back in a row stops the whole run (probe_step re-raises budget stops; make_shot keeps the generations already spent in the record, which the next guard reads). probe-queue cuts batches to fit a day's cap, names each batch's pavo_units_est and says whether the next batch fits today (budget_today). The ledger adds the evening's ~32 MCP video jobs (+64 units). README 'Free model quota (shared budget)'; codes registered class D. Review of #475: the Actions failed tail is taken from the latest record WITH generations (an adopt_run record no longer hides a stop) and records committed within COOL_DOWN before now are read too (a stop just before 00:00 UTC holds after it); the dispatch guard checks the batch's worst case (rounds x attempts_for x 2) while probe-queue shows the mean; probe_step saves every submitted generation to out/probe.json on any exit (progress after each submission, a finally, SIGTERM unwound as PROBE_TERMINATED); more branches than the guard scans (10 pages) refuse PAVO_BUDGET_UNREADABLE. Known gaps: MCP spend reaches the dispatch guard only once the ledger is merged to main; the MCP guard sees Actions spend only from fetched origin/claude/shot-probe-* refs; a deleted probe branch takes its record out of the count (keep probe branches until the UTC day and its 3 h are over).",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "class SharedQuotaStop",
+    "covers": [
+     "capacity",
+     "recurrence",
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E129",
+   "date": "2026-10-27",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128"
+   ],
+   "error": "Native-audio probe (PR #473, arc-01-long shots 118 and 119): Pavo's prompt filter refused every prompt holding the KJV word 'naked' (Genesis 3:10, 3:11) with an assistant block 'PromptSafetyBlocked' and the reason 'text_rejected_porn', before any generation and with nothing deducted. The video adapter's read-back reported only status `incomplete` (no media, no failure block): episode_build.wait_job would have polled INCOMPLETE_POLLS times, called the shot NO_VIDEO and spent its regenerations on the same refused words; the block was visible only by reading the conversation history by hand. Root cause: _history classified a turn by success/failure blocks only, so a moderation block had no status of its own.",
+   "fix": "video.py: a safety/moderation block is status `blocked` with code PAVO_PROMPT_BLOCKED and the reason code only (never the block's text); the quota guard does not count it as a quota failure. episode_build.wait_job raises PAVO_PROMPT_BLOCKED at once (no wait, no regeneration of the same words); generate_clips records the block by the line's words (pavo_native.record_block, evidence/pavo/prompt-blocks.json) and sends the shot again at once on the Kokoro route (owner R4), and pavo_native.route sends every line holding a word the filter is known to refuse ('naked') to Kokoro at plan time (long_plan_check estimate audio_routes.kokoro_prompt_filter). Class antidote: a refusal Pavo states only in its history reaches the build as its own code, never as a silent `incomplete`. Review of #476: a probe run never sends a blocked prompt again (a PAVO_PROMPT_BLOCKED on a scene, on the Kokoro route or after the reroute stops that shot for the rest of the run, probe_step), and the blocks a run learns travel in its record: shot-probe.yml's record job merges them into evidence/pavo/prompt-blocks.json (episode_build.py merge-blocks) and commits the file with the record, so the next run's route(), the preflight (which binds the file's sha256) and verify-preflight agree on the Kokoro route (tests test_a_prompt_block_stops_that_shot_for_the_rest_of_the_run, test_blocks_learned_in_actions_persist_with_the_record_and_bind_the_preflight).",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_e129_a_prompt_filter_block_is_surfaced_and_never_waited_out",
+    "covers": [
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E130",
+   "date": "2026-10-27",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126"
+   ],
+   "error": "arc-01-long Keeper probes (handoff 20261027-4): at 16:9 the talking Keeper was framed full body and lipsync_check found no face (FACE_NOT_FOUND), and plan B, the voice-over Keeper the owner approved for the Shorts (#423), was refused in the long by long_plan_check and long_build (LONG_VOICEOVER_UNSUPPORTED), so the long's Keeper had no route that could pass. Root cause: plan B was built for the Short's plan kind only, and nothing required a path approved for one plan kind to exist for the other (the same drift E127 closed for the preflight contract); the 9:16 Keeper prompt ('Medium close-up' with his seated wardrobe) was reused at 16:9 unchanged.",
+   "fix": "Plan B in the long: long_plan_check checks a voice-over Keeper with the Short's own prompt, talk_refs and line rules and the long's cover (plan_check.vo_cover(long=True): the line and the gap or tail after, a run starting on its first word), long_build cuts him as one silent clip over his run (kind keeper_vo, slowed with its parts at most MAX_SLOW), episode_build's layout and clip seconds use the same cover. Under story QA v4 a 16:9 Keeper prompt says 'Close-up from the chest up, his face large in the centre of the frame' (KEEPER_FRAMING_16X9). Class antidote: the long's compose takes every Keeper mode the Short's does.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_build.py",
+    "contains": "def test_e130_a_voiceover_keeper_is_one_silent_clip_over_his_run",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E131",
+   "date": "2026-10-27",
+   "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120"
+   ],
+   "error": "Native-audio probe (PR #473): faster-whisper base.en and small.en heard the KJV 'gavest' as 'gave us' on Pavo's speech AND on our own Kokoro rendition of the same exact line (WER 0.105 > story QA's 0.1); medium.en heard it on both. The ASR story QA v3 measures speech with (qa_pilot's whisper dir, the repository's preserved base.en) cannot measure exact archaic KJV words, so a word-perfect line would fail, and a per-clip exact-words check on it would refuse correct clips. Root cause: the ASR model was never pinned by the criteria; the instrument was chosen for prayer narration and never checked on archaic words.",
+   "fix": "story QA v4 (a new frozen file; v3 untouched) pins speech.asr_model: faster-whisper medium.en, Systran/faster-whisper-medium.en revision a29b04bd..., model.bin sha256 11b22077...; qa_pilot under v4 measures asr_model_pinned from the model.bin it was given (UNKNOWN when not measured), and pavo_native.speech_verdict refuses a clip measured by any other model (ASR_MODEL_NOT_PINNED) before the exact-words check. Class antidote: a speech instrument is pinned by hash in the criteria that read it, and a measure from another instrument never passes.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_a_clean_clip_passes_and_each_defect_fails",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }

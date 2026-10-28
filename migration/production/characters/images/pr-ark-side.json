@@ -3,18 +3,18 @@
  "prop": "ark",
  "view": "side",
  "repo_path": "migration/production/characters/refs/pr-ark-side.jpg",
- "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860",
+ "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4",
  "size": [
   720,
   1280
  ],
- "candidate": "pr-ark-side-2026102702-2",
+ "candidate": "pr-ark-side-2026102706-1",
  "prompt": null,
- "source": "approved-clip-frame {\"approval_note\": \"Claude review of shot-probe run 40477936323: canonical long low box hull, period clean, figures from behind; other attempts rejected (smoke from the hull, canoe shape, barn shape, a rotated frame)\", \"approved_score\": 9.5, \"asset\": \"shot-genesis-08-short-s-board-sha256-e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e.mp4\", \"clip_sha256\": \"e3ff62584cfab42fd26c99f2fc3de2ab80eb4baf56219866f54afb0210e0bd0e\", \"episode\": \"genesis-08-short\", \"seconds\": 0.5, \"shot\": \"s-board\"}",
+ "source": "retouched-approved-reference {\"parent\": {\"candidate\": \"pr-ark-side-2026102702-2\", \"record\": \"pr-ark-side\", \"repo_path\": \"migration/production/characters/refs/pr-ark-side.jpg\", \"sha256\": \"2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860\"}, \"retouch\": {\"patches\": [{\"box\": [318, 545, 432, 628], \"feather\": 6, \"offset\": [220, -8]}, {\"box\": [322, 556, 424, 594], \"feather\": 5, \"offset\": [-92, 13]}, {\"box\": [328, 628, 436, 668], \"feather\": 8, \"offset\": [150, -9]}], \"pillow\": \"12.3.0\", \"tool\": \"PIL: crop the box shifted by offset, paste it over the box through a mask (the rectangle inset by feather, or the optional polygon in image coordinates), blurred by feather (GaussianBlur feather/2), patches in order; JPEG quality 95\"}}",
  "approved": {
   "date": "2026-10-27",
   "score": 9.5,
-  "note": "Frame of genesis-08 s-board (approved clip, 9.5) at 0.5 s: the same finished box along its long side, flat roof and square end visible, no tower or bow. No true side elevation exists in approved clips; this oblique long-side view is the nearest and matches the three-quarter reference.",
+  "note": "Retouch of the approved genesis-08 s-board side frame: figures removed from the roof (sky, land, board and roof planks cloned from the right). A lighter patch of roof planks remains visible at 2x zoom; shape and proportions are untouched, which is all a reference carries; -1 blends better than -2. Stills made from it are reviewed at 9.5.",
   "by": "Claude's reference review (ops/CLAUDE_REVIEW.md)"
  }
 }

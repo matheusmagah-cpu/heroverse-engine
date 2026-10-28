@@ -1,0 +1,20 @@
+{
+ "version": "pavo-quote-v1",
+ "date": "2026-10-27",
+ "why": "LONG_DESIGN slice 3: the long's 9 image-first shots need 16:9 stills (scene_stills.py prepare --engine pavo sends aspect_ratio 16:9)",
+ "call": "pavo_quote_image(aspect_ratio='16:9', resolution='sd', references=None) via the heroverse-pavo connector",
+ "generation": "none (a quote only)",
+ "answer": {
+  "model": "agnes-image",
+  "aspect_ratio": "16:9",
+  "resolution": "sd",
+  "input_images": 0,
+  "count": 1,
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false,
+  "zero_cost_confirmed": true,
+  "permanent_free_access_verified": false
+ },
+ "reading": "an exact 0-credit quote at 16:9; every generation still needs its own fresh exact 0-credit quote (E124: a 0 quote does not prove free quota)"
+}

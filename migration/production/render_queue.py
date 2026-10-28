@@ -16,7 +16,6 @@ usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile|review} [H
   stale: prints "STALE PILOT PUBLISH_AT" for pilots whose slot passed more than 6 h ago (within STALE_DAYS) and that
          have no video on YouTube: due() no longer sees them, so they must be rescheduled (E49)
   reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN),
-  "shorts PILOT" (Shorts inputs handed off, Shorts never made) and
              "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried, and
              "comment PILOT" (on YouTube, public by its schedule, first comment still PENDING: E61)
 """
@@ -27,8 +26,6 @@ import re
 from pathlib import Path
 import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
-from shorts_prerequisite import ready as shorts_ready
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # E73: python3 -I does not add the script's own directory
 import preview_gate  # noqa: E402
 
@@ -47,7 +44,12 @@ STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only rende
 # v4 (owner, 2026-10-23: licensed real footage) is the same standard with the footage grammar; both may publish
 STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
                 "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
-                "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360"}
+                "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360",
+                # the acted Bible-story long (owner, 2026-10-26; no real-footage minimum, 2026-10-27): qa_pilot and
+                # prepublish_gate read its rows (STORY_V3_ROWS)
+                "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc",
+                # owner, 2026-10-27 (R1-R4): v3 + Pavo's kept speech under checks and free fallbacks (STORY_V4_ROWS)
+                "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 
@@ -203,14 +205,6 @@ def stale(production, ledger, now, days=STALE_DAYS):
     return out
 
 
-def reviewed_shorts(path):
-    """True when Shorts exist and at least one got a verdict (PASS or FAIL) from the watched review; Shorts left
-    unreviewed (provider quota or error, NOT_REVIEWED_*) are made again."""
-    if not path.exists():
-        return False
-    return any((s.get("review") or {}).get("status") in ("PASS", "FAIL") for s in json.loads(path.read_text())["shorts"])
-
-
 HOLD = Path(__file__).resolve().parents[1] / "ops" / "PUBLICATION_HOLD"
 # while present, the runner renders nothing (e.g. scripts are being moved to a new standard: a render of the old
 # script would only be thrown away and would hold the single runner for ~2 h)
@@ -269,13 +263,11 @@ def main(production, ledger_path, mode, hours="48"):
             if r["rendered"] and qa.get("status") == "PASS" and cr.get("output_sha256") != qa.get("output_sha256"):
                 print(r["pilot"], qa.get("output_sha256"))
     elif mode == "reconcile" and HOLD.exists():
-        print("PUBLICATION_HOLD", file=sys.stderr)  # owner pause: no approval, publication or Shorts is dispatched
+        print("PUBLICATION_HOLD", file=sys.stderr)  # owner pause: no approval or publication is dispatched
     elif mode == "reconcile":
         # E25: approve.yml keeps ONE pending run (concurrency group): dispatching several approvals cancels all but the
-        # last, i.e. the farthest slot. So only the earliest due approval is sent, and Shorts wait until no approval is
-        # pending, because both spend the same free Gemini quota and the long video publishes first.
-        approve, publish, shorts = [], [], []
-        long_quota_pending = False
+        # last, i.e. the farthest slot. So only the earliest due approval is sent.
+        approve, publish = [], []
         for r in rows:
             d = Path(production) / r["pilot"]
             try:
@@ -295,12 +287,9 @@ def main(production, ledger_path, mode, hours="48"):
             elif rev.get("status") == "AWAITING_REVIEW" and rev.get("output_sha256") == qa["output_sha256"]:
                 pass  # waits for the Claude review (render_queue.py review lists it); approve.yml starts when it lands
             elif quota_spent(rev, now):
-                long_quota_pending = True  # reserve shared review quota for the waiting long
+                pass  # the review quota is spent: retried after its reset (E29), never re-dispatched before
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 approve.append(r["pilot"])
-            # Shorts handed off by the render but never made (provider quota or error): made again
-            if (d / "shorts" / "inputs.json").exists() and not reviewed_shorts(d / "shorts" / "shorts.json") and shorts_ready(d):
-                shorts.append(r["pilot"])
         for p in publish:
             print("publish", p)
         comments = pending_comments(production, ledger, now)
@@ -311,9 +300,6 @@ def main(production, ledger_path, mode, hours="48"):
             print("episode", episodes[0])
         if approve:
             print("approve", approve[0])  # rows are sorted by publish time: the earliest slot first
-        elif not long_quota_pending:
-            for p in shorts:
-                print("shorts", p)
     elif RENDER_HOLD.exists():
         print("RENDER_HOLD", file=sys.stderr)
     else:

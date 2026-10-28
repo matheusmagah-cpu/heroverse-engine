@@ -118,11 +118,8 @@ class ReleaseAssets(unittest.TestCase):
     def test_no_caller_reads_or_writes_one_release_directly(self):
         bad = re.compile(r'gh release (download|upload|view|delete-asset) "?\$\{?TAG|releases/download/v0\.0\.0-cloud-assets')
         files = list((ROOT / ".github/workflows").glob("*.yml")) + list((ROOT / "migration/ci").glob("*.sh"))
-        # shorts.yml and shorts-review.yml are frozen byte for byte (test_pending_shorts, test_review_recovery,
-        # test_shorts_006_plan): they still read and write the 2026-10-13 release only, until their freeze is lifted
-        frozen = {"shorts.yml", "shorts-review.yml"}
         offenders = [str(p.relative_to(ROOT)) for p in files
-                     if p.name != "assets.sh" and p.name not in frozen and bad.search(p.read_text())]
+                     if p.name != "assets.sh" and bad.search(p.read_text())]
         self.assertEqual(offenders, [])
         self.assertIn("ASSET_RELEASE_TAG", (ROOT / "migration/publish/tiktok_publish.py").read_text())
         self.assertIn('"release_tag"', (ROOT / "migration/production/characters/characters.py").read_text())

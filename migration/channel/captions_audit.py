@@ -139,7 +139,7 @@ def repair(plan_path, out, ledger_path, root=None):
             row.update({"deleted": before["id"], "result": "DELETED_NOT_REINSERTED"})
             steps.update({"captions_track": before["id"], "captions_status": "deleted"})
             flush()
-        new_id = pv.insert_captions(s, vid, man["sentences"], man.get("output_seconds"))
+        new_id = pv.insert_captions(s, vid, man["sentences"], man.get("output_seconds"), man.get("caption_track"))
         row.update({"inserted": new_id, "result": "INSERTED_NOT_VERIFIED"})
         steps.update({"captions": True, "captions_track": new_id, "captions_status": "inserted"})
         for k in ("captions_failure_reason", "captions_srt_invalid"):

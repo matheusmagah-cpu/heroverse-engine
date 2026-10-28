@@ -533,15 +533,13 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   three things: v3 has no footage-share row, its AI share is 1.0 with both clip checks, and the arc-01 plan raises no
   QA_CONFLICT_REAL_FOOTAGE or QA_CONFLICT_AI_SHARE.
 - **Still open for the arc-01 long (rework audit, fix 3; not fixed here).**
-  - `qa_pilot.py` and `prepublish_gate.py` still read the story v1 keys. `qa_pilot` still requires
-    `footage_picture_share_min` 0.4. The v3 reader is slice 3, and its rows must not bring back a footage minimum.
-  - Nothing writes or checks the .srt track.
-  - 23 `refusal_registry.json` review rows for `long` are `open`.
-  - There is no `long_preflight` to refuse while those rows are open, and there is no `risk_order`, no resume and
-    no approved-shot contract for the long's shots.
+  - Done (E126): `qa_pilot.py` and `prepublish_gate.py` read story QA v3 by its own rows, with no footage minimum;
+    `captions.py long` writes the .srt track, qa_pilot checks it and publish_video uploads it; the 23 open
+    `refusal_registry.json` story_qa_v3 rows are `render_qa`.
+  - Done (E127): the long's preflight refuses while any review row is open (LONG_REVIEW_OPEN), and the long has the
+    Shorts' risk order, resume (`probe-queue`) and approved-shot contract (LONG_DESIGN.md section 7).
   - The preview gate has not run on the real opening.
-  - SERIES.md should point its long paragraph only to LONG_DESIGN.md. The old footage lines are now marked as
-    superseded but not yet removed.
+  - Done (E126): SERIES.md points its long paragraph only to LONG_DESIGN.md; the old footage lines are removed.
 - **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
 
 ## Owner decision: the repository stays public; optimise the long for wall-clock time (2026-10-26)
@@ -566,3 +564,66 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   chosen on public evidence (`strategy/LIPSYNC_TOOLS.md` to come), decisive test on the 3 lines running.
 - **Why:** each repeated build costs a slot anyway (genesis-07: 8 builds; genesis-08: 7 shots rejected after a full
   build). Fixing the cause once is faster than producing more. No vidIQ calls today (0 credits).
+
+## Owner decision: the arc-01 long first; its slot moves to 04/11 (2026-10-27)
+- **Owner, 27/10.** "Prioriza o longo agora."
+- **Slot.** `arcs.json` arc-01 long (pilot-015) moves from 2026-10-28T10:00:00Z to 2026-11-04T10:00:00Z, and the
+  SERIES.md calendar row with it. 28/10 was not reachable: the production estimate
+  (`evidence/long/20261027/arc-01-long-production-estimate.json`, `publish.proposed_date`) puts the earliest date at
+  02/11 if every step passes the first time, and proposes 04/11 (direct talking probes, ~21 shot-probe runs, 330 frame
+  reviews, the 1440p upscale and the 9.5 review). The later arcs' long slots are unchanged here.
+
+## Owner decision: no stall, Pavo speech kept, free fallbacks for silent shots (2026-10-27)
+- **Owner, 27/10 ~20:40-21:00 UTC (R4).** Keep Pavo's own audio for the talking shots: the speech of the characters
+  and the Keeper plus the natural ambience, in one pass; no music from Pavo (our one owned track goes under the cut);
+  judged clip by clip: the exact KJV words (by ASR, medium.en: base.en mis-hears "gavest"), one consistent voice per
+  character against a reference clip, lip sync, diction. Our Kokoro voice only for a line Pavo refuses (its prompt
+  filter, e.g. "naked"): the hybrid route of PR #473.
+- **Owner, 27/10 ~22:50 UTC, for the long and the Shorts, "em qualquer situação":**
+  - **R1.** Use every Pavo clip already generated that fits a shot (same shot and request, passing its checks and
+    Claude's review >= 9.5); never regenerate what exists.
+  - **R2.** Pavo's budget goes first to the spoken scenes (characters and the Keeper speaking, with Pavo's own speech
+    and ambient audio; no Pavo music).
+  - **R3.** When Pavo's free quota runs out, the remaining non-spoken scenes are filled from other free sources
+    coherent with the narration (licensed footage under the frozen licence list via the footage library, or free FLUX
+    stills with motion), so the video is produced without stalling. The 9.5 floor is unchanged; every fallback shot
+    still matches its line, the period rules and the canonical look rules.
+- **What it became** (branch `claude/owner-no-stall`):
+  - a new frozen `production/qa_criteria_story_v4.json`: story QA v3 with only `rights.ai_video.audio` changed
+    ("removed" -> "pavo speech+ambient kept per clip under checks") and rows added (the pinned medium.en ASR, the
+    per-clip speech checks, the Kokoro voice for refused lines, the fallback sources and shots, the spoken audio mix);
+    every v3 number unchanged, v3 untouched. A long is measured by v4 only when its plan says
+    `"criteria": "story-qa-criteria-v4"` (and `"audio_route": "kokoro"` keeps a v4 long on our voice); a Short's
+    `"audio_route": "pavo_native"` is refused by plan_check (AUDIO_ROUTE_SHORT_UNSUPPORTED, review of #476) until a
+    new frozen Short criteria file holds the speech-check rows v4 holds for the long;
+  - R1: probe-queue lists a shot with a clean clip of its request (main's shot-probe records, the claude/shot-probe-*
+    branches, clip inventories) as awaiting review, never as a new generation; a spoken shot with a clean clip of its
+    Kokoro-route request keeps that route (R1 wins over R4);
+  - R2/R3: `episode_build.py sources PLAN` spends the shared Pavo budget (quota.py, #475) on the risk order (talking
+    shots first), gives a silent, character-free shot the budget does not reach a footage or still-in-motion
+    candidate, and leaves a spoken shot or a shot with a character waiting (no free source keeps its voice or its
+    canonical look); `approve-source` records Claude's review (>= 9.5) of a fallback, never automatically;
+  - R4: native requests (prompt A of #473), PAVO_PROMPT_BLOCKED from the adapter with an automatic Kokoro retry, the
+    speech checks before approve-shot, and the build's mix (one gain per clip to -18 LUFS, 80 ms fades, a continuous
+    ambience bed, the owned music ducked, -15 LUFS loudnorm).
+
+## Slim system applied: the Agnes direct route retired, one clock per job (2026-10-28)
+- **Owner, 28/10.** "Enxuga o sistema; se tiver alguma coisa inútil você retira e deixa tudo muito bem orquestrado sem
+  retrabalho." Audit `evidence/audits/20261028-slim.md` (#477); its DECIDE items applied in one PR.
+- **Agnes direct (`agnes-clip.yml`, `production/agnes_clip.py`) retired.** The order of 2026-10-25 (Pavo → Agnes direct →
+  vidIQ) was replaced by the owner's rules R1-R4 of 27/10 (above): Pavo first, and when its free quota runs out the
+  silent shots take free fallbacks (footage library, FLUX stills with motion), wired into `episode_build.py sources`.
+  Agnes direct never left "test only" (terms unread, a watermark possible) and its three runs (2026-10-25) all failed.
+  Pavo itself still serves Agnes Flash video and agnes-image stills through the `heroverse-pavo` MCP.
+- **Also retired:** the prayer Shorts-from-long line (`shorts.yml`, `shorts-review.yml`, `publish-shorts.yml`,
+  `shorts_produce.py`, `shorts_006_*`, `publish_shorts.py`, `review_recovery.py`, `shorts_prerequisite.py`; Bible Shorts
+  are episodes through `publish-episode.yml`), the closed Chatterbox A/B (`voice-sample.yml`, `chatterbox_sample.py`;
+  `voice_judge.py` stays the ruler), the offline native-window mining tools (`opportunity.py`, `native_metrics.py`,
+  `native_plan.py`, `accuracy_check.py`; their download route is gone) and `strategy/FORMAT_OPINION_AND_CRITIQUE.md`.
+  All stay in git history.
+- **Clocks.** `heartbeat.yml` is the only GitHub cron of record (`tiktok.yml` keeps its own as a second chance); the
+  light clock (:14) is the only watchdog and no longer dispatches `tiktok.yml`; the main clock (every 4 h at :29) does
+  production only; the 08:05 daily pass does report, decision and live intelligence (OPERATIONS.md "Clocks").
+  `channel-privacy.yml` left the heartbeat (a finished job; dispatched by hand).
+- **Measure:** the daily report's scheduler health (`ops/health.py`) shows no missed slot over the next 7 days, and
+  `tiktok.yml`'s run history shows no dispatch by a Claude clock.
