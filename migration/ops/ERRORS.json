@@ -1387,6 +1387,27 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E134",
+   "date": "2026-10-28",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128"
+   ],
+   "error": "scene-stills.yml run 40623485981 (genesis-09, 9 shots x 2) passed the dispatch guard and failed at its first image: CF_DAILY_ALLOCATION_EXHAUSTED (10,000 neurons used). The guard counted 0 FLUX images today although run 40615150859 had made 30 that morning. Root cause, two holes: (1) cf_images_today counted scene-stills images by the candidate commits on the claude/stills-* review branches, and #487 squash-merged that branch (its subject lost the 'images from Cloudflare Workers AI' mark) and deleted it, so the images vanished from the count; (2) the guard refused only when the count already reached the cap (used >= cap), never when this run's own images would not fit (used + planned > cap).",
+   "fix": "dispatch_guard: scene-stills images are counted from today's scene-stills.yml runs themselves (title: shots x candidates; a run the guard refused made none; this run not counted twice), independent of what happens to their review branches; cf-images records on main are still counted by cf_allocation.flux_record on their images/ files; scene_stills facts carry flux_images (shots x candidates) and capacity refuses GUARD_CF_ALLOCATION_USED when used + planned > cap. Class antidote: a capacity count is taken from the run that spends the capacity, never from an artifact that a later merge can rename or delete, and a run's own spend must fit before it starts (as PAVO_BUDGET_SHORT does for Pavo, E128).",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e134_a_stills_run_counts_after_its_branch_is_gone_and_its_own_images_must_fit",
+    "covers": [
+     "capacity"
+    ]
+   }
   }
  ]
 }

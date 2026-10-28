@@ -312,7 +312,7 @@ class Capacity(unittest.TestCase):
 
     def test_a_used_up_flux_allocation_refuses_a_flux_run_only(self):
         # review of #445: FLUX records only, by episode_preflight's own predicate (cf_allocation.flux_record), on
-        # main and on scene-stills' review branches
+        # main; E134: scene-stills.yml's images from its runs, so a squash-merged, deleted review branch still counts
         cap = g.cf_daily_images()
         half = cap // 2
 
@@ -323,16 +323,16 @@ class Capacity(unittest.TestCase):
                       [f"migration/production/pilot-010/images/i{k}.json" for k in range(half)])
         sdxl = commit("Record pilot-011 images from Cloudflare Workers AI (sdxl, run 2)",
                       [f"migration/production/pilot-011/images/i{k}.json" for k in range(cap)])
-        stills = commit("Record scene stills images from Cloudflare Workers AI (flux, run 3; candidates)",
-                        [f"migration/production/bible/stills/candidates/s-{k}.json" for k in range(cap - half)])
-        old = commit(stills["commit"]["message"], ["migration/production/bible/stills/candidates/x.json"],
-                     date="2026-10-26T10:00:00Z")
+        rest = cap - half
+        runs = [dict(run_obj(3, "scene-stills.yml", f"scene-stills: plan={PLAN} shots={','.join(['a'] * rest)} "
+                                                    f"candidates=1", "success"), created_at="2026-10-27T09:00:00Z"),
+                dict(run_obj(4, "scene-stills.yml", f"scene-stills: plan={PLAN} shots=a,b candidates=3", "success"),
+                     created_at="2026-10-26T09:00:00Z")]                       # yesterday
         api = fake_api([("commits?", [{"sha": "c1", "commit": flux["commit"]}, {"sha": "c2", "commit": sdxl["commit"]}]),
-                        ("branches?", [{"name": "claude/stills-genesis-09-short-3", "commit": {"sha": "c3"}},
-                                       {"name": "claude/stills-genesis-08-short-1", "commit": {"sha": "c4"}},
-                                       {"name": "main", "commit": {"sha": "c9"}}]),
-                        ("commits/c1", flux), ("commits/c2", sdxl), ("commits/c3", stills), ("commits/c4", old)])
+                        ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": runs}),
+                        ("commits/c1", flux), ("commits/c2", sdxl)])
         self.assertEqual(g.cf_images_today(api, "2026-10-27"), cap)        # no sdxl, nothing from yesterday
+        self.assertEqual(g.cf_images_today(api, "2026-10-27", run_id=3), half)   # a run is not counted twice
         with self.assertRaises(g.Refusal) as c:
             g.capacity("scene-stills.yml", {"uploads": 0, "flux": True}, api, "2026-10-27")
         self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
@@ -340,6 +340,29 @@ class Capacity(unittest.TestCase):
         sys.path.insert(0, str(ROOT / "migration/production/bible"))
         import episode_preflight
         self.assertIs(episode_preflight.cf_allocation, sys.modules["cf_allocation"])   # one predicate for both
+
+    def test_e134_a_stills_run_counts_after_its_branch_is_gone_and_its_own_images_must_fit(self):
+        """E134 (28/10): genesis-09 run 40615150859 made 30 FLUX images; #487 squash-merged its review branch and
+        deleted it, the guard counted 0 and passed run 40623485981 (18 images) into a used-up allocation."""
+        cap = g.cf_daily_images()
+        done = dict(run_obj(40615150859, "scene-stills.yml",
+                            f"scene-stills: plan={PLAN} shots={','.join(['s'] * 15)} candidates=2", "success"),
+                    created_at="2026-10-28T01:28:00Z")
+        api = fake_api([("commits?", []), ("branches?", []),           # no review branch, no marked commit left
+                        ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": [done]})])
+        self.assertEqual(g.cf_images_today(api, "2026-10-28"), 30)
+        facts = g.scene_stills({"plan": PLAN, "shots": f"{S1},{S2}", "candidates": "2"})
+        self.assertEqual(facts["flux_images"], 4)
+        over = dict(facts, flux=True, uploads=0, flux_images=cap - 30 + 1)
+        with self.assertRaises(g.Refusal) as c:
+            g.capacity("scene-stills.yml", over, api, "2026-10-28")
+        self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
+        g.capacity("scene-stills.yml", dict(over, flux_images=cap - 30), api, "2026-10-28")   # exactly fits
+        refused = dict(done, id=7, conclusion="failure")
+        api2 = fake_api([("commits?", []), ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": [refused]}),
+                         ("actions/runs/7/jobs", {"jobs": [{"steps": [{"name": g.GUARD_STEP + " (inputs)",
+                                                                       "conclusion": "failure"}]}]})])
+        self.assertEqual(g.cf_images_today(api2, "2026-10-28"), 0)   # refused by the guard: no image made
 
 
 class Rerun(unittest.TestCase):
