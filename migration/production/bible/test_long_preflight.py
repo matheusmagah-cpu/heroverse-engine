@@ -129,6 +129,17 @@ class Preflight(Scratch):
 
 
 class ApprovedShots(Scratch):
+    def setUp(self):
+        super().setUp()
+        # R3 (28/10): the arc-01 long's fallback shots name scene stills that may still be DRAFT on main while their
+        # candidates are reviewed; such a request is refused (STILL_NOT_APPROVED, test_scene_stills / plan_check
+        # frame_problems). These cases are about the clips, so they read the plan with only approved frames.
+        import plan_check
+        for s in self.plan["shots"]:
+            for f in plan_check.FRAME_FIELDS:
+                if s.get(f) and (plan_check.still_record(s[f]) or {}).get("status") != "APPROVED":
+                    del s[f]
+
     def layout_and_refs(self):
         _, layout = eb.predict(self.plan, estimate_durations(self.plan))
         for folder in ("keeper", "speakers"):
