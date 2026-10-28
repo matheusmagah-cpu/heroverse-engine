@@ -1,6 +1,7 @@
 """Agnes Image 2.5 Flash stills: price, submission recovery and credential regressions; no network or real secrets."""
 from datetime import datetime, timedelta, timezone
 import json
+import os
 from pathlib import Path
 import struct
 import sys
@@ -14,7 +15,7 @@ sys.path.insert(0, str(HERE))
 from client import ORIGIN, PavoError
 from image_gen import IMAGE_MODEL, IMAGE_RATIOS, PavoImageClient
 import images
-from quota import (COOL_DOWN, DAILY_CAP, FAILED_STREAK, IMAGE_UNITS, LEDGER, NO_ACTIONS, VIDEO_UNITS, QuotaGuard,
+from quota import (COOL_DOWN, DAILY_CAP, FAILED_STREAK, IMAGE_UNITS, LEDGER, NO_ACTIONS, VIDEO_UNITS, MAX_UNREAD, SHORTS_DAILY_JOBS, QuotaGuard,
                    combine, git_actions_usage, probe_record_path, record_usage)
 from video import MODEL as VIDEO_MODEL
 from test_video import Responses, envelope, quote, started
@@ -195,17 +196,25 @@ class FreeQuota(unittest.TestCase):
         return self.client(quote(), envelope({"conversation_id": "777"}), started(IMAGE_MODEL),
                            cap=cap).generate_image("A dry plain at dusk.")
 
-    def test_a_daily_cap_refuses_before_any_request_and_is_counted_in_the_ledger(self):
-        self.assertEqual(self.submit(cap=2)["status"], "submitted")
-        self.assertEqual(self.submit(cap=2)["status"], "submitted")
-        fake = Responses()
-        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
-            PavoImageClient(self.token, fake, guard=self.guard(cap=2)).generate_image("A dry plain at dusk.")
-        self.assertEqual(fake.calls, [])                  # refused before the quote: nothing sent
-        self.assertEqual(json.loads(self.ledger.read_text())["days"]["2026-10-27"]["generated"], 2)
-        self.t += timedelta(days=1)                       # a new day starts from zero
-        self.assertEqual(self.submit(cap=2)["status"], "submitted")
-        self.assertEqual(DAILY_CAP, 120)
+    def test_e137_no_fixed_daily_total_blocks_a_live_quota_and_only_the_owner_can_cap_a_day(self):
+        """E137 (28/10): Pavo's quota is a rolling window (~35-50 jobs back ~3 h after a stop, ~9-12 jobs an hour);
+        E128's fixed 120 units a UTC day refused work while the quota was live. Every submission is still counted."""
+        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 250}}, "daily_cap": 120}))
+        self.assertEqual(self.submit()["status"], "submitted")      # 250 used today: no fixed total refuses it
+        self.assertEqual(json.loads(self.ledger.read_text())["days"]["2026-10-27"]["generated"], 251)
+        saved = os.environ.get("PAVO_IMAGE_DAILY_CAP")
+        try:
+            os.environ["PAVO_IMAGE_DAILY_CAP"] = "251"                # the owner's explicit cap still holds
+            fake = Responses()
+            with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
+                PavoImageClient(self.token, fake, guard=self.guard()).generate_image("A dry plain at dusk.")
+            self.assertEqual(fake.calls, [])              # refused before the quote: nothing sent
+        finally:
+            if saved is None:
+                os.environ.pop("PAVO_IMAGE_DAILY_CAP", None)
+            else:
+                os.environ["PAVO_IMAGE_DAILY_CAP"] = saved
+        self.assertEqual((DAILY_CAP, SHORTS_DAILY_JOBS), (120, 25))
 
     def test_two_failed_read_backs_suspend_generation_until_a_cool_down_or_a_success(self):
         for job in ("11", "12"):
@@ -228,6 +237,28 @@ class FreeQuota(unittest.TestCase):
         ok = self.client(history([{"url": CDN, "width": 768, "height": 1344}])).image_job(probe)
         self.assertEqual(ok["status"], "completed")       # the probe completed: the suspension is lifted
         self.assertEqual(self.submit()["status"], "submitted")
+
+    def test_e136_no_new_submission_while_two_of_todays_jobs_are_unread(self):
+        """E136 (28/10): 11 stills went back to back before any read-back, the quota had run out and 10 came back
+        failed; FAILED_STREAK can only stop a fan-out when read-backs come between submissions."""
+        def submit(job):
+            return self.client(quote(), envelope({"conversation_id": job}), started(IMAGE_MODEL)).generate_image(
+                "A dry plain at dusk.")
+        self.assertEqual(submit("31")["status"], "submitted")
+        self.assertEqual(submit("32")["status"], "submitted")
+        fake = Responses()
+        with self.assertRaisesRegex(PavoError, "PAVO_UNREAD_JOBS 31,32"):
+            PavoImageClient(self.token, fake, guard=self.guard()).generate_image("A dry plain at dusk.")
+        self.assertEqual(fake.calls, [])                  # refused before the quote: nothing sent
+        self.client(history([{"url": CDN}])).image_job("31")   # one read back completed: one more may go
+        self.assertEqual(submit("33")["status"], "submitted")
+        with self.assertRaisesRegex(PavoError, "PAVO_UNREAD_JOBS"):
+            self.client().generate_image("A dry plain at dusk.")
+        self.client(failed_history()).image_job("32")    # a failed read-back is read too
+        self.assertEqual(submit("34")["status"], "submitted")
+        self.t += timedelta(days=1)                       # yesterday's unread jobs do not hold today
+        self.assertEqual(submit("35")["status"], "submitted")
+        self.assertEqual(MAX_UNREAD, 2)
 
     def test_one_failure_alone_does_not_suspend(self):
         self.client(failed_history()).image_job("11")
@@ -354,20 +385,16 @@ class SharedBudget(unittest.TestCase):
 
     def test_a_video_spends_the_same_budget_as_a_still_and_is_refused_before_any_request(self):
         self.assertEqual(self.submit_image(cap=5)["status"], "submitted")              # 1 unit
+        self.video(history([{"url": CDN}])).image_job("777")                          # E136: read back before more
         self.assertEqual(self.submit_video(cap=5)["status"], "submitted")              # 2 units
-        self.assertEqual(self.submit_video("902", cap=5)["status"], "submitted")       # 2 units: 5 of 5
-        for make in (lambda c: c.generate_video("Mist at dawn.", 8, "16:9"), lambda c: c.generate_image("A plain.")):
-            fake = Responses()
-            with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
-                make(PavoImageClient(self.token, fake, guard=self.guard(cap=5)))
-            self.assertEqual(fake.calls, [])                                           # nothing sent, not even a quote
+        self.assertEqual(self.submit_video("902", cap=5)["status"], "submitted")       # 2 units: 5 counted
         self.assertEqual(json.loads(self.ledger.read_text())["days"]["2026-10-27"]["generated"], 5)
         self.assertEqual((IMAGE_UNITS, VIDEO_UNITS), (1, 2))
-        fake = Responses()                                                             # 4 used, a video needs 2: no
-        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 4}}}))
-        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
-            PavoImageClient(self.token, fake, guard=self.guard(cap=5)).generate_video("Mist at dawn.", 8, "16:9")
-        self.assertEqual(fake.calls, [])
+        for make in (lambda c: c.generate_video("Mist at dawn.", 8, "16:9"), lambda c: c.generate_image("A plain.")):
+            fake = Responses()                                                         # E136: two videos unread
+            with self.assertRaisesRegex(PavoError, "PAVO_UNREAD_JOBS"):
+                make(PavoImageClient(self.token, fake, guard=self.guard(cap=5)))
+            self.assertEqual(fake.calls, [])                                           # nothing sent, not even a quote
 
     def test_two_failed_video_read_backs_stop_videos_and_stills(self):
         for cid in ("373600417911467520", "373600509753560128"):
@@ -388,9 +415,8 @@ class SharedBudget(unittest.TestCase):
 
     def test_todays_shot_probe_runs_count_and_their_failed_tail_stops_generation(self):
         self.actions = {"units": 119, "failed_tail": 0, "last_at": None}
-        self.assertEqual(self.submit_image()["status"], "submitted")                  # 119 + 1 = the cap
-        with self.assertRaisesRegex(PavoError, "PAVO_DAILY_CAP"):
-            self.video().generate_image("A plain.")
+        self.assertEqual(self.submit_image()["status"], "submitted")                  # counted, never a day's cap
+        self.assertEqual(self.guard().check_batch(0)["used"], 120)
         self.ledger.unlink()
         self.actions = {"units": 54, "failed_tail": 24, "last_at": (self.t - timedelta(hours=1)).isoformat()}
         with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
@@ -398,12 +424,17 @@ class SharedBudget(unittest.TestCase):
         self.t += timedelta(hours=2, minutes=1)                                       # the run's stop is 3 h old
         self.assertEqual(self.submit_video()["status"], "submitted")
 
-    def test_a_batch_that_does_not_fit_the_day_is_refused_before_it_starts(self):
+    def test_a_batch_larger_than_one_window_is_refused_before_it_starts(self):
+        # E137: what was used today no longer refuses a batch; a batch alone larger than one window does
         self.actions = {"units": 54, "failed_tail": 0, "last_at": None}
-        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 40}}}))
-        self.assertEqual(self.guard().check_batch(26), {"used": 94, "planned": 26, "cap": DAILY_CAP, "remaining": 0})
-        with self.assertRaisesRegex(PavoError, "PAVO_BUDGET_SHORT planned=27 used=94 cap=120"):
-            self.guard().check_batch(27)
+        self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 140}}}))
+        self.assertEqual(self.guard().check_batch(26), {"used": 194, "planned": 26, "cap": DAILY_CAP,
+                                                         "remaining": DAILY_CAP - 26})
+        with self.assertRaisesRegex(PavoError, "PAVO_BUDGET_SHORT planned=121 window=120"):
+            self.guard().check_batch(DAILY_CAP + 1)
+        self.actions = {"units": 54, "failed_tail": 2, "last_at": self.t.isoformat()}   # a stop still refuses
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.guard().check_batch(2)
 
     def test_a_probe_record_counts_every_generation_and_its_failed_tail_in_submission_order(self):
         # run 40592173923: 3 clips, then 24 failed; the record lists shots in risk order, the ids give the time

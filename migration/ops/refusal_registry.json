@@ -1151,7 +1151,7 @@
   },
   "PAVO_BUDGET_SHORT": {
    "class": "D",
-   "resume": "E128: the batch's expected free-model units (long_preflight.planned_units) do not fit what is left today of the shared Pavo budget (main's quota ledger + today's shot-probe records); nothing was generated. Split the batch (probe-queue cuts batches to a day's cap) or dispatch it after 00:00 UTC; clips already approved are kept"
+   "resume": "E128/E137: the batch's worst-case units are larger than one rolling window of Pavo's quota (quota.DAILY_CAP, the largest batch one run may plan) or pass an owner's explicit daily cap; nothing was generated. Split the batch (probe-queue cuts batches to one window); clips already approved are kept"
   },
   "PAVO_BUDGET_UNKNOWN": {
    "class": "I",
@@ -1175,11 +1175,11 @@
   },
   "PAVO_DAILY_CAP": {
    "class": "D",
-   "resume": "E124/E128: the day's free-model cap (quota.py, 120 units a UTC day: a still 1, a video 2, MCP and shot-probe alike) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
+   "resume": "E137: only an owner's explicit PAVO_IMAGE_DAILY_CAP caps a day now (Pavo's quota is a rolling window, not a UTC day); nothing was sent; wait for the next UTC day or the owner lifts it"
   },
   "PAVO_FREE_QUOTA_SUSPECTED": {
    "class": "D",
-   "resume": "E124/E128: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
+   "resume": "E124/E128/E137: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation for 3 h (Pavo's quota returns ~35-50 jobs about 3 h after a stop); then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
   },
   "PAVO_HISTORY_SCHEMA_CHANGED": {
    "class": "D",
@@ -2492,6 +2492,14 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "PAVO_UNREAD_JOBS": {
+   "class": "D",
+   "resume": "E136: two of today's jobs are not read back yet; read them with pavo_job / pavo_image_job (never resubmit), then submit the next. Nothing was sent."
+  },
+  "PAVO_SHORTS_SHARE": {
+   "class": "D",
+   "resume": "E137: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
   }
  },
  "review": {
