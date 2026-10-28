@@ -2275,6 +2275,19 @@
     "contains": "def test_e207_inventory_reaches_branches_not_only_main",
     "covers": ["pr-late"]
    }
+  },
+  {
+   "id": "E208",
+   "date": "2026-10-28",
+   "class": "fragile-input",
+   "prior": ["E101", "E125", "E143", "E148", "E188", "E205"],
+   "error": "Offline regression reproduced the session review reader accepting truthy non-list evidence and malformed issue elements. The prepublication reader did not check that schema and accepted infinite or above-scale rubric items. No affected upload was demonstrated; a valid reviewer name alone did not validate the evidence contract.",
+   "fix": "Share strict evidence/issue-list and bounded numeric-score validation between the long-review reader and prepublication consumer. Invalid evidence remains AWAITING_REVIEW/UNKNOWN rather than PASS. Preserve reviewer identities, frozen QA, score thresholds and historical records. Shape validation does not prove viewing, hearing, source existence or reviewer authenticity.",
+   "antidote": {
+    "file": "migration/publish/test_prepublish_gate.py",
+    "contains": "def test_e208_review_schema_and_finite_scores_are_required_at_consumption",
+    "covers": ["fragile-input"]
+   }
   }
  ]
 }

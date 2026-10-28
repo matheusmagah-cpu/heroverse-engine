@@ -95,9 +95,9 @@ def claude_problems(review, sha):
         problems.append("CLAUDE_REVIEW_NOT_FOR_THIS_FILE")
     for k in (*RUBRIC, "overall"):
         v = review.get(k)
-        if isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 <= v <= 10:
+        if not owner_quality_policy.score_valid(v):
             problems.append("CLAUDE_REVIEW_SCORE_" + k)
-    if not review.get("evidence") or not isinstance(review.get("issues"), list):
+    if not owner_quality_policy.evidence_valid(review):
         problems.append("CLAUDE_REVIEW_EVIDENCE")
     return problems
 

@@ -246,12 +246,14 @@ def review_items(review, names, sha):
     if review.get("status") not in ("PASS", "FAIL"):
         return [item("review", n, "UNKNOWN", f"review {review.get('status')}: {review.get('error', '')}"[:200]) for n in names]
     w = review.get("watched_review") or {}
+    if not owner_quality_policy.evidence_valid(w):
+        return [item("review", n, "UNKNOWN", "review evidence malformed or absent") for n in names]
     if w.get("model") not in REVIEW_MODELS:
         return [item("review", n, "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one") for n in names]
     out = []
     for n in names:
         v = w.get(n)
-        out.append(item("review", n, "UNKNOWN", "score absent") if not isinstance(v, (int, float)) else
+        out.append(item("review", n, "UNKNOWN", "score absent or invalid") if not owner_quality_policy.score_valid(v) else
                    item("review", n, "PASS" if v >= PASS_ITEM else "FAIL", v))
     return out
 
@@ -285,12 +287,16 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
         dims["story_qa_" + version.rsplit("-", 1)[-1]] = story_v3_row_items(qa, sha, version)
     # whole-video watched review: its overall score is a gate of its own
     w = (review or {}).get("watched_review") or {}
+    if not isinstance(w, dict):
+        w = {}
     if review is None or review.get("output_sha256") != sha or review.get("status") not in ("PASS", "FAIL"):
         overall = [item("review", "overall", "UNKNOWN", "no completed watched review for this file")]
+    elif not owner_quality_policy.evidence_valid(w):
+        overall = [item("review", "overall", "UNKNOWN", "review evidence malformed or absent")]
     elif w.get("model") not in REVIEW_MODELS:
         overall = [item("review", "overall", "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one")]
-    elif not isinstance(w.get("overall"), (int, float)):
-        overall = [item("review", "overall", "UNKNOWN", "score absent")]
+    elif not owner_quality_policy.score_valid(w.get("overall")):
+        overall = [item("review", "overall", "UNKNOWN", "score absent or invalid")]
     else:
         overall = [item("review", "overall", "PASS" if w["overall"] >= PASS_OVERALL else "FAIL", w["overall"])]
     dims["content_and_policy"] += overall

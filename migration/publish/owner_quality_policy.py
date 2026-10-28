@@ -15,6 +15,21 @@ LONG_REVIEWERS = ("claude-session-reviewer", "gpt-6-astra-session-reviewer")
 SHORTS_REVIEWER = "gemini-3.8-flash"        # Shorts move to the Claude reviewer next (their pipeline is separate)
 
 
+def evidence_valid(review):
+    """Validate the session evidence shape, not whether anyone actually watched it."""
+    if not isinstance(review, dict):
+        return False
+    evidence, issues = review.get("evidence"), review.get("issues")
+    return (isinstance(evidence, list) and bool(evidence) and isinstance(issues, list)
+            and all(isinstance(s, str) and bool(s.strip()) for s in evidence + issues))
+
+
+def score_valid(value):
+    """Scores are finite real numbers on the rubric's 0-10 scale, never booleans."""
+    return (not isinstance(value, bool) and isinstance(value, (int, float))
+            and 0 <= value <= 10)
+
+
 def check(review, output_sha256, reviewer=SHORTS_REVIEWER):
     """Check one designated model or an explicit tuple; long videos pass LONG_REVIEWERS. Never edit evidence."""
     if not isinstance(review, dict):
