@@ -258,7 +258,7 @@ class Inputs(unittest.TestCase):
         # LONG_DESIGN slice 3: the long's build takes a long plan only
         self.refused("long-build.yml", {"plan": PLAN}, "GUARD_INPUT_INVALID")
         self.refused("long-build.yml", {"plan": LONG_PLAN, "resume_run": "x"}, "GUARD_INPUT_INVALID")
-        self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 2)
+        self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 3)
 
     def test_no_test_copies_a_live_plans_shot_ids_by_hand(self):
         """E133: a fixture that copies a live plan's shot ids breaks when the plan is edited (genesis-09's redesign

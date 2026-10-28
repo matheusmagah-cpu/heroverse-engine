@@ -122,9 +122,10 @@ def long_build(i):
     need(plan.get("version") == "bible-long-plan-v1", "plan", i.get("plan"), "a long plan (bible-long-plan-v1)")
     need(re.fullmatch(r"(\d{6,20})?", i.get("resume_run") or ""), "resume_run", i.get("resume_run"), "a run id or empty")
     ep = plan["episode"]
-    return {"uploads": 2,   # the composed long and its .srt track
+    return {"uploads": 3,   # composed long, same-master pilot alias and .srt; record also checks actual split parts
             "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}.json",
-                     "migration/production/characters/"]}
+                     "migration/production/characters/", "migration/production/bible/arcs.json",
+                     "migration/production/bible/thumbs/"]}
 
 
 def shot_probe(i):

@@ -1,5 +1,6 @@
 {
  "_note": "TikTok web selectors (data-e2e first, class fragments as fallback). Run `runner.py probe VIDEO_ID` after TikTok changes its page; edit here, not in the code.",
+ "_comment_id_attributes": ["data-comment-id", "data-cid"],
  "comment_icon": ["[data-e2e=\"comment-icon\"]", "[data-e2e=\"browse-comment-icon\"]"],
  "comment_item": ["div[class*=\"DivCommentObjectWrapper\"]", "div[class*=\"DivCommentItemContainer\"]", "div[class*=\"CommentItemContainer\"]"],
  "comment_text": ["[data-e2e=\"comment-level-1\"]", "span[data-e2e=\"comment-level-1\"]"],

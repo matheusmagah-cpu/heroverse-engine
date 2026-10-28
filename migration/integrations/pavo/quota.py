@@ -313,7 +313,7 @@ class QuotaGuard:
                             "submission; E136)" % ",".join(waiting))
 
     def _unread(self, data):
-        """E136: today's submissions not yet read back to an end (completed with media, or failed)."""
+        """E136: today's submissions not yet read back to an end (completed with media, failed or terminal blocked)."""
         day = self._day()
         out = []
         for job in data["unread"]:
@@ -368,7 +368,17 @@ class QuotaGuard:
 
     def read_back(self, conversation_id, status, images):
         """A job read back (a still's images or a video's clips): completed with media lifts a suspension only when the job was submitted after it began;
-        failed with none counts toward a stop (and a failed probe suspends again at once)."""
+        failed with none counts toward a stop (and a failed probe suspends again at once). A terminal prompt block
+        has been read, but is neither a quota failure nor a success; consumption and any suspension stay intact."""
+        if status == "blocked" and not images:
+            # E187: _history only emits blocked after is_running=False, with no media. Unknown, incomplete and
+            # acknowledgement rejection are not terminal evidence. This never resubmits or changes the prompt.
+            data = self._load()
+            data["unread"] = [j for j in data["unread"] if j != conversation_id]
+            if (data["probe"] or {}).get("conversation_id") == conversation_id:
+                data["probe"] = None  # a later explicit request is still subject to the one-probe/cool-down rule
+            self._save(data)
+            return
         if status == "completed" and images:
             data = self._load()
             data["unread"] = [j for j in data["unread"] if j != conversation_id]

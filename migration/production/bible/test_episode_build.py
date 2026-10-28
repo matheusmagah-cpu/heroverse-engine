@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import wave
 
 HERE = Path(__file__).resolve().parent
@@ -108,6 +109,74 @@ def _dialogue_plan():
 
 def dialogue_plan():
     return with_period(_dialogue_plan())
+
+
+class SourceRevocations(unittest.TestCase):
+    def test_e189_shot_writer_archives_current_only_revocation_before_replacement(self):
+        from unittest import mock
+        # Named reviewer and measured-duration fields are offline fixtures for the E149/E152 writer contract.
+        reviewer = {"reviewer": "gpt-6-astra-session-reviewer"} if hasattr(eb, "reviewer_identity") else {}
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(eb, "REPO", Path(tmp)):
+            directory = Path(tmp, "approvals")
+            path = directory / "fixture.json"
+            original = {"score": 9.6, "clip_sha256": "a" * 64, "request_sha256": "c" * 64,
+                        "note": "historical review", "revocation": {"by": "ChatGPT", "reason": "visible aircraft"}}
+            eb.save(path, {"episode": "fixture", "shots": {"s": original}})
+            record = Path(tmp, "migration/evidence/shots/fixture/probe.json")
+            eb.save(record, {"episode": "fixture", "run_id": "40500000001", "shots": {"s": {
+                "request_sha256": "c" * 64, "clip_seconds": 6,
+                "clips": [{"asset": name, "clip_sha256": sha, "uploaded": True, "flags": [],
+                           "media": {"version": "clip-media-v1", "clip_sha256": sha,
+                                     "video_seconds": 6.0, "audio_seconds": None}}
+                          for name, sha in (("new.mp4", "b" * 64), ("old.mp4", "a" * 64))]}}})
+            before = path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(record, "s", "old.mp4", 10, "not reinstatement", shots_dir=directory, **reviewer)
+            self.assertEqual(path.read_bytes(), before)
+            eb.approve_shot(record, "s", "new.mp4", 9.6, "replacement reviewed", shots_dir=directory, **reviewer)
+            replaced = eb.load(path)
+            self.assertEqual(replaced["revocations"], [dict(original, shot="s")])
+            self.assertEqual(replaced["shots"]["s"]["clip_sha256"], "b" * 64)
+            self.assertNotIn("revocation", replaced["shots"]["s"])
+            eb.approve_shot(record, "s", "new.mp4", 9.6, "replacement reviewed", shots_dir=directory, **reviewer)
+            self.assertEqual(eb.load(path)["revocations"], replaced["revocations"])
+            before = path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(record, "s", "old.mp4", 10, "not reinstatement", shots_dir=directory, **reviewer)
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_e189_revocation_wins_score_digest_and_source_type(self):
+        # A retraction is not a new quality score or a model-approved replacement.
+        with tempfile.TemporaryDirectory() as tmp:
+            for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+                for marker in ({"by": "ChatGPT", "reason": "visible aircraft"}, None, False):
+                    with self.subTest(source=source, marker=marker):
+                        rec = {"source": source, "score": 10, "clip_sha256": "a" * 64,
+                               "still_sha256": "b" * 64, "request_sha256": "c" * 64,
+                               "revocation": marker}
+                        before = copy.deepcopy(rec)
+                        bad = eb.revocation_problems("fixture", {"s": rec}, shots_dir=tmp)
+                        self.assertTrue(any(p.startswith("SHOT_REVIEW_REVOKED") for p in bad), bad)
+                        self.assertEqual(rec, before)
+            self.assertEqual(eb.revocation_problems("fixture", {"s": {"score": 9.6}}, shots_dir=tmp), [])
+
+    def test_e189_revoked_bytes_cannot_be_reused_even_after_the_source_shot_is_replaced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "origin.json").write_text(json.dumps({"shots": {"s": {"clip_sha256": "d" * 64}},
+                "revocations": [{"shot": "s", "clip_sha256": "a" * 64, "score": 9.6,
+                                 "revocation": {"by": "ChatGPT", "reason": "visible aircraft"}}]}))
+            for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+                rec = {"source": source, "score": 10, "request_sha256": "c" * 64,
+                       ("still_sha256" if source == "still_motion" else "clip_sha256"): "a" * 64}
+                self.assertTrue(eb.revocation_problems("borrower", {"s": rec}, shots_dir=tmp))
+            self.assertTrue(eb.revocation_problems("old-master", {}, shots_dir=tmp, source_hashes=["a" * 64]))
+            self.assertEqual(eb.revocation_problems("origin", shots_dir=tmp), [])
+
+    def test_e189_corrupt_revocation_history_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for history in (False, [{"revocation": {"reason": "missing hash"}}]):
+                Path(tmp, "origin.json").write_text(json.dumps({"revocations": history}))
+                self.assertTrue(eb.revocation_problems("fixture", {}, shots_dir=tmp))
 
 
 class Requests(unittest.TestCase):
@@ -545,6 +614,22 @@ class Gating(unittest.TestCase):
                                  fetch=lambda name, dst: Path(dst).write_bytes(b"approved clip"))
             self.assertTrue(str(err.exception).startswith(f"{want} {shot['id']}"), err.exception)
 
+    def test_e189_revocation_blocks_build_before_any_fetch(self):
+        import shot_sources as ss
+        for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+            with self.subTest(source=source):
+                approvals = self.approvals()
+                digests = {k: a["request_sha256"] for k, a in approvals.items()}
+                rec = approvals["s-a"]
+                rec.update(source=source, footage="fixture-footage", still="fixture-still", clip_from="origin#s",
+                           still_sha256="e" * 64, revocation={"by": "ChatGPT", "reason": "visible aircraft"})
+                rec["request_sha256"] = ss.expected_request(self.plan, self.plan["shots"][1], 1, rec, digests)
+                bad = eb.review_problems(self.plan, digests, approvals)
+                self.assertFalse(any(p.startswith("SHOT_REQUEST_CHANGED") for p in bad), bad)
+                with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                    eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals,
+                                     fetch=lambda *a: self.fail("revoked bytes were fetched"))
+
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
         # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
@@ -708,33 +793,56 @@ class Gating(unittest.TestCase):
         unsealed, path = records / f".test-{os.getpid()}-raw.json", records / f".test-{os.getpid()}.json"
         try:
             with self.assertRaises(SystemExit) as err:                             # outside evidence/shots/
-                eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
             shutil.copyfile(out / "probe.json", unsealed)                          # not from shot-probe's record job
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
             no_upload = dict(json.loads(unsealed.read_text()), run_id="40500000001")
             unsealed.write_text(json.dumps(no_upload))
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_CLIP_NOT_UPLOADED"))
-            eb.probe_assets(out, self.plan["episode"], "40500000001", path)       # sealed after the upload
+            media = {"version": "clip-media-v1", "clip_sha256": clip["clip_sha256"],
+                     "video_seconds": 7.25, "audio_seconds": 7.28}
+            with patch.object(eb.clip_timing, "measure", return_value=media):  # probe fixture has fake media bytes
+                eb.probe_assets(out, self.plan["episode"], "40500000001", path)
+            for model in (None, "unknown-session"):
+                with self.assertRaisesRegex(SystemExit, "REVIEWER_IDENTITY_REFUSED"):
+                    eb.approve_shot(path, ids[0], clip["asset"], "9.6", "reviewed fixture", shots_dir=rec,
+                                    reviewer=model)
+                self.assertFalse((rec / f"{self.plan['episode']}.json").exists())
             for score, note, code in (("9.4", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("10.5", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
                                       ("nan", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("inf", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
                                       ("9.6", " ", "SHOT_NOTE_MISSING"), ("x", "ok", "SHOT_SCORE_INVALID")):
                 with self.assertRaises(SystemExit) as err:
-                    eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec)
+                    eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec, reviewer="claude-session-reviewer")
                 self.assertTrue(str(err.exception).startswith(code), (score, err.exception))
-            approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean", shots_dir=rec)
+            approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean", shots_dir=rec,
+                                       reviewer="gpt-6-astra-session-reviewer")
+            self.assertEqual(approved["model"], "gpt-6-astra-session-reviewer")
+            self.assertEqual(approved["clip_seconds"], media["video_seconds"])
+            self.assertEqual(approved["requested_clip_seconds"], entry["clip_seconds"])
+            self.assertEqual(approved["media"], media)
             self.assertEqual((approved["clip_sha256"], approved["request_sha256"], approved["asset"], approved["run_id"]),
                              (clip["clip_sha256"], entry["request_sha256"], clip["asset"], "40500000001"))
             self.assertEqual(eb.load_approvals(self.plan, rec / f"{self.plan['episode']}.json")[ids[0]], approved)
+            # E189: an explicit retraction cannot be overwritten by the same bytes with a higher score.
+            approvals_path = rec / f"{self.plan['episode']}.json"
+            history = json.loads(approvals_path.read_text())
+            history["revocations"] = [dict(approved, shot=ids[0], revocation={
+                "by": "ChatGPT", "reason": "later direct visual inspection found a modern object"})]
+            approvals_path.write_text(json.dumps(history))
+            before = approvals_path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(path, ids[0], clip["asset"], "10", "new score cannot undo revocation", shots_dir=rec)
+            self.assertEqual(approvals_path.read_bytes(), before)
             failed = json.loads(path.read_text())
             failed["shots"][ids[0]]["clips"][0]["flags"] = ["FREEZE"]
             path.write_text(json.dumps(failed))
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec)
+                eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_CHECKS_FAILED"))
         finally:
             for f in (path, unsealed):
@@ -1637,6 +1745,61 @@ def native_plan():
     return p
 
 
+@unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "ffmpeg and ffprobe")
+class MediaTiming(unittest.TestCase):
+    def test_e152_measured_bytes_not_requested_seconds_govern_native_coverage_and_queue(self):
+        import long_preflight as lp
+        root = eb.REPO / "migration" / "evidence" / "shots"
+        with tempfile.TemporaryDirectory(prefix=".test-media-", dir=root) as d:
+            d = Path(d)
+            video = d / "native.mp4"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i",
+                            "testsrc2=size=160x90:rate=30:duration=2.3", "-f", "lavfi", "-i",
+                            "sine=frequency=220:sample_rate=48000:duration=2.4", "-c:v", "libx264", "-pix_fmt",
+                            "yuv420p", "-c:a", "aac", str(video)], check=True)
+            p = native_plan()
+            p["episode"] = "test-native-measured"
+            p["shots"] = p["shots"][:1]
+            sid, key = p["shots"][0]["id"], eb.sha256(video)
+            a = {"clip_seconds": 1, "clip_sha256": key, "request_sha256": "request",
+                 "speech": {"onset": 0.1, "end": 2.2, "gain_db": 0.0, "flags": []}}
+            needs = eb.clip_needs(p, {}, approvals={sid: a})
+            self.assertEqual(needs, {sid: 2.2})  # not ceil(Kokoro speech + generation padding)
+            self.assertTrue(eb.coverage_problems(p, needs, {sid: a}))  # old nominal approval is too short
+            before = copy.deepcopy(a)
+            record = d / "probe.json"
+            record.write_text(json.dumps({"episode": p["episode"], "shots": {sid: {"clips": [a]}}}))
+            media_dir = d / "measurements" / p["episode"] / "media"
+            media = eb.measure_clip_step(record, sid, video, media_dir)
+            self.assertEqual(media["clip_sha256"], key)
+            self.assertAlmostEqual(media["video_seconds"], 2.3, places=3)
+            self.assertGreaterEqual(media["audio_seconds"], 2.4)
+            with patch.object(eb.clip_timing, "RECORDS", d / "measurements"):
+                self.assertEqual(eb.coverage_problems(p, needs, {sid: a}), [])
+                queued = lp.queue(p, {sid: "request"}, {sid: a}, needs, max_units=400)
+                self.assertEqual((queued["approved"], queued["to_probe"]), (1, 0))
+                self.assertEqual(eb.native_spans(p, {sid: a})[sid][1:], (0.1, 2.2))
+                outside = copy.deepcopy(a)
+                outside["speech"]["end"] = 2.5
+                with self.assertRaisesRegex(SystemExit, "NATIVE_SPEECH_OUTSIDE_MEDIA"):
+                    eb.native_spans(p, {sid: outside})
+                corrupt = dict(media, clip_sha256="0" * 64)
+                eb.save(media_dir / f"{key}.json", corrupt)
+                with self.assertRaisesRegex(SystemExit, "SHOT_MEDIA_UNMEASURED"):
+                    eb.coverage_problems(p, needs, {sid: a})
+            self.assertEqual(a, before)  # no rewritten historical approval, score, note, or speech endpoint
+            with patch.object(eb.pavo_native, "premix") as premix:
+                bad = copy.deepcopy(a)
+                bad["speech"]["end"] = 2.5
+                with self.assertRaisesRegex(SystemExit, "NATIVE_SPEECH_OUTSIDE_MEDIA"):
+                    eb.native_voice(p, d, {"lines": [{"start": 0, "end": 2.4}], "total": 3.6},
+                                    {sid: str(video)}, {sid: 2.3}, {sid: bad})
+                premix.assert_not_called()  # an ASR timestamp beyond real media is not padded into speech
+            with self.assertRaisesRegex(SystemExit, "SHOT_CLIP_NOT_IN_RECORD"):
+                eb.measure_clip_step(record, "other-shot", video, d / "not-written")
+            self.assertFalse((d / "not-written").exists())
+
+
 class NativeSpeech(unittest.TestCase):
     """Owner 27/10 (R1, R2, R4): spoken shots keep Pavo's own speech and ambience on a plan that opts in; a line
     Pavo's prompt filter refuses goes to our Kokoro voice by itself (E129); a clip already made is never made again."""
@@ -1702,6 +1865,47 @@ class NativeSpeech(unittest.TestCase):
         # and a v4 long that says "kokoro" keeps our voice
         self.assertTrue(self.pn.native_plan({"criteria": self.pn.V4}))
         self.assertFalse(self.pn.native_plan({"criteria": self.pn.V4, "audio_route": "kokoro"}))
+
+    def test_e153_short_native_admission_uses_the_effective_route_not_only_an_explicit_flag(self):
+        # A V4/V5 criteria selector enables native_plan even without audio_route. The Short's guard must use
+        # that same resolver: removing the explicit flag cannot admit an unsupported native audio route.
+        for version in (self.pn.V4, self.pn.V4X, self.pn.V5):
+            for route in (None, self.pn.NATIVE):
+                with self.subTest(criteria=version, route=route):
+                    p = dialogue_plan()
+                    p["criteria"] = version
+                    if route is not None:
+                        p["audio_route"] = route
+                    self.assertTrue(self.pn.native_plan(p))
+                    self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],
+                                     ["AUDIO_ROUTE_SHORT_UNSUPPORTED"])
+                    self.assertTrue(any(x.startswith("AUDIO_ROUTE_SHORT_UNSUPPORTED")
+                                        for x in eb.check_plan(p)["problems"]))
+            p["audio_route"] = self.pn.KOKORO
+            self.assertFalse(self.pn.native_plan(p))
+            self.assertEqual(eb.plan_check.audio_route_problems(p, p["shots"]), [])
+        # Legacy Shorts still resolve to Kokoro, whether the field is absent or explicit.
+        for route in (None, self.pn.KOKORO):
+            p = dialogue_plan()
+            if route is not None:
+                p["audio_route"] = route
+            self.assertFalse(self.pn.native_plan(p))
+            self.assertEqual(eb.plan_check.audio_route_problems(p, p["shots"]), [])
+
+    def test_e153_native_longs_keep_their_own_criteria_admission(self):
+        import long_plan_check as lc
+        import test_long_plan_check as fixture
+        for version in (self.pn.V4, self.pn.V5):
+            for route in (None, self.pn.NATIVE, self.pn.KOKORO):
+                with self.subTest(criteria=version, route=route):
+                    p = fixture.v4_plan()
+                    p.update(criteria=version, episode=p["long"])
+                    if route is not None:
+                        p["audio_route"] = route
+                    with patch.object(lc, "arcs", return_value=fixture.ARCS):
+                        result = eb.check_plan(p, fixture.CHARS)
+                    self.assertEqual(result["problems"], [])
+                    self.assertEqual(self.pn.native_plan(p), route != self.pn.KOKORO)
 
     def probe(self, plan, ids, rounds, client):
         return eb.probe_step(plan, self.work, "py", "model", self.work / "out", ids, rounds, client=client,
@@ -1833,7 +2037,9 @@ class VoiceBinding(unittest.TestCase):
         self.record.write_text(json.dumps({"episode": self.episode, "run_id": "40500000002", "shots": {"s-eve": {
             "request_sha256": "r", "clip_seconds": 6, "request": {"audio": {
                 "route": "pavo_native", "speaker": "eve", "words": ["Why", "do", "you", "hide?"]}},
-            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True}]}}}))
+            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True,
+                       "media": {"version": "clip-media-v1", "clip_sha256": self.clip,
+                                 "video_seconds": 6.0, "audio_seconds": 6.0}}]}}}))
 
     def tearDown(self):
         self.pn.VOICES = self.saved
@@ -1859,7 +2065,7 @@ class VoiceBinding(unittest.TestCase):
         (self.dir / "speech" / f"{self.clip}.json").write_text(json.dumps({"measures": measures}))
 
     def approve(self):
-        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out)
+        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out, reviewer="claude-session-reviewer")
 
     def test_the_verdict_binds_the_speakers_reference_and_every_other_reference(self):
         line, ok = "Why do you hide?", {"reference": self.E, "others": [self.K]}

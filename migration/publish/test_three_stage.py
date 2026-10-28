@@ -7,6 +7,7 @@ import re
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import three_stage as ts  # noqa: E402
@@ -35,6 +36,36 @@ def pilot(root, name, backgrounds=("bg-a", "bg-b"), opening=TEXT, title="Night P
 
 
 class Structure(unittest.TestCase):
+    def test_story_routes_to_bound_measured_story_rules_never_prayer_hygiene(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production/bible'))
+        import test_long_handoff as fixture
+        h = fixture.h
+        with tempfile.TemporaryDirectory() as t:
+            path, built, *_ = fixture.fixture(t)
+            with mock.patch.object(h.thumbs, 'publish_problems', return_value=[]):
+                d = h.materialize(path, built, t)
+            h.save(d / 'out/qa.json', {'criteria_version': 'story-qa-criteria-v5',
+                'criteria_sha256': h.gate.FROZEN_CRITERIA_SHA256['story-qa-criteria-v5'],
+                'output_sha256': h.load(d / 'out/manifest.json')['output_sha256'], 'checks': {
+                    'voice_model_pinned': True, 'music_owned': True, 'every_scene_in_motion': True,
+                    'first_shot_cold_open': True, 'caption_track': True, 'no_burned_captions': True}})
+            structure = Path(t) / 'migration/structures/bible-story-long.json'
+            structure.parent.mkdir(parents=True)
+            structure.write_bytes((ts.ROOT / 'structures/bible-story-long.json').read_bytes())
+            with mock.patch.object(ts, 'ROOT', Path(t) / 'migration'):
+                rows = {r['name']: r['state'] for r in ts.structure_rows(d)}
+                self.assertEqual(rows['story_inputs_bound'], 'PASS')
+                self.assertEqual(rows['package_chapters'], 'PASS')
+                self.assertEqual(rows['package_arc_schedule'], 'PASS')
+                # A 60-second test fixture is not a qualifying long, and the story checks correctly reject it.
+                self.assertEqual(rows['story_measured_length'], 'FAIL')
+                self.assertEqual(rows['story_rehooks'], 'FAIL')
+                for name in ('driver_viewer_hook_5s', 'hygiene_spoken_amen_cta', 'hygiene_recurring_refrain',
+                             'hygiene_gratitude_block'):
+                    self.assertNotIn(name, rows)
+                (d / 'out/handoff.json').unlink()
+                self.assertEqual(ts.structure_rows(d)[0]['state'], 'UNKNOWN')
+
     def test_conforming_pilot_passes_every_row(self):
         with tempfile.TemporaryDirectory() as t:
             rows = ts.structure_rows(pilot(t, "pilot-012"))
@@ -111,6 +142,17 @@ class Authenticity(unittest.TestCase):
             d, kw, _ = self.setup(t, backgrounds=("bg-x",), title="Other | Words")
             s = json.loads((d / "script.json").read_text())
             s["segments"] = [{"id": "s", "text": " ".join("The LORD is my shepherd; I shall not want." for _ in range(50))}]
+            (d / "script.json").write_text(json.dumps(s))
+            self.assertEqual(self.rows(d, kw)["original_words_share"], "FAIL")
+
+    def test_story_counts_explicit_kjv_quotations_without_archaic_word_heuristics(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, kw, _ = self.setup(t, backgrounds=("bg-x",), title="Other | Words")
+            s = json.loads((d / "script.json").read_text())
+            s.update(version="bible-long-publication-script-v1", segments=[{
+                "id": "n00", "text": "In the beginning God created the heaven and the earth.",
+                "reference": "Genesis 1:1 (KJV)", "kind": "scripture"},
+                {"id": "n01", "text": "The story begins.", "kind": "story"}])
             (d / "script.json").write_text(json.dumps(s))
             self.assertEqual(self.rows(d, kw)["original_words_share"], "FAIL")
 

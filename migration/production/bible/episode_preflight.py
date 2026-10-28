@@ -57,7 +57,8 @@ SHEET_IMAGES = len(ch.REF_ORDER)   # a character's reference sheet: front, three
 WORK_ROOT = REPO / ".episode"   # the only place preflight creates or removes a work directory
 # the code a report vouches for: a change to any of them can change what the build refuses
 CODE = [HERE / "episode_build.py", HERE / "plan_check.py", HERE / "voice_pace.py", HERE / "lipsync_check.py",
-        HERE / "syncnet.py", HERE / "episode_preflight.py"]
+        HERE / "syncnet.py", HERE / "episode_preflight.py", HERE / "clip_timing.py", HERE / "reviewer_identity.py",
+        REPO / "migration" / "publish" / "owner_quality_policy.py"]
 
 
 def sha256(path):
@@ -253,6 +254,9 @@ def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     if eb.pavo_native.native_plan(plan):   # review of #476: a learned prompt block or a voice changes the routes
         out["prompt_blocks"] = eb.pavo_native.blocks_sha256()
         out["voices"] = sha256(eb.pavo_native.VOICES)
+        out["native_media"] = {sid: {"speech": digest(a["speech"]),
+                                    "media": digest(eb.clip_timing.evidence(a, plan.get("episode")))}
+                               for sid, a in eb.load_approvals(plan).items() if a.get("speech")}
     return out
 
 

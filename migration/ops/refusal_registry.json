@@ -1,6 +1,45 @@
 {
  "about": "E106: every refusal code a later, expensive stage can raise (test_refusal_parity.LATER), with its class: A predicted early by the same function or constant (`early`: path::needle), B a rework hole (`early`: the cheap check that would catch it, `open`: why it is still open), C knowable only after a generation, voice or render (`probe`: the cheapest earlier probe), D external or transient (`resume`), I an engine invariant no plan can break (`guard`), N not a refusal (`why`). `was`: B means the hole was closed by E106. A new later-stage code fails migration/ops/test_refusal_parity.py until it is classified here.",
  "codes": {
+  "SHOT_REVIEW_REVOKED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_build.py::def revocation_problems(",
+    "migration/production/bible/episode_preflight.py::eb.review_problems(",
+    "migration/production/bible/long_handoff.py::episode_build.revocation_problems("
+   ],
+   "note": "E189: one explicit source-hash revocation contract runs before build/fetch and long inputs, before approve-shot, and again at Short upload and long approval/publication verification. Historical score/request/reviewer identity cannot override a retraction; append-only snapshots retain the veto after replacement. Malformed revocation history fails closed; no automatic visual detection is claimed."
+  },
+  "SHOT_MEDIA_UNMEASURED": {
+   "class": "C",
+   "probe": "E152: episode_build.py measure-clip measures existing bytes by ffprobe and binds the sidecar to their hash; probe-assets seals the same measurements for new clips before any approval"
+  },
+  "NATIVE_SPEECH_OUTSIDE_MEDIA": {
+   "class": "C",
+   "probe": "E152: episode_build.py measure-clip provides the real stream durations; native_spans refuses an out-of-media speech endpoint before voicing/layout when evidence exists, and native_voice repeats on the exact bytes before mixing"
+  },
+  "REVIEWER_IDENTITY_REFUSED": {
+   "class": "N",
+   "why": "E149: explicit session identity is required before any new still, thumbnail, shot or source approval is written; this input check generates, renders and publishes nothing"
+  },
+  "SHOT_REVIEWER_REFUSED": {
+   "class": "A",
+   "early": "migration/production/bible/episode_build.py::def review_problems(",
+   "note": "E149: the same review consumer runs in verify-preflight and generate; an explicit unknown identity is refused, historical approvals without a model are preserved without relabelling"
+  },
+  "LONG_HANDOFF_REFUSED": {
+   "class": "C",
+   "probe": "The exported master, retimed speech timeline, SRT and their hashes are knowable only after assembly. long_handoff.input_documents is also run before voice/upscale to reject all static publication inputs (title, arc mapping, frozen criteria, approved thumbnail). Candidate artifacts are preserved on failure, and test_long_handoff mutates every source/publication witness. No missing witness becomes an approval."
+  },
+  "LONG_HANDOFF_INVALID": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_handoff.py::def test_each_publication_file_and_plan_remain_bound_and_missing_witness_fails_closed",
+   "note": "The upload rechecks the qualified plan, script, package, timeline, SRT and thumbnail identities. A changed or missing binding cannot publish."
+  },
+  "LONG_RELEASE_CAPACITY": {
+   "class": "D",
+   "resume": "The dispatch reserves three minimum assets; before upload the actual master size counts every split part for both identical aliases plus the SRT. A full release keeps the completed build artifact; add a new asset release and resume storage, never regenerate the video."
+  },
   "ADOPT_CLIP_MISSING": {
    "class": "N",
    "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"

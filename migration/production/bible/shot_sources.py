@@ -22,9 +22,10 @@ long_build.upscale_step), the manifest naming it per shot.
 
 usage:
   episode_build.py sources PLAN [--write]   the per-shot source plan for today's budget (evidence/sources/<ep>.json)
-  episode_build.py approve-source PLAN SHOT SOURCE ITEM SCORE NOTE
+  episode_build.py approve-source PLAN SHOT SOURCE ITEM SCORE NOTE --reviewer MODEL
         SOURCE footage (ITEM a library clip id), still_motion (ITEM an APPROVED still id of this shot) or pavo_reuse
         (ITEM <inventory.json path>#<clip sha256>)
+        MODEL is the actual reviewing session identity from owner_quality_policy.LONG_REVIEWERS, never a default
 """
 import hashlib
 import json
@@ -556,14 +557,14 @@ def fallback_digest(plan, shot, index, source, item, sha):
     canonical = {"shot": shot["id"], "kind": shot.get("kind"), "speaker": shot.get("speaker"),
                  "voiceover": shot.get("voiceover"), "characters": sorted(shot.get("characters") or []),
                  "prompt": shot.get("prompt"), "words": pavo_native.words(
-        pavo_native.shot_line(plan, index)) if shot.get("lines") is not None else [], "source": source,
+        pavo_native.shot_line(plan, index)), "source": source,
                  "item": item, "sha256": sha}
     return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=None, shots_dir=None, today=None,
-                   speech_dir=None, inventories=INVENTORIES):
-    """Claude's review of one fallback or inventory candidate (>= 9.5), into shots/<episode>.json with its `source`.
+                   speech_dir=None, inventories=INVENTORIES, *, reviewer=None):
+    """The named session's review of one fallback or inventory candidate (>= 9.5), into shots/<episode>.json with its `source`.
     Refused: a spoken shot or a shot with a character on a free fallback (SOURCE_SPOKEN_SHOT, SOURCE_CHARACTER_SHOT), a
     library clip not vetted, outside the licence list or clashing with the period (FOOTAGE_NOT_USABLE), one sharing
     no word with the shot (SOURCE_OFF_LINE: the picture follows the words), a still not APPROVED for this shot
@@ -574,6 +575,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     import episode_build as eb
     import pavo_native
     import plan_check
+    import reviewer_identity
     index = {s["id"]: i for i, s in enumerate(plan["shots"])}
     if shot_id not in index or eb.is_window(plan["shots"][index[shot_id]]):
         raise SystemExit(f"SOURCE_SHOT_UNKNOWN {shot_id}")
@@ -588,7 +590,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
         raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {REVIEW_MIN}-10)")
     if not (note or "").strip():
         raise SystemExit(f"SHOT_NOTE_MISSING {shot_id} (what the review saw)")
-    entry = {"source": source, "score": score, "note": note.strip(),
+    entry = {"source": source, "score": score, "note": note.strip(), "model": reviewer_identity.require(reviewer),
              "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}
     if source in FALLBACKS:
         refused = fallback_refusal(plan, shot, i, source, plan_check.still_record(item) if source == "still_motion"
@@ -614,6 +616,8 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
         if not rec or rec.get("status") != "APPROVED" or not rec.get("repo_path") or (not borrowed and (
                 rec.get("shot") != still_owner(shot) or rec.get("episode") != plan.get("episode"))):
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {still_owner(shot)})")
+        if not reviewer_identity.valid(rec.get("approved") or {}):
+            raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (unknown reviewer identity)")
         if borrowed:
             entry["still_from"] = item
         if shot.get("still_of") is not None:
@@ -657,12 +661,16 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
             if speech["flags"]:
                 raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
             entry["speech"] = speech
+    revoked = eb.revocation_problems(plan["episode"], {shot_id: entry}, shots_dir=shots_dir)
+    if revoked:
+        raise SystemExit("; ".join(revoked))
     out = Path(shots_dir or eb.SHOTS_DIR) / f"{plan['episode']}.json"
     data = eb.load(out) if out.exists() else {"episode": plan["episode"], "shots": {}}
     if source in FALLBACKS:
         repeat = image_repeat_refusal(plan, shot_id, entry, data["shots"])
         if repeat:
             raise SystemExit(repeat)
+    eb.archive_revoked_approval(data, shot_id)
     data["shots"][shot_id] = entry
     data["shots"] = dict(sorted(data["shots"].items()))
     eb.save(out, data)
@@ -710,6 +718,14 @@ def borrowed_clip(plan, shot, index, item, shots_dir=None):
     return {"clip_from": item, "asset": a["asset"], "clip_sha256": a["clip_sha256"],
             "clip_seconds": a.get("clip_seconds"), "from_score": a.get("score"),
             "request_sha256": fallback_digest(plan, shot, index, "pavo_reuse", item, a["clip_sha256"])}
+
+
+def source_sha256(approval):
+    """E145: the exact approved input, by source type. A still is bound to its image bytes, never a null clip hash.
+    Invalid or absent identities return None and cannot authorize a cached upscale or manifest."""
+    a = approval or {}
+    value = a.get("still_sha256") if a.get("source") == "still_motion" else a.get("clip_sha256")
+    return value if isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) else None
 
 
 def picture_sha256(approval):
@@ -839,12 +855,12 @@ def main(argv):
             out.parent.mkdir(parents=True, exist_ok=True)
             eb.save(out, result)
         return 0
-    if len(argv) == 8 and argv[1] == "approve-source":
+    if len(argv) == 10 and argv[1] == "approve-source" and argv[8] == "--reviewer":
         plan = eb.load(argv[2])
         import long_preflight
         _, report, _ = long_preflight.report_for(argv[2])
         digests = ((report or {}).get("requests") or {}).get("digests")
-        print(json.dumps(approve_source(plan, argv[3], argv[4], argv[5], argv[6], argv[7], digests),
+        print(json.dumps(approve_source(plan, argv[3], argv[4], argv[5], argv[6], argv[7], digests, reviewer=argv[9]),
                          ensure_ascii=False))
         return 0
     raise SystemExit(__doc__)

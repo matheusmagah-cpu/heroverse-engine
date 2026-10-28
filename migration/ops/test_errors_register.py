@@ -98,7 +98,7 @@ class Register(unittest.TestCase):
     def test_approval_checks_the_owner_floor(self):
         # E65: a 9.0 review would be approved and then refused at publication, again and again
         wf = (ROOT / '.github/workflows/approve.yml').read_text()
-        i, j = wf.index('oq.check(w, r["output_sha256"], oq.LONG_REVIEWER)'), wf.index('"approved": True')
+        i, j = wf.index('oq.check(w, r["output_sha256"], oq.LONG_REVIEWERS)'), wf.index('"approved": True')
         self.assertLess(i, j)
         self.assertIn('status="BELOW_OWNER_FLOOR"', wf)
 

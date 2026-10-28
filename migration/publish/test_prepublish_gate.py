@@ -50,6 +50,26 @@ def run(qa, manifest, review, preflight=(), video_bytes=None, criteria=CRITERIA,
 
 
 class Gate(unittest.TestCase):
+    def test_explicit_gpt_reviewer_passes_but_nearby_model_names_do_not(self):
+        qa, man, rev = good()
+        rev["watched_review"].update(model="gpt-6-astra-session-reviewer", overall=9.5)
+        self.assertEqual(run(qa, man, rev)["decision"], "PASS")
+        for model in ("gpt-6-astra", "gpt-6-astra-session-reviewer-other"):
+            with self.subTest(model=model):
+                rev["watched_review"]["model"] = model
+                self.assertEqual(run(qa, man, rev)["decision"], "UNKNOWN")
+
+    def test_gpt_reviewer_does_not_bypass_binding_missing_scores_or_frozen_qa(self):
+        qa, man, rev = good()
+        rev["watched_review"].update(model="gpt-6-astra-session-reviewer", overall=9.5)
+        other = copy.deepcopy(rev); other["output_sha256"] = "0" * 64
+        self.assertEqual(run(qa, man, other)["decision"], "UNKNOWN")
+        missing = copy.deepcopy(rev); del missing["watched_review"]["policy_safe"]
+        self.assertEqual(run(qa, man, missing)["decision"], "UNKNOWN")
+        self.assertEqual(run(qa, man, rev, criteria=CRITERIA + b" ")["dimensions"]["binding"], "FAIL")
+        failed = copy.deepcopy(rev); failed["watched_review"]["picture_quality"] = 6.5
+        self.assertEqual(run(qa, man, failed)["decision"], "FAIL")
+
     def test_good_case_passes_and_informative_rows_do_not_decide(self):
         r = run(*good())
         self.assertEqual(r["decision"], "PASS")

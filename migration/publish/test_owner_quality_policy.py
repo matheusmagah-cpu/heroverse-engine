@@ -15,6 +15,29 @@ def review(**updates):
 
 
 class OwnerQualityPolicy(unittest.TestCase):
+    def test_long_reviewers_are_explicit_and_do_not_expand_the_shorts_policy(self):
+        self.assertEqual(policy.LONG_REVIEWERS, ("claude-session-reviewer", "gpt-6-astra-session-reviewer"))
+        self.assertEqual(policy.SHORTS_REVIEWER, "gemini-3.8-flash")
+        for model in policy.LONG_REVIEWERS:
+            with self.subTest(model=model):
+                r = review(model=model)
+                self.assertEqual(policy.check(r, SHA, policy.LONG_REVIEWERS), [])
+                self.assertIn("REVIEW_MODEL_NOT_DESIGNATED", policy.check(r, SHA))
+        for model in ("gpt-6-astra", "gpt-6-astra-session-reviewer-other", "gemini-3.8-flash", None, True):
+            with self.subTest(unknown_model=model):
+                self.assertIn("REVIEW_MODEL_NOT_DESIGNATED",
+                              policy.check(review(model=model), SHA, policy.LONG_REVIEWERS))
+
+    def test_each_long_reviewer_still_requires_pass_floor_and_file_binding(self):
+        for model in ("claude-session-reviewer", "gpt-6-astra-session-reviewer"):
+            for changes, expected in (({"status": "FAIL"}, "REVIEW_NOT_PASS"),
+                                      ({"overall": 9.49}, "OVERALL_OUTSIDE_OWNER_RANGE"),
+                                      ({"overall": float("nan")}, "OVERALL_INVALID"),
+                                      ({"output_sha256": "b" * 64}, "REVIEW_NOT_FOR_THIS_FILE")):
+                with self.subTest(model=model, changes=changes):
+                    self.assertIn(expected, policy.check(review(model=model, **changes), SHA,
+                                                         policy.LONG_REVIEWERS))
+
     def test_inclusive_range(self):
         for value in (9.5, 9.7, 10, 10.0):
             with self.subTest(value=value):

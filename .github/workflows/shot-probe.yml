@@ -83,8 +83,7 @@ jobs:
           echo "OUT=$RUNNER_TEMP/out" >> "$GITHUB_ENV"
       - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
         run: |
-          timeout 300s sudo apt-get update -qq
-          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2   # mediapipe links libEGL/libGLESv2 (E89)
           python3 -m venv "$RUNNER_TEMP/voice"
           "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           python3 -m venv "$RUNNER_TEMP/lip"
@@ -188,6 +187,9 @@ jobs:
         with:
           name: shot-probe-${{ needs.probe.outputs.episode }}-${{ github.run_id }}
           path: ${{ runner.temp }}/out
+      - name: Media timing instrument for the hash-bound probe seal (E152)
+        if: steps.artifact.outcome == 'success'
+        run: bash migration/ci/apt_install.sh ffmpeg
       - name: Every clip into the release under its content-hash name; sheets and record on claude/shot-probe-<id>-<run>
         env:
           ARTIFACT: ${{ steps.artifact.outcome }}

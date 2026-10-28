@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
- "vetting": "APPROVED",
+ "vetting": "REJECTED",
  "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a thundercloud lit from behind, beams breaking through",
- "vetting_reasons": [],
+ "vetting_reasons": [
+  "modern aircraft / double contrail visible at t=4 s; approval explicitly revoked (E189)"
+ ],
  "vetting_luma": [
   94.5,
   90.8,
@@ -37,5 +39,23 @@
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-reflection-sky-thundercloud-clouds-sunbeams-atmosph-sha256-b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125.mp4",
  "release_tag": "v0.0.0-cloud-assets-20261025",
- "claude_seen": true
+ "claude_seen": true,
+ "vetting_history": [
+  {
+   "status": "APPROVED",
+   "note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a thundercloud lit from behind, beams breaking through",
+   "reasons": []
+  }
+ ],
+ "revocation": {
+  "by": "ChatGPT",
+  "at": "2026-10-28",
+  "reason": "Visual inspection at t=4 s shows an aircraft with a double contrail, a modern object incompatible with this historical Bible scene.",
+  "evidence": {
+   "asset_sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
+   "frame_seconds": 4,
+   "method": "Direct visual inspection; not an automated detector."
+  },
+  "error": "E189"
+ }
 }

@@ -1,14 +1,64 @@
 #!/usr/bin/env python3
 """short_engine.py: shots tile the Short, clips are never looped or slowed past MAX_SLOW, captions stay short."""
 from pathlib import Path
+import copy
+import json
 import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import short_engine as se
 
 
 class Plan(unittest.TestCase):
+    def test_e146_native_picture_and_audio_use_the_same_measured_source_onset(self):
+        import episode_build as eb
+        import long_build as lb
+        import pavo_native as pn
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            clip = d / "native.mp4"
+            clip.write_bytes(b"approved native clip")
+            layout = {"lines": [{"start": 0.0, "end": 2.0}], "total": 3.2}
+            spans = {"s-eve": ([0], 0.6, 2.6)}
+            approvals = {"s-eve": {"clip_sha256": eb.sha256(clip),
+                                    "speech": {"gain_db": 1.0, "onset": 0.6, "end": 2.6}}}
+            mixed = []
+            with patch.object(eb, "native_spans", return_value=spans), \
+                    patch.object(eb.clip_timing, "measure", return_value={"clip_sha256": eb.sha256(clip),
+                                 "video_seconds": 4.0, "audio_seconds": 4.0}), \
+                    patch.object(pn, "premix", side_effect=lambda voice, places, out, total: mixed.extend(places)):
+                voice, seconds, onsets = eb.native_voice({}, d, layout, {"s-eve": str(clip)},
+                                                        {"s-eve": 4.0}, approvals)
+            cuts = eb.shift_onsets([{"shot": "s-eve", "clip": str(clip), "start": 0.0, "end": 3.2,
+                                     "src_start": 0.0, "speed": 1.0, "talk": {"start": 0.0, "end": 2.0}}], onsets)
+            self.assertEqual(cuts[0]["src_start"], mixed[0]["src_start"])
+            timeline = d / "timeline.json"
+            timeline.write_text(json.dumps({"voice_seconds": 2.0, "sentences": layout["lines"]}))
+            cplan = {"voice": voice, "timeline": str(timeline), "music": "unused", "shots": cuts,
+                     "native_onsets": onsets}
+            # The real renderer must reach its media stage after validating this synchronized plan. Stop exactly
+            # there: no encode is needed to reproduce the former PLAN_REFUSED at the producer/consumer boundary.
+            with patch.object(se, "duration", return_value=4.0), \
+                    patch.object(lb, "run", side_effect=RuntimeError("media stage reached")):
+                with self.assertRaisesRegex(RuntimeError, "media stage reached"):
+                    lb.render(cplan, d / "out.mp4")
+            self.assertEqual(se.talk_problems(cuts, layout["lines"], onsets), [])
+            for change in ({"src_start": 0.0}, {"src_start": 0.7}, {"speed": 1.1}, {"end": 1.9}, {"start": 0.1}):
+                wrong = [dict(cuts[0], **change)]
+                self.assertIn("TALK_NOT_ALIGNED 0", se.talk_problems(wrong, layout["lines"], onsets), change)
+            # A positive offset without an actual native audio placement is still refused; Kokoro remains at 0.
+            self.assertIn("TALK_NOT_ALIGNED 0", se.talk_problems(cuts, layout["lines"]))
+            kokoro = copy.deepcopy(cuts)
+            kokoro[0]["src_start"] = 0.0
+            self.assertEqual(se.talk_problems(kokoro, layout["lines"]), [])
+            kokoro[0]["src_start"] = 0.0005
+            self.assertIn("TALK_NOT_ALIGNED 0", se.talk_problems(kokoro, layout["lines"]))
+            for invalid in (float("nan"), float("inf"), -float("inf"), -0.1):
+                self.assertIn("TALK_NOT_ALIGNED 0", se.talk_problems(cuts, layout["lines"], {"s-eve": invalid}))
+
     def test_shots_must_tile_the_short(self):
         ok = [{"start": 0.0, "end": 5.0}, {"start": 5.0, "end": 10.0}]
         self.assertEqual(se.check_shots(ok, 10.0), [])

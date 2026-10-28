@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Offline: E85 a GitHub release holds at most 1000 assets. New assets go to the newest release, reads try newest first."""
 import os
+import hashlib
+import json
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
+import textwrap
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -72,6 +76,35 @@ class ReleaseAssets(unittest.TestCase):
         self.assertEqual(os.listdir(self.t / "rel" / NEW), ["clip.mp4"])
         self.assertEqual(os.listdir(self.t / "rel" / OLD), [])
         self.assertEqual(self.run_script("upload", str(f), "--repo", "o/r").returncode, 0)  # release exists: no 2nd create
+
+    def test_e167_upscaled_image_record_resolves_to_the_release_that_received_its_bytes(self):
+        workspace = self.t / "checkout"
+        (workspace / "migration/ci").mkdir(parents=True)
+        shutil.copy(SCRIPT, workspace / "migration/ci/assets.sh")
+        destination = workspace / "migration/production/pilot-015/images"
+        destination.mkdir(parents=True)
+        temporary = self.t / "runner"
+        images = temporary / "img"
+        images.mkdir(parents=True)
+        data = b"offline fixture for already-upscaled image bytes"
+        for name, metadata in (("legacy", {}), ("tagged", {"release_tag": OLD})):
+            (images / f"{name}.png").write_bytes(data)
+            (images / f"{name}.json").write_text(json.dumps({"release_asset": "old.png", "sha256": "0" * 64,
+                                                            "size": [4096, 4096], **metadata}))
+        workflow = (ROOT / ".github/workflows/images-upres.yml").read_text()
+        block = workflow.split("      - name: Release assets and records\n        run: |\n", 1)[1]
+        script = textwrap.dedent(block).split('git config user.name', 1)[0]
+        result = subprocess.run(["bash", "-e", "-o", "pipefail", "-c", script], cwd=workspace,
+                                env={**self.env, "GITHUB_WORKSPACE": str(workspace), "RUNNER_TEMP": str(temporary),
+                                     "PILOT": "pilot-015"}, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        for name in ("legacy", "tagged"):
+            record = json.loads((destination / f"{name}.json").read_text())
+            self.assertEqual(record.get("release_tag"), NEW)
+            received = self.t / "rel" / record["release_tag"] / record["release_asset"]
+            self.assertEqual(received.read_bytes(), data)
+            self.assertEqual(record["sha256"], hashlib.sha256(received.read_bytes()).hexdigest())
+            self.assertEqual(record["size"], [4096, 4096])
 
     def test_download_tries_newest_first_and_falls_back(self):
         self.put_old("a.mp4", b"old-a"); self.put_old("b.mp4", b"old-b")

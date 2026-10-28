@@ -90,10 +90,30 @@ class Stills(unittest.TestCase):
 
     def approve(self, cid, score=9.6):
         return ss.approve(self.still, cid, score, "the ark box-shaped, the dust soft, no stray prop",
-                          stills_dir=self.dir, today="2026-10-27")
+                          stills_dir=self.dir, today="2026-10-27", reviewer="claude-session-reviewer")
 
     def codes(self, shot=None):
         return [p.split()[0] for p in pc.frame_problems(self.i, shot or self.shot, self.plan)]
+
+    def test_e149_still_identity_is_explicit_truthful_and_consumed(self):
+        cid = self.candidate()
+        before = (self.dir / f"{self.still}.json").read_bytes()
+        for model in (None, "", "unknown-session", "gemini-3.8-flash"):
+            with self.assertRaisesRegex(SystemExit, "REVIEWER_IDENTITY_REFUSED"):
+                ss.approve(self.still, cid, 9.6, "reviewed fixture", stills_dir=self.dir, reviewer=model)
+            self.assertEqual((self.dir / f"{self.still}.json").read_bytes(), before)
+            self.assertFalse((self.dir / f"{self.still}.jpg").exists())
+        rec = ss.approve(self.still, cid, 9.6, "reviewed fixture", stills_dir=self.dir,
+                         reviewer="gpt-6-astra-session-reviewer")
+        self.assertEqual(rec["approved"]["model"], "gpt-6-astra-session-reviewer")
+        self.assertEqual(rec["approved"]["by"], rec["approved"]["model"])
+        self.assertEqual(self.codes(), [])
+        rec["approved"]["model"] = "not-the-reviewer"
+        ss.save(self.dir / f"{self.still}.json", rec)
+        self.assertIn("STILL_NOT_APPROVED", self.codes())
+        del rec["approved"]["model"]
+        ss.save(self.dir / f"{self.still}.json", rec)
+        self.assertEqual(self.codes(), [])  # historical attribution stays untouched, not relabelled as GPT
 
     def test_genesis_08s_registered_stills_obey_the_rules_and_the_live_plan_starts_from_none(self):
         # 27/10: the six FLUX candidates for s-dust, s-ridge and s-board were rejected at review and the shots went
@@ -179,6 +199,16 @@ class Stills(unittest.TestCase):
         # a shot without frames digests exactly as before (the adopted clips keep their approvals)
         other = self.plan["shots"][self.index["s-axe"]]
         self.assertNotIn("frames", eb.request_identity(other, self.index["s-axe"], self.plan, {}, {})[1])
+
+    def test_e148_nonfinite_review_scores_never_write_an_approval(self):
+        cid = self.candidate()
+        record = self.dir / f"{self.still}.json"
+        before = record.read_bytes()
+        for score in (float("nan"), float("inf"), -float("inf"), 9.49):
+            with self.subTest(score=score), self.assertRaisesRegex(SystemExit, "STILL_SCORE_BELOW_FLOOR"):
+                self.approve(cid, score=score)
+            self.assertEqual(record.read_bytes(), before)
+            self.assertFalse((self.dir / f"{self.still}.jpg").exists())
 
     def test_an_approved_still_edited_by_hand_is_refused(self):
         rec = self.approve(self.candidate())
@@ -389,7 +419,7 @@ class LongStills(unittest.TestCase):
         with Image.open(out) as im:
             self.assertGreater(im.size[0], im.size[1] * 0.9)   # 640x360 cells
         rec = ss.approve(self.still, cid, 9.6, "the sword's fire soft, the gate dark, no figure", stills_dir=self.dir,
-                         today="2026-10-27")
+                         today="2026-10-27", reviewer="claude-session-reviewer")
         self.assertEqual((rec["status"], rec["size"]), ("APPROVED", [1920, 1080]))
         self.assertEqual(pc.frame_problems(self.i, self.shot, self.plan), [])
         # the request sends the approved 16:9 still as its first frame
@@ -411,7 +441,7 @@ class LongStills(unittest.TestCase):
                                             "prompt": self.shot["prompt"], "size": [1080, 1920],
                                             "repo_path": ss.rel(cand), "sha256": ss.sha256(cand)})
         with self.assertRaises(SystemExit) as c:
-            ss.approve(self.still, cand.stem, 9.6, "x", stills_dir=self.dir)
+            ss.approve(self.still, cand.stem, 9.6, "x", stills_dir=self.dir, reviewer="claude-session-reviewer")
         self.assertTrue(str(c.exception).startswith("STILL_ASPECT_MISMATCH"), str(c.exception))
         with self.assertRaises(SystemExit) as c:
             ss.aspect_of({"aspect_ratio": "4:3"})

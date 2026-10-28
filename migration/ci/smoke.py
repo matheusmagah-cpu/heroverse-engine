@@ -13,6 +13,35 @@ from pathlib import Path
 # closing music tails are a fixed few seconds, a large share of a 1-minute cut (0.79 on the first smoke) and a small
 # share of a 16-minute render (0.857 on 008); the real render still needs 0.85
 LENGTH_ONLY = {"duration_min", "speech_presence"}
+# qa_pilot.main emits these for every grammar/version. A partial or malformed report is not evidence that a
+# render passed. Grammar-specific rows remain mandatory when emitted, including UNKNOWN/None values.
+CORE_CHECKS = {"full_decode_without_errors", "video_format", "duration_min", "integrated_lufs", "true_peak",
+               "speech_presence", "no_singing", "wer_vs_script", "words_per_minute", "first_word_onset",
+               "hook_second_person", "music_owned", "voice_model_pinned"}
+
+
+def qa_problems(path):
+    try:
+        report = json.loads(path.read_text())
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return ["QA_UNREADABLE"]
+    if not isinstance(report, dict) or report.get("version") != "pilot-qa-v1":
+        return ["QA_INVALID_REPORT"]
+    checks = report.get("checks")
+    if not isinstance(checks, dict) or not checks:
+        return ["QA_MISSING_CHECKS"]
+    problems = [f"QA_MISSING {k}" for k in sorted(CORE_CHECKS - checks.keys())]
+    # The real shortened render is normally FAIL because of duration/presence. Its aggregate status must still
+    # agree with its measurements; only a measured boolean False in the two length rows can be forgiven.
+    expected = "PASS" if all(v is True for v in checks.values()) else "FAIL"
+    if report.get("status") != expected:
+        problems.append("QA_STATUS_MISMATCH")
+    for key, value in checks.items():
+        if type(value) is not bool:
+            problems.append(f"QA_UNKNOWN {key}")
+        elif value is False and key not in LENGTH_ONLY:
+            problems.append(f"QA_FAIL {key}")
+    return problems
 
 
 def cut(script):
@@ -31,8 +60,7 @@ def verdict(work):
         if not (work / f).exists():
             problems.append(f"MISSING {f}")
     if (work / "qa.json").exists():
-        checks = json.loads((work / "qa.json").read_text()).get("checks", {})
-        problems += [f"QA_FAIL {k}" for k, ok in checks.items() if not ok and k not in LENGTH_ONLY]
+        problems += qa_problems(work / "qa.json")
     if (work / "package/thumbnail_check.json").exists():
         tc = json.loads((work / "package/thumbnail_check.json").read_text())
         if tc.get("status") != "PASS":

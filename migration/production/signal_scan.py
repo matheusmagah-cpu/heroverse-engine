@@ -34,10 +34,12 @@ def events(log, start_key, end_key):
 def scan(video):
     c = SCAN_CRITERIA
     total = duration(video)
-    log = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", video,
+    detected = subprocess.run(["ffmpeg", "-nostdin", "-xerror", "-hide_banner", "-nostats", "-i", video,
                           "-vf", f"blackdetect=d=0.1:pic_th={c['black_pic_th']},freezedetect=n={c['freeze_noise']}:d=1",
                           "-af", f"silencedetect=n={c['silence_db']}dB:d=0.5", "-f", "null", "-"],
-                         capture_output=True, text=True).stderr
+                              capture_output=True, text=True)
+    detected.check_returncode()  # E185: no events from a failed detector are missing evidence, never a clean scan
+    log = detected.stderr
 
     def inner(spans):
         out = []
@@ -67,7 +69,8 @@ def main(video, out_json):
         r = scan(video)
     except Exception as e:  # a scan that could not run is missing evidence, never a pass
         r = {"version": VERSION, "status": "ERROR", "error": f"{type(e).__name__}: {e}"[:300]}
-    open(out_json, "w").write(json.dumps(r, indent=1) + "\n")
+    with open(out_json, "w") as output:
+        output.write(json.dumps(r, indent=1) + "\n")
     print(json.dumps({k: r.get(k) for k in ("status", "error") if k in r} |
                      {k: v.get("longest_s") for k, v in r.get("rows", {}).items()}))
     return 0 if r["status"] == "PASS" else 1
