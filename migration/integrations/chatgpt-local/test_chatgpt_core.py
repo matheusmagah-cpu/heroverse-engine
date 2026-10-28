@@ -96,6 +96,72 @@ class JobFile(unittest.TestCase):
                 self.assertIn("JOB_UNREADABLE", buf.getvalue())
 
 
+class FakeEl:
+    """A UI Automation wrapper as pywinauto returns it from Desktop().windows(): element_info, rectangle(),
+    descendants(), and no child_window()."""
+    def __init__(self, ctype, name="", cls="", rect=(0, 0, 10, 10), pid=1, kids=()):
+        from types import SimpleNamespace
+        self.element_info = SimpleNamespace(control_type=ctype, name=name, class_name=cls, process_id=pid)
+        self._r, self._kids = rect, list(kids)
+
+    def rectangle(self):
+        from types import SimpleNamespace
+        l, t, r, b = self._r
+        return SimpleNamespace(left=l, top=t, right=r, bottom=b, width=lambda: r - l, height=lambda: b - t)
+
+    def descendants(self):
+        return self._kids
+
+
+class AppWrappers(unittest.TestCase):
+    def test_the_new_chat_button_comes_from_the_wrapper_itself(self):
+        # E145: the first real run called child_window() on the wrapper Desktop().windows() returns and crashed
+        import app_driver
+        top = FakeEl("Button", "Novo chat", rect=(60, 96, 282, 126))
+        low = FakeEl("Button", "Novo chat", rect=(322, 434, 346, 458))
+        w = FakeEl("Window", "ChatGPT", kids=[low, FakeEl("Button", "Juninho"), top])
+        self.assertFalse(hasattr(w, "child_window"))
+        self.assertIs(app_driver.new_chat_button(w), top)
+        self.assertIsNone(app_driver.new_chat_button(FakeEl("Window", kids=[])))
+
+    def test_the_open_dialog_is_found_by_its_class_inside_the_app(self):
+        # E146: the app's Open dialog was looked for among the desktop's windows by title and never found
+        import app_driver
+        from unittest import mock
+        dlg = FakeEl("Window", "Selecionar arquivos", cls="#32770")
+        w = FakeEl("Window", "ChatGPT", kids=[FakeEl("Button", "Enviar"), dlg])
+        fake_desktop = mock.Mock()
+        fake_desktop.return_value.windows.return_value = []
+        with mock.patch.dict(sys.modules, {"pywinauto": mock.Mock(Desktop=fake_desktop)}):
+            self.assertIs(app_driver.file_dialog(w), dlg)
+            self.assertIsNone(app_driver.file_dialog(FakeEl("Window", kids=[FakeEl("Button", "Enviar")])))
+
+
+class Hands(unittest.TestCase):
+    def test_no_click_or_key_reaches_another_window(self):
+        # E147: on the PC in use, the owner's Claude app came over ChatGPT and the driver's '+' click landed outside
+        # the app; every click and key now checks the app's process is the one in front and under the pointer
+        import app_driver
+        from unittest import mock
+        fake_mouse = mock.Mock()
+        fake_kb = mock.Mock()
+        pw = mock.Mock(mouse=fake_mouse)
+        mods = {"pywinauto": pw, "pywinauto.mouse": fake_mouse, "pywinauto.keyboard": fake_kb}
+        el = FakeEl("Button", "Enviar", rect=(100, 100, 140, 130))
+        with mock.patch.dict(sys.modules, mods), mock.patch.object(app_driver.time, "sleep"), \
+                mock.patch.object(app_driver, "ours_at", return_value=False), \
+                mock.patch.object(app_driver, "foreground_pid", return_value=999), \
+                mock.patch.dict(app_driver.APP, {"pid": 42, "win": None}), \
+                mock.patch.object(app_driver.ctypes, "windll", create=True):
+            with self.assertRaises(app_driver.Stop) as c:
+                app_driver.glide_click(el)
+            self.assertIn("APP_NOT_IN_FRONT", str(c.exception))
+            fake_mouse.click.assert_not_called()
+            with self.assertRaises(app_driver.Stop):
+                app_driver.keys("^v")
+            fake_kb.send_keys.assert_not_called()
+
+
 def mock_lock(mod, d):
     from unittest import mock
     import contextlib
