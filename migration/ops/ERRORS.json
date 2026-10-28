@@ -2301,6 +2301,19 @@
     "contains": "def test_e209_keeper_native_plan_cannot_silently_restore_kokoro_or_still_fallbacks",
     "covers": ["direction"]
    }
+  },
+  {
+   "id": "E210",
+   "date": "2026-10-28",
+   "class": "env-vs-test",
+   "prior": ["E105", "E116", "E118", "E137", "E141", "E168", "E206"],
+   "error": "Adding hash-bound ffprobe measurements for the three existing arc-01 native clips correctly exposed speech beyond the s-c4-blame media end. Five synthetic long layout/request tests in two suites then errored because their estimated-duration fixtures implicitly loaded mutable production approvals. The real refusal is valid; the fixture dependency was not.",
+   "fix": "Isolate only synthetic long layout/request predictions from the live approval store; keep their existing assertions and explicit approval dictionaries. Add an isolation regression and retain the separate E152 measured-media rejection tests. Commit the real measurements without changing historical speech endpoints, scores or bytes. Production remains blocked where the native claim exceeds the media; passing unit tests are not production clearance.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_preflight.py",
+    "contains": "def test_e210_layout_fixture_is_independent_of_live_native_approvals",
+    "covers": ["env-vs-test"]
+   }
   }
  ]
 }
