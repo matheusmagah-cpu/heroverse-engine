@@ -257,12 +257,119 @@ class Grammar(unittest.TestCase):
             p["narration"][k]["text"] = "It was quiet."
         self.assertIn("COLD_OPEN_SHORT", codes(check(p)))
 
-    def test_a_voiceover_keeper_is_refused_in_the_long_until_it_has_its_own_path(self):
+    def test_e129_the_voiceover_keeper_plan_b_is_a_path_of_the_long_too(self):
+        # E130: plan B (owner-approved for the Shorts, #423) was refused in the long (LONG_VOICEOVER_UNSUPPORTED) while
+        # the arc-01 long's talking Keeper failed FACE_NOT_FOUND; now it has the long's path: his silent clip covers his
+        # line and the gap after (long_build cuts a run from its first word), the Short's prompt and talk_refs rules
+        chars = dict(CHARS, keeper=dict(CHARS["keeper"], talk_refs=["talk"]))
         p = plan()
-        k = next(s for s in p["shots"] if s["kind"] == "keeper")
+        k = shot(p, "k-insight-1")
         k["voiceover"] = True
-        self.assertIn("LONG_VOICEOVER_UNSUPPORTED", codes(check(p)))
-        self.assertNotIn("LONG_VOICEOVER_UNSUPPORTED", codes(check(plan())))
+        k["prompt"] = (f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small "
+                       "campfire, holds his head level, looks straight into the camera, his lips closed, silent. "
+                       "Night in the desert, firelight. Warm and grave.")
+        found = codes(check(p, chars=chars))
+        self.assertEqual([c for c in found if c.startswith(("KEEPER", "LONG_VOICEOVER"))], [], found)
+        self.assertIn("KEEPER_VO_NO_TALK_REF", codes(check(p)))           # still generated from his talking frame
+        k["prompt"] = k["prompt"].replace("his lips closed, silent", "speaks to the camera")
+        self.assertIn("KEEPER_VO_PROMPT", codes(check(p, chars=chars)))   # a voice-over Keeper never speaks on screen
+        long_line = " ".join([KEEPER_12] * 4)                              # ~16.7 s: more than one slowed 12 s clip
+        p["narration"][k["lines"][0]]["text"] = long_line
+        self.assertIn("KEEPER_LINE_TOO_LONG", codes(check(p, chars=chars)))
+        # the long's cover is the line and the gap after (no gap before: a run starts on its first word)
+        shots = [{"kind": "scene"}, k, {"kind": "scene"}]
+        self.assertEqual(lc.pc.vo_cover(shots, 1, long=True), (0.0, lc.LONG_LINE_GAP))
+        self.assertEqual(lc.pc.vo_cover(shots, 1), (0.0, lc.pc.LINE_GAP))   # the Short's own rule is unchanged
+
+
+V4_DIFF = {"version", "frozen_at_utc", "basis", "frozen_before_first_story_render", "frozen_before_first_story_v4_render",
+           "speech.asr_model", "rights.ai_video.audio", "rights.ai_video.audio_silent_shots",
+           "rights.ai_video.speech_checks", "rights.ai_video.refused_line_voice", "rights.fallback_sources",
+           "grammar.ai_video_speech_checks", "grammar.spoken_audio_mix", "grammar.fallback_shots"}
+
+
+def flat(d, prefix=""):
+    out = {}
+    for k, v in d.items():
+        key = f"{prefix}{k}"
+        if isinstance(v, dict) and key not in V4_DIFF:
+            out.update(flat(v, key + "."))
+        else:
+            out[key] = v
+    return out
+
+
+def v4_plan(p=None):
+    p = p or plan()
+    p["criteria"] = lc.V4
+    p["ambience"] = "the garden at dusk: a soft evening wind through the leaves and a few distant birds settling"
+    for s in p["shots"]:
+        if s["kind"] == "keeper":
+            s["prompt"] = s["prompt"].replace("Medium close-up", lc.KEEPER_FRAMING)
+    return p
+
+
+class StoryQaV4(unittest.TestCase):
+    """Owner 27/10 (R1-R4): story QA v4, a new frozen file, read for the plans that declare it; v3 is unchanged."""
+
+    def test_v4_is_v3_with_only_the_owner_rows_changed_or_added(self):
+        v3, v4 = json.loads(QA_V3.read_text()), json.loads(lc.QA_V4.read_text())
+        self.assertEqual(hashlib.sha256(QA_V3.read_bytes()).hexdigest(), lc.QA_SHA256)      # v3 frozen, untouched
+        self.assertEqual(hashlib.sha256(lc.QA_V4.read_bytes()).hexdigest(), lc.QA_V4_SHA256)
+        f3, f4 = flat(v3), flat(v4)
+        # every v3 row and number is in v4 with the same value, but the one row the owner changed
+        changed = sorted(k for k in f3 if k not in V4_DIFF and f4.get(k) != f3[k])
+        self.assertEqual(changed, [])
+        self.assertEqual(sorted(k for k in f4 if k not in f3), sorted(k for k in V4_DIFF if k in f4 and k not in f3))
+        self.assertEqual((v3["rights"]["ai_video"]["audio"], v4["rights"]["ai_video"]["audio"]),
+                         ("removed", "pavo speech+ambient kept per clip under checks"))
+        checks = v4["rights"]["ai_video"]["speech_checks"]
+        self.assertEqual(checks["exact_words_wer_max"], 0.0)
+        self.assertFalse(checks["music_from_pavo"])
+        self.assertEqual(v4["speech"]["asr_model"]["model"], "medium.en")
+        self.assertEqual(v4["rights"]["allowed_footage_licences"], v3["rights"]["allowed_footage_licences"])
+
+    def test_a_plan_keeps_v3_unless_it_declares_v4(self):
+        self.assertEqual(lc.criteria_version(plan()), lc.V3)
+        self.assertEqual(check(plan())["estimate"]["criteria"], lc.V3)
+        r = check(v4_plan())
+        self.assertEqual(r["problems"], [])
+        self.assertEqual(r["estimate"]["criteria"], lc.V4)
+        p = plan()
+        p["criteria"] = "story-qa-criteria-v9"
+        self.assertIn("CRITERIA_UNKNOWN", codes(check(p)))
+        self.assertIsNone(lc.frozen_qa_problem(plan=v4_plan()))
+        self.assertTrue(lc.frozen_qa_problem(plan=p).startswith("CRITERIA_UNKNOWN"))
+
+    def test_e129_the_long_keeper_at_16x9_is_framed_from_the_chest_up_under_v4(self):
+        p = v4_plan()
+        self.assertNotIn("KEEPER_FRAMING_16X9", codes(check(p)))
+        shot(p, "k-close-1")["prompt"] = shot(p, "k-close-1")["prompt"].replace(lc.KEEPER_FRAMING, "Medium close-up")
+        self.assertIn("KEEPER_FRAMING_16X9", codes(check(p)))
+        self.assertNotIn("KEEPER_FRAMING_16X9", codes(check(plan())))   # a v3 plan is left as it was frozen
+
+    def test_native_speech_needs_v4_a_described_voice_and_an_ambience(self):
+        p = plan()
+        p["audio_route"] = "pavo_native"
+        self.assertIn("AUDIO_ROUTE_NEEDS_V4", codes(check(p)))
+        p = v4_plan()
+        del p["ambience"]
+        self.assertIn("AMBIENCE_MISSING", codes(check(p)))
+        p = v4_plan()
+        p["audio_route"] = "loud"
+        self.assertIn("AUDIO_ROUTE_UNKNOWN", codes(check(p)))
+        r = check(v4_plan())
+        self.assertIn("s-open", r["estimate"]["audio_routes"]["pavo_native"])
+        self.assertIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
+
+    def test_a_line_pavo_refuses_goes_to_kokoro_on_its_own(self):
+        # E129 (PR #473): "naked" was refused by Pavo's prompt filter; that line is voiced by Kokoro, automatically
+        p = v4_plan()
+        god = shot(p, "s-god")
+        god["line"] = "Who told thee that thou wast naked? Hast thou eaten of the tree"
+        r = check(p)
+        self.assertIn("s-god", r["estimate"]["audio_routes"]["kokoro_prompt_filter"])
+        self.assertNotIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
 
     def test_review_2_keeper_prompts_pass_the_prompt_rules_too(self):
         p = plan()

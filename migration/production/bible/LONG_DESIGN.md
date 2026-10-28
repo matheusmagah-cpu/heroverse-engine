@@ -362,3 +362,42 @@ clip approved now; a shot approved again since is upscaled again.
 The 9 image-first shots get 16:9 stills: `scene_stills.py` prepares, crops, finalizes (1920x1080), sheets and
 approves at the plan's aspect, and refuses a picture at another aspect instead of stretching it
 (STILL_ASPECT_MISMATCH). Pavo agnes-image at 16:9 quoted 0 credits (`evidence/pavo/20261027/agnes-image-16x9-quote.json`).
+
+## 9. No stall: Pavo's own speech, reuse, the budget and free fallbacks (owner, 27/10; story QA v4)
+
+Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent shots"), for the long and the Shorts:
+- **Which QA.** A long declares `"criteria": "story-qa-criteria-v4"` (`qa_criteria_story_v4.json`: v3 with only
+  `rights.ai_video.audio` changed and rows added; every v3 number unchanged). Without it a long stays on v3 exactly as
+  before. long_plan_check, qa_pilot (STORY_V4_ROWS), prepublish_gate and render_queue pin both files.
+- **R4, Pavo's speech.** On v4 (a long's `"audio_route": "kokoro"` keeps our voice; a Short's `"audio_route":
+  "pavo_native"` is refused, AUDIO_ROUTE_SHORT_UNSUPPORTED, until a frozen Short criteria file holds the speech-check
+  rows) every spoken shot is generated with Pavo's
+  sound on and the SOUND sentence of #473's prompt A (`pavo_native.sound_sentence`: the speaker's fixed voice from
+  `voices.json`, on camera or off screen, the exact line once, pronunciation hints, the plan's `ambience`, no music).
+  A silent scene's request is unchanged, so its approval stays valid. Each kept clip is measured
+  (`episode_build.py speech-check`: medium.en words, YAMNet music and singing, loudness, the speaker cosine against
+  `voices.json` references, its lips / still mouth / no face) and approve-shot refuses it unless
+  `pavo_native.speech_verdict` passes (exact words WER 0, consistent and distinct voice, one gain to -18 LUFS within
+  +12 dB, no music, no singing). The voice is bound to `voices.json` by sha256 (review of #476): measured against
+  exactly the speaker's recorded reference (VOICE_REFERENCE_MISSING / _MISMATCH; a REFS file that is not that clip is
+  refused, VOICE_REFERENCE_FILE_MISMATCH) and against every other speaker's reference (VOICE_OTHERS_MISSING when there
+  is none, VOICE_OTHERS_MISMATCH when one is left out). A reference is chosen by Claude's review (>= 9.5) of a probed
+  native clip that passed every other check: `episode_build.py voice-reference RECORD SHOT ASSET SCORE NOTE`, by PR. The build lays each clip's speech into the voice track at its line
+  (`pavo_native.premix`: one gain, 80 ms fades, a continuous 60-900 Hz bed), starts the talking cut at the speech
+  onset, then ducks the owned music and loudnorms as before; a native line's layout takes its approved clip's speech
+  span.
+- **Refused words.** A line holding a word Pavo's filter refuses (`evidence/pavo/prompt-blocks.json`) is voiced by
+  Kokoro (today's input-audio route); a new block read back (PAVO_PROMPT_BLOCKED, E129) is recorded and the shot goes
+  again at once on the Kokoro route.
+- **R1, reuse.** probe-queue lists a shot with a clean clip of its request (main's records, the shot-probe branches,
+  clip inventories) under `awaiting_review`, never in a batch; a spoken shot with a clean clip of its Kokoro request
+  keeps that route. An inventory clip on Pavo's CDN is approved with `approve-source ... pavo_reuse` and fetched by
+  sha256.
+- **R2/R3, budget and fallbacks.** `episode_build.py sources PLAN [--write]` (and probe-queue's `sources`) spends the
+  shared budget (quota.py, #475) in risk order, the spoken shots first; a silent, character-free shot it does not
+  reach gets licensed-footage candidates (APPROVED, seen, frozen licence list, 2560x1440, sharing words with its
+  subject and line, no period clash or person) or an APPROVED still of the shot in camera motion; a spoken shot or a
+  shot with a character waits. Claude approves a candidate with `approve-source` (>= 9.5, a note); the build ships
+  that source (footage at its frame, a still rendered in motion at 2560x1440) and the manifest names it per shot.
+- **The Keeper at 16:9 (E130).** Plan B (the voice-over Keeper) is a path of the long; under v4 a 16:9 Keeper prompt
+  says "Close-up from the chest up, his face large in the centre of the frame" (KEEPER_FRAMING_16X9).

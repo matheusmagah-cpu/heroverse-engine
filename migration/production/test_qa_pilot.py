@@ -232,16 +232,80 @@ class StoryV3Rows(unittest.TestCase):
                 self.assertEqual(render_queue.STANDARD_QAS.get(version), sha, where)
                 # qa_pilot reads it with its own grammar (main() branches on the version), never a fallback
                 self.assertIn(f'"{version}"', (HERE / "qa_pilot.py").read_text(), where)
-                pinned = re.search(r'QA_SHA256 = "([0-9a-f]{64})"', src)
+                # each frozen file the checker reads is pinned there with its own hash (v3 and, since 27/10, v4)
+                pinned = re.findall(r'QA(?:_V[0-9]+)?_SHA256 = "([0-9a-f]{64})"', src)
                 if pinned:
-                    self.assertEqual(pinned.group(1), sha, where)
+                    self.assertIn(sha, pinned, where)
                 seen += 1
-        self.assertGreaterEqual(seen, 1)   # long_plan_check reads story QA v3
+        self.assertGreaterEqual(seen, 2)   # long_plan_check reads story QA v3 and v4
 
     def test_the_instruments_load_only_in_main(self):
         # importing the QA (the gate reads STORY_V3_ROWS) never loads the audio/video instruments
         self.assertNotIn("av_profile", sys.modules)
         self.assertNotIn("av_semantic", sys.modules)
+
+V4 = json.loads((HERE / "qa_criteria_story_v4.json").read_text())
+
+
+class StoryV4Rows(unittest.TestCase):
+    """Owner 27/10 (R1-R4): story QA v4 is read row by row for a long that declares it; v3's rows are all there."""
+
+    def manifest(self, **over):
+        clips = [{"id": "s-talk", "source": "pavo", "licence": "Pavo generated (owner-owned)",
+                  "model": "agnes-video-new-flash", "upscaler": V4["rights"]["ai_video"]["upscaler"],
+                  "audio": V4["rights"]["ai_video"]["audio"], "vetting": "APPROVED", "credit": "x", "sha256": "a",
+                  "clip_check": "PASS", "talking": True, "lipsync_check": "PASS", "speech_checks": "PASS"},
+                 {"id": "s-sky", "source": "footage", "licence": "Pixabay Content License", "credit": "Footage: x",
+                  "vetting": "APPROVED", "sha256": "b", "clip_check": "PASS", "audio": "removed", "talking": False}]
+        m = {"clips": clips, "holds": [{"shot": "s-talk", "characters": ["eve"], "image": "s-talk#0", "kind": "footage",
+                                        "start": 0, "end": 5}, {"shot": "s-sky", "characters": [], "image": "s-sky#0",
+                                                                 "kind": "footage", "start": 5, "end": 10}],
+             "spoken_shots": [{"shot": "s-talk"}],
+             "spoken_audio_mix": {"per_clip_gain_db": {"s-talk": 2.0}, "audio_crossfade_seconds": 0.08,
+                                  "ambience_bed": {"band_hz": [60, 900]}, "music": "owned"}}
+        m.update(over)
+        return m
+
+    def run_v4(self, manifest, asr=None):
+        import unittest.mock as mock
+        base = {k: True for k in ("ai_video_source_and_licence", "footage_licensed_vetted_and_credited")}
+        with mock.patch.object(q, "grammar_checks_story_v3", return_value=(dict(base), {})):
+            return q.grammar_checks_story_v4(V4, manifest, asr_sha256=asr)[0]
+
+    def test_every_v4_row_maps_to_a_check_and_v3_rows_are_kept(self):
+        rows = sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in V4[s])
+        self.assertEqual(sorted(q.STORY_V4_ROWS), rows)
+        for row, names in q.STORY_V3_ROWS.items():
+            self.assertTrue(set(names) <= set(q.STORY_V4_ROWS[row]), row)
+        self.assertIn('criteria["version"] == STORY_V4', (HERE / "qa_pilot.py").read_text())
+
+    def test_kept_speech_needs_its_checks_and_the_mix(self):
+        pinned = V4["speech"]["asr_model"]["model_bin_sha256"]
+        good = self.run_v4(self.manifest(), pinned)
+        for k in ("ai_video_source_and_licence", "pavo_speech_clip_checks", "fallback_shots", "spoken_audio_mix",
+                  "asr_model_pinned", "footage_licensed_vetted_and_credited"):
+            self.assertTrue(good[k], k)
+        m = self.manifest()
+        m["clips"][0]["speech_checks"] = "FAIL"
+        self.assertFalse(self.run_v4(m)["pavo_speech_clip_checks"])
+        m = self.manifest()
+        m["clips"][0]["audio"] = "music and voice"
+        self.assertFalse(self.run_v4(m)["ai_video_source_and_licence"])
+        m = self.manifest(spoken_audio_mix={})
+        self.assertFalse(self.run_v4(m)["spoken_audio_mix"])
+        self.assertFalse(self.run_v4(self.manifest(), "0" * 64)["asr_model_pinned"])   # base.en is not the pinned ASR
+        self.assertIsNone(self.run_v4(self.manifest())["asr_model_pinned"])             # unmeasured: UNKNOWN
+
+    def test_a_fallback_never_carries_a_character_or_speech_or_an_unlisted_licence(self):
+        m = self.manifest()
+        m["holds"][1]["characters"] = ["eve"]
+        self.assertFalse(self.run_v4(m)["fallback_shots"])
+        m = self.manifest(spoken_shots=[{"shot": "s-talk"}, {"shot": "s-sky"}])
+        self.assertFalse(self.run_v4(m)["fallback_shots"])
+        m = self.manifest()
+        m["clips"][1]["licence"] = "CC BY-SA 4.0"
+        self.assertFalse(self.run_v4(m)["fallback_shots"])
+        self.assertFalse(self.run_v4(m)["footage_licensed_vetted_and_credited"])
 
 
 if __name__ == "__main__":

@@ -207,6 +207,9 @@ jobs:
           done < "$RUNNER_TEMP/assets.txt"
           # sealed only after every upload: the run id and each uploaded clip (the only record approve-shot accepts)
           python3 -I -B migration/production/bible/episode_build.py probe-assets "$out" "$EP" "$GITHUB_RUN_ID" "$d/$GITHUB_RUN_ID.json" >/dev/null
+          # E129 (review of #476): the prompt blocks this run learned go with its record, so the next run and the
+          # preflight (which binds the file) send those lines to Kokoro
+          python3 -I -B migration/production/bible/episode_build.py merge-blocks "$d/$GITHUB_RUN_ID.json" migration/evidence/pavo/prompt-blocks.json
           for f in "$out"/*.jpg; do
             [ -f "$f" ] && cp "$f" "$d/$GITHUB_RUN_ID-$(basename "$f")"
           done
@@ -214,7 +217,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -q -b "$branch"
-          git add "$d"
+          git add "$d" migration/evidence/pavo/prompt-blocks.json
           git commit -q -m "Shot probe $EP (run $GITHUB_RUN_ID): clips' frame sheets and record for Claude's review"
           git push -q origin "HEAD:refs/heads/$branch"
           echo "BRANCH $branch"

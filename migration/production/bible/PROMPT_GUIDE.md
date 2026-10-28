@@ -3,7 +3,9 @@
 AI video comes from Pavo first (Agnes Flash, 720p, 4-12 s, exact zero-credit quote; owner 2026-10-25), then Agnes
 direct, then vidIQ (~15 credits/s veo-3.1-lite 1080p to ~23 credits/s minimax-h3 2k) only when both fail. Shorts are
 almost all AI; every scene still shows its words. A Pavo clip costs no credits but a miss costs a slot, so every
-prompt passes this guide before it is sent. Pavo clips carry an audio track even with no audio asked: strip it (`-an`).
+prompt passes this guide before it is sent. Pavo clips carry an audio track even with no audio asked: strip it (`-an`),
+except a spoken shot of a long on Pavo's own speech (story QA v4, LONG_DESIGN section 9; a Short is refused it until
+its own frozen criteria hold the speech checks).
 
 ## Structure (Google's Veo formula, five parts, in this order)
 1. **Cinematography**: shot size, lens feel, ONE camera move ("slow push-in", "static wide", "low tracking shot").
@@ -250,8 +252,8 @@ An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-s
   `plan_check.vo_cover`, gives what his clip covers besides the line, by the compose's own run logic: the 0.35 s gap
   before it when a talking shot comes first, and the 0.35 s gap or the 1.2 s closing tail after it. plan_check (at
   the slowest pace), `episode_build lines` (measured) and the compose all cap that whole time at 15.6 s (one 12 s clip
-  slowed 1.3), and the clip is ceil(it) seconds, 4-12 (`vo_clip_seconds`). The long has no voice-over path yet:
-  `LONG_VOICEOVER_UNSUPPORTED`.
+  slowed 1.3), and the clip is ceil(it) seconds, 4-12 (`vo_clip_seconds`). The long has the same path (E130,
+  `vo_cover(long=True)`: his line and the 0.6 s gap or the tail after, a long's run starting on its first word).
 - **The build:** the request sends his `talk_refs` frame alone (else his approved refs), no audio, no speech clause;
   Pavo's audio is stripped. `lipsync_check.py --still-mouth` (the same pinned landmarker and inner-lip opening as the
   lips check) flags `MOUTH_TALKING` when any 1 s of the clip moves fast (mean frame-to-frame change > 0.0063 of the

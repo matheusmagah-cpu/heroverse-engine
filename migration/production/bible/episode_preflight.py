@@ -144,7 +144,7 @@ def line_words(text):
     return " ".join(plan_check._plain(text))
 
 
-def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
+def setup_key(shot, chars, line, images_dir=ch.HERE / "images", binding=None):
     """A talking shot's probe key: who speaks, the reference images its request sends for the speaker (record id
     and sha256), the prompt binding and the line itself. PR #419 measured that the lips pass rate belongs to the line
     (line-01 7 of 14, genesis-07's Keeper lines 1 of 39 with the same speaker, reference, pose and binding), so a
@@ -155,7 +155,10 @@ def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
                    or eb.reference_records(who, chars, images_dir))
     except SystemExit:
         records = []
-    return {"speaker": who, "references": {rid: m.get("sha256") for rid, m in records}, "binding": eb.BOUND_AUDIO,
+    # owner 27/10 (R4): a line Pavo speaks itself is probed on its own binding (a probe of our audio binding never
+    # vouches for it, nor the other way round)
+    return {"speaker": who, "references": {rid: m.get("sha256") for rid, m in records},
+            "binding": binding or eb.BOUND_AUDIO,
             "line": line_words(line)}
 
 
@@ -187,7 +190,9 @@ def probe_rows(plan, chars, probes=None):
         talks, silent = plan_check.talking(s), plan_check.voiceover(s)
         if talks or silent:
             if talks:
-                key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]))
+                key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]),
+                                binding=eb.pavo_native.NATIVE_BINDING if eb.pavo_native.route(plan, s, i) ==
+                                eb.pavo_native.NATIVE else None)
                 found = [x for x in probes if x.get("kind", "talk") == "talk" and all(
                     (line_words(x.get("line", "")) if k == "line" else x.get(k)) == v for k, v in key.items())]
                 row, minimum = dict(key, shot=s["id"], kind="talk"), MIN_PROBE_GENERATIONS
@@ -237,6 +242,9 @@ def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     if eb.is_long(plan):   # E127: the long's review rows and its own code
         import long_preflight
         out.update(long_preflight.binding_extra(registry))
+    if eb.pavo_native.native_plan(plan):   # review of #476: a learned prompt block or a voice changes the routes
+        out["prompt_blocks"] = eb.pavo_native.blocks_sha256()
+        out["voices"] = sha256(eb.pavo_native.VOICES)
     return out
 
 

@@ -21,6 +21,11 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "AMBIENCE_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/long_plan_check.py::AMBIENCE_MISSING",
+   "note": "a native plan names the ambient sound Pavo lays under the voice"
+  },
   "APPROVED_MANIFEST_CHANGED": {
    "class": "I",
    "guard": "migration/publish/test_publication_binding.py::def test_"
@@ -39,6 +44,10 @@
    "class": "A",
    "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
    "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
+  },
+  "ASR_MODEL_NOT_PINNED": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
   },
   "ASSET_RELEASE_TAG": {
    "class": "I",
@@ -445,6 +454,10 @@
   "FOOTAGE_HASH_MISMATCH": {
    "class": "D",
    "resume": "a changed release asset: restore it (assets.sh) and the render runs again; nothing is published"
+  },
+  "FOOTAGE_NOT_USABLE": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
   "FOOTAGE_SHORT": {
    "class": "A",
@@ -949,6 +962,10 @@
    "class": "I",
    "guard": ".github/workflows/episode.yml::the lips check must work before any Pavo generation is spent (E89)"
   },
+  "LIPS_NOT_CHECKED": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
   "LIST_PATH_REFUSED": {
    "class": "A",
    "early": ".github/workflows/pavo-footage.yml::LIST_PATH_REFUSED",
@@ -1011,11 +1028,6 @@
    "class": "A",
    "early": "migration/production/bible/episode_preflight.py::if layout and not problems:   # a long's compose too",
    "note": "slice 3: the wrapper of compose_problems on the approved 720p clips, the same function the preflight runs on the measured voice and the planned lengths; residual: a clip a few hundredths shorter than recorded"
-  },
-  "LONG_VOICEOVER_UNSUPPORTED": {
-   "class": "A",
-   "early": "migration/production/bible/long_plan_check.py::LONG_VOICEOVER_UNSUPPORTED",
-   "note": "the long's plan check refuses a voice-over Keeper; the compose keeps the refusal as an invariant"
   },
   "LOUDNORM_MEASURE_FAILED": {
    "class": "D",
@@ -1087,6 +1099,11 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
    "note": "the same function at plan time"
+  },
+  "NATIVE_CLIP_MISSING": {
+   "class": "I",
+   "guard": "migration/production/bible/test_episode_build.py::def test_native_lines_take_their_clip_time_and_talking_cuts_start_at_the_speech",
+   "note": "generate_step fetches every approved clip (sha256 checked) into WORK/clips before the compose that reads its audio"
   },
   "NEXT_NOT_PUBLIC": {
    "class": "D",
@@ -1261,6 +1278,14 @@
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_MUSIC": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "PAVO_PROMPT_BLOCKED": {
+   "class": "C",
+   "probe": "E129: Pavo's prompt filter reads the words only at submission; every word it is known to refuse (evidence/pavo/prompt-blocks.json `words`: 'naked', PR #473) routes its line to Kokoro at plan time (pavo_native.route, long_plan_check estimate audio_routes.kokoro_prompt_filter), and a new block read back is recorded by the line's words (pavo_native.record_block) and the shot goes again at once on the Kokoro route (episode_build.generate_clips): no regeneration of the refused words, no wait"
+  },
   "PAVO_QUOTE_SCHEMA_CHANGED": {
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
@@ -1294,6 +1319,10 @@
    "class": "D",
    "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_SINGING": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
   "PAVO_SUBMISSION_AND_PRICE_CONTRACT_UNVERIFIED": {
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
@@ -1321,6 +1350,11 @@
   "PAVO_UPLOAD_SCHEMA_CHANGED": {
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_VOICE_UNDESCRIBED": {
+   "class": "A",
+   "early": "migration/production/bible/long_plan_check.py::PAVO_VOICE_UNDESCRIBED",
+   "note": "a native spoken shot's speaker has its fixed Pavo voice in voices.json"
   },
   "PAVO_ZERO_CREDIT_QUOTE_REQUIRED": {
    "class": "D",
@@ -1385,6 +1419,10 @@
   "PREFLIGHT_MISSING": {
    "class": "N",
    "why": "E127: probe-queue, a local read of the committed preflight's request digests (no generation, no dispatch), names the missing report; the build's PREFLIGHT_MISSING is episode_preflight.verify's, before any secret"
+  },
+  "PREMIX_FAILED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_shot_sources.py::def test_premix_lays_the_speech_and_never_drops_to_digital_silence"
   },
   "PREVIEW_APPROVED": {
    "class": "N",
@@ -1654,6 +1692,26 @@
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
   },
+  "REUSE_NOT_CLEAN": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "REUSE_PREFLIGHT_MISSING": {
+   "class": "N",
+   "why": "review of #476: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): a pavo_reuse clip is approved only against the committed preflight's request digests (the request the plan sends now); with no preflight it refuses a wrong order of steps, before any generation, voice or render"
+  },
+  "REUSE_REQUEST_CHANGED": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "REUSE_SPEECH_UNCHECKED": {
+   "class": "N",
+   "why": "review of #476: approve-source is the review's own local command: a reused clip that keeps Pavo's speech on a native spoken shot is approved only with its story QA v4 speech checks measured on that exact clip (the sidecar episode_build.py speech-check writes) and passed, as approve-shot requires for a probed clip"
+  },
+  "REUSE_URL_REFUSED": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
   "REVIEW_NOT_PASS_FOR_THIS_FILE": {
    "class": "C",
    "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
@@ -1825,9 +1883,29 @@
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
   },
+  "SOURCE_CHARACTER_SHOT": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "SOURCE_OFF_LINE": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "SOURCE_REFUSED": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "SOURCE_SHOT_UNKNOWN": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "SOURCE_SPOKEN_SHOT": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
   "SOURCE_TRANSFER_REPORT": {
    "class": "I",
@@ -1841,6 +1919,30 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::SPEAKER_NO_VOICE",
    "note": "characters.voice, the same function"
+  },
+  "SPEECH_CHECKS_FAILED": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "SPEECH_LEVEL_UNREACHABLE": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "SPEECH_NOT_HEARD": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "SPEECH_SPAN_UNKNOWN": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "SPEECH_UNCHECKED": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "SPEECH_WORDS_NOT_EXACT": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
   },
   "SRT_BOM": {
    "class": "A",
@@ -1939,6 +2041,10 @@
    ],
    "note": "Image first (owner, 27/10): a frame naming no bible/stills/<id>.json; plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
   },
+  "STILL_MOTION_FAILED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_shot_sources.py::def test_an_approved_still_moves_at_the_qa_frame"
+  },
   "STILL_MOUTH_CHECK_BLIND": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
@@ -1955,6 +2061,10 @@
     "migration/production/bible/episode_build.py::def frame_refusal("
    ],
    "note": "Image first (owner, 27/10): a frame whose still Claude has not approved (scene_stills.py approve, by PR); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
+  },
+  "STILL_NOT_FOR_SHOT": {
+   "class": "N",
+   "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
   "STILL_PATH_REFUSED": {
    "class": "A",
@@ -2346,6 +2456,46 @@
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
   },
+  "VOICE_NOT_CONSISTENT": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "VOICE_NOT_DISTINCT": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "VOICE_OTHERS_MISMATCH": {
+   "class": "C",
+   "probe": "review of #476: the measured others must be exactly every other speaker's reference in voices.json (pavo_native.voice_binding). Knowable only on a generated clip: episode_build.py speech-check measures every reference voices.json holds (VOICE_REFERENCE_FILES_MISSING otherwise), approve-shot recomputes"
+  },
+  "VOICE_OTHERS_MISSING": {
+   "class": "C",
+   "probe": "review of #476: a voice is distinct only from measured others; with no other speaker's reference in voices.json, or none measured, the clip is refused. Knowable only on a generated clip (episode_build.py speech-check, recomputed at approve-shot); a second speaker's reference is chosen first with episode_build.py voice-reference"
+  },
+  "VOICE_REFERENCE_FILES_MISSING": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command before approve-shot: every reference voices.json holds must be given, so the 'others' a voice is distinct from are every other speaker"
+  },
+  "VOICE_REFERENCE_FILE_MISMATCH": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command before approve-shot (no generation, voice or render): it refuses a REFS file that is not the clip voices.json holds as that speaker's reference (sha256), so a caller's file never replaces the recorded one"
+  },
+  "VOICE_REFERENCE_MISMATCH": {
+   "class": "C",
+   "probe": "review of #476: a speech clip's voice is measured against exactly the reference voices.json holds for its speaker (pavo_native.voice_binding, sha256). Knowable only on a generated clip: episode_build.py speech-check measures it (its REFS checked against voices.json first, episode_build.voice_references), approve-shot and approve-source pavo_reuse recompute the verdict against voices.json"
+  },
+  "VOICE_REFERENCE_MISSING": {
+   "class": "C",
+   "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
+  },
+  "VOICE_REFERENCE_NOT_NATIVE": {
+   "class": "N",
+   "why": "review of #476: voice-reference is the review's own local command (Claude, after reviewing a probed clip, before the PR): a reference is Pavo's own speech only, so a Kokoro-route clip is refused as a wrong argument"
+  },
+  "VOICE_REFERENCE_UNSET": {
+   "class": "N",
+   "why": "review of #476: speech-check is Claude's own local measuring command: a REFS file for a speaker with no reference in voices.json is refused (episode_build.py voice-reference chooses one first, by PR)"
+  },
   "VOICE_RETRY": {
    "class": "N",
    "why": "environment variables, a format word, a log line and an API enum value"
@@ -2353,6 +2503,14 @@
   "VOICE_SAMPLE_WIDTH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::subtype=\"PCM_16\""
+  },
+  "WAIT_FALLBACK_CANDIDATE": {
+   "class": "N",
+   "why": "a state word of the per-shot source plan (shot_sources.sources_report, probe-queue): the shot waits for the next day's budget or a candidate; nothing is refused or spent"
+  },
+  "WAIT_PAVO_BUDGET": {
+   "class": "N",
+   "why": "a state word of the per-shot source plan (shot_sources.sources_report, probe-queue): the shot waits for the next day's budget or a candidate; nothing is refused or spent"
   },
   "WORK_OUTSIDE_REPOSITORY": {
    "class": "I",
@@ -2944,6 +3102,53 @@
      "migration/production/bible/episode_build.py::def face_flags"
     ],
     "residual": "the Short's build runs them; the long's build must call the same functions"
+   }
+  },
+  "story_qa_v4": {
+   "rights.ai_video": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def speech_record_flags(",
+     "migration/production/bible/episode_build.py::SPEECH_CHECKS_FAILED",
+     "migration/production/qa_pilot.py::def grammar_checks_story_v4("
+    ],
+    "note": "a kept speech clip is approved only with its speech checks passed on that clip and shipped only with that record; a silent clip's audio is stripped as in v3"
+   },
+   "speech.asr_model": {
+    "class": "render_qa",
+    "checks": [
+     "migration/production/qa_pilot.py::asr_model_pinned",
+     "migration/production/bible/pavo_native.py::ASR_MODEL_NOT_PINNED"
+    ],
+    "note": "the pinned medium.en model.bin sha256, at the clip's approval and on the render"
+   },
+   "rights.fallback_sources": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/shot_sources.py::def approve_source(",
+     "migration/production/bible/episode_build.py::shot_sources.expected_request("
+    ],
+    "note": "a fallback is approved by Claude (>= 9.5) for its own request and only on a silent, character-free shot; the build ships exactly that source"
+   },
+   "grammar.ai_video_speech_checks": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def speech_record_flags("
+    ]
+   },
+   "grammar.spoken_audio_mix": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/pavo_native.py::def premix_filter(",
+     "migration/production/qa_pilot.py::spoken_audio_mix"
+    ]
+   },
+   "grammar.fallback_shots": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/shot_sources.py::SOURCE_CHARACTER_SHOT",
+     "migration/production/qa_pilot.py::fallback_shots"
+    ]
    }
   }
  }

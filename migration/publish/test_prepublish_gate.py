@@ -209,6 +209,38 @@ class StoryV1(unittest.TestCase):
         self.assertEqual(run(wrong, man, rev)["dimensions"]["rights"], "FAIL")
 
 
+class StoryV4(unittest.TestCase):
+    """Owner 27/10 (R1-R4): a long that declares story QA v4 is gated by every v4 row; v4 is pinned like v3."""
+    CRIT = (PROD / "qa_criteria_story_v4.json").read_bytes()
+
+    def v4(self):
+        rows = g.story_v3_rows("story-qa-criteria-v4")
+        qa, man, rev = good()
+        qa.update({"criteria_version": "story-qa-criteria-v4", "criteria_sha256": hashlib.sha256(self.CRIT).hexdigest(),
+                   "checks": {c: True for names in rows.values() for c in names}})
+        return qa, man, rev
+
+    def test_v4_is_pinned_and_every_row_is_an_item(self):
+        self.assertEqual(hashlib.sha256(self.CRIT).hexdigest(), g.FROZEN_CRITERIA_SHA256["story-qa-criteria-v4"])
+        self.assertEqual(g.CRITERIA_FILES["story-qa-criteria-v4"].read_bytes(), self.CRIT)
+        crit = json.loads(self.CRIT)
+        rows = sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in crit[s])
+        r = run(*self.v4())
+        self.assertEqual(sorted(i["item"] for i in r["items"]["story_qa_v4"]), rows)
+        self.assertEqual(r["dimensions"]["story_qa_v4"], "PASS")
+        named = {n for names in g.story_v3_rows("story-qa-criteria-v4").values() for n in names}
+        read = {n for spec in g.dimensions_story_v3("story-qa-criteria-v4").values() for n in spec["qa"]}
+        self.assertEqual(named - read, set())
+
+    def test_failed_speech_checks_or_an_unpinned_asr_never_pass(self):
+        for check in ("pavo_speech_clip_checks", "asr_model_pinned", "fallback_shots", "spoken_audio_mix"):
+            qa, man, rev = self.v4()
+            qa["checks"][check] = False
+            self.assertEqual(run(qa, man, rev)["dimensions"]["story_qa_v4"], "FAIL", check)
+            qa["checks"][check] = None
+            self.assertEqual(run(qa, man, rev)["decision"], "UNKNOWN", check)
+
+
 class StoryV3(unittest.TestCase):
     """E126: the acted Bible-story long is measured by the frozen story QA v3 (no footage minimum: owner,
     2026-10-27), and every v3 row is an item of the gate: PASS, FAIL or UNKNOWN, never skipped."""

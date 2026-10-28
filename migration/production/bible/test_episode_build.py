@@ -522,6 +522,29 @@ class Gating(unittest.TestCase):
                           "clip_seconds": eb.shot_seconds(s, i, self.plan, layout)}
                 for i, s in enumerate(self.plan["shots"])}
 
+    def test_a_fallback_approval_never_ships_on_a_spoken_or_character_shot(self):
+        # review of #476: generate_step checks again, at build, that a footage / still approval is on a shot with no
+        # line and no character, even when its request digest was made to match (a hand-written approval)
+        import shot_sources as ss
+        approvals, sha = self.approvals(), hashlib.sha256(b"approved clip").hexdigest()
+        for want in ("SOURCE_SPOKEN_SHOT", "SOURCE_CHARACTER_SHOT"):
+            plan = copy.deepcopy(self.plan)
+            spoken = [k for k, s in enumerate(plan["shots"]) if eb.pavo_native.spoken(s)]
+            i = spoken[0] if want == "SOURCE_SPOKEN_SHOT" else next(
+                k for k, s in enumerate(plan["shots"]) if k not in spoken and s["kind"] == "scene")
+            shot = plan["shots"][i]
+            if want == "SOURCE_CHARACTER_SHOT":
+                shot["characters"] = ["eve"]   # the plan changed the shot after a fallback was chosen for it
+            forged = dict(approvals, **{shot["id"]: dict(
+                approvals[shot["id"]], source="footage", footage="clip-river-a",
+                request_sha256=ss.fallback_digest(plan, shot, i, "footage", "clip-river-a", sha))})
+            self.assertFalse([m for m in eb.review_problems(plan, {}, {shot["id"]: forged[shot["id"]]})
+                              if m.startswith("SHOT_REQUEST_CHANGED")])   # the digest alone would let it through
+            with self.assertRaises(SystemExit) as err:
+                eb.generate_step(plan, self.work, "py", "model", approvals=forged,
+                                 fetch=lambda name, dst: Path(dst).write_bytes(b"approved clip"))
+            self.assertTrue(str(err.exception).startswith(f"{want} {shot['id']}"), err.exception)
+
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
         # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
@@ -1604,6 +1627,323 @@ class SharedQuotaStop(unittest.TestCase):
         self.assertLess(body.index("seed_budget("), body.index("probe_step("))   # seeded before any generation
         wf = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()
         self.assertIn("PAVO_BUDGET_USED: ${{ steps.guard.outputs.pavo_used }}", wf)
+
+
+def native_plan():
+    """The dialogue plan on Pavo's own speech (owner 27/10, R4): a Short that says so."""
+    p = dialogue_plan()
+    p["audio_route"] = "pavo_native"
+    p["ambience"] = "the garden at dusk: a soft evening wind through the leaves"
+    return p
+
+
+class NativeSpeech(unittest.TestCase):
+    """Owner 27/10 (R1, R2, R4): spoken shots keep Pavo's own speech and ambience on a plan that opts in; a line
+    Pavo's prompt filter refuses goes to our Kokoro voice by itself (E129); a clip already made is never made again."""
+    def setUp(self):
+        import pavo_native
+        import shot_sources
+        self.pn, self.ss = pavo_native, shot_sources
+        self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, pavo_native.BLOCKS, eb.own_track)
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-native-"))
+        pavo_native.BLOCKS = self.work / "prompt-blocks.json"
+        pavo_native.BLOCKS.write_text(json.dumps({"words": ["naked"], "lines": []}))
+        shot_sources._CACHE.clear()
+        self.layout = layout_for(native_plan(), [2.4, 3.0, 2.5, 3.1])
+        (self.work / "layout.json").write_text(json.dumps(self.layout))
+        (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"], "keeper:talk": ["kt.jpg"]}))
+        self.refs = json.loads((self.work / "refs.json").read_text())
+        self.lip = []
+        eb.clip_flags = lambda path, aspect=None: []
+        eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append(Path(wav).name) or [], {"audio": {}, "mouth": {}})
+        eb.face_flags = lambda py, model, clip: ([], {"faces": {"frames_sampled": 40, "faces_found": 0}})
+        eb.run = lambda args, **kw: Path(str(args[-1])).write_bytes(b"v")
+        eb.own_track = lambda clip: Path(clip).with_suffix(".own.wav")
+
+    def tearDown(self):
+        eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run, self.pn.BLOCKS, eb.own_track = self.saved
+        self.ss._CACHE.clear()
+        shutil.rmtree(self.work)
+
+    def req(self, plan, sid):
+        i = next(k for k, s in enumerate(plan["shots"]) if s["id"] == sid)
+        return eb.request(plan["shots"][i], i, plan, self.layout, self.refs), eb.request_identity(
+            plan["shots"][i], i, plan, self.layout, self.refs)
+
+    def test_a_native_spoken_shot_asks_pavo_for_its_own_speech_and_ambience_no_music(self):
+        native, kokoro = native_plan(), dialogue_plan()
+        (req, (sha, canon)), (old, (old_sha, _)) = self.req(native, "s-eve"), self.req(kokoro, "s-eve")
+        self.assertEqual((req["sound"], req["audios"]), (True, None))
+        self.assertTrue(old["audios"] and old["sound"] is False)                 # the Kokoro route is unchanged
+        self.assertIn('Eve says exactly these words and nothing else, once, in English: "Why do you hide?"',
+                      req["prompt"])
+        self.assertIn("the natural ambient sound of the garden at dusk", req["prompt"])
+        self.assertNotIn("music", req["prompt"].lower())                         # excluded in positive words only
+        self.assertNotIn(eb.BOUND_AUDIO.format(pronoun="her"), req["prompt"])    # no input audio to bind
+        self.assertEqual(canon["audio"]["route"], "pavo_native")
+        self.assertNotEqual(sha, old_sha)
+        god, _ = self.req(native, "s-god")
+        self.assertIn("off screen as a voice-over", god["prompt"])
+        # a scene that speaks no line is generated exactly as before: its approval stays valid
+        self.assertEqual(self.req(native, "s-a")[1][0], self.req(kokoro, "s-a")[1][0])
+
+    def test_a_short_on_pavos_own_speech_is_refused_until_its_criteria_exist(self):
+        # review of #476: no Short criteria file holds the speech-check rows yet, so the plan check refuses it
+        found = [x.split()[0] for x in eb.plan_check.audio_route_problems(native_plan(), native_plan()["shots"])]
+        self.assertEqual(found, ["AUDIO_ROUTE_SHORT_UNSUPPORTED"])
+        # the build's own plan check (every build, probe and preflight command runs it first) refuses it
+        self.assertTrue(any(x.startswith("AUDIO_ROUTE_SHORT_UNSUPPORTED")
+                            for x in eb.check_plan(native_plan())["problems"]))
+        p = native_plan()
+        p["audio_route"] = "pavo"
+        self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],
+                         ["AUDIO_ROUTE_UNKNOWN"])
+        self.assertEqual(eb.plan_check.audio_route_problems(dialogue_plan(), []), [])   # today's plans: untouched
+        # and a v4 long that says "kokoro" keeps our voice
+        self.assertTrue(self.pn.native_plan({"criteria": self.pn.V4}))
+        self.assertFalse(self.pn.native_plan({"criteria": self.pn.V4, "audio_route": "kokoro"}))
+
+    def probe(self, plan, ids, rounds, client):
+        return eb.probe_step(plan, self.work, "py", "model", self.work / "out", ids, rounds, client=client,
+                             download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None,
+                             sheet=lambda video, sheet: None)
+
+    def test_a_prompt_block_stops_that_shot_for_the_rest_of_the_run(self):
+        # review of #476: a blocked scene (or a blocked Kokoro-route shot) is never resubmitted with the same prompt
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}]})
+        rec = self.probe(dialogue_plan(), ["s-a"], 3, client)
+        self.assertEqual(len(client.calls), 1)                      # 3 rounds asked, one submission
+        self.assertTrue(rec["shots"]["s-a"]["blocked"].startswith("PAVO_PROMPT_BLOCKED"))
+        # a native line blocked, then blocked again on the Kokoro route: two submissions in all, never a third
+        client = FakeClient([{"conversation_id": "3", "status": "submitted"}, {"conversation_id": "4",
+                                                                               "status": "submitted"}],
+                            {"3": [{"status": "blocked", "blocked_reason": "x"}],
+                             "4": [{"status": "blocked", "blocked_reason": "x"}]})
+        rec = self.probe(native_plan(), ["s-eve"], 3, client)
+        self.assertEqual([c["sound"] for c in client.calls], [True, False])
+        self.assertIn("blocked", rec["shots"]["s-eve"])
+
+    def test_blocks_learned_in_actions_persist_with_the_record_and_bind_the_preflight(self):
+        # review of #476: the block lives in the probe record; the record job merges it into prompt-blocks.json and
+        # commits it, so the next run routes the line to Kokoro and the preflight (which binds the file) agrees
+        import episode_preflight as pf
+        plan = native_plan()
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"},
+                             {"conversation_id": "2", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}], "2": [done("2")]})
+        rec = self.probe(plan, ["s-eve"], 1, client)
+        self.assertEqual(len(rec["prompt_blocks"]), 1)
+        self.assertIsNone(rec["shots"]["s-eve"]["request"]["audio"].get("route"))   # recorded with the Kokoro request
+        fresh = self.work / "main-blocks.json"                                      # main's file, in the record job
+        fresh.write_text(json.dumps({"words": [], "lines": []}))
+        self.pn.BLOCKS = fresh
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "pavo_native")
+        (self.work / "plan.json").write_text(json.dumps(plan))
+        before = pf.binding(self.work / "plan.json", plan)["prompt_blocks"]
+        self.assertEqual(self.pn.merge_blocks(dict(rec, run_id="40600000000"), fresh),
+                         [rec["prompt_blocks"][0]["line_sha256"]])
+        self.assertEqual(self.pn.merge_blocks(rec, fresh), [])           # merged once
+        odd = {"run_id": "1", "prompt_blocks": [{"line_sha256": "f" * 64, "shot": "$(x)\n", "reason": "a b",
+                                                 "conversation_id": "1;rm"}]}
+        self.pn.merge_blocks(odd, fresh)                                   # sweep H2: only plain ids are copied
+        kept = json.loads(fresh.read_text())["lines"][-1]
+        self.assertEqual((kept["shot"], kept["reason"], kept["conversation_id"]), ("", "unknown", ""))
+        fresh.write_text(json.dumps({"words": [], "lines": json.loads(fresh.read_text())["lines"][:-1]}))
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "kokoro")   # the next run's route
+        self.assertNotEqual(pf.binding(self.work / "plan.json", plan)["prompt_blocks"], before)   # preflight stale
+        wf = (eb.REPO / ".github" / "workflows" / "shot-probe.yml").read_text()
+        self.assertIn('merge-blocks "$d/$GITHUB_RUN_ID.json" migration/evidence/pavo/prompt-blocks.json', wf)
+        self.assertIn('git add "$d" migration/evidence/pavo/prompt-blocks.json', wf)
+
+    def test_e129_a_prompt_filter_block_is_surfaced_and_never_waited_out(self):
+        c = FakeClient([], {"5": [{"status": "blocked", "code": "PAVO_PROMPT_BLOCKED",
+                                   "blocked_reason": "text_rejected_porn"}]})
+        with self.assertRaises(eb.ShotFailed) as err:
+            eb.wait_job(c, "5", sleep=lambda s: self.fail("a block is not waited out"))
+        self.assertEqual(str(err.exception), "PAVO_PROMPT_BLOCKED 5 text_rejected_porn")
+        self.assertEqual(c.reads, ["5"])
+
+    def test_e129_a_blocked_line_goes_to_kokoro_by_itself_and_stays_there(self):
+        plan = native_plan()
+        client = FakeClient([{"conversation_id": "1", "status": "submitted"},
+                             {"conversation_id": "2", "status": "submitted"}],
+                            {"1": [{"status": "blocked", "blocked_reason": "text_rejected_porn"}], "2": [done("2")]})
+        report = eb.generate_clips(plan, self.work, "py", "model", ids=["s-eve"], client=client,
+                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        entry = report["shots"]["s-eve"]
+        self.assertEqual((entry["route"], entry["prompt_blocked"]["reason"]), ("kokoro", "text_rejected_porn"))
+        self.assertEqual([c["sound"] for c in client.calls], [True, False])      # Pavo's speech, then our voice
+        self.assertTrue(client.calls[1]["audios"])
+        self.assertEqual(len(client.calls), 2)                                   # the refused words never sent again
+        self.assertEqual(self.pn.route(plan, plan["shots"][0], 0), "kokoro")     # learned for every later run
+        # a word the filter is known to refuse never reaches Pavo's speech at all
+        plan["shots"][0]["line"] = "I was naked; and I hid myself."
+        self.pn.BLOCKS.write_text(json.dumps({"words": ["naked"], "lines": []}))
+        self.assertFalse(self.req(plan, "s-eve")[0]["sound"])
+
+    def test_r1_a_clip_already_made_keeps_its_route_and_is_never_made_again(self):
+        plan = native_plan()
+        kokoro_sha = self.req(dialogue_plan(), "s-god")[1][0]
+        self.ss._CACHE[plan["episode"]] = {"s-god": [{"request_sha256": kokoro_sha, "from": "record"}]}
+        req, (sha, _) = self.req(plan, "s-god")
+        self.assertFalse(req["sound"])                          # God's existing clip is reused (R1 over R4)
+        self.assertEqual(sha, kokoro_sha)
+        self.assertTrue(self.req(plan, "s-eve")[0]["sound"])     # the others still get Pavo's speech
+
+    def test_a_native_approval_ships_only_with_its_speech_checks_on_that_clip(self):
+        self.assertEqual(eb.speech_record_flags({}, "a"), ["SPEECH_UNCHECKED"])
+        ok = {"speech": {"clip_sha256": "a", "flags": [], "gain_db": 2.5}}
+        self.assertEqual(eb.speech_record_flags(ok, "a"), [])
+        self.assertEqual(eb.speech_record_flags(ok, "b"), ["SPEECH_UNCHECKED"])   # another clip
+        bad = {"speech": {"clip_sha256": "a", "flags": ["VOICE_NOT_DISTINCT"], "gain_db": 2.5}}
+        self.assertEqual(eb.speech_record_flags(bad, "a"), ["SPEECH_UNCHECKED"])
+
+    def test_native_lines_take_their_clip_time_and_talking_cuts_start_at_the_speech(self):
+        plan = native_plan()
+        approvals = {"s-eve": {"speech": {"onset": 1.16, "end": 4.5, "gain_db": 1.0, "flags": []}}}
+        spans = eb.native_spans(plan, approvals)
+        self.assertEqual(spans, {"s-eve": ([0], 1.16, 4.5)})
+        self.assertEqual(eb.native_spans(dialogue_plan(), approvals), {})          # v3 / Kokoro plans: unchanged
+        cuts = eb.shift_onsets([{"shot": "s-eve", "talk": {}, "src_start": 0.0}, {"shot": "s-a", "src_start": 0.0}],
+                               {"s-eve": 1.16, "s-a": 0.5})
+        self.assertEqual([c["src_start"] for c in cuts], [1.16, 0.0])             # only a talking cut follows the lips
+
+
+class VoiceBinding(unittest.TestCase):
+    """Review of #476 (blocking): a native speech clip's voice is judged against exactly the reference voices.json
+    holds for its speaker (by sha256; a caller's file never replaces it) and against every other speaker's reference;
+    the reference itself is chosen by Claude's review through `episode_build.py voice-reference`, never by hand."""
+    K, E, A = "k" * 64, "e" * 64, "a" * 64
+
+    def setUp(self):
+        import pavo_native
+        self.pn = pavo_native
+        self.saved = pavo_native.VOICES
+        self.root = eb.REPO / "migration" / "evidence" / "shots"
+        self.episode = f"t-voice-{os.getpid()}"
+        self.dir = self.root / self.episode
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.out = Path(tempfile.mkdtemp(prefix="voice-"))
+        self.voices = self.out / "voices.json"
+        self.set_refs(keeper=self.K)
+        pavo_native.VOICES = self.voices
+        self.clip = "c" * 64
+        self.record = self.dir / "40500000002.json"
+        self.record.write_text(json.dumps({"episode": self.episode, "run_id": "40500000002", "shots": {"s-eve": {
+            "request_sha256": "r", "clip_seconds": 6, "request": {"audio": {
+                "route": "pavo_native", "speaker": "eve", "words": ["Why", "do", "you", "hide?"]}},
+            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True}]}}}))
+
+    def tearDown(self):
+        self.pn.VOICES = self.saved
+        shutil.rmtree(self.dir)
+        shutil.rmtree(self.out)
+
+    def set_refs(self, **refs):
+        voices = {w: {"pavo_voice": f"{w}'s voice", "reference": None} for w in ("keeper", "god", "adam", "eve")}
+        for who, sha in refs.items():
+            voices[who]["reference"] = {"clip_sha256": sha}
+        self.voices.write_text(json.dumps({"voices": voices}))
+
+    def measures(self, reference=None, others=None, music=0.0):
+        crit = self.pn.criteria()
+        return {"asr": {"model_bin_sha256": crit["speech"]["asr_model"]["model_bin_sha256"], "text": "Why do you hide?",
+                        "speech_span": [1.0, 3.0]},
+                "voice": {"reference": reference or self.E, "same": 0.93, "others": [0.7] * len(others or [self.K]),
+                          "others_references": others or [self.K]},
+                "lufs": -24.0, "music": music, "singing": 0.0, "lips": []}
+
+    def side(self, measures):
+        (self.dir / "speech").mkdir(exist_ok=True)
+        (self.dir / "speech" / f"{self.clip}.json").write_text(json.dumps({"measures": measures}))
+
+    def approve(self):
+        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out)
+
+    def test_the_verdict_binds_the_speakers_reference_and_every_other_reference(self):
+        line, ok = "Why do you hide?", {"reference": self.E, "others": [self.K]}
+        self.assertEqual(self.pn.speech_verdict(self.measures(), line, binding=ok), [])
+        cases = ((None, self.measures(), "VOICE_REFERENCE_MISSING"),                      # no reference recorded
+                 ({"reference": self.A, "others": [self.K]}, self.measures(), "VOICE_REFERENCE_MISMATCH"),
+                 ({"reference": self.E, "others": []}, self.measures(), "VOICE_OTHERS_MISSING"),   # distinct from none
+                 (ok, dict(self.measures(), voice={"reference": self.E, "same": 0.93, "others": []}),
+                  "VOICE_OTHERS_MISSING"),
+                 ({"reference": self.E, "others": [self.A, self.K]}, self.measures(), "VOICE_OTHERS_MISMATCH"))
+        for binding, m, flag in cases:
+            self.assertEqual(self.pn.speech_verdict(m, line, binding=binding), [flag], flag)
+        self.set_refs(keeper=self.K, eve=self.E, adam=self.A)
+        self.assertEqual(self.pn.voice_binding("eve"), {"reference": self.E, "others": [self.A, self.K]})
+        self.assertEqual(self.pn.voice_binding("god"), {"reference": None, "others": [self.A, self.E, self.K]})
+
+    def test_a_reference_file_is_the_recorded_clip_or_refused(self):
+        clip = self.out / "eve.mp4"
+        clip.write_bytes(b"eve's reference clip")
+        keeper = self.out / "keeper.mp4"
+        keeper.write_bytes(b"the keeper")
+        self.set_refs(keeper=eb.sha256(keeper), eve=eb.sha256(clip))
+        both = {"eve": str(clip), "keeper": str(keeper)}
+        self.assertEqual(eb.voice_references(both), both)
+        other = self.out / "other.mp4"
+        other.write_bytes(b"another voice")
+        for given, code in (({"eve": str(other), "keeper": str(keeper)}, "VOICE_REFERENCE_FILE_MISMATCH"),
+                            ({"eve": str(clip)}, "VOICE_REFERENCE_FILES_MISSING"),      # the others are measured
+                            (dict(both, adam=str(other)), "VOICE_REFERENCE_UNSET")):
+            with self.assertRaises(SystemExit) as err:
+                eb.voice_references(given)
+            self.assertTrue(str(err.exception).startswith(code), (code, str(err.exception)))
+
+    def test_approve_shot_refuses_unchecked_or_failed_speech_and_binds_voices_json(self):
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertTrue(str(err.exception).startswith("SPEECH_UNCHECKED"))
+        self.side(self.measures())
+        with self.assertRaises(SystemExit) as err:                     # eve has no reference in voices.json yet
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_REFERENCE_MISSING")
+        self.set_refs(keeper=self.K, eve=self.A)                       # the sidecar was measured against another clip
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_REFERENCE_MISMATCH")
+        self.set_refs(keeper=self.K, eve=self.E, adam=self.A)          # adam's reference was not measured
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve VOICE_OTHERS_MISMATCH")
+        self.set_refs(keeper=self.K, eve=self.E)
+        self.side(self.measures(music=0.3))
+        with self.assertRaises(SystemExit) as err:
+            self.approve()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve PAVO_MUSIC")
+        self.side(self.measures())
+        self.assertEqual(self.approve()["speech"]["flags"], [])
+
+    def test_voice_reference_records_a_reviewed_clips_sha256_by_command(self):
+        def choose(score="9.6", note="one warm clear voice"):
+            return eb.voice_reference_step(self.record, "s-eve", "shot-x.mp4", score, note, today="2026-10-28")
+        with self.assertRaises(SystemExit) as err:
+            choose()
+        self.assertTrue(str(err.exception).startswith("SPEECH_UNCHECKED"))
+        self.side(self.measures(music=0.3))
+        with self.assertRaises(SystemExit) as err:                     # every check but the voice ones must pass
+            choose()
+        self.assertEqual(str(err.exception), "SPEECH_CHECKS_FAILED s-eve PAVO_MUSIC")
+        self.side(self.measures())
+        with self.assertRaises(SystemExit) as err:
+            choose(score="9.4")
+        self.assertTrue(str(err.exception).startswith("SHOT_SCORE_OUT_OF_RANGE"))
+        ref = choose()
+        self.assertEqual((ref["clip_sha256"], ref["shot"], ref["run_id"]), (self.clip, "s-eve", "40500000002"))
+        self.assertEqual(self.pn.voice_reference("eve"), self.clip)       # copied from the record, never typed
+        self.assertEqual(choose()["previous"]["clip_sha256"], self.clip)   # a replaced reference is kept
+        kokoro = json.loads(self.record.read_text())
+        kokoro["shots"]["s-eve"]["request"]["audio"]["route"] = None
+        self.record.write_text(json.dumps(kokoro))
+        with self.assertRaises(SystemExit) as err:
+            choose()
+        self.assertTrue(str(err.exception).startswith("VOICE_REFERENCE_NOT_NATIVE"))
+        text = (eb.HERE / "episode_build.py").read_text()
+        self.assertIn('cmd == "voice-reference"', text)
+        self.assertIn("episode_build.py voice-reference", json.loads(self.saved.read_text())["about"])
 
 
 class ProbeRecordOnAnyExit(unittest.TestCase):

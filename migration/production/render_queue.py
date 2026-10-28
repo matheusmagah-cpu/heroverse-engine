@@ -50,7 +50,9 @@ STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e05
                 "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360",
                 # the acted Bible-story long (owner, 2026-10-26; no real-footage minimum, 2026-10-27): qa_pilot and
                 # prepublish_gate read its rows (STORY_V3_ROWS)
-                "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"}
+                "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc",
+                # owner, 2026-10-27 (R1-R4): v3 + Pavo's kept speech under checks and free fallbacks (STORY_V4_ROWS)
+                "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 

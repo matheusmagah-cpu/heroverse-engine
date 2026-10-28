@@ -67,6 +67,21 @@ def sha(path):
 
 
 class Cut(unittest.TestCase):
+    def test_e130_a_voiceover_keeper_is_one_silent_clip_over_his_run(self):
+        # E130: compose_long_shots refused plan B (LONG_VOICEOVER_UNSUPPORTED) although the owner approved it and the
+        # long's talking Keeper failed FACE_NOT_FOUND; his clip now covers his line from its first word to the next run
+        plan = tiny_plan()
+        plan["shots"][2]["voiceover"] = True
+        cuts = lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, CLIPS)
+        k = cuts[2]
+        self.assertEqual((k["shot"], k["kind"], k["start"], k["end"]), ("k-1", "keeper_vo", 8.0, 12.6))
+        self.assertNotIn("talk", k)                               # no lips on his words: the track carries them
+        self.assertAlmostEqual(k["speed"], 4.6 / 4.5, places=3)    # slowed at most MAX_SLOW to cover the gap
+        short = dict(CLIPS, **{"k-1": 3.0})
+        with self.assertRaises(SystemExit) as err:
+            lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, short)
+        self.assertIn("FOOTAGE_SHORT k-1", str(err.exception))
+
     def test_one_cut_a_shot_and_a_window_shows_the_next_part_of_its_source_clip(self):
         plan = tiny_plan()
         cuts = lb.compose_long_shots(plan, tiny_layout(), {k: f"{k}.mp4" for k in CLIPS}, CLIPS)
@@ -256,6 +271,27 @@ class Assemble(unittest.TestCase):
         with self.assertRaises(SystemExit):        # a fetched file that is not the approved clip
             lb.upscale_step(plan, "s-c", self.dir / "up2", "w", frame_fn=lambda x: x, approvals=approvals,
                             fetch=lambda name, dst: Path(dst).write_bytes(b"other"))
+
+    def test_an_approved_still_is_rendered_only_if_it_is_the_still_claude_approved(self):
+        # review of #476: upscale_step's still_motion goes through shot_sources.fetch_source (sha256, in-repo path)
+        plan = tiny_plan()
+        folder = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-still-"))
+        try:
+            still = folder / "still.jpg"
+            ffmpeg("-f", "lavfi", "-i", "testsrc=s=192x108:d=1", "-frames:v", "1", still)
+            approved = {"source": "still_motion", "still": "still-x", "repo_path": str(still.relative_to(eb.REPO)),
+                        "still_sha256": sha(still), "clip_seconds": 1.0}
+            still.write_bytes(still.read_bytes() + b"\0")          # the still changed after Claude's approval
+            with self.assertRaises(SystemExit) as c:
+                lb.upscale_step(plan, "s-c", self.dir / "up", "w", approvals={"s-c": approved})
+            self.assertTrue(str(c.exception).startswith("STILL_SHA256_MISMATCH"), str(c.exception))
+            outside = dict(approved, repo_path="../" * 6 + "tmp/still.jpg")
+            with self.assertRaises(SystemExit) as c:
+                lb.upscale_step(plan, "s-c", self.dir / "up", "w", approvals={"s-c": outside})
+            self.assertTrue(str(c.exception).startswith("STILL_PATH_REFUSED"), str(c.exception))
+            self.assertFalse((self.dir / "up" / "s-c.mp4").exists())
+        finally:
+            shutil.rmtree(folder)
 
 
     def stub(self, size="320x180", seconds=21.2, rate=48000, channels=2, audio="loudnorm=I=-15:TP=-2"):

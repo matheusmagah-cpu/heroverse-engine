@@ -198,6 +198,17 @@ STORY_V3_ROWS = {
     "grammar.ai_video_clip_checks": ["ai_video_clip_checks"],
 }
 KEEPER = "keeper"
+# story-qa-criteria-v4 (owner, 2026-10-27, R1-R4): v3's rows, the ai_video row also judging Pavo's kept speech, and the
+# rows v4 adds. A plan is measured by v4 only when it declares it (long_plan_check.criteria_version).
+STORY_V4 = "story-qa-criteria-v4"
+STORY_V4_ROWS = {**STORY_V3_ROWS,
+                 "rights.ai_video": ["ai_video_source_and_licence", "pavo_speech_clip_checks"],
+                 "speech.asr_model": ["asr_model_pinned"],
+                 "rights.fallback_sources": ["fallback_shots"],
+                 "grammar.ai_video_speech_checks": ["pavo_speech_clip_checks"],
+                 "grammar.spoken_audio_mix": ["spoken_audio_mix"],
+                 "grammar.fallback_shots": ["fallback_shots"]}
+STORY_ROWS = {STORY_V3: STORY_V3_ROWS, STORY_V4: STORY_V4_ROWS}
 KEEPER_BEATS = ("keeper_promise", "keeper_insight", "keeper_close")
 
 
@@ -354,6 +365,56 @@ def grammar_checks_story_v3(criteria, manifest, script=None, words=None, first_w
                     **{k: v[1] for k, v in rows.items() if k != "caption_track"}}
 
 
+def grammar_checks_story_v4(criteria, manifest, script=None, words=None, first_word=None, duration=None,
+                            base=None, approved=None, asr_sha256=None):
+    """story-qa-criteria-v4 (owner, 2026-10-27): every v3 row unchanged, with
+    - rights.ai_video: a Pavo clip keeps its speech (audio = the kept value) only with its speech checks PASS, and a
+      non-spoken one has its audio removed (audio_silent_shots); source, licence, model, upscaler and vetting as v3;
+    - speech.asr_model: the ASR that measured the words is the pinned medium.en (its model.bin sha256);
+    - fallback_sources / fallback_shots: every licensed-footage or still clip sits on a shot with no character and no
+      speech, APPROVED; a footage clip under the frozen licence list and credited, a still's model licence recorded;
+    - spoken_audio_mix: with any kept speech, one gain per speech clip within clip_gain_db_max, fades within
+      audio_crossfade_seconds_max, a continuous ambience bed and the owned music."""
+    g, r = criteria["grammar"], criteria["rights"]
+    ai = r["ai_video"]
+    checks, measures = grammar_checks_story_v3(criteria, manifest, script, words, first_word, duration, base, approved)
+    clips = manifest.get("clips") or []
+    pavo = [c for c in clips if c.get("source") == ai["source"]]
+    kept = [c for c in pavo if c.get("audio") == ai["audio"]]
+    checks["ai_video_source_and_licence"] = all(
+        c.get("licence") == ai["licence"] and c.get("model") == ai["model"] and c.get("upscaler") == ai["upscaler"]
+        and c.get("vetting") == ai["vetting_required"] and c.get("audio") in (ai["audio"], ai["audio_silent_shots"])
+        for c in pavo)
+    checks["pavo_speech_clip_checks"] = all(c.get("speech_checks") == "PASS" for c in kept)
+    fallbacks = [c for c in clips if c.get("source") in ("footage", "still")]
+    holds = {h.get("shot"): h for h in manifest.get("holds") or []}
+    spoken = {s.get("shot") for s in manifest.get("spoken_shots") or []}
+    flic, mlic = set(r["allowed_footage_licences"]), {x.lower() for x in r["allowed_model_licences"]}
+    checks["fallback_shots"] = all(
+        c.get("vetting") == "APPROVED" and c.get("sha256") and not (holds.get(c.get("id")) or {}).get("characters")
+        and c.get("id") not in spoken and c.get("audio") == "removed"
+        and ((c["source"] == "footage" and c.get("licence") in flic and c.get("credit"))
+             or (c["source"] == "still" and str(c.get("licence")).lower() in mlic)) for c in fallbacks)
+    # v3's footage row reads every clip as footage; a still is an image (images_open_licence_with_revision)
+    used = {h["image"].partition("#")[0] for h in manifest.get("holds") or [] if h.get("kind") == "footage"}
+    movie = [c for c in clips if c.get("source") != "still"]
+    checks["footage_licensed_vetted_and_credited"] = bool(movie) and used <= {c.get("id") for c in clips} and all(
+        c.get("licence") in flic and c.get("vetting") == r["footage_vetting_required"] and c.get("credit")
+        and c.get("sha256") for c in movie)
+    mix = manifest.get("spoken_audio_mix") or {}
+    sm, sc = g["spoken_audio_mix"], ai["speech_checks"]
+    gains = mix.get("per_clip_gain_db") or {}
+    checks["spoken_audio_mix"] = not kept or (
+        set(gains) >= {c.get("id") for c in kept}
+        and all(isinstance(v, (int, float)) and v <= sc["clip_gain_db_max"] for v in gains.values())
+        and isinstance(mix.get("audio_crossfade_seconds"), (int, float))
+        and mix["audio_crossfade_seconds"] <= sm["audio_crossfade_seconds_max"]
+        and bool(mix.get("ambience_bed")) and bool(mix.get("music")))
+    asr = criteria["speech"]["asr_model"]["model_bin_sha256"]
+    checks["asr_model_pinned"] = None if asr_sha256 is None else asr_sha256 == asr
+    return checks, measures
+
+
 def scripture_kjv_exact(script):
     """rights.script_original_with_public_domain_scripture_only, read again on the script that was voiced: every
     referenced quotation is the KJV word for word (bible/kjv_check.py, the same check script_check runs)."""
@@ -416,6 +477,14 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         clips = manifest["clips"]
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
+    elif criteria["version"] == STORY_V4:
+        # owner 27/10: v3's rows plus Pavo's kept speech, the pinned ASR, the fallback shots and the spoken mix
+        model_bin = Path(whisper) / "model.bin"
+        v3, srt_measures = grammar_checks_story_v4(criteria, manifest, script, words, first, duration,
+                                                   Path(manifest_path).parent, approved_characters(),
+                                                   av_semantic.sha256(model_bin) if model_bin.is_file() else None)
+        checks.update(v3)
+        checks["scripture_kjv_exact"] = scripture_kjv_exact(script)
     elif criteria["version"] == STORY_V3:
         # the acted Bible-story long: every v3 row through STORY_V3_ROWS, the .srt track measured against the
         # script and the words heard in the audio
@@ -430,7 +499,7 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
     # numpy bools are not JSON serializable; under v3 None stays None (UNKNOWN: evidence absent, never a pass)
-    checks = {k: (None if v is None and criteria["version"] == STORY_V3 else bool(v)) for k, v in checks.items()}
+    checks = {k: (None if v is None and criteria["version"] in STORY_ROWS else bool(v)) for k, v in checks.items()}
     result = {"version": "pilot-qa-v1", "pilot_id": manifest["pilot_id"], "output_sha256": manifest["output_sha256"],
               "status": "PASS" if all(v is True for v in checks.values()) else "FAIL", "checks": checks,
               "criteria_version": criteria["version"],
@@ -444,8 +513,8 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
               "criteria_sha256": av_semantic.sha256(criteria_path),
               "human_review": "PENDING (D-076 calibration by sampling)",
               "upload_performed": False, "publication_performed": False}
-    if criteria["version"] == STORY_V3:
-        result["rows"] = row_states(checks)
+    if criteria["version"] in STORY_ROWS:
+        result["rows"] = row_states(checks, STORY_ROWS[criteria["version"]])
         result["measurements"]["srt"] = srt_measures
     Path(out).write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps({"status": result["status"], "failed": [k for k, ok in checks.items() if not ok],

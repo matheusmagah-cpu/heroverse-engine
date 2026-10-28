@@ -544,20 +544,24 @@ def voiceover(shot):
     return isinstance(shot, dict) and shot.get("kind") == "keeper" and shot.get("voiceover") is True
 
 
-def vo_cover(shots, i):
+def vo_cover(shots, i, long=False):
     """(before, after): the seconds a voice-over Keeper clip covers around its line, by episode_build.compose_shots'
     own run logic (review of #423: plan_check, lines_step, shot_seconds and the compose share this one helper). A
     talking shot before it ends on its last word (it covers the gap only when the next shot talks too), so the clip
     covers that gap; after scenes or a voice-over shot it starts on its first word. It ends where the next line starts
-    (the gap), or with the closing tail when it is the last shot."""
+    (the gap), or with the closing tail when it is the last shot. A long (E130, long_build.compose_long_shots) cuts
+    every run from its first word to the next run's, at LONG_LINE_GAP: nothing before, the gap or tail after."""
+    if long:
+        import long_plan_check
+        return 0.0, (TAIL if i == len(shots) - 1 else long_plan_check.LONG_LINE_GAP)
     before = LINE_GAP if i > 0 and talking(shots[i - 1]) else 0.0
     after = TAIL if i == len(shots) - 1 else LINE_GAP
     return before, after
 
 
-def vo_covered(seconds, shots, i):
+def vo_covered(seconds, shots, i, long=False):
     """The time a voice-over Keeper clip covers: the gap before, his line's `seconds` and the gap or tail after."""
-    before, after = vo_cover(shots, i)
+    before, after = vo_cover(shots, i, long)
     return before + seconds + after
 
 
@@ -1085,7 +1089,24 @@ def check(plan, chars=None):
     problems += shape
     if bad_lines:
         return {"problems": problems, "pending": pending, "estimate": {}}
+    problems += audio_route_problems(plan, shots)
     return _check_shots(plan, chars, narration, shots, problems, pending)
+
+
+def audio_route_problems(plan, shots):
+    """Owner 27/10 (R4), review of #476: a Short's `audio_route` is "kokoro" (or absent); "pavo_native" is refused
+    (AUDIO_ROUTE_SHORT_UNSUPPORTED) until a new frozen Short criteria file holds the speech-check rows story QA v4
+    holds for the long."""
+    import pavo_native as pn
+    route = plan.get("audio_route")
+    if route not in (None, pn.KOKORO, pn.NATIVE):
+        return [f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})"]
+    if route != pn.NATIVE:
+        return []
+    # review of #476: refused for a Short until a Short criteria file with the speech-check rows exists (a new
+    # frozen file, owner); the engine path is the long's (story QA v4)
+    return ["AUDIO_ROUTE_SHORT_UNSUPPORTED (Pavo's own speech needs a frozen Short criteria file with the speech "
+            "checks; the long has story QA v4)"]
 
 
 def narration_problems(narration, kinds=KINDS):
