@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-s-c2-meet",
+ "episode": "arc-01-long",
+ "shot": "s-c2-meet",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her bare shoulders, steps out from between flowering trees, shy and smiling. Soft morning light. Tender. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c2-meet.jpg",
+ "sha256": "cfaae046b4cc39c214beff234f06de3d4514f13eecdc6f71c9edff8eb4fb1c4c",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c2-meet-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373660562699324480",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373660562699324480",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.6,
+  "note": "Eve steps out from flowering trees, shy smile, her reference face, rust draped garment; tender first sight.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "da391d21d9dd3189a0b760979abfee3f32c254573760c5a50eb82a3e27acf1e6",
+  "references_sha256": "f01102bf19b6ffc279a9641d335faf90fb9df4f73f93a7e8104b9703567a595a"
+ }
+}

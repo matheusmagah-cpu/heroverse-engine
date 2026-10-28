@@ -1,0 +1,529 @@
+{
+ "episode": "arc-01-long",
+ "plan_sha256": "f37c0f20ae92484c749423b989927c002466393e1f55d6e99ed70a5d477b2abc",
+ "attempts": 1,
+ "shots": {
+  "k-promise-1": {
+   "kind": "keeper",
+   "request_sha256": "0370d8d4ea7868f0cf0e8023b9376ae77fb2e1c53c25dac252eebfa0f23aea05",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos. SOUND. The narrator's voice: a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction. The narrator speaks on camera, his lips moving in sync with every word. The narrator says exactly these words and nothing else, once, in English: \"I keep the old stories. Tonight I will tell you one of them, whole.\" The soundtrack is only the voice and the natural ambient sound of the open desert at night: a small campfire crackling softly and a light night wind.",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "references": [
+     {
+      "image": "ch-keeper-talk",
+      "sha256": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+     }
+    ],
+    "audio": {
+     "route": "pavo_native",
+     "speaker": "keeper",
+     "words": [
+      "i",
+      "keep",
+      "the",
+      "old",
+      "stories",
+      "tonight",
+      "i",
+      "will",
+      "tell",
+      "you",
+      "one",
+      "of",
+      "them",
+      "whole"
+     ]
+    }
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-k-promise-1-sha256-91758e9c4f438c8cf97f1b0a879245e37b8e4450c34d453e8ce0dd0bda58e631.mp4",
+     "clip_sha256": "91758e9c4f438c8cf97f1b0a879245e37b8e4450c34d453e8ce0dd0bda58e631",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373655719851621952",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.254,
+         "lag_ms": -80,
+         "speak_to_pause": 1.0,
+         "face_frames": 0.92,
+         "sync": {
+          "offset": -1,
+          "conf": 7.873,
+          "min_dist": 7.557,
+          "windows": 177
+         }
+        }
+       }
+      }
+     ],
+     "sheet": "40616795532-k-promise-1-1.jpg",
+     "uploaded": true
+    }
+   ],
+   "clip_seconds": 5
+  },
+  "k-insight-1": {
+   "kind": "keeper",
+   "request_sha256": "65423f9611cf82d8046399ee6b0b6113bd36496add2f8406962d7d5e03549323",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes thoughtful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos. SOUND. The narrator's voice: a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction. The narrator speaks on camera, his lips moving in sync with every word. The narrator says exactly these words and nothing else, once, in English: \"Notice how short the fall is. Seven verses, and the whole world turns.\" The soundtrack is only the voice and the natural ambient sound of the open desert at night: a small campfire crackling softly and a light night wind.",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "references": [
+     {
+      "image": "ch-keeper-talk",
+      "sha256": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+     }
+    ],
+    "audio": {
+     "route": "pavo_native",
+     "speaker": "keeper",
+     "words": [
+      "notice",
+      "how",
+      "short",
+      "the",
+      "fall",
+      "is",
+      "seven",
+      "verses",
+      "and",
+      "the",
+      "whole",
+      "world",
+      "turns"
+     ]
+    }
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-k-insight-1-sha256-392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d.mp4",
+     "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373656849356765888",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [
+        "FACE_NOT_FOUND"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.149,
+         "lag_ms": -80,
+         "speak_to_pause": 1.01,
+         "face_frames": 0.4,
+         "sync": {
+          "offset": -1,
+          "conf": 5.555,
+          "min_dist": 8.527,
+          "windows": 177
+         }
+        }
+       },
+       "clip": "k-insight-1-fail1.mp4"
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373658366054271040",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [
+        "FACE_NOT_FOUND",
+        "MOUTH_NOT_IN_SYNC"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": -1.0,
+         "lag_ms": 0,
+         "speak_to_pause": 0.0,
+         "face_frames": 0.0,
+         "sync": null
+        }
+       },
+       "clip": "k-insight-1-fail2.mp4"
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373659864402794176",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [
+        "FACE_NOT_FOUND"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.34,
+         "lag_ms": -120,
+         "speak_to_pause": 1.17,
+         "face_frames": 0.75,
+         "sync": {
+          "offset": -2,
+          "conf": 6.833,
+          "min_dist": 7.749,
+          "windows": 177
+         }
+        }
+       },
+       "clip": "k-insight-1-fail3.mp4"
+      },
+      {
+       "generation": 4,
+       "conversation_id": "373661407969622720",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [
+        "FACE_NOT_FOUND"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.293,
+         "lag_ms": -120,
+         "speak_to_pause": 1.07,
+         "face_frames": 0.27,
+         "sync": {
+          "offset": -2,
+          "conf": 5.851,
+          "min_dist": 7.961,
+          "windows": 177
+         }
+        }
+       },
+       "clip": "k-insight-1-fail4.mp4"
+      },
+      {
+       "generation": 5,
+       "conversation_id": "373663083208152768",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [
+        "FACE_NOT_FOUND",
+        "MOUTH_NOT_IN_SYNC"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": -1.0,
+         "lag_ms": 0,
+         "speak_to_pause": 0.0,
+         "face_frames": 0.0,
+         "sync": null
+        }
+       },
+       "clip": "k-insight-1-fail5.mp4"
+      },
+      {
+       "generation": 6,
+       "conversation_id": "373664559498296896",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 7.0
+       },
+       "flags": [],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.239,
+         "lag_ms": 240,
+         "speak_to_pause": 1.2,
+         "face_frames": 0.85,
+         "sync": {
+          "offset": -1,
+          "conf": 5.937,
+          "min_dist": 8.016,
+          "windows": 177
+         }
+        }
+       }
+      }
+     ],
+     "sheet": "40616795532-k-insight-1-1.jpg",
+     "uploaded": true
+    }
+   ],
+   "clip_seconds": 6
+  },
+  "s-c2-adam": {
+   "kind": "scene",
+   "request_sha256": "811ced0256fcce2719e4e9efd60ff38228f0282dfedf128ef438f707c0cbc154",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, looks at Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, with joy, and speaks, his lips moving clearly with every word. A sunlit garden glade at morning. Joyful and amazed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos. SOUND. Adam's voice: a young man's light, bright tenor voice, youthful and eager, a quick lively pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"This is now bone of my bones, and flesh of my flesh: she shall be called Woman,\" The soundtrack is only the voice and the natural ambient sound of the wild open land of the garden: a soft wind through the trees and a few distant birds.",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "references": [
+     {
+      "image": "ch-adam-front",
+      "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+     },
+     {
+      "image": "ch-eve-full",
+      "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+     }
+    ],
+    "audio": {
+     "route": "pavo_native",
+     "speaker": "adam",
+     "words": [
+      "this",
+      "is",
+      "now",
+      "bone",
+      "of",
+      "my",
+      "bones",
+      "and",
+      "flesh",
+      "of",
+      "my",
+      "flesh",
+      "she",
+      "shall",
+      "be",
+      "called",
+      "woman"
+     ]
+    }
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-s-c2-adam-sha256-d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f.mp4",
+     "clip_sha256": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373650359153330880",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 9.0
+       },
+       "flags": [],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": -0.118,
+         "lag_ms": -80,
+         "speak_to_pause": 0.77,
+         "face_frames": 0.93,
+         "sync": {
+          "offset": -2,
+          "conf": 6.774,
+          "min_dist": 6.628,
+          "windows": 230
+         }
+        }
+       }
+      }
+     ],
+     "sheet": "40616795532-s-c2-adam-1.jpg",
+     "uploaded": true
+    }
+   ],
+   "clip_seconds": 5
+  },
+  "s-c4-blame": {
+   "kind": "scene",
+   "request_sha256": "1db1bb102e371931d208bd2344502afc85f2818cebdc34ba35148b631faa86af",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, gestures toward Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, without looking at her, and speaks, his lips moving clearly with every word. Dusk in the garden. Bitter and afraid. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos. SOUND. Adam's voice: a young man's light, bright tenor voice, youthful and eager, a quick lively pace, clear English diction. Adam speaks on camera, his lips moving in sync with every word. Adam says exactly these words and nothing else, once, in English: \"The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.\" Pronunciation: \"thou\" rhymes with \"now\"; \"gavest\" is two syllables, \"GAV-est\". The soundtrack is only the voice and the natural ambient sound of the wild open land of the garden: a soft wind through the trees and a few distant birds.",
+    "aspect_ratio": "16:9",
+    "sound": true,
+    "references": [
+     {
+      "image": "ch-adam-front",
+      "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+     },
+     {
+      "image": "ch-eve-full",
+      "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+     }
+    ],
+    "audio": {
+     "route": "pavo_native",
+     "speaker": "adam",
+     "words": [
+      "the",
+      "woman",
+      "whom",
+      "thou",
+      "gavest",
+      "to",
+      "be",
+      "with",
+      "me",
+      "she",
+      "gave",
+      "me",
+      "of",
+      "the",
+      "tree",
+      "and",
+      "i",
+      "did",
+      "eat"
+     ]
+    }
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-s-c4-blame-sha256-b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df.mp4",
+     "clip_sha256": "b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373652135877580480",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 9.0
+       },
+       "flags": [
+        "MOUTH_NOT_IN_SYNC"
+       ],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": -0.183,
+         "lag_ms": 0,
+         "speak_to_pause": 0.21,
+         "face_frames": 0.97,
+         "sync": {
+          "offset": -5,
+          "conf": 0.211,
+          "min_dist": 12.892,
+          "windows": 230
+         }
+        }
+       },
+       "clip": "s-c4-blame-fail1.mp4"
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373653919471795776",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 9.0
+       },
+       "flags": [],
+       "lipsync": {
+        "audio": {
+         "corr": 1.0,
+         "lag_ms": 0
+        },
+        "mouth": {
+         "corr": 0.113,
+         "lag_ms": -40,
+         "speak_to_pause": 1.14,
+         "face_frames": 1.0,
+         "sync": {
+          "offset": -1,
+          "conf": 6.143,
+          "min_dist": 6.977,
+          "windows": 230
+         }
+        }
+       }
+      }
+     ],
+     "sheet": "40616795532-s-c4-blame-1.jpg",
+     "uploaded": true
+    }
+   ],
+   "clip_seconds": 5
+  }
+ },
+ "pavo_budget": {
+  "units_before": 0,
+  "units_this_run": 20
+ },
+ "run_id": "40616795532"
+}

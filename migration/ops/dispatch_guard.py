@@ -148,7 +148,7 @@ def shot_probe(i):
     units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
                                                                       worst=True)
     return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units,
-            "short": plan.get("version") != "bible-long-plan-v1"}   # E137: the Shorts' share of the rolling quota
+            "short": plan.get("version") != "bible-long-plan-v1"}   # E138: the Shorts' share of the rolling quota
 
 
 def cf_images(i):
@@ -651,7 +651,7 @@ def pavo_actions_usage(api, today, now=None):
             break
         page += 1
     usage = quota.combine(records, today)
-    usage["short_units"] = quota.combine(shorts, today)["units"]   # E137: the Shorts' share
+    usage["short_units"] = quota.combine(shorts, today)["units"]   # E138: the Shorts' share
     return usage
 
 
@@ -666,13 +666,13 @@ def pavo_budget(facts, api, today, now=None):
         fits = guard.check_batch(facts["pavo_units"])
     except quota.PavoError as exc:
         raise Refusal(str(exc)) from None
-    if facts.get("short"):   # E137: the Shorts take at most SHORTS_DAILY_JOBS jobs a UTC day, the long the rest
+    if facts.get("short"):   # E138: the Shorts take at most SHORTS_DAILY_JOBS jobs a UTC day, the long the rest
         done = -(-int(usage.get("short_units") or 0) // quota.VIDEO_UNITS)
         planned = -(-int(facts["pavo_units"]) // quota.VIDEO_UNITS)
         if done + planned > quota.SHORTS_DAILY_JOBS:
             refuse("PAVO_SHORTS_SHARE", f"{done} Short jobs today and {planned} planned (worst case) pass the Shorts' "
                                         f"{quota.SHORTS_DAILY_JOBS} a day: split the batch or wait for the next UTC day "
-                                        "(the long has priority, E137)")
+                                        "(the long has priority, E138)")
     return fits["used"]
 
 

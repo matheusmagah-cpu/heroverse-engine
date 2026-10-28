@@ -55,13 +55,13 @@ from client import PavoError
 
 REPO = Path(__file__).resolve().parents[3]
 LEDGER = REPO / "migration" / "evidence" / "pavo" / "image-ledger.json"
-# E137 (28/10, measured by the long agent): Pavo's free quota is a rolling window, not a UTC day. After a stop about
+# E138 (28/10, measured by the long agent): Pavo's free quota is a rolling window, not a UTC day. After a stop about
 # 35-50 jobs come back ~3 h later, and sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h); a
 # still and a video each count about one job. A fixed total a UTC day (E128's 120 units) blocked work while the quota
 # was live and let it run while it was spent. The stop signal is the read-back (FAILED_STREAK, COOL_DOWN, one probe,
 # MAX_UNREAD); DAILY_CAP is now only the largest batch one run may plan (about one window), never a day's total.
 DAILY_CAP = 120
-# E137: the owner's split of the rolling quota: the Shorts take at most this many jobs a UTC day, the long the rest
+# E138: the owner's split of the rolling quota: the Shorts take at most this many jobs a UTC day, the long the rest
 SHORTS_DAILY_JOBS = 25
 FAILED_STREAK = 2
 # E136 (28/10): 11 stills were submitted back to back before any was read back; the quota had run out and 10 came back
@@ -299,7 +299,7 @@ class QuotaGuard:
 
     def before_generate(self, units=IMAGE_UNITS):
         """Raise before any request when the ledger is unreadable, a quota stop is suspected (the cool-down runs, or
-        its one probe has not read back yet) or MAX_UNREAD of today's jobs are not read back (E136). E137: no fixed
+        its one probe has not read back yet) or MAX_UNREAD of today's jobs are not read back (E136). E138: no fixed
         daily total; only an owner's explicit PAVO_IMAGE_DAILY_CAP still caps the day (PAVO_DAILY_CAP)."""
         data = self._load()
         used, actions = self._usage(data)
@@ -323,7 +323,7 @@ class QuotaGuard:
         return out
 
     def _owner_cap(self):
-        """E137: a day's total only when the owner sets PAVO_IMAGE_DAILY_CAP explicitly; None otherwise."""
+        """E138: a day's total only when the owner sets PAVO_IMAGE_DAILY_CAP explicitly; None otherwise."""
         env = os.environ.get("PAVO_IMAGE_DAILY_CAP", "").strip()
         try:
             value = int(env) if env else None
@@ -332,7 +332,7 @@ class QuotaGuard:
         return value if value is not None and value >= 0 else None
 
     def check_batch(self, units):
-        """A planned batch (its worst-case units) before it starts. E137: refused while a quota stop is suspected, and
+        """A planned batch (its worst-case units) before it starts. E138: refused while a quota stop is suspected, and
         (PAVO_BUDGET_SHORT) when the batch alone is larger than one rolling window (cap()) or passes an owner's
         explicit daily cap; the units already used today no longer refuse it. Returns {used, planned, cap,
         remaining}: remaining is the room left in one window after this batch."""
@@ -342,7 +342,7 @@ class QuotaGuard:
         cap = self.cap(data)
         if units > cap:
             raise PavoError("PAVO_BUDGET_SHORT planned=%d window=%d (split the batch: one run plans at most one "
-                            "rolling window, E137)" % (units, cap))
+                            "rolling window, E138)" % (units, cap))
         owner = self._owner_cap()
         if owner is not None and used + units > owner:
             raise PavoError("PAVO_BUDGET_SHORT planned=%d used=%d cap=%d day=%s (the owner's daily cap)"

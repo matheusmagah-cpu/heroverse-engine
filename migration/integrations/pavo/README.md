@@ -152,7 +152,7 @@ charged). 31 submissions of run 2026102705 were spent on nothing. The adapter no
   recent failed conversation ids and `suspended_until`; no credential or URL. Commit it with the run's evidence.
 - Read back every job before submitting many more: a `failed` read-back is a stop signal, not noise.
 
-### The quota is a rolling window, not a UTC day (E136, E137, 2026-10-28)
+### The quota is a rolling window, not a UTC day (E136, E138, 2026-10-28)
 
 Measured by the arc-01 long agent on 28/10: Pavo's free quota does **not** reset at 00:00 UTC. About 35-50 jobs come
 back ~3 h after a stop, and sustained throughput is ~9-12 jobs an hour. On 27/10, about 180 jobs ran in 15.7 h: the

@@ -523,7 +523,7 @@ class PavoBudget(unittest.TestCase):
         self.ledger.write_text(json.dumps({"days": {"2026-10-28": {"generated": 100}}}))
         api = self.api(ok=4, date="2026-10-28T00:30:00Z")                 # 8 units on Actions today
         facts = {"uploads": 0, "pavo_units": 13}
-        # E137: 108 used today no longer refuses (a rolling quota); a batch larger than one window does
+        # E138: 108 used today no longer refuses (a rolling quota); a batch larger than one window does
         self.assertEqual(g.pavo_budget(facts, api, "2026-10-28", now=now), 108)
         with self.assertRaises(g.Refusal) as c:
             g.pavo_budget(dict(facts, pavo_units=self.quota.DAILY_CAP + 1), api, "2026-10-28", now=now)
@@ -533,7 +533,7 @@ class PavoBudget(unittest.TestCase):
             g.pavo_budget(dict(facts, pavo_units=2), api, "2026-10-28", now=now)
         self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
 
-    def test_e137_the_shorts_take_at_most_their_share_and_the_long_the_rest(self):
+    def test_e138_the_shorts_take_at_most_their_share_and_the_long_the_rest(self):
         from datetime import datetime, timezone
         now = datetime(2026, 10, 28, 1, 0, tzinfo=timezone.utc)
         usage = {"units": 60, "failed_tail": 0, "last_at": None, "short_units": 2 * 20}   # 20 Short jobs today

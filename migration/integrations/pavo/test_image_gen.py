@@ -196,8 +196,8 @@ class FreeQuota(unittest.TestCase):
         return self.client(quote(), envelope({"conversation_id": "777"}), started(IMAGE_MODEL),
                            cap=cap).generate_image("A dry plain at dusk.")
 
-    def test_e137_no_fixed_daily_total_blocks_a_live_quota_and_only_the_owner_can_cap_a_day(self):
-        """E137 (28/10): Pavo's quota is a rolling window (~35-50 jobs back ~3 h after a stop, ~9-12 jobs an hour);
+    def test_e138_no_fixed_daily_total_blocks_a_live_quota_and_only_the_owner_can_cap_a_day(self):
+        """E138 (28/10): Pavo's quota is a rolling window (~35-50 jobs back ~3 h after a stop, ~9-12 jobs an hour);
         E128's fixed 120 units a UTC day refused work while the quota was live. Every submission is still counted."""
         self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 250}}, "daily_cap": 120}))
         self.assertEqual(self.submit()["status"], "submitted")      # 250 used today: no fixed total refuses it
@@ -425,7 +425,7 @@ class SharedBudget(unittest.TestCase):
         self.assertEqual(self.submit_video()["status"], "submitted")
 
     def test_a_batch_larger_than_one_window_is_refused_before_it_starts(self):
-        # E137: what was used today no longer refuses a batch; a batch alone larger than one window does
+        # E138: what was used today no longer refuses a batch; a batch alone larger than one window does
         self.actions = {"units": 54, "failed_tail": 0, "last_at": None}
         self.ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 140}}}))
         self.assertEqual(self.guard().check_batch(26), {"used": 194, "planned": 26, "cap": DAILY_CAP,

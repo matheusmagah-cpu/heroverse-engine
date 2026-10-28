@@ -669,7 +669,7 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h, `evidence/pavo/image-ledger.json` 2026-10-27
   and shot-probe record 40592173923). A still and a video each count as about one job. On 28/10 the quota stopped at
   ~03:26 UTC: 10 of 11 MCP stills submitted back to back read back `failed` (E136).
-- **Decision** (coordinator for the owner, 28/10): E128's fixed 120 units a UTC day is dropped (E137). The stop is two
+- **Decision** (coordinator for the owner, 28/10): E128's fixed 120 units a UTC day is dropped (E138). The stop is two
   failed read-backs (3 h cool-down, one probe) and at most two unread jobs (E136). 120 units remains only as one
   batch's largest plan. The Shorts take at most 25 jobs a UTC day, and the long has priority over the rest
   (`PAVO_SHORTS_SHARE`). Format: `integrations/pavo/README.md` "The quota is a rolling window".

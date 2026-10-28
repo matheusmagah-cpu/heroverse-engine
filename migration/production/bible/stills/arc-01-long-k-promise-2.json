@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-k-promise-2",
+ "episode": "arc-01-long",
+ "shot": "k-promise-2",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, his face and silver beard filling most of the frame, the scroll held low and out of view, looks straight into the camera with his mouth gently closed, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
+ "sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-k-promise-2-2026102801-2",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-keeper-front",
+   "sha256": "eea5e96cd78f5dadc98b87f93384fc90cc6172b2021be2711ee7ebf568816098"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373662825371744960",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373662825371744960",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "The Keeper's face and silver beard fill the chest-up frame (crop of Pavo's seated still to the shot's framing), hood, starry desert night, warm fire light, mouth closed, the same face as his clips; no writing in view.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "696e22f2323a5a2f6c15561dea8d99183f8d4eea9f0fc5c0af931024719073a9",
+  "references_sha256": "7b032aa4aa71714631d2a59653f855ca58d50340d1b092028fdec18003d012b3"
+ }
+}

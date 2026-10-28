@@ -413,7 +413,7 @@ class PavoBudgetQueue(Scratch):
         ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}}))
         now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
         guard = quota.QuotaGuard(ledger, now=lambda: now, actions=lambda day: quota.NO_ACTIONS)
-        # E137: Pavo's quota is a rolling window; 251 units used today no longer refuse the next batch
+        # E138: Pavo's quota is a rolling window; 251 units used today no longer refuse the next batch
         got = lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)
         self.assertEqual(got["next_batch"], "fits", got)
         self.assertEqual(got["remaining"], quota.DAILY_CAP - 10)
