@@ -26,21 +26,17 @@ EXEMPT = {
     "reconcile.yml": "reconciles ledgers; no generation, render or upload",
     "approve.yml": "the approval gate (prepublish_gate.py); its own gates refuse, the owner's rules forbid loosening it",
     "publish.yml": "publishes a gated, approved render; gated by approve.yml -> prepublish_gate.py",
-    "publish-shorts.yml": "publishes gated Shorts on heartbeat; idempotent by its ledger",
-    "shorts.yml": "byte-frozen (test_shorts_produce)",
-    "shorts-review.yml": "review artefacts of a made Short; no generation",
     "tiktok.yml": "mirrors a published Short (Buffer free plan); idempotent by its ledger",
     "first-comment.yml": "one comment on a published video; idempotent",
     "arc-links.yml": "metadata edits on published videos; idempotent",
     "channel-config.yml": "channel metadata; no generation",
-    "channel-privacy.yml": "privacy flips on heartbeat; idempotent",
+    "channel-privacy.yml": "privacy flips, dispatched by hand (plan by default); idempotent",
     "goal-report.yml": "a report; reads only",
     "market-panel.yml": "a market report; reads only",
     "thumb-study.yml": "a study of thumbnails; reads only",
     "render-smoke.yml": "the render's CI smoke on fixtures",
     "pavo-mcp.yml": "the Pavo integration's tests; no generation",
-    "reviewer-calibration.yml": "reviewer calibration on fixed samples",
-    "voice-sample.yml": "a short voice sample; minutes only",
+    "reviewer-calibration.yml": "reviewer calibration on fixed samples (kept: E59's antidote reads it)",
     "nightly-images.yml": "heartbeat's nightly slot; a used-up allocation defers (E62), never fails",
     "images-upres.yml": "upscales stills already made; no generation",
 }
@@ -210,7 +206,6 @@ class Inputs(unittest.TestCase):
         self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-not-a-shot", "attempts": "2"}, "GUARD_INPUT_INVALID")
         self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "7"}, "GUARD_INPUT_INVALID")
         self.refused("cf-images.yml", {"pilot": "migration/production/pilot-010", "engine": "flux"}, "GUARD_INPUT_INVALID")
-        self.refused("agnes-clip.yml", {"prompt": "x", "seconds": "13", "aspect": "9:16"}, "GUARD_INPUT_INVALID")
         self.refused("footage.yml", {"queries": "/etc/passwd", "per_theme": "3"}, "GUARD_INPUT_INVALID")
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
         self.refused("pilot-render-stills.yml", {"pilot": "pilot-999"}, "GUARD_INPUT_MISSING")
@@ -226,7 +221,6 @@ class Inputs(unittest.TestCase):
         self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
         self.assertEqual(g.subject_of("footage.yml", {"queries": "migration/production/footage/queries.json"}),
                          "footage-library")
-        self.assertIsNone(g.subject_of("agnes-clip.yml", {"seconds": "6"}))
 
     def test_a_later_episode_part_waits_for_the_earlier_one(self):
         # E112's order, reused: the guard refuses with episode_order's own refusal

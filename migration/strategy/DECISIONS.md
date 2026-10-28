@@ -606,3 +606,24 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   - R4: native requests (prompt A of #473), PAVO_PROMPT_BLOCKED from the adapter with an automatic Kokoro retry, the
     speech checks before approve-shot, and the build's mix (one gain per clip to -18 LUFS, 80 ms fades, a continuous
     ambience bed, the owned music ducked, -15 LUFS loudnorm).
+
+## Slim system applied: the Agnes direct route retired, one clock per job (2026-10-28)
+- **Owner, 28/10.** "Enxuga o sistema; se tiver alguma coisa inútil você retira e deixa tudo muito bem orquestrado sem
+  retrabalho." Audit `evidence/audits/20261028-slim.md` (#477); its DECIDE items applied in one PR.
+- **Agnes direct (`agnes-clip.yml`, `production/agnes_clip.py`) retired.** The order of 2026-10-25 (Pavo → Agnes direct →
+  vidIQ) was replaced by the owner's rules R1-R4 of 27/10 (above): Pavo first, and when its free quota runs out the
+  silent shots take free fallbacks (footage library, FLUX stills with motion), wired into `episode_build.py sources`.
+  Agnes direct never left "test only" (terms unread, a watermark possible) and its three runs (2026-10-25) all failed.
+  Pavo itself still serves Agnes Flash video and agnes-image stills through the `heroverse-pavo` MCP.
+- **Also retired:** the prayer Shorts-from-long line (`shorts.yml`, `shorts-review.yml`, `publish-shorts.yml`,
+  `shorts_produce.py`, `shorts_006_*`, `publish_shorts.py`, `review_recovery.py`, `shorts_prerequisite.py`; Bible Shorts
+  are episodes through `publish-episode.yml`), the closed Chatterbox A/B (`voice-sample.yml`, `chatterbox_sample.py`;
+  `voice_judge.py` stays the ruler), the offline native-window mining tools (`opportunity.py`, `native_metrics.py`,
+  `native_plan.py`, `accuracy_check.py`; their download route is gone) and `strategy/FORMAT_OPINION_AND_CRITIQUE.md`.
+  All stay in git history.
+- **Clocks.** `heartbeat.yml` is the only GitHub cron of record (`tiktok.yml` keeps its own as a second chance); the
+  light clock (:14) is the only watchdog and no longer dispatches `tiktok.yml`; the main clock (every 4 h at :29) does
+  production only; the 08:05 daily pass does report, decision and live intelligence (OPERATIONS.md "Clocks").
+  `channel-privacy.yml` left the heartbeat (a finished job; dispatched by hand).
+- **Measure:** the daily report's scheduler health (`ops/health.py`) shows no missed slot over the next 7 days, and
+  `tiktok.yml`'s run history shows no dispatch by a Claude clock.

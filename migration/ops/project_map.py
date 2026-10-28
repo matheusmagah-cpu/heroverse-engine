@@ -15,6 +15,7 @@ import sys
 
 SKIP = ("archive", "__pycache__", ".claude")
 CALL = re.compile(r"migration/[\w./-]+\.(?:py|sh)")
+EVIDENCE = "migration/evidence/"   # slim audit 2026-10-28 (D9): evidence scripts are provenance, not orphans
 
 
 def modules(root):
@@ -94,7 +95,9 @@ def build(root):
             continue
         reached.add(r)
         todo += mods[r]["local_imports"]
-    orphans = sorted(r for r, m in mods.items() if not m["is_test"] and r not in reached and not m["imported_by"])
+    # scripts under migration/evidence/ produced recorded evidence and stay as its provenance: never "candidates"
+    orphans = sorted(r for r, m in mods.items() if not m["is_test"] and r not in reached and not m["imported_by"]
+                     and not r.startswith(EVIDENCE))
     return {"version": "project-map-v1", "workflows": wfs, "shell": shell, "modules": mods,
             "unreached_by_any_workflow": orphans}
 

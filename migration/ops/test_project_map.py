@@ -40,6 +40,17 @@ class Map(unittest.TestCase):
             self.assertEqual(m["shell"]["migration/ci/run.sh"], ["migration/production/step.py"])
             self.assertEqual(m["modules"]["migration/production/step.py"]["called_by_workflows"], ["w.yml"])
 
+    def test_evidence_scripts_are_never_listed_as_unreached(self):
+        # slim audit 2026-10-28 (D9): a script that produced recorded evidence is its provenance, not an orphan
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for rel in ("migration/evidence/study/build.py", "migration/production/orphan.py"):
+                (root / rel).parent.mkdir(parents=True, exist_ok=True)
+                (root / rel).write_text('"""x."""\n')
+            (root / ".github/workflows").mkdir(parents=True)
+            self.assertEqual(pm.build(root)["unreached_by_any_workflow"], ["migration/production/orphan.py"])
+        self.assertFalse([r for r in pm.build(ROOT)["unreached_by_any_workflow"] if r.startswith("migration/evidence/")])
+
     def test_markdown_lists_every_workflow(self):
         m = pm.build(ROOT)
         md = pm.markdown(m)

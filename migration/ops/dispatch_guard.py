@@ -199,18 +199,6 @@ def pavo_footage(i):
             "deps": [lst, "migration/production/footage/"]}
 
 
-def agnes_clip(i):
-    need((i.get("prompt") or "").strip(), "prompt", i.get("prompt"), "not empty")
-    need(re.fullmatch(r"\d{1,2}", i.get("seconds") or "") and 4 <= int(i["seconds"]) <= 12, "seconds",
-         i.get("seconds"), "4-12")
-    need(i.get("aspect") in ("9:16", "16:9"), "aspect", i.get("aspect"), "9:16 or 16:9")
-    need(re.fullmatch(rf"({SLUG}(,{SLUG})*)?", i.get("characters") or ""), "characters", i.get("characters"),
-         "comma list of character ids")
-    need(re.fullmatch(r"([A-Za-z0-9._-]+\.(png|jpg|jpeg))?", i.get("first_frame") or ""), "first_frame",
-         i.get("first_frame"), "a release asset name of a still")
-    return {"uploads": 0, "deps": ["migration/production/characters/"]}
-
-
 def scene_stills(i):
     plan = _plan(i)
     shots = ids(i.get("shots"))
@@ -239,7 +227,7 @@ def publish_episode(i):
 def subject_of(workflow, inputs):
     """The subject a run works on, from its inputs alone (no file read): the episode's plan path, the pilot (or
     characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
-    failure history (4) is keyed on workflow + subject. None: the workflow has no subject (agnes-clip)."""
+    failure history (4) is keyed on workflow + subject. None: the workflow has no subject."""
     first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
     if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml"):
         return first
@@ -264,7 +252,6 @@ WORKFLOWS = {
     "pilot-preview.yml": (("pilot",), pilot_preview),
     "footage.yml": (("queries", "per_theme"), footage),
     "pavo-footage.yml": (("list",), pavo_footage),
-    "agnes-clip.yml": (("seconds", "aspect", "characters", "first_frame", "prompt"), agnes_clip),
     "publish-episode.yml": (("episode", "source_url", "publish_at"), publish_episode),
     "scene-stills.yml": (("plan", "shots", "candidates"), scene_stills),
 }

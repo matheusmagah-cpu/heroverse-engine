@@ -81,33 +81,6 @@ jobs:
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_video.py "$d/out/package.json" "$d/out/manifest.json" \
             "$RUNNER_TEMP/video.mp4" "$RUNNER_TEMP/thumbnail.jpg" migration/publish/ledger.json \
             "migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json" $PUBLISH_AT
-      - name: Shorts of this pilot (approved by the watched review), each at its slot
-        # a Short that cannot go out here is not lost: publish-shorts.yml (daily) retries every approved Short not
-        # in the ledger. The failure stays visible (no continue-on-error); the steps after it still run.
-        if: hashFiles(format('migration/production/{0}/shorts/shorts.json', env.PILOT)) != ''
-        id: shorts
-        env:
-          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
-        run: |
-          d="migration/production/$PILOT"
-          slots=$(python3 -I -c "import json,sys;print(','.join(json.load(open(sys.argv[1])).get('shorts_slots',[])))" "$d/schedule.json" 2>/dev/null || true)
-          test -n "$slots" || { echo "NO_SHORTS_SLOTS"; exit 0; }
-          sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
-          mkdir -p "$RUNNER_TEMP/shorts"
-          python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
-          while read -r f sha; do
-            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
-            echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
-          done
-          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
-          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
-            migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$slots"
-          python3 -I -c "import json,sys;[print(x['file'],x['upload_status']) for x in json.load(open(sys.argv[1]))['shorts']]" "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" |
-          while read -r f st; do
-            case "$st" in uploaded|processed) ;; *) continue;; esac
-            sha=$(python3 -I -c "import json,sys;print(next(s['sha256'] for s in json.load(open(sys.argv[1]))['shorts'] if s['file']==sys.argv[2]))" "$d/shorts/shorts.json" "$f")
-            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" delete "$PILOT-${f%.mp4}-sha256-$sha.mp4" || true
-          done
       - name: Delete the finished video from the private release (owner rule; YouTube now holds it)
         if: always() && steps.upload.outcome == 'success'
         run: |

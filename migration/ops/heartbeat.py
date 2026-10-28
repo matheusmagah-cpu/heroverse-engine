@@ -10,8 +10,11 @@ files of the day), so a duplicate dispatch is harmless; this table only decides 
 
 usage: heartbeat.py RUNS_JSON CONDITIONS_JSON [NOW_ISO]   (prints one workflow file per line to dispatch)
   RUNS_JSON: {"workflow.yml": [{"createdAt": ISO, "status": "...", "conclusion": "...", "updatedAt": ISO}, ...]}
-  CONDITIONS_JSON: {"images_missing": bool, "reconcile_todo": bool, "shorts_pending": bool, "production_idle": bool,
-                    "tiktok_pending": bool, "arc_links_todo": bool}
+  CONDITIONS_JSON: {"images_missing": bool, "reconcile_todo": bool, "production_idle": bool, "tiktok_pending": bool,
+                    "arc_links_todo": bool}
+
+Slim audit 2026-10-28: publish-shorts.yml left with the prayer Shorts line, and channel-privacy.yml (a finished job,
+read-only plan by default) is dispatched by hand only.
 """
 from datetime import datetime, timedelta, timezone
 import json
@@ -26,9 +29,7 @@ TASKS = [
     {"workflow": "market-panel.yml", "slots": ["07:17"], "attempts": 2},
     {"workflow": "reconcile.yml", "slots": ["07:20", "10:20", "13:20", "16:20", "19:20", "22:20"], "attempts": 1,
      "when": "reconcile_todo"},
-    {"workflow": "publish-shorts.yml", "slots": ["07:35", "13:35", "19:35"], "attempts": 2, "when": "shorts_pending"},
     {"workflow": "goal-report.yml", "slots": ["07:45"], "attempts": 2, "after": "market-panel.yml", "wait_max": "09:30"},
-    {"workflow": "channel-privacy.yml", "slots": ["08:05"], "attempts": 1},
     # E90: tiktok.yml's own cron never fired (0 scheduled runs since 2026-10-25); every heartbeat mirrors the next
     # Short already public on YouTube (owner, 2026-10-26: "published on YouTube, it must go to TikTok")
     {"workflow": "tiktok.yml", "slots": [f"{h:02d}:40" for h in range(24)], "attempts": 1, "when": "tiktok_pending"},

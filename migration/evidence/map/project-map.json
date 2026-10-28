@@ -1,20 +1,6 @@
 {
  "version": "project-map-v1",
  "workflows": {
-  "agnes-clip.yml": {
-   "name": "HeroVerse Agnes test clip (free Flash tier; review artifact only, nothing published)",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/ci/assets.sh",
-    "migration/ops/dispatch_guard.py",
-    "migration/production/agnes_clip.py",
-    "migration/production/bible/clip_check.py"
-   ],
-   "dispatches": []
-  },
   "approve.yml": {
    "name": "HeroVerse approval (automatic gates before publication)",
    "triggers": [
@@ -28,12 +14,10 @@
     "migration/production/signal_scan.py",
     "migration/publish/preflight.py",
     "migration/publish/prepublish_gate.py",
-    "migration/publish/shorts_prerequisite.py",
     "migration/publish/three_stage.py"
    ],
    "dispatches": [
-    "publish.yml",
-    "shorts.yml"
+    "publish.yml"
    ]
   },
   "arc-links.yml": {
@@ -164,7 +148,6 @@
     "migration/ops/test_runner_dispatch.py",
     "migration/production/render_queue.py",
     "migration/publish/arc_links.py",
-    "migration/publish/pending_shorts.py",
     "migration/publish/tiktok_publish.py"
    ],
    "dispatches": [
@@ -297,7 +280,6 @@
     "migration/ci/apt_install.sh",
     "migration/ci/test_ci_setup.py",
     "migration/ci/test_smoke.py",
-    "migration/mining/test_accuracy_check.py",
     "migration/mining/test_daily_intel.py",
     "migration/mining/test_gemini_public_av.py",
     "migration/mining/test_goal_report.py",
@@ -305,9 +287,6 @@
     "migration/mining/test_live_intel.py",
     "migration/mining/test_market_evidence.py",
     "migration/mining/test_market_panel.py",
-    "migration/mining/test_native_metrics.py",
-    "migration/mining/test_native_plan.py",
-    "migration/mining/test_opportunity.py",
     "migration/mining/test_owned_feedback.py",
     "migration/mining/test_packaging_mining.py",
     "migration/mining/test_reach_report.py",
@@ -346,7 +325,6 @@
     "migration/production/footage/test_pavo_footage.py",
     "migration/production/imagegen/test_cf_images.py",
     "migration/production/script_check.py",
-    "migration/production/test_agnes_clip.py",
     "migration/production/test_cinematic.py",
     "migration/production/test_long_review.py",
     "migration/production/test_no_live_pilot_data.py",
@@ -355,16 +333,13 @@
     "migration/production/test_render_queue.py",
     "migration/production/test_reviewer_calibration.py",
     "migration/production/test_script_check.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_006_motion.py",
-    "migration/production/test_shorts_006_plan.py",
     "migration/production/test_shorts_edit_plan.py",
-    "migration/production/test_shorts_produce.py",
     "migration/production/test_shorts_review.py",
     "migration/production/test_signal_scan.py",
     "migration/production/test_still_render.py",
     "migration/production/test_thumb_check.py",
-    "migration/strategy/test_ads_model.py"
+    "migration/strategy/test_ads_model.py",
+    "migration/test_second_opening_asr.py"
    ],
    "dispatches": []
   },
@@ -381,22 +356,6 @@
    ],
    "dispatches": []
   },
-  "publish-shorts.yml": {
-   "name": "HeroVerse publish Shorts (cut from a published long video, scheduled slots)",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/ci/assets.sh",
-    "migration/ops/heartbeat.py",
-    "migration/publish/pending_shorts.py",
-    "migration/publish/publication_exception.py",
-    "migration/publish/publish_shorts.py",
-    "migration/publish/shorts_prerequisite.py"
-   ],
-   "dispatches": []
-  },
   "publish.yml": {
    "name": "HeroVerse publish (validated video to the exact channel)",
    "triggers": [
@@ -405,18 +364,15 @@
    ],
    "cron": [],
    "calls": [
-    "migration/ci/assets.sh",
     "migration/ci/release_video.sh",
-    "migration/publish/pending_shorts.py",
     "migration/publish/preflight.py",
     "migration/publish/publication_binding.py",
-    "migration/publish/publish_shorts.py",
     "migration/publish/publish_video.py"
    ],
    "dispatches": []
   },
   "reconcile.yml": {
-   "name": "HeroVerse reconcile (retry approvals that errored, Shorts never made and publications that failed)",
+   "name": "HeroVerse reconcile (retry approvals that errored and publications that failed)",
    "triggers": [
     "workflow_dispatch"
    ],
@@ -429,8 +385,7 @@
     "approve.yml",
     "first-comment.yml",
     "publish-episode.yml",
-    "publish.yml",
-    "shorts.yml"
+    "publish.yml"
    ]
   },
   "render-smoke.yml": {
@@ -481,38 +436,6 @@
    ],
    "dispatches": []
   },
-  "shorts-review.yml": {
-   "name": "HeroVerse Shorts watched review (private, engine Gemini key)",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_review.py",
-    "migration/publish/shorts_prerequisite.py"
-   ],
-   "dispatches": []
-  },
-  "shorts.yml": {
-   "name": "\"HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review\"",
-   "triggers": [
-    "push",
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/production/imagegen/cutout.py",
-    "migration/production/pilot_render.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_produce.py",
-    "migration/production/shorts_review.py",
-    "migration/production/shorts_select.py",
-    "migration/publish/shorts_prerequisite.py"
-   ],
-   "dispatches": []
-  },
   "shot-probe.yml": {
    "name": "HeroVerse shot probe (a shot's exact build request on Pavo, the build's checks, clips for Claude's review; nothing published)",
    "triggers": [
@@ -555,21 +478,6 @@
    "calls": [
     "migration/ci/assets.sh",
     "migration/publish/tiktok_publish.py"
-   ],
-   "dispatches": []
-  },
-  "voice-sample.yml": {
-   "name": "HeroVerse voice A/B judged (Kokoro vs Chatterbox, objective ruler, no paid call)",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/ci/apt_install.sh",
-    "migration/ci/assets.sh",
-    "migration/production/pilot_render.py",
-    "migration/production/voice/chatterbox_sample.py",
-    "migration/production/voice/voice_judge.py"
    ],
    "dispatches": []
   }
@@ -991,28 +899,12 @@
    "test": "migration/integrations/pavo/test_video.py",
    "is_test": false
   },
-  "migration/mining/accuracy_check.py": {
-   "purpose": "Accuracy of the model-reported structure mining against native audio.",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/blueprint_stats.py",
-    "migration/mining/structure_mining.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/mining/native_metrics.py",
-    "migration/mining/test_accuracy_check.py"
-   ],
-   "test": "migration/mining/test_accuracy_check.py",
-   "is_test": false
-  },
   "migration/mining/blueprint_stats.py": {
    "purpose": "Measured blueprint from structure records (code, not model opinion).",
    "dir": "migration/mining",
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/mining/accuracy_check.py",
     "migration/mining/packaging_mining.py"
    ],
    "test": null,
@@ -1133,41 +1025,6 @@
    "test": "migration/mining/test_market_panel.py",
    "is_test": false
   },
-  "migration/mining/native_metrics.py": {
-   "purpose": "Native window measurements; descriptive estimates are not instrument qualification.",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/accuracy_check.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/mining/test_native_metrics.py"
-   ],
-   "test": "migration/mining/test_native_metrics.py",
-   "is_test": false
-  },
-  "migration/mining/native_plan.py": {
-   "purpose": "Plan native acquisitions without changing the ledger or making provider calls.",
-   "dir": "migration/mining",
-   "local_imports": [],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/mining/test_native_plan.py"
-   ],
-   "test": "migration/mining/test_native_plan.py",
-   "is_test": false
-  },
-  "migration/mining/opportunity.py": {
-   "purpose": "Market opportunity report from the preserved official observer snapshots.",
-   "dir": "migration/mining",
-   "local_imports": [],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/mining/test_opportunity.py"
-   ],
-   "test": "migration/mining/test_opportunity.py",
-   "is_test": false
-  },
   "migration/mining/owned_feedback.py": {
    "purpose": "Offline descriptive owned-video feedback. Never approves or predicts performance.",
    "dir": "migration/mining",
@@ -1221,32 +1078,16 @@
    ],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/mining/accuracy_check.py",
     "migration/mining/packaging_mining.py",
     "migration/mining/test_structure_mining.py",
     "migration/production/long_review.py",
     "migration/production/shorts_review.py",
     "migration/production/shorts_select.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_006_plan.py",
     "migration/production/test_shorts_review.py",
     "migration/publish/three_stage.py"
    ],
    "test": "migration/mining/test_structure_mining.py",
    "is_test": false
-  },
-  "migration/mining/test_accuracy_check.py": {
-   "purpose": "Regression tests of the mining-accuracy comparator (2026-10-18 audit defects).",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/accuracy_check.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
   },
   "migration/mining/test_daily_intel.py": {
    "purpose": "Offline: the daily directives cover the Bible-story niche, Shorts and longs apart.",
@@ -1338,45 +1179,6 @@
    ],
    "called_by_workflows": [
     "market-panel.yml",
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/mining/test_native_metrics.py": {
-   "purpose": "Known-answer arithmetic and boundary tests; not native-instrument qualification.",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/native_metrics.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/mining/test_native_plan.py": {
-   "purpose": "Known-answer native planner tests; no network or provider effects.",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/native_plan.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/mining/test_opportunity.py": {
-   "purpose": "Known-answer tests for interval growth and within-channel cohorts.",
-   "dir": "migration/mining",
-   "local_imports": [
-    "migration/mining/opportunity.py"
-   ],
-   "called_by_workflows": [
     "pr-checks.yml"
    ],
    "imported_by": [],
@@ -1512,7 +1314,6 @@
     "migration/production/imagegen/cf_allocation.py"
    ],
    "called_by_workflows": [
-    "agnes-clip.yml",
     "cf-images.yml",
     "episode.yml",
     "footage.yml",
@@ -1572,7 +1373,6 @@
     "heartbeat.yml",
     "market-panel.yml",
     "nightly-images.yml",
-    "publish-shorts.yml",
     "reconcile.yml"
    ],
    "imported_by": [
@@ -1806,28 +1606,11 @@
    "test": null,
    "is_test": true
   },
-  "migration/production/agnes_clip.py": {
-   "purpose": "One AI clip from Agnes Video 2.5 Flash (owner, 2026-10-25: \"this video AI is very good\"), TEST ONLY until its terms",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/characters/characters.py"
-   ],
-   "called_by_workflows": [
-    "agnes-clip.yml"
-   ],
-   "imported_by": [
-    "migration/production/test_agnes_clip.py"
-   ],
-   "test": "migration/production/test_agnes_clip.py",
-   "is_test": false
-  },
   "migration/production/bible/clip_check.py": {
    "purpose": "Check every clip before a Short is composed (PROMPT_GUIDE \"Built for 9.5\"): a clip that starts or ends on black",
    "dir": "migration/production/bible",
    "local_imports": [],
-   "called_by_workflows": [
-    "agnes-clip.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
     "migration/production/bible/episode_build.py",
     "migration/production/bible/long_build.py",
@@ -2386,7 +2169,6 @@
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/production/agnes_clip.py",
     "migration/production/bible/episode_build.py",
     "migration/production/bible/pavo_native.py",
     "migration/production/bible/plan_check.py",
@@ -2432,10 +2214,8 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/production/footage/footage.py",
-    "migration/production/shorts_produce.py",
     "migration/production/still_render.py",
-    "migration/production/test_cinematic.py",
-    "migration/production/test_shorts_produce.py"
+    "migration/production/test_cinematic.py"
    ],
    "test": "migration/production/test_cinematic.py",
    "is_test": false
@@ -2559,8 +2339,7 @@
    "called_by_workflows": [
     "pilot-preview.yml",
     "pilot-render-stills.yml",
-    "render-smoke.yml",
-    "shorts.yml"
+    "render-smoke.yml"
    ],
    "imported_by": [],
    "test": null,
@@ -2659,12 +2438,9 @@
     "pilot-preview.yml",
     "pilot-render-stills.yml",
     "render-smoke.yml",
-    "shorts.yml",
-    "shot-probe.yml",
-    "voice-sample.yml"
+    "shot-probe.yml"
    ],
    "imported_by": [
-    "migration/production/shorts_produce.py",
     "migration/production/still_render.py",
     "migration/production/test_still_render.py"
    ],
@@ -2714,8 +2490,7 @@
    "purpose": "The nightly queue: which pilots need images, and which one to render next.",
    "dir": "migration/production",
    "local_imports": [
-    "migration/production/preview_gate.py",
-    "migration/publish/shorts_prerequisite.py"
+    "migration/production/preview_gate.py"
    ],
    "called_by_workflows": [
     "heartbeat.yml",
@@ -2771,71 +2546,6 @@
    "test": "migration/production/test_script_check.py",
    "is_test": false
   },
-  "migration/production/shorts_006_material.py": {
-   "purpose": "Closed pilot-006 correction: source pins, real measurements and release barrier.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_review.py",
-    "migration/production/shorts_select.py",
-    "migration/publish/owner_quality_policy.py",
-    "migration/publish/shorts_prerequisite.py",
-    "migration/publish/shorts_qa.py"
-   ],
-   "called_by_workflows": [
-    "shorts.yml"
-   ],
-   "imported_by": [
-    "migration/production/shorts_produce.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_produce.py",
-    "migration/publish/pending_shorts.py",
-    "migration/publish/test_pending_shorts.py",
-    "migration/publish/test_publish_shorts.py"
-   ],
-   "test": "migration/production/test_shorts_006_material.py",
-   "is_test": false
-  },
-  "migration/production/shorts_006_motion.py": {
-   "purpose": "Closed v2 native-camera and source-texture treatment; no provider or grading.",
-   "dir": "migration/production",
-   "local_imports": [],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/production/shorts_produce.py",
-    "migration/production/test_shorts_006_motion.py",
-    "migration/production/test_shorts_produce.py"
-   ],
-   "test": "migration/production/test_shorts_006_motion.py",
-   "is_test": false
-  },
-  "migration/production/shorts_006_plan.py": {
-   "purpose": "Closed pilot-006 correction: source pins, real measurements and release barrier.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_review.py",
-    "migration/production/shorts_select.py",
-    "migration/publish/owner_quality_policy.py",
-    "migration/publish/shorts_prerequisite.py",
-    "migration/publish/shorts_qa.py"
-   ],
-   "called_by_workflows": [
-    "shorts-review.yml"
-   ],
-   "imported_by": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_produce.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_006_plan.py",
-    "migration/production/test_shorts_produce.py",
-    "migration/publish/pending_shorts.py",
-    "migration/publish/test_pending_shorts.py"
-   ],
-   "test": "migration/production/test_shorts_006_plan.py",
-   "is_test": false
-  },
   "migration/production/shorts_edit_plan.py": {
    "purpose": "One frozen editorial plan and its fail-closed, hash-bound readiness barrier.",
    "dir": "migration/production",
@@ -2843,39 +2553,11 @@
     "migration/production/shorts_select.py",
     "migration/publish/publication_exception.py"
    ],
-   "called_by_workflows": [
-    "shorts.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_produce.py",
-    "migration/production/test_shorts_edit_plan.py",
-    "migration/production/test_shorts_produce.py"
+    "migration/production/test_shorts_edit_plan.py"
    ],
    "test": "migration/production/test_shorts_edit_plan.py",
-   "is_test": false
-  },
-  "migration/production/shorts_produce.py": {
-   "purpose": "Produce each chosen Short as its own edit (not a crop of the long video), to STANDARD R8.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/cinematic.py",
-    "migration/production/pilot_render.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_motion.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_select.py",
-    "migration/production/still_render.py"
-   ],
-   "called_by_workflows": [
-    "shorts.yml"
-   ],
-   "imported_by": [
-    "migration/production/test_shorts_produce.py"
-   ],
-   "test": "migration/production/test_shorts_produce.py",
    "is_test": false
   },
   "migration/production/shorts_review.py": {
@@ -2886,17 +2568,10 @@
     "migration/publish/owner_quality_policy.py",
     "migration/publish/shorts_qa.py"
    ],
-   "called_by_workflows": [
-    "shorts-review.yml",
-    "shorts.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
     "migration/production/long_review.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_review.py",
-    "migration/publish/review_recovery.py"
+    "migration/production/test_shorts_review.py"
    ],
    "test": "migration/production/test_shorts_review.py",
    "is_test": false
@@ -2907,16 +2582,10 @@
    "local_imports": [
     "migration/mining/structure_mining.py"
    ],
-   "called_by_workflows": [
-    "shorts.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
     "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_produce.py",
-    "migration/production/test_shorts_edit_plan.py",
-    "migration/production/test_shorts_produce.py"
+    "migration/production/test_shorts_edit_plan.py"
    ],
    "test": null,
    "is_test": false
@@ -2948,24 +2617,10 @@
     "render-smoke.yml"
    ],
    "imported_by": [
-    "migration/production/shorts_produce.py",
     "migration/production/test_still_render.py"
    ],
    "test": "migration/production/test_still_render.py",
    "is_test": false
-  },
-  "migration/production/test_agnes_clip.py": {
-   "purpose": "Offline: the Agnes test clip waits out a full free queue, follows the task to its MP4 and never sends the key",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/agnes_clip.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
   },
   "migration/production/test_cinematic.py": {
    "purpose": "",
@@ -3084,84 +2739,12 @@
    "test": null,
    "is_test": true
   },
-  "migration/production/test_shorts_006_material.py": {
-   "purpose": "Offline synthetic contracts, not media qualification or production evidence.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/mining/structure_mining.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_review.py",
-    "migration/publish/shorts_qa.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [
-    "migration/publish/test_publish_shorts.py"
-   ],
-   "test": null,
-   "is_test": true
-  },
-  "migration/production/test_shorts_006_motion.py": {
-   "purpose": "Independent numerical oracles for the closed native v2 treatment.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/shorts_006_motion.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/production/test_shorts_006_plan.py": {
-   "purpose": "Offline synthetic contracts, not media qualification or production evidence.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/mining/structure_mining.py",
-    "migration/production/shorts_006_plan.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [
-    "migration/production/test_shorts_produce.py",
-    "migration/publish/test_publish_shorts.py"
-   ],
-   "test": null,
-   "is_test": true
-  },
   "migration/production/test_shorts_edit_plan.py": {
    "purpose": "Offline contract tests: frozen bytes, synthetic signals, no live pilot reads.",
    "dir": "migration/production",
    "local_imports": [
     "migration/production/shorts_edit_plan.py",
     "migration/production/shorts_select.py"
-   ],
-   "called_by_workflows": [
-    "pr-checks.yml"
-   ],
-   "imported_by": [
-    "migration/production/test_shorts_produce.py"
-   ],
-   "test": null,
-   "is_test": true
-  },
-  "migration/production/test_shorts_produce.py": {
-   "purpose": "Offline structural gates and unchanged media helpers against frozen input snapshots.",
-   "dir": "migration/production",
-   "local_imports": [
-    "migration/production/cinematic.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_motion.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_edit_plan.py",
-    "migration/production/shorts_produce.py",
-    "migration/production/shorts_select.py",
-    "migration/production/test_shorts_006_plan.py",
-    "migration/production/test_shorts_edit_plan.py"
    ],
    "called_by_workflows": [
     "pr-checks.yml"
@@ -3243,24 +2826,11 @@
    "test": "migration/production/test_thumb_check.py",
    "is_test": false
   },
-  "migration/production/voice/chatterbox_sample.py": {
-   "purpose": "A/B voice sample (owner, 2026-10-23: \"the voice must be perfect\"): the opening of a pilot narrated by Chatterbox",
-   "dir": "migration/production/voice",
-   "local_imports": [],
-   "called_by_workflows": [
-    "voice-sample.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": false
-  },
   "migration/production/voice/voice_judge.py": {
    "purpose": "Objective voice ruler (owner, 2026-10-23: \"the voice must be perfect\"; \"you define the ruler and judge it yourself\").",
    "dir": "migration/production/voice",
    "local_imports": [],
-   "called_by_workflows": [
-    "voice-sample.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [],
    "test": null,
    "is_test": false
@@ -3337,12 +2907,9 @@
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
     "migration/production/shorts_review.py",
     "migration/publish/pending_shorts.py",
     "migration/publish/publish_video.py",
-    "migration/publish/review_recovery.py",
     "migration/publish/test_owner_quality_policy.py"
    ],
    "test": "migration/publish/test_owner_quality_policy.py",
@@ -3353,20 +2920,11 @@
    "dir": "migration/publish",
    "local_imports": [
     "migration/production/render_queue.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/publish/owner_quality_policy.py",
-    "migration/publish/review_recovery.py"
+    "migration/publish/owner_quality_policy.py"
    ],
-   "called_by_workflows": [
-    "heartbeat.yml",
-    "publish-shorts.yml",
-    "publish.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
-    "migration/publish/publish_shorts.py",
-    "migration/publish/test_pending_shorts.py",
-    "migration/publish/test_publish_shorts.py"
+    "migration/publish/test_pending_shorts.py"
    ],
    "test": "migration/publish/test_pending_shorts.py",
    "is_test": false
@@ -3422,7 +2980,6 @@
     "publish.yml"
    ],
    "imported_by": [
-    "migration/publish/shorts_prerequisite.py",
     "migration/publish/test_publication_binding.py"
    ],
    "test": "migration/publish/test_publication_binding.py",
@@ -3432,14 +2989,10 @@
    "purpose": "One owner-attested temporal exception, not a quality or identity bypass.",
    "dir": "migration/publish",
    "local_imports": [],
-   "called_by_workflows": [
-    "publish-shorts.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [
     "migration/production/shorts_edit_plan.py",
-    "migration/publish/publish_shorts.py",
-    "migration/publish/test_publication_exception.py",
-    "migration/publish/test_publish_shorts.py"
+    "migration/publish/test_publication_exception.py"
    ],
    "test": "migration/publish/test_publication_exception.py",
    "is_test": false
@@ -3463,26 +3016,6 @@
    "test": "migration/publish/test_publish_episode.py",
    "is_test": false
   },
-  "migration/publish/publish_shorts.py": {
-   "purpose": "Publish the Shorts cut from a published long video, each scheduled at its slot.",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/pending_shorts.py",
-    "migration/publish/publication_exception.py",
-    "migration/publish/publish_video.py",
-    "migration/publish/review_recovery.py",
-    "migration/publish/shorts_qa.py"
-   ],
-   "called_by_workflows": [
-    "publish-shorts.yml",
-    "publish.yml"
-   ],
-   "imported_by": [
-    "migration/publish/test_publish_shorts.py"
-   ],
-   "test": "migration/publish/test_publish_shorts.py",
-   "is_test": false
-  },
   "migration/publish/publish_video.py": {
    "purpose": "Publish one rendered HeroVerse video to the exact channel.",
    "dir": "migration/publish",
@@ -3502,7 +3035,6 @@
     "migration/publish/first_comment.py",
     "migration/publish/preflight.py",
     "migration/publish/publish_episode.py",
-    "migration/publish/publish_shorts.py",
     "migration/publish/test_arc_links.py",
     "migration/publish/test_captions.py",
     "migration/publish/test_channel_config.py",
@@ -3512,58 +3044,13 @@
    "test": "migration/publish/test_publish_video.py",
    "is_test": false
   },
-  "migration/publish/review_recovery.py": {
-   "purpose": "One pinned, previously unreviewed Short; no general retry or approval API.",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/production/shorts_review.py",
-    "migration/publish/owner_quality_policy.py",
-    "migration/publish/shorts_prerequisite.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/publish/pending_shorts.py",
-    "migration/publish/publish_shorts.py",
-    "migration/publish/test_pending_shorts.py",
-    "migration/publish/test_publish_shorts.py",
-    "migration/publish/test_review_recovery.py"
-   ],
-   "test": "migration/publish/test_review_recovery.py",
-   "is_test": false
-  },
-  "migration/publish/shorts_prerequisite.py": {
-   "purpose": "Read-only prerequisite: Shorts may spend quota only after their long qualifies.",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/publication_binding.py"
-   ],
-   "called_by_workflows": [
-    "approve.yml",
-    "publish-shorts.yml",
-    "shorts-review.yml",
-    "shorts.yml"
-   ],
-   "imported_by": [
-    "migration/production/render_queue.py",
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/publish/review_recovery.py",
-    "migration/publish/test_shorts_prerequisite.py"
-   ],
-   "test": "migration/publish/test_shorts_prerequisite.py",
-   "is_test": false
-  },
   "migration/publish/shorts_qa.py": {
    "purpose": "Technical gate for one Short before upload (frozen; never edited to pass a file).",
    "dir": "migration/publish",
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/production/shorts_review.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/publish/publish_shorts.py"
+    "migration/production/shorts_review.py"
    ],
    "test": null,
    "is_test": false
@@ -3655,18 +3142,13 @@
    "is_test": true
   },
   "migration/publish/test_pending_shorts.py": {
-   "purpose": "Offline checks: which approved Shorts are still to publish, and when.",
+   "purpose": "Offline checks of the Shorts slot rule: which approved Shorts are still to publish, and when (E01/E02).",
    "dir": "migration/publish",
    "local_imports": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/shorts_006_plan.py",
-    "migration/publish/pending_shorts.py",
-    "migration/publish/review_recovery.py"
+    "migration/publish/pending_shorts.py"
    ],
    "called_by_workflows": [],
-   "imported_by": [
-    "migration/publish/test_publish_shorts.py"
-   ],
+   "imported_by": [],
    "test": null,
    "is_test": true
   },
@@ -3725,52 +3207,12 @@
    "test": null,
    "is_test": true
   },
-  "migration/publish/test_publish_shorts.py": {
-   "purpose": "Offline checks of the Shorts publication: slots only for Shorts still to upload, never a duplicate upload,",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/production/shorts_006_material.py",
-    "migration/production/test_shorts_006_material.py",
-    "migration/production/test_shorts_006_plan.py",
-    "migration/publish/pending_shorts.py",
-    "migration/publish/publication_exception.py",
-    "migration/publish/publish_shorts.py",
-    "migration/publish/review_recovery.py",
-    "migration/publish/test_pending_shorts.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
   "migration/publish/test_publish_video.py": {
    "purpose": "",
    "dir": "migration/publish",
    "local_imports": [
     "migration/publish/captions.py",
     "migration/publish/publish_video.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/publish/test_review_recovery.py": {
-   "purpose": "Synthetic known answers; no provider, credentials or live media operations.",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/review_recovery.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/publish/test_shorts_prerequisite.py": {
-   "purpose": "",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/shorts_prerequisite.py"
    ],
    "called_by_workflows": [],
    "imported_by": [],
@@ -3866,12 +3308,14 @@
    "is_test": true
   },
   "migration/test_second_opening_asr.py": {
-   "purpose": "",
+   "purpose": "extract_model of second_opening_asr.py: ci/render_pilot.sh unpacks the frozen QA's ASR model with it, so a zip",
    "dir": "migration",
    "local_imports": [
     "migration/second_opening_asr.py"
    ],
-   "called_by_workflows": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
    "imported_by": [],
    "test": null,
    "is_test": true
@@ -3891,11 +3335,8 @@
  "unreached_by_any_workflow": [
   "migration/diagnostics/av-profile/profile_openings.py",
   "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py",
-  "migration/evidence/handoff/pilot-015-draft/build015.py",
-  "migration/evidence/vidiq/20261023/algorithm_study/analyze.py",
-  "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
-  "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
   "migration/integrations/pavo/server.py",
-  "migration/production/imagegen/hydrate_reused.py"
+  "migration/production/imagegen/hydrate_reused.py",
+  "migration/production/voice/voice_judge.py"
  ]
 }
