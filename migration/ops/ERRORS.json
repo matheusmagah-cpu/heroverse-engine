@@ -2327,6 +2327,19 @@
     "contains": "def test_e211_completed_voice_is_reused_without_deleting_or_resynthesizing",
     "covers": ["rerun-without-fix"]
    }
+  },
+  {
+   "id": "E212",
+   "date": "2026-10-28",
+   "class": "direction",
+   "prior": ["E209"],
+   "error": "Genesis-09's pending spoken close said that the full story was already in the long video and promised part ten tomorrow, although no Flood long delivery or current episode master existed. A planned slot and the CTA keyword check did not establish availability. No publication with this pending line was demonstrated.",
+   "fix": "Keep the full-story direction and the next part's subject but use an availability-independent invitation to follow the series. Remove the unsupported present-tense delivery and relative-day promise before voice synthesis. Preserve all other narration, shots, sources, historical approvals and frozen gates. The existing arc-links flow still waits for a confirmed public long before adding links; a fresh measured preflight remains required.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "def test_e212_short_close_does_not_claim_unpublished_delivery",
+    "covers": ["direction"]
+   }
   }
  ]
 }
