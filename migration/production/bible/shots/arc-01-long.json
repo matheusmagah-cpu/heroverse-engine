@@ -42,19 +42,19 @@
   "k-promise-3": {
    "source": "still_motion",
    "score": 9.5,
-   "note": "Same Keeper, chest-up crop, a faint knowing look, mouth closed, stars and dunes behind; matches k-promise-2 so the promise reads as one sitting. Shipped as this approved still in slow continuous camera motion.",
+   "note": "A tight close-up of the Keeper (face and beard fill the frame) after k-promise-2's chest-up, mouth closed under his Kokoro line; shipped as this still in slow camera motion.",
    "approved_at": "2026-10-28",
    "still": "arc-01-long-k-promise-3",
    "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
    "clip_sha256": null,
-   "still_sha256": "49bb8e9d0c6135aa8feb45ec3087843e31c04db26a0387c52e6b323e6ff6e01f",
+   "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
    "frame": [
     2560,
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 12,
-   "request_sha256": "e622874e820c4dfb51b6c865bd56f29e826f4f21b9afd5affa2e72a11fa98a2c"
+   "request_sha256": "1ec48e5733fc7a28e289d70a977493aade6b08f09372dcb1e7b2f3b6a17278de"
   },
   "s-c1-adam-hands": {
    "source": "still_motion",
@@ -124,6 +124,19 @@
    "clip_seconds": 6,
    "request_sha256": "6b11a16e13377fa1636fd94b996429e86c5145641b86b9e85954dd133d545aff"
   },
+  "s-c1-divide": {
+   "source": "footage",
+   "score": 9.5,
+   "note": "The sun on the horizon of a dark land under a wide clear sky, golden light against the dark: God divides the light from the darkness; no person or object.",
+   "approved_at": "2026-10-28",
+   "footage": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall",
+   "asset": "footage-clip-sunrise-sunset-clouds-golden-sunset-sun-downfall-sha256-48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e.mp4",
+   "clip_sha256": "48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-92093/)",
+   "clip_seconds": 20,
+   "request_sha256": "2adc3ef102cf59352754b75fa7e5e6ab15dbbc523a4d43709446aab37601f188"
+  },
   "s-c1-eve": {
    "source": "still_motion",
    "score": 9.5,
@@ -174,6 +187,19 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 6,
    "request_sha256": "6266dccbdf7bcc1bbdb705fca48166389513268450bacc156051a4534f80a08e"
+  },
+  "s-c1-light": {
+   "source": "footage",
+   "score": 9.5,
+   "note": "Clouds part over the dark sea and light breaks through and spreads on the water: 'Let there be light' as a real sky; no person or modern object in any frame.",
+   "approved_at": "2026-10-28",
+   "footage": "clip-sunset-sea-ocean-sunset-clouds-nature-water",
+   "asset": "footage-clip-sunset-sea-ocean-sunset-clouds-nature-water-sha256-951c79ee64d8f39a0c486b00a684b22f1636d3919ef3c86942c69d4edb8e63fc.mp4",
+   "clip_sha256": "951c79ee64d8f39a0c486b00a684b22f1636d3919ef3c86942c69d4edb8e63fc",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: BlueDreams-BD via Pixabay (https://pixabay.com/videos/id-250805/)",
+   "clip_seconds": 20,
+   "request_sha256": "78ec96b2d129da1f8a57a3eeb592131e93ea2e3aaa9128767334ad4adf4e18e9"
   },
   "s-c1-river": {
    "source": "still_motion",
