@@ -3,12 +3,13 @@
  "inputs": {},
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "26ffd4d8f68f8c2d234e336c6b4cf601fa1c9c6510fdd7ecbd33bca0218078fe",
   "original_path": "migration/requests/20261028-heartbeat-recovery-once.json",
   "base_commit": "15a18640f6e0b5b43d3ea19d4d5747eaa8fc5879",
   "dispatcher_run_id": "40748986746",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-28T18:54:06.689902+00:00"
+  "claimed_at": "2026-10-28T18:54:06.689902+00:00",
+  "acknowledged_at": "2026-10-28T18:54:09.452218+00:00"
  }
 }
