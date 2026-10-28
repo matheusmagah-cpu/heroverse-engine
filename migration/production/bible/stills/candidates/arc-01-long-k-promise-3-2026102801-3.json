@@ -1,0 +1,47 @@
+{
+ "id": "arc-01-long-k-promise-3-2026102801-3",
+ "still": "arc-01-long-k-promise-3",
+ "episode": "arc-01-long",
+ "shot": "k-promise-3",
+ "run": "2026102801",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, his face and silver beard filling most of the frame, the scroll held low and out of view, looks straight into the camera with his mouth gently closed, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, his face and silver beard filling most of the frame, the scroll held low and out of view, looks straight into the camera with his mouth gently closed, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 16:9, the characters' approved references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373663884764253248",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-keeper-front",
+   "sha256": "eea5e96cd78f5dadc98b87f93384fc90cc6172b2021be2711ee7ebf568816098"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373663884764253248",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373663884764253248",
+   "status": "completed"
+  }
+ },
+ "upscaler": "crop 1209x680 at (707,216) of Pavo's native 2624x1472 to the shot's chest-up framing, then Lanczos to 1920x1080",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/arc-01-long-k-promise-3-2026102801-3.jpg",
+ "sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f"
+}
