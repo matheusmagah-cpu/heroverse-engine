@@ -19,6 +19,43 @@ ROOT = g.ROOT
 PLAN = "migration/production/bible/plans/genesis-09-short.json"
 LONG_PLAN = "migration/production/bible/plans/arc-01-long.json"
 PILOT = next(p.parent.name for p in sorted((ROOT / "migration/production").glob("pilot-*/script.json")))
+
+
+def live_shots(plan, n=2):
+    """E133: shot ids of a live plan for a fixture, read from the plan itself (never copied by hand: a plan edit
+    removed genesis-09's s-laugh and broke this file). Generated scene shots with no speaker (one probe = at most 3
+    generations), in plan order."""
+    shots = json.loads((ROOT / plan).read_text())["shots"]
+    ids = [s["id"] for s in shots if s.get("kind") == "scene" and s.get("window_of") is None and not s.get("speaker")]
+    assert len(ids) >= n, (plan, ids)
+    return ids[:n]
+
+
+S1, S2 = live_shots(PLAN)
+L1, L2 = live_shots(LONG_PLAN)
+HAND_SHOTS = __import__("re").compile(r'"shots":\s*"([^"]+)"')
+
+
+def hand_copied_shot_ids(root=ROOT):
+    """E133's class antidote: [(test file, line, ids)] where a test line names a live plan (PLAN, LONG_PLAN or a
+    plans/<episode>.json path) and passes a hand-written `"shots": "..."` literal holding ids of that plan. An id the
+    plan does not have (a refusal test: "s-not-a-shot") is fine; a real id must come from the plan (live_shots)."""
+    plans = {p.stem: {s["id"] for s in json.loads(p.read_text())["shots"]}
+             for p in (root / "migration/production/bible/plans").glob("*.json")}
+    names = {"PLAN": "genesis-09-short", "LONG_PLAN": "arc-01-long"}
+    out = []
+    for f in sorted(root.glob("migration/**/test_*.py")):
+        for no, line in enumerate(f.read_text().splitlines(), 1):
+            m = HAND_SHOTS.search(line)
+            if not m:
+                continue
+            eps = [ep for ep in plans if f"plans/{ep}.json" in line]
+            eps += [names[k] for k in names if __import__("re").search(rf'"plan":\s*{k}\b', line)]
+            for ep in eps:
+                hit = [i for i in m.group(1).split(",") if i in plans.get(ep, set())]
+                if hit:
+                    out.append((str(f.relative_to(root)), no, hit))
+    return out
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
     "heartbeat.yml": "the scheduler itself; it dispatches, it makes nothing",
@@ -74,13 +111,13 @@ def render(expr, inputs, subject):
 
 SAMPLES = {
     "episode.yml": {"plan": PLAN, "resume_run": ""},
-    "shot-probe.yml": {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""},
+    "shot-probe.yml": {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""},
     "publish-episode.yml": {"episode": "genesis-09-short", "source_url": "", "publish_at": ""},
     "cf-images.yml": {"pilot": PILOT, "engine": "flux", "only": ""},
     "pilot-render-stills.yml": {"pilot": PILOT},
     "pilot-preview.yml": {"pilot": PILOT},
     "footage.yml": {"queries": f"migration/production/{PILOT}/beats.json", "per_theme": "3"},
-    "scene-stills.yml": {"plan": PLAN, "shots": "s-voice", "candidates": "2"},
+    "scene-stills.yml": {"plan": PLAN, "shots": S1, "candidates": "2"},
     "long-build.yml": {"plan": LONG_PLAN, "resume_run": ""},
 }
 
@@ -204,7 +241,7 @@ class Inputs(unittest.TestCase):
         self.refused("episode.yml", {"plan": "plans/x.json"}, "GUARD_INPUT_INVALID")
         self.refused("episode.yml", {"plan": "migration/production/bible/plans/nope-99-short.json"}, "GUARD_INPUT_MISSING")
         self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-not-a-shot", "attempts": "2"}, "GUARD_INPUT_INVALID")
-        self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "7"}, "GUARD_INPUT_INVALID")
+        self.refused("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "7"}, "GUARD_INPUT_INVALID")
         self.refused("cf-images.yml", {"pilot": "migration/production/pilot-010", "engine": "flux"}, "GUARD_INPUT_INVALID")
         self.refused("footage.yml", {"queries": "/etc/passwd", "per_theme": "3"}, "GUARD_INPUT_INVALID")
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
@@ -214,8 +251,24 @@ class Inputs(unittest.TestCase):
         self.refused("long-build.yml", {"plan": LONG_PLAN, "resume_run": "x"}, "GUARD_INPUT_INVALID")
         self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 2)
 
+    def test_no_test_copies_a_live_plans_shot_ids_by_hand(self):
+        """E133: a fixture that copies a live plan's shot ids breaks when the plan is edited (genesis-09's redesign
+        removed s-laugh: GUARD_INPUT_INVALID in two tests). Every test reads them from the plan (live_shots)."""
+        self.assertEqual(hand_copied_shot_ids(), [])
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            (d / "migration/production/bible/plans").mkdir(parents=True)
+            (d / "migration/production/bible/plans/ep-01-short.json").write_text(json.dumps(
+                {"shots": [{"id": "s-a", "kind": "scene"}]}))
+            (d / "migration/ops").mkdir(parents=True)
+            (d / "migration/ops/test_x.py").write_text(
+                'PLAN = "migration/production/bible/plans/ep-01-short.json"\n'
+                'a = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-a"}\n'
+                'b = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-not-a-shot"}\n')
+            self.assertEqual(hand_copied_shot_ids(d), [("migration/ops/test_x.py", 2, ["s-a"])])
+
     def test_valid_inputs_name_their_subject_and_uploads(self):
-        f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": "s-voice,s-laugh", "attempts": "3"})
+        f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
         self.assertEqual(f["uploads"], 6)
         self.assertEqual(g.subject_of("shot-probe.yml", {"plan": PLAN}), PLAN)
         self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
@@ -235,7 +288,7 @@ class Inputs(unittest.TestCase):
             self.refused("publish-episode.yml", {"episode": "genesis-01-short"}, "GUARD_RECORD_OVER_LIMIT")
 
     def test_the_run_name_names_its_subject(self):
-        title = g.run_name("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "2"})
+        title = g.run_name("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "2"})
         self.assertEqual(g.run_subject("shot-probe.yml", title), PLAN)
         self.assertEqual(g.run_subject("publish-episode.yml", g.run_name("publish-episode.yml",
                                                                          {"episode": "genesis-09-short"})), PLAN)
@@ -326,8 +379,8 @@ class Rerun(unittest.TestCase):
     def test_the_failure_history_is_keyed_on_the_subject_not_the_other_inputs(self):
         # review of #445: a new resume_run / attempts / adopt_run is not a fix
         wf = "shot-probe.yml"
-        old = g.run_name(wf, {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""})
-        new = {"plan": PLAN, "shots": "s-laugh", "attempts": "3", "adopt_run": ""}
+        old = g.run_name(wf, {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""})
+        new = {"plan": PLAN, "shots": S2, "attempts": "3", "adopt_run": ""}
         api = fake_api([(f"actions/workflows/{wf}/runs", {"workflow_runs": [run_obj(4, wf, old, "failure")]}),
                         ("actions/runs/4/jobs", {"jobs": []}), ("compare/", {"status": "identical", "files": []})])
         self.assert_refused(api, wf=wf, inputs=new)
@@ -408,11 +461,11 @@ class PavoBudget(unittest.TestCase):
 
     def test_a_probe_batch_names_its_expected_units_and_an_adopt_run_none(self):
         probe = g.WORKFLOWS["shot-probe.yml"][1]
-        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights,g-c1-image", "attempts": "2", "adopt_run": ""})
+        f = probe({"plan": LONG_PLAN, "shots": f"{L1},{L2}", "attempts": "2", "adopt_run": ""})
         # review of #475: the worst case, 2 shots x 2 rounds x 3 generations (make_shot's ATTEMPTS) x 2 units, so a
         # batch that starts can finish; the mean (1.2 a round: 10 units) is only probe-queue's estimate
         self.assertEqual(f["pavo_units"], 24)
-        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights", "attempts": "2", "adopt_run": "40592173923"})
+        f = probe({"plan": LONG_PLAN, "shots": L1, "attempts": "2", "adopt_run": "40592173923"})
         self.assertEqual(f["pavo_units"], 0)
 
     def test_todays_probe_records_count_from_their_branches(self):
