@@ -125,6 +125,8 @@ class ColdOpen(unittest.TestCase):
         items, _ = eb.plan_check.sequence(plan)
         return [eb.plan_check.words(x["text"]) / lpc.pace(x) for x in items]
 
+    # E210: this case supplies synthetic durations, not current production speech receipts.
+    @patch.object(eb, "load_approvals", lambda *args, **kwargs: {})
     def test_the_keeper_starts_at_the_cold_open_end_measured_on_the_voice(self):
         plan = json.loads(LONG.read_text())
         d = self.durations(plan)
