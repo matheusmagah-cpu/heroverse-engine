@@ -1,0 +1,333 @@
+{
+ "version": "shorts-v5-source-map-v1",
+ "written_at": "2026-10-28",
+ "order": "story-qa-criteria-v5 (owner 28/10): existing Pavo assets -> Pavo video for key beats when the quota allows -> faceless stock -> animated stills -> Kokoro for every line without a native clip, God always Kokoro; longest hold 12 s with motion; 9.5 reviews unchanged",
+ "needs_opt_in": [
+  "shot_sources: a Short's 9:16 centre crop of a 16:9 approved still or library clip (E132 frame), reviewed per shot",
+  "pavo_reuse across episodes: an approved clip of another episode's shot (shots/<episode>.json) for a coherent line, reviewed per shot",
+  "plan: per-shot `source` of v5 and Kokoro for God's lines"
+ ],
+ "pavo_jobs_needed": {
+  "genesis-09-short": 0,
+  "genesis-10-short": "0-2 (the ark stills)",
+  "genesis-11-short": 0
+ },
+ "episodes": {
+  "genesis-09-short": {
+   "s-voice": {
+    "source": "still_motion",
+    "item": "genesis-09-s-voice",
+    "note": "APPROVED ark still (Pavo, refs); God's Genesis 7:4 on Kokoro (v5: God always Kokoro)"
+   },
+   "s-finished": {
+    "source": "still_motion",
+    "item": "genesis-09-s-finished",
+    "note": "APPROVED ark still"
+   },
+   "s-sky": {
+    "source": "still_motion",
+    "item": "genesis-09-s-sky",
+    "note": "APPROVED FLUX still"
+   },
+   "s-noah-door": {
+    "source": "flux_00",
+    "item": "faceless",
+    "note": "Noah from behind in his canonical robe and rope belt in the dark doorway (v5 faceless; his face never shown); Pavo by references only if the quota allows after the long"
+   },
+   "s-pairs": {
+    "source": "flux_00",
+    "item": "genesis-09-s-pairs",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-lions": {
+    "source": "flux_00",
+    "item": "genesis-09-s-lions",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-music": {
+    "source": "pavo_reuse",
+    "item": "shots/genesis-08-short.json#s-wedding",
+    "note": "approved 9.5: a crowd from behind dances through the camp with drums and torches, never looking up at the dark hull on the hill (line 4); published in genesis-08: review the repeat and the hull's look at night; else FLUX"
+   },
+   "s-enter": {
+    "source": "flux_00",
+    "item": "genesis-09-s-enter",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-shut": {
+    "source": "flux_00",
+    "item": "genesis-09-s-shut",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-windows": {
+    "source": "flux_00",
+    "item": null,
+    "note": "FLUX first; stock candidate clip-rain-weather-rain-water-* (heavy rain on water, no people) with the 9:16 crop"
+   },
+   "s-springs": {
+    "source": "flux_00",
+    "item": null,
+    "note": "FLUX first; stock candidate clip-rain-puddle-raindrops-* (close rain on water)"
+   },
+   "s-climb": {
+    "source": "flux_00",
+    "item": "genesis-09-s-climb",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-float": {
+    "source": "still_motion",
+    "item": "genesis-09-s-float",
+    "note": "APPROVED ark still"
+   },
+   "s-fists": {
+    "source": "flux_00",
+    "item": "genesis-09-s-fists",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-hills": {
+    "source": "flux_00",
+    "item": null,
+    "note": "FLUX first; stock candidate clip-sunrise-fog-sea-of-fog-* (hilltops as islands in a sea of fog: coherent, but golden sunrise against a grey-rain line)"
+   },
+   "s-peak-crowd": {
+    "source": "still_motion",
+    "item": "genesis-09-s-peak-crowd",
+    "note": "APPROVED FLUX still"
+   },
+   "s-drift": {
+    "source": "still_motion",
+    "item": "genesis-09-s-drift",
+    "note": "APPROVED ark still"
+   },
+   "s-rock": {
+    "source": "flux_00",
+    "item": "genesis-09-s-rock",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-noah-lamp": {
+    "source": "pavo_reuse",
+    "item": "shots/genesis-08-short.json#s-alone",
+    "note": "approved 9.5: an old man seen from behind works alone inside the hull by one oil lamp (Noah faceless, the lamp of lines 17-18); published in genesis-08: review the repeat; else FLUX faceless"
+   },
+   "k-insight": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-2",
+    "note": "approved 9.5 Keeper close-up by the fire (16:9); the 9:16 centre crop keeps face and beard; Kokoro voice-over"
+   },
+   "k-question": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-3",
+    "note": "approved 9.5; second Keeper still, a different hold from k-insight"
+   },
+   "k-close": {
+    "source": "pavo_reuse",
+    "item": "shots/genesis-08-short.json#k-close",
+    "note": "approved 9.5 Pavo Keeper voice-over clip (9:16, the same exact prompt); published in genesis-08 on 27/10: the review checks the repeat; alternative arc-01-long-k-promise-2 with the opposite camera move"
+   }
+  },
+  "genesis-10-short": {
+   "s-voice": {
+    "source": "pavo_still_or_flux",
+    "item": null,
+    "note": "ark still needs Pavo with the refs (1 job) when the quota allows; else FLUX mountain top at dawn with no ark in frame; God's Genesis 8:16 on Kokoro"
+   },
+   "s-hold": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-hold",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-wind": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-wind",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-calm": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-calm",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-ararat": {
+    "source": "pavo_still",
+    "item": null,
+    "note": "the ark on Ararat needs its references (1 Pavo job); fallback: line 3 on s-still-water's FLUX still if no Pavo by the build"
+   },
+   "s-still-water": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-still-water",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-window": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-window",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-raven": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-raven",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-noah-dove": {
+    "source": "flux_00",
+    "item": "faceless",
+    "note": "Noah from behind in his canonical robe releasing the dove (faceless); Pavo by references only if the quota allows"
+   },
+   "s-dove-circle": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-dove-circle",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-hand": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-hand",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-dusk": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-dusk",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-leaf": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-leaf",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-release": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-release",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-empty-sky": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-empty-sky",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-green": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-green",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-dry": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-dry",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-door-shut": {
+    "source": "flux_00",
+    "item": "genesis-10-short-s-door-shut",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "k-insight": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-2",
+    "note": "approved 9.5 Keeper close-up by the fire (16:9); the 9:16 centre crop keeps face and beard; Kokoro voice-over"
+   },
+   "k-question": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-3",
+    "note": "approved 9.5; second Keeper still, a different hold from k-insight"
+   },
+   "k-close": {
+    "source": "pavo_reuse",
+    "item": "shots/genesis-08-short.json#k-close",
+    "note": "approved 9.5 Pavo Keeper voice-over clip (9:16, the same exact prompt); published in genesis-08 on 27/10: the review checks the repeat; alternative arc-01-long-k-promise-2 with the opposite camera move"
+   }
+  },
+  "genesis-11-short": {
+   "s-voice": {
+    "source": "flux_00",
+    "item": null,
+    "note": "rainbow over a washed valley (no person); God's Genesis 9:11 on Kokoro; stock candidate: a rainbow query (the library has none)"
+   },
+   "s-door-open": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-door-open",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-family-out": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-family-out",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-noah-out": {
+    "source": "flux_00",
+    "item": "faceless",
+    "note": "Noah from behind, robe and rope belt, stepping barefoot onto wet grass (faceless)"
+   },
+   "s-stones": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-stones",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-noah-altar": {
+    "source": "flux_00",
+    "item": "faceless",
+    "note": "Noah from behind kneeling at the stone altar, smoke rising (faceless)"
+   },
+   "s-smoke": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-smoke",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-heart": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-heart",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-bless": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-bless",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-creatures": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-creatures",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-covenant": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-covenant",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-colour": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-colour",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-bow-close": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-bow-close",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-bow-hung": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-bow-hung",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-look": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-look",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "s-grass": {
+    "source": "flux_00",
+    "item": "genesis-11-short-s-grass",
+    "note": "FLUX still at 00:00 UTC (DRAFT record), still in motion after review"
+   },
+   "k-insight": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-2",
+    "note": "approved 9.5 Keeper close-up by the fire (16:9); the 9:16 centre crop keeps face and beard; Kokoro voice-over"
+   },
+   "k-question": {
+    "source": "still_motion (opt-in: 9:16 centre crop)",
+    "item": "arc-01-long-k-promise-3",
+    "note": "approved 9.5; second Keeper still, a different hold from k-insight"
+   },
+   "k-close": {
+    "source": "pavo_reuse",
+    "item": "shots/genesis-08-short.json#k-close",
+    "note": "approved 9.5 Pavo Keeper voice-over clip (9:16, the same exact prompt); published in genesis-08 on 27/10: the review checks the repeat; alternative arc-01-long-k-promise-2 with the opposite camera move"
+   }
+  }
+ }
+}
