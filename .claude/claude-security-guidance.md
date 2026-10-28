@@ -11,7 +11,7 @@
   existing workflow, never contents write.
 - The publish gate is the owner's quality floor: `approve.yml` → `prepublish_gate.py` writes `APPROVAL.json` bound to
   the video's `output_sha256`. A diff that writes `APPROVAL.json` outside that path, skips the hash recomputation, or
-  publishes (`publish_video.py`, `publish_shorts.py`, `publish_episode.py`) without a matching approval is a finding.
+  publishes (`publish_video.py`, `publish_episode.py`) without a matching approval is a finding.
 - Frozen QA criteria (`migration/production/qa_criteria_v3.json`, `qa_criteria_v4.json`, `pilot-NNN/qa_criteria.json`)
   are pinned by SHA256 in `render_queue.py`, `script_check.py` and `prepublish_gate.py`. Changing a pinned hash, or
   turning a failed or missing check into a pass (`except: pass`, a default of `True`, a skipped branch) is a finding.
