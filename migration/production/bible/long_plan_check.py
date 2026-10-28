@@ -637,6 +637,11 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             if not (voices.get(who) or {}).get("pavo_voice"):
                 problems.append(f"PAVO_VOICE_UNDESCRIBED shot {i} {s['id']} ({who}: production/bible/voices.json)")
             routes[s["id"]] = pn.route(plan, s, i)
+    # owner 28/10: a long designed to one day's Pavo budget names each shot's source (`source_design`); episode_build
+    # sources and probe-queue follow it, so a planned fallback must be one a fallback may carry
+    if "source_design" in plan:
+        import shot_sources
+        problems += shot_sources.source_design_problems(plan)
 
     gens = [s for s in shots if s.get("window_of") is None]
     talk = [i for i, s in enumerate(shots) if s.get("window_of") is None and pc.talking(s)]

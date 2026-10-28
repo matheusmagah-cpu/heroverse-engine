@@ -2,6 +2,49 @@
  "id": "genesis-09-s-drift",
  "episode": "genesis-09-short",
  "shot": "s-drift",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A lone man seen from behind, his face never visible, on a rock in the rising water, and a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, far off in the rain, the roof empty and flat. Grey dusk, rain and mist. Final and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A lone man in a long rough undyed wool robe, barefoot, his back to the camera and his face never visible, stands on a rock in the rising water, and a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle floats far off in the rain, the roof empty and flat. Grey dusk, rain and mist. Final and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-drift.jpg",
+ "sha256": "68b858c87a8a681433de72286958b5065aeaa7ec1a6132622efb460acfde4bbd",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-drift-2026102804-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373668090342574144",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373668090342574144",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-26eba2e97eb5-0-d9aa8c56b344.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "A lone barefoot man in an undyed wool robe, back to the camera, on a rock in the rising water, the ark floating far off in grey mist between mountains: the mocker watching it go (lines 15-16). Run 2026102803's -1 was refused for a trench coat.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "69c01f89e9eb5612b98cdda2711f9a3fe4ed06c4318cc71ec927c883310ed333",
+  "references_sha256": "2c4f74bd30742c1408129dea18a0cfd64914d19408cb465a4e1cc6889dca3204"
+ }
 }

@@ -1,0 +1,57 @@
+{
+ "id": "genesis-09-s-enter-2026102806-1",
+ "still": "genesis-09-s-enter",
+ "episode": "genesis-09-short",
+ "shot": "s-enter",
+ "run": "2026102806",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot, low angle. A small family of eight, tiny beside the towering side of pitch-black planks, walks away from the camera, all their backs to the camera, an old man and his wife, three young men and their wives, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbing a broad earthen ramp up through the open wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground, the roof empty and flat. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot, low angle. A small family of eight, tiny beside the towering side of pitch-black planks, walks away from the camera, all their backs to the camera, an old man and his wife, three young men and their wives, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbing a broad earthen ramp up through the open wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground, the roof empty and flat. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373671257495047232",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373671257495047232",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373671257495047232",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-d268ac0a4d9b-0-846813a1cc06.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-enter-2026102806-1.jpg",
+ "sha256": "a6df6f651d1639941b508b793f8f47cc40f8e23b64d109ad7c9716683750cfc1"
+}

@@ -381,13 +381,14 @@ class Plan(unittest.TestCase):
         arc = json.loads((ev / "long/20261026/arc-01-voice.json").read_text())["pace_by_voice_words_per_s"]
         ns = json.loads((ev / "long/20261026/noah-scoffer-voice.json").read_text())["pace_by_voice_words_per_s"]
         kp = json.loads((ev / "voice/20261026/kokoro-pace.json").read_text())
+        cv = json.loads((ev / "voice/20261028/cain-voice.json").read_text())["pace_by_voice_words_per_s"]
         runs, lines = {}, {}
         for run in arc.values():
             for key, v in run.items():
                 runs.setdefault(key.split()[0], []).append(v["pace"])
                 if "line_min" in v:
                     lines.setdefault(key.split()[0], []).append(v["line_min"])
-        for src in (ns, kp["probe_by_voice"]):
+        for src in (ns, kp["probe_by_voice"], cv):
             for who, v in src.items():
                 runs.setdefault(who, []).append(v["pace"])
                 lines.setdefault(who, []).append(v["line_min"])
@@ -1226,9 +1227,9 @@ class ArkLook(unittest.TestCase):
             def ark(prompt):   # E113's sentences (parts 1-8) or E123's phrase (part 9 on)
                 return ARK in prompt or pc.has_phrase(prompt, pc.ARK_PHRASE)
             return ark(s["prompt"]) or bool(still and ark(still["prompt"]))
-        # genesis-09 (E123; redesigned 28/10 to the Shorts' ~20 Pavo units): 6 stills name the ark by its phrase
-        # (s-voice, s-finished, s-enter, s-shut, s-float, s-drift); the other scenes keep it off frame
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 6)):
+        # genesis-09 (E123; redesigned 28/10 to the Shorts' ~20 Pavo units): 4 stills name the ark by its phrase
+        # (s-voice, s-finished, s-float, s-drift); s-enter and s-shut frame the door only
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 4)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept

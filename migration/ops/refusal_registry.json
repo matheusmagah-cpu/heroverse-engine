@@ -1812,6 +1812,48 @@
    "class": "N",
    "why": "owner exception 28/10 (arc-01 long only): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it refuses a character still not made with exactly the character's approved references (Pavo read-back), and generate_step refuses the same again from the approval"
   },
+  "SOURCE_DESIGN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_FALLBACK": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_TWICE": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_WINDOW": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
@@ -2450,6 +2492,10 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
   }
  },
  "review": {

@@ -253,6 +253,54 @@ def fallback_refusal(plan, shot, index, source, still=None):
     return None
 
 
+DESIGN_KEYS = ("pavo_talking", "pavo_voice_over", "pavo_scene", "window", "footage", "still_motion")
+
+
+def planned_fallbacks(plan):
+    """Owner 28/10 (a long designed to one day's Pavo budget): the shots the plan's `source_design` gives a free source
+    (`footage`, `still_motion`) and that a fallback may carry (fallback_refusal: silent, no character). They never take
+    Pavo budget (allocate) and are never queued for a probe (long_preflight.queue): the budget goes to the spoken
+    shots and the acted scenes first. A listed shot a fallback may not carry stays on Pavo, and long_plan_check refuses
+    the plan (SOURCE_DESIGN_FALLBACK)."""
+    design = (plan or {}).get("source_design")
+    if not isinstance(design, dict):
+        return set()
+    listed = {x for k in FALLBACKS for x in (design.get(k) or []) if isinstance(x, str)}
+    return {s["id"] for i, s in enumerate(plan.get("shots") or [])
+            if s.get("id") in listed and s.get("window_of") is None
+            and fallback_refusal(plan, s, i, "still_motion") is None}
+
+
+def source_design_problems(plan):
+    """long_plan_check's rows on the plan's `source_design` (when it has one): every id a shot of the plan, in one list
+    only; `window` holds exactly the windows; a `footage` or `still_motion` shot is one a fallback may carry."""
+    design = plan.get("source_design")
+    if not isinstance(design, dict):
+        return ["SOURCE_DESIGN (an object: " + ", ".join(DESIGN_KEYS) + " as lists of shot ids, and a note)"]
+    shots = plan.get("shots") or []
+    index = {s.get("id"): i for i, s in enumerate(shots) if isinstance(s, dict)}
+    out, seen = [], {}
+    for k in DESIGN_KEYS:
+        for sid in design.get(k) or []:
+            if sid not in index:
+                out.append(f"SOURCE_DESIGN_UNKNOWN {k} {sid}")
+                continue
+            if sid in seen:
+                out.append(f"SOURCE_DESIGN_TWICE {sid} ({seen[sid]} and {k})")
+            seen[sid] = k
+            s = shots[index[sid]]
+            if (k == "window") != (s.get("window_of") is not None):
+                out.append(f"SOURCE_DESIGN_WINDOW {sid} ({k}: `window` lists exactly the window_of shots)")
+            elif k in FALLBACKS:
+                why = fallback_refusal(plan, s, index[sid], k)
+                if why:
+                    out.append(f"SOURCE_DESIGN_FALLBACK {why}")
+    missing = [sid for sid in index if sid not in seen]
+    if missing:
+        out.append(f"SOURCE_DESIGN_MISSING {', '.join(missing[:8])} (every shot names its source)")
+    return out
+
+
 def allocate(plan, todo, remaining, rounds=None):
     """[(shot, source or WAIT_PAVO_BUDGET)] for the shots still to make (`todo`, in risk_order: the spoken shots come
     first), spending `remaining` units on Pavo first come first served; a non-spoken shot with no character that the
@@ -262,8 +310,12 @@ def allocate(plan, todo, remaining, rounds=None):
     import pavo_native
     rounds = rounds or long_preflight.PROBE_ROUNDS
     index = {s["id"]: i for i, s in enumerate(plan["shots"])}
+    planned = planned_fallbacks(plan)
     out = []
     for s in todo:
+        if s["id"] in planned:   # owner 28/10: the plan gives it a free source; the budget is for the acted shots
+            out.append((s, "fallback"))
+            continue
         units = long_preflight.planned_units([s], rounds, worst=True)   # the dispatch guard's bound (#475 review)
         if units <= remaining:
             remaining -= units

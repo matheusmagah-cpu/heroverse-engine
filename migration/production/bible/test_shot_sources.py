@@ -102,6 +102,36 @@ class Allocation(unittest.TestCase):
         rich = dict((s["id"], c) for s, c in ss.allocate(p, todo, 10 ** 6))
         self.assertEqual(set(rich.values()), {"pavo"})
 
+    def test_a_planned_fallback_never_takes_the_budget_or_a_probe(self):
+        # owner 28/10 (arc-02, a long designed to one day's Pavo budget): before this, allocate and probe-queue spent
+        # the budget in risk order, so a wide or establishing shot the plan gives to FLUX or footage (rank 3) took Pavo
+        # before the acted scenes (rank 4); the plan's source_design now decides, and a character shot stays on Pavo
+        import long_preflight
+        p = plan()
+        p["source_design"] = {"pavo_talking": ["s-eve"], "pavo_voice_over": ["s-god"], "pavo_scene": ["s-pair"],
+                              "window": [], "footage": ["s-river"], "still_motion": []}
+        self.assertEqual(ss.source_design_problems(p), [])
+        self.assertEqual(ss.planned_fallbacks(p), {"s-river"})
+        todo = [s for _, s in eb.risk_order(p["shots"])]
+        rich = dict((s["id"], c) for s, c in ss.allocate(p, todo, 10 ** 6))
+        self.assertEqual(rich, {"s-eve": "pavo", "s-god": "pavo", "s-river": "fallback", "s-pair": "pavo"})
+        q = long_preflight.queue(p, {}, {}, max_units=10 ** 6)
+        probed = [x for b in q["batches"] for x in b["shots"].split(",")]
+        self.assertEqual((q["planned_fallback"], sorted(probed)), (["s-river"], ["s-eve", "s-god", "s-pair"]))
+        # a plan that names a character or a spoken shot as a fallback is refused, and that shot stays on Pavo
+        p["source_design"].update(pavo_scene=[], still_motion=["s-pair"])
+        self.assertTrue(any(x.startswith("SOURCE_DESIGN_FALLBACK SOURCE_CHARACTER_SHOT s-pair")
+                            for x in ss.source_design_problems(p)))
+        self.assertEqual(ss.planned_fallbacks(p), {"s-river"})
+        p["source_design"].update(still_motion=["s-river", "s-nope"])
+        bad = ss.source_design_problems(p)
+        for code in ("SOURCE_DESIGN_TWICE s-river", "SOURCE_DESIGN_UNKNOWN still_motion s-nope",
+                     "SOURCE_DESIGN_MISSING s-pair"):
+            self.assertTrue(any(x.startswith(code) for x in bad), (code, bad))
+        # without a source_design nothing changes (the Shorts and arc-01)
+        del p["source_design"]
+        self.assertEqual(ss.planned_fallbacks(p), set())
+
     def test_the_sources_report_fills_the_silent_shot_from_the_library(self):
         class Spent:
             def check_batch(self, units):
@@ -247,11 +277,11 @@ class OwnerException(unittest.TestCase):
 
 
 class VoiceAudio(unittest.TestCase):
-    """E135: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
+    """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
     which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
 
     @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
-    def test_e135_the_voice_encoder_reads_a_wav_decoded_from_the_clip(self):
+    def test_e137_the_voice_encoder_reads_a_wav_decoded_from_the_clip(self):
         import inspect
         import wave
         d = Path(tempfile.mkdtemp())

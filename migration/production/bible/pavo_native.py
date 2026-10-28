@@ -320,7 +320,7 @@ def sha256_file(path):
 
 
 def voice_wav(path, run=None):
-    """E135: the clip's soundtrack as a 16 kHz mono WAV for the voice encoder. resemblyzer.preprocess_wav reads a file
+    """E137: the clip's soundtrack as a 16 kHz mono WAV for the voice encoder. resemblyzer.preprocess_wav reads a file
     with librosa, and librosa >= 0.11 reads only what soundfile reads (no MP4): speech-check died on every clip
     (arc-01 long, 28/10). Decoded once with ffmpeg into a temporary file beside nothing else."""
     import subprocess
