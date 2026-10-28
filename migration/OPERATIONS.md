@@ -68,6 +68,11 @@ One scheduler of record, one watchdog, one daily pass; nothing else checks the s
 `render.yml` cron (:13, :43) lives in heroverse-runner.
 
 ## Known limits (measured)
+- Qualified production handoff (E213): the existing heartbeat checks Bible plans independently of the pilot
+  render queue. A current strict-plan/preflight/order PASS can queue one `episode.yml` or `long-build.yml` request
+  in `migration/requests/`, then invoke the same reusable durable-claim dispatcher. Prior claims/acknowledgements,
+  active builds and discovered evidence stop automatic replacement. Refusals are visible in the job summary.
+  This closes ready-plan -> build, not mining/modeling, source approval, perceptual review or publication readback.
 - Build evidence discovery (E207): the existing heartbeat's independent read-only `review-discovery` job
   lists `claude/long-*` and `claude/episode-*` branches with exact commit and build run IDs in its log/summary.
   The designated supervisor reads this inventory before the main-tree review queue, fetches each report at

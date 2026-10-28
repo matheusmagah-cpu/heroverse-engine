@@ -57,6 +57,37 @@ jobs:
             gh workflow run "$w" --repo "$GITHUB_REPOSITORY" --ref main
           done < "$T/due"
 
+  qualified-production:
+    # The existing clock advances only fully qualified plans; it never generates or approves sources.
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      ready: ${{ steps.handoff.outputs.ready }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+      - name: Ready plans to the existing durable request queue
+        id: handoff
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 -I -B migration/ops/production_handoff.py
+
+  submit-qualified-production:
+    needs: qualified-production
+    if: needs.qualified-production.outputs.ready == 'true'
+    permissions:
+      contents: write
+      actions: write
+    uses: ./.github/workflows/requests.yml
+
   review-discovery:
     # Independent read-only inventory: a failed scheduler must not hide build evidence.
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
