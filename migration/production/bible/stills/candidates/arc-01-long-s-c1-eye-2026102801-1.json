@@ -1,0 +1,51 @@
+{
+ "id": "arc-01-long-s-c1-eye-2026102801-1",
+ "still": "arc-01-long-s-c1-eye",
+ "episode": "arc-01-long",
+ "shot": "s-c1-eye",
+ "run": "2026102801",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 16:9, the characters' approved references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373664282418088640",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-serpent-three-quarter",
+   "sha256": "4fe6763d22559f7c3184d9b74b61e02f7d17b4835ecff99a1d3447f68b1e9ac3"
+  },
+  {
+   "record": "ch-serpent-full",
+   "sha256": "42d89a997dab4a3ae47cf51f8f4d903a1f53d0e72c33f904a4462e5d9037ad9b"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373664282418088640",
+   "input_images": 2
+  },
+  "job": {
+   "conversation_id": "373664282418088640",
+   "status": "completed"
+  }
+ },
+ "upscaler": "none (native from Pavo), Lanczos to 1920x1080",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/arc-01-long-s-c1-eye-2026102801-1.jpg",
+ "sha256": "ac2655e3cdb35e006f0e130da237666b841d5be6e095510e9cf2155b8b35f9f0"
+}

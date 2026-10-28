@@ -381,13 +381,14 @@ class Plan(unittest.TestCase):
         arc = json.loads((ev / "long/20261026/arc-01-voice.json").read_text())["pace_by_voice_words_per_s"]
         ns = json.loads((ev / "long/20261026/noah-scoffer-voice.json").read_text())["pace_by_voice_words_per_s"]
         kp = json.loads((ev / "voice/20261026/kokoro-pace.json").read_text())
+        cv = json.loads((ev / "voice/20261028/cain-voice.json").read_text())["pace_by_voice_words_per_s"]
         runs, lines = {}, {}
         for run in arc.values():
             for key, v in run.items():
                 runs.setdefault(key.split()[0], []).append(v["pace"])
                 if "line_min" in v:
                     lines.setdefault(key.split()[0], []).append(v["line_min"])
-        for src in (ns, kp["probe_by_voice"]):
+        for src in (ns, kp["probe_by_voice"], cv):
             for who, v in src.items():
                 runs.setdefault(who, []).append(v["pace"])
                 lines.setdefault(who, []).append(v["line_min"])
@@ -1226,9 +1227,9 @@ class ArkLook(unittest.TestCase):
             def ark(prompt):   # E113's sentences (parts 1-8) or E123's phrase (part 9 on)
                 return ARK in prompt or pc.has_phrase(prompt, pc.ARK_PHRASE)
             return ark(s["prompt"]) or bool(still and ark(still["prompt"]))
-        # genesis-09 (E123): 17 stills name the ark by its phrase; the interiors (s-inside, s-lamp, s-hull) show a
-        # plank hold, and s-noah-door / s-noah-ramp are Noah's reference shots, which cannot take a still (E122)
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 17)):
+        # genesis-09 (E123; redesigned 28/10 to the Shorts' ~20 Pavo units): 4 stills name the ark by its phrase
+        # (s-voice, s-finished, s-float, s-drift); s-enter and s-shut frame the door only
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 4)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
@@ -1406,6 +1407,20 @@ class ArkPositiveWording(unittest.TestCase):
             self.assertEqual(pc.prop_problems_e123(0, {"kind": "scene", "id": shot, "prompt": v2["prompt"]}), [])
             self.assertTrue(pc.has_phrase(v2["prompt"], ARK_PHRASE))
             self.assertEqual(len(v2["references"]), 2)
+
+
+class KeeperStill(unittest.TestCase):
+    """Owner exception (arc-01 long, plan B): a Keeper shot's still is judged as his own prompt (his campfire, outside
+    the story's time), a scene shot's still by the scene rules as before."""
+
+    def test_a_keeper_still_is_not_held_to_the_scene_period_but_a_scene_still_is(self):
+        plan = {"period": "eden", "shots": [{"id": "k-1", "kind": "keeper"}, {"id": "s-1", "kind": "scene"}]}
+        prompt = ("Painterly cinematic realism, a wide 16:9 frame. Close-up. The narrator sits by a campfire at night "
+                  "holding an old rolled scroll. Warm firelight. Grave. No text, no logos.")
+        self.assertEqual(pc.still_prompt_problems("k-1/still", prompt, plan), [])
+        found = " ".join(pc.still_prompt_problems("s-1/still", prompt, plan))
+        self.assertIn("SCENE_PERIOD_MISSING", found)
+        self.assertIn("SCENE_WRITING", found)
 
 
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged

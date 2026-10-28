@@ -160,7 +160,7 @@ class ApprovedShots(Scratch):
         layout, refs = self.layout_and_refs()
         digests = eb.request_digests(self.plan, layout, refs)
         self.assertEqual(sorted(digests), sorted(self.generated()))
-        self.assertEqual(len(digests), 164)
+        self.assertEqual(len(digests), len(self.generated()))   # the live plan's count (E133: never a copied literal)
         i, shot = next((i, s) for i, s in enumerate(self.plan["shots"]) if s["id"] == "s-c1-light")
         self.assertEqual(eb.request_identity(shot, i, self.plan, layout, refs)[1]["aspect_ratio"], "16:9")
         self.assertEqual(sorted(eb.clip_needs(self.plan, layout)), sorted(self.generated()))
@@ -232,12 +232,12 @@ class RiskAndResume(Scratch):
         ids = self.generated()
         digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
         q = lp.queue(self.plan, digests, {})
-        self.assertEqual(q["to_probe"], 164)
+        self.assertEqual(q["to_probe"], len(self.generated()))
         self.assertEqual(q["batches"][0]["shots"].split(",")[0], "s-open")
         for b in q["batches"]:
             self.assertLessEqual(b["minutes_est"], lp.PROBE_JOB_MINUTES - lp.PROBE_SETUP_MINUTES)
             self.assertEqual(len({eb.risk_rank(s) for s in self.plan["shots"] if s["id"] in b["shots"].split(",")}), 1)
-        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), 164)
+        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), len(self.generated()))
         approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids[:100]}
         approvals["s-open"] = {"request_sha256": "f" * 64, "clip_seconds": 6}   # approved for another request
         q = lp.queue(self.plan, digests, approvals)
@@ -256,7 +256,7 @@ class RiskAndResume(Scratch):
         self.assertEqual(parts, s["generated"])
         self.assertEqual(s["prop_guided"]["n"], 0)   # Eden: no prop of props.json
         self.assertEqual(e["time"]["shot_probe_runs"], len(lp.queue(self.plan, {}, {})["batches"]))
-        written = ROOT / "migration" / "evidence" / "long" / "20261027" / "arc-01-long-production-estimate.json"
+        written = sorted((ROOT / "migration" / "evidence" / "long").glob("*/arc-01-long-production-estimate.json"))[-1]   # the latest
         self.assertEqual(json.loads(written.read_text())["shots"], s)   # the committed estimate is this plan's
 
 
@@ -270,10 +270,12 @@ class ReviewOf468(Scratch):
         # a Short's new preflight report is no fix that lifts GUARD_RERUN_WITHOUT_FIX for its probes
         import dispatch_guard as g
         probe = g.WORKFLOWS["shot-probe.yml"][1]
-        short = probe({"plan": "migration/production/bible/plans/genesis-09-short.json", "shots": "s-voice",
-                       "attempts": "2"})
+        short_plan = "migration/production/bible/plans/genesis-09-short.json"
+        long_plan = "migration/production/bible/plans/arc-01-long.json"
+        first = {p: json.loads((ROOT / p).read_text())["shots"][1]["id"] for p in (short_plan, long_plan)}   # E133
+        short = probe({"plan": short_plan, "shots": first[short_plan], "attempts": "2"})
         self.assertFalse([d for d in short["deps"] if "evidence/preflight" in d])
-        long_ = probe({"plan": "migration/production/bible/plans/arc-01-long.json", "shots": "s-open", "attempts": "2"})
+        long_ = probe({"plan": long_plan, "shots": first[long_plan], "attempts": "2"})
         self.assertIn("migration/evidence/preflight/arc-01-long.json", long_["deps"])
 
     def test_a_batch_is_packed_to_seventy_percent_of_the_probe_timeout(self):
@@ -336,12 +338,12 @@ class ReviewOf468(Scratch):
 
     def test_an_unfrozen_story_qa_blocks_the_long_preflight(self):
         # the arc-01 long is measured by story QA v4 since 28/10: unfreeze whichever version it declares
-        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256
-        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = "0" * 64
+        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256
+        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = lpc.QA_V4X_SHA256 = "0" * 64   # V4X: the owner's arc-01 exception (28/10)
         try:
             r = pf.preflight(LONG, setups=[], today_images=0)
         finally:
-            lpc.QA_SHA256, lpc.QA_V4_SHA256 = saved
+            lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256 = saved
         self.assertTrue(any(b.startswith("PLAN QA_NOT_FROZEN") for b in r["blockers"]), r["blockers"])
 
     def test_check_probe_and_probe_queue_are_wired_for_the_long(self):
@@ -411,14 +413,19 @@ class PavoBudgetQueue(Scratch):
         ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 251}}}))
         now = datetime(2026, 10, 27, 23, 0, tzinfo=timezone.utc)
         guard = quota.QuotaGuard(ledger, now=lambda: now, actions=lambda day: quota.NO_ACTIONS)
+        # E138: Pavo's quota is a rolling window; 251 units used today no longer refuse the next batch
         got = lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)
+        self.assertEqual(got["next_batch"], "fits", got)
+        self.assertEqual(got["remaining"], quota.DAILY_CAP - 10)
+        # review of #475: the worst case is what must fit (one window), not the mean
+        got = lp.budget_today([{"pavo_units_est": 10, "pavo_units_max": quota.DAILY_CAP + 1}], guard)
         self.assertEqual(got["next_batch"], "refused")
         self.assertTrue(got["refusal"].startswith("PAVO_BUDGET_SHORT"), got)
-        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}}))
-        self.assertEqual(lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)["remaining"], 10)
-        # review of #475: the worst case is what must fit, not the mean
-        self.assertEqual(lp.budget_today([{"pavo_units_est": 10, "pavo_units_max": 21}], guard)["next_batch"],
-                         "refused")
+        ledger.write_text(json.dumps({"days": {"2026-10-27": {"generated": 100}}, "failed_streak": 2,
+                                      "suspended_at": "2026-10-27T22:00:00+00:00",
+                                      "suspended_until": "2026-10-28T01:00:00+00:00"}))
+        self.assertTrue(lp.budget_today([{"pavo_units_est": 5, "pavo_units_max": 10}], guard)["refusal"].startswith(
+            "PAVO_FREE_QUOTA_SUSPECTED"))                 # a stop is what refuses now
 
 
 if __name__ == "__main__":

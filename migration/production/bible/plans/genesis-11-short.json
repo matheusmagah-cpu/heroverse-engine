@@ -1,0 +1,313 @@
+{
+ "version": "bible-plan-v2",
+ "episode": "genesis-11-short",
+ "part": 11,
+ "passage": "Genesis 8:18-9:16 (KJV, public domain)",
+ "period": "the-flood",
+ "aspect_ratio": "9:16",
+ "story": "The rainbow covenant (SERIES.md episode 11; arc 3, The Flood)",
+ "people": "Noah is APPROVED (characters.json) and appears by his references in two silent Pavo shots (s-noah-out: he steps onto dry ground; s-noah-altar: he kneels at the altar); Genesis gives him no words here. His wife, sons and their wives have no characters.json entry: they are seen from behind or in silhouette in rough undyed wool robes and head-cloths. Nobody speaks. God is never shown: His Genesis 9:11 is a deep voice-over over the clearing storm and the first rainbow at the open (a flash-forward). No establishing shot. The Keeper only for the insight, the comment question and the close, in voice-over (plan B), genesis-07's exact prompts. Budget (coordinator 28/10): Pavo for God's voice-over, the two Noah shots and the Keeper's three; no ark in frame (no Pavo still); every other scene a FLUX still in motion.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 9:11, voice-over: never again a flood, over the first rainbow as a flash-forward); stake and open loop (the door must open after a year: what world is left?); escalation in three rising steps of the human heart against God's mercy, each ending on a hook (they step out, the altar before anything else; the Lord says the heart is still evil from youth; God blesses them and promises a sign); climax s-colour and s-bow-close (the first rainbow) carrying Genesis 9:13; payoff (Genesis 9:16: I will look upon it, that I may remember); keeper_close (insight: the sign is God's own reminder; comment question; part 12).",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "God said that after the flood, to eight people standing on an empty, washed earth. But first the great door had to open, after more than a year shut inside in the dark."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah went forth, and his sons, and his wife, and his sons’ wives with him:",
+   "reference": "Genesis 8:18 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "His bare feet touched dry ground. Behind him every creature came out, into a washed and silent world."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah builded an altar unto the Lord; and took of every clean beast, and of every clean fowl, and offered burnt offerings on the altar.",
+   "reference": "Genesis 8:20 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Before a tent, before a field, before anything else, he built an altar. The first thing he did on the new earth was worship."
+  },
+  {
+   "kind": "scripture",
+   "text": "and the Lord said in his heart, I will not again curse the ground any more for man’s sake; for the imagination of man’s heart is evil from his youth;",
+   "reference": "Genesis 8:21 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Read that slowly. The flood had washed the earth, but it had not changed the human heart. And still God chose mercy."
+  },
+  {
+   "kind": "scripture",
+   "text": "And God blessed Noah and his sons, and said unto them, Be fruitful, and multiply, and replenish the earth.",
+   "reference": "Genesis 9:1 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Eight people and a whole empty world to fill. Then God made a promise, not only to Noah, but to every living thing."
+  },
+  {
+   "kind": "scripture",
+   "text": "And God said, This is the token of the covenant which I make between me and you and every living creature that is with you, for perpetual generations:",
+   "reference": "Genesis 9:12 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Then the grey clouds parted over the valley, and for the first time in the whole story, colour stretched from one side of the sky to the other."
+  },
+  {
+   "kind": "scripture",
+   "text": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
+   "reference": "Genesis 9:13 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "A bow, the kind a warrior hangs up on the wall of his tent when the battle is over, pointed away from the earth and up toward heaven."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the bow shall be in the cloud; and I will look upon it, that I may remember the everlasting covenant between God and every living creature of all flesh that is upon the earth.",
+   "reference": "Genesis 9:16 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The family stood together in the wet grass and looked up for a long time. Every rainbow since has carried that same promise, hanging in the sky after the storm."
+  },
+  {
+   "kind": "insight",
+   "text": "Most people think the rainbow is there to remind us. Read the verse again: God says He will look at it and remember. The sign is first of all His own."
+  },
+  {
+   "kind": "cta",
+   "text": "Next time you see a rainbow, what will it remind you of? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part twelve tomorrow: The tower of Babel."
+  }
+ ],
+ "shots": [
+  {
+   "id": "s-voice",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 9:11 (KJV)",
+   "line": "neither shall there any more be a flood to destroy the earth.",
+   "seconds": 8,
+   "characters": [],
+   "first_frame": "genesis-11-short-s-voice",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow crane up. The last storm clouds roll away over a washed green valley and a pale rainbow slowly brightens across the sky, sunlight sweeping over the wet grass. Late afternoon after rain. Vast and gentle. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos."
+  },
+  {
+   "id": "s-door-open",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 10,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The great square door of rough timber swings down and bright daylight floods in over the family in silhouette. Bright morning light. Release. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-door-open",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-family-out",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. The family seen from behind walks down a plank ramp onto wet green ground, carrying bundles. Bright morning. Grateful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-family-out",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-out",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 8,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, steps barefoot from a plank ramp onto wet green grass and stands still, breathing the open air, as sheep and goats walk past him onto the hillside, his lips closed, silent. Bright morning after rain, sunlight on his face. Grateful and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "id": "s-stones",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 10,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Young men in silhouette lift rough field stones into a low altar on the hillside. Morning, long shadows. Devoted. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-stones",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-altar",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 9,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, kneels before a low altar of rough field stones as smoke from the offering rises straight up into the clear sky, his head bowed, his lips closed, silent. Morning light, smoke drifting. Reverent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "id": "s-smoke",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 12,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. A thin column of smoke rises from the small stone altar on the empty green hillside, the family in silhouette kneeling around it. Morning, clear sky. Holy and still. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-smoke",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-heart",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The family in silhouette sits close together on the hillside at evening, looking at each other in silence. Evening, warm low sun. Sobering. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-heart",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-bless",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. Golden light falls over the family in silhouette as they stand with raised hands on the hillside. Golden late light. Blessed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-bless",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-creatures",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow tracking shot. Herds and birds spread out over the green valley below the family in silhouette. Bright day. Abundant. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-creatures",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-covenant",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 12,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The clouds above the hillside begin to break apart as the family in silhouette looks up. Rain clearing, shafts of sunlight. Expectant. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-covenant",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-colour",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 10,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow tilt up. A rainbow fades in across the whole sky over the washed valley above a few small figures in silhouette. Late afternoon after rain. Wonder. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-colour",
+   "figures": "anonymous"
+  },
+  {
+   "climax": true,
+   "id": "s-bow-close",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The rainbow glows against the dark retreating storm while the family in silhouette stands below it. Late afternoon, sun behind them. Awe. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-bow-close",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-bow-hung",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow crane up. The great arc of the rainbow spans from mountain to mountain over the shining valley, small silhouettes beneath it. Golden light. Peace. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-bow-hung",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-look",
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "seconds": 12,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The family in silhouette looks up at the rainbow in silence, a child pointing. Golden light after rain. Promise. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-look",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-grass",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 9,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The family in silhouette stands in the wet grass under the fading rainbow as evening comes. Evening glow. Quiet hope. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "first_frame": "genesis-11-short-s-grass",
+   "figures": "anonymous"
+  },
+  {
+   "id": "k-insight",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    15
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+  },
+  {
+   "id": "k-question",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    16
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+  },
+  {
+   "id": "k-close",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    17
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  }
+ ]
+}

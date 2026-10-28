@@ -111,6 +111,57 @@
    "role": "antagonist only: an invented ringleader of the valley's mockers in the days of Noah, never a named biblical person; his lines are our own words, never Scripture",
    "note": "Genesis records no word of the mockers: the scoffer's taunts are dramatization (kind story, no reference). The crimson tunic, striped headcloth and pointed black beard keep him apart from Noah's plain belted robe and grey beard and the Keeper's hood and silver beard.",
    "reviewed": "DRAFT (2026-10-27): runs 40425015909, 40426431468 and 40427508239 rejected (metal shoulder plates, chains, a necklace, an earring, a red-and-gold headcloth, a full beard, a different face each time); 'bronze armbands' and the embroidered sash kept drawing a Roman soldier, so the look now reads a plain crimson wool tunic tied with a broad black sash. New sheet by cf-images.yml, then Claude's review."
+  },
+  "cain": {
+   "name": "Cain",
+   "first_story": "Genesis 4 (arc-02 long)",
+   "status": "DRAFT",
+   "seed": 7701,
+   "look": "a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms",
+   "wardrobe": {
+    "field": "a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth",
+    "wanderer": "a rough dark brown wool cloak pulled tight around his shoulders against the wind"
+   },
+   "refs": [],
+   "voice": "am_eric",
+   "pronoun": "his",
+   "role": "the elder brother, the tiller of the ground (Genesis 4:2); he speaks only his KJV words (Genesis 4:13-14 in the arc-02 long)",
+   "note": "Cropped curly black hair, a close-cropped beard and a heavy build keep him apart from Adam (lean, wavy shoulder-length hair, short full beard) and from Abel (slender, beardless, longer hair). A Pavo voice of his own (voices.json) and a measured Kokoro pace (evidence/voice/20261028/cain-voice.json).",
+   "reviewed": "DRAFT (2026-10-28): reference prompts written for the arc-02 long (images.json ch-cain-*); sheet by cf-images.yml (pilot characters), then Claude's review sets APPROVED with the kept refs."
+  },
+  "abel": {
+   "name": "Abel",
+   "first_story": "Genesis 4 (arc-02 long)",
+   "status": "DRAFT",
+   "seed": 7801,
+   "look": "a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck",
+   "wardrobe": {
+    "shepherd": "a cream undyed wool tunic with a sheepskin over one shoulder, a plain wooden shepherd's crook in one hand",
+    "altar": "a cream undyed wool tunic with a sheepskin over one shoulder, kneeling with his hands open"
+   },
+   "refs": [],
+   "voice": "am_liam",
+   "pronoun": "his",
+   "role": "the younger brother, the keeper of sheep (Genesis 4:2); silent on screen (Genesis gives him no words)",
+   "note": "Beardless, slender and in cream wool, he never reads as Cain (dark brown tunic, heavy build) or Adam (bearded, hide garment).",
+   "reviewed": "DRAFT (2026-10-28): reference prompts written for the arc-02 long (images.json ch-abel-*); sheet by cf-images.yml (pilot characters), then Claude's review sets APPROVED with the kept refs."
+  },
+  "enoch": {
+   "name": "Enoch",
+   "first_story": "Genesis 5 (arc-02 long)",
+   "status": "DRAFT",
+   "seed": 7901,
+   "look": "a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders",
+   "wardrobe": {
+    "walk": "walking with a plain wooden walking stick along a hill path",
+    "tent": "seated at the open flap of a goat-hair tent, his hands resting on his knees"
+   },
+   "refs": [],
+   "voice": "bm_daniel",
+   "pronoun": "his",
+   "role": "Enoch of Seth's line, who walked with God (Genesis 5:21-24); never Cain's son Enoch (Genesis 4:17), who is not shown; silent on screen",
+   "note": "Black hair and beard streaked with grey, a cream robe and a dark blue shawl keep him apart from Noah (bald crown, iron-grey beard, brown robe with a rope) and the Keeper (silver-white beard under a brown hood).",
+   "reviewed": "DRAFT (2026-10-28): reference prompts written for the arc-02 long (images.json ch-enoch-*); sheet by cf-images.yml (pilot characters), then Claude's review sets APPROVED with the kept refs."
   }
  },
  "god": {

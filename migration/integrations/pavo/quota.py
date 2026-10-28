@@ -55,8 +55,19 @@ from client import PavoError
 
 REPO = Path(__file__).resolve().parents[3]
 LEDGER = REPO / "migration" / "evidence" / "pavo" / "image-ledger.json"
+# E138 (28/10, measured by the long agent): Pavo's free quota is a rolling window, not a UTC day. After a stop about
+# 35-50 jobs come back ~3 h later, and sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h); a
+# still and a video each count about one job. A fixed total a UTC day (E128's 120 units) blocked work while the quota
+# was live and let it run while it was spent. The stop signal is the read-back (FAILED_STREAK, COOL_DOWN, one probe,
+# MAX_UNREAD); DAILY_CAP is now only the largest batch one run may plan (about one window), never a day's total.
 DAILY_CAP = 120
+# E138: the owner's split of the rolling quota: the Shorts take at most this many jobs a UTC day, the long the rest
+SHORTS_DAILY_JOBS = 25
 FAILED_STREAK = 2
+# E136 (28/10): 11 stills were submitted back to back before any was read back; the quota had run out and 10 came back
+# `failed`. FAILED_STREAK can only stop a fan-out when read-backs come between submissions, so a new submission waits
+# while this many of today's jobs are still unread (PAVO_UNREAD_JOBS): a quota stop costs at most this many.
+MAX_UNREAD = 2
 COOL_DOWN = timedelta(hours=3)
 KEEP_FAILED = 50
 KEEP_JOBS = 200
@@ -203,6 +214,7 @@ class QuotaGuard:
         data.setdefault("suspended_at", None)
         data.setdefault("suspended_until", None)
         data.setdefault("probe", None)
+        data.setdefault("unread", [])
         days = data["days"]
         if not isinstance(days, dict):
             raise _unreadable("days is not an object")
@@ -222,6 +234,8 @@ class QuotaGuard:
         _when(data["suspended_until"], "suspended_until")
         if data["suspended_until"] is not None and data["suspended_at"] is None:
             raise _unreadable("suspended_until without suspended_at")
+        if not isinstance(data["unread"], list) or not all(isinstance(j, str) for j in data["unread"]):
+            raise _unreadable("unread is not a list of ids")
         probe = data["probe"]
         if probe is not None and (not isinstance(probe, dict) or not isinstance(probe.get("conversation_id"), str)):
             raise _unreadable("probe is not {conversation_id}")
@@ -285,25 +299,55 @@ class QuotaGuard:
 
     def before_generate(self, units=IMAGE_UNITS):
         """Raise before any request when the ledger is unreadable, a quota stop is suspected (the cool-down runs, or
-        its one probe has not read back yet) or this generation's units would pass the day's cap."""
+        its one probe has not read back yet) or MAX_UNREAD of today's jobs are not read back (E136). E138: no fixed
+        daily total; only an owner's explicit PAVO_IMAGE_DAILY_CAP still caps the day (PAVO_DAILY_CAP)."""
         data = self._load()
         used, actions = self._usage(data)
         self._stopped(data, actions)
-        cap = self.cap(data)
-        if used + units > cap:
+        cap = self._owner_cap()
+        if cap is not None and used + units > cap:
             raise PavoError("PAVO_DAILY_CAP generated=%d units=%d cap=%d day=%s" % (used, units, cap, self._day()))
+        waiting = self._unread(data)
+        if len(waiting) >= MAX_UNREAD:
+            raise PavoError("PAVO_UNREAD_JOBS %s (read them back with pavo_job / pavo_image_job before another "
+                            "submission; E136)" % ",".join(waiting))
+
+    def _unread(self, data):
+        """E136: today's submissions not yet read back to an end (completed with media, or failed)."""
+        day = self._day()
+        out = []
+        for job in data["unread"]:
+            at = _when(data["jobs"].get(job), "jobs.%s" % job)
+            if at is not None and at.astimezone(timezone.utc).strftime("%Y-%m-%d") == day:
+                out.append(job)
+        return out
+
+    def _owner_cap(self):
+        """E138: a day's total only when the owner sets PAVO_IMAGE_DAILY_CAP explicitly; None otherwise."""
+        env = os.environ.get("PAVO_IMAGE_DAILY_CAP", "").strip()
+        try:
+            value = int(env) if env else None
+        except ValueError:
+            return None
+        return value if value is not None and value >= 0 else None
 
     def check_batch(self, units):
-        """E128: a planned batch (its expected units) before it starts: PAVO_BUDGET_SHORT when it does not fit what is
-        left today, so a batch never starts that cannot finish. Returns {used, planned, cap, remaining}."""
+        """A planned batch (its worst-case units) before it starts. E138: refused while a quota stop is suspected, and
+        (PAVO_BUDGET_SHORT) when the batch alone is larger than one rolling window (cap()) or passes an owner's
+        explicit daily cap; the units already used today no longer refuse it. Returns {used, planned, cap,
+        remaining}: remaining is the room left in one window after this batch."""
         data = self._load()
         used, actions = self._usage(data)
         self._stopped(data, actions)
         cap = self.cap(data)
-        if used + units > cap:
-            raise PavoError("PAVO_BUDGET_SHORT planned=%d used=%d cap=%d day=%s (split the batch or wait for the next "
-                            "UTC day)" % (units, used, cap, self._day()))
-        return {"used": used, "planned": units, "cap": cap, "remaining": cap - used - units}
+        if units > cap:
+            raise PavoError("PAVO_BUDGET_SHORT planned=%d window=%d (split the batch: one run plans at most one "
+                            "rolling window, E138)" % (units, cap))
+        owner = self._owner_cap()
+        if owner is not None and used + units > owner:
+            raise PavoError("PAVO_BUDGET_SHORT planned=%d used=%d cap=%d day=%s (the owner's daily cap)"
+                            % (units, used, owner, self._day()))
+        return {"used": used, "planned": units, "cap": cap, "remaining": cap - units}
 
     def submitted(self, conversation_id, units=IMAGE_UNITS):
         """Count one submission that created a conversation (whatever its acknowledgement said) as its units; after a
@@ -313,6 +357,8 @@ class QuotaGuard:
         day = data["days"].setdefault(self._day(), {"generated": 0})
         day["generated"] = int(day.get("generated", 0)) + units
         data["jobs"][conversation_id] = now.isoformat()
+        if conversation_id not in data["unread"]:
+            data["unread"] = (data["unread"] + [conversation_id])[-KEEP_JOBS:]
         if len(data["jobs"]) > KEEP_JOBS:
             data["jobs"] = dict(sorted(data["jobs"].items(), key=lambda kv: kv[1])[-KEEP_JOBS:])
         until = _when(data["suspended_until"], "suspended_until")
@@ -325,11 +371,13 @@ class QuotaGuard:
         failed with none counts toward a stop (and a failed probe suspends again at once)."""
         if status == "completed" and images:
             data = self._load()
+            data["unread"] = [j for j in data["unread"] if j != conversation_id]
             at = _when(data["suspended_at"], "suspended_at")
             if at is not None:
                 sent = _when(data["jobs"].get(conversation_id), "jobs.%s" % conversation_id)
                 if sent is None or sent < at:
-                    return   # an older job finishing late says nothing about the quota now
+                    self._save(data)   # read (E136), but an older job finishing late says nothing about the quota now
+                    return
                 data.update(suspended_at=None, suspended_until=None, probe=None)
             data["failed_streak"] = 0
             self._save(data)
@@ -337,7 +385,9 @@ class QuotaGuard:
         if status != "failed" or images:
             return
         data = self._load()
+        data["unread"] = [j for j in data["unread"] if j != conversation_id]
         if conversation_id in data["failed_jobs"]:
+            self._save(data)
             return
         data["failed_jobs"] = (data["failed_jobs"] + [conversation_id])[-KEEP_FAILED:]
         data["failed_streak"] += 1

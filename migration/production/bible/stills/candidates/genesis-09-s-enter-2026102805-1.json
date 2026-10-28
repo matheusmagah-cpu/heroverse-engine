@@ -1,0 +1,57 @@
+{
+ "id": "genesis-09-s-enter-2026102805-1",
+ "still": "genesis-09-s-enter",
+ "episode": "genesis-09-short",
+ "shot": "s-enter",
+ "run": "2026102805",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight walks away from the camera, all their backs to the camera, an old man and his wife, three young men and their wives, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbing a broad earthen ramp up through the open wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground, the roof empty and flat. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A family of eight walks away from the camera, all their backs to the camera, an old man and his wife, three young men and their wives, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbing a broad earthen ramp up through the open wide wooden door in the side of a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the ground, the roof empty and flat. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373668677847652032",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373668677847652032",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373668677847652032",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-b16ce5e50048-0-c371419b6aa5.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-enter-2026102805-1.jpg",
+ "sha256": "d2ce450e7ee8f9d88d00569b864e3ad6e43aff8bdf6a89134bb8916a9e5315bd"
+}

@@ -627,3 +627,121 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   `channel-privacy.yml` left the heartbeat (a finished job; dispatched by hand).
 - **Measure:** the daily report's scheduler health (`ops/health.py`) shows no missed slot over the next 7 days, and
   `tiktok.yml`'s run history shows no dispatch by a Claude clock.
+
+## Owner decision: fixed cadence, and the arc-01 long tomorrow by exception (2026-10-28)
+- **Cadence (owner, 28/10 ~02:00-02:30 UTC): "cadência fixa (dono 28/10): 2 Shorts/dia, longo dia sim dia não;
+  produções desenhadas para o orçamento do Pavo"** ("longo dia sim, dia não"); only the mining can change it. From
+  arc-02 on, every production is designed to the shared free Pavo quota (120 units a UTC day, quota.py): a 2-day cycle
+  is 240 units = 4 Shorts x ~20 + one long <= 160 units (about 60 Pavo clips with retries; an existing clip is free).
+  Measured on arc-01 under frozen story QA v4: the long as planned needs ~142 Pavo clips (~360 units), and even with
+  ~40 shots cut one acted long costs ~260 units, so the cadence is capped by the quota until each long is designed to
+  the budget.
+- **arc-01, owner, 28/10 ~02:30 UTC (exception, this long only):** "Tem que ser amanhã.. abre a exceção e faça o que
+  resta do longo com parte das cenas do Pavo misturado com imagens animadas ou vídeos coerentes.. e no outro você faz
+  desse jeito aí.. só não pode falhar! Tem que ser preciso, sem retrabalho e assertivo com a estrutura e roteiro."
+  The time the owner accepted for "amanhã": **2026-10-29 22:00 UTC** (the 10:00 standard slot cannot be met safely:
+  ~145 Pavo still units across two UTC days, the stills' review, the build and the preview review).
+- **What it became:** `production/qa_criteria_story_v4_owner_exception_arc01.json` (frozen, pinned by sha256 in
+  long_plan_check, render_queue and prepublish_gate): story QA v4 with only `rights.fallback_sources` (and
+  `grammar.fallback_shots`, the same rule) widened, plus its version, freeze time and an `owner_exception` record
+  naming the plan; long_plan_check refuses it for any other plan (CRITERIA_EXCEPTION_PLAN). Under it a silent shot with
+  characters may be a still in motion made by Pavo agnes-image with exactly the characters' approved references
+  (SOURCE_CHARACTER_STILL otherwise), and a spoken shot whose native clip does not exist or pass is the long's plan B:
+  the pinned Kokoro voice over an approved still of the shot (God always Kokoro, #486). A Pavo character still is
+  owner-owned output judged by fallback_shots (qa_pilot), not by the open-model image row. v3, v4, every other gate and
+  the 9.5 floor are unchanged; the structure and script are plans/arc-01-long.json as they were (no shot cut).
+
+## Owner decision: one long every other day; arc-02 designed for one production day (2026-10-28)
+- **Owner, 28/10 (through the orchestrator).** One Bible long every other day: arc-01 on 29/10, then arc-02 on 31/10
+  (production from 30/10). arc-02 is designed from the start to be made in about one day under today's limits: Pavo
+  (120 units a day shared with the Shorts) at most ~60 clips, only for the spoken shots and the acted scenes with a
+  character; God always on the Kokoro route (one voice); every other hold character-free under the narration (story
+  QA v4 `rights.fallback_sources`: vetted footage, FLUX stills in motion) or a window of an acted clip. The frozen QA
+  files are unchanged.
+- **What it became** (branch `claude/arc-02-long-plan`): `plans/arc-02-long.json` (Genesis 4:1-6:22, the four Shorts
+  of arcs.json arc-02 as chapters), Cain, Abel and Enoch as DRAFT characters with reference prompts, Cain's measured
+  Kokoro pace (`evidence/voice/20261028/cain-voice.json`), 38 DRAFT still prompts; the cadence anchor
+  (`ops/runway.py` FIRST_STORY_LONG 29/10) and the arcs.json long slots 31/10, 02/11, 04/11 (arc-01's own slot,
+  29/10 22:00 UTC, is the exception's, below).
+
+## Pavo's quota is a rolling window; the Shorts' share is 25 jobs a day (2026-10-28)
+- **Measured** (arc-01 long agent, 28/10): no reset at 00:00 UTC. When the quota comes back is still open (28/10 09:48Z): not 3 h after a stop (06:44Z
+  probe failed) and not 4-5 h after the burst began (09:47Z probe failed); a fixed daily image allowance resetting at
+  16:00Z (about 120 units) or a ~24 h rolling window both fit (`evidence/pavo/20261028/quota-observation.json`);
+  sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h, `evidence/pavo/image-ledger.json` 2026-10-27
+  and shot-probe record 40592173923). A still and a video each count as about one job. On 28/10 the quota stopped at
+  ~03:26 UTC: 10 of 11 MCP stills submitted back to back read back `failed` (E136).
+- **Decision** (coordinator for the owner, 28/10): E128's fixed 120 units a UTC day is dropped (E138). The stop is two
+  failed read-backs (3 h cool-down, one probe) and at most two unread jobs (E136). 120 units remains only as one
+  batch's largest plan. The Shorts take at most 25 jobs a UTC day, and the long has priority over the rest
+  (`PAVO_SHORTS_SHARE`). Format: `integrations/pavo/README.md` "The quota is a rolling window".
+- **Shorts design** (28/10, about 20 Pavo units a Short including retries): Pavo only where the format needs it
+  (spoken shots, characters by reference, the ark's still); every other scene is a free still in motion (FLUX) or
+  footage. genesis-09 was redesigned to 22 shots on this rule (#487).
+
+
+## Daily analysis 2026-10-28 (day 11 of 14, max 30)
+Sources: vidIQ 9 read calls, 40 credits, 0 generation (`evidence/vidiq/20261028/daily-analysis.json`, ledger first);
+latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has not run yet); `mining/live_intel.py`
+(`evidence/learning/20261028.json`, `stats-20261028.json`, `state.json`). Labels: [official] YouTube public count,
+[own] our calculation from Analytics rows (Analytics lags ~48-72 h), [est] projection.
+- **Pace.**
+  - Subscribers [official]: **299 / 1,000** today (291 on 27/10, 272 on 21/10). Measured: **+8 in 24 h, +27 in 7 d
+    (3.9/day)**. Needed [own]: **192/day** to day 14 (31/10), **36/day** to day 30 (16/11).
+  - Public long-form watch hours, 365 d [own]: **24.3 / 4,000** (27/10). Measured: +2.7 in the last 30 h
+    (about 2.2 per 24 h), +21.0 in 7 d (2.9/day). Needed: **1,086/day** to day 14 and **202/day** to day 30.
+  - Projection [est]: at the 7-day pace, 16/11 reaches about 376 subscribers (456 at the 24-hour pace) and about
+    83 long hours. **Day 14 and day 30 are both out of reach at today's pace.** Only a Bible long that the Shorts
+    feed can change the hours. Per 100 views, Bible Shorts gain about 1.7 subscribers (Analytics, parts 1-4), so
+    36 a day needs about 2,100 Short views a day; today's rate is about 400-800.
+  - Per format, Analytics 14 d [own], data to about 25-26/10:
+    | format | views | hours | avg % viewed | subs | impressions / CTR (report, to 25/10 PT) |
+    |---|---|---|---|---|---|
+    | Bible Shorts parts 1-4 | 657 | 3.8 | 41-111 % (g02 80 %, g01 111 %) | 11 | 221 / 0.9 % (thumbnail surfaces only) |
+    | prayer longs (9, retired) | 247 | 21.0 | 2-36 % (NGfnyTul-K0 34 %) | 3 | 6,008 / 1.76 %, 106 clicks |
+    | prayer Shorts (3, retired) | 528 | 6.3 | 96-261 % | 10 | 140 / 2.1 % |
+  - Per Short, current views [official, vidIQ 08:08Z] and live_intel verdict against the series median at a similar age:
+    g01 129 (89 h, **bad** 0.43x), g02 303 (81 h, **good** 2.4x), g03 123 (67 h, **bad** 0.57x), g04 129 (57 h,
+    **neutral** 0.85x), g05 182 (43 h), g06 156 (33 h), **g07 462 (19 h, outlier 57.8)**, **g08 318 (9 h, outlier
+    90.9, like rate 14.8 %)**: g05-g08 are inconclusive (under 48 h).
+  - Traffic 7 d [own]: SHORTS feed 651 views (227 min); **RELATED_VIDEO 131 views but 977 min, 77 % of the minutes**;
+    search 22 views. The long hours come from suggested video, not from the Shorts.
+- **Verdict per long (funnel).** All 10 public longs are prayer longs (line retired 26/10): **NO_SHORTS_TRAFFIC**
+  on all 10 (0 views from Shorts). Their hours come from suggested video. 53Xysf9x46c (family, 26/10) has 78 views,
+  outlier 4.9; ZPSxpF-zBl8 has 7 and F8u5dTT_2mM has 5: **weak**. The funnel has nothing to measure until the first
+  Bible long (arc-01, 29/10 22:00Z). `arc_links.py` then links Shorts 1-4 to it, and its first 48 h are the funnel's first test.
+- **Live-intelligence hypothesis (state.json, RUNNING): H-20261028-short-v2**, `structure = bible-story-short`
+  (part 7 on: 170-179 s, God's voice or a character speaks the conflict in the cold open, about 32 acted Pavo scenes,
+  cut only). Expected: at least 1.2x the series median at the same age on 2 consecutive episodes. Measured by
+  live_intel when g07 reaches 48 h (29/10 13:30Z) and g08 does (29/10 23:30Z). The early read is strong (g07 462 at
+  19 h and g08 318 at 9 h, against parts 1-6 at 123-303 lifetime) but under 48 h, so no verdict yet.
+  The genesis-05..08 episode records carry no `video_id`, so live_intel skipped them. Today's run used ids from
+  `publish/ledger.json` in a scratch copy. Filling the records is for the producing agents.
+- **Decision of the day (within the fixed cadence; nothing moves).**
+  1. **Shorts: keep the v2 format for genesis-09..12** (all already planned on it). Question titles naming the
+     story's object or character, as g07 ("Why Did God Regret Making Man?") did. Title proposals for the producing
+     agents (episode records do not exist yet):
+     - genesis-09 (29/10 13:30Z): `Who Shut the Door of the Ark? 🚪 | The Flood Begins, Bible Story (KJV) #shorts`
+       (vidIQ score 90; Genesis 7:16 "and the LORD shut him in", which the plan's open-door hook sets up). Thumbnail
+       spec unchanged (Noah's grief close-up in the first rain, "THE FLOOD BEGINS").
+     - genesis-10 (29/10 23:30Z): `Why Did Noah Send Out a Dove? 🕊️ | The Dove and the Olive Leaf, Bible Story (KJV) #shorts` (not scored).
+     - genesis-11 (30/10 13:30Z): `Why Did God Set a Bow in the Cloud? 🌈 | The Rainbow Covenant, Bible Story (KJV) #shorts`
+       (not scored; KJV 9:13 "I do set my bow in the cloud").
+  2. **arc-01 long: keep the plan's title.** `Creation, Eden and the Fall: How a Very Good World Broke in One
+     Afternoon | Genesis 1-3 Bible Story (KJV)` scores 97 against 88 for the character-led alternative. It already
+     follows the series formula and names the place (validated hygiene). **Thumbnail direction:** the story's
+     characters, not the Keeper (thumb-host 27/10: host face 2/36 Bible-long winners, character face 30/36).
+     - A close-up of Eve or Adam with readable fear or shame right after the fruit (Genesis 3:7-10, "I was afraid
+       ... and I hid myself"), with the fruit as the one symbol object.
+     - Designed text of 2-4 words repeating the title's story name, e.g. "THE FALL" (validated hygiene: long winners
+       7/7 carry designed text with the story name and 6/7 a close-up face with emotion).
+     - No arrow (0/36 winners). Warm, vivid light (R16). The same Adam and Eve references as the Shorts so a Short
+       viewer recognises them.
+     - Through the thumbs spec, check and approve path (E121), at 9.5.
+  3. **Packaging for suggested traffic:** suggested video carries 77 % of the long minutes. The long keeps
+     "Genesis 1-3 Bible Story (KJV)" in title and tags, matching the Bible-story long neighbourhood its Shorts and
+     the winners sit in.
+- **Why:** the cadence is fixed and only the mining can change it. Today's data changes nothing in it. Only g02 has
+  a 48 h verdict above the median. The Short-format change of part 7 is the one effect worth isolating (one
+  hypothesis at a time). The packaging follows the validated hygiene rows only; no driver is validated
+  (package mining 27/10). vidIQ: 40 credits (balance 3,261 before), no generation.

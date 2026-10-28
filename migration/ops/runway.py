@@ -2,7 +2,7 @@
 """Content runway of the long videos: the engine must never run out of Bible-story longs.
 
 The long cadence (owner, 2026-10-26: "stop the prayer videos; the channel is going in another direction"; SERIES.md
-calendar): one Bible-story long every LONG_EVERY days at 10:00 UTC from FIRST_STORY_LONG (28/10 10:00), so never more
+calendar): one Bible-story long every LONG_EVERY days at 10:00 UTC from FIRST_STORY_LONG (29/10 10:00), so never more
 than LONG_EVERY days between two longs. Only a Bible-story long counts (script archetype bible-story-long,
 render_queue.story_pilot); a prayer pilot never fills a slot, and its retired slots (00:00 and 10:00 every day) are not
 slots any more. A story script counts as written only when it follows its registered structure
@@ -25,7 +25,7 @@ import script_check  # noqa: E402  (structure_problems: the registered beat map)
 
 DAYS = 6
 LONG_EVERY = timedelta(days=2)                                    # SERIES.md: the long every other day
-FIRST_STORY_LONG = datetime(2026, 10, 28, 10, 0, tzinfo=timezone.utc)   # arc 1, pilot-015
+FIRST_STORY_LONG = datetime(2026, 10, 29, 10, 0, tzinfo=timezone.utc)   # arc 1 (owner 28/10: arc-01 on 29/10, then every other day)
 # owner 2026-10-19: approval (gate PASS) one full day ahead, so a provider hiccup or a FAIL has a day to be fixed
 # without missing the slot; the render comes 12 h before that (E24)
 SCRIPT_LEAD, RENDER_LEAD, APPROVAL_LEAD = timedelta(hours=72), timedelta(hours=36), timedelta(hours=24)

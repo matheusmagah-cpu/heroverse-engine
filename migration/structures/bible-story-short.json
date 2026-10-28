@@ -200,6 +200,8 @@
    "title_label_only_anti": "NOT validated: label-only titles win too (Shorts 13/27, longs 6/7)",
    "missing_sample": ">= 6 more weak contrasts per form from >= 4 channels (same form, at or below channel norm), from the winners' own channels, so the package is compared within channel"
   },
-  "best_winner_hypothesis": "vE_XJw7nU34 (breakout 1511): CAPS question title + designed text box on the frame. One video: a hypothesis for the daily loop, not a target"
+  "best_winner_hypothesis": "vE_XJw7nU34 (breakout 1511): CAPS question title + designed text box on the frame. One video: a hypothesis for the daily loop, not a target",
+  "rechecked_on": "2026-10-28",
+  "recheck_note": "28/10 recheck (evidence/vidiq/20261028/package_mining.json): no new weak contrast; one vidiq_youtube_search returned 50 Shorts 0-3 days old with no channel norm, so unusable. Status unchanged. Question titles: free, not supported as a driver (the DECISIONS 28/10 proposal stays a hypothesis)."
  }
 }

@@ -1,0 +1,2720 @@
+{
+ "version": "bible-long-plan-v1",
+ "long": "arc-02-long",
+ "episode": "arc-02-long",
+ "arc": "arc-02",
+ "pilot": "pilot-016",
+ "status": "DRAFT (2026-10-28): arc-02 long, designed for one production day (owner 28/10: one long every other day, slot 2026-10-31, production from 30/10). Not built, nothing generated. Cain, Abel and Enoch are DRAFT until Claude approves their reference sheets (CHARACTER_PENDING).",
+ "title": "Cain, Abel and the Man Who Walked With God | Genesis 4-6 Bible Story (KJV)",
+ "passage": "Genesis 4:1-6:22 (KJV, public domain)",
+ "period": "before-the-flood",
+ "aspect_ratio": "16:9",
+ "burned_captions": false,
+ "criteria": "story-qa-criteria-v4",
+ "ambience": "the open plain east of Eden: a dry wind over the grass, distant sheep and the crackle of an open fire",
+ "people": "Cain, Abel and Enoch are new characters.json entries (DRAFT until Claude approves their reference sheets); Adam, Eve and Noah are APPROVED and appear with their look word for word, the same entries as the Shorts. Only Cain speaks on screen (Genesis 4:13-14, Pavo's own speech under story QA v4). God speaks only as a voice-over over storm, fire, wind or sky, always on the Kokoro route (one voice: audio_route kokoro on each of His shots). Abel, Enoch and Noah are silent; the other KJV words are the Keeper's narration. The Keeper narrates and is on screen only for the promise, the insight and the close.",
+ "chapters": [
+  {
+   "id": "c1",
+   "short": "genesis-05-short",
+   "title": "Am I My Brother's Keeper?"
+  },
+  {
+   "id": "c2",
+   "short": "genesis-06-short",
+   "title": "The Man Who Never Died?"
+  },
+  {
+   "id": "c3",
+   "short": "genesis-07-short",
+   "title": "Why Did God Regret Making Man?"
+  },
+  {
+   "id": "c4",
+   "short": "genesis-08-short",
+   "title": "Noah Built a Ship on Dry Ground"
+  }
+ ],
+ "narration": [
+  {
+   "kind": "story",
+   "text": "You heard that right. The first child ever born has just killed the second, out in a field, with no one watching."
+  },
+  {
+   "kind": "story",
+   "text": "Cain thought the ground would keep his secret. It did not. The earth itself cried out."
+  },
+  {
+   "kind": "story",
+   "text": "So how does a man go from bringing God a gift to killing his own brother? And what will God do with him now?"
+  },
+  {
+   "kind": "promise",
+   "text": "I keep the old stories. Tonight I will tell you one about two brothers."
+  },
+  {
+   "kind": "promise",
+   "text": "Stay to the end, because this same story hides a man who never died."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Adam knew Eve his wife; and she conceived, and bare Cain, and said, I have gotten a man from the LORD.",
+   "reference": "Genesis 4:1 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Think of what that meant to her. The woman who lost a garden is holding a son, and she calls him a gift."
+  },
+  {
+   "kind": "scripture",
+   "text": "And she again bare his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
+   "reference": "Genesis 4:2 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "In the old language, Abel's name sounds like a breath, a vapour, something gone in a moment. Hold on to that."
+  },
+  {
+   "kind": "story",
+   "text": "Two brothers, two kinds of work. One followed the flock across the hills. The other bent his back over the hard soil his father had been told about, the ground that would bring forth thorns."
+  },
+  {
+   "kind": "story",
+   "text": "Nothing in the text says either job was better. A shepherd and a farmer, side by side, just outside the gate of Eden. Both of them were needed."
+  },
+  {
+   "kind": "scripture",
+   "text": "And in process of time it came to pass, that Cain brought of the fruit of the ground an offering unto the LORD.",
+   "reference": "Genesis 4:3 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And Abel, he also brought of the firstlings of his flock and of the fat thereof.",
+   "reference": "Genesis 4:4 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Notice the small words. Cain brought some fruit. Abel brought the firstlings, and the fat, the very best he had, before he kept anything for himself."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the LORD had respect unto Abel and to his offering: But unto Cain and to his offering he had not respect.",
+   "reference": "Genesis 4:4-5 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "We are not told how they knew. Perhaps the smoke of one altar rose straight to heaven, and the other drifted and died in the wind. However it happened, both brothers saw it."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Cain was very wroth, and his countenance fell.",
+   "reference": "Genesis 4:5 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "His face fell. You know that look. It is the face of someone who wanted the reward without giving the heart."
+  },
+  {
+   "kind": "story",
+   "text": "And here is the part most people skip. Before anything terrible happens, God goes looking for Cain, and He speaks to him like a father."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the LORD said unto Cain, Why art thou wroth? and why is thy countenance fallen? If thou doest well, shalt thou not be accepted?",
+   "reference": "Genesis 4:6-7 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "It is not a threat. It is an open door. Cain can still turn around."
+  },
+  {
+   "kind": "scripture",
+   "text": "And unto thee shall be his desire, and thou shalt rule over him.",
+   "reference": "Genesis 4:7 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Sin crouches at his door like a hungry animal. Cain can master it. The question is whether he will.",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "And Cain talked with Abel his brother: and it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
+   "reference": "Genesis 4:8 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "That is all the text gives us. One sentence. No struggle described, no cry for help. Just a field, and then one brother instead of two."
+  },
+  {
+   "kind": "story",
+   "text": "Abel never speaks a single word in the whole story. The only voice he is given is his blood, crying from the ground."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the LORD said unto Cain, Where is Abel thy brother? And he said, I know not: Am I my brother's keeper?",
+   "reference": "Genesis 4:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Listen to that answer. First a lie, and then a joke. Am I supposed to look after him? He keeps the sheep, not me."
+  },
+  {
+   "kind": "story",
+   "text": "But God already knows. The question was never for information. It was one more chance to tell the truth, and Cain lets it pass.",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "When thou tillest the ground, it shall not henceforth yield unto thee her strength; a fugitive and a vagabond shalt thou be in the earth.",
+   "reference": "Genesis 4:12 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Do you see the shape of it? The man who loved the ground is cut off from the ground. The thing he worked for most will not answer him any more."
+  },
+  {
+   "kind": "story",
+   "text": "Even now he does not say he is sorry. He says it hurts. He is afraid someone will do to him what he did to Abel."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the LORD set a mark upon Cain, lest any finding him should kill him.",
+   "reference": "Genesis 4:15 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "And this is the surprise. God judges Cain, and then God protects him. Mercy, even here, for the man who shed the first blood."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Cain went out from the presence of the LORD, and dwelt in the land of Nod, on the east of Eden.",
+   "reference": "Genesis 4:16 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Nod means wandering. The man told he would wander settles in a land named for it."
+  },
+  {
+   "kind": "story",
+   "text": "Remember that he walked out from God's presence. Because the rest of this story is about two ways to live: walking away from God, and walking with Him.",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "And Cain knew his wife; and she conceived, and bare Enoch: and he builded a city, and called the name of the city, after the name of his son, Enoch.",
+   "reference": "Genesis 4:17 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Keep that name in mind, Enoch. There are two men called Enoch in these chapters, and they could not be more different. One is remembered for a settlement, the other for a walk."
+  },
+  {
+   "kind": "story",
+   "text": "Cain's family grows fast, and so does everything they make. Herds and tents, harps and pipes, tools of bronze and iron. Clever, gifted, restless people."
+  },
+  {
+   "kind": "scripture",
+   "text": "And his brother's name was Jubal: he was the father of all such as handle the harp and organ.",
+   "reference": "Genesis 4:21 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "But listen to the man at the end of that line, Lamech, speaking to his two wives."
+  },
+  {
+   "kind": "scripture",
+   "text": "for I have slain a man to my wounding, and a young man to my hurt.",
+   "reference": "Genesis 4:23 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "If Cain shall be avenged sevenfold, truly Lamech seventy and sevenfold.",
+   "reference": "Genesis 4:24 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "He turns God's mercy into a boast. Cain killed and was afraid. Lamech kills and sings about it.",
+   "rehook": true
+  },
+  {
+   "kind": "story",
+   "text": "In just a few generations, violence has become a song. And the song is getting louder."
+  },
+  {
+   "kind": "story",
+   "text": "Meanwhile, far from that camp, Adam and Eve are still grieving the son they lost. They have buried one child, and the other is gone east."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Adam knew his wife again; and she bare a son, and called his name Seth: For God, said she, hath appointed me another seed instead of Abel, whom Cain slew.",
+   "reference": "Genesis 4:25 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And to Seth, to him also there was born a son; and he called his name Enos: then began men to call upon the name of the LORD.",
+   "reference": "Genesis 4:26 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "So now there are two families on the earth. One builds and boasts. The other calls on the name of the LORD. Same parents, same world, two very different directions."
+  },
+  {
+   "kind": "story",
+   "text": "And then the Bible slows down into a list. Names, ages, sons and daughters, and the same three words again and again."
+  },
+  {
+   "kind": "scripture",
+   "text": "And all the days that Adam lived were nine hundred and thirty years: and he died.",
+   "reference": "Genesis 5:5 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "And he died. Seth lived, and he died. Enos, and he died. Like a bell tolling across the generations, every few verses. You almost stop hearing it."
+  },
+  {
+   "kind": "story",
+   "text": "Read this chapter slowly and it starts to feel heavy. Every life, however long, ends the same way. Until one does not.",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "And Enoch lived sixty and five years, and begat Methuselah:",
+   "reference": "Genesis 5:21 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:",
+   "reference": "Genesis 5:22 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "This is the other Enoch. Not the boy a murderer named his settlement after, but a quiet man from Seth's family line. No settlement, no song, no weapon. Just a man and his God."
+  },
+  {
+   "kind": "story",
+   "text": "Notice when it starts. After his son is born. Something about holding that child turned him toward God, and he never turned back."
+  },
+  {
+   "kind": "story",
+   "text": "Walked with God. Not once, not only on a special day. Three hundred years of ordinary mornings, side by side, in a world that was walking the other way."
+  },
+  {
+   "kind": "scripture",
+   "text": "And all the days of Enoch were three hundred sixty and five years:",
+   "reference": "Genesis 5:23 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And Enoch walked with God: and he was not; for God took him.",
+   "reference": "Genesis 5:24 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "No and he died. Just and he was not. For one man, the bell stops ringing."
+  },
+  {
+   "kind": "story",
+   "text": "Cain walked away from God. Enoch walked with God until God simply took him home."
+  },
+  {
+   "kind": "scripture",
+   "text": "And all the days of Methuselah were nine hundred sixty and nine years: and he died.",
+   "reference": "Genesis 5:27 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Enoch's son outlives everyone in the Bible. But the world around his tent is getting darker every year. What happens when almost no one walks with God any more?",
+   "rehook": true
+  },
+  {
+   "kind": "story",
+   "text": "A few more generations pass, and a father in Seth's line names his boy with a sigh and a hope."
+  },
+  {
+   "kind": "scripture",
+   "text": "And he called his name Noah, saying, This same shall comfort us concerning our work and toil of our hands, because of the ground which the LORD hath cursed.",
+   "reference": "Genesis 5:29 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Comfort from the cursed ground. Do you hear the echo? It is Cain's ground, still hard, still thorny, still waiting for comfort."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the LORD said, My spirit shall not always strive with man, for that he also is flesh: yet his days shall be an hundred and twenty years.",
+   "reference": "Genesis 6:3 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Some read those hundred and twenty years as a shorter life, and some as a countdown. Either way, God is still waiting."
+  },
+  {
+   "kind": "scripture",
+   "text": "And GOD saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
+   "reference": "Genesis 6:5 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Not some thoughts. Every one. Only evil. All day long. What began in one field has spread to every tent on the plain."
+  },
+  {
+   "kind": "scripture",
+   "text": "And it repented the LORD that he had made man on the earth, and it grieved him at his heart.",
+   "reference": "Genesis 6:6 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Read that again. It grieved Him at His heart. This is not an angry machine. This is a Father whose children broke His heart."
+  },
+  {
+   "kind": "scripture",
+   "text": "But Noah found grace in the eyes of the LORD.",
+   "reference": "Genesis 6:8 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "One man. In a whole world gone wrong, one man. Who was he, and what would God ask him to do?",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "Noah was a just man and perfect in his generations, and Noah walked with God.",
+   "reference": "Genesis 6:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "There it is again. Walked with God, the same words as Enoch."
+  },
+  {
+   "kind": "scripture",
+   "text": "The earth also was corrupt before God, and the earth was filled with violence.",
+   "reference": "Genesis 6:11 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "And then God speaks to him, in a world that has forgotten how to listen."
+  },
+  {
+   "kind": "story",
+   "text": "Imagine hearing that, alone on a dry hill, with the noise of a violent world below you. And then being told to build. Not to fight back. To build."
+  },
+  {
+   "kind": "scripture",
+   "text": "Make thee an ark of gopher wood; rooms shalt thou make in the ark, and shalt pitch it within and without with pitch.",
+   "reference": "Genesis 6:14 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "But with thee will I establish my covenant; and thou shalt come into the ark, thou, and thy sons, and thy wife, and thy sons' wives with thee.",
+   "reference": "Genesis 6:18 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Hear the mercy inside the judgment. Before a single drop falls, God makes a promise and leaves a door open."
+  },
+  {
+   "kind": "story",
+   "text": "No rain has fallen anywhere in the story so far. No one has ever seen a flood. Noah picks up his tools anyway."
+  },
+  {
+   "kind": "story",
+   "text": "Day after day the beams go up on dry ground, while the neighbours watch and laugh and wonder what is wrong with the old man."
+  },
+  {
+   "kind": "scripture",
+   "text": "Thus did Noah; according to all that God commanded him, so did he.",
+   "reference": "Genesis 6:22 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And of every living thing of all flesh, two of every sort shalt thou bring into the ark, to keep them alive with thee;",
+   "reference": "Genesis 6:19 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Two of every kind, and food for all of them. God is not only ending a world. He is carrying one through."
+  },
+  {
+   "kind": "story",
+   "text": "That is what walking with God looks like when the whole world is shouting. You just keep doing the next thing He told you, one beam at a time."
+  },
+  {
+   "kind": "insight",
+   "text": "Here is what most readers miss in these chapters full of names and deaths."
+  },
+  {
+   "kind": "insight",
+   "text": "Cain and Enoch are not just two men. They are two ways to live, and everyone in this story is on one of them."
+  },
+  {
+   "kind": "insight",
+   "text": "Cain's way starts with a gift given without the heart, and it ends with a lonely man who walks out from God's presence, into the land of wandering."
+  },
+  {
+   "kind": "insight",
+   "text": "Enoch's way has no great deeds at all. No battle, no miracle. Just a man who kept walking beside God, one ordinary day after another."
+  },
+  {
+   "kind": "insight",
+   "text": "Lamech's song was loud. Enoch's walk was quiet. God took Enoch."
+  },
+  {
+   "kind": "insight",
+   "text": "Abel's life was a breath, gone in a moment. Yet his gift is the very first one the Bible says God accepted."
+  },
+  {
+   "kind": "insight",
+   "text": "And notice who God goes after first. Not Abel. Cain. Before the murder He warns him, and after it He marks him to keep him alive."
+  },
+  {
+   "kind": "insight",
+   "text": "And then Noah, at the very end, is the proof that Enoch's way never died out. Even in the worst generation, one man was still walking it."
+  },
+  {
+   "kind": "insight",
+   "text": "God does not wait for you to become Enoch before He comes looking for you."
+  },
+  {
+   "kind": "insight",
+   "text": "These chapters leave you with one simple question. Which way are you walking today?"
+  },
+  {
+   "kind": "cta",
+   "text": "Tell me in the comments: which brother, or which Enoch, do you see in yourself?"
+  },
+  {
+   "kind": "cta",
+   "text": "Next, the rain begins and the flood comes. Watch the next story with me."
+  }
+ ],
+ "shots": [
+  {
+   "id": "g-co-blood",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "the voice of thy brother's blood crieth unto me from the ground.",
+   "reference": "Genesis 4:10 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "audio_route": "kokoro",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A dark storm gathers over an empty plowed field, wind tearing at the dry furrows while lightning flickers deep inside the low clouds. Dusk, a red glow under black clouds. Judgment and grief. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "conflict": true,
+   "beat": "cold_open"
+  },
+  {
+   "id": "s-co-cain",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, handheld. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, stands over the dark furrows breathing hard, his hands and forearms dark with earth, staring down at the ground. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Shock and dread. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "cold_open",
+   "lines": [
+    0
+   ]
+  },
+  {
+   "id": "s-co-crook",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. A plain wooden shepherd's crook lies dropped across a fresh furrow, a few tufts of white wool caught in the clods beside it. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Loss. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "cold_open",
+   "lines": [
+    0
+   ]
+  },
+  {
+   "id": "s-co-flee",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. A lone man seen from behind hurries away across the plowed field into the dusk, his cloak whipping in the wind. Dusk on the open plain east of Eden, a hard red sky over dry grass. Guilt and flight. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "cold_open",
+   "lines": [
+    1
+   ]
+  },
+  {
+   "id": "s-co-cain2",
+   "kind": "scene",
+   "window_of": "s-co-cain",
+   "beat": "cold_open",
+   "lines": [
+    2
+   ]
+  },
+  {
+   "id": "s-co-sky",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Black storm clouds roll low over the open plain as the last red light fades. Dusk on the open plain east of Eden, a hard red sky over dry grass. Foreboding. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "cold_open",
+   "lines": [
+    2
+   ]
+  },
+  {
+   "id": "k-promise-1",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_promise",
+   "lines": [
+    3
+   ]
+  },
+  {
+   "id": "k-promise-2",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_promise",
+   "lines": [
+    4
+   ]
+  },
+  {
+   "id": "s-c1-birth",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, sits at the mouth of a goat-hair tent cradling a newborn baby wrapped in wool, tears of joy on her face. The shade of a goat-hair tent on the open plain, warm firelight. Tender wonder. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "s-c1-adam",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, kneels at the tent opening and looks down at the newborn in wonder, one hand on the tent pole. The same tent at dawn, soft light across the plain. Hope after loss. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "s-c1-tent",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow drift. A single goat-hair tent stands alone on the empty plain at dawn, a thin line of smoke rising, a woman in silhouette at its door holding a bundle. Dawn on the empty open plain east of Eden. A new beginning. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "s-c1-abel",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "abel"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. Abel, a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck, a cream undyed wool tunic with a sheepskin over one shoulder, a plain wooden shepherd's crook in one hand, walks among his flock across the hills, guiding the sheep with the crook and smiling. Green grazing hills under a soft morning sky, sheep moving through the grass. Peaceful and free. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "s-c1-plow",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, drives a wooden digging stick into hard soil and breaks the clods with his bare hands, sweat on his face. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Labour and strain. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "s-c1-birth2",
+   "kind": "scene",
+   "window_of": "s-c1-birth",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "s-c1-flock",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial shot, slow drift. A shepherd seen from behind leads a long line of sheep over a green ridge. Green grazing hills under a soft morning sky, sheep moving through the grass. Wide open freedom. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    9
+   ]
+  },
+  {
+   "id": "s-c1-plow2",
+   "kind": "scene",
+   "window_of": "s-c1-plow",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    9
+   ]
+  },
+  {
+   "id": "s-c1-both",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain",
+    "abel"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth and Abel, a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck, a cream undyed wool tunic with a sheepskin over one shoulder, a plain wooden shepherd's crook in one hand, stand at the edge of a field where the furrows meet the grazing hills, sharing water from a clay jar. The border of a plowed field and green hills, warm late afternoon. Brotherhood. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    10
+   ]
+  },
+  {
+   "id": "s-c1-abel2",
+   "kind": "scene",
+   "window_of": "s-c1-abel",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    10
+   ]
+  },
+  {
+   "id": "s-c1-cainoff",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, sets a small heap of grain heads and dry fruit on a rough altar of field stones, his face closed and impatient. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Duty without devotion. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    11,
+    12
+   ]
+  },
+  {
+   "id": "s-c1-altars",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Two rough altars of piled field stones stand side by side on a bare rise, morning mist around them. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Waiting. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    11,
+    12
+   ]
+  },
+  {
+   "id": "s-c1-abeloff",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "abel"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Abel, a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck, a cream undyed wool tunic with a sheepskin over one shoulder, kneeling with his hands open, carries a spotless white lamb to the second altar in both arms and kneels before it. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Wholehearted. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    11,
+    12
+   ]
+  },
+  {
+   "id": "s-c1-grain",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. A few withered grain heads and bruised dry figs lie on a flat altar stone. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Something held back. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    13
+   ]
+  },
+  {
+   "id": "s-c1-abeloff2",
+   "kind": "scene",
+   "window_of": "s-c1-abeloff",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    13
+   ]
+  },
+  {
+   "id": "s-c1-smoke",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. A column of white smoke rises straight from one altar into a clear sky while thin smoke from the other altar bends and falls back to the ground. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Accepted and refused. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    14
+   ]
+  },
+  {
+   "id": "s-c1-watch",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, watches the smoke of his brother's altar rise, his jaw tightening, his eyes narrowing. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Envy rising. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    14
+   ]
+  },
+  {
+   "id": "s-c1-abelpray",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "abel"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Abel, a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck, a cream undyed wool tunic with a sheepskin over one shoulder, kneeling with his hands open, kneels before the rising white smoke with his hands open and his face lifted, at peace. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Quiet joy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    15
+   ]
+  },
+  {
+   "id": "s-c1-ash",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cold grey ash and half-burnt grain scatter across a stone in a gust of wind. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Rejected. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    15
+   ]
+  },
+  {
+   "id": "s-c1-fall",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, turns away from the altars, his face darkening with anger and shame, his fists clenched at his sides. Two rough altars of piled field stones on a bare rise of the open plain, early morning. Wounded pride. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    16,
+    17
+   ]
+  },
+  {
+   "id": "s-c1-alone",
+   "kind": "scene",
+   "window_of": "s-co-cain",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    16,
+    17
+   ]
+  },
+  {
+   "id": "s-c1-wind",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A warm wind rises over the plain and bends the grass around a lone figure seen from behind. Dusk on the open plain east of Eden, a hard red sky over dry grass. A presence drawing near. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    18
+   ]
+  },
+  {
+   "id": "s-c1-cainoff2",
+   "kind": "scene",
+   "window_of": "s-c1-cainoff",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    18
+   ]
+  },
+  {
+   "id": "s-c1-glow",
+   "kind": "scene",
+   "window_of": "s-c1-watch",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    19
+   ]
+  },
+  {
+   "id": "s-c1-listen",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, lifts his head as the wind moves around him, listening, his anger wavering for a moment. Dusk on the open plain east of Eden, a hard red sky over dry grass. On the edge of a choice. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    19
+   ]
+  },
+  {
+   "id": "s-c1-watch2",
+   "kind": "scene",
+   "window_of": "s-c1-watch",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    20
+   ]
+  },
+  {
+   "id": "g-c1-door",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "and if thou doest not well, sin lieth at the door.",
+   "reference": "Genesis 4:7 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "audio_route": "kokoro",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Firelight flickers at the dark open flap of a goat-hair tent while the wind howls and storm clouds churn above. Night, storm light and a low red fire. Warning. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-choice",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, stares into the fire, his face half in shadow, his jaw set hard. Night on the open plain, a low fire and a sky full of stars. The choice made. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    21,
+    22
+   ]
+  },
+  {
+   "id": "s-c1-door",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Deep shadow pools at the open flap of a goat-hair tent, firelight trembling on the ground before it. Night on the open plain, a low fire and a sky full of stars. Something waiting. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    21,
+    22
+   ]
+  },
+  {
+   "id": "s-c1-walk",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain",
+    "abel"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth and Abel, a slender young man of about twenty with Middle Eastern features, warm olive-brown skin, soft dark brown eyes, an open gentle beardless face with light stubble, short dark brown hair curling at the neck, a cream undyed wool tunic with a sheepskin over one shoulder, a plain wooden shepherd's crook in one hand, walk side by side out into the plowed field, the younger brother trusting and easy, the elder silent. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Dread under calm. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    23
+   ]
+  },
+  {
+   "id": "s-c1-shadow",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Two men in silhouette face each other far off in the furrows; one raises his arm against the red sky. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Violence implied, never shown. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    23
+   ]
+  },
+  {
+   "id": "s-c1-empty",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. An empty plowed field at dusk, wind moving a single dropped sheepskin across the furrows. Dusk on the open plain east of Eden, a hard red sky over dry grass. Silence after. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    24
+   ]
+  },
+  {
+   "id": "s-c1-walk2",
+   "kind": "scene",
+   "window_of": "s-c1-walk",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    24
+   ]
+  },
+  {
+   "id": "s-c1-hands",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, handheld. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, kneels in the furrow and looks at his own shaking hands, breathing hard, horror dawning on his face. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Horror. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    25
+   ]
+  },
+  {
+   "id": "s-c1-earth",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. Dark wet earth in a furrow, a single drop of water sinking into the soil. A plowed field of dark furrows on the open plain, late afternoon, long shadows. The ground remembers. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    25
+   ]
+  },
+  {
+   "id": "s-c1-storm",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Wind sweeps across the empty field and the clouds open into a pale shaft of light. Dusk on the open plain east of Eden, a hard red sky over dry grass. Called to account. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    26
+   ]
+  },
+  {
+   "id": "s-c1-lie",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, turns his face away and shrugs with a cold, defiant half-smile, his eyes avoiding the light. Dusk on the open plain east of Eden, a hard red sky over dry grass. The lie. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    26
+   ]
+  },
+  {
+   "id": "s-c1-hands2",
+   "kind": "scene",
+   "window_of": "s-c1-hands",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    27
+   ]
+  },
+  {
+   "id": "s-c1-both2",
+   "kind": "scene",
+   "window_of": "s-c1-both",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    27
+   ]
+  },
+  {
+   "id": "s-c1-turn",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, stands frozen in the wind, his cloak pulled tight, unable to answer. Dusk on the open plain east of Eden, a hard red sky over dry grass. Exposed. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    28
+   ]
+  },
+  {
+   "id": "s-c1-lie2",
+   "kind": "scene",
+   "window_of": "s-c1-lie",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    28
+   ]
+  },
+  {
+   "id": "g-c1-cursed",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "now art thou cursed from the earth, which hath opened her mouth to receive thy brother's blood",
+   "reference": "Genesis 4:11 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "audio_route": "kokoro",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle shot, slow tilt down. Lightning splits the dark sky and rain lashes a cracked, empty field as thunder rolls over the plain. Night, storm light. Judgment. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-dig",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a sleeveless coarse brown wool tunic tied with a rope belt, his forearms dusty with dry earth, digs at the cracked soil with his bare hands, nothing growing, his face desperate. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Futility. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    29
+   ]
+  },
+  {
+   "id": "s-c1-dry",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Seed lies dead on cracked grey earth that splits wider in the dry wind. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Barren. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    29
+   ]
+  },
+  {
+   "id": "s-c1-wander",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. A lone wanderer seen from behind trudges across a barren plain into blowing dust. Dusk on the open plain east of Eden, a hard red sky over dry grass. Exile. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    30
+   ]
+  },
+  {
+   "id": "s-c1-turn2",
+   "kind": "scene",
+   "window_of": "s-c1-turn",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    30
+   ]
+  },
+  {
+   "id": "t-c1-cain",
+   "kind": "scene",
+   "speaker": "cain",
+   "line": "My punishment is greater than I can bear. Behold, thou hast driven me out this day",
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, looks up into the wind and speaks, his lips moving clearly with every word, his voice breaking. Night on the open plain, storm light on his face. Despair. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "reference": "Genesis 4:13-14 (KJV)",
+   "beat": "chapter",
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-afraid",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, glances fearfully over his shoulder into the darkness, firelight on his face. Night on the open plain, a low fire and a sky full of stars. Hunted. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    31
+   ]
+  },
+  {
+   "id": "s-c1-fear",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A lone man in silhouette crouches by a small fire at night, looking over his shoulder into the dark. Night on the open plain, a low fire and a sky full of stars. Fear. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    31
+   ]
+  },
+  {
+   "id": "s-c1-mark",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, closes his eyes as a soft warm light falls across his brow, his fear easing into stunned stillness. Night on the open plain, a low fire and a sky full of stars. Undeserved mercy. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    32,
+    33
+   ]
+  },
+  {
+   "id": "s-c1-stars",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A vast field of stars wheels slowly over the dark plain. Night on the open plain, a low fire and a sky full of stars. Watched over. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    32,
+    33
+   ]
+  },
+  {
+   "id": "s-c1-afraid2",
+   "kind": "scene",
+   "window_of": "s-c1-afraid",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    32,
+    33
+   ]
+  },
+  {
+   "id": "s-c1-leave",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, walks away eastward into a barren land with his cloak around him, small against the horizon. A barren eastern land at dawn, grey hills and blowing dust. Departure. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    34,
+    35
+   ]
+  },
+  {
+   "id": "s-c1-east",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow pan. Grey barren hills stretch away to the east under a pale dawn sky. Dawn over barren eastern hills. Far from home. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    34,
+    35
+   ]
+  },
+  {
+   "id": "s-c1-mark2",
+   "kind": "scene",
+   "window_of": "s-c1-mark",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    34,
+    35
+   ]
+  },
+  {
+   "id": "s-c1-leave2",
+   "kind": "scene",
+   "window_of": "s-c1-leave",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    36
+   ]
+  },
+  {
+   "id": "s-c1-ways",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial shot, slow drift. Two faint footpaths split apart across a wide plain, one lone traveller seen from behind on each. Morning light over the wide open plain. Two ways. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1",
+   "lines": [
+    36
+   ]
+  },
+  {
+   "id": "s-c2-cain",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, stands among new goat-hair tents, holding a small boy's hand and looking out over the camp. A sprawling camp of dark goat-hair tents on the open plain, smoke of many fires, evening. Settled but restless. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    37
+   ]
+  },
+  {
+   "id": "s-c2-camp",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Figures seen from behind raise tall goat-hair tents in a ring on the open plain while children run between them. A sprawling camp of dark goat-hair tents on the open plain, smoke of many fires, evening. A settlement rising. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    37
+   ]
+  },
+  {
+   "id": "s-c2-cain2",
+   "kind": "scene",
+   "window_of": "s-c2-cain",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    38
+   ]
+  },
+  {
+   "id": "s-c2-otherenoch",
+   "kind": "scene",
+   "window_of": "s-c1-choice",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    38
+   ]
+  },
+  {
+   "id": "s-c2-herds",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. Herdsmen seen from behind drive great herds of cattle past rows of tents. A sprawling camp of dark goat-hair tents on the open plain, smoke of many fires, evening. Wealth. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    39,
+    40
+   ]
+  },
+  {
+   "id": "s-c2-harp",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A musician in silhouette plucks a simple wooden harp beside a fire while others sit listening with their backs to the camera. Evening by a fire in the tent camp. Gifted. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    39,
+    40
+   ]
+  },
+  {
+   "id": "s-c2-forge",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, handheld. A smith seen from behind hammers glowing metal on a stone anvil, sparks flying into the dark. Night at an open-air forge in the tent camp. Skill and heat. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    39,
+    40
+   ]
+  },
+  {
+   "id": "s-c2-lamech",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A tall man in silhouette stands before a fire with a bronze blade in his hand while two women in shadow watch him. Night in the tent camp, firelight. Arrogance. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    41,
+    42
+   ]
+  },
+  {
+   "id": "s-c2-blade",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. A bronze blade lies on a stone beside the fire, firelight sliding along its edge. Night by a fire in the tent camp. Menace. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    41,
+    42
+   ]
+  },
+  {
+   "id": "s-c2-crowd",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, handheld. A crowd seen from behind cheers around a bonfire, fists raised. The crowded plain of tents at night, torchlight, smoke and dust in the air. Violence celebrated. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    43,
+    44
+   ]
+  },
+  {
+   "id": "s-c2-cainold",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "cain"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Cain, a powerfully built man of about twenty-eight with Middle Eastern features, sun-darkened olive-brown skin, a heavy brow over narrow dark brown eyes, a square jaw, short thick black curly hair cropped close to the head, a close-cropped black beard, broad shoulders and thick forearms, a rough dark brown wool cloak pulled tight around his shoulders against the wind, sits alone by a dying fire at the edge of the noisy camp, haunted, staring into the embers. Night at the edge of the tent camp, firelight. Haunted. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    43,
+    44
+   ]
+  },
+  {
+   "id": "s-c2-dance",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Dancers in silhouette whirl around the bonfire, their shadows thrown huge across the tents. The crowded plain of tents at night, torchlight, smoke and dust in the air. Wild. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    45
+   ]
+  },
+  {
+   "id": "s-c2-grief",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, sit together beside a small cairn of stones on a hillside, her head on his shoulder. A quiet hillside at dusk. Grief. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    46
+   ]
+  },
+  {
+   "id": "s-c2-memory",
+   "kind": "scene",
+   "window_of": "s-c1-adam",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    46
+   ]
+  },
+  {
+   "id": "s-c2-seth",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, holds a newborn to her shoulder and smiles through tears, her eyes closed. A quiet camp of a few goat-hair tents by a spring under acacia trees, soft evening light. Comfort. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    47
+   ]
+  },
+  {
+   "id": "s-c2-grief2",
+   "kind": "scene",
+   "window_of": "s-c2-grief",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    47
+   ]
+  },
+  {
+   "id": "s-c2-call",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A small family seen from behind stands on a hilltop at sunrise, their arms lifted toward the sky. Sunrise over the hills above the spring. Worship. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    48
+   ]
+  },
+  {
+   "id": "s-c2-seth2",
+   "kind": "scene",
+   "window_of": "s-c2-seth",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    48
+   ]
+  },
+  {
+   "id": "s-c2-crowd2",
+   "kind": "scene",
+   "window_of": "s-c2-cainold",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    49
+   ]
+  },
+  {
+   "id": "s-c2-adameve",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, stand at the door of their tent at sunrise with a young boy between them, their faces lifted to the light. A quiet camp of a few goat-hair tents by a spring under acacia trees, soft evening light. Hope returns. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    49
+   ]
+  },
+  {
+   "id": "s-c2-adamold",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, lies still on a woven mat beside a dying fire, his eyes closing in peace. The shade of a goat-hair tent, the last firelight. The end of a long life. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    50,
+    51
+   ]
+  },
+  {
+   "id": "s-c2-burial",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Mourners seen from behind stand around a fresh cairn of stones on a hillside. A hillside at dusk. And he died. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    50,
+    51
+   ]
+  },
+  {
+   "id": "s-c2-grief3",
+   "kind": "scene",
+   "window_of": "s-c2-grief",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    50,
+    51
+   ]
+  },
+  {
+   "id": "s-c2-clouds",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Clouds race in fast motion over the quiet hills, light and shadow passing. Day passing into night. Time. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    52
+   ]
+  },
+  {
+   "id": "s-c2-adamold2",
+   "kind": "scene",
+   "window_of": "s-c2-adamold",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    52
+   ]
+  },
+  {
+   "id": "s-c2-enochyoung",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, seated at the open flap of a goat-hair tent, his hands resting on his knees, sits at the open flap of his tent at dusk, listening to the distant noise of the camps with a troubled face. A quiet camp of a few goat-hair tents by a spring under acacia trees, soft evening light. A different man. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    53
+   ]
+  },
+  {
+   "id": "s-c2-adameve2",
+   "kind": "scene",
+   "window_of": "s-c2-adameve",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    53
+   ]
+  },
+  {
+   "id": "s-c2-enoch",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, seated at the open flap of a goat-hair tent, his hands resting on his knees, holds a newborn baby boy in his arms at the tent door and gazes at him with wonder. A quiet camp of a few goat-hair tents by a spring under acacia trees, soft evening light. A turning point. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    54,
+    55
+   ]
+  },
+  {
+   "id": "s-c2-enochwalk",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, walking with a plain wooden walking stick along a hill path, walks steadily up the hill path alone, his face peaceful and lifted toward the light. A narrow path climbing a grassy hill above the plain, clear dawn light. Walking in step. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    54,
+    55
+   ]
+  },
+  {
+   "id": "s-c2-enochfam",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, seated at the open flap of a goat-hair tent, his hands resting on his knees, sits at his tent door teaching a small circle of children, smiling and gesturing gently toward the hills. A quiet camp of a few goat-hair tents by a spring under acacia trees, soft evening light. Faithful at home. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    56
+   ]
+  },
+  {
+   "id": "s-c2-enoch2",
+   "kind": "scene",
+   "window_of": "s-c2-enoch",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    56
+   ]
+  },
+  {
+   "id": "s-c2-enochdawn",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, walking with a plain wooden walking stick along a hill path, pauses on the hill path at dawn and lifts his face to the rising light, eyes closed, at peace. A narrow path climbing a grassy hill above the plain, clear dawn light. Turned toward the light. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    57
+   ]
+  },
+  {
+   "id": "s-c2-morning",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Morning mist lifts off a green valley as birds rise from the grass. Early morning. Every new day. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    57
+   ]
+  },
+  {
+   "id": "s-c2-enochrain",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, tracking. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, walking with a plain wooden walking stick along a hill path, walks the hill path in a soft rain, his stick steady, a calm smile on his face. A hill path in soft rain under grey clouds. Faithful through the years. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    58
+   ]
+  },
+  {
+   "id": "s-c2-against",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A lone figure seen from behind climbs a hill path while a crowd in silhouette streams the other way toward the torchlit camps. Dusk over the hills and the camps. Against the crowd. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    58
+   ]
+  },
+  {
+   "id": "s-c2-taken",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "enoch"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. Enoch, a lean upright man of about sixty with Middle Eastern features, weathered olive skin, calm bright dark eyes with deep laugh lines, a long black beard streaked with grey, long black hair streaked with grey tied back at the neck, a plain undyed cream wool robe with a dark blue woven shawl over his shoulders, walking with a plain wooden walking stick along a hill path, walks up into a bright golden haze at the top of the hill and is lost from sight in the light. The hilltop at sunrise, golden mist. Taken. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    59,
+    60
+   ]
+  },
+  {
+   "id": "s-c2-stick",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A plain wooden walking stick rests against a stone on the empty hilltop path, golden light all around. The hilltop at sunrise, golden mist. He was not. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    59,
+    60
+   ]
+  },
+  {
+   "id": "s-c2-enochfam2",
+   "kind": "scene",
+   "window_of": "s-c2-enochfam",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    61
+   ]
+  },
+  {
+   "id": "s-c2-taken2",
+   "kind": "scene",
+   "window_of": "s-c2-enochwalk",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    62
+   ]
+  },
+  {
+   "id": "s-c2-dark",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Torches flare across a crowded camp of tents at night as figures seen from behind push and shove. The crowded plain of tents at night, torchlight, smoke and dust in the air. Darkness spreading. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    63,
+    64
+   ]
+  },
+  {
+   "id": "s-c2-enochrain2",
+   "kind": "scene",
+   "window_of": "s-c2-enochrain",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    63,
+    64
+   ]
+  },
+  {
+   "id": "s-c2-storm",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Storm clouds build over the plain at dusk, lightning far off. Dusk on the open plain east of Eden, a hard red sky over dry grass. Gathering darkness. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c2",
+   "lines": [
+    63,
+    64
+   ]
+  },
+  {
+   "id": "s-c3-baby",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, stands at the door of a goat-hair tent at dusk looking out over the crowded plain below, quiet and grave. A dry hillside above the plain at dusk, wind moving the grass. Comfort in a hard world. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    65,
+    66
+   ]
+  },
+  {
+   "id": "s-c3-toil",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Farmers seen from behind bend over cracked, thorny fields under a hard sun. A plowed field of dark furrows on the open plain, late afternoon, long shadows. Toil. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    65,
+    66
+   ]
+  },
+  {
+   "id": "s-c3-cracked",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Thorns grow through cracked grey earth. A plowed field of dark furrows on the open plain, late afternoon, long shadows. The cursed ground. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    65,
+    66
+   ]
+  },
+  {
+   "id": "s-c3-dig",
+   "kind": "scene",
+   "window_of": "s-c1-dig",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    67
+   ]
+  },
+  {
+   "id": "s-c3-crowds",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial shot, slow drift. A vast plain covered with tents and crowds of tiny figures in silhouette, smoke rising from countless fires. The crowded plain of tents at night, torchlight, smoke and dust in the air. Crowded and loud. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    67
+   ]
+  },
+  {
+   "id": "s-c3-enochy",
+   "kind": "scene",
+   "window_of": "s-c2-enochyoung",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    68,
+    69
+   ]
+  },
+  {
+   "id": "s-c3-baby2",
+   "kind": "scene",
+   "window_of": "s-c3-baby",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    68,
+    69
+   ]
+  },
+  {
+   "id": "s-c3-waiting",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A lone figure seen from behind sits on a hilltop above the torchlit camps, looking up at the stars. Night on the open plain, a low fire and a sky full of stars. Waiting. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    68,
+    69
+   ]
+  },
+  {
+   "id": "s-c3-fight",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Two men in silhouette grapple in the dust beside a fire while a crowd seen from behind jeers. The crowded plain of tents at night, torchlight, smoke and dust in the air. Violence. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    70
+   ]
+  },
+  {
+   "id": "s-c3-tents",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, walks between crowded tents at night, turning his face away from a fight beside a fire. The crowded plain of tents at night, torchlight, smoke and dust in the air. A stranger in his own world. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    70
+   ]
+  },
+  {
+   "id": "s-c3-fires",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Fires burn across a trampled plain under thick smoke and a red moon. The crowded plain of tents at night, torchlight, smoke and dust in the air. Spreading ruin. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    71
+   ]
+  },
+  {
+   "id": "s-c3-tents2",
+   "kind": "scene",
+   "window_of": "s-c3-tents",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    71
+   ]
+  },
+  {
+   "id": "s-c3-mother",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. A mother in silhouette shields her child at a tent door as torches pass. The crowded plain of tents at night, torchlight, smoke and dust in the air. Fear. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    72,
+    73
+   ]
+  },
+  {
+   "id": "s-c3-grief",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Heavy rain clouds hang low and still over the dark plain, a dim light behind them. Night, heavy clouds. Grief. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    72,
+    73
+   ]
+  },
+  {
+   "id": "s-c3-children",
+   "kind": "scene",
+   "window_of": "s-c1-lie",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    72,
+    73
+   ]
+  },
+  {
+   "id": "g-c3-destroy",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "I will destroy man whom I have created from the face of the earth;",
+   "reference": "Genesis 6:7 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "audio_route": "kokoro",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Thunder rolls as a vast bank of black storm clouds spreads across the whole sky above the empty plain. Night, storm light. Judgment decided. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-noah",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, stands alone on the hillside above the noisy camp, quiet and still, a small light breaking on his face. A dry hillside above the plain at dusk, wind moving the grass. Grace. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    74,
+    75
+   ]
+  },
+  {
+   "id": "s-c3-noahpray",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, closes his eyes and bows his head in prayer while the wind moves his grey beard. A dry hillside above the plain at dusk, wind moving the grass. Faithful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c3",
+   "lines": [
+    74,
+    75
+   ]
+  },
+  {
+   "id": "s-c4-walk",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, tracking. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, walks the same narrow hill path in the dawn light, steady and calm. A narrow path climbing a grassy hill above the plain, clear dawn light. The same path. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    76
+   ]
+  },
+  {
+   "id": "s-c4-enoch",
+   "kind": "scene",
+   "window_of": "s-c2-enochdawn",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    77
+   ]
+  },
+  {
+   "id": "s-c4-camp",
+   "kind": "scene",
+   "window_of": "s-c3-noahpray",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    78,
+    79
+   ]
+  },
+  {
+   "id": "s-c4-look",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, lifts his head and looks up as the wind rises around him, listening. A dry hillside above the plain at dusk, wind moving the grass. Called. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    78,
+    79
+   ]
+  },
+  {
+   "id": "g-c4-end",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "The end of all flesh is come before me; for the earth is filled with violence",
+   "reference": "Genesis 6:13 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "audio_route": "kokoro",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Wind roars over the dry hillside and lightning splits the black clouds above the plain. Dusk turning to storm. The verdict. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-climax",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, stands alone on the hilltop in the storm wind, his robe whipping around him, looking down at the camp below with grief and resolve. A dry hilltop at dusk under a storm sky, the fires of the camp far below. The turn. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "climax": true,
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    80
+   ]
+  },
+  {
+   "id": "s-c4-noah2",
+   "kind": "scene",
+   "window_of": "s-c3-noah",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    80
+   ]
+  },
+  {
+   "id": "s-c4-trees",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. A stand of tall cypress trees sways on a dry hillside under a clearing sky. A dry hillside after the storm. The work ahead. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    81
+   ]
+  },
+  {
+   "id": "s-c4-look2",
+   "kind": "scene",
+   "window_of": "s-c4-look",
+   "beat": "chapter",
+   "chapter": "c4",
+   "lines": [
+    81
+   ]
+  },
+  {
+   "id": "s-p-family",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, stands at his tent door at dawn as three young men and four women seen from behind gather around him. A goat-hair tent on the dry hillside at dawn. A family under a promise. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    82,
+    83
+   ]
+  },
+  {
+   "id": "s-p-dawn",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Dawn light breaks over the dry hills after the storm. Dawn after the storm. Promise. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    82,
+    83
+   ]
+  },
+  {
+   "id": "s-p-climax2",
+   "kind": "scene",
+   "window_of": "s-c4-climax",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    82,
+    83
+   ]
+  },
+  {
+   "id": "s-p-axe",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand, swings an axe into the trunk of a tall cypress, wood chips flying, sweat on his brow. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Obedience. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    84
+   ]
+  },
+  {
+   "id": "s-p-log",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A freshly felled cypress trunk lies on the dry ground, pale wood chips scattered around it. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Begun. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    84
+   ]
+  },
+  {
+   "id": "s-p-beam",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand, and three young men seen from behind haul a long squared beam up a slope on ropes. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Labour. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    85
+   ]
+  },
+  {
+   "id": "s-p-watch",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Onlookers seen from behind stand at the edge of the clearing, pointing and laughing. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Scorn. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    85
+   ]
+  },
+  {
+   "id": "s-p-pitch",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand, smears thick black pitch over a squared timber with a wooden paddle, calm and steady. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Faithful work. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    86
+   ]
+  },
+  {
+   "id": "s-p-measure",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand, stretches a knotted measuring cord along a squared beam while a young man seen from behind holds the other end. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Care in every detail. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    87,
+    88
+   ]
+  },
+  {
+   "id": "s-p-goats",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A pair of goats and a pair of sheep graze quietly beside the stacked timbers. A clearing of felled cypress trunks on a dry hillside, bright midday sun, sawdust in the air. Two of every kind. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    87,
+    88
+   ]
+  },
+  {
+   "id": "s-p-dusk0",
+   "kind": "scene",
+   "window_of": "s-p-beam",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    87,
+    88
+   ]
+  },
+  {
+   "id": "s-p-dusk",
+   "kind": "scene",
+   "seconds": 12,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand, rests his mallet on his shoulder and looks out over his work at sunset, the clearing full of squared beams. The clearing at sunset, long golden light. Peace in obedience. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    89
+   ]
+  },
+  {
+   "id": "s-p-pitch2",
+   "kind": "scene",
+   "window_of": "s-p-measure",
+   "beat": "payoff",
+   "chapter": "c4",
+   "lines": [
+    89
+   ]
+  },
+  {
+   "id": "k-insight-1",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes thoughtful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_insight",
+   "lines": [
+    90
+   ]
+  },
+  {
+   "id": "s-ki-ways",
+   "kind": "scene",
+   "window_of": "s-p-dusk",
+   "beat": "keeper_insight",
+   "lines": [
+    91
+   ]
+  },
+  {
+   "id": "s-ki-enoch",
+   "kind": "scene",
+   "window_of": "s-c2-enochrain",
+   "beat": "keeper_insight",
+   "lines": [
+    91
+   ]
+  },
+  {
+   "id": "s-ki-cain",
+   "kind": "scene",
+   "window_of": "s-c1-fall",
+   "beat": "keeper_insight",
+   "lines": [
+    92
+   ]
+  },
+  {
+   "id": "s-ki-leave",
+   "kind": "scene",
+   "window_of": "s-c1-turn",
+   "beat": "keeper_insight",
+   "lines": [
+    92
+   ]
+  },
+  {
+   "id": "s-ki-path",
+   "kind": "scene",
+   "window_of": "s-c2-enochyoung",
+   "beat": "keeper_insight",
+   "lines": [
+    93
+   ]
+  },
+  {
+   "id": "s-ki-rain",
+   "kind": "scene",
+   "window_of": "s-p-axe",
+   "beat": "keeper_insight",
+   "lines": [
+    93
+   ]
+  },
+  {
+   "id": "s-ki-lamech",
+   "kind": "scene",
+   "window_of": "s-c4-walk",
+   "beat": "keeper_insight",
+   "lines": [
+    94
+   ]
+  },
+  {
+   "id": "s-ki-abel",
+   "kind": "scene",
+   "window_of": "s-c1-abelpray",
+   "beat": "keeper_insight",
+   "lines": [
+    95
+   ]
+  },
+  {
+   "id": "s-ki-abeloff",
+   "kind": "scene",
+   "window_of": "s-c1-abeloff",
+   "beat": "keeper_insight",
+   "lines": [
+    95
+   ]
+  },
+  {
+   "id": "s-ki-listen",
+   "kind": "scene",
+   "window_of": "s-c1-listen",
+   "beat": "keeper_insight",
+   "lines": [
+    96
+   ]
+  },
+  {
+   "id": "s-ki-door",
+   "kind": "scene",
+   "window_of": "s-c1-adam",
+   "beat": "keeper_insight",
+   "lines": [
+    96
+   ]
+  },
+  {
+   "id": "s-ki-measure",
+   "kind": "scene",
+   "window_of": "s-p-pitch",
+   "beat": "keeper_insight",
+   "lines": [
+    97
+   ]
+  },
+  {
+   "id": "s-ki-family",
+   "kind": "scene",
+   "window_of": "s-c1-abelpray",
+   "beat": "keeper_insight",
+   "lines": [
+    97
+   ]
+  },
+  {
+   "id": "k-insight-2",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_insight",
+   "lines": [
+    98
+   ]
+  },
+  {
+   "id": "s-ki-noah",
+   "kind": "scene",
+   "window_of": "s-c2-adameve",
+   "beat": "keeper_insight",
+   "lines": [
+    99
+   ]
+  },
+  {
+   "id": "k-close-1",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_close",
+   "lines": [
+    100
+   ]
+  },
+  {
+   "id": "k-close-2",
+   "kind": "keeper",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind",
+   "beat": "keeper_close",
+   "lines": [
+    101
+   ]
+  }
+ ],
+ "source_design": {
+  "note": "Owner 28/10: arc-02 is made in about one day under today's limits. Pavo (120 units a day shared with the Shorts) only for the spoken shots (Cain's KJV line and the Keeper with Pavo's own speech, God's voice-overs on the Kokoro route) and the acted scenes with a character; every other hold is character-free under the narration (story QA v4 rights.fallback_sources): anonymous figures and establishing shots as approved FLUX stills in motion (records in bible/stills/arc-02-long-*.json, DRAFT) or vetted licensed footage, or a window of an acted Pavo clip (no generation). The engine decides each shot's source with `episode_build.py sources` and Claude's approve-source; this is the intended split.",
+  "pavo_talking": [
+   "k-promise-1",
+   "k-promise-2",
+   "t-c1-cain",
+   "k-insight-1",
+   "k-insight-2",
+   "k-close-1",
+   "k-close-2"
+  ],
+  "pavo_voice_over": [
+   "g-co-blood",
+   "g-c1-door",
+   "g-c1-cursed",
+   "g-c3-destroy",
+   "g-c4-end"
+  ],
+  "pavo_scene": [
+   "s-co-cain",
+   "s-c1-birth",
+   "s-c1-adam",
+   "s-c1-abel",
+   "s-c1-plow",
+   "s-c1-both",
+   "s-c1-cainoff",
+   "s-c1-abeloff",
+   "s-c1-watch",
+   "s-c1-abelpray",
+   "s-c1-fall",
+   "s-c1-listen",
+   "s-c1-choice",
+   "s-c1-walk",
+   "s-c1-hands",
+   "s-c1-lie",
+   "s-c1-turn",
+   "s-c1-dig",
+   "s-c1-afraid",
+   "s-c1-mark",
+   "s-c1-leave",
+   "s-c2-cain",
+   "s-c2-cainold",
+   "s-c2-grief",
+   "s-c2-seth",
+   "s-c2-adameve",
+   "s-c2-adamold",
+   "s-c2-enochyoung",
+   "s-c2-enoch",
+   "s-c2-enochwalk",
+   "s-c2-enochfam",
+   "s-c2-enochdawn",
+   "s-c2-enochrain",
+   "s-c2-taken",
+   "s-c3-baby",
+   "s-c3-tents",
+   "s-c3-noah",
+   "s-c3-noahpray",
+   "s-c4-walk",
+   "s-c4-look",
+   "s-c4-climax",
+   "s-p-family",
+   "s-p-axe",
+   "s-p-beam",
+   "s-p-pitch",
+   "s-p-measure",
+   "s-p-dusk"
+  ],
+  "window": [
+   "s-co-cain2",
+   "s-c1-birth2",
+   "s-c1-plow2",
+   "s-c1-abel2",
+   "s-c1-abeloff2",
+   "s-c1-alone",
+   "s-c1-cainoff2",
+   "s-c1-glow",
+   "s-c1-watch2",
+   "s-c1-walk2",
+   "s-c1-hands2",
+   "s-c1-both2",
+   "s-c1-lie2",
+   "s-c1-turn2",
+   "s-c1-afraid2",
+   "s-c1-mark2",
+   "s-c1-leave2",
+   "s-c2-cain2",
+   "s-c2-otherenoch",
+   "s-c2-memory",
+   "s-c2-grief2",
+   "s-c2-seth2",
+   "s-c2-crowd2",
+   "s-c2-grief3",
+   "s-c2-adamold2",
+   "s-c2-adameve2",
+   "s-c2-enoch2",
+   "s-c2-enochfam2",
+   "s-c2-taken2",
+   "s-c2-enochrain2",
+   "s-c3-dig",
+   "s-c3-enochy",
+   "s-c3-baby2",
+   "s-c3-tents2",
+   "s-c3-children",
+   "s-c4-enoch",
+   "s-c4-camp",
+   "s-c4-noah2",
+   "s-c4-look2",
+   "s-p-climax2",
+   "s-p-dusk0",
+   "s-p-pitch2",
+   "s-ki-ways",
+   "s-ki-enoch",
+   "s-ki-cain",
+   "s-ki-leave",
+   "s-ki-path",
+   "s-ki-rain",
+   "s-ki-lamech",
+   "s-ki-abel",
+   "s-ki-abeloff",
+   "s-ki-listen",
+   "s-ki-door",
+   "s-ki-measure",
+   "s-ki-family",
+   "s-ki-noah"
+  ],
+  "footage": [
+   "s-co-sky",
+   "s-c1-ash",
+   "s-c1-storm",
+   "s-c1-stars",
+   "s-c1-east",
+   "s-c2-clouds",
+   "s-c2-morning",
+   "s-c2-storm",
+   "s-c3-cracked",
+   "s-c3-grief",
+   "s-c4-trees",
+   "s-p-dawn"
+  ],
+  "still_motion": [
+   "s-co-crook",
+   "s-co-flee",
+   "s-c1-tent",
+   "s-c1-flock",
+   "s-c1-altars",
+   "s-c1-grain",
+   "s-c1-smoke",
+   "s-c1-wind",
+   "s-c1-door",
+   "s-c1-shadow",
+   "s-c1-empty",
+   "s-c1-earth",
+   "s-c1-dry",
+   "s-c1-wander",
+   "s-c1-fear",
+   "s-c1-ways",
+   "s-c2-camp",
+   "s-c2-herds",
+   "s-c2-harp",
+   "s-c2-forge",
+   "s-c2-lamech",
+   "s-c2-blade",
+   "s-c2-crowd",
+   "s-c2-dance",
+   "s-c2-call",
+   "s-c2-burial",
+   "s-c2-against",
+   "s-c2-stick",
+   "s-c2-dark",
+   "s-c3-toil",
+   "s-c3-crowds",
+   "s-c3-waiting",
+   "s-c3-fight",
+   "s-c3-fires",
+   "s-c3-mother",
+   "s-p-log",
+   "s-p-watch",
+   "s-p-goats"
+  ]
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "id": "arc-01-long-s-c3-eve",
+ "episode": "arc-01-long",
+ "shot": "s-c3-eve",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her bare shoulders, faces The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, on the branch, her mouth closed. Shade beneath the great tree at noon. Earnest and unsure. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c3-eve.jpg",
+ "sha256": "7a5736f54dce1d661d097f7fe01e122769e81c58f07b092af3da4c736ac982f7",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c3-eve-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  },
+  {
+   "record": "ch-serpent-three-quarter",
+   "sha256": "4fe6763d22559f7c3184d9b74b61e02f7d17b4835ecff99a1d3447f68b1e9ac3"
+  },
+  {
+   "record": "ch-serpent-full",
+   "sha256": "42d89a997dab4a3ae47cf51f8f4d903a1f53d0e72c33f904a4462e5d9037ad9b"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373661486108936256",
+   "input_images": 3
+  },
+  "job": {
+   "conversation_id": "373661486108936256",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.6,
+  "note": "Eve faces the serpent on a low branch, both true to their references; earnest, mouth closed for the Kokoro line; the temptation staged clearly.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "95463fa29b83555c26dcee128d0b4b8c7a50acc1b9f34d80d8ee76deab421bc3",
+  "references_sha256": "759e72eae59eb47566d8e47f4159d14c558f4943bfdc9611a6b3f31dd7abeab4"
+ }
+}

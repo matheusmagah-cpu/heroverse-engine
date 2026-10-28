@@ -151,7 +151,7 @@ def collect_videos(page, max_videos):
     page.goto(f"{BASE}/@{core.HANDLE}", wait_until="domcontentloaded")
     pause((4, 8))
     if challenged(page):
-        return None   # E134: a puzzle instead of the videos; never solved, reported
+        return None   # E142: a puzzle instead of the videos; never solved, reported
     for _ in range(4):
         if len(videos) >= max_videos:
             break

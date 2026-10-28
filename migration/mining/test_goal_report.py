@@ -93,11 +93,12 @@ class LongRunway(unittest.TestCase):
         # review of #415: a rendered, approved or uploaded long stays counted whatever its later gate fields say
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
         from test_script_check import structured_story
-        now = datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc)
+        now = datetime(2026, 10, 27, 12, 0, tzinfo=timezone.utc)
+        # one day after the long cadence moved to 29/10 (owner 28/10), so the slot is on the runway's cadence
         with tempfile.TemporaryDirectory() as t:
             d = Path(t) / "pilot-015"
             (d / "out").mkdir(parents=True)
-            (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-28T10:00:00Z"}))
+            (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-29T10:00:00Z"}))
             (d / "script.json").write_text(json.dumps(structured_story(burned_captions=True)))
             (d / "out" / "manifest.json").write_text(json.dumps({"output_sha256": "a" * 64}))
             rows, runway = gr.pipeline(t, {}, now)

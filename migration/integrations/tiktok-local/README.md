@@ -52,4 +52,4 @@ Default have no TikTok history). The runner therefore uses its own profile, whic
 
 Dry run the same day, logged out and headless: our profile page loaded (HeroVerse, 1070 followers) but TikTok put a
 "Drag the slider to fit the puzzle" challenge over the video list, so `comments` stops with CHALLENGE (exit 4,
-E134). Whether a logged-in, visible window gets through without a puzzle is the first thing to see after the login.
+E142). Whether a logged-in, visible window gets through without a puzzle is the first thing to see after the login.

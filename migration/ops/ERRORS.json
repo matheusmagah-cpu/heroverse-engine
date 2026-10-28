@@ -1369,12 +1369,190 @@
    "id": "E133",
    "date": "2026-10-28",
    "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132"
+   ],
+   "error": "PR #487 (genesis-09 redesigned to the Shorts' Pavo budget) turned PR checks red: test_dispatch_guard fed the live genesis-09 plan hand-copied shot ids ('s-voice,s-laugh', 's-laugh' in the rerun test), and the redesign removed s-laugh, so the guard refused the fixture itself (GUARD_INPUT_INVALID: ids of this plan's generated shots) in test_valid_inputs_name_their_subject_and_uploads and test_the_failure_history_is_keyed_on_the_subject_not_the_other_inputs. Root cause: a test read a LIVE plan (production data that changes with every episode edit) but copied its shot ids as literals, so an ordinary plan edit broke unrelated tests; test_long_preflight and the long-plan probe tests had the same coupling.",
+   "fix": "test_dispatch_guard.live_shots(plan) reads the ids from the plan itself (generated scene shots with no speaker: the same 3-generation bound the unit expectations assume); every Short- and long-plan fixture there and in test_long_preflight takes its ids from the plan. Class antidote: hand_copied_shot_ids scans every migration test file for a line that names a live plan (PLAN, LONG_PLAN or plans/<episode>.json) and passes a `\"shots\"` literal holding that plan's real ids, and the test fails on any (an id the plan lacks, for a refusal test, stays allowed).",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_no_test_copies_a_live_plans_shot_ids_by_hand",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E134",
+   "date": "2026-10-28",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128"
+   ],
+   "error": "scene-stills.yml run 40623485981 (genesis-09, 9 shots x 2) passed the dispatch guard and failed at its first image: CF_DAILY_ALLOCATION_EXHAUSTED (10,000 neurons used). The guard counted 0 FLUX images today although run 40615150859 had made 30 that morning. Root cause, two holes: (1) cf_images_today counted scene-stills images by the candidate commits on the claude/stills-* review branches, and #487 squash-merged that branch (its subject lost the 'images from Cloudflare Workers AI' mark) and deleted it, so the images vanished from the count; (2) the guard refused only when the count already reached the cap (used >= cap), never when this run's own images would not fit (used + planned > cap).",
+   "fix": "dispatch_guard: scene-stills images are counted from today's scene-stills.yml runs themselves (title: shots x candidates; a run the guard refused made none; this run not counted twice), independent of what happens to their review branches; cf-images records on main are still counted by cf_allocation.flux_record on their images/ files; scene_stills facts carry flux_images (shots x candidates) and capacity refuses GUARD_CF_ALLOCATION_USED when used + planned > cap. Class antidote: a capacity count is taken from the run that spends the capacity, never from an artifact that a later merge can rename or delete, and a run's own spend must fit before it starts (as PAVO_BUDGET_SHORT does for Pavo, E128).",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e134_a_stills_run_counts_after_its_branch_is_gone_and_its_own_images_must_fit",
+    "covers": [
+     "capacity"
+    ]
+   }
+  },
+  {
+   "id": "E135",
+   "date": "2026-10-28",
+   "class": [
+    "cheap-vs-expensive"
+   ],
+   "prior": [
+    "E106",
+    "E127"
+   ],
+   "error": "shot-probe.yml run 40626005505 (genesis-09 batch A: s-voice, s-noah-door, s-noah-lamp) passed the dispatch guard and stopped in its next step, plan_check --strict: 11 STILL_NOT_APPROVED (the FLUX stills of the other shots wait for 00:00 UTC). No Pavo unit was spent, but a run was, and its failure now blocks the next probe of this plan (GUARD_RERUN_WITHOUT_FIX) until main changes what it depends on. Root cause: the guard checked shot-probe's inputs (the shots are ids of the plan) but not the strict state of the whole plan, which the workflow requires before any probe; Claude dispatched without running plan_check --strict on main's plan first.",
+   "fix": "dispatch_guard.plan_strict_problems runs the workflow's own checker (plan_check.py --strict, or long_plan_check.py --strict for a long) and check_local refuses GUARD_PLAN_NOT_STRICT for shot-probe.yml before the run starts (refusal_registry class A, early plan_check.check). Class antidote: a guard runs every cheap check the workflow's first steps run, so a run never starts only to stop at one.",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run",
+    "covers": [
+     "cheap-vs-expensive"
+    ]
+   }
+  },
+  {
+   "id": "E137",
+   "date": "2026-10-28",
+   "class": [
+    "instrument",
     "env-vs-test"
    ],
    "prior": [
     "E105",
     "E116",
-    "E118"
+    "E118",
+    "E120",
+    "E131"
+   ],
+   "error": "episode_build.py speech-check failed on all four native clips of shot-probe run 40616795532 (arc-01 long, the first story QA v4 voice measure with references): soundfile.LibsndfileError 'Format not recognised' on the .mp4. Root cause: pavo_native.measure handed the clip path to resemblyzer.preprocess_wav, which loads with librosa; librosa >= 0.11 reads only what soundfile reads (no MP4 container, the audioread fallback is gone), so the voice instrument could not read the very clips it gates. #473 measured on WAVs extracted by hand, so no test fed it an MP4. (A second, environment-only snag on the way: PyAV 19 dropped av.open(metadata_errors=...) that faster-whisper 1.2.1 passes; the measuring environment installs av 16.0.1.)",
+   "fix": "pavo_native.voice_wav decodes the clip's soundtrack with ffmpeg to a 16 kHz mono WAV and measure() embeds that WAV for the clip and for every reference clip (VOICE_AUDIO_DECODE_FAILED when it cannot).",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e137_the_voice_encoder_reads_a_wav_decoded_from_the_clip",
+    "covers": [
+     "instrument",
+     "env-vs-test"
+    ]
+   }
+  },
+  {
+   "id": "E136",
+   "date": "2026-10-28",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134"
+   ],
+   "error": "Shorts runway, 28/10 ~03:25 UTC: Claude submitted 11 genesis-09 scene stills through the Pavo MCP back to back before reading any back. Pavo's free quota had run out; 10 read back `failed` with no image (conversations 373673260065523776 ... 373673831350700096, ledger failed_streak 10, suspended until 06:26). Root cause: the stop of E124/E128 (two failed read-backs in a row) only works when read-backs come between submissions; nothing limited how many submissions could be in flight unread, so a fan-out spent its whole size on a spent quota (the same loss as E124's 31 submissions).",
+   "fix": "quota.MAX_UNREAD = 2: the ledger keeps today's submitted-but-unread jobs (`unread`); before_generate refuses PAVO_UNREAD_JOBS while two are unread, and a read-back to an end (completed with media, or failed) clears one. The builds submit and wait one job at a time, so they never meet it. Class antidote: a spend whose stop signal arrives only on read-back is never ahead of its read-backs by more than the stop needs.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "def test_e136_no_new_submission_while_two_of_todays_jobs_are_unread",
+    "covers": [
+     "capacity"
+    ]
+   }
+  },
+  {
+   "id": "E138",
+   "date": "2026-10-28",
+   "class": [
+    "threshold"
+   ],
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120"
+   ],
+   "error": "E128 modelled Pavo's free quota as 120 units a UTC day (a still 1, a video 2). Measured by the arc-01 long agent (28/10): the quota is a rolling window, it does not reset at 00:00 UTC; when it comes back is still open: not ~3 h after a stop (the 28/10 06:44Z probe failed 3.4 h after the 03:22Z stop) and not ~4-5 h after the burst began (the 09:47Z probe failed 7.9 h after it); a fixed daily image allowance resetting at 16:00Z (about 120 units) or a ~24 h rolling window both still fit (evidence/pavo/20261028/quota-observation.json) and sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h, evidence/pavo/image-ledger.json 2026-10-27 reconstruction plus shot-probe record 40592173923), and a still and a video each count about one job. The fixed daily total refused live work (the long needs ~130 jobs before 29/10 14:00 UTC) and still let 28/10's MCP stills run into a stop at ~55 MCP units (E136). Root cause: a threshold taken from one day's observation and a guessed unit, never checked against the stop signal itself.",
+   "fix": "quota.py: no fixed daily total; the stop is the read-back (FAILED_STREAK 2, COOL_DOWN 3 h, one probe, MAX_UNREAD 2); DAILY_CAP is now only the largest batch one run may plan (one window: check_batch refuses PAVO_BUDGET_SHORT for a batch larger than it); an owner's explicit PAVO_IMAGE_DAILY_CAP still caps a day (PAVO_DAILY_CAP). Owner's split: quota.SHORTS_DAILY_JOBS = 25 jobs a UTC day for the Shorts, the long the rest; the dispatch guard counts today's Short shot-probe jobs (claude/shot-probe-*-short-* records) plus the batch's worst case and refuses PAVO_SHORTS_SHARE. Every generation is still counted in the ledger and the records. Class antidote: a quota limit follows the provider's measured stop signal, and a fixed number only shapes a batch, never blocks a live quota.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "def test_e138_no_fixed_daily_total_blocks_a_live_quota_and_only_the_owner_can_cap_a_day",
+    "covers": [
+     "threshold"
+    ]
+   }
+  },
+  {
+   "id": "E139",
+   "date": "2026-10-28",
+   "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120",
+    "E131",
+    "E137"
+   ],
+   "error": "Found designing the arc-02 long (#491, before any build): story QA's image_repeat_gap_seconds_min (300 s) was measured on each hold's manifest `image`, `<shot id>#<src_start>`, so one library clip or one still approved for two shots counted as two pictures. approve-source accepted the same footage clip or still for any number of shots of a plan, and qa_pilot would have passed the repeat. Root cause: the instrument keyed a picture by the shot that shows it, not by what it shows; a fallback (R3) is the first source that can put one picture on two shots.",
+   "fix": "shot_sources.approve_source refuses a footage clip or a still already approved for another shot of the plan whose hold is nearer than the gap (SOURCE_IMAGE_REPEAT, keyed by clip/still sha256; a long on long_plan_check.timeline, the check's own layout, a Short always near); qa_pilot.repeat_gaps keys a fallback hold by its source sha256 (a still one picture whatever part is shown, footage by part) and story QA v3/v4 read it. Class antidote: a gate on a property of the picture keys it by the picture's content, never by the slot that shows it.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e139_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap",
+    "covers": [
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E140",
+   "date": "2026-10-28",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129"
+   ],
+   "error": "Daily analysis 28/10 (#507): mining/live_intel.py judged only genesis-01..04. genesis-05..08 were public (their ids in publish/ledger.json), but their episode records had no video_id, and rows() skipped them with `continue` and no message. Root cause: no step owned the record's video_id. publish_episode.py wrote the id only to the ledger and the receipt, and publish-episode.yml committed only those. The ids of genesis-01..04 had been typed in by hand when live_intel was added (#341), so the gap stayed hidden until the first episode published after it.",
+   "fix": "publish_episode.record_video_id writes the uploaded id into the episode record (refusing EPISODE_VIDEO_ID_MISMATCH when the record names another video), and publish-episode.yml commits the record with the ledger. live_intel.main reads publish/ledger.json and refuses EPISODE_VIDEO_ID_MISSING / _MISMATCH before writing anything, instead of skipping. genesis-05..08 got their ids from the ledger. Class antidote: an instrument refuses a published item it cannot read; it never drops it in silence. The store that holds the fact (the ledger) is checked against the copy the instrument reads.",
+   "antidote": {
+    "file": "migration/mining/test_live_intel.py",
+    "contains": "def test_e140_a_published_episode_without_its_video_id_is_refused_not_skipped",
+    "covers": [
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E141",
+   "date": "2026-10-28",
+   "class": [
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137"
    ],
    "error": "TikTok local runner (comment replies, owner 28/10): the first `runner.py comments` on the owner's PC died with FileNotFoundError writing out/own_videos.json.tmp. Root cause: tiktok_core.write_json assumed the folder existed; the runner's tests ran only in the repository and never wrote a state file into a fresh install folder, so the PC's empty C:\\HeroVerse\\tiktok-runner (no out/) was never exercised.",
    "fix": "write_json creates the parent folder before its atomic write (tmp then replace); the runner's ledger, own-video list and comments file all go through it.",
@@ -1387,7 +1565,7 @@
    }
   },
   {
-   "id": "E134",
+   "id": "E142",
    "date": "2026-10-28",
    "class": [
     "silent"
@@ -1397,7 +1575,8 @@
     "E121",
     "E124",
     "E128",
-    "E129"
+    "E129",
+    "E140"
    ],
    "error": "TikTok local runner dry run on the owner's PC (logged out, headless): TikTok answered our profile page with a 'Drag the slider to fit the puzzle' challenge, and `runner.py comments` ended with exit 0 and 'videos=0 new=0', which reads as 'no comment to answer'. Root cause: the challenge check ran only on video pages (open_video), not on the profile listing, and an empty listing was treated as a normal result.",
    "fix": "collect_videos returns None on a challenge; tiktok_core.listing_outcome turns a challenge into exit 4 (CHALLENGE, never solved: the owner logs in and looks) and an empty listing into exit 5 (NO_VIDEOS_FOUND); `comments` stops on either before writing anything.",

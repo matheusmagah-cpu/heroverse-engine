@@ -1,0 +1,95 @@
+{
+ "version": "stills-review-v1",
+ "episode": "genesis-09-short",
+ "reviewed_at": "2026-10-28T01:45:00Z",
+ "rubric": "ops/CLAUDE_REVIEW.md + PROMPT_GUIDE scene rules: the still shows its words, the flood period (no modern object, no building, the hold with a flat plank roof), faces of the crowd not shown, one coherent look; floor 9.5",
+ "runs": {
+  "40615150859": {
+   "engine": "FLUX schnell on Workers AI (free), 15 non-ark shots x 2",
+   "sheet": "production/bible/stills/sheets/genesis-09-short-40615150859.jpg",
+   "approved": {
+    "genesis-09-s-sky-40615150859-1": 9.5,
+    "genesis-09-s-peak-crowd-40615150859-2": 9.5
+   },
+   "rejected": {
+    "s-sky-2": "a man in a peaked cap (modern) at the left edge",
+    "s-lions-1": "one lion and a lioness, no sheep; crowd faces visible, a man striding",
+    "s-lions-2": "one lion not a pair; crowd with headbands and raised arms like a concert, not drawing back",
+    "s-windows-1": "modern ridge camping tents lit from inside",
+    "s-windows-2": "a glass lantern on a stand (period exclusion)",
+    "s-springs-1": "string lights and an electric pole",
+    "s-springs-2": "cables across the frame, T-shirts",
+    "s-tents-1": "a domed church on the horizon (period exclusion)",
+    "s-tents-2": "letterboxed frame (black bands)",
+    "s-climb-1": "an umbrella",
+    "s-climb-2": "hooded sweatshirts, tyre ruts",
+    "s-run-1": "denim shorts, modern haircut",
+    "s-run-2": "a castle tower on the hill, cargo shorts",
+    "s-inside-1": "gabled roof (the hold has a flat plank roof), modern railings",
+    "s-inside-2": "a skylight beam, calm family, not braced against the timbers (8.5-9.0)",
+    "s-hills-1": "no water below the hill (the line's subject)",
+    "s-hills-2": "modern crowd (checked shirt, flat cap), no water",
+    "s-carry-1": "cargo shorts with pockets",
+    "s-carry-2": "broken anatomy (the woman's head between the bearers' legs)",
+    "s-peak-crowd-1": "a thin line along a ridge, less crowded than -2",
+    "s-feet-1": "bare clean feet, no sandals, no rain, no water creeping",
+    "s-feet-2": "bare feet, no sandals, no rain; CG-clean skin (9.3)",
+    "s-lamp-1": "gabled roof, the doorway open on dry desert during the flood",
+    "s-lamp-2": "a stone wall, a fence and a house outside",
+    "s-hull-1": "a modern jacket, the hand not on the timbers",
+    "s-hull-2": "the hand on his own head, not on the hull",
+    "s-feed-1": "gabled barn open to dry land",
+    "s-feed-2": "gabled barn open to dry land"
+   },
+   "finding": "FLUX schnell takes no negative prompt and does not hold the flood period: 13 of 15 shots had no candidate at 9.5 (modern clothes and objects, buildings, gabled barns). The 13 shots go to Pavo agnes-image stills (1 unit each, today's Shorts reservation), which held the period in runs 2026102701-04."
+  },
+  "2026102803-05": {
+   "engine": "Pavo agnes-image (hd 9:16, the 2 approved ark references), MCP from the main checkout, 0 credits each",
+   "pavo_units": {
+    "ark_stills": 11,
+    "thumbnail": 3,
+    "total": 14,
+    "reservation": 40
+   },
+   "approved": {
+    "genesis-09-s-voice-2026102803-1": 9.5,
+    "genesis-09-s-finished-2026102803-1": 9.5,
+    "genesis-09-s-float-2026102803-1": 9.5,
+    "genesis-09-s-drift-2026102804-1": 9.5
+   },
+   "rejected": {
+    "s-enter-2026102803-1": "faces to the camera, blue jeans",
+    "s-shut-2026102803-1": "the ark tilted and floating in surf (the door shuts on dry land), modern shirts and jeans",
+    "s-drift-2026102803-1": "a trench coat",
+    "s-enter-2026102804-1": "shorts and sweaters; not on the ramp, the door not seen",
+    "s-shut-2026102804-1": "the ark raised on stilts, the door not shutting, boots",
+    "s-enter-2026102805-1": "robes right, but the ark drawn light brown and shed-sized, not giant or pitch-black (9.0)",
+    "s-shut-2026102805-1": "the ark end-on with no door in view: the shutting door (the line) is not shown (9.0)"
+   },
+   "finding": "agnes-image draws modern casual clothes on crowds unless the robes are named positively (ankle-length rough undyed wool robes, head-cloths, barefoot): 2026102804/05 fixed the clothes but lost the ark's scale and door. s-enter and s-shut stay open."
+  },
+  "2026102807": {
+   "engine": "Pavo agnes-image, no references, 11 non-ark stills submitted back to back (MCP)",
+   "result": "10 read back `failed` with no image (Pavo's free quota had run out at ~03:26 UTC); conversation 373673667613428800 was still running at the last read and is to be read back, never resubmitted",
+   "pavo_units": 11,
+   "error": "E136 (PAVO_UNREAD_JOBS, PR #499): never more than 2 unread jobs",
+   "next": "the 11 stills on FLUX after 00:00 UTC 29/10 (scene-stills.yml, 2 candidates each); s-climb, s-fists, s-rock and s-springs name the period robes positively"
+  }
+ },
+ "thumbnail": {
+  "spec": "production/bible/thumbs/genesis-09-short.json (v2, v3, v4 wording in its note)",
+  "rejected": {
+   "genesis-09-short-20261028-1": "Noah's face by reference and grief are right; a columned temple behind him, R16 saturation 0.33",
+   "genesis-09-short-20261028-2": "R16 PASS, Noah's face, grief; stone towers on both sides (period exclusion)",
+   "genesis-09-short-20261028-3": "half figure not a close-up, buildings and a staff, R16 0.45"
+  },
+  "finding": "the period sentence's 'No stone buildings, towers' and any wide background draw buildings; the next spec frames the face only."
+ },
+ "pavo_units_genesis_09_28_10": {
+  "stills": 13,
+  "thumbnail": 4,
+  "lost_to_quota_stop": 11,
+  "total": 28,
+  "reservation": 40
+ }
+}

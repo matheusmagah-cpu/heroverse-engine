@@ -1179,6 +1179,86 @@
    "credits": 5,
    "purpose": "thumbnail host analysis: Bible-story long outliers, 'presenter on camera tells a Bible story' (find host-led winners)",
    "saved_to": "evidence/vidiq/20261027/thumb-host.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "daily analysis 28/10: budget before the reads",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_channel_analytics",
+   "credits": 5,
+   "purpose": "daily analysis 28/10: per-video views, hours, % viewed, subs, 14 d",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_channel_analytics",
+   "credits": 5,
+   "purpose": "daily analysis 28/10: traffic sources, 7 d",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_channel_analytics",
+   "credits": 5,
+   "purpose": "daily analysis 28/10: daily series 7 d (subs, minutes) for the 24 h / 7 d pace",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_get_videos_by_ids",
+   "credits": 5,
+   "purpose": "daily analysis 28/10: current stats of the videos published in the last 72 h (Analytics lags 48 h)",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "decision 28/10: arc-01 long title, current plan title",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "decision 28/10: arc-01 long title, alternative from mining",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "decision 28/10: genesis-09 Short title proposal",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_channel_stats",
+   "credits": 5,
+   "purpose": "daily analysis 28/10: current subscriber count and 7 d growth (official count)",
+   "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_youtube_search",
+   "credits": 5,
+   "purpose": "package mining 28/10 (the one read left today): recent Bible-story Shorts across channels, looking for weak contrasts for title/thumbnail; balance checked in the daily analysis (3,261 before reads)",
+   "saved_to": "evidence/vidiq/20261028/package_mining.json"
   }
  ]
 }

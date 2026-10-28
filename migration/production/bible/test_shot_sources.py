@@ -102,6 +102,36 @@ class Allocation(unittest.TestCase):
         rich = dict((s["id"], c) for s, c in ss.allocate(p, todo, 10 ** 6))
         self.assertEqual(set(rich.values()), {"pavo"})
 
+    def test_a_planned_fallback_never_takes_the_budget_or_a_probe(self):
+        # owner 28/10 (arc-02, a long designed to one day's Pavo budget): before this, allocate and probe-queue spent
+        # the budget in risk order, so a wide or establishing shot the plan gives to FLUX or footage (rank 3) took Pavo
+        # before the acted scenes (rank 4); the plan's source_design now decides, and a character shot stays on Pavo
+        import long_preflight
+        p = plan()
+        p["source_design"] = {"pavo_talking": ["s-eve"], "pavo_voice_over": ["s-god"], "pavo_scene": ["s-pair"],
+                              "window": [], "footage": ["s-river"], "still_motion": []}
+        self.assertEqual(ss.source_design_problems(p), [])
+        self.assertEqual(ss.planned_fallbacks(p), {"s-river"})
+        todo = [s for _, s in eb.risk_order(p["shots"])]
+        rich = dict((s["id"], c) for s, c in ss.allocate(p, todo, 10 ** 6))
+        self.assertEqual(rich, {"s-eve": "pavo", "s-god": "pavo", "s-river": "fallback", "s-pair": "pavo"})
+        q = long_preflight.queue(p, {}, {}, max_units=10 ** 6)
+        probed = [x for b in q["batches"] for x in b["shots"].split(",")]
+        self.assertEqual((q["planned_fallback"], sorted(probed)), (["s-river"], ["s-eve", "s-god", "s-pair"]))
+        # a plan that names a character or a spoken shot as a fallback is refused, and that shot stays on Pavo
+        p["source_design"].update(pavo_scene=[], still_motion=["s-pair"])
+        self.assertTrue(any(x.startswith("SOURCE_DESIGN_FALLBACK SOURCE_CHARACTER_SHOT s-pair")
+                            for x in ss.source_design_problems(p)))
+        self.assertEqual(ss.planned_fallbacks(p), {"s-river"})
+        p["source_design"].update(still_motion=["s-river", "s-nope"])
+        bad = ss.source_design_problems(p)
+        for code in ("SOURCE_DESIGN_TWICE s-river", "SOURCE_DESIGN_UNKNOWN still_motion s-nope",
+                     "SOURCE_DESIGN_MISSING s-pair"):
+            self.assertTrue(any(x.startswith(code) for x in bad), (code, bad))
+        # without a source_design nothing changes (the Shorts and arc-01)
+        del p["source_design"]
+        self.assertEqual(ss.planned_fallbacks(p), set())
+
     def test_the_sources_report_fills_the_silent_shot_from_the_library(self):
         class Spent:
             def check_batch(self, units):
@@ -172,6 +202,219 @@ class ApproveSource(unittest.TestCase):
             self.approve("s-river", item="still-x", source="still_motion")
         self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"))
         self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by any refusal
+
+    def test_e139_a_fallback_picture_is_never_shown_twice_within_the_repeat_gap(self):
+        """E139 (found designing arc-02, 28/10): story QA's image_repeat_gap_seconds_min was measured on the hold's
+        `image`, `<shot id>#<src_start>`, so the same library clip or still approved for two shots counted as two
+        pictures; approve-source let it in and qa_pilot passed it. A fallback's picture is its source's sha256: a
+        second shot of the plan within the gap is refused at approval (SOURCE_IMAGE_REPEAT), and qa_pilot keys a
+        fallback hold by that sha256 (a still is one picture whatever part is shown; footage by its part too)."""
+        import long_plan_check as lpc
+        sys.path.insert(0, str(HERE.parent))
+        import qa_pilot
+        # a Short is shorter than the gap: the same clip on two of its shots is a repeat
+        p = plan()
+        p["shots"].append(dict(p["shots"][2], id="s-river2", lines=[1]))
+        p["shots"].pop(3)
+        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "the river", lib=self.lib, shots_dir=self.dir)
+        with self.assertRaises(SystemExit) as err:
+            ss.approve_source(p, "s-river2", "footage", "clip-river-a", 9.6, "the river", lib=self.lib,
+                              shots_dir=self.dir)
+        self.assertTrue(str(err.exception).startswith("SOURCE_IMAGE_REPEAT s-river2"), str(err.exception))
+        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "approved again", lib=self.lib,
+                          shots_dir=self.dir)                       # the same shot again is not a repeat
+        # the long: the gap is measured on the plan's own timeline
+        arc = json.loads((HERE / "plans" / "arc-02-long.json").read_text())
+        gap = lpc.qa_for(arc)["grammar"]["image_repeat_gap_seconds_min"]
+        tl = lpc.timeline(arc)
+        at = {s["id"]: (tl["begin"][i], tl["end"][i]) for i, s in enumerate(arc["shots"])}
+        foot = arc["source_design"]["footage"]
+        first = foot[0]
+        near = next(x for x in foot[1:] if at[x][0] - at[first][1] < gap)
+        far = next(x for x in reversed(foot) if at[x][0] - at[first][1] >= gap)
+        ids = [s["id"] for s in arc["shots"]]
+        said = {w for x in (first, near, far) for w in ss.subject(arc, arc["shots"][ids.index(x)], ids.index(x))}
+        title = " ".join(sorted(w for w in said if not ss.period_clash(arc, {"title": w, "query": ""})))
+        lib = [clip("clip-any", theme="sky", title=title)]
+        d = self.dir / "long"
+        ss.approve_source(arc, first, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
+        ss.approve_source(arc, far, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)   # far enough apart
+        with self.assertRaises(SystemExit) as err:
+            ss.approve_source(arc, near, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
+        self.assertTrue(str(err.exception).startswith(f"SOURCE_IMAGE_REPEAT {near}"), str(err.exception))
+        # qa_pilot: two holds of different shots showing one still (or one footage part) are the same picture
+        holds = [{"start": 0.0, "end": 5.0, "image": "s-a#0.000"}, {"start": 30.0, "end": 35.0, "image": "s-b#0.000"},
+                 {"start": 60.0, "end": 65.0, "image": "s-c#2.000"}, {"start": 90.0, "end": 95.0, "image": "s-d#0.000"}]
+        manifest = {"holds": holds, "images": {"s-a": {"sha256": "a" * 64}, "s-b": {"sha256": "a" * 64}},
+                    "clips": [{"id": "s-c", "source": "footage", "source_sha256": "c" * 64},
+                              {"id": "s-d", "source": "footage", "source_sha256": "c" * 64}]}
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [25.0])     # the still twice; footage parts differ
+        manifest["holds"][3]["image"] = "s-d#2.000"
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [25.0, 25.0])
+        manifest["images"]["s-b"]["sha256"] = "b" * 64
+        manifest["clips"][1]["source_sha256"] = "d" * 64
+        self.assertEqual(qa_pilot.repeat_gaps(manifest), [])           # different pictures: no repeat
+
+
+class OwnerException(unittest.TestCase):
+    """Owner 28/10 ~02:30 UTC ("tem que ser amanhã"): for the arc-01 long ONLY, a silent shot with characters may be a
+    still in motion made by Pavo with every approved reference of each character it shows, and a spoken shot on the
+    Kokoro voice (plan B) may stand on such a still. Everywhere else v4's refusals stand."""
+
+    def setUp(self):
+        self.saved = (ss.owner_exception, eb.reference_records)
+        self.refs = {"eve": [("ch-eve-full", {"sha256": "e" * 64})], "keeper": [("ch-keeper-front", {"sha256": "k" * 64})]}
+        eb.reference_records = lambda cid, chars=None, *a, **k: self.refs[cid]
+
+    def tearDown(self):
+        ss.owner_exception, eb.reference_records = self.saved
+
+    @staticmethod
+    def still(shas, inputs=None):
+        return {"references": [{"record": "r", "sha256": s} for s in shas],
+                "pavo": {"generate": {"model": "agnes-image", "conversation_id": "1",
+                                      "input_images": len(shas) if inputs is None else inputs},
+                         "job": {"conversation_id": "1", "status": "completed"}}}
+
+    def test_without_the_exception_v4_refuses_every_person_or_voice_on_a_fallback(self):
+        ss.owner_exception = lambda plan: False
+        p = plan()
+        good = self.still(["e" * 64])
+        self.assertTrue(ss.fallback_refusal(p, p["shots"][3], 3, "still_motion", good).startswith("SOURCE_CHARACTER_SHOT"))
+        self.assertTrue(ss.fallback_refusal(p, p["shots"][0], 0, "still_motion", good).startswith("SOURCE_SPOKEN_SHOT"))
+        self.assertIsNone(ss.fallback_refusal(p, p["shots"][2], 2, "footage"))
+
+    def test_the_exception_takes_a_character_still_only_with_its_approved_references(self):
+        ss.owner_exception = lambda plan: True
+        p = plan()
+        pair = p["shots"][3]
+        self.assertIsNone(ss.fallback_refusal(p, pair, 3, "still_motion", self.still(["e" * 64])))
+        for bad in (self.still([]), self.still(["x" * 64]), self.still(["e" * 64], inputs=0), {"references": []}):
+            self.assertTrue(ss.fallback_refusal(p, pair, 3, "still_motion", bad).startswith("SOURCE_CHARACTER_STILL"))
+        self.assertTrue(ss.fallback_refusal(p, pair, 3, "footage").startswith("SOURCE_CHARACTER_SHOT"))
+
+    def test_the_exception_takes_a_spoken_shot_only_on_the_kokoro_voice(self):
+        ss.owner_exception = lambda plan: True
+        p = plan()
+        p["criteria"] = pn.V4X
+        eve = p["shots"][0]
+        self.assertTrue(ss.fallback_refusal(p, eve, 0, "still_motion", self.still(["e" * 64]))
+                        .startswith("SOURCE_SPOKEN_SHOT"))          # Pavo's own speech route: never a still
+        eve["audio_route"] = "kokoro"
+        self.assertIsNone(ss.fallback_refusal(p, eve, 0, "still_motion", self.still(["e" * 64])))
+        god = p["shots"][1]
+        god["audio_route"] = "kokoro"
+        self.assertIsNone(ss.fallback_refusal(p, god, 1, "still_motion", {}))   # God: a still with no one on it
+        self.assertTrue(ss.fallback_refusal(p, god, 1, "footage").startswith("SOURCE_SPOKEN_SHOT"))
+
+    def test_a_shot_may_show_another_shots_approved_still_only_far_enough_apart(self):
+        """Owner exception, 28/10 contingency (fewer new Pavo stills, nothing loosened): a character shot may show the
+        APPROVED still of another shot (`still_of`) with another camera move, only with the same characters, never
+        chained, and every shot showing that still at least image_repeat_gap_seconds_min from every other (E139)."""
+        import copy
+        import long_plan_check as lpc
+        ss.owner_exception, eb.reference_records = self.saved
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        reused = [s for s in arc["shots"] if s.get("still_of")]
+        if not reused:
+            self.skipTest("the plan reuses no still")
+        self.assertEqual(ss.still_of_problems(arc), [])
+        self.assertEqual(lpc.check(arc)["problems"], [])
+        ids = [s["id"] for s in arc["shots"]]
+        tl = lpc.timeline(arc)
+        tgt = reused[0]
+        src = tgt["still_of"]
+        near = next(s["id"] for i, s in enumerate(arc["shots"]) if s["id"] not in (tgt["id"], src)
+                    and s.get("window_of") is None and s["kind"] == tgt["kind"]
+                    and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(tgt))
+                    and abs(tl["begin"][i] - tl["begin"][ids.index(src)]) < 120)
+        for change, code in (({"still_of": tgt["id"]}, "STILL_OF_UNKNOWN"),
+                             ({"still_of": "no-such-shot"}, "STILL_OF_UNKNOWN")):
+            p = copy.deepcopy(arc)
+            p["shots"][ids.index(tgt["id"])].update(change)
+            self.assertTrue(any(r.startswith(code) for r in ss.still_of_problems(p)), code)
+        p = copy.deepcopy(arc)
+        p["shots"][ids.index(near)]["still_of"] = src                 # the same still within the gap
+        self.assertTrue(any(r.startswith(f"STILL_OF_GAP {near}") or r.startswith(f"STILL_OF_GAP {tgt['id']}")
+                            or (r.startswith("STILL_OF_GAP") and near in r) for r in ss.still_of_problems(p)))
+        self.assertTrue(any(r.startswith("STILL_OF_GAP") for r in lpc.check(p)["problems"]))
+        p = copy.deepcopy(arc)
+        other = next(s for s in arc["shots"] if s.get("window_of") is None and ss.has_character(s)
+                     and sorted(ss.shown_characters(s)) != sorted(ss.shown_characters(tgt)) and not s.get("still_of"))
+        p["shots"][ids.index(tgt["id"])]["still_of"] = other["id"]
+        self.assertTrue(any(r.startswith("STILL_OF_CHARACTERS") for r in ss.still_of_problems(p)))
+        p = copy.deepcopy(arc)
+        p["shots"][ids.index(src)]["still_of"] = near                 # a reused still never names a reuse
+        self.assertTrue(any(r.startswith("STILL_OF_CHAIN") for r in ss.still_of_problems(p)))
+        p = copy.deepcopy(arc)
+        p["episode"] = "arc-02-long"                                  # the exception is the arc-01 long's only
+        self.assertTrue(all(r.startswith("STILL_OF_OUTSIDE_EXCEPTION") for r in ss.still_of_problems(p)))
+        # approve-source: the reuse takes its source's APPROVED still with another camera move; no other shot may
+        approved = [s for s in reused if (pc_rec := __import__("plan_check").still_record(
+            f"arc-01-long-{s['still_of']}")) and pc_rec.get("status") == "APPROVED"]
+        if approved:
+            t = approved[0]
+            d = Path(tempfile.mkdtemp())
+            try:
+                a = ss.approve_source(arc, t["id"], "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
+                                      shots_dir=d)
+                self.assertEqual(a["motion"], ss.REUSE_KEEPER_MOTION if t["kind"] == "keeper" else ss.REUSE_MOTION)
+                other = next(s["id"] for s in arc["shots"] if s["id"] not in (t["id"], t["still_of"])
+                             and s.get("still_of") != t["still_of"] and s.get("window_of") is None
+                             and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(t)))
+                with self.assertRaises(SystemExit) as err:   # a shot that does not name the still never takes it
+                    ss.approve_source(arc, other, "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
+                                      shots_dir=d)
+                self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
+            finally:
+                shutil.rmtree(d)
+
+    def test_the_exception_is_bound_to_the_arc01_plan(self):
+        import long_plan_check as lpc
+        ss.owner_exception = self.saved[0]
+        q = lpc.qa_for({"criteria": lpc.V4X})
+        self.assertEqual(q["owner_exception"]["episode"], "arc-01-long")
+        self.assertTrue(lpc.owner_exception({"criteria": lpc.V4X, "episode": "arc-01-long"}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4X, "episode": "arc-02-long"}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4, "episode": "arc-01-long"}))
+        self.assertIsNone(lpc.frozen_qa_problem(plan={"criteria": lpc.V4X}))
+        v4, v4x = lpc.qa(lpc.QA_V4), lpc.qa(lpc.QA_V4X)
+        for key in set(v4) | set(v4x):   # only the fallback rows, the version, the freeze time and the record change
+            if key in ("version", "frozen_at_utc", "owner_exception"):
+                continue
+            if key in ("rights", "grammar"):
+                a = {k: v for k, v in v4[key].items() if k not in ("fallback_sources", "fallback_shots")}
+                b = {k: v for k, v in v4x[key].items() if k not in ("fallback_sources", "fallback_shots")}
+                self.assertEqual(a, b, key)
+            else:
+                self.assertEqual(v4.get(key), v4x.get(key), key)
+
+
+class VoiceAudio(unittest.TestCase):
+    """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
+    which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_e137_the_voice_encoder_reads_a_wav_decoded_from_the_clip(self):
+        import inspect
+        import wave
+        d = Path(tempfile.mkdtemp())
+        try:
+            clip = d / "c.mp4"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=64x36:d=1",
+                            "-f", "lavfi", "-i", "sine=f=220:d=1", "-shortest", "-c:v", "libx264", "-c:a", "aac",
+                            str(clip)], check=True)
+            out = pn.voice_wav(clip)
+            with wave.open(out) as w:
+                self.assertEqual((w.getnchannels(), w.getframerate()), (1, 16000))
+                self.assertGreater(w.getnframes(), 8000)
+            with self.assertRaises(SystemExit):
+                pn.voice_wav(d / "missing.mp4")
+        finally:
+            shutil.rmtree(d)
+        src = inspect.getsource(pn.measure)
+        self.assertNotIn("preprocess_wav(str(", src)          # never the clip path itself
+        self.assertEqual(src.count("preprocess_wav(voice_wav("), 2)   # the clip and every reference
 
 
 class ApproveReuse(unittest.TestCase):

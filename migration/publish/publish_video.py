@@ -57,7 +57,7 @@ def caption_tracks(s, vid):
 
 
 V3_LONG = "story-qa-criteria-v3"
-STORY_LONGS = (V3_LONG, "story-qa-criteria-v4")   # v4 (owner 27/10) keeps v3's .srt rows unchanged
+STORY_LONGS = (V3_LONG, "story-qa-criteria-v4", "story-qa-criteria-v4-owner-exception-arc01")   # v4 and its arc-01 exception keep v3's .srt rows
 
 
 def caption_track_missing(manifest_path, manifest, package=None, pilot_dir=None):

@@ -19,6 +19,43 @@ ROOT = g.ROOT
 PLAN = "migration/production/bible/plans/genesis-09-short.json"
 LONG_PLAN = "migration/production/bible/plans/arc-01-long.json"
 PILOT = next(p.parent.name for p in sorted((ROOT / "migration/production").glob("pilot-*/script.json")))
+
+
+def live_shots(plan, n=2):
+    """E133: shot ids of a live plan for a fixture, read from the plan itself (never copied by hand: a plan edit
+    removed genesis-09's s-laugh and broke this file). Generated scene shots with no speaker (one probe = at most 3
+    generations), in plan order."""
+    shots = json.loads((ROOT / plan).read_text())["shots"]
+    ids = [s["id"] for s in shots if s.get("kind") == "scene" and s.get("window_of") is None and not s.get("speaker")]
+    assert len(ids) >= n, (plan, ids)
+    return ids[:n]
+
+
+S1, S2 = live_shots(PLAN)
+L1, L2 = live_shots(LONG_PLAN)
+HAND_SHOTS = __import__("re").compile(r'"shots":\s*"([^"]+)"')
+
+
+def hand_copied_shot_ids(root=ROOT):
+    """E133's class antidote: [(test file, line, ids)] where a test line names a live plan (PLAN, LONG_PLAN or a
+    plans/<episode>.json path) and passes a hand-written `"shots": "..."` literal holding ids of that plan. An id the
+    plan does not have (a refusal test: "s-not-a-shot") is fine; a real id must come from the plan (live_shots)."""
+    plans = {p.stem: {s["id"] for s in json.loads(p.read_text())["shots"]}
+             for p in (root / "migration/production/bible/plans").glob("*.json")}
+    names = {"PLAN": "genesis-09-short", "LONG_PLAN": "arc-01-long"}
+    out = []
+    for f in sorted(root.glob("migration/**/test_*.py")):
+        for no, line in enumerate(f.read_text().splitlines(), 1):
+            m = HAND_SHOTS.search(line)
+            if not m:
+                continue
+            eps = [ep for ep in plans if f"plans/{ep}.json" in line]
+            eps += [names[k] for k in names if __import__("re").search(rf'"plan":\s*{k}\b', line)]
+            for ep in eps:
+                hit = [i for i in m.group(1).split(",") if i in plans.get(ep, set())]
+                if hit:
+                    out.append((str(f.relative_to(root)), no, hit))
+    return out
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
     "heartbeat.yml": "the scheduler itself; it dispatches, it makes nothing",
@@ -75,13 +112,13 @@ def render(expr, inputs, subject):
 
 SAMPLES = {
     "episode.yml": {"plan": PLAN, "resume_run": ""},
-    "shot-probe.yml": {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""},
+    "shot-probe.yml": {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""},
     "publish-episode.yml": {"episode": "genesis-09-short", "source_url": "", "publish_at": ""},
     "cf-images.yml": {"pilot": PILOT, "engine": "flux", "only": ""},
     "pilot-render-stills.yml": {"pilot": PILOT},
     "pilot-preview.yml": {"pilot": PILOT},
     "footage.yml": {"queries": f"migration/production/{PILOT}/beats.json", "per_theme": "3"},
-    "scene-stills.yml": {"plan": PLAN, "shots": "s-voice", "candidates": "2"},
+    "scene-stills.yml": {"plan": PLAN, "shots": S1, "candidates": "2"},
     "long-build.yml": {"plan": LONG_PLAN, "resume_run": ""},
 }
 
@@ -205,7 +242,7 @@ class Inputs(unittest.TestCase):
         self.refused("episode.yml", {"plan": "plans/x.json"}, "GUARD_INPUT_INVALID")
         self.refused("episode.yml", {"plan": "migration/production/bible/plans/nope-99-short.json"}, "GUARD_INPUT_MISSING")
         self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-not-a-shot", "attempts": "2"}, "GUARD_INPUT_INVALID")
-        self.refused("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "7"}, "GUARD_INPUT_INVALID")
+        self.refused("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "7"}, "GUARD_INPUT_INVALID")
         self.refused("cf-images.yml", {"pilot": "migration/production/pilot-010", "engine": "flux"}, "GUARD_INPUT_INVALID")
         self.refused("footage.yml", {"queries": "/etc/passwd", "per_theme": "3"}, "GUARD_INPUT_INVALID")
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
@@ -215,8 +252,46 @@ class Inputs(unittest.TestCase):
         self.refused("long-build.yml", {"plan": LONG_PLAN, "resume_run": "x"}, "GUARD_INPUT_INVALID")
         self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 2)
 
+    def test_no_test_copies_a_live_plans_shot_ids_by_hand(self):
+        """E133: a fixture that copies a live plan's shot ids breaks when the plan is edited (genesis-09's redesign
+        removed s-laugh: GUARD_INPUT_INVALID in two tests). Every test reads them from the plan (live_shots)."""
+        self.assertEqual(hand_copied_shot_ids(), [])
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            (d / "migration/production/bible/plans").mkdir(parents=True)
+            (d / "migration/production/bible/plans/ep-01-short.json").write_text(json.dumps(
+                {"shots": [{"id": "s-a", "kind": "scene"}]}))
+            (d / "migration/ops").mkdir(parents=True)
+            (d / "migration/ops/test_x.py").write_text(
+                'PLAN = "migration/production/bible/plans/ep-01-short.json"\n'
+                'a = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-a"}\n'
+                'b = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-not-a-shot"}\n')
+            self.assertEqual(hand_copied_shot_ids(d), [("migration/ops/test_x.py", 2, ["s-a"])])
+
+    def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run(self):
+        """E135: run 40626005505 passed the guard and stopped in shot-probe's next step (plan_check --strict: 11
+        STILL_NOT_APPROVED). The guard runs that same check first."""
+        import subprocess as sp
+
+        def ran(code, out):
+            return lambda cmd, **kw: sp.CompletedProcess(cmd, code, out, "")
+        bad = ran(1, json.dumps({"problems": ["STILL_NOT_APPROVED shot 4 s-pairs (...)"]}))
+        self.assertEqual(g.plan_strict_problems(PLAN, run=bad), ["STILL_NOT_APPROVED shot 4 s-pairs (...)"])
+        self.assertEqual(g.plan_strict_problems(PLAN, run=ran(0, "{}")), [])
+        self.assertTrue(g.plan_strict_problems(PLAN, run=ran(2, "Traceback")))    # a crash is never a pass
+        seen = []
+        with mock.patch.object(g, "plan_strict_problems", lambda p: seen.append(p) or ["STILL_NOT_APPROVED x"]):
+            with self.assertRaises(g.Refusal) as c:
+                g.check_local("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "1", "adopt_run": ""})
+            self.assertTrue(str(c.exception).startswith("GUARD_PLAN_NOT_STRICT"), str(c.exception))
+            g.check_local("scene-stills.yml", {"plan": PLAN, "shots": S1, "candidates": "1"})   # stills come first
+        self.assertEqual(seen, [PLAN])
+        long_cmd = []
+        g.plan_strict_problems(LONG_PLAN, run=lambda cmd, **kw: long_cmd.append(cmd) or sp.CompletedProcess(cmd, 0, "", ""))
+        self.assertTrue(long_cmd[0][3].endswith("long_plan_check.py"))
+
     def test_valid_inputs_name_their_subject_and_uploads(self):
-        f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": "s-voice,s-laugh", "attempts": "3"})
+        f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
         self.assertEqual(f["uploads"], 6)
         self.assertEqual(g.subject_of("shot-probe.yml", {"plan": PLAN}), PLAN)
         self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
@@ -236,7 +311,7 @@ class Inputs(unittest.TestCase):
             self.refused("publish-episode.yml", {"episode": "genesis-01-short"}, "GUARD_RECORD_OVER_LIMIT")
 
     def test_the_run_name_names_its_subject(self):
-        title = g.run_name("shot-probe.yml", {"plan": PLAN, "shots": "s-voice", "attempts": "2"})
+        title = g.run_name("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "2"})
         self.assertEqual(g.run_subject("shot-probe.yml", title), PLAN)
         self.assertEqual(g.run_subject("publish-episode.yml", g.run_name("publish-episode.yml",
                                                                          {"episode": "genesis-09-short"})), PLAN)
@@ -260,7 +335,7 @@ class Capacity(unittest.TestCase):
 
     def test_a_used_up_flux_allocation_refuses_a_flux_run_only(self):
         # review of #445: FLUX records only, by episode_preflight's own predicate (cf_allocation.flux_record), on
-        # main and on scene-stills' review branches
+        # main; E134: scene-stills.yml's images from its runs, so a squash-merged, deleted review branch still counts
         cap = g.cf_daily_images()
         half = cap // 2
 
@@ -271,16 +346,16 @@ class Capacity(unittest.TestCase):
                       [f"migration/production/pilot-010/images/i{k}.json" for k in range(half)])
         sdxl = commit("Record pilot-011 images from Cloudflare Workers AI (sdxl, run 2)",
                       [f"migration/production/pilot-011/images/i{k}.json" for k in range(cap)])
-        stills = commit("Record scene stills images from Cloudflare Workers AI (flux, run 3; candidates)",
-                        [f"migration/production/bible/stills/candidates/s-{k}.json" for k in range(cap - half)])
-        old = commit(stills["commit"]["message"], ["migration/production/bible/stills/candidates/x.json"],
-                     date="2026-10-26T10:00:00Z")
+        rest = cap - half
+        runs = [dict(run_obj(3, "scene-stills.yml", f"scene-stills: plan={PLAN} shots={','.join(['a'] * rest)} "
+                                                    f"candidates=1", "success"), created_at="2026-10-27T09:00:00Z"),
+                dict(run_obj(4, "scene-stills.yml", f"scene-stills: plan={PLAN} shots=a,b candidates=3", "success"),
+                     created_at="2026-10-26T09:00:00Z")]                       # yesterday
         api = fake_api([("commits?", [{"sha": "c1", "commit": flux["commit"]}, {"sha": "c2", "commit": sdxl["commit"]}]),
-                        ("branches?", [{"name": "claude/stills-genesis-09-short-3", "commit": {"sha": "c3"}},
-                                       {"name": "claude/stills-genesis-08-short-1", "commit": {"sha": "c4"}},
-                                       {"name": "main", "commit": {"sha": "c9"}}]),
-                        ("commits/c1", flux), ("commits/c2", sdxl), ("commits/c3", stills), ("commits/c4", old)])
+                        ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": runs}),
+                        ("commits/c1", flux), ("commits/c2", sdxl)])
         self.assertEqual(g.cf_images_today(api, "2026-10-27"), cap)        # no sdxl, nothing from yesterday
+        self.assertEqual(g.cf_images_today(api, "2026-10-27", run_id=3), half)   # a run is not counted twice
         with self.assertRaises(g.Refusal) as c:
             g.capacity("scene-stills.yml", {"uploads": 0, "flux": True}, api, "2026-10-27")
         self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
@@ -288,6 +363,29 @@ class Capacity(unittest.TestCase):
         sys.path.insert(0, str(ROOT / "migration/production/bible"))
         import episode_preflight
         self.assertIs(episode_preflight.cf_allocation, sys.modules["cf_allocation"])   # one predicate for both
+
+    def test_e134_a_stills_run_counts_after_its_branch_is_gone_and_its_own_images_must_fit(self):
+        """E134 (28/10): genesis-09 run 40615150859 made 30 FLUX images; #487 squash-merged its review branch and
+        deleted it, the guard counted 0 and passed run 40623485981 (18 images) into a used-up allocation."""
+        cap = g.cf_daily_images()
+        done = dict(run_obj(40615150859, "scene-stills.yml",
+                            f"scene-stills: plan={PLAN} shots={','.join(['s'] * 15)} candidates=2", "success"),
+                    created_at="2026-10-28T01:28:00Z")
+        api = fake_api([("commits?", []), ("branches?", []),           # no review branch, no marked commit left
+                        ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": [done]})])
+        self.assertEqual(g.cf_images_today(api, "2026-10-28"), 30)
+        facts = g.scene_stills({"plan": PLAN, "shots": f"{S1},{S2}", "candidates": "2"})
+        self.assertEqual(facts["flux_images"], 4)
+        over = dict(facts, flux=True, uploads=0, flux_images=cap - 30 + 1)
+        with self.assertRaises(g.Refusal) as c:
+            g.capacity("scene-stills.yml", over, api, "2026-10-28")
+        self.assertTrue(str(c.exception).startswith("GUARD_CF_ALLOCATION_USED"))
+        g.capacity("scene-stills.yml", dict(over, flux_images=cap - 30), api, "2026-10-28")   # exactly fits
+        refused = dict(done, id=7, conclusion="failure")
+        api2 = fake_api([("commits?", []), ("actions/workflows/scene-stills.yml/runs", {"workflow_runs": [refused]}),
+                         ("actions/runs/7/jobs", {"jobs": [{"steps": [{"name": g.GUARD_STEP + " (inputs)",
+                                                                       "conclusion": "failure"}]}]})])
+        self.assertEqual(g.cf_images_today(api2, "2026-10-28"), 0)   # refused by the guard: no image made
 
 
 class Rerun(unittest.TestCase):
@@ -327,8 +425,8 @@ class Rerun(unittest.TestCase):
     def test_the_failure_history_is_keyed_on_the_subject_not_the_other_inputs(self):
         # review of #445: a new resume_run / attempts / adopt_run is not a fix
         wf = "shot-probe.yml"
-        old = g.run_name(wf, {"plan": PLAN, "shots": "s-voice", "attempts": "2", "adopt_run": ""})
-        new = {"plan": PLAN, "shots": "s-laugh", "attempts": "3", "adopt_run": ""}
+        old = g.run_name(wf, {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""})
+        new = {"plan": PLAN, "shots": S2, "attempts": "3", "adopt_run": ""}
         api = fake_api([(f"actions/workflows/{wf}/runs", {"workflow_runs": [run_obj(4, wf, old, "failure")]}),
                         ("actions/runs/4/jobs", {"jobs": []}), ("compare/", {"status": "identical", "files": []})])
         self.assert_refused(api, wf=wf, inputs=new)
@@ -409,11 +507,11 @@ class PavoBudget(unittest.TestCase):
 
     def test_a_probe_batch_names_its_expected_units_and_an_adopt_run_none(self):
         probe = g.WORKFLOWS["shot-probe.yml"][1]
-        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights,g-c1-image", "attempts": "2", "adopt_run": ""})
+        f = probe({"plan": LONG_PLAN, "shots": f"{L1},{L2}", "attempts": "2", "adopt_run": ""})
         # review of #475: the worst case, 2 shots x 2 rounds x 3 generations (make_shot's ATTEMPTS) x 2 units, so a
         # batch that starts can finish; the mean (1.2 a round: 10 units) is only probe-queue's estimate
         self.assertEqual(f["pavo_units"], 24)
-        f = probe({"plan": LONG_PLAN, "shots": "g-c1-lights", "attempts": "2", "adopt_run": "40592173923"})
+        f = probe({"plan": LONG_PLAN, "shots": L1, "attempts": "2", "adopt_run": "40592173923"})
         self.assertEqual(f["pavo_units"], 0)
 
     def test_todays_probe_records_count_from_their_branches(self):
@@ -426,14 +524,30 @@ class PavoBudget(unittest.TestCase):
         self.ledger.write_text(json.dumps({"days": {"2026-10-28": {"generated": 100}}}))
         api = self.api(ok=4, date="2026-10-28T00:30:00Z")                 # 8 units on Actions today
         facts = {"uploads": 0, "pavo_units": 13}
+        # E138: 108 used today no longer refuses (a rolling quota); a batch larger than one window does
+        self.assertEqual(g.pavo_budget(facts, api, "2026-10-28", now=now), 108)
         with self.assertRaises(g.Refusal) as c:
-            g.pavo_budget(facts, api, "2026-10-28", now=now)
-        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_SHORT planned=13 used=108 cap=120"), c.exception)
-        self.assertEqual(g.pavo_budget(dict(facts, pavo_units=12), api, "2026-10-28", now=now), 108)
+            g.pavo_budget(dict(facts, pavo_units=self.quota.DAILY_CAP + 1), api, "2026-10-28", now=now)
+        self.assertTrue(str(c.exception).startswith("PAVO_BUDGET_SHORT"), c.exception)
         api = self.api(failed=2, date="2026-10-28T00:30:00Z")              # the last run ended on 2 failed read-backs
         with self.assertRaises(g.Refusal) as c:
             g.pavo_budget(dict(facts, pavo_units=2), api, "2026-10-28", now=now)
         self.assertTrue(str(c.exception).startswith("PAVO_FREE_QUOTA_SUSPECTED"), c.exception)
+
+    def test_e138_the_shorts_take_at_most_their_share_and_the_long_the_rest(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 28, 1, 0, tzinfo=timezone.utc)
+        usage = {"units": 60, "failed_tail": 0, "last_at": None, "short_units": 2 * 20}   # 20 Short jobs today
+        with mock.patch.object(g, "pavo_actions_usage", return_value=usage):
+            with self.assertRaises(g.Refusal) as c:
+                g.pavo_budget({"uploads": 0, "pavo_units": 12, "short": True}, None, "2026-10-28", now=now)
+            self.assertTrue(str(c.exception).startswith("PAVO_SHORTS_SHARE"), c.exception)
+            g.pavo_budget({"uploads": 0, "pavo_units": 10, "short": True}, None, "2026-10-28", now=now)   # 25 of 25
+            g.pavo_budget({"uploads": 0, "pavo_units": 100, "short": False}, None, "2026-10-28", now=now)  # the long
+        self.assertTrue(g.shot_probe({"plan": PLAN, "shots": S1, "attempts": "1", "adopt_run": ""})["short"])
+        self.assertFalse(g.shot_probe({"plan": LONG_PLAN, "shots": L1, "attempts": "1", "adopt_run": ""})["short"])
+        api = self.api(ok=4, date="2026-10-28T00:30:00Z")
+        self.assertEqual(g.pavo_actions_usage(api, "2026-10-28", now)["short_units"], 0)   # an arc-01-long record
 
     def test_capacity_checks_the_budget_and_the_probe_gets_the_count(self):
         with mock.patch.object(g, "pavo_budget", return_value=57) as budget:

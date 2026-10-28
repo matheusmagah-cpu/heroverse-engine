@@ -260,6 +260,8 @@ Runs once a day in the daily pass at 08:05 UTC, after goal-report (07:45): repor
    under 48 h it stays inconclusive. Record it in `evidence/learning/<YYYYMMDD>.json` (same schema as 20261024).
    The verdicts come from `mining/live_intel.py` (tested): each episode against the series median at a similar age
    (0.75-1.33x), inconclusive under 48 h or 100 views; snapshots accumulate in `evidence/learning/state.json`.
+   `publish_episode.py` writes each episode's `video_id` into its record (`publish-episode.yml` commits it), and
+   live_intel refuses a published episode (in `publish/ledger.json`) whose record lacks it, never skipping it (E140).
 3. **Turn it into one change.** Name the single change the next episodes make (hook, title pattern, length, visual,
    end card, slot), the stage it touches and how it will be measured. Write it into `production/bible/SERIES.md` or
    `PROMPT_GUIDE.md` so production uses it; the next day's run checks whether it worked.

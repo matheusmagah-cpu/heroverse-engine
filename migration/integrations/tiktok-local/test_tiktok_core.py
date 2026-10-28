@@ -88,7 +88,7 @@ class Parse(unittest.TestCase):
 
 class FreshInstall(unittest.TestCase):
     def test_state_files_are_written_on_a_fresh_install(self):
-        # E133: `comments` died on the PC's first run: out/ did not exist yet, and no test had written a state file
+        # E141: `comments` died on the PC's first run: out/ did not exist yet, and no test had written a state file
         # outside the repository (env-vs-test). Every file the runner writes goes through write_json into an empty
         # install folder here.
         import tempfile
@@ -102,7 +102,7 @@ class FreshInstall(unittest.TestCase):
 
 class Listing(unittest.TestCase):
     def test_a_challenge_or_an_empty_listing_is_never_a_silent_success(self):
-        # E134: the PC's logged-out dry run got "Drag the slider to fit the puzzle" on our profile page and
+        # E142: the PC's logged-out dry run got "Drag the slider to fit the puzzle" on our profile page and
         # `comments` ended 0 with videos=0, as if there were nothing to answer
         self.assertEqual(core.listing_outcome(None)[0], 4)
         self.assertIn("CHALLENGE", core.listing_outcome(None)[1])

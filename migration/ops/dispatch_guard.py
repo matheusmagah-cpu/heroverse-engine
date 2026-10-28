@@ -147,7 +147,8 @@ def shot_probe(i):
     # review of #475: the worst case (every generation make_shot may spend), so a batch never starts it cannot finish
     units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
                                                                       worst=True)
-    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units}
+    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units,
+            "short": plan.get("version") != "bible-long-plan-v1"}   # E138: the Shorts' share of the rolling quota
 
 
 def cf_images(i):
@@ -206,7 +207,8 @@ def scene_stills(i):
     known = {s.get("id") for s in plan.get("shots", [])}
     need(set(shots) <= known, "shots", i.get("shots"), f"ids of this plan ({len(known)} shots)")
     need(re.fullmatch(r"[1-3]", i.get("candidates") or ""), "candidates", i.get("candidates"), "1-3")
-    return {"uploads": 0, "deps": [i["plan"], "migration/production/bible/stills/"]}   # a review branch, no asset
+    return {"uploads": 0, "deps": [i["plan"], "migration/production/bible/stills/"],   # a review branch, no asset
+            "flux_images": len(shots) * int(i["candidates"])}   # E134: what this run asks of the allocation
 
 
 def publish_episode(i):
@@ -562,20 +564,37 @@ def cf_daily_images():
     return int(re.search(r"^CF_DAILY_IMAGES = (\d+)", text, re.M).group(1))
 
 
-def cf_images_today(api, today):
-    """FLUX images recorded today (UTC), by REST, with episode_preflight's own predicate (cf_allocation.flux_record):
-    the records cf-images.yml commits to main and the candidates scene-stills.yml commits to its review branches."""
+STILLS_TITLE = re.compile(r"^scene-stills: plan=\S+ shots=(\S+) candidates=([1-3])$")
+
+
+def stills_images_today(api, today, run_id=None):
+    """E134: FLUX images scene-stills.yml runs asked for today (UTC), from the runs themselves (their titles: shots x
+    candidates), whatever happened to their review branch afterwards. Counting the candidates' commits on the
+    claude/stills-* branches missed every run whose branch was squash-merged and deleted (genesis-09 run 40615150859:
+    30 images, #487), so run 40623485981 passed the guard with the allocation already used up. A run this guard
+    refused made nothing; this run is not counted twice. Conservative: a run that stopped early counts in full."""
+    runs = (api(f"actions/workflows/scene-stills.yml/runs?created=%3E%3D{today}&per_page=100") or {}).get(
+        "workflow_runs", [])
+    n = 0
+    for r in runs:
+        if str(r.get("id")) == str(run_id) or not str(r.get("created_at", "")).startswith(today):
+            continue
+        if r.get("conclusion") in FAILED and failed_in_guard(api, r["id"]):
+            continue
+        m = STILLS_TITLE.match(r.get("display_title") or "")
+        if m:
+            n += len(m.group(1).split(",")) * int(m.group(2))
+    return n
+
+
+def cf_images_today(api, today, run_id=None):
+    """FLUX images used today (UTC), by REST: the records cf-images.yml commits to main (episode_preflight's own
+    predicate, cf_allocation.flux_record, on its images/ records) plus what today's scene-stills.yml runs asked for
+    (E134: from the runs, not from their review branches)."""
     sys.path.insert(0, str(ROOT / "migration" / "production" / "imagegen"))
     import cf_allocation
     shas = [c["sha"] for c in api(f"commits?sha=main&since={today}T00:00:00Z&per_page=100") or []
             if cf_allocation.MARK in (c["commit"]["message"] or "").split("\n", 1)[0]]
-    page = 1
-    while page <= 10:
-        batch = api(f"branches?per_page=100&page={page}") or []
-        shas += [b["commit"]["sha"] for b in batch if b["name"].startswith(cf_allocation.STILLS_BRANCH)]
-        if len(batch) < 100:
-            break
-        page += 1
     used = 0
     for sha in dict.fromkeys(shas):
         c = api(f"commits/{sha}") or {}
@@ -583,9 +602,9 @@ def cf_images_today(api, today):
         subject = (meta.get("message") or "").split("\n", 1)[0]
         if not (meta.get("committer") or {}).get("date", "").startswith(today):
             continue
-        used += sum(1 for f in c.get("files", []) if f.get("status") == "added"
+        used += sum(1 for f in c.get("files", []) if f.get("status") == "added" and "/images/" in f["filename"]
                     and cf_allocation.flux_record(subject, f["filename"]))
-    return used
+    return used + stills_images_today(api, today, run_id)
 
 
 BRANCH_PAGES = 10   # 1000 branches; more refuses PAVO_BUDGET_UNREADABLE (review of #475: never a partial count)
@@ -599,7 +618,7 @@ def pavo_actions_usage(api, today, now=None):
     sys.path.insert(0, str(ROOT / "migration" / "integrations" / "pavo"))
     import quota
     now = now or datetime.now(timezone.utc)
-    records, page = [], 1
+    records, shorts, page = [], [], 1
     while True:
         if page > BRANCH_PAGES:
             refuse("PAVO_BUDGET_UNREADABLE", f"more than {BRANCH_PAGES * 100} branches: delete merged probe branches "
@@ -625,10 +644,15 @@ def pavo_actions_usage(api, today, now=None):
             except (KeyError, ValueError, TypeError):
                 refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: its record cannot be read")
             records.append((at, record))
+            m = quota.PROBE_BRANCH.fullmatch(b.get("name", ""))
+            if m and m.group(1).endswith("-short"):
+                shorts.append((at, record))
         if len(batch) < 100:
             break
         page += 1
-    return quota.combine(records, today)
+    usage = quota.combine(records, today)
+    usage["short_units"] = quota.combine(shorts, today)["units"]   # E138: the Shorts' share
+    return usage
 
 
 def pavo_budget(facts, api, today, now=None):
@@ -642,6 +666,13 @@ def pavo_budget(facts, api, today, now=None):
         fits = guard.check_batch(facts["pavo_units"])
     except quota.PavoError as exc:
         raise Refusal(str(exc)) from None
+    if facts.get("short"):   # E138: the Shorts take at most SHORTS_DAILY_JOBS jobs a UTC day, the long the rest
+        done = -(-int(usage.get("short_units") or 0) // quota.VIDEO_UNITS)
+        planned = -(-int(facts["pavo_units"]) // quota.VIDEO_UNITS)
+        if done + planned > quota.SHORTS_DAILY_JOBS:
+            refuse("PAVO_SHORTS_SHARE", f"{done} Short jobs today and {planned} planned (worst case) pass the Shorts' "
+                                        f"{quota.SHORTS_DAILY_JOBS} a day: split the batch or wait for the next UTC day "
+                                        "(the long has priority, E138)")
     return fits["used"]
 
 
@@ -652,10 +683,11 @@ def capacity(workflow, facts, api, today):
         refuse("GUARD_ASSETS_FULL", f"{tag} holds {n} of {ASSET_LIMIT} assets and this run uploads up to "
                                     f"{facts['uploads']}: add a new tag at the front of migration/ci/assets.sh TAGS (E85)")
     if facts.get("flux"):
-        used, cap = cf_images_today(api, today), cf_daily_images()
-        if used >= cap:
-            refuse("GUARD_CF_ALLOCATION_USED", f"{used} FLUX images recorded today of about {cap}: dispatch after "
-                                               f"00:00 UTC (E62)")
+        used, cap = cf_images_today(api, today, facts.get("run_id")), cf_daily_images()
+        planned = facts.get("flux_images", 0)   # E134: this run's own images must fit too
+        if used >= cap or used + planned > cap:
+            refuse("GUARD_CF_ALLOCATION_USED", f"{used} FLUX images used today and {planned} asked of about {cap}: "
+                                               f"fewer shots or candidates, or dispatch after 00:00 UTC (E62, E134)")
     if facts.get("pavo_units"):
         facts["pavo_used"] = pavo_budget(facts, api, today)
 
@@ -720,10 +752,36 @@ def rerun(workflow, facts, inputs, api, run_id, attempt, sha):
                                           f"first, or record an external cause in {RETRIES.relative_to(ROOT)}")
 
 
+PLAN_STRICT = ("shot-probe.yml",)   # E135: workflows whose next step is the plan's strict check
+
+
+def plan_strict_problems(plan_path, run=subprocess.run):
+    """E135: the plan's own strict check, the one shot-probe.yml runs right after this guard (plan_check.py --strict for
+    a Short, long_plan_check.py --strict for a long): its problems, [] when it passes. genesis-09 run 40626005505
+    passed the guard and stopped in that step on 11 STILL_NOT_APPROVED, a whole run spent to learn what this predicts
+    for nothing."""
+    plan = load(plan_path)
+    checker = "long_plan_check.py" if plan.get("version") == "bible-long-plan-v1" else "plan_check.py"
+    done = run([sys.executable, "-I", "-B", str(ROOT / "migration" / "production" / "bible" / checker),
+                str(ROOT / plan_path), "--strict"], capture_output=True, text=True, cwd=str(ROOT))
+    if done.returncode == 0:
+        return []
+    try:
+        problems = list(json.loads(done.stdout).get("problems") or [])
+    except (ValueError, AttributeError):
+        problems = []
+    return problems or [f"{checker} exit {done.returncode}: {(done.stderr or done.stdout).strip()[-300:]}"]
+
+
 def check_local(workflow, inputs):
     if workflow not in WORKFLOWS:
         refuse("GUARD_WORKFLOW_UNKNOWN", f"{workflow}: add it to dispatch_guard.WORKFLOWS")
     facts = WORKFLOWS[workflow][1](inputs)
+    if workflow in PLAN_STRICT:
+        problems = plan_strict_problems(inputs["plan"])
+        if problems:
+            refuse("GUARD_PLAN_NOT_STRICT", f"{len(problems)} problem(s), e.g. {problems[0][:200]} (the workflow's own "
+                                            "plan check would stop the run: fix the plan first, E135)")
     facts["subject"] = subject_of(workflow, inputs)
     facts["flux"] = (workflow == "cf-images.yml" and inputs.get("engine") == "flux") or workflow == "scene-stills.yml"
     scan = static_import_problems(workflow)      # once: its problems here, its files for (4)
@@ -736,6 +794,7 @@ def check_local(workflow, inputs):
 
 def check(workflow, inputs, api, run_id, attempt, sha, today):
     facts = check_local(workflow, inputs)
+    facts["run_id"] = run_id
     capacity(workflow, facts, api, today)
     rerun(workflow, facts, inputs, api, run_id, attempt, sha)
     return facts

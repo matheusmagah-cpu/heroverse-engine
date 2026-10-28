@@ -70,7 +70,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add migration/publish/ledger.json migration/publish/receipts
+          # E140: the episode record carries the video_id publish_episode.py wrote into it
+          git add migration/publish/ledger.json migration/publish/receipts "migration/production/bible/episodes/$EPISODE.json"
           if ! git diff --cached --quiet; then git commit -q -m "Publish Bible episode $EPISODE (run $GITHUB_RUN_ID)"; fi
           git pull --rebase -q origin main
           git push -q origin HEAD:main

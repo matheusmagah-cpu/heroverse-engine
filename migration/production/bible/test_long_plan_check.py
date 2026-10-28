@@ -371,6 +371,22 @@ class StoryQaV4(unittest.TestCase):
         self.assertIn("s-god", r["estimate"]["audio_routes"]["kokoro_prompt_filter"])
         self.assertNotIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
 
+    def test_the_owner_exception_criteria_serve_the_arc01_long_only(self):
+        # owner 28/10 ~02:30 UTC ("tem que ser amanhã"): the exception file names its plan; any other is refused
+        p = v4_plan()
+        p["criteria"] = lc.V4X
+        p["episode"] = "arc-02-long"
+        self.assertIn("CRITERIA_EXCEPTION_PLAN", codes(check(p)))
+        p["episode"] = "arc-01-long"
+        self.assertNotIn("CRITERIA_EXCEPTION_PLAN", codes(check(p)))
+        self.assertIsNone(lc.frozen_qa_problem(plan=p))
+        saved = lc.QA_V4X_SHA256
+        lc.QA_V4X_SHA256 = "0" * 64                      # pinned like v4: an edited file is refused
+        try:
+            self.assertTrue(lc.frozen_qa_problem(plan=p).startswith("QA_NOT_FROZEN"))
+        finally:
+            lc.QA_V4X_SHA256 = saved
+
     def test_a_spoken_shot_may_keep_kokoro_on_a_native_plan_but_never_opt_into_native(self):
         # owner 28/10: God is one voice across the long (never seen speaking): his lines keep our Kokoro voice-over
         p = v4_plan()
@@ -663,6 +679,38 @@ class DraftArc1(unittest.TestCase):
         self.assertEqual(cast, {"adam", "eve", "serpent"})
         speakers = {s["speaker"] for s in p["shots"] if s.get("speaker")}
         self.assertEqual(speakers, {"adam", "eve", "god"})
+
+
+class PlanArc2(unittest.TestCase):
+    def test_the_arc_2_plan_is_arcs_json_arc_02_within_one_days_pavo_budget(self):
+        # owner, 28/10: one long every other day, arc-02 made in about one day: Pavo only for the spoken shots and
+        # the acted scenes with a character (at most ~60 clips), God always on the Kokoro route, every other hold
+        # character-free (story QA v4 fallbacks) or a window; until Claude approves the new cast's sheets the only
+        # rows left are their CHARACTER_PENDING (a DRAFT character), so --strict waits for them
+        p = json.loads((HERE / "plans" / "arc-02-long.json").read_text())
+        r = lc.check(p)
+        self.assertEqual(r["problems"], [])
+        chars = lc.ch.registry()
+        for row in r["pending"]:
+            cid = row.split()[1]
+            self.assertTrue(row.startswith("CHARACTER_PENDING ") and chars[cid]["status"] == "DRAFT", row)
+        self.assertTrue(14 <= r["estimate"]["minutes"] <= 18, r["estimate"])
+        arc = lc.arcs()["arc-02"]
+        self.assertEqual([c["short"] for c in p["chapters"]], arc["shorts"])
+        self.assertEqual(p["criteria"], "story-qa-criteria-v4")
+        god = [s for s in p["shots"] if s.get("speaker") == "god"]
+        self.assertTrue(god and all(s.get("audio_route") == "kokoro" for s in god))
+        design = p["source_design"]
+        pavo = design["pavo_talking"] + design["pavo_voice_over"] + design["pavo_scene"]
+        self.assertLessEqual(len(pavo), 60)
+        by_id = {s["id"]: s for s in p["shots"]}
+        for sid in design["footage"] + design["still_motion"]:
+            s = by_id[sid]
+            self.assertFalse(s.get("characters") or s.get("speaker") or s["kind"] == "keeper", sid)
+        for sid in design["window"]:
+            self.assertIn(by_id[sid]["window_of"], design["pavo_scene"], sid)
+        self.assertEqual(sorted(pavo + design["window"] + design["footage"] + design["still_motion"]),
+                         sorted(by_id))
 
 
 class StoryQa(unittest.TestCase):

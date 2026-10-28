@@ -9,7 +9,7 @@
  "passage": "Genesis 1:1-3:24 (KJV, public domain)",
  "aspect_ratio": "16:9",
  "burned_captions": false,
- "criteria": "story-qa-criteria-v4",
+ "criteria": "story-qa-criteria-v4-owner-exception-arc01",
  "ambience": "the wild open land of the garden: a soft wind through the trees and a few distant birds",
  "people": "Adam, Eve and the serpent are APPROVED and appear with their look word for word, the same entries as the Shorts. God speaks only as a voice-over over storm, light, rain or wind. The serpent is silent on screen: its words are the Keeper's narration (story QA v3: every talking clip passes lipsync_check, which reads a human face). The Keeper narrates and is on screen only for the promise, the insight and the close.",
  "chapters": [
@@ -516,7 +516,8 @@
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, holds a ripe red fruit up toward the camera, turns her face to the man beside her, and speaks, her lips moving clearly with every word. A dense garden at golden dusk, warm low sunlight through the leaves. Tempting and uneasy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "conflict": true,
-   "beat": "cold_open"
+   "beat": "cold_open",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-co-adam",
@@ -584,7 +585,7 @@
     4
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-promise-2",
@@ -594,7 +595,7 @@
     5
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-promise-3",
@@ -604,7 +605,7 @@
     6
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c1-deep",
@@ -613,6 +614,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Static wide shot. Dark deep ocean water under a black sky; slow heavy swells roll across the surface and faint mist drifts low. Night before dawn, a faint grey glow on the horizon. Primeval and silent. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-deep",
    "beat": "chapter",
    "lines": [
     7,
@@ -642,6 +644,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low tracking shot just above the water. A strong wind moves across a dark calm sea, drawing long ripples and thin veils of mist over the surface. Early twilight, soft grey-blue light. Mysterious and alive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-wind",
    "beat": "chapter",
    "lines": [
     9,
@@ -656,6 +659,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. Green hills rise out of a calm sea as the water draws back from new land. Soft morning light and mist. Creation unfolding. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-land",
    "beat": "chapter",
    "lines": [
     9,
@@ -813,6 +817,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A full moon rises over still water, its light laid across the surface. Night. Quiet. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-moon",
    "beat": "chapter",
    "lines": [
     16
@@ -853,31 +858,31 @@
    "id": "s-c1-whale",
    "kind": "scene",
    "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands on a cliff as a great whale breaks the surface of the sea below. Morning light on the water. Wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A great whale breaks the surface of a calm open sea below a green cliff, white spray catching the light. Morning light on the water. Wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
     17,
     18
    ],
-   "chapter": "c1"
+   "chapter": "c1",
+   "establishing": true,
+   "first_frame": "arc-01-long-s-c1-whale"
   },
   {
    "id": "s-c1-herd",
    "kind": "scene",
    "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks among cattle grazing on a green hillside. Morning light. Abundant. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Cattle graze across a green hillside, deer and wild goats among them. Morning light. Abundant. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
     19,
     20
    ],
-   "chapter": "c1"
+   "chapter": "c1",
+   "establishing": true,
+   "first_frame": "arc-01-long-s-c1-herd"
   },
   {
    "id": "s-c1-fox",
@@ -930,6 +935,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. The wind dies away and the whole valley falls still, every leaf motionless. Late morning. Hushed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c1-hush",
    "beat": "chapter",
    "lines": [
     21
@@ -1181,6 +1187,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. A broad river winds through a green valley and parts into four bright streams. Clear morning light, mist over the water. Abundant and calm. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c2-river",
    "beat": "chapter",
    "lines": [
     32,
@@ -1253,6 +1260,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow push-in. Four bright rivers branch out from one great river across a green land. Morning light, mist on the water. Abundance. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c2-four",
    "beat": "chapter",
    "lines": [
     35,
@@ -1264,16 +1272,16 @@
    "id": "s-c2-gold",
    "kind": "scene",
    "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts a gleaming nugget of gold from a clear streambed. Sunlight on the water. Wealth without want. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. A gleaming nugget of gold rests among the pebbles of a clear streambed, the water running over it. Sunlight on the water. Wealth without want. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
     35,
     36
    ],
-   "chapter": "c2"
+   "chapter": "c2",
+   "establishing": true,
+   "first_frame": "arc-01-long-s-c2-gold"
   },
   {
    "id": "s-c2-swim",
@@ -1596,13 +1604,14 @@
    "characters": [
     "adam"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lies back in the grass, smiling at the sky. Afternoon. Content. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wades into a clear shallow river as silver fish dart around his legs. Bright morning light on the water. Joy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     48,
     49
    ],
-   "chapter": "c2"
+   "chapter": "c2",
+   "still_of": "s-c1-sea-life"
   },
   {
    "id": "s-c2-coil",
@@ -1765,7 +1774,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, faces The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, on the branch, and speaks, her lips moving clearly with every word. Shade beneath the great tree at noon. Earnest and unsure. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "reference": "Genesis 3:3 (KJV)",
    "beat": "chapter",
-   "chapter": "c3"
+   "chapter": "c3",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c3-touch",
@@ -1940,13 +1950,14 @@
    "characters": [
     "adam"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands a few steps behind her under the tree, silent. Noon shade. Passive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, watches her hand with wide uncertain eyes. The same garden at golden dusk, leaves moving in a light wind. Hesitant and still. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     63,
     64
    ],
-   "chapter": "c3"
+   "chapter": "c3",
+   "still_of": "s-co-adam"
   },
   {
    "id": "s-c3-both-tree",
@@ -1972,13 +1983,14 @@
    "characters": [
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, pulls the fruit from the branch and bites into it. Noon light, a sudden stillness in the leaves. Decisive. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow pull-back. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, holds a ripe red fruit up toward the camera, turns her face to the man beside her, and speaks, her lips moving clearly with every word. A dense garden at golden dusk, warm low sunlight through the leaves. Tempting and uneasy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     65,
     66
    ],
-   "chapter": "c3"
+   "chapter": "c3",
+   "still_of": "s-open"
   },
   {
    "id": "s-c3-give",
@@ -2122,6 +2134,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Evening wind moves through the dark trees of the garden, leaves turning silver. The cool of the day. A presence. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c4-evening",
    "beat": "chapter",
    "lines": [
     71,
@@ -2153,13 +2166,14 @@
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hide together behind a thick tree trunk. Dusk in the garden, blue shadows. Cornered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, crouch among dark leaves, holding their breath. The garden at dusk, blue shadows. Afraid. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     71,
     72
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-co-hide"
   },
   {
    "id": "s-c4-trees",
@@ -2230,7 +2244,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, crouches among dark leaves, afraid, and speaks, his lips moving clearly with every word. Evening shadows among the trees. Fearful and ashamed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "reference": "Genesis 3:10 (KJV)",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "g-c4-naked",
@@ -2241,6 +2256,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A cool wind rolls through the darkening garden and the leaves of every tree turn silver in a sudden low light. The cool of the day, evening light. Grave and searching. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-naked",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2298,7 +2314,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, lifts her face, tears in her eyes, and speaks, her lips moving clearly with every word. Dusk light fading in the garden. Broken. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "reference": "Genesis 3:13 (KJV)",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-apart",
@@ -2322,12 +2339,13 @@
    "characters": [
     "serpent"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, coiled in deep shadow at the foot of the tree. Dusk. Exposed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow pull-back. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     77
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-c1-eye"
   },
   {
    "id": "g-c4-serpent",
@@ -2338,6 +2356,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-serpent",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2380,13 +2399,14 @@
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, look up as the first stars appear over the dark garden. Clear night falling. Quiet promise. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, sit together in the grass watching the sun go down. Warm dusk light over the valley. Content and unaware. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     78,
     79
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-c1-pair"
   },
   {
    "id": "s-c4-ground-c",
@@ -2395,6 +2415,7 @@
    "characters": [],
    "establishing": true,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Cracks spread across dry earth as the grass withers. Night, lightning flicker. Cursed ground. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-c4-ground-c",
    "beat": "chapter",
    "lines": [
     80
@@ -2425,6 +2446,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Rain begins to fall in grey sheets across the dark garden, the leaves bowing under it. Night. Sorrow. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-woman",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2450,12 +2472,13 @@
    "characters": [
     "adam"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands alone in the rain, waiting. Night. Dread. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands at the edge of a dark sea at night, looking out over the water. Night, faint starlight on the waves. Small and awed. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "chapter",
    "lines": [
     81
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-c1-shore"
   },
   {
    "id": "g-c4-ground",
@@ -2466,6 +2489,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the garden. Night, heavy rain sweeping across the trees. Terrible and grand. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-ground",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2509,6 +2533,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Heavy grey clouds roll over a barren plain of cracked dry earth and thorn bushes. Dawn, cold wind and dust. Heavy and final. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-dust",
    "beat": "chapter",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2521,13 +2546,14 @@
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, takes Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, by the hands. Grey dawn after the storm. Hope. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand together at the edge of a sunlit river. The valley in full morning light. Peace and promise. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "payoff",
    "lines": [
     83,
     84
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-c1-both"
   },
   {
    "id": "s-c4-eve-look",
@@ -2536,13 +2562,14 @@
    "characters": [
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks up at him, tears and a faint smile. Dawn light. Tender. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow pull-back. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, turns toward the light and smiles. A garden glade in warm morning sun. Gentle and radiant. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "payoff",
    "lines": [
     83,
     84
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-c1-eve"
   },
   {
    "id": "s-c4-coats",
@@ -2599,6 +2626,7 @@
    "seconds": 8,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Mist drifts through the garden at dawn and soft light glows on a second great tree at its heart. Dawn. Solemn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-g-c4-one-of-us",
    "beat": "payoff",
    "chapter": "c4",
    "audio_route": "kokoro"
@@ -2655,13 +2683,14 @@
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into a barren plain. Cold dawn, wind and dust. Exile. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back, wider. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into a barren plain. Cold dawn, wind and dust. Exile. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "payoff",
    "lines": [
     88,
     89
    ],
-   "chapter": "c4"
+   "chapter": "c4",
+   "still_of": "s-co-exile"
   },
   {
    "id": "s-c4-field",
@@ -2754,7 +2783,7 @@
     93
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-ki-trees",
@@ -2768,11 +2797,16 @@
   {
    "id": "s-ki-bite",
    "kind": "scene",
-   "window_of": "s-c3-take",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme close-up, slow pull-back. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, her dark eyes fixed on the fruit. Warm light on her face. Longing. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     94
-   ]
+   ],
+   "still_of": "s-c3-eve-eyes"
   },
   {
    "id": "k-insight-3",
@@ -2782,12 +2816,17 @@
     95
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-ki-coats",
    "kind": "scene",
-   "window_of": "s-c4-coats",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, stand shoulder to shoulder in the rough hide garments, their eyes lowered. Cold grey dawn. Humbled and covered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     96
@@ -2796,7 +2835,12 @@
   {
    "id": "s-ki-garden",
    "kind": "scene",
-   "window_of": "s-c4-last",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, stand small at the edge of a dusty plain, the green garden far behind them. Cold dawn light. Grief. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     96
@@ -2810,7 +2854,8 @@
     97
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro",
+   "still_of": "k-promise-2"
   },
   {
    "id": "s-ki-valley",
@@ -2824,7 +2869,11 @@
   {
    "id": "s-ki-gate",
    "kind": "scene",
-   "window_of": "s-c4-gate",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow pull-back. The flaming sword is a small turning flame far away before the dark line of the garden's trees. Dawn, fire light on the leaves. Final and holy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+   "first_frame": "arc-01-long-s-ki-gate",
    "beat": "keeper_insight",
    "lines": [
     98
@@ -2833,7 +2882,12 @@
   {
    "id": "s-ki-shame",
    "kind": "scene",
-   "window_of": "s-c3-shame",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hold broad fig leaves against themselves, their eyes cast down. The light in the garden suddenly grey and flat. Shame. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     99
@@ -2842,11 +2896,16 @@
   {
    "id": "s-ki-face",
    "kind": "scene",
-   "window_of": "s-c4-face",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, watches her hand with wide uncertain eyes. The same garden at golden dusk, leaves moving in a light wind. Hesitant and still. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     99
-   ]
+   ],
+   "still_of": "s-co-adam"
   },
   {
    "id": "k-insight-7",
@@ -2856,12 +2915,17 @@
     100
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-ki-leave",
    "kind": "scene",
-   "window_of": "s-c4-leave",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk side by side along a dusty path, their backs to the camera. Cold dawn, wind and dust. Exile. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "beat": "keeper_insight",
    "lines": [
     101
@@ -2884,7 +2948,7 @@
     102
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-insight-6",
@@ -2894,7 +2958,7 @@
     103
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-insight-9",
@@ -2904,7 +2968,8 @@
     104
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro",
+   "still_of": "k-promise-1"
   },
   {
    "id": "k-insight-5",
@@ -2914,7 +2979,8 @@
     105
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro",
+   "still_of": "k-promise-3"
   },
   {
    "id": "k-close-1",
@@ -2924,7 +2990,7 @@
     106
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "k-close-2",
@@ -2934,7 +3000,7 @@
     107
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
+   "audio_route": "kokoro"
   }
  ]
 }

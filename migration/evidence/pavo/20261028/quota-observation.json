@@ -1,0 +1,40 @@
+{
+ "version": "pavo-quota-observation-v1",
+ "date": "2026-10-28",
+ "method": "Pavo conversation ids are snowflake ids: time_ms = (id >> 22) + 1704067200000 (2024-01-01 UTC); calibrated on the 56 ids of evidence/pavo/image-ledger.json against their recorded times, spread 4.3 s",
+ "stops": [
+  {
+   "burst_began": "2026-10-27T12:38Z",
+   "stop": "2026-10-27T15:27Z",
+   "failed": "373492859393620672 ... 373495096538335296 (31, genesis-09 run 2026102705, E124)",
+   "app_hint": "try again in 3 hours",
+   "next_try": "2026-10-27T20:45Z",
+   "next_result": "completed",
+   "records": "evidence/pavo/20261027/genesis-09-run2026102705/jobs.json, evidence/pavo/20261027/arc-01-long-talk/probes.json"
+  },
+  {
+   "burst_began": "2026-10-27T20:45Z",
+   "stop": "~2026-10-27T22:15Z",
+   "failed": "24 Flash video jobs of shot-probe 40592173923 (E128 video entry)",
+   "app_hint": "try again in 4 hours",
+   "next_try": "2026-10-28T01:53Z",
+   "next_result": "completed (shot-probe 40616795532), ~3.6 h after the stop",
+   "records": "evidence/shots/arc-01-long/40592173923.json, evidence/shots/arc-01-long/40616795532.json"
+  },
+  {
+   "burst_began": "2026-10-28T01:53Z (MCP stills from 02:31Z)",
+   "stop": "2026-10-28T03:22Z",
+   "failed": "373672867956788288 and 11 back-to-back MCP stills to 03:26Z (E136)",
+   "next_try": "2026-10-28T06:44Z (373723730616786688, s-open probe)",
+   "next_result": "failed, 3.4 h after the stop; the guard suspended until 09:46Z. Probe 2 at 09:47Z (373769752080608768, k-promise-1): failed, 6.4 h after the stop and 7.9 h after the burst began; suspended until 12:47Z",
+   "records": "evidence/pavo/image-ledger.json"
+  }
+ ],
+ "rejected": {
+  "back ~3 h after a stop (E138 as first written)": "the 06:44Z probe failed 3.4 h after the 03:22Z stop",
+  "a fixed daily reset at 16:00Z (00:00 China)": "NOT ruled out after all: the 27/10 22:15Z stop was a run of Flash video jobs and its refill at 01:53Z was a video shot-probe, so it says nothing about the image quota if video and stills are counted apart",
+  "back about 4-5 h after the burst began (#506)": "the 09:47Z probe failed 7.9 h after the burst began"
+ },
+ "model": "open (28/10 09:48Z). Still consistent with every record: (A) a fixed daily image allowance resetting at 16:00Z (00:00 China), about 120 units (E128's figure), with the 22:15Z stop on a separate video quota; (B) a long rolling window of about 24 h. Next probes: 12:48Z, then 16:05Z (tests A). The owner's app hint (try again in N h) is the exact signal when it can be read.",
+ "unchanged": "the guard: two failed read-backs suspend everything for 3 h, then one probe; at most 2 unread jobs"
+}

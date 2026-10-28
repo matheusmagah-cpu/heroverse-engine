@@ -92,11 +92,25 @@ QA_SHA256 = "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"  
 QA_V4 = ROOT / "migration" / "production" / "qa_criteria_story_v4.json"
 QA_V4_SHA256 = "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"   # frozen 2026-10-27 (owner)
 V3, V4 = "story-qa-criteria-v3", "story-qa-criteria-v4"
+# owner exception (28/10 ~02:30 UTC, "tem que ser amanhã"): v4 with only its fallback rows widened, for the arc-01
+# long ONLY (the file names its plan: CRITERIA_EXCEPTION_PLAN for any other). Measured as v4 in every other row.
+QA_V4X = ROOT / "migration" / "production" / "qa_criteria_story_v4_owner_exception_arc01.json"
+QA_V4X_SHA256 = "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388"   # frozen 2026-10-28 (owner)
+V4X = "story-qa-criteria-v4-owner-exception-arc01"
+V4_FAMILY = (V4, V4X)
 
 
 def criteria_files():
     """{version: (file, pinned sha256)}, read at call time (a test may pin another hash)."""
-    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256)}
+    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256), V4X: (QA_V4X, QA_V4X_SHA256)}
+
+
+def owner_exception(plan):
+    """True when the plan is measured by the owner's exception criteria and is the plan that file names."""
+    if criteria_version(plan) != V4X:
+        return False
+    q = qa_for(plan) or {}
+    return (plan or {}).get("episode") == (q.get("owner_exception") or {}).get("episode")
 
 
 # E130: the long's Keeper at 16:9, framed from the chest up (a "Medium close-up" with his seated wardrobe drew him
@@ -186,6 +200,46 @@ def _people(s, shots_by_id):
     return bool(src.get("characters")) or src.get("figures") == "anonymous"
 
 
+def timeline(plan, g=None):
+    """The long's estimated layout: the voice items each shot carries, each line at its voice's pace with LONG_LINE_GAP
+    between lines and the Short's TAIL after the last, the cold open's last frame held until gate.cold_open_s, and each
+    shot's begin, hold and end (the shots of one voice run share it equally). check() and approve-source's repeat gap
+    (shot_sources, E139) read this one layout."""
+    g = g if g is not None else gate()
+    shots = plan["shots"]
+    items, carried = pc.sequence(plan)
+    for i, s in enumerate(shots):
+        if pc.speaking(s) and s.get("rehook"):
+            items[carried[i][0]]["rehook"] = True
+    est = [pc.words(x["text"]) / pace(x) for x in items]
+    start, t = [], 0.0
+    for e in est:
+        start.append(t)
+        t += e + LONG_LINE_GAP
+    total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
+    # the cold open ends where the first line after it starts; the Keeper never starts before cold_open_s, so the
+    # build holds the cold open's last frame (under the music) until then (COLD_OPEN_HOLD_MAX at most)
+    cold = g["cold_open_s"]
+    after = next((i for i, s in enumerate(shots) if s.get("beat") != "cold_open"), None)
+    cold_voice = start[carried[after][0]] if after is not None else total
+    cold_hold = 0.0
+    if after is not None and shots[0].get("beat") == "cold_open" and cold_voice < cold:
+        cold_hold = cold - cold_voice
+        k0 = carried[after][0]
+        start = start[:k0] + [x + cold_hold for x in start[k0:]]
+        total += cold_hold
+    begin, hold = [0.0] * len(shots), [0.0] * len(shots)
+    for a, b, idx in pc.groups(shots, carried):
+        t0 = start[idx[0]]
+        t1 = start[idx[-1] + 1] if idx[-1] + 1 < len(items) else total
+        for j in range(a, b + 1):
+            hold[j] = (t1 - t0) / (b - a + 1)
+            begin[j] = t0 + (j - a) * hold[j]
+    end = [begin[i] + hold[i] for i in range(len(shots))]
+    return {"items": items, "carried": carried, "est": est, "start": start, "total": total, "cold_voice": cold_voice,
+            "cold_hold": cold_hold, "begin": begin, "hold": hold, "end": end}
+
+
 def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     """{"problems": [...], "pending": [...], "estimate": {...}} for a long plan. gate_values: the structure's
     script.gate (default gate()); criteria: the frozen story QA (default qa()); arc_table: arcs.json by id (default
@@ -198,6 +252,10 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         problems.append(f"CRITERIA_UNKNOWN {criteria_version(plan)!r} (a long is measured by "
                         f"{' or '.join(criteria_files())})")
         q = qa()
+    exc = q.get("owner_exception") or {}
+    if exc and plan.get("episode") != exc.get("episode"):
+        problems.append(f"CRITERIA_EXCEPTION_PLAN {q.get('version')} is the owner's exception for {exc.get('episode')} "
+                        f"only, not {plan.get('episode')!r}")
     arc_map = arc_table if arc_table is not None else arcs()
 
     # the long as a whole
@@ -250,36 +308,11 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         return {"problems": problems, "pending": pending, "estimate": {}}
     problems += pc.lines_order_problems(shots, len(narration))
 
-    # the voice track and its timeline (the Short's estimate: WPS, LINE_GAP between lines, TAIL after the last)
-    items, carried = pc.sequence(plan)
-    for i, s in enumerate(shots):
-        if pc.speaking(s) and s.get("rehook"):
-            items[carried[i][0]]["rehook"] = True
-    est = [pc.words(x["text"]) / pace(x) for x in items]
-    start, t = [], 0.0
-    for e in est:
-        start.append(t)
-        t += e + LONG_LINE_GAP
-    total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
-    # the cold open ends where the first line after it starts; the Keeper never starts before cold_open_s, so the
-    # build holds the cold open's last frame (under the music) until then (COLD_OPEN_HOLD_MAX at most)
-    cold = g["cold_open_s"]
-    after = next((i for i, s in enumerate(shots) if s.get("beat") != "cold_open"), None)
-    cold_voice = start[carried[after][0]] if after is not None else total
-    cold_hold = 0.0
-    if after is not None and shots[0].get("beat") == "cold_open" and cold_voice < cold:
-        cold_hold = cold - cold_voice
-        k0 = carried[after][0]
-        start = start[:k0] + [x + cold_hold for x in start[k0:]]
-        total += cold_hold
-    begin, hold = [0.0] * len(shots), [0.0] * len(shots)
-    for a, b, idx in pc.groups(shots, carried):
-        t0 = start[idx[0]]
-        t1 = start[idx[-1] + 1] if idx[-1] + 1 < len(items) else total
-        for j in range(a, b + 1):
-            hold[j] = (t1 - t0) / (b - a + 1)
-            begin[j] = t0 + (j - a) * hold[j]
-    end = [begin[i] + hold[i] for i in range(len(shots))]
+    # the voice track and its timeline (timeline(): the one layout the check and approve-source read)
+    tl = timeline(plan, g)
+    items, carried, est, start, total = tl["items"], tl["carried"], tl["est"], tl["start"], tl["total"]
+    cold, cold_voice, cold_hold = g["cold_open_s"], tl["cold_voice"], tl["cold_hold"]
+    begin, hold, end = tl["begin"], tl["hold"], tl["end"]
 
     # every shot
     by_id = {s["id"]: s for s in shots}
@@ -348,7 +381,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                     problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {sid} (~{slowest:.1f} s at the slowest pace)")
                 if span < pc.talk_min(gaps):
                     problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
-            if q.get("version") == V4 and plan.get("aspect_ratio") == "16:9" and (
+            if q.get("version") in V4_FAMILY and plan.get("aspect_ratio") == "16:9" and (
                     KEEPER_FRAMING not in s.get("prompt", "") or KEEPER_FRAMING_OFF.search(s.get("prompt", ""))):
                 # E130: at 16:9 "Medium close-up" with his seated wardrobe drew him full body, his face too small for
                 # the landmarker (FACE_NOT_FOUND on the arc-01 long's Keeper probes); the long's Keeper is framed
@@ -598,7 +631,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     route = plan.get("audio_route")
     if route not in (None, pn.KOKORO, pn.NATIVE):
         problems.append(f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})")
-    if route == pn.NATIVE and q.get("version") != V4:
+    if route == pn.NATIVE and q.get("version") not in V4_FAMILY:
         problems.append(f"AUDIO_ROUTE_NEEDS_V4 (Pavo's own speech is measured only by {V4}; {q.get('version')} "
                         "removes Pavo's audio)")
     for i, s in enumerate(shots):
@@ -608,7 +641,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"AUDIO_ROUTE_UNKNOWN shot {i} {s['id']} {s['audio_route']!r} (a spoken shot may say only "
                             f"{pn.KOKORO!r})")
     routes = {}
-    if pn.native_plan(plan) and q.get("version") == V4:
+    if pn.native_plan(plan) and q.get("version") in V4_FAMILY:
         voices = pn.load_voices()
         if not pn.ambience(plan, {}):
             problems.append("AMBIENCE_MISSING (the plan's `ambience`: the natural sound Pavo lays under the voice)")
@@ -619,6 +652,15 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             if not (voices.get(who) or {}).get("pavo_voice"):
                 problems.append(f"PAVO_VOICE_UNDESCRIBED shot {i} {s['id']} ({who}: production/bible/voices.json)")
             routes[s["id"]] = pn.route(plan, s, i)
+    # owner 28/10: a long designed to one day's Pavo budget names each shot's source (`source_design`); episode_build
+    # sources and probe-queue follow it, so a planned fallback must be one a fallback may carry
+    if "source_design" in plan:
+        import shot_sources
+        problems += shot_sources.source_design_problems(plan)
+    # owner exception (arc-01, 28/10 contingency): a shot showing another shot's approved still, far enough apart
+    if any(isinstance(s, dict) and s.get("still_of") is not None for s in shots):
+        import shot_sources
+        problems += shot_sources.still_of_problems(plan, tl)
 
     gens = [s for s in shots if s.get("window_of") is None]
     talk = [i for i, s in enumerate(shots) if s.get("window_of") is None and pc.talking(s)]

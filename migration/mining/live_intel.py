@@ -14,7 +14,7 @@ Deterministic, so a verdict never depends on how a stats table was read that day
 5. The authenticity layer is never an attribute: KJV text, references, our own reflection and prayer, the AI
    disclosure and no copied scripts are fixed (PROTECTED); a hypothesis touching them is refused.
 
-usage: live_intel.py EPISODES_DIR STATS_JSON STATE_JSON OUT_JSON
+usage: live_intel.py EPISODES_DIR STATS_JSON STATE_JSON OUT_JSON [LEDGER_JSON]
 """
 from datetime import datetime
 import json
@@ -100,10 +100,33 @@ def can_start(hypotheses, new):
     return True, "OK"
 
 
-def main(episodes_dir, stats_path, state_path, out_path):
+LEDGER = Path(__file__).resolve().parents[1] / "publish/ledger.json"
+
+
+def video_id_problems(episodes, ledger):
+    """E140: every episode the publish ledger has uploaded ('bible:<id>:<output_sha256>' -> video_id) carries that
+    video_id in its record. A record without it was skipped by rows() without a word (genesis-05..08, 2026-10-28)."""
+    out = []
+    for ep in episodes:
+        vid = (ledger.get("entries", {}).get(f"bible:{ep.get('id')}:{ep.get('output_sha256')}") or {}).get("video_id")
+        if not vid:
+            continue
+        if not ep.get("video_id"):
+            out.append(f"EPISODE_VIDEO_ID_MISSING {ep['id']} (ledger {vid})")
+        elif ep["video_id"] != vid:
+            out.append(f"EPISODE_VIDEO_ID_MISMATCH {ep['id']} (record {ep['video_id']}, ledger {vid})")
+    return out
+
+
+def main(episodes_dir, stats_path, state_path, out_path, ledger_path=LEDGER):
     """STATE (evidence/learning/state.json) persists across days: every snapshot ever taken (history) and the
-    hypotheses; STATS is today's snapshot; OUT is today's verdict file."""
+    hypotheses; STATS is today's snapshot; OUT is today's verdict file. LEDGER (publish/ledger.json) says which
+    episodes are published: one whose record lacks its video_id is refused, never skipped (E140)."""
     episodes = [json.loads(p.read_text()) for p in sorted(Path(episodes_dir).glob("*.json"))]
+    if Path(ledger_path).exists():
+        bad = video_id_problems(episodes, json.loads(Path(ledger_path).read_text()))
+        if bad:
+            raise SystemExit("; ".join(bad))
     stats = json.loads(Path(stats_path).read_text())
     state = json.loads(Path(state_path).read_text()) if Path(state_path).exists() else {"history": [], "hypotheses": []}
     current = rows(episodes, stats)
@@ -122,4 +145,4 @@ def main(episodes_dir, stats_path, state_path, out_path):
 
 
 if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:5]))
+    sys.exit(main(*sys.argv[1:6]))

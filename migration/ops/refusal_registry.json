@@ -362,6 +362,10 @@
    "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
    "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
   },
+  "EPISODE_VIDEO_ID_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_episode.py::def test_e140_the_upload_writes_its_video_id_into_the_episode_record"
+  },
   "ESPEAK_DATA_MISSING": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::FACE_CHECK_BLIND"
@@ -597,6 +601,10 @@
   "GUARD_OK": {
    "class": "N",
    "why": "E116: the dispatch guard's pass line"
+  },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
   },
   "GUARD_RECORD_OVER_LIMIT": {
    "class": "N",
@@ -1151,7 +1159,7 @@
   },
   "PAVO_BUDGET_SHORT": {
    "class": "D",
-   "resume": "E128: the batch's expected free-model units (long_preflight.planned_units) do not fit what is left today of the shared Pavo budget (main's quota ledger + today's shot-probe records); nothing was generated. Split the batch (probe-queue cuts batches to a day's cap) or dispatch it after 00:00 UTC; clips already approved are kept"
+   "resume": "E128/E138: the batch's worst-case units are larger than one rolling window of Pavo's quota (quota.DAILY_CAP, the largest batch one run may plan) or pass an owner's explicit daily cap; nothing was generated. Split the batch (probe-queue cuts batches to one window); clips already approved are kept"
   },
   "PAVO_BUDGET_UNKNOWN": {
    "class": "I",
@@ -1175,11 +1183,11 @@
   },
   "PAVO_DAILY_CAP": {
    "class": "D",
-   "resume": "E124/E128: the day's free-model cap (quota.py, 120 units a UTC day: a still 1, a video 2, MCP and shot-probe alike) is reached before any request; nothing was sent. Wait for the next UTC day (or the owner raises PAVO_IMAGE_DAILY_CAP), then generate the missing candidates; the ones already made are kept"
+   "resume": "E138: only an owner's explicit PAVO_IMAGE_DAILY_CAP caps a day now (Pavo's quota is a rolling window, not a UTC day); nothing was sent; wait for the next UTC day or the owner lifts it"
   },
   "PAVO_FREE_QUOTA_SUSPECTED": {
    "class": "D",
-   "resume": "E124/E128: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation (Pavo's free quota is likely spent; its quote still says 0) for 3 h; then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
+   "resume": "E124/E128/E138: two failed read-backs in a row (stills or videos; a shot-probe run stops at once) suspend generation for 3 h (Pavo's quota returns ~35-50 jobs about 3 h after a stop); then one probe goes, and a completed read-back lifts it. Candidates already made are kept"
   },
   "PAVO_HISTORY_SCHEMA_CHANGED": {
    "class": "D",
@@ -1254,6 +1262,10 @@
    "class": "D",
    "resume": "the credential: check pavo_account in the session before dispatch; renew the secret, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
   },
+  "PAVO_SHORTS_SHARE": {
+   "class": "D",
+   "resume": "E138: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
+  },
   "PAVO_SINGING": {
    "class": "C",
    "probe": "story QA v4 (owner 27/10, R4): knowable only on a generated clip. The cheapest probe is the native line's direct 0-credit Pavo probe (episode_preflight's talking-line probes, binding pavo_native.NATIVE_BINDING), then episode_build.py speech-check on the probed clip before approve-shot, which recomputes the verdict and refuses a failed or unmeasured clip (SPEECH_UNCHECKED, SPEECH_CHECKS_FAILED); the build ships only an approval whose speech record is of that exact clip"
@@ -1273,6 +1285,10 @@
   "PAVO_UNREACHABLE": {
    "class": "D",
    "resume": "waits (RATE_LIMIT_WAITS, OUTAGE_WAITS) then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
+  },
+  "PAVO_UNREAD_JOBS": {
+   "class": "D",
+   "resume": "E136: two of today's jobs are not read back yet; read them with pavo_job / pavo_image_job (never resubmit), then submit the next. Nothing was sent."
   },
   "PAVO_UPLOAD_HOST_UNREACHABLE": {
    "class": "D",
@@ -1808,6 +1824,56 @@
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
+  "SOURCE_CHARACTER_STILL": {
+   "class": "N",
+   "why": "owner exception 28/10 (arc-01 long only): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it refuses a character still not made with exactly the character's approved references (Pavo read-back), and generate_step refuses the same again from the approval"
+  },
+  "SOURCE_DESIGN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_FALLBACK": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_MISSING": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_TWICE": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_DESIGN_WINDOW": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.source_design_problems(plan)"
+   ],
+   "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
+  },
+  "SOURCE_IMAGE_REPEAT": {
+   "class": "N",
+   "why": "E139: approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it stops no generation, voice or render, and refuses only a fallback whose picture (sha256) another shot of the plan already shows within story QA's image_repeat_gap_seconds_min"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
@@ -1986,6 +2052,48 @@
   "STILL_NOT_FOR_SHOT": {
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
+  },
+  "STILL_OF_CHAIN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_CHARACTERS": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_GAP": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_OUTSIDE_EXCEPTION": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
   },
   "STILL_PATH_REFUSED": {
    "class": "A",
@@ -2360,6 +2468,10 @@
   "VOICE_ASSET_IDENTITY_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
+  },
+  "VOICE_AUDIO_DECODE_FAILED": {
+   "class": "N",
+   "why": "E137: speech-check is the review's own local measure (Claude, before approve-shot): ffmpeg could not decode the probed clip's soundtrack; it stops no generation or render and the clip is simply not approved"
   },
   "VOICE_CLIPPING": {
    "class": "C",
@@ -2905,7 +3017,8 @@
    "grammar.image_repeat_gap_seconds_min": {
     "class": "render_qa",
     "checks": [
-     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]"
+     "migration/production/qa_pilot.py::\"grammar.image_repeat_gap_seconds_min\": [\"image_repeat_gap\"]",
+     "migration/production/bible/shot_sources.py::SOURCE_IMAGE_REPEAT"
     ],
     "was": "open until E126: qa_pilot.py and prepublish_gate.py read story QA v3 (STORY_V3_ROWS, one gate item per row)"
    },

@@ -38,7 +38,7 @@ def read_json(path, default):
 
 def write_json(path, data):
     p = Path(path)
-    p.parent.mkdir(parents=True, exist_ok=True)   # E133: a fresh install has no out/ yet
+    p.parent.mkdir(parents=True, exist_ok=True)   # E141: a fresh install has no out/ yet
     tmp = p.with_suffix(p.suffix + ".tmp")
     tmp.write_text(json.dumps(data, indent=1, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
     tmp.replace(p)
@@ -149,7 +149,7 @@ def videos_from_api(body, handle=HANDLE):
 
 def listing_outcome(videos):
     """(exit code, reason) of the video listing: None = TikTok showed a challenge (a puzzle) instead of the page,
-    [] = no video found. Both stop `comments` with a non-zero code, never an empty "success" (E134)."""
+    [] = no video found. Both stop `comments` with a non-zero code, never an empty "success" (E142)."""
     if videos is None:
         return 4, "CHALLENGE: TikTok showed a puzzle instead of our videos; nothing is solved (owner: log in with `runner.py login`, look at the window)"
     if not videos:
