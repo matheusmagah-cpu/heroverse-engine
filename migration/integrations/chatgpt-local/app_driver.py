@@ -210,18 +210,40 @@ def menu_item(w, prefix):
     raise Stop(6, f"APP_CHANGED: no '{prefix}' in the '+' menu")
 
 
+def file_dialog(w):
+    """The app's own Open dialog (a Windows #32770 dialog owned by the app: a child of its window or a top-level
+    window of the same process). E146: it is not found among the desktop's top-level windows by its title alone."""
+    from pywinauto import Desktop
+    pid = w.element_info.process_id
+    cands = [d for d in w.descendants() if d.element_info.control_type == "Window"]
+    cands += [d for d in Desktop(backend="uia").windows() if d.element_info.process_id == pid]
+    for d in cands:
+        if d.element_info.class_name == "#32770" or (d.element_info.name or "") in OPEN_DIALOG:
+            return d
+    return None
+
+
+def close_file_dialog(w):
+    """A file dialog left open by an earlier run is cancelled first."""
+    d = file_dialog(w)
+    if d is not None:
+        d.set_focus()
+        keys("{ESC}")
+        pause((1, 2))
+
+
 def attach(w, refs):
     """The app's own file dialog: '+' > 'Adicionar fotos e arquivos', the files' full paths in the name box, Enter."""
     glide_click(menu_item(w, "Adicionar fotos e arquivos"))
-    from pywinauto import Desktop
     dlg = None
-    for _ in range(20):
+    for _ in range(30):
         time.sleep(0.5)
-        dlg = next((d for d in Desktop(backend="uia").windows() if (d.element_info.name or "") in OPEN_DIALOG), None)
-        if dlg:
+        dlg = file_dialog(w)
+        if dlg is not None:
             break
     if dlg is None:
         raise Stop(6, "APP_CHANGED: the file dialog did not open")
+    dlg.set_focus()
     pause((1, 2))
     clip_text(" ".join(f'"{Path(p).resolve()}"' for p in refs))
     keys("%n")                                 # the dialog's own "Nome" box (Alt+N)
@@ -231,7 +253,7 @@ def attach(w, refs):
     pause((8, 14))                             # the uploads finish
 
 
-def send(w, box, refs, prompt):
+def send(w, box, refs, prompt, before_send):
     glide_click(menu_item(w, "Criar imagem"))  # the image tool, chosen in the menu
     pause((1, 3))
     attach(w, refs)
@@ -242,6 +264,7 @@ def send(w, box, refs, prompt):
     btn = named(w, SEND_NAME)
     if btn is None:
         raise Stop(6, "APP_CHANGED: no 'Enviar' button")
+    before_send()                              # the ledger says SENDING before the click, never after
     glide_click(btn)
 
 
@@ -316,21 +339,26 @@ def make_image(job, ref_paths, out_dir):
     out = Path(out_dir)
     with ScreenReaderFlag():
         w = app_window()
+        close_file_dialog(w)
         box = open_new_chat(w)
-        ledger["requests"][job["id"]] = {"state": "SENDING", "at": core.iso(core.now_utc()), "still": job.get("still"),
-                                         "client": "chatgpt-app"}
-        core.write_json(LEDGER, ledger)
         started = core.now_utc()
+
+        def sending():
+            ledger["requests"][job["id"]] = {"state": "SENDING", "at": core.iso(core.now_utc()),
+                                             "still": job.get("still"), "client": "chatgpt-app"}
+            core.write_json(LEDGER, ledger)
         try:
-            send(w, box, [p for p, _ in refs], core.full_prompt(job["prompt"]))
+            send(w, box, [p for p, _ in refs], core.full_prompt(job["prompt"]), sending)
             ledger["requests"][job["id"]]["state"] = "SENT"
             core.write_json(LEDGER, ledger)
             img = wait_image(w)
             pause()
             src = save_image(w, img)
         except Stop as s:
-            ledger["requests"][job["id"]].update(state="UNCERTAIN" if s.code == 6 else "STOPPED", why=str(s))
-            core.write_json(LEDGER, ledger)
+            close_file_dialog(w)
+            if job["id"] in ledger["requests"]:   # only a prompt that was sent is recorded (and never resent)
+                ledger["requests"][job["id"]].update(state="UNCERTAIN" if s.code == 6 else "STOPPED", why=str(s))
+                core.write_json(LEDGER, ledger)
             raise
     data = src.read_bytes()
     ext = core.extension(data) or src.suffix or ".png"
