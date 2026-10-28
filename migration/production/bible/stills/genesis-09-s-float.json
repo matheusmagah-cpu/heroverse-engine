@@ -2,6 +2,49 @@
  "id": "genesis-09-s-float",
  "episode": "genesis-09-short",
  "shot": "s-float",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. A giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, floats level on the drowned valley, the roof empty and flat, the tops of trees and tents just above the water around it, a few figures in silhouette clinging to a floating tree trunk in the foreground. Grey day, rain and mist. Vast and lonely. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. A giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, floats level on the drowned valley, the roof empty and flat, the tops of trees and tents just above the water around it, a few figures in silhouette clinging to a floating tree trunk in the foreground. Grey day, rain and mist. Vast and lonely. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-float.jpg",
+ "sha256": "0495ab46be49ef22e0bcf3f2bd38a3b191c474dae36bd37ac2012af85f8146b5",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-float-2026102803-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373666998590930496",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373666998590930496",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-d7af78dac1b7-0-31645fcb6143.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "The ark floats level on brown water over the drowned valley floor, tents and trees at the edge, small figures wading and one clinging to a floating tree in the foreground, grey mist: the waters bore up the ark (line 11). Ark look exact.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "17398ca05c0ea62bbd8d1f53c6c1ec2049aa7434584e9205d0f2deb98f2e6246",
+  "references_sha256": "2c4f74bd30742c1408129dea18a0cfd64914d19408cb465a4e1cc6889dca3204"
+ }
 }

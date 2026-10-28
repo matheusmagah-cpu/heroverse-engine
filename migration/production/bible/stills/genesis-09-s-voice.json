@@ -2,6 +2,49 @@
  "id": "genesis-09-s-voice",
  "episode": "genesis-09-short",
  "shot": "s-voice",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Black rain clouds hang low over a dry valley where a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle stands alone on a hill, its roof empty and flat, a fork of lightning glowing deep inside the clouds. Dusk, the dry grass bent flat by a cold wind, dust hanging over the slopes. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Black rain clouds hang low over a dry valley where a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle stands alone on a hill, its roof empty and flat, a fork of lightning glowing deep inside the clouds. Dusk, the dry grass bent flat by a cold wind, dust hanging over the slopes. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+ "sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-voice-2026102803-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "ba2d1ef1a958a414c84425b22cd9a0f5cbe06b1ec3e2b1418c826699873dd7c4"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "12fb15fee81405bee381095e8444ab21b145f073499c1c9470bd05f295f1be81"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373666546356357184",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373666546356357184",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-04b467abf55a-0-34589bcfc5d7.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "The ark in its one look (long flat box of pitch-black planks, flat roof, square ends, as tall at both ends) alone in a dry valley under low black clouds with a fork of lightning, dust and bent grass; no people, nothing built; ominous and vast. It stands on the valley floor rather than a hill: the line (God's seven days) does not depend on it.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "e0b54e856ac4695dce40892556a0accfe428545506fe0f9d15a3b7e8e45b8909",
+  "references_sha256": "2c4f74bd30742c1408129dea18a0cfd64914d19408cb465a4e1cc6889dca3204"
+ }
 }
