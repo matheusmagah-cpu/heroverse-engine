@@ -6,7 +6,7 @@
  "period": "the-flood",
  "aspect_ratio": "9:16",
  "story": "The flood (SERIES.md episode 9; arc 3, The Flood)",
- "people": "Noah and his family are seen only from behind on the ramp and in silhouette (no characters.json reference in this episode: Genesis gives Noah no words before the flood is over, and the Shorts' Pavo budget of ~20 units, coordinator 28/10, goes to God's voice-over and the Keeper). The people of the valley are an unnamed crowd seen from behind or in silhouette, a lone man seen from behind on the last rock at the climax; none is a characters.json entry and none speaks. God is never shown: His Genesis 7:4 is a deep voice-over over the storm at the open. No establishing shot. The Keeper only for the insight, the comment question and the close, in voice-over (plan B): silent on screen with his narration over, genesis-07's exact prompts.",
+ "people": "Noah is APPROVED (characters.json) and appears by his references in two silent Pavo shots: at the open door looking over the valley (s-noah-door) and by the lamp inside with his family asleep around him (s-noah-lamp); Genesis gives him no words before the flood is over, so he never speaks. His wife, sons and their wives have no characters.json entry: they are seen from behind on the ramp and in silhouette. The people of the valley (s-music, s-windows, s-springs, s-climb, s-hills, s-fists, s-peak-crowd, s-rock) are an unnamed crowd seen from behind or in silhouette, a lone man seen from behind on the last rock at the climax; none is a characters.json entry and none speaks. God is never shown: His Genesis 7:4 is a deep voice-over over the storm at the open. No establishing shot. The Keeper only for the insight, the comment question and the close, in voice-over (plan B): silent on screen with his narration over, genesis-07's exact prompts.",
  "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 7:4, voice-over: seven days, then forty days of rain); stake and open loop (seven days before the rain the valley was still laughing; one week, one open door: would anyone believe?); escalation in three rising steps of the flood against the valley, acted, each ending on a hook (the animals come and the family goes in, and the Lord shut him in; the fountains of the deep and the windows of heaven, and the loudest mockers run for the hills; the waters bear up the ark and cover the hills, one last peak); acted climax s-peak and s-drift (a lone man seen from behind on the last rock watches the ark float past) carrying Genesis 7:23 'and Noah only remained alive'; payoff (Genesis 7:24, the family safe inside, the shut door held); keeper_close in voice-over (insight: seven more days with the door open, and the Lord, not Noah, shut it; comment question; part 10).",
  "narration": [
   {
@@ -137,11 +137,23 @@
    "lines": [
     1
    ],
-   "seconds": 8,
+   "seconds": 6,
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tilt up. The men in silhouette pause in their work and glance up at the darkening sky, then turn back to their fires, smoke drifting across the camp. Evening, the clouds thickening. Heedless and uneasy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "first_frame": "genesis-09-s-sky",
    "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-door",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing in a great square doorway of rough pitch-black planks under a grey sky, looks out over the valley, his lips closed, silent, a gust of wind tugging at his robe, while people in silhouette pass far below without looking up. Overcast afternoon, flat grey light on the timber. Patient and grave. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "id": "s-pairs",
@@ -316,16 +328,17 @@
    "figures": "anonymous"
   },
   {
-   "id": "s-lamp",
+   "id": "s-noah-lamp",
    "kind": "scene",
    "lines": [
     17,
     18
    ],
    "seconds": 12,
-   "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. The small flame of the clay lamp flickers on the plank floor beside the family in silhouette asleep on the straw. Dim warm lamplight. Safe and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
-   "first_frame": "genesis-09-s-lamp",
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, sits on a rough plank floor in the dark beside a small clay oil lamp, his family in silhouette asleep on the straw around him and a white lamb curled at his feet, and he lifts his eyes toward the drumming of the rain overhead, his lips closed, silent, his face calm. Dim warm lamplight in deep shadow, the steady sound of rain. Safe and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
    "figures": "anonymous"
   },
   {
