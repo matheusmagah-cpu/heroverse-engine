@@ -665,6 +665,24 @@ class StoryQaV4(unittest.TestCase):
 
 
 class DraftArc1(unittest.TestCase):
+    def test_e209_keeper_native_plan_cannot_silently_restore_kokoro_or_still_fallbacks(self):
+        import pavo_native as pn
+        p = json.loads(DRAFT_PLAN.read_text())
+        keepers = [(i, s) for i, s in enumerate(p["shots"]) if s.get("kind") == "keeper"]
+        self.assertEqual(len(keepers), 14)
+        for i, s in keepers:
+            with self.subTest(shot=s["id"]):
+                self.assertEqual(pn.route(p, s, i), pn.NATIVE)
+                self.assertIn(s["id"], p["source_design"]["pavo_talking"])
+                self.assertNotIn(s["id"], p["source_design"]["still_motion"])
+                self.assertNotIn("still_of", s)
+                self.assertEqual((p["fallbacks"].get(s["id"]) or {}).get("source"), "wait_pavo_native")
+        gods = [(i, s) for i, s in enumerate(p["shots"]) if s.get("speaker") == "god"]
+        self.assertEqual(len(gods), 9)
+        for i, s in gods:
+            self.assertEqual(pn.route(p, s, i), pn.KOKORO)
+            self.assertFalse(s.get("characters"))
+
     def test_the_arc_1_draft_is_arcs_json_arc_01_and_passes_strict(self):
         # owner, 2026-10-26: the long follows arcs.json, arc-01 = Genesis 1-3 = Shorts 1-4, one complete story, with
         # Adam, Eve, the serpent (silent: the Keeper narrates its lines) and God; no Cain or Abel
