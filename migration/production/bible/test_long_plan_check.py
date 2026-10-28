@@ -371,6 +371,40 @@ class StoryQaV4(unittest.TestCase):
         self.assertIn("s-god", r["estimate"]["audio_routes"]["kokoro_prompt_filter"])
         self.assertNotIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
 
+    def test_the_owner_exception_criteria_serve_the_arc01_long_only(self):
+        # owner 28/10 ~02:30 UTC ("tem que ser amanhã"): the exception file names its plan; any other is refused
+        p = v4_plan()
+        p["criteria"] = lc.V4X
+        p["episode"] = "arc-02-long"
+        self.assertIn("CRITERIA_EXCEPTION_PLAN", codes(check(p)))
+        p["episode"] = "arc-01-long"
+        self.assertNotIn("CRITERIA_EXCEPTION_PLAN", codes(check(p)))
+        self.assertIsNone(lc.frozen_qa_problem(plan=p))
+        saved = lc.QA_V4X_SHA256
+        lc.QA_V4X_SHA256 = "0" * 64                      # pinned like v4: an edited file is refused
+        try:
+            self.assertTrue(lc.frozen_qa_problem(plan=p).startswith("QA_NOT_FROZEN"))
+        finally:
+            lc.QA_V4X_SHA256 = saved
+
+    def test_a_spoken_shot_may_keep_kokoro_on_a_native_plan_but_never_opt_into_native(self):
+        # owner 28/10: God is one voice across the long (never seen speaking): his lines keep our Kokoro voice-over
+        p = v4_plan()
+        shot(p, "s-god")["audio_route"] = "kokoro"
+        r = check(p)
+        self.assertNotIn("AUDIO_ROUTE_UNKNOWN", codes(r))
+        self.assertIn("s-god", r["estimate"]["audio_routes"]["kokoro_plan"])
+        self.assertNotIn("s-god", r["estimate"]["audio_routes"]["pavo_native"])
+        self.assertNotIn("s-god", r["estimate"]["audio_routes"]["kokoro_prompt_filter"])
+        p = plan()
+        shot(p, "s-god")["audio_route"] = "pavo_native"     # a shot cannot choose Pavo's speech on its own
+        self.assertIn("AUDIO_ROUTE_UNKNOWN", codes(check(p)))
+        p = v4_plan()
+        import pavo_native
+        silent = next(s for s in p["shots"] if s.get("window_of") is None and not pavo_native.spoken(s))
+        silent["audio_route"] = "kokoro"                      # a shot that speaks no line has no route
+        self.assertIn("AUDIO_ROUTE_UNKNOWN", codes(check(p)))
+
     def test_review_2_keeper_prompts_pass_the_prompt_rules_too(self):
         p = plan()
         s = shot(p, "k-insight-1")

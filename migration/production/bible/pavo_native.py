@@ -35,6 +35,7 @@ for _p in (HERE, REPO / "migration" / "production" / "characters"):
     if str(_p) not in sys.path:
         sys.path.insert(0, str(_p))
 V4 = "story-qa-criteria-v4"
+V4X = "story-qa-criteria-v4-owner-exception-arc01"   # the owner's arc-01 exception (long_plan_check.V4X)
 QA_V4 = REPO / "migration" / "production" / "qa_criteria_story_v4.json"
 NATIVE = "pavo_native"
 KOKORO = "kokoro"
@@ -64,7 +65,7 @@ def native_plan(plan):
     criteria file with the speech rows exists)."""
     if not isinstance(plan, dict) or plan.get("audio_route") == KOKORO:
         return False
-    return plan.get("criteria") == V4 or plan.get("audio_route") == NATIVE
+    return plan.get("criteria") in (V4, V4X) or plan.get("audio_route") == NATIVE
 
 
 def load_voices(path=None):
@@ -114,7 +115,9 @@ def route(plan, shot, index, blocks=None):
     refuses; on any other plan "kokoro" (today's route)."""
     if not spoken(shot):
         return None
-    if not native_plan(plan):
+    if not native_plan(plan) or shot.get("audio_route") == KOKORO:
+        # owner 28/10: a shot may keep our Kokoro voice on a native plan (God's voice-overs: one voice for the whole
+        # long, never seen speaking); a shot can never opt INTO native speech on its own (long_plan_check)
         return KOKORO
     return KOKORO if line_blocked(shot_line(plan, index), blocks) else NATIVE
 

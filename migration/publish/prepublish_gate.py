@@ -45,13 +45,18 @@ FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e513512
                           "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc",
                           # owner, 2026-10-27 (R1-R4): v3 + Pavo's speech kept per clip under checks, the pinned
                           # medium.en ASR, free fallbacks for non-spoken shots; v3 stays frozen and unchanged
-                          "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"}
+                          "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f",
+                          # owner exception 2026-10-28 ("tem que ser amanhã"): v4 with only the fallback rows widened,
+                          # for the arc-01 long only (long_plan_check CRITERIA_EXCEPTION_PLAN); v4 stays frozen
+                          "story-qa-criteria-v4-owner-exception-arc01": "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
                   "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json",
                   "story-qa-criteria-v1": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v1.json",
                   "story-qa-criteria-v3": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v3.json",
-                  "story-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v4.json"}
+                  "story-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v4.json",
+                  "story-qa-criteria-v4-owner-exception-arc01": Path(__file__).resolve().parents[1] / "production"
+                  / "qa_criteria_story_v4_owner_exception_arc01.json"}
 STANDARD_VERSIONS = tuple(CRITERIA_FILES)  # STANDARD.md renders: the only ones approved or published
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
@@ -96,7 +101,8 @@ DIMENSIONS_STORY_V1 = {**DIMENSIONS_V4,
                        "rights": {"qa": DIMENSIONS_V4["rights"]["qa"] + ["ai_video_source_and_licence"], "review": []}}
 STORY_V3 = "story-qa-criteria-v3"
 STORY_V4 = "story-qa-criteria-v4"
-STORY_VERSIONS = (STORY_V3, STORY_V4)
+STORY_V4X = "story-qa-criteria-v4-owner-exception-arc01"   # the owner's arc-01 exception (28/10)
+STORY_VERSIONS = (STORY_V3, STORY_V4, STORY_V4X)
 
 
 def story_v3_rows(version=STORY_V3):

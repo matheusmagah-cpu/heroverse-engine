@@ -129,6 +129,17 @@ class Preflight(Scratch):
 
 
 class ApprovedShots(Scratch):
+    def setUp(self):
+        super().setUp()
+        # R3 (28/10): the arc-01 long's fallback shots name scene stills that may still be DRAFT on main while their
+        # candidates are reviewed; such a request is refused (STILL_NOT_APPROVED, test_scene_stills / plan_check
+        # frame_problems). These cases are about the clips, so they read the plan with only approved frames.
+        import plan_check
+        for s in self.plan["shots"]:
+            for f in plan_check.FRAME_FIELDS:
+                if s.get(f) and (plan_check.still_record(s[f]) or {}).get("status") != "APPROVED":
+                    del s[f]
+
     def layout_and_refs(self):
         _, layout = eb.predict(self.plan, estimate_durations(self.plan))
         for folder in ("keeper", "speakers"):
@@ -327,12 +338,12 @@ class ReviewOf468(Scratch):
 
     def test_an_unfrozen_story_qa_blocks_the_long_preflight(self):
         # the arc-01 long is measured by story QA v4 since 28/10: unfreeze whichever version it declares
-        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256
-        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = "0" * 64
+        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256
+        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = lpc.QA_V4X_SHA256 = "0" * 64   # V4X: the owner's arc-01 exception (28/10)
         try:
             r = pf.preflight(LONG, setups=[], today_images=0)
         finally:
-            lpc.QA_SHA256, lpc.QA_V4_SHA256 = saved
+            lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256 = saved
         self.assertTrue(any(b.startswith("PLAN QA_NOT_FROZEN") for b in r["blockers"]), r["blockers"])
 
     def test_check_probe_and_probe_queue_are_wired_for_the_long(self):

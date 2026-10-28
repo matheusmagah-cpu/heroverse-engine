@@ -627,3 +627,26 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   `channel-privacy.yml` left the heartbeat (a finished job; dispatched by hand).
 - **Measure:** the daily report's scheduler health (`ops/health.py`) shows no missed slot over the next 7 days, and
   `tiktok.yml`'s run history shows no dispatch by a Claude clock.
+
+## Owner decision: fixed cadence, and the arc-01 long tomorrow by exception (2026-10-28)
+- **Cadence (owner, 28/10 ~02:00-02:30 UTC): "cadência fixa (dono 28/10): 2 Shorts/dia, longo dia sim dia não;
+  produções desenhadas para o orçamento do Pavo"** ("longo dia sim, dia não"); only the mining can change it. From
+  arc-02 on, every production is designed to the shared free Pavo quota (120 units a UTC day, quota.py): a 2-day cycle
+  is 240 units = 4 Shorts x ~20 + one long <= 160 units (about 60 Pavo clips with retries; an existing clip is free).
+  Measured on arc-01 under frozen story QA v4: the long as planned needs ~142 Pavo clips (~360 units), and even with
+  ~40 shots cut one acted long costs ~260 units, so the cadence is capped by the quota until each long is designed to
+  the budget.
+- **arc-01, owner, 28/10 ~02:30 UTC (exception, this long only):** "Tem que ser amanhã.. abre a exceção e faça o que
+  resta do longo com parte das cenas do Pavo misturado com imagens animadas ou vídeos coerentes.. e no outro você faz
+  desse jeito aí.. só não pode falhar! Tem que ser preciso, sem retrabalho e assertivo com a estrutura e roteiro."
+  The time the owner accepted for "amanhã": **2026-10-29 22:00 UTC** (the 10:00 standard slot cannot be met safely:
+  ~145 Pavo still units across two UTC days, the stills' review, the build and the preview review).
+- **What it became:** `production/qa_criteria_story_v4_owner_exception_arc01.json` (frozen, pinned by sha256 in
+  long_plan_check, render_queue and prepublish_gate): story QA v4 with only `rights.fallback_sources` (and
+  `grammar.fallback_shots`, the same rule) widened, plus its version, freeze time and an `owner_exception` record
+  naming the plan; long_plan_check refuses it for any other plan (CRITERIA_EXCEPTION_PLAN). Under it a silent shot with
+  characters may be a still in motion made by Pavo agnes-image with exactly the characters' approved references
+  (SOURCE_CHARACTER_STILL otherwise), and a spoken shot whose native clip does not exist or pass is the long's plan B:
+  the pinned Kokoro voice over an approved still of the shot (God always Kokoro, #486). A Pavo character still is
+  owner-owned output judged by fallback_shots (qa_pilot), not by the open-model image row. v3, v4, every other gate and
+  the 9.5 floor are unchanged; the structure and script are plans/arc-01-long.json as they were (no shot cut).
