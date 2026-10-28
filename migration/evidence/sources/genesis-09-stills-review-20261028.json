@@ -67,6 +67,13 @@
     "s-shut-2026102805-1": "the ark end-on with no door in view: the shutting door (the line) is not shown (9.0)"
    },
    "finding": "agnes-image draws modern casual clothes on crowds unless the robes are named positively (ankle-length rough undyed wool robes, head-cloths, barefoot): 2026102804/05 fixed the clothes but lost the ark's scale and door. s-enter and s-shut stay open."
+  },
+  "2026102807": {
+   "engine": "Pavo agnes-image, no references, 11 non-ark stills submitted back to back (MCP)",
+   "result": "10 read back `failed` with no image (Pavo's free quota had run out at ~03:26 UTC); conversation 373673667613428800 was still running at the last read and is to be read back, never resubmitted",
+   "pavo_units": 11,
+   "error": "E136 (PAVO_UNREAD_JOBS, PR #499): never more than 2 unread jobs",
+   "next": "the 11 stills on FLUX after 00:00 UTC 29/10 (scene-stills.yml, 2 candidates each); s-climb, s-fists, s-rock and s-springs name the period robes positively"
   }
  },
  "thumbnail": {
@@ -77,5 +84,12 @@
    "genesis-09-short-20261028-3": "half figure not a close-up, buildings and a staff, R16 0.45"
   },
   "finding": "the period sentence's 'No stone buildings, towers' and any wide background draw buildings; the next spec frames the face only."
+ },
+ "pavo_units_genesis_09_28_10": {
+  "stills": 13,
+  "thumbnail": 4,
+  "lost_to_quota_stop": 11,
+  "total": 28,
+  "reservation": 40
  }
 }
