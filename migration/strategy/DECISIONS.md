@@ -650,3 +650,16 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   the pinned Kokoro voice over an approved still of the shot (God always Kokoro, #486). A Pavo character still is
   owner-owned output judged by fallback_shots (qa_pilot), not by the open-model image row. v3, v4, every other gate and
   the 9.5 floor are unchanged; the structure and script are plans/arc-01-long.json as they were (no shot cut).
+
+## Owner decision: one long every other day; arc-02 designed for one production day (2026-10-28)
+- **Owner, 28/10 (through the orchestrator).** One Bible long every other day: arc-01 on 29/10, then arc-02 on 31/10
+  (production from 30/10). arc-02 is designed from the start to be made in about one day under today's limits: Pavo
+  (120 units a day shared with the Shorts) at most ~60 clips, only for the spoken shots and the acted scenes with a
+  character; God always on the Kokoro route (one voice); every other hold character-free under the narration (story
+  QA v4 `rights.fallback_sources`: vetted footage, FLUX stills in motion) or a window of an acted clip. The frozen QA
+  files are unchanged.
+- **What it became** (branch `claude/arc-02-long-plan`): `plans/arc-02-long.json` (Genesis 4:1-6:22, the four Shorts
+  of arcs.json arc-02 as chapters), Cain, Abel and Enoch as DRAFT characters with reference prompts, Cain's measured
+  Kokoro pace (`evidence/voice/20261028/cain-voice.json`), 38 DRAFT still prompts; the cadence anchor
+  (`ops/runway.py` FIRST_STORY_LONG 29/10) and the arcs.json long slots 31/10, 02/11, 04/11 (arc-01's own slot,
+  29/10 22:00 UTC, is the exception's, below).

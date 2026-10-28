@@ -1,0 +1,133 @@
+{
+ "version": "voice-pace-measure-v1",
+ "date": "2026-10-28",
+ "how": "Voiced locally in a Claude session, no Actions run, 0 credits: kokoro-onnx with the hash-pinned Kokoro v1.0 assets (kokoro-v1.0.fp16.onnx, voices-v1.0.bin bca610b8..., verify_public_voice_asset.ASSETS) through pilot_render.py voice, each line one segment in its speaker's characters.json voice at speed 1.0. A line is its sentences from the first sentence's start to the last sentence's end in timeline.json (the method of evidence/long/20261026/noah-scoffer-voice.json); a voice's pace is its words over its seconds; words are plan_check.words (split on spaces).",
+ "calibration": "Adam's and Eve's three lines of noah-scoffer-voice.json in the same run: 3.798 (the same to the third decimal) and 3.560 (3.566 there), so the method and the model are the same.",
+ "lines_chosen": "Cain (am_eric, arc-02 long): his KJV line of the plan (Genesis 4:13-14), one other KJV-based line and six short dramatic lines of the kind a Genesis 4 Short would give him, 11-17 words each, the talking-line range.",
+ "voices": {
+  "cain": {
+   "voice_id": "am_eric",
+   "speed": 1.0
+  },
+  "adam": {
+   "voice_id": "am_fenrir",
+   "speed": 1.0
+  },
+  "eve": {
+   "voice_id": "af_heart",
+   "speed": 1.0
+  }
+ },
+ "pace_by_voice_words_per_s": {
+  "cain": {
+   "lines": 8,
+   "pace": 3.34,
+   "line_min": 2.759,
+   "line_max": 4.064,
+   "each": [
+    {
+     "line": "My punishment is greater than I can bear. Behold, thou hast driven me out this day",
+     "words": 16,
+     "seconds": 5.279,
+     "pace": 3.031
+    },
+    {
+     "line": "I know not: Am I my brother's keeper? He keeps the sheep, not me.",
+     "words": 14,
+     "seconds": 5.074,
+     "pace": 2.759
+    },
+    {
+     "line": "Every one that findeth me shall slay me. Where can I hide from thy face?",
+     "words": 15,
+     "seconds": 4.682,
+     "pace": 3.204
+    },
+    {
+     "line": "Abel, come out with me into the field. There is something I must show you.",
+     "words": 15,
+     "seconds": 4.425,
+     "pace": 3.39
+    },
+    {
+     "line": "Why does his smoke rise and mine fall back? I gave the work of my own hands.",
+     "words": 17,
+     "seconds": 5.065,
+     "pace": 3.356
+    },
+    {
+     "line": "I tilled this ground with my own hands, and now it will not answer me.",
+     "words": 15,
+     "seconds": 3.691,
+     "pace": 4.064
+    },
+    {
+     "line": "A fugitive and a vagabond. Is that all I am now, a man with no ground?",
+     "words": 16,
+     "seconds": 4.809,
+     "pace": 3.327
+    },
+    {
+     "line": "Do not look at me like that. I brought an offering too, the same as he did.",
+     "words": 17,
+     "seconds": 4.404,
+     "pace": 3.86
+    }
+   ]
+  },
+  "adam": {
+   "lines": 3,
+   "pace": 3.798,
+   "line_min": 3.5,
+   "line_max": 4.085,
+   "each": [
+    {
+     "line": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman,",
+     "words": 17,
+     "seconds": 4.404,
+     "pace": 3.86
+    },
+    {
+     "line": "I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.",
+     "words": 19,
+     "seconds": 5.428,
+     "pace": 3.5
+    },
+    {
+     "line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+     "words": 19,
+     "seconds": 4.651,
+     "pace": 4.085
+    }
+   ]
+  },
+  "eve": {
+   "lines": 3,
+   "pace": 3.56,
+   "line_min": 2.886,
+   "line_max": 4.087,
+   "each": [
+    {
+     "line": "He says you will not die. He says your eyes will be opened, and you will see.",
+     "words": 17,
+     "seconds": 4.34,
+     "pace": 3.917
+    },
+    {
+     "line": "God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+     "words": 17,
+     "seconds": 4.16,
+     "pace": 4.087
+    },
+    {
+     "line": "It was the serpent. He twisted every word. The serpent beguiled me, and I did eat.",
+     "words": 16,
+     "seconds": 5.544,
+     "pace": 2.886
+    }
+   ]
+  }
+ },
+ "used_by": "migration/production/bible/voice_pace.py VOICE_PACE cain 3.340, VOICE_SLOWEST cain 2.732 (min(3.340 x 2.25/2.75 = 2.733, slowest line 2.759)).",
+ "reading": "Cain (am_eric) speaks between the narrator (2.874) and Eve (3.566-3.732); his 16-word plan line measures about 4.8 s, inside one talking hold."
+}

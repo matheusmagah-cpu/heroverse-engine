@@ -177,7 +177,8 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
     max_units = max_units or quota.QuotaGuard(actions=None).cap()
     approvals = approvals or {}
     existing = existing or {}
-    todo, review = [], {}
+    todo, review, planned = [], {}, []
+    fallback = shot_sources.planned_fallbacks(plan)   # owner 28/10: a free source by design, never a probe
     for i, s in eb.risk_order(plan["shots"]):
         a = approvals.get(s["id"])
         need = (needs or {}).get(s["id"])
@@ -186,6 +187,9 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
             continue
         if a and a.get("request_sha256") == digests.get(s["id"]) and (
                 need is None or (isinstance(a.get("clip_seconds"), (int, float)) and a["clip_seconds"] >= need)):
+            continue
+        if s["id"] in fallback:   # its free source is approved by approve-source (R3), never probed
+            planned.append(s["id"])
             continue
         if existing.get(s["id"]):
             review[s["id"]] = [c.get("asset") or c.get("url") for c in existing[s["id"]]]
@@ -208,7 +212,8 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
         close()
     generated = [s for s in plan["shots"] if not eb.is_window(s)]
     return {"episode": plan.get("episode"), "generated_shots": len(generated),
-            "approved": len(generated) - len(todo) - len(review), "awaiting_review": review,
+            "approved": len(generated) - len(todo) - len(review) - len(planned), "awaiting_review": review,
+            "planned_fallback": sorted(planned),
             "to_probe": len(todo), "batches": batches,
             "probe_minutes_est": round(sum(b["minutes_est"] for b in batches))}
 

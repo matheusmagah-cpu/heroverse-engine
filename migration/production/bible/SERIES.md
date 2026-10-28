@@ -53,9 +53,9 @@ script counts once the full `script_check` passes; a prayer long still scheduled
 |---|---|---|---|---|
 | prayer (stopped 26/10) | - | - | 013 night (public); 014 morning (its slot passed before the stop: the hold leaves it if public); 008 night held by `channel-privacy.yml` unschedule (`channel/hold-plan.json`) | 26/10 00:00, 26/10 10:00; 27/10 00:00 withdrawn |
 | 1 In the beginning | 1-4 (Gen 1-3) | 24-25/10 | Creation, Eden and the Fall | 29/10 22:00 (owner 28/10, "tem que ser amanhã": exception criteria, DECISIONS.md) |
-| 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 30/10 10:00 |
-| 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 01/11 10:00 |
-| 4 Abram | 13-16 (Gen 12-19) | 30-31/10 | The call of Abraham | 03/11 10:00 |
+| 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 31/10 10:00 (owner 28/10: every other day after arc-01 on 29/10) |
+| 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 02/11 10:00 |
+| 4 Abram | 13-16 (Gen 12-19) | 30-31/10 | The call of Abraham | 04/11 10:00 |
 (then every 2 days: 4 Shorts, 1 long; the episode table below is cut into arcs of 4 in order.)
 
 **Production.**

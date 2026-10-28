@@ -681,6 +681,38 @@ class DraftArc1(unittest.TestCase):
         self.assertEqual(speakers, {"adam", "eve", "god"})
 
 
+class PlanArc2(unittest.TestCase):
+    def test_the_arc_2_plan_is_arcs_json_arc_02_within_one_days_pavo_budget(self):
+        # owner, 28/10: one long every other day, arc-02 made in about one day: Pavo only for the spoken shots and
+        # the acted scenes with a character (at most ~60 clips), God always on the Kokoro route, every other hold
+        # character-free (story QA v4 fallbacks) or a window; until Claude approves the new cast's sheets the only
+        # rows left are their CHARACTER_PENDING (a DRAFT character), so --strict waits for them
+        p = json.loads((HERE / "plans" / "arc-02-long.json").read_text())
+        r = lc.check(p)
+        self.assertEqual(r["problems"], [])
+        chars = lc.ch.registry()
+        for row in r["pending"]:
+            cid = row.split()[1]
+            self.assertTrue(row.startswith("CHARACTER_PENDING ") and chars[cid]["status"] == "DRAFT", row)
+        self.assertTrue(14 <= r["estimate"]["minutes"] <= 18, r["estimate"])
+        arc = lc.arcs()["arc-02"]
+        self.assertEqual([c["short"] for c in p["chapters"]], arc["shorts"])
+        self.assertEqual(p["criteria"], "story-qa-criteria-v4")
+        god = [s for s in p["shots"] if s.get("speaker") == "god"]
+        self.assertTrue(god and all(s.get("audio_route") == "kokoro" for s in god))
+        design = p["source_design"]
+        pavo = design["pavo_talking"] + design["pavo_voice_over"] + design["pavo_scene"]
+        self.assertLessEqual(len(pavo), 60)
+        by_id = {s["id"]: s for s in p["shots"]}
+        for sid in design["footage"] + design["still_motion"]:
+            s = by_id[sid]
+            self.assertFalse(s.get("characters") or s.get("speaker") or s["kind"] == "keeper", sid)
+        for sid in design["window"]:
+            self.assertIn(by_id[sid]["window_of"], design["pavo_scene"], sid)
+        self.assertEqual(sorted(pavo + design["window"] + design["footage"] + design["still_motion"]),
+                         sorted(by_id))
+
+
 class StoryQa(unittest.TestCase):
     def test_v1_stays_byte_identical_to_main(self):
         self.assertEqual(hashlib.sha256(QA_V1.read_bytes()).hexdigest(), QA_V1_SHA256)
