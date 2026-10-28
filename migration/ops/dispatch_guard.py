@@ -181,8 +181,8 @@ def pilot_preview(i):
 
 def footage(i):
     q = i.get("queries") or "migration/production/footage/queries.json"
-    m = re.fullmatch(r"migration/production/(footage/queries|(pilot-\d{3})/beats(-\d)?)\.json", q)
-    need(m, "queries", q, "footage/queries.json or pilot-NNN/beats(-N).json")
+    m = re.fullmatch(r"migration/production/(footage/queries(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?|(pilot-\d{3})/beats(-\d)?)\.json", q)
+    need(m, "queries", q, "footage/queries(-<name>).json or pilot-NNN/beats(-N).json")
     need(re.fullmatch(r"\d{1,2}", i.get("per_theme") or "3"), "per_theme", i.get("per_theme"), "1-2 digits")
     need_file(q)
     themes = load(q).get("themes", [])

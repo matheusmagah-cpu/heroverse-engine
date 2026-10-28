@@ -2574,6 +2574,10 @@
   "REUSE_CHARACTERS_DIFFER": {
    "class": "N",
    "why": "story QA v5 opt-in (28/10): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render and refuses only a borrowed clip that is not the one the shot names, not approved, of another frame or of other characters"
+  },
+  "FOOTAGE_CROP_FAILED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_shot_sources.py::def test_the_build_crops_the_clip_after_its_sha256_check"
   }
  },
  "review": {
