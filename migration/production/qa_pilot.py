@@ -208,7 +208,9 @@ STORY_V4_ROWS = {**STORY_V3_ROWS,
                  "grammar.ai_video_speech_checks": ["pavo_speech_clip_checks"],
                  "grammar.spoken_audio_mix": ["spoken_audio_mix"],
                  "grammar.fallback_shots": ["fallback_shots"]}
-STORY_ROWS = {STORY_V3: STORY_V3_ROWS, STORY_V4: STORY_V4_ROWS}
+# the owner's arc-01 exception (28/10): v4's rows; only fallback_shots reads its widened fallback rule
+STORY_V4X = "story-qa-criteria-v4-owner-exception-arc01"
+STORY_ROWS = {STORY_V3: STORY_V3_ROWS, STORY_V4: STORY_V4_ROWS, STORY_V4X: STORY_V4_ROWS}
 KEEPER_BEATS = ("keeper_promise", "keeper_insight", "keeper_close")
 
 
@@ -390,11 +392,32 @@ def grammar_checks_story_v4(criteria, manifest, script=None, words=None, first_w
     holds = {h.get("shot"): h for h in manifest.get("holds") or []}
     spoken = {s.get("shot") for s in manifest.get("spoken_shots") or []}
     flic, mlic = set(r["allowed_footage_licences"]), {x.lower() for x in r["allowed_model_licences"]}
+    exception = criteria.get("version") == STORY_V4X
+
+    def person_or_voice_ok(c):
+        """v4: a fallback shows no character and speaks no line. The owner's arc-01 exception: a still made by Pavo
+        with the characters' approved references (the build records character_refs from the approval it checked)
+        may show them, and a spoken shot may carry the Kokoro voice over such a still."""
+        if exception and c["source"] == "still" and c.get("character_refs") is True:
+            return c.get("id") not in spoken or c.get("voice") == "kokoro"
+        return not (holds.get(c.get("id")) or {}).get("characters") and c.get("id") not in spoken
+
+    def licence_ok(c):
+        if c["source"] == "footage":
+            return c.get("licence") in flic and bool(c.get("credit"))
+        return str(c.get("licence")).lower() in mlic or (
+            exception and c.get("character_refs") is True and c.get("licence") == ai["licence"])
+
     checks["fallback_shots"] = all(
-        c.get("vetting") == "APPROVED" and c.get("sha256") and not (holds.get(c.get("id")) or {}).get("characters")
-        and c.get("id") not in spoken and c.get("audio") == "removed"
-        and ((c["source"] == "footage" and c.get("licence") in flic and c.get("credit"))
-             or (c["source"] == "still" and str(c.get("licence")).lower() in mlic)) for c in fallbacks)
+        c.get("vetting") == "APPROVED" and c.get("sha256") and person_or_voice_ok(c) and c.get("audio") == "removed"
+        and licence_ok(c) for c in fallbacks)
+    if exception:   # a Pavo character still is owner-owned output, judged by fallback_shots, not the open-model row
+        models = [m for i in (manifest.get("images") or {}).values() if not i.get("pavo_still")
+                  for m in i["models"].values()]
+        checks["images_open_licence_with_revision"] = bool(manifest.get("images")) and all(
+            str(m.get("license")).lower() in mlic and m.get("revision") for m in models) and all(
+            m.get("revision") for i in (manifest.get("images") or {}).values() if i.get("pavo_still")
+            for m in i["models"].values())
     # v3's footage row reads every clip as footage; a still is an image (images_open_licence_with_revision)
     used = {h["image"].partition("#")[0] for h in manifest.get("holds") or [] if h.get("kind") == "footage"}
     movie = [c for c in clips if c.get("source") != "still"]
@@ -477,7 +500,7 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         clips = manifest["clips"]
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
-    elif criteria["version"] == STORY_V4:
+    elif criteria["version"] in (STORY_V4, STORY_V4X):
         # owner 27/10: v3's rows plus Pavo's kept speech, the pinned ASR, the fallback shots and the spoken mix
         model_bin = Path(whisper) / "model.bin"
         v3, srt_measures = grammar_checks_story_v4(criteria, manifest, script, words, first, duration,

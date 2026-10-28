@@ -1,0 +1,47 @@
+{
+ "version": "stills-review-v1",
+ "episode": "genesis-09-short",
+ "reviewed_at": "2026-10-28T01:45:00Z",
+ "rubric": "ops/CLAUDE_REVIEW.md + PROMPT_GUIDE scene rules: the still shows its words, the flood period (no modern object, no building, the hold with a flat plank roof), faces of the crowd not shown, one coherent look; floor 9.5",
+ "runs": {
+  "40615150859": {
+   "engine": "FLUX schnell on Workers AI (free), 15 non-ark shots x 2",
+   "sheet": "production/bible/stills/sheets/genesis-09-short-40615150859.jpg",
+   "approved": {
+    "genesis-09-s-sky-40615150859-1": 9.5,
+    "genesis-09-s-peak-crowd-40615150859-2": 9.5
+   },
+   "rejected": {
+    "s-sky-2": "a man in a peaked cap (modern) at the left edge",
+    "s-lions-1": "one lion and a lioness, no sheep; crowd faces visible, a man striding",
+    "s-lions-2": "one lion not a pair; crowd with headbands and raised arms like a concert, not drawing back",
+    "s-windows-1": "modern ridge camping tents lit from inside",
+    "s-windows-2": "a glass lantern on a stand (period exclusion)",
+    "s-springs-1": "string lights and an electric pole",
+    "s-springs-2": "cables across the frame, T-shirts",
+    "s-tents-1": "a domed church on the horizon (period exclusion)",
+    "s-tents-2": "letterboxed frame (black bands)",
+    "s-climb-1": "an umbrella",
+    "s-climb-2": "hooded sweatshirts, tyre ruts",
+    "s-run-1": "denim shorts, modern haircut",
+    "s-run-2": "a castle tower on the hill, cargo shorts",
+    "s-inside-1": "gabled roof (the hold has a flat plank roof), modern railings",
+    "s-inside-2": "a skylight beam, calm family, not braced against the timbers (8.5-9.0)",
+    "s-hills-1": "no water below the hill (the line's subject)",
+    "s-hills-2": "modern crowd (checked shirt, flat cap), no water",
+    "s-carry-1": "cargo shorts with pockets",
+    "s-carry-2": "broken anatomy (the woman's head between the bearers' legs)",
+    "s-peak-crowd-1": "a thin line along a ridge, less crowded than -2",
+    "s-feet-1": "bare clean feet, no sandals, no rain, no water creeping",
+    "s-feet-2": "bare feet, no sandals, no rain; CG-clean skin (9.3)",
+    "s-lamp-1": "gabled roof, the doorway open on dry desert during the flood",
+    "s-lamp-2": "a stone wall, a fence and a house outside",
+    "s-hull-1": "a modern jacket, the hand not on the timbers",
+    "s-hull-2": "the hand on his own head, not on the hull",
+    "s-feed-1": "gabled barn open to dry land",
+    "s-feed-2": "gabled barn open to dry land"
+   },
+   "finding": "FLUX schnell takes no negative prompt and does not hold the flood period: 13 of 15 shots had no candidate at 9.5 (modern clothes and objects, buildings, gabled barns). The 13 shots go to Pavo agnes-image stills (1 unit each, today's Shorts reservation), which held the period in runs 2026102701-04."
+  }
+ }
+}

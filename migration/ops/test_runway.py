@@ -49,9 +49,9 @@ class Runway(unittest.TestCase):
         self.assertNotIn(0, {t.hour for t in r.slots(NOW, 20)})                       # the night slots retired
         arcs = json.loads((Path(r.__file__).resolve().parents[1] / "production/bible/arcs.json").read_text())["arcs"]
         # = SERIES.md calendar; arc-01's long moved off it to 04/11 (owner 27/10, "prioriza o longo agora":
-        # DECISIONS.md), the other arcs keep the cadence slots from 31/10 (owner 28/10: every other day after arc-01 on
-        # 29/10)
-        self.assertEqual(arcs[0]["long"]["slot"], "2026-11-04T10:00:00Z")
+        # DECISIONS.md), then to 29/10 22:00 (owner 28/10: "tem que ser amanhã"); the other arcs keep the cadence
+        # slots from 31/10 (owner 28/10: every other day after arc-01 on 29/10)
+        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-29T22:00:00Z")
         long_slots = [r.ts(a["long"]["slot"]) for a in arcs[1:]]
         self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if long_slots[0] <= t <= long_slots[-1]])
 

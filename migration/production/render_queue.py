@@ -49,7 +49,9 @@ STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e05
                 # prepublish_gate read its rows (STORY_V3_ROWS)
                 "story-qa-criteria-v3": "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc",
                 # owner, 2026-10-27 (R1-R4): v3 + Pavo's kept speech under checks and free fallbacks (STORY_V4_ROWS)
-                "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"}
+                "story-qa-criteria-v4": "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f",
+                # owner exception 2026-10-28: v4 with the fallback rows widened, arc-01 long only (STORY_V4_ROWS)
+                "story-qa-criteria-v4-owner-exception-arc01": "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 
