@@ -66,6 +66,7 @@ EXEMPT = {
     "tiktok.yml": "mirrors a published Short (Buffer free plan); idempotent by its ledger",
     "first-comment.yml": "one comment on a published video; idempotent",
     "arc-links.yml": "metadata edits on published videos; idempotent",
+    "gemini-image.yml": "one image on the free AI Studio key; a quota or billing answer ends the run (never billing)",
     "comment-replies.yml": "replies to viewers' comments, decided by Claude and gated by reply_policy; idempotent by its ledger",
     "channel-config.yml": "channel metadata; no generation",
     "channel-privacy.yml": "privacy flips, dispatched by hand (plan by default); idempotent",

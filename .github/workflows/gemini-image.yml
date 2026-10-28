@@ -1,0 +1,63 @@
+name: HeroVerse Gemini image (one candidate from approved stills, free AI Studio key; refuses on quota or billing)
+# Owner, 2026-10-28: a cloud image route that does not depend on the PC. migration/integrations/gemini/image.py sends
+# the request's approved stills inline at full resolution with the still's prompt and asks for ONE 16:9 image. The key
+# (secret HERO_GEMINI_API_KEY, billing disabled) is only in the environment of the one step that calls the API and
+# goes in a request header; nothing prints it. A quota or billing answer ends the run with its name; billing is never
+# enabled. The candidate (DRAFT) and its record go to branch claude/gemini-image-<run> for Claude's still review.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: models = list the image models the key can see; generate = one image from the request
+        type: choice
+        default: generate
+        options: [generate, models]
+        required: true
+      request:
+        description: request file under migration/integrations/gemini/requests/
+        type: string
+        default: migration/integrations/gemini/requests/arc-01-long-s-c3-eve-near.json
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-gemini-image
+  cancel-in-progress: false
+jobs:
+  image:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      MODE: ${{ inputs.mode }}
+      REQUEST: ${{ inputs.request }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Inputs and offline tests
+        run: |
+          case "$MODE" in generate|models) ;; *) echo INVALID_MODE; exit 1;; esac
+          if ! printf '%s' "$REQUEST" | grep -Eq '^migration/integrations/gemini/requests/[a-z0-9-]+\.json$'; then
+            echo "REQUEST_PATH_INVALID"; exit 1
+          fi
+          [ -f "$REQUEST" ] || { echo "REQUEST_MISSING"; exit 1; }
+          python3 -I -B migration/integrations/gemini/test_image.py
+      - name: Gemini API
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          if [ "$MODE" = models ]; then python3 -I -B migration/integrations/gemini/image.py models; exit $?; fi
+          python3 -I -B migration/integrations/gemini/image.py generate "$REQUEST" "$RUNNER_TEMP/out"
+      - name: Candidate to its branch for review
+        if: env.MODE == 'generate'
+        run: |
+          dest=migration/production/bible/stills/candidates
+          cp "$RUNNER_TEMP"/out/* "$dest"/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="claude/gemini-image-$GITHUB_RUN_ID"
+          git checkout -q -b "$branch"
+          git add "$dest"
+          git commit -q -m "Gemini image candidate (run $GITHUB_RUN_ID, DRAFT for Claude's still review)"
+          git push -q origin "$branch"
+          echo "CANDIDATE_BRANCH $branch"
