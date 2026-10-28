@@ -114,7 +114,9 @@ def route(plan, shot, index, blocks=None):
     refuses; on any other plan "kokoro" (today's route)."""
     if not spoken(shot):
         return None
-    if not native_plan(plan):
+    if not native_plan(plan) or shot.get("audio_route") == KOKORO:
+        # owner 28/10: a shot may keep our Kokoro voice on a native plan (God's voice-overs: one voice for the whole
+        # long, never seen speaking); a shot can never opt INTO native speech on its own (long_plan_check)
         return KOKORO
     return KOKORO if line_blocked(shot_line(plan, index), blocks) else NATIVE
 

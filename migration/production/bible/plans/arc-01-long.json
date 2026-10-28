@@ -790,7 +790,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow tilt up. The sun sinks below the horizon as the moon rises and the first stars appear over a calm sea. Dusk turning to night. Vast and ordered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
    "chapter": "c1",
-   "ambience": "a calm sea at dusk: gentle waves on the shore and a soft evening wind"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c1-stars",
@@ -946,7 +946,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Golden sunbeams break through high clouds and sweep slowly across a green valley and a winding river. Late morning, warm light and moving cloud shadows. Majestic and tender. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c1"
+   "chapter": "c1",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c1-adam-hands",
@@ -1299,7 +1300,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A warm wind moves through the branches of a single great tree heavy with fruit, sunlight flickering through its leaves. The center of the garden at noon. Solemn and clear. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c2"
+   "chapter": "c2",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c2-tree",
@@ -2240,7 +2242,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A cool wind rolls through the darkening garden and the leaves of every tree turn silver in a sudden low light. The cool of the day, evening light. Grave and searching. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-point",
@@ -2337,7 +2340,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
    "chapter": "c4",
-   "ambience": "the garden at nightfall: a hard wind driving dust across the ground"
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-dust",
@@ -2423,7 +2426,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Rain begins to fall in grey sheets across the dark garden, the leaves bowing under it. Night. Sorrow. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-eve-rain",
@@ -2463,7 +2467,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the garden. Night, heavy rain sweeping across the trees. Terrible and grand. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-kneel",
@@ -2505,7 +2510,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Heavy grey clouds roll over a barren plain of cracked dry earth and thorn bushes. Dawn, cold wind and dust. Heavy and final. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-name",
@@ -2594,7 +2600,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Mist drifts through the garden at dawn and soft light glows on a second great tree at its heart. Dawn. Solemn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "payoff",
-   "chapter": "c4"
+   "chapter": "c4",
+   "audio_route": "kokoro"
   },
   {
    "id": "s-c4-life",
