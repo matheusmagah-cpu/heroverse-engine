@@ -1,0 +1,65 @@
+{
+ "id": "genesis-09-short-20261028-3",
+ "episode": "genesis-09-short",
+ "run": "20261028",
+ "status": "DRAFT",
+ "format": "short",
+ "size": [
+  1080,
+  1920
+ ],
+ "spec_sha256": "e13ce65302e25793eec2df164d5613587377e48cba61fe73cb1096e143434fe4",
+ "prompt": "Extreme close-up, his face filling the whole frame edge to edge from brow to chin with almost no background: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his dark eyes lifted to the sky in grief and dread, the first heavy rain of the flood streaming down his weathered cheeks and grey beard, his mouth closed, only a sliver of dark teal storm sky with falling rain behind his head. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. Golden torchlight bathes his face in rich warm orange and amber against the deep teal storm, vivid saturated colour, high contrast, photorealistic cinematic film still, sharp focus on the eyes, film grain, no text, no lettering, no signature, no watermark.",
+ "text": "THE FLOOD BEGINS",
+ "text_by": "thumbs.py overlay (DejaVu Sans Bold), never the image model",
+ "source": "pavo-agnes-image-2.5-flash",
+ "model": "agnes-image",
+ "ratio": "9:16",
+ "resolution": "hd",
+ "conversation_id": "373668931170533184",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-noah-front",
+   "sha256": "4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5",
+   "sent_sha256": "50414fb9e968367841be07c9f700d86b989e44e00c70524b41c26c392747f4e8"
+  },
+  {
+   "record": "ch-noah-three-quarter",
+   "sha256": "3c5fc8f49ff36c9893fcf11a30ee58e888d5c8c6a187e2f5cbf45dc0d6c6b422",
+   "sent_sha256": "0f1a3a2d1d1f0e1aea42967cb13fe7ae2cd3c62ce4e5669d75b4e71306137494"
+  }
+ ],
+ "references_live": true,
+ "source_size": [
+  1472,
+  2624
+ ],
+ "base_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261028-3-base.jpg",
+ "base_sha256": "e9c6089660a454c63ea3272624da5ea6d0e7ac9df25571b4d218077275f2ae11",
+ "repo_path": "migration/production/bible/thumbs/candidates/genesis-09-short-20261028-3.jpg",
+ "sha256": "a59ce3ceddd28a2608c95742ea1b3f4281cdb4946decc78873f2552cab549266",
+ "r16": {
+  "status": "FAIL",
+  "fails": [
+   "THUMB_NOT_SATURATED 0.45 <= 0.45 (R16)"
+  ],
+  "metrics": {
+   "brightness": 0.239,
+   "contrast": 0.205,
+   "saturation": 0.446,
+   "colourfulness": 0.166,
+   "edge_density": 0.141,
+   "warm_share": 0.201,
+   "blue_share": 0.272,
+   "dark_share": 0.398,
+   "bright_share": 0.032,
+   "yellow_text_like": 0.0
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)"
+}

@@ -42,6 +42,40 @@
     "s-feed-2": "gabled barn open to dry land"
    },
    "finding": "FLUX schnell takes no negative prompt and does not hold the flood period: 13 of 15 shots had no candidate at 9.5 (modern clothes and objects, buildings, gabled barns). The 13 shots go to Pavo agnes-image stills (1 unit each, today's Shorts reservation), which held the period in runs 2026102701-04."
+  },
+  "2026102803-05": {
+   "engine": "Pavo agnes-image (hd 9:16, the 2 approved ark references), MCP from the main checkout, 0 credits each",
+   "pavo_units": {
+    "ark_stills": 11,
+    "thumbnail": 3,
+    "total": 14,
+    "reservation": 40
+   },
+   "approved": {
+    "genesis-09-s-voice-2026102803-1": 9.5,
+    "genesis-09-s-finished-2026102803-1": 9.5,
+    "genesis-09-s-float-2026102803-1": 9.5,
+    "genesis-09-s-drift-2026102804-1": 9.5
+   },
+   "rejected": {
+    "s-enter-2026102803-1": "faces to the camera, blue jeans",
+    "s-shut-2026102803-1": "the ark tilted and floating in surf (the door shuts on dry land), modern shirts and jeans",
+    "s-drift-2026102803-1": "a trench coat",
+    "s-enter-2026102804-1": "shorts and sweaters; not on the ramp, the door not seen",
+    "s-shut-2026102804-1": "the ark raised on stilts, the door not shutting, boots",
+    "s-enter-2026102805-1": "robes right, but the ark drawn light brown and shed-sized, not giant or pitch-black (9.0)",
+    "s-shut-2026102805-1": "the ark end-on with no door in view: the shutting door (the line) is not shown (9.0)"
+   },
+   "finding": "agnes-image draws modern casual clothes on crowds unless the robes are named positively (ankle-length rough undyed wool robes, head-cloths, barefoot): 2026102804/05 fixed the clothes but lost the ark's scale and door. s-enter and s-shut stay open."
   }
+ },
+ "thumbnail": {
+  "spec": "production/bible/thumbs/genesis-09-short.json (v2, v3, v4 wording in its note)",
+  "rejected": {
+   "genesis-09-short-20261028-1": "Noah's face by reference and grief are right; a columned temple behind him, R16 saturation 0.33",
+   "genesis-09-short-20261028-2": "R16 PASS, Noah's face, grief; stone towers on both sides (period exclusion)",
+   "genesis-09-short-20261028-3": "half figure not a close-up, buildings and a staff, R16 0.45"
+  },
+  "finding": "the period sentence's 'No stone buildings, towers' and any wide background draw buildings; the next spec frames the face only."
  }
 }
