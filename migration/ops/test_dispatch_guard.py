@@ -298,6 +298,16 @@ class Inputs(unittest.TestCase):
         g.plan_strict_problems(LONG_PLAN, run=lambda cmd, **kw: long_cmd.append(cmd) or sp.CompletedProcess(cmd, 0, "", ""))
         self.assertTrue(long_cmd[0][3].endswith("long_plan_check.py"))
 
+    def test_parallel_footage_runs_retry_their_record_push(self):
+        """After E144 footage runs of different queries run at once; each pulls and pushes its records to main, so a
+        push that loses the race pulls again (bounded) and a run that never lands fails loudly, never silently."""
+        wf = (g.WF_DIR / "footage.yml").read_text()
+        loop = re.search(r"for i in 1 2 3 4 5 6; do\n\s+git pull --rebase -q origin main && git push -q origin HEAD:main "
+                         r"&& \{ pushed=1; break; \}\n\s+git rebase --abort 2>/dev/null \|\| true; sleep \$\(\(i \* 7\)\)\n"
+                         r"\s+done\n\s+\[ \"\$pushed\" = 1 \] \|\| \{ echo \"FOOTAGE_RECORDS_NOT_PUSHED\"; exit 1; \}", wf)
+        self.assertIsNotNone(loop)
+        self.assertEqual(wf.count("git push"), 1)
+
     def test_e144_footage_runs_of_different_queries_never_share_a_pending_slot(self):
         """E144 (28/10): GitHub keeps one PENDING run per concurrency group and cancels the older one; every
         footage.yml run shared `heroverse-footage` and the subject `footage-library`/the pilot, so the long's beats-6

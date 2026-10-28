@@ -2578,6 +2578,10 @@
   "FOOTAGE_CROP_FAILED": {
    "class": "I",
    "guard": "migration/production/bible/test_shot_sources.py::def test_the_build_crops_the_clip_after_its_sha256_check"
+  },
+  "FOOTAGE_RECORDS_NOT_PUSHED": {
+   "class": "D",
+   "resume": "main moved six times during the run's push window (parallel footage runs, E144); the clips are uploaded: dispatch the same queries again, the uploaded clips are found again by id and skipped"
   }
  },
  "review": {
