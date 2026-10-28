@@ -1607,6 +1607,26 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E144",
+   "date": "2026-10-28",
+   "class": [
+    "order"
+   ],
+   "prior": [
+    "E112",
+    "E116"
+   ],
+   "error": "28/10 ~11:15-11:36 UTC: footage.yml runs cancelled each other. Every run shared the workflow-level concurrency group `heroverse-footage` (and the library's runs the subject `footage-library`); GitHub keeps one PENDING run per group and cancels the older pending one when a newer one queues. The long's beats-6 (40680841788) cancelled genesis-09's stock search (40678588023) while both waited behind beats-5, and genesis-10/11's dispatch then cancelled beats-6 (re-dispatched as 40681276657). Root cause: a concurrency group meant to serialise runs was shared by unrelated inputs, and GitHub's pending-replacement turned serialisation into silent cancellation.",
+   "fix": "footage.yml's workflow-level group is per queries file (`heroverse-footage-<queries>`), and the dispatch guard gives a named library queries file its own subject (`footage-library-<name>`), so two different searches never share a pending slot; a pilot's beats keep the pilot's subject on purpose (its footage, images, render and preview in order). Class antidote: a concurrency group serialises only runs that must not overlap; unrelated inputs never share one (a pending run in a shared group is replaced, not queued).",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e144_footage_runs_of_different_queries_never_share_a_pending_slot",
+    "covers": [
+     "order"
+    ]
+   }
   }
  ]
 }

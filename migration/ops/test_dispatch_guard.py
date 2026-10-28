@@ -250,7 +250,7 @@ class Inputs(unittest.TestCase):
         self.refused("footage.yml", {"queries": "migration/production/footage/queries-nope-99.json"}, "GUARD_INPUT_MISSING")
         named = {"queries": "migration/production/footage/queries-shorts-g09.json", "per_theme": "2"}
         self.assertEqual(g.WORKFLOWS["footage.yml"][1](named)["uploads"], 2 * 17)
-        self.assertEqual(g.subject_of("footage.yml", named), "footage-library")
+        self.assertEqual(g.subject_of("footage.yml", named), "footage-library-shorts-g09")
         wf = (g.WF_DIR / "footage.yml").read_text()
         self.assertIn("footage/queries(-[a-z0-9]+)*|", wf)   # the workflow's own path check agrees
         self.refused("publish-episode.yml", {"episode": "genesis-01-short", "publish_at": "tomorrow"}, "GUARD_INPUT_INVALID")
@@ -297,6 +297,21 @@ class Inputs(unittest.TestCase):
         long_cmd = []
         g.plan_strict_problems(LONG_PLAN, run=lambda cmd, **kw: long_cmd.append(cmd) or sp.CompletedProcess(cmd, 0, "", ""))
         self.assertTrue(long_cmd[0][3].endswith("long_plan_check.py"))
+
+    def test_e144_footage_runs_of_different_queries_never_share_a_pending_slot(self):
+        """E144 (28/10): GitHub keeps one PENDING run per concurrency group and cancels the older one; every
+        footage.yml run shared `heroverse-footage` and the subject `footage-library`/the pilot, so the long's beats-6
+        cancelled genesis-09's pending run (40678588023) and genesis-10/11's cancelled beats-6 (40680841788). Each
+        queries file is now its own workflow-level group, and a named library queries file its own subject (job
+        group); a pilot's beats keep the pilot's subject on purpose (its footage, images, render and preview in order)."""
+        subjects = {g.subject_of("footage.yml", {"queries": q}) for q in (
+            "migration/production/footage/queries.json", "migration/production/footage/queries-shorts-g09.json",
+            "migration/production/footage/queries-shorts-g10-g11.json", f"migration/production/{PILOT}/beats-5.json")}
+        self.assertEqual(len(subjects), 4)
+        wf = (g.WF_DIR / "footage.yml").read_text()
+        top = re.search(r"^concurrency:.*?\n  group: (.+)", wf, re.M | re.S).group(1)
+        self.assertIn("inputs.queries", top)
+        self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
 
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
