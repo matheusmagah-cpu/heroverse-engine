@@ -105,7 +105,7 @@
  "time": {
   "probe_minutes_sequential": 2400,
   "probe_hours_sequential": 40.0,
-  "shot_probe_runs": 22,
+  "shot_probe_runs": 23,
   "why_sequential": "shot-probe.yml has one workflow-level concurrency group (heroverse-shot-probe) and generate_clips submits one job and polls it to the end before the next",
   "with_two_pavo_jobs_at_once": 20.0,
   "direct_talking_probe_hours": 6.6,
@@ -120,7 +120,7 @@
    "27-28/10: this contract (claude/long-preflight) and the story QA v3 reader, .srt writer and the 25 open review rows (claude/long-qa-v3-gates) merged: until then LONG_REVIEW_OPEN blocks the build",
    "28/10: the local preflight with the pinned Kokoro (--voice --refs --write, 0 credits): the measured length and every request digest; a 16:9 still path in scene_stills.py for the 11 image-first shots",
    "28-29/10: 120 direct 0-credit talking probes (20 lines x 6), about 6.6 h at two Pavo jobs at once; the main risk: genesis-07's Keeper lines passed 1 in 33, so a Keeper line under 0.9 goes to plan B (voice-over Keeper, still mouth) before any shot-probe run",
-   "29/10-01/11: 22 shot-probe.yml runs (~40 h one after another, probe-queue order) with Claude's frame reviews and approve-shot PRs as each run lands; about 15 % re-probed",
+   "29/10-01/11: 23 shot-probe.yml runs (~40 h one after another, probe-queue order) with Claude's frame reviews and approve-shot PRs as each run lands; about 15 % re-probed",
    "in parallel: LONG_DESIGN slice 3, the long's build (16:9 compose at LONG_LINE_GAP, .srt, owned music at -15 LUFS, the Real-ESRGAN matrix), which ships approved clips only (verify-preflight first)",
    "02/11: the build, the preview gate and Claude's long review (>= 9.5); 03/11 approve.yml -> prepublish_gate.py; 04/11 publication (day 30 of the goal is 16/11)"
   ]

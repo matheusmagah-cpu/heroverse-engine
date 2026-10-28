@@ -69,6 +69,37 @@ class LiveIntel(unittest.TestCase):
             self.assertEqual((v3["verdict"], v3["median"]), ("good", 390))  # judged against v1/v2 at 47-48 h
             self.assertEqual(len(json.loads(state.read_text())["history"]), 3)
 
+    def test_e140_a_published_episode_without_its_video_id_is_refused_not_skipped(self):
+        """E140: genesis-05..08 were public with their ids in publish/ledger.json, but their records had no video_id
+        and rows() skipped them without a word. main() now refuses: the instrument never drops a published episode."""
+        with tempfile.TemporaryDirectory() as t:
+            eps = Path(t, "eps")
+            eps.mkdir()
+            sha = "ab" * 32
+            rec = lambda **over: json.dumps(dict({"id": "genesis-05-short", "part": 5, "output_sha256": sha,
+                                                  "attributes": {}}, **over))
+            (eps / "genesis-05-short.json").write_text(rec())
+            ledger = Path(t, "ledger.json")
+            ledger.write_text(json.dumps({"entries": {f"bible:genesis-05-short:{sha}": {"video_id": "OYijqQdQq0o"}}}))
+            Path(t, "stats.json").write_text(json.dumps({"captured_at": "2026-10-28T08:00:00Z", "videos": []}))
+            args = (eps, Path(t, "stats.json"), Path(t, "state.json"), Path(t, "out.json"), ledger)
+            with self.assertRaises(SystemExit) as e:
+                li.main(*args)
+            self.assertIn("EPISODE_VIDEO_ID_MISSING genesis-05-short", str(e.exception))
+            self.assertFalse(Path(t, "state.json").exists())   # nothing half-written
+            (eps / "genesis-05-short.json").write_text(rec(video_id="WRONG"))
+            with self.assertRaises(SystemExit) as e:
+                li.main(*args)
+            self.assertIn("EPISODE_VIDEO_ID_MISMATCH genesis-05-short", str(e.exception))
+            (eps / "genesis-05-short.json").write_text(rec(video_id="OYijqQdQq0o"))
+            self.assertEqual(li.main(*args), 0)
+
+    def test_e140_every_published_episode_record_carries_the_ledger_video_id(self):
+        root = Path(__file__).resolve().parents[1]
+        ledger = json.loads((root / "publish/ledger.json").read_text())
+        eps = [json.loads(f.read_text()) for f in sorted((root / "production/bible/episodes").glob("*.json"))]
+        self.assertEqual(li.video_id_problems(eps, ledger), [])
+
 
 if __name__ == "__main__":
     unittest.main()

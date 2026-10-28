@@ -14,7 +14,59 @@
    "id": "genesis-03-short",
    "age_h": 2.8,
    "views": 40
+  },
+  {
+   "id": "genesis-01-short",
+   "age_h": 89.4,
+   "views": 129
+  },
+  {
+   "id": "genesis-02-short",
+   "age_h": 80.6,
+   "views": 303
+  },
+  {
+   "id": "genesis-03-short",
+   "age_h": 66.6,
+   "views": 123
+  },
+  {
+   "id": "genesis-04-short",
+   "age_h": 56.6,
+   "views": 129
+  },
+  {
+   "id": "genesis-05-short",
+   "age_h": 42.6,
+   "views": 182
+  },
+  {
+   "id": "genesis-06-short",
+   "age_h": 32.6,
+   "views": 156
+  },
+  {
+   "id": "genesis-07-short",
+   "age_h": 18.6,
+   "views": 462
+  },
+  {
+   "id": "genesis-08-short",
+   "age_h": 8.6,
+   "views": 318
   }
  ],
- "hypotheses": []
+ "hypotheses": [
+  {
+   "id": "H-20261028-short-v2",
+   "attribute": "structure",
+   "value": "bible-story-short",
+   "started": "2026-10-28",
+   "status": "RUNNING",
+   "change": "Shorts v2 from part 7: 170-179 s, God's voice or a character speaks the conflict in the cold open, ~32 Pavo acted scenes, engine compose, cut only (parts 1-6: 47-86 s, 1-13 AI scenes)",
+   "expected": ">= 1.2x the series median at the same age (live_intel GOOD) on 2 consecutive episodes carrying it",
+   "measured_by": "mining/live_intel.py; genesis-07 reaches 48 h on 2026-10-29 13:30Z, genesis-08 on 2026-10-29 23:30Z",
+   "early_read_20261028": "genesis-07 462 views at 18.6 h, genesis-08 318 at 8.6 h vs parts 1-6 at 123-303 lifetime (own calculation, inconclusive under 48 h)"
+  }
+ ]
 }

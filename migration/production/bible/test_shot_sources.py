@@ -359,8 +359,11 @@ class OwnerException(unittest.TestCase):
                 a = ss.approve_source(arc, t["id"], "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
                                       shots_dir=d)
                 self.assertEqual(a["motion"], ss.REUSE_KEEPER_MOTION if t["kind"] == "keeper" else ss.REUSE_MOTION)
-                with self.assertRaises(SystemExit) as err:
-                    ss.approve_source(arc, near, "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
+                other = next(s["id"] for s in arc["shots"] if s["id"] not in (t["id"], t["still_of"])
+                             and s.get("still_of") != t["still_of"] and s.get("window_of") is None
+                             and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(t)))
+                with self.assertRaises(SystemExit) as err:   # a shot that does not name the still never takes it
+                    ss.approve_source(arc, other, "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
                                       shots_dir=d)
                 self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
             finally:
