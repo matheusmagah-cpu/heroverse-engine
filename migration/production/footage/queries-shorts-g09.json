@@ -1,0 +1,24 @@
+{
+ "version": "footage-queries-v1",
+ "library": "migration/production/footage/library",
+ "note": "genesis-09-short (Genesis 7, the flood) under story QA v5 (owner 28/10: \"Preciso de Short HOJE... pegar vídeos disponíveis, coerentes com o que está falando\"): stock for the scenes whose stills are not approved, period-coherent, no face shown; `faceless` themes may show a figure from behind, hands or feet (footage.BLOCK_FACELESS), every clip still vetted on its frame sheet and reviewed >= 9.5 per shot (approve-source). Pixabay first, then Wikimedia Commons; 16:9 clips are centre-cropped to 1080x1920 for the Short.",
+ "themes": [
+  {"theme": "flood-pairs", "query": "camels walking desert"},
+  {"theme": "flood-pairs", "query": "goats walking hill"},
+  {"theme": "flood-lions", "query": "lion walking"},
+  {"theme": "flood-camp", "query": "bonfire sparks night"},
+  {"theme": "flood-camp", "query": "people dancing around fire silhouette", "faceless": true},
+  {"theme": "flood-door", "query": "old wooden door closing"},
+  {"theme": "flood-rain", "query": "heavy rain night"},
+  {"theme": "flood-rain", "query": "lightning night sky"},
+  {"theme": "flood-springs", "query": "muddy water flowing"},
+  {"theme": "flood-springs", "query": "flood water rushing"},
+  {"theme": "flood-climb", "query": "people walking up hill rain", "faceless": true},
+  {"theme": "flood-hands", "query": "hands knocking wooden door", "faceless": true},
+  {"theme": "flood-hills", "query": "flooded valley"},
+  {"theme": "flood-hills", "query": "fog over hills"},
+  {"theme": "flood-rock", "query": "man standing on rock sea back view", "faceless": true},
+  {"theme": "flood-lamp", "query": "oil lamp flame dark"},
+  {"theme": "flood-robe", "query": "old man walking robe back view", "faceless": true}
+ ]
+}
