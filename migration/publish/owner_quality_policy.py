@@ -10,18 +10,20 @@ import re
 OWNER_FLOOR = 9.5
 
 
-LONG_REVIEWER = "claude-session-reviewer"  # owner 2026-10-24: replaces gemini-3.8-flash for long videos
+LONG_REVIEWERS = ("claude-session-reviewer", "gpt-6-astra-session-reviewer")
+# Explicit session identities only: retain historical Claude reviews and record the GPT handoff truthfully.
 SHORTS_REVIEWER = "gemini-3.8-flash"        # Shorts move to the Claude reviewer next (their pipeline is separate)
 
 
 def check(review, output_sha256, reviewer=SHORTS_REVIEWER):
-    """Return categorical problems without modifying the review evidence. Long videos pass LONG_REVIEWER."""
+    """Check one designated model or an explicit tuple; long videos pass LONG_REVIEWERS. Never edit evidence."""
     if not isinstance(review, dict):
         return ["REVIEW_NOT_OBJECT"]
     problems = []
     if review.get("status") != "PASS":
         problems.append("REVIEW_NOT_PASS")
-    if review.get("model") != reviewer:
+    models = (reviewer,) if isinstance(reviewer, str) else reviewer
+    if not isinstance(models, tuple) or review.get("model") not in models:
         problems.append("REVIEW_MODEL_NOT_DESIGNATED")
     overall = review.get("overall")
     if (isinstance(overall, bool) or not isinstance(overall, (int, float))

@@ -1,11 +1,25 @@
-# Claude review (designated reviewer of long videos since 2026-10-24)
+# Session review (Claude since 2026-10-24; GPT continuity, 2026-10-28)
 
 Owner, 2026-10-24: "replace gemini-3.8-flash; I cannot have this in the system; find another AI". Every free Gemini
-candidate failed the calibration (`evidence/reviewer-calibration/`), so Claude reviews.
+candidate failed the calibration (`evidence/reviewer-calibration/`), so Claude became the designated reviewer.
+
+## Explicit reviewer handoff
+For the owner's request on 2026-10-28 that GPT take over the project's continuity, the long-video allowlist is
+`publish/owner_quality_policy.py`'s `LONG_REVIEWERS`: `claude-session-reviewer` and
+`gpt-6-astra-session-reviewer` only. `long_review.py`, `prepublish_gate.py`, automatic approval and the final upload
+check all use that same list. No prefix, other GPT model or automatic fallback qualifies. The Shorts policy is
+unchanged.
+
+The reviewer must inspect the evidence below and record its **true session identity** in `model`; never label a GPT
+review as Claude. `inspection/claude_review.json`, schema `claude-review-v1` and existing diagnostic names stay as
+legacy interfaces so the same approval trigger and stored Claude evidence remain compatible. Keeping those names
+does not change the reviewer identified in the record. The rubric, hash bindings, frozen QA and 9.5 owner floor
+are unchanged. This handoff neither creates a review nor approves a video: only the existing
+`approve.yml` → `prepublish_gate.py` path may write `APPROVAL.json`.
 
 ## When
 Every main-clock run: `render_queue.py migration/production migration/publish/ledger.json review 72` lists due renders
-with QA PASS and no Claude review for their hash. Each one is reviewed in the same run.
+with QA PASS and no review for their hash. Each one is reviewed in the same run by a designated reviewer.
 
 ## What is looked at (evidence)
 - `inspection/review-sheet.jpg`: 16 frames evenly across the video at 640×360 (picture, captions, cards).
@@ -14,7 +28,7 @@ with QA PASS and no Claude review for their hash. Each one is reviewed in the sa
 - `inspection/thumbnail.jpg` and `out/thumbnail_check.json` (R16).
 - `out/timeline.json` and `script.json`: the full spoken text, the hook within 8 s, roadmap, re-hooks, CTA (R12, R13).
 - `out/qa.json`: the objective audio and speech measures (loudness, true peak, speech presence, WER, wpm, music
-  under the voice). Claude does not hear the file; the frozen QA measures it and already failed anything outside
+  under the voice). The session reviewer does not hear the file; the frozen QA measures it and already failed anything outside
   its bands.
 - `out/package.json`: title (R14), description (R15), chapters.
 
@@ -27,7 +41,7 @@ measures (each band met with margin = 9.5+). Every score below 9.5 names its iss
 Gate: items ≥ 7 and overall ≥ 8; publication needs overall ≥ 9.5 (owner floor).
 
 ## Output
-`inspection/claude_review.json`: `version` claude-review-v1, `model` claude-session-reviewer, `pilot_id`,
+`inspection/claude_review.json`: `version` claude-review-v1, `model` the actual designated session identity, `pilot_id`,
 `output_sha256` (the render's hash), `reviewed_at`, the eight scores, `overall`, `issues` (list, timestamps),
 `strongest_moment`, `evidence` (the files read). Committed through a branch, PR and squash merge; the push starts
 `approve.yml`, which binds it to the file and runs every other gate.

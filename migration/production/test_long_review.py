@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline checks of the long-video review: own rows and the designated reviewer's (Claude) review decide."""
+"""Offline checks of the long-video review: own rows and an explicitly designated session review decide."""
 import hashlib
 import json
 from pathlib import Path
@@ -46,8 +46,9 @@ class Review(unittest.TestCase):
     def test_reviewer_model_matches_the_gate(self):
         sys.path.insert(0, str(HERE.parent / "publish"))
         import prepublish_gate
-        self.assertEqual(lr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)
-        self.assertEqual(lr.REVIEW_MODELS, ("claude-session-reviewer",))   # owner 2026-10-24: gemini-3.8-flash replaced
+        import owner_quality_policy
+        self.assertIs(lr.REVIEW_MODELS, owner_quality_policy.LONG_REVIEWERS)
+        self.assertIs(prepublish_gate.REVIEW_MODELS, owner_quality_policy.LONG_REVIEWERS)
 
     def test_review_prompt_unchanged(self):
         self.assertEqual(hashlib.sha256(lr.review_prompt("X").encode()).hexdigest(), REVIEW_PROMPT_X_SHA256)
@@ -83,6 +84,7 @@ class Review(unittest.TestCase):
 
     def test_no_valid_review_for_this_file_is_awaiting_never_a_verdict(self):
         for bad in (None, claude(sha="other"), claude(model="gemini-3.8-flash"), claude(overall=11),
+                    claude(model="gpt-6-astra-session-reviewer-other"),
                     claude(evidence=[]), claude(opening_and_promise="9")):
             with tempfile.TemporaryDirectory() as t:
                 d = pilot(t)
@@ -93,6 +95,32 @@ class Review(unittest.TestCase):
                 out = json.loads((d / "out" / "review.json").read_text())
             self.assertEqual(out["status"], "AWAITING_REVIEW", bad)
             self.assertNotIn("watched_review", out)
+
+    def test_gpt_review_keeps_its_real_identity_and_evidence(self):
+        record = claude(model="gpt-6-astra-session-reviewer")
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t)
+            self.write(d, record)
+            with mock.patch("builtins.print"):
+                lr.main(str(d))
+            out = json.loads((d / "out" / "review.json").read_text())
+            self.assertEqual(json.loads((d / lr.CLAUDE_REVIEW).read_text()), record)
+        self.assertEqual(out["status"], "PASS")
+        self.assertEqual(out["watched_review"]["model"], "gpt-6-astra-session-reviewer")
+        self.assertEqual(out["watched_review"]["evidence"], record["evidence"])
+        self.assertEqual(out["output_sha256"], record["output_sha256"])
+
+    def test_gpt_review_needs_the_same_binding_evidence_and_rubric(self):
+        for changes, expected in (({"output_sha256": "other"}, "AWAITING_REVIEW"),
+                                  ({"evidence": []}, "AWAITING_REVIEW"),
+                                  ({"overall": 11}, "AWAITING_REVIEW"),
+                                  ({"picture_quality": 6.5}, "FAIL")):
+            with self.subTest(changes=changes), tempfile.TemporaryDirectory() as t:
+                d = pilot(t)
+                self.write(d, claude(model="gpt-6-astra-session-reviewer", **changes))
+                with mock.patch("builtins.print"):
+                    lr.main(str(d))
+                self.assertEqual(json.loads((d / "out" / "review.json").read_text())["status"], expected)
 
     def test_down_reviewer_costs_one_tiny_call_and_no_video_call(self):
         # E58: the old reviewer did not answer even a 5-token call; the review now never calls a provider at all

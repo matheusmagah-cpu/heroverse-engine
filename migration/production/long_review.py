@@ -4,10 +4,10 @@
 
 1. Hard rows measured on our own file and script (length, Scripture read per
    10 minutes) block approval.
-2. Watched review by the designated reviewer, Claude (owner, 2026-10-24: "replace gemini-3.8-flash; find another
-   AI"). Claude reviews the inspection sheets, the transcript, the thumbnail and the QA audio measures and commits
-   inspection/claude_review.json bound to the render's hash (rubric items >= 7, overall >= 8; the owner floor 9.5
-   applies at publication). No provider is called here; a render without a valid Claude review for its hash is
+2. Watched review by an explicitly designated session reviewer (owner_quality_policy.LONG_REVIEWERS). The reviewer
+   inspects the sheets, transcript, thumbnail and QA audio measures and commits inspection/claude_review.json
+   bound to the render's hash, with its true model identity (rubric items >= 7, overall >= 8; the owner floor 9.5
+   applies at publication). The filename is legacy. No provider is called here; a render without a valid review for its hash is
    AWAITING_REVIEW, never a verdict.
 
 Writes out/review.json; prints the status. Never edits QA criteria.
@@ -21,14 +21,16 @@ import sys
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "mining"))
+sys.path.insert(0, str(HERE.parent / "publish"))
+import owner_quality_policy  # noqa: E402
 import shorts_review as sr  # noqa: E402  (Files API upload and delete: reviewer calibration only)
 import structure_mining as sm  # noqa: E402  (reviewer calibration only)
 
 RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 PASS_ITEM, PASS_OVERALL = 7, 8
-REVIEW_MODELS = ("claude-session-reviewer",)  # same tuple as publish/prepublish_gate.py
-CLAUDE_REVIEW = "inspection/claude_review.json"
+REVIEW_MODELS = owner_quality_policy.LONG_REVIEWERS
+CLAUDE_REVIEW = "inspection/claude_review.json"  # legacy path; model identifies the actual session reviewer
 # hard rows (block), prayer format: measured on our own file and script (deterministic).
 HARD = {"minutes": (10.02, 50.0), "scripture_per_10_min": (4, 99)}
 # free-tier tokens per minute: the whole-video review samples fewer frames
@@ -72,11 +74,11 @@ def own_measures(script, timeline, seconds):
 
 
 def claude_problems(review, sha):
-    """A Claude review is valid only for this render, with every rubric score, an overall and its evidence."""
+    """A designated session review is valid only for this render, with every score and its evidence."""
     if not isinstance(review, dict):
         return ["CLAUDE_REVIEW_MISSING"]
     problems = []
-    if review.get("model") != REVIEW_MODELS[0]:
+    if review.get("model") not in REVIEW_MODELS:
         problems.append("CLAUDE_REVIEW_MODEL")
     if review.get("output_sha256") != sha:
         problems.append("CLAUDE_REVIEW_NOT_FOR_THIS_FILE")

@@ -14,9 +14,9 @@ VIDEO_BYTES = b"0" * 10
 VIDEO_SHA = hashlib.sha256(VIDEO_BYTES).hexdigest()
 
 
-def synthetic_review():
+def synthetic_review(model="claude-session-reviewer"):
     return {"status": "PASS", "output_sha256": VIDEO_SHA,
-            "watched_review": {"status": "PASS", "model": "claude-session-reviewer", "overall": 9.6}}
+            "watched_review": {"status": "PASS", "model": model, "overall": 9.6}}
 
 
 class R:
@@ -118,6 +118,24 @@ class NewUploadOwnerFloor(unittest.TestCase):
         self.assertFalse(args[-2].exists())
         self.assertFalse(args[-1].exists())
 
+    def test_gpt_review_passes_the_upload_check_without_rewriting_evidence(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            self.fixture(d, synthetic_review("gpt-6-astra-session-reviewer"))
+            before = (d / "review.json").read_text()
+            pv.check_new_upload(d / "m.json", {"output_sha256": VIDEO_SHA}, d / "v.mp4")
+            self.assertEqual((d / "review.json").read_text(), before)
+
+    def test_gpt_review_cannot_upload_below_floor_failed_or_bound_to_another_file(self):
+        for scope, field, value in (("watched", "overall", 9.49), ("watched", "status", "FAIL"),
+                                    ("top", "status", "FAIL"), ("top", "output_sha256", "a" * 64),
+                                    ("top", "watched_review", None)):
+            with self.subTest(scope=scope, field=field, value=value), tempfile.TemporaryDirectory() as t:
+                r = synthetic_review("gpt-6-astra-session-reviewer")
+                target = r if scope == "top" else r["watched_review"]
+                target[field] = value
+                self.assert_blocked_without_session_or_upload(self.fixture(Path(t), r))
+
     def test_low_missing_or_invalid_score_blocks_before_session(self):
         for score in (8.5, 8.99, 9, 9.49, 10.1, True, False, None, "9", float("nan"), float("inf")):
             with self.subTest(score=score), tempfile.TemporaryDirectory() as t:
@@ -148,7 +166,8 @@ class NewUploadOwnerFloor(unittest.TestCase):
     def test_status_and_designated_model_are_required(self):
         for scope, field, value in (("top", "status", "FAIL"), ("top", "status", None),
                                     ("watched", "status", "FAIL"), ("watched", "status", None),
-                                    ("watched", "model", "gemini-3.6-flash"), ("watched", "model", None)):
+                                    ("watched", "model", "gemini-3.6-flash"), ("watched", "model", None),
+                                    ("watched", "model", "gpt-6-astra-session-reviewer-other")):
             with self.subTest(scope=scope, field=field, value=value), tempfile.TemporaryDirectory() as t:
                 review = synthetic_review()
                 target = review if scope == "top" else review["watched_review"]
@@ -197,7 +216,7 @@ class NewUploadOwnerFloor(unittest.TestCase):
                     patch.object(pv.owner_quality_policy, "check", wraps=pv.owner_quality_policy.check) as check:
                 pv.check_new_upload(d / "m.json", {"output_sha256": sha}, d / "v.mp4")
             bound, actual, reviewer = check.call_args.args
-            self.assertEqual(reviewer, "claude-session-reviewer")   # long videos: the Claude reviewer
+            self.assertIs(reviewer, pv.owner_quality_policy.LONG_REVIEWERS)
             self.assertEqual(actual, sha)
             self.assertEqual(bound, {**review["watched_review"], "output_sha256": sha})
             self.assertNotIn("output_sha256", review["watched_review"])
