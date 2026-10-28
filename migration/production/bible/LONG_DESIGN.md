@@ -242,7 +242,8 @@ long could be measured or approved. Now:
 2. **The render path.** `still_render` and `pilot_render`, the long's old render, have no talking or lip-sync path;
    only `episode_build` (the Shorts') does. The long's build is episode_build's path at 16:9, with submit and leave
    and a matrix upscale (slice 3).
-3. **The cast.** Cain and Abel have no characters.json entry. Arc 2's long will need them (owner: not for now).
+3. **The cast.** Cain, Abel and Enoch are DRAFT characters.json entries (28/10, the arc-02 long): their sheets
+   are made by cf-images.yml and approved by Claude before any of their shots is generated.
 4. **Pavo concurrency.** Two jobs at once is measured; the ceiling is not. The next 0-credit test is 4 at once.
 
 ## 5. The arc-1 draft (`plans/arc-01-long.json`)
@@ -404,3 +405,18 @@ Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent s
   that source (footage at its frame, a still rendered in motion at 2560x1440) and the manifest names it per shot.
 - **The Keeper at 16:9 (E130).** Plan B (the voice-over Keeper) is a path of the long; under v4 a 16:9 Keeper prompt
   says "Close-up from the chest up, his face large in the centre of the frame" (KEEPER_FRAMING_16X9).
+
+## 10. The arc-02 plan: one production day (owner, 28/10)
+
+`plans/arc-02-long.json` (Genesis 4:1-6:22; chapters genesis-05 to 08) is built for one day of production under
+today's limits, with the split in its `source_design`:
+- **Pavo, 59 clips:** 47 silent acted scenes with a character (Cain, Abel, Enoch, Adam, Eve, Noah), 5 voice-overs of
+  God on the Kokoro route (one voice, `audio_route: kokoro`), 7 talking shots (Cain's Genesis 4:13-14 and six Keeper
+  close-ups, Pavo's own speech under story QA v4). Expected about 160 units at one candidate a shot (scene 1.2 and
+  talking 2.5 generations, 2 units each), plus the direct talking probes the preflight asks for (7 lines x 6).
+- **Free, 50 holds:** 38 FLUX stills in motion (anonymous figures and establishing shots; DRAFT records
+  `stills/arc-02-long-*.json`) and 12 vetted footage holds (sky, clouds, rain, mist, sunrise).
+- **Windows, 56 holds** of the acted clips (at most two a clip, FOOTAGE_SHORT holds).
+- Measured locally with the pinned Kokoro (each speaker's voice, LONG_LINE_GAP): 14.77 min, cold open 27.7 s, climax
+  at 0.795, Keeper 3.8 %, every hold 4.08-6.87 s. long_plan_check: no problem; `--strict` waits only for the three
+  CHARACTER_PENDING rows.

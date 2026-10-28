@@ -381,13 +381,14 @@ class Plan(unittest.TestCase):
         arc = json.loads((ev / "long/20261026/arc-01-voice.json").read_text())["pace_by_voice_words_per_s"]
         ns = json.loads((ev / "long/20261026/noah-scoffer-voice.json").read_text())["pace_by_voice_words_per_s"]
         kp = json.loads((ev / "voice/20261026/kokoro-pace.json").read_text())
+        cv = json.loads((ev / "voice/20261028/cain-voice.json").read_text())["pace_by_voice_words_per_s"]
         runs, lines = {}, {}
         for run in arc.values():
             for key, v in run.items():
                 runs.setdefault(key.split()[0], []).append(v["pace"])
                 if "line_min" in v:
                     lines.setdefault(key.split()[0], []).append(v["line_min"])
-        for src in (ns, kp["probe_by_voice"]):
+        for src in (ns, kp["probe_by_voice"], cv):
             for who, v in src.items():
                 runs.setdefault(who, []).append(v["pace"])
                 lines.setdefault(who, []).append(v["line_min"])
