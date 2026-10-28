@@ -100,6 +100,19 @@ class FreshInstall(unittest.TestCase):
                 self.assertEqual(core.read_json(dest, None), {"ok": True})
 
 
+class Listing(unittest.TestCase):
+    def test_a_challenge_or_an_empty_listing_is_never_a_silent_success(self):
+        # E134: the PC's logged-out dry run got "Drag the slider to fit the puzzle" on our profile page and
+        # `comments` ended 0 with videos=0, as if there were nothing to answer
+        self.assertEqual(core.listing_outcome(None)[0], 4)
+        self.assertIn("CHALLENGE", core.listing_outcome(None)[1])
+        self.assertEqual(core.listing_outcome([])[0], 5)
+        self.assertEqual(core.listing_outcome([{"video_id": VID}]), (0, None))
+        src = (HERE / "runner.py").read_text()
+        self.assertIn("code, why = core.listing_outcome(videos)", src)
+        self.assertIn("drag the slider", src)
+
+
 class Source(unittest.TestCase):
     def test_no_cookie_value_spoofing_or_captcha_code(self):
         src = (HERE / "runner.py").read_text()

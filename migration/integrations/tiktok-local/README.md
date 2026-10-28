@@ -49,3 +49,7 @@ No browser profile on the PC is logged in to TikTok (read-only check, counts onl
 cookies and no login cookie and no www.tiktok.com page in its history; Chrome "Profile 1" and "Profile 3" and Edge
 Default have no TikTok history). The runner therefore uses its own profile, which the owner logs into once with
 `runner.py login`.
+
+Dry run the same day, logged out and headless: our profile page loaded (HeroVerse, 1070 followers) but TikTok put a
+"Drag the slider to fit the puzzle" challenge over the video list, so `comments` stops with CHALLENGE (exit 4,
+E134). Whether a logged-in, visible window gets through without a puzzle is the first thing to see after the login.

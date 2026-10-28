@@ -150,6 +150,8 @@ def collect_videos(page, max_videos):
     page.on("response", lambda r: "/api/post/item_list" in r.url and videos.extend(core.videos_from_api(json_of(r))))
     page.goto(f"{BASE}/@{core.HANDLE}", wait_until="domcontentloaded")
     pause((4, 8))
+    if challenged(page):
+        return None   # E134: a puzzle instead of the videos; never solved, reported
     for _ in range(4):
         if len(videos) >= max_videos:
             break
@@ -189,6 +191,11 @@ def cmd_comments(args):
             log("NOT_LOGGED_IN (comments are read anyway where TikTok shows them)")
         page = ctx.pages[0] if ctx.pages else ctx.new_page()
         videos = collect_videos(page, args.max_videos)
+        code, why = core.listing_outcome(videos)
+        if code:
+            log(why)
+            ctx.close()
+            return code
         core.write_json(OWN, {"handle": core.HANDLE, "at": core.iso(core.now_utc()), "videos": videos})
         current = {"vid": None}
         page.on("response", lambda r: "/api/comment/list" in r.url and current["vid"]

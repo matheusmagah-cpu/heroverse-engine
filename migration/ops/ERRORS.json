@@ -1385,6 +1385,29 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E134",
+   "date": "2026-10-28",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129"
+   ],
+   "error": "TikTok local runner dry run on the owner's PC (logged out, headless): TikTok answered our profile page with a 'Drag the slider to fit the puzzle' challenge, and `runner.py comments` ended with exit 0 and 'videos=0 new=0', which reads as 'no comment to answer'. Root cause: the challenge check ran only on video pages (open_video), not on the profile listing, and an empty listing was treated as a normal result.",
+   "fix": "collect_videos returns None on a challenge; tiktok_core.listing_outcome turns a challenge into exit 4 (CHALLENGE, never solved: the owner logs in and looks) and an empty listing into exit 5 (NO_VIDEOS_FOUND); `comments` stops on either before writing anything.",
+   "antidote": {
+    "file": "migration/integrations/tiktok-local/test_tiktok_core.py",
+    "contains": "def test_a_challenge_or_an_empty_listing_is_never_a_silent_success",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

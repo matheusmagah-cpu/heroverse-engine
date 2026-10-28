@@ -145,6 +145,16 @@ def videos_from_api(body, handle=HANDLE):
     return out
 
 
+def listing_outcome(videos):
+    """(exit code, reason) of the video listing: None = TikTok showed a challenge (a puzzle) instead of the page,
+    [] = no video found. Both stop `comments` with a non-zero code, never an empty "success" (E134)."""
+    if videos is None:
+        return 4, "CHALLENGE: TikTok showed a puzzle instead of our videos; nothing is solved (owner: log in with `runner.py login`, look at the window)"
+    if not videos:
+        return 5, f"NO_VIDEOS_FOUND on @{HANDLE} (page changed? run `runner.py probe` on a known video)"
+    return 0, None
+
+
 def new_comments(found, ledger):
     """Comments not decided yet: none acted on or skipped (the ledger), each once."""
     acted, out, seen = set(ledger.get("actions", {})), [], set()
