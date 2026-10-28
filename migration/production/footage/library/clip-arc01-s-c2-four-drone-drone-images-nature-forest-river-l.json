@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-four-drone-drone-images-nature-forest-river-l",
+ "theme": "arc01-s-c2-four",
+ "query": "river branches aerial",
+ "source": "pixabay",
+ "title": "drone, drone images, nature, forest, river, landscape, drone footage, aerial view, aerial image, amazon, aerial images, clouds, sky",
+ "page": "https://pixabay.com/videos/id-216060/",
+ "author": "Drone_Aventura",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Drone_Aventura via Pixabay (https://pixabay.com/videos/id-216060/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ff2d42fdd03e0a514bf0244160eda0ae9b9476db83c634602d9612d56158e684",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  108.1,
+  109.1,
+  107.9,
+  109.1,
+  112.9
+ ],
+ "vetting_descriptions": [
+  "A beautiful view of a lake with a mountain in the background, with a few boats floating on the water.",
+  "A beautiful view of a lake with mountains in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-four-drone-drone-images-nature-forest-river-l-sha256-ff2d42fdd03e0a514bf0244160eda0ae9b9476db83c634602d9612d56158e684.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

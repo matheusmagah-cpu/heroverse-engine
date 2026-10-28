@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-fruit-dew-dewdrop-waterdrop-bull-wet-rush-stal",
+ "theme": "arc01-s-c3-fruit",
+ "query": "red fruit hanging branch dew",
+ "source": "pixabay",
+ "title": "dew, dewdrop, waterdrop, bull, wet, rush stalk",
+ "page": "https://pixabay.com/videos/id-126177/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-126177/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "63347fa5f10557e0645616cbc567ebda19a5db0f64dd41e3e63ef715a6776c3b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  35.2,
+  35.1,
+  36.2,
+  36.7,
+  36.5
+ ],
+ "vetting_descriptions": [
+  "A close up of a plant with water droplets on it.",
+  "A close up of a plant with water droplets on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-fruit-dew-dewdrop-waterdrop-bull-wet-rush-stal-sha256-63347fa5f10557e0645616cbc567ebda19a5db0f64dd41e3e63ef715a6776c3b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

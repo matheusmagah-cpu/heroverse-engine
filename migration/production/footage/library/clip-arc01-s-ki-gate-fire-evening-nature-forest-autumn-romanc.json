@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-ki-gate-fire-evening-nature-forest-autumn-romanc",
+ "theme": "arc01-s-ki-gate",
+ "query": "distant fire night forest edge",
+ "source": "pixabay",
+ "title": "fire, evening, nature, forest, autumn, romance, love",
+ "page": "https://pixabay.com/videos/id-148594/",
+ "author": "Domka_1611",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: Domka_1611 via Pixabay (https://pixabay.com/videos/id-148594/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8642c91d737ff946c4d224c08e65e69044c214ef7aa76d86453daf1aa2b8a19b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  41.9,
+  34.3,
+  34.1,
+  36.3,
+  50.4
+ ],
+ "vetting_descriptions": [
+  "A person is pouring water into a teapot, which is placed on a fire.",
+  "A person pouring water into a cup while another person holds a bucket of water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

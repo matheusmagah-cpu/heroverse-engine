@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-silhouette-sunset-nature-landscape-dusk-sky-twiligh",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette couple sunset",
+ "source": "pixabay",
+ "title": "sunset, nature, landscape, dusk, sky, twilight, sun, seagull, bird, gull, plumage, wildlife, feathers, beak, silhouette",
+ "page": "https://pixabay.com/videos/id-236610/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-236610/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1e95d362efc396f416ff33a524e52e68e9a3364d5a9c1fac62ebf9bae787602c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.4,
+  80.9,
+  80.3,
+  81.7,
+  81.4
+ ],
+ "vetting_descriptions": [
+  "A bird is standing on a rock in front of a beautiful sunset.",
+  "A bird is standing on a rock in front of a sunset."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-silhouette-sunset-nature-landscape-dusk-sky-twiligh-sha256-1e95d362efc396f416ff33a524e52e68e9a3364d5a9c1fac62ebf9bae787602c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-gate-waterfall-trees-forest-leaves-autumn-fal",
+ "theme": "arc01-s-c4-gate",
+ "query": "dark forest path entrance",
+ "source": "pixabay",
+ "title": "waterfall, trees, forest, leaves, autumn, fall, trail, path, landscape",
+ "page": "https://pixabay.com/videos/id-239608/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-239608/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "31a953cb41e7f347f5a375e914bff4bffb9bf67cb329e4d61a348010121b3f91",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.2,
+  115.9,
+  116.2,
+  116.0,
+  115.8
+ ],
+ "vetting_descriptions": [
+  "A waterfall is surrounded by trees and a forest, with a small stream flowing down the side of a mountain.",
+  "A waterfall is surrounded by trees and ferns, and there is a trail leading to the waterfall."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-gate-waterfall-trees-forest-leaves-autumn-fal-sha256-31a953cb41e7f347f5a375e914bff4bffb9bf67cb329e4d61a348010121b3f91.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-deep-ocean-sea-waves-rocks-pacific-coast-colo",
+ "theme": "arc01-s-c1-deep",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "ocean, sea, waves, rocks, pacific, coast, colorful",
+ "page": "https://pixabay.com/videos/id-217115/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-217115/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "922ec03defe7d57d37c6a3fd6884f18d13e2bad8b114bc53e8886ed0e3bf7ff1",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  119.7,
+  119.2,
+  119.7,
+  121.3,
+  120.1
+ ],
+ "vetting_descriptions": [
+  "A rocky cliff overlooking the ocean with waves crashing against the rocks.",
+  "A rocky cliff overlooking the ocean with waves crashing against the rocks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-deep-ocean-sea-waves-rocks-pacific-coast-colo-sha256-922ec03defe7d57d37c6a3fd6884f18d13e2bad8b114bc53e8886ed0e3bf7ff1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

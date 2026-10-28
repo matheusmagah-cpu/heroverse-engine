@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hide-drone-aerial-view-cinematic-drone-footag",
+ "theme": "arc01-x-hide",
+ "query": "hiding behind tree from behind",
+ "source": "pixabay",
+ "title": "drone, aerial view, cinematic, drone footage, sky view, 4k drone, abstract landscape, flying camera, nature from above",
+ "page": "https://pixabay.com/videos/id-276605/",
+ "author": "Drone4u",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Drone4u via Pixabay (https://pixabay.com/videos/id-276605/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "df7919456d164b7808464aeb65f84a324715fc4594e8f748f547e3c3baa8323f",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  96.3,
+  97.2,
+  97.5,
+  96.5,
+  94.1
+ ],
+ "vetting_descriptions": [
+  "A dirt road is surrounded by trees and grass, and there are a few cows in the distance.",
+  "A person is riding a bike on a dirt road through a forest."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

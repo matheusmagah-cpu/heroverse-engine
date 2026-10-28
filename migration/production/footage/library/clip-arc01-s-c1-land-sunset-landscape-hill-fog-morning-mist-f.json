@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-land-sunset-landscape-hill-fog-morning-mist-f",
+ "theme": "arc01-s-c1-land",
+ "query": "green hills sea aerial morning",
+ "source": "pixabay",
+ "title": "sunset, landscape, hill, fog, morning mist, forest, nature, mood, morning mood, fall, autumn day",
+ "page": "https://pixabay.com/videos/id-316173/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-316173/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c4d9b1729a7c90674ab4901263a75bf7485c2983286b4a353af6c354c6c339a7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  112.5,
+  118.3,
+  120.0,
+  121.8,
+  124.6
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over a mountain range, with a cloudy sky and a few trees in the foreground.",
+  "The sun is setting over a mountain range, with a cloudy sky and a few trees visible."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-land-sunset-landscape-hill-fog-morning-mist-f-sha256-c4d9b1729a7c90674ab4901263a75bf7485c2983286b4a353af6c354c6c339a7.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,43 @@
+{
+ "id": "clip-arc01-s-c4-sword2-skull-head-bones-flames-fire-burn-fictio",
+ "theme": "arc01-s-c4-sword2",
+ "query": "fire flames spinning night",
+ "source": "pixabay",
+ "title": "skull, head, bones, flames, fire, burn, fiction, creativity, background, beautiful wallpaper, human, skeleton, hot, night, halloween, holiday, horror, evil, hell, smoke, burning",
+ "page": "https://pixabay.com/videos/id-63533/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-63533/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a9e17f7c716b20f9536a252af20814450b9759e1a8b20650451c0834894ebec7",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "BLACK_RUN_AFTER_GRADE 3.17s"
+ ],
+ "vetting_luma": [
+  4.4,
+  7.0,
+  4.8,
+  3.6,
+  3.1
+ ],
+ "vetting_descriptions": [
+  "A skull with flames behind it is the main focus of the image.",
+  "A skull with a fire in the background."
+ ],
+ "vetting_black_run_s": 3.17,
+ "release_asset": null,
+ "release_tag": null
+}

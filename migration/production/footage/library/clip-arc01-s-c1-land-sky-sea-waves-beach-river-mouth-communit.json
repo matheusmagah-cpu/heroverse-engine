@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c1-land-sky-sea-waves-beach-river-mouth-communit",
+ "theme": "arc01-s-c1-land",
+ "query": "green hills sea aerial morning",
+ "source": "pixabay",
+ "title": "sky, sea, waves, beach, river mouth, community, ocean, seaside, morning, aerial, landscape, coastline, nature, coast, scenic",
+ "page": "https://pixabay.com/videos/id-49658/",
+ "author": "daniloriba",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: daniloriba via Pixabay (https://pixabay.com/videos/id-49658/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "040e55fed744bcbfee501d518652a6ae1f9e23030010161484092cace52f403b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car,truck"
+ ],
+ "vetting_luma": [
+  95.5,
+  98.8,
+  104.1,
+  107.5,
+  113.1
+ ],
+ "vetting_descriptions": [
+  "A view of a park with a car and a truck parked in the lot.",
+  "A beautiful view of the ocean with a pier, boats, and houses in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-man-walking-fog-morning-scenic-sunrise-h",
+ "theme": "arc01-x-from-behind",
+ "query": "man walking away field back view",
+ "source": "pixabay",
+ "title": "man, walking, fog, morning, scenic, sunrise, hiking, alone, drenthe, netherlands, landscape",
+ "page": "https://pixabay.com/videos/id-223578/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-223578/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9356c6dc3f2cc2c72f49c38d35c83eb3eb070a5120522f18495286323a1cf9dc",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man,person"
+ ],
+ "vetting_luma": [
+  109.1,
+  122.2,
+  125.1,
+  129.9,
+  131.0
+ ],
+ "vetting_descriptions": [
+  "A person is walking on a path in a foggy field, with a sunset in the background.",
+  "A man is walking on a path in a foggy field, with a backpack on his back."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

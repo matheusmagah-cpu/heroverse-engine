@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-naked-bellflower-flower-wind-wildflower-in-the",
+ "theme": "arc01-g-c4-naked",
+ "query": "wind darkening forest leaves",
+ "source": "pixabay",
+ "title": "bellflower, flower, wind, wildflower, in the forest",
+ "page": "https://pixabay.com/videos/id-118417/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-118417/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c279387c63903ad09432ac2e9504ef100656f7ddcaaea95ba6e45718cf358043",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  59.6,
+  61.9,
+  62.1,
+  58.5,
+  55.9
+ ],
+ "vetting_descriptions": [
+  "A purple flower is blooming in the woods, surrounded by green leaves.",
+  "A purple flower is blooming in a forest, surrounded by green leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-naked-bellflower-flower-wind-wildflower-in-the-sha256-c279387c63903ad09432ac2e9504ef100656f7ddcaaea95ba6e45718cf358043.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

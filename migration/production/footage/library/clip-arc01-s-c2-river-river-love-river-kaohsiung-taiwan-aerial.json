@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c2-river-river-love-river-kaohsiung-taiwan-aerial",
+ "theme": "arc01-s-c2-river",
+ "query": "river delta aerial green valley",
+ "source": "pixabay",
+ "title": "river, love river, kaohsiung, taiwan, aerial, landscape, cityscape, scenery, urban, water",
+ "page": "https://pixabay.com/videos/id-272859/",
+ "author": "hagemann_one",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: hagemann_one via Pixabay (https://pixabay.com/videos/id-272859/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "75163d6cfbc25246d26713dbe847dbe06bbedde97fe9f0eb721ba1d28003f4d3",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED buildings,cars,city"
+ ],
+ "vetting_luma": [
+  125.3,
+  124.8,
+  122.9,
+  120.9,
+  122.3
+ ],
+ "vetting_descriptions": [
+  "A city street with a bridge over a river, cars, and buildings.",
+  "A city street with a bridge over a river, a street with a red roof, a street with a yellow roof, a street with a green roof, a street with a red roof, a street with a yellow roof, a street with a green roof, a street with a red roof, a street with a yellow roof, a street with a green roof, a street with a red roof,"
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

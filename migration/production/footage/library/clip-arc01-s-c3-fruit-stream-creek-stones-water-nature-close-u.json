@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-fruit-stream-creek-stones-water-nature-close-u",
+ "theme": "arc01-s-c3-fruit",
+ "query": "fig fruit branch close up",
+ "source": "pixabay",
+ "title": "stream, creek, stones, water, nature, close-up",
+ "page": "https://pixabay.com/videos/id-189372/",
+ "author": "bluetuner",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: bluetuner via Pixabay (https://pixabay.com/videos/id-189372/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2ae39596e880d121b3e5d6929d244d067a69a77a74c4881a59f5267372d07d7c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  99.3,
+  98.3,
+  99.7,
+  97.3,
+  97.2
+ ],
+ "vetting_descriptions": [
+  "A river with rocks and water, and a small ripple in the water.",
+  "A rocky river with a lot of rocks and water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-fruit-stream-creek-stones-water-nature-close-u-sha256-2ae39596e880d121b3e5d6929d244d067a69a77a74c4881a59f5267372d07d7c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

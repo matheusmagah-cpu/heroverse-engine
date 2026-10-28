@@ -1,0 +1,43 @@
+{
+ "id": "clip-arc01-s-co-gate-rose-fire-flame-burn-plant-heat-night-en",
+ "theme": "arc01-s-co-gate",
+ "query": "torch flame night trees",
+ "source": "pixabay",
+ "title": "rose, fire, flame, burn, plant, heat, night, enlightenment, rose flower, romance, romantic, love",
+ "page": "https://pixabay.com/videos/id-63537/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-63537/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eaf06a148a8692bd83652b1adf526989ac0a4a4089dbe67023ba9a270f3a687b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "BLACK_RUN_AFTER_GRADE 5.93s"
+ ],
+ "vetting_luma": [
+  5.6,
+  6.0,
+  6.1,
+  5.8,
+  5.6
+ ],
+ "vetting_descriptions": [
+  "A single red rose is shown in a dark room, with a flame on the stem.",
+  "A single red rose is lit up by a flame, sitting on a stem in a dark room."
+ ],
+ "vetting_black_run_s": 5.93,
+ "release_asset": null,
+ "release_tag": null
+}

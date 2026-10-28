@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-silhouette-mountain-desert-sun-sky-sand-road-nature",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette walking desert",
+ "source": "pixabay",
+ "title": "mountain, desert, sun, sky, sand, road, nature, iran",
+ "page": "https://pixabay.com/videos/id-70872/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-70872/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7fb2e14c0cbfd584dc342df9401df953ac10540dbf1b1a574056c04d53658ac0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  147.3,
+  147.5,
+  147.9,
+  147.4,
+  147.1
+ ],
+ "vetting_descriptions": [
+  "A desert landscape with mountains in the background and a few bushes scattered throughout.",
+  "A desert landscape with a mountain range in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-silhouette-mountain-desert-sun-sky-sand-road-nature-sha256-7fb2e14c0cbfd584dc342df9401df953ac10540dbf1b1a574056c04d53658ac0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

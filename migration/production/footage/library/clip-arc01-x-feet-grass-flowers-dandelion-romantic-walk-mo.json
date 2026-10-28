@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-feet-grass-flowers-dandelion-romantic-walk-mo",
+ "theme": "arc01-x-feet",
+ "query": "barefoot walking grass",
+ "source": "pixabay",
+ "title": "grass, flowers, dandelion, romantic, walk, move, peaceful, movement, calm, peace, nature, green, meadow, field",
+ "page": "https://pixabay.com/videos/id-115984/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-115984/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "812051dd5ac58401902417e252375e83c1464ff27f1827aa8cf6fb4ff66a061e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  53.8,
+  53.5,
+  54.9,
+  59.1,
+  57.1
+ ],
+ "vetting_descriptions": [
+  "A green field with a pathway leading to a grassy area.",
+  "A green field with grass and flowers, and a pathway leading to the field."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-feet-grass-flowers-dandelion-romantic-walk-mo-sha256-812051dd5ac58401902417e252375e83c1464ff27f1827aa8cf6fb4ff66a061e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

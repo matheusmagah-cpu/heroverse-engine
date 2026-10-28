@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-feet-playground-children-trees-swing-path-sem",
+ "theme": "arc01-x-feet",
+ "query": "bare feet walking sand path",
+ "source": "pixabay",
+ "title": "playground, children, trees, swing, path, semicircle, sand",
+ "page": "https://pixabay.com/videos/id-169421/",
+ "author": "adamduda",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adamduda via Pixabay (https://pixabay.com/videos/id-169421/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "aee849c7a2d73c147e03e94cbdcb7e86b1026000ea8a84a175ba07089d1671cc",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  100.2,
+  100.2,
+  100.1,
+  100.0,
+  100.0
+ ],
+ "vetting_descriptions": [
+  "A park with a pool, sand, and trees.",
+  "A park with a pool, sand, and trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-feet-playground-children-trees-swing-path-sem-sha256-aee849c7a2d73c147e03e94cbdcb7e86b1026000ea8a84a175ba07089d1671cc.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

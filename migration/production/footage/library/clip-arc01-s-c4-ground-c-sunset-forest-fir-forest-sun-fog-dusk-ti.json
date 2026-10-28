@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-ground-c-sunset-forest-fir-forest-sun-fog-dusk-ti",
+ "theme": "arc01-s-c4-ground-c",
+ "query": "dry cracked earth time lapse",
+ "source": "pixabay",
+ "title": "sunset, forest, fir forest, sun, fog, dusk, time lapse",
+ "page": "https://pixabay.com/videos/id-142695/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-142695/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3eb3f6b220db375eddc759fc1aad24964b319d7c2042faa5673f57ba5b68c210",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  58.5,
+  34.3,
+  36.2,
+  25.3,
+  27.1
+ ],
+ "vetting_descriptions": [
+  "The sun is setting behind a cloudy sky, with a silhouette of a tree in the foreground.",
+  "A sunset with a cloudy sky and a silhouette of a tree."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-ground-c-sunset-forest-fir-forest-sun-fog-dusk-ti-sha256-3eb3f6b220db375eddc759fc1aad24964b319d7c2042faa5673f57ba5b68c210.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

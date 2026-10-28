@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-hush-foxtail-morning-dew-wind-autumn",
+ "theme": "arc01-s-c1-hush",
+ "query": "still valley morning no wind",
+ "source": "pixabay",
+ "title": "foxtail, morning, dew, wind, autumn",
+ "page": "https://pixabay.com/videos/id-90753/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 53.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90753/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "36e5bc3506603eaadd6ff426a7fbb88537c3b17f79ddf6bc469ed8650eb5fd3e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.3,
+  81.4,
+  81.6,
+  81.7,
+  81.7
+ ],
+ "vetting_descriptions": [
+  "A field of tall grass with a fence in the background.",
+  "A field of tall grass with a fence in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-hush-foxtail-morning-dew-wind-autumn-sha256-36e5bc3506603eaadd6ff426a7fbb88537c3b17f79ddf6bc469ed8650eb5fd3e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

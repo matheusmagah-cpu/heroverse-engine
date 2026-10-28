@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-one-of-us-netherlands-sun-rays-misty-forest-sunlig",
+ "theme": "arc01-g-c4-one-of-us",
+ "query": "misty forest dawn light rays",
+ "source": "pixabay",
+ "title": "netherlands, sun rays, misty forest, sunlight, fog, woodland, nature, sunbeams, trees, morning light, atmospheric, forest",
+ "page": "https://pixabay.com/videos/id-382579/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-382579/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3258f6e88bd2e13bcb99dee83a834143ad270b84178289ab460549a70b4558e3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  59.5,
+  60.4,
+  66.8,
+  60.9,
+  63.3
+ ],
+ "vetting_descriptions": [
+  "A pathway in a forest with a dog walking down it.",
+  "A pathway in a forest with a sun shining through the trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-one-of-us-netherlands-sun-rays-misty-forest-sunlig-sha256-3258f6e88bd2e13bcb99dee83a834143ad270b84178289ab460549a70b4558e3.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

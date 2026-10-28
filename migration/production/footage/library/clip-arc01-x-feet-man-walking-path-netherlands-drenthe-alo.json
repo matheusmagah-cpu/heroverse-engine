@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-feet-man-walking-path-netherlands-drenthe-alo",
+ "theme": "arc01-x-feet",
+ "query": "barefoot walking grass",
+ "source": "pixabay",
+ "title": "man, walking, path, netherlands, drenthe, alone, sunrise",
+ "page": "https://pixabay.com/videos/id-202743/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-202743/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2d6907d1c6f126e5c36fed66fce9a79d98cc5141d44945851908d463e5657b8c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  118.3,
+  122.4,
+  129.9,
+  132.9,
+  133.5
+ ],
+ "vetting_descriptions": [
+  "A man is walking on a path in a park, with a sunset in the background.",
+  "A man is walking on a path in a park, with a sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

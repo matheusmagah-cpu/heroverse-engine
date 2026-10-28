@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-snake-python-serpent-reptile-animal-wild",
+ "theme": "arc01-x-snake",
+ "query": "snake head close up",
+ "source": "pixabay",
+ "title": "snake, python, serpent, reptile, animal, wildlife",
+ "page": "https://pixabay.com/videos/id-173143/",
+ "author": "FestiMania",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 22.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: FestiMania via Pixabay (https://pixabay.com/videos/id-173143/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "041ba8b0ebf1c619a3818cb892fe842cd5f5be961afae08db83d2d1b5c106d10",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  59.1,
+  63.1,
+  62.3,
+  62.8,
+  61.3
+ ],
+ "vetting_descriptions": [
+  "A yellow and white snake is curled up on a branch.",
+  "A yellow and white snake is curled up on a branch."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-snake-python-serpent-reptile-animal-wild-sha256-041ba8b0ebf1c619a3818cb892fe842cd5f5be961afae08db83d2d1b5c106d10.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

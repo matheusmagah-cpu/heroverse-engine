@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-feet-autumn-fall-leaves-bench-park-forest-tre",
+ "theme": "arc01-x-feet",
+ "query": "barefoot walking grass",
+ "source": "pixabay",
+ "title": "autumn, fall, leaves, bench, park, forest, trees, grass, calm, walk, recreation, mist, fog",
+ "page": "https://pixabay.com/videos/id-137702/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-137702/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a76bff27676e48fedab088f356c8183a67dbc9a077d6b611d7ab3723a1820e26",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  71.6,
+  75.0,
+  77.6,
+  76.9,
+  79.9
+ ],
+ "vetting_descriptions": [
+  "A park bench is sitting on a leaf-covered ground with a picnic table nearby.",
+  "A park bench is sitting in a park with a table and chairs, and a tree with yellow leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-feet-autumn-fall-leaves-bench-park-forest-tre-sha256-a76bff27676e48fedab088f356c8183a67dbc9a077d6b611d7ab3723a1820e26.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

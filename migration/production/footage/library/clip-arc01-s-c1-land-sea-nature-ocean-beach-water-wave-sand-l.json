@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-land-sea-nature-ocean-beach-water-wave-sand-l",
+ "theme": "arc01-s-c1-land",
+ "query": "green hills sea aerial morning",
+ "source": "pixabay",
+ "title": "sea, nature, ocean, beach, water, wave, sand, landscape, aerial, peaceful, morning, peace, meditation, calm, orange, sunset",
+ "page": "https://pixabay.com/videos/id-280121/",
+ "author": "NatureViewdaBeau",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NatureViewdaBeau via Pixabay (https://pixabay.com/videos/id-280121/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7a0ade4c63ac6ff424b3d42536f578dfa53d35c7a8dce47dbb330762a432aac6",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  91.0,
+  88.9,
+  77.9,
+  76.4,
+  77.4
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over the ocean, creating a beautiful orange sky.",
+  "A beautiful sunset over the ocean with a sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-land-sea-nature-ocean-beach-water-wave-sand-l-sha256-7a0ade4c63ac6ff424b3d42536f578dfa53d35c7a8dce47dbb330762a432aac6.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

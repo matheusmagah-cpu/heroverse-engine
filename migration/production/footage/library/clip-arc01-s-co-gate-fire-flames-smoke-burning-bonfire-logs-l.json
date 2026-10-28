@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-co-gate-fire-flames-smoke-burning-bonfire-logs-l",
+ "theme": "arc01-s-co-gate",
+ "query": "fire burning dark forest night",
+ "source": "pixabay",
+ "title": "fire, flames, smoke, burning, bonfire, logs, lumber, burn",
+ "page": "https://pixabay.com/videos/id-87634/",
+ "author": "ArtSqb",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ArtSqb via Pixabay (https://pixabay.com/videos/id-87634/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6af66adc6f64a24201f194cbab6dcc40896356dd4b1ec49c9651b96ae944c037",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  50.5,
+  50.2,
+  48.1,
+  47.4,
+  48.2
+ ],
+ "vetting_descriptions": [
+  "A fire is burning in a fireplace, with a log on the fire and a piece of wood on the top.",
+  "A fire pit with a log burning in it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-co-gate-fire-flames-smoke-burning-bonfire-logs-l-sha256-6af66adc6f64a24201f194cbab6dcc40896356dd4b1ec49c9651b96ae944c037.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

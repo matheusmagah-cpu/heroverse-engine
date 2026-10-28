@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-cloak-wind-energy-wind-power-pinwheels-wind-en",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "wind energy, wind power, pinwheels, wind, energy, wind farm, summer, hydrogen, nature, landscape",
+ "page": "https://pixabay.com/videos/id-166822/",
+ "author": "wollschu",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: wollschu via Pixabay (https://pixabay.com/videos/id-166822/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3689fa96bbaa61a9e729e5e36ea0ed38aea0d18b6c3378d93318e4463d2d5417",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.8,
+  109.5,
+  109.3,
+  108.7,
+  109.5
+ ],
+ "vetting_descriptions": [
+  "A windmill stands in a field with a mountain in the background.",
+  "Two wind turbines are visible in the sky, with a green field below them."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-cloak-wind-energy-wind-power-pinwheels-wind-en-sha256-3689fa96bbaa61a9e729e5e36ea0ed38aea0d18b6c3378d93318e4463d2d5417.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

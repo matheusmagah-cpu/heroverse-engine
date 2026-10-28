@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c1-moon-landscape-lake-mount-fuji-before-sunrise",
+ "theme": "arc01-s-c1-moon",
+ "query": "full moon rising over lake",
+ "source": "pixabay",
+ "title": "landscape, lake, mount fuji, before sunrise, crescent moon, wavelet, driftwood, winter, japan",
+ "page": "https://pixabay.com/videos/id-343048/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-343048/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6508caeb527a5763d99249e081e2396bd6fa6609368a089720e5d8c439de1573",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat"
+ ],
+ "vetting_luma": [
+  68.8,
+  69.3,
+  68.3,
+  68.6,
+  69.0
+ ],
+ "vetting_descriptions": [
+  "A beautiful mountain is reflected in the water, and a boat is floating on the lake.",
+  "A mountain is visible in the background, and a tree branch is floating in the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

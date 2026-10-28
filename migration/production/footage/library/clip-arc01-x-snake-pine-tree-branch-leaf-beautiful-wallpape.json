@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-pine-tree-branch-leaf-beautiful-wallpape",
+ "theme": "arc01-x-snake",
+ "query": "green tree python branch",
+ "source": "pixabay",
+ "title": "pine, tree, branch, leaf, beautiful wallpaper, green, sea, ocean, wave, nature, garden, forest, trip, summer, holiday, natural, blue, mountain, relaxing, background",
+ "page": "https://pixabay.com/videos/id-98991/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-98991/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e122e32782b9e4674b206d04bd8e5c2b5e9ad9f515e2d7cbacf82cdc6570244b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  142.0,
+  141.9,
+  141.9,
+  141.8,
+  141.8
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves is next to a body of water.",
+  "A view of the ocean with a rock in the water and two trees on the shore."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-pine-tree-branch-leaf-beautiful-wallpape-sha256-e122e32782b9e4674b206d04bd8e5c2b5e9ad9f515e2d7cbacf82cdc6570244b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

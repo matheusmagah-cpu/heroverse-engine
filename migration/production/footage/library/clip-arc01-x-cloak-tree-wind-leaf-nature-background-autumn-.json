@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-cloak-tree-wind-leaf-nature-background-autumn-",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "tree, wind, leaf, nature, background, autumn, view, sky, blue, beautiful wallpaper, forest, weather, green, spring, open, summer, rural, clouds",
+ "page": "https://pixabay.com/videos/id-31461/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-31461/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0e3f81b04815f3bee6b90233db533290b79de286d203b1f25a1d4d787c88cdd2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  141.2,
+  141.6,
+  137.2,
+  116.5,
+  119.8
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and branches in front of a blue sky.",
+  "A tree with green leaves and branches is seen in the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-cloak-tree-wind-leaf-nature-background-autumn--sha256-0e3f81b04815f3bee6b90233db533290b79de286d203b1f25a1d4d787c88cdd2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-wind-republic-of-korea-nature-landscape-wind",
+ "theme": "arc01-s-c3-wind",
+ "query": "trees bending strong wind",
+ "source": "pixabay",
+ "title": "republic of korea, nature, landscape, wind",
+ "page": "https://pixabay.com/videos/id-384550/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-384550/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8e23ed0fd42d44e0809bdc6dd50c706b1af3cb62d9c5d6d6ec2250f29b47ca51",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.8,
+  97.7,
+  97.7,
+  96.7,
+  97.5
+ ],
+ "vetting_descriptions": [
+  "A field of yellow flowers with green leaves and a yellow sun in the background.",
+  "A field of yellow flowers with green stems and leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-wind-republic-of-korea-nature-landscape-wind-sha256-8e23ed0fd42d44e0809bdc6dd50c706b1af3cb62d9c5d6d6ec2250f29b47ca51.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

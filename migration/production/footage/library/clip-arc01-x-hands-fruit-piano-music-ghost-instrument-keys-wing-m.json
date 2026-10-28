@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-hands-fruit-piano-music-ghost-instrument-keys-wing-m",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hands holding fig",
+ "source": "pixabay",
+ "title": "piano, music, ghost, instrument, keys, wing, melody, keyboard, piano keys, musical instrument, piano keyboard, spirit hand",
+ "page": "https://pixabay.com/videos/id-13042/",
+ "author": "PascalBeckmann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: PascalBeckmann via Pixabay (https://pixabay.com/videos/id-13042/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "820acdfb9e23e766c94cd8a5da65617dd79b050875a1d4781524b193508dd6f6",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  70.4,
+  78.0,
+  83.3,
+  83.2,
+  84.4
+ ],
+ "vetting_descriptions": [
+  "A black and white piano with red accents and a black keyboard.",
+  "A black and white piano with red keys and a black and white keyboard."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-hands-fruit-piano-music-ghost-instrument-keys-wing-m-sha256-820acdfb9e23e766c94cd8a5da65617dd79b050875a1d4781524b193508dd6f6.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

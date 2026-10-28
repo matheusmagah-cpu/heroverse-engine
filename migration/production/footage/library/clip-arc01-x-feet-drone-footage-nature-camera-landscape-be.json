@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-feet-drone-footage-nature-camera-landscape-be",
+ "theme": "arc01-x-feet",
+ "query": "bare feet walking sand path",
+ "source": "pixabay",
+ "title": "drone, footage, nature, camera, landscape, beach, videography, person, human, walking, coast, water, sea, waves, sand",
+ "page": "https://pixabay.com/videos/id-304357/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-304357/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "88496c492f2fdaea5ab2ec6aa4efeebddc492e4b52248018c9837b48a87c3ffa",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  122.6,
+  125.9,
+  126.8,
+  123.8,
+  124.6
+ ],
+ "vetting_descriptions": [
+  "A beach scene with a blue water surface and a blue line in the sand.",
+  "A beach scene with a surfboard sticking out of the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-feet-drone-footage-nature-camera-landscape-be-sha256-88496c492f2fdaea5ab2ec6aa4efeebddc492e4b52248018c9837b48a87c3ffa.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

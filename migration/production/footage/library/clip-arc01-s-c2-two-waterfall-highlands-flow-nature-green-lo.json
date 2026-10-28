@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-two-waterfall-highlands-flow-nature-green-lo",
+ "theme": "arc01-s-c2-two",
+ "query": "two big trees meadow",
+ "source": "pixabay",
+ "title": "waterfall, highlands, flow, nature, green, lonely, hike, green trees, meadow, idyll, idyllic, calm, scotland, landscape",
+ "page": "https://pixabay.com/videos/id-127360/",
+ "author": "NathanKoop",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NathanKoop via Pixabay (https://pixabay.com/videos/id-127360/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e68c26f8e7513608a72a7e3deffd6f86619c02b0bef4a89d78b63c9bfbbc2234",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  64.1,
+  65.8,
+  65.5,
+  65.5,
+  65.1
+ ],
+ "vetting_descriptions": [
+  "A river with a waterfall and a mountain in the background.",
+  "A river with a waterfall and a mountain in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-two-waterfall-highlands-flow-nature-green-lo-sha256-e68c26f8e7513608a72a7e3deffd6f86619c02b0bef4a89d78b63c9bfbbc2234.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-g-c4-dust-iceland-road-winter-cold-snowflakes-ston",
+ "theme": "arc01-g-c4-dust",
+ "query": "barren desert clouds thorns",
+ "source": "pixabay",
+ "title": "iceland, road, winter, cold, snowflakes, stone desert, desert, level, travel, landscape, heaven, clouds, cloudy, endless",
+ "page": "https://pixabay.com/videos/id-62004/",
+ "author": "Neugiernase",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Neugiernase via Pixabay (https://pixabay.com/videos/id-62004/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2f75edea0f67dcb54de3f04b0e51ffe3de4bf06df4d53271e82bfc951159d0e9",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED sign"
+ ],
+ "vetting_luma": [
+  153.3,
+  153.3,
+  153.4,
+  153.5,
+  153.4
+ ],
+ "vetting_descriptions": [
+  "A lonely road with a yellow sign on the side.",
+  "A lonely road with a yellow sign on the side."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

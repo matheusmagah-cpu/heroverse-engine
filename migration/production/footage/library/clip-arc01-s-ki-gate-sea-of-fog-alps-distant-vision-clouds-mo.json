@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-ki-gate-sea-of-fog-alps-distant-vision-clouds-mo",
+ "theme": "arc01-s-ki-gate",
+ "query": "distant fire night forest edge",
+ "source": "pixabay",
+ "title": "sea of fog, alps, distant vision, clouds, morning hour, morning light, light, mood, sunlight, sunbeams",
+ "page": "https://pixabay.com/videos/id-322480/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 21.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 19.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-322480/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f4c9486dbe6db97a576f51affaca42f5c2ec4a9f799f71c439afeaa056e6d842",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  142.3,
+  149.2,
+  153.9,
+  157.8,
+  162.5
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset over a mountain range with clouds and mountains in the background.",
+  "A beautiful sunset over a mountain range with clouds in the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-ki-gate-sea-of-fog-alps-distant-vision-clouds-mo-sha256-f4c9486dbe6db97a576f51affaca42f5c2ec4a9f799f71c439afeaa056e6d842.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

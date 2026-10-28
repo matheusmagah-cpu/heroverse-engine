@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-feet-duck-baby-bird-nature-animal-ornithology",
+ "theme": "arc01-x-feet",
+ "query": "barefoot walking grass",
+ "source": "pixabay",
+ "title": "duck, baby, bird, nature, animal, ornithology, beak, chick, feathers, fauna, grass",
+ "page": "https://pixabay.com/videos/id-265501/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-265501/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fc1e17eab671a9a2d396dc50fd5466319d6e59b16deb7f88ffb4c4cb71b1de18",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  88.8,
+  88.9,
+  88.3,
+  90.8,
+  88.7
+ ],
+ "vetting_descriptions": [
+  "A baby duck is sitting on the grass next to a plant.",
+  "A baby chick is eating grass in the shade."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-feet-duck-baby-bird-nature-animal-ornithology-sha256-fc1e17eab671a9a2d396dc50fd5466319d6e59b16deb7f88ffb4c4cb71b1de18.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

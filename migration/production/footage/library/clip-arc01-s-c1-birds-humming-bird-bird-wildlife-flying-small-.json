@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c1-birds-humming-bird-bird-wildlife-flying-small-",
+ "theme": "arc01-s-c1-birds",
+ "query": "white birds flock river flying",
+ "source": "pixabay",
+ "title": "humming bird, bird, wildlife, flying, small bird",
+ "page": "https://pixabay.com/videos/id-215937/",
+ "author": "Afzaal0001",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Afzaal0001 via Pixabay (https://pixabay.com/videos/id-215937/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "74cfabd4a15c335ea56c52b3fab34867be593c493a24b7bd6faa8f70b370b86c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car"
+ ],
+ "vetting_luma": [
+  118.6,
+  118.9,
+  118.2,
+  119.0,
+  118.9
+ ],
+ "vetting_descriptions": [
+  "A bird is eating from a bird feeder, which is attached to a car.",
+  "A green bird is eating from a bird feeder."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

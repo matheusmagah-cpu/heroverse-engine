@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-woman-face-young-look-adult-beauty-perso",
+ "theme": "arc01-x-from-behind",
+ "query": "woman long hair from behind field",
+ "source": "pixabay",
+ "title": "woman, face, young, look, adult, beauty, person, head, eyes, pose, model, hair, human, emotions, fashion, style, portrait",
+ "page": "https://pixabay.com/videos/id-78731/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-78731/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cb5c64498a00bb7b29a8833f885da2db3c7b27c838b7eff31d3427b76b7a7543",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED woman"
+ ],
+ "vetting_luma": [
+  124.0,
+  124.7,
+  123.8,
+  123.6,
+  122.5
+ ],
+ "vetting_descriptions": [
+  "A woman with brown hair and a black tank top is looking at the camera.",
+  "A woman with brown hair and a black tank top is looking at the camera."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

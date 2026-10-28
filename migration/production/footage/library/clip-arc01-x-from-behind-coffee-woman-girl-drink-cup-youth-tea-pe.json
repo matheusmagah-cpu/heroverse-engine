@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-coffee-woman-girl-drink-cup-youth-tea-pe",
+ "theme": "arc01-x-from-behind",
+ "query": "woman long hair from behind field",
+ "source": "pixabay",
+ "title": "coffee, woman, girl, drink, cup, youth, tea, people, portrait, drinking, adult, sitting, happy, comfortable, relax, open air, to sit, wind, hair, nature, sky, clouds, atmosphere",
+ "page": "https://pixabay.com/videos/id-20564/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-20564/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e432b20f37954b69738e93d0d9c7cf71cc4bf569617fea09cbbd99802058c9af",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person,woman"
+ ],
+ "vetting_luma": [
+  164.8,
+  164.8,
+  164.8,
+  164.5,
+  164.6
+ ],
+ "vetting_descriptions": [
+  "A woman is sitting on a beach, holding a cup of coffee, and looking out at the ocean.",
+  "A person is sitting on a pier, holding a cup of coffee, and looking out at the ocean."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

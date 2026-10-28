@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-deep-sea-ocean-beach-waves-sun-dusk-sunset-na",
+ "theme": "arc01-s-c1-deep",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "sea, ocean, beach, waves, sun, dusk, sunset, nature, rest, meditation",
+ "page": "https://pixabay.com/videos/id-138588/",
+ "author": "Natures_Embrace",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Natures_Embrace via Pixabay (https://pixabay.com/videos/id-138588/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c765442ba026988d3f7f21ea16444a89858dd32b0c52bd106de49771ff153ce1",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  89.9,
+  89.3,
+  91.7,
+  95.3,
+  107.1
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over the ocean, creating a beautiful scene with the waves and the sky.",
+  "The sun is setting over the ocean, and the waves are crashing."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-deep-sea-ocean-beach-waves-sun-dusk-sunset-na-sha256-c765442ba026988d3f7f21ea16444a89858dd32b0c52bd106de49771ff153ce1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

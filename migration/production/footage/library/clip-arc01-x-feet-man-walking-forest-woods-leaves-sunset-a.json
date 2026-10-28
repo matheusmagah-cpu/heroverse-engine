@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-feet-man-walking-forest-woods-leaves-sunset-a",
+ "theme": "arc01-x-feet",
+ "query": "bare feet walking sand path",
+ "source": "pixabay",
+ "title": "man, walking, forest, woods, leaves, sunset, afternoon, netherlands, drenthe, hiking, nature, trees, branches, path, landscape",
+ "page": "https://pixabay.com/videos/id-231769/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 57.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-231769/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d8ca8a0b83bc7e154b3c83047c7f8264e9596d05802df3b4b309f9060ae68389",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  81.0,
+  72.2,
+  73.9,
+  101.4,
+  113.8
+ ],
+ "vetting_descriptions": [
+  "A man is walking through a grassy field with trees in the background.",
+  "A man stands in a forest, wearing a backpack and looking at the sun."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

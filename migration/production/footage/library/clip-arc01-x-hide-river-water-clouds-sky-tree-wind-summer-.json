@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hide-river-water-clouds-sky-tree-wind-summer-",
+ "theme": "arc01-x-hide",
+ "query": "hiding behind tree from behind",
+ "source": "pixabay",
+ "title": "river, water, clouds, sky, tree, wind, summer, mainly cloudy, landscape, wildlife, by the river, nature, view from above, fallen trees, shore",
+ "page": "https://pixabay.com/videos/id-40161/",
+ "author": "Mil_ua",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Mil_ua via Pixabay (https://pixabay.com/videos/id-40161/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "33de99efb521dcbfc6c0494759c0d733b47cf2e1c8a8b9ee83a407380d5a9927",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  140.2,
+  139.9,
+  139.9,
+  139.8,
+  139.8
+ ],
+ "vetting_descriptions": [
+  "A tree branch is sticking out of the water, and the sky is cloudy.",
+  "A tree branch is sticking out of the water, and there are no people visible in the image."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

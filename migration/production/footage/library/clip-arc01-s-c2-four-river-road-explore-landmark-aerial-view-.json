@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-four-river-road-explore-landmark-aerial-view-",
+ "theme": "arc01-s-c2-four",
+ "query": "river branches aerial",
+ "source": "pixabay",
+ "title": "river, road, explore, landmark, aerial view, drone view, infrastructure, landscape",
+ "page": "https://pixabay.com/videos/id-205702/",
+ "author": "43073801",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: 43073801 via Pixabay (https://pixabay.com/videos/id-205702/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8dd18a8089374e04727697a3f3775fca6d38ed0869a109f8e1a80f4878c79c17",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  120.7,
+  120.0,
+  120.9,
+  121.5,
+  126.3
+ ],
+ "vetting_descriptions": [
+  "A bridge over a highway with a green field below.",
+  "A highway with a bridge over it, surrounded by trees and grass."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-four-river-road-explore-landmark-aerial-view--sha256-8dd18a8089374e04727697a3f3775fca6d38ed0869a109f8e1a80f4878c79c17.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-silhouette-sunset-sea-beach-ocean-couple-dusk-sky-h",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette couple sunset",
+ "source": "pixabay",
+ "title": "sunset, sea, beach, ocean, couple, dusk, sky, horizon, twilight, clouds, water, sun, seascape, silhouette, nature, landscape",
+ "page": "https://pixabay.com/videos/id-214413/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-214413/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d2040c632514b475170488c50c68478e0d432741fc201dd28e0e81234dc0386c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man,person"
+ ],
+ "vetting_luma": [
+  62.7,
+  62.5,
+  60.2,
+  60.6,
+  62.9
+ ],
+ "vetting_descriptions": [
+  "A man is standing on a rock in the ocean, watching the sunset.",
+  "A person is standing on a rock in the ocean, watching the sunset."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

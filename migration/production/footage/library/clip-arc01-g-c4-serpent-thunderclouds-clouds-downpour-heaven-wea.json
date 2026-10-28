@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-serpent-thunderclouds-clouds-downpour-heaven-wea",
+ "theme": "arc01-g-c4-serpent",
+ "query": "dark storm clouds wind dust",
+ "source": "pixabay",
+ "title": "thunderclouds, clouds, downpour, heaven, weather, nature, cloud band, wind",
+ "page": "https://pixabay.com/videos/id-379251/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-379251/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2ea27b3f4332330c7df924d310e0243f6684cb4438cd1601e060e0c6493c4ca2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  110.0,
+  112.7,
+  114.9,
+  119.1,
+  124.2
+ ],
+ "vetting_descriptions": [
+  "A dark cloud is looming over a field with a house in the background.",
+  "A cloudy day with a dark sky, a field of trees, and a house in the distance."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-serpent-thunderclouds-clouds-downpour-heaven-wea-sha256-2ea27b3f4332330c7df924d310e0243f6684cb4438cd1601e060e0c6493c4ca2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

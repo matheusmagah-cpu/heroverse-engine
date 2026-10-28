@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-leaves2-rain-close-up-rivulet-close-outdoor-natu",
+ "theme": "arc01-s-c4-leaves2",
+ "query": "leaves on wet ground rain",
+ "source": "pixabay",
+ "title": "rain, close up, rivulet, close, outdoor, natural, spring, plant, green, water, freshness, weather, gloomy, raindrop, wet, overcast, sad, day, cold, nature, dark, cloudy",
+ "page": "https://pixabay.com/videos/id-8571/",
+ "author": "FrostWorks",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: FrostWorks via Pixabay (https://pixabay.com/videos/id-8571/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d2d35b8d1fafbd5bebcd013246c2868f838ed0af0dc2754734f93deec991ffe9",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  47.2,
+  47.8,
+  46.7,
+  47.3,
+  48.3
+ ],
+ "vetting_descriptions": [
+  "A puddle of water with a rock in it and a green plant growing in it.",
+  "A puddle of water with a rock in it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-leaves2-rain-close-up-rivulet-close-outdoor-natu-sha256-d2d35b8d1fafbd5bebcd013246c2868f838ed0af0dc2754734f93deec991ffe9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

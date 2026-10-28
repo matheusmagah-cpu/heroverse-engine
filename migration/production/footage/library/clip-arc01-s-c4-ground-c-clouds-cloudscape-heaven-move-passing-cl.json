@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-ground-c-clouds-cloudscape-heaven-move-passing-cl",
+ "theme": "arc01-s-c4-ground-c",
+ "query": "dry cracked earth time lapse",
+ "source": "pixabay",
+ "title": "clouds, cloudscape, heaven, move, passing clouds, nature, time lapse",
+ "page": "https://pixabay.com/videos/id-168022/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-168022/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ae56a5e2161435b689662a516b107e2bcd7101fe80a1f40c6654c9135d345f0a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.7,
+  152.8,
+  144.8,
+  139.8,
+  152.3
+ ],
+ "vetting_descriptions": [
+  "A cloudy blue sky with a few clouds and a blue background.",
+  "A blue sky with clouds and a white cloud in the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-ground-c-clouds-cloudscape-heaven-move-passing-cl-sha256-ae56a5e2161435b689662a516b107e2bcd7101fe80a1f40c6654c9135d345f0a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

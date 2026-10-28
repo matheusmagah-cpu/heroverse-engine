@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-fireplace-christmas-burning-fire-campfir",
+ "theme": "arc01-keeper-camp",
+ "query": "campfire embers close up night",
+ "source": "pixabay",
+ "title": "fireplace, christmas, burning fire, campfire, bonfire, burning logs, christmas fireplace",
+ "page": "https://pixabay.com/videos/id-239511/",
+ "author": "BFCMUSIC",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: BFCMUSIC via Pixabay (https://pixabay.com/videos/id-239511/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b3295c1b8e8e73c196bfefe15f90d7789ec4cf98a6cff9284c4ac8b9dad20c07",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  53.2,
+  55.4,
+  57.0,
+  59.0,
+  52.9
+ ],
+ "vetting_descriptions": [
+  "A fireplace with a fire burning in it, and a log on the fire.",
+  "A fire is burning in a fireplace, with a log on the fire and a flame."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-fireplace-christmas-burning-fire-campfir-sha256-b3295c1b8e8e73c196bfefe15f90d7789ec4cf98a6cff9284c4ac8b9dad20c07.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

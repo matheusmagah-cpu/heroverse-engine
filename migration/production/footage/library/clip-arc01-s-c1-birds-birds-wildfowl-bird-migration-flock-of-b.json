@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-birds-birds-wildfowl-bird-migration-flock-of-b",
+ "theme": "arc01-s-c1-birds",
+ "query": "white birds flock river flying",
+ "source": "pixabay",
+ "title": "birds, wildfowl, bird migration, flock of birds, nature, fauna, crane",
+ "page": "https://pixabay.com/videos/id-240104/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-240104/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d6e65bd52f24dbd22dd824c7d2aea5490ea2cabf55ba3ea8ecd27060f98161ce",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  178.5,
+  176.4,
+  175.2,
+  174.8,
+  174.8
+ ],
+ "vetting_descriptions": [
+  "A large flock of birds is flying over a green field, with a cloudy sky above.",
+  "A large flock of birds is flying over a green field, with a cloudy sky above."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-birds-birds-wildfowl-bird-migration-flock-of-b-sha256-d6e65bd52f24dbd22dd824c7d2aea5490ea2cabf55ba3ea8ecd27060f98161ce.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

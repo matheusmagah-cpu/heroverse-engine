@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-tree-branches-leaves-green-sun-relaxing-",
+ "theme": "arc01-x-snake",
+ "query": "green tree python branch",
+ "source": "pixabay",
+ "title": "tree, branches, leaves, green, sun, relaxing, meditation, calm, nature, spiritual, dream, romance, peaceful",
+ "page": "https://pixabay.com/videos/id-92739/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-92739/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2a46ad7d677167db7a8bb1ce1b351164e762867ae2ac00d747e94e5b38cad70e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.9,
+  83.8,
+  85.7,
+  85.0,
+  85.3
+ ],
+ "vetting_descriptions": [
+  "A tree filled with leaves and branches with a blue sky above.",
+  "A tree filled with leaves is in the foreground, with a blue sky and sunlight shining through the branches."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-tree-branches-leaves-green-sun-relaxing--sha256-2a46ad7d677167db7a8bb1ce1b351164e762867ae2ac00d747e94e5b38cad70e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

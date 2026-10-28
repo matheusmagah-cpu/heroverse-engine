@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-ground-stars-starry-sky-night-sky-heaven-night-",
+ "theme": "arc01-g-c4-ground",
+ "query": "lightning storm night sky",
+ "source": "pixabay",
+ "title": "stars, starry sky, night sky, heaven, night, daybreak",
+ "page": "https://pixabay.com/videos/id-137617/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 16.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 14.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-137617/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3ed9011cef380511d91367cc8af85cf0c6fcd26023f92deb07e1e487c7b71bc5",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  30.7,
+  31.5,
+  32.1,
+  34.4,
+  37.5
+ ],
+ "vetting_descriptions": [
+  "The night sky is filled with stars and the moon is visible in the background.",
+  "The night sky is filled with stars and the moon is visible in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-ground-stars-starry-sky-night-sky-heaven-night--sha256-3ed9011cef380511d91367cc8af85cf0c6fcd26023f92deb07e1e487c7b71bc5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-ki-gate-aerial-view-beach-sea-summer-landscape-d",
+ "theme": "arc01-s-ki-gate",
+ "query": "distant fire night forest edge",
+ "source": "pixabay",
+ "title": "aerial view, beach, sea, summer, landscape, distant vision, sand dunes, waves, horizon, freedom",
+ "page": "https://pixabay.com/videos/id-13622/",
+ "author": "KaiMiano",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KaiMiano via Pixabay (https://pixabay.com/videos/id-13622/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2cecf98d3d1654097608d375fcdbbd1bda36612806dcf5b8eedd9e79010fcfa4",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,people,person"
+ ],
+ "vetting_luma": [
+  137.7,
+  138.6,
+  136.5,
+  137.7,
+  131.6
+ ],
+ "vetting_descriptions": [
+  "A beach scene with people walking on the sand and a cloudy sky.",
+  "A beach scene with a person walking on the sand and a boat in the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

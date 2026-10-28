@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c1-deep-sunset-ocean-water-waves-sun-dark-nature",
+ "theme": "arc01-s-c1-deep",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "sunset, ocean, water, waves, sun, dark, nature, night, beach, sea, summer, sand, coast, landscape, seascape",
+ "page": "https://pixabay.com/videos/id-300197/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-300197/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "53c47d888fa30dbea6501d12fe01031c58411b350c59cba25a918dbbb255ca96",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,person"
+ ],
+ "vetting_luma": [
+  116.2,
+  120.1,
+  117.3,
+  117.1,
+  121.0
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over the ocean, and a boat is visible in the distance.",
+  "A person is swimming in the ocean, and the sun is setting over the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

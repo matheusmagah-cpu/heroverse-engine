@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-silhouette-sunset-man-silhouette-sea-ocean-sky-dusk",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette couple sunset",
+ "source": "pixabay",
+ "title": "sunset, man, silhouette, sea, ocean, sky, dusk, twilight, sun, beach, horizon, alone, calm, meditating, meditation, zen, peaceful, waves, reflection, sand, nature",
+ "page": "https://pixabay.com/videos/id-222039/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-222039/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "07263def7d3dd79f17cacd558552db3abce772b364852d20fd5685d3d8676c2b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  83.8,
+  83.4,
+  84.2,
+  85.0,
+  84.3
+ ],
+ "vetting_descriptions": [
+  "A man is sitting on the beach, looking at the sunset.",
+  "A man is sitting on the beach, watching the sunset."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

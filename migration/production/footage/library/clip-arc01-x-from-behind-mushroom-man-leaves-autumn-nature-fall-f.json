@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-mushroom-man-leaves-autumn-nature-fall-f",
+ "theme": "arc01-x-from-behind",
+ "query": "man walking away field back view",
+ "source": "pixabay",
+ "title": "mushroom, man, leaves, autumn, nature, fall, forest, trees, road, path, walking, hiking, landscape",
+ "page": "https://pixabay.com/videos/id-185724/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-185724/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b4f148ab1d8d27f6f21e652570ab2896c4704fe13467956d4ec83c0aaa25848f",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man,person"
+ ],
+ "vetting_luma": [
+  105.8,
+  110.1,
+  118.6,
+  120.3,
+  122.1
+ ],
+ "vetting_descriptions": [
+  "A person is walking through a forest, and there is a mushroom on the ground.",
+  "A man is walking through a forest, and there is a mushroom on the ground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

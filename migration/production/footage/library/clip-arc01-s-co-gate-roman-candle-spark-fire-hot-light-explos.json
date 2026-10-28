@@ -1,0 +1,44 @@
+{
+ "id": "clip-arc01-s-co-gate-roman-candle-spark-fire-hot-light-explos",
+ "theme": "arc01-s-co-gate",
+ "query": "torch flame night trees",
+ "source": "pixabay",
+ "title": "roman candle, spark, fire, hot, light, explosion, fun, celebration, party, surprise, happiness, beautiful wallpaper, christmas, dark, night, background, flame, smoke, traditional, new year, birthday, lighter, burn",
+ "page": "https://pixabay.com/videos/id-110363/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-110363/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c5e1d33c4c2fc4f9c823218a5af2e6b1c1c3f8d86f2ed1c4dd0ceb6666b72720",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "BLACK_RUN_AFTER_GRADE 5.53s",
+  "DESCRIBED hand"
+ ],
+ "vetting_luma": [
+  1.2,
+  23.5,
+  5.4,
+  3.5,
+  4.4
+ ],
+ "vetting_descriptions": [
+  "A lit blue candle is in a dark room, and a hand is holding it.",
+  "A firework show is happening in the dark sky, with sparks flying and a bright light illuminating the scene."
+ ],
+ "vetting_black_run_s": 5.53,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-ground-clouds-sky-night-dark-summer",
+ "theme": "arc01-g-c4-ground",
+ "query": "lightning storm night sky",
+ "source": "pixabay",
+ "title": "clouds, sky, night, dark, summer",
+ "page": "https://pixabay.com/videos/id-225775/",
+ "author": "Kaffeesüchtig",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 10.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 8.0,
+ "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-225775/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e6d5f5f176eda5427a38c94a95f41c83e94db55f78eec636dfddb9f38e39d7b1",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  33.9,
+  31.2,
+  28.5,
+  26.8,
+  26.3
+ ],
+ "vetting_descriptions": [
+  "A cloudy sky with a sun peeking through the clouds.",
+  "A dark sky with clouds and a moon in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-ground-clouds-sky-night-dark-summer-sha256-e6d5f5f176eda5427a38c94a95f41c83e94db55f78eec636dfddb9f38e39d7b1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-cloak-wolf-animal-mammal-nature-wild-predator-",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "wolf, animal, mammal, nature wild, predator, wolves, nature, wild, wildlife, atmospheric, hunter, atmosphere, carnivores, fur, canine",
+ "page": "https://pixabay.com/videos/id-27400/",
+ "author": "Zethian",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Zethian via Pixabay (https://pixabay.com/videos/id-27400/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f5cf26c2fc58da6156ca3586829ba38c0b3b93b9d7bcb7a67234b60c7f9781f0",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED face"
+ ],
+ "vetting_luma": [
+  104.2,
+  95.6,
+  85.5,
+  76.1,
+  70.2
+ ],
+ "vetting_descriptions": [
+  "A wolf with a brown and white face is looking at the camera.",
+  "A wolf is standing in front of a tree, looking at the camera."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

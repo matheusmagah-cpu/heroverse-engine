@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-dark-fire-wood-charcoal",
+ "theme": "arc01-keeper-camp",
+ "query": "fire crackling dark night",
+ "source": "pixabay",
+ "title": "dark, fire, wood, charcoal",
+ "page": "https://pixabay.com/videos/id-110250/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-110250/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fa7f9e234c89391ba54981b64fadc7854108cf706a8f84fec57ed00043808509",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.1,
+  92.9,
+  95.9,
+  93.2,
+  93.3
+ ],
+ "vetting_descriptions": [
+  "A fire pit with a stick and a log on it, and a skateboard on the ground.",
+  "A fire is burning in a fire pit, and a baseball bat is placed on top of the fire."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-dark-fire-wood-charcoal-sha256-fa7f9e234c89391ba54981b64fadc7854108cf706a8f84fec57ed00043808509.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

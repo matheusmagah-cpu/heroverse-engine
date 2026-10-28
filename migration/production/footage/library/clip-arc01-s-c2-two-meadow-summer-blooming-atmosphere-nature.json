@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-two-meadow-summer-blooming-atmosphere-nature",
+ "theme": "arc01-s-c2-two",
+ "query": "two big trees meadow",
+ "source": "pixabay",
+ "title": "meadow, summer, blooming, atmosphere, nature, planet, earth, world, universe, global",
+ "page": "https://pixabay.com/videos/id-359930/",
+ "author": "u_tdcdmi53de",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: u_tdcdmi53de via Pixabay (https://pixabay.com/videos/id-359930/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "508ce1324405a3fc0bb0a95fa4613df56f564c96a0455c6a29bcfe62569006f8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  91.6,
+  97.5,
+  102.6,
+  109.1,
+  114.5
+ ],
+ "vetting_descriptions": [
+  "A large grassy field with a soccer field in the middle, surrounded by trees and a highway.",
+  "A view of a soccer field with a road running through it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-two-meadow-summer-blooming-atmosphere-nature-sha256-508ce1324405a3fc0bb0a95fa4613df56f564c96a0455c6a29bcfe62569006f8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

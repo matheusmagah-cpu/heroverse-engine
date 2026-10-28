@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-evening-wind-power-pinwheels-wind-energy-energy-",
+ "theme": "arc01-s-c4-evening",
+ "query": "evening wind trees leaves dusk",
+ "source": "pixabay",
+ "title": "wind power, pinwheels, wind energy, energy transition, rural, sunset, dusk, climate change",
+ "page": "https://pixabay.com/videos/id-133443/",
+ "author": "VP68",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: VP68 via Pixabay (https://pixabay.com/videos/id-133443/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "61342847c49214841b92e307c61a5bbe8ca7f88ea6dc79679c5cf269fa9cefbb",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  134.2,
+  135.5,
+  123.8,
+  124.7,
+  124.5
+ ],
+ "vetting_descriptions": [
+  "A wind farm with three wind turbines, a moon in the sky, and a sunset in the background.",
+  "A group of wind turbines are visible in the distance, with a pink sky in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-evening-wind-power-pinwheels-wind-energy-energy--sha256-61342847c49214841b92e307c61a5bbe8ca7f88ea6dc79679c5cf269fa9cefbb.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

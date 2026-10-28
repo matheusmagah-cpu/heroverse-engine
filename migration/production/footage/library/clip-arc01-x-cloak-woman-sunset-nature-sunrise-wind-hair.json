@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-cloak-woman-sunset-nature-sunrise-wind-hair",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "woman, sunset, nature, sunrise, wind, hair",
+ "page": "https://pixabay.com/videos/id-38909/",
+ "author": "ZAIDoopro",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ZAIDoopro via Pixabay (https://pixabay.com/videos/id-38909/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "86cd30b89df4cfc7ad0dd5c6a20ce5c75b244c2093512294ed1a53e423977582",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  66.1,
+  66.6,
+  66.6,
+  66.6,
+  67.0
+ ],
+ "vetting_descriptions": [
+  "A person is sitting in a field with a sunset in the background.",
+  "A person is sitting in a field with a beautiful sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

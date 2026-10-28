@@ -1,0 +1,43 @@
+{
+ "id": "clip-arc01-keeper-camp-roman-candle-spark-fire-hot-light-explos",
+ "theme": "arc01-keeper-camp",
+ "query": "fire crackling dark night",
+ "source": "pixabay",
+ "title": "roman candle, spark, fire, hot, light, explosion, fun, celebration, party, surprise, happiness, christmas, dark, beautiful wallpaper, night, background, flame, smoke, traditional, new year, birthday",
+ "page": "https://pixabay.com/videos/id-110366/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-110366/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3416f533522b205b53c56e460e25ed139371807ef245d90f4cd96dae8a5f2229",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "BLACK_RUN_AFTER_GRADE 0.70s"
+ ],
+ "vetting_luma": [
+  21.0,
+  8.9,
+  7.4,
+  12.2,
+  15.1
+ ],
+ "vetting_descriptions": [
+  "A firework display is visible in the image, with sparks flying in the air.",
+  "A firework show is taking place in the dark, with sparks flying in the air."
+ ],
+ "vetting_black_run_s": 0.7,
+ "release_asset": null,
+ "release_tag": null
+}

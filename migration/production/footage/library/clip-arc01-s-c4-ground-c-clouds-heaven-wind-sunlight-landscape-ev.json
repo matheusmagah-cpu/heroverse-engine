@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c4-ground-c-clouds-heaven-wind-sunlight-landscape-ev",
+ "theme": "arc01-s-c4-ground-c",
+ "query": "dry cracked earth time lapse",
+ "source": "pixabay",
+ "title": "clouds, heaven, wind, sunlight, landscape, evening sun, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-30586/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-30586/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "aadbc6d9bb9bc5d10ec65b3c2852343f06573ddaf85e08100f902112ac8e6760",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car"
+ ],
+ "vetting_luma": [
+  104.5,
+  92.4,
+  79.3,
+  62.8,
+  48.3
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset with clouds and a field of green grass.",
+  "A dark sky with clouds and a sunset, with a house and a car visible in the distance."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

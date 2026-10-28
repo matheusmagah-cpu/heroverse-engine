@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-man-trees-sunrise-forest-woods-morning-f",
+ "theme": "arc01-x-from-behind",
+ "query": "man walking away field back view",
+ "source": "pixabay",
+ "title": "man, trees, sunrise, forest, woods, morning, fog, sunlight, wilderness, trail, sunbeams, misty, scenic, field, outdoors, nature, drenthe, netherlands, landscape, walking, alone, hiking, lonely",
+ "page": "https://pixabay.com/videos/id-220348/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-220348/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "48cc5c7d43322893eb86c525aee287951e3f886682fdc4a4ef8431d521c61d6a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  94.8,
+  101.6,
+  102.6,
+  103.4,
+  103.7
+ ],
+ "vetting_descriptions": [
+  "A man is walking down a path in a forest, wearing a backpack.",
+  "A man is walking down a path in a forest, wearing a backpack."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

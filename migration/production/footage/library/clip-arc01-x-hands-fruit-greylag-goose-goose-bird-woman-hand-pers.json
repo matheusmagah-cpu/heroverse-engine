@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hands-fruit-greylag-goose-goose-bird-woman-hand-pers",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hands holding fig",
+ "source": "pixabay",
+ "title": "greylag goose, goose, bird, woman, hand, person, water bird, plumage, feed, group, wildlife",
+ "page": "https://pixabay.com/videos/id-172293/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-172293/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bc8d70f5cde9147de7f54e06be08153e54d35e7a1f7da5e2c4ff4a48e284fc56",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  90.2,
+  92.3,
+  91.8,
+  85.4,
+  85.1
+ ],
+ "vetting_descriptions": [
+  "A person is standing next to a group of birds, including ducks and geese, on a dirt road.",
+  "A person is standing next to a group of ducks on a path."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

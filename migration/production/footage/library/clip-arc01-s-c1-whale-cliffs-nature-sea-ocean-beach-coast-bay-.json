@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-whale-cliffs-nature-sea-ocean-beach-coast-bay-",
+ "theme": "arc01-s-c1-whale",
+ "query": "whale breaching ocean",
+ "source": "pixabay",
+ "title": "cliffs, nature, sea, ocean, beach, coast, bay, water, england, freshwater",
+ "page": "https://pixabay.com/videos/id-361729/",
+ "author": "paulmaunders",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: paulmaunders via Pixabay (https://pixabay.com/videos/id-361729/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f32143bb1ad6f287bc9bb9c38d848fb5e3004867ba3e3a17396a44000e6f57b0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.6,
+  123.8,
+  126.8,
+  125.3,
+  127.5
+ ],
+ "vetting_descriptions": [
+  "A beautiful beach with a rocky cliff and a body of water with a few rocks in it.",
+  "A beautiful beach scene with a rocky cliff, a rocky beach, and a rocky cliff with a road going up it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-whale-cliffs-nature-sea-ocean-beach-coast-bay--sha256-f32143bb1ad6f287bc9bb9c38d848fb5e3004867ba3e3a17396a44000e6f57b0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

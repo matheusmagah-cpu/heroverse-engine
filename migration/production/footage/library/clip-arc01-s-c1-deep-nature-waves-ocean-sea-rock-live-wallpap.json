@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-deep-nature-waves-ocean-sea-rock-live-wallpap",
+ "theme": "arc01-s-c1-deep",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "nature, waves, ocean, sea, rock, live wallpaper, earth day",
+ "page": "https://pixabay.com/videos/id-31377/",
+ "author": "spaceX55",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: spaceX55 via Pixabay (https://pixabay.com/videos/id-31377/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b692fbb688933ca1eb13f5dc7aa0d58cb86ca8017ef5d132b496f01c7ec31f5d",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.8,
+  129.5,
+  129.8,
+  129.3,
+  130.3
+ ],
+ "vetting_descriptions": [
+  "A rocky shoreline with a rock in the water.",
+  "A rocky shoreline with a body of water and a few rocks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-deep-nature-waves-ocean-sea-rock-live-wallpap-sha256-b692fbb688933ca1eb13f5dc7aa0d58cb86ca8017ef5d132b496f01c7ec31f5d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
