@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline checks of the long runway: Bible-story longs only, one every other day at 10:00 UTC (owner, 2026-10-26)."""
+"""Offline long runway checks: authoritative arc deadlines, plus the legacy cadence when no calendar exists."""
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -41,19 +41,44 @@ class Runway(unittest.TestCase):
         p.start()
         self.addCleanup(p.stop)
 
-    def test_slots_are_the_bible_story_long_cadence(self):
+    def test_slots_keep_the_legacy_cadence_when_no_calendar_is_supplied(self):
         got = r.slots(NOW)
         self.assertEqual([t.strftime("%d/%m %H:%M") for t in got], ["29/10 10:00", "31/10 10:00", "02/11 10:00"])
         self.assertEqual(r.slots(datetime(2026, 10, 29, 10, 0, tzinfo=timezone.utc))[0].strftime("%d/%m"), "31/10")
         self.assertTrue(all(b - a == timedelta(days=2) for a, b in zip(got, got[1:])))   # never 2+ days without
         self.assertNotIn(0, {t.hour for t in r.slots(NOW, 20)})                       # the night slots retired
-        arcs = json.loads((Path(r.__file__).resolve().parents[1] / "production/bible/arcs.json").read_text())["arcs"]
-        # = SERIES.md calendar; arc-01's long moved off it to 04/11 (owner 27/10, "prioriza o longo agora":
-        # DECISIONS.md), then to 29/10 22:00 (owner 28/10: "tem que ser amanhã"), then to 28/10 22:00 (owner 28/10 ~11:10Z: "HOJE"); the others keep the cadence
-        # slots from 31/10 (owner 28/10: every other day after arc-01 on 29/10)
-        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-28T22:00:00Z")
-        long_slots = [r.ts(a["long"]["slot"]) for a in arcs[1:]]
-        self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if long_slots[0] <= t <= long_slots[-1]])
+
+    def test_e166_authoritative_arc_deadline_is_visible_until_upload_without_invented_pilot_approval(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            prod = Path(temporary)
+            bible = prod / "bible"
+            (bible / "plans").mkdir(parents=True)
+            (bible / "arcs.json").write_text(json.dumps({"arcs": [
+                {"id": "arc-01", "long": {"pilot": "pilot-015", "slot": "2026-10-28T22:00:00Z"}},
+                {"id": "arc-02", "long": {"pilot": None, "slot": "2026-10-31T10:00:00Z"}}
+            ]}))
+            (bible / "plans/arc-01-long.json").write_text(json.dumps({"version": "bible-long-plan-v1",
+                                                                      "episode": "arc-01-long"}))
+            for at in ("2026-10-28T14:00:00Z", "2026-10-28T22:00:00Z", "2026-10-29T00:01:00Z"):
+                with self.subTest(at=at):
+                    rows, alerts = r.check(prod, {}, r.ts(at))
+                    self.assertEqual([row["slot"] for row in rows], ["2026-10-28T22:00Z", "2026-10-31T10:00Z"])
+                    self.assertEqual(rows[0]["pilot"], "arc-01-long")
+                    self.assertEqual(rows[0]["stage"], "planned")
+                    self.assertTrue(rows[0]["late"])
+                    self.assertTrue(any("arc-01-long" in alert for alert in alerts))
+            ledger = {"entries": {"bible:arc-01-long:" + "a" * 64: {"video_id": "confirmed-video"}}}
+            rows, _ = r.check(prod, ledger, r.ts("2026-10-29T00:01:00Z"))
+            self.assertEqual([row["slot"] for row in rows], ["2026-10-31T10:00Z"])
+
+    def test_invalid_arc_calendar_is_reported_instead_of_replaced_by_a_different_deadline(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            prod = Path(temporary)
+            (prod / "bible").mkdir()
+            (prod / "bible/arcs.json").write_text('{"arcs":[{"id":"arc-01","long":{"slot":"not-a-date"}}]}')
+            rows, alerts = r.check(prod, {}, NOW)
+            self.assertEqual(rows, [])
+            self.assertTrue(any("LONG_CALENDAR_INVALID" in alert for alert in alerts))
 
     def test_every_slot_listed_and_gaps_alerted(self):
         # E15: every long slot of the next days is listed and a gap alerts; a prayer pilot never fills one (2026-10-26)

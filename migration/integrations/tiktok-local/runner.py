@@ -8,7 +8,7 @@ profile, logged in once by the owner. Called by the main clock through Desktop C
   runner.py comments [--out FILE]    our videos (@heroverse.official only) and their viewers' top-level comments not yet
                                      decided, to out/comments.json; read-only
   runner.py reply --in FILE [--dry-run] [--max N]
-                                     acts on Claude's decisions {"replies": [{comment_id, video_id, author, decision,
+                                     acts on Claude's decisions {"replies": [{comment_id, video_id, author, comment_text, decision,
                                      text | reason, verse?}]}: each REPLY is liked and answered; each SKIP is recorded
   runner.py probe VIDEO_ID           which selectors.json entries are found on one of our video pages; read-only
   runner.py story VIDEO_ID           STORY_WEB_UNSUPPORTED: TikTok's web upload has no Story option (README.md)
@@ -171,7 +171,7 @@ def collect_videos(page, max_videos):
 def open_video(page, vid):
     page.goto(f"{BASE}/@{core.HANDLE}/video/{vid}", wait_until="domcontentloaded")
     pause((3, 6))
-    if f"/@{core.HANDLE}/video/{vid}" not in page.url:
+    if not core.own_video_page(page.url, vid):
         raise RuntimeError(f"NOT_OUR_VIDEO_PAGE {vid}")
     if challenged(page):
         raise RuntimeError("CHALLENGE")
@@ -230,31 +230,87 @@ def cmd_comments(args):
     return 0
 
 
+def comment_identity(el, video_id):
+    """Read explicit DOM identity; absent/changed selectors never become a best-effort match."""
+    result = {"video_id": video_id, "comment_id": None, "author": None, "comment_text": None}
+    try:
+        ids = {el.get_attribute(name) for name in SELECTORS["_comment_id_attributes"]}
+        ids.discard(None)
+        if len(ids) == 1:
+            result["comment_id"] = ids.pop()
+        author, text = first(el, "comment_author", 1500), first(el, "comment_text", 1500)
+        if author is not None and author.count() == 1:
+            result["author"] = core.author_from_href(author.first.get_attribute("href"))
+        if text is not None and text.count() == 1:
+            result["comment_text"] = text.first.inner_text(timeout=1500)
+    except Exception:  # noqa: BLE001 (a stale/unreadable DOM node is not identity evidence)
+        pass
+    return result
+
+
 def find_comment(page, item):
-    """The comment's container on the open video page, by its author and text, scrolling the list a few times."""
-    snippet = (item.get("comment_text") or "").strip()[:40]
+    """The unique container with this cid, exact profile handle and full original comment text."""
+    if core.identity_problems(item):
+        raise RuntimeError("COMMENT_IDENTITY_INVALID")
+    if not core.own_video_page(page.url, item["video_id"]):
+        raise RuntimeError("COMMENT_VIDEO_MISMATCH")
+    unverifiable = False
     for _ in range(6):
         items = first(page, "comment_item", 3000)
         if items is not None:
-            for el in items.all():
-                try:
-                    text = el.inner_text(timeout=1500)
-                except Exception:  # noqa: BLE001
-                    continue
-                if (not snippet or snippet in text) and (not item.get("author") or item["author"] in text):
-                    return el
+            elements = items.all()
+            identities = [comment_identity(el, item["video_id"]) for el in elements]
+            index = core.comment_index(item, identities)
+            if index is not None:
+                return elements[index]
+            unverifiable = unverifiable or any(not candidate.get("comment_id")
+                and candidate.get("author") == item["author"]
+                and core.normal_text(candidate.get("comment_text")) == core.normal_text(item["comment_text"])
+                for candidate in identities)
         page.mouse.wheel(0, 1500)
         pause((2, 4))
+    if unverifiable:
+        raise RuntimeError("COMMENT_IDENTITY_UNVERIFIABLE (no explicit DOM comment id)")
     return None
 
 
-def wait_api(page, fragment, action, timeout=15000):
-    with page.expect_response(lambda r: fragment in r.url, timeout=timeout) as info:
-        action()
-    return json_of(info.value) or {}
+def assert_comment_identity(page, el, item):
+    if not core.own_video_page(page.url, item["video_id"]):
+        raise RuntimeError("COMMENT_VIDEO_MISMATCH")
+    if core.comment_index(item, [comment_identity(el, item["video_id"])]) != 0:
+        raise RuntimeError("COMMENT_IDENTITY_MISMATCH")
+
+
+def wait_api(page, fragment, action, item, timeout=15000):
+    """Guard the outgoing write too: a rerender between identity read and click must not change the target."""
+    refused = []
+    pattern = "**" + fragment + "*"
+
+    def guard(route, request):
+        if core.request_targets_comment(request.url, request.post_data, fragment, item):
+            route.continue_()
+        else:
+            refused.append(True)
+            route.abort()
+
+    page.route(pattern, guard)
+    try:
+        with page.expect_response(lambda r: fragment in r.url, timeout=timeout) as info:
+            action()
+        if refused:
+            raise RuntimeError("COMMENT_REQUEST_IDENTITY_MISMATCH")
+        return json_of(info.value) or {}
+    except Exception:
+        if refused:
+            raise RuntimeError("COMMENT_REQUEST_IDENTITY_MISMATCH") from None
+        raise
+    finally:
+        page.unroute(pattern, guard)
 
 
 def act(page, item, ledger, dry):
+    if core.identity_problems(item):
+        return "COMMENT_IDENTITY_INVALID"
     cid = item["comment_id"]
     open_video(page, item["video_id"])
     el = find_comment(page, item)
@@ -265,13 +321,16 @@ def act(page, item, ledger, dry):
         return f"DRY_RUN_FOUND like={'yes' if like is not None else 'no'} reply={'yes' if reply is not None else 'no'}"
     if reply is None:
         return "REPLY_BUTTON_NOT_FOUND"
+    assert_comment_identity(page, el, item)
     entry = ledger["actions"][cid] = {"video_id": item["video_id"], "state": "ATTEMPTING", "at": core.iso(core.now_utc())}
     core.write_json(LEDGER, ledger)
     if like is not None and not item.get("liked_by_us"):
-        body = wait_api(page, "/api/comment/digg", lambda: like.first.click())
+        assert_comment_identity(page, el, item)
+        body = wait_api(page, "/api/comment/digg", lambda: like.first.click(), item)
         entry["liked"] = body.get("status_code") == 0
         core.write_json(LEDGER, ledger)
         pause(core.SHORT_PAUSE)
+    assert_comment_identity(page, el, item)
     reply.first.click()
     pause(core.SHORT_PAUSE)
     box = first(page, "reply_input", 4000)
@@ -285,14 +344,15 @@ def act(page, item, ledger, dry):
     post = first(page, "reply_post", 4000)
     try:
         body = wait_api(page, "/api/comment/publish", (lambda: post.last.click()) if post is not None
-                        else (lambda: page.keyboard.press("Enter")))
+                        else (lambda: page.keyboard.press("Enter")), item)
     except Exception as e:  # noqa: BLE001
         entry["state"], entry["why"] = "UNCERTAIN", f"NO_PUBLISH_RESPONSE {type(e).__name__}"
         return entry["why"]
-    if body.get("status_code") == 0:
-        entry["state"], entry["reply_cid"] = "REPLIED", str((body.get("comment") or {}).get("cid", ""))
+    verified = core.verified_reply_id(body, item)
+    if verified is not None:
+        entry["state"], entry["reply_cid"] = "REPLIED", verified
     else:
-        entry["state"], entry["why"] = "UNCERTAIN", f"PUBLISH_STATUS {body.get('status_code')}"
+        entry["state"], entry["why"] = "UNCERTAIN", "PUBLISH_IDENTITY_UNCONFIRMED"
     entry["at"] = core.iso(core.now_utc())
     return entry["state"]
 

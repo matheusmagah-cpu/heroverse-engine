@@ -25,7 +25,18 @@
    "licence": "Pixabay Content License",
    "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-229685/)",
    "clip_seconds": 20,
-   "request_sha256": "ae401d8bf0edf8e9bc2d4120b48aa18cc7ffdd1a2fc2c315a71408067bb8b757"
+   "request_sha256": "ae401d8bf0edf8e9bc2d4120b48aa18cc7ffdd1a2fc2c315a71408067bb8b757",
+   "revocation": {
+    "by": "ChatGPT",
+    "at": "2026-10-28",
+    "reason": "Visual inspection at t=4 s shows an aircraft with a double contrail, a modern object incompatible with this historical Bible scene.",
+    "evidence": {
+     "asset_sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
+     "frame_seconds": 4,
+     "method": "Direct visual inspection; not an automated detector."
+    },
+    "error": "E189"
+   }
   },
   "g-c4-naked": {
    "source": "footage",
@@ -794,5 +805,32 @@
    "clip_seconds": 12,
    "request_sha256": "3530220ac78f3e3e685a6cd41f03678ce403c9ff1f15ff5345f99384d82a11fe"
   }
- }
+ },
+ "revocations": [
+  {
+   "shot": "g-c4-ground",
+   "source": "footage",
+   "score": 9.6,
+   "note": "a thundercloud lit from behind, beams breaking through",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-reflection-sky-thundercloud-clouds-sunbeams-atmosph",
+   "asset": "footage-clip-g13-reflection-sky-thundercloud-clouds-sunbeams-atmosph-sha256-b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125.mp4",
+   "clip_sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-229685/)",
+   "clip_seconds": 20,
+   "request_sha256": "ae401d8bf0edf8e9bc2d4120b48aa18cc7ffdd1a2fc2c315a71408067bb8b757",
+   "revocation": {
+    "by": "ChatGPT",
+    "at": "2026-10-28",
+    "reason": "Visual inspection at t=4 s shows an aircraft with a double contrail, a modern object incompatible with this historical Bible scene.",
+    "evidence": {
+     "asset_sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
+     "frame_seconds": 4,
+     "method": "Direct visual inspection; not an automated detector."
+    },
+    "error": "E189"
+   }
+  }
+ ]
 }

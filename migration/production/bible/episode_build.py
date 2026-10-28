@@ -60,9 +60,12 @@ the episode record and dispatches publish-episode.yml.
                                                  E114, shot-probe.yml with adopt_run: clips a build run made and
                                                  Claude approved, as a probe record (request recomputed and equal to
                                                  the plan's now, the build's checks again); nothing generated
-  episode_build.py approve-shot RECORD SHOT ASSET SCORE NOTE
-                                                 E114: Claude's frame review (SCORE >= 9.5) approves one probed clip
+  episode_build.py approve-shot RECORD SHOT ASSET SCORE NOTE --reviewer MODEL
+                                                 E114: the named session's frame review (SCORE >= 9.5) approves a clip
                                                  into shots/<episode>.json (by PR); the build ships that clip
+  episode_build.py measure-clip RECORD SHOT CLIP [OUT_DIR]
+                                                 E152: ffprobe timing of existing bytes, hash-bound sidecar only;
+                                                 no review, no approval change, no regeneration
   episode_build.py voice-reference RECORD SHOT ASSET SCORE NOTE
                                                  story QA v4 (review of #476): Claude's review (>= 9.5) records one
                                                  probed native clip's sha256 as its speaker's reference in voices.json
@@ -94,6 +97,8 @@ sys.path.insert(0, str(REPO / "migration" / "integrations" / "pavo"))
 import plan_check  # noqa: E402
 import characters as ch  # noqa: E402
 import pavo_native  # noqa: E402  (owner 27/10: Pavo's own speech, story QA v4)
+import reviewer_identity  # noqa: E402
+import clip_timing  # noqa: E402
 
 VOICE = {"voice_id": "am_michael", "speed": 1.0}   # the pinned engine voice (qa_pilot.voice_model_pinned)
 LINE_GAP = plan_check.LINE_GAP
@@ -571,6 +576,10 @@ def native_spans(plan, approvals=None):
         speech = (approvals.get(s["id"]) or {}).get("speech") or {}
         if pavo_native.spoken(s) and not is_window(s) and isinstance(speech.get("onset"), (int, float)) and \
                 isinstance(speech.get("end"), (int, float)) and speech["end"] > speech["onset"]:
+            media = clip_timing.evidence(approvals[s["id"]], plan.get("episode"))
+            problem = clip_timing.speech_problem(s["id"], speech, media) if media else None
+            if problem:
+                raise SystemExit(problem)
             out[s["id"]] = (carried[i], float(speech["onset"]), float(speech["end"]))
     return out
 
@@ -801,11 +810,12 @@ def shot_seconds(shot, index, plan, layout, slack=0.0):
     return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"] - slack))
 
 
-def clip_needs(plan, layout, slack=0.0):
-    """E118: {shot id: the clip seconds this machine's layout needs} (shot_seconds). The preflight records them with
-    no slack; the build checks against them with MEASURE_TOLERANCE (coverage_problems)."""
-    return {s["id"]: shot_seconds(s, i, plan, layout, slack) for i, s in enumerate(plan["shots"])
-            if not is_window(s)}
+def clip_needs(plan, layout, slack=0.0, approvals=None):
+    """E118: source coverage this layout needs. E152: a native approval needs its actual speech endpoint, not
+    the integer duration once requested from Pavo. Other shots keep shot_seconds and MEASURE_TOLERANCE."""
+    spans = native_spans(plan, approvals)
+    return {s["id"]: spans[s["id"]][2] if s["id"] in spans else shot_seconds(s, i, plan, layout, slack)
+            for i, s in enumerate(plan["shots"]) if not is_window(s)}
 
 
 BOUND_AUDIO = "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice"
@@ -1047,6 +1057,74 @@ def request_digests(plan, layout, refs, chars=None):
             if not is_window(s)}
 
 
+def revocation_problems(episode, approvals=None, shots_dir=None, source_hashes=()):
+    """E189: a retracted review vetoes its exact bytes, independent of score, request or reviewer allowlist.
+
+    `revocation` presence (even malformed/null/false) means STOP, never implicit reinstatement. The original
+    approval remains unchanged; its complete snapshot also goes in its document's append-only `revocations`
+    history so replacing the current shot cannot silently make the rejected bytes reusable. This is an explicit
+    human/session review record, not an automatic visual detector. All consumers read the same current records.
+    """
+    directory = Path(shots_dir) if shots_dir is not None else SHOTS_DIR
+    documents, rows, vetoed = {}, [], {}
+    try:
+        for path in sorted(directory.glob("*.json")):
+            doc = load(path)
+            current, history = doc.get("shots", {}), doc.get("revocations", [])
+            if not isinstance(current, dict) or not isinstance(history, list):
+                raise ValueError("invalid current approvals or revocation history")
+            if any(not isinstance(a, dict) for a in current.values()) or any(
+                    not isinstance(a, dict) or "revocation" not in a for a in history):
+                raise ValueError("invalid approval or revocation entry")
+            if any(not any(isinstance(a.get(k), str) and re.fullmatch(r"[0-9a-f]{64}", a[k])
+                           for k in ("clip_sha256", "still_sha256")) for a in history):
+                raise ValueError("revocation history has no exact source hash")
+            documents[path.stem] = current
+            rows.extend((f"{path.stem}#{sid}", a) for sid, a in current.items())
+            rows.extend((f"{path.stem}#{a.get('shot', 'history')}", a) for a in history)
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        return [f"SHOT_REVIEW_REVOKED unreadable approval/revocation history ({type(exc).__name__})"]
+    approvals = documents.get(episode, {}) if approvals is None else approvals
+    rows.extend((f"{episode}#{sid}", a) for sid, a in approvals.items())
+    for origin, rec in rows:
+        if "revocation" in rec:
+            for key in ("clip_sha256", "still_sha256"):
+                value = rec.get(key)
+                if isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value):
+                    vetoed.setdefault(value, origin)
+    out = []
+    for sid, rec in approvals.items():
+        origins = {vetoed[value] for key in ("clip_sha256", "still_sha256")
+                   if isinstance(value := rec.get(key), str) and value in vetoed}
+        if "revocation" in rec or origins:
+            out.append(f"SHOT_REVIEW_REVOKED {episode}#{sid} (explicit retraction; historical score/hash do not "
+                       f"restore approval; source: {', '.join(sorted(origins)) or episode + '#' + sid})")
+    for value in sorted(set(source_hashes)):
+        if value in vetoed:
+            out.append(f"SHOT_REVIEW_REVOKED rendered source {value} ({vetoed[value]})")
+    return out
+
+
+def archive_revoked_approval(data, shot_id):
+    """E189: both approval writers preserve a current-only retraction before replacing its shot.
+
+    Keep the complete old record, including the original score/reviewer and revocation identity. Appending
+    an already archived snapshot is a no-op; a clean replacement never removes or edits earlier snapshots.
+    """
+    old = data.get("shots", {}).get(shot_id)
+    if old is None or "revocation" not in old:
+        return
+    if not any(isinstance(old.get(k), str) and re.fullmatch(r"[0-9a-f]{64}", old[k])
+               for k in ("clip_sha256", "still_sha256")):
+        raise SystemExit(f"SHOT_REVIEW_REVOKED {shot_id} (cannot archive a retraction without its exact source hash)")
+    history = data.setdefault("revocations", [])
+    if not isinstance(history, list):
+        raise SystemExit(f"SHOT_REVIEW_REVOKED {shot_id} (invalid revocation history)")
+    snapshot = dict(json.loads(json.dumps(old)), shot=shot_id)
+    if snapshot not in history:
+        history.append(snapshot)
+
+
 def review_problems(plan, digests, approvals=None, needs=None):
     """E114: a build runs only when every shot has an approved clip made from the request the plan sends now:
     SHOT_NOT_REVIEWED (no approved clip) and SHOT_REQUEST_CHANGED (approved for another request), each naming its
@@ -1061,13 +1139,16 @@ def review_problems(plan, digests, approvals=None, needs=None):
     index = {s["id"]: k for k, s in enumerate(plan["shots"])}
     changed = [i for i in ids if i in approvals and approvals[i].get("request_sha256") != shot_sources.expected_request(
         plan, plan["shots"][index[i]], index[i], approvals[i], digests)]
-    out = []
+    out = revocation_problems(plan.get("episode"), {k: v for k, v in approvals.items() if k in ids})
     if missing:
         out.append("SHOT_NOT_REVIEWED " + " ".join(missing) + " (shot-probe.yml, Claude's frame review >= 9.5, "
                    "episode_build.py approve-shot, by PR)")
     if changed:
         out.append("SHOT_REQUEST_CHANGED " + " ".join(changed) + " (the plan's request is no longer the one the "
                    "approved clip was made from: probe and approve again)")
+    unknown = [i for i in ids if i in approvals and not reviewer_identity.valid(approvals[i])]
+    if unknown:
+        out.append("SHOT_REVIEWER_REFUSED " + " ".join(unknown) + " (unknown explicit reviewer identity)")
     if needs is not None:
         out += coverage_problems(plan, needs, {k: v for k, v in approvals.items() if k not in changed})
     return out
@@ -1083,8 +1164,9 @@ def coverage_problems(plan, needs, approvals):
         a = approvals.get(s["id"])
         if a is None:
             continue
-        have, need = a.get("clip_seconds"), needs.get(s["id"])
-        if not isinstance(have, (int, float)) or not isinstance(need, (int, float)) or have < need:
+        have, need = clip_timing.seconds(a, plan.get("episode")), needs.get(s["id"])
+        if (not isinstance(have, (int, float)) or not isinstance(need, (int, float))
+                or not math.isfinite(have) or not math.isfinite(need) or have < need):
             short.append(f"{s['id']}({have}<{need})")
     return [("SHOT_CLIP_TOO_SHORT " + " ".join(short) + " (the approved clip is shorter than the clip seconds this "
              "layout needs: probe at the new length and approve again)")] if short else []
@@ -1423,8 +1505,8 @@ def speech_record_flags(approved, clip_sha):
     """A native speech clip ships only with the speech checks its approval recorded for this exact clip, all passed
     (story QA v4 rights.ai_video.speech_checks): SPEECH_UNCHECKED otherwise."""
     speech = approved.get("speech") or {}
-    if speech.get("clip_sha256") != clip_sha or speech.get("flags") != [] or not isinstance(speech.get("gain_db"),
-                                                                                           (int, float)):
+    if (speech.get("clip_sha256") != clip_sha or speech.get("flags") != []
+            or not isinstance(speech.get("gain_db"), (int, float)) or not math.isfinite(speech["gain_db"])):
         return ["SPEECH_UNCHECKED"]
     return []
 
@@ -1535,7 +1617,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
     approvals = load_approvals(plan) if approvals is None else approvals
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
     digests = request_digests(plan, layout, refs)   # E127: windows ship their source clip
-    bad = review_problems(plan, digests, approvals, clip_needs(plan, layout, MEASURE_TOLERANCE))
+    bad = review_problems(plan, digests, approvals, clip_needs(plan, layout, MEASURE_TOLERANCE, approvals))
     if bad:
         raise SystemExit("; ".join(bad))
     report_path = work / "report.json"
@@ -1564,7 +1646,8 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
                 flags = flags + speech_record_flags(approved, sha256(final))
         entry["source"] = source
         entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score", "source",
-                                                          "footage", "still", "url", "licence", "credit", "speech")
+                               "footage", "still", "still_sha256", "repo_path", "frame", "motion", "still_from",
+                               "clip_from", "clip_seconds", "crop_to", "url", "inventory", "licence", "credit", "speech")
                              if k in approved}
         entry["checks"] = {"flags": flags, "measures": measures}
         report["shots"][shot["id"]] = entry
@@ -1573,7 +1656,8 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
             save(report_path, in_plan_order(report, plan))
             raise SystemExit(entry["error"])
         save(report_path, in_plan_order(report, plan))
-        print(json.dumps({"shot": shot["id"], "approved_clip": approved["asset"]}))
+        print(json.dumps({"shot": shot["id"], "approved_clip": approved.get("asset") or approved.get("repo_path")
+                          or approved.get("url")}))
     return report
 
 
@@ -1706,6 +1790,7 @@ def probe_assets(out, episode, run_id=None, dst=None):
                 raise SystemExit(f"SHOT_CLIP_SHA256_MISMATCH {clip['asset']}")
             names.append(clip["asset"])
             if run_id:
+                clip["media"] = clip_timing.measure(out / clip["asset"])
                 clip["uploaded"] = True
                 clip["sheet"] = f"{run_id}-{clip['sheet']}"   # the name it is pushed under
     if run_id and dst:
@@ -1784,8 +1869,27 @@ def adopt_step(plan, run_dir, lip_python, face_model, out, ids, source_run, shee
     return record
 
 
-def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today=None):
-    """E114: Claude's frame review approves one probed clip (>= SHOT_REVIEW_MIN) into shots/<episode>.json, copied
+def measure_clip_step(record_path, shot_id, clip_path, out_dir=None):
+    """Measure an existing recorded clip by hash, without rewriting its approval or claiming a new review."""
+    record_path = Path(record_path)
+    root = (REPO / "migration" / "evidence" / "shots").resolve()
+    if root not in record_path.resolve().parents:
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (a record under migration/evidence/shots/)")
+    record = load(record_path)
+    ep = record.get("episode")
+    if not plan_check.EPISODE_ID.fullmatch(ep or ""):
+        raise SystemExit(f"SHOT_RECORD_REFUSED {record_path} (invalid episode)")
+    media = clip_timing.measure(clip_path)
+    clips = ((record.get("shots") or {}).get(shot_id) or {}).get("clips") or []
+    if not any(c.get("clip_sha256") == media["clip_sha256"] for c in clips):
+        raise SystemExit(f"SHOT_CLIP_NOT_IN_RECORD {shot_id} {media['clip_sha256']}")
+    dst = Path(out_dir) if out_dir else root / ep / "media"
+    save(dst / f"{media['clip_sha256']}.json", media)
+    return media
+
+
+def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today=None, *, reviewer=None):
+    """E114: the named session's frame review approves one probed clip (>= SHOT_REVIEW_MIN) into shots/<episode>.json, copied
     from the probe record so nobody hand-edits a hash. Refused: a record outside evidence/shots/, a clip that failed
     the build's checks, a score under the floor, an empty note."""
     record_path = Path(record_path)
@@ -1804,6 +1908,10 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
         raise SystemExit(f"SHOT_CLIP_NOT_UPLOADED {shot_id} {asset} (shot-probe.yml's record job uploads every clip)")
     if clip.get("flags"):
         raise SystemExit(f"SHOT_CHECKS_FAILED {shot_id} {','.join(clip['flags'])} (the build would refuse this clip)")
+    revoked = revocation_problems(record["episode"], {shot_id: {"clip_sha256": clip.get("clip_sha256")}},
+                                  shots_dir=shots_dir)
+    if revoked:
+        raise SystemExit("; ".join(revoked))
     try:
         score = float(score)
     except (TypeError, ValueError):
@@ -1812,11 +1920,14 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
         raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {SHOT_REVIEW_MIN}-10)")
     if not (note or "").strip():
         raise SystemExit(f"SHOT_NOTE_MISSING {shot_id} (what the frame review saw)")
-    # E118: the seconds the clip was generated at (coverage_problems); a record from before E118 kept them in its
-    # request's canonical form
-    seconds = entry.get("clip_seconds", (entry.get("request") or {}).get("seconds"))
-    if not isinstance(seconds, int) or isinstance(seconds, bool) or seconds <= 0:
+    # E152: keep the requested seconds as provenance only. The approved usable duration is measured on these bytes.
+    requested = entry.get("clip_seconds", (entry.get("request") or {}).get("seconds"))
+    if not isinstance(requested, int) or isinstance(requested, bool) or requested <= 0:
         raise SystemExit(f"SHOT_CLIP_SECONDS_UNKNOWN {shot_id} (the probe record holds no clip seconds)")
+    media = clip_timing.evidence(clip, record.get("episode"))
+    if media is None:
+        raise SystemExit(f"SHOT_MEDIA_UNMEASURED {shot_id} (episode_build.py measure-clip before approving legacy probes)")
+    seconds = media["video_seconds"]
     speech = None
     audio = (entry.get("request") or {}).get("audio") or {}
     if audio.get("route") == pavo_native.NATIVE:
@@ -1831,13 +1942,19 @@ def approve_shot(record_path, shot_id, asset, score, note, shots_dir=None, today
                                            binding=pavo_native.voice_binding(audio.get("speaker")))
         if speech["flags"]:
             raise SystemExit(f"SPEECH_CHECKS_FAILED {shot_id} {','.join(speech['flags'])}")
+        outside = clip_timing.speech_problem(shot_id, speech, media)
+        if outside:
+            raise SystemExit(outside)
+    model = reviewer_identity.require(reviewer)
     path = Path(shots_dir or SHOTS_DIR) / f"{record['episode']}.json"
     data = load(path) if path.exists() else {"episode": record["episode"], "shots": {}}
+    archive_revoked_approval(data, shot_id)
     data["shots"][shot_id] = {"asset": asset, "clip_sha256": clip["clip_sha256"],
-                              "request_sha256": entry["request_sha256"], "clip_seconds": seconds, "score": score, "note": note.strip(),
+                              "request_sha256": entry["request_sha256"], "clip_seconds": seconds,
+                              "requested_clip_seconds": requested, "media": media, "score": score, "note": note.strip(),
                               "probe_record": rel(record_path), "run_id": record.get("run_id"),
                               "source_run": clip.get("source_run"),
-                              "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}
+                              "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime()), "model": model}
     if speech:
         data["shots"][shot_id]["speech"] = speech
     data["shots"] = dict(sorted(data["shots"].items()))
@@ -1965,6 +2082,13 @@ def native_voice(plan, work, layout, audio_clips, seconds, approvals=None):
     if not spans:
         return str(work / "narration.wav"), seconds, {}
     approvals = load_approvals(plan) if approvals is None else approvals
+    for sid in spans:
+        media = clip_timing.measure(audio_clips.get(sid, ""))
+        if media["clip_sha256"] != approvals[sid].get("clip_sha256"):
+            raise SystemExit(f"SHOT_CLIP_SHA256_MISMATCH {sid}")
+        outside = clip_timing.speech_problem(sid, approvals[sid]["speech"], media)
+        if outside:
+            raise SystemExit(outside)
     places = pavo_native.placements(plan, layout, spans, audio_clips, approvals)
     mixed = work / "narration-native.wav"
     pavo_native.premix(work / "narration.wav", places, mixed, layout["total"])
@@ -1998,7 +2122,7 @@ def compose_step(plan, work, music, out):
     shots = shift_onsets(compose_shots(plan, layout, clips, seconds), onsets)
     compose_plan = {"voice": voice, "timeline": str(work / "compose-timeline.json"),
                     "music": str(music), "music_offset": float(plan.get("music_offset", 600.0)), "tail": TAIL,
-                    "shots": shots}
+                    "shots": shots, "native_onsets": onsets}
     save(work / "compose-plan.json", compose_plan)
     short_engine.main(str(work / "compose-plan.json"), str(out))
     runs = clip_check.black_runs(str(out))
@@ -2059,8 +2183,11 @@ def main(argv):
         for name in probe_assets(argv[2], argv[3], *(argv[4:6] if len(argv) == 6 else ())):
             print(name)
         return 0
-    if cmd == "approve-shot" and len(argv) == 7:   # E114: RECORD SHOT ASSET SCORE NOTE
-        print(json.dumps(approve_shot(argv[2], argv[3], argv[4], argv[5], argv[6]), ensure_ascii=False))
+    if cmd == "approve-shot" and len(argv) == 9 and argv[7] == "--reviewer":
+        print(json.dumps(approve_shot(argv[2], argv[3], argv[4], argv[5], argv[6], reviewer=argv[8]), ensure_ascii=False))
+        return 0
+    if cmd == "measure-clip" and len(argv) in (5, 6):
+        print(json.dumps(measure_clip_step(*argv[2:5], out_dir=argv[5] if len(argv) == 6 else None)))
         return 0
     if cmd == "check-probe" and len(argv) == 3:    # shot-probe.yml's inputs (env SHOTS, ATTEMPTS), before any secret
         ids, n = probe_ids(load(argv[2]), os.environ.get("SHOTS", ""), os.environ.get("ATTEMPTS", ""))

@@ -32,6 +32,7 @@ These entries record manual reviews separately from plugin execution and yield.
 | Zone | Scope | Review date | Method and result |
 |---|---|---|---|
 | `gpt-reviewer-handoff` | `claude/gpt-takeover-20261028`: exact long-reviewer allowlist, shared gate/upload policy, `approve.yml`, consuming tests and handoff documentation. | 2026-10-28 | **MANUAL independent static review**: no new blocking finding in the inspected diff; no `verified-security-sweep` or `pr-review-toolkit` execution or score claimed. See [report](2026-10-28-gpt-reviewer-handoff.md); functional results remain in the transition handoff. |
+| `production-continuity-integration` | Same PR, based on `51cb8f7`: durable dispatch claims, reviewer/media bindings, long handoff, source revocation, fail-closed detectors and exact TikTok target checks. | 2026-10-28 | **MANUAL review and offline regressions**, including independent E189 writer/history reproduction and 10 focused integration tests. Scope and remaining environment limitations are explicit in the [integration addendum](2026-10-28-gpt-reviewer-handoff.md#integration-addendum-production-and-continuity-corrections). No plugin execution, audiovisual approval or whole-project certification claimed. |
 
 ## Proposed, not yet run
 

@@ -27,7 +27,8 @@ usage:
                                                            sha256 from SRC_DIR) as JPEGs the image model accepts
   thumbs.py finalize SPEC IMAGE RUN N META_JSON            one candidate (crop, text, record, R16)
   thumbs.py sheet EPISODE RUN OUT_JPG                      the run's contact sheet
-  thumbs.py approve EPISODE CANDIDATE --score S --note T   after Claude's review (>= 9.5), by PR
+  thumbs.py approve EPISODE CANDIDATE --score S --note T --reviewer MODEL
+                                                        after the named session's review (>= 9.5), by PR
   thumbs.py verify EPISODE [THUMBNAIL]                     what publish refuses (exit 1 on any)
 """
 from datetime import datetime, timezone
@@ -39,6 +40,9 @@ import shutil
 import sys
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import reviewer_identity  # noqa: E402
+
 REPO = HERE.parents[2]
 THUMBS = HERE / "thumbs"
 CHARACTERS = REPO / "migration" / "production" / "characters"
@@ -169,6 +173,8 @@ def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=
     if form and spec.get("format") != form:
         out.append(f"THUMB_NOT_APPROVED {episode}: format {spec.get('format')} is not the episode's {form}")
     a = spec.get("approved") or {}
+    if not reviewer_identity.valid(a):
+        out.append(f"THUMB_NOT_APPROVED {episode}: unknown reviewer identity {a.get('model')!r}")
     if spec.get("status") != "APPROVED" or not a.get("sha256"):
         return out + [f"THUMB_NOT_APPROVED {episode}: status {spec.get('status')} (thumbs.py approve after review)"]
     if spec.get("episode") != episode:
@@ -323,8 +329,8 @@ def sheet(episode, run, out_jpg, thumbs_dir=None):
     return [r["id"] for r in recs]
 
 
-def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=None):
-    """Claude's review approved CANDIDATE (overall >= 9.5): its image becomes bible/thumbs/<episode>.jpg and the spec
+def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=None, *, reviewer=None):
+    """The named session's review approved CANDIDATE (overall >= 9.5): its image becomes bible/thumbs/<episode>.jpg and the spec
     APPROVED with the sha256 computed here. Refused when the candidate is not the recorded image, was made from
     another spec, fails R16 (thumb_check.py), or the spec fails its own rules."""
     thumbs_dir = Path(thumbs_dir or THUMBS)
@@ -352,13 +358,14 @@ def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=
         raise SystemExit(f"THUMB_R16_FAIL {candidate} " + "; ".join(check["fails"]))
     if meta.get("episode") != episode or spec.get("episode") != episode:
         raise SystemExit(f"THUMB_CANDIDATE_UNKNOWN {candidate} (the spec and candidate are {episode}'s)")
+    model = reviewer_identity.require(reviewer)
     dst = image_path(episode, thumbs_dir)
     shutil.copyfile(src, dst)
     spec.update({"status": "APPROVED", "repo_path": rel(dst),
                  "approved": {"sha256": sha256(dst), "spec_sha256": digest(spec), "candidate": candidate,
                               "score": score, "note": note.strip(),
                               "date": today or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                              "by": "Claude's thumbnail review (ops/CLAUDE_REVIEW.md)"}})
+                              "by": model, "model": model}})
     save(spec_path(episode, thumbs_dir), spec)
     return spec
 
@@ -379,8 +386,8 @@ def main(argv):
     if cmd == "sheet" and len(args) == 3:
         print(json.dumps({"sheet": args[2], "candidates": sheet(*args)}))
         return 0
-    if cmd == "approve" and len(args) == 6 and args[2] == "--score" and args[4] == "--note":
-        spec = approve(args[0], args[1], float(args[3]), args[5])
+    if cmd == "approve" and len(args) == 8 and args[2] == "--score" and args[4] == "--note" and args[6] == "--reviewer":
+        spec = approve(args[0], args[1], float(args[3]), args[5], reviewer=args[7])
         print(json.dumps({"episode": args[0], "status": spec["status"], "sha256": spec["approved"]["sha256"]}))
         return 0
     if cmd == "verify" and len(args) in (1, 2):

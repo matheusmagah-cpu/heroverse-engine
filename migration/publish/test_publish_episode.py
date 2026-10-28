@@ -5,6 +5,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import publish_episode as pe  # noqa: E402
@@ -13,6 +14,23 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class Episode(unittest.TestCase):
+    def test_e189_revocation_blocks_even_hash_matching_short_before_any_session(self):
+        sys.path.insert(0, str(pe.THUMBS_CODE))
+        import episode_build as eb
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(eb, "SHOTS_DIR", Path(tmp, "shots")):
+            Path(tmp, "shots").mkdir()
+            Path(tmp, "shots/fixture-short.json").write_text(json.dumps({"shots": {"s": {
+                "score": 9.6, "clip_sha256": "a" * 64,
+                "revocation": {"by": "ChatGPT", "reason": "visible aircraft"}}}}))
+            video = Path(tmp, "video.mp4")
+            video.write_bytes(b"fixture")
+            record = Path(tmp, "episode-record.json")
+            record.write_text(json.dumps({"id": "fixture-short", "title": "T",
+                "description": "KJV (public domain). AI voice.", "output_sha256": pe.sha256_file(video)}))
+            with mock.patch.object(pe.pv, "session", side_effect=AssertionError("no remote session allowed")):
+                with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                    pe.main(record, video, Path(tmp, "unused-ledger"), Path(tmp, "unused-receipt"))
+
     def test_every_episode_record_is_publishable_metadata(self):
         for f in sorted((ROOT / "production/bible/episodes").glob("*.json")):
             ep = json.loads(f.read_text())

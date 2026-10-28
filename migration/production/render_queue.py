@@ -7,6 +7,8 @@ yet on YouTube. It needs images while any image its script uses has no
 images/<id>.json record; it needs a render when its images are complete and no
 completed frozen-v3 render exists for the current script and matching output hash.
 A completed v3 QA FAIL is not rerendered repeatedly; it awaits an input correction.
+The approved-clip long-build route hands off an already rendered master. It never
+enters the legacy image/preview/render queue, even if its handoff needs repair.
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile|review} [HOURS]
   review: prints "PILOT SHA256" for every due render with QA PASS and no Claude review for that hash
   images: prints "PILOT id,id,..." for every pilot with images still missing
@@ -29,12 +31,20 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # E73: python3 -I does not add the script's own directory
 import preview_gate  # noqa: E402
 
+LONG_PUBLICATION_SCRIPT = "bible-long-publication-script-v1"
+
+
+def long_build_script(script):
+    return isinstance(script, dict) and script.get("version") == LONG_PUBLICATION_SCRIPT
+
 
 def when(s):
     return datetime.fromisoformat(s.replace("Z", "+00:00"))
 
 
 def needed_images(d, script):
+    if long_build_script(script):
+        return []  # its backgrounds identify approved source bytes, not legacy image requests
     spec = json.loads((d / "images.json").read_text()) if (d / "images.json").exists() else {"images": []}
     ids = {i["id"] for i in spec["images"]} | set(script["backgrounds"]) | {script["figure"], script["overlay"]["title_image"]}
     return sorted(i for i in ids if not (d / "images" / f"{i}.json").exists())
@@ -65,17 +75,32 @@ def object_or_empty(path):
     return value if isinstance(value, dict) else {}
 
 
-def current_render(manifest, qa, script_sha):
+def current_render(manifest, qa, script_sha, pilot_dir=None):
     """Completed current render, not a publication verdict. FAIL must not loop."""
     if not isinstance(manifest, dict) or not isinstance(qa, dict):
         return False
     output = manifest.get("output_sha256")
-    return (isinstance(output, str) and re.fullmatch(r"[0-9a-f]{64}", output) is not None
-            and manifest.get("script_sha256") == script_sha
-            and qa.get("output_sha256") == output
-            and qa.get("criteria_version") in STANDARD_QAS
+    if not (isinstance(output, str) and re.fullmatch(r"[0-9a-f]{64}", output) is not None
+            and qa.get("output_sha256") == output and qa.get("criteria_version") in STANDARD_QAS
             and qa.get("criteria_sha256") == STANDARD_QAS[qa.get("criteria_version")]
-            and qa.get("status") in ("PASS", "FAIL"))
+            and qa.get("status") in ("PASS", "FAIL")):
+        return False
+    if pilot_dir is not None or manifest.get("version") == "bible-long-manifest-v1":
+        # E168: the long manifest predates its publication script. Its handoff, not an invented script_sha256
+        # field, binds the script, measured timeline, package, schedule, thumbnail and unchanged source plan.
+        if pilot_dir is None:
+            return False
+        d = Path(pilot_dir).resolve()
+        sys.path.insert(0, str(Path(__file__).resolve().parent / "bible"))
+        import long_handoff
+        try:
+            binding = long_handoff.verify(d, root=d.parents[2])
+        except (OSError, ValueError, TypeError, KeyError, AttributeError, SystemExit):
+            return False  # an incomplete handoff waits for repair; never a legacy render or an approval
+        return (binding["files"].get("script.json") == script_sha
+                and manifest == object_or_empty(d / "out/manifest.json")
+                and qa.get("criteria_version") == manifest.get("criteria_version"))
+    return manifest.get("script_sha256") == script_sha
 
 
 def unvetted_footage(production, script):
@@ -93,7 +118,8 @@ def unvetted_footage(production, script):
 def next_render(rows):
     """The one rule for the next full render, shared by the queue, the runner wake and the engine fallback (E78: two
     copies of it missed the footage check): images complete, footage vetted, not rendered, preview at the floor."""
-    return next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
+    return next((r for r in rows if r.get("render_route") != "long-build"
+                 and not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
                  and r["preview_ok"]), None)
 
 
@@ -131,6 +157,13 @@ def due(production, ledger, now, hours):
             continue  # already on YouTube
         script_sha = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
         script = json.loads((d / "script.json").read_text())
+        long_build = (long_build_script(script) or m.get("version") == "bible-long-manifest-v1"
+                      or (d / "out/handoff.json").exists())
+        if long_build:
+            out.append({"pilot": d.name, "publish_at": t, "render_route": "long-build",
+                        "missing_images": [], "unvetted_footage": [], "preview_ok": False,
+                        "rendered": current_render(m, object_or_empty(d / "out/qa.json"), script_sha, d)})
+            continue
         out.append({"pilot": d.name, "publish_at": t, "missing_images": needed_images(d, script),
                     "unvetted_footage": unvetted_footage(production, script),
                     "rendered": current_render(m, object_or_empty(d / "out" / "qa.json"), script_sha),
@@ -243,7 +276,8 @@ def main(production, ledger_path, mode, hours="48"):
                 print(r["pilot"], ",".join(r["missing_images"]))
     elif mode == "preview":
         # a script with no current render and no preview of itself gets the ~15 min preview first (one at a time)
-        nxt = next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
+        nxt = next((r for r in rows if r.get("render_route") != "long-build"
+                    and not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
                     and not r["preview_ok"] and not preview_gate.previewed(Path(production) / r["pilot"])), None)
         if nxt:
             print(nxt["pilot"])
@@ -255,7 +289,7 @@ def main(production, ledger_path, mode, hours="48"):
         # Claude reviews every preview of a current script that has no review for that script yet
         for r in rows:
             d = Path(production) / r["pilot"]
-            if not r["rendered"] and preview_gate.previewed(d) and not preview_gate.review(d):
+            if r.get("render_route") != "long-build" and not r["rendered"] and preview_gate.previewed(d) and not preview_gate.review(d):
                 print(r["pilot"], preview_gate.script_sha(d))
     elif mode == "review":
         # the designated reviewer (Claude) reviews every due render that passed QA and has no review for its hash

@@ -2,10 +2,12 @@
 """Synthetic files with known defects: the whole-file scan finds a 1 s black gap and a 4 s silence that a
 0.5 frames/s sample could miss, and passes a clean file (ffmpeg lavfi sources, nothing downloaded)."""
 from pathlib import Path
+import json
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import signal_scan as ss  # noqa: E402
@@ -20,6 +22,18 @@ def make(path, black=None, mute=None, d=14):
 
 
 class Scan(unittest.TestCase):
+    def test_e185_failed_detector_is_error_after_a_successful_probe(self):
+        # A readable duration is not evidence that the subsequent detectors finished.
+        for stderr in ("", "frame=100\n", "black_start:5 black_end:6 black_duration:1\n"):
+            with self.subTest(stderr=stderr), tempfile.TemporaryDirectory() as t:
+                out = Path(t) / "scan.json"
+                failed = subprocess.CompletedProcess(["ffmpeg"], 1, "", stderr)
+                with patch.object(ss, "duration", return_value=14.0), patch.object(ss.subprocess, "run", return_value=failed):
+                    self.assertEqual(ss.main("synthetic.mp4", str(out)), 1)
+                result = json.loads(out.read_text())
+                self.assertEqual(result["status"], "ERROR")
+                self.assertNotIn("rows", result)
+
     def test_clean_passes(self):
         with tempfile.TemporaryDirectory() as t:
             make(Path(t) / "ok.mp4")

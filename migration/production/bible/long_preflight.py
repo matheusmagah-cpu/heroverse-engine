@@ -186,7 +186,8 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
                 shot_sources.expected_request(plan, s, i, a, digests):
             continue
         if a and a.get("request_sha256") == digests.get(s["id"]) and (
-                need is None or (isinstance(a.get("clip_seconds"), (int, float)) and a["clip_seconds"] >= need)):
+                need is None or (eb.clip_timing.finite_positive(eb.clip_timing.seconds(a, plan.get("episode")))
+                                 and eb.clip_timing.seconds(a, plan.get("episode")) >= need)):
             continue
         if s["id"] in fallback:   # its free source is approved by approve-source (R3), never probed
             planned.append(s["id"])

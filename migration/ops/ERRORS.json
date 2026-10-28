@@ -869,17 +869,6 @@
    }
   },
   {
-   "id": "E107",
-   "date": "2026-10-26",
-   "class": "silent",
-   "error": "The owner saw 'Erro ao carregar legendas' in the YouTube app on 8heTdP0LllM (pilot-008, now private). publish_video.py sent the SRT with captions.insert, took HTTP 200 as done and recorded captions: true; nothing ever read whether YouTube served the track (captions.list snippet.status serving/syncing/failed), so a failed or stuck track could pass silently on every long. The resume check also took any English track, the automatic ASR one included, as 'already inserted', which would skip our upload. Offline evidence: the SRT rebuilt for each of the 11 captioned prayer longs (002, 004, 005, 006, 007, 008, 010, 011, 012, 013, 014; each manifest's hash is its ledger key) is valid (numbering, timing format, blank-line separators, monotonic and non-overlapping, inside the video, no empty cue, ASCII/UTF-8 without BOM, LF) and its multipart media part is byte-exact; the SRT is therefore not shown to be the cause. The live cause (failed track, still syncing, private-video playback in the app, or the ASR track) is decided by the captions-audit run, not claimed here.",
-   "fix": "publish/captions.py builds (byte-identical for valid input), validates strictly and frames the SRT; publish_video.py validates before captions.insert (CAPTIONS_SRT_INVALID), records the track id, polls captions.list a bounded number of times (captions.WAIT_CALLS, 50 units each, inside preflight's LONG_UNITS) and records captions_status; failed or not listed fails the run with CAPTIONS_FAILED after the ledger and receipt are written; still syncing is recorded with a warning and read again by a re-run, which also verifies the legacy entries; only our standard English track counts, never ASR. preflight.py validates the exact SRT against output_seconds. channel-privacy.yml gains captions-audit (read-only receipt channel/captions-audit-<run>.json) and captions-repair (only a reviewed captions-repair-plan.json; delete our failed track, insert, wait), both by hand only. Review of #424, each with a test that failed first: a recorded failed track is re-inserted at most once a run (delete ours, never ASR; then verify), so a failure no longer fails every re-run; a resumed upload whose legacy manifest fails the strict SRT check records CAPTIONS_SRT_INVALID as a warning, uploads nothing and lets the chain go on (a new upload is still refused before upload); captions-repair writes the new track id and status into the publish ledger entry (committed with the receipt) and writes the receipt after every delete and insert; a plan longer than MAX_PLAN (from the wait and the job timeout) is refused; PAST_VIDEO_END compares against the duration rounded to the millisecond; the english scope uses channel_privacy.language and the uploads paging is one helper, channel_privacy.channel_uploads.",
-   "antidote": {
-    "file": "migration/publish/test_captions.py",
-    "contains": "def test_a_track_that_ends_failed_fails_the_run_and_is_recorded"
-   }
-  },
-  {
    "id": "E105",
    "date": "2026-10-26",
    "class": "env-vs-test",
@@ -899,6 +888,17 @@
    "antidote": {
     "file": "migration/ops/test_refusal_parity.py",
     "contains": "def test_every_later_refusal_is_classified"
+   }
+  },
+  {
+   "id": "E107",
+   "date": "2026-10-26",
+   "class": "silent",
+   "error": "The owner saw 'Erro ao carregar legendas' in the YouTube app on 8heTdP0LllM (pilot-008, now private). publish_video.py sent the SRT with captions.insert, took HTTP 200 as done and recorded captions: true; nothing ever read whether YouTube served the track (captions.list snippet.status serving/syncing/failed), so a failed or stuck track could pass silently on every long. The resume check also took any English track, the automatic ASR one included, as 'already inserted', which would skip our upload. Offline evidence: the SRT rebuilt for each of the 11 captioned prayer longs (002, 004, 005, 006, 007, 008, 010, 011, 012, 013, 014; each manifest's hash is its ledger key) is valid (numbering, timing format, blank-line separators, monotonic and non-overlapping, inside the video, no empty cue, ASCII/UTF-8 without BOM, LF) and its multipart media part is byte-exact; the SRT is therefore not shown to be the cause. The live cause (failed track, still syncing, private-video playback in the app, or the ASR track) is decided by the captions-audit run, not claimed here.",
+   "fix": "publish/captions.py builds (byte-identical for valid input), validates strictly and frames the SRT; publish_video.py validates before captions.insert (CAPTIONS_SRT_INVALID), records the track id, polls captions.list a bounded number of times (captions.WAIT_CALLS, 50 units each, inside preflight's LONG_UNITS) and records captions_status; failed or not listed fails the run with CAPTIONS_FAILED after the ledger and receipt are written; still syncing is recorded with a warning and read again by a re-run, which also verifies the legacy entries; only our standard English track counts, never ASR. preflight.py validates the exact SRT against output_seconds. channel-privacy.yml gains captions-audit (read-only receipt channel/captions-audit-<run>.json) and captions-repair (only a reviewed captions-repair-plan.json; delete our failed track, insert, wait), both by hand only. Review of #424, each with a test that failed first: a recorded failed track is re-inserted at most once a run (delete ours, never ASR; then verify), so a failure no longer fails every re-run; a resumed upload whose legacy manifest fails the strict SRT check records CAPTIONS_SRT_INVALID as a warning, uploads nothing and lets the chain go on (a new upload is still refused before upload); captions-repair writes the new track id and status into the publish ledger entry (committed with the receipt) and writes the receipt after every delete and insert; a plan longer than MAX_PLAN (from the wait and the job timeout) is refused; PAST_VIDEO_END compares against the duration rounded to the millisecond; the english scope uses channel_privacy.language and the uploads paging is one helper, channel_privacy.channel_uploads.",
+   "antidote": {
+    "file": "migration/publish/test_captions.py",
+    "contains": "def test_a_track_that_ends_failed_fails_the_run_and_is_recorded"
    }
   },
   {
@@ -1430,6 +1430,28 @@
    }
   },
   {
+   "id": "E136",
+   "date": "2026-10-28",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134"
+   ],
+   "error": "Shorts runway, 28/10 ~03:25 UTC: Claude submitted 11 genesis-09 scene stills through the Pavo MCP back to back before reading any back. Pavo's free quota had run out; 10 read back `failed` with no image (conversations 373673260065523776 ... 373673831350700096, ledger failed_streak 10, suspended until 06:26). Root cause: the stop of E124/E128 (two failed read-backs in a row) only works when read-backs come between submissions; nothing limited how many submissions could be in flight unread, so a fan-out spent its whole size on a spent quota (the same loss as E124's 31 submissions).",
+   "fix": "quota.MAX_UNREAD = 2: the ledger keeps today's submitted-but-unread jobs (`unread`); before_generate refuses PAVO_UNREAD_JOBS while two are unread, and a read-back to an end (completed with media, or failed) clears one. The builds submit and wait one job at a time, so they never meet it. Class antidote: a spend whose stop signal arrives only on read-back is never ahead of its read-backs by more than the stop needs.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "def test_e136_no_new_submission_while_two_of_todays_jobs_are_unread",
+    "covers": [
+     "capacity"
+    ]
+   }
+  },
+  {
    "id": "E137",
    "date": "2026-10-28",
    "class": [
@@ -1451,28 +1473,6 @@
     "covers": [
      "instrument",
      "env-vs-test"
-    ]
-   }
-  },
-  {
-   "id": "E136",
-   "date": "2026-10-28",
-   "class": [
-    "capacity"
-   ],
-   "prior": [
-    "E116",
-    "E124",
-    "E128",
-    "E134"
-   ],
-   "error": "Shorts runway, 28/10 ~03:25 UTC: Claude submitted 11 genesis-09 scene stills through the Pavo MCP back to back before reading any back. Pavo's free quota had run out; 10 read back `failed` with no image (conversations 373673260065523776 ... 373673831350700096, ledger failed_streak 10, suspended until 06:26). Root cause: the stop of E124/E128 (two failed read-backs in a row) only works when read-backs come between submissions; nothing limited how many submissions could be in flight unread, so a fan-out spent its whole size on a spent quota (the same loss as E124's 31 submissions).",
-   "fix": "quota.MAX_UNREAD = 2: the ledger keeps today's submitted-but-unread jobs (`unread`); before_generate refuses PAVO_UNREAD_JOBS while two are unread, and a read-back to an end (completed with media, or failed) clears one. The builds submit and wait one job at a time, so they never meet it. Class antidote: a spend whose stop signal arrives only on read-back is never ahead of its read-backs by more than the stop needs.",
-   "antidote": {
-    "file": "migration/integrations/pavo/test_image_gen.py",
-    "contains": "def test_e136_no_new_submission_while_two_of_todays_jobs_are_unread",
-    "covers": [
-     "capacity"
     ]
    }
   },
@@ -1625,6 +1625,641 @@
     "contains": "def test_e144_footage_runs_of_different_queries_never_share_a_pending_slot",
     "covers": [
      "order"
+    ]
+   }
+  },
+  {
+   "id": "E145",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133"
+   ],
+   "error": "Offline producer/consumer audit, 28/10: a valid still_motion approval or inventory pavo_reuse approval has no release asset. generate_step completed its checks then crashed indexing asset, and its report dropped the still hash and render metadata. long_build recorded a still upscale with source_sha256=null and compared it to clip_sha256=null, so a stale or unbound still cache could be accepted. Root cause: consumers assumed every approved input was a release video instead of preserving the source-specific identity.",
+   "fix": "generate_step preserves still/reuse provenance and logs the real source without inventing an asset. shot_sources.source_sha256 selects a validated image or video content hash by source type; upscale naming, production, resume and manifest vetting use that identity and matching source kind. A missing hash never matches another missing hash. Old still upscales without a binding must be recreated from the already approved image; no approval or media is silently repaired.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e145_every_approved_source_reaches_the_build_with_its_identity_intact",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E146",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145"
+   ],
+   "error": "Offline long-render reproduction, 28/10: native_voice trims speech from its measured onset and shift_onsets gives the picture that same positive source offset, but short_engine.talk_problems still required zero. A synchronized native long therefore failed PLAN_REFUSED TALK_NOT_ALIGNED. Root cause: the producer introduced native timing without extending the consumer contract.",
+   "fix": "Both compose paths carry native_onsets from the same native_voice call that lays out the audio. Both renderers validate the video source start against exactly that measured onset rounded to the ffmpeg millisecond; Kokoro still requires exactly zero. Normal speed, exact voice-line start, coverage through its end and voice-timeline membership remain mandatory. Positive offsets without the audio binding and mismatches remain refused.",
+   "antidote": {
+    "file": "migration/production/bible/test_short_engine.py",
+    "contains": "def test_e146_native_picture_and_audio_use_the_same_measured_source_onset",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E147",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146"
+   ],
+   "error": "Offline digest reproduction, 28/10: fallback_digest included narration words only when the shot had lines. A God or character shot carries its own line instead; changing that speech left a still/footage/reused-clip approval identity unchanged. Root cause: the digest used one input representation rather than the sequence resolver used by voice production.",
+   "fix": "The fallback digest always resolves the shot words through pavo_native.shot_line/plan_check.sequence, which covers both own line and narration. Changing either now causes SHOT_REQUEST_CHANGED in the real review consumer; existing digests for unchanged narration-only shots remain unchanged. Own-line fallbacks need a fresh review binding, never a hand-edited approval.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e147_fallback_identity_binds_own_spoken_words_and_shared_narration",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E148",
+   "date": "2026-10-28",
+   "class": [
+    "instrument",
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E120",
+    "E125",
+    "E131",
+    "E137",
+    "E139",
+    "E143"
+   ],
+   "error": "Offline numeric-boundary audit, 28/10: NaN passed scene_stills approval bounds and native-speech cosine/music/singing comparisons. Nonfinite gains and clip coverage also passed type-only checks; an infinite ASR end could be treated as a valid span. Root cause: numeric type and ordered comparisons do not prove a finite measurement (NaN comparisons are false). No current production record was established to contain these values.",
+   "fix": "Require finite review scores, native similarity/music/singing/loudness/span measurements, recorded and mixed gains, and clip coverage values. Unknown/nonfinite input is refused through the existing named failures before an approval, cached output or mix can be accepted. The quality floor, frozen criteria, cosine margins, gain limit and audio thresholds are unchanged. Regression cases cover NaN and both infinities; the still-review case verifies no record/image mutation.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e148_nonfinite_speech_measurements_never_pass_or_reach_the_mix",
+    "covers": [
+     "instrument",
+     "fragile-input"
+    ]
+   }
+  },
+  {
+   "id": "E149",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147"
+   ],
+   "error": "Offline handoff audit: still and thumbnail writers always labelled the reviewer Claude, while shot/source approvals recorded no session identity. A real GPT session could not make a truthfully attributed approval and consumers had no explicit-identity check. Root cause: reviewer identity was implicit prose rather than a shared producer/consumer contract.",
+   "fix": "All four new approval writers require explicit --reviewer from owner_quality_policy.LONG_REVIEWERS and record the actual model; still/thumb by matches it. Still, thumbnail and shot/source consumers reject explicit unknown identities. Historical records without a model remain unchanged rather than being re-labelled; valid identity does not assert a real review or manufacture a score.",
+   "antidote": {
+    "file": "migration/production/bible/test_scene_stills.py",
+    "contains": "def test_e149_still_identity_is_explicit_truthful_and_consumed",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E150",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149"
+   ],
+   "error": "Offline story-v5 contract reproduction: shot_sources permits pinned Kokoro God/keeper voice-over on vetted character-free footage, but long_build omitted the route from its manifest and qa_pilot applied the v4 silent-only fallback predicate to v5. An allowed source would therefore fail fallback_shots after a full render.",
+   "fix": "The manifest records the actual Kokoro/off-screen route for fallback sources and a Keeper camp cutaway carries no on-screen character. The v5 consumer accepts only that explicit Kokoro route, no claimed talking face, character-free holds, removed source audio, approved vetting and the unchanged licence rules. v4 remains silent-only. No frozen QA byte, threshold, licence or approval changed.",
+   "antidote": {
+    "file": "migration/production/test_qa_pilot.py",
+    "contains": "def test_e150_v5_kokoro_voiceover_on_vetted_fallback_is_not_native_or_a_figure",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E151",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150"
+   ],
+   "error": "Offline long/publication bridge audit: long_build exported MP4, captions, manifest and report, but not the compose voice timeline consumed by the normal pilot publication/review pipeline. Recreating timings from script estimates would lose retiming, native speech spans and the cold-open hold.",
+   "fix": "Export OUT/timeline.json from the exact compose-timeline used by the render, preserving sentences, speakers, voice timing and metadata, plus actual cuts/source offsets/holds and the measured output hash/duration. The manifest binds that timeline by SHA256. Synthetic real-MP4 assembly verifies that the exported cues are unchanged, cuts tile the output, and the speech tail is not invented.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_build.py",
+    "contains": "def test_e151_timeline_preserves_measured_voice_gaps_tail_and_native_offsets",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E152",
+   "date": "2026-10-28",
+   "class": [
+    "drift",
+    "instrument"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E120",
+    "E126",
+    "E130",
+    "E131",
+    "E132",
+    "E133",
+    "E137",
+    "E139",
+    "E145",
+    "E146",
+    "E147",
+    "E148",
+    "E149",
+    "E150",
+    "E151"
+   ],
+   "error": "The exact approved native clips for arc-01 measure 7.291667/9.416667/9.416667 video seconds, despite requests and approvals recording 6/5/5. Coverage and the reuse queue treated that requested duration as measured media and native clip_needs rounded the actual speech to a generation request. One recorded ASR endpoint (9.5 s) also exceeds both real source streams (video 9.416667, audio 9.44), which cannot establish spoken content beyond the media.",
+   "fix": "Probe seals measure video/audio stream durations on the hash-verified bytes; new approvals preserve requested seconds separately and copy the measured record. measure-clip can add a hash-bound timing sidecar to an existing probe without rewriting historical approvals or inventing a review. Coverage and the reuse queue consume the same media timing; native coverage uses the speech endpoint rather than a requested integer. Bound media/speech also stale the preflight. Native spans and the actual premix refuse endpoints outside either real stream, with no clamp or invented silence/words. Existing bytes remain available for a genuine speech remeasurement/review.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_e152_measured_bytes_not_requested_seconds_govern_native_coverage_and_queue",
+    "covers": [
+     "drift",
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E153",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152"
+   ],
+   "error": "The Short audio admission checked only an explicit audio_route=pavo_native, while the shared engine also inferred native speech from V4/V4x/V5 criteria. A V5 Short with audio_route omitted therefore passed that admission and resolved to the unsupported native route; setting the explicit flag correctly refused the same effective route. Reproduced offline without any generation, render or publication.",
+   "fix": "Use pavo_native.native_plan, the engine's existing canonical resolver, for the Short admission after validating explicit input values. Explicit and inherited native routes are refused alike until a Short native criteria contract is supported. Legacy and explicit Kokoro Shorts are unchanged; V4/V5 longs still enter their own criteria validator. No new route, plan, historical approval or frozen QA file was changed.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_e153_short_native_admission_uses_the_effective_route_not_only_an_explicit_flag",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E165",
+   "date": "2026-10-28",
+   "class": [
+    "silent",
+    "order"
+   ],
+   "prior": [
+    "E107",
+    "E112",
+    "E116",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E144"
+   ],
+   "error": "The original request workflow moved failed dispatches to done. An acknowledgement-only correction preserved failed requests as pending, but a lost response could mean the provider already accepted the POST; a later request push replayed that same pending request. Offline reproduction observed two dispatch attempts for one unacknowledged request. Root cause: the external side effect preceded a durably recorded reservation, and an unknown outcome was treated as safely retryable.",
+   "fix": "Check out and refresh current main. Before each POST, persist a claim containing the original request hash, base commit, original path, dispatcher run/attempt and timestamp under inflight; require its commit/push to succeed before dispatch. Only positive acknowledgement moves it to done. Ambiguous responses, crashes and failed acknowledgement persistence retain the remote claim and never replay it automatically, while independent requests may proceed. Reconcile remote run history read-only before explicitly resolving a claim; do not infer absence from a lost response or claim provider exactly-once semantics. Refuse symlink requests and preserve shell metacharacters as literal input data.",
+   "antidote": {
+    "file": "migration/ops/test_requests.py",
+    "contains": "def test_e165_claim_precedes_post_and_ambiguous_dispatch_never_replays_on_a_later_push",
+    "covers": [
+     "silent",
+     "order"
+    ]
+   }
+  },
+  {
+   "id": "E166",
+   "date": "2026-10-28",
+   "class": [
+    "drift",
+    "instrument"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E120",
+    "E126",
+    "E130",
+    "E131",
+    "E132",
+    "E133",
+    "E137",
+    "E139",
+    "E145",
+    "E146",
+    "E147",
+    "E148",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153"
+   ],
+   "error": "The live arc calendar moved arc-01 to 2026-10-28 22:00 UTC, but runway independently began at 2026-10-29 10:00 UTC and intentionally excluded arc-01 in its test. The monitor omitted the actual deadline and would forget an overdue unuploaded arc after its slot passed.",
+   "fix": "Read bible/arcs.json as the authoritative calendar when present, keep overdue unuploaded arcs visible, recognize Bible plan existence only as planned (never rendered or approved), and report malformed calendars instead of substituting a different deadline. Preserve the legacy cadence only for production trees without the calendar. Class antidote: deadline monitors consume the authoritative schedule and retain unmet deadlines until completion evidence exists.",
+   "antidote": {
+    "file": "migration/ops/test_runway.py",
+    "contains": "def test_e166_authoritative_arc_deadline_is_visible_until_upload_without_invented_pilot_approval",
+    "covers": [
+     "drift",
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E167",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166"
+   ],
+   "error": "images-upres uploaded new image bytes through the multi-release assets helper and updated release_asset/sha256 while preserving an old release_tag or leaving it absent. Consumers construct URLs from release_tag (or the old legacy default), so the record could name the new asset under a release that never received it.",
+   "fix": "Record assets.sh newest after the successful upload, alongside the new asset name and hash, matching the existing cf-images contract. Class antidote: a content record updates location and identity together when bytes move to a new store; the offline workflow regression resolves the resulting record against the actual stub release bytes.",
+   "antidote": {
+    "file": "migration/ops/test_release_assets.py",
+    "contains": "def test_e167_upscaled_image_record_resolves_to_the_release_that_received_its_bytes",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E168",
+   "date": "2026-10-28",
+   "class": [
+    "drift",
+    "env-vs-test"
+   ],
+   "error": "Offline audit confirmed that long-build only recorded Bible media evidence: it never materialized the mapped pilot, measured whole-file QA, provided the pilot-named master alias, package or inspection inputs consumed by approve.yml/publish.yml. Its assemble job also read native Pavo speech from WORK/clips even though prepare never exported those original clips; upscales deliberately have no audio. No arc-01 master or publication is claimed by this reproduction.",
+   "fix": "Add long_handoff as a strict adapter of actual master bytes, the exported retimed timeline, source plan words, SRT, arc schedule and already-approved thumbnail into the existing pilot route. Validate known publication inputs before voice/upscale; carry verified original clips between jobs; run real frozen QA with YAMNet and pinned faster-whisper medium.en; preserve failures and inspection artifacts. Store the exact same MP4 under the Bible name and pilot alias with release_video split handling and actual-part capacity checks. No QA/review score or APPROVAL is synthesized; existing approve.yml remains the only approval writer. Class antidote: a new renderer must provide every downstream consumer contract, including original audio, measured evidence and content identity. The render queue recognizes this measured handoff, routes QA PASS toward review/reconcile, keeps QA FAIL blocked without rerender, and never sends the new script into legacy figure/image/preview/render work; missing or changed bindings fail closed.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_handoff.py",
+    "contains": "def test_e168_materializes_same_master_words_timing_captions_and_package_without_any_approval",
+    "covers": [
+     "drift",
+     "env-vs-test"
+    ]
+   },
+   "prior": [
+    "E100",
+    "E102",
+    "E105",
+    "E116",
+    "E118",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E137",
+    "E141",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167"
+   ]
+  },
+  {
+   "id": "E169",
+   "date": "2026-10-28",
+   "class": [
+    "drift",
+    "instrument"
+   ],
+   "error": "The pilot publication reader rejected canonical story-v3/v4/v4x/v5 gate rows by falling back to prayer dimensions. three_stage also required a prayer's you-within-five-seconds, Amen, refrain and gratitude; long_review measured only legacy timeline.segments and used prayer duration/quotation-density bands. An archaic-word heuristic counted original words incorrectly for explicit KJV story segments. All were reproduced with isolated offline contract fixtures, not a real video approval.",
+   "fix": "Read the canonical version-specific story dimensions and require every frozen story row, including story_qa_arc01 for the owner exception. Evaluate the existing story structure on bound measured cuts and retimed sentences (14-18 min, cold open, Keeper limits, rehooks, climax, captions, chapters and arc schedule), not prayer hygiene or plan estimates. long_review reads real sentence segment IDs and the already-registered story duration band; prayer scripture-density is reported but does not become a new story gate. Count the plan's explicit KJV quotations for original-word share. Preserve legacy prayer tests and all frozen QA files. Class antidote: producers, evaluators and final revalidators consume the same declared format/version and instrument metadata.",
+   "antidote": {
+    "file": "migration/publish/test_publication_binding.py",
+    "contains": "def test_e169_publication_reads_the_same_story_dimensions_and_rows_as_the_canonical_gate",
+    "covers": [
+     "drift",
+     "instrument"
+    ]
+   },
+   "prior": [
+    "E100",
+    "E102",
+    "E120",
+    "E126",
+    "E130",
+    "E131",
+    "E132",
+    "E133",
+    "E137",
+    "E139",
+    "E145",
+    "E146",
+    "E147",
+    "E148",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168"
+   ]
+  },
+  {
+   "id": "E185",
+   "date": "2026-10-28",
+   "class": [
+    "instrument"
+   ],
+   "error": "Offline audit reproduction: ffprobe succeeded but the full-file FFmpeg detector exited nonzero; empty stderr events became black=0/silence=0 and PASS. A partial failed scan could also look like a completed FAIL. No production incident is asserted.",
+   "fix": "signal_scan checks detector completion before interpreting events and uses -xerror for decode errors. A failed execution writes ERROR with no clean measurement rows and exits nonzero; frozen thresholds are unchanged.",
+   "antidote": {
+    "file": "migration/production/test_signal_scan.py",
+    "contains": "def test_e185_failed_detector_is_error_after_a_successful_probe",
+    "covers": [
+     "instrument"
+    ]
+   },
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169"
+   ]
+  },
+  {
+   "id": "E186",
+   "date": "2026-10-28",
+   "class": [
+    "instrument"
+   ],
+   "error": "Offline audit reproduction: failed Tesseract returned an empty word list and failed graded FFmpeg returned zero black duration, allowing incomplete footage vetting to approve. Invalid/non-finite grade measurements also lacked a missing-evidence state.",
+   "fix": "Check OCR and graded-detector exit codes; failed measurements become None. decide requires a finite nonnegative measured black duration for approval and records null/PENDING for missing evidence. Existing defect thresholds and visible-defect rejection stay unchanged.",
+   "antidote": {
+    "file": "migration/production/footage/test_footage.py",
+    "contains": "def test_e186_failed_ocr_does_not_become_no_text",
+    "covers": [
+     "instrument"
+    ]
+   },
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185"
+   ]
+  },
+  {
+   "id": "E187",
+   "date": "2026-10-28",
+   "class": [
+    "order"
+   ],
+   "error": "Offline audit reproduction: Pavo history correctly returned terminal PromptSafetyBlocked (not running, no media), but quota.read_back only acknowledged completed/failed. Two terminal blocked jobs or a blocked cooldown probe remained unread and stopped later explicit work indefinitely within that ledger state.",
+   "fix": "A terminal blocked readback clears only that unread id and its completed probe reservation. Consumption, failed streak and suspension times remain intact; unknown/incomplete/running/rejected acknowledgements remain unread. The refusal reason remains in the job result; no retry, prompt rewriting or generation is introduced.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_video.py",
+    "contains": "def test_e187_terminal_block_readback_clears_unread_without_refunding_or_success",
+    "covers": [
+     "order"
+    ]
+   },
+   "prior": [
+    "E112",
+    "E116",
+    "E144",
+    "E165"
+   ]
+  },
+  {
+   "id": "E188",
+   "date": "2026-10-28",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148"
+   ],
+   "error": "Offline audit reproduced a wrong TikTok target: find_comment chose the first 40-character/author substring, and author/original text were optional. Missing fields, duplicate containers or another cid could reach the action path; status_code=0 alone could mark the requested cid REPLIED. No real like/reply was sent during reproduction.",
+   "fix": "Require complete original identity, an explicit DOM cid, exact profile handle/full comment text and one matching container; recheck before action. Abort outgoing writes whose video/comment-parent/action/text is missing, duplicate or different before the browser sends them. Mark REPLIED only for a new cid confirmed with the expected parent, video, account and text; ambiguous outcomes stay blocked from retries. Missing live DOM identity fails closed and still requires local compatibility validation.",
+   "antidote": {
+    "file": "migration/integrations/tiktok-local/test_tiktok_core.py",
+    "contains": "def test_e188_prefix_or_author_substring_cannot_select_a_different_comment",
+    "covers": [
+     "fragile-input"
+    ]
+   }
+  },
+  {
+   "id": "E189",
+   "date": "2026-10-28",
+   "class": [
+    "drift",
+    "review-after-build"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E109",
+    "E110",
+    "E117",
+    "E126",
+    "E127",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168",
+    "E169"
+   ],
+   "error": "The approved arc-01 g-c4-ground footage (SHA b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125) shows an aircraft/double contrail at t=4 s. Direct ChatGPT visual review contradicts its historical APPROVED / 9.6 record; matching request hashes and scores had no revocation contract and could still ship rejected bytes.",
+   "fix": "Preserve the original score/hash/attribution, append an explicit ChatGPT revocation and the original approval snapshot to the same episode's revocations history; mark the catalog REJECTED while retaining its earlier vetting. episode_build.revocation_problems reads current approvals and durable revocation snapshots, vetoes source SHA across all source routes and episodes, and refuses malformed history. Both approval writers archive any current-only revocation before replacing it, without changing or duplicating earlier snapshots; approve_source also checks candidate bytes against the global veto before writing. The same check runs before build/fetch, approve-shot, Short upload, long inputs, and long approval/publication revalidation including manifest source hashes. No perceptual score, automatic visual detector, QA PASS, replacement media or deletion is fabricated. The legacy Short recheck covers its current approvals; it does not claim a complete historical source-hash chain for an old Short master after its shots have been replaced.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_e189_revocation_blocks_build_before_any_fetch",
+    "covers": [
+     "drift",
+     "review-after-build"
+    ]
+   }
+  },
+  {
+   "id": "E205",
+   "date": "2026-10-28",
+   "class": [
+    "fragile-input",
+    "silent"
+   ],
+   "prior": [
+    "E101",
+    "E107",
+    "E121",
+    "E124",
+    "E125",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E143",
+    "E148",
+    "E165",
+    "E188"
+   ],
+   "error": "Offline audit reproduced smoke.py returning PASS for absent/empty QA checks, a FAIL report with no measurements, and truthy non-boolean checks. The smoke path exits before the full-render QA failure handling. This was a CI evidence-consumer defect; no publication bypass or affected published video was demonstrated.",
+   "fix": "Validate the report schema, mandatory common measurements, strict boolean results and aggregate status. Preserve the intentional exception only for measured False in duration_min and speech_presence; missing, malformed or UNKNOWN evidence fails. Frozen QA criteria are unchanged.",
+   "antidote": {
+    "file": "migration/ci/test_smoke.py",
+    "contains": "def test_e205_missing_malformed_or_unknown_measurements_never_pass",
+    "covers": [
+     "fragile-input",
+     "silent"
+    ]
+   }
+  },
+  {
+   "id": "E206",
+   "date": "2026-10-28",
+   "class": [
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141",
+    "E168"
+   ],
+   "error": "The consolidated canonical test run detected mixed package installation paths: long-build and shot-probe added the shared bounded installer for qualification/probe sealing but retained older direct apt-get calls in other jobs. The mixed workflow violated the existing CI installation invariant; the first detected failure was test_every_engine_apt_install_goes_through_it. No remote build or production failure is claimed by this offline finding.",
+   "fix": "Route every apt installation in those two workflows through migration/ci/apt_install.sh, preserving the required packages and the existing 300s/600s phase limits. Its official Ubuntu origins and per-request bounds apply consistently. The existing class-level CI test checks every workflow using the shared installer and refuses remaining direct calls; no QA threshold or media contract changed.",
+   "antidote": {
+    "file": "migration/ci/test_ci_setup.py",
+    "contains": "def test_every_engine_apt_install_goes_through_it",
+    "covers": [
+     "env-vs-test"
     ]
    }
   }

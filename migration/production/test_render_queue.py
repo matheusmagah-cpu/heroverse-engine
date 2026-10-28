@@ -365,5 +365,145 @@ class Queue(unittest.TestCase):
             self.assertEqual(buf.getvalue(), "")
 
 
+class LongBuildQueue(unittest.TestCase):
+    """E168 integration fixtures only: no generated footage, real QA or production approvals."""
+
+    def setUp(self):
+        from unittest.mock import patch
+        sys.path.insert(0, str(Path(rq.__file__).resolve().parent / "bible"))
+        import test_long_handoff
+        self.h = test_long_handoff.h
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = Path(tmp.name)
+        self.plan, built, _, self.manifest, _ = test_long_handoff.fixture(self.root)
+        with patch.object(self.h.thumbs, "publish_problems", return_value=[]):
+            self.d = self.h.materialize(self.plan, built, self.root)
+        self.production = self.root / "migration/production"
+        self.now = datetime(2026, 10, 28, 21, tzinfo=timezone.utc)
+        self.sha = self.manifest["output_sha256"]
+
+    def qa(self, status="PASS", **changes):
+        version = self.manifest["criteria_version"]
+        qa = dict(status=status, output_sha256=self.sha, criteria_version=version,
+                  criteria_sha256=rq.STANDARD_QAS[version])
+        qa.update(changes)
+        self.h.save(self.d / "out/qa.json", qa)
+        return qa
+
+    def output(self, mode):
+        import contextlib
+        import io
+        from unittest.mock import patch
+        result = io.StringIO()
+        with patch.object(rq, "datetime") as dt, patch.object(rq, "HOLD", self.root / "no-hold"), \
+                patch.object(rq, "RENDER_HOLD", self.root / "no-render-hold"), contextlib.redirect_stdout(result):
+            dt.now.return_value = self.now
+            dt.fromisoformat = datetime.fromisoformat
+            rq.main(self.production, self.root / "no-ledger.json", mode)
+        return result.getvalue()
+
+    def assert_no_legacy_work(self):
+        for mode in ("images", "preview", "preview-review", "render", "reassign"):
+            self.assertEqual(self.output(mode), "", mode)
+        self.assertIsNone(rq.next_render(rq.due(self.production, {}, self.now, 48)))
+        self.assertFalse((self.d / "inspection/APPROVAL.json").exists())
+
+    def test_e168_materialized_long_enters_review_reconcile_without_legacy_images_or_preview(self):
+        from unittest.mock import patch
+        self.qa()
+        script = self.h.load(self.d / "script.json")
+        self.assertNotIn("figure", script)
+        self.assertNotIn("overlay", script)
+        self.assertNotIn("script_sha256", self.manifest)
+        self.assertEqual(rq.needed_images(self.d, script), [])
+        with patch.object(rq, "needed_images", side_effect=AssertionError("legacy images")), \
+                patch.object(rq, "unvetted_footage", side_effect=AssertionError("legacy footage")), \
+                patch.object(rq.preview_gate, "approved", side_effect=AssertionError("legacy preview")):
+            rows = rq.due(self.production, {}, self.now, 48)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["render_route"], "long-build")
+        self.assertTrue(rows[0]["rendered"])
+        self.assertFalse(rows[0]["preview_ok"])  # never claim a review of a legacy preview happened
+        self.assert_no_legacy_work()
+        self.assertEqual(self.output("review"), f"pilot-999 {self.sha}\n")
+        self.assertEqual(self.output("reconcile"), "approve pilot-999\n")
+        self.assertFalse((self.d / "inspection/APPROVAL.json").exists())
+        ledger = {"entries": {f"pilot-999:{self.sha}": {"video_id": "fixture-upload"}}}
+        self.assertEqual(rq.due(self.production, ledger, self.now, 48), [])
+
+    def test_e168_failed_long_qa_is_completed_but_never_rerendered_or_promoted(self):
+        qa = self.qa("FAIL")
+        script_sha = self.h.sha256(self.d / "script.json")
+        self.assertTrue(rq.current_render(self.manifest, qa, script_sha, self.d))
+        self.assertFalse(rq.current_render(self.manifest, qa, script_sha))  # the manifest alone is not the binding
+        self.assertTrue(rq.due(self.production, {}, self.now, 48)[0]["rendered"])
+        self.assert_no_legacy_work()
+        self.assertEqual(self.output("review"), "")
+        self.assertEqual(self.output("reconcile"), "")
+        self.assertEqual(self.h.load(self.d / "out/qa.json")["status"], "FAIL")
+
+    def test_incomplete_or_mismatched_long_qa_waits_without_any_legacy_regeneration(self):
+        qa_path = self.d / "out/qa.json"
+        cases = (None, b"{broken", b"[]", b"null",
+                 {"status": "UNKNOWN"}, {"output_sha256": "b" * 64}, {"criteria_sha256": "changed"},
+                 {"criteria_version": "story-qa-criteria-v3", "criteria_sha256": rq.STANDARD_QAS["story-qa-criteria-v3"]})
+        for changes in cases:
+            with self.subTest(changes=changes):
+                self.qa()
+                if changes is None:
+                    qa_path.unlink()
+                elif isinstance(changes, bytes):
+                    qa_path.write_bytes(changes)
+                else:
+                    self.qa(**changes)
+                row = rq.due(self.production, {}, self.now, 48)[0]
+                self.assertEqual(row["render_route"], "long-build")
+                self.assertFalse(row["rendered"])
+                self.assert_no_legacy_work()
+                self.assertEqual(self.output("review"), "")
+                self.assertEqual(self.output("reconcile"), "")
+
+    def test_missing_or_changed_handoff_and_inputs_never_fall_back_to_the_legacy_renderer(self):
+        self.qa()
+        handoff = self.d / "out/handoff.json"
+        binding = self.h.load(handoff)
+        bad_hash = json.loads(json.dumps(binding))
+        bad_hash["files"]["script.json"] = "0" * 64
+        bad_script = self.h.load(self.d / "script.json")
+        bad_script["version"] = "legacy"  # manifest/handoff still identify this as the long-build route
+        cases = [(handoff, None), (handoff, b"{broken"), (handoff, b"[]"),
+                 (handoff, json.dumps(bad_hash).encode()),
+                 (self.d / "script.json", json.dumps(bad_script).encode())]
+        cases += [(self.d / name, (self.d / name).read_bytes() + b"\n") for name in binding["files"]]
+        cases.append((self.plan, self.plan.read_bytes() + b"\n"))
+        for path, data in cases:
+            with self.subTest(path=str(path.relative_to(self.root)), data=data is None):
+                original = path.read_bytes()
+                try:
+                    if data is None:
+                        path.unlink()
+                    else:
+                        path.write_bytes(data)
+                    row = rq.due(self.production, {}, self.now, 48)[0]
+                    self.assertEqual(row["render_route"], "long-build")
+                    self.assertFalse(row["rendered"])
+                    self.assert_no_legacy_work()
+                    self.assertEqual(self.output("review"), "")
+                    self.assertEqual(self.output("reconcile"), "")
+                finally:
+                    path.write_bytes(original)
+        self.assertTrue(rq.due(self.production, {}, self.now, 48)[0]["rendered"])
+
+    def test_an_incomplete_long_does_not_block_a_separate_legacy_story_render(self):
+        pilot(self.production, "pilot-001", "2026-10-28T23:00:00Z")
+        rows = rq.due(self.production, {}, self.now, 48)
+        self.assertEqual(rq.next_render(rows)["pilot"], "pilot-001")
+        self.assertEqual(self.output("render"), "pilot-001\n")
+        long_row = next(r for r in rows if r["pilot"] == "pilot-999")
+        # Explicit routing remains a guard even if another caller supplies an old preview result.
+        self.assertIsNone(rq.next_render([dict(long_row, preview_ok=True)]))
+
+
 if __name__ == "__main__":
     unittest.main()

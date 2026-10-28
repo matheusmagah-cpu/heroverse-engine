@@ -36,6 +36,14 @@ def claude(sha="abc", **over):
 
 
 class Review(unittest.TestCase):
+    def test_story_reads_real_sentence_ids_and_its_existing_story_band_not_prayer_density(self):
+        script = {'archetype': 'bible-story-long', 'criteria_version': 'story-qa-criteria-v5',
+                  'segments': [{'id': 'n00', 'reference': 'Genesis 1:1 (KJV)'}, {'id': 'n01'}]}
+        measured = lr.own_measures(script, {'sentences': [{'segment': 'n00'}, {'segment': 'n01'}]}, 900)
+        self.assertEqual(measured['scripture_per_10_min'], 0.67)
+        self.assertEqual(lr.hard_bands(script), {'minutes': (14, 18)})
+        self.assertEqual(lr.hard_bands({'archetype': 'prayer'}), lr.HARD)
+
     def test_pilot_003_own_rows(self):
         script = json.loads((HERE / "pilot-003/script.json").read_text())
         timeline = json.loads((HERE / "pilot-003/out/timeline.json").read_text())

@@ -17,6 +17,12 @@ does not change the reviewer identified in the record. The rubric, hash bindings
 are unchanged. This handoff neither creates a review nor approves a video: only the existing
 `approve.yml` → `prepublish_gate.py` path may write `APPROVAL.json`.
 
+Bible-production still, thumbnail, per-shot and source approvals use the same explicit session identities (E149).
+Their writers require `--reviewer MODEL` and record `model`; still/thumbnail `by` records the same actual identity.
+Never omit the identity to imply a historical Claude review. Existing historical approvals without a `model` stay
+unchanged; a present unknown identity is refused by the production/publish consumer. This does not change the
+separate Gemini Shorts-from-long review policy, authorize a generation provider, or substitute for viewing.
+
 ## When
 Every main-clock run: `render_queue.py migration/production migration/publish/ledger.json review 72` lists due renders
 with QA PASS and no review for their hash. Each one is reviewed in the same run by a designated reviewer.

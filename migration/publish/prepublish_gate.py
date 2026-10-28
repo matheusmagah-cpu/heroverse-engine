@@ -169,6 +169,11 @@ DIMENSIONS_BY_VERSION = {"pilot-qa-criteria-v3": DIMENSIONS_V3, "pilot-qa-criter
 SCORE_HARD = ("minutes", "scripture_per_10_min")
 
 
+def score_hard_keys(version):
+    """The acted story's registered structure has a length band, not a prayer's quotation frequency."""
+    return ("minutes",) if version in STORY_VERSIONS else SCORE_HARD
+
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -291,11 +296,11 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     dims["content_and_policy"] += overall
     hard = (review or {}).get("scorecard_hard") if review and review.get("output_sha256") == sha else None
     if not hard:
-        dims["scorecard"] = [item("score", n, "UNKNOWN", "no scorecard for this file") for n in SCORE_HARD]
+        dims["scorecard"] = [item("score", n, "UNKNOWN", "no scorecard for this file") for n in score_hard_keys(version)]
     else:
         dims["scorecard"] = [item("score", n, "UNKNOWN", "row absent") if n not in hard else
                              item("score", n, "PASS" if hard[n].get("pass") else "FAIL", hard[n].get("value"))
-                             for n in sorted(set(SCORE_HARD) | set(hard))]
+                             for n in sorted(set(score_hard_keys(version)) | set(hard))]
     scan = load(d / "out" / "scan.json")
     if scan is None or scan.get("status") not in ("PASS", "FAIL"):
         dims["full_file_scan"] = [item("scan", "signal_scan", "UNKNOWN", (scan or {}).get("error", "out/scan.json missing"))]

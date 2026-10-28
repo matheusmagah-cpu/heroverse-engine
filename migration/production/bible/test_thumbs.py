@@ -86,9 +86,9 @@ class Pipeline(unittest.TestCase):
         ep = "genesis-09-short"
         self.assertTrue(all(p.startswith("THUMB_NOT_APPROVED") for p in thumbs.publish_problems(ep, "short", None, self.dir)))
         with self.assertRaises(SystemExit) as low:
-            thumbs.approve(ep, rec["id"], 9.0, "x", self.dir)
+            thumbs.approve(ep, rec["id"], 9.0, "x", self.dir, reviewer="claude-session-reviewer")
         self.assertIn("THUMB_SCORE_BELOW_FLOOR", str(low.exception))
-        thumbs.approve(ep, rec["id"], 9.6, "character, emotion, text read at phone size", self.dir)
+        thumbs.approve(ep, rec["id"], 9.6, "character, emotion, text read at phone size", self.dir, reviewer="claude-session-reviewer")
         self.assertEqual(thumbs.publish_problems(ep, "short", None, self.dir), [])
         self.assertEqual(thumbs.publish_problems(ep, "short", self.dir / f"{ep}.jpg", self.dir), [])
         self.assertTrue(thumbs.publish_problems(ep, "short", self.img, self.dir))   # not the approved bytes
@@ -97,6 +97,28 @@ class Pipeline(unittest.TestCase):
         spec["text"] = "NOAH AND THE FLOOD"
         (self.dir / f"{ep}.json").write_text(json.dumps(spec))
         self.assertTrue(any("changed after its approval" in p for p in thumbs.publish_problems(ep, "short", None, self.dir)))
+
+    def test_e149_thumb_identity_is_required_and_checked_at_publish(self):
+        ep = "genesis-09-short"
+        path = self.dir / f"{ep}.json"
+        candidate = thumbs.finalize(path, self.img, "7", "1", {"source": "test"}, self.dir)
+        before = path.read_bytes()
+        for model in (None, "unknown-session"):
+            with self.assertRaisesRegex(SystemExit, "REVIEWER_IDENTITY_REFUSED"):
+                thumbs.approve(ep, candidate["id"], 9.6, "reviewed fixture", self.dir, reviewer=model)
+            self.assertEqual(path.read_bytes(), before)
+            self.assertFalse((self.dir / f"{ep}.jpg").exists())
+        rec = thumbs.approve(ep, candidate["id"], 9.6, "reviewed fixture", self.dir,
+                             reviewer="gpt-6-astra-session-reviewer")
+        self.assertEqual(rec["approved"]["model"], "gpt-6-astra-session-reviewer")
+        self.assertEqual(rec["approved"]["by"], rec["approved"]["model"])
+        self.assertEqual(thumbs.publish_problems(ep, "short", None, self.dir), [])
+        rec["approved"]["model"] = "unknown-session"
+        thumbs.save(path, rec)
+        self.assertTrue(any("reviewer identity" in p for p in thumbs.publish_problems(ep, "short", None, self.dir)))
+        del rec["approved"]["model"]
+        thumbs.save(path, rec)
+        self.assertEqual(thumbs.publish_problems(ep, "short", None, self.dir), [])
 
     def test_an_approval_written_by_hand_is_refused(self):
         """Review of #460: publish re-checks what `approve` checks (score, note, a recorded candidate with these bytes,
@@ -124,7 +146,7 @@ class Pipeline(unittest.TestCase):
         import shutil
         ep = "genesis-09-short"
         rec = thumbs.finalize(self.dir / f"{ep}.json", self.img, "7", "1", {}, self.dir)
-        thumbs.approve(ep, rec["id"], 9.6, "ok", self.dir)
+        thumbs.approve(ep, rec["id"], 9.6, "ok", self.dir, reviewer="claude-session-reviewer")
         shutil.copyfile(self.dir / f"{ep}.json", self.dir / "genesis-10-short.json")
         shutil.copyfile(self.dir / f"{ep}.jpg", self.dir / "genesis-10-short.jpg")
         found = thumbs.publish_problems("genesis-10-short", "short", None, self.dir)
@@ -141,7 +163,7 @@ class Pipeline(unittest.TestCase):
         spec = dict(self.spec, emotion="dread")
         (self.dir / "genesis-09-short.json").write_text(json.dumps(spec))
         with self.assertRaises(SystemExit) as e:
-            thumbs.approve("genesis-09-short", rec["id"], 9.6, "x", self.dir)
+            thumbs.approve("genesis-09-short", rec["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer")
         self.assertIn("THUMB_SPEC_CHANGED", str(e.exception))
 
 

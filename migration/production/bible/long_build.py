@@ -36,7 +36,7 @@ upscale-ids, a plan without a PASS preflight bound to it now):
   long_build.py upscale PLAN SHOT OUT WEIGHTS   one approved clip (sha256 checked) to OUT/<shot>.mp4 + .json at
                                                 2560x1440 30 fps (Real-ESRGAN x4v3, weights sha256 checked)
   long_build.py assemble PLAN WORK UP MUSIC OUT the composed long OUT/<long>.mp4, OUT/captions.srt,
-                                                OUT/manifest.json, OUT/report.json; refused on any check
+                                                OUT/manifest.json, OUT/report.json, OUT/timeline.json; refused on any check
   long_build.py sheet VIDEO SHEET.jpg           20 frames of the composed long on one 16:9 sheet (5 x 4)
 """
 import json
@@ -255,6 +255,7 @@ def timeline_step(plan, work):
 def upscale_ids(plan, done_names=(), approvals=None):
     """The generated shots to upscale: every one whose artifact of the approved clip it ships now is not in
     done_names (a resume_run's artifacts)."""
+    import shot_sources
     approvals = eb.load_approvals(plan) if approvals is None else approvals
     done = set(done_names)
     todo = []
@@ -262,7 +263,10 @@ def upscale_ids(plan, done_names=(), approvals=None):
         a = approvals.get(s["id"])
         if not a:
             raise SystemExit(f"SHOT_NOT_REVIEWED {s['id']}")
-        if artifact_name(plan["episode"], s["id"], a.get("clip_sha256") or a.get("still_sha256")) not in done:
+        key = shot_sources.source_sha256(a)
+        if key is None:
+            raise SystemExit(f"UPSCALE_SOURCE_MISMATCH {s['id']} (no valid approved source hash)")
+        if artifact_name(plan["episode"], s["id"], key) not in done:
             todo.append(s["id"])
     return todo
 
@@ -282,6 +286,9 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     import shot_sources
+    key = shot_sources.source_sha256(a)
+    if key is None:
+        raise SystemExit(f"UPSCALE_SOURCE_MISMATCH {shot_id} (no valid approved source hash)")
     src = out / f"{shot_id}.src.mp4"
     dst = out / f"{shot_id}.mp4"
     kind = a.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved for this shot
@@ -307,9 +314,8 @@ def upscale_step(plan, shot_id, out, weights, frame_fn=None, fetch=eb.fetch_rele
             w, h, fps, seconds = pavo_footage.render(src, dst, frame_fn)
         finally:
             src.unlink(missing_ok=True)
-    key = a.get("clip_sha256") or a.get("still_sha256")
     rec = {"version": UP_RECORD, "episode": plan["episode"], "shot": shot_id, "source_asset": a.get("asset"),
-           "source_kind": kind, "source_sha256": a.get("clip_sha256"),
+           "source_kind": kind, "source_sha256": key,
            "source": {"width": w, "height": h, "fps": round(fps, 3), "seconds": round(seconds, 3)},
            "frame": frame_of(dst), "fps": FPS, "upscaler": upscaler, "sha256": eb.sha256(dst),
            "artifact": artifact_name(plan["episode"], shot_id, key)}
@@ -322,6 +328,7 @@ def upscaled(plan, up, approvals, frame=FRAME):
     """{shot id: (clip path, record)} of every generated shot, each bound to the clip approved now: UPSCALE_MISSING,
     UPSCALE_SOURCE_MISMATCH (made from another clip than the approved one), UPSCALE_SHA256_MISMATCH,
     UPSCALE_FRAME (not the QA's frame)."""
+    import shot_sources
     out, problems = {}, []
     for s in generated(plan):
         sid = s["id"]
@@ -330,7 +337,10 @@ def upscaled(plan, up, approvals, frame=FRAME):
             problems.append(f"UPSCALE_MISSING {sid}")
             continue
         rec = eb.load(r)
-        if rec.get("source_sha256") != (approvals.get(sid) or {}).get("clip_sha256"):
+        a = approvals.get(sid) or {}
+        key = shot_sources.source_sha256(a)
+        if (key is None or rec.get("source_sha256") != key
+                or rec.get("source_kind", "pavo") != a.get("source", "pavo")):
             problems.append(f"UPSCALE_SOURCE_MISMATCH {sid}")
         elif eb.sha256(f) != rec.get("sha256"):
             problems.append(f"UPSCALE_SHA256_MISMATCH {sid}")
@@ -428,7 +438,8 @@ def render(cplan, out, frame=FRAME):
     timeline = json.loads(Path(cplan["timeline"]).read_text())
     total = round(timeline["voice_seconds"] + cplan.get("tail", eb.TAIL), 3)
     cuts = cplan["shots"]
-    problems = short_engine.check_shots(cuts, total) + short_engine.talk_problems(cuts, timeline["sentences"])
+    problems = short_engine.check_shots(cuts, total) + short_engine.talk_problems(
+        cuts, timeline["sentences"], cplan.get("native_onsets"))
     if problems:
         raise SystemExit("PLAN_REFUSED " + "; ".join(problems))
     with tempfile.TemporaryDirectory() as tmp:
@@ -487,8 +498,22 @@ def probe(path):
 
 # ---------- the assembly ----------
 
+def timeline_record(plan, timeline, cuts, out_sha, seconds):
+    """E151: portable copy of the voice timeline actually used by the compose, bound to its output bytes.
+
+    No duration is estimated from script length, and no sentences are recreated from the plan. Native spans,
+    retiming and the cold-open hold are already reflected in this measured compose timeline. Cuts include the
+    native source offset/hold but no ephemeral runner paths. The tail belongs to output_seconds/cuts, not speech.
+    """
+    return dict(timeline, version="bible-long-timeline-v1", pilot_id=plan.get("pilot"), long=plan["episode"],
+                output_sha256=out_sha, output_seconds=seconds,
+                cuts=[{k: c[k] for k in ("shot", "source", "kind", "start", "end", "src_start", "speed", "hold", "talk")
+                       if k in c} for c in cuts])
+
+
 def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, seconds, track):
     """The render manifest qa_pilot reads for story QA v3 (LONG_DESIGN "manifest contract")."""
+    import shot_sources
     by_id = {s["id"]: s for s in plan["shots"]}
     gods = {s["id"] for s in plan["shots"] if pc.speaking(s) and s.get("speaker") == eb.ch.GOD}
     holds = []
@@ -511,15 +536,17 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
         f, rec = ups[s["id"]]
         kind = rec.get("source_kind") or approved.get("source") or "pavo"
         kinds[s["id"]] = kind
-        vetted = approved.get("clip_sha256") == rec["source_sha256"] and approved.get("source", "pavo") == kind
+        key = shot_sources.source_sha256(approved)
+        vetted = key is not None and key == rec["source_sha256"] and approved.get("source", "pavo") == kind
         base = {"id": s["id"], "source_kind": kind, "upscaler": rec["upscaler"], "sha256": rec["sha256"],
                 "source_sha256": rec["source_sha256"], "approved_asset": rec["source_asset"], "clip_check": ok}
         if kind == "footage":   # owner 27/10 (R3): a licensed library clip, vetted and credited (v3 rights rows)
             clips.append(dict(base, source="footage", licence=approved.get("licence"), credit=approved.get("credit"),
-                              vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False))
+                              vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False,
+                              voice="kokoro" if eb.pavo_native.spoken(s) else None,
+                              voiceover="keeper" if s.get("kind") == "keeper" else s.get("speaker")))
             continue
         if kind == "still_motion":   # an approved still in camera motion: an image with its model and licence
-            import shot_sources
             still = pc.still_record(approved.get("still")) or {}
             src = still.get("source") if isinstance(still.get("source"), dict) else {}
             pavo_still = bool(still.get("pavo"))   # owner's arc-01 exception: Pavo agnes-image with the refs
@@ -535,8 +562,9 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
                               credit=("Still: Pavo agnes-image with the characters' approved references (owner-owned), "
                                       "approved scene still") if pavo_still else
                               "Still: FLUX.1 [schnell] (Apache-2.0) on Workers AI, approved scene still",
-                              vetting="APPROVED", audio="removed", talking=False, character_refs=refs_ok,
-                              voice="kokoro" if eb.pavo_native.spoken(s) else None))
+                              vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False, character_refs=refs_ok,
+                              voice="kokoro" if eb.pavo_native.spoken(s) else None,
+                              voiceover="keeper" if s.get("kind") == "keeper" else s.get("speaker")))
             continue
         native = isinstance(approved.get("speech"), dict)
         if native:
@@ -550,6 +578,8 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
                           speech_checks=("PASS" if speech[s["id"]]["flags"] == [] else "FAIL") if native else None))
     for h in holds:
         h["source_kind"] = kinds.get(by_id[h["shot"]].get("window_of") or h["shot"])
+        if h["source_kind"] == "footage" and by_id[h["shot"]].get("kind") == "keeper":
+            h["characters"] = []  # a vetted night-camp cutaway carries his voice, not his on-screen face
     return {"version": "bible-long-manifest-v1", "pilot_id": plan.get("pilot"), "long": plan["episode"],
             "criteria_version": q["version"], "output_sha256": out_sha, "output_seconds": seconds,
             "frame": list(FRAME), "holds": holds, "sentences": timeline["sentences"], "clips": clips, "images": images,
@@ -568,7 +598,7 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
 
 def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, render_fn=render,
                   min_seconds=MIN_SECONDS):
-    """The composed long from the upscaled approved clips: OUT/<long>.mp4, captions.srt, manifest.json, report.json.
+    """The composed long: OUT/<long>.mp4, captions.srt, manifest.json, report.json and the real timeline.json.
     Refused (LONG_COMPOSE_REFUSED) on a frame, length, black frame or loudness outside the frozen QA."""
     import captions
     import clip_check
@@ -599,7 +629,7 @@ def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, r
     cuts = eb.shift_onsets(compose_long_shots(plan, layout, {k: str(f) for k, (f, _) in ups.items()}, seconds), onsets)
     cplan = {"voice": voice, "timeline": str(work / "compose-timeline.json"),
              "music": str(music), "music_offset": float(plan.get("music_offset", 600.0)), "tail": eb.TAIL,
-             "frame": list(frame), "shots": cuts}
+             "frame": list(frame), "shots": cuts, "native_onsets": onsets}
     eb.save(work / "compose-plan.json", cplan)
     video = out_dir / f"{plan['episode']}.mp4"
     total = render_fn(cplan, video, frame)
@@ -629,8 +659,12 @@ def assemble_step(plan, work, up, music, out_dir, frame=FRAME, approvals=None, r
     report["composed"] = composed
     eb.save(report_path, report)
     eb.save(out_dir / "report.json", report)
-    eb.save(out_dir / "manifest.json", manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha,
-                                                   round(info["seconds"], 3), track))
+    exported = timeline_record(plan, timeline, cuts, out_sha, round(info["seconds"], 3))
+    eb.save(out_dir / "timeline.json", exported)
+    manifest = manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha,
+                           round(info["seconds"], 3), track)
+    manifest["timeline"] = {"file": "timeline.json", "sha256": eb.sha256(out_dir / "timeline.json")}
+    eb.save(out_dir / "manifest.json", manifest)
     problems = []
     if [v.get("width"), v.get("height")] != list(frame) or v.get("codec_name") != "h264" or \
             v.get("avg_frame_rate") not in ("30/1", "30000/1000"):

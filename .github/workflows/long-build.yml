@@ -7,8 +7,10 @@ run-name: "long-build: plan=${{ inputs.plan }} resume_run=${{ inputs.resume_run 
 # content hash, checked again), the long's cuts on the 720p clips (its timeline step), then one Real-ESRGAN job a
 # clip (2560x1440 30 fps, the QA's upscaler) and the assembly (one cut a shot, story QA v3 holds, windows on their
 # source clip, owned music, -15 LUFS / -1.5 dBTP, the .srt by captions.py's writer, the manifest qa_pilot reads).
-# The record job (no secret) puts the file and its .srt in the release under the file's sha256 and the sheet,
-# manifest and report on a claude/long-* branch for Claude's review. resume_run: a failed run's upscaled clips are
+# Qualification runs real YAMNet/ASR QA and materializes this same master as its mapped pilot (no review or approval
+# is invented). The record job puts the file, pilot alias and .srt in the release under the file's sha256 and the
+# evidence on the existing claude/long-* review branch. approve.yml is still the only approval writer.
+# resume_run: a failed run's upscaled clips are
 # kept (artifacts of the approved clip they were made from); the rest is redone.
 on:
   workflow_dispatch:
@@ -61,6 +63,8 @@ jobs:
           test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
           python3 -I -B migration/production/bible/long_plan_check.py "$PLAN" --strict
+          # Known publication inputs are checked before voice/upscaling, not hours later.
+          python3 -I -B migration/production/bible/long_handoff.py inputs "$PLAN"
           # E126: the committed long preflight is PASS for this plan, no review row is open, every generated shot has
           # an approved clip of the request the plan sends now; else the build stops here, before any voice or clip
           python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
@@ -70,8 +74,7 @@ jobs:
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout (episode_build.rel)
       - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
         run: |
-          timeout 300s sudo apt-get update -qq
-          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2   # mediapipe links libEGL/libGLESv2 (E89)
           python3 -m venv "$RUNNER_TEMP/voice"
           "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           python3 -m venv "$RUNNER_TEMP/lip"
@@ -127,6 +130,8 @@ jobs:
           for f in report.json layout.json compose-timeline.json long-timeline.json narration.wav; do
             [ -f "$WORK/$f" ] && cp "$WORK/$f" "$RUNNER_TEMP/prep/" || true
           done
+          # Native Pavo audio is in these verified source clips; the upscales intentionally contain no audio.
+          [ ! -d "$WORK/clips" ] || cp -a "$WORK/clips" "$RUNNER_TEMP/prep/clips"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && steps.plan.outputs.episode != ''
         with:
@@ -168,7 +173,7 @@ jobs:
         run: |
           [[ "$SHOT" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "SHOT_ID_REFUSED"; exit 1; }
           [[ "$PLAN" =~ ^migration/production/bible/plans/[a-z0-9]+(-[a-z0-9]+)*-long\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }   # sweep H1
-          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg
           python3 -m venv "$RUNNER_TEMP/up"
           "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1 torchvision==0.20.1
           "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
@@ -237,7 +242,7 @@ jobs:
         run: |
           [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
           [[ "$PLAN" =~ ^migration/production/bible/plans/[a-z0-9]+(-[a-z0-9]+)*-long\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }   # sweep H1
-          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg fonts-dejavu-core
           bash migration/ci/assets.sh download --pattern original-rest-music.lossless.flac -O "$RUNNER_TEMP/music.flac" --clobber
           echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $RUNNER_TEMP/music.flac" | sha256sum -c -
           python3 -I -B migration/production/bible/long_build.py assemble "$PLAN" "$GITHUB_WORKSPACE/.episode/$EP" "$RUNNER_TEMP/up" "$RUNNER_TEMP/music.flac" "$RUNNER_TEMP/out"
@@ -255,20 +260,101 @@ jobs:
           path: ${{ runner.temp }}/out
           retention-days: 14
 
-  record:
+  qualify:
     needs: assemble
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      pilot: ${{ steps.handoff.outputs.pilot }}
+    env:
+      PLAN: ${{ inputs.plan }}
+      EP: ${{ needs.assemble.outputs.episode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Dispatch guard, qualification attempt (no measurement repeated without a relevant fix)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py attempt long-build.yml
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: long-out-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+      - name: Pinned QA runtime and actual publication handoff (no review, no approval)
+        id: handoff
+        run: |
+          bash migration/ci/apt_install.sh ffmpeg fonts-dejavu-core
+          timeout 120s python3 -m venv "$RUNNER_TEMP/qa"
+          timeout 900s "$RUNNER_TEMP/qa/bin/pip" install --disable-pip-version-check --timeout 60 -q ai-edge-litert==2.3.0 faster-whisper==1.2.1 av==16.0.1 pillow==11.0.0 numpy==2.2.6
+          python3 -I -B migration/production/bible/long_handoff.py materialize "$PLAN" "$RUNNER_TEMP/out"
+          pilot=$(python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["pilot"])' "$PLAN")
+          echo "pilot=$pilot" >> "$GITHUB_OUTPUT"
+          echo "PILOT=$pilot" >> "$GITHUB_ENV"
+      - name: YAMNet and story ASR from frozen model pins (medium.en, not the prayer's base.en)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/models/whisper"
+          bash migration/ci/assets.sh download --repo "$GITHUB_REPOSITORY" --pattern 'yamnet-classification-tflite-v1-sha256-*.tflite' -O "$RUNNER_TEMP/models/yamnet.tflite" --clobber
+          echo "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de  $RUNNER_TEMP/models/yamnet.tflite" | sha256sum -c -
+          revision=a29b04bd15381511a9af671baec01072039215e3
+          for name in config.json tokenizer.json vocabulary.txt model.bin; do
+            curl -fsSL --retry 3 --max-time 900 -o "$RUNNER_TEMP/models/whisper/$name" "https://huggingface.co/Systran/faster-whisper-medium.en/resolve/$revision/$name"
+          done
+          echo "11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b  $RUNNER_TEMP/models/whisper/model.bin" | sha256sum -c -
+      - name: Frozen QA over the real master (preserve FAIL for inspection, never replace it with a score)
+        id: qa
+        continue-on-error: true
+        run: |
+          d="migration/production/$PILOT"
+          criteria=$(python3 -I -B migration/production/bible/long_handoff.py inputs "$PLAN" | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["criteria"])')
+          "$RUNNER_TEMP/qa/bin/python" -I -B migration/production/qa_pilot.py "$RUNNER_TEMP/out/$EP.mp4" "$d/out/manifest.json" "$d/script.json" "$criteria" "$RUNNER_TEMP/models/yamnet.tflite" "$RUNNER_TEMP/models/whisper" "$d/out/qa.json"
+      - name: Real inspection sheets, approved thumbnail ruler and publication preflight
+        run: |
+          d="migration/production/$PILOT"; mp4="$RUNNER_TEMP/out/$EP.mp4"
+          duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$mp4")
+          rows=$(python3 -I -c 'import math,sys;print(math.ceil(math.ceil(float(sys.argv[1])/20)/4))' "$duration")
+          ffmpeg -nostdin -v error -y -i "$mp4" -vf "fps=1/20,scale=480:270,tile=4x$rows" -frames:v 1 -q:v 4 "$d/inspection/pilot-contact-sheet.jpg"
+          ffmpeg -nostdin -v error -y -t 40 -i "$mp4" -vf 'fps=1/2.5,scale=480:270,tile=4x4' -frames:v 1 -q:v 4 "$d/inspection/opening-sheet.jpg"
+          ffmpeg -nostdin -v error -y -i "$mp4" -vf "fps=16/$duration,scale=640:360,tile=4x4" -frames:v 1 -q:v 3 "$d/inspection/review-sheet.jpg"
+          "$RUNNER_TEMP/qa/bin/python" -I -B migration/production/thumb_check.py "$d/inspection/thumbnail.jpg" "$d/out/thumbnail_check.json"
+          python3 -I -B migration/production/bible/long_handoff.py verify "$d" "$mp4"
+          python3 -I -B migration/publish/preflight.py "$d" "$d/inspection/thumbnail.jpg"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.handoff.outputs.pilot != ''
+        with:
+          name: long-pilot-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
+          path: migration/production/${{ steps.handoff.outputs.pilot }}
+          retention-days: 14
+      - name: Qualification status (the preserved evidence may fail; nothing is approved here)
+        if: always() && steps.handoff.outputs.pilot != ''
+        run: test '${{ steps.qa.outcome }}' = success
+
+  record:
+    needs: [assemble, qualify]
+    if: ${{ !cancelled() && needs.assemble.result == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: write   # release assets (assets.sh) and the evidence branch; no secret in this job
     env:
       EP: ${{ needs.assemble.outputs.episode }}
+      PILOT: ${{ needs.qualify.outputs.pilot }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: long-out-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
           path: ${{ runner.temp }}/out
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: needs.qualify.outputs.pilot != ''
+        with:
+          name: long-pilot-${{ needs.assemble.outputs.episode }}-${{ github.run_id }}
+          path: migration/production/${{ needs.qualify.outputs.pilot }}
       - name: The long and its .srt into the release by the file's sha256; sheet, manifest and report on claude/long-<id>-<run>
         env:
           GH_TOKEN: ${{ github.token }}
@@ -282,15 +368,21 @@ jobs:
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['caption_track']['sha256']==sys.argv[2] else 'CAPTIONS_SHA256_MISMATCH')" "$out/manifest.json" "$srt_sha"
           asset="bible-$EP-sha256-$sha.mp4"
           srt_asset="bible-$EP-sha256-$sha.srt"   # the track of exactly this file
-          cp "$mp4" "$RUNNER_TEMP/$asset"
+          python3 -I -B migration/production/bible/long_handoff.py capacity "$mp4" "$PILOT"
           cp "$out/captions.srt" "$RUNNER_TEMP/$srt_asset"
-          bash migration/ci/assets.sh upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+          REPO="$GITHUB_REPOSITORY" bash migration/ci/release_video.sh put "$mp4" "$asset"
           bash migration/ci/assets.sh upload "$RUNNER_TEMP/$srt_asset" --repo "$GITHUB_REPOSITORY" --clobber
-          tag=$(bash migration/ci/assets.sh which "$asset" --repo "$GITHUB_REPOSITORY")
+          tag=$(bash migration/ci/assets.sh newest)
+          if [ -n "$PILOT" ]; then
+            python3 -I -B migration/production/bible/long_handoff.py verify "migration/production/$PILOT" "$mp4"
+            # Existing approve.yml/publish.yml download this exact alias, with large-file parts handled identically.
+            REPO="$GITHUB_REPOSITORY" bash migration/ci/release_video.sh put "$mp4" "$PILOT-sha256-$sha.mp4"
+          fi
           d="migration/evidence/episodes/$EP"; mkdir -p "$d"
           python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r['composed'].update(release_asset=sys.argv[2],srt_asset=sys.argv[3],release_tag=sys.argv[4],run_id=sys.argv[5]);open(sys.argv[6],'w').write(json.dumps(r,indent=1,ensure_ascii=False)+'\n')" \
             "$out/report.json" "$asset" "$srt_asset" "$tag" "$GITHUB_RUN_ID" "$d/report-$GITHUB_RUN_ID.json"
           cp "$out/manifest.json" "$d/manifest-$GITHUB_RUN_ID.json"
+          cp "$out/timeline.json" "$d/timeline-$GITHUB_RUN_ID.json"
           cp "$out/captions.srt" "$d/captions-$GITHUB_RUN_ID.srt"
           cp "$out/sheet.jpg" "$d/sheet-$GITHUB_RUN_ID.jpg"
           branch="claude/long-$EP-$GITHUB_RUN_ID"
@@ -298,6 +390,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -q -b "$branch"
           git add "$d"
+          [ -z "$PILOT" ] || git add "migration/production/$PILOT"
           git commit -q -m "Long $EP built from its approved clips (run $GITHUB_RUN_ID): sheet, manifest, .srt and report for review"
           git push -q origin "HEAD:refs/heads/$branch"
           echo "BRANCH $branch"

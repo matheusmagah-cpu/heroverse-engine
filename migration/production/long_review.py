@@ -68,9 +68,20 @@ def watch(file, title, key, models):
 
 def own_measures(script, timeline, seconds):
     """Rows measured on our own file and script, no model: length and Scripture read per 10 minutes."""
-    spoken = {seg["id"] for seg in timeline.get("segments", [])}
+    spoken = {seg["id"] for seg in timeline.get("segments", [])} | {
+        sent.get("segment") for sent in timeline.get("sentences", [])}
     refs = [seg for seg in script["segments"] if seg.get("reference") and seg["id"] in spoken]
     return {"minutes": round(seconds / 60, 2), "scripture_per_10_min": round(10 * len(refs) / max(seconds / 60, 1e-6), 2)}
+
+
+def hard_bands(script):
+    """Keep legacy prayer bands frozen; the acted long uses its already-registered story length target."""
+    if script.get("archetype") == "bible-story-long" and script.get("criteria_version") in (
+            "story-qa-criteria-v3", "story-qa-criteria-v4", "story-qa-criteria-v4-owner-exception-arc01",
+            "story-qa-criteria-v5"):
+        import script_check
+        return {"minutes": tuple(script_check.story_gate()["length_min"])}
+    return HARD
 
 
 def claude_problems(review, sha):
@@ -114,10 +125,13 @@ def main(pilot_dir, video_path=None):
     review["status"] = "PASS" if all(review[k] >= PASS_ITEM for k in RUBRIC) and review["overall"] >= PASS_OVERALL else "FAIL"
     timeline = json.loads((d / "out" / "timeline.json").read_text())
     own = own_measures(script, timeline, manifest["output_seconds"])
-    hard = {k: {"value": own[k], "band": b, "pass": b[0] <= own[k] <= b[1]} for k, b in HARD.items()}
+    bands = hard_bands(script)
+    hard = {k: {"value": own[k], "band": b, "pass": b[0] <= own[k] <= b[1]} for k, b in bands.items()}
     status = "PASS" if all(v["pass"] for v in hard.values()) and review["status"] == "PASS" else "FAIL"
     out = {"version": "long-review-v2", "pilot_id": script["pilot_id"], "output_sha256": sha,
-           "status": status, "scorecard_hard": hard, "scorecard_reported": {}, "watched_review": review}
+           "status": status, "scorecard_hard": hard,
+           "scorecard_reported": {k: {"value": v, "informative": True} for k, v in own.items() if k not in bands},
+           "watched_review": review}
     (d / "out" / "review.json").write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps({"status": status, "hard": {k: v["pass"] for k, v in hard.items()},
                       "review": {k: review.get(k) for k in (*RUBRIC, "overall", "status")}}))

@@ -1,11 +1,13 @@
 """Price, submission recovery and credential regressions; no network or real secrets."""
 import io
+from datetime import datetime, timedelta, timezone
 import json
 from http.client import HTTPResponse
 from pathlib import Path
 import socket
 import sys
 import threading
+import tempfile
 import time
 from types import SimpleNamespace
 import unittest
@@ -15,6 +17,7 @@ from urllib.error import URLError
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from client import MAX_BYTES, ORIGIN, PavoError
 from video import MODEL, PavoVideoClient
+from quota import COOL_DOWN, VIDEO_UNITS, QuotaGuard
 
 
 class Reply(io.BytesIO):
@@ -246,6 +249,69 @@ class Video(unittest.TestCase):
                          "unknown")
         payload["turns"][0]["assistant"] = [{"type": "QuotaTryDeduct", "data": {"required_amount": 0}}]
         self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["status"], "incomplete")
+
+
+class TerminalQuota(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.path = Path(self.tmp.name) / "quota.json"
+        self.now = datetime(2026, 10, 28, 12, tzinfo=timezone.utc)
+        self.guard = QuotaGuard(self.path, now=lambda: self.now)
+
+    def blocked(self, job, running=False):
+        payload = {"is_running": running, "turns": [{"assistant": [{"type": "PromptSafetyBlocked",
+                   "data": {"reason": "text_rejected_porn"}}]}]}
+        fake = Responses(envelope(payload))
+        result = PavoVideoClient("synthetic-offline-pavo-credential", fake, guard=self.guard).job(job)
+        self.assertEqual(len(fake.calls), 1)  # only history; never a generation or a retry
+        self.assertEqual(fake.calls[0][0].get_method(), "GET")
+        return result
+
+    def test_e187_terminal_block_readback_clears_unread_without_refunding_or_success(self):
+        for job in ("901", "902"):
+            self.guard.submitted(job, VIDEO_UNITS)
+        with self.assertRaisesRegex(PavoError, "PAVO_UNREAD_JOBS"):
+            self.guard.before_generate()
+        for job in ("901", "902"):
+            result = self.blocked(job)
+            self.assertEqual((result["status"], result["code"], result["blocked_reason"]),
+                             ("blocked", "PAVO_PROMPT_BLOCKED", "text_rejected_porn"))
+            self.assertFalse(result["published"])
+        state = json.loads(self.path.read_text())
+        self.assertEqual(state["unread"], [])
+        self.assertEqual(state["days"]["2026-10-28"]["generated"], 2 * VIDEO_UNITS)
+        self.assertEqual(state["failed_streak"], 0)
+        self.guard.before_generate()
+
+    def test_blocked_probe_preserves_suspension_and_consumption(self):
+        for job in ("910", "911"):
+            self.guard.submitted(job, VIDEO_UNITS)
+            self.guard.read_back(job, "failed", [])
+        stopped = json.loads(self.path.read_text())
+        self.now += COOL_DOWN + timedelta(seconds=1)
+        self.guard.before_generate()
+        self.guard.submitted("912", VIDEO_UNITS)
+        self.blocked("912")
+        state = json.loads(self.path.read_text())
+        self.assertEqual(state["unread"], [])
+        self.assertIsNone(state["probe"])
+        for field in ("suspended_at", "suspended_until", "failed_streak", "failed_jobs"):
+            self.assertEqual(state[field], stopped[field])
+        self.assertEqual(state["days"]["2026-10-28"]["generated"], 3 * VIDEO_UNITS)
+        self.guard.before_generate()  # the next explicitly requested probe, not an automatic retry
+        self.guard.submitted("913", VIDEO_UNITS)
+        with self.assertRaisesRegex(PavoError, "PAVO_FREE_QUOTA_SUSPECTED"):
+            self.guard.before_generate()
+
+    def test_running_safety_block_and_unknown_endings_stay_unread(self):
+        self.guard.submitted("920", VIDEO_UNITS)
+        self.assertEqual(self.blocked("920", running=True)["status"], "running")
+        for status in ("running", "incomplete", "unknown", "rejected", "completed"):
+            self.guard.read_back("920", status, [])
+            self.assertEqual(json.loads(self.path.read_text())["unread"], ["920"])
+        self.guard.read_back("920", "blocked", [{"url": "contradictory-media"}])
+        self.assertEqual(json.loads(self.path.read_text())["unread"], ["920"])
 
 
 def png(width=720, height=1280):

@@ -66,3 +66,47 @@ interfaces. New evidence must identify the actual designated reviewer; a GPT
 review must not claim a Claude identity. The manual review found no new gate
 weakening in this migration, but it must not be described as execution of either
 review plugin.
+
+## Integration addendum: production and continuity corrections
+
+The later integration is based on engine commit
+`51cb8f74c53b9f368981f90720e668f62eef859f`. It retains this handoff and adds
+the root-cause corrections registered as E145-E153, E165-E169, E185-E189,
+E205 and E206. This section is a manual review record, not a plugin sweep,
+whole-repository certification or audiovisual approval.
+
+The additional inspected contracts are:
+
+- Durable workflow claims are committed and pushed before dispatch. Ambiguous
+  dispatch responses remain inflight and are not automatically replayed. The
+  dispatcher run ID is not represented as the destination run ID. This does
+  not claim provider-level exactly-once execution.
+- Reviewer identity remains explicit. Measured media durations, source bytes,
+  assembled timeline, review and publication bindings are checked rather than
+  replaced by requested durations or a historical score. Frozen criteria and
+  the automatic approval-writing route remain unchanged.
+- Render detector errors remain errors. Native-audio admission uses the same
+  effective route as the build, and the unsupported native Short route stays
+  blocked. The patch does not claim that every existing plan has been migrated
+  to the owner's desired character-native routing.
+- E189 preserves the original visual-review evidence while recording a later
+  explicit revocation. Both approval writers archive current-only revocations
+  before replacement; rejected bytes remain vetoed by SHA across episodes.
+  A separate reviewing agent reproduced the former history-loss case and
+  confirmed the veto survives replacement without duplicating the snapshot.
+  Ten focused E189/E149/E152 tests passed in the integrated tree. This is not
+  an automated visual detector. The legacy Short recheck is limited to current
+  shot approvals, not a complete historical master-source manifest.
+- TikTok comment actions require exact target identity and a confirmed response;
+  ambiguous outcomes do not become success or trigger automatic retries. No
+  real comment action was performed during the offline tests.
+
+No new paid service, credential value, fabricated score, hand-written approval
+or media publication is introduced by this integration. New generation and
+publication still require their existing preflight, evidence and quality gates.
+
+The local supplemental Pavo checks are not a complete pass: the existing
+socket-based deadline test encounters the sandbox's socket permission limit,
+and the MCP transport test requires its pinned dependency in the existing CI
+job. The PR's actual Pavo CI result is required before merge; neither test is
+removed or relaxed to hide those environment limitations.

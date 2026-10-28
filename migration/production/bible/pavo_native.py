@@ -25,6 +25,7 @@ no music, no singing.
 """
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -242,7 +243,7 @@ def wer(reference, heard):
 
 def clip_gain_db(lufs, checks):
     """One static gain to the common voice level, at most clip_gain_db_max (None when the clip cannot reach it)."""
-    if lufs is None:
+    if not isinstance(lufs, (int, float)) or not math.isfinite(lufs):
         return None
     gain = checks["clip_voice_lufs_target"] - lufs
     return round(gain, 2) if gain <= checks["clip_gain_db_max"] + 1e-9 else None
@@ -293,16 +294,19 @@ def speech_verdict(measures, line, crit=None, binding=None):
         flags.append("VOICE_OTHERS_MISSING")
     elif sorted(measured) != sorted(binding["others"]) or len(others) != len(measured):
         flags.append("VOICE_OTHERS_MISMATCH")
-    elif not isinstance(voice.get("same"), (int, float)) or voice["same"] < checks["voice_same_character_cosine_min"]:
+    elif (not isinstance(voice.get("same"), (int, float)) or not math.isfinite(voice["same"])
+          or voice["same"] < checks["voice_same_character_cosine_min"]):
         flags.append("VOICE_NOT_CONSISTENT")
-    elif max(voice.get("others") or [-1.0]) > voice["same"] - checks["voice_other_character_margin_min"] + 1e-9:
+    elif (not all(isinstance(x, (int, float)) and math.isfinite(x) for x in others)
+          or max(others) > voice["same"] - checks["voice_other_character_margin_min"] + 1e-9):
         flags.append("VOICE_NOT_DISTINCT")
     if clip_gain_db(measures.get("lufs"), checks) is None:
         flags.append("SPEECH_LEVEL_UNREACHABLE")
     music, singing = measures.get("music"), measures.get("singing")
-    if not isinstance(music, (int, float)) or music > checks["music_presence_max"] + 1e-9:
+    if not isinstance(music, (int, float)) or not math.isfinite(music) or music > checks["music_presence_max"] + 1e-9:
         flags.append("PAVO_MUSIC")
-    if not isinstance(singing, (int, float)) or singing > checks["singing_presence_max"] + 1e-9:
+    if (not isinstance(singing, (int, float)) or not math.isfinite(singing)
+            or singing > checks["singing_presence_max"] + 1e-9):
         flags.append("PAVO_SINGING")
     lips = measures.get("lips")
     if lips is None:
@@ -399,7 +403,7 @@ def placements(plan, layout, spans, clips, approvals):
     out = []
     for sid, (idx, onset, end) in sorted(spans.items(), key=lambda kv: kv[1][0][0]):
         gain = ((approvals.get(sid) or {}).get("speech") or {}).get("gain_db")
-        if not isinstance(gain, (int, float)):
+        if not isinstance(gain, (int, float)) or not math.isfinite(gain):
             raise SystemExit(f"SPEECH_UNCHECKED {sid} (no gain recorded with its approval)")
         if sid not in clips or not Path(clips[sid]).is_file():
             raise SystemExit(f"NATIVE_CLIP_MISSING {sid} (the approved clip with its own audio)")
@@ -446,7 +450,8 @@ def premix(voice_wav, places, out_wav, total, run=None):
 def speech_span(measures):
     """(onset, end) of the clip's speech in seconds, from its ASR span: the cut and the voice layout use them."""
     span = (measures.get("asr") or {}).get("speech_span")
-    if not (isinstance(span, (list, tuple)) and len(span) == 2 and all(isinstance(x, (int, float)) for x in span)
+    if not (isinstance(span, (list, tuple)) and len(span) == 2
+            and all(isinstance(x, (int, float)) and math.isfinite(x) for x in span)
             and 0 <= span[0] < span[1]):
         raise SystemExit("SPEECH_SPAN_UNKNOWN (the approved clip records no ASR speech span)")
     return float(span[0]), float(span[1])
