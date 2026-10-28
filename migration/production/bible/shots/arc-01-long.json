@@ -1,6 +1,84 @@
 {
  "episode": "arc-01-long",
  "shots": {
+  "g-c4-dust": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a barren desert valley under a pale sky: unto dust",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c4-cost-desert-death-valley-vegetation-nature-ou",
+   "asset": "footage-clip-g13-c4-cost-desert-death-valley-vegetation-nature-ou-sha256-09354d616b2f984bad897ce7f02c65fbc2ed7e3c3a9caf303d2f6f5172ec89b1.mp4",
+   "clip_sha256": "09354d616b2f984bad897ce7f02c65fbc2ed7e3c3a9caf303d2f6f5172ec89b1",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: jdwork via Pixabay (https://pixabay.com/videos/id-86847/)",
+   "clip_seconds": 20,
+   "request_sha256": "3359885c04b5b0bb3f61fb0acdfed63b0f0f4f8832c744073321ddafff206d3b"
+  },
+  "g-c4-ground": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a thundercloud lit from behind, beams breaking through",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-reflection-sky-thundercloud-clouds-sunbeams-atmosph",
+   "asset": "footage-clip-g13-reflection-sky-thundercloud-clouds-sunbeams-atmosph-sha256-b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125.mp4",
+   "clip_sha256": "b6f1eff1c645dd5bc5ee89284c42d88791963b4d16bdab4955723cf67ef58125",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-229685/)",
+   "clip_seconds": 20,
+   "request_sha256": "ae401d8bf0edf8e9bc2d4120b48aa18cc7ffdd1a2fc2c315a71408067bb8b757"
+  },
+  "g-c4-naked": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a great dark trunk in deep forest shade: the garden darkening",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c4-afraid-trees-leaves-moss-forrest-woods-green-my",
+   "asset": "footage-clip-g13-c4-afraid-trees-leaves-moss-forrest-woods-green-my-sha256-0841ea8bcfcff1c6728b43ff034c860005e544b118052d4d568aca5e4447c160.mp4",
+   "clip_sha256": "0841ea8bcfcff1c6728b43ff034c860005e544b118052d4d568aca5e4447c160",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: NZDN via Pixabay (https://pixabay.com/videos/id-232329/)",
+   "clip_seconds": 20,
+   "request_sha256": "733490d1cb673729c1cf547ecbfa40f238333f9590fd483c387612bb1a459e66"
+  },
+  "g-c4-one-of-us": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "light rays streaming through the trees of a forest",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-reflection-forest-trees-leaves-sun-rays-green-walk-",
+   "asset": "footage-clip-g13-reflection-forest-trees-leaves-sun-rays-green-walk--sha256-73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97.mp4",
+   "clip_sha256": "73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-103195/)",
+   "clip_seconds": 20,
+   "request_sha256": "f9b2277940cb34c9f94460d8671d1eb54ba03721d338380bb4fbccc449b50cd4"
+  },
+  "g-c4-serpent": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "heavy dark clouds rolling over a black ridge",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-reflection-clouds-cloud-formation-cloud-layers-land",
+   "asset": "footage-clip-g13-reflection-clouds-cloud-formation-cloud-layers-land-sha256-20aefcd3c142f55cf3a725d73242204c73ad3e5db69d4e0f0cc2a23a328ce32d.mp4",
+   "clip_sha256": "20aefcd3c142f55cf3a725d73242204c73ad3e5db69d4e0f0cc2a23a328ce32d",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-267470/)",
+   "clip_seconds": 20,
+   "request_sha256": "4cc2b773f86bfa37dec18c4111b798b2c6d6d3b0b147665ae69a1533609dcd8d"
+  },
+  "g-c4-woman": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a grim rain front over the dark land (300 s+ from s-co-gate)",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-rehook-3-sunset-rain-grim-wind-clouds-golden-sunb",
+   "asset": "footage-clip-g13-rehook-3-sunset-rain-grim-wind-clouds-golden-sunb-sha256-83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4.mp4",
+   "clip_sha256": "83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-91942/)",
+   "clip_seconds": 20,
+   "request_sha256": "1916d1aa87ab1fdce3932a3399e2074703dc8711318e693206580d1e314b83cd"
+  },
   "k-insight-1": {
    "asset": "shot-arc-01-long-k-insight-1-sha256-392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d.mp4",
    "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
@@ -90,6 +168,19 @@
    "clip_seconds": 8,
    "request_sha256": "efb5c123f9ed394758a33895dc1072e0115bcf8ece33c575853201a3369eafe3"
   },
+  "s-c1-birds": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "two birds in silhouette against the sun on a rock: the sky filling with things that fly",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c1-lights-sunset-seagulls-birds-gulls-silhouette-s",
+   "asset": "footage-clip-g13-c1-lights-sunset-seagulls-birds-gulls-silhouette-s-sha256-429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08.mp4",
+   "clip_sha256": "429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-203196/)",
+   "clip_seconds": 20,
+   "request_sha256": "2964868427419a89050fd36e0271a96a700db71c1b099ad5b5dd6fb476e28f68"
+  },
   "s-c1-both": {
    "source": "still_motion",
    "score": 9.5,
@@ -123,6 +214,19 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 6,
    "request_sha256": "6b11a16e13377fa1636fd94b996429e86c5145641b86b9e85954dd133d545aff"
+  },
+  "s-c1-deep": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "open sea at dusk under a darkening sky: the face of the deep",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-chapter-1-dusk-sunset-ocean-sea-beach-twilight-dar",
+   "asset": "footage-clip-g13-chapter-1-dusk-sunset-ocean-sea-beach-twilight-dar-sha256-eb8ff4202e6a233ea2649fd3b4f6eabf186fbf2dca1674b5b10a4dd9f982647a.mp4",
+   "clip_sha256": "eb8ff4202e6a233ea2649fd3b4f6eabf186fbf2dca1674b5b10a4dd9f982647a",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-52866/)",
+   "clip_seconds": 20,
+   "request_sha256": "a8d30348e1d8563a81c4a11064356f5c1c6eefbd3b247689893a1d8989f16775"
   },
   "s-c1-divide": {
    "source": "footage",
@@ -171,6 +275,19 @@
    "clip_seconds": 6,
    "request_sha256": "61c4e69242a464b8b646b88ee51b778e65f979db03c69223995a9db596b3d33a"
   },
+  "s-c1-fox": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a goldfinch among wild thistles: every living creature after his kind",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c2-poem-stieglitz-goldfinch-bird-wild-bird-natur",
+   "asset": "footage-clip-g13-c2-poem-stieglitz-goldfinch-bird-wild-bird-natur-sha256-4b4baca79354bc136c158a65b590917630abac366907e365f8bec5b1048f64c7.mp4",
+   "clip_sha256": "4b4baca79354bc136c158a65b590917630abac366907e365f8bec5b1048f64c7",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-286511/)",
+   "clip_seconds": 20,
+   "request_sha256": "365de5e9169acefe075f4af4a492658ec7386b65e7c6f953b0416a7e415fdabd"
+  },
   "s-c1-grass": {
    "source": "still_motion",
    "score": 9.6,
@@ -188,6 +305,45 @@
    "clip_seconds": 6,
    "request_sha256": "6266dccbdf7bcc1bbdb705fca48166389513268450bacc156051a4534f80a08e"
   },
+  "s-c1-herd": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a flock grazing a green pasture under great trees: cattle and beasts of the earth",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-cta-flock-of-sheep-sheep-farm-animals-animal",
+   "asset": "footage-clip-g13-cta-flock-of-sheep-sheep-farm-animals-animal-sha256-c27a3bde396447c841fb81d63cdf6735f1cc45fb5e7df31026caeee551f47124.mp4",
+   "clip_sha256": "c27a3bde396447c841fb81d63cdf6735f1cc45fb5e7df31026caeee551f47124",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-250000/)",
+   "clip_seconds": 20,
+   "request_sha256": "ed02a8eebc99332f93b4d21539cc37582dde3fca17ce9f0f3791f4b8ece781c8"
+  },
+  "s-c1-hush": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a fog-filled valley at dawn, utterly still",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c1-verygood-mountains-landscape-nature-sky-blue-sunr",
+   "asset": "footage-clip-g13-c1-verygood-mountains-landscape-nature-sky-blue-sunr-sha256-98d1e8cd7ab9f58cf549343dc793164eab1f9f2d8ff3e94697032bd68c725225.mp4",
+   "clip_sha256": "98d1e8cd7ab9f58cf549343dc793164eab1f9f2d8ff3e94697032bd68c725225",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: NatureViewdaBeau via Pixabay (https://pixabay.com/videos/id-280484/)",
+   "clip_seconds": 20,
+   "request_sha256": "1ffae4595312fdb0861c6110ee0887283eedb5aaa02d65e58f0aa53fecfb922f"
+  },
+  "s-c1-land": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "waves draw back from a rocky shore with a wild tree: new land out of the sea",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-chapter-2-ocean-sea-waves-soil-island-liquid-wind-",
+   "asset": "footage-clip-g13-chapter-2-ocean-sea-waves-soil-island-liquid-wind--sha256-9eabd6e9cdc3f7fb34e4239fedb5d0e5ff6887ea0e5191aa2db3c45fd98e22e9.mp4",
+   "clip_sha256": "9eabd6e9cdc3f7fb34e4239fedb5d0e5ff6887ea0e5191aa2db3c45fd98e22e9",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-86373/)",
+   "clip_seconds": 20,
+   "request_sha256": "33cb49fcc438056b62ba67e7250d99cdf27269d16942418fc796cdd246efbde1"
+  },
   "s-c1-light": {
    "source": "footage",
    "score": 9.5,
@@ -200,6 +356,19 @@
    "credit": "Footage: BlueDreams-BD via Pixabay (https://pixabay.com/videos/id-250805/)",
    "clip_seconds": 20,
    "request_sha256": "78ec96b2d129da1f8a57a3eeb592131e93ea2e3aaa9128767334ad4adf4e18e9"
+  },
+  "s-c1-moon": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a full moon rising through dark branches",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c1-lights-moon-moonrise-super-moon-super-moonrise-",
+   "asset": "footage-clip-g13-c1-lights-moon-moonrise-super-moon-super-moonrise--sha256-feccd70f363050be7de6b79a8e7aeea496a1e7f841a664bb578ffce3a108b296.mp4",
+   "clip_sha256": "feccd70f363050be7de6b79a8e7aeea496a1e7f841a664bb578ffce3a108b296",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Hans via Pixabay (https://pixabay.com/videos/id-35554/)",
+   "clip_seconds": 20,
+   "request_sha256": "a44543a3badaed65ad018db94ae4df3618ab1bbdc039f8bf33bbb5f90616cdce"
   },
   "s-c1-river": {
    "source": "still_motion",
@@ -269,6 +438,32 @@
    "clip_seconds": 6,
    "request_sha256": "150be168f180bca9d979b7e12d6f6081bc1ae34bd67e9095e2cfcf34e7e078ab"
   },
+  "s-c1-whale": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "waves breaking over sea rocks: the seas filling",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c1-land-ocean-rocks-beach-waves-coast-shore",
+   "asset": "footage-clip-g13-c1-land-ocean-rocks-beach-waves-coast-shore-sha256-2fd23128adaf1e85444eba2e6bc1a31eec0951f5855452d11c837eceb0c4f341.mp4",
+   "clip_sha256": "2fd23128adaf1e85444eba2e6bc1a31eec0951f5855452d11c837eceb0c4f341",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: tigerpaint3 via Pixabay (https://pixabay.com/videos/id-197448/)",
+   "clip_seconds": 20,
+   "request_sha256": "c57f0340be02c922f085223199bed2132002956363bc95d4eb212b4f1df225bc"
+  },
+  "s-c1-wind": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "wind ripples running across open water",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c2-unashamed-sea-waves-blue-abstract-background-natur",
+   "asset": "footage-clip-g13-c2-unashamed-sea-waves-blue-abstract-background-natur-sha256-d892d76543e18286e681d2eec0ae021ca6a230d478819030545002261f230302.mp4",
+   "clip_sha256": "d892d76543e18286e681d2eec0ae021ca6a230d478819030545002261f230302",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-134822/)",
+   "clip_seconds": 20,
+   "request_sha256": "21c6a1f051d50bc5f2e86bd4a09e75f672263086dea58b4dae5b4ac5e8485da2"
+  },
   "s-c2-adam": {
    "asset": "shot-arc-01-long-s-c2-adam-sha256-d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f.mp4",
    "clip_sha256": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
@@ -290,6 +485,45 @@
     "criteria": "story-qa-criteria-v4"
    }
   },
+  "s-c2-dust": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "wind-rippled dust and sand: the dust of the ground",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c4-out-desert-dunes-wind-sky-view-hot-dry-soil-",
+   "asset": "footage-clip-g13-c4-out-desert-dunes-wind-sky-view-hot-dry-soil--sha256-153266cf0065f46368db9fec88500681df65d53fbaf2c9ff1343dbaa160c9059.mp4",
+   "clip_sha256": "153266cf0065f46368db9fec88500681df65d53fbaf2c9ff1343dbaa160c9059",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-232932/)",
+   "clip_seconds": 20,
+   "request_sha256": "7af6ffdae462404b750b9e1fc7fed9bbc20a4636cf175be386123ef699763a9f"
+  },
+  "s-c2-four": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a river breaking over rocks and spreading into pools",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-rehook-2b-waterfall-highlands-flow-nature-green-lo",
+   "asset": "footage-clip-g13-rehook-2b-waterfall-highlands-flow-nature-green-lo-sha256-48126afdb4699cadd81d63460d24af917e35564e517decec4092e37a1125c3ce.mp4",
+   "clip_sha256": "48126afdb4699cadd81d63460d24af917e35564e517decec4092e37a1125c3ce",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: NathanKoop via Pixabay (https://pixabay.com/videos/id-127361/)",
+   "clip_seconds": 20,
+   "request_sha256": "158be473c6f271e43f6eead6ea2eb0e19f8655bef626e421696316a1d0521541"
+  },
+  "s-c2-gold": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a clear stream over stones in a green forest: the river that waters the garden",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c2-woman-river-stream-waterfall-trees-forest-moun",
+   "asset": "footage-clip-g13-c2-woman-river-stream-waterfall-trees-forest-moun-sha256-a3356276769746043beb62825c6553b2909de788df825fe128486365d9a93948.mp4",
+   "clip_sha256": "a3356276769746043beb62825c6553b2909de788df825fe128486365d9a93948",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Alex_Sochi7777 via Pixabay (https://pixabay.com/videos/id-174860/)",
+   "clip_seconds": 20,
+   "request_sha256": "94cec99a01d0abf5f98309cb655dc4fa28012f9dc1f17fdfdc2409dbadbe94a1"
+  },
   "s-c2-meet": {
    "source": "still_motion",
    "score": 9.6,
@@ -307,6 +541,32 @@
    "clip_seconds": 6,
    "request_sha256": "2e6120dda89d6edc946395e6cc1b068b3bffa3cec6e605bbd8cc0849e1dc17a2"
   },
+  "s-c2-river": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a great river through untouched forest under morning mist",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-rehook-1-drone-drones-drone-images-nature-forest-",
+   "asset": "footage-clip-g13-rehook-1-drone-drones-drone-images-nature-forest--sha256-c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd.mp4",
+   "clip_sha256": "c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Drone_Aventura via Pixabay (https://pixabay.com/videos/id-216058/)",
+   "clip_seconds": 20,
+   "request_sha256": "c18467b459287a8f139659618f7b33e5c145d1cb88d2d788c0ab8541f94e3f9c"
+  },
+  "s-c2-two": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "two trees side by side, a dark conifer and a bright green beech",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c3-answer-larch-beech-conifer-deciduous-tree-tree-",
+   "asset": "footage-clip-g13-c3-answer-larch-beech-conifer-deciduous-tree-tree--sha256-c63a468b8327be0b72660e6990f2ac68f0434c0ac10019fd6d8bcd502b9d9921.mp4",
+   "clip_sha256": "c63a468b8327be0b72660e6990f2ac68f0434c0ac10019fd6d8bcd502b9d9921",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132749/)",
+   "clip_seconds": 20,
+   "request_sha256": "52f6c1dfc3f024b3e4631a97586e03c9fbb11a1b1f1843efcd48a0a520e40c24"
+  },
   "s-c3-eve": {
    "source": "still_motion",
    "score": 9.6,
@@ -323,6 +583,32 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 12,
    "request_sha256": "cf06a4e4aa0a6696e18d70c4ef59638415ee7fb0a3821a99329b570074dfdcc7"
+  },
+  "s-c3-fruit": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a pomegranate branch with ripe red fruit against a clear sky",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c3-answer-tree-fruit-pomegranate-healthy-food-orga",
+   "asset": "footage-clip-g13-c3-answer-tree-fruit-pomegranate-healthy-food-orga-sha256-e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649.mp4",
+   "clip_sha256": "e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-232357/)",
+   "clip_seconds": 20,
+   "request_sha256": "e422b795fedb1eac478343c620b612b74dff19ca0239c8c787abc9d5d55f64fa"
+  },
+  "s-c3-wind": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "tree crowns bending in a strong wind",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c4-walk-trees-leaves-forest-spring-body-herb-bra",
+   "asset": "footage-clip-g13-c4-walk-trees-leaves-forest-spring-body-herb-bra-sha256-bf9331de79e84e2a367c977cce98a4b5a101b6b3252393b71ea9956e0fcc9c8b.mp4",
+   "clip_sha256": "bf9331de79e84e2a367c977cce98a4b5a101b6b3252393b71ea9956e0fcc9c8b",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-260814/)",
+   "clip_seconds": 20,
+   "request_sha256": "0433a5c62b5e61cb3a7596d4831c692dc1b433f3525aeb6519a4bb0edaa1826b"
   },
   "s-c4-blame": {
    "asset": "shot-arc-01-long-s-c4-blame-sha256-b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df.mp4",
@@ -362,6 +648,71 @@
    "clip_seconds": 12,
    "request_sha256": "0875b6c77b4532951dcbfa4a0e083742709385554d7d730693a2c043ef0b98e6"
   },
+  "s-c4-evening": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "dark wet leaves stirring in the evening shade",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-chapter-4-leaves-rain-trees-green-forest-herb-gree",
+   "asset": "footage-clip-g13-chapter-4-leaves-rain-trees-green-forest-herb-gree-sha256-63fad40cc09ab28419d08d8b15b7ee254658f7da5cc2e6bbc73dec950c3a3d43.mp4",
+   "clip_sha256": "63fad40cc09ab28419d08d8b15b7ee254658f7da5cc2e6bbc73dec950c3a3d43",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-203228/)",
+   "clip_seconds": 20,
+   "request_sha256": "b6c792163e91d1dfb8df933b8a4fc3cfaae6411bf4a4c973b1006fcd5fc8c5e5"
+  },
+  "s-c4-gate": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a deep green forest wall, its way shut in shadow",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c4-note-trees-forest-nature-desert-track-mystica",
+   "asset": "footage-clip-g13-c4-note-trees-forest-nature-desert-track-mystica-sha256-70097ec83fe20a88bc913a5c55d7b33b559153e9b32d7864f33cc2d5c041ab2c.mp4",
+   "clip_sha256": "70097ec83fe20a88bc913a5c55d7b33b559153e9b32d7864f33cc2d5c041ab2c",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Moviemacker via Pixabay (https://pixabay.com/videos/id-215922/)",
+   "clip_seconds": 20,
+   "request_sha256": "2d25a154536e396efdb831d1643af7c505986edfbb6eca7237c3236177711c27"
+  },
+  "s-c4-ground-c": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a burnt, grey, dead woodland: the cursed ground",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-chapter-2-flames-dramatic-chaos-fire-hot-heat-burn",
+   "asset": "footage-clip-g13-chapter-2-flames-dramatic-chaos-fire-hot-heat-burn-sha256-beff0e96b5d6dc1443530c2248e5f5c6677b23bab8f61303990f6c93bfb56424.mp4",
+   "clip_sha256": "beff0e96b5d6dc1443530c2248e5f5c6677b23bab8f61303990f6c93bfb56424",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-217738/)",
+   "clip_seconds": 20,
+   "request_sha256": "55bc4361e18ebcc307ef27202a7cf8bf9885215e491a277d9d92ee864be555b6"
+  },
+  "s-c4-leaves2": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "red leaves trembling on a bare twig",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c3-eyes-autumn-autumn-leaves-autumn-scenery-wind",
+   "asset": "footage-clip-g13-c3-eyes-autumn-autumn-leaves-autumn-scenery-wind-sha256-350eeffca579177edb612aa05781cbd1a603d0cf3f3440b10580c3c739136349.mp4",
+   "clip_sha256": "350eeffca579177edb612aa05781cbd1a603d0cf3f3440b10580c3c739136349",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-137879/)",
+   "clip_seconds": 20,
+   "request_sha256": "6dbf36082bad478238dce8c252e8634b2a7d9d1d27154866be722386dbd3ee41"
+  },
+  "s-c4-life": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a lone tree against the sunset over an empty plain",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-c2-note-netherlands-drenthe-nature-tree-branches",
+   "asset": "footage-clip-g13-c2-note-netherlands-drenthe-nature-tree-branches-sha256-0c590f3b72f0c729a64bbfbdbc032c037a4dc69e5f9d0dd684162cd0dc05f574.mp4",
+   "clip_sha256": "0c590f3b72f0c729a64bbfbdbc032c037a4dc69e5f9d0dd684162cd0dc05f574",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-267861/)",
+   "clip_seconds": 20,
+   "request_sha256": "148c4e5e1498f9bd13bdd765aaabecb4443213d67af84cf654a48184d91933f0"
+  },
   "s-co-adam": {
    "source": "still_motion",
    "score": 9.5,
@@ -395,6 +746,19 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 6,
    "request_sha256": "764e191666c3039acf5837e128186b3b62ccb2d3aa734c51205fa9f24c99b12b"
+  },
+  "s-co-gate": {
+   "source": "footage",
+   "score": 9.6,
+   "note": "a dark storm front over a black horizon, a thin band of light: the world coming apart",
+   "approved_at": "2026-10-28",
+   "footage": "clip-g13-rehook-3-sunset-rain-grim-wind-clouds-golden-sunb",
+   "asset": "footage-clip-g13-rehook-3-sunset-rain-grim-wind-clouds-golden-sunb-sha256-83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4.mp4",
+   "clip_sha256": "83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-91942/)",
+   "clip_seconds": 20,
+   "request_sha256": "448bd4d68e05c1ddd78b158bb9b982e15bb2402ea4f1049b47ff803421534415"
   },
   "s-co-hide": {
    "source": "still_motion",

@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; light rays streaming through the trees of a forest",
  "vetting_reasons": [],
  "vetting_luma": [
   54.6,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-reflection-forest-trees-leaves-sun-rays-green-walk--sha256-73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }

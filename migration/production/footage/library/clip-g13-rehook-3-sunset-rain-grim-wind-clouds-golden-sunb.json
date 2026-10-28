@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a dark storm front over a black horizon, a thin band of light: the world coming apart",
  "vetting_reasons": [],
  "vetting_luma": [
   86.0,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-rehook-3-sunset-rain-grim-wind-clouds-golden-sunb-sha256-83b13ff15a4d3ad7bb1d86fccb9a3e66f8622b6864e7618fe5ebdabf8c3daed4.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }

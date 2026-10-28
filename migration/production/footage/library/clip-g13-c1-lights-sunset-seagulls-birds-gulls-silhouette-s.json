@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; two birds in silhouette against the sun on a rock: the sky filling with things that fly",
  "vetting_reasons": [],
  "vetting_luma": [
   98.1,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-c1-lights-sunset-seagulls-birds-gulls-silhouette-s-sha256-429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }

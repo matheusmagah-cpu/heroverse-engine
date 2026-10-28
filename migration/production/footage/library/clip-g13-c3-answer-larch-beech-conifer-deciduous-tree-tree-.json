@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "c63a468b8327be0b72660e6990f2ac68f0434c0ac10019fd6d8bcd502b9d9921",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; two trees side by side, a dark conifer and a bright green beech",
  "vetting_reasons": [],
  "vetting_luma": [
   83.8,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-c3-answer-larch-beech-conifer-deciduous-tree-tree--sha256-c63a468b8327be0b72660e6990f2ac68f0434c0ac10019fd6d8bcd502b9d9921.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }

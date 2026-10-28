@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a great river through untouched forest under morning mist",
  "vetting_reasons": [],
  "vetting_luma": [
   125.2,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-rehook-1-drone-drones-drone-images-nature-forest--sha256-c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }
