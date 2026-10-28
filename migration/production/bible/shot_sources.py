@@ -240,8 +240,12 @@ def fallback_refusal(plan, shot, index, source, still=None):
     (plan B) and a shot with characters, as a still in motion made with their references (SOURCE_CHARACTER_STILL)."""
     import pavo_native
     exc = owner_exception(plan)
-    if pavo_native.spoken(shot) and not (exc and source == "still_motion"
-                                         and pavo_native.route(plan, shot, index) == pavo_native.KOKORO):
+    kokoro = exc and pavo_native.route(plan, shot, index) == pavo_native.KOKORO
+    # story QA v5 (owner 28/10 ~11:10Z): God's voice-over (always Kokoro, never a figure) may stand on licensed
+    # footage of sky, light, garden or water as well as on a still in motion: no face, no lip-sync claimed
+    god_vo = kokoro and shot.get("speaker") == "god" and not has_character(shot) and source == "footage" \
+        and v5(plan)
+    if pavo_native.spoken(shot) and not ((kokoro and source == "still_motion") or god_vo):
         return f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)"
     if has_character(shot):
         if not exc or source != "still_motion":
@@ -413,6 +417,11 @@ def footage_ok(rec, frame=FRAME):
     return (rec.get("vetting") == "APPROVED" and rec.get("claude_seen") is True and rec.get("licence") in ACCEPTED
             and rec.get("frame") == list(frame) and rec.get("sha256")
             and rec.get("release_asset", "").endswith(f"-sha256-{rec.get('sha256')}.mp4"))
+
+
+def v5(plan):
+    import long_plan_check as lpc
+    return lpc.criteria_version(plan) == lpc.V5
 
 
 def faceless_shot(plan, shot):

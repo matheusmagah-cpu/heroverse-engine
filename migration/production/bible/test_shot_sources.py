@@ -409,6 +409,24 @@ class OwnerException(unittest.TestCase):
         self.assertTrue(ss.period_clash(v5plan, {"title": "woman walking in the city street", "query": "x"},
                                         faceless=True))
 
+    def test_v5_lets_gods_voice_over_stand_on_footage_never_a_characters_line(self):
+        """Owner 28/10 ~11:10Z ("o longo tem que sair HOJE"): under v5 God's Kokoro voice-over may stand on licensed
+        footage (sky, light, garden, water); a character's spoken line never does, and v4 / the arc-01 exception keep
+        God on a still."""
+        import long_plan_check as lpc
+        ss.owner_exception = self.saved[0]
+        p = plan()
+        god = p["shots"][1]
+        god["audio_route"] = "kokoro"
+        for crit, ok in ((lpc.V5, True), (pn.V4X, False)):
+            p.update(criteria=crit, episode="arc-01-long")
+            why = ss.fallback_refusal(p, god, 1, "footage")
+            self.assertEqual(why is None, ok, (crit, why))
+        p.update(criteria=lpc.V5)
+        eve = p["shots"][0]
+        eve["audio_route"] = "kokoro"
+        self.assertTrue(ss.fallback_refusal(p, eve, 0, "footage").startswith("SOURCE_SPOKEN_SHOT"))
+
     def test_the_exception_is_bound_to_the_arc01_plan(self):
         import long_plan_check as lpc
         ss.owner_exception = self.saved[0]
