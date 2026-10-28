@@ -229,22 +229,25 @@ class RiskAndResume(Scratch):
                                                          if not eb.is_window(s)])
 
     def test_the_queue_resumes_where_the_approvals_stop_in_batches_that_fit_one_run(self):
-        ids = self.generated()
+        import shot_sources as ss
+        planned = ss.planned_fallbacks(self.plan)          # the plan's free sources are never probed (owner 28/10)
+        ids = [i for i in self.generated() if i not in planned]
         digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
         q = lp.queue(self.plan, digests, {})
-        self.assertEqual(q["to_probe"], len(self.generated()))
+        self.assertEqual(q["to_probe"], len(ids))
         self.assertEqual(q["batches"][0]["shots"].split(",")[0], "s-open")
         for b in q["batches"]:
             self.assertLessEqual(b["minutes_est"], lp.PROBE_JOB_MINUTES - lp.PROBE_SETUP_MINUTES)
             self.assertEqual(len({eb.risk_rank(s) for s in self.plan["shots"] if s["id"] in b["shots"].split(",")}), 1)
-        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), len(self.generated()))
-        approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids[:100]}
+        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), len(ids))
+        k = len(ids) // 2
+        approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids[:k]}
         approvals["s-open"] = {"request_sha256": "f" * 64, "clip_seconds": 6}   # approved for another request
         q = lp.queue(self.plan, digests, approvals)
         left = [x for b in q["batches"] for x in b["shots"].split(",")]
-        self.assertEqual(q["approved"], 99)
+        self.assertEqual(q["approved"], k - 1)
         self.assertEqual(left[0], "s-open")
-        self.assertEqual(sorted(left), sorted(set(ids[100:]) | {"s-open"}))
+        self.assertEqual(sorted(left), sorted(set(ids[k:]) | {"s-open"}))
 
     def test_the_production_estimate_accounts_for_every_generated_shot(self):
         e = lp.estimate(self.plan)
@@ -338,12 +341,13 @@ class ReviewOf468(Scratch):
 
     def test_an_unfrozen_story_qa_blocks_the_long_preflight(self):
         # the arc-01 long is measured by story QA v4 since 28/10: unfreeze whichever version it declares
-        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256
-        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = lpc.QA_V4X_SHA256 = "0" * 64   # V4X: the owner's arc-01 exception (28/10)
+        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256, lpc.QA_V5_SHA256
+        # V4X: the owner's arc-01 exception (28/10); V5: the general rule the long moved to (28/10)
+        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = lpc.QA_V4X_SHA256 = lpc.QA_V5_SHA256 = "0" * 64
         try:
             r = pf.preflight(LONG, setups=[], today_images=0)
         finally:
-            lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256 = saved
+            lpc.QA_SHA256, lpc.QA_V4_SHA256, lpc.QA_V4X_SHA256, lpc.QA_V5_SHA256 = saved
         self.assertTrue(any(b.startswith("PLAN QA_NOT_FROZEN") for b in r["blockers"]), r["blockers"])
 
     def test_check_probe_and_probe_queue_are_wired_for_the_long(self):

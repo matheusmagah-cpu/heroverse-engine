@@ -415,15 +415,24 @@ def footage_ok(rec, frame=FRAME):
             and rec.get("release_asset", "").endswith(f"-sha256-{rec.get('sha256')}.mp4"))
 
 
-def period_clash(plan, rec):
+def faceless_shot(plan, shot):
+    """Story QA v5 (rights.fallback_sources.faceless_footage): a shot of anonymous figures (`figures: "anonymous"`, no
+    named character, never God) may take a clip of a faceless figure; Claude's review refuses any visible face."""
+    import long_plan_check as lpc
+    return (lpc.criteria_version(plan) == lpc.V5 and (shot or {}).get("figures") == "anonymous"
+            and not (shot or {}).get("characters"))
+
+
+def period_clash(plan, rec, faceless=False):
     """Words of the plan's period exclusions (plan_check.PERIODS[...]["avoid"]) or footage.BLOCK in the clip's title or
     query: the picture would break the period rules or show a person."""
     import plan_check
-    from footage import BLOCK
+    from footage import BLOCK, BLOCK_FACELESS
+    block = BLOCK_FACELESS if faceless else BLOCK
     text = f"{rec.get('title', '')} {rec.get('query', '')}"
     avoid = (plan_check.period(plan) or {}).get("avoid") or []
     hit = [w for w in avoid if re.search(rf"(?i)\b(?:{w})\b", text)]
-    return hit or ([BLOCK.search(text).group(0)] if BLOCK.search(text) else [])
+    return hit or ([block.search(text).group(0)] if block.search(text) else [])
 
 
 def footage_candidates(plan, shot, index, lib=None, n=3):
@@ -547,7 +556,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     if source == "footage":
         rec = next((r for r in (library() if lib is None else lib) if r.get("id") == item), None)
         frame = plan_frame(plan)
-        if rec is None or not footage_ok(rec, frame) or period_clash(plan, rec):
+        if rec is None or not footage_ok(rec, frame) or period_clash(plan, rec, faceless_shot(plan, shot)):
             raise SystemExit(f"FOOTAGE_NOT_USABLE {item} (APPROVED, seen by Claude, the frozen licence list, "
                              f"{frame[0]}x{frame[1]}, no period clash or person)")
         if not set(subject(plan, shot, i)) & set(words(f"{rec.get('theme')} {rec.get('query')} {rec.get('title')}")):
