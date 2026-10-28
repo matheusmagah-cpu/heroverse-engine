@@ -513,15 +513,25 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
             clips.append(dict(base, source="footage", licence=approved.get("licence"), credit=approved.get("credit"),
                               vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False))
             continue
-        if kind == "still_motion":   # an approved FLUX still in camera motion: an image with its model and licence
+        if kind == "still_motion":   # an approved still in camera motion: an image with its model and licence
+            import shot_sources
             still = pc.still_record(approved.get("still")) or {}
-            src = still.get("source") or {}
+            src = still.get("source") if isinstance(still.get("source"), dict) else {}
+            pavo_still = bool(still.get("pavo"))   # owner's arc-01 exception: Pavo agnes-image with the refs
+            revision = src.get("revision") or src.get("model") or (
+                (still.get("pavo") or {}).get("generate") or {}).get("model") or still.get("engine") or (
+                (still.get("models") or {}).get("image") if isinstance(still.get("models"), dict) else None)
             images[s["id"]] = {"still": approved.get("still"), "sha256": approved.get("still_sha256"),
+                               "pavo_still": pavo_still,
                                "models": {"still": {"license": src.get("license") or approved.get("licence"),
-                                                    "revision": src.get("revision") or src.get("model")}}}
-            clips.append(dict(base, source="still", licence=approved.get("licence"), credit="Still: FLUX.1 [schnell] "
-                              "(Apache-2.0) on Workers AI, approved scene still", vetting="APPROVED", audio="removed",
-                              talking=False))
+                                                    "revision": revision}}}
+            refs_ok = shot_sources.has_character(s) and not shot_sources.character_still_problems(s, still)
+            clips.append(dict(base, source="still", licence=approved.get("licence"),
+                              credit=("Still: Pavo agnes-image with the characters' approved references (owner-owned), "
+                                      "approved scene still") if pavo_still else
+                              "Still: FLUX.1 [schnell] (Apache-2.0) on Workers AI, approved scene still",
+                              vetting="APPROVED", audio="removed", talking=False, character_refs=refs_ok,
+                              voice="kokoro" if eb.pavo_native.spoken(s) else None))
             continue
         native = isinstance(approved.get("speech"), dict)
         if native:

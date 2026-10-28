@@ -186,8 +186,16 @@ def probe_rows(plan, chars, probes=None):
     probes = load_probes() if probes is None else probes
     items, carried = plan_check.sequence(plan)
     rows, missing, low, run_chance = [], [], [], 1.0
+    import shot_sources
+    plan_b = {}
+    if shot_sources.owner_exception(plan):   # the owner's arc-01 exception: plan B, the Kokoro voice over a still
+        plan_b = {sid for sid, a in eb.load_approvals(plan).items() if a.get("source") == "still_motion"}
     for i, s in enumerate(plan["shots"]):
         talks, silent = plan_check.talking(s), plan_check.voiceover(s)
+        if (talks or silent) and s["id"] in plan_b:
+            rows.append({"kind": "plan_b_still", "shot": s["id"], "probe": "none needed: the Kokoro voice over its "
+                         "approved still in motion (owner exception, arc-01 long); no lips are shown speaking"})
+            continue
         if talks or silent:
             if talks:
                 key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]),

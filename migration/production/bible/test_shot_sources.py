@@ -174,6 +174,78 @@ class ApproveSource(unittest.TestCase):
         self.assertFalse((self.dir / "t-sources.json").exists())   # nothing approved by any refusal
 
 
+class OwnerException(unittest.TestCase):
+    """Owner 28/10 ~02:30 UTC ("tem que ser amanhã"): for the arc-01 long ONLY, a silent shot with characters may be a
+    still in motion made by Pavo with every approved reference of each character it shows, and a spoken shot on the
+    Kokoro voice (plan B) may stand on such a still. Everywhere else v4's refusals stand."""
+
+    def setUp(self):
+        self.saved = (ss.owner_exception, eb.reference_records)
+        self.refs = {"eve": [("ch-eve-full", {"sha256": "e" * 64})], "keeper": [("ch-keeper-front", {"sha256": "k" * 64})]}
+        eb.reference_records = lambda cid, chars=None, *a, **k: self.refs[cid]
+
+    def tearDown(self):
+        ss.owner_exception, eb.reference_records = self.saved
+
+    @staticmethod
+    def still(shas, inputs=None):
+        return {"references": [{"record": "r", "sha256": s} for s in shas],
+                "pavo": {"generate": {"model": "agnes-image", "conversation_id": "1",
+                                      "input_images": len(shas) if inputs is None else inputs},
+                         "job": {"conversation_id": "1", "status": "completed"}}}
+
+    def test_without_the_exception_v4_refuses_every_person_or_voice_on_a_fallback(self):
+        ss.owner_exception = lambda plan: False
+        p = plan()
+        good = self.still(["e" * 64])
+        self.assertTrue(ss.fallback_refusal(p, p["shots"][3], 3, "still_motion", good).startswith("SOURCE_CHARACTER_SHOT"))
+        self.assertTrue(ss.fallback_refusal(p, p["shots"][0], 0, "still_motion", good).startswith("SOURCE_SPOKEN_SHOT"))
+        self.assertIsNone(ss.fallback_refusal(p, p["shots"][2], 2, "footage"))
+
+    def test_the_exception_takes_a_character_still_only_with_its_approved_references(self):
+        ss.owner_exception = lambda plan: True
+        p = plan()
+        pair = p["shots"][3]
+        self.assertIsNone(ss.fallback_refusal(p, pair, 3, "still_motion", self.still(["e" * 64])))
+        for bad in (self.still([]), self.still(["x" * 64]), self.still(["e" * 64], inputs=0), {"references": []}):
+            self.assertTrue(ss.fallback_refusal(p, pair, 3, "still_motion", bad).startswith("SOURCE_CHARACTER_STILL"))
+        self.assertTrue(ss.fallback_refusal(p, pair, 3, "footage").startswith("SOURCE_CHARACTER_SHOT"))
+
+    def test_the_exception_takes_a_spoken_shot_only_on_the_kokoro_voice(self):
+        ss.owner_exception = lambda plan: True
+        p = plan()
+        p["criteria"] = pn.V4X
+        eve = p["shots"][0]
+        self.assertTrue(ss.fallback_refusal(p, eve, 0, "still_motion", self.still(["e" * 64]))
+                        .startswith("SOURCE_SPOKEN_SHOT"))          # Pavo's own speech route: never a still
+        eve["audio_route"] = "kokoro"
+        self.assertIsNone(ss.fallback_refusal(p, eve, 0, "still_motion", self.still(["e" * 64])))
+        god = p["shots"][1]
+        god["audio_route"] = "kokoro"
+        self.assertIsNone(ss.fallback_refusal(p, god, 1, "still_motion", {}))   # God: a still with no one on it
+        self.assertTrue(ss.fallback_refusal(p, god, 1, "footage").startswith("SOURCE_SPOKEN_SHOT"))
+
+    def test_the_exception_is_bound_to_the_arc01_plan(self):
+        import long_plan_check as lpc
+        ss.owner_exception = self.saved[0]
+        q = lpc.qa_for({"criteria": lpc.V4X})
+        self.assertEqual(q["owner_exception"]["episode"], "arc-01-long")
+        self.assertTrue(lpc.owner_exception({"criteria": lpc.V4X, "episode": "arc-01-long"}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4X, "episode": "arc-02-long"}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4, "episode": "arc-01-long"}))
+        self.assertIsNone(lpc.frozen_qa_problem(plan={"criteria": lpc.V4X}))
+        v4, v4x = lpc.qa(lpc.QA_V4), lpc.qa(lpc.QA_V4X)
+        for key in set(v4) | set(v4x):   # only the fallback rows, the version, the freeze time and the record change
+            if key in ("version", "frozen_at_utc", "owner_exception"):
+                continue
+            if key in ("rights", "grammar"):
+                a = {k: v for k, v in v4[key].items() if k not in ("fallback_sources", "fallback_shots")}
+                b = {k: v for k, v in v4x[key].items() if k not in ("fallback_sources", "fallback_shots")}
+                self.assertEqual(a, b, key)
+            else:
+                self.assertEqual(v4.get(key), v4x.get(key), key)
+
+
 class ApproveReuse(unittest.TestCase):
     """R1, review of #476: an inventory clip (Pavo's CDN) is approved only for the request the committed preflight
     says the plan sends now, clean, from the CDN, and on a native spoken shot only with its speech checks passed."""

@@ -233,7 +233,7 @@ class StoryV3Rows(unittest.TestCase):
                 # qa_pilot reads it with its own grammar (main() branches on the version), never a fallback
                 self.assertIn(f'"{version}"', (HERE / "qa_pilot.py").read_text(), where)
                 # each frozen file the checker reads is pinned there with its own hash (v3 and, since 27/10, v4)
-                pinned = re.findall(r'QA(?:_V[0-9]+)?_SHA256 = "([0-9a-f]{64})"', src)
+                pinned = re.findall(r'QA(?:_V[0-9]+X?)?_SHA256 = "([0-9a-f]{64})"', src)   # V4X: the owner's arc-01 exception
                 if pinned:
                     self.assertIn(sha, pinned, where)
                 seen += 1
@@ -277,7 +277,7 @@ class StoryV4Rows(unittest.TestCase):
         self.assertEqual(sorted(q.STORY_V4_ROWS), rows)
         for row, names in q.STORY_V3_ROWS.items():
             self.assertTrue(set(names) <= set(q.STORY_V4_ROWS[row]), row)
-        self.assertIn('criteria["version"] == STORY_V4', (HERE / "qa_pilot.py").read_text())
+        self.assertRegex((HERE / "qa_pilot.py").read_text(), r'criteria\["version"\] in \(STORY_V4, STORY_V4X\)')
 
     def test_kept_speech_needs_its_checks_and_the_mix(self):
         pinned = V4["speech"]["asr_model"]["model_bin_sha256"]
