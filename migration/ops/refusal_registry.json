@@ -13,10 +13,6 @@
    "class": "N",
    "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"
   },
-  "ALREADY_ABSENT": {
-   "class": "N",
-   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
   "ALREADY_APPROVED": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
@@ -25,10 +21,6 @@
    "class": "A",
    "early": "migration/production/bible/long_plan_check.py::AMBIENCE_MISSING",
    "note": "a native plan names the ambient sound Pavo lays under the voice"
-  },
-  "APPROVED_MANIFEST_CHANGED": {
-   "class": "I",
-   "guard": "migration/publish/test_publication_binding.py::def test_"
   },
   "ARK_LOOK_CONFLICT": {
    "class": "A",
@@ -39,11 +31,6 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def plan_prop_problems(",
    "note": "E113: a scene prompt that names the ark (ark, hull, keel, ship, boat, vessel) outside the period sentences carries plan_check.ARK_LOOK and ARK_EXCLUDE word for word (PROPS), and with them and the period sentences taken out names no ship, boat, vessel, mast, sail, prow, figurehead, funnel, smokestack or curved sides (ARK_AVOID); plan_check and long_plan_check (plan_prop_problems) and episode_build.request (prop_refusal) by the same function; the one exemption, genesis-08's approved shots by `ark_look_grandfathered` (ark_grandfathered, prompt sha256 pinned), is honoured by both alike"
-  },
-  "ASPECT_REFUSED": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
   },
   "ASR_MODEL_NOT_PINNED": {
    "class": "C",
@@ -240,11 +227,6 @@
    "class": "D",
    "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
   },
-  "CHARACTERS_REFUSED": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
-  },
   "CHARACTER_LOOK_CHANGED": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def character_problems(",
@@ -327,10 +309,6 @@
    "class": "C",
    "probe": "clip_check on every clip before the compose (BLACK_START/END regenerate the shot); ESTABLISHING_SHARE inside COMPOSE_REFUSED is predicted (compose_prediction); LOUDNESS is set by loudnorm in the mix"
   },
-  "CORRECTION_MEASUREMENTS_MISMATCH": {
-   "class": "I",
-   "guard": "migration/publish/test_publication_binding.py::def test_"
-  },
   "CREDENTIAL_IN_CONVERSATION_ID_REFUSED": {
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
@@ -402,18 +380,6 @@
    "class": "I",
    "guard": "migration/publish/test_publication_binding.py::def test_"
   },
-  "EXCEPTION_REMOTE_HEAD_CHANGED": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
-  },
-  "EXCEPTION_RESERVATION_PERSISTENCE_UNCONFIRMED": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
-  },
-  "EXCEPTION_SLOT_MISMATCH_BEFORE_RESERVATION": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
-  },
   "FACE_CHECK_BLIND": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::FACE_CHECK_BLIND"
@@ -438,18 +404,9 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
-  "FETCH_HEAD": {
-   "class": "N",
-   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
   "FFMPEG_FAILED": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2"
-  },
-  "FIRST_FRAME_REFUSED": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
   },
   "FOOTAGE_HASH_MISMATCH": {
    "class": "D",
@@ -524,15 +481,6 @@
     "migration/production/bible/episode_build.py::def frame_refusal("
    ],
    "note": "Image first (owner, 27/10): a last frame without a first frame (Pavo refuses it too); plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.frame_problems"
-  },
-  "FRAME_TAG": {
-   "class": "N",
-   "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
-  "FRAME_TAG_MISSING": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
   },
   "FRESH_ZERO_CREDIT_QUOTE_REQUIRED": {
    "class": "D",
@@ -896,11 +844,6 @@
    ],
    "note": "E106: these surfaced as PAVO_REFUSED when the shot's turn came; prepare_video and _plan now run offline on every request first"
   },
-  "INVALID_SLOTS": {
-   "class": "A",
-   "early": ".github/workflows/publish-shorts.yml::INVALID_SLOTS",
-   "note": "refused in the workflow's first step before any work (a 0 s run)"
-  },
   "INVALID_SOUND_FLAG": {
    "class": "A",
    "was": "B",
@@ -995,10 +938,6 @@
   "LONG_NOT_PUBLIC": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
-  },
-  "LONG_NOT_QUALIFIED": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
   "LONG_NOT_UPLOADED": {
    "class": "D",
@@ -1176,10 +1115,6 @@
   "NO_REPORT": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
-  },
-  "NO_SHORTS_SLOTS": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
   "NO_UPLOADED_TRACK": {
    "class": "D",
@@ -1492,11 +1427,6 @@
    ],
    "note": "E127: a long's window_of shot is a second view of an earlier clip and is never generated; the dispatch guard refuses its id before the run, check-probe in the first step"
   },
-  "PROMPT_TOO_LONG": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
-  },
   "PROP_CANDIDATE_NAME_REFUSED": {
    "class": "N",
    "why": "E122: props.py, the prop reference registry, refuses a malformed run or candidate number; it runs before anything is generated from the prop and stops no Pavo generation, voice or render"
@@ -1566,10 +1496,6 @@
   "PUBLICATION_HOLD": {
    "class": "D",
    "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
-  },
-  "PUBLICATION_PERSISTENCE_UNCONFIRMED": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
   "PUBLISH_AT": {
    "class": "A",
@@ -1746,11 +1672,6 @@
   "SCOPE_MISSING": {
    "class": "D",
    "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
-  },
-  "SECONDS_REFUSED": {
-   "class": "A",
-   "early": ".github/workflows/agnes-clip.yml::SECONDS_REFUSED",
-   "note": "refused in the workflow's first step before any work (a 0 s run); agnes-clip.yml is a test-only workflow"
   },
   "SHORT_DESCRIPTION": {
    "class": "A",
@@ -2431,10 +2352,6 @@
   "UPSTREAM_HTTP_REFUSED": {
    "class": "D",
    "resume": "upstream: an uncertain submission is read with job(), never resubmitted; the adapter is fixed by PR, then resume_run keeps every clip already made (E93); the run is dispatched again only once the cause is gone"
-  },
-  "VERIFICATION_UNKNOWN": {
-   "class": "D",
-   "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
   "VERIFY_DESCRIPTION": {
    "class": "D",

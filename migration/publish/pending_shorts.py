@@ -5,6 +5,10 @@ or nothing. Slots come from schedule.json while still ahead; otherwise the
 daily slots (14:00, 20:00, 23:00 UTC = 11h, 17h, 20h BRT) from now on, always
 after the long video opens (each Short links to it).
 usage: pending_shorts.py PRODUCTION_DIR LEDGER
+
+No workflow publishes from this module since the prayer Shorts-from-long line was retired (slim audit 2026-10-28:
+publish-shorts.yml, shorts.yml and publish.yml's Shorts step are gone; Bible Shorts are episodes, publish-episode.yml).
+It stays as the tested slot rule (E01/E02: a late Short never takes another pilot's slot).
 """
 from datetime import datetime, timedelta, timezone
 import json
@@ -15,11 +19,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import owner_quality_policy
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
 import render_queue  # noqa: E402  (story_pilot: prayer longs are retired, owner 2026-10-26)
-
-DENIED_NEW_006 = frozenset({
-    "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-    "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707",
-    "126c2e8335f5135e4d2ec2407c67e6eb636d8ce36ea7d0bd489d8ed34ff9c617"})
 
 DAILY = (14, 20, 23)
 REVIEW_MODELS = ("gemini-3.8-flash",)  # only the designated reviewer's PASS publishes (publish/prepublish_gate.py)
@@ -66,59 +65,6 @@ def taken(production, entries, pilot):
     return out
 
 
-def material_context(spec):
-    def tag(key, field):
-        value = spec.get(key)
-        return value.get(field) if isinstance(value, dict) else None
-    return (tag("edit_plan", "version") == "shorts-006-correction-plan-v2"
-            or tag("finalization", "kind") == "pilot-006-correction-v2"
-            or tag("correction_material_review_attempt", "version") == "shorts-006-material-review-attempt-v1")
-
-
-def denied_output_context(spec):
-    return any(isinstance(r, dict) and isinstance(r.get("sha256"), str)
-               and r["sha256"] in DENIED_NEW_006 for r in spec.get("shorts", []))
-
-
-def recovery_context(spec, pilot_dir):
-    """Identify the bounded recovery from trusted directory OR manifest identity."""
-    return Path(pilot_dir).name == "pilot-006" or spec.get("source_pilot") == "pilot-006" or material_context(spec) or denied_output_context(spec)
-
-
-def recovery_gate(spec, pilot_dir, now):
-    """Pure eligibility guard. An uploaded ID is handled before this gate."""
-    import review_recovery as rr
-    d = Path(pilot_dir)
-    if d.name != rr.PILOT or spec.get("source_pilot") != rr.PILOT:
-        raise ValueError("RECOVERY_PILOT_CONTEXT_MISMATCH")
-    if ".." in d.parts or any(p.is_symlink() for p in (d, *d.parents)):
-        raise ValueError("RECOVERY_PATH_SYMLINK")
-    if any(r.get("sha256") in DENIED_NEW_006 and r.get("publish") is True for r in spec.get("shorts", [])):
-        raise ValueError("DENIED_HISTORICAL_OUTPUT")
-    final_context = spec.get("finalization")
-    if material_context(spec) and (not isinstance(final_context, dict) or final_context.get("kind") != "pilot-006-correction-v2"):
-        raise ValueError("MATERIAL_FINALIZATION_REQUIRED")
-    # A correction must never fall back to the historical recovery validator.
-    if "edit_plan" in spec or "finalization" in spec:
-        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "production"))
-        import shorts_006_plan as correction
-        final = spec.get("finalization")
-        if not isinstance(final, dict) or final.get("kind") not in ("pilot-006-correction-v1", "pilot-006-correction-v2"):
-            raise ValueError("CORRECTION_FINALIZATION_REQUIRED")
-        if final["kind"] == "pilot-006-correction-v2":
-            import shorts_006_material as material
-            bound = material.binding(spec, pilot_dir=d)
-        else:
-            bound = correction.binding(
-                spec, plan_sha256=correction.hash_file(d / "shorts" / "correction-plan.json"),
-                history_sha256=correction.hash_file(d / "shorts" / "correction-history.json"))
-    else:
-        bound = rr.binding(spec)
-    if now > when(bound["release_deadline"]):
-        raise ValueError("TARGET_SLOT_LEAD_MISSED")
-    return bound
-
-
 def pending(production, ledger, now=None):
     now = now or datetime.now(timezone.utc)
     entries = ledger.get("entries", {})
@@ -136,17 +82,6 @@ def pending(production, ledger, now=None):
             continue
         schedule = json.loads((d / "schedule.json").read_text()) if (d / "schedule.json").exists() else {}
         opens = when(schedule["publish_at"]) if schedule.get("publish_at") else now
-        if recovery_context(spec, d):
-            try:
-                bound = recovery_gate(spec, d, now)
-                target = when(bound["target_slot"])
-                if (len(todo) != 1 or todo[0]["sha256"] != bound["output_sha256"]
-                        or opens + timedelta(minutes=30) > target
-                        or target in taken(production, entries, d.name)):
-                    continue
-            except (OSError, ValueError, TypeError, KeyError):
-                continue
-            return d.name, [bound["target_slot"]]
         return d.name, slots_for(len(todo), schedule, opens, now, taken(production, entries, d.name))
     return None
 
@@ -159,21 +94,11 @@ def states(pilot_dir, ledger, now=None):
     spec = json.loads((Path(pilot_dir) / "shorts" / "shorts.json").read_text())
     entries = ledger.get("entries", {})
     out = []
-    recovery_blocked = False
-    needs_new_gate = any(s.get("publish") is True and "video_id" not in entries.get(
-        f"short:{spec['source_pilot']}:{s['sha256']}", {}) for s in spec["shorts"])
-    if needs_new_gate and recovery_context(spec, pilot_dir):
-        try:
-            recovery_gate(spec, pilot_dir, now)
-        except (OSError, ValueError, TypeError, KeyError):
-            recovery_blocked = True
     for s in spec["shorts"]:
         entry = entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})
         passed = (s.get("review") or {}).get("status") == "PASS" and (s.get("qa") or {}).get("status", "PASS") == "PASS"
         if "video_id" in entry:
             state = "scheduled" if entry.get("slot") and when(entry["slot"]) > now else "published"
-        elif recovery_blocked:
-            state = "temporal_recovery_blocked"
         elif not passed:
             state = "failed"
         elif not s.get("publish"):
@@ -184,7 +109,7 @@ def states(pilot_dir, ledger, now=None):
             state = "owner_quality_policy_blocked"
         else:
             state = "approved_awaiting_slot"
-        out.append({"file": s.get("file") if material_context(spec) and "video_id" in entry else s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
+        out.append({"file": s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
     return out
 
 

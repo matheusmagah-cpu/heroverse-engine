@@ -11,7 +11,7 @@ Source: `evidence/structure-mining/20261017/measured.json` (`blueprint_stats.py`
   - United Prayer: off-format livestreams.
   - Prayer of Hope: hour-long videos under 90% coverage.
 
-The prayer sample is small. Its targets are bands, not points, and are re-measured every week (structure mining on Sundays). The mining itself is MODEL_REPORTED until the native-window accuracy check reports its agreement rate.
+The prayer sample is small. Its targets are bands, not points, and are re-measured every week (structure mining on Sundays). The mining itself stays MODEL_REPORTED: the native-window accuracy check that would have measured its agreement rate was archived on 2026-10-28 with the native-window download route it served (slim audit `evidence/audits/20261028-slim.md`, D11).
 
 **Rule** (`BEAT_THE_REFERENCE_RULE.md`): every number below is the winner median. Our video must sit inside the band and beat the winner where the arrow points.
 
@@ -59,7 +59,9 @@ Enforced by `script_check.py`: hook ≤ 20 words, first prayer by 90 s, CTA afte
 - **Tags:** 6–10 tags, ≤ 400 characters.
 - **Category:** 29. Made for kids: no. Synthetic media: declared.
 
-## 2. Teaching and opinion-critique (`FORMAT_OPINION_AND_CRITIQUE.md`)
+## 2. Teaching and opinion-critique
+
+> Retired 2026-10-28: `strategy/FORMAT_OPINION_AND_CRITIQUE.md` was a 2026-10-17 candidate axis of the prayer era, never mined; the channel's line is the Bible series (`production/bible/SERIES.md`). Its text stays in git history (slim audit, M8). The measurements below are kept for reference only.
 
 | Measure | Winner median | HeroVerse target |
 |---|---|---|
@@ -112,7 +114,7 @@ Our render is mined with the **same miner and the same model** as the references
   - scripture on screen;
   - policy.
 
-**Reported rows** (against the winners' bands in section 1, written to `out/review.json`): words per minute 140–160, beats per minute 2.0–2.6, shots per minute ≥ 6, "you" ≥ 6 per 100 words, length 15–20 min. They turn into hard rows once the accuracy check shows the miner's beat and shot counts agree with native audio and pictures.
+**Reported rows** (against the winners' bands in section 1, written to `out/review.json`): words per minute 140–160, beats per minute 2.0–2.6, shots per minute ≥ 6, "you" ≥ 6 per 100 words, length 15–20 min. They stay reported rows: the native accuracy check that could have made them hard rows is archived (2026-10-28).
 
 ## 4. Policy exclusions (never modelled or copied)
 
@@ -128,7 +130,6 @@ Our render is mined with the **same miner and the same model** as the references
 | Market panel | daily |
 | Packaging mining | Sundays |
 | Structure mining of winners | Sundays |
-| Accuracy check vs native audio | after each structure mining |
 | Our own published videos' public stats | daily intel |
 
 When a target moves, this spec is updated with the date and evidence file. The criteria of a pilot already rendered are never changed.

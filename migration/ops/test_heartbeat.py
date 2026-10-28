@@ -8,7 +8,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import heartbeat as hb  # noqa: E402
 
-ALL = {"images_missing": True, "reconcile_todo": True, "shorts_pending": True, "production_idle": True}
+ALL = {"images_missing": True, "reconcile_todo": True, "production_idle": True}
 
 
 def t(h, m=0, day=18):
@@ -24,15 +24,15 @@ class Heartbeat(unittest.TestCase):
     def test_dropped_crons_are_caught_up(self):
         # 2026-10-18 09:41: nothing ran since midnight -> every passed daily task is dispatched once
         got = hb.decide({}, ALL, t(9, 41))
-        for w in ("nightly-images.yml", "market-panel.yml", "reconcile.yml", "publish-shorts.yml", "channel-privacy.yml"):
+        for w in ("nightly-images.yml", "market-panel.yml", "reconcile.yml"):
             self.assertIn(w, got)
         self.assertIn("goal-report.yml", got)          # past wait_max: no longer waits for the panel
 
     def test_nothing_twice_after_a_run(self):
-        runs = {"market-panel.yml": [run(7, 30)], "channel-privacy.yml": [run(8, 10)]}
+        runs = {"market-panel.yml": [run(7, 30)], "goal-report.yml": [run(7, 50)]}
         got = hb.decide(runs, ALL, t(8, 41))
         self.assertNotIn("market-panel.yml", got)
-        self.assertNotIn("channel-privacy.yml", got)
+        self.assertNotIn("goal-report.yml", got)
 
     def test_failed_run_retried_once_after_a_pause(self):
         failed = {"market-panel.yml": [run(7, 30, conclusion="failure")]}
@@ -42,13 +42,13 @@ class Heartbeat(unittest.TestCase):
         self.assertNotIn("market-panel.yml", hb.decide(twice, ALL, t(10, 11)))    # attempts used up
 
     def test_in_progress_is_not_duplicated(self):
-        runs = {"channel-privacy.yml": [run(8, 41, status="in_progress", conclusion=None)]}
-        self.assertNotIn("channel-privacy.yml", hb.decide(runs, ALL, t(10, 11)))
+        runs = {"market-panel.yml": [run(8, 41, status="in_progress", conclusion=None)]}
+        self.assertNotIn("market-panel.yml", hb.decide(runs, ALL, t(10, 11)))
 
     def test_conditions_keep_idle_tasks_quiet(self):
-        idle = {"images_missing": False, "reconcile_todo": False, "shorts_pending": False, "production_idle": True}
+        idle = {"images_missing": False, "reconcile_todo": False, "production_idle": True}
         got = hb.decide({}, idle, t(9, 41))
-        self.assertFalse({"nightly-images.yml", "reconcile.yml", "publish-shorts.yml"} & set(got))
+        self.assertFalse({"nightly-images.yml", "reconcile.yml"} & set(got))
 
     def test_every_heartbeat_mirrors_a_short_waiting_for_tiktok(self):
         # E90: tiktok.yml's own cron never fired; the heartbeat dispatches it every hour while a Short public on
@@ -60,10 +60,10 @@ class Heartbeat(unittest.TestCase):
         self.assertNotIn("tiktok.yml", hb.decide({}, {**ALL, "tiktok_pending": False}, t(13, 41)))
         wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
         self.assertIn('migration/production/bible/episodes > "$T/tiktok" || echo "PENDING_CHECK_FAILED" > "$T/tiktok"', wf)
-        self.assertIn("'tiktok_pending':s(sys.argv[4])", wf)
-        self.assertIn('"$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/arcs" "$T/conditions.json"', wf)
-        self.assertIn("'arc_links_todo':s(sys.argv[5])", wf)
-        self.assertIn("open(sys.argv[6],'w')", wf)
+        self.assertIn("'tiktok_pending':s(sys.argv[3])", wf)
+        self.assertIn('"$T/images" "$T/reconcile" "$T/tiktok" "$T/arcs" "$T/conditions.json"', wf)
+        self.assertIn("'arc_links_todo':s(sys.argv[4])", wf)
+        self.assertIn("open(sys.argv[5],'w')", wf)
         tiktok = (Path(__file__).resolve().parents[2] / ".github/workflows/tiktok.yml").read_text()
         self.assertLess(tiktok.index("git pull -q --ff-only origin main"), tiktok.index("tiktok_publish.py pending"))
 
@@ -74,9 +74,9 @@ class Heartbeat(unittest.TestCase):
         import tempfile
         wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
         code = re.search(r'python3 -I -c "(import json,os,sys;s=lambda p.*?)" \\', wf).group(1)
-        names = ["images", "reconcile", "shorts", "tiktok", "arcs"]
-        flags = {"images": "images_missing", "reconcile": "reconcile_todo", "shorts": "shorts_pending",
-                 "tiktok": "tiktok_pending", "arcs": "arc_links_todo"}
+        names = ["images", "reconcile", "tiktok", "arcs"]
+        flags = {"images": "images_missing", "reconcile": "reconcile_todo", "tiktok": "tiktok_pending",
+                 "arcs": "arc_links_todo"}
         with tempfile.TemporaryDirectory() as d:
             for only in names:
                 paths = []
@@ -124,7 +124,8 @@ class Health(unittest.TestCase):
         runs = {"market-panel.yml": [run(7, 30)], "heartbeat.yml": [run(6, 11)], "runner": [run(9, 13)]}
         rows, alerts = health.check(runs, t(12, 0))
         text = " ".join(alerts)
-        self.assertIn("channel-privacy.yml", text)           # 08:05 slot, nothing since, > 3 h
+        self.assertIn("goal-report.yml", text)               # 07:45 slot, nothing since, > 3 h
+        self.assertNotIn("channel-privacy.yml", text)        # dispatched by hand only (slim audit 2026-10-28)
         self.assertNotIn("market-panel.yml", text)
         self.assertNotIn("reconcile.yml", text)              # conditional: not judged from history
         self.assertIn("heartbeat.yml", text)                 # last beat 6 h ago

@@ -1,7 +1,9 @@
 # AI video prompts for the Bible-story series (owner, 2026-10-24: "the secret is the prompt; no credit wasted")
 
-AI video comes from Pavo first (Agnes Flash, 720p, 4-12 s, exact zero-credit quote; owner 2026-10-25), then Agnes
-direct, then vidIQ (~15 credits/s veo-3.1-lite 1080p to ~23 credits/s minimax-h3 2k) only when both fail. Shorts are
+AI video comes from Pavo first (Agnes Flash, 720p, 4-12 s, exact zero-credit quote; owner 2026-10-25). When Pavo's
+free quota runs out, silent shots take the owner's free fallbacks (R1-R4, DECISIONS 2026-10-27: footage library, FLUX
+stills with motion); vidIQ (~15 credits/s veo-3.1-lite 1080p to ~23 credits/s minimax-h3 2k) stays the last resort.
+The direct Agnes route (`agnes-clip.yml`) is retired (DECISIONS 2026-10-28). Shorts are
 almost all AI; every scene still shows its words. A Pavo clip costs no credits but a miss costs a slot, so every
 prompt passes this guide before it is sent. Pavo clips carry an audio track even with no audio asked: strip it (`-an`),
 except a spoken shot of a long on Pavo's own speech (story QA v4, LONG_DESIGN section 9; a Short is refused it until
@@ -143,7 +145,7 @@ FLUX `seed` and a `status`. Before a character's first scene:
    `characters/images.json`, and Claude reviews it (same face in all three, period-true clothing, no modern object).
    Only then is its status set to APPROVED, by PR.
 2. Every still prompt that shows it carries its `look` word for word plus one `wardrobe` variant, and reuses its seed.
-3. Every AI clip that shows it uses reference mode (Pavo `references`, else `agnes-clip.yml` input `characters`): the
+3. Every AI clip that shows it uses reference mode (Pavo `references`): the
    approved reference images go in (at most 5) and the prompt carries the look; `characters.py` refuses an unapproved character
    or a changed look before any call.
 4. A new character joins the bible the first time a story needs it, never improvised inside one episode.

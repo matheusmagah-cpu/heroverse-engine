@@ -49,8 +49,7 @@ LATER = [
     "migration/integrations/pavo/quota.py",   # E124: the free-image daily cap and quota stop
     ".github/workflows/episode.yml", ".github/workflows/long-build.yml", ".github/workflows/cf-images.yml", ".github/workflows/scene-stills.yml", ".github/workflows/publish-episode.yml",
     ".github/workflows/pavo-footage.yml", ".github/workflows/footage.yml", ".github/workflows/approve.yml",
-    ".github/workflows/publish.yml", ".github/workflows/shorts.yml", ".github/workflows/publish-shorts.yml",
-    ".github/workflows/tiktok.yml", ".github/workflows/agnes-clip.yml",
+    ".github/workflows/publish.yml", ".github/workflows/tiktok.yml",
     "migration/ops/dispatch_guard.py",   # E116: refuses at dispatch, before any secret or work
 ]
 # any later build added beside the Short's (a long build, a new engine) is scanned without being listed

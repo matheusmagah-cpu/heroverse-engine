@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ACTIVE = ("migration/production", "migration/publish", "migration/ops", "migration/mining")
 DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDARD.md", "migration/ops/RUNNER_WAKEUP.md", "migration/ops/CLAUDE_REVIEW.md",
              "migration/strategy/DECISIONS.md", "migration/strategy/MODELING_SPEC.md", "migration/strategy/VIDIQ.md",
-             "migration/strategy/BEAT_THE_REFERENCE_RULE.md", "migration/strategy/FORMAT_OPINION_AND_CRITIQUE.md",
+             "migration/strategy/BEAT_THE_REFERENCE_RULE.md",
              "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
              "migration/strategy/MARKET_FORECAST_TIME_TO_YPP_20261017.md"}  # registered forecast (evidence of DECISIONS)
 # E115: failure classes (rework audit 2026-10-27). An entry's `class` is one of these, or a list of them
@@ -65,7 +65,7 @@ class Register(unittest.TestCase):
 
     def test_push_triggers_ignore_deleted_files(self):
         # E50: deleting pilot-001 (out/qa.json) fired approve.yml, which then looked for the deleted render
-        for name in ('approve.yml', 'publish.yml'):  # shorts.yml is byte-frozen (test_shorts_produce)
+        for name in ('approve.yml', 'publish.yml'):
             text = (ROOT / '.github/workflows' / name).read_text()
             diffs = re.findall(r'git diff [^|]*HEAD~1 HEAD', text)
             self.assertTrue(diffs, name)
@@ -85,7 +85,11 @@ class Register(unittest.TestCase):
         shared = (ROOT / 'migration/ci/apt_install.sh').read_text()
         self.assertIn('mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/', shared)
         self.assertEqual(len(re.findall(r'.*apt-get .*(?:update|install).*', shared)), 2)
-        for path in ('.github/workflows/pr-checks.yml', '.github/workflows/voice-sample.yml', 'migration/ci/render_pilot.sh'):
+        # voice-sample.yml (the workflow of E55) was retired with the closed voice A/B (slim audit 2026-10-28); every
+        # workflow that installs with apt_install.sh is held to the same bound
+        users = sorted(str(p.relative_to(ROOT)) for p in (ROOT / '.github/workflows').glob('*.yml')
+                       if 'apt_install.sh' in p.read_text())
+        for path in sorted({'.github/workflows/pr-checks.yml', 'migration/ci/render_pilot.sh', *users}):
             text = (ROOT / path).read_text()
             self.assertIn('apt_install.sh', text, path)
             for line in re.findall(r'.*apt-get .*(?:update|install).*', text) + re.findall(r'.*apt-get .*(?:update|install).*', shared):

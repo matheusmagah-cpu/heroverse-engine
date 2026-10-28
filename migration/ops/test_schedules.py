@@ -30,6 +30,13 @@ class Schedules(unittest.TestCase):
             self.assertIn(name, beat, f"{name} relies on cron: dispatch it from ops/heartbeat.py too (E08, E86, E90)")
             self.assertIn("workflow_dispatch", (WORKFLOWS / name).read_text(), f"{name}: the heartbeat cannot dispatch it")
 
+    def test_single_clock_design(self):
+        # slim audit 2026-10-28 (OPERATIONS.md "Clocks"): heartbeat.yml is the one GitHub cron of record; tiktok.yml
+        # keeps its own cron only as a second chance (E90). A new schedule goes into the heartbeat's TASKS instead.
+        crons = {wf.name for wf in WORKFLOWS.glob("*.yml") if scheduled(wf.read_text())}
+        self.assertEqual(crons, {"heartbeat.yml", "tiktok.yml"})
+        self.assertNotIn("channel-privacy.yml", dispatched_by_heartbeat())   # by hand only (a finished job)
+
     def test_the_parser_sees_a_schedule(self):
         self.assertTrue(scheduled("name: x\non:\n  schedule:\n    - cron: '0 * * * *'\n  workflow_dispatch:\njobs:\n"))
         self.assertFalse(scheduled("name: x\non:\n  workflow_dispatch:\njobs:\n  a:\n    schedule: no\n"))
