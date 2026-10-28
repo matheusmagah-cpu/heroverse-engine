@@ -1,0 +1,26 @@
+{
+ "shot": "s-c4-blame",
+ "clip_sha256": "b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df",
+ "measures": {
+  "asr": {
+   "model_bin_sha256": "11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b",
+   "text": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+   "speech_span": [
+    0.0,
+    9.44
+   ]
+  },
+  "music": 0.0,
+  "singing": 0.0,
+  "lufs": -18.2,
+  "voice": {
+   "reference": null,
+   "same": null,
+   "others": []
+  },
+  "lips": []
+ },
+ "verdict": [
+  "VOICE_REFERENCE_MISSING"
+ ]
+}

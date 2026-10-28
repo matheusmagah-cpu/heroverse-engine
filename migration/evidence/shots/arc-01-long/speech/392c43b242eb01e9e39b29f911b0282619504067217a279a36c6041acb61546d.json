@@ -1,0 +1,26 @@
+{
+ "shot": "k-insight-1",
+ "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+ "measures": {
+  "asr": {
+   "model_bin_sha256": "11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b",
+   "text": "Notice how short the fall is, seven verses and the whole world turns.",
+   "speech_span": [
+    0.0,
+    7.2
+   ]
+  },
+  "music": 0.0,
+  "singing": 0.0,
+  "lufs": -12.9,
+  "voice": {
+   "reference": null,
+   "same": null,
+   "others": []
+  },
+  "lips": []
+ },
+ "verdict": [
+  "VOICE_REFERENCE_MISSING"
+ ]
+}

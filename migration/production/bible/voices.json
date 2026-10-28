@@ -4,7 +4,16 @@
  "voices": {
   "keeper": {
    "pavo_voice": "a mature man's deep, warm storyteller voice, calm, measured pace, clear English diction",
-   "reference": null,
+   "reference": {
+    "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+    "asset": "shot-arc-01-long-k-insight-1-sha256-392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d.mp4",
+    "episode": "arc-01-long",
+    "shot": "k-insight-1",
+    "run_id": "40616795532",
+    "score": 9.6,
+    "note": "The Keeper's native line, exact words by medium.en (WER 0), no music or singing, lips in sync (no flags), a deep warm unhurried storyteller voice that matches his look; chosen as his reference voice.",
+    "chosen_at": "2026-10-28"
+   },
    "measured": "PR #473: Keeper vs Keeper cosine 0.932 across two clips"
   },
   "god": {
@@ -14,7 +23,16 @@
   },
   "adam": {
    "pavo_voice": "a young man's light, bright tenor voice, youthful and eager, a quick lively pace, clear English diction",
-   "reference": null,
+   "reference": {
+    "clip_sha256": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+    "asset": "shot-arc-01-long-s-c2-adam-sha256-d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f.mp4",
+    "episode": "arc-01-long",
+    "shot": "s-c2-adam",
+    "run_id": "40616795532",
+    "score": 9.6,
+    "note": "Adam's native line (Gen 2:23), exact words by medium.en, no music or singing, lips in sync, the younger brighter quicker voice described in voices.json (28/10); chosen as his reference voice.",
+    "chosen_at": "2026-10-28"
+   },
    "measured": "PR #473 (old description \"a young man's warm baritone voice, calm, measured pace, clear English diction\"): Adam vs Adam 0.880-0.893 across scenes, 0.957 within one; NOT distinct from the Keeper (0.852-0.890). Owner 28/10: described younger, brighter and faster than the Keeper's deep, calm, measured voice; not probed yet"
   },
   "eve": {

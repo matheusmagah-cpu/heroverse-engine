@@ -137,6 +137,23 @@
    "clip_seconds": 6.0,
    "request_sha256": "61c4e69242a464b8b646b88ee51b778e65f979db03c69223995a9db596b3d33a"
   },
+  "s-c1-grass": {
+   "source": "still_motion",
+   "score": 9.6,
+   "note": "Adam in the rust wool cloak with the rope cord runs his hand through grass and wild flowers by a river in warm sun; the cloak wording fixes the tee-like garment of the first tries. Shipped as this approved still in slow continuous camera motion.",
+   "approved_at": "2026-10-28",
+   "still": "arc-01-long-s-c1-grass",
+   "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-grass.jpg",
+   "clip_sha256": null,
+   "still_sha256": "dbc0d794e01bf12e7d03efcf26657d3dbcfdbb686e4dbe45c6c862a15e89609a",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 6.0,
+   "request_sha256": "6266dccbdf7bcc1bbdb705fca48166389513268450bacc156051a4534f80a08e"
+  },
   "s-c1-river": {
    "source": "still_motion",
    "score": 9.5,
@@ -170,6 +187,40 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 6.0,
    "request_sha256": "94a35c4e3a76ac8ef72c98d36d6824372b888d6bcc48d467691a86bb86a4f67c"
+  },
+  "s-c1-sky": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Adam looks up at a vast blue sky over the sea from the garden, his reference face, rust garment and rope cord; open and high for the firmament line. Shipped as this approved still in slow continuous camera motion.",
+   "approved_at": "2026-10-28",
+   "still": "arc-01-long-s-c1-sky",
+   "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-sky.jpg",
+   "clip_sha256": null,
+   "still_sha256": "3ac08bdbd21d3d0447abcf12854e1c6c19f5cfbed82f6e7529d9becdebaf0c6a",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 6.0,
+   "request_sha256": "61c2f4b86b0321fa995c649658c77b46c833c89abf9de573b7a8f4cdaf12f72f"
+  },
+  "s-c1-stars": {
+   "source": "still_motion",
+   "score": 9.6,
+   "note": "Adam lies in the grass under a sky dense with stars over a quiet valley; awe and stillness, the same face and garment, period clean. Shipped as this approved still in slow continuous camera motion.",
+   "approved_at": "2026-10-28",
+   "still": "arc-01-long-s-c1-stars",
+   "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-stars.jpg",
+   "clip_sha256": null,
+   "still_sha256": "be0b5cda512f273b00774512ba3a1cfef34112ee057610f5f90a6aaef48eb789",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 6.0,
+   "request_sha256": "150be168f180bca9d979b7e12d6f6081bc1ae34bd67e9095e2cfcf34e7e078ab"
   },
   "s-c2-meet": {
    "source": "still_motion",
