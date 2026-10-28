@@ -162,8 +162,9 @@ The biggest cost is context re-read on every turn, not output. Rules for every s
   is the only GitHub cron of record (`tiktok.yml` keeps its own cron only as a second chance, E90; `test_schedules`).
   The light clock (Claude, Haiku, :14 hourly) is the only watchdog: heartbeat older than 55 min (re-dispatch it),
   failed runs, missed slots, TikTok ledger states; it never dispatches `tiktok.yml`. The main clock (every 4 h at :29)
-  does production only (long and Shorts pipeline, reviews, PRs) and re-checks neither the heartbeat nor TikTok. The
-  daily pass at 08:05 UTC does the report, the decision and the live intelligence (below).
+  does production (long and Shorts pipeline, reviews, PRs) and the comment replies (below), and re-checks neither the
+  heartbeat nor the TikTok mirror. The daily pass at 08:05 UTC does the report, the decision and the live
+  intelligence (below).
 - **No rework** (section above): a probe or preflight before any build, so a failure costs one cheap call, not a build plus its review.
 - **Rate limit.** Before a fan-out, read `rate_limit_info`; when the five-hour window is close to its limit, defer non-urgent work to after `resetsAt`.
 
@@ -221,6 +222,23 @@ Each video ships the full package, and `preflight.py` checks every measurable it
 Every item and its source are written into the package. An item without evidence is marked `UNMEASURED` and listed for stage 1. It is never guessed.
 
 After upload, reconcile the existing video ID and the intended visibility/schedule, captions, playlist, disclosure and remaining package items. Record items that require Studio as pending until verified. An incomplete comment, end screen or readback does not justify another upload. An expired slot remains unresolved until a valid scheduling decision is recorded; it does not count as a delivered publication.
+
+### Comment replies (owner, 2026-10-28: every comment answered, coherently and automatically)
+
+Every viewer's comment on our YouTube and TikTok videos gets an answer written by Claude (the main clock), in the
+series' voice (`production/bible/brand-profile.md` "Voice"): coherent with that video's story and with the comment,
+short, reverent, never preachy; an exact KJV verse only when it fits (its `verse` is checked by `kjv_check`). Spam,
+hate and provocation get a SKIP with its reason, never an argument. `publish/reply_policy.py` gates every decision on
+both platforms (length, no link/mention/hashtag, banned words, verse checked, no reply text used twice). At most 20
+replies a day per platform, every action in a ledger so nothing is answered twice.
+- **YouTube** (official Data API): `comment-replies.yml` (heartbeat, six slots) posts the decided replies
+  (`comments.insert` with `parentId`, at most 4 a run) and queues new comments in `publish/comment_queue.json`; Claude
+  writes `publish/comment_replies.json` by PR; ledger `publish/comment_replies_ledger.json`. The API cannot like a
+  comment, so nothing tries.
+- **TikTok** (no API for this; TikTok refuses datacenter IPs): `integrations/tiktok-local/` runs on the owner's PC
+  through Desktop Commander, in its own Chrome profile logged in once by the owner; it lists comments, likes and
+  answers each one Claude decided, paced like a person (45-240 s between comments, 3 a run). Stories are not posted:
+  TikTok's web upload has no Story option.
 
 ## Live intelligence: observe every stage and feed the next mining cycle
 

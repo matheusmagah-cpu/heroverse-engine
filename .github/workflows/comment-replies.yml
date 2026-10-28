@@ -1,0 +1,62 @@
+name: HeroVerse comment replies (YouTube; viewers' comments queued for Claude, Claude's decided replies posted)
+# Owner, 2026-10-28: every comment on our videos answered coherently. No cron of its own: heartbeat.yml dispatches it
+# six times a day (migration/ops/heartbeat.py). Each run first posts up to 4 replies Claude decided in
+# migration/publish/comment_replies.json (merged by PR; 20 a UTC day at most), then queues the new comments in
+# migration/publish/comment_queue.json for the main clock. The ledger migration/publish/comment_replies_ledger.json
+# stops any comment from being answered twice. The Data API cannot like a comment.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: run = post then fetch; fetch = only queue new comments; dry = print the replies it would post
+        type: choice
+        default: run
+        options: [run, fetch, dry]
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-comment-replies
+  cancel-in-progress: false
+jobs:
+  replies:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      MODE: ${{ inputs.mode || 'run' }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Publication hold, then the latest queue and ledger
+        run: |
+          case "$MODE" in run|fetch|dry) ;; *) echo INVALID_MODE; exit 1;; esac
+          git pull -q --ff-only origin main
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
+      - name: Offline tests and the reply policy before any write
+        run: |
+          python3 -I -B migration/publish/test_comment_replies.py
+          python3 -I -B migration/publish/comment_replies.py check
+      - name: Dependencies already used by publication
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+      - name: Post the decided replies, then queue the new comments
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          PY="$RUNNER_TEMP/venv/bin/python"
+          if [ "$MODE" = dry ]; then DRY_RUN=1 "$PY" -I -B migration/publish/comment_replies.py post; exit 0; fi
+          if [ "$MODE" = run ]; then "$PY" -I -B migration/publish/comment_replies.py post; fi
+          "$PY" -I -B migration/publish/comment_replies.py fetch
+      - name: Record the queue and the ledger
+        if: always() && env.MODE != 'dry'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/publish/comment_queue.json migration/publish/comment_replies_ledger.json
+          git commit -q -m "Comment replies (run $GITHUB_RUN_ID)" || exit 0
+          for i in 1 2 3 4 5; do   # the ledger is what stops a second reply: it must land
+            git pull --no-rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          echo "COMMENT_LEDGER_NOT_PUSHED"; exit 1

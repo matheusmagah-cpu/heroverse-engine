@@ -36,6 +36,9 @@ TASKS = [
     # Shorts <-> long links of an arc (publish/arc_links.py), after the long's 10:00 slot and each Short slot
     # (13:30, 23:30); arc_links_todo comes from the repo files (arcs.json and the ledgers), no secret
     {"workflow": "arc-links.yml", "slots": ["10:20", "13:50", "23:35"], "attempts": 2, "when": "arc_links_todo"},
+    # viewers' comments on YouTube (owner, 2026-10-28): each run posts up to 4 replies Claude decided (20 a day) and
+    # queues the new comments for the main clock (publish/comment_replies.py); no condition: the fetch is the check
+    {"workflow": "comment-replies.yml", "slots": ["01:10", "05:10", "09:10", "13:10", "17:10", "21:10"], "attempts": 1},
 ]
 
 
