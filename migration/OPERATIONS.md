@@ -68,6 +68,12 @@ One scheduler of record, one watchdog, one daily pass; nothing else checks the s
 `render.yml` cron (:13, :43) lives in heroverse-runner.
 
 ## Known limits (measured)
+- Build evidence discovery (E207): the existing heartbeat's independent read-only `review-discovery` job
+  lists `claude/long-*` and `claude/episode-*` branches with exact commit and build run IDs in its log/summary.
+  The designated supervisor reads this inventory before the main-tree review queue, fetches each report at
+  that commit and reconciles its media hash/current plan against existing reviews. Retained historical branches
+  are not automatically pending work. Discovery neither validates the evidence nor invokes a reviewer;
+  reviewer invocation remains an explicit operational gap. No new clock, approval or parallel ledger is added.
 - Long videos are reviewed by Claude (`ops/CLAUDE_REVIEW.md`) since 2026-10-24: `gemini-3.8-flash` answered only
   intermittently on the free tier and every free Gemini candidate failed calibration. Bible Shorts are reviewed by
   Claude on their frame sheets (`approve-shot`, E114); only the retired Shorts-from-long line (`shorts_review.py`,

@@ -2262,6 +2262,19 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E207",
+   "date": "2026-10-28",
+   "class": "pr-late",
+   "prior": [],
+   "error": "Long and Short builds push evidence branches, while the scheduled main-tree queue does not discover them. A successful build can therefore remain invisible to that queue until a session locates its branch. This is a static workflow finding, not evidence that a completed current video was lost.",
+   "fix": "The existing heartbeat inventories all paginated long/episode evidence branches with commit and build-run identities in its log and summary. The designated supervisor must reconcile each against its report, current plan and existing reviews. Inventory is not pending status, QA or approval and never dispatches, merges, scores or publishes. API/malformed inventory failures remain errors. This closes discovery only, not autonomous reviewer invocation.",
+   "antidote": {
+    "file": "migration/ops/test_review_discovery.py",
+    "contains": "def test_e207_inventory_reaches_branches_not_only_main",
+    "covers": ["pr-late"]
+   }
   }
  ]
 }
