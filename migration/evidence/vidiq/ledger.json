@@ -1251,6 +1251,14 @@
    "credits": 5,
    "purpose": "daily analysis 28/10: current subscriber count and 7 d growth (official count)",
    "saved_to": "evidence/vidiq/20261028/daily-analysis.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "research",
+   "tool": "vidiq_youtube_search",
+   "credits": 5,
+   "purpose": "package mining 28/10 (the one read left today): recent Bible-story Shorts across channels, looking for weak contrasts for title/thumbnail; balance checked in the daily analysis (3,261 before reads)",
+   "saved_to": "evidence/vidiq/20261028/package_mining.json"
   }
  ]
 }
