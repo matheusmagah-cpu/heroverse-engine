@@ -7,20 +7,23 @@
    "text": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
    "speech_span": [
     0.0,
-    9.44
+    9.5
    ]
   },
   "music": 0.0,
   "singing": 0.0,
   "lufs": -18.2,
   "voice": {
-   "reference": null,
-   "same": null,
-   "others": []
+   "reference": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+   "same": 0.9138,
+   "others": [
+    0.8195
+   ],
+   "others_references": [
+    "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d"
+   ]
   },
   "lips": []
  },
- "verdict": [
-  "VOICE_REFERENCE_MISSING"
- ]
+ "verdict": []
 }

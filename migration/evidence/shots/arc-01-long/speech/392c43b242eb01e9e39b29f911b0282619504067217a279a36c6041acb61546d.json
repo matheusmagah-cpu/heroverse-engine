@@ -4,7 +4,7 @@
  "measures": {
   "asr": {
    "model_bin_sha256": "11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b",
-   "text": "Notice how short the fall is, seven verses and the whole world turns.",
+   "text": "Notice how short the fall is, seven verses, and the whole world turns.",
    "speech_span": [
     0.0,
     7.2
@@ -14,13 +14,16 @@
   "singing": 0.0,
   "lufs": -12.9,
   "voice": {
-   "reference": null,
-   "same": null,
-   "others": []
+   "reference": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+   "same": 1.0,
+   "others": [
+    0.84
+   ],
+   "others_references": [
+    "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f"
+   ]
   },
   "lips": []
  },
- "verdict": [
-  "VOICE_REFERENCE_MISSING"
- ]
+ "verdict": []
 }

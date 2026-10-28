@@ -1,6 +1,27 @@
 {
  "episode": "arc-01-long",
  "shots": {
+  "k-insight-1": {
+   "asset": "shot-arc-01-long-k-insight-1-sha256-392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d.mp4",
+   "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+   "request_sha256": "65423f9611cf82d8046399ee6b0b6113bd36496add2f8406962d7d5e03549323",
+   "clip_seconds": 6,
+   "score": 9.6,
+   "note": "The Keeper chest-up at his campfire under the stars, his reference face, Pavo's own speech: exact words (medium.en WER 0), lips in sync, no music or singing, his reference voice; a calm grave delivery that opens the insight.",
+   "probe_record": "migration/evidence/shots/arc-01-long/40616795532.json",
+   "run_id": "40616795532",
+   "source_run": null,
+   "approved_at": "2026-10-28",
+   "speech": {
+    "clip_sha256": "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d",
+    "flags": [],
+    "onset": 0.0,
+    "end": 7.2,
+    "lufs": -12.9,
+    "gain_db": -5.1,
+    "criteria": "story-qa-criteria-v4"
+   }
+  },
   "k-promise-2": {
    "source": "still_motion",
    "score": 9.5,
@@ -15,7 +36,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12.0,
+   "clip_seconds": 12,
    "request_sha256": "e8f0d55045268fe163508b8638fe3ac4ab65cac1b805df33962cc9bdb0ed9290"
   },
   "k-promise-3": {
@@ -32,7 +53,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12.0,
+   "clip_seconds": 12,
    "request_sha256": "e622874e820c4dfb51b6c865bd56f29e826f4f21b9afd5affa2e72a11fa98a2c"
   },
   "s-c1-adam-hands": {
@@ -49,7 +70,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "5729771800109ae2449a793558c84d837c5b7aa71646c981dae8e73e395aaaef"
   },
   "s-c1-adam-light": {
@@ -66,7 +87,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 8.0,
+   "clip_seconds": 8,
    "request_sha256": "efb5c123f9ed394758a33895dc1072e0115bcf8ece33c575853201a3369eafe3"
   },
   "s-c1-both": {
@@ -83,7 +104,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 9.0,
+   "clip_seconds": 9,
    "request_sha256": "227e2d70e4308d051e18aee65ba0c633874368a44e3ce66d9b785ff5cb8eed3d"
   },
   "s-c1-dawn": {
@@ -100,7 +121,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "6b11a16e13377fa1636fd94b996429e86c5145641b86b9e85954dd133d545aff"
   },
   "s-c1-eve": {
@@ -117,7 +138,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "dee759db5e6bc37302c60ad1fd4527b957eefa90013779655f9d39f3584a3270"
   },
   "s-c1-eye": {
@@ -134,7 +155,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "61c4e69242a464b8b646b88ee51b778e65f979db03c69223995a9db596b3d33a"
   },
   "s-c1-grass": {
@@ -151,7 +172,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "6266dccbdf7bcc1bbdb705fca48166389513268450bacc156051a4534f80a08e"
   },
   "s-c1-river": {
@@ -168,7 +189,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "fd562a8449c106b3ff0c9ada4b4234a1ef15f11f1647f28463afc13985175dfc"
   },
   "s-c1-shore": {
@@ -185,7 +206,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "94a35c4e3a76ac8ef72c98d36d6824372b888d6bcc48d467691a86bb86a4f67c"
   },
   "s-c1-sky": {
@@ -202,7 +223,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "61c2f4b86b0321fa995c649658c77b46c833c89abf9de573b7a8f4cdaf12f72f"
   },
   "s-c1-stars": {
@@ -219,8 +240,29 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "150be168f180bca9d979b7e12d6f6081bc1ae34bd67e9095e2cfcf34e7e078ab"
+  },
+  "s-c2-adam": {
+   "asset": "shot-arc-01-long-s-c2-adam-sha256-d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f.mp4",
+   "clip_sha256": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+   "request_sha256": "811ced0256fcce2719e4e9efd60ff38228f0282dfedf128ef438f707c0cbc154",
+   "clip_seconds": 5,
+   "score": 9.6,
+   "note": "Adam speaks Gen 2:23 to Eve in the garden at morning, both faces true to their references, exact KJV words, lips in sync, no music; tender first words, the younger brighter voice (Keeper cosine 0.84 against 1.0 own).",
+   "probe_record": "migration/evidence/shots/arc-01-long/40616795532.json",
+   "run_id": "40616795532",
+   "source_run": null,
+   "approved_at": "2026-10-28",
+   "speech": {
+    "clip_sha256": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+    "flags": [],
+    "onset": 0.0,
+    "end": 9.16,
+    "lufs": -17.7,
+    "gain_db": -0.3,
+    "criteria": "story-qa-criteria-v4"
+   }
   },
   "s-c2-meet": {
    "source": "still_motion",
@@ -236,7 +278,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "2e6120dda89d6edc946395e6cc1b068b3bffa3cec6e605bbd8cc0849e1dc17a2"
   },
   "s-c3-eve": {
@@ -253,8 +295,29 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12.0,
+   "clip_seconds": 12,
    "request_sha256": "cf06a4e4aa0a6696e18d70c4ef59638415ee7fb0a3821a99329b570074dfdcc7"
+  },
+  "s-c4-blame": {
+   "asset": "shot-arc-01-long-s-c4-blame-sha256-b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df.mp4",
+   "clip_sha256": "b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df",
+   "request_sha256": "1db1bb102e371931d208bd2344502afc85f2818cebdc34ba35148b631faa86af",
+   "clip_seconds": 5,
+   "score": 9.5,
+   "note": "Adam at dusk gestures toward Eve as he blames her (Gen 3:12), exact words incl. 'gavest', lips in sync, Adam's voice 0.914 to his reference and 0.82 to the Keeper's, no music; Eve's hurt face behind him carries the beat.",
+   "probe_record": "migration/evidence/shots/arc-01-long/40616795532.json",
+   "run_id": "40616795532",
+   "source_run": null,
+   "approved_at": "2026-10-28",
+   "speech": {
+    "clip_sha256": "b17a8e494093d7e72c10a2027e25aff1d81d4a800d48c4ba5e2be4a01a0d55df",
+    "flags": [],
+    "onset": 0.0,
+    "end": 9.5,
+    "lufs": -18.2,
+    "gain_db": 0.2,
+    "criteria": "story-qa-criteria-v4"
+   }
   },
   "s-c4-eve": {
    "source": "still_motion",
@@ -270,7 +333,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12.0,
+   "clip_seconds": 12,
    "request_sha256": "0875b6c77b4532951dcbfa4a0e083742709385554d7d730693a2c043ef0b98e6"
   },
   "s-co-adam": {
@@ -287,7 +350,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "3057a4f558bf16488b27f5fd151d01b241c34b13d784477c5cfbc3020264cdfa"
   },
   "s-co-exile": {
@@ -304,7 +367,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "764e191666c3039acf5837e128186b3b62ccb2d3aa734c51205fa9f24c99b12b"
   },
   "s-co-hide": {
@@ -321,7 +384,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 6.0,
+   "clip_seconds": 6,
    "request_sha256": "a24d7f60cf797c31069cd892412dd1c9c2f566b9fee4da141dc4ce7bac226e12"
   },
   "s-open": {
@@ -338,7 +401,7 @@
     1440
    ],
    "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12.0,
+   "clip_seconds": 12,
    "request_sha256": "3530220ac78f3e3e685a6cd41f03678ce403c9ff1f15ff5345f99384d82a11fe"
   }
  }

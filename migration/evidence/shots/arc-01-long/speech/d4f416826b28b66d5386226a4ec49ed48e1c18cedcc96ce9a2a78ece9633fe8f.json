@@ -14,13 +14,16 @@
   "singing": 0.0,
   "lufs": -17.7,
   "voice": {
-   "reference": null,
-   "same": null,
-   "others": []
+   "reference": "d4f416826b28b66d5386226a4ec49ed48e1c18cedcc96ce9a2a78ece9633fe8f",
+   "same": 1.0,
+   "others": [
+    0.84
+   ],
+   "others_references": [
+    "392c43b242eb01e9e39b29f911b0282619504067217a279a36c6041acb61546d"
+   ]
   },
   "lips": []
  },
- "verdict": [
-  "VOICE_REFERENCE_MISSING"
- ]
+ "verdict": []
 }
