@@ -507,6 +507,45 @@ class ShortsV5OptIn(unittest.TestCase):
             real.unlink()
 
 
+class ShortsV5Footage(unittest.TestCase):
+    """Owner 28/10 ("Preciso de Short HOJE... pegar vídeos disponíveis, coerentes"): a v5 Short may use a 16:9 library
+    clip, centre-cropped to 1080x1920 at the build; a Short under older criteria still may not (E132)."""
+    def test_a_v5_short_takes_a_16x9_clip_cropped_to_its_frame(self):
+        lib = [clip("clip-river-a")]
+        v5 = {"episode": "t-v5", "aspect_ratio": "9:16", "criteria": "story-qa-criteria-v5", "audio_route": "kokoro",
+              "narration": plan()["narration"], "shots": plan()["shots"]}
+        old = dict(v5, criteria="story-qa-criteria-v4")
+        self.assertEqual([c["item"] for c in ss.footage_candidates(v5, v5["shots"][2], 2, lib)], ["clip-river-a"])
+        self.assertEqual(ss.footage_candidates(old, old["shots"][2], 2, lib), [])
+        with tempfile.TemporaryDirectory() as d:
+            a = ss.approve_source(v5, "s-river", "footage", "clip-river-a", 9.6, "the river, cropped", lib=lib,
+                                  shots_dir=d, today="2026-10-28")
+            self.assertEqual(a["crop_to"], [1080, 1920])
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(old, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d)
+            self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_USABLE"))
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_the_build_crops_the_clip_after_its_sha256_check(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            src = d / "src.mp4"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc=s=320x180:d=1", "-pix_fmt", "yuv420p",
+                            str(src)], check=True)
+            sha = hashlib.sha256(src.read_bytes()).hexdigest()
+            approval = {"source": "footage", "asset": f"footage-clip-river-a-sha256-{sha}.mp4", "clip_sha256": sha,
+                        "crop_to": [108, 192]}
+            out = ss.fetch_source(approval, d / "out.mp4", fetch=lambda name, dst: shutil.copy(src, dst))
+            info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-of", "json", str(out)],
+                                             capture_output=True, text=True).stdout)
+            v = [s for s in info["streams"] if s["codec_type"] == "video"][0]
+            self.assertEqual((v["width"], v["height"]), (108, 192))
+            with self.assertRaises(SystemExit) as err:     # another file in its place is refused before any crop
+                ss.fetch_source(dict(approval, clip_sha256="0" * 64), d / "bad.mp4",
+                                fetch=lambda name, dst: shutil.copy(src, dst))
+            self.assertTrue(str(err.exception).startswith("SHOT_CLIP_SHA256_MISMATCH"))
+
+
 class VoiceAudio(unittest.TestCase):
     """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
     which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
