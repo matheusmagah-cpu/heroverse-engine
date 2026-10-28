@@ -1,0 +1,127 @@
+{
+ "version": "long-production-estimate-v1",
+ "date": "2026-10-28",
+ "plan": "migration/production/bible/plans/arc-01-long.json",
+ "episode": "arc-01-long",
+ "generation": "none (an estimate: no Pavo, no FLUX, no Actions run)",
+ "shots": {
+  "holds": 174,
+  "generated": 171,
+  "windows": 3,
+  "talking_character_reference_video": {
+   "n": 6,
+   "ids": [
+    "s-open",
+    "s-c2-adam",
+    "s-c3-eve",
+    "s-c4-adam",
+    "s-c4-blame",
+    "s-c4-eve"
+   ],
+   "how": "references (the speaker's talk_refs frame) + input audio, lipsync_check + SyncNet"
+  },
+  "talking_keeper_reference_video": {
+   "n": 14,
+   "ids": [
+    "k-promise-1",
+    "k-promise-2",
+    "k-promise-3",
+    "k-insight-1",
+    "k-insight-2",
+    "k-insight-3",
+    "k-insight-4",
+    "k-insight-7",
+    "k-insight-8",
+    "k-insight-6",
+    "k-insight-9",
+    "k-insight-5",
+    "k-close-1",
+    "k-close-2"
+   ]
+  },
+  "god_voice_over_text_to_video": {
+   "n": 9,
+   "ids": [
+    "g-c1-lights",
+    "g-c1-image",
+    "g-c2-command",
+    "g-c4-naked",
+    "g-c4-serpent",
+    "g-c4-woman",
+    "g-c4-ground",
+    "g-c4-dust",
+    "g-c4-one-of-us"
+   ],
+   "how": "text to video, no person, face check"
+  },
+  "character_reference_video": {
+   "n": 119,
+   "how": "references (characters' approved sheets, <= 5); cannot take a still (Pavo: frames and references are exclusive)"
+  },
+  "image_first_still_needed": {
+   "n": 10,
+   "ids": [
+    "s-co-gate",
+    "s-c1-deep",
+    "s-c1-wind",
+    "s-c1-light",
+    "s-c1-divide",
+    "s-c1-moon",
+    "s-c4-life",
+    "s-c4-gate",
+    "s-c4-sword2",
+    "s-ki-gate"
+   ],
+   "why": "no character, no audio, and a light / dust / particle / fire moment: PROMPT_GUIDE 'always start from a checked still'"
+  },
+  "direct_text_to_video": {
+   "n": 13,
+   "how": "no character, no audio, no light moment: text to video, period sentences word for word, frame review"
+  },
+  "prop_guided": {
+   "n": 0,
+   "ids": [],
+   "why": "PROP_SHOT_WITHOUT_STILL is the ark's rule (from part 9); arc-01 is Eden: no prop in props.json applies"
+  }
+ },
+ "pavo": {
+  "model": "agnes-video-new-flash",
+  "resolution": "720p (1280x720 at 16:9, measured 2026-10-26)",
+  "clip_seconds": "4-12 a clip (adapter); the plan's scenes are 4-9 s, talking clips 4-12 s after the retime",
+  "aspect": "16:9 honoured (evidence/pavo/20261026/long-16x9-and-concurrency.json)",
+  "inputs": "<= 5 reference images or first(+last) frame, never both; <= 3 input audios 2-12 s in all",
+  "price": "every generation at a fresh exact 0-credit quote (refused otherwise)",
+  "free_limits": "E128: Pavo's free quota is the model quota, shared by stills and videos (a Flash video makes an Agnes still inside its conversation; run 40592173923 burned 24 video submissions on a spent quota). quota.py counts every generation (a still 1 unit, a video 2) against one cap of 120 units a UTC day, MCP and shot-probe alike; the dispatch guard refuses a batch whose worst case does not fit (PAVO_BUDGET_SHORT) and two failed read-backs in a row stop generation. A 0 quote does not prove free quota. At 120 units a day a probe day holds about 60 video jobs: the long's probes take several days",
+  "jobs_first_pass": 171,
+  "jobs_expected_probe": 462,
+  "jobs_direct_talking_probes": "20 lines x 6 generations = 120 (the preflight's PROBE_REQUIRED: >= 6 direct 0-credit generations a line, evidence/pavo/setups.json; none recorded for the long's lines yet)",
+  "stills": {
+   "candidates": 20,
+   "engine": "Pavo agnes-image (free, cap 120/day: fits one day) or FLUX (Workers AI, ~44 a day: two days)",
+   "blocker": "scene_stills.py makes 9:16 stills only (SIDE 1080x1920); a 16:9 plan refuses them (plan_check STILL_ASPECT_MISMATCH): a 16:9 still path is needed first"
+  }
+ },
+ "time": {
+  "probe_minutes_sequential": 2400,
+  "probe_hours_sequential": 40.0,
+  "shot_probe_runs": 23,
+  "why_sequential": "shot-probe.yml has one workflow-level concurrency group (heroverse-shot-probe) and generate_clips submits one job and polls it to the end before the next",
+  "with_two_pavo_jobs_at_once": 20.0,
+  "direct_talking_probe_hours": 6.6,
+  "upscale_cpu_minutes_1440p": 1546,
+  "reviews": "342 clip frame sheets for Claude (>= 9.5 each, approve-shot by PR)"
+ },
+ "publish": {
+  "as_of": "2026-10-27 (the proposal of that day; rerun estimates keep it until a new one is written)",
+  "proposed_date": "2026-11-04",
+  "earliest_if_every_step_passes_first_time": "2026-11-02",
+  "critical_path": [
+   "27-28/10: this contract (claude/long-preflight) and the story QA v3 reader, .srt writer and the 25 open review rows (claude/long-qa-v3-gates) merged: until then LONG_REVIEW_OPEN blocks the build",
+   "28/10: the local preflight with the pinned Kokoro (--voice --refs --write, 0 credits): the measured length and every request digest; a 16:9 still path in scene_stills.py for the 10 image-first shots",
+   "28-29/10: 120 direct 0-credit talking probes (20 lines x 6), about 6.6 h at two Pavo jobs at once; the main risk: genesis-07's Keeper lines passed 1 in 33, so a Keeper line under 0.9 goes to plan B (voice-over Keeper, still mouth) before any shot-probe run",
+   "29/10-01/11: 23 shot-probe.yml runs (~40 h one after another, probe-queue order) with Claude's frame reviews and approve-shot PRs as each run lands; about 15 % re-probed",
+   "in parallel: LONG_DESIGN slice 3, the long's build (16:9 compose at LONG_LINE_GAP, .srt, owned music at -15 LUFS, the Real-ESRGAN matrix), which ships approved clips only (verify-preflight first)",
+   "02/11: the build, the preview gate and Claude's long review (>= 9.5); 03/11 approve.yml -> prepublish_gate.py; 04/11 publication (day 30 of the goal is 16/11)"
+  ]
+ }
+}

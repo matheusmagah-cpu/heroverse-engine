@@ -160,7 +160,7 @@ class ApprovedShots(Scratch):
         layout, refs = self.layout_and_refs()
         digests = eb.request_digests(self.plan, layout, refs)
         self.assertEqual(sorted(digests), sorted(self.generated()))
-        self.assertEqual(len(digests), 164)
+        self.assertEqual(len(digests), len(self.generated()))   # the live plan's count (E133: never a copied literal)
         i, shot = next((i, s) for i, s in enumerate(self.plan["shots"]) if s["id"] == "s-c1-light")
         self.assertEqual(eb.request_identity(shot, i, self.plan, layout, refs)[1]["aspect_ratio"], "16:9")
         self.assertEqual(sorted(eb.clip_needs(self.plan, layout)), sorted(self.generated()))
@@ -232,12 +232,12 @@ class RiskAndResume(Scratch):
         ids = self.generated()
         digests = {i: f"{k:064x}" for k, i in enumerate(ids)}
         q = lp.queue(self.plan, digests, {})
-        self.assertEqual(q["to_probe"], 164)
+        self.assertEqual(q["to_probe"], len(self.generated()))
         self.assertEqual(q["batches"][0]["shots"].split(",")[0], "s-open")
         for b in q["batches"]:
             self.assertLessEqual(b["minutes_est"], lp.PROBE_JOB_MINUTES - lp.PROBE_SETUP_MINUTES)
             self.assertEqual(len({eb.risk_rank(s) for s in self.plan["shots"] if s["id"] in b["shots"].split(",")}), 1)
-        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), 164)
+        self.assertEqual(sum(len(b["shots"].split(",")) for b in q["batches"]), len(self.generated()))
         approvals = {i: {"request_sha256": digests[i], "clip_seconds": 6} for i in ids[:100]}
         approvals["s-open"] = {"request_sha256": "f" * 64, "clip_seconds": 6}   # approved for another request
         q = lp.queue(self.plan, digests, approvals)
@@ -256,7 +256,7 @@ class RiskAndResume(Scratch):
         self.assertEqual(parts, s["generated"])
         self.assertEqual(s["prop_guided"]["n"], 0)   # Eden: no prop of props.json
         self.assertEqual(e["time"]["shot_probe_runs"], len(lp.queue(self.plan, {}, {})["batches"]))
-        written = ROOT / "migration" / "evidence" / "long" / "20261027" / "arc-01-long-production-estimate.json"
+        written = sorted((ROOT / "migration" / "evidence" / "long").glob("*/arc-01-long-production-estimate.json"))[-1]   # the latest
         self.assertEqual(json.loads(written.read_text())["shots"], s)   # the committed estimate is this plan's
 
 
