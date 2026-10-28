@@ -1,0 +1,40 @@
+{
+ "id": "clip-calm-sea-travel-beach-sand-beautiful-calm-relax-c",
+ "theme": "calm-sea",
+ "query": "calm sea horizon grey",
+ "source": "pixabay",
+ "title": "travel, beach, sand, beautiful, calm, relax, coastal, landscape, waves, nature, water, horizon, sea",
+ "page": "https://pixabay.com/videos/id-23053/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-23053/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4a4cd23b3b4efca4575fda80ed021c1377e8eb1f715d03108279246f74f38a4e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  160.6,
+  161.5,
+  160.8,
+  157.9,
+  157.9
+ ],
+ "vetting_descriptions": [
+  "A beach scene with a rocky shore and a body of water.",
+  "A beach scene with a rocky shore and a body of water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-calm-sea-travel-beach-sand-beautiful-calm-relax-c-sha256-4a4cd23b3b4efca4575fda80ed021c1377e8eb1f715d03108279246f74f38a4e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

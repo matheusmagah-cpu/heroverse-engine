@@ -1,0 +1,40 @@
+{
+ "id": "clip-family-back-soccer-field-soccer-kids-playing-netherl",
+ "theme": "family-back",
+ "query": "family walking field back view",
+ "source": "pixabay",
+ "title": "soccer field, soccer, kids, playing, netherlands, drenthe, hoogeveen",
+ "page": "https://pixabay.com/videos/id-202749/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-202749/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f485cb1c66f29c053f32b764ebe3b14a45feead6d173eead829e25a78ee34504",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.0,
+  79.9,
+  79.6,
+  79.4,
+  78.9
+ ],
+ "vetting_descriptions": [
+  "A soccer field with a white line and a goal.",
+  "A soccer field with a white line and a shadow of a tree on the grass."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-family-back-soccer-field-soccer-kids-playing-netherl-sha256-f485cb1c66f29c053f32b764ebe3b14a45feead6d173eead829e25a78ee34504.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

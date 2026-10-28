@@ -1,0 +1,40 @@
+{
+ "id": "clip-barefoot-grass-rain-rainy-day-rainy-weather-wet",
+ "theme": "barefoot",
+ "query": "barefoot walking wet grass",
+ "source": "pixabay",
+ "title": "grass, rain, rainy day, rainy weather, wet",
+ "page": "https://pixabay.com/videos/id-118894/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-118894/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7bebc479a77bfc014ffd7a42c752a4bef48785a0024ee99a7df6cb5f2d8683ed",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  72.6,
+  72.3,
+  72.0,
+  72.0,
+  71.7
+ ],
+ "vetting_descriptions": [
+  "A close up of a plant with white flowers and green leaves.",
+  "A close up of a plant with white flowers and green leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-barefoot-grass-rain-rainy-day-rainy-weather-wet-sha256-7bebc479a77bfc014ffd7a42c752a4bef48785a0024ee99a7df6cb5f2d8683ed.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

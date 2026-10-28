@@ -1,0 +1,40 @@
+{
+ "id": "clip-calm-sea-sea-beach-coast-waves-ocean-horizon-sky-",
+ "theme": "calm-sea",
+ "query": "calm sea horizon grey",
+ "source": "pixabay",
+ "title": "sea, beach, coast, waves, ocean, horizon, sky, holiday, trip, sun, calm, tourism, tropical, island, nature",
+ "page": "https://pixabay.com/videos/id-259107/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-259107/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d993f157ddf89dfd39f8ce32fdf162326d07c63c365b82007aa574832c4be862",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  134.7,
+  115.7,
+  127.1,
+  111.8,
+  109.8
+ ],
+ "vetting_descriptions": [
+  "The image shows a beautiful beach with a clear blue sky above it.",
+  "A beautiful blue ocean with a clear sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-calm-sea-sea-beach-coast-waves-ocean-horizon-sky--sha256-d993f157ddf89dfd39f8ce32fdf162326d07c63c365b82007aa574832c4be862.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

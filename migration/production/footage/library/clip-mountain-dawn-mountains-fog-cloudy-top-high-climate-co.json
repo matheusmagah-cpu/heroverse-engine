@@ -1,0 +1,40 @@
+{
+ "id": "clip-mountain-dawn-mountains-fog-cloudy-top-high-climate-co",
+ "theme": "mountain-dawn",
+ "query": "mountain peak sunrise mist",
+ "source": "pixabay",
+ "title": "mountains, fog, cloudy, top, high, climate, cold, view, nature, beautiful wallpaper, sky, clouds, season, twilight, sunrise, peak, forest, trees, background",
+ "page": "https://pixabay.com/videos/id-251451/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 54.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-251451/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "593f0cb4f4587ee4bcaa12a336efb0d92b680b48bcd510fae4035050bc265bcf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  117.7,
+  112.7,
+  105.9,
+  98.3,
+  93.5
+ ],
+ "vetting_descriptions": [
+  "A mountain with fog and trees in the background.",
+  "A foggy mountain with a rocky terrain and a forest."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-mountain-dawn-mountains-fog-cloudy-top-high-climate-co-sha256-593f0cb4f4587ee4bcaa12a336efb0d92b680b48bcd510fae4035050bc265bcf.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

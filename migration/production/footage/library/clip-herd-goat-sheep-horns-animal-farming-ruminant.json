@@ -1,0 +1,40 @@
+{
+ "id": "clip-herd-goat-sheep-horns-animal-farming-ruminant",
+ "theme": "herd",
+ "query": "sheep flock grazing hillside",
+ "source": "pixabay",
+ "title": "goat, sheep, horns, animal, farming, ruminants, farm, fauna, environment, head, grazing, fur, youth, wild, dangerous, strong, nature",
+ "page": "https://pixabay.com/videos/id-240277/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 46.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-240277/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d463257ab6a0d1287e314562435c844e2e0db69657f544550c4d021066fea0e4",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  118.0,
+  118.6,
+  118.3,
+  118.7,
+  118.2
+ ],
+ "vetting_descriptions": [
+  "A ram with large horns is sitting on the ground next to a goat.",
+  "A ram with large horns is laying down in the dirt."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-herd-goat-sheep-horns-animal-farming-ruminant-sha256-d463257ab6a0d1287e314562435c844e2e0db69657f544550c4d021066fea0e4.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

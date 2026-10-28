@@ -1,0 +1,42 @@
+{
+ "id": "clip-receding-beach-landscape-clouds-travel-waves-wate",
+ "theme": "receding",
+ "query": "water receding rocks",
+ "source": "pixabay",
+ "title": "beach, landscape, clouds, travel, waves, water, sky, nature, blue, scene, rocks",
+ "page": "https://pixabay.com/videos/id-19986/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-19986/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7c2937ff3199f3fe7eaf74e792e9b0842d91ed700192e2c14b93f320e8cf3599",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat"
+ ],
+ "vetting_luma": [
+  158.7,
+  163.5,
+  157.2,
+  157.8,
+  160.9
+ ],
+ "vetting_descriptions": [
+  "A beautiful ocean view with a rocky shore and a boat in the distance.",
+  "A rocky cliff overlooking the ocean with a few birds flying in the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

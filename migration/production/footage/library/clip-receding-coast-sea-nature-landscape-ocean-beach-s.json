@@ -1,0 +1,40 @@
+{
+ "id": "clip-receding-coast-sea-nature-landscape-ocean-beach-s",
+ "theme": "receding",
+ "query": "water receding rocks",
+ "source": "pixabay",
+ "title": "coast, sea, nature, landscape, ocean, beach, scenery, water, wave, rock, waves, sand",
+ "page": "https://pixabay.com/videos/id-339761/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-339761/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "697d3aa40c817161e1865519b7e0adac401778d273446a03010310dc0998fabc",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  96.5,
+  99.6,
+  101.5,
+  100.9,
+  100.9
+ ],
+ "vetting_descriptions": [
+  "A beautiful green ocean with a rock in the middle and a wave crashing.",
+  "A beautiful blue ocean with a rock in the middle of it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-receding-coast-sea-nature-landscape-ocean-beach-s-sha256-697d3aa40c817161e1865519b7e0adac401778d273446a03010310dc0998fabc.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

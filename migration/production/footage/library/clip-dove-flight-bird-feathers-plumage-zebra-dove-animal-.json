@@ -1,0 +1,40 @@
+{
+ "id": "clip-dove-flight-bird-feathers-plumage-zebra-dove-animal-",
+ "theme": "dove-flight",
+ "query": "white dove flying",
+ "source": "pixabay",
+ "title": "bird, feathers, plumage, zebra dove, animal, nature",
+ "page": "https://pixabay.com/videos/id-203331/",
+ "author": "PiAnt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: PiAnt via Pixabay (https://pixabay.com/videos/id-203331/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3c500e9ecd3fcd7822d1c283c2fcbd9d734105de1185d5356443b8f2971ec1ed",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  42.3,
+  42.5,
+  42.2,
+  42.5,
+  43.9
+ ],
+ "vetting_descriptions": [
+  "A bird is perched on a wooden pole, looking at the camera.",
+  "A bird is perched on a wooden pole, looking at the camera."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dove-flight-bird-feathers-plumage-zebra-dove-animal--sha256-3c500e9ecd3fcd7822d1c283c2fcbd9d734105de1185d5356443b8f2971ec1ed.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

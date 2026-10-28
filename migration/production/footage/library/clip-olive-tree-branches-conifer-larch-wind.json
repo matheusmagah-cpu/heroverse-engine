@@ -1,0 +1,40 @@
+{
+ "id": "clip-olive-tree-branches-conifer-larch-wind",
+ "theme": "olive",
+ "query": "olive tree wind",
+ "source": "pixabay",
+ "title": "tree, branches, conifer, larch, wind",
+ "page": "https://pixabay.com/videos/id-132748/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132748/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c15f4207521e47b1f2e72652e7830f188a884148cd1eb35d61ccd0058ec13fc5",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  104.6,
+  103.8,
+  104.5,
+  104.7,
+  106.8
+ ],
+ "vetting_descriptions": [
+  "A tree with red berries and green leaves is seen in the foreground, with a mountain in the background.",
+  "A tree with green leaves and red berries is in front of a mountain."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-olive-tree-branches-conifer-larch-wind-sha256-c15f4207521e47b1f2e72652e7830f188a884148cd1eb35d61ccd0058ec13fc5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-wind-water-marine-wave-water-background-texture-nat",
+ "theme": "wind-water",
+ "query": "wind waves open sea",
+ "source": "pixabay",
+ "title": "marine, wave, water, background, texture, nature, ocean, lake, rhythm, wind, beach, holiday, travel, tropical, season, sunset, foam, summer, solar, blue, beautiful wallpaper, landscape, open",
+ "page": "https://pixabay.com/videos/id-41421/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-41421/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d0f09965364e417dc04c23ce6c1144e22d90b7557c07a85c5ed6e443e17b8175",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.1,
+  129.5,
+  114.7,
+  127.2,
+  135.4
+ ],
+ "vetting_descriptions": [
+  "A body of water with ripples and a small wave.",
+  "A body of water with ripples and a reflection of the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-wind-water-marine-wave-water-background-texture-nat-sha256-d0f09965364e417dc04c23ce6c1144e22d90b7557c07a85c5ed6e443e17b8175.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

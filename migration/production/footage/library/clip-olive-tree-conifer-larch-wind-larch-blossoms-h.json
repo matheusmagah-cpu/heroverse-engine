@@ -1,0 +1,40 @@
+{
+ "id": "clip-olive-tree-conifer-larch-wind-larch-blossoms-h",
+ "theme": "olive",
+ "query": "olive tree wind",
+ "source": "pixabay",
+ "title": "tree, conifer, larch, wind, larch blossoms, hill, forest",
+ "page": "https://pixabay.com/videos/id-128635/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128635/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6f2baffeaca6de17c80c2f9713b680a7e293375f9ec50b98d5d04deed893c967",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.7,
+  98.0,
+  99.5,
+  104.7,
+  105.5
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a mountain in the background.",
+  "A tree with green leaves and a cloudy sky above."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-olive-tree-conifer-larch-wind-larch-blossoms-h-sha256-6f2baffeaca6de17c80c2f9713b680a7e293375f9ec50b98d5d04deed893c967.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

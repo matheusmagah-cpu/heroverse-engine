@@ -1,0 +1,40 @@
+{
+ "id": "clip-rainbow-rain-plants-nature-green-garden-colombia",
+ "theme": "rainbow",
+ "query": "rainbow after rain",
+ "source": "pixabay",
+ "title": "rain, plants, nature, green, garden, colombia",
+ "page": "https://pixabay.com/videos/id-44791/",
+ "author": "TRAPHITHO",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TRAPHITHO via Pixabay (https://pixabay.com/videos/id-44791/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8b9e9f3011d9811cce2c31ad42cb4691a31ebdadab78f8864a34600a97f62998",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  78.3,
+  78.6,
+  78.6,
+  79.1,
+  79.5
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a few yellow leaves.",
+  "A tree with green leaves and a few drops of water on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-rainbow-rain-plants-nature-green-garden-colombia-sha256-8b9e9f3011d9811cce2c31ad42cb4691a31ebdadab78f8864a34600a97f62998.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

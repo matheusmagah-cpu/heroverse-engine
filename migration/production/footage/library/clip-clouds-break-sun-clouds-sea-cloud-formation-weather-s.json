@@ -1,0 +1,40 @@
+{
+ "id": "clip-clouds-break-sun-clouds-sea-cloud-formation-weather-s",
+ "theme": "clouds-break",
+ "query": "sun rays through clouds",
+ "source": "pixabay",
+ "title": "sun, clouds, sea, cloud formation, weather, sunbeams, fog, haze, morning mood, mood",
+ "page": "https://pixabay.com/videos/id-133966/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-133966/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "be58d651ae079233507e8ab49095135f2ef0acbba9da17c60682888530aa68b1",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.5,
+  106.4,
+  102.1,
+  98.4,
+  95.4
+ ],
+ "vetting_descriptions": [
+  "A mountain range with a cloudy sky above it.",
+  "A beautiful sunset over the ocean with mountains in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-clouds-break-sun-clouds-sea-cloud-formation-weather-s-sha256-be58d651ae079233507e8ab49095135f2ef0acbba9da17c60682888530aa68b1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
