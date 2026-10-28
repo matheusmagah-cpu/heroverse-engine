@@ -38,7 +38,7 @@ def pilot(root, name, publish_at, images_done=True, rendered=False, previewed=Tr
 
 
 class Queue(unittest.TestCase):
-    def test_quota_pending_suppresses_same_and_other_shorts(self):
+    def test_spent_review_quota_suppresses_the_approval_until_its_reset(self):
         import contextlib, io
         from unittest.mock import patch
         from datetime import timedelta
@@ -46,7 +46,7 @@ class Queue(unittest.TestCase):
             with tempfile.TemporaryDirectory() as t:
                 for name in ('pilot-005','pilot-006'):
                     pilot(t,name,'2026-10-19T10:00:00Z',rendered=True)
-                    d=Path(t)/name;(d/'shorts').mkdir();(d/'shorts/inputs.json').write_text('{}')
+                    d=Path(t)/name
                     (d/'out/review.json').write_text(json.dumps({'status':'FAIL','output_sha256':'a'*64}))
                 d=Path(t)/'pilot-005'
                 (d/'out/review.json').write_text(json.dumps({'status':'ERROR','error':'QUOTA',
@@ -54,8 +54,7 @@ class Queue(unittest.TestCase):
                 class Fixed(rq.datetime):
                     @classmethod
                     def now(cls,tz=None): return NOW
-                # Isolate scheduling from qualification, tested by test_shorts_prerequisite.
-                with patch.object(rq,'datetime',Fixed), patch.object(rq,'shorts_ready',return_value=True):
+                with patch.object(rq,'datetime',Fixed):
                     buf=io.StringIO()
                     with contextlib.redirect_stdout(buf):rq.main(t,str(Path(t)/'none'),'reconcile')
                     self.assertEqual(buf.getvalue(),'')
@@ -267,7 +266,7 @@ class Queue(unittest.TestCase):
                 if name in ("pilot-006", "pilot-007"):  # final decision UNKNOWN is retried, FAIL is not
                     gate = "UNKNOWN" if name == "pilot-006" else "FAIL"
                     (d / "out" / "gate.json").write_text(json.dumps({"decision": gate, "output_sha256": "a"*64}))
-                if name in ("pilot-005", "pilot-006"):  # Shorts never made, or all left unreviewed -> made again
+                if name in ("pilot-005", "pilot-006"):  # Shorts inputs handed off by a render: the Shorts-from-long line is retired, nothing is dispatched
                     (d / "shorts").mkdir()
                     (d / "shorts" / "inputs.json").write_text("{}")
                 if name == "pilot-006":
@@ -287,9 +286,9 @@ class Queue(unittest.TestCase):
                     rq.main(t, str(Path(t) / "none.json"), "reconcile")
             finally:
                 rq.datetime = real
-            # E25: one approval only, the earliest slot; Shorts wait while an approval is pending (same Gemini quota)
+            # E25: one approval only, the earliest slot
             self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "approve pilot-003"])
-            for name in ("pilot-003", "pilot-006"):  # terminal failures: unqualified longs must not produce Shorts
+            for name in ("pilot-003", "pilot-006"):  # terminal failures are not retried
                 (Path(t) / name / "out" / "review.json").write_text(json.dumps({"status": "FAIL", "output_sha256": "a"*64}))
             (Path(t) / "pilot-006" / "out" / "gate.json").write_text(json.dumps({"decision": "FAIL", "output_sha256": "a"*64}))
             buf = io.StringIO()

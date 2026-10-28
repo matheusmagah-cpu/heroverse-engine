@@ -67,7 +67,7 @@ beyond that only after telling the owner. Every call in `evidence/vidiq/ledger.j
 
 | Tool (5 credits) | What it adds to HeroVerse | Where it enters | Cadence |
 |---|---|---|---|
-| `video_transcript` | YouTube captions of reference videos: an independent instrument for the mining-accuracy check (the miner FAILED 0.50) and for wpm/beat/structure measures | `mining/accuracy_check.py` holdout, structure mining | setup ~20, then ~10/week |
+| `video_transcript` | YouTube captions of reference videos: an independent instrument for wpm/beat/structure measures (the native-window accuracy check, `mining/accuracy_check.py`, was archived 2026-10-28: the miner FAILED 0.50) | structure mining | setup ~20, then ~10/week |
 | `outliers` | comparable videos that beat their channel, with dates: comparables of each topic, candidates for `structure_channels.txt`, title/thumbnail patterns | per-pilot opinion; mining list | 1 per pilot topic; 3 formats at setup; weekly refresh |
 | `comment_insights` (discover/validate) | what the prayer audience asks for and dislikes; test of a topic idea against real comments | script topic and angle (before writing) | discover 2 at setup; validate 1 per new script |
 | `keyword_research` (research / rising) | demand and rising topics (validated only as direction: ρ 0.40) | topic priority in the queue | 1 per script; rising weekly |
@@ -111,5 +111,5 @@ all on one. The story order of SERIES.md is not a topic choice.
 | `vidiq-competitor-watchlist` | monthly, read-only (`vidiq_update_competitors` is denied) | 1 |
 | `vidiq-get-started` | credit balance and recovery of an interrupted compose job (`vidiq_job_poll`) | 1 |
 
-AI video generation (`vidiq_generate_video`) is the last fallback since 2026-10-25: Pavo first, Agnes direct second
-(DECISIONS.md "Pavo is the first source of AI video"). vidIQ credits go to voice, stock search and compose.
+AI video generation (`vidiq_generate_video`) is the last resort since 2026-10-25: Pavo first, then the owner's free
+fallbacks for silent shots (R1-R4, DECISIONS 2026-10-27); the direct Agnes route is retired (DECISIONS 2026-10-28). vidIQ credits go to voice, stock search and compose.

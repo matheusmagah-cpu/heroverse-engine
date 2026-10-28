@@ -94,7 +94,8 @@ class AptInstall(unittest.TestCase):
             self.assertEqual(log, "")
 
     def test_every_engine_apt_install_goes_through_it(self):
-        for path in (WF / "pr-checks.yml", WF / "voice-sample.yml", CI / "render_pilot.sh"):
+        users = [p for p in sorted(WF.glob("*.yml")) if "apt_install.sh" in p.read_text()]
+        for path in sorted({WF / "pr-checks.yml", CI / "render_pilot.sh", *users}):
             text = path.read_text()
             self.assertIsNone(re.search(r".*apt-get\s.*", text), path.name)
             self.assertTrue("apt_install.sh" in text, path.name)

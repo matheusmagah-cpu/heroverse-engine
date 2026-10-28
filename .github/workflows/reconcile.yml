@@ -1,4 +1,4 @@
-name: HeroVerse reconcile (retry approvals that errored, Shorts never made and publications that failed)
+name: HeroVerse reconcile (retry approvals that errored and publications that failed)
 # 07:20 UTC is right after the YouTube Data API day resets (uploads that failed on quota succeed then); the other
 # two runs catch provider errors during the day. Only due pilots (publishing within 48 h, not on YouTube) are touched.
 on:
@@ -25,7 +25,6 @@ jobs:
             case "$action" in
               approve) gh workflow run approve.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;
               publish) gh workflow run publish.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" -f publish_at="" ;;
-              shorts) gh workflow run shorts.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;
               comment) gh workflow run first-comment.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;  # E61
               episode) gh workflow run publish-episode.yml --repo "$GITHUB_REPOSITORY" --ref main -f episode="$pilot" ;;  # E70
             esac
