@@ -239,7 +239,11 @@ def subject_of(workflow, inputs):
         return first
     if workflow in ("footage.yml", "pavo-footage.yml"):
         m = re.match(r"migration/production/(pilot-\d{3})/", first or "migration/production/footage/")
-        return m.group(1) if m else "footage-library"
+        if m:   # a pilot's footage shares its pilot's group with its images, render and preview (serialised on purpose)
+            return m.group(1)
+        # E144: a named queries file is its own subject: its run never waits in (and never replaces) another's group
+        named = re.fullmatch(r"migration/production/footage/queries-([a-z0-9]+(?:-[a-z0-9]+)*)\.json", first or "")
+        return f"footage-library-{named.group(1)}" if named else "footage-library"
     return None
 
 

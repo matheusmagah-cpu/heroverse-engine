@@ -14,8 +14,8 @@ on:
 permissions:
   actions: read   # E116: the dispatch guard reads runs (read-only)
   contents: write
-concurrency:
-  group: heroverse-footage
+concurrency:   # E144: one group per queries file: GitHub keeps one PENDING run a group and cancels the older one
+  group: heroverse-footage-${{ inputs.queries || 'default' }}
   cancel-in-progress: false
 jobs:
   guard:
