@@ -50,6 +50,7 @@ INVENTORIES = REPO / "migration" / "evidence" / "pavo"
 SOURCES_DIR = REPO / "migration" / "evidence" / "sources"
 REVIEW_MIN = 9.5
 FRAME = (2560, 1440)
+SHORT_FRAME = (1080, 1920)
 CDN = re.compile(r"^https://cos-aigc-default\.agnes-ai\.space/[A-Za-z0-9_./%+-]+\.mp4$")
 STOP = {"a", "an", "the", "and", "of", "to", "in", "on", "at", "his", "her", "its", "their", "with", "from", "by",
         "is", "are", "was", "be", "it", "this", "that", "for", "as", "into", "over", "under", "no", "not", "one", "all",
@@ -219,16 +220,22 @@ def subject(plan, shot, index):
     return words((parts[2] if len(parts) > 2 else shot.get("prompt", "")) + " " + line)
 
 
+def plan_frame(plan):
+    """E132: the frame a fallback is made at, the plan's own: a Short (9:16, the default of episode_build) 1080x1920,
+    a long 2560x1440. A fallback at another frame fails its build (CLIP_ASPECT_MISMATCH)."""
+    return SHORT_FRAME if (plan or {}).get("aspect_ratio", "9:16") == "9:16" else FRAME
+
+
 def library(path=LIBRARY):
     return [json.loads(p.read_text()) for p in sorted(Path(path).glob("clip-*.json"))]
 
 
-def footage_ok(rec):
+def footage_ok(rec, frame=FRAME):
     """A library clip a fallback may use: APPROVED, seen by Claude on its sheet, under the frozen licence list, at the
-    QA's frame, in the release by content hash."""
+    plan's frame (E132: plan_frame), in the release by content hash."""
     from footage import ACCEPTED
     return (rec.get("vetting") == "APPROVED" and rec.get("claude_seen") is True and rec.get("licence") in ACCEPTED
-            and rec.get("frame") == list(FRAME) and rec.get("sha256")
+            and rec.get("frame") == list(frame) and rec.get("sha256")
             and rec.get("release_asset", "").endswith(f"-sha256-{rec.get('sha256')}.mp4"))
 
 
@@ -249,7 +256,7 @@ def footage_candidates(plan, shot, index, lib=None, n=3):
     want = set(subject(plan, shot, index))
     scored = []
     for rec in (library() if lib is None else lib):
-        if not footage_ok(rec) or period_clash(plan, rec):
+        if not footage_ok(rec, plan_frame(plan)) or period_clash(plan, rec):
             continue
         have = set(words(f"{rec.get('theme', '')} {rec.get('query', '')} {rec.get('title', '')}"))
         overlap = sorted(want & have)
@@ -361,9 +368,10 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
             raise SystemExit(f"SOURCE_CHARACTER_SHOT {shot_id} (a character's canonical look needs its references)")
     if source == "footage":
         rec = next((r for r in (library() if lib is None else lib) if r.get("id") == item), None)
-        if rec is None or not footage_ok(rec) or period_clash(plan, rec):
+        frame = plan_frame(plan)
+        if rec is None or not footage_ok(rec, frame) or period_clash(plan, rec):
             raise SystemExit(f"FOOTAGE_NOT_USABLE {item} (APPROVED, seen by Claude, the frozen licence list, "
-                             f"{FRAME[0]}x{FRAME[1]}, no period clash or person)")
+                             f"{frame[0]}x{frame[1]}, no period clash or person)")
         if not set(subject(plan, shot, i)) & set(words(f"{rec.get('theme')} {rec.get('query')} {rec.get('title')}")):
             raise SystemExit(f"SOURCE_OFF_LINE {shot_id} {item} (the clip shares no word with what the shot shows)")
         entry.update(footage=item, asset=rec["release_asset"], clip_sha256=rec["sha256"], licence=rec["licence"],
@@ -375,6 +383,7 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                 rec.get("episode") != plan.get("episode") or not rec.get("repo_path"):
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {shot_id})")
         entry.update(still=item, repo_path=rec["repo_path"], clip_sha256=None, still_sha256=rec["sha256"],
+                     frame=list(plan_frame(plan)),   # E132: rendered at the frame of the plan that ships it
                      licence=(rec.get("source") or {}).get("license") or "apache-2.0",
                      clip_seconds=float(shot.get("seconds") or 0.0),
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
@@ -452,6 +461,9 @@ def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME):
     dst = Path(dst)
     dst.parent.mkdir(parents=True, exist_ok=True)
     if src == "still_motion":
+        # E132: the approval names the frame of the plan that ships it (approve_source: plan_frame); a Short's still
+        # rendered at the long's default would fail its build (CLIP_ASPECT_MISMATCH)
+        frame = tuple(approval.get("frame") or frame)
         still = REPO / str(approval.get("repo_path") or "")
         if REPO.resolve() not in still.resolve().parents or not still.is_file():
             raise SystemExit(f"STILL_PATH_REFUSED {approval.get('still')}")
