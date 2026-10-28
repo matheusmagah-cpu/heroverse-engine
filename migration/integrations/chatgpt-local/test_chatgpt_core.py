@@ -151,7 +151,7 @@ class Hands(unittest.TestCase):
         with mock.patch.dict(sys.modules, mods), mock.patch.object(app_driver.time, "sleep"), \
                 mock.patch.object(app_driver, "ours_at", return_value=False), \
                 mock.patch.object(app_driver, "foreground_pid", return_value=999), \
-                mock.patch.dict(app_driver.APP, {"pid": 42, "win": None}), \
+                mock.patch.dict(app_driver.APP, {"pids": {42}, "win": None}), \
                 mock.patch.object(app_driver.ctypes, "windll", create=True):
             with self.assertRaises(app_driver.Stop) as c:
                 app_driver.glide_click(el)

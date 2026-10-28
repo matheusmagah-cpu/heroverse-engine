@@ -129,7 +129,7 @@ def glide_click(el, double=False):
     (mouse.double_click if double else mouse.click)(coords=(tx, ty))
 
 
-APP = {"pid": None}   # the ChatGPT app's process: every click and key goes only to its windows (E147)
+APP = {"pids": set(), "win": None}   # the ChatGPT app's processes: every click and key goes only to them (E147)
 
 
 def root_pid_at(x, y):
@@ -152,6 +152,17 @@ def foreground_pid():
     return pid.value or None
 
 
+def app_pids(pid):
+    """Every process of the app (Electron runs several; its dialogs can belong to another of them)."""
+    name = process_name(pid)
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", f"(Get-Process -Name '{name}').Id"],
+                             capture_output=True, text=True, timeout=20).stdout
+        return {int(x) for x in out.split() if x.strip().isdigit()} | {pid}
+    except Exception:  # noqa: BLE001
+        return {pid}
+
+
 def process_name(pid):
     """The executable's name only (never a window title, which can hold the owner's private text)."""
     try:
@@ -163,14 +174,14 @@ def process_name(pid):
 
 
 def ours_at(x, y):
-    return APP["pid"] is not None and root_pid_at(x, y) == APP["pid"] and foreground_pid() == APP["pid"]
+    return root_pid_at(x, y) in APP["pids"] and foreground_pid() in APP["pids"]
 
 
 def keys(seq):
     from pywinauto.keyboard import send_keys
     time.sleep(random.uniform(0.2, 0.6))
     fg = foreground_pid()
-    if APP["pid"] is None or fg != APP["pid"]:
+    if fg not in APP["pids"]:
         raise Stop(6, f"APP_NOT_IN_FRONT: keys {seq!r} would go to process {process_name(fg)}; nothing typed")
     send_keys(seq)
 
@@ -186,7 +197,7 @@ def app_window():
     from pywinauto import Desktop
     for w in Desktop(backend="uia").windows(title="ChatGPT"):
         if (w.element_info.class_name or "").startswith("Chrome_WidgetWin"):
-            APP["pid"], APP["win"] = w.element_info.process_id, w
+            APP["pids"], APP["win"] = app_pids(w.element_info.process_id), w
             return w
     raise Stop(9, "APP_NOT_RUNNING: open the ChatGPT app (signed in) and run again")
 
