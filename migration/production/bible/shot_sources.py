@@ -245,6 +245,11 @@ def fallback_refusal(plan, shot, index, source, still=None):
     # footage of sky, light, garden or water as well as on a still in motion: no face, no lip-sync claimed
     god_vo = kokoro and shot.get("speaker") == "god" and not has_character(shot) and source == "footage" \
         and v5(plan)
+    # and the Keeper's line (owner 28/10 ~11:10Z, "every shot needs a second option"): his Kokoro voice over footage
+    # of his night camp (a campfire, embers, a scroll by the fire, desert stars) with no face on screen
+    keeper_vo = kokoro and shot.get("kind") == "keeper" and source == "footage" and v5(plan)
+    if keeper_vo:
+        return None
     if pavo_native.spoken(shot) and not ((kokoro and source == "still_motion") or god_vo):
         return f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)"
     if has_character(shot):

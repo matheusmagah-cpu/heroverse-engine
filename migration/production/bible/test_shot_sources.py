@@ -423,6 +423,13 @@ class OwnerException(unittest.TestCase):
             why = ss.fallback_refusal(p, god, 1, "footage")
             self.assertEqual(why is None, ok, (crit, why))
         p.update(criteria=lpc.V5)
+        keeper = {"id": "k-x", "kind": "keeper", "lines": [0], "audio_route": "kokoro"}
+        p["shots"].append(keeper)
+        self.assertIsNone(ss.fallback_refusal(p, keeper, len(p["shots"]) - 1, "footage"))   # his camp, no face
+        p.update(criteria=pn.V4X)
+        self.assertIsNotNone(ss.fallback_refusal(p, keeper, len(p["shots"]) - 1, "footage"))
+        p["shots"].pop()
+        p.update(criteria=lpc.V5)
         eve = p["shots"][0]
         eve["audio_route"] = "kokoro"
         self.assertTrue(ss.fallback_refusal(p, eve, 0, "footage").startswith("SOURCE_SPOKEN_SHOT"))
