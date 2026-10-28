@@ -1,0 +1,12 @@
+{
+ "_note": "TikTok web selectors (data-e2e first, class fragments as fallback). Run `runner.py probe VIDEO_ID` after TikTok changes its page; edit here, not in the code.",
+ "comment_icon": ["[data-e2e=\"comment-icon\"]", "[data-e2e=\"browse-comment-icon\"]"],
+ "comment_item": ["div[class*=\"DivCommentObjectWrapper\"]", "div[class*=\"DivCommentItemContainer\"]", "div[class*=\"CommentItemContainer\"]"],
+ "comment_text": ["[data-e2e=\"comment-level-1\"]", "span[data-e2e=\"comment-level-1\"]"],
+ "comment_author": ["[data-e2e=\"comment-username-1\"]", "a[href^=\"/@\"]"],
+ "comment_like": ["[data-e2e=\"comment-like-icon\"]", "div[class*=\"DivLikeWrapper\"]", "div[class*=\"LikeContainer\"]"],
+ "comment_reply": ["[data-e2e=\"comment-reply-1\"]", "span[data-e2e=\"comment-reply-1\"]"],
+ "comment_list": ["div[class*=\"DivCommentListContainer\"]", "div[class*=\"CommentListContainer\"]"],
+ "reply_input": ["[data-e2e=\"comment-input\"] [contenteditable=\"true\"]", "div[contenteditable=\"true\"]"],
+ "reply_post": ["[data-e2e=\"comment-post\"]", "div[class*=\"DivPostButton\"]"]
+}
