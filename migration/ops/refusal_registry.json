@@ -2053,6 +2053,48 @@
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
+  "STILL_OF_CHAIN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_CHARACTERS": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_GAP": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_OUTSIDE_EXCEPTION": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
+  "STILL_OF_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_plan_check.py::shot_sources.still_of_problems(plan, tl)"
+   ],
+   "note": "owner exception, 28/10 contingency (arc-01 long only): a shot showing another shot's APPROVED still (`still_of`) is checked at plan time by the same module approve-source uses (same characters, no chain, every shot of that still at least image_repeat_gap_seconds_min apart: E139)"
+  },
   "STILL_PATH_REFUSED": {
    "class": "A",
    "early": [

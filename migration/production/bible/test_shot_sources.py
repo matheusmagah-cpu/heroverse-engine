@@ -307,6 +307,68 @@ class OwnerException(unittest.TestCase):
         self.assertIsNone(ss.fallback_refusal(p, god, 1, "still_motion", {}))   # God: a still with no one on it
         self.assertTrue(ss.fallback_refusal(p, god, 1, "footage").startswith("SOURCE_SPOKEN_SHOT"))
 
+    def test_a_shot_may_show_another_shots_approved_still_only_far_enough_apart(self):
+        """Owner exception, 28/10 contingency (fewer new Pavo stills, nothing loosened): a character shot may show the
+        APPROVED still of another shot (`still_of`) with another camera move, only with the same characters, never
+        chained, and every shot showing that still at least image_repeat_gap_seconds_min from every other (E139)."""
+        import copy
+        import long_plan_check as lpc
+        ss.owner_exception, eb.reference_records = self.saved
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        reused = [s for s in arc["shots"] if s.get("still_of")]
+        if not reused:
+            self.skipTest("the plan reuses no still")
+        self.assertEqual(ss.still_of_problems(arc), [])
+        self.assertEqual(lpc.check(arc)["problems"], [])
+        ids = [s["id"] for s in arc["shots"]]
+        tl = lpc.timeline(arc)
+        tgt = reused[0]
+        src = tgt["still_of"]
+        near = next(s["id"] for i, s in enumerate(arc["shots"]) if s["id"] not in (tgt["id"], src)
+                    and s.get("window_of") is None and s["kind"] == tgt["kind"]
+                    and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(tgt))
+                    and abs(tl["begin"][i] - tl["begin"][ids.index(src)]) < 120)
+        for change, code in (({"still_of": tgt["id"]}, "STILL_OF_UNKNOWN"),
+                             ({"still_of": "no-such-shot"}, "STILL_OF_UNKNOWN")):
+            p = copy.deepcopy(arc)
+            p["shots"][ids.index(tgt["id"])].update(change)
+            self.assertTrue(any(r.startswith(code) for r in ss.still_of_problems(p)), code)
+        p = copy.deepcopy(arc)
+        p["shots"][ids.index(near)]["still_of"] = src                 # the same still within the gap
+        self.assertTrue(any(r.startswith(f"STILL_OF_GAP {near}") or r.startswith(f"STILL_OF_GAP {tgt['id']}")
+                            or (r.startswith("STILL_OF_GAP") and near in r) for r in ss.still_of_problems(p)))
+        self.assertTrue(any(r.startswith("STILL_OF_GAP") for r in lpc.check(p)["problems"]))
+        p = copy.deepcopy(arc)
+        other = next(s for s in arc["shots"] if s.get("window_of") is None and ss.has_character(s)
+                     and sorted(ss.shown_characters(s)) != sorted(ss.shown_characters(tgt)) and not s.get("still_of"))
+        p["shots"][ids.index(tgt["id"])]["still_of"] = other["id"]
+        self.assertTrue(any(r.startswith("STILL_OF_CHARACTERS") for r in ss.still_of_problems(p)))
+        p = copy.deepcopy(arc)
+        p["shots"][ids.index(src)]["still_of"] = near                 # a reused still never names a reuse
+        self.assertTrue(any(r.startswith("STILL_OF_CHAIN") for r in ss.still_of_problems(p)))
+        p = copy.deepcopy(arc)
+        p["episode"] = "arc-02-long"                                  # the exception is the arc-01 long's only
+        self.assertTrue(all(r.startswith("STILL_OF_OUTSIDE_EXCEPTION") for r in ss.still_of_problems(p)))
+        # approve-source: the reuse takes its source's APPROVED still with another camera move; no other shot may
+        approved = [s for s in reused if (pc_rec := __import__("plan_check").still_record(
+            f"arc-01-long-{s['still_of']}")) and pc_rec.get("status") == "APPROVED"]
+        if approved:
+            t = approved[0]
+            d = Path(tempfile.mkdtemp())
+            try:
+                a = ss.approve_source(arc, t["id"], "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
+                                      shots_dir=d)
+                self.assertEqual(a["motion"], ss.REUSE_KEEPER_MOTION if t["kind"] == "keeper" else ss.REUSE_MOTION)
+                other = next(s["id"] for s in arc["shots"] if s["id"] not in (t["id"], t["still_of"])
+                             and s.get("still_of") != t["still_of"] and s.get("window_of") is None
+                             and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(t)))
+                with self.assertRaises(SystemExit) as err:   # a shot that does not name the still never takes it
+                    ss.approve_source(arc, other, "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
+                                      shots_dir=d)
+                self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
+            finally:
+                shutil.rmtree(d)
+
     def test_the_exception_is_bound_to_the_arc01_plan(self):
         import long_plan_check as lpc
         ss.owner_exception = self.saved[0]
