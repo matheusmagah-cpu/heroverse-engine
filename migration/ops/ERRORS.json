@@ -2314,6 +2314,19 @@
     "contains": "def test_e210_layout_fixture_is_independent_of_live_native_approvals",
     "covers": ["env-vs-test"]
    }
+  },
+  {
+   "id": "E211",
+   "date": "2026-10-28",
+   "class": "rerun-without-fix",
+   "prior": ["E116"],
+   "error": "Measured preflight unconditionally removed its work directory and synthesized again on every retry, even when raw voice had completed and only downstream layout or review evidence had changed. The regression reproduced two synthesis calls and loss of existing evidence on the same inputs. A reused directory could also expose a stale derived layout after an early layout refusal.",
+   "fix": "Preserve preflight work and seal successful raw synthesis with an atomic input/output hash checkpoint before downstream layout. Bind script, renderer, prepared source/models and the isolated Python/package/eSpeak runtime. Under one nonblocking local lock, reuse only a complete matching checkpoint; preserve and refuse incomplete, corrupt, changed or unattested work without automatic replay. Recompute current layout and gates, archiving the prior derived layout so an early refusal cannot reuse it. A checkpoint is neither QA nor audiovisual approval, and does not establish durable cloud storage.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_preflight.py",
+    "contains": "def test_e211_completed_voice_is_reused_without_deleting_or_resynthesizing",
+    "covers": ["rerun-without-fix"]
+   }
   }
  ]
 }
