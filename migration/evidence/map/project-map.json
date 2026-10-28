@@ -87,19 +87,6 @@
    ],
    "dispatches": []
   },
-  "description-refresh.yml": {
-   "name": "HeroVerse pilot012 opening chapter correction",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/publish/refresh_description.py",
-    "migration/publish/test_package_chapters.py",
-    "migration/publish/test_refresh_description.py"
-   ],
-   "dispatches": []
-  },
   "episode.yml": {
    "name": "HeroVerse episode build (plan -> Keeper + Pavo scenes -> composed Short, checked; nothing published)",
    "triggers": [
@@ -480,17 +467,6 @@
    ],
    "dispatches": []
   },
-  "reviewer-probe.yml": {
-   "name": "HeroVerse reviewer probe (one tiny text call per free model; diagnosis only)",
-   "triggers": [
-    "workflow_dispatch"
-   ],
-   "cron": [],
-   "calls": [
-    "migration/ops/reviewer_probe.py"
-   ],
-   "dispatches": []
-  },
   "scene-stills.yml": {
    "name": "HeroVerse scene stills (image first; FLUX on the Workers AI free allocation; candidates for Claude's review)",
    "triggers": [
@@ -781,43 +757,6 @@
    "test": null,
    "is_test": false
   },
-  "migration/diagnostics/rapidapi-mcp/connection_probe.py": {
-   "purpose": "Bounded MCP transport probe. No video downloads or tools/call are implemented.",
-   "dir": "migration/diagnostics/rapidapi-mcp",
-   "local_imports": [],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/diagnostics/rapidapi-native-av/native_probe.py",
-    "migration/diagnostics/rapidapi-native-av/preflight.py"
-   ],
-   "test": null,
-   "is_test": false
-  },
-  "migration/diagnostics/rapidapi-native-av/native_probe.py": {
-   "purpose": "One fixed cloud media request; never retries a start or approves production.",
-   "dir": "migration/diagnostics/rapidapi-native-av",
-   "local_imports": [
-    "migration/diagnostics/rapidapi-mcp/connection_probe.py",
-    "migration/diagnostics/rapidapi-native-av/preflight.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
-   "is_test": false
-  },
-  "migration/diagnostics/rapidapi-native-av/preflight.py": {
-   "purpose": "Read public tool contracts and bounded quota metadata. Never starts a media job.",
-   "dir": "migration/diagnostics/rapidapi-native-av",
-   "local_imports": [
-    "migration/diagnostics/rapidapi-mcp/connection_probe.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [
-    "migration/diagnostics/rapidapi-native-av/native_probe.py"
-   ],
-   "test": null,
-   "is_test": false
-  },
   "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py": {
    "purpose": "Bounded blind native-audio inference; a candidate reviewer, not a QA bypass.",
    "dir": "migration/diagnostics/rapidapi-native-av",
@@ -1099,8 +1038,7 @@
    "called_by_workflows": [],
    "imported_by": [
     "migration/mining/structure_mining.py",
-    "migration/mining/test_gemini_public_av.py",
-    "migration/ops/reviewer_probe.py"
+    "migration/mining/test_gemini_public_av.py"
    ],
    "test": "migration/mining/test_gemini_public_av.py",
    "is_test": false
@@ -1669,19 +1607,6 @@
    "test": "migration/ops/test_project_map.py",
    "is_test": false
   },
-  "migration/ops/reviewer_probe.py": {
-   "purpose": "E58 root cause: is the designated reviewer down for any request, or only for our video requests?",
-   "dir": "migration/ops",
-   "local_imports": [
-    "migration/mining/gemini_public_av.py"
-   ],
-   "called_by_workflows": [
-    "reviewer-probe.yml"
-   ],
-   "imported_by": [],
-   "test": null,
-   "is_test": false
-  },
   "migration/ops/runner_dispatch.py": {
    "purpose": "Bounded, fail-closed engine -> runner wake-up. No rendering/publication gates changed.",
    "dir": "migration/ops",
@@ -1941,7 +1866,6 @@
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
     "migration/production/bible/plan_check.py",
-    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/shot_sources.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_long_build.py",
@@ -1983,7 +1907,6 @@
     "migration/production/bible/episode_build.py",
     "migration/production/bible/long_build.py",
     "migration/production/bible/long_preflight.py",
-    "migration/production/bible/rekey_shots_e118.py",
     "migration/production/bible/test_episode_build.py",
     "migration/production/bible/test_episode_preflight.py",
     "migration/production/bible/test_long_build.py",
@@ -2148,18 +2071,6 @@
     "migration/production/characters/test_characters.py"
    ],
    "test": "migration/production/bible/test_plan_check.py",
-   "is_test": false
-  },
-  "migration/production/bible/rekey_shots_e118.py": {
-   "purpose": "E118 one-off migration: re-key every approved clip in shots/*.json to the request digest without `seconds`.",
-   "dir": "migration/production/bible",
-   "local_imports": [
-    "migration/production/bible/episode_build.py",
-    "migration/production/bible/episode_preflight.py"
-   ],
-   "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
    "is_test": false
   },
   "migration/production/bible/scene_stills.py": {
@@ -3592,7 +3503,6 @@
     "migration/publish/preflight.py",
     "migration/publish/publish_episode.py",
     "migration/publish/publish_shorts.py",
-    "migration/publish/refresh_description.py",
     "migration/publish/test_arc_links.py",
     "migration/publish/test_captions.py",
     "migration/publish/test_channel_config.py",
@@ -3600,21 +3510,6 @@
     "migration/publish/test_publish_video.py"
    ],
    "test": "migration/publish/test_publish_video.py",
-   "is_test": false
-  },
-  "migration/publish/refresh_description.py": {
-   "purpose": "Bounded pilot012 opening chapter repair. No upload or status write.",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/publish_video.py"
-   ],
-   "called_by_workflows": [
-    "description-refresh.yml"
-   ],
-   "imported_by": [
-    "migration/publish/test_refresh_description.py"
-   ],
-   "test": "migration/publish/test_refresh_description.py",
    "is_test": false
   },
   "migration/publish/review_recovery.py": {
@@ -3754,9 +3649,7 @@
    "purpose": "",
    "dir": "migration/publish",
    "local_imports": [],
-   "called_by_workflows": [
-    "description-refresh.yml"
-   ],
+   "called_by_workflows": [],
    "imported_by": [],
    "test": null,
    "is_test": true
@@ -3858,19 +3751,6 @@
     "migration/publish/publish_video.py"
    ],
    "called_by_workflows": [],
-   "imported_by": [],
-   "test": null,
-   "is_test": true
-  },
-  "migration/publish/test_refresh_description.py": {
-   "purpose": "",
-   "dir": "migration/publish",
-   "local_imports": [
-    "migration/publish/refresh_description.py"
-   ],
-   "called_by_workflows": [
-    "description-refresh.yml"
-   ],
    "imported_by": [],
    "test": null,
    "is_test": true
@@ -4010,14 +3890,12 @@
  },
  "unreached_by_any_workflow": [
   "migration/diagnostics/av-profile/profile_openings.py",
-  "migration/diagnostics/rapidapi-native-av/native_probe.py",
   "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py",
   "migration/evidence/handoff/pilot-015-draft/build015.py",
   "migration/evidence/vidiq/20261023/algorithm_study/analyze.py",
   "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
   "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
   "migration/integrations/pavo/server.py",
-  "migration/production/bible/rekey_shots_e118.py",
   "migration/production/imagegen/hydrate_reused.py"
  ]
 }

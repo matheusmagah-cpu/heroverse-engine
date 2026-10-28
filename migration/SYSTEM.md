@@ -49,10 +49,12 @@ Every stage, **from the channel configuration to the pinned comment**, is held t
 
 | Tool | Used for | Limits |
 |---|---|---|
-| vidIQ (MCP, read-only, authorized research agent) | Mining and live intelligence: outliers, watched audits, transcripts, stats, our public videos and analytics | ≤10 calls/day, ≤2,000 credits/cycle (`evidence/vidiq/ledger.json`) |
-| Claude, designated reviewer of long videos (since 2026-10-24) | Stage 3: review of the inspection sheets, transcript, thumbnail and QA audio measures, bound to the render hash (`ops/CLAUDE_REVIEW.md`) | `gemini-3.8-flash` was replaced (intermittent on the free tier, E58); free Gemini candidates failed calibration |
-| Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Preserve existing hashes; verify capacity under the zero-additional-cost rule |
+| vidIQ (MCP, authorized research agent) | Mining and live intelligence: outliers, watched audits, transcripts, stats, our public videos and analytics; generation (voice, stock search, compose) only as the second choice after Pavo | Research ≤10 calls/day and ≤2,000 credits/cycle; generation ≤200 credits/day; write tools denied; every spend in `evidence/vidiq/ledger.json` (`strategy/VIDIQ.md`) |
+| Claude, designated reviewer (long videos since 2026-10-24; Bible Shorts' clips and frame sheets, E114) | Stage 3: review of the inspection sheets, transcript, thumbnail and QA audio measures, bound to the render hash (`ops/CLAUDE_REVIEW.md`) | `gemini-3.8-flash` was replaced (intermittent on the free tier, E58); free Gemini candidates failed calibration |
+| Pavo (`heroverse-pavo` MCP and Actions; Agnes Flash video, agnes-image stills) | Stage 2: the first source of AI video and of scene stills and thumbnails (DECISIONS 2026-10-25) | Only at a fresh exact zero-credit quote; one shared free budget for MCP and Actions (`integrations/pavo/quota.py`, E124, E128) |
+| Kokoro voice, FLUX images (Cloudflare), licensed footage, ffmpeg | Stage 2 execution (FLUX and footage are the R3 fallback) | Preserve existing hashes; verify capacity under the zero-additional-cost rule |
 | YouTube Data API | Stage 4 publication and reconciliation | Our OAuth |
+| Buffer, free plan | Mirror Shorts already public on YouTube to TikTok (`tiktok.yml`) | Never a paid plan, never a first publication (owner exception, 2026-10-25) |
 | GitHub Actions and the authorized execution agent | Execute the existing production, review and publication entry points | Public repositories; account, executor and dispatch boundaries are in `OPERATIONS.md`; media passes the same gates |
 
 Nothing else is added unless a stage cannot meet its bar without it, and that is proven first.
