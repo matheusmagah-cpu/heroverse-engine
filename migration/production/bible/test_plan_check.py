@@ -1409,6 +1409,20 @@ class ArkPositiveWording(unittest.TestCase):
             self.assertEqual(len(v2["references"]), 2)
 
 
+class KeeperStill(unittest.TestCase):
+    """Owner exception (arc-01 long, plan B): a Keeper shot's still is judged as his own prompt (his campfire, outside
+    the story's time), a scene shot's still by the scene rules as before."""
+
+    def test_a_keeper_still_is_not_held_to_the_scene_period_but_a_scene_still_is(self):
+        plan = {"period": "eden", "shots": [{"id": "k-1", "kind": "keeper"}, {"id": "s-1", "kind": "scene"}]}
+        prompt = ("Painterly cinematic realism, a wide 16:9 frame. Close-up. The narrator sits by a campfire at night "
+                  "holding an old rolled scroll. Warm firelight. Grave. No text, no logos.")
+        self.assertEqual(pc.still_prompt_problems("k-1/still", prompt, plan), [])
+        found = " ".join(pc.still_prompt_problems("s-1/still", prompt, plan))
+        self.assertIn("SCENE_PERIOD_MISSING", found)
+        self.assertIn("SCENE_WRITING", found)
+
+
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
 from test_long_plan_check import DraftArc1, Grammar as LongGrammar, NoRendererReadsTheNewQaYet, StoryQa  # noqa: E402,F401,E501
 

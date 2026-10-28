@@ -1,0 +1,44 @@
+{
+ "id": "arc-01-long-s-co-hide",
+ "episode": "arc-01-long",
+ "shot": "s-co-hide",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, in a rust-brown draped garment over a pale undyed wrap, crouch among dark leaves, holding their breath. The garden at dusk, blue shadows. Afraid. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-co-hide.jpg",
+ "sha256": "8599f63f1523d8344d0219fb93536683eea25e831138eeea2c7eccb6d1e09af6",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-co-hide-2026102801-2",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  },
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373662905209719424",
+   "input_images": 2
+  },
+  "job": {
+   "conversation_id": "373662905209719424",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Adam and Eve crouch among dark leaves at dusk, afraid, both faces and garments consistent; the cold open's hiding beat.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "b90056149998e82248d8e106cc56b4acd47334f01d58226d301b75329538e499",
+  "references_sha256": "adfe5674fdea26d67f8b1dd0ebb225ee344023d299575c725f22677a109e0ec9"
+ }
+}

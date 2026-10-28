@@ -1,0 +1,47 @@
+{
+ "id": "arc-01-long-s-open-2026102801-2",
+ "still": "arc-01-long-s-open",
+ "episode": "arc-01-long",
+ "shot": "s-open",
+ "run": "2026102801",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, in a rust-brown draped garment over a pale undyed wrap, holds a ripe red fruit up toward the camera, turns her face to the man beside her, her mouth closed. A dense garden at golden dusk, warm low sunlight through the leaves. Tempting and uneasy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, in a rust-brown draped garment over a pale undyed wrap, holds a ripe red fruit up toward the camera, turns her face to the man beside her, her mouth closed. A dense garden at golden dusk, warm low sunlight through the leaves. Tempting and uneasy. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 16:9, the characters' approved references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373663708344040128",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373663708344040128",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373663708344040128",
+   "status": "completed"
+  }
+ },
+ "upscaler": "none (native from Pavo), Lanczos to 1920x1080",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/arc-01-long-s-open-2026102801-2.jpg",
+ "sha256": "f3fc8d87791860513815a69ba5d4f7673aeb35be22061d06ab6f9f676e538052"
+}

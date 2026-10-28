@@ -1,0 +1,40 @@
+{
+ "id": "arc-01-long-s-c4-eve",
+ "episode": "arc-01-long",
+ "shot": "s-c4-eve",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her bare shoulders, lifts her face, tears in her eyes, her mouth closed. Dusk light fading in the garden. Broken. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c4-eve.jpg",
+ "sha256": "706ccf8e308bb43bd8d5b20f85d137bfa3a8c438ef4f282d4f8bf0a754a57c88",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c4-eve-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373662039262706368",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373662039262706368",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Eve lifts her face with a tear among tall leaves at dusk; broken, mouth closed for her line; garment in the same family as her other stills.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "fb223f1e17c63c567e95522627c516ee025f6a53c817939182dfa22f666b9c02",
+  "references_sha256": "f01102bf19b6ffc279a9641d335faf90fb9df4f73f93a7e8104b9703567a595a"
+ }
+}

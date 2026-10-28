@@ -276,6 +276,33 @@ class OwnerException(unittest.TestCase):
                 self.assertEqual(v4.get(key), v4x.get(key), key)
 
 
+class VoiceAudio(unittest.TestCase):
+    """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
+    which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_e137_the_voice_encoder_reads_a_wav_decoded_from_the_clip(self):
+        import inspect
+        import wave
+        d = Path(tempfile.mkdtemp())
+        try:
+            clip = d / "c.mp4"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=64x36:d=1",
+                            "-f", "lavfi", "-i", "sine=f=220:d=1", "-shortest", "-c:v", "libx264", "-c:a", "aac",
+                            str(clip)], check=True)
+            out = pn.voice_wav(clip)
+            with wave.open(out) as w:
+                self.assertEqual((w.getnchannels(), w.getframerate()), (1, 16000))
+                self.assertGreater(w.getnframes(), 8000)
+            with self.assertRaises(SystemExit):
+                pn.voice_wav(d / "missing.mp4")
+        finally:
+            shutil.rmtree(d)
+        src = inspect.getsource(pn.measure)
+        self.assertNotIn("preprocess_wav(str(", src)          # never the clip path itself
+        self.assertEqual(src.count("preprocess_wav(voice_wav("), 2)   # the clip and every reference
+
+
 class ApproveReuse(unittest.TestCase):
     """R1, review of #476: an inventory clip (Pavo's CDN) is approved only for the request the committed preflight
     says the plan sends now, clean, from the CDN, and on a native spoken shot only with its speech checks passed."""

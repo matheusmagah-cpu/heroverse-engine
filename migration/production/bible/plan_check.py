@@ -859,7 +859,13 @@ def still_record(still_id, stills_dir=None):
 
 def still_prompt_problems(label, prompt, plan):
     """A still's own prompt under the scene rules (E108 period, E110 writing, E113 ark): what a frame shows is what
-    Pavo animates, so the still states the period and the ark's look word for word like any scene prompt."""
+    Pavo animates, so the still states the period and the ark's look word for word like any scene prompt. A still of a
+    Keeper shot (the owner's arc-01 exception, plan B) is judged as the Keeper's own prompt is: he sits outside the
+    story's time, at his campfire (prompt_problems), never under the scene's period."""
+    sid = str(label).partition("/")[0]
+    if isinstance(plan, dict) and any(s.get("id") == sid and s.get("kind") == "keeper" for s in plan.get("shots") or []):
+        return [p for p in prompt_problems(0, {"id": label, "prompt": prompt})
+                if not p.startswith("PROMPT_NO_CINEMATOGRAPHY")]   # a still has a framing, not a camera move
     pseudo = {"kind": "scene", "id": label, "prompt": prompt}
     found = []
     per, problem = resolve_period(plan)

@@ -1854,6 +1854,10 @@
    ],
    "note": "owner 28/10: the plan's source_design (which shots take Pavo, a window or a free fallback) is checked at plan time by the same module episode_build sources and probe-queue follow (shot_sources.planned_fallbacks)"
   },
+  "VOICE_AUDIO_DECODE_FAILED": {
+   "class": "N",
+   "why": "E137: speech-check is the review's own local measure (Claude, before approve-shot): ffmpeg could not decode the probed clip's soundtrack; it stops no generation or render and the clip is simply not approved"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
