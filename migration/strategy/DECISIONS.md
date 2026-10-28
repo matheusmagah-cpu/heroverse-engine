@@ -665,7 +665,9 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   29/10 22:00 UTC, is the exception's, below).
 
 ## Pavo's quota is a rolling window; the Shorts' share is 25 jobs a day (2026-10-28)
-- **Measured** (arc-01 long agent, 28/10): no reset at 00:00 UTC. About 35-50 jobs come back ~3 h after a stop;
+- **Measured** (arc-01 long agent, 28/10): no reset at 00:00 UTC. About 35-55 jobs come back when the burst's own jobs age out, about 4-5 h after
+  the burst began (corrected 28/10: not 3 h after a stop, the 06:44Z probe failed 3.4 h after the 03:22Z stop;
+  not a fixed 16:00Z reset; `evidence/pavo/20261028/quota-observation.json`);
   sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h, `evidence/pavo/image-ledger.json` 2026-10-27
   and shot-probe record 40592173923). A still and a video each count as about one job. On 28/10 the quota stopped at
   ~03:26 UTC: 10 of 11 MCP stills submitted back to back read back `failed` (E136).
