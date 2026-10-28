@@ -1226,9 +1226,9 @@ class ArkLook(unittest.TestCase):
             def ark(prompt):   # E113's sentences (parts 1-8) or E123's phrase (part 9 on)
                 return ARK in prompt or pc.has_phrase(prompt, pc.ARK_PHRASE)
             return ark(s["prompt"]) or bool(still and ark(still["prompt"]))
-        # genesis-09 (E123): 17 stills name the ark by its phrase; the interiors (s-inside, s-lamp, s-hull) show a
-        # plank hold, and s-noah-door / s-noah-ramp are Noah's reference shots, which cannot take a still (E122)
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 17)):
+        # genesis-09 (E123; redesigned 28/10 to the Shorts' ~20 Pavo units): 6 stills name the ark by its phrase
+        # (s-voice, s-finished, s-enter, s-shut, s-float, s-drift); the other scenes keep it off frame
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 6)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
