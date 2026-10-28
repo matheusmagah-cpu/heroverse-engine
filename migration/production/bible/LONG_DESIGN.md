@@ -420,3 +420,11 @@ today's limits, with the split in its `source_design`:
 - Measured locally with the pinned Kokoro (each speaker's voice, LONG_LINE_GAP): 14.77 min, cold open 27.7 s, climax
   at 0.795, Keeper 3.8 %, every hold 4.08-6.87 s. long_plan_check: no problem; `--strict` waits only for the three
   CHARACTER_PENDING rows.
+- **The engine follows the split.** `shot_sources.planned_fallbacks`: a shot the plan's `source_design` gives to
+  `footage` or `still_motion` (and that a fallback may carry) never takes Pavo budget in `episode_build.py sources`
+  and is never queued by probe-queue (`planned_fallback`); long_plan_check refuses a design that lists a spoken or
+  character shot as a fallback, an unknown or twice-listed id, a non-window under `window`, or a shot with no source
+  (SOURCE_DESIGN_*).
+- **Windows and story QA `image_repeat_gap_seconds_min` (300 s).** qa_pilot keys each hold by its manifest `image`,
+  which long_build writes as `<source shot>#<src_start>`: a window shows another part of its clip, so it is a
+  different image and no repeat (test_long_build). No hold of the plan repeats a source part.
