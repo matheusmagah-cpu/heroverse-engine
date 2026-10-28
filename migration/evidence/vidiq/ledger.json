@@ -1259,6 +1259,46 @@
    "credits": 5,
    "purpose": "package mining 28/10 (the one read left today): recent Bible-story Shorts across channels, looking for weak contrasts for title/thumbnail; balance checked in the daily analysis (3,261 before reads)",
    "saved_to": "evidence/vidiq/20261028/package_mining.json"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "generation",
+   "tool": "vidiq_refine_thumbnail",
+   "credits": 0,
+   "purpose": "owner 28/10 (vidIQ inside its quota): TEST, one character still for arc-01 plan C from the APPROVED Pavo still arc-01-long-s-c1-eve (sha256 916e3f63...): new pose and scene for s-c3-eve-near at 16:9, same face and wardrobe; cost, size, identity check and a 9.5 review recorded",
+   "saved_to": "evidence/vidiq/20261028/arc01-still-test.json",
+   "balance_before": 3216,
+   "outcome": "failed and refunded (job_155d850f-d979-43bd-a37f-e1254a67ebbd: 'Thumbnail image is unavailable', bad_request): vidIQ could not fetch the source from Pavo's CDN URL"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "generation",
+   "tool": "vidiq_refine_thumbnail",
+   "credits": 0,
+   "purpose": "the same TEST again, the source given as the public raw GitHub URL of the approved still (migration/production/bible/stills/arc-01-long-s-c1-eve.jpg on main)",
+   "saved_to": "evidence/vidiq/20261028/arc01-still-test.json",
+   "balance_before": 3216,
+   "outcome": "failed and refunded (job_bf60bf80-b511-4498-81a9-102dcdf96d9f: 'Thumbnail image is unavailable', bad_request) with a public raw GitHub URL too: refine takes only a vidIQ-hosted thumbnail"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "generation",
+   "tool": "vidiq_generate_thumbnail",
+   "credits": 0,
+   "purpose": "the TEST through generate_thumbnail (the coordinator's fallback): referenceImages = the approved still arc-01-long-s-c1-eve (public raw URL), userQuery = the same woman in a new pose for s-c3-eve-near, landscape 16:9, no text",
+   "saved_to": "evidence/vidiq/20261028/arc01-still-test.json",
+   "balance_before": 3216,
+   "outcome": "failed and refunded (job_f7bf2ced-24ea-4715-ae60-9a257eeee39b: Thumbnail image is unavailable, bad_request): vidIQ does not fetch our image from a URL"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "generation",
+   "tool": "vidiq_refine_thumbnail",
+   "credits": 22,
+   "purpose": "the TEST with the source as a base64 data URI (288x216 face crop of arc-01-long-s-c1-eve, sha256 of the base64 0950eecb...)",
+   "saved_to": "evidence/vidiq/20261028/arc01-still-test.json",
+   "balance_before": 3216,
+   "outcome": "completed (job_506b5375-8386-4584-a2cf-305f27600aa7), 1376x768, identity FAIL (another woman), review 7.5: not usable; evidence/vidiq/20261028/arc01-still-test.json"
   }
  ]
 }

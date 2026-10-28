@@ -369,6 +369,46 @@ class OwnerException(unittest.TestCase):
             finally:
                 shutil.rmtree(d)
 
+    def test_v5_is_v4_with_only_the_source_rows_and_the_agreed_values_changed(self):
+        """Owner 28/10 ("destrave todos os vídeos.. tanto os longos.. tanto os shorts"): story QA v5 is the general rule
+        of the integrated source plan, for any plan that names it; v4 copied, then only the source order (Pavo assets,
+        Pavo video, faceless footage, animated stills, Kokoro), the 12 s hold and the measured character-free share."""
+        import long_build
+        import long_plan_check as lpc
+        ss.owner_exception = self.saved[0]
+        self.assertIsNone(lpc.frozen_qa_problem(plan={"criteria": lpc.V5}))
+        v4, v5 = lpc.qa(lpc.QA_V4), lpc.qa(lpc.QA_V5)
+        self.assertNotIn("owner_exception", v5)                       # general: bound to no plan
+        self.assertEqual(v5["grammar"]["scene_seconds"], [4.0, 12.0])
+        self.assertEqual(v5["grammar"]["image_repeat_gap_seconds_min"], 300.0)
+        self.assertTrue(v5["grammar"]["every_scene_in_motion"])
+        self.assertLess(v5["grammar"]["establishing_share_max"], 0.2)
+        for key in set(v4) | set(v5):
+            if key in ("version", "frozen_at_utc", "owner_v5"):
+                continue
+            if key in ("rights", "grammar"):
+                skip = ("fallback_sources", "fallback_shots", "scene_seconds", "establishing_share_max")
+                self.assertEqual({k: v for k, v in v4[key].items() if k not in skip},
+                                 {k: v for k, v in v5[key].items() if k not in skip}, key)
+            else:
+                self.assertEqual(v4.get(key), v5.get(key), key)
+        for episode in ("arc-01-long", "arc-02-long", "genesis-10-short"):
+            self.assertTrue(lpc.owner_exception({"criteria": lpc.V5, "episode": episode}))
+        self.assertFalse(lpc.owner_exception({"criteria": lpc.V4, "episode": "arc-01-long"}))
+        self.assertEqual(long_build.plan_holds({"criteria": lpc.V5, "version": lpc.VERSION}), (4.0, 12.0))
+        self.assertEqual(lpc.establishing_share_max(v4), __import__("plan_check").ESTABLISHING_SHARE_MAX)
+        # faceless footage: only on a v5 shot of anonymous figures; text, branding and the modern world stay refused
+        anon = {"id": "s-x", "kind": "scene", "characters": [], "figures": "anonymous"}
+        v5plan = {"criteria": lpc.V5, "passage": "Genesis 3"}
+        self.assertTrue(ss.faceless_shot(v5plan, anon))
+        self.assertFalse(ss.faceless_shot({"criteria": lpc.V4, "passage": "Genesis 3"}, anon))
+        self.assertFalse(ss.faceless_shot(v5plan, dict(anon, characters=["eve"])))
+        rec = {"title": "woman walking barefoot on grass", "query": "bare feet grass"}
+        self.assertTrue(ss.period_clash(v5plan, rec))
+        self.assertFalse(ss.period_clash(v5plan, rec, faceless=True))
+        self.assertTrue(ss.period_clash(v5plan, {"title": "woman walking in the city street", "query": "x"},
+                                        faceless=True))
+
     def test_the_exception_is_bound_to_the_arc01_plan(self):
         import long_plan_check as lpc
         ss.owner_exception = self.saved[0]

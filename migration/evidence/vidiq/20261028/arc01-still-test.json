@@ -1,0 +1,49 @@
+{
+ "date": "2026-10-28",
+ "owner_request": "vidIQ inside its quota for arc-01 character stills (owner, 28/10)",
+ "attempts": [
+  {
+   "tool": "vidiq_refine_thumbnail",
+   "job": "job_155d850f-d979-43bd-a37f-e1254a67ebbd",
+   "source": "Pavo CDN URL of arc-01-long-s-c1-eve",
+   "result": "failed, refunded: 'Thumbnail image is unavailable'"
+  },
+  {
+   "tool": "vidiq_refine_thumbnail",
+   "job": "job_bf60bf80-b511-4498-81a9-102dcdf96d9f",
+   "source": "public raw GitHub URL of the approved still",
+   "result": "failed, refunded: same"
+  },
+  {
+   "tool": "vidiq_generate_thumbnail",
+   "job": "job_f7bf2ced-24ea-4715-ae60-9a257eeee39b",
+   "source": "referenceImages = the same raw URL",
+   "result": "failed, refunded: same"
+  },
+  {
+   "tool": "vidiq_refine_thumbnail",
+   "job": "job_506b5375-8386-4584-a2cf-305f27600aa7",
+   "source": "base64 data URI, a 288x216 face crop of arc-01-long-s-c1-eve (the only way vidIQ took our image)",
+   "result": "completed",
+   "credits": 22,
+   "model": "gemini-3.1-flash-image",
+   "image_url": "https://ai-thumbnails.s3.amazonaws.com/editor/25b4bb9b-03c5-49b5-9e3c-68fb70253db3/34a05d49-8a72-4de1-a17d-4e11c3b87561.jpeg",
+   "size": [
+    1376,
+    768
+   ],
+   "aspect": "1.79 (16:9 after a crop to 1365x768; upscale needed for 2560x1440)",
+   "sha256": "b649d6511d5b1cdd27a04e07d54364100c0a7886b18d77b9ac16b232ab907f43"
+  }
+ ],
+ "review": {
+  "identity": "FAIL: not Eve. Side by side (arc01-still-test-face-compare.png): Eve's approved face is rounder and softer with a fuller lower face and lighter warm olive-brown skin; the vidIQ woman has a narrower, more angular face, darker skin and a different nose and brow. The same type, another person. Our references go to Pavo as full images with a read-back; vidIQ took only a small crop.",
+  "wardrobe": "right: rust-brown draped garment over a pale undyed wrap",
+  "scene": "right: walks toward a great fruit tree, hand brushing the leaves, noon-warm light",
+  "style": "photographic, not the series' painterly Old-Master grade; cultivated flower beds",
+  "score": 7.5,
+  "verdict": "below 9.5: not usable for a named character (identity)"
+ },
+ "cost_per_image_credits": 22,
+ "fits_200_a_day": 9
+}
