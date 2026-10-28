@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-hands-path-summer-daylight-nature-landscape-gr",
+ "theme": "flood-hands",
+ "query": "hands knocking wooden door",
+ "source": "pixabay",
+ "title": "path, summer, daylight, nature, landscape, grass, trees, field, water, plants, afternoon, sunset, peaceful, beautifull, bridge, wooden",
+ "page": "https://pixabay.com/videos/id-119779/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 62.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-119779/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9628f5893c70f71cbf3834847424df9891ec9177edea6bd262bd31aab4ffb1fc",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  139.2,
+  138.9,
+  138.5,
+  138.1,
+  137.5
+ ],
+ "vetting_descriptions": [
+  "A field of white flowers with a blue sky above.",
+  "A field of white flowers with a blue sky above."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-hands-path-summer-daylight-nature-landscape-gr-sha256-9628f5893c70f71cbf3834847424df9891ec9177edea6bd262bd31aab4ffb1fc.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-robe-man-walking-fog-web-morning-scenic-sunri",
+ "theme": "flood-robe",
+ "query": "old man walking robe back view",
+ "source": "pixabay",
+ "title": "man, walking, fog, web, morning, scenic, sunrise, hiking, alone, drenthe, netherlands, landscape",
+ "page": "https://pixabay.com/videos/id-223581/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-223581/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4c6a6862623370d58c200467b86fde1502aad3f369e7d6c2190429d682c1ecdc",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  100.1,
+  109.6,
+  117.3,
+  120.7,
+  122.8
+ ],
+ "vetting_descriptions": [
+  "A man is walking in a grassy field with a sunset in the background.",
+  "A man is walking on a bridge with a backpack on, and the sun is setting in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

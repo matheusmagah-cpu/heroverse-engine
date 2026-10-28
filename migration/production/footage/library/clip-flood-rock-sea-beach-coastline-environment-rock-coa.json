@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rock-sea-beach-coastline-environment-rock-coa",
+ "theme": "flood-rock",
+ "query": "man standing on rock sea back view",
+ "source": "pixabay",
+ "title": "sea, beach, coastline, environment, rock coastline, travel, drone, 4k resolution, nature, aerial view",
+ "page": "https://pixabay.com/videos/id-197739/",
+ "author": "bellergy",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 57.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: bellergy via Pixabay (https://pixabay.com/videos/id-197739/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "59c3d8e6f621e862f71e224d75be5f55b9590522b90feae3629d8c9b088cdf1e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  140.7,
+  140.6,
+  135.7,
+  134.0,
+  132.3
+ ],
+ "vetting_descriptions": [
+  "A view of the ocean with a rocky shore and a mountain in the distance.",
+  "A rocky island with a mountain in the background and a body of water with waves crashing on the rocks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rock-sea-beach-coastline-environment-rock-coa-sha256-59c3d8e6f621e862f71e224d75be5f55b9590522b90feae3629d8c9b088cdf1e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

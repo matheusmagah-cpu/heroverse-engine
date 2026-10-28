@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-robe-beach-sand-sunrise-shore-water-sea-ocean",
+ "theme": "flood-robe",
+ "query": "old man walking robe back view",
+ "source": "pixabay",
+ "title": "beach, sand, sunrise, shore, water, sea, ocean, gran canaria, spain, summer, running, man, woman, hiking, walking",
+ "page": "https://pixabay.com/videos/id-139364/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-139364/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "18601557292b5f3a3a0d659ba963d3efaa929f5656a14432e8f816011e817762",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  137.9,
+  128.9,
+  131.0,
+  136.4,
+  135.0
+ ],
+ "vetting_descriptions": [
+  "A person is walking on a beach at sunset, leaving footprints in the sand.",
+  "A person is walking on a beach at sunset."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-pairs-iceland-road-winter-cold-snowflakes-ston",
+ "theme": "flood-pairs",
+ "query": "camels walking desert",
+ "source": "pixabay",
+ "title": "iceland, road, winter, cold, snowflakes, stone desert, desert, level, travel, landscape, heaven, clouds, cloudy, endless",
+ "page": "https://pixabay.com/videos/id-62004/",
+ "author": "Neugiernase",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Neugiernase via Pixabay (https://pixabay.com/videos/id-62004/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f1cc906b36c43be740a3a66995cfdc6a8fab5fa152b4ad08e6cdcf52cd7b3b96",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED sign"
+ ],
+ "vetting_luma": [
+  153.3,
+  153.3,
+  153.4,
+  153.5,
+  153.4
+ ],
+ "vetting_descriptions": [
+  "A lonely road with a yellow sign and a white line in the middle of a desert.",
+  "A lonely road with a yellow sign on the side."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

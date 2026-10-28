@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-hills-lake-pond-hills-field-valley-summer-sky-",
+ "theme": "flood-hills",
+ "query": "flooded valley",
+ "source": "pixabay",
+ "title": "lake, pond, hills, field, valley, summer, sky, italy, umbria, landscape",
+ "page": "https://pixabay.com/videos/id-73726/",
+ "author": "cla-fumassa",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: cla-fumassa via Pixabay (https://pixabay.com/videos/id-73726/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "af46fcc9ba8b370b605bed8c22cbcfba0433aaa459a40d7723f70e7fe2e87b70",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  110.1,
+  110.4,
+  111.0,
+  111.6,
+  110.4
+ ],
+ "vetting_descriptions": [
+  "A beautiful green field with a tree in the middle and a pond nearby.",
+  "A tree is standing alone in a field with a pond in the middle of a lush green hillside."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-hills-lake-pond-hills-field-valley-summer-sky--sha256-af46fcc9ba8b370b605bed8c22cbcfba0433aaa459a40d7723f70e7fe2e87b70.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

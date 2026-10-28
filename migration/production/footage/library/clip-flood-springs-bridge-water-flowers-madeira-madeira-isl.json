@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-bridge-water-flowers-madeira-madeira-isl",
+ "theme": "flood-springs",
+ "query": "muddy water flowing",
+ "source": "pixabay",
+ "title": "bridge, water, flowers, madeira, madeira island, portugal, nature, flowing, cinematic, green, garden",
+ "page": "https://pixabay.com/videos/id-126237/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 51.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-126237/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9c0195bf8cc1a87f5769f920da94483e87657c90032fc57c73c37987e9309941",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  70.5,
+  70.0,
+  69.8,
+  69.5,
+  69.0
+ ],
+ "vetting_descriptions": [
+  "A bridge over a pond with a green mossy background and a fern-covered island in the middle.",
+  "A bridge over a pond with a green mossy background and a fish swimming in the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-bridge-water-flowers-madeira-madeira-isl-sha256-9c0195bf8cc1a87f5769f920da94483e87657c90032fc57c73c37987e9309941.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

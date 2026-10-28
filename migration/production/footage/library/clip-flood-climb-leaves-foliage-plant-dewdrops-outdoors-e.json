@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-climb-leaves-foliage-plant-dewdrops-outdoors-e",
+ "theme": "flood-climb",
+ "query": "people walking up hill rain",
+ "source": "pixabay",
+ "title": "leaves, foliage, plant, dewdrops, outdoors, environment, peaceful, water droplets, nature, green, close-up, moisture, rain, raindrops, raining, morning, macro, botany, texture, spring",
+ "page": "https://pixabay.com/videos/id-217712/",
+ "author": "YanaHD",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: YanaHD via Pixabay (https://pixabay.com/videos/id-217712/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "602330c842fba39f8e6891b30b5317e386b8486b7dbeeb7e8bc61441489618cf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  55.8,
+  56.2,
+  56.7,
+  55.9,
+  55.2
+ ],
+ "vetting_descriptions": [
+  "A green leafy plant with rain drops on it.",
+  "A green leafy plant with water droplets on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-climb-leaves-foliage-plant-dewdrops-outdoors-e-sha256-602330c842fba39f8e6891b30b5317e386b8486b7dbeeb7e8bc61441489618cf.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

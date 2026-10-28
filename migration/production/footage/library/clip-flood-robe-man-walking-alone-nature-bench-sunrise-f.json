@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-robe-man-walking-alone-nature-bench-sunrise-f",
+ "theme": "flood-robe",
+ "query": "old man walking robe back view",
+ "source": "pixabay",
+ "title": "man, walking, alone, nature, bench, sunrise, fog, early, mist, forest, landscape, trees",
+ "page": "https://pixabay.com/videos/id-298105/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-298105/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2e40ca1a1a4a37c1ef43785171f116184c06d113cdb5b2ca19c23f2628ae52fa",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  101.6,
+  102.8,
+  103.4,
+  103.7,
+  104.0
+ ],
+ "vetting_descriptions": [
+  "A man is walking in a foggy park, with a bench in the background.",
+  "A man is running in a park with a bench in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

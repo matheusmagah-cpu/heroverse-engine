@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lamp-stove-gas-flame-heat-hot-kitchen",
+ "theme": "flood-lamp",
+ "query": "oil lamp flame dark",
+ "source": "pixabay",
+ "title": "stove, gas, flame, heat, hot, kitchen",
+ "page": "https://pixabay.com/videos/id-75534/",
+ "author": "EtoileOfficial",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: EtoileOfficial via Pixabay (https://pixabay.com/videos/id-75534/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a43f93c6d94d0b7ac61f369cf03472be7bdd36d84d7474a881ffa379ffc6efe7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  135.1,
+  135.5,
+  135.4,
+  135.7,
+  135.7
+ ],
+ "vetting_descriptions": [
+  "A flame is visible on the top of a gas stove.",
+  "A stove top with a flame underneath it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lamp-stove-gas-flame-heat-hot-kitchen-sha256-a43f93c6d94d0b7ac61f369cf03472be7bdd36d84d7474a881ffa379ffc6efe7.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

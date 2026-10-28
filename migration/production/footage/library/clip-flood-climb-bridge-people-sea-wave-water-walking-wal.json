@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-climb-bridge-people-sea-wave-water-walking-wal",
+ "theme": "flood-climb",
+ "query": "people walking up hill rain",
+ "source": "pixabay",
+ "title": "bridge, people, sea, wave, water, walking, walk, sky, nature, landscape",
+ "page": "https://pixabay.com/videos/id-159827/",
+ "author": "Yulia_Repnikova",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Yulia_Repnikova via Pixabay (https://pixabay.com/videos/id-159827/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "060f1661ba7539882089eba6919a16e5665a2642736c9551c584499d0385db28",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  132.0,
+  132.0,
+  131.5,
+  131.1,
+  130.3
+ ],
+ "vetting_descriptions": [
+  "A couple is walking on a pier with a body of water in the background.",
+  "A man is walking on a pier with a body of water in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

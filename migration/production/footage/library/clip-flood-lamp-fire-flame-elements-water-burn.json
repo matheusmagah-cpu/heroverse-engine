@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lamp-fire-flame-elements-water-burn",
+ "theme": "flood-lamp",
+ "query": "oil lamp flame dark",
+ "source": "pixabay",
+ "title": "fire, flame, elements, water, burn",
+ "page": "https://pixabay.com/videos/id-132773/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132773/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "00955ee3d023d9dab3a6ed89dcb70ec7be24e5bb81030e22bb3fa6a27bee6af3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  50.0,
+  27.5,
+  41.3,
+  31.0,
+  27.0
+ ],
+ "vetting_descriptions": [
+  "A fire is burning with a yellow flame, and there is a black background.",
+  "A flame is visible in the image, with a blue background and a yellow flame."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lamp-fire-flame-elements-water-burn-sha256-00955ee3d023d9dab3a6ed89dcb70ec7be24e5bb81030e22bb3fa6a27bee6af3.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

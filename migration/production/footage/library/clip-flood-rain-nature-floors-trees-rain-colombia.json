@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rain-nature-floors-trees-rain-colombia",
+ "theme": "flood-rain",
+ "query": "heavy rain night",
+ "source": "pixabay",
+ "title": "nature, floors, trees, rain, colombia",
+ "page": "https://pixabay.com/videos/id-29584/",
+ "author": "TRAPHITHO",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TRAPHITHO via Pixabay (https://pixabay.com/videos/id-29584/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fa0f182ec07ec9b3b3fcd097a515432fdde59a1acae46d7b0a58bad0c773024b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  69.8,
+  69.8,
+  70.5,
+  69.3,
+  69.9
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a few drops of water on it.",
+  "A tree with green leaves and a few red flowers on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rain-nature-floors-trees-rain-colombia-sha256-fa0f182ec07ec9b3b3fcd097a515432fdde59a1acae46d7b0a58bad0c773024b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

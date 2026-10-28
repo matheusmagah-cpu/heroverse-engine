@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-hills-morning-fog-national-park-netherlands-dr",
+ "theme": "flood-hills",
+ "query": "fog over hills",
+ "source": "pixabay",
+ "title": "morning, fog, national park, netherlands, drenthe, dwingelderveld, nature, scenic, landscape, aerial, drone, 4k",
+ "page": "https://pixabay.com/videos/id-177223/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-177223/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "96888fbe389b87f76f7606a2f94623f83564b98b7f1fdbd27b22900b8be97b90",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  176.7,
+  174.0,
+  170.7,
+  166.2,
+  161.2
+ ],
+ "vetting_descriptions": [
+  "A serene scene of a lake with trees and a sunset in the background.",
+  "A serene scene of a lake with trees and a sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-hills-morning-fog-national-park-netherlands-dr-sha256-96888fbe389b87f76f7606a2f94623f83564b98b7f1fdbd27b22900b8be97b90.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

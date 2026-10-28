@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-door-path-bridge-wooden-summer-daylight-natur",
+ "theme": "flood-door",
+ "query": "old wooden door closing",
+ "source": "pixabay",
+ "title": "path, bridge, wooden, summer, daylight, nature, landscape, grass, trees, field, water, plants, afternoon",
+ "page": "https://pixabay.com/videos/id-119775/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-119775/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e3e18722b3774372f7661fd37bed182deda5c2f938e86e2722f1607a6535d8cf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  171.0,
+  171.3,
+  171.6,
+  171.2,
+  172.2
+ ],
+ "vetting_descriptions": [
+  "A roadway is surrounded by a field of grass and trees, with a cloudy sky above.",
+  "A roadway is surrounded by trees and grass, and the sky is cloudy."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-door-path-bridge-wooden-summer-daylight-natur-sha256-e3e18722b3774372f7661fd37bed182deda5c2f938e86e2722f1607a6535d8cf.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

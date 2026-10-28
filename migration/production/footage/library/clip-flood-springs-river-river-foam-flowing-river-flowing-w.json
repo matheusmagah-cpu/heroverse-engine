@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-river-river-foam-flowing-river-flowing-w",
+ "theme": "flood-springs",
+ "query": "muddy water flowing",
+ "source": "pixabay",
+ "title": "river, river foam, flowing river, flowing water, forest, waterfall, water, river beauty",
+ "page": "https://pixabay.com/videos/id-206997/",
+ "author": "Nils_Vega",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Nils_Vega via Pixabay (https://pixabay.com/videos/id-206997/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "82d739420ee01677cae375a0e5cce82a70307643cf8044373a284583d93e66ec",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  89.6,
+  89.2,
+  88.9,
+  88.4,
+  88.6
+ ],
+ "vetting_descriptions": [
+  "A river with a fallen tree in it, surrounded by green trees and moss.",
+  "A river with a tree branch in it, surrounded by trees and moss."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-river-river-foam-flowing-river-flowing-w-sha256-82d739420ee01677cae375a0e5cce82a70307643cf8044373a284583d93e66ec.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-rock-sea-beach-chile-coastline-environment-na",
+ "theme": "flood-rock",
+ "query": "man standing on rock sea back view",
+ "source": "pixabay",
+ "title": "sea, beach, chile, coastline, environment, nature, rock coastline, travel, drone, 4k resolution, aerial view",
+ "page": "https://pixabay.com/videos/id-200898/",
+ "author": "bellergy",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: bellergy via Pixabay (https://pixabay.com/videos/id-200898/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "726b4343a0927dfcbb61c7ec74e1527e70e074181dd8db6273bf75d5a9b0d034",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,people"
+ ],
+ "vetting_luma": [
+  76.0,
+  100.9,
+  114.5,
+  118.8,
+  103.8
+ ],
+ "vetting_descriptions": [
+  "A view of the ocean with a rocky island in the distance, a few people on the island, and a boat in the water.",
+  "A lighthouse is sitting on a rock in the ocean, with a staircase leading to the top."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}
