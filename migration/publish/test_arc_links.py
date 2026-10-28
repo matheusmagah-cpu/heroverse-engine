@@ -343,7 +343,7 @@ class RepoFiles(unittest.TestCase):
         self.assertEqual([a["shorts"] for a in arcs],
                          [[f"genesis-{n:02d}-short" for n in range(k, k + 4)] for k in (1, 5, 9, 13)])
         self.assertEqual(arcs[0]["long"]["pilot"], "pilot-015")
-        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-29T22:00:00Z")   # owner 28/10: "tem que ser amanhã"
+        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-28T22:00:00Z")   # owner 28/10 ~11:10Z: "tem que sair HOJE"
         self.assertEqual([a["next"] for a in arcs], ["arc-02", "arc-03", "arc-04", None])
         for p in (ROOT / "migration/production/bible/episodes").glob("*.json"):
             self.assertEqual(sum(p.stem in a["shorts"] for a in arcs), 1, p.stem)
