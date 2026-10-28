@@ -1,0 +1,528 @@
+{
+ "episode": "arc-01-long",
+ "plan_sha256": null,
+ "attempts": 2,
+ "shots": {
+  "g-c1-lights": {
+   "kind": "scene",
+   "request_sha256": "7baa48f18ca33e47d047ad691b97396d85b438d7491b16c3021480db3cf926f2",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow tilt up. The sun sinks below the horizon as the moon rises and the first stars appear over a calm sea. Dusk turning to night. Vast and ordered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-g-c1-lights-sha256-04c5e12992fe0c43ffe8625f015d8aeef480f75437602a8ac750d57fd196be7e.mp4",
+     "clip_sha256": "04c5e12992fe0c43ffe8625f015d8aeef480f75437602a8ac750d57fd196be7e",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373595250617019904",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 8.0
+       },
+       "flags": [],
+       "faces": {
+        "frames_sampled": 48,
+        "faces_found": 0
+       }
+      }
+     ],
+     "sheet": "40592173923-g-c1-lights-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "error": "SHOT_FAILED g-c1-lights after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373600692692355136",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373600777736613376",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373600881708632704",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c1-image": {
+   "kind": "scene",
+   "request_sha256": "4c755d9737ba49a111641d1052e1beb76997237bdedaadc8b46d751f9891206f",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Golden sunbeams break through high clouds and sweep slowly across a green valley and a winding river. Late morning, warm light and moving cloud shadows. Majestic and tender. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-g-c1-image-sha256-31785bb406883dc31c3f3e49688d54296cd73d67a630b88c07ed7c4ecedfab85.mp4",
+     "clip_sha256": "31785bb406883dc31c3f3e49688d54296cd73d67a630b88c07ed7c4ecedfab85",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373596512523709952",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 8.0
+       },
+       "flags": [],
+       "faces": {
+        "frames_sampled": 48,
+        "faces_found": 0
+       }
+      }
+     ],
+     "sheet": "40592173923-g-c1-image-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "error": "SHOT_FAILED g-c1-image after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373600994875731456",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373601084662876864",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373601188371557888",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c2-command": {
+   "kind": "scene",
+   "request_sha256": "d07b835f18002e7cfbe8444b8f3f87fde72857a49ca00b97c7216f7b8eb0f947",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A warm wind moves through the branches of a single great tree heavy with fruit, sunlight flickering through its leaves. The center of the garden at noon. Solemn and clear. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-arc-01-long-g-c2-command-sha256-ff01f7a4530a8c827a094c32fadf65367813e3e15538d011dbc3a23854b51f8b.mp4",
+     "clip_sha256": "ff01f7a4530a8c827a094c32fadf65367813e3e15538d011dbc3a23854b51f8b",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373597833729489600",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 1280.0,
+        "height": 720.0,
+        "seconds": 8.0
+       },
+       "flags": [],
+       "faces": {
+        "frames_sampled": 48,
+        "faces_found": 0
+       }
+      }
+     ],
+     "sheet": "40592173923-g-c2-command-1.jpg",
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "error": "SHOT_FAILED g-c2-command after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373601290288430912",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373601333670637056",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373601417841876736",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c4-serpent": {
+   "kind": "scene",
+   "request_sha256": "91b737dbc24759796c00c866a405c12f7cc8334976aadbb31d50a19321a13cdf",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "error": "SHOT_FAILED g-c4-serpent after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373599328776227520",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373599422602545792",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373599508590501632",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    },
+    {
+     "round": 2,
+     "error": "SHOT_FAILED g-c4-serpent after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373601537299848960",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373601633664014016",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373601718464474624",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c4-woman": {
+   "kind": "scene",
+   "request_sha256": "31d2459df463d1b19214542584e1bbb3ce9a369d6abcc95cd2278d189cfa7aa1",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Rain begins to fall in grey sheets across the dark garden, the leaves bowing under it. Night. Sorrow. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "error": "SHOT_FAILED g-c4-woman after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373599605881047680",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373599702480665280",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373599788144528000",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    },
+    {
+     "round": 2,
+     "error": "SHOT_FAILED g-c4-woman after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373601801544666176",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373601884659576320",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373601981111810752",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c4-ground": {
+   "kind": "scene",
+   "request_sha256": "3f791c48e4c75e690e93c9264a3efc5d0534d7a06ac20042cf065d8638e134f7",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the garden. Night, heavy rain sweeping across the trees. Terrible and grand. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "error": "SHOT_FAILED g-c4-ground after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373599872458956544",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373599953023147776",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373600037328682560",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c4-dust": {
+   "kind": "scene",
+   "request_sha256": "4c2a065aa0675b93c138f2d5a40fccb21a3b07cc8def23faf406fad03d018cc3",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Heavy grey clouds roll over a barren plain of cracked dry earth and thorn bushes. Dawn, cold wind and dust. Heavy and final. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "error": "SHOT_FAILED g-c4-dust after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373600135936769600",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373600228915578944",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373600326458343232",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  },
+  "g-c4-one-of-us": {
+   "kind": "scene",
+   "request_sha256": "c38bc09285e97dd2cdac12cac64066fba39b9e7af7a279f66b30c6a2dfe6741d",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Mist drifts through the garden at dawn and soft light glows on a second great tree at its heart. Dawn. Solemn. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "16:9",
+    "sound": false,
+    "references": [],
+    "audio": null
+   },
+   "clips": [
+    {
+     "round": 1,
+     "error": "SHOT_FAILED g-c4-one-of-us after 3 generations: NO_VIDEO; NO_VIDEO; NO_VIDEO",
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "373600417911467520",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 2,
+       "conversation_id": "373600509753560128",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      },
+      {
+       "generation": 3,
+       "conversation_id": "373600606113499776",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "flags": [
+        "NO_VIDEO"
+       ]
+      }
+     ]
+    }
+   ],
+   "clip_seconds": 8
+  }
+ },
+ "run_id": "40592173923"
+}
