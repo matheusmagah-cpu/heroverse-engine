@@ -1364,6 +1364,29 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E133",
+   "date": "2026-10-28",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132"
+   ],
+   "error": "PR #487 (genesis-09 redesigned to the Shorts' Pavo budget) turned PR checks red: test_dispatch_guard fed the live genesis-09 plan hand-copied shot ids ('s-voice,s-laugh', 's-laugh' in the rerun test), and the redesign removed s-laugh, so the guard refused the fixture itself (GUARD_INPUT_INVALID: ids of this plan's generated shots) in test_valid_inputs_name_their_subject_and_uploads and test_the_failure_history_is_keyed_on_the_subject_not_the_other_inputs. Root cause: a test read a LIVE plan (production data that changes with every episode edit) but copied its shot ids as literals, so an ordinary plan edit broke unrelated tests; test_long_preflight and the long-plan probe tests had the same coupling.",
+   "fix": "test_dispatch_guard.live_shots(plan) reads the ids from the plan itself (generated scene shots with no speaker: the same 3-generation bound the unit expectations assume); every Short- and long-plan fixture there and in test_long_preflight takes its ids from the plan. Class antidote: hand_copied_shot_ids scans every migration test file for a line that names a live plan (PLAN, LONG_PLAN or plans/<episode>.json) and passes a `\"shots\"` literal holding that plan's real ids, and the test fails on any (an id the plan lacks, for a refusal test, stays allowed).",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_no_test_copies_a_live_plans_shot_ids_by_hand",
+    "covers": [
+     "drift"
+    ]
+   }
   }
  ]
 }

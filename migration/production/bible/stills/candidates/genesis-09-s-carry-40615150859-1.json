@@ -1,0 +1,37 @@
+{
+ "id": "genesis-09-s-carry-40615150859-1",
+ "still": "genesis-09-s-carry",
+ "episode": "genesis-09-short",
+ "shot": "s-carry",
+ "run": "40615150859",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot, low angle. Two men seen from behind, faces not visible, carrying an old woman between them up a rocky slope, water at their knees. Grey day, rain streaming over the stones. Straining and afraid. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot, low angle. Two men seen from behind, faces not visible, carrying an old woman between them up a rocky slope, water at their knees. Grey day, rain streaming over the stones. Straining and afraid. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos., tall vertical composition, the whole subject inside the central third of the frame",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "source": "cf-flux",
+ "conversation_id": null,
+ "quote": null,
+ "references": [],
+ "pavo": null,
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 576 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-carry-40615150859-1.jpg",
+ "sha256": "33610985bbc89b7dadcdd05568cfafeb1a072ca42c6e3e09207ff2559331ac40"
+}

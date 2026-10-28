@@ -270,10 +270,12 @@ class ReviewOf468(Scratch):
         # a Short's new preflight report is no fix that lifts GUARD_RERUN_WITHOUT_FIX for its probes
         import dispatch_guard as g
         probe = g.WORKFLOWS["shot-probe.yml"][1]
-        short = probe({"plan": "migration/production/bible/plans/genesis-09-short.json", "shots": "s-voice",
-                       "attempts": "2"})
+        short_plan = "migration/production/bible/plans/genesis-09-short.json"
+        long_plan = "migration/production/bible/plans/arc-01-long.json"
+        first = {p: json.loads((ROOT / p).read_text())["shots"][1]["id"] for p in (short_plan, long_plan)}   # E133
+        short = probe({"plan": short_plan, "shots": first[short_plan], "attempts": "2"})
         self.assertFalse([d for d in short["deps"] if "evidence/preflight" in d])
-        long_ = probe({"plan": "migration/production/bible/plans/arc-01-long.json", "shots": "s-open", "attempts": "2"})
+        long_ = probe({"plan": long_plan, "shots": first[long_plan], "attempts": "2"})
         self.assertIn("migration/evidence/preflight/arc-01-long.json", long_["deps"])
 
     def test_a_batch_is_packed_to_seventy_percent_of_the_probe_timeout(self):
