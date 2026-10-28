@@ -2,6 +2,24 @@
  "id": "genesis-09-s-sky",
  "episode": "genesis-09-short",
  "shot": "s-sky",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Men in silhouette, faces hidden in shadow, stand among the cooking fires of a camp of tents under a darkening grey sky heavy with cloud. Evening, smoke rising from the camp. Heedless and uneasy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. Men in silhouette, faces hidden in shadow, stand among the cooking fires of a camp of tents under a darkening grey sky heavy with cloud. Evening, smoke rising from the camp. Heedless and uneasy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-sky.jpg",
+ "sha256": "801fa50d75c3dd7448ee719017cd2a4e15a2a4f14d931f4e63395e3b07fa9f29",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-sky-40615150859-1",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Silhouetted figures, faces in shadow, among cooking fires and plain hide tents under a heavy darkening sky, smoke rising; no modern object, no building; heedless and uneasy as written. Photoreal grade (FLUX) is darker than the Pavo stills: the build's single warm grade evens it.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "c9f372498d60e18c15aba4cec410c2bffe9111e89affae2045c77f4b836d336d",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }
