@@ -2500,6 +2500,10 @@
   "PAVO_SHORTS_SHARE": {
    "class": "D",
    "resume": "E137: the Shorts used their share of the rolling Pavo quota for the UTC day (quota.SHORTS_DAILY_JOBS); split the batch or dispatch after 00:00 UTC; the long has priority over the rest."
+  },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
   }
  },
  "review": {

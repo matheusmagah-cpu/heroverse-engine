@@ -1408,6 +1408,70 @@
      "capacity"
     ]
    }
+  },
+  {
+   "id": "E135",
+   "date": "2026-10-28",
+   "class": [
+    "cheap-vs-expensive"
+   ],
+   "prior": [
+    "E106",
+    "E127"
+   ],
+   "error": "shot-probe.yml run 40626005505 (genesis-09 batch A: s-voice, s-noah-door, s-noah-lamp) passed the dispatch guard and stopped in its next step, plan_check --strict: 11 STILL_NOT_APPROVED (the FLUX stills of the other shots wait for 00:00 UTC). No Pavo unit was spent, but a run was, and its failure now blocks the next probe of this plan (GUARD_RERUN_WITHOUT_FIX) until main changes what it depends on. Root cause: the guard checked shot-probe's inputs (the shots are ids of the plan) but not the strict state of the whole plan, which the workflow requires before any probe; Claude dispatched without running plan_check --strict on main's plan first.",
+   "fix": "dispatch_guard.plan_strict_problems runs the workflow's own checker (plan_check.py --strict, or long_plan_check.py --strict for a long) and check_local refuses GUARD_PLAN_NOT_STRICT for shot-probe.yml before the run starts (refusal_registry class A, early plan_check.check). Class antidote: a guard runs every cheap check the workflow's first steps run, so a run never starts only to stop at one.",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run",
+    "covers": [
+     "cheap-vs-expensive"
+    ]
+   }
+  },
+  {
+   "id": "E136",
+   "date": "2026-10-28",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134"
+   ],
+   "error": "Shorts runway, 28/10 ~03:25 UTC: Claude submitted 11 genesis-09 scene stills through the Pavo MCP back to back before reading any back. Pavo's free quota had run out; 10 read back `failed` with no image (conversations 373673260065523776 ... 373673831350700096, ledger failed_streak 10, suspended until 06:26). Root cause: the stop of E124/E128 (two failed read-backs in a row) only works when read-backs come between submissions; nothing limited how many submissions could be in flight unread, so a fan-out spent its whole size on a spent quota (the same loss as E124's 31 submissions).",
+   "fix": "quota.MAX_UNREAD = 2: the ledger keeps today's submitted-but-unread jobs (`unread`); before_generate refuses PAVO_UNREAD_JOBS while two are unread, and a read-back to an end (completed with media, or failed) clears one. The builds submit and wait one job at a time, so they never meet it. Class antidote: a spend whose stop signal arrives only on read-back is never ahead of its read-backs by more than the stop needs.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "def test_e136_no_new_submission_while_two_of_todays_jobs_are_unread",
+    "covers": [
+     "capacity"
+    ]
+   }
+  },
+  {
+   "id": "E137",
+   "date": "2026-10-28",
+   "class": [
+    "threshold"
+   ],
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120"
+   ],
+   "error": "E128 modelled Pavo's free quota as 120 units a UTC day (a still 1, a video 2). Measured by the arc-01 long agent (28/10): the quota is a rolling window, it does not reset at 00:00 UTC; about 35-50 jobs come back ~3 h after a stop and sustained throughput is ~9-12 jobs an hour (27/10: ~180 jobs in 15.7 h, evidence/pavo/image-ledger.json 2026-10-27 reconstruction plus shot-probe record 40592173923), and a still and a video each count about one job. The fixed daily total refused live work (the long needs ~130 jobs before 29/10 14:00 UTC) and still let 28/10's MCP stills run into a stop at ~55 MCP units (E136). Root cause: a threshold taken from one day's observation and a guessed unit, never checked against the stop signal itself.",
+   "fix": "quota.py: no fixed daily total; the stop is the read-back (FAILED_STREAK 2, COOL_DOWN 3 h, one probe, MAX_UNREAD 2); DAILY_CAP is now only the largest batch one run may plan (one window: check_batch refuses PAVO_BUDGET_SHORT for a batch larger than it); an owner's explicit PAVO_IMAGE_DAILY_CAP still caps a day (PAVO_DAILY_CAP). Owner's split: quota.SHORTS_DAILY_JOBS = 25 jobs a UTC day for the Shorts, the long the rest; the dispatch guard counts today's Short shot-probe jobs (claude/shot-probe-*-short-* records) plus the batch's worst case and refuses PAVO_SHORTS_SHARE. Every generation is still counted in the ledger and the records. Class antidote: a quota limit follows the provider's measured stop signal, and a fixed number only shapes a batch, never blocks a live quota.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_image_gen.py",
+    "contains": "def test_e137_no_fixed_daily_total_blocks_a_live_quota_and_only_the_owner_can_cap_a_day",
+    "covers": [
+     "threshold"
+    ]
+   }
   }
  ]
 }
