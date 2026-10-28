@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install or update the ChatGPT runner on the owner's PC from the public repository at one commit (or branch).
+"""Install or update the ChatGPT app driver on the owner's PC from the public repository at one commit (or branch).
 Nothing else is touched: profile/, ledger.json, jobs/, refs/, out/ and logs/ stay as they are.
 
 usage (PowerShell, in C:\\HeroVerse\\chatgpt-runner):  .venv\\Scripts\\python deploy.py REF
@@ -12,7 +12,7 @@ import urllib.request
 RAW = "https://raw.githubusercontent.com/matheusmagah-cpu/heroverse-engine/{ref}/{path}"
 HERE = Path(__file__).resolve().parent
 SRC = "migration/integrations/chatgpt-local/"
-NAMES = ("runner.py", "chatgpt_core.py", "mcp_server.py", "bridge.py", "deploy.py", "test_chatgpt_core.py", "README.md")
+NAMES = ("app_driver.py", "chatgpt_core.py", "mcp_server.py", "bridge.py", "deploy.py", "test_chatgpt_core.py", "README.md")
 
 
 def main(ref):

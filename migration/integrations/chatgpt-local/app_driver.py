@@ -41,8 +41,10 @@ REFS = HERE / "refs"
 MAIN_X = 350                      # the main area starts right of the sidebar
 DOWNLOADS = Path(os.environ.get("USERPROFILE", str(HERE))) / "Downloads"
 SPI_GETSCREENREADER, SPI_SETSCREENREADER, SPIF_SENDCHANGE = 0x0046, 0x0047, 0x2
-STOP_NAMES = ("Parar", "Parar de gerar", "Parar streaming", "Stop")
+PLUS_NAME, SEND_NAME = "Adicionar arquivos e mais", "Enviar"   # pt-BR app, 2026-10-28
+OPEN_DIALOG = ("Abrir", "Open")
 SAVE_NAMES = ("Baixar", "Baixar imagem", "Download", "Salvar", "Salvar imagem")
+FLAG_FILE = HERE / "screenreader.was"   # the flag's value before a run, kept until the run restores it
 
 
 class Stop(Exception):
@@ -81,14 +83,20 @@ class ScreenReaderFlag:
     """Windows' screen-reader flag on for the run (Electron then exposes its UI to UI Automation), restored after."""
     def __enter__(self):
         self.u = ctypes.windll.user32
-        self.was = ctypes.c_int(0)
-        self.u.SystemParametersInfoW(SPI_GETSCREENREADER, 0, ctypes.byref(self.was), 0)
+        if FLAG_FILE.exists():                 # a run that was killed: its saved value is the real one
+            self.was = int(FLAG_FILE.read_text() or 0)
+        else:
+            cur = ctypes.c_int(0)
+            self.u.SystemParametersInfoW(SPI_GETSCREENREADER, 0, ctypes.byref(cur), 0)
+            self.was = cur.value
+            FLAG_FILE.write_text(str(self.was))
         self.u.SystemParametersInfoW(SPI_SETSCREENREADER, 1, None, SPIF_SENDCHANGE)
         time.sleep(2)
         return self
 
     def __exit__(self, *exc):
-        self.u.SystemParametersInfoW(SPI_SETSCREENREADER, self.was.value, None, SPIF_SENDCHANGE)
+        self.u.SystemParametersInfoW(SPI_SETSCREENREADER, self.was, None, SPIF_SENDCHANGE)
+        FLAG_FILE.unlink(missing_ok=True)
 
 
 # ---------- a person's hand ----------
@@ -120,11 +128,6 @@ def keys(seq):
     from pywinauto.keyboard import send_keys
     time.sleep(random.uniform(0.2, 0.6))
     send_keys(seq)
-
-
-def clip_files(paths):
-    lits = ",".join("'" + str(Path(p).resolve()).replace("'", "''") + "'" for p in paths)
-    subprocess.run(["powershell", "-NoProfile", "-Command", f"Set-Clipboard -LiteralPath {lits}"], check=True, timeout=30)
 
 
 def clip_text(text):
@@ -193,16 +196,53 @@ def open_new_chat(w):
     return box
 
 
-def send(w, box, refs, prompt):
-    glide_click(box)
-    clip_files(refs)
-    keys("^v")
+def menu_item(w, prefix):
+    """An entry of the composer's "+" menu, opened like a person would."""
+    plus = named(w, PLUS_NAME)
+    if plus is None:
+        raise Stop(6, "APP_CHANGED: no '+' (Adicionar arquivos e mais) button")
+    glide_click(plus)
+    pause((1, 2))
+    for el in main_controls(w, ("Button", "MenuItem")):
+        if (el.element_info.name or "").startswith(prefix):
+            return el
+    keys("{ESC}")
+    raise Stop(6, f"APP_CHANGED: no '{prefix}' in the '+' menu")
+
+
+def attach(w, refs):
+    """The app's own file dialog: '+' > 'Adicionar fotos e arquivos', the files' full paths in the name box, Enter."""
+    glide_click(menu_item(w, "Adicionar fotos e arquivos"))
+    from pywinauto import Desktop
+    dlg = None
+    for _ in range(20):
+        time.sleep(0.5)
+        dlg = next((d for d in Desktop(backend="uia").windows() if (d.element_info.name or "") in OPEN_DIALOG), None)
+        if dlg:
+            break
+    if dlg is None:
+        raise Stop(6, "APP_CHANGED: the file dialog did not open")
+    pause((1, 2))
+    clip_text(" ".join(f'"{Path(p).resolve()}"' for p in refs))
+    keys("%n")                                 # the dialog's own "Nome" box (Alt+N)
+    keys("^a^v")
+    pause((1, 2))
+    keys("{ENTER}")
     pause((8, 14))                             # the uploads finish
+
+
+def send(w, box, refs, prompt):
+    glide_click(menu_item(w, "Criar imagem"))  # the image tool, chosen in the menu
+    pause((1, 3))
+    attach(w, refs)
     glide_click(composer(w) or box)
     clip_text(prompt)
     keys("^v")
     pause()
-    keys("{ENTER}")
+    btn = named(w, SEND_NAME)
+    if btn is None:
+        raise Stop(6, "APP_CHANGED: no 'Enviar' button")
+    glide_click(btn)
 
 
 def biggest_image(w):
@@ -226,7 +266,7 @@ def wait_image(w):
         if b:
             raise Stop(4 if b[0] == "CHALLENGE" else 5, f"{b[0]} in the new chat: '{b[1]}'")
         img = biggest_image(w)
-        if img is not None and named(w, STOP_NAMES) is None:
+        if img is not None and named(w, SEND_NAME) is not None:   # while it answers, the stop button replaces Enviar
             seen += 1
             if seen >= 2:                        # the same finished state twice
                 return img

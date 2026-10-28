@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""The bridge between cloud agents and the ChatGPT runner on the owner's PC (Desktop Commander).
+"""The bridge between cloud agents and the ChatGPT app driver on the owner's PC (Desktop Commander).
 
 Cloud side (in the repository):
   bridge.py job STILL_RECORD SUBJECT REF_RECORD... [--ref-commit SHA]
       prints a job: the still's prompt behind an identity line for SUBJECT, and each APPROVED reference still by its
-      public raw URL at a commit and its sha256 (the runner downloads and checks them). The agent writes it to
-      C:\\HeroVerse\\chatgpt-runner\\jobs\\<id>.json (write_file) and starts `runner.py job jobs\\<id>.json`
+      public raw URL at a commit and its sha256 (the driver downloads and checks them). The agent writes it to
+      C:\\HeroVerse\\chatgpt-runner\\jobs\\<id>.json (write_file) and starts `app_driver.py job jobs\\<id>.json`
       (start_process; read_process_output until IMAGE_SAVED or a stop line).
 
-PC side (deployed next to runner.py):
+PC side (deployed next to app_driver.py):
   bridge.py push JOB_ID
       sends out\\<id>\\<id>.<ext> and its record to a new branch claude/chatgpt-image-<id> under
       migration/production/bible/stills/candidates/ through the GitHub API (gh, logged in once by the owner); without

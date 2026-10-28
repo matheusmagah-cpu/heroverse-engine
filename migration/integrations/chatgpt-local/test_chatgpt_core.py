@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline tests of the ChatGPT image runner's rules and bridge (no browser, no network)."""
+"""Offline tests of the ChatGPT app driver's rules and bridge (no app, no network)."""
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import struct
@@ -81,37 +81,37 @@ class Bridge(unittest.TestCase):
 
 class JobFile(unittest.TestCase):
     def test_a_missing_or_broken_job_file_is_a_named_refusal(self):
-        # E143: the PC's first `runner.py job` named a job not written yet (its folder did not exist) and died with a
+        # E143: the PC's first `runner.py job` (now app_driver.py job) named a job not written yet (its folder did not exist) and died with a
         # FileNotFoundError traceback instead of an exit code the bridge can read
         import contextlib
         import io
-        import runner  # noqa: E402  (no browser starts before the job is read)
-        with tempfile.TemporaryDirectory() as d, mock_lock(runner, d):
+        import app_driver  # noqa: E402  (the app is not touched before the job is read)
+        with tempfile.TemporaryDirectory() as d, mock_lock(app_driver, d):
             bad = Path(d) / "broken.json"
             bad.write_text("{not json")
             for path in (str(Path(d) / "missing.json"), str(bad)):
                 buf = io.StringIO()
                 with contextlib.redirect_stdout(buf):
-                    self.assertEqual(runner.main(["job", path]), 2)
+                    self.assertEqual(app_driver.main(["job", path]), 2)
                 self.assertIn("JOB_UNREADABLE", buf.getvalue())
 
 
-def mock_lock(runner, d):
+def mock_lock(mod, d):
     from unittest import mock
     import contextlib
     stack = contextlib.ExitStack()
-    stack.enter_context(mock.patch.object(runner, "LOCK", Path(d) / "runner.lock"))
-    stack.enter_context(mock.patch.object(runner, "LOG", Path(d) / "logs" / "runner.log"))
+    stack.enter_context(mock.patch.object(mod, "LOCK", Path(d) / "runner.lock"))
+    stack.enter_context(mock.patch.object(mod, "LOG", Path(d) / "logs" / "driver.log"))
     return stack
 
 
 class Source(unittest.TestCase):
     def test_no_cookie_value_spoofing_proxy_or_captcha_code(self):
-        src = (HERE / "runner.py").read_text() + (HERE / "mcp_server.py").read_text() + (HERE / "bridge.py").read_text()
+        src = (HERE / "app_driver.py").read_text() + (HERE / "mcp_server.py").read_text() + (HERE / "bridge.py").read_text()
         for banned in ('["value"]', "['value']", "stealth", "navigator.webdriver", "add_init_script", "proxy=",
                        "2captcha", "anticaptcha", "storage_state("):
             self.assertFalse(banned in src, banned)
-        self.assertIn('c["name"].startswith(SESSION_COOKIE)', src)
+        self.assertIn("x > 350", src)          # the sidebar (the owner's other chats) is never read
 
 
 if __name__ == "__main__":

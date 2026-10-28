@@ -1,6 +1,6 @@
-"""The ChatGPT image runner's rules, without a browser (tested in the repository on every PR).
+"""The ChatGPT app driver's rules, without the app (tested in the repository on every PR).
 
-Ledger (ledger.json next to runner.py): {"requests": {job_id: {"state", "at", ...}}}. A job is written as
+Ledger (ledger.json next to app_driver.py): {"requests": {job_id: {"state", "at", ...}}}. A job is written as
 SENDING before the prompt is sent, so a run that dies never sends the same job twice by itself (it stays UNCERTAIN
 until someone looks at the conversation).
 """
@@ -32,7 +32,7 @@ LICENCE = {
                  "and interest, if any, in and to Output.\"",
     "similar_output": "Output may not be unique; other users may receive similar output (same terms).",
     "automation_note": "The same terms forbid automatically or programmatically extracting data or Output; this image "
-                       "was made by a browser script in the owner's own session at the owner's explicit request "
+                       "was made by a UI Automation driver of the ChatGPT app in the owner's own session at the owner's explicit request "
                        "(2026-10-28), one at a time. The owner carries that account risk.",
     "usage_policies": "https://openai.com/policies/usage-policies/",
 }
@@ -157,7 +157,7 @@ def blocked(text):
 def record(job, refs, data, conversation_url, started, finished):
     w_h = size_of(data)
     return {
-        "id": job["id"], "status": "DRAFT", "engine": "chatgpt.com web, the owner's own account (runner on his PC)",
+        "id": job["id"], "status": "DRAFT", "engine": "ChatGPT desktop app, the owner's own account (driver on his PC)",
         "still": job.get("still"), "prompt": job["prompt"], "prompt_sent": full_prompt(job["prompt"]),
         "references": [{"name": Path(p).name, "sha256": sha256(d), "bytes": len(d), "size": list(size_of(d) or [])}
                        for p, d in refs],
