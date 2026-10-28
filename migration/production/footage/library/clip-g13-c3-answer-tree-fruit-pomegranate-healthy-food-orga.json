@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a pomegranate branch with ripe red fruit against a clear sky",
  "vetting_reasons": [],
  "vetting_luma": [
   121.1,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-c3-answer-tree-fruit-pomegranate-healthy-food-orga-sha256-e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }

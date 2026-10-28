@@ -20,8 +20,8 @@
   1440
  ],
  "sha256": "0841ea8bcfcff1c6728b43ff034c860005e544b118052d4d568aca5e4447c160",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet (3 frames, 10/50/90 %) reviewed by Claude 2026-10-28 for arc-01: no person, text, logo, watermark or modern object; a great dark trunk in deep forest shade: the garden darkening",
  "vetting_reasons": [],
  "vetting_luma": [
   19.6,
@@ -36,5 +36,6 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-g13-c4-afraid-trees-leaves-moss-forrest-woods-green-my-sha256-0841ea8bcfcff1c6728b43ff034c860005e544b118052d4d568aca5e4447c160.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "claude_seen": true
 }
