@@ -430,6 +430,83 @@ class OwnerException(unittest.TestCase):
                 self.assertEqual(v4.get(key), v4x.get(key), key)
 
 
+class ShortsV5OptIn(unittest.TestCase):
+    """Story QA v5 for the Shorts (owner 28/10: "destrave todos os vídeos... utilize tudo que o Pavo tem"): a Short
+    that says `"criteria": "story-qa-criteria-v5"` (and the Kokoro route) may show an approved still of another plan
+    (`still_from`: the arc-01 long's Keeper stills) at its own 1080x1920 frame, and adopt another episode's approved
+    Pavo clip (`clip_from`), each by Claude's review; nothing changes for a plan under older criteria."""
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.dir)
+
+    def short(self, **over):
+        p = {"episode": "t-short", "aspect_ratio": "9:16", "criteria": "story-qa-criteria-v5", "audio_route": "kokoro",
+             "narration": [{"kind": "story", "text": "The camp danced on."}, {"kind": "insight", "text": "Most miss it."}],
+             "shots": [{"id": "s-music", "kind": "scene", "lines": [0], "seconds": 8, "characters": [],
+                        "figures": "anonymous", "clip_from": "g08#s-wedding",
+                        "prompt": f"{STYLE}. Wide shot. Silhouettes dance around the fire"},
+                       {"id": "k-insight", "kind": "keeper", "voiceover": True, "lines": [1],
+                        "still_from": "arc-k-promise-2", "prompt": f"{STYLE}. Medium shot. The narrator by the fire"}]}
+        p.update(over)
+        return p
+
+    def test_a_v5_short_borrows_a_named_still_of_another_plan_at_its_own_frame(self):
+        import plan_check
+        rec = {"id": "arc-k-promise-2", "episode": "arc-long", "shot": "k-promise-2", "status": "APPROVED",
+               "repo_path": "migration/production/bible/stills/arc.jpg", "sha256": "c" * 64}
+        keep, refusal = plan_check.still_record, ss.fallback_refusal
+        plan_check.still_record = lambda i: rec if i == "arc-k-promise-2" else None
+        ss.fallback_refusal = lambda *a, **k: None          # the keeper's own references: tested in OwnerException
+        try:
+            a = ss.approve_source(self.short(), "k-insight", "still_motion", "arc-k-promise-2", 9.5, "crop holds the face",
+                                  shots_dir=self.dir, today="2026-10-28")
+            self.assertEqual((a["still_from"], a["frame"]), ("arc-k-promise-2", [1080, 1920]))
+            for plan, item in ((self.short(criteria="story-qa-criteria-v4"), "arc-k-promise-2"),   # older criteria
+                               (self.short(), "arc-k-promise-3")):                                 # not the named one
+                with self.assertRaises(SystemExit) as err:
+                    ss.approve_source(plan, "k-insight", "still_motion", item, 9.5, "x", shots_dir=self.dir)
+                self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
+        finally:
+            plan_check.still_record, ss.fallback_refusal = keep, refusal
+
+    def test_a_v5_short_adopts_another_episodes_approved_clip_by_its_sha256(self):
+        sha = "b" * 64
+        (self.dir / "g08.json").write_text(json.dumps({"episode": "g08", "shots": {"s-wedding": {
+            "asset": f"shot-g08-s-wedding-sha256-{sha}.mp4", "clip_sha256": sha, "clip_seconds": 8, "score": 9.5}}}))
+        src = {"episode": "g08", "aspect_ratio": "9:16", "shots": [{"id": "s-wedding", "kind": "scene", "characters": []}]}
+        plans = ss.HERE / "plans"
+        real = plans / "g08.json"
+        self.assertFalse(real.exists())
+        real.write_text(json.dumps(src))
+        try:
+            a = ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "not read as recycled",
+                                  shots_dir=self.dir, today="2026-10-28")
+            self.assertEqual((a["clip_from"], a["clip_sha256"], a["clip_seconds"]), ("g08#s-wedding", sha, 8))
+            p = self.short()
+            approvals = json.loads((self.dir / "t-short.json").read_text())["shots"]
+            self.assertFalse([m for m in eb.review_problems(p, {}, approvals) if "s-music" in m
+                              and m.startswith("SHOT_REQUEST_CHANGED")])
+            p["shots"][0]["prompt"] += " Drums."              # the shot changed: approve again
+            self.assertTrue([m for m in eb.review_problems(p, {}, approvals) if m.startswith("SHOT_REQUEST_CHANGED")])
+            for plan, code in ((self.short(criteria="story-qa-criteria-v4"), "REUSE_NOT_NAMED"),):
+                with self.assertRaises(SystemExit) as err:
+                    ss.approve_source(plan, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+                self.assertTrue(str(err.exception).startswith(code), str(err.exception))
+            other = self.short()
+            other["shots"][0]["characters"] = ["noah"]
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(other, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+            self.assertTrue(str(err.exception).startswith("REUSE_CHARACTERS_DIFFER"))
+            real.write_text(json.dumps(dict(src, aspect_ratio="16:9")))
+            with self.assertRaises(SystemExit) as err:
+                ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+            self.assertTrue(str(err.exception).startswith("REUSE_FRAME_MISMATCH"))
+        finally:
+            real.unlink()
+
+
 class VoiceAudio(unittest.TestCase):
     """E137: speech-check died on the arc-01 long's native clips (28/10): resemblyzer.preprocess_wav reads with librosa,
     which (>= 0.11) reads only what soundfile reads, never an MP4. The voice is measured on a WAV decoded from the clip."""
