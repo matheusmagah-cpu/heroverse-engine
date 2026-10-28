@@ -1364,6 +1364,27 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E133",
+   "date": "2026-10-28",
+   "class": [
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118"
+   ],
+   "error": "TikTok local runner (comment replies, owner 28/10): the first `runner.py comments` on the owner's PC died with FileNotFoundError writing out/own_videos.json.tmp. Root cause: tiktok_core.write_json assumed the folder existed; the runner's tests ran only in the repository and never wrote a state file into a fresh install folder, so the PC's empty C:\\HeroVerse\\tiktok-runner (no out/) was never exercised.",
+   "fix": "write_json creates the parent folder before its atomic write (tmp then replace); the runner's ledger, own-video list and comments file all go through it.",
+   "antidote": {
+    "file": "migration/integrations/tiktok-local/test_tiktok_core.py",
+    "contains": "def test_state_files_are_written_on_a_fresh_install",
+    "covers": [
+     "env-vs-test"
+    ]
+   }
   }
  ]
 }

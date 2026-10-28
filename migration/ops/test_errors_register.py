@@ -161,7 +161,7 @@ class Register(unittest.TestCase):
         # owner, 2026-10-26: "an error must never repeat": its antidote is a test, and that test runs on every PR
         # (pr-checks.yml, or pavo-mcp.yml for the Pavo integration), so a change that brings the error back fails CI
         wf = (ROOT / ".github/workflows/pr-checks.yml").read_text() + (ROOT / ".github/workflows/pavo-mcp.yml").read_text()
-        listed = set(re.findall(r"migration/[\w/]+/test_[\w*]+\.py", wf))
+        listed = set(re.findall(r"migration/[\w/-]+/test_[\w*]+\.py", wf))
 
         def runs(rel):
             return rel in listed or any(l.endswith("test_*.py") and rel.startswith(l[:-len("test_*.py")])
@@ -174,7 +174,7 @@ class Register(unittest.TestCase):
 
     def test_every_active_test_runs_in_pr_checks(self):
         wf = (ROOT / ".github/workflows/pr-checks.yml").read_text()
-        listed = set(re.findall(r"migration/[\w/]+/test_[\w*]+\.py", wf))
+        listed = set(re.findall(r"migration/[\w/-]+/test_[\w*]+\.py", wf))
         for d in ACTIVE:
             for t in sorted((ROOT / d).glob("test_*.py")):
                 rel = str(t.relative_to(ROOT))

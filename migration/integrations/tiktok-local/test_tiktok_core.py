@@ -86,6 +86,20 @@ class Parse(unittest.TestCase):
         self.assertEqual(core.new_comments(found, ledger), [{"comment_id": "2"}])
 
 
+class FreshInstall(unittest.TestCase):
+    def test_state_files_are_written_on_a_fresh_install(self):
+        # E133: `comments` died on the PC's first run: out/ did not exist yet, and no test had written a state file
+        # outside the repository (env-vs-test). Every file the runner writes goes through write_json into an empty
+        # install folder here.
+        import tempfile
+        import runner  # noqa: E402
+        with tempfile.TemporaryDirectory() as d:
+            for target in (runner.LEDGER, runner.OWN, Path(runner.HERE) / "out" / "comments.json"):
+                dest = Path(d) / Path(target).relative_to(runner.HERE)
+                core.write_json(dest, {"ok": True})
+                self.assertEqual(core.read_json(dest, None), {"ok": True})
+
+
 class Source(unittest.TestCase):
     def test_no_cookie_value_spoofing_or_captcha_code(self):
         src = (HERE / "runner.py").read_text()
