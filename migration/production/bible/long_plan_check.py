@@ -657,6 +657,10 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     if "source_design" in plan:
         import shot_sources
         problems += shot_sources.source_design_problems(plan)
+    # owner exception (arc-01, 28/10 contingency): a shot showing another shot's approved still, far enough apart
+    if any(isinstance(s, dict) and s.get("still_of") is not None for s in shots):
+        import shot_sources
+        problems += shot_sources.still_of_problems(plan, tl)
 
     gens = [s for s in shots if s.get("window_of") is None]
     talk = [i for i, s in enumerate(shots) if s.get("window_of") is None and pc.talking(s)]

@@ -253,6 +253,66 @@ def fallback_refusal(plan, shot, index, source, still=None):
     return None
 
 
+REUSE_MOTION = "pull_out"
+REUSE_KEEPER_MOTION = "static_crop"
+
+
+def still_owner(shot):
+    """The shot whose APPROVED still this shot shows: its own, or the one its `still_of` names (owner exception)."""
+    return shot.get("still_of") or shot.get("id")
+
+
+def still_of_problems(plan, timeline=None):
+    """Owner exception (arc-01 long, 28/10 contingency): a character shot may show the APPROVED still of another shot of
+    the plan (`still_of`: that shot's id) instead of a new Pavo still, rendered with another camera move
+    (REUSE_MOTION). Nothing in the frozen QA moves: the still keeps its references and Pavo read-back
+    (character_still_problems on the shot that shows it), and every shot showing one still is at least story QA's
+    image_repeat_gap_seconds_min from every other (E139: a picture is its sha256). Rows: STILL_OF_OUTSIDE_EXCEPTION,
+    STILL_OF_UNKNOWN, STILL_OF_CHAIN, STILL_OF_CHARACTERS, STILL_OF_REFUSED (a shot a fallback still may not carry),
+    STILL_OF_GAP."""
+    import long_plan_check as lpc
+    shots = plan.get("shots") or []
+    users = [s for s in shots if isinstance(s, dict) and s.get("still_of") is not None]
+    if not users:
+        return []
+    if not owner_exception(plan):
+        return [f"STILL_OF_OUTSIDE_EXCEPTION {s.get('id')} (a reused still is the owner's arc-01 exception only)"
+                for s in users]
+    index = {s.get("id"): i for i, s in enumerate(shots)}
+    out, groups = [], {}
+    for s in users:
+        src = s["still_of"]
+        if src not in index or src == s.get("id") or shots[index[src]].get("window_of") is not None:
+            out.append(f"STILL_OF_UNKNOWN {s.get('id')} ({src!r}: another generated shot of the plan)")
+            continue
+        if shots[index[src]].get("still_of") is not None:
+            out.append(f"STILL_OF_CHAIN {s.get('id')} ({src} itself shows {shots[index[src]]['still_of']}'s still)")
+            continue
+        if sorted(shown_characters(s)) != sorted(shown_characters(shots[index[src]])) or not has_character(s):
+            out.append(f"STILL_OF_CHARACTERS {s.get('id')} (shows {shown_characters(s)}, {src}'s still shows "
+                       f"{shown_characters(shots[index[src]])}: the same characters, by their references)")
+            continue
+        why = fallback_refusal(plan, s, index[s["id"]], "still_motion")
+        if why:
+            out.append(f"STILL_OF_REFUSED {why}")
+            continue
+        groups.setdefault(src, [src]).append(s["id"])
+    if not groups:
+        return out
+    tl = timeline or lpc.timeline(plan)
+    gap = (lpc.qa_for(plan) or lpc.qa())["grammar"]["image_repeat_gap_seconds_min"]
+    at = {s["id"]: (tl["begin"][i], tl["end"][i]) for i, s in enumerate(shots)}
+    for src, ids in sorted(groups.items()):
+        for a in range(len(ids)):
+            for b in range(a + 1, len(ids)):
+                x, y = at[ids[a]], at[ids[b]]
+                apart = max(y[0] - x[1], x[0] - y[1])
+                if apart < gap:
+                    out.append(f"STILL_OF_GAP {ids[b]} ({src}'s still also on {ids[a]}, {apart:.1f} s apart < story "
+                               f"QA's image_repeat_gap_seconds_min {gap:g})")
+    return out
+
+
 DESIGN_KEYS = ("pavo_talking", "pavo_voice_over", "pavo_scene", "window", "footage", "still_motion")
 
 
@@ -389,7 +449,7 @@ def still_candidates(plan, shot, stills_dir=None):
     out = []
     for p in sorted(folder.glob("*.json")) if folder.is_dir() else []:
         rec = json.loads(p.read_text())
-        if rec.get("episode") == plan.get("episode") and rec.get("shot") == shot["id"] and \
+        if rec.get("episode") == plan.get("episode") and rec.get("shot") == still_owner(shot) and \
                 rec.get("status") == "APPROVED" and rec.get("repo_path") and rec.get("sha256"):
             out.append({"source": "still_motion", "item": rec["id"]})
     first = (shot.get("first_frame") or "")
@@ -497,9 +557,16 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     elif source == "still_motion":
         rec = plan_check.still_record(item)
-        if not rec or rec.get("status") != "APPROVED" or rec.get("shot") != shot_id or \
+        if not rec or rec.get("status") != "APPROVED" or rec.get("shot") != still_owner(shot) or \
                 rec.get("episode") != plan.get("episode") or not rec.get("repo_path"):
-            raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {shot_id})")
+            raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {still_owner(shot)})")
+        if shot.get("still_of") is not None:
+            bad = still_of_problems(plan)
+            mine = [b for b in bad if shot_id in b.split()[1:3]]
+            if mine:
+                raise SystemExit(mine[0])
+            # another camera move over the same picture; a talking Keeper stays static (E98): a tighter crop
+            entry["motion"] = REUSE_KEEPER_MOTION if shot.get("kind") == "keeper" else REUSE_MOTION
         entry.update(still=item, repo_path=rec["repo_path"], clip_sha256=None, still_sha256=rec["sha256"],
                      frame=list(plan_frame(plan)),   # E132: rendered at the frame of the plan that ships it
                      licence=still_licence(rec),
@@ -599,7 +666,8 @@ def still_motion_clip(still, out, seconds, frame=FRAME, motion="push_in", fps=30
     frames = int(round(seconds * fps))
     e = f"(3*pow(on/{frames},2)-2*pow(on/{frames},3))"
     base = 1 / (1 - camera.ZOOM)
-    z = {"push_in": f"(1.0000+{base - 1:.4f}*{e})", "pull_out": f"({base:.4f}-{base - 1:.4f}*{e})"}.get(motion, f"{base:.4f}")
+    z = {"push_in": f"(1.0000+{base - 1:.4f}*{e})", "pull_out": f"({base:.4f}-{base - 1:.4f}*{e})",
+         "static_crop": f"{base:.4f}"}.get(motion, f"{base:.4f}")
     vf = (f"scale={2 * w}:{2 * h}:force_original_aspect_ratio=increase,crop={2 * w}:{2 * h},"
           f"zoompan=z='{z}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d={frames}:s={w}x{h}:fps={fps},"
           f"trim=end_frame={frames},format=yuv420p")
@@ -627,7 +695,8 @@ def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME):
             raise SystemExit(f"STILL_PATH_REFUSED {approval.get('still')}")
         if eb.sha256(still) != approval.get("still_sha256"):
             raise SystemExit(f"STILL_SHA256_MISMATCH {approval.get('still')}")
-        return still_motion_clip(still, dst, approval["clip_seconds"], frame)
+        move = {"motion": approval["motion"]} if approval.get("motion") else {}   # a reused still's own camera move
+        return still_motion_clip(still, dst, approval["clip_seconds"], frame, **move)
     if src == "pavo_reuse" and approval.get("url"):
         if not CDN.fullmatch(approval["url"]):
             raise SystemExit("REUSE_URL_REFUSED")
