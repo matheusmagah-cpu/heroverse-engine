@@ -1,0 +1,218 @@
+{
+ "version": "live-intel-v1",
+ "captured_at": "2026-10-28T08:08:00Z",
+ "episodes": [
+  {
+   "id": "genesis-01-short",
+   "part": 1,
+   "video_id": "ku2MTQKmXaU",
+   "age_h": 89.4,
+   "bucket": "48h",
+   "views": 129,
+   "like_rate": 0.085,
+   "attributes": {
+    "hook_type": "mystery_statement",
+    "hook_line": "Before there was light, God spoke.",
+    "title_pattern": "hook_emoji_pipe_story_kjv",
+    "first_visual": "ai_first_light",
+    "ai_scenes": 3,
+    "seconds": 62.8,
+    "slot_utc": "14:44",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "bad",
+    "ratio_to_median": 0.43,
+    "median": 303.0,
+    "bucket": "48h"
+   }
+  },
+  {
+   "id": "genesis-02-short",
+   "part": 2,
+   "video_id": "hwq4qgjreh0",
+   "age_h": 80.6,
+   "bucket": "48h",
+   "views": 303,
+   "like_rate": 0.106,
+   "attributes": {
+    "hook_type": "statement",
+    "title_pattern": "hook_emoji_pipe_story_kjv",
+    "first_visual": "ai_first_man",
+    "ai_scenes": 2,
+    "seconds": 51.9,
+    "slot_utc": "23:30",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "good",
+    "ratio_to_median": 2.4,
+    "median": 126.0,
+    "bucket": "48h"
+   }
+  },
+  {
+   "id": "genesis-03-short",
+   "part": 3,
+   "video_id": "K_ZwsCt-Wg4",
+   "age_h": 66.6,
+   "bucket": "48h",
+   "views": 123,
+   "like_rate": 0.049,
+   "attributes": {
+    "hook_type": "question_teaser",
+    "hook_line": "One question. That's all it took.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_serpent",
+    "ai_scenes": 1,
+    "seconds": 46.6,
+    "slot_utc": "13:30",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "bad",
+    "ratio_to_median": 0.57,
+    "median": 216.0,
+    "bucket": "48h"
+   }
+  },
+  {
+   "id": "genesis-04-short",
+   "part": 4,
+   "video_id": "s9YK37YErRc",
+   "age_h": 56.6,
+   "bucket": "48h",
+   "views": 129,
+   "like_rate": 0.07,
+   "attributes": {
+    "hook_type": "contrast_statement",
+    "hook_line": "They hid from God. He came looking anyway.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_flaming_sword",
+    "ai_scenes": 1,
+    "seconds": 48.0,
+    "slot_utc": "23:30",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "neutral",
+    "ratio_to_median": 0.85,
+    "median": 152.5,
+    "bucket": "48h"
+   }
+  },
+  {
+   "id": "genesis-05-short",
+   "part": 5,
+   "video_id": "OYijqQdQq0o",
+   "age_h": 42.6,
+   "bucket": "24h",
+   "views": 182,
+   "like_rate": 0.027,
+   "attributes": {
+    "hook_type": "contrast_statement",
+    "hook_line": "Two brothers brought God an offering. Only one walked away angry.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_two_altars",
+    "ai_scenes": 2,
+    "seconds": 62.6,
+    "slot_utc": "13:30",
+    "transition": "cut"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 42.6 h / views 182"
+   }
+  },
+  {
+   "id": "genesis-06-short",
+   "part": 6,
+   "video_id": "dyuqBS_FXew",
+   "age_h": 32.6,
+   "bucket": "24h",
+   "views": 156,
+   "like_rate": 0.122,
+   "attributes": {
+    "hook_type": "pattern_break",
+    "hook_line": "Genesis five reads like a list of funerals.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_burial_cairns",
+    "ai_scenes": 13,
+    "slot_utc": "23:30",
+    "transition": "cut",
+    "seconds": 85.5,
+    "voice": "kokoro_am_michael",
+    "compose": "engine"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 32.6 h / views 156"
+   }
+  },
+  {
+   "id": "genesis-07-short",
+   "part": 7,
+   "video_id": "Vvfw4W4nV7M",
+   "age_h": 18.6,
+   "bucket": "2h",
+   "views": 462,
+   "like_rate": 0.087,
+   "attributes": {
+    "hook_type": "god_voice_cold_open",
+    "hook_line": "The end of all flesh is come before me; for the earth is filled with violence through them.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_storm_over_tents",
+    "ai_scenes": 33,
+    "slot_utc": "13:30",
+    "transition": "cut",
+    "seconds": 173.8,
+    "voice": "kokoro_am_michael",
+    "compose": "engine",
+    "structure": "bible-story-short"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 18.6 h / views 462"
+   }
+  },
+  {
+   "id": "genesis-08-short",
+   "part": 8,
+   "video_id": "jPNjgf-PWHM",
+   "age_h": 8.6,
+   "bucket": "2h",
+   "views": 318,
+   "like_rate": 0.148,
+   "attributes": {
+    "hook_type": "god_voice_cold_open",
+    "hook_line": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh",
+    "title_pattern": "hook_emoji_pipe_story_kjv",
+    "first_visual": "ai_storm_over_ark_ribs",
+    "ai_scenes": 32,
+    "slot_utc": "23:30",
+    "transition": "cut",
+    "seconds": 175.11,
+    "voice": "kokoro_am_michael",
+    "compose": "engine",
+    "structure": "bible-story-short"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 8.6 h / views 318"
+   }
+  }
+ ],
+ "hypotheses": [
+  {
+   "id": "H-20261028-short-v2",
+   "attribute": "structure",
+   "value": "bible-story-short",
+   "started": "2026-10-28",
+   "status": "RUNNING",
+   "change": "Shorts v2 from part 7: 170-179 s, God's voice or a character speaks the conflict in the cold open, ~32 Pavo acted scenes, engine compose, cut only (parts 1-6: 47-86 s, 1-13 AI scenes)",
+   "expected": ">= 1.2x the series median at the same age (live_intel GOOD) on 2 consecutive episodes carrying it",
+   "measured_by": "mining/live_intel.py; genesis-07 reaches 48 h on 2026-10-29 13:30Z, genesis-08 on 2026-10-29 23:30Z",
+   "early_read_20261028": "genesis-07 462 views at 18.6 h, genesis-08 318 at 8.6 h vs parts 1-6 at 123-303 lifetime (own calculation, inconclusive under 48 h)"
+  }
+ ]
+}

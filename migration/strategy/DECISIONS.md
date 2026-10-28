@@ -679,3 +679,69 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   (spoken shots, characters by reference, the ark's still); every other scene is a free still in motion (FLUX) or
   footage. genesis-09 was redesigned to 22 shots on this rule (#487).
 
+
+## Daily analysis 2026-10-28 (day 11 of 14, max 30)
+Sources: vidIQ 9 read calls, 40 credits, 0 generation (`evidence/vidiq/20261028/daily-analysis.json`, ledger first);
+latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has not run yet); `mining/live_intel.py`
+(`evidence/learning/20261028.json`, `stats-20261028.json`, `state.json`). Labels: [official] YouTube public count,
+[own] our calculation from Analytics rows (Analytics lags ~48-72 h), [est] projection.
+- **Pace.**
+  - Subscribers [official]: **299 / 1,000** today (291 on 27/10, 272 on 21/10). Measured: **+8 in 24 h, +27 in 7 d
+    (3.9/day)**. Needed [own]: **192/day** to day 14 (31/10), **36/day** to day 30 (16/11).
+  - Public long-form watch hours, 365 d [own]: **24.3 / 4,000** (27/10). Measured: +2.7 in the last 30 h
+    (about 2.2 per 24 h), +21.0 in 7 d (2.9/day). Needed: **1,086/day** to day 14 and **202/day** to day 30.
+  - Projection [est]: at the 7-day pace, 16/11 reaches about 376 subscribers (456 at the 24-hour pace) and about
+    83 long hours. **Day 14 and day 30 are both out of reach at today's pace.** Only a Bible long that the Shorts
+    feed can change the hours. Per 100 views, Bible Shorts gain about 1.7 subscribers (Analytics, parts 1-4), so
+    36 a day needs about 2,100 Short views a day; today's rate is about 400-800.
+  - Per format, Analytics 14 d [own], data to about 25-26/10:
+    | format | views | hours | avg % viewed | subs | impressions / CTR (report, to 25/10 PT) |
+    |---|---|---|---|---|---|
+    | Bible Shorts parts 1-4 | 657 | 3.8 | 41-111 % (g02 80 %, g01 111 %) | 11 | 221 / 0.9 % (thumbnail surfaces only) |
+    | prayer longs (9, retired) | 247 | 21.0 | 2-36 % (NGfnyTul-K0 34 %) | 3 | 6,008 / 1.76 %, 106 clicks |
+    | prayer Shorts (3, retired) | 528 | 6.3 | 96-261 % | 10 | 140 / 2.1 % |
+  - Per Short, current views [official, vidIQ 08:08Z] and live_intel verdict against the series median at a similar age:
+    g01 129 (89 h, **bad** 0.43x), g02 303 (81 h, **good** 2.4x), g03 123 (67 h, **bad** 0.57x), g04 129 (57 h,
+    **neutral** 0.85x), g05 182 (43 h), g06 156 (33 h), **g07 462 (19 h, outlier 57.8)**, **g08 318 (9 h, outlier
+    90.9, like rate 14.8 %)**: g05-g08 are inconclusive (under 48 h).
+  - Traffic 7 d [own]: SHORTS feed 651 views (227 min); **RELATED_VIDEO 131 views but 977 min, 77 % of the minutes**;
+    search 22 views. The long hours come from suggested video, not from the Shorts.
+- **Verdict per long (funnel).** All 10 public longs are prayer longs (line retired 26/10): **NO_SHORTS_TRAFFIC**
+  on all 10 (0 views from Shorts). Their hours come from suggested video. 53Xysf9x46c (family, 26/10) has 78 views,
+  outlier 4.9; ZPSxpF-zBl8 has 7 and F8u5dTT_2mM has 5: **weak**. The funnel has nothing to measure until the first
+  Bible long (arc-01, 29/10 22:00Z). `arc_links.py` then links Shorts 1-4 to it, and its first 48 h are the funnel's first test.
+- **Live-intelligence hypothesis (state.json, RUNNING): H-20261028-short-v2**, `structure = bible-story-short`
+  (part 7 on: 170-179 s, God's voice or a character speaks the conflict in the cold open, about 32 acted Pavo scenes,
+  cut only). Expected: at least 1.2x the series median at the same age on 2 consecutive episodes. Measured by
+  live_intel when g07 reaches 48 h (29/10 13:30Z) and g08 does (29/10 23:30Z). The early read is strong (g07 462 at
+  19 h and g08 318 at 9 h, against parts 1-6 at 123-303 lifetime) but under 48 h, so no verdict yet.
+  The genesis-05..08 episode records carry no `video_id`, so live_intel skipped them. Today's run used ids from
+  `publish/ledger.json` in a scratch copy. Filling the records is for the producing agents.
+- **Decision of the day (within the fixed cadence; nothing moves).**
+  1. **Shorts: keep the v2 format for genesis-09..12** (all already planned on it). Question titles naming the
+     story's object or character, as g07 ("Why Did God Regret Making Man?") did. Title proposals for the producing
+     agents (episode records do not exist yet):
+     - genesis-09 (29/10 13:30Z): `Who Shut the Door of the Ark? 🚪 | The Flood Begins, Bible Story (KJV) #shorts`
+       (vidIQ score 90; Genesis 7:16 "and the LORD shut him in", which the plan's open-door hook sets up). Thumbnail
+       spec unchanged (Noah's grief close-up in the first rain, "THE FLOOD BEGINS").
+     - genesis-10 (29/10 23:30Z): `Why Did Noah Send Out a Dove? 🕊️ | The Dove and the Olive Leaf, Bible Story (KJV) #shorts` (not scored).
+     - genesis-11 (30/10 13:30Z): `Why Did God Set a Bow in the Cloud? 🌈 | The Rainbow Covenant, Bible Story (KJV) #shorts`
+       (not scored; KJV 9:13 "I do set my bow in the cloud").
+  2. **arc-01 long: keep the plan's title.** `Creation, Eden and the Fall: How a Very Good World Broke in One
+     Afternoon | Genesis 1-3 Bible Story (KJV)` scores 97 against 88 for the character-led alternative. It already
+     follows the series formula and names the place (validated hygiene). **Thumbnail direction:** the story's
+     characters, not the Keeper (thumb-host 27/10: host face 2/36 Bible-long winners, character face 30/36).
+     - A close-up of Eve or Adam with readable fear or shame right after the fruit (Genesis 3:7-10, "I was afraid
+       ... and I hid myself"), with the fruit as the one symbol object.
+     - Designed text of 2-4 words repeating the title's story name, e.g. "THE FALL" (validated hygiene: long winners
+       7/7 carry designed text with the story name and 6/7 a close-up face with emotion).
+     - No arrow (0/36 winners). Warm, vivid light (R16). The same Adam and Eve references as the Shorts so a Short
+       viewer recognises them.
+     - Through the thumbs spec, check and approve path (E121), at 9.5.
+  3. **Packaging for suggested traffic:** suggested video carries 77 % of the long minutes. The long keeps
+     "Genesis 1-3 Bible Story (KJV)" in title and tags, matching the Bible-story long neighbourhood its Shorts and
+     the winners sit in.
+- **Why:** the cadence is fixed and only the mining can change it. Today's data changes nothing in it. Only g02 has
+  a 48 h verdict above the median. The Short-format change of part 7 is the one effect worth isolating (one
+  hypothesis at a time). The packaging follows the validated hygiene rows only; no driver is validated
+  (package mining 27/10). vidIQ: 40 credits (balance 3,261 before), no generation.
