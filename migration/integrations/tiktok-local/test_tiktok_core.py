@@ -7,7 +7,7 @@ import sys
 import unittest
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
+ROOT = HERE.parents[2] if len(HERE.parents) > 2 else HERE   # the repository; on the PC the folder itself
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration/publish"))
 sys.path.insert(0, str(HERE / "vendor/migration/publish"))   # on the PC (deploy.py)
