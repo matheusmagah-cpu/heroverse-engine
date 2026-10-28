@@ -1627,6 +1627,78 @@
      "order"
     ]
    }
+  },
+  {
+   "id": "E145",
+   "date": "2026-10-28",
+   "class": [
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141"
+   ],
+   "error": "ChatGPT app driver, first real run on the owner's PC: open_new_chat called child_window() on the window that Desktop(backend='uia').windows() returns, which is a wrapper without that method, and the run died with AttributeError before any action. Root cause: the driver was written against pywinauto's WindowSpecification API and never ran against a wrapper before the PC; no test modelled the object the driver really gets.",
+   "fix": "new_chat_button() looks through the wrapper's own descendants() and element_info (the topmost 'Novo chat' button only, compared by name).",
+   "antidote": {
+    "file": "migration/integrations/chatgpt-local/test_chatgpt_core.py",
+    "contains": "def test_the_new_chat_button_comes_from_the_wrapper_itself",
+    "covers": [
+     "env-vs-test"
+    ]
+   }
+  },
+  {
+   "id": "E146",
+   "date": "2026-10-28",
+   "class": [
+    "env-vs-test"
+   ],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141",
+    "E145"
+   ],
+   "error": "ChatGPT app driver: after '+' > 'Adicionar fotos e arquivos' the app's Open dialog was on screen, but the driver looked for it among the desktop's top-level windows by the title 'Abrir'/'Open', did not find it in 15 s, stopped with APP_CHANGED and left the dialog open. Root cause: the dialog is a Windows #32770 dialog owned by the app; its title was assumed, not read.",
+   "fix": "file_dialog() finds a #32770 window inside the app's tree or among the top-level windows of the app's own process; a dialog left open by an earlier run is cancelled first (close_file_dialog).",
+   "antidote": {
+    "file": "migration/integrations/chatgpt-local/test_chatgpt_core.py",
+    "contains": "def test_the_open_dialog_is_found_by_its_class_inside_the_app",
+    "covers": [
+     "env-vs-test"
+    ]
+   }
+  },
+  {
+   "id": "E147",
+   "date": "2026-10-28",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142"
+   ],
+   "error": "ChatGPT app driver on the PC while the owner was using it: the owner's Claude app came over the ChatGPT window and the driver's mouse click on '+' (screen coordinates) landed in the other app; the run then stopped only because the menu item was missing. Root cause: clicks and keys went to whatever window was at the point or in front; nothing checked it was the ChatGPT app.",
+   "fix": "Every click checks that the top-level window under the pointer and the foreground window both belong to the ChatGPT app's process (one attempt to bring it back to the front), and every key checks the foreground; otherwise APP_NOT_IN_FRONT stops the run with nothing clicked or typed. The ledger records a request only right before 'Enviar', so a stop before sending leaves nothing to clean up.",
+   "antidote": {
+    "file": "migration/integrations/chatgpt-local/test_chatgpt_core.py",
+    "contains": "def test_no_click_or_key_reaches_another_window",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

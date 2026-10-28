@@ -152,6 +152,16 @@ def foreground_pid():
     return pid.value or None
 
 
+def process_name(pid):
+    """The executable's name only (never a window title, which can hold the owner's private text)."""
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", f"(Get-Process -Id {int(pid)}).ProcessName"],
+                             capture_output=True, text=True, timeout=20).stdout.strip()
+        return out or str(pid)
+    except Exception:  # noqa: BLE001
+        return str(pid)
+
+
 def ours_at(x, y):
     return APP["pid"] is not None and root_pid_at(x, y) == APP["pid"] and foreground_pid() == APP["pid"]
 
@@ -159,8 +169,9 @@ def ours_at(x, y):
 def keys(seq):
     from pywinauto.keyboard import send_keys
     time.sleep(random.uniform(0.2, 0.6))
-    if APP["pid"] is None or foreground_pid() != APP["pid"]:
-        raise Stop(6, "APP_NOT_IN_FRONT: the keys would go to another window; nothing typed (the PC is in use)")
+    fg = foreground_pid()
+    if APP["pid"] is None or fg != APP["pid"]:
+        raise Stop(6, f"APP_NOT_IN_FRONT: keys {seq!r} would go to process {process_name(fg)}; nothing typed")
     send_keys(seq)
 
 
