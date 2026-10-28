@@ -386,6 +386,9 @@ Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent s
   (`pavo_native.premix`: one gain, 80 ms fades, a continuous 60-900 Hz bed), starts the talking cut at the speech
   onset, then ducks the owned music and loudnorms as before; a native line's layout takes its approved clip's speech
   span.
+- **One God voice (owner, 28/10).** A spoken shot may say `"audio_route": "kokoro"` on a native plan and keep our
+  Kokoro voice-over (never the reverse: AUDIO_ROUTE_UNKNOWN); the arc-01 long puts all 9 of God's lines there (never
+  seen speaking), so God is one voice across the long and Pavo's units go to Adam, Eve and the Keeper.
 - **Refused words.** A line holding a word Pavo's filter refuses (`evidence/pavo/prompt-blocks.json`) is voiced by
   Kokoro (today's input-audio route); a new block read back (PAVO_PROMPT_BLOCKED, E129) is recorded and the shot goes
   again at once on the Kokoro route.

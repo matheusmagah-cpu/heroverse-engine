@@ -601,6 +601,12 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     if route == pn.NATIVE and q.get("version") != V4:
         problems.append(f"AUDIO_ROUTE_NEEDS_V4 (Pavo's own speech is measured only by {V4}; {q.get('version')} "
                         "removes Pavo's audio)")
+    for i, s in enumerate(shots):
+        # owner 28/10: a spoken shot may keep our Kokoro voice on a native plan ("audio_route": "kokoro"), never opt
+        # into Pavo's speech on its own (that is the plan's choice, under v4)
+        if "audio_route" in s and (s["audio_route"] != pn.KOKORO or not pn.spoken(s)):
+            problems.append(f"AUDIO_ROUTE_UNKNOWN shot {i} {s['id']} {s['audio_route']!r} (a spoken shot may say only "
+                            f"{pn.KOKORO!r})")
     routes = {}
     if pn.native_plan(plan) and q.get("version") == V4:
         voices = pn.load_voices()
@@ -634,7 +640,10 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                                 "windows": sum(len(v) for v in windows.values()), "total": len(gens)},
                 "clip_seconds": clip_seconds, "criteria": q.get("version"),
                 "audio_routes": {"pavo_native": sorted(k for k, v in routes.items() if v == pn.NATIVE),
-                                 "kokoro_prompt_filter": sorted(k for k, v in routes.items() if v == pn.KOKORO)},
+                                 "kokoro_prompt_filter": sorted(k for k, v in routes.items() if v == pn.KOKORO
+                                                                and (by_id.get(k) or {}).get("audio_route") != pn.KOKORO),
+                                 "kokoro_plan": sorted(k for k, v in routes.items() if v == pn.KOKORO
+                                                       and (by_id.get(k) or {}).get("audio_route") == pn.KOKORO)},
                 "pavo_minutes_sequential": round((len(scenes) * PAVO_SCENE_S + len(talk) * PAVO_TALK_S) / 60),
                 "upscale_minutes_1440p": round(clip_seconds * UPSCALE_S_PER_CLIP_S / 60)}
     return {"problems": problems, "pending": pending, "estimate": estimate}
