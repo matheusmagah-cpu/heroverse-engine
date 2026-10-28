@@ -124,6 +124,19 @@
    "clip_seconds": 6,
    "request_sha256": "6b11a16e13377fa1636fd94b996429e86c5145641b86b9e85954dd133d545aff"
   },
+  "s-c1-divide": {
+   "source": "footage",
+   "score": 9.5,
+   "note": "The sun on the horizon of a dark land under a wide clear sky, golden light against the dark: God divides the light from the darkness; no person or object.",
+   "approved_at": "2026-10-28",
+   "footage": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall",
+   "asset": "footage-clip-sunrise-sunset-clouds-golden-sunset-sun-downfall-sha256-48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e.mp4",
+   "clip_sha256": "48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-92093/)",
+   "clip_seconds": 20,
+   "request_sha256": "2adc3ef102cf59352754b75fa7e5e6ab15dbbc523a4d43709446aab37601f188"
+  },
   "s-c1-eve": {
    "source": "still_motion",
    "score": 9.5,
@@ -174,6 +187,19 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 6,
    "request_sha256": "6266dccbdf7bcc1bbdb705fca48166389513268450bacc156051a4534f80a08e"
+  },
+  "s-c1-light": {
+   "source": "footage",
+   "score": 9.5,
+   "note": "Clouds part over the dark sea and light breaks through and spreads on the water: 'Let there be light' as a real sky; no person or modern object in any frame.",
+   "approved_at": "2026-10-28",
+   "footage": "clip-sunset-sea-ocean-sunset-clouds-nature-water",
+   "asset": "footage-clip-sunset-sea-ocean-sunset-clouds-nature-water-sha256-951c79ee64d8f39a0c486b00a684b22f1636d3919ef3c86942c69d4edb8e63fc.mp4",
+   "clip_sha256": "951c79ee64d8f39a0c486b00a684b22f1636d3919ef3c86942c69d4edb8e63fc",
+   "licence": "Pixabay Content License",
+   "credit": "Footage: BlueDreams-BD via Pixabay (https://pixabay.com/videos/id-250805/)",
+   "clip_seconds": 20,
+   "request_sha256": "78ec96b2d129da1f8a57a3eeb592131e93ea2e3aaa9128767334ad4adf4e18e9"
   },
   "s-c1-river": {
    "source": "still_motion",
