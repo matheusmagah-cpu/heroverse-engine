@@ -2558,6 +2558,22 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "REUSE_NOT_NAMED": {
+   "class": "N",
+   "why": "story QA v5 opt-in (28/10): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render and refuses only a borrowed clip that is not the one the shot names, not approved, of another frame or of other characters"
+  },
+  "REUSE_NOT_APPROVED": {
+   "class": "N",
+   "why": "story QA v5 opt-in (28/10): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render and refuses only a borrowed clip that is not the one the shot names, not approved, of another frame or of other characters"
+  },
+  "REUSE_FRAME_MISMATCH": {
+   "class": "N",
+   "why": "story QA v5 opt-in (28/10): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render and refuses only a borrowed clip that is not the one the shot names, not approved, of another frame or of other characters"
+  },
+  "REUSE_CHARACTERS_DIFFER": {
+   "class": "N",
+   "why": "story QA v5 opt-in (28/10): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render and refuses only a borrowed clip that is not the one the shot names, not approved, of another frame or of other characters"
   }
  },
  "review": {

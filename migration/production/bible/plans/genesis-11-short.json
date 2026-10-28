@@ -132,10 +132,11 @@
     2
    ],
    "seconds": 8,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, steps barefoot from a plank ramp onto wet green grass and stands still, breathing the open air, as sheep and goats walk past him onto the hillside, his lips closed, silent. Bright morning after rain, sunlight on his face. Grateful and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man with short grey hair on a bare head, in a plain brown wool robe belted with a rope, barefoot, seen from behind, his face never visible, steps barefoot from a plank ramp onto wet green grass and stands still, breathing the open air, as sheep and goats walk past him onto the hillside. Bright morning after rain, sunlight on his face. Grateful and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous",
+   "first_frame": "genesis-11-short-s-noah-out",
+   "upgrade": "v5 (owner 28/10): faceless Noah from behind in his canonical robe and rope belt; the referenced Noah (characters: [noah], his look word for word) comes back for this shot only if a reference route passes the identity check before the build"
   },
   {
    "id": "s-stones",
@@ -156,10 +157,11 @@
     4
    ],
    "seconds": 9,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, kneels before a low altar of rough field stones as smoke from the offering rises straight up into the clear sky, his head bowed, his lips closed, silent. Morning light, smoke drifting. Reverent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man with short grey hair on a bare head, in a plain brown wool robe belted with a rope, barefoot, seen from behind, his face never visible, kneels before a low altar of rough field stones as smoke from the offering rises straight up into the clear sky. Morning light, smoke drifting. Reverent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous",
+   "first_frame": "genesis-11-short-s-noah-altar",
+   "upgrade": "v5 (owner 28/10): faceless Noah from behind in his canonical robe and rope belt; the referenced Noah (characters: [noah], his look word for word) comes back for this shot only if a reference route passes the identity check before the build"
   },
   {
    "id": "s-smoke",
@@ -289,7 +291,8 @@
    "lines": [
     15
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
+   "still_from": "arc-01-long-k-promise-2"
   },
   {
    "id": "k-question",
@@ -298,7 +301,8 @@
    "lines": [
     16
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos.",
+   "clip_from": "genesis-08-short#k-question"
   },
   {
    "id": "k-close",
@@ -307,7 +311,11 @@
    "lines": [
     17
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
+   "clip_from": "genesis-08-short#k-close"
   }
- ]
+ ],
+ "criteria": "story-qa-criteria-v5",
+ "audio_route": "kokoro",
+ "sources_v5": "Under story QA v5: God's line on Kokoro over the s-voice FLUX still; Noah faceless (s-noah-out, s-noah-altar) with the referenced Noah as the named upgrade; the Keeper from an arc-01 still and genesis-08's approved clips (review: not read as recycled); every other scene its own FLUX still in motion."
 }

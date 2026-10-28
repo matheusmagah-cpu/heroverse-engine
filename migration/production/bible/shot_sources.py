@@ -566,9 +566,12 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     elif source == "still_motion":
         rec = plan_check.still_record(item)
-        if not rec or rec.get("status") != "APPROVED" or rec.get("shot") != still_owner(shot) or \
-                rec.get("episode") != plan.get("episode") or not rec.get("repo_path"):
+        borrowed = borrowed_still(plan, shot, item)   # story QA v5 opt-in: an approved still of another plan
+        if not rec or rec.get("status") != "APPROVED" or not rec.get("repo_path") or (not borrowed and (
+                rec.get("shot") != still_owner(shot) or rec.get("episode") != plan.get("episode"))):
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {still_owner(shot)})")
+        if borrowed:
+            entry["still_from"] = item
         if shot.get("still_of") is not None:
             bad = still_of_problems(plan)
             mine = [b for b in bad if shot_id in b.split()[1:3]]
@@ -582,6 +585,8 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                      # a spoken shot has no `seconds` (its line decides): the longest clip the adapter makes covers it
                      clip_seconds=int(shot.get("seconds") or MAX_STILL_CLIP_SECONDS),   # E118: whole seconds, like a Pavo clip
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
+    elif shot.get("clip_from") is not None:   # story QA v5 opt-in: another episode's approved Pavo clip
+        entry.update(borrowed_clip(plan, shot, i, item, shots_dir))
     else:   # pavo_reuse: a clean clip of an inventory, of the request the plan sends now
         path, _, sha = str(item).partition("#")
         found = [c for c in committed_clips(plan, inventories=inventories, approvals={}).get(shot_id, [])
@@ -618,6 +623,49 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     data["shots"] = dict(sorted(data["shots"].items()))
     eb.save(out, data)
     return entry
+
+
+def v5_plan(plan):
+    import long_plan_check as lpc
+    return lpc.criteria_version(plan) == lpc.V5
+
+
+def borrowed_still(plan, shot, item):
+    """Story QA v5 opt-in (owner 28/10, "utilize tudo que o Pavo tem"): a shot may name `still_from`, an APPROVED
+    still of another plan (the arc-01 long's Keeper stills for a Short's Keeper plan B), rendered at this plan's own
+    frame (E132: a 16:9 still is centre-cropped to 1080x1920 by still_motion_clip) and approved by Claude's review
+    like any still; only on a v5 plan and only the still the shot names."""
+    return bool(v5_plan(plan) and shot.get("still_from") and shot.get("still_from") == item)
+
+
+def borrowed_clip(plan, shot, index, item, shots_dir=None):
+    """Story QA v5 opt-in: a shot may name `clip_from` ("<episode>#<shot>"), an APPROVED Pavo clip of another episode
+    (genesis-08's camp dancing for genesis-09's music), adopted by its sha256: never regenerated (R1). Refused unless
+    the plan is v5 and the item is the one the shot names (REUSE_NOT_NAMED), the clip is a Pavo clip approved in that
+    episode's shots record (REUSE_NOT_APPROVED), its plan has this plan's aspect (REUSE_FRAME_MISMATCH) and shows the
+    same characters and kind (REUSE_CHARACTERS_DIFFER). Whether a published clip reads as recycled is the confirmation
+    review's call (coordinator 28/10)."""
+    import episode_build as eb
+    if not v5_plan(plan) or shot.get("clip_from") != item:
+        raise SystemExit(f"REUSE_NOT_NAMED {shot['id']} {item} (a v5 plan's shot names its `clip_from`)")
+    episode, _, sid = str(item).partition("#")
+    rec_path = Path(shots_dir or eb.SHOTS_DIR) / f"{episode}.json"
+    src_plan_path = HERE / "plans" / f"{episode}.json"
+    approvals = (eb.load(rec_path) if rec_path.is_file() else {}).get("shots") or {}
+    a = approvals.get(sid)
+    if not a or a.get("source", "pavo") not in ("pavo",) or not a.get("asset") or not a.get("clip_sha256"):
+        raise SystemExit(f"REUSE_NOT_APPROVED {item} (an approved Pavo clip in shots/{episode}.json)")
+    src_plan = json.loads(src_plan_path.read_text()) if src_plan_path.is_file() else {}
+    if src_plan.get("aspect_ratio", "9:16") != plan.get("aspect_ratio", "9:16"):
+        raise SystemExit(f"REUSE_FRAME_MISMATCH {item} ({src_plan.get('aspect_ratio')} for a "
+                         f"{plan.get('aspect_ratio', '9:16')} plan)")
+    src = next((s for s in src_plan.get("shots") or [] if s.get("id") == sid), {})
+    if sorted(src.get("characters") or []) != sorted(shot.get("characters") or []) or \
+            (src.get("kind") == "keeper") != (shot.get("kind") == "keeper"):
+        raise SystemExit(f"REUSE_CHARACTERS_DIFFER {shot['id']} {item} (the same characters and kind)")
+    return {"clip_from": item, "asset": a["asset"], "clip_sha256": a["clip_sha256"],
+            "clip_seconds": a.get("clip_seconds"), "from_score": a.get("score"),
+            "request_sha256": fallback_digest(plan, shot, index, "pavo_reuse", item, a["clip_sha256"])}
 
 
 def picture_sha256(approval):
@@ -662,6 +710,8 @@ def expected_request(plan, shot, index, approval, digests):
         return fallback_digest(plan, shot, index, "footage", approval.get("footage"), approval.get("clip_sha256"))
     if (approval or {}).get("source") == "still_motion":
         return fallback_digest(plan, shot, index, "still_motion", approval.get("still"), approval.get("still_sha256"))
+    if (approval or {}).get("source") == "pavo_reuse" and (approval or {}).get("clip_from"):
+        return fallback_digest(plan, shot, index, "pavo_reuse", approval.get("clip_from"), approval.get("clip_sha256"))
     return digests.get(shot["id"])
 
 
