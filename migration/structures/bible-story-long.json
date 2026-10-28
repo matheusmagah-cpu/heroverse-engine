@@ -276,6 +276,8 @@
    "missing_sample": ">= 6 more weak contrasts per form from >= 4 channels (same form, at or below channel norm), from the winners' own channels, so the package is compared within channel",
    "thumbnail_recurring_host": "NOT validated (owner idea 27/10, Keeper on every thumbnail): host face 2/36 Bible-story long winners (31 channels, max 3/36; both church recordings, not designed thumbnails), weak 0/3; story-character face 30/36 vs 3/3; arrow 0/36 vs 1/3; presenting gesture 3/36 vs 0/3; cooking-host formula 0/36. Gap: >= 6 host-thumbnail winners from >= 4 channels (found 2 from 2); only our own A/B could test it. Evidence: evidence/vidiq/20261027/thumb-host.json"
   },
-  "best_winner_hypothesis": "q5FW9qWzPSc (breakout 1224): deadline title 'The LAST NIGHT of SODOM' (CAPS on 3 key words), one big word on a muted poster, no face. One video, and it breaks the face hygiene: a hypothesis, not a target"
+  "best_winner_hypothesis": "q5FW9qWzPSc (breakout 1224): deadline title 'The LAST NIGHT of SODOM' (CAPS on 3 key words), one big word on a muted poster, no face. One video, and it breaks the face hygiene: a hypothesis, not a target",
+  "rechecked_on": "2026-10-28",
+  "recheck_note": "28/10 recheck (evidence/vidiq/20261028/package_mining.json): no new weak contrast; one vidiq_youtube_search returned 50 Shorts 0-3 days old with no channel norm, so unusable. Status unchanged. The call returned Shorts only: longs gained 0 weak contrasts."
  }
 }

@@ -1,0 +1,508 @@
+{
+ "date": "2026-10-28",
+ "focus": "package (title + thumbnail) mining, weak contrasts for Bible Shorts and longs",
+ "verdict": "NOT VALIDATED. No package driver, no gate. The 27/10 state stands: hygiene only.",
+ "budget": {
+  "read_calls_used": 1,
+  "tool": "vidiq_youtube_search",
+  "credits": 5,
+  "ledger": "evidence/vidiq/ledger.json (recorded before the call)",
+  "balance_basis": "3,261 before the day's reads (daily-analysis.json), 40 spent earlier today, 5 now; research credits in the ledger 1,350 of 2,000 per cycle"
+ },
+ "existing_records_checked": {
+  "files": [
+   "20261026/bible_story_shorts.json",
+   "20261026/bible_story_long.json",
+   "20261027/package_titles_thumbnails.json",
+   "20261027/thumb-host.json",
+   "20261025/bible_story_long.json",
+   "20261024/shorts_validation.json (prayer niche)",
+   "20261023/algorithm_study (prayer niche)"
+  ],
+  "result": "Weak contrasts with package data exist only as the same 3 Shorts (2 channels) and 3 longs (3 channels) already counted on 27/10; the 26/10 records hold the same videos. Other low-view videos in older records are the retired prayer niche (different form) and carry no thumbnail coding. No new weak contrast was available offline."
+ },
+ "new_call": {
+  "query": "bible story shorts KJV, type video, duration short, order date, since 2026-08-01, limit 50",
+  "returned": 50,
+  "channels_other_than_ours": 29,
+  "why_unusable_as_weak_contrasts": [
+   "No channel norm (outlierScore and vph null on every row): 'at or below the channel norm' cannot be measured, and model estimates do not replace counts.",
+   "Age confounded: all 50 were published 25-28/10 (0-3 days old); views at that age do not separate weak from winner.",
+   "Mixed forms: many are devotional verse-audio clips of 5-60 s, not 60-180 s story Shorts; only a minority are same-form.",
+   "Channels are tiny (0-14,200 subscribers; median about 100) and the sample is the latest uploads, not a winners' own-channel comparison.",
+   "Shorts only, so longs gained 0 weak contrasts."
+  ]
+ },
+ "gate_arithmetic": {
+  "short": "weak 3 from 2 channels; need >= 6 from >= 4 channels: missing 3 weak and 2 channels",
+  "long": "weak 3 from 3 channels; need >= 6 from >= 4: missing 3 weak and 1 channel"
+ },
+ "question_titles": {
+  "decision_28_10": "DECISIONS 28/10 proposed question titles for genesis-09..11.",
+  "evidence_market": "27/10 (not re-measured): question in 2/27 Shorts winners by the title coder, opponent-or-question 14/27 (52 %), same form 10/18 (56 %); label-only titles win too (13/27); weak 0/3. Below the 70 % driver bar. Not validated.",
+  "evidence_own_today": "Our own Shorts already use question titles and do not separate by it (public views seen 28/10, single channel, ages differ, so a hint only): 'Why Did God Regret Making Man?' 466; 'Am I My Brother's Keeper?' 183; 'The Man Who Never Died?' 156; 'Where Art Thou?' 129; 'Did God Really Say That?' 123. Four of five question titles sit at 123-183 views, the same range as the earlier non-question parts (123-303 lifetime).",
+  "conclusion": "Does NOT support question titles as a driver; the evidence neither validates nor refutes them (no weak sample). It is a free choice: keep it as a hypothesis for the live loop and do not present it as validated in plans or checks. The hygiene (title names the character or place) is met by the three proposals."
+ },
+ "labels": {
+  "title_names_character_or_place": "hygiene (27/10, unchanged)",
+  "long_thumb_character_closeup_emotion": "hygiene (27/10, unchanged)",
+  "title_question_or_conflict": "free (not validated)",
+  "title_label_only": "free (not anti)",
+  "recurring_host_thumbnail": "not validated (27/10)"
+ },
+ "gate_proposal": "none: nothing validated, so no title or thumbnail gate (plan_check and frozen QA untouched).",
+ "next_sample": "To reach the bar: 3 weak Shorts from >= 2 more channels and 3 weak longs from >= 1 more channel, same form, aged >= 10 days, taken with vidiq_channel_videos from the winners' own channels (it carries each channel's own history for the norm); about 5-6 calls, 25-30 credits, on a day with research budget free.",
+ "storage": "public metadata only (ids, titles, counts)",
+ "rows": [
+  {
+   "id": "sX6FdDrNywg",
+   "channelTitle": "The Bible Alive",
+   "subscriberCount": 163,
+   "viewCount": 811,
+   "duration": "PT2M3S",
+   "publishedAt": "2026-10-28T05:43:33Z",
+   "title": "450 to 1: Fire Falls from Heaven | Elijah Ep.3 #BibleStory #Shorts"
+  },
+  {
+   "id": "aabrYi9xdpQ",
+   "channelTitle": "The Bible Alive",
+   "subscriberCount": 163,
+   "viewCount": 779,
+   "duration": "PT2M13S",
+   "publishedAt": "2026-10-28T05:42:09Z",
+   "title": "The Last Handful of Meal | Elijah Ep.2 #BibleStory #Shorts"
+  },
+  {
+   "id": "agG1j3uEhrU",
+   "channelTitle": "Quiet Bible Audio",
+   "subscriberCount": 14,
+   "viewCount": 32,
+   "duration": "PT53S",
+   "publishedAt": "2026-10-28T01:00:16Z",
+   "title": "Trust God With Your Next Step | Proverbs 3:5–6 KJV #Shorts"
+  },
+  {
+   "id": "_PTLVIwcxFM",
+   "channelTitle": "Zippi and Friends",
+   "subscriberCount": 5,
+   "viewCount": 0,
+   "duration": "PT54S",
+   "publishedAt": "2026-10-28T00:00:21Z",
+   "title": "Jesus Loves Me ❤️ Bible Story for Kids | Zippi #Shorts"
+  },
+  {
+   "id": "I5FQ9NRtLjQ",
+   "channelTitle": "Ancient Stories, Modern Voices",
+   "subscriberCount": 407,
+   "viewCount": 13,
+   "duration": "PT55S",
+   "publishedAt": "2026-10-28T00:00:35Z",
+   "title": "They Marched In SILENCE For 7 Days… Then The Wall Fell 🧱 | Jericho, 2072"
+  },
+  {
+   "id": "MPRIFNCDtCg",
+   "channelTitle": "BloodOfChristTV",
+   "subscriberCount": 2050,
+   "viewCount": 1032,
+   "duration": "PT1M43S",
+   "publishedAt": "2026-10-27T22:46:22Z",
+   "title": "Five Loaves, Two Fish—Jesus Fed 5,000! | John 6"
+  },
+  {
+   "id": "DC0VzOeSFKQ",
+   "channelTitle": "What The Text Says",
+   "subscriberCount": 62,
+   "viewCount": 334,
+   "duration": "PT1M5S",
+   "publishedAt": "2026-10-27T22:00:06Z",
+   "title": "Why Did God Say \"Jacob, Jacob\" Twice? #shorts"
+  },
+  {
+   "id": "K0nID4DY_Nc",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 289,
+   "duration": "PT43S",
+   "publishedAt": "2026-10-27T20:15:42Z",
+   "title": "He is risen — the empty tomb #shorts"
+  },
+  {
+   "id": "TyoWrtX_cuU",
+   "channelTitle": "One Minute Bible",
+   "subscriberCount": 1320,
+   "viewCount": 14,
+   "duration": "PT33S",
+   "publishedAt": "2026-10-27T16:30:35Z",
+   "title": "He Wrestled With God All Night and Refused to Let Go | Bible Story"
+  },
+  {
+   "id": "2vOYtnlItXM",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 171,
+   "duration": "PT55S",
+   "publishedAt": "2026-10-27T16:15:49Z",
+   "title": "Samson and Delilah — and the last prayer #shorts"
+  },
+  {
+   "id": "Vvfw4W4nV7M",
+   "channelTitle": "HeroVerse",
+   "subscriberCount": 299,
+   "viewCount": 466,
+   "duration": "PT2M54S",
+   "publishedAt": "2026-10-27T13:30:05Z",
+   "title": "Why Did God Regret Making Man? 💔 | God Sees the Earth Corrupt, Bible Story (KJV) #shorts"
+  },
+  {
+   "id": "w4ELvuxOxng",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 394,
+   "duration": "PT46S",
+   "publishedAt": "2026-10-27T12:15:58Z",
+   "title": "The walls of Jericho #shorts"
+  },
+  {
+   "id": "bHM2PeUss60",
+   "channelTitle": "BloodOfChristTV",
+   "subscriberCount": 2050,
+   "viewCount": 1405,
+   "duration": "PT2M7S",
+   "publishedAt": "2026-10-27T10:35:05Z",
+   "title": "Everyone Feared Goliath—But David Trusted God | 1 Samuel 17"
+  },
+  {
+   "id": "SdhtPdkA5q8",
+   "channelTitle": "Whispers from the Light",
+   "subscriberCount": 5,
+   "viewCount": 6,
+   "duration": "PT1M54S",
+   "publishedAt": "2026-10-27T09:05:33Z",
+   "title": "The Son Who Stole His Father's Kingdom #Shorts"
+  },
+  {
+   "id": "U8Y0GgBnW_8",
+   "channelTitle": "Disciples of Christ TV",
+   "subscriberCount": 8200,
+   "viewCount": 976,
+   "duration": "PT1M1S",
+   "publishedAt": "2026-10-27T06:00:35Z",
+   "title": "99 Were Safe. He Went Searching for One (Luke 15) #Shorts"
+  },
+  {
+   "id": "9_twiDNtDvo",
+   "channelTitle": "Words of Jesus",
+   "subscriberCount": 111,
+   "viewCount": 252,
+   "duration": "PT48S",
+   "publishedAt": "2026-10-27T04:57:44Z",
+   "title": "Jesus Calls Levi — “Follow Me” | A Powerful Bible Story #Shorts"
+  },
+  {
+   "id": "Qr8N0o9S9vU",
+   "channelTitle": "bigdogsview",
+   "subscriberCount": 461,
+   "viewCount": 15,
+   "duration": "PT3M",
+   "publishedAt": "2026-10-27T04:56:10Z",
+   "title": "Mark 3:1-5 KJV | Stretch Forth Thine Hand | Bible Short"
+  },
+  {
+   "id": "iOc6CKrV7uI",
+   "channelTitle": "bigdogsview",
+   "subscriberCount": 461,
+   "viewCount": 30,
+   "duration": "PT3M",
+   "publishedAt": "2026-10-27T04:51:35Z",
+   "title": "Matthew 13:31-32 KJV | The Mustard Seed | Bible Short"
+  },
+  {
+   "id": "6q8jeonv06U",
+   "channelTitle": "bigdogsview",
+   "subscriberCount": 461,
+   "viewCount": 25,
+   "duration": "PT3M",
+   "publishedAt": "2026-10-27T04:38:21Z",
+   "title": "John 2:1-11 KJV | Water into Wine | Bible Short"
+  },
+  {
+   "id": "8nAUlKHPavc",
+   "channelTitle": "Scripture in Oil",
+   "subscriberCount": 17,
+   "viewCount": 370,
+   "duration": "PT32S",
+   "publishedAt": "2026-10-27T02:24:11Z",
+   "title": "The Giants Before the Flood 😳 Genesis 6 | Noah Found Grace #shorts #genesis #bible #kjv  #biblestory"
+  },
+  {
+   "id": "0H5ZIZ2Uvts",
+   "channelTitle": "Arthurchive",
+   "subscriberCount": 3,
+   "viewCount": 55,
+   "duration": "PT1M8S",
+   "publishedAt": "2026-10-27T01:18:35Z",
+   "title": "The woman who met Jesus at a well. #Shorts"
+  },
+  {
+   "id": "dyuqBS_FXew",
+   "channelTitle": "HeroVerse",
+   "subscriberCount": 299,
+   "viewCount": 156,
+   "duration": "PT1M26S",
+   "publishedAt": "2026-10-26T23:30:16Z",
+   "title": "The Man Who Never Died? ☁️ | Enoch Walked With God, Bible Story (KJV) #shorts"
+  },
+  {
+   "id": "aTpI6t9c4V4",
+   "channelTitle": "Peaceful Bible ",
+   "subscriberCount": 27,
+   "viewCount": 181,
+   "duration": "PT54S",
+   "publishedAt": "2026-10-26T22:04:29Z",
+   "title": "Devo: Samson's Last Prayer 🌊 Judges 16:21-30 | Bible by the Water"
+  },
+  {
+   "id": "0XN4x0t7VVc",
+   "channelTitle": "What The Text Says",
+   "subscriberCount": 62,
+   "viewCount": 163,
+   "duration": "PT1M31S",
+   "publishedAt": "2026-10-26T22:00:21Z",
+   "title": "God Asked Elijah the Same Question Twice. Why? #shorts"
+  },
+  {
+   "id": "EP5OdgOy5l8",
+   "channelTitle": "Light for the Journey",
+   "subscriberCount": 52,
+   "viewCount": 128,
+   "duration": "PT50S",
+   "publishedAt": "2026-10-26T21:13:15Z",
+   "title": "The Sign of Jonah Points to Jesus ✝️ #shorts"
+  },
+  {
+   "id": "nQc4dSYzgv8",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 74,
+   "duration": "PT38S",
+   "publishedAt": "2026-10-26T20:15:50Z",
+   "title": "Jacob's Ladder — \"This is the house of God\" #shorts"
+  },
+  {
+   "id": "A1j3qMgYqgI",
+   "channelTitle": "What The Text Says",
+   "subscriberCount": 62,
+   "viewCount": 330,
+   "duration": "PT45S",
+   "publishedAt": "2026-10-26T18:00:17Z",
+   "title": "Jacob Got a New Name and a Hurt Hip. The Text Keeps Both #shorts"
+  },
+  {
+   "id": "DUUmEPLkTlg",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 370,
+   "duration": "PT47S",
+   "publishedAt": "2026-10-26T16:15:47Z",
+   "title": "\"If I perish, I perish\" — Esther's courage #shorts"
+  },
+  {
+   "id": "H477PhBN-mI",
+   "channelTitle": "He Giveth Light",
+   "subscriberCount": 752,
+   "viewCount": 223,
+   "duration": "PT33S",
+   "publishedAt": "2026-10-26T14:00:23Z",
+   "title": "Part of a Wider Story | 1 Chronicles 1:5 | KJV Audio Bible #Shorts | God's Word"
+  },
+  {
+   "id": "OYijqQdQq0o",
+   "channelTitle": "HeroVerse",
+   "subscriberCount": 299,
+   "viewCount": 183,
+   "duration": "PT1M3S",
+   "publishedAt": "2026-10-26T13:30:12Z",
+   "title": "Am I My Brother's Keeper? 🐑 | Cain and Abel, Bible Story (KJV) #shorts"
+  },
+  {
+   "id": "OE8mt7_Eeik",
+   "channelTitle": "Jonathan Gibbons",
+   "subscriberCount": 54,
+   "viewCount": 21,
+   "duration": "PT36S",
+   "publishedAt": "2026-10-26T13:26:18Z",
+   "title": "God Was Working All Along | Ruth 4:22 KJV"
+  },
+  {
+   "id": "1G3B1S4JfRY",
+   "channelTitle": "Jesus Will Save Everybody",
+   "subscriberCount": 620,
+   "viewCount": 392,
+   "duration": "PT41S",
+   "publishedAt": "2026-10-26T13:02:34Z",
+   "title": "The Brothers Who Sold Him Bowed at His Feet — And Didn’t Know Him | Joseph Part 9 #Shorts"
+  },
+  {
+   "id": "4u-wukDpaXg",
+   "channelTitle": "Daily Verse of God",
+   "subscriberCount": 967,
+   "viewCount": 213,
+   "duration": "PT5S",
+   "publishedAt": "2026-10-26T13:02:30Z",
+   "title": "Give Your Burdens to God 🙏❤️ | Psalm 55:22 KJV #shorts"
+  },
+  {
+   "id": "4x7dCTpX31M",
+   "channelTitle": "Divine Echo",
+   "subscriberCount": 14200,
+   "viewCount": 278,
+   "duration": "PT43S",
+   "publishedAt": "2026-10-26T06:30:07Z",
+   "title": "Fire from Heaven! Elijah on Mount Carmel | Bible Story"
+  },
+  {
+   "id": "cGrGbPH_fjY",
+   "channelTitle": "Scripture Illustrated by Pearl Highstead",
+   "subscriberCount": 0,
+   "viewCount": 30,
+   "duration": "PT41S",
+   "publishedAt": "2026-10-26T06:00:18Z",
+   "title": "KJV Old Testament Bible Coloring Book | Detailed | Book 1 Part 1  #Shorts  #biblecoloringbook"
+  },
+  {
+   "id": "mClgbOkMoEM",
+   "channelTitle": "Disciples of Christ TV",
+   "subscriberCount": 8200,
+   "viewCount": 348,
+   "duration": "PT1M1S",
+   "publishedAt": "2026-10-26T06:00:02Z",
+   "title": "\"Your Daughter Is Dead.\" Jesus Said, \"Be Not Afraid\" (Mark 5) #Shorts #bible #jesus"
+  },
+  {
+   "id": "Dry0og08HpM",
+   "channelTitle": "The Living Bible Stories",
+   "subscriberCount": 44,
+   "viewCount": 476,
+   "duration": "PT57S",
+   "publishedAt": "2026-10-26T04:44:28Z",
+   "title": "Naaman’s Miracle | Bible Story"
+  },
+  {
+   "id": "RvpaFgfpIKU",
+   "channelTitle": "Bible Whys",
+   "subscriberCount": 26,
+   "viewCount": 9,
+   "duration": "PT47S",
+   "publishedAt": "2026-10-26T00:20:09Z",
+   "title": "A Teen Fell Asleep in Church… and Died?! 😳 #shorts"
+  },
+  {
+   "id": "yN_HcFW6rpc",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 1216,
+   "duration": "PT50S",
+   "publishedAt": "2026-10-26T00:15:49Z",
+   "title": "\"The Lord shut him in\" — the flood #shorts"
+  },
+  {
+   "id": "22ENkpJ4ox4",
+   "channelTitle": "Scripture at Night",
+   "subscriberCount": 926,
+   "viewCount": 92,
+   "duration": "PT50S",
+   "publishedAt": "2026-10-26T00:10:52Z",
+   "title": "Before you sleep, hear Acts 16:25-28 (KJV)"
+  },
+  {
+   "id": "s9YK37YErRc",
+   "channelTitle": "HeroVerse",
+   "subscriberCount": 299,
+   "viewCount": 129,
+   "duration": "PT49S",
+   "publishedAt": "2026-10-25T23:30:08Z",
+   "title": "Where Art Thou? 🔥 | Driven Out of Eden, Bible Story (KJV) #shorts"
+  },
+  {
+   "id": "s5HNBhEhIJc",
+   "channelTitle": "𝐸𝒹𝑒𝓃 𝐿𝑒𝑔𝒶𝒸𝓎 𝒫𝑜𝒹𝒸𝒶𝓈𝓉",
+   "subscriberCount": 144,
+   "viewCount": 50,
+   "duration": "PT43S",
+   "publishedAt": "2026-10-25T23:02:30Z",
+   "title": "The Devil Knows the Bible Too! 😳 Matthew 4:6 KJV #shortsviral"
+  },
+  {
+   "id": "WGjyH6yzlL4",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 829,
+   "duration": "PT55S",
+   "publishedAt": "2026-10-25T20:15:47Z",
+   "title": "The writing on the wall — Mene, Mene, Tekel #shorts"
+  },
+  {
+   "id": "nZ9onXrOh1c",
+   "channelTitle": "Disciples of Christ TV",
+   "subscriberCount": 8200,
+   "viewCount": 417,
+   "duration": "PT1M1S",
+   "publishedAt": "2026-10-25T18:00:21Z",
+   "title": "His Last Words Changed His Eternity (Luke 23) #Shorts"
+  },
+  {
+   "id": "AN8DDQlt8RM",
+   "channelTitle": "Our Daily Guide",
+   "subscriberCount": 100,
+   "viewCount": 545,
+   "duration": "PT50S",
+   "publishedAt": "2026-10-25T17:15:42Z",
+   "title": "Jonah thrown into the sea #shorts"
+  },
+  {
+   "id": "MZmW20EimRo",
+   "channelTitle": "Gloria Dei Fontana",
+   "subscriberCount": 1560,
+   "viewCount": 525,
+   "duration": "PT33S",
+   "publishedAt": "2026-10-25T16:00:20Z",
+   "title": "The Storm Was Loud. Jesus Was Asleep. | Mark 4 #Shorts"
+  },
+  {
+   "id": "uNnH0xtAqNU",
+   "channelTitle": "Quiet Bible Audio",
+   "subscriberCount": 14,
+   "viewCount": 96,
+   "duration": "PT59S",
+   "publishedAt": "2026-10-25T16:00:28Z",
+   "title": "When No One Notices | Colossians 3:23 KJV #Shorts"
+  },
+  {
+   "id": "wNclWBK5zaw",
+   "channelTitle": "ProPods",
+   "subscriberCount": 549,
+   "viewCount": 23,
+   "duration": "PT1M29S",
+   "publishedAt": "2026-10-25T14:36:17Z",
+   "title": "You'd Know Him By His Driving | Jehu #Shorts"
+  },
+  {
+   "id": "K_ZwsCt-Wg4",
+   "channelTitle": "HeroVerse",
+   "subscriberCount": 299,
+   "viewCount": 123,
+   "duration": "PT47S",
+   "publishedAt": "2026-10-25T13:30:21Z",
+   "title": "Did God Really Say That? 🐍 | The Serpent in Eden, Bible Story (KJV) #shorts"
+  },
+  {
+   "id": "EfFtGL9TQCQ",
+   "channelTitle": "Sleepy Scripture",
+   "subscriberCount": 33,
+   "viewCount": 367,
+   "duration": "PT35S",
+   "publishedAt": "2026-10-25T07:02:28Z",
+   "title": "\"The LORD is my light and my salvation; whom shall I fear?\" | Psalm 27 (KJV) #shorts"
+  }
+ ]
+}
