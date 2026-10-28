@@ -25,7 +25,8 @@ LIMIT_HINTS = ("you've hit the", "you have hit the", "you've reached", "you have
 CHALLENGE_HINTS = ("verify you are human", "just a moment", "checking your browser", "unusual activity",
                    "are you a robot", "complete the security check")
 LICENCE = {
-    "terms": "OpenAI Terms of Use (https://openai.com/policies/terms-of-use/), section 'Content', 'Ownership of content'",
+    "terms": "OpenAI Terms of Use (https://openai.com/policies/terms-of-use/, effective January 1, 2026, read "
+             "2026-10-28), 'Ownership of content'",
     "ownership": "\"As between you and OpenAI, and to the extent permitted by applicable law, you (a) retain your "
                  "ownership rights in Input and (b) own the Output. We hereby assign to you all our right, title, "
                  "and interest, if any, in and to Output.\"",

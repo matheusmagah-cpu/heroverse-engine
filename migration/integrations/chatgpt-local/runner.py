@@ -277,7 +277,10 @@ def cmd_image(args):
 
 def cmd_job(args):
     """The bridge's PC side: a job written by a cloud agent (bridge.py job) names its refs by URL and sha256."""
-    job = json.loads(Path(args.job).read_text(encoding="utf-8"))
+    try:
+        job = json.loads(Path(args.job).read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:   # E143: a missing or broken job file is a named refusal, not a traceback
+        raise Stop(2, f"JOB_UNREADABLE {args.job}: {type(e).__name__}") from None
     paths = []
     for r in job.get("refs", []):
         dest = REFS / r["name"]

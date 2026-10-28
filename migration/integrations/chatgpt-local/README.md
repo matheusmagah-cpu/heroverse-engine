@@ -29,7 +29,8 @@ Exit codes: 0 ok, 2 job invalid, 3 not logged in, 4 challenge, 5 usage limit, 6 
 1. In the repository: `python3 migration/integrations/chatgpt-local/bridge.py job <still record> "<subject>"
    <approved ref records...> --ref-commit <main sha>` prints the job (prompt = identity line + the still's prompt,
    refs by raw URL and sha256).
-2. Desktop Commander: `write_file C:\HeroVerse\chatgpt-runner\jobs\<id>.json`, then `start_process`
+2. Desktop Commander: `create_directory C:\HeroVerse\chatgpt-runner\jobs` (once; write_file does not create
+   folders), `write_file C:\HeroVerse\chatgpt-runner\jobs\<id>.json`, then `start_process`
    `...\python.exe ...\runner.py job ...\jobs\<id>.json`, and `read_process_output` until `IMAGE_SAVED` or a stop line.
 3. Review: `read_file` the image (Desktop Commander shows it) and its record; the record is text, so it can be
    committed directly. The image reaches the repository with `bridge.py push <id>` (gh on the PC) as a DRAFT
