@@ -324,12 +324,13 @@ class ReviewOf468(Scratch):
         self.assertTrue(any(p.startswith("KEEPER_SHARE") and p.endswith("(measured)") for p in problems), problems)
 
     def test_an_unfrozen_story_qa_blocks_the_long_preflight(self):
-        saved = lpc.QA_SHA256
-        lpc.QA_SHA256 = "0" * 64
+        # the arc-01 long is measured by story QA v4 since 28/10: unfreeze whichever version it declares
+        saved = lpc.QA_SHA256, lpc.QA_V4_SHA256
+        lpc.QA_SHA256 = lpc.QA_V4_SHA256 = "0" * 64
         try:
             r = pf.preflight(LONG, setups=[], today_images=0)
         finally:
-            lpc.QA_SHA256 = saved
+            lpc.QA_SHA256, lpc.QA_V4_SHA256 = saved
         self.assertTrue(any(b.startswith("PLAN QA_NOT_FROZEN") for b in r["blockers"]), r["blockers"])
 
     def test_check_probe_and_probe_queue_are_wired_for_the_long(self):

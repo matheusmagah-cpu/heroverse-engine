@@ -9,6 +9,8 @@
  "passage": "Genesis 1:1-3:24 (KJV, public domain)",
  "aspect_ratio": "16:9",
  "burned_captions": false,
+ "criteria": "story-qa-criteria-v4",
+ "ambience": "the wild open land of the garden: a soft wind through the trees and a few distant birds",
  "people": "Adam, Eve and the serpent are APPROVED and appear with their look word for word, the same entries as the Shorts. God speaks only as a voice-over over storm, light, rain or wind. The serpent is silent on screen: its words are the Keeper's narration (story QA v3: every talking clip passes lipsync_check, which reads a human face). The Keeper narrates and is on screen only for the promise, the insight and the close.",
  "chapters": [
   {
@@ -580,7 +582,8 @@
    "lines": [
     4
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-promise-2",
@@ -589,7 +592,8 @@
    "lines": [
     5
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-promise-3",
@@ -598,7 +602,8 @@
    "lines": [
     6
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "s-c1-deep",
@@ -783,7 +788,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow tilt up. The sun sinks below the horizon as the moon rises and the first stars appear over a calm sea. Dusk turning to night. Vast and ordered. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c1"
+   "chapter": "c1",
+   "ambience": "a calm sea at dusk: gentle waves on the shore and a soft evening wind"
   },
   {
    "id": "s-c1-stars",
@@ -2323,7 +2329,8 @@
    "characters": [],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
    "beat": "chapter",
-   "chapter": "c4"
+   "chapter": "c4",
+   "ambience": "the garden at nightfall: a hard wind driving dust across the ground"
   },
   {
    "id": "s-c4-dust",
@@ -2718,7 +2725,8 @@
    "lines": [
     92
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes thoughtful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes thoughtful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-insight-2",
@@ -2727,7 +2735,8 @@
    "lines": [
     93
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "s-ki-trees",
@@ -2754,7 +2763,8 @@
    "lines": [
     95
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "s-ki-coats",
@@ -2781,7 +2791,8 @@
    "lines": [
     97
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "s-ki-valley",
@@ -2826,7 +2837,8 @@
    "lines": [
     100
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "s-ki-leave",
@@ -2853,7 +2865,8 @@
    "lines": [
     102
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-insight-6",
@@ -2862,7 +2875,8 @@
    "lines": [
     103
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-insight-9",
@@ -2871,7 +2885,8 @@
    "lines": [
     104
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-insight-5",
@@ -2880,7 +2895,8 @@
    "lines": [
     105
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-close-1",
@@ -2889,7 +2905,8 @@
    "lines": [
     106
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   },
   {
    "id": "k-close-2",
@@ -2898,7 +2915,8 @@
    "lines": [
     107
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   }
  ]
 }
