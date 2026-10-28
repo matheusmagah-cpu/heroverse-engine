@@ -1,0 +1,32 @@
+{
+ "version": "shorts-runway-v1",
+ "written_at": "2026-10-28T01:30:00Z",
+ "owner": "28/10: Shorts never stop; use what exists, make the rest another way at the same quality; never loosen the system",
+ "slots_wanted": ["2026-10-28T23:30:00Z", "2026-10-29T13:30:00Z", "2026-10-29T23:30:00Z"],
+ "scheduled_from_28_10": [],
+ "next_episode": {
+  "id": "genesis-09-short",
+  "why": "E112 order: genesis-08 is recorded; genesis-09 has the only complete Short plan (PR #461 wording, plan_check --strict: only STILL_NOT_APPROVED x32). genesis-10 (PR #416) builds only after genesis-09 is recorded.",
+  "inventory": {
+   "pavo_reuse": "none: no clean clip of any genesis-09 request (sources report 28/10 01:20Z: pavo_reuse 0)",
+   "stills": "none reusable: the 3 matching run-2026102705 candidates (s-voice x2, s-laugh) were made with the pre-E125 ark references (sha256 2972b1e3.../94134e79...), the approved refs are ba2d1ef1.../12fb15fe...; runs 01-04 were made from older prompts",
+   "thumbnail": "run 20261027: 2 candidates below 9.5 (evidence/thumbs/genesis-09-short-20261027.json); spec revised 28/10 to its findings"
+  },
+  "sources_plan": {
+   "ark_stills_pavo": ["s-voice", "s-laugh", "s-finished", "s-pairs", "s-birds", "s-shrug", "s-music", "s-enter", "s-wife", "s-shut", "s-latecomer", "s-deep", "s-lift", "s-float", "s-fists", "s-peak", "s-drift"],
+   "non_ark_stills_flux": ["s-sky", "s-lions", "s-windows", "s-springs", "s-tents", "s-climb", "s-run", "s-inside", "s-hills", "s-carry", "s-peak-crowd", "s-feet", "s-lamp", "s-hull", "s-feed"],
+   "pavo_video_only": {"shots": ["s-voice", "s-noah-door", "s-noah-ramp", "k-insight", "k-question", "k-close"],
+                       "why": "spoken (God's voice-over) or a character (Noah by reference, the Keeper plan B): no free source keeps the floor (R2/R3)"},
+   "still_motion_r3": "the other 31 silent, character-free shots from their APPROVED stills when the day's Pavo budget does not reach them (episode_build.py approve-source, Claude's review >= 9.5 each); needs PR #483 (E132: a Short's fallback at 1080x1920)"
+  },
+  "pavo_units": {
+   "ark_stills": "17 (one candidate each) to 34 (two)",
+   "thumbnail": "1-2",
+   "shot_probe_6_shots_attempts_1": {"mean": 15, "dispatch_guard_worst": 54},
+   "total_min": "about 33 mean, the guard needs 54 free for the probe batch",
+   "shared_with": "arc-01 long (priority); one shot-probe at a time repository-wide"
+  },
+  "flux_images": "30 (15 stills x 2 candidates) of the ~44 a day, scene-stills.yml, after PR #461 is on main",
+  "path": ["merge #461 (+ #483)", "scene-stills.yml FLUX 15 shots x2", "Pavo MCP ark stills 17 + thumbnail 2", "Claude review, scene_stills approve + thumbs approve (one PR)", "preflight (local Kokoro) + shot-probe s-voice,s-noah-door,s-noah-ramp,k-insight,k-question,k-close", "approve-shot + approve-source (one PR)", "episode.yml, confirmation review, record PR (slot), publish-episode.yml"]
+ }
+}
