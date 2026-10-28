@@ -4,7 +4,7 @@
  "episode": "arc-01-long",
  "arc": "arc-01",
  "pilot": "pilot-015",
- "status": "DRAFT (2026-10-26): design slice 1, not built. Measure the voice locally before any build.",
+ "status": "DRAFT (2026-10-28): Keeper native allocation aligned, not built. Refresh measured voice/reference preflight and native approvals before any build; no quota or readiness is asserted.",
  "title": "Creation, Eden and the Fall: How a Very Good World Broke | Genesis 1-3 Bible Story (KJV)",
  "passage": "Genesis 1:1-3:24 (KJV, public domain)",
  "aspect_ratio": "16:9",
@@ -584,8 +584,7 @@
    "lines": [
     4
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a calm welcoming look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-promise-2",
@@ -594,8 +593,7 @@
    "lines": [
     5
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, one eyebrow slightly raised. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-promise-3",
@@ -604,8 +602,7 @@
    "lines": [
     6
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a faint knowing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "s-c1-deep",
@@ -2271,8 +2268,7 @@
    "lines": [
     93
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "s-ki-trees",
@@ -2303,8 +2299,7 @@
    "lines": [
     95
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "s-ki-coats",
@@ -2327,9 +2322,7 @@
    "lines": [
     97
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro",
-   "still_of": "k-promise-2"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "s-ki-valley",
@@ -2374,8 +2367,7 @@
    "lines": [
     100
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "s-ki-leave",
@@ -2407,8 +2399,7 @@
    "lines": [
     102
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-insight-6",
@@ -2417,8 +2408,7 @@
    "lines": [
     103
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-insight-9",
@@ -2427,8 +2417,7 @@
    "lines": [
     104
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-insight-5",
@@ -2437,9 +2426,7 @@
    "lines": [
     105
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro",
-   "still_of": "k-promise-3"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-close-1",
@@ -2448,8 +2435,7 @@
    "lines": [
     106
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-close-2",
@@ -2458,24 +2444,27 @@
    "lines": [
     107
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos.",
-   "audio_route": "kokoro"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up from the chest up, his face large in the centre of the frame, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   }
  ],
  "source_design": {
   "pavo_talking": [
    "s-open",
    "k-promise-1",
+   "k-promise-2",
+   "k-promise-3",
    "s-c2-adam",
    "s-c4-adam",
    "s-c4-blame",
    "k-insight-1",
    "k-insight-2",
    "k-insight-3",
+   "k-insight-4",
    "k-insight-7",
    "k-insight-8",
    "k-insight-6",
    "k-insight-9",
+   "k-insight-5",
    "k-close-1",
    "k-close-2"
   ],
@@ -2584,8 +2573,6 @@
    "s-co-adam",
    "s-co-hide",
    "s-co-exile",
-   "k-promise-2",
-   "k-promise-3",
    "s-c1-shore",
    "s-c1-adam-light",
    "s-c1-dawn",
@@ -2608,12 +2595,10 @@
    "s-c4-eve-look",
    "s-c4-leave",
    "s-c4-sword2",
-   "k-insight-4",
    "s-ki-gate",
-   "s-ki-face",
-   "k-insight-5"
+   "s-ki-face"
   ],
-  "note": "owner 28/10 (integrated plan): Pavo assets where they serve best, Pavo video for the shots still to make (key beats first, each with a named fallback in `fallbacks`), animated stills for the rest (approved Pavo stills and FLUX frames, continuous motion), licensed footage; Kokoro voices every line without a native clip"
+  "note": "Owner 28/10: all 14 on-camera Keeper blocks require Pavo native speech with the canonical Keeper reference; God stays Kokoro and unseen. Reuse matching approved native bytes first. Keeper native clips are not interchangeable with the former Kokoro/still-motion fallbacks. Non-Keeper source choices remain unchanged here; no new generation is authorized without fresh preflight, live zero-cost/capacity guards and real review."
  },
  "fallbacks": {
   "s-open": {
@@ -2623,8 +2608,8 @@
    "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
   },
   "k-promise-1": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "s-c1-sea-life": {
    "source": "merge",
@@ -2906,8 +2891,8 @@
    "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
   },
   "k-insight-2": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "s-ki-bite": {
    "source": "still_motion",
@@ -2916,40 +2901,60 @@
    "why": "approved still >= 315 s from its other uses; the line must still be followed (approve-source >= 9.5)"
   },
   "k-insight-3": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "s-ki-coats": {
    "source": "merge",
    "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
   },
   "k-insight-7": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "s-ki-leave": {
    "source": "merge",
    "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
   },
   "k-insight-8": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "k-insight-6": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "k-insight-9": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "k-close-1": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   },
   "k-close-2": {
-   "source": "merge",
-   "why": "no approved still far enough: its time goes to the run's other shots (holds <= 12 s) or a reviewed footage clip"
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
+  },
+  "k-promise-2": {
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
+  },
+  "k-promise-3": {
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
+  },
+  "k-insight-1": {
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
+  },
+  "k-insight-4": {
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
+  },
+  "k-insight-5": {
+   "source": "wait_pavo_native",
+   "why": "Keeper speech must retain the canonical native voice. Reuse an approved matching native clip; otherwise wait for a valid native probe and review. No automatic Kokoro or still-motion substitution."
   }
  }
 }

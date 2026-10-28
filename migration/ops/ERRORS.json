@@ -2288,6 +2288,19 @@
     "contains": "def test_e208_review_schema_and_finite_scores_are_required_at_consumption",
     "covers": ["fragile-input"]
    }
+  },
+  {
+   "id": "E209",
+   "date": "2026-10-28",
+   "class": "direction",
+   "prior": [],
+   "error": "The arc-01 draft retained the earlier Kokoro contingency after the owner required native Pavo speech for the Keeper: 13 of 14 Keeper blocks still routed to Kokoro, four were allocated to still motion and two reused another still. A structural plan PASS did not establish alignment with that newer direction.",
+   "fix": "Align all 14 Keeper blocks to the existing native route and canonical Keeper voice reference, with every Keeper source allocated to talking video. Preserve God on Kokoro, every non-Keeper shot, narration, approved media and frozen criteria. Keeper contingency now waits for matching approved native speech instead of silently changing voice or substituting a still. Fresh measured preflight, live zero-cost quota guards and genuine review remain mandatory; no generation or production readiness is claimed.",
+   "antidote": {
+    "file": "migration/production/bible/test_long_plan_check.py",
+    "contains": "def test_e209_keeper_native_plan_cannot_silently_restore_kokoro_or_still_fallbacks",
+    "covers": ["direction"]
+   }
   }
  ]
 }
