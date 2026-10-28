@@ -6,6 +6,7 @@ name: HeroVerse requests (start a workflow by committing a request file)
 # crash or failed acknowledgement push. Reconcile their workflow/run history, request hash and base commit
 # read-only before explicitly resolving them. This is not an exactly-once guarantee from the provider.
 on:
+  workflow_call:
   push:
     branches: [main]
     paths: ['migration/requests/*.json']

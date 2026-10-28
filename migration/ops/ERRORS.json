@@ -2340,6 +2340,19 @@
     "contains": "def test_e212_short_close_does_not_claim_unpublished_delivery",
     "covers": ["direction"]
    }
+  },
+  {
+   "id": "E213",
+   "date": "2026-10-28",
+   "class": "pr-late",
+   "prior": ["E207"],
+   "error": "The heartbeat's pilot queue did not hand qualified Bible plans to episode.yml or long-build.yml. The runner could exit QUEUE_EMPTY successfully while Bible-plan work remained outside its queue. Evidence discovery alone closed neither this transition nor reviewer execution.",
+   "fix": "Use the existing heartbeat to check current strict plan, preflight and ordering/publication inputs, then persist at most one request in the existing request queue. Invoke that same durable-claim dispatcher as a reusable workflow, because a GITHUB_TOKEN push does not itself start another push workflow. Hold incomplete inputs, active runs, evidence branches and prior claimed/acknowledged requests; never retry an ambiguous build or write review/approval. No new scheduler, provider generation, parallel ledger or claim of ten-stage autonomy.",
+   "antidote": {
+    "file": "migration/ops/test_production_handoff.py",
+    "contains": "def test_e213_ready_plan_reaches_existing_build_without_another_chat_command",
+    "covers": ["pr-late"]
+   }
   }
  ]
 }
