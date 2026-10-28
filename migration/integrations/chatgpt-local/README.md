@@ -3,8 +3,8 @@
 Owner, 2026-10-28: "Faça pelo computador mesmo o MCP": still images from ChatGPT in the owner's own account (no
 per-image limit on his plan), with our approved character stills as references. chatgpt.com answers cloud IPs with
 a Cloudflare challenge, so this runs on the owner's Windows PC (device "Matheus") and the cloud agents reach it
-through Desktop Commander. The cloud backup for when the PC is off is `../gemini/` (its free key cannot make images
-today: `evidence/gemini-image/20261028-free-tier.json`).
+through Desktop Commander. There is no cloud backup: the free Gemini key's image limit is 0
+(`evidence/gemini-image/20261028-free-tier.json`), so that route was not kept.
 
 ## Setup (once)
 - Installed at `C:\HeroVerse\chatgpt-runner` (venv with Playwright and mcp, the installed Chrome).

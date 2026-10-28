@@ -22,5 +22,5 @@
   }
  ],
  "daily_free_limit": 0,
- "decision": "No image is made on this key. Billing stays disabled (owner: no new spending). image.py and gemini-image.yml stay as the tested route; a run on this key ends with QUOTA_EXHAUSTED (exit 3) and saves nothing."
+ "decision": "No image is made on this key and billing stays disabled (owner: no new spending). The route (image.py, gemini-image.yml, tested in PR #516) was removed before merge: nothing unused stays in the project."
 }

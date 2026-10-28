@@ -745,3 +745,5 @@ latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has 
   a 48 h verdict above the median. The Short-format change of part 7 is the one effect worth isolating (one
   hypothesis at a time). The packaging follows the validated hygiene rows only; no driver is validated
   (package mining 27/10). vidIQ: 40 credits (balance 3,261 before), no generation.
+
+- **2026-10-28, Gemini image free tier = 0, route not kept.** Every image model on the free AI Studio key answered 429 with limit 0 (`evidence/gemini-image/20261028-free-tier.json`); stills from ChatGPT run on the owner's PC (`integrations/chatgpt-local/`).
