@@ -1,23 +1,12 @@
-name: HeroVerse Gemini image (one candidate from approved stills, free AI Studio key; refuses on quota or billing)
+name: HeroVerse Gemini image PROBE (one-off test branch, never merged) (one candidate from approved stills, free AI Studio key; refuses on quota or billing)
 # Owner, 2026-10-28: a cloud image route that does not depend on the PC. migration/integrations/gemini/image.py sends
 # the request's approved stills inline at full resolution with the still's prompt and asks for ONE 16:9 image. The key
 # (secret HERO_GEMINI_API_KEY, billing disabled) is only in the environment of the one step that calls the API and
 # goes in a request header; nothing prints it. A quota or billing answer ends the run with its name; billing is never
 # enabled. The candidate (DRAFT) and its record go to branch claude/gemini-image-<run> for Claude's still review.
 on:
-  workflow_dispatch:
-    inputs:
-      mode:
-        description: models = list the image models the key can see; generate = one image from the request
-        type: choice
-        default: generate
-        options: [generate, models]
-        required: true
-      request:
-        description: request file under migration/integrations/gemini/requests/
-        type: string
-        default: migration/integrations/gemini/requests/arc-01-long-s-c3-eve-near.json
-        required: true
+  push:
+    branches: [claude/gemini-image-probe-1]
 permissions:
   contents: write
 concurrency:
@@ -29,8 +18,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
-      MODE: ${{ inputs.mode }}
-      REQUEST: ${{ inputs.request }}
+      MODE: generate
+      REQUEST: migration/integrations/gemini/requests/arc-01-long-s-c3-eve-near.json
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Inputs and offline tests
@@ -46,7 +35,7 @@ jobs:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
           mkdir -p "$RUNNER_TEMP/out"
-          if [ "$MODE" = models ]; then python3 -I -B migration/integrations/gemini/image.py models; exit $?; fi
+          python3 -I -B migration/integrations/gemini/image.py models || true
           python3 -I -B migration/integrations/gemini/image.py generate "$REQUEST" "$RUNNER_TEMP/out"
       - name: Candidate to its branch for review
         if: env.MODE == 'generate'
