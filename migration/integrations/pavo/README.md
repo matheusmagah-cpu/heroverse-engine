@@ -154,11 +154,12 @@ charged). 31 submissions of run 2026102705 were spent on nothing. The adapter no
 
 ### The quota is a rolling window, not a UTC day (E136, E138, 2026-10-28)
 
-Measured by the arc-01 long agent on 28/10: Pavo's free quota does **not** reset at 00:00 UTC. About 35-55 jobs come
-back when the burst's own jobs age out, about 4-5 h after the burst began, and sustained throughput is at most ~9-12
-jobs an hour. Corrected the same day: it is **not** "back ~3 h after a stop" (the 06:44Z probe failed 3.4 h after
-the 03:22Z stop), and not a fixed reset at 16:00Z either (the 27/10 22:15Z stop was back by 01:53Z); the stops,
-decoded from the job ids, are in `evidence/pavo/20261028/quota-observation.json`. The owner's app hint ("try again
+Measured by the arc-01 long agent on 28/10: Pavo's free quota does **not** reset at 00:00 UTC. When it comes
+back is **still open** (28/10 09:48Z): it is not "back ~3 h after a stop" (the 06:44Z probe failed 3.4 h
+after the 03:22Z stop) and not "about 4-5 h after the burst began" (the 09:47Z probe failed 7.9 h after it).
+Still consistent: a fixed daily image allowance resetting at 16:00Z (00:00 China), about 120 units, with video
+counted apart; or a ~24 h rolling window. Sustained throughput of ~9-12 jobs an hour is not to be planned on. The
+stops, decoded from the job ids, are in `evidence/pavo/20261028/quota-observation.json`. The owner's app hint ("try again
 in N hours") is the exact signal when it can be read. The guard below is unchanged. On 27/10, about 180 jobs ran in 15.7 h: the
 2026-10-27 reconstruction in `evidence/pavo/image-ledger.json` plus shot-probe record 40592173923. A still and a video
 each count as about one job. On 28/10 the quota stopped again at ~03:26 UTC after about 55 MCP units and the Actions
