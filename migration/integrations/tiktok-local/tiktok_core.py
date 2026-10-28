@@ -102,9 +102,11 @@ def plan(replies, ledger, own_videos, now, run_cap=RUN_CAP, policy=None):
     todo, refused, seen = [], [], set()
     for item in replies:
         cid = str(item.get("comment_id", ""))
-        if cid in ledger.get("actions", {}) or cid in seen or item.get("decision") == "SKIP":
+        if cid in ledger.get("actions", {}) or cid in seen:
             continue
         bad = reply_problems(item, own_videos, policy)
+        if item.get("decision") == "SKIP" and not bad:
+            continue   # recorded through `skips`
         if bad:
             refused.append({"comment_id": cid, "problems": bad})
             continue
