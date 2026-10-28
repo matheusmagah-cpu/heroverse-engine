@@ -118,6 +118,17 @@ def problems(episode, video=None):
     return out + description_problems(episode["description"])
 
 
+def record_video_id(episode_path, episode, vid):
+    """E140: the episode record carries the id of the video published from it (live_intel and the daily pass read it
+    there); publish-episode.yml commits the record with the ledger. A record naming another video is refused."""
+    if episode.get("video_id") == vid:
+        return
+    if episode.get("video_id"):
+        raise SystemExit(f"EPISODE_VIDEO_ID_MISMATCH record {episode['video_id']}, ledger {vid}")
+    episode["video_id"] = vid
+    Path(episode_path).write_text(json.dumps(episode, indent=1, ensure_ascii=False) + "\n")
+
+
 def main(episode_path, video, ledger_path, receipt_path, publish_at=None):
     episode = json.loads(Path(episode_path).read_text())
     bad = problems(episode, video)
@@ -145,6 +156,7 @@ def main(episode_path, video, ledger_path, receipt_path, publish_at=None):
         entry.update({"video_id": pv.upload(s, video, body)["id"], "uploaded_at": datetime.now(timezone.utc).isoformat()})
         save()   # durable before any further step
     vid = entry["video_id"]
+    record_video_id(episode_path, episode, vid)
     if thumb_required(episode) and not entry["steps"].get("thumbnail"):
         image = thumbs().approved_image(episode["id"])
         bad = thumbs().publish_problems(episode["id"], episode.get("format", "short"), image)

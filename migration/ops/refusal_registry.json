@@ -362,6 +362,10 @@
    "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
    "note": "E106: episode_build.py check-record runs publish_episode's own rules on the record before publish-episode.yml is dispatched"
   },
+  "EPISODE_VIDEO_ID_MISMATCH": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_episode.py::def test_e140_the_upload_writes_its_video_id_into_the_episode_record"
+  },
   "ESPEAK_DATA_MISSING": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::FACE_CHECK_BLIND"

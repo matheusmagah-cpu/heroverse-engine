@@ -1518,6 +1518,29 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E140",
+   "date": "2026-10-28",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129"
+   ],
+   "error": "Daily analysis 28/10 (#507): mining/live_intel.py judged only genesis-01..04. genesis-05..08 were public (their ids in publish/ledger.json), but their episode records had no video_id, and rows() skipped them with `continue` and no message. Root cause: no step owned the record's video_id. publish_episode.py wrote the id only to the ledger and the receipt, and publish-episode.yml committed only those. The ids of genesis-01..04 had been typed in by hand when live_intel was added (#341), so the gap stayed hidden until the first episode published after it.",
+   "fix": "publish_episode.record_video_id writes the uploaded id into the episode record (refusing EPISODE_VIDEO_ID_MISMATCH when the record names another video), and publish-episode.yml commits the record with the ledger. live_intel.main reads publish/ledger.json and refuses EPISODE_VIDEO_ID_MISSING / _MISMATCH before writing anything, instead of skipping. genesis-05..08 got their ids from the ledger. Class antidote: an instrument refuses a published item it cannot read; it never drops it in silence. The store that holds the fact (the ledger) is checked against the copy the instrument reads.",
+   "antidote": {
+    "file": "migration/mining/test_live_intel.py",
+    "contains": "def test_e140_a_published_episode_without_its_video_id_is_refused_not_skipped",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }
