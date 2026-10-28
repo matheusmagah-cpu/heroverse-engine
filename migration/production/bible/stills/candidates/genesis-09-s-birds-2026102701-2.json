@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-birds-2026102701-2",
+ "still": "genesis-09-s-birds",
+ "episode": "genesis-09-short",
+ "shot": "s-birds",
+ "run": "2026102701",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Flocks of birds in pairs line the flat plank roof of the vast ark, its whole hull smeared pitch-black, three young men in silhouette standing on the roof looking up, more pairs of birds wheeling in the sky. Morning, a grey sky full of wings. Wondrous and still. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Flocks of birds in pairs line the flat plank roof of the vast ark, its whole hull smeared pitch-black, three young men in silhouette standing on the roof looking up, more pairs of birds wheeling in the sky. Morning, a grey sky full of wings. Wondrous and still. The ark is one long, low, box-shaped wooden hull with straight sides of rough planks and flat square ends, the same low height from end to end. The ark has no mast, sail, prow, figurehead, funnel or smokestack, no smoke rising from it and no band along its waterline. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373452479435964224",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-birds-2026102701-2.jpg",
+ "sha256": "1d66f5d5a318e8b6bf1c1e3f01c948ab7c4e785e5e0e14e2bef65a743f8ead80"
+}

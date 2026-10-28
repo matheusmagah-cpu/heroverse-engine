@@ -1161,13 +1161,10 @@ class ArkLook(unittest.TestCase):
         # the flood's period sentence alone ("the great wooden ark") does not make a shot show the ark
         flood = f"{pc.PERIODS['the-flood']['setting']} {pc.PERIODS['the-flood']['exclude']}"
         self.assertEqual(pc.prop_shot_problems(1, dict(shot, prompt=f"Rain on the tents. {flood}"), p), [])
-        # genesis-09-short on main is refused for exactly this until #461's image-first plan lands, and for E123's
-        # wording (E113's ark sentences and flood sentence) until it is reworded
-        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
+        # genesis-09-short (image first, E123 wording): every scene that shows the ark starts from a still; what
+        # remains is only Claude's review of the stills
         g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
-        if not all(s.get("first_frame") for s in g09["shots"] if s["kind"] == "scene" and not s.get("characters")):
-            self.assertLessEqual(set(codes(pc.check(g09))),
-                                 {"PROP_SHOT_WITHOUT_STILL", "ARK_LOOK_CONFLICT", "SCENE_PERIOD_MISSING"})
+        self.assertLessEqual(set(codes(pc.check(g09))), {"STILL_NOT_APPROVED"})
 
     def test_the_look_is_the_shape_so_the_shot_names_no_ship_beside_it(self):
         for body in ("The ark, a long, low wooden ship, stands on the hill.", "The ark's mast leans in the wind.",
@@ -1220,17 +1217,7 @@ class ArkLook(unittest.TestCase):
             for f in sorted((HERE / folder).glob("*.json")):
                 pl = json.loads(f.read_text())
                 if isinstance(pl.get("shots"), list):
-                    # E122: genesis-09-short on main still makes its ark shots from text; it is refused (only for
-                    # that) until #461's image-first plan gives each a still made with the ark's references
                     got = pc.plan_prop_problems(pl, pl["shots"])
-                    if f.name == "genesis-09-short.json" and not all(s.get("first_frame") for s in pl["shots"]
-                                                                    if s["kind"] == "scene" and not s.get("characters")):
-                        got = [x for x in got if not x.startswith("PROP_SHOT_WITHOUT_STILL")]
-                    if f.name == "genesis-09-short.json" and any(ARK_LOOK in (s.get("prompt") or "")
-                                                                for s in pl["shots"]):
-                        # E123: on main genesis-09 still holds E113's wording; refused until it is reworded.
-                        # TODO remove this allowance when #461's genesis-09 plan is reworded to ARK_PHRASE
-                        got = [x for x in got if not x.startswith("ARK_LOOK_CONFLICT")]
                     self.assertEqual(got, [], f.name)
         def shown(s):
             # image first (owner, 27/10): a shot that starts from a still shows the ark the still's prompt draws (its
@@ -1239,7 +1226,9 @@ class ArkLook(unittest.TestCase):
             def ark(prompt):   # E113's sentences (parts 1-8) or E123's phrase (part 9 on)
                 return ARK in prompt or pc.has_phrase(prompt, pc.ARK_PHRASE)
             return ark(s["prompt"]) or bool(still and ark(still["prompt"]))
-        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 22)):
+        # genesis-09 (E123): 17 stills name the ark by its phrase; the interiors (s-inside, s-lamp, s-hull) show a
+        # plank hold, and s-noah-door / s-noah-ramp are Noah's reference shots, which cannot take a still (E122)
+        for ep, expect in (("genesis-08-short", 3), ("genesis-09-short", 17)):
             shots = json.loads((HERE / "plans" / f"{ep}.json").read_text())["shots"]
             self.assertEqual(sum(shown(s) for s in shots), expect, ep)
         # genesis-08's three shots still rejected carry the look (in their prompt or the still they start from), seconds kept
@@ -1271,7 +1260,7 @@ class ArkLook(unittest.TestCase):
         # the same field in any other plan is refused, and its shots are checked
         g09 = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
         g09["ark_look_grandfathered"] = ["s-voice"]
-        g09["shots"][0]["prompt"] = g09["shots"][0]["prompt"].replace(ARK, "")
+        g09["shots"][0]["prompt"] = "The ark stands on the hill. " + g09["shots"][0]["prompt"]
         got = codes(pc.check(g09))
         self.assertIn("ARK_GRANDFATHER_REFUSED", got)
         self.assertIn("ARK_LOOK_CONFLICT", got)    # part 9: E123, the word "ark" itself is refused

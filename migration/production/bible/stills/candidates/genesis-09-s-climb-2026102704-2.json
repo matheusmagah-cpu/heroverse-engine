@@ -1,0 +1,56 @@
+{
+ "id": "genesis-09-s-climb-2026102704-2",
+ "still": "genesis-09-s-climb",
+ "episode": "genesis-09-short",
+ "shot": "s-climb",
+ "run": "2026102704",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Crowds in silhouette on a muddy slope in the rain, carrying children and leading goats on ropes, the valley below turned to water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Crowds in silhouette on a muddy slope in the rain, carrying children and leading goats on ropes, the valley below turned to water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373479718126944064",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373479718126944064",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373479718126944064",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-243c7bf3f9c3-0-bb69ff95c292.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-climb-2026102704-2.jpg",
+ "sha256": "3c0221a607c55e8b2201ac7d4594a664a158495220998e744da27ff408cb98f3"
+}

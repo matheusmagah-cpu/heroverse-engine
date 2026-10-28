@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-springs-2026102702-2",
+ "still": "genesis-09-s-springs",
+ "episode": "genesis-09-short",
+ "shot": "s-springs",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot, low angle. Muddy water rushes between collapsing tents, people seen from behind, faces not visible, wading in it to the waist, holding baskets above their heads. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot, low angle. Muddy water rushes between collapsing tents, people seen from behind, faces not visible, wading in it to the waist, holding baskets above their heads. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373455373653064384",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-springs-2026102702-2.jpg",
+ "sha256": "2ac645089687530b9209a962aa6b12a46c94ff274ef5beecbb52203e3ab301e3"
+}

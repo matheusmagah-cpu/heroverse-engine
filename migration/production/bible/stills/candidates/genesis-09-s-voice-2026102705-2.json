@@ -1,0 +1,56 @@
+{
+ "id": "genesis-09-s-voice-2026102705-2",
+ "still": "genesis-09-s-voice",
+ "episode": "genesis-09-short",
+ "shot": "s-voice",
+ "run": "2026102705",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Black rain clouds hang low over a dry valley where a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle stands alone on a hill, its roof empty and flat, a fork of lightning glowing deep inside the clouds. Dusk, the dry grass bent flat by a cold wind, dust hanging over the slopes. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Black rain clouds hang low over a dry valley where a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle stands alone on a hill, its roof empty and flat, a fork of lightning glowing deep inside the clouds. Dusk, the dry grass bent flat by a cold wind, dust hanging over the slopes. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373492698000997056",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373492698000997056",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373492698000997056",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-9a030da3de15-0-797ea6f7769c.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-voice-2026102705-2.jpg",
+ "sha256": "e8f7bb085c8e71dce15ffa7cd940062cd7b93095068ff64d91c53d18c367efed"
+}

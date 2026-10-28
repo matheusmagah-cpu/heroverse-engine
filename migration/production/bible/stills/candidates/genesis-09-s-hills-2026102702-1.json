@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-hills-2026102702-1",
+ "still": "genesis-09-s-hills",
+ "episode": "genesis-09-short",
+ "shot": "s-hills",
+ "run": "2026102702",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A crowd in silhouette packed on a hilltop, brown water risen below them, the last treetops just above it. Grey day, rain and drifting mist. Crowded and afraid. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. A crowd in silhouette packed on a hilltop, brown water risen below them, the last treetops just above it. Grey day, rain and drifting mist. Crowded and afraid. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373458255408347840",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-hills-2026102702-1.jpg",
+ "sha256": "42ddb209d4462aed14d90ed8839a1026aeb55f9a8cce7c07f5d5c834b6749b82"
+}

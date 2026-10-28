@@ -1,0 +1,29 @@
+{
+ "id": "genesis-09-s-feed-2026102703-1",
+ "still": "genesis-09-s-feed",
+ "episode": "genesis-09-short",
+ "shot": "s-feed",
+ "run": "2026102703",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot. Young women seen from behind, faces not visible, carrying armfuls of hay to the animals in their stalls in the grey daylight falling through a long gap under the roof beams, a dove asleep on a beam above. Grey day, soft light and long shadows. Tender and patient. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot. Young women seen from behind, faces not visible, carrying armfuls of hay to the animals in their stalls in the grey daylight falling through a long gap under the roof beams, a dove asleep on a beam above. Grey day, soft light and long shadows. Tender and patient. The ancient Near East in the days of the flood: the great wooden ark, the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373460945479744192",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-feed-2026102703-1.jpg",
+ "sha256": "19c738ec5f5280774409357294ade8c69e7989be082771b2bf5140104817452a"
+}

@@ -1,0 +1,56 @@
+{
+ "id": "genesis-09-s-laugh-2026102705-1",
+ "still": "genesis-09-s-laugh",
+ "episode": "genesis-09-short",
+ "shot": "s-laugh",
+ "run": "2026102705",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces turned away toward the crate, stands at the foot of a hill laughing up at a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the hilltop, the roof empty and flat, heads thrown back, a man in silhouette at the front with one arm flung out toward it. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium wide shot. A crowd seen from behind, faces turned away toward the crate, stands at the foot of a hill laughing up at a giant long rectangular wooden crate of rough planks smeared pitch-black, with a flat plank roof and flat square ends, as tall at both ends as in the middle, resting flat on the hilltop, the roof empty and flat, heads thrown back, a man in silhouette at the front with one arm flung out toward it. Hot afternoon, harsh sun on the black pitch. Scornful and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, 2 ark references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373492790137253376",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "pr-ark-side",
+   "sha256": "2972b1e361cd4b6a44ef95b9d16c378b4a2dcd4f4e4e524df2a1988b28e4a860"
+  },
+  {
+   "record": "pr-ark-three-quarter",
+   "sha256": "94134e794a8117454b3ea37b5f96c64d140d3039668bc5b70abc1e5ad3b93bee"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373492790137253376",
+   "input_images": 2,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "373492790137253376",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-b6ba69cc18c8-0-4b2772ed3ccc.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-laugh-2026102705-1.jpg",
+ "sha256": "a47601ba570f24a6077dee8159389b07cb814bffd295182bf87a7a13c8b55a55"
+}
