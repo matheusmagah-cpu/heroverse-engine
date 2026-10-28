@@ -1587,6 +1587,26 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E143",
+   "date": "2026-10-28",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125"
+   ],
+   "error": "ChatGPT image runner on the owner's PC: the first `runner.py job jobs\\<id>.json` ran before the job file existed (Desktop Commander's write_file had failed because jobs\\ did not exist yet) and died with a FileNotFoundError traceback, so the bridge got exit 1 and a stack trace instead of a named refusal. Root cause: cmd_job read the job file outside the runner's Stop handling.",
+   "fix": "cmd_job turns a missing or unparsable job file into Stop(2, JOB_UNREADABLE ...), logged and returned as exit 2 like every other refusal; README tells the bridge to create jobs\\ first (create_directory).",
+   "antidote": {
+    "file": "migration/integrations/chatgpt-local/test_chatgpt_core.py",
+    "contains": "def test_a_missing_or_broken_job_file_is_a_named_refusal",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }

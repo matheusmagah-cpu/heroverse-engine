@@ -757,3 +757,5 @@ latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has 
   - Unchanged: the 300 s repeat rule, exact KJV, the structure, audio/loudness/captions, the 9.5 reviews.
 - **arc-01** moves to v5 with an integrated source map (`source_design` + named `fallbacks`); the arc-01 exception
   file stays as it was. The Shorts opt in by naming v5 in their plan (their own frame, E132).
+
+- **2026-10-28, Gemini image free tier = 0, route not kept.** Every image model on the free AI Studio key answered 429 with limit 0 (`evidence/gemini-image/20261028-free-tier.json`); stills from ChatGPT run on the owner's PC (`integrations/chatgpt-local/`).
