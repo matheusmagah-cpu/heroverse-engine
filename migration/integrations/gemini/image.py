@@ -33,7 +33,9 @@ import urllib.request
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = "https://generativelanguage.googleapis.com/v1beta/"
-MODEL = "gemini-2.5-flash-image"     # "Nano Banana"; pricing page 2026-10-28: Free Tier image output "Not available"
+# "Nano Banana". Measured 2026-10-28 (evidence/gemini-image/20261028-free-tier.json): on the free key every image
+# model answers 429 with free-tier limit 0, as the pricing page says ("Not available" on the Free Tier)
+MODEL = "gemini-2.5-flash-image"
 MAX_REFS = 3
 TIMEOUT = 180
 INSTRUCTION = ("The attached images are approved stills of {subject}: keep the face, skin tone, eyes and hair exactly "

@@ -1,0 +1,26 @@
+{
+ "date": "2026-10-28",
+ "question": "Can the free AI Studio key (HERO_GEMINI_API_KEY, billing disabled) generate images through the Gemini API?",
+ "answer": "No. The key sees six image models, and every image request is refused with a free-tier limit of 0.",
+ "docs": {
+  "pricing": "https://ai.google.dev/gemini-api/docs/pricing (read 2026-10-28): Free Tier column, image output 'Not available' for gemini-2.5-flash-image, gemini-3.1-flash-image, gemini-3.1-flash-lite-image, gemini-3-pro-image",
+  "rate_limits": "https://ai.google.dev/gemini-api/docs/rate-limits (read 2026-10-28): per-tier limits are shown in AI Studio; IPM applies to the image models"
+ },
+ "runs": [
+  {
+   "run": 40672808281,
+   "branch": "claude/gemini-image-probe-1 (one-off probe; the PR's workflow with a push trigger)",
+   "models_visible": ["gemini-2.5-flash-image", "gemini-3-pro-image-preview", "gemini-3-pro-image",
+                      "gemini-3.1-flash-image-preview", "gemini-3.1-flash-image", "gemini-3.1-flash-lite-image"],
+   "model": "gemini-2.5-flash-image",
+   "result": "QUOTA_EXHAUSTED: HTTP 429 RESOURCE_EXHAUSTED; Quota exceeded for metric generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image"
+  },
+  {
+   "run": 40672918124,
+   "model": "gemini-3.1-flash-lite-image",
+   "result": "QUOTA_EXHAUSTED: HTTP 429 RESOURCE_EXHAUSTED; generate_content_free_tier_requests, limit: 0, model: gemini-3.1-flash-lite-image"
+  }
+ ],
+ "daily_free_limit": 0,
+ "decision": "No image is made on this key. Billing stays disabled (owner: no new spending). image.py and gemini-image.yml stay as the tested route; a run on this key ends with QUOTA_EXHAUSTED (exit 3) and saves nothing."
+}
