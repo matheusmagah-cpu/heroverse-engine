@@ -2,6 +2,39 @@
  "id": "arc-01-long-s-co-adam",
  "episode": "arc-01-long",
  "shot": "s-co-adam",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, watches her hand with wide uncertain eyes. The same garden at golden dusk, leaves moving in a light wind. Hesitant and still. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, watches her hand with wide uncertain eyes. The same garden at golden dusk, leaves moving in a light wind. Hesitant and still. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-co-adam.jpg",
+ "sha256": "45f421336e617c245b1956af8044a02fadb9e4e47ab703436bb0b179baefe144",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-co-adam-2026102801-2",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373663772222750528",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373663772222750528",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Adam close, uncertain eyes at golden dusk among leaves; rust garment and rope cord as his clips; the cold open's hesitation.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "ca3c1b2383e71743fe52ca048f66e3a09b05b9567b7d1f4ac76222b47cb4463d",
+  "references_sha256": "7c4e71ad8c08559c3dcd89ba9bddc60793dcd4150485a8d359026935e6a3f94d"
+ }
 }

@@ -1,0 +1,47 @@
+{
+ "id": "arc-01-long-s-c1-river-2026102801-1",
+ "still": "arc-01-long-s-c1-river",
+ "episode": "arc-01-long",
+ "shot": "s-c1-river",
+ "run": "2026102801",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, walks along a riverbank in the growing light. Early morning. Peace. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, walks along a riverbank in the growing light. Early morning. Peace. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 16:9, the characters' approved references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373665247015471744",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373665247015471744",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373665247015471744",
+   "status": "completed"
+  }
+ },
+ "upscaler": "none (native from Pavo), Lanczos to 1920x1080",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/arc-01-long-s-c1-river-2026102801-1.jpg",
+ "sha256": "996f2d0e72769f97ed5ce49fb28645e4e09abb844919582f073198e4a83fa830"
+}

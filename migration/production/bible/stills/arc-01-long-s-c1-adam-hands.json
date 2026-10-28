@@ -2,6 +2,39 @@
  "id": "arc-01-long-s-c1-adam-hands",
  "episode": "arc-01-long",
  "shot": "s-c1-adam-hands",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, opens his hands and looks at them as if for the first time. Soft morning light through leaves. Quiet wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, opens his hands and looks at them as if for the first time. Soft morning light through leaves. Quiet wonder. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-adam-hands.jpg",
+ "sha256": "da281549f3adde6665779f0416a8a0539177ff79fa043c952c7c7aafe9b087bc",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c1-adam-hands-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373664045158632064",
+   "input_images": 1
+  },
+  "job": {
+   "conversation_id": "373664045158632064",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "Adam (his reference face and beard) in the rust draped garment with the rope cord, hands open in soft morning light by a river; wonder reads, period clean.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "fddfb36c2601787d84c555edffdb613d48636de6db94abc83d70908193c67efc",
+  "references_sha256": "7c4e71ad8c08559c3dcd89ba9bddc60793dcd4150485a8d359026935e6a3f94d"
+ }
 }

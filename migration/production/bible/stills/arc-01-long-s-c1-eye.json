@@ -2,6 +2,43 @@
  "id": "arc-01-long-s-c1-eye",
  "episode": "arc-01-long",
  "shot": "s-c1-eye",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/arc-01-long-s-c1-eye.jpg",
+ "sha256": "ac2655e3cdb35e006f0e130da237666b841d5be6e095510e9cf2155b8b35f9f0",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "arc-01-long-s-c1-eye-2026102801-1",
+ "engine": "pavo",
+ "references": [
+  {
+   "record": "ch-serpent-three-quarter",
+   "sha256": "4fe6763d22559f7c3184d9b74b61e02f7d17b4835ecff99a1d3447f68b1e9ac3"
+  },
+  {
+   "record": "ch-serpent-full",
+   "sha256": "42d89a997dab4a3ae47cf51f8f4d903a1f53d0e72c33f904a4462e5d9037ad9b"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373664282418088640",
+   "input_images": 2
+  },
+  "job": {
+   "conversation_id": "373664282418088640",
+   "status": "completed"
+  }
+ },
+ "approved": {
+  "date": "2026-10-28",
+  "score": 9.5,
+  "note": "The serpent as its references (olive-bronze diamond scales, golden slit eyes, forked tongue) coiled on a branch; the first sight of it, watchful; a little brighter than dusk but menacing.",
+  "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+  "prompt_sha256": "b903b3ec8216e148c8a2d9c482e6a3891d53479e806bc10d0039819403cbfe58",
+  "references_sha256": "151530c2db6b133576b8c3157268bfd571fb6240885f50c1794b602455d1ec72"
+ }
 }

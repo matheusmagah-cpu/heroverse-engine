@@ -1,0 +1,51 @@
+{
+ "id": "arc-01-long-s-c1-both-2026102801-1",
+ "still": "arc-01-long-s-c1-both",
+ "episode": "arc-01-long",
+ "shot": "s-c1-both",
+ "run": "2026102801",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, in a rust-brown draped garment over a pale undyed wrap, stand together at the edge of a sunlit river. The valley in full morning light. Peace and promise. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, in a rust-orange draped wool garment with a rope cord over the shoulder, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, in a rust-brown draped garment over a pale undyed wrap, stand together at the edge of a sunlit river. The valley in full morning light. Peace and promise. The world at its making and the garden of Eden: untouched wild land, rivers, trees and open sky. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 16:9, the characters' approved references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "373664180374636608",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [
+  {
+   "record": "ch-adam-front",
+   "sha256": "37e0df4ccab6b053bb916c85c48262bb9a0181b2021e4ae542f9f1740a011c5e"
+  },
+  {
+   "record": "ch-eve-full",
+   "sha256": "b54fc108d9a2fc2d544cfa734a4636a00636f5a98412fa718720d1d78649b8bc"
+  }
+ ],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "373664180374636608",
+   "input_images": 2
+  },
+  "job": {
+   "conversation_id": "373664180374636608",
+   "status": "completed"
+  }
+ },
+ "upscaler": "none (native from Pavo), Lanczos to 1920x1080",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/arc-01-long-s-c1-both-2026102801-1.jpg",
+ "sha256": "1b3c1b0b7b4d9b6c4ee2d76c8b29a327bd6e6b1b99130b11c5b2048bd9662761"
+}
