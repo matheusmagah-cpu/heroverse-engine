@@ -147,7 +147,8 @@ def shot_probe(i):
     # review of #475: the worst case (every generation make_shot may spend), so a batch never starts it cannot finish
     units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
                                                                       worst=True)
-    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units}
+    return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units,
+            "short": plan.get("version") != "bible-long-plan-v1"}   # E138: the Shorts' share of the rolling quota
 
 
 def cf_images(i):
@@ -617,7 +618,7 @@ def pavo_actions_usage(api, today, now=None):
     sys.path.insert(0, str(ROOT / "migration" / "integrations" / "pavo"))
     import quota
     now = now or datetime.now(timezone.utc)
-    records, page = [], 1
+    records, shorts, page = [], [], 1
     while True:
         if page > BRANCH_PAGES:
             refuse("PAVO_BUDGET_UNREADABLE", f"more than {BRANCH_PAGES * 100} branches: delete merged probe branches "
@@ -643,10 +644,15 @@ def pavo_actions_usage(api, today, now=None):
             except (KeyError, ValueError, TypeError):
                 refuse("PAVO_BUDGET_UNREADABLE", f"{b['name']}: its record cannot be read")
             records.append((at, record))
+            m = quota.PROBE_BRANCH.fullmatch(b.get("name", ""))
+            if m and m.group(1).endswith("-short"):
+                shorts.append((at, record))
         if len(batch) < 100:
             break
         page += 1
-    return quota.combine(records, today)
+    usage = quota.combine(records, today)
+    usage["short_units"] = quota.combine(shorts, today)["units"]   # E138: the Shorts' share
+    return usage
 
 
 def pavo_budget(facts, api, today, now=None):
@@ -660,6 +666,13 @@ def pavo_budget(facts, api, today, now=None):
         fits = guard.check_batch(facts["pavo_units"])
     except quota.PavoError as exc:
         raise Refusal(str(exc)) from None
+    if facts.get("short"):   # E138: the Shorts take at most SHORTS_DAILY_JOBS jobs a UTC day, the long the rest
+        done = -(-int(usage.get("short_units") or 0) // quota.VIDEO_UNITS)
+        planned = -(-int(facts["pavo_units"]) // quota.VIDEO_UNITS)
+        if done + planned > quota.SHORTS_DAILY_JOBS:
+            refuse("PAVO_SHORTS_SHARE", f"{done} Short jobs today and {planned} planned (worst case) pass the Shorts' "
+                                        f"{quota.SHORTS_DAILY_JOBS} a day: split the batch or wait for the next UTC day "
+                                        "(the long has priority, E138)")
     return fits["used"]
 
 

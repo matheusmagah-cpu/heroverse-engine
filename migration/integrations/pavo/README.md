@@ -152,6 +152,28 @@ charged). 31 submissions of run 2026102705 were spent on nothing. The adapter no
   recent failed conversation ids and `suspended_until`; no credential or URL. Commit it with the run's evidence.
 - Read back every job before submitting many more: a `failed` read-back is a stop signal, not noise.
 
+### The quota is a rolling window, not a UTC day (E136, E138, 2026-10-28)
+
+Measured by the arc-01 long agent on 28/10: Pavo's free quota does **not** reset at 00:00 UTC. About 35-50 jobs come
+back ~3 h after a stop, and sustained throughput is ~9-12 jobs an hour. On 27/10, about 180 jobs ran in 15.7 h: the
+2026-10-27 reconstruction in `evidence/pavo/image-ledger.json` plus shot-probe record 40592173923. A still and a video
+each count as about one job. On 28/10 the quota stopped again at ~03:26 UTC after about 55 MCP units and the Actions
+runs: 10 of 11 stills submitted back to back read `failed` (E136). The rules this replaces are in the E128 section
+below, which is kept for history:
+
+- **No fixed daily total.** The stop is the read-back: two failed read-backs in a row suspend everything for 3 h, then
+  one probe goes, and a completed read-back lifts the suspension. Every generation is still counted, in the ledger and
+  in the probe records. Only an owner's explicit `PAVO_IMAGE_DAILY_CAP` caps a day (`PAVO_DAILY_CAP`).
+- **At most 2 unread jobs (E136).** A new submission waits while two of today's jobs are not read back
+  (`PAVO_UNREAD_JOBS`). Read each one back with `pavo_job` / `pavo_image_job`; never resubmit. A quota stop then costs
+  at most two submissions.
+- **One window per batch.** `quota.DAILY_CAP` (120 units) is only the largest batch one run may plan. `check_batch`
+  refuses a larger one with `PAVO_BUDGET_SHORT` (split it); what was used earlier today no longer refuses a batch.
+- **The owner's split.** The Shorts take at most `quota.SHORTS_DAILY_JOBS` (25) jobs a UTC day; the long has priority
+  over the rest. The dispatch guard counts today's Short shot-probe jobs (`claude/shot-probe-*-short-*` records) plus
+  the batch's worst case, and refuses with `PAVO_SHORTS_SHARE`. MCP stills for a Short are not told apart in the
+  ledger: the session counts them in its review evidence, within the same 25.
+
 ### Free model quota: one budget for stills and videos, MCP and Actions (E128, 2026-10-27)
 
 The free quota is the model quota, not the image tool's. A Flash video job makes an Agnes Image 2.5 Flash still inside
