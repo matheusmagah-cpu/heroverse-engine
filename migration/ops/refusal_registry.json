@@ -1808,6 +1808,10 @@
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"
   },
+  "SOURCE_CHARACTER_STILL": {
+   "class": "N",
+   "why": "owner exception 28/10 (arc-01 long only): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR); it refuses a character still not made with exactly the character's approved references (Pavo read-back), and generate_step refuses the same again from the approval"
+  },
   "SOURCE_MANIFEST_MISMATCH": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"

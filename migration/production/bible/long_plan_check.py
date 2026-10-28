@@ -92,11 +92,25 @@ QA_SHA256 = "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"  
 QA_V4 = ROOT / "migration" / "production" / "qa_criteria_story_v4.json"
 QA_V4_SHA256 = "99a91e3e75387acea6c6815510baa9a5d0271e46eb0a644e66b8a7e0ab0a272f"   # frozen 2026-10-27 (owner)
 V3, V4 = "story-qa-criteria-v3", "story-qa-criteria-v4"
+# owner exception (28/10 ~02:30 UTC, "tem que ser amanhã"): v4 with only its fallback rows widened, for the arc-01
+# long ONLY (the file names its plan: CRITERIA_EXCEPTION_PLAN for any other). Measured as v4 in every other row.
+QA_V4X = ROOT / "migration" / "production" / "qa_criteria_story_v4_owner_exception_arc01.json"
+QA_V4X_SHA256 = "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388"   # frozen 2026-10-28 (owner)
+V4X = "story-qa-criteria-v4-owner-exception-arc01"
+V4_FAMILY = (V4, V4X)
 
 
 def criteria_files():
     """{version: (file, pinned sha256)}, read at call time (a test may pin another hash)."""
-    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256)}
+    return {V3: (QA, QA_SHA256), V4: (QA_V4, QA_V4_SHA256), V4X: (QA_V4X, QA_V4X_SHA256)}
+
+
+def owner_exception(plan):
+    """True when the plan is measured by the owner's exception criteria and is the plan that file names."""
+    if criteria_version(plan) != V4X:
+        return False
+    q = qa_for(plan) or {}
+    return (plan or {}).get("episode") == (q.get("owner_exception") or {}).get("episode")
 
 
 # E130: the long's Keeper at 16:9, framed from the chest up (a "Medium close-up" with his seated wardrobe drew him
@@ -198,6 +212,10 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
         problems.append(f"CRITERIA_UNKNOWN {criteria_version(plan)!r} (a long is measured by "
                         f"{' or '.join(criteria_files())})")
         q = qa()
+    exc = q.get("owner_exception") or {}
+    if exc and plan.get("episode") != exc.get("episode"):
+        problems.append(f"CRITERIA_EXCEPTION_PLAN {q.get('version')} is the owner's exception for {exc.get('episode')} "
+                        f"only, not {plan.get('episode')!r}")
     arc_map = arc_table if arc_table is not None else arcs()
 
     # the long as a whole
@@ -348,7 +366,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
                     problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {sid} (~{slowest:.1f} s at the slowest pace)")
                 if span < pc.talk_min(gaps):
                     problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
-            if q.get("version") == V4 and plan.get("aspect_ratio") == "16:9" and (
+            if q.get("version") in V4_FAMILY and plan.get("aspect_ratio") == "16:9" and (
                     KEEPER_FRAMING not in s.get("prompt", "") or KEEPER_FRAMING_OFF.search(s.get("prompt", ""))):
                 # E130: at 16:9 "Medium close-up" with his seated wardrobe drew him full body, his face too small for
                 # the landmarker (FACE_NOT_FOUND on the arc-01 long's Keeper probes); the long's Keeper is framed
@@ -598,7 +616,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     route = plan.get("audio_route")
     if route not in (None, pn.KOKORO, pn.NATIVE):
         problems.append(f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})")
-    if route == pn.NATIVE and q.get("version") != V4:
+    if route == pn.NATIVE and q.get("version") not in V4_FAMILY:
         problems.append(f"AUDIO_ROUTE_NEEDS_V4 (Pavo's own speech is measured only by {V4}; {q.get('version')} "
                         "removes Pavo's audio)")
     for i, s in enumerate(shots):
@@ -608,7 +626,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"AUDIO_ROUTE_UNKNOWN shot {i} {s['id']} {s['audio_route']!r} (a spoken shot may say only "
                             f"{pn.KOKORO!r})")
     routes = {}
-    if pn.native_plan(plan) and q.get("version") == V4:
+    if pn.native_plan(plan) and q.get("version") in V4_FAMILY:
         voices = pn.load_voices()
         if not pn.ambience(plan, {}):
             problems.append("AMBIENCE_MISSING (the plan's `ambience`: the natural sound Pavo lays under the voice)")

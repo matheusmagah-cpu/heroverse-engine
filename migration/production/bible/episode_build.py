@@ -1550,10 +1550,10 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
         import shot_sources
         source = approved.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved, recorded per shot
         if source in shot_sources.FALLBACKS:   # review of #476: the plan may have changed the shot since
-            if pavo_native.spoken(shot):
-                raise SystemExit(f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)")
-            if shot_sources.has_character(shot):
-                raise SystemExit(f"SOURCE_CHARACTER_SHOT {shot['id']} (a character's look needs its references)")
+            refused = shot_sources.fallback_refusal(plan, shot, index, source, plan_check.still_record(
+                approved.get("still")) if source == "still_motion" else None)
+            if refused:
+                raise SystemExit(refused)
         if not (final.exists() and approved.get("clip_sha256") and sha256(final) == approved["clip_sha256"]):
             shot_sources.fetch_source(approved, final, fetch)
         if source in shot_sources.FALLBACKS:   # a licensed clip or a still in motion: no person, no speech

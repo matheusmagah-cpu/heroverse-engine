@@ -57,6 +57,21 @@ STOP = {"a", "an", "the", "and", "of", "to", "in", "on", "at", "his", "her", "it
         "shot", "camera", "slow", "wide", "close", "up", "light", "painterly", "cinematic", "realism", "grain", "film"}
 
 
+MAX_STILL_CLIP_SECONDS = 12.0   # plan_check.SCENE_SECONDS[1]: a still in motion for a shot that names no seconds
+PAVO_STILL_LICENCE = "Pavo generated (owner-owned)"   # story QA v4 rights.ai_video.licence
+
+
+def still_licence(rec):
+    """The licence a still carries: a FLUX still its model's (apache-2.0), a Pavo agnes-image still Pavo's (owner-owned
+    output). `source` is the engine's name (a string) or a {license, revision} record."""
+    src = (rec or {}).get("source")
+    if isinstance(src, dict):
+        return src.get("license") or "apache-2.0"
+    if str(src or "").startswith("pavo") or (rec or {}).get("pavo"):
+        return PAVO_STILL_LICENCE
+    return "apache-2.0"
+
+
 def words(text):
     return [w for w in re.findall(r"[a-z]+", str(text or "").lower()) if w not in STOP and len(w) > 2]
 
@@ -192,20 +207,69 @@ def has_character(shot):
     return bool(shot.get("characters")) or shot.get("kind") == "keeper"
 
 
+def shown_characters(shot):
+    return ["keeper"] if shot.get("kind") == "keeper" else list(shot.get("characters") or [])
+
+
+def owner_exception(plan):
+    """The owner's arc-01 exception (qa_criteria_story_v4_owner_exception_arc01.json, bound to its plan)."""
+    import long_plan_check
+    return long_plan_check.owner_exception(plan)
+
+
+def character_still_problems(shot, rec, chars=None):
+    """Owner exception: a still that shows characters was made by Pavo agnes-image with exactly the approved
+    reference images of every character the shot shows (by sha256), Pavo's read-back proving that many inputs."""
+    import episode_build as eb
+    import plan_check
+    need = []
+    for cid in shown_characters(shot):
+        try:
+            need += [m.get("sha256") for _, m in eb.reference_records(cid, chars)]
+        except SystemExit as exc:
+            return [str(exc)]
+    sent = [r.get("sha256") for r in (rec or {}).get("references") or [] if isinstance(r, dict)]
+    if not need or sorted(sent) != sorted(need):
+        return [f"made without exactly the approved references of {shown_characters(shot)}"]
+    return plan_check.pavo_proof_problems((rec or {}).get("pavo"), len(need))
+
+
+def fallback_refusal(plan, shot, index, source, still=None):
+    """Why a free fallback may not carry this shot, or None. v4: a spoken shot or a shot with a character never
+    (SOURCE_SPOKEN_SHOT, SOURCE_CHARACTER_SHOT). The owner's arc-01 exception: a spoken shot on the Kokoro voice
+    (plan B) and a shot with characters, as a still in motion made with their references (SOURCE_CHARACTER_STILL)."""
+    import pavo_native
+    exc = owner_exception(plan)
+    if pavo_native.spoken(shot) and not (exc and source == "still_motion"
+                                         and pavo_native.route(plan, shot, index) == pavo_native.KOKORO):
+        return f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)"
+    if has_character(shot):
+        if not exc or source != "still_motion":
+            return f"SOURCE_CHARACTER_SHOT {shot['id']} (a character's canonical look needs its references)"
+        if still is not None:
+            bad = character_still_problems(shot, still)
+            if bad:
+                return f"SOURCE_CHARACTER_STILL {shot['id']} " + "; ".join(bad)
+    return None
+
+
 def allocate(plan, todo, remaining, rounds=None):
     """[(shot, source or WAIT_PAVO_BUDGET)] for the shots still to make (`todo`, in risk_order: the spoken shots come
     first), spending `remaining` units on Pavo first come first served; a non-spoken shot with no character that the
-    budget does not reach gets a free fallback."""
+    budget does not reach gets a free fallback (and, under the owner's arc-01 exception, a character shot or a spoken
+    shot on the Kokoro voice gets a still in motion)."""
     import long_preflight
     import pavo_native
     rounds = rounds or long_preflight.PROBE_ROUNDS
+    index = {s["id"]: i for i, s in enumerate(plan["shots"])}
     out = []
     for s in todo:
         units = long_preflight.planned_units([s], rounds, worst=True)   # the dispatch guard's bound (#475 review)
         if units <= remaining:
             remaining -= units
             out.append((s, "pavo"))
-        elif pavo_native.spoken(s) or has_character(s):
+        elif (pavo_native.spoken(s) or has_character(s)) and fallback_refusal(plan, s, index[s["id"]],
+                                                                               "still_motion"):
             out.append((s, "WAIT_PAVO_BUDGET"))
         else:
             out.append((s, "fallback"))
@@ -304,7 +368,9 @@ def sources_report(plan, digests, approvals, guard=None, branch=None, lib=None, 
     index = {s["id"]: i for i, s in todo}
     for s, choice in allocate(plan, [s for _, s in todo], remaining):
         if choice == "fallback":
-            cands = footage_candidates(plan, s, index[s["id"]], lib) + still_candidates(plan, s)
+            import pavo_native
+            free = not has_character(s) and not pavo_native.spoken(s)   # a person or a voice: a still with refs only
+            cands = (footage_candidates(plan, s, index[s["id"]], lib) if free else []) + still_candidates(plan, s)
             shots[s["id"]] = {"source": cands[0]["source"] if cands else "WAIT_FALLBACK_CANDIDATE",
                               "state": "fallback", "candidates": cands}
         else:
@@ -362,10 +428,10 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     entry = {"source": source, "score": score, "note": note.strip(),
              "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}
     if source in FALLBACKS:
-        if pavo_native.spoken(shot):
-            raise SystemExit(f"SOURCE_SPOKEN_SHOT {shot_id} (a spoken shot is always Pavo: R2)")
-        if has_character(shot):
-            raise SystemExit(f"SOURCE_CHARACTER_SHOT {shot_id} (a character's canonical look needs its references)")
+        refused = fallback_refusal(plan, shot, i, source, plan_check.still_record(item) if source == "still_motion"
+                                   else None)
+        if refused:
+            raise SystemExit(refused)
     if source == "footage":
         rec = next((r for r in (library() if lib is None else lib) if r.get("id") == item), None)
         frame = plan_frame(plan)
@@ -384,8 +450,9 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {shot_id})")
         entry.update(still=item, repo_path=rec["repo_path"], clip_sha256=None, still_sha256=rec["sha256"],
                      frame=list(plan_frame(plan)),   # E132: rendered at the frame of the plan that ships it
-                     licence=(rec.get("source") or {}).get("license") or "apache-2.0",
-                     clip_seconds=float(shot.get("seconds") or 0.0),
+                     licence=still_licence(rec),
+                     # a spoken shot has no `seconds` (its line decides): the longest clip the adapter makes covers it
+                     clip_seconds=float(shot.get("seconds") or MAX_STILL_CLIP_SECONDS),
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     else:   # pavo_reuse: a clean clip of an inventory, of the request the plan sends now
         path, _, sha = str(item).partition("#")
