@@ -167,11 +167,21 @@ def composer(w):
     return box[0] if box else None
 
 
+def new_chat_button(w):
+    """The topmost "Novo chat" button (the sidebar's own). E145: a window found through Desktop().windows() is a
+    wrapper (no child_window): only descendants() and element_info are used, and only the button's name is compared."""
+    found = [e for e in w.descendants() if e.element_info.control_type == "Button"
+             and (e.element_info.name or "").strip() == "Novo chat"]
+    return min(found, key=lambda e: e.rectangle().top) if found else None
+
+
 def open_new_chat(w):
     w.set_focus()
     pause((1, 2))
-    new = w.child_window(title="Novo chat", control_type="Button", found_index=0)   # the sidebar's first button only
-    glide_click(new.wrapper_object())
+    new = new_chat_button(w)
+    if new is None:
+        raise Stop(6, "APP_CHANGED: no 'Novo chat' button")
+    glide_click(new)
     pause((3, 5))
     chat = named(w, "Chat")
     if chat is not None:
