@@ -277,10 +277,19 @@ def cmd_image(args):
 
 def cmd_job(args):
     """The bridge's PC side: a job written by a cloud agent (bridge.py job) names its refs by URL and sha256."""
+    job = read_job(args.job)
+    return make_image(job, fetch_refs(job), HERE / "out" / job["id"], args.dry_run)
+
+
+def read_job(path):
     try:
-        job = json.loads(Path(args.job).read_text(encoding="utf-8"))
+        return json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError) as e:   # E143: a missing or broken job file is a named refusal, not a traceback
-        raise Stop(2, f"JOB_UNREADABLE {args.job}: {type(e).__name__}") from None
+        raise Stop(2, f"JOB_UNREADABLE {path}: {type(e).__name__}") from None
+
+
+def fetch_refs(job):
+    """The job's references in refs/, downloaded by URL when missing and checked by sha256."""
     paths = []
     for r in job.get("refs", []):
         dest = REFS / r["name"]
@@ -291,7 +300,7 @@ def cmd_job(args):
         if core.sha256(dest.read_bytes()) != r["sha256"]:
             raise Stop(2, f"REF_SHA256_MISMATCH {r['name']}")
         paths.append(dest)
-    return make_image(job, paths, HERE / "out" / job["id"], args.dry_run)
+    return paths
 
 
 def cmd_probe(args):
