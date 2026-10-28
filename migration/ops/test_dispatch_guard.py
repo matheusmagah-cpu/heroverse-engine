@@ -267,6 +267,28 @@ class Inputs(unittest.TestCase):
                 'b = {"plan": "migration/production/bible/plans/ep-01-short.json", "shots": "s-not-a-shot"}\n')
             self.assertEqual(hand_copied_shot_ids(d), [("migration/ops/test_x.py", 2, ["s-a"])])
 
+    def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run(self):
+        """E135: run 40626005505 passed the guard and stopped in shot-probe's next step (plan_check --strict: 11
+        STILL_NOT_APPROVED). The guard runs that same check first."""
+        import subprocess as sp
+
+        def ran(code, out):
+            return lambda cmd, **kw: sp.CompletedProcess(cmd, code, out, "")
+        bad = ran(1, json.dumps({"problems": ["STILL_NOT_APPROVED shot 4 s-pairs (...)"]}))
+        self.assertEqual(g.plan_strict_problems(PLAN, run=bad), ["STILL_NOT_APPROVED shot 4 s-pairs (...)"])
+        self.assertEqual(g.plan_strict_problems(PLAN, run=ran(0, "{}")), [])
+        self.assertTrue(g.plan_strict_problems(PLAN, run=ran(2, "Traceback")))    # a crash is never a pass
+        seen = []
+        with mock.patch.object(g, "plan_strict_problems", lambda p: seen.append(p) or ["STILL_NOT_APPROVED x"]):
+            with self.assertRaises(g.Refusal) as c:
+                g.check_local("shot-probe.yml", {"plan": PLAN, "shots": S1, "attempts": "1", "adopt_run": ""})
+            self.assertTrue(str(c.exception).startswith("GUARD_PLAN_NOT_STRICT"), str(c.exception))
+            g.check_local("scene-stills.yml", {"plan": PLAN, "shots": S1, "candidates": "1"})   # stills come first
+        self.assertEqual(seen, [PLAN])
+        long_cmd = []
+        g.plan_strict_problems(LONG_PLAN, run=lambda cmd, **kw: long_cmd.append(cmd) or sp.CompletedProcess(cmd, 0, "", ""))
+        self.assertTrue(long_cmd[0][3].endswith("long_plan_check.py"))
+
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
         self.assertEqual(f["uploads"], 6)

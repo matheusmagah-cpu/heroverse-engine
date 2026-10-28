@@ -1408,6 +1408,26 @@
      "capacity"
     ]
    }
+  },
+  {
+   "id": "E135",
+   "date": "2026-10-28",
+   "class": [
+    "cheap-vs-expensive"
+   ],
+   "prior": [
+    "E106",
+    "E127"
+   ],
+   "error": "shot-probe.yml run 40626005505 (genesis-09 batch A: s-voice, s-noah-door, s-noah-lamp) passed the dispatch guard and stopped in its next step, plan_check --strict: 11 STILL_NOT_APPROVED (the FLUX stills of the other shots wait for 00:00 UTC). No Pavo unit was spent, but a run was, and its failure now blocks the next probe of this plan (GUARD_RERUN_WITHOUT_FIX) until main changes what it depends on. Root cause: the guard checked shot-probe's inputs (the shots are ids of the plan) but not the strict state of the whole plan, which the workflow requires before any probe; Claude dispatched without running plan_check --strict on main's plan first.",
+   "fix": "dispatch_guard.plan_strict_problems runs the workflow's own checker (plan_check.py --strict, or long_plan_check.py --strict for a long) and check_local refuses GUARD_PLAN_NOT_STRICT for shot-probe.yml before the run starts (refusal_registry class A, early plan_check.check). Class antidote: a guard runs every cheap check the workflow's first steps run, so a run never starts only to stop at one.",
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e135_a_probe_whose_plan_fails_its_strict_check_is_refused_before_the_run",
+    "covers": [
+     "cheap-vs-expensive"
+    ]
+   }
   }
  ]
 }

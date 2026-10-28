@@ -2492,6 +2492,10 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
    "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "GUARD_PLAN_NOT_STRICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def check(plan, chars=None):"
   }
  },
  "review": {
