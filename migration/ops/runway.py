@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Content runway of the long videos: the engine must never run out of Bible-story longs.
 
-The committed bible/arcs.json is the authoritative calendar, including moved deadlines (arc-01: 28/10 22:00 UTC).
+The committed bible/arcs.json is the authoritative calendar, including moved deadlines (arc-01: 29/10 22:00 UTC).
 An overdue arc remains visible until its upload is recorded. A production tree without that calendar uses the older
 LONG_EVERY/FIRST_STORY_LONG cadence. Only a Bible-story long counts (script archetype bible-story-long,
 render_queue.story_pilot); a prayer pilot never fills a slot, and its retired slots (00:00 and 10:00 every day) are not
@@ -149,6 +149,75 @@ def check(production, ledger, now):
     return rows, alerts
 
 
+
+def recovery_rows(production, ledger, now):
+    """Read existing target calendar + publication receipts; never schedule, approve or move a target.
+
+    A ledger ID alone is not a schedule/publication readback. A master record alone
+    is not QA or audiovisual approval. Receipt confirmation expires after one hour
+    for this supervisory report; the publisher must still perform its own live read.
+    """
+    production = Path(production)
+    config = render_queue.object_or_empty(production / "bible/arcs.json").get("recovery")
+    if not config:
+        return []
+    receipts = []
+    for path in (production.parent / "publish/receipts").glob("*.json"):
+        item = render_queue.object_or_empty(path)
+        if item.get("version") == "publish-receipt-v1":
+            receipts.append(item)
+    rows = []
+    for target in config["targets"]:
+        episode, at = target["episode"], ts(target["slot"])
+        if at > now + timedelta(days=DAYS):
+            continue
+        record = render_queue.object_or_empty(production / "bible/episodes" / (episode + ".json"))
+        sha = record.get("output_sha256")
+        keys = {k: v for k, v in ledger.get("entries", {}).items()
+                if k.startswith("bible:" + episode + ":") and v.get("video_id")}
+        # Long publication can retain its existing pilot ledger identity.
+        calendar = render_queue.object_or_empty(production / "bible/arcs.json")
+        for arc in calendar.get("arcs", []):
+            pilot = arc.get("long", {}).get("pilot")
+            if episode == arc["id"] + "-long" and pilot:
+                keys.update({k: v for k, v in ledger.get("entries", {}).items()
+                             if k.startswith(pilot + ":") and v.get("video_id")})
+        confirmed = None
+        for item in receipts:
+            entry = keys.get(item.get("key"))
+            if (not entry or entry["video_id"] != item.get("video_id")
+                    or item.get("channel_id") != "UCuMF6pJQkyMzaVoAxFL86yA"
+                    or item.get("upload_status") != "processed"):
+                continue
+            if sha and not item["key"].endswith(":" + sha):
+                continue
+            try:
+                age = now - ts(item["verified_at"])
+                if not timedelta(0) <= age <= timedelta(hours=1):
+                    continue
+            except (KeyError, ValueError, TypeError):
+                continue
+            if item.get("privacy") == "public" and now >= at:
+                confirmed = "PUBLIC_READBACK_CONFIRMED"
+                break
+            if item.get("privacy") == "private" and item.get("publish_at") == target["slot"] and now < at:
+                confirmed = "SCHEDULE_READBACK_CONFIRMED"
+        left = at - now
+        if confirmed:
+            state = confirmed
+        elif left <= timedelta(0):
+            state = "PUBLIC_READBACK_REQUIRED"
+        elif left <= timedelta(hours=config["scheduled_readback_lead_hours"]):
+            state = "NOT_SCHEDULED_CONFIRMED"
+        elif left <= timedelta(hours=config["master_review_lead_hours"]):
+            state = "MASTER_GATES_RECHECK_REQUIRED" if sha else "AT_RISK_NO_MASTER"
+        else:
+            state = "TARGET_ONLY"
+        rows.append({**target, "state": state, "master_recorded": bool(sha),
+                     "owner_stage": "publication" if left <= timedelta(hours=2) else "production/review"})
+    return rows
+
+
 def main(production, ledger_path, report_md, now=None):
     now = ts(now) if now else datetime.now(timezone.utc)
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
@@ -158,6 +227,15 @@ def main(production, ledger_path, report_md, now=None):
           *([f"- ⚠ {a}" for a in alerts] or ["- every long slot is on time"]),
           "| slot (UTC) | pilot | stage |", "|---|---|---|",
           *(f"| {r['slot']} | {r['pilot'] or '—'} | {r['stage']}{' ⚠' if r['late'] else ''} |" for r in rows)]
+    recovery = recovery_rows(production, ledger, now)
+    if recovery:
+        md += ["", "## Recovery targets (no YouTube scheduling or media approval implied)",
+               "Receipt confirmations require a matching processed ID/hash/channel and a readback within one hour. "
+               "Makeups require the approved extra, both next-day regular Shorts ready and the long protected; "
+               "move only the extra after an ineligible window. No episode is skipped.",
+               "| target (UTC) | content | type | observed state | responsible stage |",
+               "|---|---|---|---|---|",
+               *(f"| {r['slot']} | {r['episode']} | {r['kind']} | {r['state']} | {r['owner_stage']} |" for r in recovery)]
     with open(report_md, "a") as f:
         f.write("\n".join(md) + "\n")
     print(json.dumps({"alerts": alerts}))
