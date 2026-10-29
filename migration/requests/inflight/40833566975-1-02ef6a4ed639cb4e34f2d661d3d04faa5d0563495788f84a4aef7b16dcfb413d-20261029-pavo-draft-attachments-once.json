@@ -1,0 +1,16 @@
+{
+ "workflow": "pavo-mcp.yml",
+ "inputs": {
+  "attachments_manifest": "migration/evidence/pavo/attachments/short09-openai-20261029.json"
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "claimed",
+  "request_sha256": "02ef6a4ed639cb4e34f2d661d3d04faa5d0563495788f84a4aef7b16dcfb413d",
+  "original_path": "migration/requests/20261029-pavo-draft-attachments-once.json",
+  "base_commit": "e5cb8cc63c2d4e9f31821c435a753e14d89e69ab",
+  "dispatcher_run_id": "40833566975",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-29T07:09:10.360380+00:00"
+ }
+}
