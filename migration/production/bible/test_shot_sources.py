@@ -969,7 +969,7 @@ class SpeechStockPolicy(unittest.TestCase):
         p.update(source_policy="pavo_speech_stock", criteria="story-qa-criteria-v5", audio_route="kokoro")
         return p
 
-    def test_owner_20261029_non_talking_route_never_consumes_pavo_and_allows_reviewed_stills(self):
+    def test_e218_stock_route_never_consumes_pavo_or_silently_uses_stills(self):
         p = self.hybrid()
         with patch.object(ss, "fallback_refusal", return_value=None):
             for budget in (0, 10 ** 6):
