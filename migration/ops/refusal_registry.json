@@ -2632,10 +2632,6 @@
     "migration/production/bible/long_preflight.py::shot_sources.planned_fallbacks(plan)"
    ],
    "note": "E218: queue excludes new non-talking pictures from Pavo; generate_clips and probe_step enforce require_pavo_generation before work or provider calls. Existing clip discovery/review remains available."
-  },
-  "SOURCE_POLICY_STILL_FORBIDDEN": {
-   "class": "N",
-   "why": "E218: local approve-source command cannot add a new animated-still approval against the selected speech/stock policy. Existing valid approvals remain readable; no generation or publication is performed."
   }
  },
  "review": {
