@@ -36,5 +36,17 @@
  ],
  "vetting_black_run_s": 0.0,
  "release_asset": "footage-clip-flood-rain-nature-floors-trees-rain-colombia-sha256-fa0f182ec07ec9b3b3fcd097a515432fdde59a1acae46d7b0a58bad0c773024b.mp4",
- "release_tag": "v0.0.0-cloud-assets-20261025"
+ "release_tag": "v0.0.0-cloud-assets-20261025",
+ "editorial_triage": {
+  "date": "2026-10-29",
+  "actor": "ChatGPT Codex session; no designated reviewer identity asserted",
+  "candidate_for": "genesis-09-short#s-windows",
+  "status": "NOT_MATCH_CURRENT_SHOT",
+  "sha256_verified": "fa0f182ec07ec9b3b3fcd097a515432fdde59a1acae46d7b0a58bad0c773024b",
+  "inspection": "Verified complete downloaded MP4 hash; inspected 20 sampled frames at 1fps across the 20-second clip in original wide and centered 9:16 crop. This is frame-sequence triage, not real-time playback, audio listening or full audiovisual review.",
+  "observed": "Close view of wet green leaves and grass in daylight; water droplets and leaf movement. No wide storm, camp, running figures or lightning. Center portrait crop is dominated by the same leaves.",
+  "next_action": "Do not adopt for the existing s-windows request. At most a possible nature insert after explicit direction and figure-free-share validation; not a substitute for the present camp action. Wait for the existing targeted search before altering the shot.",
+  "scene_approved": false,
+  "review_score": null
+ }
 }
