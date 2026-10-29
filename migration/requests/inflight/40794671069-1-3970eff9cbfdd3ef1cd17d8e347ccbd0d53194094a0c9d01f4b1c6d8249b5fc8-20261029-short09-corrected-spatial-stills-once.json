@@ -1,0 +1,18 @@
+{
+ "workflow": "scene-stills.yml",
+ "inputs": {
+  "plan": "migration/production/bible/plans/genesis-09-short.json",
+  "shots": "s-noah-door,s-rock,s-noah-lamp",
+  "candidates": "1"
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "claimed",
+  "request_sha256": "3970eff9cbfdd3ef1cd17d8e347ccbd0d53194094a0c9d01f4b1c6d8249b5fc8",
+  "original_path": "migration/requests/20261029-short09-corrected-spatial-stills-once.json",
+  "base_commit": "7538664b29e35df2f0ca544a3adeee6ea782bea5",
+  "dispatcher_run_id": "40794671069",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-29T00:32:14.718800+00:00"
+ }
+}

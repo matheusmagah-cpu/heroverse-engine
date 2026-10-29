@@ -1,8 +1,0 @@
-{
- "workflow": "scene-stills.yml",
- "inputs": {
-  "plan": "migration/production/bible/plans/genesis-09-short.json",
-  "shots": "s-noah-door,s-rock,s-noah-lamp",
-  "candidates": "1"
- }
-}
