@@ -1,0 +1,39 @@
+{
+ "id": "genesis-09-s-rock-2026102901-1",
+ "still": "genesis-09-s-rock",
+ "episode": "genesis-09-short",
+ "shot": "s-rock",
+ "run": "2026102901",
+ "status": "DRAFT",
+ "sent_prompt": null,
+ "engine": "chatgpt-imagegen",
+ "models": null,
+ "generated_by": "OpenAI (recovered prior conversation)",
+ "source": {
+  "provider": "OpenAI",
+  "license": "OpenAI generated output; owner-authorized creation; production license acceptance pending",
+  "original_sha256": "a8761c8299485c9ec75a8557bf2b8d2b551480f8305a706037dd3551af345c21"
+ },
+ "conversation_id": null,
+ "quote": null,
+ "references": [],
+ "pavo": null,
+ "upscaler": "Lanczos resize only; no super-resolution or new generation",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-rock-2026102901-1.jpg",
+ "sha256": "8a600088f3ba73610977b401a0f3dbfc7c98537f278b0b99f0e8e905556e5837",
+ "target_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static medium-wide rear view. Opaque grey floodwater surrounds one small black rock and one lone man in a rough undyed wool robe. The water surface crosses both shins; his feet and ankles lie entirely beneath opaque floodwater. Only small edges of the rock break the surface around his submerged legs. His back faces the camera and his head points straight away toward unbroken empty water stretching across the whole background. His whole body and the surface across both shins fit inside the central third of the square image for a vertical crop. Long visible rain streaks cross the scene. Grey dusk, rain and mist. Alone and too late. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "prompt": null,
+ "provenance_status": "EXACT_GENERATION_PROMPT_AND_REFERENCE_BINDINGS_NOT_RECOVERED",
+ "reference_use_reported": "No canonical reference: anonymous man",
+ "visual_triage": {
+  "observed": "Both feet and ankles are covered by opaque floodwater; only rock tips are exposed; rain and an empty water background are visible.",
+  "remaining": "The head is slightly turned and part of the face is visible; the brief asks for a direct rear view. The sun opening also needs editorial judgment against the intended grey dusk.",
+  "score": null,
+  "approved": false
+ }
+}
