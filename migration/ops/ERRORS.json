@@ -2353,6 +2353,19 @@
     "contains": "def test_e213_ready_plan_reaches_existing_build_without_another_chat_command",
     "covers": ["pr-late"]
    }
+  },
+  {
+   "id": "E214",
+   "date": "2026-10-28",
+   "class": "rerun-without-fix",
+   "prior": ["E116", "E211"],
+   "error": "Cloudflare image generation retried the same non-idempotent POST up to four times after HTTP errors. A 408 or 5xx response can follow an accepted generation, so this could duplicate results and quota use. The offline regression reproduced four POST calls for each of eight HTTP statuses; no affected production result is asserted. Provider error details were also copied into public workflow errors.",
+   "fix": "Send a generation POST once only. Treat HTTP, timeout, transport and malformed-response errors as an outcome requiring reconciliation, without replay or provider-body logging. Preserve the existing free-allocation deferral and successful image response formats. Keep workflow claims, dispatch guards, quota limits, frozen QA and review identities unchanged; this does not authorize retrying an older uncertain request.",
+   "antidote": {
+    "file": "migration/production/imagegen/test_cf_images.py",
+    "contains": "def test_e214_generation_post_is_never_replayed_after_an_http_error",
+    "covers": ["rerun-without-fix"]
+   }
   }
  ]
 }

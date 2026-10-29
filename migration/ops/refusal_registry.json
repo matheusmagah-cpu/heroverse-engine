@@ -254,13 +254,9 @@
    "class": "D",
    "resume": "the made images are kept and the rest wait for the next nightly slot (E62); episode_preflight reports today's images against the ~44 a day before a sheet is dispatched"
   },
-  "CF_HTTP_{}": {
+  "CF_GENERATION_OUTCOME_UNCERTAIN_NO_REPLAY": {
    "class": "D",
-   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
-  },
-  "CF_NO_IMAGE": {
-   "class": "C",
-   "probe": "one image (ONLY=<id>) before a batch"
+   "resume": "E214: reconcile the exact image request, workflow/run and any returned bytes before another invocation. An HTTP error, timeout or malformed acknowledgement is not proof that generation did not run. Do not automatically replay the POST; preserve prior outputs and the durable workflow claim. If the provider exposes no outcome identity, keep this request unresolved rather than infer failure or approve a new attempt."
   },
   "CHANNEL_IDENTITY_MISMATCH": {
    "class": "D",
