@@ -1537,6 +1537,8 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
     None) in risk_order (E99), each through shot_runner (the build's own request and checks) and make_shot (a
     failed clip is a NEW generation, attempts_for(shot) in all, each refused one kept beside the shot, E94); the
     report in plan order. A shot that fails all its generations stops with SHOT_FAILED naming it."""
+    import shot_sources
+    shot_sources.require_pavo_generation(plan, ids)
     work = Path(work)
     rel(work)
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
@@ -1691,6 +1693,8 @@ def probe_step(plan, work, lip_python, face_model, out, ids, attempts, client=No
     content-hash asset name with a frame sheet; every generation's checks, refused ones included, and the shot's
     request sha256 go to OUT/probe.json. A shot that fails a round is recorded and the others go on. Nothing is
     approved here."""
+    import shot_sources
+    shot_sources.require_pavo_generation(plan, ids)
     work, out = Path(work), Path(out)
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
     if client is None:

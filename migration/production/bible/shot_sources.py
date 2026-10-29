@@ -20,6 +20,11 @@ clip, `approve-source` (below) for a library clip, a still in motion or an inven
 a note, by PR. The approval records the shot's `source`, and the build ships exactly that (episode_build.generate_step,
 long_build.upscale_step), the manifest naming it per shot.
 
+Owner 29/10: plans with source_policy=pavo_speech_stock keep valid approvals and existing clips first. Only
+on-camera talking shots take new Pavo video; other new pictures use licensed footage, never automatic stills.
+The same rule holds at both generation entry points. Character/period/rights/review requirements remain intact:
+a source that cannot meet them stays pending for direction, not silently moved to another provider.
+
 usage:
   episode_build.py sources PLAN [--write]   the per-shot source plan for today's budget (evidence/sources/<ep>.json)
   episode_build.py approve-source PLAN SHOT SOURCE ITEM SCORE NOTE --reviewer MODEL
@@ -326,12 +331,44 @@ def still_of_problems(plan, timeline=None):
 DESIGN_KEYS = ("pavo_talking", "pavo_voice_over", "pavo_scene", "window", "footage", "still_motion")
 
 
+def source_policy_problems(plan):
+    policy = plan.get("source_policy")
+    if policy not in (None, "pavo_speech_stock"):
+        return [f"SOURCE_POLICY_UNKNOWN {policy!r} (pavo_speech_stock or omitted)"]
+    return []
+
+
+def speech_stock(plan):
+    bad = source_policy_problems(plan)
+    if bad:
+        raise SystemExit("; ".join(bad))
+    return plan.get("source_policy") == "pavo_speech_stock"
+
+
+def stock_required(plan, shot):
+    """New pictures only: preserve valid approvals/reuse; stock cannot relax character or review gates."""
+    import plan_check
+    return speech_stock(plan) and shot.get("window_of") is None and not plan_check.talking(shot)
+
+
+def require_pavo_generation(plan, ids=None):
+    """Check the actual effect boundary as well as the cheap queue, before files, clients or provider calls."""
+    wanted = None if ids is None else set(ids)
+    refused = [s["id"] for s in plan.get("shots") or []
+               if (wanted is None or s["id"] in wanted) and stock_required(plan, s)]
+    if refused:
+        raise SystemExit("SOURCE_POLICY_PAVO_FORBIDDEN " + ",".join(refused)
+                         + " (new non-talking pictures use licensed footage; reconcile existing clips first)")
+
+
 def planned_fallbacks(plan):
     """Owner 28/10 (a long designed to one day's Pavo budget): the shots the plan's `source_design` gives a free source
     (`footage`, `still_motion`) and that a fallback may carry (fallback_refusal: silent, no character). They never take
     Pavo budget (allocate) and are never queued for a probe (long_preflight.queue): the budget goes to the spoken
     shots and the acted scenes first. A listed shot a fallback may not carry stays on Pavo, and long_plan_check refuses
     the plan (SOURCE_DESIGN_FALLBACK)."""
+    if speech_stock(plan):
+        return {s["id"] for s in plan.get("shots") or [] if stock_required(plan, s)}
     design = (plan or {}).get("source_design")
     if not isinstance(design, dict):
         return set()
@@ -383,6 +420,16 @@ def allocate(plan, todo, remaining, rounds=None):
     planned = planned_fallbacks(plan)
     out = []
     for s in todo:
+        if speech_stock(plan):
+            if stock_required(plan, s):
+                out.append((s, "footage"))
+                continue
+            # A talking character waits for Pavo; quota pressure does not turn speech into a still.
+            units = long_preflight.planned_units([s], rounds, worst=True)
+            out.append((s, "pavo" if units <= remaining else "WAIT_PAVO_BUDGET"))
+            if units <= remaining:
+                remaining -= units
+            continue
         if s["id"] in planned:   # owner 28/10: the plan gives it a free source; the budget is for the acted shots
             out.append((s, "fallback"))
             continue
@@ -521,7 +568,8 @@ def sources_report(plan, digests, approvals, guard=None, branch=None, lib=None, 
     todo, shots = [], {}
     for i, s in eb.risk_order(plan["shots"]):
         a = approvals.get(s["id"])
-        if a and (a.get("request_sha256") == digests.get(s["id"]) or a.get("source") in FALLBACKS):
+        valid = expected_request(plan, s, i, a, digests) if a else None
+        if a and valid and a.get("request_sha256") == valid:
             shots[s["id"]] = {"source": a.get("source", "pavo"), "state": "approved"}
         elif s["id"] in waiting:
             shots[s["id"]] = {"source": "pavo_reuse", "state": "awaiting_review",
@@ -531,7 +579,14 @@ def sources_report(plan, digests, approvals, guard=None, branch=None, lib=None, 
             todo.append((i, s))
     index = {s["id"]: i for i, s in todo}
     for s, choice in allocate(plan, [s for _, s in todo], remaining):
-        if choice == "fallback":
+        if choice == "footage":
+            refusal = fallback_refusal(plan, s, index[s["id"]], "footage")
+            cands = [] if refusal else footage_candidates(plan, s, index[s["id"]], lib)
+            shots[s["id"]] = {"source": "footage" if cands else "WAIT_FALLBACK_CANDIDATE",
+                              "state": "fallback", "candidates": cands}
+            if refusal:
+                shots[s["id"]]["refusal"] = refusal
+        elif choice == "fallback":
             import pavo_native
             free = not has_character(s) and not pavo_native.spoken(s)   # a person or a voice: a still with refs only
             cands = (footage_candidates(plan, s, index[s["id"]], lib) if free else []) + still_candidates(plan, s)
@@ -582,6 +637,8 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     i, shot = index[shot_id], plan["shots"][index[shot_id]]
     if source not in ("footage", "still_motion", "pavo_reuse"):
         raise SystemExit(f"SOURCE_REFUSED {source!r} (footage, still_motion or pavo_reuse)")
+    if speech_stock(plan) and source == "still_motion":
+        raise SystemExit(f"SOURCE_POLICY_STILL_FORBIDDEN {shot_id} (preserve existing valid approvals; new pictures use footage or Pavo speech)")
     try:
         score = float(score)
     except (TypeError, ValueError):
