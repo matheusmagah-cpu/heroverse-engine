@@ -2414,6 +2414,47 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E218",
+   "date": "2026-10-29",
+   "class": [
+    "direction",
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168",
+    "E169",
+    "E189",
+    "E209",
+    "E212"
+   ],
+   "error": "The owner directed Pavo speech plus licensed stock for other new pictures, but the source allocator/probe queue still used legacy Pavo-first allocation. Even with a footprint plan, fallback selection could choose a still and excluded God voice-over footage that story-v5 already allows. The source report also marked fallback approvals ready without matching their current request. Offline regressions reproduced the divergence; no additional provider job is claimed.",
+   "fix": "Add an explicit pavo_speech_stock plan policy to the five active plans. Route only on-camera speech to new Pavo generation and all other new pictures to footage selection, preserving character, source, licence and 9.5 review gates. Enforce the same policy before generation/probe effects and reject unknown policies. Reconcile existing clean clips before new source selection, preserve valid approvals, and require the current fallback digest in source readiness reports. Existing native-audio restrictions, frozen criteria, reviewers and publication gates remain unchanged.",
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "def test_e218_stock_route_never_consumes_pavo_or_silently_uses_stills",
+    "covers": [
+     "direction",
+     "drift"
+    ]
+   }
   }
  ]
 }

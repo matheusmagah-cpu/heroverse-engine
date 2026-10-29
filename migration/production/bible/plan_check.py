@@ -1074,7 +1074,8 @@ def _speaker_problems(i, s, chars, span, span_slowest):
 def check(plan, chars=None):
     """{"problems": [...], "pending": [...], "estimate": {...}} for a plan."""
     chars = chars if chars is not None else ch.registry()
-    problems, pending = [], []
+    import shot_sources
+    problems, pending = shot_sources.source_policy_problems(plan), []
     if plan.get("version") != VERSION:
         problems.append(f"PLAN_VERSION (need {VERSION})")
     if not isinstance(plan.get("episode"), str) or not EPISODE_ID.fullmatch(plan["episode"]):

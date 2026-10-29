@@ -1,0 +1,7 @@
+{
+ "workflow": "footage.yml",
+ "inputs": {
+  "queries": "migration/production/footage/queries-shorts-g09-recovery.json",
+  "per_theme": "2"
+ }
+}

@@ -2617,6 +2617,25 @@
   "FOOTAGE_RECORDS_NOT_PUSHED": {
    "class": "D",
    "resume": "main moved six times during the run's push window (parallel footage runs, E144); the clips are uploaded: dispatch the same queries again, the uploaded clips are found again by id and skipped"
+  },
+  "SOURCE_POLICY_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::shot_sources.source_policy_problems(plan)",
+    "migration/production/bible/long_plan_check.py::shot_sources.source_policy_problems(plan)"
+   ],
+   "note": "E218: unknown source policy is rejected during plan validation, never treated as legacy Pavo-first."
+  },
+  "SOURCE_POLICY_PAVO_FORBIDDEN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_preflight.py::shot_sources.planned_fallbacks(plan)"
+   ],
+   "note": "E218: queue excludes new non-talking pictures from Pavo; generate_clips and probe_step enforce require_pavo_generation before work or provider calls. Existing clip discovery/review remains available."
+  },
+  "SOURCE_POLICY_STILL_FORBIDDEN": {
+   "class": "N",
+   "why": "E218: local approve-source command cannot add a new animated-still approval against the selected speech/stock policy. Existing valid approvals remain readable; no generation or publication is performed."
   }
  },
  "review": {

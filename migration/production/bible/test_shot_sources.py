@@ -353,6 +353,7 @@ class OwnerException(unittest.TestCase):
         import long_plan_check as lpc
         ss.owner_exception, eb.reference_records = self.saved
         arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        arc.pop("source_policy", None)  # historical 28/10 exception; the 29/10 policy has its own refusal test
         reused = [s for s in arc["shots"] if s.get("still_of")]
         if not reused:
             self.skipTest("the plan reuses no still")
@@ -958,6 +959,87 @@ class Mix(unittest.TestCase):
             v = [s for s in info["streams"] if s["codec_type"] == "video"][0]
             self.assertEqual((v["width"], v["height"]), (320, 180))
             self.assertFalse([s for s in info["streams"] if s["codec_type"] == "audio"])
+
+
+class SpeechStockPolicy(unittest.TestCase):
+    """E218: the owner's selected source route holds at allocation and provider boundaries."""
+
+    def hybrid(self):
+        p = plan()
+        p.update(source_policy="pavo_speech_stock", criteria="story-qa-criteria-v5", audio_route="kokoro")
+        return p
+
+    def test_e218_stock_route_never_consumes_pavo_or_silently_uses_stills(self):
+        p = self.hybrid()
+        with patch.object(ss, "fallback_refusal", return_value=None):
+            for budget in (0, 10 ** 6):
+                got = {s["id"]: c for s, c in ss.allocate(p, p["shots"], budget)}
+                self.assertEqual(got["s-river"], "footage")
+                self.assertEqual(got["s-god"], "footage")
+                self.assertEqual(got["s-pair"], "footage")
+                self.assertEqual(got["s-eve"], "pavo" if budget else "WAIT_PAVO_BUDGET")
+
+    def test_e218_report_keeps_reuse_and_stock_constraints(self):
+        p = self.hybrid()
+        guard = type("Budget", (), {"check_batch": lambda self, units: {"remaining": 1000, "used": 0, "cap": 1000}})()
+        lib = [clip("clip-river-a"), clip("clip-light", theme="light", title="light water")]
+        with patch.object(ss, "still_candidates", return_value=[{"source": "still_motion", "item": "stale-still"}]) as stills:
+            report = ss.sources_report(p, {"s-eve": "e1"}, {}, guard=guard, lib=lib)
+            self.assertEqual([c["source"] for c in report["shots"]["s-river"]["candidates"]], ["footage"])
+            self.assertEqual(report["shots"]["s-god"]["source"], "footage")
+            self.assertEqual(report["shots"]["s-pair"]["source"], "WAIT_FALLBACK_CANDIDATE")
+            self.assertIn("SOURCE_CHARACTER_SHOT", report["shots"]["s-pair"]["refusal"])
+            stills.assert_not_called()
+        approved = {"s-river": {"source": "still_motion", "request_sha256": "unchanged"}}
+        with patch.object(ss, "expected_request", return_value="unchanged"):
+            report = ss.sources_report(p, {}, approved, guard=guard, lib=lib)
+        self.assertEqual(report["shots"]["s-river"], {"source": "still_motion", "state": "approved"})
+
+    def test_e218_queue_reconciles_existing_clips_before_routing_to_stock(self):
+        import long_preflight
+        p = self.hybrid()
+        q = long_preflight.queue(p, {}, {}, existing={"s-river": [{"asset": "already-made.mp4"}]}, max_units=1000)
+        self.assertEqual(q["awaiting_review"], {"s-river": ["already-made.mp4"]})
+        self.assertEqual(q["planned_fallback"], ["s-god", "s-pair"])
+        self.assertEqual([s for b in q["batches"] for s in b["shots"].split(",")], ["s-eve"])
+
+    def test_e218_provider_entry_points_refuse_wrong_route_before_any_work(self):
+        p = self.hybrid()
+        with patch.object(eb, "load") as read, patch.object(eb, "budget_client") as client:
+            for run in (lambda: eb.generate_clips(p, "missing", "python", "face", ids=["s-river"]),
+                        lambda: eb.probe_step(p, "missing", "python", "face", "missing", ["s-god"], 1)):
+                with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_PAVO_FORBIDDEN"):
+                    run()
+            read.assert_not_called()
+            client.assert_not_called()
+
+    def test_e218_unknown_policy_does_not_fall_back_to_legacy(self):
+        p = self.hybrid()
+        p["source_policy"] = "pavo_spech_stock"
+        with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_UNKNOWN"):
+            ss.allocate(p, p["shots"], 10 ** 6)
+
+    def test_e218_stale_fallback_approval_is_not_reported_as_ready(self):
+        p = self.hybrid()
+        guard = type("Budget", (), {"check_batch": lambda self, units: {"remaining": 0, "used": 0, "cap": 1000}})()
+        a = {"s-river": {"source": "still_motion", "request_sha256": "old-request"}}
+        with patch.object(ss, "expected_request", return_value="current-request"):
+            report = ss.sources_report(p, {}, a, guard=guard, lib=[])
+        self.assertEqual(report["shots"]["s-river"]["state"], "fallback")
+
+    def test_e218_new_still_approval_cannot_override_the_selected_policy(self):
+        with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_STILL_FORBIDDEN"):
+            ss.approve_source(self.hybrid(), "s-river", "still_motion", "old-still", 9.5, "test")
+
+    def test_e218_active_plans_use_policy_without_changing_frozen_criteria(self):
+        import plan_check
+        for episode in ("genesis-09-short", "genesis-10-short", "genesis-11-short", "arc-01-long", "arc-02-long"):
+            p = json.loads((HERE / "plans" / f"{episode}.json").read_text())
+            self.assertEqual(p["source_policy"], "pavo_speech_stock")
+            self.assertEqual(ss.source_policy_problems(p), [])
+            for s in p["shots"]:
+                if s.get("window_of") is None:
+                    self.assertEqual(ss.stock_required(p, s), not plan_check.talking(s))
 
 
 if __name__ == "__main__":

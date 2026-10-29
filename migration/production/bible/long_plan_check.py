@@ -261,7 +261,8 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     arcs())."""
     chars = chars if chars is not None else ch.registry()
     g = gate_values if gate_values is not None else gate()
-    problems, pending = [], []
+    import shot_sources
+    problems, pending = shot_sources.source_policy_problems(plan), []
     q = criteria if criteria is not None else qa_for(plan)
     if q is None:
         problems.append(f"CRITERIA_UNKNOWN {criteria_version(plan)!r} (a long is measured by "
