@@ -1,0 +1,74 @@
+{
+ "version": "short09-recovered-candidates-v1",
+ "base_commit": "2c8ff667fe3c102b9e985cbf8ab1c49026632d98",
+ "status": "DRAFT_VISUAL_TRIAGE_ONLY",
+ "reviewer": "ChatGPT Codex session; no designated reviewer identity asserted",
+ "production_approvals_written": false,
+ "generation_calls": 0,
+ "audio_listening_completed": false,
+ "items": [
+  {
+   "candidate": "genesis-09-short-s-noah-door-2026102901-1",
+   "shot": "s-noah-door",
+   "sha256": "f672fda18fe4c56f3dd72cb15f601440a0a03270571bc28406ab175d06a7a947",
+   "original_sha256": "6416777cabf5ceccae1329bfc9637e591a7f4642472209e42af89042b78bab72",
+   "repo_path": "migration/production/bible/stills/candidates/genesis-09-short-s-noah-door-2026102901-1.jpg",
+   "size": [
+    1080,
+    1920
+   ],
+   "observed": "Continuous doorway opening to the floor; symmetric rear view; bare head, brown robe and rope belt; distant people visible.",
+   "remaining": "The exact generation prompt is unavailable; the Noah reference hash is recovered and matches the current canonical record.",
+   "preview_seconds": 6,
+   "preview_sha256": "cf0dd5452e57ffb9001b9e59a35b531b8247d4a61996f23bc55b78dadeb515ef"
+  },
+  {
+   "candidate": "genesis-09-s-rock-2026102901-1",
+   "shot": "s-rock",
+   "sha256": "8a600088f3ba73610977b401a0f3dbfc7c98537f278b0b99f0e8e905556e5837",
+   "original_sha256": "a8761c8299485c9ec75a8557bf2b8d2b551480f8305a706037dd3551af345c21",
+   "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-rock-2026102901-1.jpg",
+   "size": [
+    1080,
+    1920
+   ],
+   "observed": "Both feet and ankles are covered by opaque floodwater; only rock tips are exposed; rain and an empty water background are visible.",
+   "remaining": "The head is slightly turned and part of the face is visible; the brief asks for a direct rear view. The sun opening also needs editorial judgment against the intended grey dusk.",
+   "preview_seconds": 6,
+   "preview_sha256": "26b316fda07f6bf7576f082c69e640cbd3033a6bc905d457e6fc19b4bddac2d3"
+  },
+  {
+   "candidate": "genesis-09-short-s-noah-lamp-2026102901-1",
+   "shot": "s-noah-lamp",
+   "sha256": "8955c02236116b1e3241b25765e16391ff58f0cdcb97ae85e337411162704459",
+   "original_sha256": "7b2fd64d1f573958c8fcf20830d3a697790649dfbd4a2526f01467e753830248",
+   "repo_path": "migration/production/bible/stills/candidates/genesis-09-short-s-noah-lamp-2026102901-1.jpg",
+   "size": [
+    1080,
+    1920
+   ],
+   "observed": "Clay oil lamp and flame are fully visible at lower left; the entire curled lamb is visible at lower right; robe, plank floor and sleeping family are legible.",
+   "remaining": "Preview camera move corrected to 1.5% and inspected at end frame; physical subject animation, original generation prompt, source qualification and designated review remain pending.",
+   "preview_seconds": 12,
+   "preview_sha256": "6f7d37e9ac37c7e8ae419913a09b938014bb8cb7dcf0d945899dab6217da36cf"
+  }
+ ],
+ "preview": {
+  "filename": "HeroVerse_Short09_3_Cenas_Previa_Sem_Audio.mp4",
+  "sha256": "e86847fdb1ff41b01ceb930e5c163101da1944d1ee53108966e4bd09dd973609",
+  "seconds": 24,
+  "audio": false,
+  "purpose": "Camera-motion inspection of three draft images, not an episode render or animation of subjects",
+  "lamp_motion": "Centered eased push-in 1.000 to 1.015 over 360 frames; preserves lamp and lamb at end frame"
+ },
+ "validation": {
+  "preview_format": "1080x1920, 30fps, 24 seconds, no audio",
+  "black_frame_check": "PASS; no unexpected black frames",
+  "not_episode_qa": true,
+  "canonical_test_suites": {
+   "passed": 84,
+   "total": 84,
+   "environment_note": "82 suites passed initially; two required installed runtime OpenCV on the isolated Python path and passed unchanged in a temporary venv."
+  }
+ }
+}
