@@ -10,8 +10,11 @@ import json
 import os
 from pathlib import Path
 import re
+import sys
 from urllib.parse import urlsplit
 from urllib.request import Request
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from client import PavoError
 import images
