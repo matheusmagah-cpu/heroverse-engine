@@ -29,6 +29,26 @@ def jpeg(path, size=(1080, 1920), colour=(90, 70, 50)):
 
 
 class Stills(unittest.TestCase):
+    def test_e215_critical_scene_details_are_explicit_inside_the_vertical_crop(self):
+        # Static brief protection after inspecting run 40793104573. This does not grade generated pixels.
+        required = {
+            "genesis-09-short-s-noah-door": ("Only the back of his head is visible",
+                                           "both ears and shoulders are symmetric",
+                                           "uninterrupted opening reaches the floor",
+                                           "walking on foot"),
+            "genesis-09-s-rock": ("water surface crosses both shins",
+                                  "feet and ankles lie entirely beneath opaque floodwater",
+                                  "unbroken empty water"),
+            "genesis-09-short-s-noah-lamp": ("clay oil lamp and its single flame are fully visible",
+                                           "inside the central third",
+                                           "warm light clearly reveals",
+                                           "Only the back of his head is visible")}
+        for sid, clauses in required.items():
+            prompt = json.loads((HERE / "stills" / f"{sid}.json").read_text())["prompt"]
+            for clause in clauses:
+                with self.subTest(still=sid, clause=clause):
+                    self.assertIn(clause, prompt)
+
     def setUp(self):
         # inside the repository (a still is a repository image), removed after each test
         self.dir = Path(tempfile.mkdtemp(prefix=".test-stills-", dir=HERE))
