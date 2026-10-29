@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lamp-recovery-lava-lamp-fluid-drip-dripping-fluent-lam",
+ "theme": "flood-lamp-recovery",
+ "query": "oil lamp",
+ "source": "pixabay",
+ "title": "lava lamp, fluid, drip, dripping, fluent, lamp, liquid, oil, wellness, relaxation, abstract, therapy, river",
+ "page": "https://pixabay.com/videos/id-51538/",
+ "author": "KlausHausmann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KlausHausmann via Pixabay (https://pixabay.com/videos/id-51538/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "536ae3849101d3e16d35b038d08c3a4d26e7b5466fb7a76b2681ca959efe9483",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  199.8,
+  222.6,
+  208.0,
+  203.8,
+  206.6
+ ],
+ "vetting_descriptions": [
+  "A blue and white pattern is visible on a white background.",
+  "A blue circle with a blue dot in the center is on a white background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lamp-recovery-lava-lamp-fluid-drip-dripping-fluent-lam-sha256-536ae3849101d3e16d35b038d08c3a4d26e7b5466fb7a76b2681ca959efe9483.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

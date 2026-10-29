@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-recovery-river-rapids-water-whitewater-rocks-natu",
+ "theme": "flood-springs-recovery",
+ "query": "river rapids",
+ "source": "pixabay",
+ "title": "river, rapids, water, whitewater, rocks, nature, wilderness, outdoors, landscape",
+ "page": "https://pixabay.com/videos/id-230299/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-230299/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a14f8c0606172357d2b73b4ae2fed30a4f60259255fa4c6ccda907437b00b4f9",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  134.0,
+  133.8,
+  133.8,
+  134.0,
+  133.8
+ ],
+ "vetting_descriptions": [
+  "A river with rocks and plants, and a tree in the background.",
+  "A river with rocks and plants, a tree, and a waterfall."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-recovery-river-rapids-water-whitewater-rocks-natu-sha256-a14f8c0606172357d2b73b4ae2fed30a4f60259255fa4c6ccda907437b00b4f9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

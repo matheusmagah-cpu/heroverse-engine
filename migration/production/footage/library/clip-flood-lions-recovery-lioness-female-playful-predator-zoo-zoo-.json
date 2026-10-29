@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lions-recovery-lioness-female-playful-predator-zoo-zoo-",
+ "theme": "flood-lions-recovery",
+ "query": "lion",
+ "source": "pixabay",
+ "title": "lioness, female, playful, predator, zoo, zoo hague, carnivores, wildlife, big cat, dangerous, lion",
+ "page": "https://pixabay.com/videos/id-88022/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 22.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-88022/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "04cc86b1d9dfffdcf0a51e5962ba76ab05c50ea34ab38ddafa7362aff6e1ab97",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  110.7,
+  119.8,
+  114.5,
+  120.3,
+  102.2
+ ],
+ "vetting_descriptions": [
+  "Two lions are standing next to each other in a zoo enclosure.",
+  "A lion is sitting on the ground in a grassy area, surrounded by green plants and rocks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lions-recovery-lioness-female-playful-predator-zoo-zoo--sha256-04cc86b1d9dfffdcf0a51e5962ba76ab05c50ea34ab38ddafa7362aff6e1ab97.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

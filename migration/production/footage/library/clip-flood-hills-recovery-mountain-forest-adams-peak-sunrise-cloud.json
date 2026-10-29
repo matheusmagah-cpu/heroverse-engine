@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-hills-recovery-mountain-forest-adams-peak-sunrise-cloud",
+ "theme": "flood-hills-recovery",
+ "query": "mist mountains",
+ "source": "pixabay",
+ "title": "mountain, forest, adams peak, sunrise, clouds, sky, fog, mist, nature, drone, dji, sri lanka, landscape",
+ "page": "https://pixabay.com/videos/id-174999/",
+ "author": "nuwaus",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 45.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: nuwaus via Pixabay (https://pixabay.com/videos/id-174999/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b97a684805fc3f77654037c869e2ea36e9ac7fff742f556e094b37d37795e9ab",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.0,
+  137.4,
+  138.1,
+  136.5,
+  132.2
+ ],
+ "vetting_descriptions": [
+  "A mountain is visible in the distance, with a cloudy sky above it.",
+  "A mountain is visible in the distance, and there is a cloudy sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-hills-recovery-mountain-forest-adams-peak-sunrise-cloud-sha256-b97a684805fc3f77654037c869e2ea36e9ac7fff742f556e094b37d37795e9ab.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

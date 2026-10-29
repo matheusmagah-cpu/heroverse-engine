@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rain-recovery-leaves-tree-branch-rain-drops-plants-for",
+ "theme": "flood-rain-recovery",
+ "query": "rain drops",
+ "source": "pixabay",
+ "title": "leaves, tree, branch, rain, drops, plants, forest idyll, forest landscape, rain shower, nature, raindrops, forest",
+ "page": "https://pixabay.com/videos/id-172940/",
+ "author": "joergip31",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: joergip31 via Pixabay (https://pixabay.com/videos/id-172940/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9357d6136f51f86cd8e70cfeb8123e539bbedfc641bf457089aabfd59f952ccf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.6,
+  115.9,
+  108.0,
+  119.2,
+  117.7
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a branch with a leaf on it.",
+  "A tree with green leaves and a branch with a leaf on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rain-recovery-leaves-tree-branch-rain-drops-plants-for-sha256-9357d6136f51f86cd8e70cfeb8123e539bbedfc641bf457089aabfd59f952ccf.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

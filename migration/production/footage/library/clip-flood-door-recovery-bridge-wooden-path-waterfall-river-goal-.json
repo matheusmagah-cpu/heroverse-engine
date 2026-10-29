@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-door-recovery-bridge-wooden-path-waterfall-river-goal-",
+ "theme": "flood-door-recovery",
+ "query": "wooden door",
+ "source": "pixabay",
+ "title": "bridge, wooden, path, waterfall, river, goal, cascade, nature, forest, view, mountain, park, beautiful wallpaper, trip, herb, leaf, that, tree, beauty, beautiful, background, season, spring, autumn, green, flowing",
+ "page": "https://pixabay.com/videos/id-108514/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-108514/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7e4c1803c301af11ec8a863ee116d16c35577a62750821fab8fcb2cab02a6dc1",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.2,
+  109.1,
+  109.1,
+  109.4,
+  109.6
+ ],
+ "vetting_descriptions": [
+  "A bridge over a river with a fence on the side.",
+  "A bridge over a river with a fence on the side and a tree in the foreground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-door-recovery-bridge-wooden-path-waterfall-river-goal--sha256-7e4c1803c301af11ec8a863ee116d16c35577a62750821fab8fcb2cab02a6dc1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

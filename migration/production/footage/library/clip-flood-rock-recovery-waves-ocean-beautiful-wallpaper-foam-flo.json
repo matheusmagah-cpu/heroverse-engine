@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rock-recovery-waves-ocean-beautiful-wallpaper-foam-flo",
+ "theme": "flood-rock-recovery",
+ "query": "waves rocks",
+ "source": "pixabay",
+ "title": "waves, ocean, beautiful wallpaper, foam, flow, marine, water, bounce, beach, background, holiday, travel, landscape, tropical, relaxing, nature, rocky, rocks",
+ "page": "https://pixabay.com/videos/id-61950/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-61950/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e68bbb13b935468c5a37feb6004f3ab6610243fc4c51fc6d97c47412517c1407",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  135.7,
+  127.2,
+  150.2,
+  169.6,
+  165.2
+ ],
+ "vetting_descriptions": [
+  "A wave crashing on a rock in the ocean.",
+  "A wave in the ocean with a white and blue color."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rock-recovery-waves-ocean-beautiful-wallpaper-foam-flo-sha256-e68bbb13b935468c5a37feb6004f3ab6610243fc4c51fc6d97c47412517c1407.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

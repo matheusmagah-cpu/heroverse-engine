@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-pairs-recovery-elephants-sunset-savannah-tanzania-zanzi",
+ "theme": "flood-pairs-recovery",
+ "query": "elephants walking",
+ "source": "pixabay",
+ "title": "elephants, sunset, savannah, tanzania, zanzibar, safari, african sunset, travel, elephant, africa",
+ "page": "https://pixabay.com/videos/id-292151/",
+ "author": "seyhmuskino",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: seyhmuskino via Pixabay (https://pixabay.com/videos/id-292151/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e32a2e7d24886b5dfa8537dbba835e398acaaf9784d69dcec4eddbe3600a9c10",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  114.1,
+  113.8,
+  113.8,
+  113.7,
+  113.5
+ ],
+ "vetting_descriptions": [
+  "Two elephants are walking through a field with trees and a sunset in the background.",
+  "Two elephants are walking in a field with trees and a sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-pairs-recovery-elephants-sunset-savannah-tanzania-zanzi-sha256-e32a2e7d24886b5dfa8537dbba835e398acaaf9784d69dcec4eddbe3600a9c10.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

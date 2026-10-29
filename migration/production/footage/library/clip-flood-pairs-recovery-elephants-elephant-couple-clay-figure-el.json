@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-pairs-recovery-elephants-elephant-couple-clay-figure-el",
+ "theme": "flood-pairs-recovery",
+ "query": "elephants walking",
+ "source": "pixabay",
+ "title": "elephants, elephant couple, clay figure, elephant, characters",
+ "page": "https://pixabay.com/videos/id-125062/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-125062/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4c5a4bb1d62f76ef99168f7fbf088f81943c44ffb85a1bc036f5a9f95f915b61",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  16.6,
+  14.3,
+  16.8,
+  19.5,
+  19.9
+ ],
+ "vetting_descriptions": [
+  "A statue of two elephants holding each other is displayed in a dark room.",
+  "A statue of two hands holding each other is displayed in a dark room."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-pairs-recovery-elephants-elephant-couple-clay-figure-el-sha256-4c5a4bb1d62f76ef99168f7fbf088f81943c44ffb85a1bc036f5a9f95f915b61.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
