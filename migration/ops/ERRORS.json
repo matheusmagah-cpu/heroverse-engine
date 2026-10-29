@@ -2379,6 +2379,24 @@
     "contains": "def test_e215_critical_scene_details_are_explicit_inside_the_vertical_crop",
     "covers": ["random"]
    }
+  },
+  {
+   "id": "E216",
+   "date": "2026-10-29",
+   "class": "pr-late",
+   "prior": [
+    "E207",
+    "E213"
+   ],
+   "error": "The owner requested transferring the three newly generated OpenAI DRAFT images to Pavo, but the remote integration exposed account checks only. The existing upload adapter was reachable only inside generation, leaving the artifact handoff without a callable remote consumer. No upload or production approval had occurred.",
+   "fix": "Expose an optional upload-only manifest mode in the existing Pavo workflow. Preserve exact OpenAI source, unknown prompts as null, reference hashes and unqualified DRAFT status. Persist exclusive content-addressed claims to main before provider effects; never replay a claimed attachment, including after timeout or rerun. Require an exact zero quote, fixed storage hosts and a SHA256 readback; preserve partial or unknown outcomes. No conversation, media generation, approval, scheduler, licence assertion or frozen QA change is added.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_attachments.py",
+    "contains": "def test_e216_remote_transfer_is_wired_without_enabling_generation",
+    "covers": [
+     "pr-late"
+    ]
+   }
   }
  ]
 }

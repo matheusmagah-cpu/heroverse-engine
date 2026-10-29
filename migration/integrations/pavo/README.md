@@ -295,3 +295,14 @@ The request and result contracts were checked against Pavo's public frontend and
 - https://github.com/maoshuhua/pavo-cli/tree/1dbd922ff03447601715fb542d9afcea687345d3 — inspected, not installed;
   its regional test endpoints and on-disk credential store are not adopted.
 - https://py.sdk.modelcontextprotocol.io/ — official MCP SDK.
+
+### Upload-only DRAFT transfer (2026-10-29)
+
+`pavo-mcp.yml` accepts an optional `attachments_manifest` pointing to a committed
+manifest in `migration/evidence/pavo/attachments/`. The three PR536 candidates
+are uploaded as OpenAI DRAFT references, with unknown original prompts kept null.
+Content-addressed claims must reach main before provider effects. An existing
+claim requires reconciliation, never resubmission. Only an exact zero quote
+permits presign/PUT/inspect, followed by unsigned CDN readback with exact SHA256.
+No conversation, generation, quota-reset assertion or approval is created.
+Receipts and partial outcomes remain in that directory and the run artifact.
