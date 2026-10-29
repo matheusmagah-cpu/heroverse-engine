@@ -20,10 +20,11 @@ clip, `approve-source` (below) for a library clip, a still in motion or an inven
 a note, by PR. The approval records the shot's `source`, and the build ships exactly that (episode_build.generate_step,
 long_build.upscale_step), the manifest naming it per shot.
 
-Owner 29/10: plans with source_policy=pavo_speech_stock keep valid approvals and existing clips first. Only
-on-camera talking shots take new Pavo video; other new pictures use licensed footage, never automatic stills.
-The same rule holds at both generation entry points. Character/period/rights/review requirements remain intact:
-a source that cannot meet them stays pending for direction, not silently moved to another provider.
+Owner 29/10 (latest direction): plans with source_policy=pavo_speech_stock keep valid approvals and existing clips
+first. Pavo/Buzzy are limited to speaking scenes; Buzzy remains metadata-only and is never invoked here. Other new
+pictures use licensed footage or an APPROVED still in camera motion. Generated stills are allowed only with recorded
+provenance, rights, hash, contextual review and, when a character appears, the approved reference binding. Camera
+motion is never claimed as body motion or lip-sync. The same rule holds at generation and source-approval boundaries.
 
 usage:
   episode_build.py sources PLAN [--write]   the per-shot source plan for today's budget (evidence/sources/<ep>.json)
@@ -241,9 +242,10 @@ def character_still_problems(shot, rec, chars=None):
 
 
 def fallback_refusal(plan, shot, index, source, still=None):
-    """Why a free fallback may not carry this shot, or None. v4: a spoken shot or a shot with a character never
-    (SOURCE_SPOKEN_SHOT, SOURCE_CHARACTER_SHOT). The owner's arc-01 exception: a spoken shot on the Kokoro voice
-    (plan B) and a shot with characters, as a still in motion made with their references (SOURCE_CHARACTER_STILL)."""
+    """Why a free fallback may not carry this shot, or None. A spoken shot stays on its qualified speech route.
+    Under the current pavo_speech_stock policy, a silent character shot may use only an APPROVED still made with the
+    character's references; licensed footage cannot substitute that identity. Legacy plans retain the arc-01
+    exception. Every accepted still remains subject to SOURCE_CHARACTER_STILL and contextual review."""
     import pavo_native
     exc = owner_exception(plan)
     kokoro = exc and pavo_native.route(plan, shot, index) == pavo_native.KOKORO
@@ -259,7 +261,7 @@ def fallback_refusal(plan, shot, index, source, still=None):
     if pavo_native.spoken(shot) and not ((kokoro and source == "still_motion") or god_vo):
         return f"SOURCE_SPOKEN_SHOT {shot['id']} (a spoken shot is always Pavo: R2)"
     if has_character(shot):
-        if not exc or source != "still_motion":
+        if source != "still_motion" or not (exc or speech_stock(plan)):
             return f"SOURCE_CHARACTER_SHOT {shot['id']} (a character's canonical look needs its references)"
         if still is not None:
             bad = character_still_problems(shot, still)
@@ -346,7 +348,7 @@ def speech_stock(plan):
 
 
 def stock_required(plan, shot):
-    """New pictures only: preserve valid approvals/reuse; stock cannot relax character or review gates."""
+    """New pictures only: preserve valid approvals/reuse; footage or reviewed still motion cannot relax gates."""
     import plan_check
     return speech_stock(plan) and shot.get("window_of") is None and not plan_check.talking(shot)
 
@@ -358,7 +360,7 @@ def require_pavo_generation(plan, ids=None):
                if (wanted is None or s["id"] in wanted) and stock_required(plan, s)]
     if refused:
         raise SystemExit("SOURCE_POLICY_PAVO_FORBIDDEN " + ",".join(refused)
-                         + " (new non-talking pictures use licensed footage; reconcile existing clips first)")
+                         + " (new non-talking pictures use licensed footage or reviewed still motion; reconcile existing clips first)")
 
 
 def planned_fallbacks(plan):
@@ -422,7 +424,7 @@ def allocate(plan, todo, remaining, rounds=None):
     for s in todo:
         if speech_stock(plan):
             if stock_required(plan, s):
-                out.append((s, "footage"))
+                out.append((s, "fallback"))
                 continue
             # A talking character waits for Pavo; quota pressure does not turn speech into a still.
             units = long_preflight.planned_units([s], rounds, worst=True)
@@ -637,8 +639,6 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     i, shot = index[shot_id], plan["shots"][index[shot_id]]
     if source not in ("footage", "still_motion", "pavo_reuse"):
         raise SystemExit(f"SOURCE_REFUSED {source!r} (footage, still_motion or pavo_reuse)")
-    if speech_stock(plan) and source == "still_motion":
-        raise SystemExit(f"SOURCE_POLICY_STILL_FORBIDDEN {shot_id} (preserve existing valid approvals; new pictures use footage or Pavo speech)")
     try:
         score = float(score)
     except (TypeError, ValueError):
