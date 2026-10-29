@@ -64,3 +64,33 @@ Next production work: qualify source/provenance and the actual reviewer before
 any approval or generation dispatch. Preserve candidate IDs and hashes. Do not
 rerun the completed 84 suites unless relevant code changes; remote PR checks
 remain required.
+
+
+## Offline render delivery repair — E219
+
+The owner requested a working automatic render after a legacy runner cycle skipped
+its render step. Readback of runner40902446386 confirms QUEUE_EMPTY in the legacy
+pilot queue. That is separate from the heartbeat's qualified Bible-plan handoff,
+which still refuses stale/missing production inputs. Do not treat either an empty
+queue or successful CI as a newly delivered master.
+
+The offline editing renderer is now reproducible via production/draft_render.py:
+hash-bound sealed inputs, normal seekable MP4, output/cache locks, validated resume
+and atomic final delivery. A real negative regression reproduced a short picture
+hidden by longer audio. The repair checks decoded video frames and the video
+stream independently, and preserves exact AAC packet payloads and timing when
+copying an existing mix. Full local canonical validation passed86/86 suites.
+
+A real175-second/5250-frame1080x1920/30fps DRAFT was built with this code and passed
+complete decoding; exact AAC payload/timing equality also passed. Private media,
+editing-package identifiers and account data remain in their authorized storage.
+The existing supervisor is the consumer of the portable private editing package;
+no additional clock, generation request or public media transfer is introduced.
+
+Owner/stage: editing/render automation. Accept the command's technical output only
+when its recipe, hashes and full-video validation correspond; recover the same
+artifact on uncertain persistence. Unchanged completed outputs need no new render.
+The active22-shot plan, source approvals, frozen criteria and designated reviewer
+policy remain unchanged. Next production step still requires legitimate review
+and current plan/preflight integration before the existing build/publish gates.
+No audiovisual score, approval, schedule or publication was created by this repair.
