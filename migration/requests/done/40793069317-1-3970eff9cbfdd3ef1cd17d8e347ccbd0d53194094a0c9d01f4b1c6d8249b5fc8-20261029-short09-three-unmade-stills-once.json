@@ -7,12 +7,13 @@
  },
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "3970eff9cbfdd3ef1cd17d8e347ccbd0d53194094a0c9d01f4b1c6d8249b5fc8",
   "original_path": "migration/requests/20261029-short09-three-unmade-stills-once.json",
   "base_commit": "66d7b35e75f441282c6587feac8ea29cf8afc4da",
   "dispatcher_run_id": "40793069317",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-29T00:17:39.127878+00:00"
+  "claimed_at": "2026-10-29T00:17:39.127878+00:00",
+  "acknowledged_at": "2026-10-29T00:17:41.757244+00:00"
  }
 }
