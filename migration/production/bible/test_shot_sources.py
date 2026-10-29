@@ -969,27 +969,28 @@ class SpeechStockPolicy(unittest.TestCase):
         p.update(source_policy="pavo_speech_stock", criteria="story-qa-criteria-v5", audio_route="kokoro")
         return p
 
-    def test_e218_stock_route_never_consumes_pavo_or_silently_uses_stills(self):
+    def test_owner_20261029_non_talking_route_never_consumes_pavo_and_allows_reviewed_stills(self):
         p = self.hybrid()
         with patch.object(ss, "fallback_refusal", return_value=None):
             for budget in (0, 10 ** 6):
                 got = {s["id"]: c for s, c in ss.allocate(p, p["shots"], budget)}
-                self.assertEqual(got["s-river"], "footage")
-                self.assertEqual(got["s-god"], "footage")
-                self.assertEqual(got["s-pair"], "footage")
+                self.assertEqual(got["s-river"], "fallback")
+                self.assertEqual(got["s-god"], "fallback")
+                self.assertEqual(got["s-pair"], "fallback")
                 self.assertEqual(got["s-eve"], "pavo" if budget else "WAIT_PAVO_BUDGET")
 
-    def test_e218_report_keeps_reuse_and_stock_constraints(self):
+    def test_owner_20261029_report_offers_footage_and_reviewed_stills_without_pavo(self):
         p = self.hybrid()
         guard = type("Budget", (), {"check_batch": lambda self, units: {"remaining": 1000, "used": 0, "cap": 1000}})()
         lib = [clip("clip-river-a"), clip("clip-light", theme="light", title="light water")]
-        with patch.object(ss, "still_candidates", return_value=[{"source": "still_motion", "item": "stale-still"}]) as stills:
+        with patch.object(ss, "still_candidates",
+                          return_value=[{"source": "still_motion", "item": "reviewed-still"}]) as stills:
             report = ss.sources_report(p, {"s-eve": "e1"}, {}, guard=guard, lib=lib)
-            self.assertEqual([c["source"] for c in report["shots"]["s-river"]["candidates"]], ["footage"])
-            self.assertEqual(report["shots"]["s-god"]["source"], "footage")
-            self.assertEqual(report["shots"]["s-pair"]["source"], "WAIT_FALLBACK_CANDIDATE")
-            self.assertIn("SOURCE_CHARACTER_SHOT", report["shots"]["s-pair"]["refusal"])
-            stills.assert_not_called()
+            self.assertEqual([c["source"] for c in report["shots"]["s-river"]["candidates"]],
+                             ["footage", "still_motion"])
+            self.assertEqual(report["shots"]["s-god"]["source"], "still_motion")
+            self.assertEqual(report["shots"]["s-pair"]["source"], "still_motion")
+            self.assertEqual(stills.call_count, 3)
         approved = {"s-river": {"source": "still_motion", "request_sha256": "unchanged"}}
         with patch.object(ss, "expected_request", return_value="unchanged"):
             report = ss.sources_report(p, {}, approved, guard=guard, lib=lib)
@@ -1027,9 +1028,23 @@ class SpeechStockPolicy(unittest.TestCase):
             report = ss.sources_report(p, {}, a, guard=guard, lib=[])
         self.assertEqual(report["shots"]["s-river"]["state"], "fallback")
 
-    def test_e218_new_still_approval_cannot_override_the_selected_policy(self):
-        with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_STILL_FORBIDDEN"):
-            ss.approve_source(self.hybrid(), "s-river", "still_motion", "old-still", 9.5, "test")
+    def test_owner_20261029_reviewed_still_can_enter_selected_policy(self):
+        import plan_check
+        import reviewer_identity
+        p = self.hybrid()
+        rec = {"id": "still-river", "episode": p["episode"], "shot": "s-river", "status": "APPROVED",
+               "repo_path": "migration/production/bible/stills/still-river.jpg", "sha256": "a" * 64,
+               "source": {"license": "apache-2.0"}, "approved": {"model": "claude-session-reviewer"}}
+        with tempfile.TemporaryDirectory() as td, \
+             patch.object(plan_check, "still_record", return_value=rec), \
+             patch.object(reviewer_identity, "valid", return_value=True), \
+             patch.object(reviewer_identity, "require", return_value="claude-session-reviewer"):
+            got = ss.approve_source(p, "s-river", "still_motion", "still-river", 9.5,
+                                    "The reviewed still matches the river line.", shots_dir=Path(td),
+                                    reviewer="claude-session-reviewer")
+        self.assertEqual(got["source"], "still_motion")
+        self.assertEqual(got["still_sha256"], "a" * 64)
+        self.assertEqual(got["licence"], "apache-2.0")
 
     def test_e218_active_plans_use_policy_without_changing_frozen_criteria(self):
         import plan_check
