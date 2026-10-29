@@ -2366,6 +2366,19 @@
     "contains": "def test_e214_generation_post_is_never_replayed_after_an_http_error",
     "covers": ["rerun-without-fix"]
    }
+  },
+  {
+   "id": "E215",
+   "date": "2026-10-29",
+   "class": "random",
+   "prior": ["E114", "E118"],
+   "error": "The three new Short09 still candidates of run 40793104573 had verified bytes but failed the scene brief: Noah at the doorway wore spectacles in a turned view, the man on the rock had dry visible feet instead of submerged ankles, and the lamp was absent from the cropped composition. Text instructions alone did not establish pixel fidelity; the medium framing and central crop did not explicitly reserve all critical objects. The candidates remained DRAFT, with no claimed approval or publication.",
+   "fix": "Revise only the three DRAFT still briefs before another bounded attempt: directly rear-facing symmetric head/shoulders and a full-height doorway, an opaque surface crossing both shins, and a visible foreground clay lamp plus lamb with readable warm exposure. Anchor required details inside the vertical crop. Preserve narration, canonical wardrobe, existing approvals, frozen QA and reviewer identities. A static regression protects these explicit brief requirements; it cannot guarantee generated pixels, which still require actual designated review. The failed candidate hashes and observations are retained in the audit.",
+   "antidote": {
+    "file": "migration/production/bible/test_scene_stills.py",
+    "contains": "def test_e215_critical_scene_details_are_explicit_inside_the_vertical_crop",
+    "covers": ["random"]
+   }
   }
  ]
 }
