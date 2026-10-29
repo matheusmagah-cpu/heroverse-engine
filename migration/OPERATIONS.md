@@ -68,6 +68,15 @@ One scheduler of record, one watchdog, one daily pass; nothing else checks the s
 `render.yml` cron (:13, :43) lives in heroverse-runner.
 
 ## Known limits (measured)
+- Offline editorial drafts: `production/draft_render.py MANIFEST --output PREVIEW` consumes the existing
+  private editing package, never the production approval queue. Sources must match their hashes; reuse of
+  existing stills is explicit. The CLI locks the output, resumes matching segments, and delivers atomically
+  only after video frame/duration and full-decode checks. An optional hash-bound `audio_copy` input preserves
+  AAC payloads and packet timing. A matching delivered file is reused without another render. The existing
+  supervisor can invoke this command after materializing the editing package; no additional scheduler,
+  public media transfer, source approval or production-plan substitution is implied. A receipt is technical
+  DRAFT evidence only. `heroverse-runner/render.yml` still selects legacy pilot renders; `QUEUE_EMPTY` there
+  is not a statement about Bible draft readiness. Qualified Bible production uses the handoff below.
 - Qualified production handoff (E213): the existing heartbeat checks Bible plans independently of the pilot
   render queue. A current strict-plan/preflight/order PASS can queue one `episode.yml` or `long-build.yml` request
   in `migration/requests/`, then invoke the same reusable durable-claim dispatcher. Prior claims/acknowledgements,
