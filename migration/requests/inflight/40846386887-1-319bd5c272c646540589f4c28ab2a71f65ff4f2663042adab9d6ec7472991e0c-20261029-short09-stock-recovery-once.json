@@ -1,0 +1,17 @@
+{
+ "workflow": "footage.yml",
+ "inputs": {
+  "queries": "migration/production/footage/queries-shorts-g09-recovery.json",
+  "per_theme": "2"
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "claimed",
+  "request_sha256": "319bd5c272c646540589f4c28ab2a71f65ff4f2663042adab9d6ec7472991e0c",
+  "original_path": "migration/requests/20261029-short09-stock-recovery-once.json",
+  "base_commit": "603ddc4475e2bca5299ce6167c945dee8c351858",
+  "dispatcher_run_id": "40846386887",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-29T09:01:36.327542+00:00"
+ }
+}
