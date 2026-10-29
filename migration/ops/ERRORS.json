@@ -2397,6 +2397,23 @@
      "pr-late"
     ]
    }
+  },
+  {
+   "id": "E217",
+   "date": "2026-10-29",
+   "class": "env-vs-test",
+   "prior": [
+    "E105", "E116", "E118", "E137", "E141", "E168", "E206", "E210"
+   ],
+   "error": "Attachment run 40833596089 failed before claims/provider calls: python3 -I removed the script directory from sys.path. The unit test injected that directory and masked the real CLI import failure (client not found).",
+   "fix": "Initialize only the resolved adapter directory on sys.path in attachments.py before sibling imports, matching the isolated entry-point contract. Execute the exact -I -B CLI in a subprocess regression so test imports cannot mask it. Reconcile run 40833596089: claim failed before file creation or upstream effects; only that run may resume after the fix, without another request or transfer.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_attachments.py",
+    "contains": "def test_e217_exact_isolated_cli_loads_without_test_path_injection",
+    "covers": [
+     "env-vs-test"
+    ]
+   }
   }
  ]
 }

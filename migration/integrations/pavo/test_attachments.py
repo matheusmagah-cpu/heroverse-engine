@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -43,6 +44,13 @@ class DraftAttachments(unittest.TestCase):
         self.assertIn('attachments.py send', wf)
         self.assertLess(wf.index('Persist attachment claims before any provider call'), wf.index('PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}', wf.index('  attachments:')))
         self.assertIn('git push origin HEAD:main', wf)
+
+    def test_e217_exact_isolated_cli_loads_without_test_path_injection(self):
+        cli = Path(__file__).resolve().with_name('attachments.py')
+        result = subprocess.run([sys.executable, '-I', '-B', str(cli), '--help'],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('claim', result.stdout)
 
     def test_generation_routes_are_refused_before_network(self):
         c = a.AttachmentClient(token='offline-test')
