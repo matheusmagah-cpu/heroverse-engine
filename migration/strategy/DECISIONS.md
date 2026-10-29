@@ -759,25 +759,3 @@ latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has 
   file stays as it was. The Shorts opt in by naming v5 in their plan (their own frame, E132).
 
 - **2026-10-28, Gemini image free tier = 0, route not kept.** Every image model on the free AI Studio key answered 429 with limit 0 (`evidence/gemini-image/20261028-free-tier.json`); stills from ChatGPT run on the owner's PC (`integrations/chatgpt-local/`).
-
-## Owner direction implemented in source routing and recovery targets (2026-10-29)
-
-The owner asked to continue and resolve production, using Pavo for speaking scenes and public-library videos
-for the rest. E218 implements `source_policy: pavo_speech_stock` in the active Short 09/10/11 and arc 01/02 plans.
-It preserves valid approvals and existing clips; only new on-camera speech uses Pavo. All other new pictures
-are routed to licensed footage, subject to the same character, period, exact-action, source and review checks.
-There is no automatic still substitute or provider switch on an unavailable source. God's voice stays Kokoro.
-Unknown policies fail early; actual generation/probe entry points enforce the route before any provider effect.
-
-The first long's expired arcs.json target moves from 28/10 22:00Z to 29/10 22:00Z, matching the recovery plan.
-The next long targets remain 31/10, 02/11, 04/11 at 10:00Z, then alternate days. Shorts keep 13:30/23:30Z;
-two conditional recovery slots at 19:30Z on 30/10 and 31/10 require an approved extra and the next day's
-two Shorts ready, without delaying the long. Otherwise the recovery slot moves to the next eligible date.
-The operational target for 29/10 through 16/11 inclusive is 40 Shorts (38 regular, two recovery) and ten longs;
-it is not a capacity forecast, publication confirmation or promise of monetization. Reserve target: four
-approved Shorts and one approved long. No new clock, generation, upload, review identity or frozen QA is added.
-
-Acceptance: master, technical QA and actual 9.5 review at T-4h; approved upload, processing and schedule
-readback at T-2h; public ID/package confirmation at the first existing cycle after the slot. A failed target
-remains an operational miss and is reconciled in order, never filled by a fabricated approval or duplicate upload.
-Private channel analytics and account-budget details remain in the owner's private analysis, not this repository.

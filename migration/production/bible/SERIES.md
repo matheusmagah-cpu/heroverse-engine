@@ -3,20 +3,6 @@
 Owner: one micro-story at a time from Genesis, narrated from the KJV (public domain), cinematic and never still, AI
 video only at the hook and the story's peak, finishing with a short reflection and a prayer. Shorts feed long videos.
 
-## Current source and recovery policy
-
-Owner 29/10: new on-camera talking scenes use Pavo; other new pictures use licensed library video.
-The five active plans opt into `source_policy: pavo_speech_stock`; valid approved media and existing clean clips
-are reused first. A missing identity, matching action, licence or designated review is not replaced by an
-automatically generated silent Pavo clip or animated still. Historical production descriptions below are
-superseded where they conflict. Source selection is not media approval.
-
-The two regular Short targets remain 13:30 and 23:30 UTC. Two conditional recovery slots at 19:30 UTC
-on 30/10 and 31/10 repay the missed 28/10 slots, only with the extra and the next day's two Shorts approved
-and the long protected. Otherwise move only that recovery slot to the next eligible day; at most one extra
-per day and two total. Publication order remains sequential. Long targets follow arcs.json. These are targets,
-not YouTube scheduled uploads. Preserve the original 31/10 and 16/11 goal checkpoints.
-
 ## One format, two lengths: the Shorts lead to the long (owner, 2026-10-25)
 Owner: "o que está pronto, mantém; a partir desse momento passa para a ideia do short ... o short tem que seguir o
 padrão do longo e o longo do short ... o short direcionar pro vídeo longo; monta uma estratégia efetiva".
@@ -66,7 +52,7 @@ script counts once the full `script_check` passes; a prayer long still scheduled
 | Arc | Shorts (episodes) | Shorts dates | Long | Long slot |
 |---|---|---|---|---|
 | prayer (stopped 26/10) | - | - | 013 night (public); 014 morning (its slot passed before the stop: the hold leaves it if public); 008 night held by `channel-privacy.yml` unschedule (`channel/hold-plan.json`) | 26/10 00:00, 26/10 10:00; 27/10 00:00 withdrawn |
-| 1 In the beginning | 1-4 (Gen 1-3) | 24-25/10 | Creation, Eden and the Fall | 29/10 22:00 (recovery target, owner 29/10; production and review still required, DECISIONS.md) |
+| 1 In the beginning | 1-4 (Gen 1-3) | 24-25/10 | Creation, Eden and the Fall | 28/10 22:00 (owner 28/10 ~11:10Z, "o longo tem que sair HOJE": story QA v5, DECISIONS.md) |
 | 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 31/10 10:00 (owner 28/10: every other day after arc-01 on 29/10) |
 | 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 02/11 10:00 |
 | 4 Abram | 13-16 (Gen 12-19) | 30-31/10 | The call of Abraham | 04/11 10:00 |

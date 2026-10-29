@@ -157,5 +157,64 @@ class Runway(unittest.TestCase):
             self.assertTrue(any("pilot-017" in a and "rendered" in a for a in alerts))
 
 
+class Recovery(unittest.TestCase):
+    def test_owner_targets_have_only_two_makeups_and_do_not_skip_parts(self):
+        root = Path(__file__).resolve().parents[2]
+        table = json.loads((root / "migration/production/bible/arcs.json").read_text())
+        targets = table["recovery"]["targets"]
+        shorts = [t for t in targets if t["kind"] != "long"]
+        longs = [t for t in targets if t["kind"] == "long"]
+        self.assertEqual([t["episode"] for t in shorts], [f"genesis-{n:02d}-short" for n in range(9, 49)])
+        self.assertEqual(len(longs), 10)
+        self.assertEqual([t["slot"] for t in shorts if t["kind"] == "makeup"],
+                         ["2026-10-30T19:30:00Z", "2026-10-31T19:30:00Z"])
+        self.assertEqual(longs[0]["slot"], "2026-10-29T22:00:00Z")
+        for arc in table["arcs"]:
+            target = next(t for t in longs if t["episode"] == arc["id"] + "-long")
+            self.assertEqual(arc["long"]["slot"], target["slot"])
+        early = [t for t in targets if t["slot"][:10] <= "2026-10-31"]
+        self.assertEqual(sum(t["kind"] != "long" for t in early), 8)
+        self.assertEqual(sum(t["kind"] == "long" for t in early), 2)
+        self.assertEqual(len({t["slot"] for t in targets}), 50)
+
+    def test_deadline_report_never_promotes_an_upload_or_old_receipt_to_a_schedule(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            prod = Path(tmp) / "production"
+            bible = prod / "bible"
+            (bible / "episodes").mkdir(parents=True)
+            receipts = Path(tmp) / "publish/receipts"
+            receipts.mkdir(parents=True)
+            ep, sha, at = "genesis-09-short", "a" * 64, "2026-10-29T13:30:00Z"
+            (bible / "arcs.json").write_text(json.dumps({"recovery": {
+                "master_review_lead_hours": 4, "scheduled_readback_lead_hours": 2,
+                "targets": [{"episode": ep, "slot": at, "kind": "regular"}]}}))
+            ledger = {"entries": {"bible:" + ep + ":" + sha: {"video_id": "the-existing-id"}}}
+            def status(now):
+                return r.recovery_rows(prod, ledger, r.ts(now))[0]["state"]
+            self.assertEqual(status("2026-10-29T09:30:00Z"), "AT_RISK_NO_MASTER")
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+            self.assertEqual(status("2026-10-29T13:30:00Z"), "PUBLIC_READBACK_REQUIRED")
+            (bible / "episodes" / (ep + ".json")).write_text(json.dumps({"output_sha256": sha}))
+            self.assertEqual(status("2026-10-29T09:30:00Z"), "MASTER_GATES_RECHECK_REQUIRED")
+            receipt = {"version": "publish-receipt-v1", "key": "bible:" + ep + ":" + sha,
+                       "video_id": "the-existing-id", "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+                       "upload_status": "processed", "privacy": "private", "publish_at": at,
+                       "verified_at": "2026-10-29T10:29:00Z"}
+            path = receipts / "one.json"
+            path.write_text(json.dumps(receipt))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+            receipt["verified_at"] = "2026-10-29T11:29:00Z"
+            path.write_text(json.dumps(receipt))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "SCHEDULE_READBACK_CONFIRMED")
+            for key, bad in [("video_id", "wrong-id"), ("channel_id", "wrong-channel"),
+                             ("upload_status", "uploaded"), ("publish_at", "2026-10-30T13:30:00Z")]:
+                value = dict(receipt, **{key: bad}); path.write_text(json.dumps(value))
+                self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED", key)
+            path.write_text(json.dumps(receipt))
+            (bible / "episodes" / (ep + ".json")).write_text(json.dumps({"output_sha256": "b" * 64}))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+
+
+
 if __name__ == "__main__":
     unittest.main()

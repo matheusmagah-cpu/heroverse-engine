@@ -11,15 +11,17 @@ on-camera speech; other new pictures use footage selection. Existing matching
 clips precede new source requests. Valid approved media stays reusable. No
 media approval, frozen criterion or designated reviewer was changed.
 
-The first long's elapsed slot moves from 28 October 22:00 UTC to the recovery
-target 29 October 22:00 UTC. SERIES and DECISIONS describe the two regular
-Short slots plus the two conditional recovery extras. These are production
-targets, not confirmed YouTube schedules. Recompute preflight after this plan
+PR539 concurrently integrated the recovery calendar and runway report. Its
+full 40-Short/10-long target calendar and deadline checks are preserved. This
+change adds no competing calendar and leaves historical guides untouched.
+These are production targets, not confirmed YouTube schedules. Recompute preflight after this plan
 change; do not reuse a PASS bound to the previous plan/code hashes.
 
 Validation and manual review: docs/audits/2026-10-29-speech-stock-routing.md.
 All 85 canonical local suites passed across the full run and focused reruns.
-Remote PR checks and squash merge still need their separate readback.
+Remote PR540 checks and squash merge still need their separate readback.
+PR540 reconciles main09e982a6 with the existing recovery calendar, without
+replaying the already completed heartbeat recovery or copying private context.
 
 One new request: 20261029-short09-stock-recovery-once.json. It searches eight
 specific visual subjects through the existing free footage workflow, up to two

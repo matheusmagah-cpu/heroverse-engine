@@ -1,0 +1,15 @@
+{
+ "workflow": "heartbeat.yml",
+ "inputs": {},
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "acknowledged",
+  "request_sha256": "26ffd4d8f68f8c2d234e336c6b4cf601fa1c9c6510fdd7ecbd33bca0218078fe",
+  "original_path": "migration/requests/20261029-heartbeat-recovery-0832.json",
+  "base_commit": "035fc02091cf5048be24fd023b4f4f11e66a70e6",
+  "dispatcher_run_id": "40843965102",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-29T08:41:58.431899+00:00",
+  "acknowledged_at": "2026-10-29T08:42:01.947915+00:00"
+ }
+}

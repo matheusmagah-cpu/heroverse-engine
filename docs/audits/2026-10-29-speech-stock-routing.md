@@ -26,6 +26,11 @@ Eight routing regressions cover quota, voice-over, character refusals, existing
 clips, provider boundaries, invalid policy, stale digest and still refusal.
 No FFmpeg command changed. git diff --check passed.
 
+Concurrent PR539 already integrated the same date correction plus the complete
+recovery calendar/report. PR540 preserves those main09e982a6 versions, drops
+duplicate historical-guide edits and retains only source routing and its bounded
+stock acquisition. No private material is introduced into the public repository.
+
 The bounded stock request uses the existing free footage workflow, two retained
 candidates per query and existing page/hash deduplication. It does not approve
 or publish results. Scene suitability must be checked on actual footage and
