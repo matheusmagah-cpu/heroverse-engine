@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "source": "openai-imagegen",
+  "status": "DRAFT",
+  "approved": false,
+  "generation_enabled": false,
+  "items": [
+    {
+      "shot": "s-noah-door",
+      "path": "migration/production/bible/stills/candidates/genesis-09-short-s-noah-door-2026102901-1.jpg",
+      "sha256": "f672fda18fe4c56f3dd72cb15f601440a0a03270571bc28406ab175d06a7a947",
+      "prompt": null,
+      "provenance_status": "EXACT_GENERATION_PROMPT_NOT_RECOVERED",
+      "reference_sha256": [
+        "4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5"
+      ]
+    },
+    {
+      "shot": "s-rock",
+      "path": "migration/production/bible/stills/candidates/genesis-09-s-rock-2026102901-1.jpg",
+      "sha256": "8a600088f3ba73610977b401a0f3dbfc7c98537f278b0b99f0e8e905556e5837",
+      "prompt": null,
+      "provenance_status": "EXACT_GENERATION_PROMPT_NOT_RECOVERED",
+      "reference_sha256": []
+    },
+    {
+      "shot": "s-noah-lamp",
+      "path": "migration/production/bible/stills/candidates/genesis-09-short-s-noah-lamp-2026102901-1.jpg",
+      "sha256": "8955c02236116b1e3241b25765e16391ff58f0cdcb97ae85e337411162704459",
+      "prompt": null,
+      "provenance_status": "EXACT_GENERATION_PROMPT_NOT_RECOVERED",
+      "reference_sha256": [
+        "4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5"
+      ]
+    }
+  ]
+}
