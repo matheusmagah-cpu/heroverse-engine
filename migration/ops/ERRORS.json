@@ -2273,20 +2273,31 @@
    "antidote": {
     "file": "migration/ops/test_review_discovery.py",
     "contains": "def test_e207_inventory_reaches_branches_not_only_main",
-    "covers": ["pr-late"]
+    "covers": [
+     "pr-late"
+    ]
    }
   },
   {
    "id": "E208",
    "date": "2026-10-28",
    "class": "fragile-input",
-   "prior": ["E101", "E125", "E143", "E148", "E188", "E205"],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205"
+   ],
    "error": "Offline regression reproduced the session review reader accepting truthy non-list evidence and malformed issue elements. The prepublication reader did not check that schema and accepted infinite or above-scale rubric items. No affected upload was demonstrated; a valid reviewer name alone did not validate the evidence contract.",
    "fix": "Share strict evidence/issue-list and bounded numeric-score validation between the long-review reader and prepublication consumer. Invalid evidence remains AWAITING_REVIEW/UNKNOWN rather than PASS. Preserve reviewer identities, frozen QA, score thresholds and historical records. Shape validation does not prove viewing, hearing, source existence or reviewer authenticity.",
    "antidote": {
     "file": "migration/publish/test_prepublish_gate.py",
     "contains": "def test_e208_review_schema_and_finite_scores_are_required_at_consumption",
-    "covers": ["fragile-input"]
+    "covers": [
+     "fragile-input"
+    ]
    }
   },
   {
@@ -2299,85 +2310,119 @@
    "antidote": {
     "file": "migration/production/bible/test_long_plan_check.py",
     "contains": "def test_e209_keeper_native_plan_cannot_silently_restore_kokoro_or_still_fallbacks",
-    "covers": ["direction"]
+    "covers": [
+     "direction"
+    ]
    }
   },
   {
    "id": "E210",
    "date": "2026-10-28",
    "class": "env-vs-test",
-   "prior": ["E105", "E116", "E118", "E137", "E141", "E168", "E206"],
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141",
+    "E168",
+    "E206"
+   ],
    "error": "Adding hash-bound ffprobe measurements for the three existing arc-01 native clips correctly exposed speech beyond the s-c4-blame media end. Five synthetic long layout/request tests in two suites then errored because their estimated-duration fixtures implicitly loaded mutable production approvals. The real refusal is valid; the fixture dependency was not.",
    "fix": "Isolate only synthetic long layout/request predictions from the live approval store; keep their existing assertions and explicit approval dictionaries. Add an isolation regression and retain the separate E152 measured-media rejection tests. Commit the real measurements without changing historical speech endpoints, scores or bytes. Production remains blocked where the native claim exceeds the media; passing unit tests are not production clearance.",
    "antidote": {
     "file": "migration/production/bible/test_long_preflight.py",
     "contains": "def test_e210_layout_fixture_is_independent_of_live_native_approvals",
-    "covers": ["env-vs-test"]
+    "covers": [
+     "env-vs-test"
+    ]
    }
   },
   {
    "id": "E211",
    "date": "2026-10-28",
    "class": "rerun-without-fix",
-   "prior": ["E116"],
+   "prior": [
+    "E116"
+   ],
    "error": "Measured preflight unconditionally removed its work directory and synthesized again on every retry, even when raw voice had completed and only downstream layout or review evidence had changed. The regression reproduced two synthesis calls and loss of existing evidence on the same inputs. A reused directory could also expose a stale derived layout after an early layout refusal.",
    "fix": "Preserve preflight work and seal successful raw synthesis with an atomic input/output hash checkpoint before downstream layout. Bind script, renderer, prepared source/models and the isolated Python/package/eSpeak runtime. Under one nonblocking local lock, reuse only a complete matching checkpoint; preserve and refuse incomplete, corrupt, changed or unattested work without automatic replay. Recompute current layout and gates, archiving the prior derived layout so an early refusal cannot reuse it. A checkpoint is neither QA nor audiovisual approval, and does not establish durable cloud storage.",
    "antidote": {
     "file": "migration/production/bible/test_episode_preflight.py",
     "contains": "def test_e211_completed_voice_is_reused_without_deleting_or_resynthesizing",
-    "covers": ["rerun-without-fix"]
+    "covers": [
+     "rerun-without-fix"
+    ]
    }
   },
   {
    "id": "E212",
    "date": "2026-10-28",
    "class": "direction",
-   "prior": ["E209"],
+   "prior": [
+    "E209"
+   ],
    "error": "Genesis-09's pending spoken close said that the full story was already in the long video and promised part ten tomorrow, although no Flood long delivery or current episode master existed. A planned slot and the CTA keyword check did not establish availability. No publication with this pending line was demonstrated.",
    "fix": "Keep the full-story direction and the next part's subject but use an availability-independent invitation to follow the series. Remove the unsupported present-tense delivery and relative-day promise before voice synthesis. Preserve all other narration, shots, sources, historical approvals and frozen gates. The existing arc-links flow still waits for a confirmed public long before adding links; a fresh measured preflight remains required.",
    "antidote": {
     "file": "migration/production/bible/test_plan_check.py",
     "contains": "def test_e212_short_close_does_not_claim_unpublished_delivery",
-    "covers": ["direction"]
+    "covers": [
+     "direction"
+    ]
    }
   },
   {
    "id": "E213",
    "date": "2026-10-28",
    "class": "pr-late",
-   "prior": ["E207"],
+   "prior": [
+    "E207"
+   ],
    "error": "The heartbeat's pilot queue did not hand qualified Bible plans to episode.yml or long-build.yml. The runner could exit QUEUE_EMPTY successfully while Bible-plan work remained outside its queue. Evidence discovery alone closed neither this transition nor reviewer execution.",
    "fix": "Use the existing heartbeat to check current strict plan, preflight and ordering/publication inputs, then persist at most one request in the existing request queue. Invoke that same durable-claim dispatcher as a reusable workflow, because a GITHUB_TOKEN push does not itself start another push workflow. Hold incomplete inputs, active runs, evidence branches and prior claimed/acknowledged requests; never retry an ambiguous build or write review/approval. No new scheduler, provider generation, parallel ledger or claim of ten-stage autonomy.",
    "antidote": {
     "file": "migration/ops/test_production_handoff.py",
     "contains": "def test_e213_ready_plan_reaches_existing_build_without_another_chat_command",
-    "covers": ["pr-late"]
+    "covers": [
+     "pr-late"
+    ]
    }
   },
   {
    "id": "E214",
    "date": "2026-10-28",
    "class": "rerun-without-fix",
-   "prior": ["E116", "E211"],
+   "prior": [
+    "E116",
+    "E211"
+   ],
    "error": "Cloudflare image generation retried the same non-idempotent POST up to four times after HTTP errors. A 408 or 5xx response can follow an accepted generation, so this could duplicate results and quota use. The offline regression reproduced four POST calls for each of eight HTTP statuses; no affected production result is asserted. Provider error details were also copied into public workflow errors.",
    "fix": "Send a generation POST once only. Treat HTTP, timeout, transport and malformed-response errors as an outcome requiring reconciliation, without replay or provider-body logging. Preserve the existing free-allocation deferral and successful image response formats. Keep workflow claims, dispatch guards, quota limits, frozen QA and review identities unchanged; this does not authorize retrying an older uncertain request.",
    "antidote": {
     "file": "migration/production/imagegen/test_cf_images.py",
     "contains": "def test_e214_generation_post_is_never_replayed_after_an_http_error",
-    "covers": ["rerun-without-fix"]
+    "covers": [
+     "rerun-without-fix"
+    ]
    }
   },
   {
    "id": "E215",
    "date": "2026-10-29",
    "class": "random",
-   "prior": ["E114", "E118"],
+   "prior": [
+    "E114",
+    "E118"
+   ],
    "error": "The three new Short09 still candidates of run 40793104573 had verified bytes but failed the scene brief: Noah at the doorway wore spectacles in a turned view, the man on the rock had dry visible feet instead of submerged ankles, and the lamp was absent from the cropped composition. Text instructions alone did not establish pixel fidelity; the medium framing and central crop did not explicitly reserve all critical objects. The candidates remained DRAFT, with no claimed approval or publication.",
    "fix": "Revise only the three DRAFT still briefs before another bounded attempt: directly rear-facing symmetric head/shoulders and a full-height doorway, an opaque surface crossing both shins, and a visible foreground clay lamp plus lamb with readable warm exposure. Anchor required details inside the vertical crop. Preserve narration, canonical wardrobe, existing approvals, frozen QA and reviewer identities. A static regression protects these explicit brief requirements; it cannot guarantee generated pixels, which still require actual designated review. The failed candidate hashes and observations are retained in the audit.",
    "antidote": {
     "file": "migration/production/bible/test_scene_stills.py",
     "contains": "def test_e215_critical_scene_details_are_explicit_inside_the_vertical_crop",
-    "covers": ["random"]
+    "covers": [
+     "random"
+    ]
    }
   },
   {
@@ -2403,7 +2448,14 @@
    "date": "2026-10-29",
    "class": "env-vs-test",
    "prior": [
-    "E105", "E116", "E118", "E137", "E141", "E168", "E206", "E210"
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141",
+    "E168",
+    "E206",
+    "E210"
    ],
    "error": "Attachment run 40833596089 failed before claims/provider calls: python3 -I removed the script directory from sys.path. The unit test injected that directory and masked the real CLI import failure (client not found).",
    "fix": "Initialize only the resolved adapter directory on sys.path in attachments.py before sibling imports, matching the isolated entry-point contract. Execute the exact -I -B CLI in a subprocess regression so test imports cannot mask it. Reconcile run 40833596089: claim failed before file creation or upstream effects; only that run may resume after the fix, without another request or transfer.",
@@ -2539,6 +2591,34 @@
    "antidote": {
     "file": "migration/publish/test_native_review.py",
     "contains": "test_e221_provider_hash_encodings_preserve_exact_identity",
+    "covers": [
+     "fragile-input"
+    ]
+   }
+  },
+  {
+   "id": "E222",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221"
+   ],
+   "error": "Native review validation accepted narrative coverage without heard excerpts and sub-floor scores without linked timestamped defects. The prompt also assumed the Keeper was speaking, even though camera-only portraits are allowed. Structural acceptance did not establish factual localization accuracy.",
+   "fix": "Require heard excerpts, speaker and motion observations, plus valid timestamped issue references for every sub-floor criterion and overall. Remove the speaking-character assumption. Preserve raw provider evidence and all scores unchanged; no retry or approval. These structural checks do not prove the observations true and cannot replace exact-media corroboration.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "test_e222_grounding_required_without_changing_scores",
     "covers": [
      "fragile-input"
     ]

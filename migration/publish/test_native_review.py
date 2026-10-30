@@ -15,6 +15,34 @@ SPEC.loader.exec_module(n)
 
 
 class Review(unittest.TestCase):
+
+    def test_e222_grounding_required_without_changing_scores(self):
+        r = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
+             'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 9.5,
+             'issues': [], 'limitations': [], 'criterion_issues': {},
+             'coverage': [{'start': x*25, 'end': (x+1)*25,
+                 'audible_observation': 'Voice over music', 'visual_observation': 'Landscape',
+                 'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
+                 'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
+                 for x in range(7)]}
+        n.validate_report(r)
+        import copy
+        for field in ('speech_excerpt', 'speaker_observation', 'motion_observation'):
+            bad=copy.deepcopy(r); del bad['coverage'][0][field]
+            with self.assertRaises(n.Refusal): n.validate_report(bad)
+        for key in (*n.RUBRIC, 'overall'):
+            bad=copy.deepcopy(r)
+            if key == 'overall': bad[key]=6.6
+            else: bad['scores'][key]=6.6
+            with self.assertRaises(n.Refusal): n.validate_report(bad)
+            bad['issues']=['00:05.00 - Synthetic fixture defect']
+            bad['criterion_issues']={key:[0]}
+            n.validate_report(bad)
+            for ref in (-1, 1, True, '0'):
+                bad['criterion_issues']={key:[ref]}
+                with self.assertRaises(n.Refusal): n.validate_report(bad)
+        self.assertNotIn('the speaking Keeper', n.prompt())
+
     def test_e221_provider_hash_encodings_preserve_exact_identity(self):
         digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
         for wire in (n.base64.b64encode(bytes.fromhex(digest)).decode(),
@@ -118,7 +146,9 @@ class Review(unittest.TestCase):
         r = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
              'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 9.5, 'issues': [], 'limitations': [],
              'coverage': [{'start': x*25, 'end': (x+1)*25, 'audible_observation': 'audio',
-                           'visual_observation': 'video', 'sync_observation': 'sync'} for x in range(7)]}
+                           'visual_observation': 'video', 'sync_observation': 'sync',
+                           'speech_excerpt': 'A synthetic fixture sentence',
+                           'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'} for x in range(7)]}
         n.validate_report(r)
         for delta in ({'audio_received': False}, {'duration_seconds': 20}, {'overall': True},
                       {'coverage': r['coverage'][:-1]}, {'coverage': r['coverage'][1:]}):
