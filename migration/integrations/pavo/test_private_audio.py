@@ -36,6 +36,114 @@ class PrivateAudio(unittest.TestCase):
                   'reference': bridge.REFERENCE, 'reference_sha256': bridge.REFERENCE_SHA,
                   'sound': False, 'aspect_ratio': '9:16', 'production_approved': False}
 
+    def hook(self):
+        return {'version': 'pavo-private-hook-v1', 'episode': 'genesis-09-short', 'shot': 's-voice',
+                'prompt': 'Animate the approved first frame. Both voices remain offscreen.', 'seconds': 10,
+                'first_frame': 'migration/production/bible/stills/genesis-09-s-voice.jpg',
+                'first_frame_sha256': '8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19',
+                'sound': False, 'aspect_ratio': '9:16', 'production_approved': False}
+
+    def test_hook_accepts_only_approved_exact_first_frame_without_audio(self):
+        m = self.hook()
+        try:
+            accepted = bridge.validate(m)
+        except bridge.Blocked as exc:
+            self.fail('approved silent hook refused: ' + str(exc))
+        self.assertEqual(accepted['shot'], 's-voice')
+        for change in ({'shot': 'k-close'}, {'seconds': 9}, {'seconds': True}, {'sound': True},
+                       {'first_frame': bridge.REFERENCE}, {'first_frame_sha256': '0'*64},
+                       {'audio_sha256': '0'*64}, {'nonce': 'another-generation'}, {'references': [bridge.REFERENCE]}):
+            with self.subTest(change=change), self.assertRaises(bridge.Blocked):
+                bridge.validate({**m, **change})
+        record = bridge.ROOT/'migration/production/bible/stills/genesis-09-s-voice.json'
+        original = Path.read_text
+        for change in ({'status': 'DRAFT'}, {'approved': {'score': 9.4}}, {'sha256': '0'*64}):
+            def changed(p, *a, **kw):
+                raw = original(p, *a, **kw)
+                return json.dumps({**json.loads(raw), **change}) if p == record else raw
+            with self.subTest(record=change), patch.object(Path, 'read_text', changed), self.assertRaises(bridge.Blocked):
+                bridge.validate(m)
+
+    def test_hook_cannot_replay_by_changing_prompt_or_retry_input(self):
+        m = self.hook()
+        r = bridge.public_record(bridge.initial_record(m, '1234567890'))
+        for state in ('CLAIMED', 'SUBMITTING', 'UNKNOWN', 'COMPLETE', 'FAILED'):
+            with self.subTest(state=state), self.assertRaises(bridge.Blocked):
+                bridge.require_new([{**r, 'state': state}], '0'*64, manifest=m)
+        with self.assertRaises(bridge.Blocked):
+            bridge.require_new([], bridge.digest(m), retry_run='1234567890', manifest=m)
+
+    def test_hook_cli_claim_refuses_changed_digest_for_existing_slot(self):
+        m = self.hook()
+        old = bridge.public_record(bridge.initial_record({**m, 'prompt': 'A different earlier hook prompt.'}, '1234567890'))
+        old['state'] = 'COMPLETE'
+        self.assertNotEqual(old['request_sha256'], bridge.digest(m))
+        with tempfile.TemporaryDirectory() as d:
+            persisted = []
+            history = [old]
+            env = {'RUNNER_TEMP': d, 'GITHUB_RUN_ID': '1234567891', 'GITHUB_REPOSITORY': 'matheusmagah-cpu/heroverse-engine',
+                   'GITHUB_REF': 'refs/heads/main', 'GITHUB_RUN_ATTEMPT': '1'}
+            with patch.dict(os.environ, env), patch.object(bridge, 'inputs', return_value=({}, m)), \
+                 patch.object(bridge, 'lease'), patch.object(bridge.native_review, 'recipient_check'), \
+                 patch.object(bridge, 'history_records', side_effect=lambda: history), \
+                 patch.object(bridge, 'persist', side_effect=lambda r, p: persisted.append(copy.deepcopy(r))), \
+                 patch.object(bridge, 'PrivateVideoClient', side_effect=AssertionError('provider used during claim')):
+                with self.assertRaisesRegex(bridge.Blocked, 'HOOK_EXISTING_CLAIM_RECONCILE'):
+                    bridge.cli('claim')
+                self.assertEqual(persisted, [])
+                history.clear()
+                bridge.cli('claim')
+                self.assertEqual(len(persisted), 1)
+                self.assertEqual((persisted[0]['shot'], persisted[0]['state'], persisted[0]['conversation_id']),
+                                 ('s-voice', 'CLAIMED', None))
+
+    def test_hook_cli_uses_frames_only_and_zero_quote_before_any_mutation(self):
+        m = self.hook()
+        with tempfile.TemporaryDirectory() as d:
+            private = Path(d)/'pavo-private-audio'; receipt = private/'receipt.json'
+            r = bridge.initial_record(m, '1234567890')
+            bridge.atomic(receipt, r)
+            events = []
+            class Client(bridge.PrivateVideoClient):
+                def __init__(self, *args, **kw): super().__init__(token='fake', *args, **kw)
+                def _quote(self, seconds, ratio, mode, images, audios=(), sound=False):
+                    events.append(('quote', seconds, ratio, mode, images, len(audios), sound))
+                    return {'zero_cost_confirmed': allowed[0]}
+                def _upload(self, item):
+                    self.assert_no_audio(item)
+                    events.append(('upload', item['path'])); return {'url': 'https://example.invalid/image.jpg'}
+                def assert_no_audio(self, item):
+                    assert item['mime'] == 'image/jpeg'
+                def _video_json(self, route, body=None, job=None):
+                    assert route == 'create'
+                    events.append(('create',)); return {'conversation_id': '373800000000000004'}
+                def _start_stream(self, job, prompt, seconds, ratio, mode, uploaded, voiced, sound):
+                    events.append(('stream', mode, len(uploaded), len(voiced), sound))
+                    assert json.loads(receipt.read_text())['conversation_id'] == job
+                    return True
+            env = {'RUNNER_TEMP': d, 'GITHUB_RUN_ID': '1234567890', 'GITHUB_REPOSITORY': 'matheusmagah-cpu/heroverse-engine',
+                   'GITHUB_REF': 'refs/heads/main', 'GITHUB_RUN_ATTEMPT': '1',
+                   'PAVO_IMAGE_LEDGER': str(Path(d)/'fresh-quota.json')}
+            allowed = [False]
+            import dispatch_guard
+            with patch.dict(os.environ, env), patch.object(bridge, 'inputs', return_value=({}, m)), \
+                 patch.object(bridge, 'lease'), patch.object(bridge, 'persist', side_effect=lambda state, dest: bridge.atomic(dest, state)), \
+                 patch.object(bridge, 'PrivateVideoClient', Client), patch.object(dispatch_guard, 'pavo_budget', return_value=0):
+                with self.assertRaisesRegex(bridge.Blocked, 'ZERO_CREDIT'):
+                    bridge.cli('prepare')
+                self.assertEqual(events, [('quote', 10, '9:16', 'frames_to_video', 1, 0, False)])
+                self.assertEqual(json.loads(receipt.read_text())['state'], 'CLAIMED')
+                events.clear(); allowed[0] = True
+                bridge.cli('prepare'); bridge.cli('ready')
+                self.assertEqual(json.loads(receipt.read_text())['state'], 'INPUT_VERIFIED')
+                self.assertFalse((bridge.ROOT/'.episode'/'private-audio-1234567890'/'input.wav').exists())
+                bridge.cli('submit')
+                self.assertEqual([e[0] for e in events], ['quote', 'quote', 'upload', 'create', 'stream'])
+                self.assertEqual(events[-1], ('stream', 'frames_to_video', 1, 0, False))
+                self.assertEqual(json.loads(receipt.read_text())['state'], 'UNKNOWN')
+                with self.assertRaisesRegex(bridge.Blocked, 'EXISTING_SUBMISSION'):
+                    bridge.cli('submit')
+
     def test_exact_wav_and_timing_required(self):
         bridge.validate(self.m, reference_check=False)
         bridge.check_audio(self.m, self.audio)
@@ -205,6 +313,20 @@ class PrivateAudio(unittest.TestCase):
         self.assertEqual(g.private_audio(i)['pavo_units'],2)
         self.assertEqual(g.private_audio(dict(i,reconcile_run='1234567890'))['pavo_units'],0)
         with self.assertRaises(g.Refusal): g.private_audio(dict(i,sha256='0'*64))
+
+    def test_hook_dispatch_binds_real_first_frame_and_refuses_retry(self):
+        import dispatch_guard as g
+        path = bridge.MANIFESTS+'genesis-09-s-voice-20261030.json'
+        m = json.loads((bridge.ROOT/path).read_text())
+        i = {'plan':'migration/production/bible/plans/genesis-09-short.json', 'manifest':path,
+             'sha256':bridge.digest(m), 'lease_run_id':'offline-test'}
+        facts = g.private_audio(i)
+        self.assertEqual(facts['pavo_units'], 2)
+        self.assertIn('migration/production/bible/stills/genesis-09-s-voice.jpg', facts['deps'])
+        self.assertNotIn(bridge.REFERENCE, facts['deps'])
+        self.assertEqual(g.private_audio(dict(i,reconcile_run='1234567890'))['pavo_units'], 0)
+        with self.assertRaises(g.Refusal): g.private_audio(dict(i,sha256='0'*64))
+        with self.assertRaises(g.Refusal): g.private_audio(dict(i,retry_run='1234567890'))
 
     def test_get_only_recovery_after_failed_poll_never_unblocks_generation(self):
         import dispatch_guard as g
