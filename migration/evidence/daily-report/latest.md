@@ -1,23 +1,23 @@
-# HeroVerse daily report — 2026-10-29 13:40 UTC (day 12 of 14, max 30)
+# HeroVerse daily report — 2026-10-30 09:52 UTC (day 13 of 14, max 30)
 
 ## YPP progress
 Sources: [official] YouTube Data API count; [own] our calculation from YouTube Analytics rows (an estimate of
 the YPP counter, which only YouTube Studio shows and which can differ); [plan] our arithmetic toward day 14.
 
-- Subscribers [official]: **300 / 1,000** — [plan] 233.3/day to reach it by day 14
-- Public long-form watch hours, last 365 d [own]: **25.2 / 4,000** — [plan] 1324.9/day
-- Public Shorts views, last 90 d [own]: 1,568 / 10,000,000 (the alternative YPP path)
-- For contrast, NOT the YPP counters: all-content watch hours 365 d incl. Shorts and private/removed videos [own] 112.0 h; lifetime views of public Shorts [official] 5,068
+- Subscribers [official]: **300 / 1,000** — [plan] 350.0/day to reach it by day 14
+- Public long-form watch hours, last 365 d [own]: **27.4 / 4,000** — [plan] 1986.3/day
+- Public Shorts views, last 90 d [own]: 2,382 / 10,000,000 (the alternative YPP path)
+- For contrast, NOT the YPP counters: all-content watch hours 365 d incl. Shorts and private/removed videos [own] 130.1 h; lifetime views of public Shorts [official] 5,072
 - Classification of long vs Shorts: duration <= 180 s (Analytics content type unavailable)
-- Public videos [official]: 44; total channel views 5,417
+- Public videos [official]: 44; total channel views 5,449
 
 ## Short -> long funnel (each public long, last 90 d, by traffic source)
 | long | views | from Shorts | share | avg view s (Shorts / other) | verdict |
 |---|---|---|---|---|---|
-| Before Your Family's Day Begins, Cover Them in Pra | 21 | 0 | 0.0 | None / 576.0 | NO_SHORTS_TRAFFIC |
-| Before You Sleep, Let God's Mercy Wash Today Away  | 3 | 0 | 0.0 | None / 2.7 | NO_SHORTS_TRAFFIC |
-| When You Wake Up Tired, Wait on the Lord 🌅 | Morni | 3 | 0 | 0.0 | None / 0.0 | NO_SHORTS_TRAFFIC |
-| Before You Sleep, Give God the Worry You Can't Fix | 20 | 0 | 0.0 | None / 125.2 | NO_SHORTS_TRAFFIC |
+| Before Your Family's Day Begins, Cover Them in Pra | 82 | 0 | 0.0 | None / 455.3 | NO_SHORTS_TRAFFIC |
+| Before You Sleep, Let God's Mercy Wash Today Away  | 8 | 0 | 0.0 | None / 19.1 | NO_SHORTS_TRAFFIC |
+| When You Wake Up Tired, Wait on the Lord 🌅 | Morni | 5 | 0 | 0.0 | None / 66.0 | NO_SHORTS_TRAFFIC |
+| Before You Sleep, Give God the Worry You Can't Fix | 21 | 0 | 0.0 | None / 120.2 | NO_SHORTS_TRAFFIC |
 | Morning Prayer with Bible Verses for Peace | Start | 94 | 0 | 0.0 | None / 541.3 | NO_SHORTS_TRAFFIC |
 | Night Prayer for Healing | Rest Your Body and Hear | 15 | 0 | 0.0 | None / 496.3 | NO_SHORTS_TRAFFIC |
 | Morning Prayer for Protection | Psalm 91 Over You  | 8 | 0 | 0.0 | None / 370.2 | NO_SHORTS_TRAFFIC |
@@ -35,18 +35,18 @@ the YPP counter, which only YouTube Studio shows and which can differ); [plan] o
 ## Latest public videos
 | published | views | watch h | avg view % | subs gained | title |
 |---|---|---|---|---|---|
-| 2026-10-27T23:30 | 323 | - | - | - | Noah Built a Ship on Dry Ground 🔨 | Noah Builds the Ark, Bible Story ( |
-| 2026-10-27T13:30 | 2 | 0.0 | 42.5 | 0 | Why Did God Regret Making Man? 💔 | God Sees the Earth Corrupt, Bible S |
-| 2026-10-26T23:30 | 144 | 1.5 | 82.6 | 2 | The Man Who Never Died? ☁️ | Enoch Walked With God, Bible Story (KJV)  |
-| 2026-10-26T13:30 | 179 | 1.4 | 77.0 | 1 | Am I My Brother's Keeper? 🐑 | Cain and Abel, Bible Story (KJV) #shorts |
-| 2026-10-26T10:00 | 21 | 0.6 | 59.2 | 0 | Before Your Family's Day Begins, Cover Them in Prayer 🙏 | Morning Pray |
-| 2026-10-26T00:00 | 3 | 0.0 | 0.9 | 0 | Before You Sleep, Let God's Mercy Wash Today Away 🌙 | Night Prayer for |
-| 2026-10-25T23:30 | 131 | 0.6 | 64.4 | 3 | Where Art Thou? 🔥 | Driven Out of Eden, Bible Story (KJV) #shorts |
-| 2026-10-25T13:30 | 123 | 0.4 | 43.8 | 2 | Did God Really Say That? 🐍 | The Serpent in Eden, Bible Story (KJV) #s |
-| 2026-10-25T10:00 | 3 | 0.0 | 0 | 0 | When You Wake Up Tired, Wait on the Lord 🌅 | Morning Prayer for Streng |
-| 2026-10-24T23:30 | 303 | 1.9 | 79.8 | 5 | God Breathed Into the Dust 🌿 | Garden of Eden Bible Story (KJV) #short |
-| 2026-10-24T14:44 | 128 | 0.8 | 77.0 | 2 | Before There Was Light, God Spoke ✨ | Genesis 1 Bible Story (KJV) #sho |
-| 2026-10-24T00:00 | 20 | 0.7 | 13.9 | 0 | Before You Sleep, Give God the Worry You Can't Fix 🌙 | Night Prayer fo |
+| 2026-10-27T23:30 | 319 | 5.5 | 71.8 | 8 | Noah Built a Ship on Dry Ground 🔨 | Noah Builds the Ark, Bible Story ( |
+| 2026-10-27T13:30 | 470 | 10.2 | 83.1 | 3 | Why Did God Regret Making Man? 💔 | God Sees the Earth Corrupt, Bible S |
+| 2026-10-26T23:30 | 162 | 1.7 | 84.0 | 2 | The Man Who Never Died? ☁️ | Enoch Walked With God, Bible Story (KJV)  |
+| 2026-10-26T13:30 | 186 | 1.4 | 75.6 | 1 | Am I My Brother's Keeper? 🐑 | Cain and Abel, Bible Story (KJV) #shorts |
+| 2026-10-26T10:00 | 82 | 2.6 | 45.5 | 0 | Before Your Family's Day Begins, Cover Them in Prayer 🙏 | Morning Pray |
+| 2026-10-26T00:00 | 8 | 0.0 | 2.7 | 0 | Before You Sleep, Let God's Mercy Wash Today Away 🌙 | Night Prayer for |
+| 2026-10-25T23:30 | 130 | 0.6 | 64.4 | 3 | Where Art Thou? 🔥 | Driven Out of Eden, Bible Story (KJV) #shorts |
+| 2026-10-25T13:30 | 123 | 0.4 | 43.3 | 2 | Did God Really Say That? 🐍 | The Serpent in Eden, Bible Story (KJV) #s |
+| 2026-10-25T10:00 | 5 | 0.1 | 16.9 | 0 | When You Wake Up Tired, Wait on the Lord 🌅 | Morning Prayer for Streng |
+| 2026-10-24T23:30 | 302 | 1.8 | 79.8 | 5 | God Breathed Into the Dust 🌿 | Garden of Eden Bible Story (KJV) #short |
+| 2026-10-24T14:44 | 129 | 0.8 | 77.0 | 2 | Before There Was Light, God Spoke ✨ | Genesis 1 Bible Story (KJV) #sho |
+| 2026-10-24T00:00 | 21 | 0.7 | 13.9 | 0 | Before You Sleep, Give God the Worry You Can't Fix 🌙 | Night Prayer fo |
 
 ## Public videos with fear-bait/prophecy-style titles (5; 2.9 of the channel's watch hours)
 - The 2026 Warning: What They DON’T Want You to Know. ⚠️📖 #prophecy #christianmoti — 0.1 h, 21 views
@@ -67,26 +67,26 @@ Impressions: thumbnail shown > 1 s, >= 50 % visible. CTR: clicks / impressions. 
 | Morning Prayer / God Has Already Gone Ahead of You (v4zN53ZiUIs) | long | 1,123 | 1.96 % | 22 | 42 | 2026-10-18 | 2026-10-18 .. 2026-10-27 |
 | The 24-Hour Test: What To Do After You Pray (iK_5edYQtx8) | long | 819 | 1.34 % | 11 | 27 | 2026-09-04 | 2026-09-04 .. 2026-10-18 |
 | Rest Is Not Giving Up / A Christian Reflection + Q (FifnlNUQKNk) | long | 742 | 0.40 % | 3 | 10 | 2026-10-10 | 2026-10-10 .. 2026-10-26 |
-| Before You Sleep, Give God the Worry You Can't Fix (9g2MeIit9ys) | long | 636 | 2.36 % | 15 | 20 | 2026-10-24 | 2026-10-23 .. 2026-10-27 |
+| Before You Sleep, Give God the Worry You Can't Fix (9g2MeIit9ys) | long | 636 | 2.36 % | 15 | 21 | 2026-10-24 | 2026-10-23 .. 2026-10-27 |
 | Night Prayer Before Sleep / Give God Your Worries, (Iegu_RD_wbE) | long | 589 | 2.04 % | 12 | 37 | 2026-10-19 | 2026-10-19 .. 2026-10-27 |
-| Before Your Family's Day Begins, Cover Them in Pra (53Xysf9x46c) | long | 433 | 4.39 % | 19 | 21 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
+| Before Your Family's Day Begins, Cover Them in Pra (53Xysf9x46c) | long | 433 | 4.39 % | 19 | 82 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
 | Night Prayer for Healing / Rest Your Body and Hear (tri-CUwy_m0) | long | 297 | 2.69 % | 8 | 15 | 2026-10-21 | 2026-10-20 .. 2026-10-27 |
 | Night Prayer of Thanksgiving / His Mercies Are New (1bT9pEROuhI) | long | 251 | 2.39 % | 6 | 27 | 2026-10-20 | 2026-10-19 .. 2026-10-27 |
-| Before You Sleep, Let God's Mercy Wash Today Away  (ZPSxpF-zBl8) | long | 242 | 2.07 % | 5 | 3 | 2026-10-26 | 2026-10-25 .. 2026-10-27 |
-| Before There Was Light, God Spoke ✨ / Genesis 1 Bi (ku2MTQKmXaU) | short | 173 | 1.16 % | 2 | 128 | 2026-10-24 | 2026-10-24 .. 2026-10-27 |
+| Before You Sleep, Let God's Mercy Wash Today Away  (ZPSxpF-zBl8) | long | 242 | 2.07 % | 5 | 8 | 2026-10-26 | 2026-10-25 .. 2026-10-27 |
+| Before There Was Light, God Spoke ✨ / Genesis 1 Bi (ku2MTQKmXaU) | short | 173 | 1.16 % | 2 | 129 | 2026-10-24 | 2026-10-24 .. 2026-10-27 |
 | Morning Prayer for Protection / Psalm 91 Over You  (XDwxi4pvllM) | long | 150 | 0.67 % | 1 | 8 | 2026-10-20 | 2026-10-20 .. 2026-10-27 |
-| Am I My Brother's Keeper? 🐑 / Cain and Abel, Bible (OYijqQdQq0o) | short | 128 | 0.00 % | 0 | 179 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
-| God Breathed Into the Dust 🌿 / Garden of Eden Bibl (hwq4qgjreh0) | short | 127 | 0.79 % | 1 | 303 | 2026-10-24 | 2026-10-24 .. 2026-10-27 |
-| Why Did God Regret Making Man? 💔 / God Sees the Ea (Vvfw4W4nV7M) | short | 93 | 4.30 % | 4 | 2 | 2026-10-27 | 2026-10-26 .. 2026-10-27 |
-| Noah Built a Ship on Dry Ground 🔨 / Noah Builds th (jPNjgf-PWHM) | short | 88 | 1.14 % | 1 | 323 | 2026-10-27 | 2026-10-27 .. 2026-10-27 |
-| When You Wake Up Tired, Wait on the Lord 🌅 / Morni (F8u5dTT_2mM) | long | 65 | 1.54 % | 1 | 3 | 2026-10-25 | 2026-10-25 .. 2026-10-27 |
+| Am I My Brother's Keeper? 🐑 / Cain and Abel, Bible (OYijqQdQq0o) | short | 128 | 0.00 % | 0 | 186 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
+| God Breathed Into the Dust 🌿 / Garden of Eden Bibl (hwq4qgjreh0) | short | 127 | 0.79 % | 1 | 302 | 2026-10-24 | 2026-10-24 .. 2026-10-27 |
+| Why Did God Regret Making Man? 💔 / God Sees the Ea (Vvfw4W4nV7M) | short | 93 | 4.30 % | 4 | 470 | 2026-10-27 | 2026-10-26 .. 2026-10-27 |
+| Noah Built a Ship on Dry Ground 🔨 / Noah Builds th (jPNjgf-PWHM) | short | 88 | 1.14 % | 1 | 319 | 2026-10-27 | 2026-10-27 .. 2026-10-27 |
+| When You Wake Up Tired, Wait on the Lord 🌅 / Morni (F8u5dTT_2mM) | long | 65 | 1.54 % | 1 | 5 | 2026-10-25 | 2026-10-25 .. 2026-10-27 |
 | Did God Really Say That? 🐍 / The Serpent in Eden,  (K_ZwsCt-Wg4) | short | 63 | 1.59 % | 1 | 123 | 2026-10-25 | 2026-10-25 .. 2026-10-27 |
-| The Man Who Never Died? ☁️ / Enoch Walked With God (dyuqBS_FXew) | short | 63 | 3.17 % | 2 | 144 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
-| Where Art Thou? 🔥 / Driven Out of Eden, Bible Stor (s9YK37YErRc) | short | 57 | 0.00 % | 0 | 131 | 2026-10-25 | 2026-10-25 .. 2026-10-27 |
+| The Man Who Never Died? ☁️ / Enoch Walked With God (dyuqBS_FXew) | short | 63 | 3.17 % | 2 | 162 | 2026-10-26 | 2026-10-26 .. 2026-10-27 |
+| Where Art Thou? 🔥 / Driven Out of Eden, Bible Stor (s9YK37YErRc) | short | 57 | 0.00 % | 0 | 130 | 2026-10-25 | 2026-10-25 .. 2026-10-27 |
 | The Ultimate Morning Prayer for Peace #shorts (_sUdOLxWy5c) | short | 52 | 3.85 % | 2 | 293 | 2026-10-18 | 2026-10-18 .. 2026-10-27 |
-| God’s Silence Is NOT Rejection… (Watch This) ✝️ #m (RI-uNS8jhfU) | short | 46 | 2.17 % | 1 | 437 | 2026-07-11 | 2026-08-05 .. 2026-10-27 |
+| God’s Silence Is NOT Rejection… (Watch This) ✝️ #m (RI-uNS8jhfU) | short | 46 | 2.17 % | 1 | 439 | 2026-07-11 | 2026-08-05 .. 2026-10-27 |
 | Rest for the Part of You Still Awake #shorts (SsgCGkM6knQ) | short | 46 | 0.00 % | 0 | 212 | 2026-10-19 | 2026-10-19 .. 2026-10-27 |
-| A Prayer for Peace in Your Relationships #shorts (VEbS6pvirTA) | short | 39 | 0.00 % | 0 | 28 | 2026-10-20 | 2026-10-20 .. 2026-10-27 |
+| A Prayer for Peace in Your Relationships #shorts (VEbS6pvirTA) | short | 39 | 0.00 % | 0 | 29 | 2026-10-20 | 2026-10-20 .. 2026-10-27 |
 | The 2026 Prophecy: What They Are Hiding From You ( (bAsb6Ov0A-A) | short | 30 | 0.00 % | 0 | 41 | 2026-07-14 | 2026-08-08 .. 2026-10-27 |
 | Why God Chose YOU For This Exact Moment In History (imfvOr3Q0aI) | short | 27 | 0.00 % | 0 | 370 | 2026-07-18 | 2026-08-08 .. 2026-10-27 |
 | The 2026 Warning: What They DON’T Want You to Know (Hy54XVINoiQ) | short | 26 | 0.00 % | 0 | 21 | 2026-07-19 | 2026-09-01 .. 2026-10-27 |
@@ -127,35 +127,35 @@ Impressions: thumbnail shown > 1 s, >= 50 % visible. CTR: clicks / impressions. 
 | 2026-10-14 | 6 | 0.00 % | 0 | 6 / 0.00 % | - | - |
 
 ## Scheduler health (heartbeat.yml; GitHub drops crons, the heartbeat catches up)
-- ⚠ runner: no run for 5:16:26
+- ⚠ runner: no run for 3:28:10
 | workflow | last run (UTC) | result |
 |---|---|---|
 | nightly-images.yml | 2026-10-24T14:50 | success |
-| market-panel.yml | 2026-10-29T08:42 | success |
+| market-panel.yml | 2026-10-30T09:52 | in_progress |
 | reconcile.yml | 2026-10-28T07:20 | success |
-| goal-report.yml | 2026-10-29T13:39 | in_progress |
-| tiktok.yml | 2026-10-29T06:59 | success |
+| goal-report.yml | 2026-10-30T09:52 | in_progress |
+| tiktok.yml | 2026-10-30T03:00 | success |
 | arc-links.yml | - | - |
-| comment-replies.yml | 2026-10-29T13:39 | success |
-| heartbeat.yml | 2026-10-29T13:39 | success |
-| runner | 2026-10-29T08:24 | success ⚠ |
+| comment-replies.yml | 2026-10-30T09:52 | in_progress |
+| heartbeat.yml | 2026-10-30T09:51 | success |
+| runner | 2026-10-30T06:24 | success ⚠ |
 
 ## Actions minutes (speed only; public repo: standard runners free)
-- last 24 h 200 · last 7 d 9760 · last 30 d 10300 min of runner time
+- last 24 h 83 · last 7 d 9732 · last 30 d 10297 min of runner time
 | workflow (30 d) | minutes | runs | min per run |
 |---|---|---|---|
 | HeroVerse pilot render (figure + backgrounds + captions) and QA | 1963 | 17 | 115.5 |
-| HeroVerse PR checks (unit tests + pilot acceptance) | 1431 | 447 | 3.2 |
+| HeroVerse PR checks (unit tests + pilot acceptance) | 1453 | 451 | 3.2 |
 | HeroVerse footage library (licensed real footage, no paid call) | 1348 | 12 | 112.3 |
-| HeroVerse render smoke (a ~1 minute cut through the whole render path) | 935 | 73 | 12.8 |
+| HeroVerse render smoke (a ~1 minute cut through the whole render path) | 951 | 74 | 12.9 |
 | HeroVerse episode build (plan -> Keeper + Pavo scenes -> composed Short, checked; nothing published) | 900 | 13 | 69.2 |
 | footage: queries=migration/production/pilot-015/beats-6.json per_theme=3 | 550 | 2 | 275.0 |
 | HeroVerse pilot preview (opening + every footage clip + thumbnail, before the full render) | 458 | 18 | 25.4 |
-| HeroVerse approval (automatic gates before publication) | 358 | 41 | 8.7 |
+| HeroVerse approval (automatic gates before publication) | 319 | 38 | 8.4 |
 
 ## Long runway (Bible-story arc deadlines, next 6 days and overdue uploads; prayer longs stopped 2026-10-26)
-- ⚠ 2026-10-29 22:00 UTC (8:18:59 left): arc-01-long is at 'planned'
-- ⚠ 2026-10-31 10:00 UTC (1 day, 20:18:59 left): arc-02-long is at 'planned'
+- ⚠ 2026-10-29 22:00 UTC (-1 day, 12:06:34 left): arc-01-long is at 'planned'
+- ⚠ 2026-10-31 10:00 UTC (1 day, 0:06:34 left): arc-02-long is at 'planned'
 | slot (UTC) | pilot | stage |
 |---|---|---|
 | 2026-10-29T22:00Z | arc-01-long | planned ⚠ |
@@ -168,9 +168,9 @@ Receipt confirmations require a matching processed ID/hash/channel and a readbac
 | target (UTC) | content | type | observed state | responsible stage |
 |---|---|---|---|---|
 | 2026-10-29T13:30:00Z | genesis-09-short | regular | PUBLIC_READBACK_REQUIRED | publication |
-| 2026-10-29T22:00:00Z | arc-01-long | long | TARGET_ONLY | production/review |
-| 2026-10-29T23:30:00Z | genesis-10-short | regular | TARGET_ONLY | production/review |
-| 2026-10-30T13:30:00Z | genesis-11-short | regular | TARGET_ONLY | production/review |
+| 2026-10-29T22:00:00Z | arc-01-long | long | PUBLIC_READBACK_REQUIRED | publication |
+| 2026-10-29T23:30:00Z | genesis-10-short | regular | PUBLIC_READBACK_REQUIRED | publication |
+| 2026-10-30T13:30:00Z | genesis-11-short | regular | AT_RISK_NO_MASTER | production/review |
 | 2026-10-30T19:30:00Z | genesis-12-short | makeup | TARGET_ONLY | production/review |
 | 2026-10-30T23:30:00Z | genesis-13-short | regular | TARGET_ONLY | production/review |
 | 2026-10-31T10:00:00Z | arc-02-long | long | TARGET_ONLY | production/review |
@@ -186,3 +186,4 @@ Receipt confirmations require a matching processed ID/hash/channel and a readbac
 | 2026-11-03T23:30:00Z | genesis-22-short | regular | TARGET_ONLY | production/review |
 | 2026-11-04T10:00:00Z | arc-04-long | long | TARGET_ONLY | production/review |
 | 2026-11-04T13:30:00Z | genesis-23-short | regular | TARGET_ONLY | production/review |
+| 2026-11-04T23:30:00Z | genesis-24-short | regular | TARGET_ONLY | production/review |

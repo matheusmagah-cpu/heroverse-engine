@@ -331,6 +331,8 @@ def validate_report(report):
             issue = report['issues'][index]
             match = re.match(r'^(\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?)\s', issue)
             require(match is not None, 'ISSUE_TIMESTAMP_MISSING')
+            require(bool(re.sub(r'^[\s:—–-]+', '', issue[match.end():])),
+                    'ISSUE_DESCRIPTION_MISSING')
             parts = match.group(1).split(':')
             seconds = float(parts[-1])
             minutes = int(parts[-2])

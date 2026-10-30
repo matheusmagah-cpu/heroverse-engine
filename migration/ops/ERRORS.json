@@ -2614,13 +2614,34 @@
     "E220",
     "E221"
    ],
-   "error": "Native review validation accepted narrative coverage without heard excerpts and sub-floor scores without linked timestamped defects. The prompt also assumed the Keeper was speaking, even though camera-only portraits are allowed. Structural acceptance did not establish factual localization accuracy. Follow-up code review reproduced acceptance of impossible clock fields and timestamps beyond the 175-second media because only a prefix regex was checked.",
-   "fix": "Require heard excerpts, speaker and motion observations, plus valid timestamped issue references for every sub-floor criterion and overall. Remove the speaking-character assumption. Preserve raw provider evidence and all scores unchanged; no retry or approval. These structural checks do not prove the observations true and cannot replace exact-media corroboration. Parse the timestamp and reject invalid clock fields or positions outside [0,175); retain valid MM:SS and HH:MM:SS decimal timestamps.",
+   "error": "Native review validation accepted narrative coverage without heard excerpts and sub-floor scores without linked timestamped defects. The prompt also assumed the Keeper was speaking, even though camera-only portraits are allowed. Structural acceptance did not establish factual localization accuracy. Follow-up code review reproduced acceptance of impossible clock fields and timestamps beyond the 175-second media because only a prefix regex was checked. Toolkit delta review also demonstrated acceptance of timestamp-only issues with no defect description.",
+   "fix": "Require heard excerpts, speaker and motion observations, plus valid timestamped issue references for every sub-floor criterion and overall. Remove the speaking-character assumption. Preserve raw provider evidence and all scores unchanged; no retry or approval. These structural checks do not prove the observations true and cannot replace exact-media corroboration. Parse the timestamp and reject invalid clock fields or positions outside [0,175); retain valid MM:SS and HH:MM:SS decimal timestamps. Require a nonempty description after timestamp/separators; regression exercises poll receipt preservation, no replay, and actual-input immutability.",
    "antidote": {
     "file": "migration/publish/test_native_review.py",
     "contains": "test_e222_grounding_required_without_changing_scores",
     "covers": [
      "fragile-input"
+    ]
+   }
+  },
+  {
+   "id": "E223",
+   "date": "2026-10-30",
+   "class": [
+    "direction"
+   ],
+   "prior": [
+    "E209",
+    "E212",
+    "E218"
+   ],
+   "error": "The shared-executor documentation PR initially added an unregistered directing document under migration/ops. CI run 41053125627 correctly rejected it before merge.",
+   "fix": "Keep the coordination protocol in the existing canonical migration/OPERATIONS.md and remove the new directing file. Point scheduled instructions and the handoff to that section; do not weaken or expand the document allowlist.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "test_only_listed_documents_direct",
+    "covers": [
+     "direction"
     ]
    }
   }

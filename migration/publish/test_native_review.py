@@ -1,5 +1,6 @@
 """Native reviewer transport boundaries, no network and no credentials."""
 import importlib.util
+import copy
 import json
 import os
 from pathlib import Path
@@ -25,26 +26,34 @@ class Review(unittest.TestCase):
                  'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
                  'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
                  for x in range(7)]}
+        before = copy.deepcopy(r)
         n.validate_report(r)
-        import copy
+        self.assertEqual(r, before)
         for field in ('speech_excerpt', 'speaker_observation', 'motion_observation'):
             bad=copy.deepcopy(r); del bad['coverage'][0][field]
+            before = copy.deepcopy(bad)
             with self.assertRaises(n.Refusal): n.validate_report(bad)
+            self.assertEqual(bad, before)
         for key in (*n.RUBRIC, 'overall'):
             bad=copy.deepcopy(r)
             if key == 'overall': bad[key]=6.6
             else: bad['scores'][key]=6.6
+            before = copy.deepcopy(bad)
             with self.assertRaises(n.Refusal): n.validate_report(bad)
+            self.assertEqual(bad, before)
             bad['issues']=['00:05.00 - Synthetic fixture defect']
             bad['criterion_issues']={key:[0]}
+            before = copy.deepcopy(bad)
             n.validate_report(bad)
+            self.assertEqual(bad, before)
             for ref in (-1, 1, True, '0'):
                 bad['criterion_issues']={key:[ref]}
+                before = copy.deepcopy(bad)
                 with self.assertRaises(n.Refusal): n.validate_report(bad)
+                self.assertEqual(bad, before)
         self.assertNotIn('the speaking Keeper', n.prompt())
 
     def test_e222_issue_times_are_valid_and_inside_media(self):
-        import copy
         report = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
                   'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 6.6,
                   'issues': ['00:05 Synthetic defect'], 'limitations': [],
@@ -58,13 +67,55 @@ class Review(unittest.TestCase):
             with self.subTest(stamp=stamp):
                 bad = copy.deepcopy(report)
                 bad['issues'] = [stamp + ' Synthetic defect']
+                before = copy.deepcopy(bad)
                 with self.assertRaises(n.Refusal):
                     n.validate_report(bad)
+                self.assertEqual(bad, before)
         for stamp in ('00:00', '02:54.99', '00:02:54.99'):
             good = copy.deepcopy(report)
             good['issues'] = [stamp + ' Synthetic defect']
+            before = copy.deepcopy(good)
             n.validate_report(good)
-        self.assertEqual(report['overall'], 6.6)
+            self.assertEqual(good, before)
+
+    def test_e222_timestamp_without_description_stays_unvalidated(self):
+        report = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
+                  'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 6.6,
+                  'issues': ['00:05 Synthetic defect'], 'limitations': [],
+                  'criterion_issues': {'overall': [0]},
+                  'coverage': [{'start': x*25, 'end': (x+1)*25,
+                      'audible_observation': 'Voice over music', 'visual_observation': 'Landscape',
+                      'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
+                      'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
+                      for x in range(7)]}
+        for issue in ('00:05 ', '00:05\n\t', '00:05\u00a0', '00:05 - ', '00:05 — : -\t'):
+            with self.subTest(issue=issue), tempfile.TemporaryDirectory() as d, \
+                 patch.object(n, 'free_key', return_value='test'):
+                report['issues'] = [issue]
+                before = copy.deepcopy(report)
+                response_text = json.dumps(report)
+                body = json.dumps({'id': 'fixture-id', 'model': n.MODEL, 'status': 'completed',
+                                   'steps': [{'type': 'model_output', 'content': [
+                                       {'type': 'text', 'text': response_text}]}]}).encode()
+                receipt = Path(d) / 'receipt.json'
+                n.save(receipt, {'status': 'SUBMITTED', 'output_sha256': 'a'*64,
+                                 'interaction_id': 'fixture-id'})
+                with patch.object(n, 'request', return_value=({}, body)) as send:
+                    with self.assertRaisesRegex(n.Refusal, 'ISSUE_DESCRIPTION_MISSING'):
+                        n.poll({'sha256': 'a'*64}, receipt)
+                    saved = json.loads(receipt.read_text())
+                    self.assertEqual(saved['status'], 'COMPLETE_UNVALIDATED')
+                    self.assertEqual(saved['response_text'], response_text)
+                    self.assertEqual(saved['response_sha256'], n.hashlib.sha256(body).hexdigest())
+                    self.assertNotIn('report', saved)
+                    self.assertFalse(saved.get('publication_ready', False))
+                    with self.assertRaisesRegex(n.Refusal, 'POLL_STATE_INVALID'):
+                        n.poll({'sha256': 'a'*64}, receipt)
+                    with self.assertRaisesRegex(n.Refusal, 'SUBMIT_STATE_INVALID'):
+                        n.submit({'sha256': 'a'*64}, receipt)
+                    send.assert_called_once_with(n.API + '/v1beta/interactions/fixture-id', 'test')
+                self.assertEqual(report, before)
+                self.assertFalse((Path(d) / 'APPROVAL.json').exists())
 
     def test_e221_provider_hash_encodings_preserve_exact_identity(self):
         digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
