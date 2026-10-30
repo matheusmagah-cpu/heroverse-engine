@@ -129,6 +129,7 @@ def public_record(r):
             'request_sha256': r['request_sha256'], 'state': r['state'], 'created_at': r['created_at'],
             'updated_at': datetime.now(timezone.utc).isoformat(), 'conversation_id': cid,
             'terminal_at': r.get('terminal_at'), 'retry_of': r.get('retry_of'),
+            'submitted_at': r.get('submitted_at'),
             'production_approved': False, 'published': False,
             'shots': {r['shot']: {'clips': [{'generations': gens}]}}}
 
@@ -171,7 +172,8 @@ class RecordingGuard(quota.QuotaGuard):
 
     def submitted(self, conversation_id, units=quota.VIDEO_UNITS):
         # Existing generate_video invokes this after create and BEFORE its stream POST.
-        self.receipt.update(conversation_id=conversation_id, state='SUBMITTING')
+        self.receipt.update(conversation_id=conversation_id, state='SUBMITTING',
+                            submitted_at=datetime.now(timezone.utc).isoformat())
         self.persist()  # Must be durable remotely or streaming never begins.
         super().submitted(conversation_id, units)
 
@@ -316,7 +318,8 @@ def cli(command):
         need(re.fullmatch(r'[1-9][0-9]{0,24}', str(old.get('conversation_id') or '')), 'NO_ID_RECONCILE_CREATE')
         r = initial_record(m, source)
         r.update(created_at=old['created_at'], conversation_id=old['conversation_id'], state=old['state'],
-                 terminal_at=old.get('terminal_at'), retry_of=old.get('retry_of'))
+                 terminal_at=old.get('terminal_at'), retry_of=old.get('retry_of'),
+                 submitted_at=old.get('submitted_at'))
         atomic(receipt, r)
         return
     r = json.loads(receipt.read_text())

@@ -116,6 +116,20 @@ class PrivateAudio(unittest.TestCase):
         for status,videos in [('incomplete',[]),('completed',[{'url':'redacted'}]),('blocked',[])]:
             with self.assertRaises(bridge.Blocked): bridge.verify_retry(r,C(status,videos))
 
+    def test_e227_history_reads_do_not_move_usage_or_clear_newer_failures(self):
+        now=datetime(2030,1,2,12,tzinfo=timezone.utc);old=now-timedelta(days=1)
+        r=bridge.public_record(bridge.initial_record(self.m,'1234567890'))
+        r.update(state='COMPLETE',submitted_at=old.isoformat(),conversation_id='900001',
+                 shots={'k-close':{'clips':[{'generations':[{'conversation_id':'900001','flags':[]}]}]}})
+        recent={'shots':{'x':{'clips':[{'generations':[
+            {'conversation_id':'900002','flags':['NO_VIDEO']},{'conversation_id':'900003','flags':['NO_VIDEO']}]}]}}}
+        used=bridge.quota.combine([(now,r),(now-timedelta(minutes=1),recent)],'2030-01-02')
+        self.assertEqual((used['units'],used['failed_tail']),(4,2))
+        r.update(state='UNKNOWN',submitted_at=now.isoformat())
+        self.assertEqual(bridge.quota.combine([(now,r),(now-timedelta(minutes=1),recent)],'2030-01-02')['failed_tail'],2)
+        r.pop('submitted_at')
+        with self.assertRaises(bridge.PavoError): bridge.quota.combine([(now,r)],'2030-01-02')
+
     def test_e226_private_bridge_persists_only_public_record(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)/'repo'; root.mkdir()

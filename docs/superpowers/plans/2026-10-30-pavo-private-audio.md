@@ -13,7 +13,7 @@
 ## Constraints
 
 - Zero new spending; exact zero quote including audio/reference before upload and again through the existing generator.
-- One generation per exact manifest hash, never automatically replay an unknown submission.
+- One generation per durable claim. A same-hash retry requires OPERATIONS' exact terminal-failure/cooldown checks; an unknown submission is never replayed.
 - Existing executor lease, subject concurrency, shared quota, 25 Short jobs/day and original publication gates remain.
 - Approved Keeper reference and exact PCM SHA256; no voice reconstruction or media in public logs/artifacts.
 - DRAFT only: a completed generation does not approve source, speech, lip sync, plan or publication.

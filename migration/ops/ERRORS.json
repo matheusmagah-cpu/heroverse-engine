@@ -2734,6 +2734,50 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E227",
+   "date": "2026-10-30",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134",
+    "E136"
+   ],
+   "error": "Pre-merge sweep reproduced a private GET-only reconciliation moving yesterday's Pavo job into today's quota and an old success clearing a newer failed tail because both readers used the record branch commit time.",
+   "fix": "Persist provider submission time before streaming, retain it across recovery, and normalize private records in shared quota.combine used by both REST and git/MCP. Unresolved private jobs consume units without clearing terminal failure evidence; failed cooldown uses its stable first terminal time.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_private_audio.py",
+    "contains": "test_e227_history_reads_do_not_move_usage_or_clear_newer_failures",
+    "covers": [
+     "capacity"
+    ]
+   }
+  },
+  {
+   "id": "E228",
+   "date": "2026-10-30",
+   "class": [
+    "rerun-without-fix"
+   ],
+   "prior": [
+    "E116",
+    "E211",
+    "E214"
+   ],
+   "error": "Pre-merge sweep reproduced dispatch_guard refusing a GET-only reconciliation after the original poll failed at the same commit, leaving the saved conversation unreachable through its intended recovery workflow.",
+   "fix": "Permit only the validated private-audio reconcile mode without a code-fix requirement. A separate explicitly requested retry remains subject to exact failed history, fresh provider GET, cooldown, lease and quota. Ordinary generation after failure is still refused.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_private_audio.py",
+    "contains": "test_get_only_recovery_after_failed_poll_never_unblocks_generation",
+    "covers": [
+     "rerun-without-fix"
+    ]
+   }
   }
  ]
 }
