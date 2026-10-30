@@ -4,14 +4,14 @@
  "evidence": "migration/evidence/vidiq/20261019/channels.json",
  "settings": {
   "description": {
-   "value": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
-   "source": "6/6 winners: first line says what and when, a list of what you will find, a subscribe line; 2/6 quote a verse; 1/6 discloses AI (we disclose: honesty rule)",
-   "verified_at": "2026-10-19"
+   "value": "HeroVerse tells the Bible story by story in English, using the King James Version (KJV) with original reflections. Discover our Shorts; longer videos exploring complete story arcs are in development. We use AI-generated visuals and synthetic voices.",
+   "source": "Owner's current Bible-series direction in migration/production/bible/SERIES.md and migration/strategy/DECISIONS.md (2026-10-30): English KJV stories, original reflections, Shorts, long arcs in development and disclosed synthetic production.",
+   "verified_at": "2026-10-30"
   },
   "keywords": {
-   "value": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" \"KJV\" \"Scripture\" \"gratitude prayer\" \"everyday faith\"",
-   "source": "most frequent terms in the 6 winners' video tags (vidiq_get_videos_by_ids 2026-10-19), 10 terms, no stuffing",
-   "verified_at": "2026-10-19"
+   "value": "\"Bible stories\" \"King James Version\" \"KJV\" \"Genesis\" \"Bible storytelling\" \"Bible Shorts\" \"Scripture\"",
+   "source": "Owner's current Bible-series direction in migration/production/bible/SERIES.md (2026-10-30); seven terms describing the KJV Bible, Genesis and the channel's storytelling format.",
+   "verified_at": "2026-10-30"
   },
   "country": {
    "value": "US",
