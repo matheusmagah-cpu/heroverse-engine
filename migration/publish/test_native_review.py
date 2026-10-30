@@ -15,6 +15,53 @@ SPEC.loader.exec_module(n)
 
 
 class Review(unittest.TestCase):
+    def test_e221_provider_hash_encodings_preserve_exact_identity(self):
+        digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
+        for wire in (n.base64.b64encode(bytes.fromhex(digest)).decode(),
+                     n.base64.b64encode(digest.encode()).decode()):
+            self.assertEqual(n.provider_sha256(wire), digest)
+        for wire in ('bad', n.base64.b64encode(b'x'*64).decode(),
+                     n.base64.b64encode(b'x'*31).decode()):
+            with self.assertRaises(n.Refusal):
+                n.provider_sha256(wire)
+
+    def test_resume_requires_proof_inference_was_never_started(self):
+        i = {'plan': 'x', 'sha256': 'a'*64, 'resume_before_inference': '1'}
+        run = {'id': 1, 'display_title': n.title(i), 'path': '.github/workflows/native-review.yml',
+               'status': 'completed', 'conclusion': 'failure', 'run_attempt': 1}
+        steps = [{'name': k, 'status': 'completed', 'conclusion': v} for k, v in (
+            ('Open one private resumable upload session', 'success'),
+            ('Await exact-byte upload and read back provider hash', 'failure'),
+            ('Submit native audio and video review once', 'skipped'),
+            ('Read the same interaction (GET only)', 'skipped'))]
+        jobs = [{'name':'review', 'steps':steps}]
+        self.assertEqual(n.recovery_source(i, run, jobs), '1')
+        for delta in ({'status':'in_progress'}, {'run_attempt':2}, {'display_title':'another master'},
+                      {'conclusion':'success'}, {'id':3}):
+            with self.assertRaises(n.Refusal): n.recovery_source(i, run | delta, jobs)
+        for conclusion in ('success', 'failure', None):
+            changed = [dict(s) for s in steps]; changed[2]['conclusion'] = conclusion
+            with self.assertRaises(n.Refusal):
+                n.recovery_source(i, run, [{'name':'review', 'steps':changed}])
+        n.reject_duplicate(i, [run], 2, 1, '1')
+        with self.assertRaises(n.Refusal):
+            n.reject_duplicate(i, [run, run | {'id':3}], 2, 1, '1')
+
+    def test_resume_never_uploads_again_and_still_verifies_file(self):
+        with tempfile.TemporaryDirectory() as d, patch.dict(os.environ, {'GITHUB_RUN_ID':'2'}), \
+             patch.object(n, 'free_key', return_value='test'), patch.object(n, 'request') as send:
+            root=Path(d); receipt=root/'receipt.json'; digest='a'*64
+            i={'plan':'x', 'sha256':digest, 'byte_size':'80', 'resume_before_inference':'1'}
+            n.save(root/'recovery.json', {'source_run_id':'1', 'current_run_id':'2',
+                                        'sha256':digest, 'inference_was_skipped':True})
+            n.upload(i,root,receipt); send.assert_not_called()
+            self.assertEqual(json.loads(receipt.read_text())['file_display_name'], 'review-master-'+digest+'-1')
+            f={'name':'files/test','state':'ACTIVE','mimeType':'video/mp4','sizeBytes':'80',
+               'uri':n.API+'/v1beta/files/test','sha256Hash':n.base64.b64encode(digest.encode()).decode()}
+            with patch.object(n,'find_file',return_value=f): n.file_ready(i,receipt)
+            self.assertEqual(json.loads(receipt.read_text())['status'],'FILE_READY')
+            send.assert_not_called()
+
     def test_exact_content_never_replayed_even_after_success(self):
         i = {'plan': 'x', 'sha256': 'a' * 64}
         for status in ('success', 'failure', None):

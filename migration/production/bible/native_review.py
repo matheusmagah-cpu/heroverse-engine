@@ -83,6 +83,7 @@ def inputs():
     require(re.fullmatch(r'[0-9a-f]{64}', i['sha256']), 'HASH_INVALID')
     require(i['owner_review_authorized'] == 'true', 'OWNER_DESIGNATION_REQUIRED')
     require(str(i['byte_size']).isdigit() and 0 < int(i['byte_size']) <= LIMIT, 'SIZE_INVALID')
+    require(re.fullmatch(r'[0-9]*', i.get('resume_before_inference', '')), 'RESUME_ID_INVALID')
     return i
 
 
@@ -101,28 +102,58 @@ def title(i):
     return f"native-review: plan={i['plan']} sha256={i['sha256']}"
 
 
-def reject_duplicate(i, runs, current_run, attempt):
+def reject_duplicate(i, runs, current_run, attempt, permitted_source=None):
     require(str(attempt) == '1', 'REPLAY_REFUSED')
-    require(not any(str(r['id']) != str(current_run) and r.get('display_title') == title(i)
+    require(not any(str(r['id']) not in (str(current_run), str(permitted_source)) and r.get('display_title') == title(i)
                     for r in runs), 'CONTENT_ALREADY_SUBMITTED_RECONCILE_EXISTING_RUN')
 
 
+def recovery_source(i, run, jobs):
+    """Resume only an upload whose inference step demonstrably never ran."""
+    require(str(run.get('id')) == i.get('resume_before_inference')
+            and run.get('display_title') == title(i)
+            and run.get('path') == '.github/workflows/native-review.yml'
+            and run.get('status') == 'completed' and run.get('conclusion') == 'failure'
+            and run.get('run_attempt') == 1, 'RECOVERY_SOURCE_INVALID')
+    require(len(jobs) == 1 and jobs[0].get('name') == 'review', 'RECOVERY_JOBS_INVALID')
+    steps = {s['name']: s for s in jobs[0].get('steps', [])}
+    for name, conclusion in (
+        ('Open one private resumable upload session', 'success'),
+        ('Await exact-byte upload and read back provider hash', 'failure'),
+        ('Submit native audio and video review once', 'skipped'),
+        ('Read the same interaction (GET only)', 'skipped')):
+        require(steps.get(name, {}).get('status') == 'completed'
+                and steps[name].get('conclusion') == conclusion, 'INFERENCE_MAY_HAVE_RUN_RECONCILE_ONLY')
+    return str(run['id'])
+
+
+def github_read(path):
+    url = 'https://api.github.com/repos/matheusmagah-cpu/heroverse-engine' + path
+    req = urllib.request.Request(url, headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                                              'Accept': 'application/vnd.github+json'})
+    with urllib.request.build_opener(NoRedirect()).open(req, timeout=30) as r:
+        return json.load(r)
+
+
 def guard(i):
-    token = os.environ['GH_TOKEN']
     repo = os.environ['GITHUB_REPOSITORY']
     require(repo == 'matheusmagah-cpu/heroverse-engine' and os.environ['GITHUB_REF'] == 'refs/heads/main', 'MAIN_ONLY')
+    source = i.get('resume_before_inference') or None
+    if source:
+        source = recovery_source(i, github_read('/actions/runs/' + source),
+                                 github_read('/actions/runs/' + source + '/jobs')['jobs'])
     # All pages: never lose idempotency when the first page fills up.
     page = 1
     while True:
-        url = f'https://api.github.com/repos/{repo}/actions/workflows/native-review.yml/runs?per_page=100&page={page}'
-        req = urllib.request.Request(url, headers={'Authorization': 'Bearer ' + token,
-                                                  'Accept': 'application/vnd.github+json'})
-        with urllib.request.build_opener(NoRedirect()).open(req, timeout=30) as r:
-            runs = json.load(r)['workflow_runs']
-        reject_duplicate(i, runs, os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'])
+        runs = github_read(f'/actions/workflows/native-review.yml/runs?per_page=100&page={page}')['workflow_runs']
+        reject_duplicate(i, runs, os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], source)
         if len(runs) < 100:
             break
         page += 1
+    if source:
+        save(Path(os.environ['RUNNER_TEMP']) / 'native-review' / 'recovery.json',
+             {'source_run_id': source, 'current_run_id': os.environ['GITHUB_RUN_ID'],
+              'sha256': i['sha256'], 'inference_was_skipped': True})
 
 
 def seal(i, receipt):
@@ -171,13 +202,21 @@ def cleanup(i, receipt):
 def upload(i, root, receipt):
     key = free_key(i)
     require(not receipt.exists(), 'EXISTING_RECEIPT_RECONCILE')
-    name = 'review-master-' + i['sha256'] + '-' + os.environ['GITHUB_RUN_ID']
+    source = i.get('resume_before_inference') or os.environ['GITHUB_RUN_ID']
+    name = 'review-master-' + i['sha256'] + '-' + source
     record = {'version': 'native-av-evidence-v1', 'model': MODEL, 'output_sha256': i['sha256'],
               'plan': i['plan'], 'run_id': os.environ['GITHUB_RUN_ID'], 'status': 'UPLOAD_START_UNCERTAIN',
               'byte_size': int(i['byte_size']), 'file_display_name': name,
               'production_approved': False, 'owner_designation': 'explicit-2026-10-29',
               'calibration': 'owner-accepted-partial-two-completed-one-uncertain',
               'coverage': {'video_sampling_fps': 4, 'native_audio': True, 'full_input': True}}
+    if i.get('resume_before_inference'):
+        proof = json.loads((root / 'recovery.json').read_text())
+        require(proof == {'source_run_id': source, 'current_run_id': os.environ['GITHUB_RUN_ID'],
+                          'sha256': i['sha256'], 'inference_was_skipped': True}, 'RECOVERY_PROOF_INVALID')
+        record.update(status='EXISTING_UPLOAD_GET_ONLY', operation_run_id=source)
+        save(receipt, record)
+        return  # No upload POST, no new file; ready() retrieves the existing one.
     save(receipt, record)
     h, _ = request(API + '/upload/v1beta/files', key, json.dumps({'file': {'display_name': name}}).encode(),
                    {'Content-Type': 'application/json', 'X-Goog-Upload-Protocol': 'resumable',
@@ -206,6 +245,20 @@ def find_file(record, key):
     return found[0] if found else None
 
 
+def provider_sha256(value):
+    # Files API returns base64. Observed upload/readback encodes the hex text;
+    # protobuf bytes implementations can encode the 32 digest bytes instead.
+    try:
+        raw = base64.b64decode(value, validate=True)
+    except (ValueError, TypeError):
+        raise Refusal('PROVIDER_FILE_HASH_MISMATCH')
+    if len(raw) == 32:
+        return raw.hex()
+    if re.fullmatch(b'[0-9a-fA-F]{64}', raw):
+        return raw.decode('ascii').lower()
+    raise Refusal('PROVIDER_FILE_HASH_MISMATCH')
+
+
 def file_ready(i, receipt):
     key = free_key(i)
     record = json.loads(receipt.read_text())
@@ -217,7 +270,7 @@ def file_ready(i, receipt):
             save(receipt, record)
             if f.get('state') == 'ACTIVE':
                 digest = f.get('sha256Hash', '')
-                require(base64.b64decode(digest).hex() == i['sha256'], 'PROVIDER_FILE_HASH_MISMATCH')
+                require(provider_sha256(digest) == i['sha256'], 'PROVIDER_FILE_HASH_MISMATCH')
                 require(int(f.get('sizeBytes', 0)) == int(i['byte_size']), 'PROVIDER_FILE_SIZE_MISMATCH')
                 https(f['uri'], provider=True)
                 require(f.get('mimeType') == 'video/mp4', 'PROVIDER_MIME_MISMATCH')
