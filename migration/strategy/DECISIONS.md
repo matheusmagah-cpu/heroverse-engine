@@ -759,3 +759,45 @@ latest goal report (27/10 14:54, `evidence/daily-report/latest.md`; today's has 
   file stays as it was. The Shorts opt in by naming v5 in their plan (their own frame, E132).
 
 - **2026-10-28, Gemini image free tier = 0, route not kept.** Every image model on the free AI Studio key answered 429 with limit 0 (`evidence/gemini-image/20261028-free-tier.json`); stills from ChatGPT run on the owner's PC (`integrations/chatgpt-local/`).
+
+## Owner recovery direction: qualified first delivery, then measured cadence (2026-10-30)
+
+- **Owner priority.** Resume production, aim for the next unpublished episode in the morning of 30 October
+  (America/Sao_Paulo), and revise quantities and production strategy. Pavo is primary for speaking Keeper/characters;
+  Buzzy is standby; other scenes may use legally usable public video or GPT-generated stills with cinematic motion.
+  This direction supersedes conflicting historical source/cadence prose. No new spending, exact KJV, frozen
+  criteria, the 9.5 floor, true reviewer identity and automatic publication qualification remain binding.
+- **Observed delivery, not readiness.** Main `dc2a7be9e2992c701e5d246b61f2b5828cabb87c`: Short09's active plan
+  has 22 shots, 13 DRAFT first-frame refusals and stale preflight. The preserved private 175-second v6 remains
+  DRAFT; its 21 visual segments, spoken opening and narrator need integration. Existing reviews concern other
+  media hashes. The publication ledger ends at part 08; no new YouTube public readback is asserted here.
+- **First release.** Finish 09 through sources, exact plan/audio, technical checks and actual audiovisual review,
+  then the existing publication gate and processed/public readback. The requested morning is a target, not a
+  promise. If missed, record it and choose the next eligible window only after qualification. Never skip parts,
+  backdate or accumulate several missed uploads in one window. Complete the existing arc-01 long after 09.
+- **Work in progress.** One current delivery plus one next episode in preparation. Preserve the existing master,
+  source hashes, provider jobs and accepted reviews while their inputs match. Prepare 10's corrected raven wording
+  and measured voice timing while 09 is the current delivery; do not turn preparation into a second production
+  fan-out. Reconcile any uncertain provider/run ID with reads; never replay an unknown submission.
+- **Quantity arithmetic.** 30 October–16 November inclusive is 18 days: two regular opportunities/day gives 36,
+  and up to four conditional extras gives 40 Shorts, not 40 regular windows. Each extra uses a separate eligible day,
+  at most one/day, only if the next day's regular Shorts are ready and the long is protected. Seventy Shorts is
+  a stretch production scenario requiring measured free capacity, source/review throughput and audience evidence;
+  it is neither a release commitment nor an instruction to open more work. A first long on 30 or 31 October followed
+  by intervals of at least 48 hours allows at most 9 longs by 16 November; starting later reduces that count.
+- **Re-anchor from reality.** Old absolute `arcs.json.recovery.targets` stay as historical targets and missed-slot
+  evidence, not a current YouTube schedule. No replacement publishAt is invented by this update. After the first
+  confirmed release, record remaining eligible windows in order. Restore two daily Shorts only as qualified
+  inventory supports them and build the existing reserve of four Shorts/one long. Review throughput and usable
+  audience evidence at 48 hours and again by 72 hours; sparse analytics remain inconclusive. Keep or adapt the next
+  cycle from that evidence. This review is performed by existing supervision, with no new clock or frequency.
+- **Source execution.** Reuse matching Pavo assets first; new speaking clips use approved references, consistent
+  supported voices, speech/lip-sync checks and a fresh exact zero-credit quote under the shared quota. God remains
+  exact KJV/Kokoro with no figure; no invented Noah dialogue. Buzzy diagnostics do not establish a qualified
+  generation route, zero cost or rights. Public video requires a usable licence and source/author/hash evidence.
+  GPT stills retain their true provenance and any missing original prompt evidence; the existing unqualified
+  DRAFTs do not become approved. Qualify any route against unchanged frozen criteria before production use.
+  Cinematic motion must support the narrated action; a camera push is not proof of acted animation or 9.5 quality.
+- **Bounded next check.** One existing `pavo-mcp.yml` connection request, with empty `attachments_manifest`, runs
+  offline tests and an authenticated account GET only. It does not quote, upload, generate or approve media.
+  Follow its durable request claim and run; do not create another request after an uncertain dispatch.

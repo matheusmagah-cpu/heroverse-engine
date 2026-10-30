@@ -73,8 +73,8 @@
   }
  ],
  "recovery": {
-  "status": "TARGETS_NOT_YOUTUBE_SCHEDULE",
-  "owner_direction_date": "2026-10-29",
+  "status": "REANCHOR_PENDING_QUALIFIED_DELIVERY_NOT_YOUTUBE_SCHEDULE",
+  "owner_direction_date": "2026-10-30",
   "timezone": "America/Sao_Paulo",
   "master_review_lead_hours": 4,
   "scheduled_readback_lead_hours": 2,
@@ -335,11 +335,42 @@
    }
   ],
   "production_direction": {
-   "cohort": "hybrid-pavo-speech-licensed-video-20261029",
-   "new_speech": "Pavo with approved references and consistent supported input voice, fresh exact zero quote, shared quota and long priority. Shorts retain supported audio; God is Kokoro without a figure; no invented Noah speech.",
-   "new_other_scenes": "Action-matched licensed library video: source, author, license, file/hash, period, crop and continuity. Preserve valid existing approved assets. No new silent Pavo generation or automatic still animation. If no equivalent exists, adapt original direction/narration while keeping KJV, events and frozen criteria before production. Library technical vetting is not scene approval.",
+   "cohort": "pavo-speech-qualified-video-gpt-stills-20261030",
+   "new_speech": "Pavo first for the speaking Keeper and speaking characters, approved references and consistent supported voices, fresh exact zero quote, shared quota, actual speech/lip-sync checks and long priority. God remains exact KJV/Kokoro without a figure; no invented Noah dialogue. Preserve matching accepted assets first.",
+   "new_other_scenes": "Action-matched legally usable public/library video or GPT-generated stills with cinematic motion. Require source, author/licence or generation provenance, file/hash, period, crop, continuity and designated review. Public accessibility is not a licence, camera motion is not proof of acted animation, and GPT DRAFTs remain unqualified under existing frozen source gates until legitimately qualified. Preserve existing valid assets and do not weaken frozen criteria.",
    "precedence": "Current owner direction supersedes conflicting historical source/cadence text for new work. Frozen criteria and valid approvals remain binding.",
-   "private_budget": "Pause paid provider readings/generation pending private expense reconciliation and a free current balance check. Do not copy private analytics or provider responses into this repository."
-  }
+   "private_budget": "Pause paid provider readings/generation pending private expense reconciliation and a free current balance check. Do not copy private analytics or provider responses into this repository.",
+   "standby": "Buzzy diagnostics only until its generation route, exact zero-cost conditions, rights and media checks are qualified; no generation fallback is implied by connection."
+  },
+  "targets_status": "HISTORICAL_SUPERSEDED_TARGETS: preserved as missed-slot evidence; no replacement publishAt until a qualified re-anchoring decision.",
+  "current_delivery": {
+   "episode": "genesis-09-short",
+   "state": "DRAFT_NOT_READY",
+   "requested_daypart": "morning",
+   "requested_date": "2026-10-30",
+   "timezone": "America/Sao_Paulo",
+   "readiness": "Active plan has 22 shots, 13 DRAFT first-frame refusals and stale preflight. Private v6 is not approved; no new public readback is claimed. If the morning target is missed, record it and use the next eligible qualified window without skipping parts."
+  },
+  "work_in_progress": {
+   "current": 1,
+   "next_in_preparation": 1,
+   "next_episode": "genesis-10-short",
+   "long_priority": "Complete existing arc-01-long after genesis-09-short; reuse accepted work and reconcile existing jobs before any new submission."
+  },
+  "quantity_scenarios": {
+   "window_start": "2026-10-30",
+   "window_end": "2026-11-16",
+   "inclusive_days": 18,
+   "regular_short_opportunities": 36,
+   "conditional_extra_shorts_max": 4,
+   "recovery_shorts_scenario": 40,
+   "stretch_production_shorts": 70,
+   "stretch_status": "CAPACITY_SCENARIO_NOT_COMMITMENT_OR_SCHEDULE",
+   "long_interval_hours_min": 48,
+   "longs_max_if_first_qualifies_on_oct30_or_oct31": 9,
+   "long_anchor": "First long only after the qualified publication of Short09; a later first long reduces the possible count."
+  },
+  "conditional_catchup_policy": "Replaces the historical two-makeup scenario for future re-anchoring only: up to four extras, at most one on each separate eligible day, only with the next-day regular Shorts ready and the long protected. Never bunch uploads or skip episodes; no new slots or automatic rescheduling are created here.",
+  "cadence_acceptance": "Restore two daily Shorts only when actual qualified inventory sustains them; preserve reserve targets of four Shorts and one long. After the first new public delivery, review throughput and available audience evidence at 48 hours and again by 72 hours in existing supervision; sparse analytics remain inconclusive."
  }
 }
