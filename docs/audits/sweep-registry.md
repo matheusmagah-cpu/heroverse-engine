@@ -27,6 +27,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `native-review-pr549` | PR #549: native-review workflow, native_review.py and publishing regression tests; exact working hashes and original 1.4.0 Codex execution recorded in `2026-10-30-native-review-pr549.md`. | 2026-10-30 | 0/8 confirmed; schema limitations retained |
 | `existing-edit-import` | Local existing-edit importer, CLI guards and bound draft-render consumption; original 1.4.0 Codex method, final hashes and historical findings-index gap in `2026-10-30-existing-edit-import.md`. | 2026-10-30 | 2/8 confirmed (1 Medium + 1 Low), fixed; 0 open; index gap |
 | `pavo-private-audio` | Private exact-WAV bridge, workflow, recovery/retry, shared quota consumers; original 1.4.0 Codex sweep, commit-bound reproductions and final hashes in `2026-10-30-pavo-private-audio.md`. | 2026-10-30 | 2/9 confirmed (2 Medium), fixed; 0 open confirmed; provider-price limitation retained |
+| `request-input-digits` | requests.yml key validator and real-shell/stub-CLI regressions; original 1.4.0 Codex small-zone sweep and commit-bound E229 reproduction in `2026-10-30-request-input-digits.md`. | 2026-10-30 | 1/4 confirmed (1 Medium), fixed; 0 open |
 
 ## Manual reviews (not plugin sweeps)
 

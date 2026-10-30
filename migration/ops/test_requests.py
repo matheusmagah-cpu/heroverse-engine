@@ -161,6 +161,31 @@ for line in sys.stdin:
         self.assertEqual(sum(c["args"][2] == "fail.yml" for c in self.calls()), 2)
         self.assertTrue(all(c["durable_before_post"] for c in self.calls()))
 
+    def test_e229_digit_input_name_preserves_values_and_claim_order(self):
+        value = "first line\nsecond ' \" $(touch SHOULD_NOT_EXIST)"
+        self.request("private-audio.json", "pavo-private-audio.yml", sha256="a" * 64,
+                     receipt_certificate=value, lease_run_id="run9")
+        result = self.run_workflow()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(len(self.calls()), 1)
+        call = self.calls()[0]
+        self.assertTrue(call['durable_before_post'])
+        self.assertEqual(call['args'], ['workflow', 'run', 'pavo-private-audio.yml',
+                         '-f', 'sha256=' + 'a' * 64, '-f', 'receipt_certificate=' + value,
+                         '-f', 'lease_run_id=run9', '--ref', 'main'])
+        self.assertFalse((self.repo / 'SHOULD_NOT_EXIST').exists())
+        self.assertEqual(len(self.records('done')), 1)
+        self.assertEqual(self.records('inflight'), {})
+
+    def test_input_identifier_refuses_digit_prefix_options_and_shell_syntax(self):
+        for index, key in enumerate(('1bad', '--ref', 'sha-256', 'a;b', 'a b', 'a\nb', 'a$(id)', 'shá')):
+            self.request(f'invalid-key-{index}.json', 'good.yml', **{key: 'value'})
+        result = self.run_workflow()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.calls(), [])
+        self.assertEqual(self.records('inflight'), {})
+        self.assertEqual(self.records('done'), {})
+
     def test_invalid_or_previously_claimed_input_is_not_dispatched(self):
         self.request("good.json", "good.yml")
         self.request("invalid.json", "requests.yml")

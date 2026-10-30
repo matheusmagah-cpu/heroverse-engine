@@ -53,7 +53,7 @@ jobs:
           assert wf not in ("requests.yml",), "NO_RECURSION"
           out = [wf]
           for k, v in (r.get("inputs") or {}).items():
-              assert re.fullmatch(r"[a-z_]+", k), "BAD_INPUT"
+              assert re.fullmatch(r"[a-z_][a-z0-9_]*", k), "BAD_INPUT"
               out += ["-f", f"{k}={v}"]
           print(" ".join(shlex.quote(x) for x in out))
           PY
