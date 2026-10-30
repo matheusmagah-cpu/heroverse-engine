@@ -1,0 +1,20 @@
+{
+ "workflow": "pavo-private-audio.yml",
+ "inputs": {
+  "plan": "migration/production/bible/plans/genesis-09-short.json",
+  "manifest": "migration/integrations/pavo/private-inputs/genesis-09-k-question-20261030.json",
+  "sha256": "34594ffb551d9c3766657f53c7de243e66ac24944e1fcf3cb52a68200b6a6b3a",
+  "receipt_certificate": "-----BEGIN CERTIFICATE-----\nMIIENzCCAp+gAwIBAgIUX8DjrlcZRBvLDKxN8h4lIWGoKTkwDQYJKoZIhvcNAQEL\nBQAwKzEpMCcGA1UEAwwgSGVyb1ZlcnNlLXByaXZhdGUtcmV2aWV3LXJlY2VpcHQw\nHhcNMjYxMDMwMDE1NDEwWhcNMjYxMTI5MDE1NDEwWjArMSkwJwYDVQQDDCBIZXJv\nVmVyc2UtcHJpdmF0ZS1yZXZpZXctcmVjZWlwdDCCAaIwDQYJKoZIhvcNAQEBBQAD\nggGPADCCAYoCggGBAIqMhiRT3fk8xa9KUIWtHiT99OTycCfXGsrfawBMWHUj1D0o\nZddA7+7s1Dj9AoT5ixrzqhYFb/LifVPF8dNrz9ZzHGHeJU6RSg7hkWRq0ISYtgdh\nEru2FyOHKMsNnkW7Har+osznMmoEV9yutYeNdgplkvmFGl5RuXWg8J+HahR3Nq3T\nNAUG1EeNPbhQVHPmCnRAVsTLxR1lvsQgFuOMlz8cauyk/5DUt4mUg1o+fdO0DRL7\nnhjK8RdB5rfIf4LGsSLBUopt9Th6AeorkSAA1NRFLgQ1HJShbm0WOrK5XzW4P81w\ngezoSsy7tWxzag1XGxfEvapfre7swcZuS7nX0nPO8T0iO/Wi3QycO7WXZn87SfMZ\nSl1HRr/rq1+MzgYKDKQII8MHj/DPwPlrif59ANUR3Yf02srohbgYwW94KPbQOnZy\nLkozZ1Boyx9XD9DJR+7yeo0R4vNDqUttvOLumm7m2YpOOZNHWzHuHMC7/qMQrPkZ\ns1pRkfIKcavieylK7QIDAQABo1MwUTAdBgNVHQ4EFgQU+pjJSdGonbQ4/BYfDszW\nNsCHBQkwHwYDVR0jBBgwFoAU+pjJSdGonbQ4/BYfDszWNsCHBQkwDwYDVR0TAQH/\nBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAYEAPSf/+uuyMB6fQ8Ahe5MWzW4ar7+J\nzkouJpEZnNlgGJVFxR4gATkhXWAYBvBHYJ2XMcD/vRY2gFp4l0awH3RyL8Dq8upz\n1DW4lK/C0gcdkCJ6xlRfbNZHp3v08l8sDUO/CnJNSPDK3RF6xjGnDuo1nS6Vx8X9\nA9iuhLYdmmTCLhQCl0TXHjIRL21CGsNcQbGtrZ1wRMKvrxpNcltct1hgKOeGytoj\ncySvwG9ci/sBHx4+G80vSHjCZEM2AIy6+LBppG2XJsc8+LBgKk9UjRMUGzdFISTW\nlQ4QKie8u8vzWwQBGyn5BEeVzEqylggz3bRGOca5UTvgW+nJPJE76WanZFVfBPRW\n54tnI6RwuYSJ9vgurYe0CTDTLR/Yj7JuLnFL4gEdNCW0ULMpo6OsjxJoBivmHBl4\n+0FmK7rKLguPyGVodKAzhKTns/Un/ayBwzbmXY49LC9hUiec/49dw4WczfvJvC/L\nLbbI+i10grcNLsLMFi8ww6uK0239HsrKtoOM\n-----END CERTIFICATE-----\n",
+  "lease_run_id": "codex-import-audio-20261030-1318"
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "claimed",
+  "request_sha256": "2b8e14d118c1c1f66a3d0183c22cabfa374438749cc98d063980d38db9ed1a96",
+  "original_path": "migration/requests/20261030-pavo-private-k-question-once.json",
+  "base_commit": "8ea88b49503b2ecffbbb5fe1304ff437869907a4",
+  "dispatcher_run_id": "41078028115",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-30T15:09:29.862704+00:00"
+ }
+}
