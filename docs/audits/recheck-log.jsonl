@@ -1,0 +1,2 @@
+{"date": "2026-10-30", "commit": "67e415a8e58fae86128e8ef239780467574bdc7b", "dirty": true, "id": "2026-10-30-pavo-private-audio/F1", "result": "fixed", "reproduce_exit": 0, "guard_exit": 0, "where": "now at migration/ops/dispatch_guard.py:781"}
+{"date": "2026-10-30", "commit": "67e415a8e58fae86128e8ef239780467574bdc7b", "dirty": true, "id": "2026-10-30-pavo-private-audio/F2", "result": "fixed", "reproduce_exit": 0, "guard_exit": 0, "where": "still at migration/ops/dispatch_guard.py:689"}

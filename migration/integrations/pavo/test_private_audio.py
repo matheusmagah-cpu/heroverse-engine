@@ -85,6 +85,7 @@ class PrivateAudio(unittest.TestCase):
             g.submitted('373800000000000001', 2)
             self.assertEqual(events[0]['conversation_id'], '373800000000000001')
             self.assertEqual(events[0]['state'], 'SUBMITTING')
+            self.assertEqual(events[0]['submitted_at'], bridge.public_record(r)['submitted_at'])
             self.assertEqual(bridge.public_record(r)['shots']['k-close']['clips'][0]['generations'][0]['conversation_id'],
                              '373800000000000001')
 
@@ -115,6 +116,28 @@ class PrivateAudio(unittest.TestCase):
         bridge.verify_retry(r,C('failed',[]))
         for status,videos in [('incomplete',[]),('completed',[{'url':'redacted'}]),('blocked',[])]:
             with self.assertRaises(bridge.Blocked): bridge.verify_retry(r,C(status,videos))
+
+    def test_retry_requires_all_history_failed_and_the_latest_source(self):
+        now = datetime.now(timezone.utc)
+        records = []
+        for i, hours in enumerate((20, 12, 4)):
+            r = bridge.public_record(bridge.initial_record(self.m, str(1234567890 + i)))
+            created = now - timedelta(hours=hours)
+            r.update(state='FAILED', conversation_id=str(373800000000000001 + i),
+                     created_at=created.isoformat(), terminal_at=(created + timedelta(minutes=1)).isoformat())
+            records.append(r)
+        digest = records[-1]['request_sha256']
+        latest = records[-1]['run_id']
+        self.assertEqual(bridge.require_new(records, digest, retry_run=latest), records[-1])
+        for old in records[:-1]:
+            with self.subTest(old=old['run_id']), self.assertRaisesRegex(bridge.Blocked, 'RETRY_SOURCE_NOT_LATEST'):
+                bridge.require_new(records, digest, retry_run=old['run_id'])
+        for index in (0, 1):
+            for state in ('UNKNOWN', 'COMPLETE', 'SUBMITTING'):
+                history = copy.deepcopy(records)
+                history[index]['state'] = state
+                with self.subTest(index=index, state=state), self.assertRaises(bridge.Blocked):
+                    bridge.require_new(history, digest, retry_run=latest)
 
     def test_e227_history_reads_do_not_move_usage_or_clear_newer_failures(self):
         now=datetime(2030,1,2,12,tzinfo=timezone.utc);old=now-timedelta(days=1)
