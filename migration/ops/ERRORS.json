@@ -2543,6 +2543,27 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E223",
+   "date": "2026-10-30",
+   "class": [
+    "direction"
+   ],
+   "prior": [
+    "E209",
+    "E212",
+    "E218"
+   ],
+   "error": "The shared-executor documentation PR initially added an unregistered directing document under migration/ops. CI run 41053125627 correctly rejected it before merge.",
+   "fix": "Keep the coordination protocol in the existing canonical migration/OPERATIONS.md and remove the new directing file. Point scheduled instructions and the handoff to that section; do not weaken or expand the document allowlist.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "test_only_listed_documents_direct",
+    "covers": [
+     "direction"
+    ]
+   }
   }
  ]
 }
