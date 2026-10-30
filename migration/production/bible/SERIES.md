@@ -1,7 +1,52 @@
 # The Bible, story by story (KJV): series plan (owner, 2026-10-24)
 
-Owner: one micro-story at a time from Genesis, narrated from the KJV (public domain), cinematic and never still, AI
-video only at the hook and the story's peak, finishing with a short reflection and a prayer. Shorts feed long videos.
+Owner: one micro-story at a time from Genesis, narrated from the KJV (public domain), with cinematic motion,
+finishing with a short reflection and a prayer. Shorts feed long videos. The current production and recovery
+direction below supersedes historical source and calendar assumptions; frozen gates remain unchanged.
+
+## Current recovery direction (owner, 2026-10-30)
+
+The immediate priority is the next unpublished episode, **genesis-09-short**, with the owner's requested morning
+publication on 30 October in America/Sao_Paulo treated as a target, never a readiness or scheduling claim.
+At this checkpoint its active plan has 22 shots and 13 stills without approval, its preflight is stale, and the
+preserved 175-second private v6 is a DRAFT. Its 21 visual segments, spoken opening and narrator must be reconciled
+with the active plan and exact audio. Review the actual resulting master; old scores cannot approve a new hash.
+If the morning target passes, record the miss and use the next eligible window after qualification. Do not skip
+to a later episode, backdate an upload, bunch missed releases or rebuild unchanged accepted work.
+
+Keep **one current delivery and one next episode in preparation**: finish 09, prepare 10's corrected script and
+measured voice timing, then complete the existing arc-01 long. Existing clips, stills, voices and reviews are reused
+only while their exact inputs and criteria match. Reconcile saved provider/run IDs before any new submission;
+an uncertain request is never replayed. Keep the existing clocks and shared executor lease.
+
+| Planning scenario through 16 November | Quantity | Condition |
+|---|---|---|
+| Regular Short opportunities, 30 October–16 November inclusive | 18 days × 2 = 36 | Candidate morning/evening windows; a missed window does not become a scheduled video |
+| Recovery scenario | 36 regular + up to 4 extras = 40 Shorts | Extras on separate eligible days, at most one/day, only with the next day's regular Shorts ready and the long protected |
+| Stretch production scenario | 70 Shorts | Capacity scenario only; requires measured free throughput, source/review capacity and audience evidence; no publication promise or new slots |
+| Long recovery scenario | At most 9 longs | First only after 09; then at least 48 hours apart. Nine fits only if the first qualifies on 30 or 31 October; a later start reduces the count |
+
+These are opportunities and scenarios, not inventory or YouTube schedules. Restore two daily Shorts only as
+completed 9.5 masters sustain it; build the existing reserve target of four Shorts and one long without widening
+work in progress. Do not force the long into a date unsupported by its sources and actual review. Re-anchor
+remaining targets from confirmed publication/readback, preserving episode order. After the first new public
+delivery, review process throughput and available audience evidence at 48 hours and again by 72 hours; sparse
+analytics stay inconclusive. Adjust the next cycle from that evidence through DECISIONS.md.
+
+**Sources.** Pavo is first for the speaking Keeper and speaking characters, with their approved references,
+consistent voices, lip-sync and exact speech checks, and a fresh exact zero-credit quote. Preserve existing
+matching clips first. God's words remain exact KJV in the pinned Kokoro voice over a scene without a person;
+do not invent Noah dialogue. Buzzy stays on standby for diagnostics until its generation route, exact zero-cost
+conditions, rights and media checks are qualified. Other scenes use action-matched licensed/public-domain video
+or GPT-generated stills with cinematic motion, subject to proven provenance and the existing source gates.
+Being publicly accessible does not establish a video licence; camera motion alone does not establish acted
+animation or 9.5 quality. GPT DRAFT images are not automatically admissible under frozen story QA v5: qualify
+the route without changing frozen criteria, and preserve their true origin and missing prompt evidence.
+
+No new spending, paid provider reads, quota-reset assumptions or manual APPROVAL.json. Source approval,
+current plan/preflight, technical QA, actual audiovisual review at overall 9.5, the existing publication gate
+and processed/public readback are all required. `arcs.json.recovery` records the scenario and historical targets;
+the old absolute targets remain evidence of missed commitments until a qualified re-anchoring decision exists.
 
 ## One format, two lengths: the Shorts lead to the long (owner, 2026-10-25)
 Owner: "o que está pronto, mantém; a partir desse momento passa para a ideia do short ... o short tem que seguir o
@@ -14,10 +59,10 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 
 **The funnel.**
 - The Bible is told in **arcs**: one arc = one complete story = 4 Short episodes = 1 long video.
-- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 170-179 s from
+- **Shorts (the door; target 2 a day, morning/evening, subject to recovery above):** one moment of the arc each, in order, 170-179 s from
   part 7 (owner, 2026-10-26: the measured driver of `structures/bible-story-short.json`, 5/6 winners vs 0/3 weak; under
-  YouTube's 180 s limit, the tail included; parts 1-6 stay at their 62-90 s, TikTok Creator Rewards counting 1 minute or more), almost all AI video from Pavo (owner,
-  2026-10-25; each scene matches its words). Built in four
+  YouTube's 180 s limit, the tail included; parts 1-6 stay at their 62-90 s), with sources following the current
+  recovery direction and each scene matching its words. Built in four
   beats, recorded line by line in the episode's `narration` (kind scripture / story / insight / cta): the hook; the
   moment told in the KJV with our own retelling around it; one **insight** of our own (what most readers miss, a
   tension in the text, a critique of a common reading; never a paraphrase of the verse); and a close that sends the
@@ -25,7 +70,7 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   refuses a Short from part 6 on that breaks any of this (`short_problems`); parts 1-5 stay as published. Each ends with the next part ("Part N+1 tomorrow: ...") and, once the arc's long exists,
   points to it ("The full story is on the channel"); its first comment links the long, and the Studio "related video"
   of every Short in the arc is set to the long.
-- **Long (the room, every other day):** the whole arc in 14-18 min (render limit 200 min; winners 11-47 min), the same
+- **Long (the room; target at least 48 hours apart after the first qualified release):** the whole arc in 14-18 min (render limit 200 min; winners 11-47 min), the same
   voice, picture style, title formula and thumbnail look as its Shorts, so a viewer who liked the Short recognises
   it. Structure: cold open on the arc's peak moment (0:00-0:30, the Short's hook shot), the story narrated from the
   KJV with plain connecting narration, one chapter per Short episode (chapters = the Short titles), a re-hook
@@ -43,8 +88,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   `<Story>: <human angle> | Genesis N-M Bible Story (KJV)` (long); same narrator voice; same visual anchors
   (PROMPT_GUIDE.md); the long's chapters reuse the Shorts' hook lines.
 
-**Calendar (long slots at 10:00 UTC, one Bible-story long every 2 days; prayer longs stopped, owner 2026-10-26:
-"stop the prayer videos; the channel is going in another direction").** The long stands on its own: it follows its own
+**Historical calendar (superseded by the conditional recovery above; these dates are not a current schedule).**
+Prayer longs stopped, owner 2026-10-26: "stop the prayer videos; the channel is going in another direction". The long stands on its own: it follows its own
 registered structure (`structures/bible-story-long.json`, gate in `script.gate`: 14-18 min, a character speaks the
 conflict in the first 30 s, >= 6 re-hooks, the climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in the
 cold open, no burned captions); traffic from its Shorts is only a plus. `ops/runway.py` counts these slots (a
@@ -56,31 +101,29 @@ script counts once the full `script_check` passes; a prayer long still scheduled
 | 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 31/10 10:00 (owner 28/10: every other day after arc-01 on 29/10) |
 | 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 02/11 10:00 |
 | 4 Abram | 13-16 (Gen 12-19) | 30-31/10 | The call of Abraham | 04/11 10:00 |
-(then every 2 days: 4 Shorts, 1 long; the episode table below is cut into arcs of 4 in order.)
+(The episode table below is cut into arcs of four in order. Future dates require the qualified re-anchoring above.)
 
 **Production.**
-- AI video comes from Pavo first (free, exact zero-credit quote; DECISIONS.md 2026-10-25 "Pavo is the first source"),
-  then Agnes direct, and vidIQ's generator only when both fail. Shorts are almost all AI (owner, 2026-10-25), each scene
-  still matching its words; this replaces "AI video only at the hook and the peak".
+
+- Use the current source direction above. The Agnes direct route is retired; Buzzy standby is not a generation
+  authorization, and a provider failure does not authorize spending or an unqualified substitute.
 - Shorts (from part 7, owner 2026-10-26): produced by `episode.yml` from a plan (`plans/<episode-id>.json`, PROMPT_GUIDE
   "Keeper + acted scenes", Shorts v2): the conflict opens spoken by a character or God's voice, the characters speak
-  their own lines lip-synced, the story acted out in Pavo scenes, the Keeper only for the insight and the close, composed by the engine, no vidIQ credits; Claude writes the plan and reviews the sheet before
+  their own lines lip-synced, the story acted coherently in qualified sources, the Keeper only for the insight and the close, composed by the engine, no vidIQ credits; the designated executor writes the plan and records the true reviewer identity before
   `publish-episode.yml`. (Parts 1-5 used vidIQ voice, stock search and compose, about 45 credits each.)
-- Credit budget: 3,811 credits on 25/10 must last to the renewal on 18/11 (about 159 a day). Two Shorts a day at
-  about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
-  long costs no vidIQ credits.
-- Voice: the Shorts use ElevenLabs "George" through vidIQ (about 14 credits a minute: about 220 for a 16-minute long,
-  which the budget cannot carry every other day). The long uses the engine's free Kokoro voice `am_michael`, the
-  voice the frozen gate pins (`qa_pilot.voice_model_pinned`); a different Kokoro voice would mean changing a gate.
+- Voice: use the supported existing Pavo/Kokoro routes, exact character voice bindings and the pinned narrator
+  `am_michael`; God uses `am_onyx`. Preserve accepted audio and qualify changed lines by measured timing.
+  Historical vidIQ balances or per-video estimates are not current spending authorization.
 - Long: one per arc of `arcs.json` (arc-01 = Genesis 1-3, Shorts 1-4). How it is planned, built, measured and
   published is `LONG_DESIGN.md` only (owner, 2026-10-26: the Keeper narrating, the same characters as the Shorts;
   owner, 2026-10-27: "Libera o pavo no longo").
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
-## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)
-- Per Short: AI clips from Pavo (0) + voice (~14 a minute: ~20 for the 62-90 s of parts 1-6; from part 7 the voice is free Kokoro) + stock search (~8) + compose (~16) ≈ 45;
-  a vidIQ AI clip (veo-3.1-lite 4 s, 60) only when Pavo and Agnes both fail.
-- Ceiling 200 credits a day; the ledger records every call (owner authorization 2026-10-24: "libero tudo").
+## Capacity and spending
+
+Use observed completions and current free readback, not historical balances, to estimate throughput. Pavo's
+shared quota and unread-job stop still apply; a zero quote does not prove available generation capacity.
+Existing vidIQ limits and its ledger remain ceilings, not permission to resume paused paid calls. No new spending.
 
 ## Episodes (Genesis; KJV ranges)
 | # | Story | KJV | Hook moment for AI |
