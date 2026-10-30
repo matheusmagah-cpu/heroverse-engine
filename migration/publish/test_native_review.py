@@ -43,6 +43,29 @@ class Review(unittest.TestCase):
                 with self.assertRaises(n.Refusal): n.validate_report(bad)
         self.assertNotIn('the speaking Keeper', n.prompt())
 
+    def test_e222_issue_times_are_valid_and_inside_media(self):
+        import copy
+        report = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
+                  'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 6.6,
+                  'issues': ['00:05 Synthetic defect'], 'limitations': [],
+                  'criterion_issues': {'overall': [0]},
+                  'coverage': [{'start': x*25, 'end': (x+1)*25,
+                      'audible_observation': 'Voice over music', 'visual_observation': 'Landscape',
+                      'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
+                      'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
+                      for x in range(7)]}
+        for stamp in ('99:99', '00:60', '00:01:60', '01:00:00', '02:55', '02:55.01', '03:00'):
+            with self.subTest(stamp=stamp):
+                bad = copy.deepcopy(report)
+                bad['issues'] = [stamp + ' Synthetic defect']
+                with self.assertRaises(n.Refusal):
+                    n.validate_report(bad)
+        for stamp in ('00:00', '02:54.99', '00:02:54.99'):
+            good = copy.deepcopy(report)
+            good['issues'] = [stamp + ' Synthetic defect']
+            n.validate_report(good)
+        self.assertEqual(report['overall'], 6.6)
+
     def test_e221_provider_hash_encodings_preserve_exact_identity(self):
         digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
         for wire in (n.base64.b64encode(bytes.fromhex(digest)).decode(),

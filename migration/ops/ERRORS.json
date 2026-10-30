@@ -2614,8 +2614,8 @@
     "E220",
     "E221"
    ],
-   "error": "Native review validation accepted narrative coverage without heard excerpts and sub-floor scores without linked timestamped defects. The prompt also assumed the Keeper was speaking, even though camera-only portraits are allowed. Structural acceptance did not establish factual localization accuracy.",
-   "fix": "Require heard excerpts, speaker and motion observations, plus valid timestamped issue references for every sub-floor criterion and overall. Remove the speaking-character assumption. Preserve raw provider evidence and all scores unchanged; no retry or approval. These structural checks do not prove the observations true and cannot replace exact-media corroboration.",
+   "error": "Native review validation accepted narrative coverage without heard excerpts and sub-floor scores without linked timestamped defects. The prompt also assumed the Keeper was speaking, even though camera-only portraits are allowed. Structural acceptance did not establish factual localization accuracy. Follow-up code review reproduced acceptance of impossible clock fields and timestamps beyond the 175-second media because only a prefix regex was checked.",
+   "fix": "Require heard excerpts, speaker and motion observations, plus valid timestamped issue references for every sub-floor criterion and overall. Remove the speaking-character assumption. Preserve raw provider evidence and all scores unchanged; no retry or approval. These structural checks do not prove the observations true and cannot replace exact-media corroboration. Parse the timestamp and reject invalid clock fields or positions outside [0,175); retain valid MM:SS and HH:MM:SS decimal timestamps.",
    "antidote": {
     "file": "migration/publish/test_native_review.py",
     "contains": "test_e222_grounding_required_without_changing_scores",

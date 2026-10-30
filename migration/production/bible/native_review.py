@@ -329,7 +329,15 @@ def validate_report(report):
         for index in refs:
             require(type(index) is int and 0 <= index < len(report['issues']), 'ISSUE_REFERENCE_INVALID')
             issue = report['issues'][index]
-            require(bool(re.match(r'^\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?\s', issue)), 'ISSUE_TIMESTAMP_MISSING')
+            match = re.match(r'^(\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?)\s', issue)
+            require(match is not None, 'ISSUE_TIMESTAMP_MISSING')
+            parts = match.group(1).split(':')
+            seconds = float(parts[-1])
+            minutes = int(parts[-2])
+            hours = int(parts[0]) if len(parts) == 3 else 0
+            require(seconds < 60 and minutes < 60, 'ISSUE_TIMESTAMP_INVALID')
+            require(hours * 3600 + minutes * 60 + seconds < 175,
+                    'ISSUE_TIMESTAMP_OUTSIDE_MEDIA')
     end = 0
     require(isinstance(report.get('coverage'), list) and len(report['coverage']) >= 6, 'COVERAGE_MISSING')
     for seg in report['coverage']:
