@@ -2184,5 +2184,217 @@ class ProbeRecordOnAnyExit(unittest.TestCase):
         self.assertIn("signal.signal(signal.SIGTERM", text)
 
 
+@unittest.skipUnless(HAS_FFMPEG, 'ffmpeg required')
+class ExistingEditImport(unittest.TestCase):
+    def fixture(self, root):
+        root.mkdir()
+        plan = {"episode": "import-fixture", "narration": [{"kind": "cta", "text": "Keep the existing words."}],
+                "shots": [{"id": "k-close", "kind": "keeper", "lines": [0], "prompt": "unchanged"}]}
+        eb.save(root / "plan.json", plan)
+        with wave.open(str(root / "narration.wav"), "wb") as f:
+            f.setparams((1, 2, 24000, 0, "NONE", "not compressed"))
+            f.writeframes(struct.pack('<h', 321) * 48000)
+        subprocess.run(['ffmpeg', '-v', 'error', '-i', str(root / 'narration.wav'),
+                        '-c:a', 'aac', str(root / 'mix.m4a')], check=True)
+        subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=32x48',
+                        '-frames:v', '1', '-threads', '1', str(root / 'image.png')], check=True)
+        (root / "captions.ass").write_text('[Script Info]\nScriptType: v4.00+\n'
+                                          '[V4+ Styles]\nFormat: Name, Fontname, Fontsize\n'
+                                          'Style: Default,DejaVu Sans,16\n[Events]\n'
+                                          'Format: Layer, Start, End, Style, Text\n')
+        manifest = {"status": "DRAFT_NOT_APPROVED", "narrator": "narration.wav", "ass": "captions.ass",
+                    "reuse_existing_stills": True,
+                    "audio_copy": {"source": "mix.m4a", "sha256": eb.sha256(root / "mix.m4a")},
+                    "segments": [{"id": "k-close", "source": "image.png", "kind": "image", "seconds": 2,
+                                  "sha256": eb.sha256(root / "image.png"), "crop": [0, 0, 16, 24]}]}
+        eb.save(root / "manifest.json", manifest)
+        def asset(name):
+            return {"path": name, "sha256": eb.sha256(root / name)}
+        binding = {"schema": "heroverse-existing-edit-v1", "episode": "import-fixture", "fps": 30, "frames": 60,
+                   "plan": asset("plan.json"), "manifest": asset("manifest.json"),
+                   "master_audio": asset("narration.wav"), "final_mix": asset("mix.m4a"),
+                   "captions": asset("captions.ass"),
+                   "visuals": [{"id": "k-close", "start_frame": 0, "end_frame": 60,
+                                "logical_shots": [{"shot": "k-close", "start_frame": 0, "end_frame": 60}],
+                                "narration_units": [{"kind": "cta", "voice": "am_michael",
+                                                     "text": "Keep the existing words."}]}]}
+        eb.save(root / "binding.json", binding)
+        return plan, binding
+
+    def test_e224_existing_master_is_preserved_and_lines_cannot_rebuild_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, "source"), Path(tmp, "imported")
+            plan, binding = self.fixture(root)
+            result = eb.import_edit_step(root / "binding.json", root, work)
+            self.assertEqual(result["status"], "IMPORTED_NOT_APPROVED")
+            self.assertEqual(result["frames"], 60)
+            self.assertEqual(result["seconds"], 2)
+            self.assertTrue(result["plan_blockers"])
+            self.assertEqual((work / "narration.wav").read_bytes(), (root / "narration.wav").read_bytes())
+            with wave.open(str(work / "keeper" / "k-close.wav"), 'rb') as clip:
+                self.assertEqual(clip.readframes(48000), struct.pack('<h', 321) * 48000)
+            self.assertEqual(eb.load(work / "manifest.json")["segments"][0]["crop"], [0, 0, 16, 24])
+            with self.assertRaisesRegex(SystemExit, "EXISTING_EDIT_IMMUTABLE"):
+                eb.lines_step(plan, work)
+            for command in ('voice-script', 'lines', 'generate', 'probe', 'compose', 'adopt'):
+                with self.subTest(command=command), self.assertRaisesRegex(SystemExit, 'EXISTING_EDIT_IMMUTABLE'):
+                    eb.main(['episode_build.py', command, str(root / 'plan.json'), str(work)])
+            self.assertEqual((work / "narration.wav").read_bytes(), (root / "narration.wav").read_bytes())
+            self.assertFalse((work / "APPROVAL.json").exists())
+            self.assertFalse((work / "layout.json").exists())
+            self.assertEqual(eb.import_edit_step(root / "binding.json", root, work), result)
+
+    def test_import_refuses_changed_bytes_semantics_frames_and_paths_before_writes(self):
+        cases = ("hash", "text", "gap", "duration", "escape", "symlink", "bool", "nan", "non_aac")
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                root, work = Path(tmp, "source"), Path(tmp, "imported")
+                _, binding = self.fixture(root)
+                if case == "hash":
+                    binding["master_audio"]["sha256"] = "0" * 64
+                elif case == "text":
+                    binding["visuals"][0]["narration_units"][0]["text"] = "Different words."
+                elif case == "gap":
+                    binding["visuals"][0]["start_frame"] = 1
+                elif case == "duration":
+                    binding["frames"] = 61
+                elif case == "escape":
+                    binding["master_audio"]["path"] = "../source/narration.wav"
+                elif case == "symlink":
+                    (root / "alias.wav").symlink_to(root / "narration.wav")
+                    binding["master_audio"]["path"] = "alias.wav"
+                elif case == "bool":
+                    binding["frames"] = True
+                elif case == "nan":
+                    manifest = eb.load(root / 'manifest.json')
+                    manifest['segments'][0]['seconds'] = float('nan')
+                    eb.save(root / 'manifest.json', manifest)
+                    binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+                elif case == 'non_aac':
+                    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(root / 'narration.wav'),
+                                    '-c:a', 'alac', str(root / 'mix.m4a')], check=True)
+                    binding['final_mix']['sha256'] = eb.sha256(root / 'mix.m4a')
+                    manifest = eb.load(root / 'manifest.json')
+                    manifest['audio_copy']['sha256'] = binding['final_mix']['sha256']
+                    eb.save(root / 'manifest.json', manifest)
+                    binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+                eb.save(root / "binding.json", binding)
+                with self.assertRaises((ValueError, SystemExit)):
+                    eb.import_edit_step(root / "binding.json", root, work)
+                self.assertFalse(work.exists())
+
+    def test_import_never_overwrites_partial_or_mutated_outputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, "source"), Path(tmp, "imported")
+            self.fixture(root)
+            work.mkdir()
+            (work / "narration.wav").write_bytes(b"unrelated")
+            with self.assertRaisesRegex(ValueError, "EXISTING_EDIT_OUTPUT_EXISTS"):
+                eb.import_edit_step(root / "binding.json", root, work)
+            self.assertEqual((work / "narration.wav").read_bytes(), b"unrelated")
+            other = Path(tmp, "complete")
+            eb.import_edit_step(root / "binding.json", root, other)
+            (other / "narration.wav").write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "EXISTING_EDIT_OUTPUT_CHANGED"):
+                eb.import_edit_step(root / "binding.json", root, other)
+
+    def test_import_has_real_draft_consumer_with_identical_audio_packets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            self.fixture(root)
+            eb.import_edit_step(root / 'binding.json', root, work)
+            result = eb.existing_edit.render_imported(work, Path(tmp, 'draft.mp4'))
+            self.assertEqual(result['validation']['video_frames'], 60)
+            self.assertTrue(result['validation']['audio_packets_identical'])
+            self.assertFalse(result['publication_approved'])
+            with self.assertRaisesRegex(ValueError, 'EXISTING_EDIT_OUTPUT_OVERLAP'):
+                eb.existing_edit.render_imported(work, work / 'narration.wav')
+
+    def test_shared_narration_can_span_two_visuals_without_inventing_word_boundaries(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            plan['shots'] = [{'id': sid, 'kind': 'scene', 'lines': [0], 'seconds': 1,
+                              'characters': [], 'establishing': True, 'prompt': 'fixture'}
+                             for sid in ('s-one', 's-two')]
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            manifest = eb.load(root / 'manifest.json')
+            manifest['segments'] = [dict(manifest['segments'][0], id=sid, seconds=1)
+                                     for sid in ('s-one', 's-two')]
+            eb.save(root / 'manifest.json', manifest)
+            binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+            binding['visuals'] = [dict(binding['visuals'][0], id=sid, start_frame=i*30, end_frame=(i+1)*30,
+                                      logical_shots=[{'shot': sid, 'start_frame': i*30, 'end_frame': (i+1)*30}])
+                                  for i, sid in enumerate(('s-one', 's-two'))]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertEqual(result['frames'], 60)
+            self.assertIsNone(result['word_boundaries'])
+
+    def test_e225_caption_or_manifest_change_after_verify_is_refused_at_consumption(self):
+        for name in ('captions.ass', 'manifest.json'):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+                self.fixture(root)
+                eb.import_edit_step(root / 'binding.json', root, work)
+                render = eb.existing_edit.dr.render
+                def interleave(*args, **kwargs):
+                    with (work / name).open('ab') as f:
+                        f.write(b'\nchanged after verification\n')
+                    return render(*args, **kwargs)
+                with patch.object(eb.existing_edit.dr, 'render', side_effect=interleave):
+                    with self.assertRaisesRegex(ValueError, 'HASH_MISMATCH'):
+                        eb.existing_edit.render_imported(work, Path(tmp, 'draft.mp4'))
+                self.assertFalse(Path(tmp, 'draft.mp4').exists())
+
+    def test_keeper_slice_uses_nonzero_frame_offset_without_audio_retime(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            pcm = struct.pack('<h', 321) * 24000 + struct.pack('<h', 987) * 24000
+            with wave.open(str(root / 'narration.wav'), 'wb') as f:
+                f.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+                f.writeframes(pcm)
+            binding['master_audio']['sha256'] = eb.sha256(root / 'narration.wav')
+            plan['narration'].insert(0, {'kind': 'story', 'text': 'Earlier narration.'})
+            plan['shots'][0]['lines'] = [1]
+            plan['shots'].insert(0, {'id': 's-opening', 'kind': 'scene', 'lines': [0], 'seconds': 1,
+                                      'characters': [], 'establishing': True, 'prompt': 'fixture'})
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            manifest = eb.load(root / 'manifest.json')
+            manifest['segments'] = [dict(manifest['segments'][0], id=sid, seconds=1)
+                                     for sid in ('s-opening', 'k-close')]
+            eb.save(root / 'manifest.json', manifest)
+            binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+            binding['visuals'] = [dict(binding['visuals'][0], id=sid, start_frame=i*30, end_frame=(i+1)*30,
+                                      logical_shots=[{'shot': sid, 'start_frame': i*30, 'end_frame': (i+1)*30}],
+                                      narration_units=[dict(plan['narration'][i], voice='am_michael')])
+                                  for i, sid in enumerate(('s-opening', 'k-close'))]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            with wave.open(str(work / result['keeper']['k-close']['path']), 'rb') as f:
+                self.assertEqual(f.getnframes(), 24000)
+                self.assertEqual(f.readframes(24000), struct.pack('<h', 987) * 24000)
+
+    def test_interrupted_receipt_write_still_blocks_voice_reconstruction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, _ = self.fixture(root)
+            actual_open = Path.open
+            def fail_receipt(path, *args, **kwargs):
+                if path == work / 'existing-edit.json' and args == ('xb',):
+                    raise OSError('synthetic receipt write failure')
+                return actual_open(path, *args, **kwargs)
+            with patch.object(Path, 'open', fail_receipt):
+                with self.assertRaisesRegex(OSError, 'synthetic receipt'):
+                    eb.import_edit_step(root / 'binding.json', root, work)
+            before = (work / 'narration.wav').read_bytes()
+            with self.assertRaisesRegex(SystemExit, 'EXISTING_EDIT_IMMUTABLE'):
+                eb.lines_step(plan, work)
+            self.assertEqual((work / 'narration.wav').read_bytes(), before)
+
+
 if __name__ == "__main__":
     unittest.main()

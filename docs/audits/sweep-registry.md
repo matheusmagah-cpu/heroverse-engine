@@ -25,6 +25,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `slim-system` | PR (claude/slim-system): deletes `description-refresh.yml` and `reviewer-probe.yml` (write-scoped, YouTube / Gemini secrets) with their scripts, the RapidAPI diagnostics and `rekey_shots_e118.py`; `test_dispatch_guard.py` EXEMPT shrinks to existing workflows; docs only otherwise. | 2026-10-28 | 0/4 security (none >= 8) |
 | `slim-system-2` | PR (claude/slim-system-2): deletes `shorts.yml`, `shorts-review.yml`, `publish-shorts.yml`, `voice-sample.yml`, `agnes-clip.yml`; unwires `approve.yml`, `publish.yml` (Shorts step), `reconcile.yml`, `heartbeat.yml` (shorts input); `dispatch_guard.py` loses agnes-clip; `render_queue.py` reconcile loses `shorts`; `pending_shorts.py` slot rule only. | 2026-10-28 | 0/7 security (none >= 8) |
 | `native-review-pr549` | PR #549: native-review workflow, native_review.py and publishing regression tests; exact working hashes and original 1.4.0 Codex execution recorded in `2026-10-30-native-review-pr549.md`. | 2026-10-30 | 0/8 confirmed; schema limitations retained |
+| `existing-edit-import` | Local existing-edit importer, CLI guards and bound draft-render consumption; original 1.4.0 Codex method, final hashes and historical findings-index gap in `2026-10-30-existing-edit-import.md`. | 2026-10-30 | 2/8 confirmed (1 Medium + 1 Low), fixed; 0 open; index gap |
 
 ## Manual reviews (not plugin sweeps)
 

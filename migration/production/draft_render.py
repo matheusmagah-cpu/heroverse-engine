@@ -309,13 +309,15 @@ def atomic_write(path, data):
 
 
 def render(manifest, output, work=None, audio_copy=None, audio_copy_sha256=None,
-           *, geometry=(1080, 1920), fps=30):
+           *, geometry=(1080, 1920), fps=30, expected_manifest_sha256=None, expected_subtitle_sha256=None):
     """Low-resolution geometry is an API-only fixture seam, never a CLI switch."""
     manifest, output = Path(manifest).resolve(), Path(output).resolve()
     if fps != 30 or len(geometry) != 2 or any(type(x) is not int or x <= 0 or x % 2 for x in geometry):
         raise RenderError('GEOMETRY_INVALID')
     with output_lock(output), Snapshots() as snapshots:
         raw = manifest.read_bytes()
+        if expected_manifest_sha256 is not None and sha(raw) != expected_manifest_sha256:
+            raise RenderError('MANIFEST_HASH_MISMATCH')
         doc = json.loads(raw)
         if not isinstance(doc, dict) or not isinstance(doc.get('segments'), list) or not doc['segments']:
             raise RenderError('SEGMENTS_REQUIRED')
@@ -362,10 +364,12 @@ def render(manifest, output, work=None, audio_copy=None, audio_copy_sha256=None,
         sub = None
         sub_value = doc.get('ass') or doc.get('subtitles')
         if sub_value:
-            sub = snapshots.file(local(sub_value, base))
+            sub = snapshots.file(local(sub_value, base), expected_subtitle_sha256)
             data = read_fd(sub.fd)
             if b'[Script Info]' not in data or b'[Events]' not in data:
                 raise RenderError('SUBTITLES_NOT_ASS')
+        elif expected_subtitle_sha256 is not None:
+            raise RenderError('BOUND_SUBTITLES_REQUIRED')
         version = snapshots.call(['ffmpeg', '-version']).decode().splitlines()[0]
         engine_sha = sha(Path(__file__).read_bytes())
         options = {'geometry': geometry, 'fps': fps, 'ffmpeg': version, 'engine_sha256': engine_sha}

@@ -78,6 +78,19 @@ One GitHub scheduler of record; the existing Claude and ChatGPT routines share t
   public media transfer, source approval or production-plan substitution is implied. A receipt is technical
   DRAFT evidence only. `heroverse-runner/render.yml` still selects legacy pilot renders; `QUEUE_EMPTY` there
   is not a statement about Bible draft readiness. Qualified Bible production uses the handoff below.
+- Existing private edits (E224): `production/bible/episode_build.py import-edit BINDING ROOT WORK`
+  imports an existing edit without Kokoro, retiming, extra gaps or an added tail. The binding uses schema
+  `heroverse-existing-edit-v1`, episode, fps 30, total frames, hash-bound relative `path`/`sha256` records for
+  plan, manifest, master_audio, final_mix and captions, plus contiguous visual frame spans. Each visual has
+  its manifest id, ordered `logical_shots` with shot/start_frame/end_frame and exact `narration_units`
+  (kind, text, voice and reference when present). The manifest retains source hashes, crops, speed and starts.
+  No symlinks or parent paths are accepted. A new private WORK receives the byte-identical master, final mix,
+  captions and media, exact PCM Keeper slices and an `existing-edit.json` receipt. Repeating the same import
+  verifies all delivered hashes; a partial or changed WORK is refused. `render-imported WORK OUT` uses the
+  existing DRAFT renderer and copies the mix; OUT must be outside WORK. Regular voice/compose/probe commands
+  refuse this workspace. Imports keep every full-plan blocker, contain no fabricated word boundaries,
+  submit no provider requests and grant no source, audiovisual or publication approval. Keep private inputs
+  outside tracked files. Actions/Pavo transport and approved-shot integration remain separate gates.
 - Qualified production handoff (E213): the existing heartbeat checks Bible plans independently of the pilot
   render queue. A current strict-plan/preflight/order PASS can queue one `episode.yml` or `long-build.yml` request
   in `migration/requests/`, then invoke the same reusable durable-claim dispatcher. Prior claims/acknowledgements,
