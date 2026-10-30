@@ -15,12 +15,13 @@
  },
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "db37ba6f60ac7a0dfb40aa8a95dbc561983cb6e61cc29870efcf59a13a67c067",
   "original_path": "migration/requests/20261030-pavo-private-k-close-once.json",
   "base_commit": "26af9fa9b0505c608c1909c9b186b93226d6abf5",
   "dispatcher_run_id": "41074578212",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-30T14:46:32.600846+00:00"
+  "claimed_at": "2026-10-30T14:46:32.600846+00:00",
+  "acknowledged_at": "2026-10-30T14:46:35.532390+00:00"
  }
 }
