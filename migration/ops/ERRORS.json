@@ -2810,6 +2810,39 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E230",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222",
+    "E224",
+    "E225",
+    "E226",
+    "E229"
+   ],
+   "error": "Native review run 41101753017 preserved a complete 6.0 report but left it COMPLETE_UNVALIDATED because every issue used the natural 'MM:SS: description' separator. The validator required whitespace immediately after the timestamp and therefore reported ISSUE_TIMESTAMP_MISSING even though the timestamp, description and criterion links were present.",
+   "fix": "Accept a colon followed by whitespace as an alternative delimiter after an otherwise unchanged valid MM:SS or HH:MM:SS timestamp. Keep the clock-range, media-boundary, nonempty-description, criterion-link and raw-evidence requirements unchanged; validate the preserved response without rewriting it or repeating inference.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "test_e230_timestamp_colon_separator_is_accepted_without_mutation",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }

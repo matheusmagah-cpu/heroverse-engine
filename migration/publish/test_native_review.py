@@ -117,6 +117,20 @@ class Review(unittest.TestCase):
                 self.assertEqual(report, before)
                 self.assertFalse((Path(d) / 'APPROVAL.json').exists())
 
+    def test_e230_timestamp_colon_separator_is_accepted_without_mutation(self):
+        report = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
+                  'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 6.0,
+                  'issues': ['00:06.40: Abrupt cut to a static facade'], 'limitations': [],
+                  'criterion_issues': {'overall': [0]},
+                  'coverage': [{'start': x*25, 'end': (x+1)*25,
+                      'audible_observation': 'Voice over music', 'visual_observation': 'Landscape',
+                      'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
+                      'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
+                      for x in range(7)]}
+        before = copy.deepcopy(report)
+        n.validate_report(report)
+        self.assertEqual(report, before)
+
     def test_e221_provider_hash_encodings_preserve_exact_identity(self):
         digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
         for wire in (n.base64.b64encode(bytes.fromhex(digest)).decode(),
