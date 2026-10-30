@@ -9,12 +9,13 @@
  },
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "2b8e14d118c1c1f66a3d0183c22cabfa374438749cc98d063980d38db9ed1a96",
   "original_path": "migration/requests/20261030-pavo-private-k-question-once.json",
   "base_commit": "8ea88b49503b2ecffbbb5fe1304ff437869907a4",
   "dispatcher_run_id": "41078028115",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-30T15:09:29.862704+00:00"
+  "claimed_at": "2026-10-30T15:09:29.862704+00:00",
+  "acknowledged_at": "2026-10-30T15:09:32.822347+00:00"
  }
 }
