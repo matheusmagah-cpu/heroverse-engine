@@ -12,8 +12,12 @@ Existing media workflow claims still govern provider effects.
 The original PR Review Toolkit prompts are available to the ChatGPT host through
 the personal skill pr-review-toolkit (upstream revision and identity in the protocol).
 A real specialist review of PR549 head 8e4decf8d87feb7c4b006688a3ceff24ed24f1bc
-is in progress at this handoff's preparation. Do not infer approval from installation.
-PR549 remains separate and must reconcile its actual review findings.
+completed with five original specialists executed sequentially by Codex. It found
+one Important: a timestamp with only whitespace can be marked EVIDENCE_COMPLETE
+without a defect description. Publication flags remained false; no publishing bypass
+was demonstrated. See migration/evidence/handoff/20261030-pr549-toolkit-review.md.
+PR549 remains separate: reconcile this demonstrated finding and the separate
+security-sweep requirement; do not regenerate media or redo accepted work.
 
 Existing Short09/10 deliveries, current plans and media hashes remain as recorded.
 No media was regenerated, submitted, approved or published by this coordination change.
