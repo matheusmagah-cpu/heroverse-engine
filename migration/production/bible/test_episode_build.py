@@ -2186,14 +2186,14 @@ class ProbeRecordOnAnyExit(unittest.TestCase):
 
 @unittest.skipUnless(HAS_FFMPEG, 'ffmpeg required')
 class ExistingEditImport(unittest.TestCase):
-    def fixture(self, root):
+    def fixture(self, root, seconds=2):
         root.mkdir()
         plan = {"episode": "import-fixture", "narration": [{"kind": "cta", "text": "Keep the existing words."}],
                 "shots": [{"id": "k-close", "kind": "keeper", "lines": [0], "prompt": "unchanged"}]}
         eb.save(root / "plan.json", plan)
         with wave.open(str(root / "narration.wav"), "wb") as f:
             f.setparams((1, 2, 24000, 0, "NONE", "not compressed"))
-            f.writeframes(struct.pack('<h', 321) * 48000)
+            f.writeframes(struct.pack('<h', 321) * (24000 * seconds))
         subprocess.run(['ffmpeg', '-v', 'error', '-i', str(root / 'narration.wav'),
                         '-c:a', 'aac', str(root / 'mix.m4a')], check=True)
         subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=32x48',
@@ -2205,21 +2205,158 @@ class ExistingEditImport(unittest.TestCase):
         manifest = {"status": "DRAFT_NOT_APPROVED", "narrator": "narration.wav", "ass": "captions.ass",
                     "reuse_existing_stills": True,
                     "audio_copy": {"source": "mix.m4a", "sha256": eb.sha256(root / "mix.m4a")},
-                    "segments": [{"id": "k-close", "source": "image.png", "kind": "image", "seconds": 2,
+                    "segments": [{"id": "k-close", "source": "image.png", "kind": "image", "seconds": seconds,
                                   "sha256": eb.sha256(root / "image.png"), "crop": [0, 0, 16, 24]}]}
         eb.save(root / "manifest.json", manifest)
         def asset(name):
             return {"path": name, "sha256": eb.sha256(root / name)}
-        binding = {"schema": "heroverse-existing-edit-v1", "episode": "import-fixture", "fps": 30, "frames": 60,
+        binding = {"schema": "heroverse-existing-edit-v1", "episode": "import-fixture", "fps": 30,
+                   "frames": 30 * seconds,
                    "plan": asset("plan.json"), "manifest": asset("manifest.json"),
                    "master_audio": asset("narration.wav"), "final_mix": asset("mix.m4a"),
                    "captions": asset("captions.ass"),
-                   "visuals": [{"id": "k-close", "start_frame": 0, "end_frame": 60,
-                                "logical_shots": [{"shot": "k-close", "start_frame": 0, "end_frame": 60}],
+                   "visuals": [{"id": "k-close", "start_frame": 0, "end_frame": 30 * seconds,
+                                "logical_shots": [{"shot": "k-close", "start_frame": 0,
+                                                   "end_frame": 30 * seconds}],
                                 "narration_units": [{"kind": "cta", "voice": "am_michael",
                                                      "text": "Keep the existing words."}]}]}
         eb.save(root / "binding.json", binding)
         return plan, binding
+
+    def measured_fixture(self, root):
+        plan, binding = self.fixture(root, seconds=175)
+        story = ('A family prepares nearby while a distant neighbor watches and considers the changing weather '
+                 'outside.')
+        narration = [{'kind': 'story', 'text': story} for _ in range(18)] + [
+            {'kind': 'story', 'text': 'The workers carry supplies together and pause beside the entrance, watching '
+             'dark clouds gather while people across the valley continue ordinary routines and ignore the '
+             'changing weather all around.'},
+            {'kind': 'insight', 'text': 'Careful choices can protect others when danger approaches, and preparation '
+             'becomes meaningful when people use what they have learned to help someone who needs shelter.'},
+            {'kind': 'story', 'text': 'The narrator introduces the following quotation.'},
+            {'kind': 'scripture', 'text': 'and the Lord shut him in.', 'reference': 'Genesis 7:16 (KJV)'},
+            {'kind': 'insight', 'text': 'Consider how patient preparation helps people choose wisely when difficult '
+             'circumstances arrive.'},
+            {'kind': 'cta', 'text': 'Would you help a neighbor find safety when the final warning arrives?'},
+            {'kind': 'cta', 'text': 'Follow the full story and share what you learned with a friend before the next '
+             'episode.'}]
+        opening = {'kind': 'scripture', 'text': 'For yet seven days, and I will cause it to rain upon the earth '
+                   'forty days and forty nights;', 'reference': 'Genesis 7:4 (KJV)', 'voice': 'am_onyx'}
+        spans = [('s-open', 0, 300, []), ('s-story', 300, 4050, list(range(19))),
+                 ('s-lesson', 4050, 4410, [19]), ('k-insight', 4410, 4770, [20, 21, 22]),
+                 ('k-question', 4770, 4950, [23]), ('k-close', 4950, 5250, [24])]
+        shots = [{'id': sid, 'kind': 'keeper' if sid.startswith('k-') else 'scene', 'lines': lines,
+                  'prompt': 'Unqualified synthetic fixture ' + sid} for sid, _, _, lines in spans]
+        shots[0].pop('lines')
+        shots[0].update(speaker='god', line=opening['text'], reference=opening['reference'], seconds=10)
+        shots[1].update(seconds=12, figures='anonymous', first_frame='missing-synthetic-still')
+        shots[2].update(seconds=12, figures='anonymous', climax=True)
+        plan.update(version='bible-plan-v2', part=9, period='the-flood', narration=narration, shots=shots)
+        eb.save(root / 'plan.json', plan)
+        binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+        segment = eb.load(root / 'manifest.json')['segments'][0]
+        manifest = eb.load(root / 'manifest.json')
+        manifest['segments'] = [dict(segment, id=sid, seconds=(end - start) / 30)
+                                for sid, start, end, _ in spans]
+        eb.save(root / 'manifest.json', manifest)
+        binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+        binding['visuals'] = [
+            {'id': sid, 'start_frame': start, 'end_frame': end,
+             'logical_shots': [{'shot': sid, 'start_frame': start, 'end_frame': end}],
+             'narration_units': [opening] if sid == 's-open' else
+             [dict(narration[k], voice='am_michael') for k in lines]}
+            for sid, start, end, lines in spans]
+        eb.save(root / 'binding.json', binding)
+        return plan, binding
+
+    def test_measured_short_contract_preserves_175_seconds_and_all_plan_refusals(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.measured_fixture(root)
+            checked = eb.check_plan(plan)
+            self.assertEqual(checked['estimate']['words'], 395)
+            self.assertEqual(checked['estimate']['seconds'], 152.9)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            contract = result['measured_short_contract']
+            self.assertEqual(contract['seconds'], 175)
+            self.assertEqual(contract['problems'], [])
+            self.assertEqual(contract['measurement'], {'frames': 5250, 'fps': 30, 'pcm_samples': 4200000,
+                                                      'sample_rate': 24000, 'channels': 1, 'sample_width_bytes': 2})
+            self.assertEqual(contract['conservative_shares'], {
+                'basis': 'whole_visual_interval_union', 'keeper_frames': 840, 'keeper_seconds': 28,
+                'keeper_share_upper_bound': 0.16, 'lesson_frames': 1200, 'lesson_seconds': 40,
+                'lesson_share_upper_bound': 40 / 175, 'speech_boundaries': None})
+            self.assertEqual(result['static_estimate']['seconds'], 152.9)
+            self.assertEqual(result['plan_blockers'], checked['problems'] + checked['pending'])
+            for code in ('SHORT SHORT_LENGTH 152.9', 'KEEPER_LINE_KIND', 'STILL_MISSING'):
+                self.assertTrue(any(p.startswith(code) for p in result['plan_blockers']), code)
+            self.assertEqual(result['plan_sha256'], binding['plan']['sha256'])
+            self.assertEqual(result['binding_sha256'], eb.sha256(root / 'binding.json'))
+            self.assertEqual(result['outputs']['narration.wav'], binding['master_audio']['sha256'])
+            self.assertEqual(result['outputs']['final-mix.m4a'], binding['final_mix']['sha256'])
+            for name in ('plan.json', 'narration.wav', 'captions.ass'):
+                self.assertEqual((work / name).read_bytes(), (root / name).read_bytes(), name)
+            self.assertEqual((work / 'final-mix.m4a').read_bytes(), (root / 'mix.m4a').read_bytes())
+            self.assertIsNone(result['word_boundaries'])
+            self.assertTrue(all(k['speech_boundaries'] is None for k in result['keeper'].values()))
+            self.assertFalse(result['production_approved'])
+            self.assertFalse(result['publication_approved'])
+            self.assertFalse((work / 'APPROVAL.json').exists())
+            self.assertFalse((work / 'layout.json').exists())
+            self.assertEqual(eb.import_edit_step(root / 'binding.json', root, work), result)
+            binding['plan']['sha256'] = '0' * 64
+            eb.save(root / 'binding.json', binding)
+            with self.assertRaisesRegex(ValueError, 'EXISTING_EDIT_INPUT_CHANGED'):
+                eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertEqual(eb.load(work / 'existing-edit.json'), result)
+
+    def test_measured_contract_counts_scripture_even_when_labelled_as_insight(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            quote = ('And the earth was without form, and void; and darkness was upon the face of the deep. '
+                     'And the Spirit of God moved upon the face of the waters.')
+            plan.update(part=9, narration=[{'kind': 'insight', 'text': quote}])
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            binding['visuals'][0]['narration_units'] = [dict(plan['narration'][0], voice='am_michael')]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            problems = result['measured_short_contract']['problems']
+            self.assertIn('ORIGINAL_SHARE 0.00 < 0.4', problems)
+            self.assertTrue(any(p.startswith('INSIGHT_MISSING') for p in problems))
+            self.assertTrue(any(p.startswith('KJV_UNREFERENCED') for p in result['plan_blockers']))
+            self.assertFalse(result['production_approved'])
+
+    def test_conservative_shares_count_a_shared_visual_once_without_unit_timing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            plan['narration'] = [{'kind': 'story', 'text': 'An introduction to the quotation.'},
+                                 {'kind': 'scripture', 'text': 'and the Lord shut him in.',
+                                  'reference': 'Genesis 7:16 (KJV)'},
+                                 {'kind': 'insight', 'text': 'Consider what the choice means.'}]
+            plan['shots'] = [{'id': 's-before', 'kind': 'scene', 'lines': [0], 'seconds': 1, 'prompt': 'fixture'},
+                             {'id': 'k-close', 'kind': 'keeper', 'lines': [1, 2], 'prompt': 'fixture'}]
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            binding['visuals'][0].update(
+                logical_shots=[{'shot': 's-before', 'start_frame': 0, 'end_frame': 30},
+                               {'shot': 'k-close', 'start_frame': 30, 'end_frame': 60}],
+                narration_units=[dict(n, voice='am_michael') for n in plan['narration']])
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            shares = result['measured_short_contract']['conservative_shares']
+            self.assertEqual(shares['keeper_frames'], 60)
+            self.assertEqual(shares['lesson_frames'], 60)
+            self.assertEqual(shares['keeper_share_upper_bound'], 1.0)
+            self.assertEqual(shares['lesson_share_upper_bound'], 1.0)
+            self.assertIsNone(shares['speech_boundaries'])
+            self.assertIsNone(result['word_boundaries'])
+            self.assertIsNone(result['keeper']['k-close']['speech_boundaries'])
 
     def test_e224_existing_master_is_preserved_and_lines_cannot_rebuild_it(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -2245,7 +2382,8 @@ class ExistingEditImport(unittest.TestCase):
             self.assertEqual(eb.import_edit_step(root / "binding.json", root, work), result)
 
     def test_import_refuses_changed_bytes_semantics_frames_and_paths_before_writes(self):
-        cases = ("hash", "text", "gap", "duration", "escape", "symlink", "bool", "nan", "non_aac")
+        cases = ("hash", "text", "gap", "duration", "escape", "symlink", "bool", "nan", "non_aac",
+                 "pcm_sample", "pcm_length", "endpoint", "media_bytes", "plan_bytes")
         for case in cases:
             with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
                 root, work = Path(tmp, "source"), Path(tmp, "imported")
@@ -2265,6 +2403,22 @@ class ExistingEditImport(unittest.TestCase):
                     binding["master_audio"]["path"] = "alias.wav"
                 elif case == "bool":
                     binding["frames"] = True
+                elif case == 'pcm_sample':
+                    audio = root / 'narration.wav'
+                    audio.write_bytes(audio.read_bytes()[:-2] + struct.pack('<h', 322))
+                elif case == 'pcm_length':
+                    with wave.open(str(root / 'narration.wav'), 'wb') as f:
+                        f.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+                        f.writeframes(struct.pack('<h', 321) * 47999)
+                    binding['master_audio']['sha256'] = eb.sha256(root / 'narration.wav')
+                elif case == 'endpoint':
+                    binding['visuals'][0]['end_frame'] = 59
+                elif case == 'media_bytes':
+                    with (root / 'image.png').open('ab') as f:
+                        f.write(b'changed media')
+                elif case == 'plan_bytes':
+                    with (root / 'plan.json').open('ab') as f:
+                        f.write(b'\n')
                 elif case == "nan":
                     manifest = eb.load(root / 'manifest.json')
                     manifest['segments'][0]['seconds'] = float('nan')
