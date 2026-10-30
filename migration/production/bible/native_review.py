@@ -129,7 +129,17 @@ def seal(i, receipt):
     """Only encrypted evidence may be stored in a public Actions artifact."""
     require(receipt.exists(), "NO_RECEIPT_TO_SEAL")
     cert = receipt.parent / "recipient.pem"
-    cert.write_text(i["receipt_certificate"])
+    raw = i["receipt_certificate"].strip()
+    require(len(raw) <= 12000, "CERTIFICATE_TOO_LARGE")
+    m = re.fullmatch(r"-----BEGIN CERTIFICATE-----([A-Za-z0-9+/=\s]+)-----END CERTIFICATE-----", raw)
+    require(m is not None, "CERTIFICATE_INVALID")
+    body = re.sub(r"\s+", "", m.group(1))
+    base64.b64decode(body, validate=True)
+    # GitHub's web dispatch form uses a single-line INPUT and strips CR/LF.
+    # Rewrap only the public certificate; never accept private-key PEM material.
+    cert.write_text("-----BEGIN CERTIFICATE-----\n" +
+                    "\n".join(body[x:x+64] for x in range(0, len(body), 64)) +
+                    "\n-----END CERTIFICATE-----\n")
     output = receipt.parent / "receipt.cms"
     subprocess.run(["openssl", "cms", "-encrypt", "-binary", "-aes-256-cbc", "-outform", "DER",
                     "-in", str(receipt), "-out", str(output), str(cert)],
