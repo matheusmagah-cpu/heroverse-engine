@@ -128,19 +128,40 @@ def public_record(r):
     return {'version': 'private-audio-probe-v1', 'episode': r['episode'], 'run_id': r['run_id'],
             'request_sha256': r['request_sha256'], 'state': r['state'], 'created_at': r['created_at'],
             'updated_at': datetime.now(timezone.utc).isoformat(), 'conversation_id': cid,
+            'terminal_at': r.get('terminal_at'), 'retry_of': r.get('retry_of'),
             'production_approved': False, 'published': False,
             'shots': {r['shot']: {'clips': [{'generations': gens}]}}}
 
 
-def require_new(records, request_sha256):
+def require_new(records, request_sha256, retry_run=None):
+    matching = [r for r in records if r.get('request_sha256') == request_sha256]
+    retry = None
+    if retry_run:
+        need(matching and all(r.get('version') == 'private-audio-probe-v1' and r.get('state') == 'FAILED'
+                             and re.fullmatch(r'[1-9][0-9]{0,24}', str(r.get('conversation_id') or '')) for r in matching),
+             'RETRY_REQUIRES_TERMINAL_FAILED_HISTORY')
+        retry = max(matching, key=lambda r: datetime.fromisoformat(r['created_at']))
+        need(retry.get('run_id') == retry_run, 'RETRY_SOURCE_NOT_LATEST')
+        try:
+            at = datetime.fromisoformat(retry['terminal_at'])
+            need(at.tzinfo is not None and datetime.now(timezone.utc) - at >= timedelta(hours=3), 'RETRY_COOLDOWN')
+        except (KeyError, TypeError, ValueError):
+            raise Blocked('RETRY_TERMINAL_TIME_REQUIRED') from None
     for r in records:
-        need(r.get('request_sha256') != request_sha256, 'EXISTING_CLAIM_RECONCILE')
+        need(r.get('request_sha256') != request_sha256 or retry is not None, 'EXISTING_CLAIM_RECONCILE')
         if r.get('version') != 'private-audio-probe-v1':
             continue
         need(r.get('state') in TERMINAL, 'OTHER_PRIVATE_JOB_UNRESOLVED')
         if r.get('state') in ('FAILED', 'BLOCKED'):
-            at = datetime.fromisoformat(r['updated_at'])
+            at = datetime.fromisoformat(r.get('terminal_at') or r['updated_at'])
             need(datetime.now(timezone.utc) - at >= timedelta(hours=3), 'PRIVATE_PROBE_COOLDOWN')
+    return retry
+
+
+def verify_retry(record, client):
+    result = client.job(record['conversation_id'])
+    need(result.get('conversation_id') == record['conversation_id'] and result.get('status') == 'failed'
+         and result.get('videos') == [], 'RETRY_PROVIDER_NOT_TERMINAL_FAILED')
 
 
 class RecordingGuard(quota.QuotaGuard):
@@ -162,6 +183,8 @@ def poll_once(r, client):
     status = result.get('status')
     r['state'] = 'COMPLETE' if status == 'completed' and result.get('videos') else (
         'FAILED' if status == 'failed' else 'BLOCKED' if status == 'blocked' else 'UNKNOWN')
+    if r['state'] in TERMINAL and not r.get('terminal_at'):
+        r['terminal_at'] = datetime.now(timezone.utc).isoformat()
     return r
 
 
@@ -190,6 +213,8 @@ def inputs():
     need(i.get('sha256') == digest(m), 'MANIFEST_DIGEST')
     need(i.get('plan') == 'migration/production/bible/plans/genesis-09-short.json', 'PLAN_REFUSED')
     need(not i.get('reconcile_run') or re.fullmatch(r'[1-9][0-9]{5,19}', i['reconcile_run']), 'RECOVERY_RUN_INVALID')
+    need(not i.get('retry_run') or re.fullmatch(r'[1-9][0-9]{5,19}', i['retry_run']), 'RETRY_RUN_INVALID')
+    need(not (i.get('retry_run') and i.get('reconcile_run')), 'RETRY_RECOVERY_CONFLICT')
     return i, m
 
 
@@ -272,8 +297,11 @@ def cli(command):
     need(not i.get('reconcile_run') or command in ('recover', 'poll'), 'RECOVERY_READ_ONLY')
     if command == 'claim':
         native_review.recipient_check(i)
-        require_new(history_records(), digest(m))
+        retry = require_new(history_records(), digest(m), i.get('retry_run'))
+        if retry:
+            verify_retry(retry, PrivateVideoClient())  # GET only, before the new durable claim.
         r = initial_record(m, os.environ['GITHUB_RUN_ID'])
+        if retry: r['retry_of'] = retry['run_id']
         persist(r, receipt)
         return
     if command == 'recover':
@@ -287,7 +315,8 @@ def cli(command):
         need(old.get('version') == 'private-audio-probe-v1' and old.get('request_sha256') == digest(m), 'RECOVERY_IDENTITY')
         need(re.fullmatch(r'[1-9][0-9]{0,24}', str(old.get('conversation_id') or '')), 'NO_ID_RECONCILE_CREATE')
         r = initial_record(m, source)
-        r.update(created_at=old['created_at'], conversation_id=old['conversation_id'], state=old['state'])
+        r.update(created_at=old['created_at'], conversation_id=old['conversation_id'], state=old['state'],
+                 terminal_at=old.get('terminal_at'), retry_of=old.get('retry_of'))
         atomic(receipt, r)
         return
     r = json.loads(receipt.read_text())

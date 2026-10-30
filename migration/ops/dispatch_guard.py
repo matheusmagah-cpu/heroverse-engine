@@ -254,6 +254,9 @@ def private_audio(i):
         need(re.fullmatch(r"[a-zA-Z0-9-]{1,120}", i.get("lease_run_id", "")), "lease_run_id", "[id]", "shared owner run")
         need(not i.get("reconcile_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["reconcile_run"]),
              "reconcile_run", i.get("reconcile_run"), "prior private DRAFT run")
+        need(not i.get("retry_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["retry_run"]),
+             "retry_run", i.get("retry_run"), "prior terminal failed DRAFT run")
+        need(not (i.get("retry_run") and i.get("reconcile_run")), "retry_run", "[mode]", "one recovery mode")
     except (bridge.Blocked, ValueError, OSError) as exc:
         raise Refusal("PRIVATE_AUDIO_MANIFEST_REFUSED") from None
     return {"uploads": 0, "pavo_units": 0 if i.get("reconcile_run") else 2, "short": True,
@@ -770,6 +773,11 @@ def rerun(workflow, facts, inputs, api, run_id, attempt, sha):
     of this subject that this guard did not refuse failed -> a commit since its head_sha must touch what it depends
     on, or retries.json records its external cause."""
     attempt_check(api, run_id, attempt, sha)
+    if workflow == "pavo-private-audio.yml" and (inputs.get("reconcile_run") or inputs.get("retry_run")):
+        # E226: exact-CID GET recovery and an explicitly requested terminal-failure probe
+        # have their own stricter checks before provider mutation. UNKNOWN is never replayed.
+        private_audio(inputs)
+        return
     runs = (api(f"actions/workflows/{workflow}/runs?status=completed&per_page=100") or {}).get("workflow_runs", [])
     for r in runs:
         if str(r["id"]) == str(run_id) or not same_subject(workflow, facts, inputs, r.get("display_title")):

@@ -22,6 +22,9 @@ on:
       reconcile_run:
         description: Prior private DRAFT run to read by its saved conversation ID; never resubmits
         required: false
+      retry_run:
+        description: Explicit one-probe request after a saved failed job, fresh failed readback and at least 3h cooldown
+        required: false
 permissions:
   contents: read
   actions: read
@@ -49,6 +52,8 @@ jobs:
         run: python3 -I -B migration/ops/dispatch_guard.py run pavo-private-audio.yml
       - name: Durable DRAFT claim before any Pavo mutation
         if: inputs.reconcile_run == ''
+        env:
+          PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

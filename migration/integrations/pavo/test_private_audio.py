@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Private-input bridge: exact bytes, bounded authority and no ambiguous replay."""
 import copy
+from datetime import datetime, timezone, timedelta
 import hashlib
 import io
 import json
@@ -97,6 +98,24 @@ class PrivateAudio(unittest.TestCase):
         self.assertEqual(r['state'], 'UNKNOWN')
         self.assertEqual(r['conversation_id'], '373800000000000001')
 
+    def test_terminal_retry_requires_same_last_failed_job_and_cooldown(self):
+        r=bridge.public_record(bridge.initial_record(self.m,'1234567890'))
+        r.update(state='FAILED',conversation_id='373800000000000001',
+                 terminal_at=(datetime.now(timezone.utc)-timedelta(hours=4)).isoformat())
+        self.assertEqual(bridge.require_new([r],r['request_sha256'],retry_run=r['run_id']),r)
+        for change in ({'state':'UNKNOWN'},{'state':'COMPLETE'},{'conversation_id':None},
+                       {'terminal_at':datetime.now(timezone.utc).isoformat()}):
+            with self.subTest(change=change), self.assertRaises(bridge.Blocked):
+                bridge.require_new([{**r,**change}],r['request_sha256'],retry_run=r['run_id'])
+        with self.assertRaises(bridge.Blocked):
+            bridge.require_new([r],r['request_sha256'],retry_run='1234567891')
+        class C:
+            def __init__(self,status,videos): self.status,self.videos=status,videos
+            def job(self,cid): return {'status':self.status,'videos':self.videos,'conversation_id':cid}
+        bridge.verify_retry(r,C('failed',[]))
+        for status,videos in [('incomplete',[]),('completed',[{'url':'redacted'}]),('blocked',[])]:
+            with self.assertRaises(bridge.Blocked): bridge.verify_retry(r,C(status,videos))
+
     def test_e226_private_bridge_persists_only_public_record(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)/'repo'; root.mkdir()
@@ -149,6 +168,25 @@ class PrivateAudio(unittest.TestCase):
         self.assertEqual(g.private_audio(i)['pavo_units'],2)
         self.assertEqual(g.private_audio(dict(i,reconcile_run='1234567890'))['pavo_units'],0)
         with self.assertRaises(g.Refusal): g.private_audio(dict(i,sha256='0'*64))
+
+    def test_get_only_recovery_after_failed_poll_never_unblocks_generation(self):
+        import dispatch_guard as g
+        m=json.loads((bridge.ROOT/bridge.MANIFESTS/'genesis-09-k-close-20261030.json').read_text())
+        i={'plan':'migration/production/bible/plans/genesis-09-short.json',
+           'manifest':bridge.MANIFESTS+'genesis-09-k-close-20261030.json',
+           'sha256':bridge.digest(m),'lease_run_id':'offline-test','reconcile_run':'1234567890'}
+        facts=g.private_audio(i);facts['subject']=i['plan']
+        previous={'id':1234567890,'conclusion':'failure','head_sha':'a'*40,
+                  'display_title':g.run_name(bridge.WORKFLOW,i)}
+        def api(path):
+            if path.startswith('actions/workflows/'): return {'workflow_runs':[previous]}
+            if path.startswith('compare/'): return {'status':'identical','files':[]}
+            raise AssertionError(path)
+        with patch.object(g,'failed_in_guard',return_value=False), patch.object(g,'recorded_retry',return_value=False), \
+             patch.object(g,'depends_on',return_value=[i['manifest']]):
+            g.rerun(bridge.WORKFLOW,facts,i,api,'1234567891',1,'a'*40)
+            with self.assertRaises(g.Refusal):
+                g.rerun(bridge.WORKFLOW,facts,dict(i,reconcile_run=''),api,'1234567891',1,'a'*40)
 
 
 if __name__ == '__main__': unittest.main()
