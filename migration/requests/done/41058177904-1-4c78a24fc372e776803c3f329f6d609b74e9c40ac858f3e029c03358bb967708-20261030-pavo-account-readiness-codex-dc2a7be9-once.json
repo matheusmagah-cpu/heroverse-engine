@@ -5,12 +5,13 @@
  },
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "4c78a24fc372e776803c3f329f6d609b74e9c40ac858f3e029c03358bb967708",
   "original_path": "migration/requests/20261030-pavo-account-readiness-codex-dc2a7be9-once.json",
   "base_commit": "839e65549521337d037a98342af653a37c0347de",
   "dispatcher_run_id": "41058177904",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-30T12:48:58.649962+00:00"
+  "claimed_at": "2026-10-30T12:48:58.649962+00:00",
+  "acknowledged_at": "2026-10-30T12:49:00.889282+00:00"
  }
 }
