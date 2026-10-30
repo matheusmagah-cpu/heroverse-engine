@@ -2778,6 +2778,38 @@
      "rerun-without-fix"
     ]
    }
+  },
+  {
+   "id": "E229",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222",
+    "E224",
+    "E225",
+    "E226"
+   ],
+   "error": "The first private Pavo request was rejected before claim or dispatch: requests.yml allowed only lowercase letters and underscores in input names, rejecting the declared sha256 workflow input. Live dispatcher41072937005 reported BAD_INPUT; no provider request occurred.",
+   "fix": "Allow lowercase letters or underscore as the first input-name character and lowercase letters, digits or underscores thereafter. Preserve shell quoting, durable claims and ambiguous-dispatch refusal.",
+   "antidote": {
+    "file": "migration/ops/test_requests.py",
+    "contains": "test_e229_digit_input_name_preserves_values_and_claim_order",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }
