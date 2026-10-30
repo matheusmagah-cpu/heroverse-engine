@@ -238,12 +238,34 @@ def native_review(i):
     return {"uploads": 0, "deps": [i["plan"], "migration/ops/CLAUDE_REVIEW.md"]}
 
 
+def private_audio(i):
+    """Exact-WAV DRAFT input; no full-plan approval or publication is implied."""
+    sys.path.insert(0, str(ROOT / "migration/integrations/pavo"))
+    import private_audio as bridge
+    plan = _plan(i)
+    need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
+    path = i.get("manifest", "")
+    need(isinstance(path, str) and re.fullmatch(re.escape(bridge.MANIFESTS) + r"[a-z0-9-]+\.json", path),
+         "manifest", path, "a committed private audio metadata manifest")
+    try:
+        manifest = bridge.validate(json.loads((ROOT / path).read_text()))
+        need(i.get("sha256") == bridge.digest(manifest), "sha256", i.get("sha256"), "exact manifest digest")
+        need(plan.get("episode") == manifest["episode"], "plan", i.get("plan"), "matching episode")
+        need(re.fullmatch(r"[a-zA-Z0-9-]{1,120}", i.get("lease_run_id", "")), "lease_run_id", "[id]", "shared owner run")
+        need(not i.get("reconcile_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["reconcile_run"]),
+             "reconcile_run", i.get("reconcile_run"), "prior private DRAFT run")
+    except (bridge.Blocked, ValueError, OSError) as exc:
+        raise Refusal("PRIVATE_AUDIO_MANIFEST_REFUSED") from None
+    return {"uploads": 0, "pavo_units": 0 if i.get("reconcile_run") else 2, "short": True,
+            "deps": [i["plan"], path, bridge.REFERENCE, "migration/integrations/pavo/private_audio.py"]}
+
+
 def subject_of(workflow, inputs):
     """The subject a run works on, from its inputs alone (no file read): the episode's plan path, the pilot (or
     characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
     failure history (4) is keyed on workflow + subject. None: the workflow has no subject."""
     first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
-    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml", "native-review.yml"):
+    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml", "native-review.yml", "pavo-private-audio.yml"):
         return first
     if workflow == "publish-episode.yml":
         return f"migration/production/bible/plans/{first}.json"
@@ -262,6 +284,7 @@ def subject_of(workflow, inputs):
 # workflow file -> (input names in run-name order, the first one naming the subject; check). run-name is
 # "<stem>: k=v k=v" (test_dispatch_guard), so a later dispatch finds the earlier runs of its subject.
 WORKFLOWS = {
+    "pavo-private-audio.yml": (("plan", "sha256"), private_audio),
     "native-review.yml": (("plan", "sha256"), native_review),
     "episode.yml": (("plan", "resume_run"), episode),   # regenerate is always refused (E114), and kept off run-name
     "shot-probe.yml": (("plan", "shots", "attempts", "adopt_run"), shot_probe),
@@ -276,7 +299,7 @@ WORKFLOWS = {
 }
 # the job of each workflow that holds its subject's concurrency group (pavo-footage's work is a matrix of clip jobs:
 # GitHub keeps one pending job per group and cancels the rest, so it keeps its workflow-level group only)
-SUBJECT_JOBS = {"native-review.yml": "review", "episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
+SUBJECT_JOBS = {"pavo-private-audio.yml": "talk", "native-review.yml": "review", "episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
                 "pilot-render-stills.yml": "render", "pilot-preview.yml": "preview", "footage.yml": "library",
                 "publish-episode.yml": "publish", "scene-stills.yml": "stills", "long-build.yml": "prepare"}
 

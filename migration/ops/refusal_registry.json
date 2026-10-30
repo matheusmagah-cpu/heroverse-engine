@@ -2632,6 +2632,11 @@
     "migration/production/bible/long_preflight.py::shot_sources.planned_fallbacks(plan)"
    ],
    "note": "E218: queue excludes new non-talking pictures from Pavo; generate_clips and probe_step enforce require_pavo_generation before work or provider calls. Existing clip discovery/review remains available."
+  },
+  "PRIVATE_AUDIO_MANIFEST_REFUSED": {
+   "class": "A",
+   "early": "migration/integrations/pavo/private_audio.py::def validate(",
+   "note": "E226: the same metadata, timing, Keeper reference and digest checks run in dispatch guard before credentials and again at the private-input consumer."
   }
  },
  "review": {

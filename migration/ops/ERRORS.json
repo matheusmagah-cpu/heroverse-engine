@@ -2703,6 +2703,37 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E226",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222",
+    "E224",
+    "E225"
+   ],
+   "error": "Prepared private narration could not reach the authenticated Pavo executor; account diagnostics and an imported DRAFT were incorrectly insufficient to resume generation. Copying private WAVs or signed URLs to the public repository is not an acceptable transfer.",
+   "fix": "Provide one hash-bound private audio upload through an encrypted CMS receipt, exact WAV readback and the existing zero-quote Pavo generator. Persist public claims and conversation IDs in the existing shot-probe branch before stream submission, never publish private media/URLs and never automatically replay an uncertain request. This entry point makes an unapproved DRAFT only.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_private_audio.py",
+    "contains": "test_e226_private_bridge_persists_only_public_record",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }

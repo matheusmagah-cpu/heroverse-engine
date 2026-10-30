@@ -111,6 +111,9 @@ def render(expr, inputs, subject):
 
 
 SAMPLES = {
+    "pavo-private-audio.yml": {"plan": PLAN, "sha256": "7ea943f06681a33d3dc32de31cbf525bb7f03eb67e414f8bfd9628c081373f33",
+                               "manifest": "migration/integrations/pavo/private-inputs/genesis-09-k-close-20261030.json",
+                               "lease_run_id": "offline-test"},
     "native-review.yml": {"plan": PLAN, "sha256": "a" * 64, "byte_size": "100", "owner_review_authorized": "true"},
     "episode.yml": {"plan": PLAN, "resume_run": ""},
     "shot-probe.yml": {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""},
