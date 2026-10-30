@@ -4,7 +4,8 @@ Owner: keep Claude Code and ChatGPT connected to the same ongoing project; switc
 responsibility when one is unavailable without redoing the other's accepted work.
 This delivery changes coordination, not the production implementation.
 
-Read migration/ops/EXECUTOR_COORDINATION.md before any project-writing run.
+Read migration/OPERATIONS.md, section Shared Claude Code / ChatGPT execution,
+before any project-writing run.
 The common GitHub control reference is claude/shared-executor-control. Its lease
 must be acquired with an exact observed parent and a non-forced update/readback.
 Existing media workflow claims still govern provider effects.
