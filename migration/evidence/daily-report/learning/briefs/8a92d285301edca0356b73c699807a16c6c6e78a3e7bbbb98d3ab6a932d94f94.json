@@ -1,0 +1,72 @@
+{
+  "facts": [
+    "Reference cohort and evidence retain the existing adapter provenance."
+  ],
+  "hypotheses": [],
+  "id": "8a92d285301edca0356b73c699807a16c6c6e78a3e7bbbb98d3ab6a932d94f94",
+  "reference_card_ids": [
+    "OuqwfEgNavE",
+    "fXhKzleJhxI",
+    "mtWtsL5hOLg",
+    "1YkQeS5ankw",
+    "TjkOf6Dgwb4",
+    "tYdS0TngzuQ",
+    "JGj76i7s0XM",
+    "lnULY_fWzgU",
+    "ndv-iT9wZik"
+  ],
+  "reference_cohort_counts": {
+    "weak": 3,
+    "winner": 6
+  },
+  "reference_report_only": true,
+  "rendered_inputs_mutation": false,
+  "required_next_evidence": [
+    "Explicit versioned structure assignment",
+    "Verified exposure and effective metric coverage",
+    "Predeclared matched baseline"
+  ],
+  "script_mutation": false,
+  "single_variable_experiment": null,
+  "source_records": {
+    "ledger": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/publish/ledger.json",
+      "path": "migration/evidence/daily-report/learning/sources/ff6614496b51b3d396103eabde92c4c33652cbb1622fbd06a380c6a8789336ad.json",
+      "sha256": "ff6614496b51b3d396103eabde92c4c33652cbb1622fbd06a380c6a8789336ad"
+    },
+    "snapshot": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/daily-report/learning/captures/051641475d17cfeb418a08f46fd7fc518136b0bffaf14f0658ad02819b5945d1.json",
+      "path": "migration/evidence/daily-report/learning/sources/051641475d17cfeb418a08f46fd7fc518136b0bffaf14f0658ad02819b5945d1.json",
+      "sha256": "051641475d17cfeb418a08f46fd7fc518136b0bffaf14f0658ad02819b5945d1"
+    },
+    "structure": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/structures/guided-prayer-scenic.json",
+      "path": "migration/evidence/daily-report/learning/sources/7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47.json",
+      "sha256": "7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47"
+    },
+    "structure_audit": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/vidiq/20261019/structure_audit.json",
+      "path": "migration/evidence/daily-report/learning/sources/4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142.json",
+      "sha256": "4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142"
+    },
+    "thumbnails": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/vidiq/20261019/thumbnails.json",
+      "path": "migration/evidence/daily-report/learning/sources/3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece.json",
+      "sha256": "3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece"
+    }
+  },
+  "status": "EVIDENCE_INSUFFICIENT",
+  "structure_id": "guided-prayer-scenic",
+  "structure_version": "structure-v1",
+  "unknowns": [
+    "NO_VERIFIED_EXACT_CHECKPOINT",
+    "NO_MATCHED_BASELINE",
+    "NO_VERSIONED_OWNED_STRUCTURE_ASSIGNMENT",
+    "REFERENCE_SOURCE_CONFLICTS"
+  ]
+}
