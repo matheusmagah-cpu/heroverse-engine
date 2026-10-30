@@ -329,7 +329,7 @@ def validate_report(report):
         for index in refs:
             require(type(index) is int and 0 <= index < len(report['issues']), 'ISSUE_REFERENCE_INVALID')
             issue = report['issues'][index]
-            match = re.match(r'^(\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?)\s', issue)
+            match = re.match(r'^(\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?)(?:\s+|:\s+)', issue)
             require(match is not None, 'ISSUE_TIMESTAMP_MISSING')
             require(bool(re.sub(r'^[\s:—–-]+', '', issue[match.end():])),
                     'ISSUE_DESCRIPTION_MISSING')
