@@ -15,6 +15,9 @@ the episode record and dispatches publish-episode.yml.
                                                  WORK/layout.json; refuses TALK_LINE_RETIME_OVER, a Keeper share or a
                                                  lesson share > 25 % and a length outside the part's range (170-179 s
                                                  from part 7)
+  episode_build.py import-edit BINDING ROOT WORK  preserve an existing private master, mix, captions and frame map;
+                                                 import only, retain plan blockers, no provider or approval
+  episode_build.py render-imported WORK OUT      render that import as DRAFT with the existing final mix copied
   episode_build.py refs PLAN WORK                approved reference images (release asset or repository file, sha256
                                                  checked), as JPEG <= 1536 px in WORK/refs; a talking speaker's
                                                  `talk_refs` speaking frame as "<id>:talk" (E95)
@@ -99,6 +102,7 @@ import characters as ch  # noqa: E402
 import pavo_native  # noqa: E402  (owner 27/10: Pavo's own speech, story QA v4)
 import reviewer_identity  # noqa: E402
 import clip_timing  # noqa: E402
+import existing_edit  # noqa: E402
 
 VOICE = {"voice_id": "am_michael", "speed": 1.0}   # the pinned engine voice (qa_pilot.voice_model_pinned)
 LINE_GAP = plan_check.LINE_GAP
@@ -589,6 +593,7 @@ def lines_step(plan, work):
     order, write each talking clip's input audio (the Keeper's lines, a character's spoken line) and the compose
     timeline; measure the Short against the plan's rules again."""
     work = Path(work)
+    existing_edit.refuse_rebuild(work)
     items, carried = plan_check.sequence(plan)
     timeline = load(work / "timeline.json")
     params, frames = read_wav(work / "voice.wav")
@@ -682,6 +687,9 @@ def lines_step(plan, work):
 
 
 # ---------- reference images ----------
+
+def import_edit_step(binding, root, work):
+    return existing_edit.import_edit(binding, root, work, sys.modules[__name__])
 
 def sha256(path):
     digest = hashlib.sha256()
@@ -2177,6 +2185,14 @@ def main(argv):
     if len(argv) < 3:
         raise SystemExit(__doc__)
     cmd = argv[1]
+    if cmd == 'import-edit' and len(argv) == 5:
+        print(json.dumps(import_edit_step(*argv[2:5]), ensure_ascii=False))
+        return 0
+    if cmd == 'render-imported' and len(argv) == 4:
+        print(json.dumps(existing_edit.render_imported(*argv[2:4]), ensure_ascii=False))
+        return 0
+    if cmd in ('voice-script', 'lines', 'generate', 'probe', 'compose', 'adopt') and len(argv) >= 4:
+        existing_edit.refuse_rebuild(argv[3])
     if cmd == "sheet" and len(argv) == 4:
         return sheet_step(argv[2], argv[3])
     if cmd == "check-regenerate" and len(argv) == 3:

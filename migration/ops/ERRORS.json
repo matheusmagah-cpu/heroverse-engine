@@ -2644,6 +2644,65 @@
      "direction"
     ]
    }
+  },
+  {
+   "id": "E224",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222"
+   ],
+   "error": "An existing private edit could not enter the engine without reconstructing its voice. The generated-voice lines step inserts gaps and retimes speech, so it must not overwrite a measured existing master or invent per-unit word boundaries.",
+   "fix": "Add a confined hash-bound import with exact PCM/frame coverage, final-mix and caption preservation, immutable output verification and the existing DRAFT renderer as its consumer. Keep every full-plan blocker and all approval gates; no imported receipt is a production pass. Refuse the generated-voice path in an imported workspace. A durable pending marker blocks reconstruction even when the final receipt write is interrupted.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "test_e224_existing_master_is_preserved_and_lines_cannot_rebuild_it",
+    "covers": [
+     "fragile-input"
+    ]
+   }
+  },
+  {
+   "id": "E225",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222",
+    "E224"
+   ],
+   "error": "Pre-merge sweep of the existing-edit importer reproduced a caption mutation after output verification but before rendering. The original renderer reopened the subtitle pathname without the imported expected hash, so a different caption could enter a DRAFT render.",
+   "fix": "Pass the imported manifest and subtitle hashes into draft_render. Validate the manifest raw bytes before parsing and the subtitle sealed snapshot at consumption. Refuse changed inputs before delivering output. The race remains a DRAFT integrity issue, not a publication-gate bypass. Also reject nonfinite segment durations before import and preserve narration shared across cuts by carried-unit indices.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "test_e225_caption_or_manifest_change_after_verify_is_refused_at_consumption",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }
