@@ -13,6 +13,9 @@ on:
       byte_size:
         description: Exact MP4 byte count for the one resumable upload
         required: true
+      resume_before_inference:
+        description: Optional failed run ID only when its inference step was skipped; reuses its uploaded file
+        required: false
       free_tier_evidence:
         description: Fresh verified Free Tier JSON bound to the API key hash (no key or account data)
         required: true

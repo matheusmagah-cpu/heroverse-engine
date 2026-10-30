@@ -2516,6 +2516,33 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E221",
+   "date": "2026-10-30",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220"
+   ],
+   "error": "Native review run 40990049460 uploaded the exact MP4, but the provider returned sha256Hash as base64 of 64 hexadecimal ASCII characters. Interpreting that as 32 raw digest bytes produced a false mismatch. The inference step was skipped, so no review request occurred.",
+   "fix": "Decode strict base64, accept only a 32-byte digest or 64 hexadecimal ASCII characters, and compare the canonical digest exactly. Resume the same uploaded file only after GitHub readback proves the original run failed at file validation and inference was skipped. Refuse any possibly submitted, active, mismatched or previously resumed operation.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "test_e221_provider_hash_encodings_preserve_exact_identity",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }
