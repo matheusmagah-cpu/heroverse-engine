@@ -113,8 +113,10 @@ Then: duration and aspect come from the tool fields, not the text.
 | job_8a50c757 dust rising into sunlight | veo-3.1-lite 1080p | 4 | 60 | MISS: read as fire |
 
 ## Built for 9.5 before compose (owner, 2026-10-24: "a 9.5 needs a structure made for 9.5")
-Genesis 1 (part 1) scored ~8 because nothing checked the clips before the compose. Every episode now passes, in
-order, before any paid compose:
+Genesis 1 (part 1) scored ~8 because nothing checked the clips before the compose. Build every episode through the
+following checks. Complete source and script checks before a full compose, including free and imported edits;
+complete render-specific checks on the resulting file before final review. Short construction samples remain
+available to check a change in context before assembling the complete video:
 1. Every stock clip is looked at (its preview frame), not chosen by its text description: no modern objects (cars,
    aquariums, ski gear), no modern people, the subject inside the 9:16 center crop.
 2. Each clip matches the exact words over it (the moon on "the moon", not a black frame).
@@ -136,6 +138,29 @@ order, before any paid compose:
    the words ours, one insight of at least 20 words of our own reading of the passage, a close that names the full
    story. A Short under a minute does not count for TikTok Creator Rewards; a Short that only reads the verse over
    stock footage reads as reused content on both platforms.
+
+### Apply the checks to the actual construction (owner clarification, 2026-10-30)
+
+The eight review dimensions in `ops/CLAUDE_REVIEW.md` guide the construction of each shot. Record its real frame
+interval, exact spoken units, dramatic purpose, source hash, observed figures/action, motion capability, evidence,
+remaining defect and specific next correction in the existing editing package. A quality target of 9.5 is not a
+measured score. Keep the designated review, source qualification and frozen QA requirements intact.
+
+Inspect the actual source before selecting it. For movement or a changed crop, inspect its first, middle and last
+frames; then check a short contextual sample with the incoming/outgoing cuts, original sound and captions.
+Correspondence between image and words, anatomy, identity, period objects, texture, continuity and visual variety
+are construction checks. A still with camera movement must be recorded as camera-only: it does not demonstrate
+body motion, fluid motion or lip sync. A prompt describing hands or a crowd is not evidence that the image has them.
+
+When a known construction defect remains, repair that source, framing or sequence and check the affected sample
+before another complete render for final review. Reuse unchanged, accepted work whose inputs and context still
+match. Do not repeatedly submit the same master to obtain a higher score. The final audiovisual review checks the
+complete result independently and remains bound to its exact hash.
+
+For a preserved private edit, compare the plan with the media actually bound to the timeline before acting on its
+old refusals. Keep measured frame/PCM duration separate from a narration estimate, retain the original audio and
+honest classifications, and leave unknown provenance or review evidence pending. Use the existing import route;
+this procedure neither waives a plan refusal nor creates an approval. A construction sample is a draft.
 
 ## Characters stay the same in every video (owner, 2026-10-25)
 "If Moses appears once, he is the same Moses a hundred videos later." `production/characters/characters.json` is the
