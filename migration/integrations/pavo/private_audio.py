@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One private exact-WAV DRAFT, using the existing Pavo generator and encrypted receipts.
+"""One private exact-WAV or approved-first-frame DRAFT, with encrypted receipts.
 
 Only hashes, state and conversation IDs enter the existing shot-probe branches.
 The caller uploads directly to Pavo; neither media nor storage URLs are public artifacts.
@@ -31,6 +31,8 @@ from video import PavoVideoClient
 
 REFERENCE = 'migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg'
 REFERENCE_SHA = '575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a'
+HOOK_FRAME = 'migration/production/bible/stills/genesis-09-s-voice.jpg'
+HOOK_SHA = '8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19'
 MANIFESTS = 'migration/integrations/pavo/private-inputs/'
 WORKFLOW = 'pavo-private-audio.yml'
 SHA = re.compile(r'[0-9a-f]{64}')
@@ -51,12 +53,28 @@ def digest(value):
 
 
 def validate(m, reference_check=True):
-    need(isinstance(m, dict) and m.get('version') == 'pavo-private-audio-v1', 'MANIFEST_SCHEMA')
-    need(m.get('episode') == 'genesis-09-short' and m.get('shot') in ('k-insight', 'k-question', 'k-close'), 'SUBJECT_REFUSED')
+    need(isinstance(m, dict) and m.get('version') in ('pavo-private-audio-v1', 'pavo-private-hook-v1'), 'MANIFEST_SCHEMA')
+    hook = m['version'] == 'pavo-private-hook-v1'
+    need(m.get('episode') == 'genesis-09-short' and
+         m.get('shot') in (('s-voice',) if hook else ('k-insight', 'k-question', 'k-close')), 'SUBJECT_REFUSED')
     need(m.get('production_approved') is False and m.get('sound') is False and m.get('aspect_ratio') == '9:16', 'DRAFT_POLICY')
-    need(m.get('reference') == REFERENCE and m.get('reference_sha256') == REFERENCE_SHA, 'REFERENCE_REFUSED')
     need(isinstance(m.get('prompt'), str) and 20 <= len(m['prompt']) <= 4000, 'PROMPT_INVALID')
     need(type(m.get('seconds')) is int and 4 <= m['seconds'] <= 12, 'SECONDS_INVALID')
+    if hook:
+        need(set(m) == {'version', 'episode', 'shot', 'prompt', 'seconds', 'first_frame',
+                        'first_frame_sha256', 'sound', 'aspect_ratio', 'production_approved'}, 'HOOK_FIELDS')
+        need(m['seconds'] == 10 and m.get('first_frame') == HOOK_FRAME and
+             m.get('first_frame_sha256') == HOOK_SHA, 'HOOK_BINDING')
+        if reference_check:
+            p = ROOT / HOOK_FRAME
+            need(p.is_file() and not p.is_symlink() and hashlib.sha256(p.read_bytes()).hexdigest() == HOOK_SHA, 'REFERENCE_CHANGED')
+            r = json.loads(p.with_suffix('.json').read_text())
+            score = (r.get('approved') or {}).get('score')
+            need(r.get('repo_path') == HOOK_FRAME and r.get('sha256') == HOOK_SHA and
+                 r.get('status') == 'APPROVED' and type(score) in (int, float) and math.isfinite(score) and
+                 score >= 9.5, 'HOOK_REFERENCE_NOT_APPROVED')
+        return m
+    need(m.get('reference') == REFERENCE and m.get('reference_sha256') == REFERENCE_SHA, 'REFERENCE_REFUSED')
     need(type(m.get('audio_bytes')) is int and 44 < m['audio_bytes'] <= 15 * 1024 * 1024, 'AUDIO_SIZE_INVALID')
     need(isinstance(m.get('audio_sha256'), str) and SHA.fullmatch(m['audio_sha256']), 'AUDIO_HASH_INVALID')
     for key in ('audio_seconds', 'speech_seconds'):
@@ -134,7 +152,12 @@ def public_record(r):
             'shots': {r['shot']: {'clips': [{'generations': gens}]}}}
 
 
-def require_new(records, request_sha256, retry_run=None):
+def require_new(records, request_sha256, retry_run=None, manifest=None):
+    if manifest and manifest.get('version') == 'pavo-private-hook-v1':
+        need(not retry_run, 'HOOK_RETRY_REFUSED')
+        # The one approved hook slot is not a new request merely because its prompt/digest changes.
+        need(not any(r.get('episode') == manifest['episode'] and manifest['shot'] in (r.get('shots') or {})
+                     for r in records), 'HOOK_EXISTING_CLAIM_RECONCILE')
     matching = [r for r in records if r.get('request_sha256') == request_sha256]
     retry = None
     if retry_run:
@@ -217,6 +240,7 @@ def inputs():
     need(not i.get('reconcile_run') or re.fullmatch(r'[1-9][0-9]{5,19}', i['reconcile_run']), 'RECOVERY_RUN_INVALID')
     need(not i.get('retry_run') or re.fullmatch(r'[1-9][0-9]{5,19}', i['retry_run']), 'RETRY_RUN_INVALID')
     need(not (i.get('retry_run') and i.get('reconcile_run')), 'RETRY_RECOVERY_CONFLICT')
+    need(not (m['version'] == 'pavo-private-hook-v1' and i.get('retry_run')), 'HOOK_RETRY_REFUSED')
     return i, m
 
 
@@ -299,7 +323,7 @@ def cli(command):
     need(not i.get('reconcile_run') or command in ('recover', 'poll'), 'RECOVERY_READ_ONLY')
     if command == 'claim':
         native_review.recipient_check(i)
-        retry = require_new(history_records(), digest(m), i.get('retry_run'))
+        retry = require_new(history_records(), digest(m), i.get('retry_run'), manifest=m)
         if retry:
             verify_retry(retry, PrivateVideoClient())  # GET only, before the new durable claim.
         r = initial_record(m, os.environ['GITHUB_RUN_ID'])
@@ -326,12 +350,21 @@ def cli(command):
     need(r['request_sha256'] == digest(m) and r['run_id'] == (i.get('reconcile_run') or os.environ['GITHUB_RUN_ID']), 'RECEIPT_MISMATCH')
     need(not i.get('reconcile_run') or command == 'poll', 'RECOVERY_READ_ONLY')
     client = PrivateVideoClient()
+    hook = m['version'] == 'pavo-private-hook-v1'
     if command == 'prepare':
         need(r['state'] == 'CLAIMED', 'EXISTING_UPLOAD_RECONCILE')
+        if hook:
+            q = client.quote_video(m['seconds'], '9:16', first_frame=HOOK_FRAME, sound=False)
+            need(q.get('zero_cost_confirmed') is True, 'ZERO_CREDIT_QUOTE_REQUIRED')
+            r.update(initial_quote=q, state='INPUT_VERIFIED'); persist(r, receipt)
+            return
         r['state'] = 'UPLOAD_START_UNCERTAIN'; persist(r, receipt)
         r['upload'], r['initial_quote'] = prepare_upload(m, client)
         r['state'] = 'UPLOAD_PENDING'; persist(r, receipt)
     elif command == 'ready':
+        if hook:
+            need(r['state'] == 'INPUT_VERIFIED', 'HOOK_INPUT_STATE')
+            return  # The approved frame is in the checkout; no private WAV transfer exists.
         need(r['state'] == 'UPLOAD_PENDING', 'UPLOAD_STATE')
         until = time.monotonic() + 1200
         while True:
@@ -347,8 +380,9 @@ def cli(command):
         (work / 'input.wav').write_bytes(data)
         r['state'] = 'AUDIO_VERIFIED'; persist(r, receipt)
     elif command == 'submit':
-        need(r['state'] == 'AUDIO_VERIFIED', 'EXISTING_SUBMISSION_RECONCILE')
-        check_audio(m, (work / 'input.wav').read_bytes())
+        need(r['state'] == ('INPUT_VERIFIED' if hook else 'AUDIO_VERIFIED'), 'EXISTING_SUBMISSION_RECONCILE')
+        if not hook:
+            check_audio(m, (work / 'input.wav').read_bytes())
         import dispatch_guard
         now = datetime.now(timezone.utc)
         api = lambda p: native_review.github_read('/' + p)
@@ -360,8 +394,11 @@ def cli(command):
         lease(i)
         client = PrivateVideoClient(guard=RecordingGuard(qp, r, lambda: persist(r, receipt)))
         try:
-            result = client.generate_video(m['prompt'], m['seconds'], '9:16', references=[REFERENCE],
-                                          audios=[str((work / 'input.wav').relative_to(ROOT))], sound=False)
+            if hook:
+                result = client.generate_video(m['prompt'], m['seconds'], '9:16', first_frame=HOOK_FRAME, sound=False)
+            else:
+                result = client.generate_video(m['prompt'], m['seconds'], '9:16', references=[REFERENCE],
+                                              audios=[str((work / 'input.wav').relative_to(ROOT))], sound=False)
             r['submission'] = result
             r['state'] = 'UNKNOWN'
         finally:

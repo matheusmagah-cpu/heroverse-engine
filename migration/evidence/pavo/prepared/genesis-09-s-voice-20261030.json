@@ -1,0 +1,133 @@
+{
+  "version": "pavo-prepared-hook-v1",
+  "status": "DRAFT_EXECUTOR_IMPLEMENTED_AWAITING_REVIEW_NOT_ENQUEUED",
+  "episode": "genesis-09-short",
+  "visual": "s-voice",
+  "logical_shots": [
+    "s-voice",
+    "s-warning-response"
+  ],
+  "production_approved": false,
+  "publication_approved": false,
+  "generation_submitted": false,
+  "quality_target": 9.5,
+  "quality_policy": "Design for >=9.5 from reference, storyboard, action, camera and exact duration before generation; prove the result by real audiovisual review. This preparation and the existing still approval do not approve the generated video.",
+  "reference": {
+    "record": "migration/production/bible/stills/genesis-09-s-voice.json",
+    "image": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+    "sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
+    "existing_record_status": "APPROVED",
+    "existing_record_score": 9.5,
+    "existing_record_date": "2026-10-28",
+    "new_video_approval_transferred": false
+  },
+  "adapter_inputs": {
+    "prompt": "Animate the supplied first frame as a 10-second cinematic sequence with two distinct views and one clean cut. Preserve the exact pitch-black rectangular wooden ark, flat roof, square ends, plank structure, dry valley, distant cliffs, storm clouds and painterly realistic lighting. No people are visible; both God and the narrator are offscreen voices in the separate original soundtrack, never visible figures, faces or mouths. FIRST VIEW, 0 to 6.4 seconds: begin on the exact supplied vertical composition. The existing lightning glows briefly and fades naturally during the first second; clouds drift slowly, a thin veil of dust travels close to the ground, and sparse grass bends gently. Use a restrained steady camera push of approximately three percent, keeping the entire ark recognizable. SECOND VIEW, 6.4 to 10 seconds: make one clean hard cut to a tighter, steady three-quarter view of the same near square end and adjacent long plank wall of this exact ark. Keep the roof flat, the timber rigid, and the same orientation, dry ground, storm lighting and color. This closer framing must be visibly distinct from the first view; hold it with subtle cloud and dust motion. Do not invent or open a door. Do not increase rainfall or introduce floodwater. No orbit, handheld shake, transition effects, morphing, moving timber, vessels, people, divine figure, facial features, captions, text or logos. Silent visual output; no music, sound or generated speech. The original production audio remains unchanged in the edit.",
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "first_frame": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+    "last_frame": "",
+    "references": [],
+    "audios": [],
+    "sound": false
+  },
+  "quote_inputs": {
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "first_frame": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+    "last_frame": "",
+    "references": [],
+    "audios": [],
+    "sound": false
+  },
+  "expected_contract": {
+    "model": "agnes-video-new-flash",
+    "mode": "frames_to_video",
+    "input_images": 1,
+    "input_audios": 0,
+    "count": 1,
+    "resolution": "720p",
+    "quote_observed": false,
+    "quote": null,
+    "required_fresh_quote": {
+      "required_credits": 0,
+      "final_points": 0,
+      "is_estimate": false,
+      "zero_cost_confirmed": true
+    },
+    "refuse_before_upload_or_create_if_quote_fails": true,
+    "additional_spend_allowed": false
+  },
+  "editorial_binding": {
+    "start_frame": 0,
+    "end_frame": 300,
+    "fps": 30,
+    "seconds": 10,
+    "master_total_seconds": 175,
+    "master_total_frames": 5250,
+    "narration_sha256": "4d2e68a10b4fc91aefc1f7c7801dd704166b15f1dd7ce36a3bac2582cec9c3ba",
+    "final_aac_file_sha256": "0da31c3f833ac5c44554b59b5c56320f8015039719a1d4051aa0fcafbc841d5f",
+    "caption_sha256": "d766e0c8272365cb789f27f103aecf91c5611aeb3b0684b9b2585e59eb57f430",
+    "hook_pcm_sample_frames": 240000,
+    "hook_pcm_sha256": "fb36eca82cb609a14aff0451665a27dbecc89a686a6ca68eb85adde0e87e54fb",
+    "sample_rate": 24000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "voice_boundary_seconds": 6.4,
+    "voice_boundary_frame": 192,
+    "voice_boundary_basis": "Existing edit binding; not a new word alignment or listening verdict.",
+    "god_voice": "am_onyx",
+    "narrator_voice": "am_michael",
+    "all_audio_offscreen": true,
+    "provider_audio_required": false,
+    "audio_resynthesis_allowed": false,
+    "audio_stretch_allowed": false,
+    "master_audio_changes_allowed": false,
+    "new_audio_file_created": false,
+    "preserve_other_visuals_during_hook_integration": true,
+    "normalize_video_at_speed": 1,
+    "final_trim_frames": 300,
+    "missing_duration_policy": "Measure the actual returned video; do not assume requested length. If under 300 frames after 30fps normalization, stop for evidence-based editorial evaluation rather than silently looping, stretching or reusing s-finished."
+  },
+  "execution_bounds": {
+    "new_generation_count_max": 1,
+    "automatic_generation_retries": 0,
+    "quota_units": 2,
+    "shared_executor_lease_required": true,
+    "durable_request_claim_before_provider_mutation": true,
+    "request_identity_basis": "Canonical SHA256 of the strict execution manifest, plus one-claim-only enforcement for the fixed Genesis09 s-voice slot even if the prompt digest changes; no nonce fields accepted.",
+    "reconcile_existing_same_identity_first": true,
+    "persist_conversation_id_before_polling": true,
+    "unknown_submission_policy": "GET-only reconciliation of the saved conversation ID. If the ID was not captured, stop; never replay.",
+    "keeper_jobs": [
+      "374570243844815552",
+      "374575934491393856",
+      "374581476488650496"
+    ],
+    "keeper_jobs_must_not_be_replayed": true,
+    "local_mediapipe_syncnet_retry_allowed": false
+  },
+  "executor_readiness": {
+    "existing_adapter_supports_inputs": true,
+    "workflow": "pavo-private-audio.yml",
+    "implementation_status": "LOCAL_TESTED_AWAITING_INDEPENDENT_REVIEWS",
+    "execution_manifest": "migration/integrations/pavo/private-inputs/genesis-09-s-voice-20261030.json",
+    "active_request_created": false,
+    "next_consumer": "Review/tests/merge, then validated existing workflow under the owner lease. No dispatch or quote observed by this preparation."
+  },
+  "storyboard": [
+    {
+      "start_seconds": 0,
+      "end_seconds": 6.4,
+      "coverage": "Exact approved wide composition, restrained push, existing lightning fades, cloud/dust/grass movement.",
+      "voice": "God offscreen"
+    },
+    {
+      "start_seconds": 6.4,
+      "end_seconds": 10,
+      "coverage": "Planned hard cut to visibly tighter three-quarter view of the same near square end and adjacent long plank wall, steady framing.",
+      "voice": "Narrator offscreen"
+    }
+  ],
+  "storyboard_timing_status": "Requested timing only. Returned video must demonstrate distinct coverage at the existing voice transition; no two-take or cut-timing approval is inferred from this prompt."
+}

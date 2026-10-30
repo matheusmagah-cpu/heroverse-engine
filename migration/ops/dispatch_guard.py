@@ -239,7 +239,7 @@ def native_review(i):
 
 
 def private_audio(i):
-    """Exact-WAV DRAFT input; no full-plan approval or publication is implied."""
+    """Bound private WAV or approved hook frame; no plan approval/publication is implied."""
     sys.path.insert(0, str(ROOT / "migration/integrations/pavo"))
     import private_audio as bridge
     plan = _plan(i)
@@ -257,10 +257,13 @@ def private_audio(i):
         need(not i.get("retry_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["retry_run"]),
              "retry_run", i.get("retry_run"), "prior terminal failed DRAFT run")
         need(not (i.get("retry_run") and i.get("reconcile_run")), "retry_run", "[mode]", "one recovery mode")
+        need(not (manifest["version"] == "pavo-private-hook-v1" and i.get("retry_run")),
+             "retry_run", "[mode]", "hook has one claim only")
     except (bridge.Blocked, ValueError, OSError) as exc:
         raise Refusal("PRIVATE_AUDIO_MANIFEST_REFUSED") from None
     return {"uploads": 0, "pavo_units": 0 if i.get("reconcile_run") else 2, "short": True,
-            "deps": [i["plan"], path, bridge.REFERENCE, "migration/integrations/pavo/private_audio.py"]}
+            "deps": [i["plan"], path, manifest.get("first_frame", bridge.REFERENCE),
+                     "migration/integrations/pavo/private_audio.py"]}
 
 
 def subject_of(workflow, inputs):

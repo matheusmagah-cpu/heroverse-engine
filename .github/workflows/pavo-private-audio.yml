@@ -1,4 +1,4 @@
-name: HeroVerse private Pavo talking DRAFT
+name: HeroVerse private Pavo talking or hook DRAFT
 run-name: "pavo-private-audio: plan=${{ inputs.plan }} sha256=${{ inputs.sha256 }}"
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         required: true
         default: migration/production/bible/plans/genesis-09-short.json
       manifest:
-        description: Committed hash-only private audio manifest
+        description: Committed hash-bound private WAV or approved silent hook manifest
         required: true
       sha256:
         description: Canonical manifest request digest
@@ -64,7 +64,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           python3 -I -B migration/integrations/pavo/private_audio.py recover
-      - name: Exact zero quote and one private audio upload address
+      - name: Exact zero quote; private WAV upload address only for talking shots
         if: inputs.reconcile_run == ''
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
@@ -79,7 +79,7 @@ jobs:
           path: ${{ runner.temp }}/pavo-private-audio/receipt.cms
           retention-days: 7
           if-no-files-found: error
-      - name: Await exact private WAV transfer and verify PCM
+      - name: Verify exact private WAV, or retain the approved hook frame with no audio transfer
         if: inputs.reconcile_run == ''
         run: python3 -I -B migration/integrations/pavo/private_audio.py ready
       - name: Fresh quote and exactly one existing-adapter generation
