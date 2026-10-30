@@ -5,7 +5,60 @@ Owner rule (2026-10-18): no random actions. Every change must:
 - have its consequences checked across the pipeline before it ships;
 - carry a measurement that keeps or reverts it.
 
-The goal is YPP in 14 days (30 at most), and the system is being validated to become a product.
+## Current strategy and monetization (2026-10-30)
+
+Start here and in `production/bible/SERIES.md`. The current recovery direction dated 30 October below governs
+production; earlier dated entries preserve the evidence and decisions of their own period. The former prayer
+strategy and 14/30-day YPP targets are historical assumptions, not current production or monetization promises.
+The goal is sustainable eligibility through an original English KJV Bible series and a delivery process that
+reliably produces qualified public videos. The daily evidence protocol and owner's fixed rules still apply.
+
+1. **One delivery in production, one next episode in preparation.** Finish `genesis-09-short`; prepare 10's
+   corrected script and measured voice timing without opening another production fan-out; complete the existing
+   `arc-01` long after 09. Preserve accepted work while its inputs match. Restore two daily Shorts only when
+   qualified inventory and observed completion capacity sustain it, protecting the long and the existing reserve
+   of four Shorts and one long. Missed windows do not create extra releases or justify skipping episodes.
+2. **Shorts lead to an available long.** Once an arc's long is public, connect its Shorts through YouTube Studio's
+   **Related Video** field and verify the viewer-facing link. URLs in Shorts descriptions and comments are not
+   clickable, so the existing automatic description/comment links do not complete this step. Related Video
+   requires advanced feature access. Until that arc's long is public, the CTA must not claim that its full story
+   is available. The long also needs its own title, thumbnail and retention; Shorts traffic remains a contribution
+   to measure. Sources: [link behavior](https://support.google.com/youtube/answer/13748639?hl=en) and
+   [Related Video](https://support.google.com/youtube/answer/14075157?hl=en).
+3. **Forecast from Studio and confirmed deliveries.** Use YouTube Studio's Earn counters for qualified YPP
+   progress and owned Analytics for retention, subscribers gained and traffic to the long. Public cumulative
+   views, upload counts and assumed retention do not establish qualified watch hours or Shorts views in the
+   eligibility window. Re-anchor production opportunities from confirmed public delivery and measured free
+   capacity; 40/70-Short scenarios and old calendar dates are not monetization forecasts. Review throughput at
+   48 and 72 hours after the first new delivery and audience results at comparable video ages, including seven
+   days. Sparse data stays inconclusive. Record the evidence and next decision here without promising revenue,
+   an RPM or an eligibility date.
+
+### Platform requirements checked on 2026-10-30
+
+| Route | Eligibility threshold and implication |
+|---|---|
+| Expanded YPP, where available | 500 subscribers, three valid public uploads in 90 days, and either 3,000 qualified watch hours in 12 months or 3 million qualified Shorts views in 90 days. This is earlier access to fan funding and other eligible features, not automatic Ads/Premium revenue. [Official requirements](https://support.google.com/youtube/answer/13429240?hl=en). |
+| Ads/Premium under the current rules | 1,000 subscribers and either 4,000 qualified watch hours in 12 months or 10 million qualified Shorts views in 90 days. Shorts Feed watch hours do not count toward the long-form watch-hour threshold; the channel still undergoes review. [Official requirements](https://support.google.com/youtube/answer/72851?hl=en). |
+| Announced changes from 1 February 2027 | New Ads/Premium entrants need 1,000 subscribers and either 8,000 qualified watch hours in 365 days or 20 million qualified Shorts views in 90 days. Monthly Shorts Creator Pool earnings require maintaining 10 million qualified Shorts views over 90 days. Existing YPP status is protected by the announcement; it does not promise protection merely for submitting an application before the change. [Official announcement](https://support.google.com/youtube/answer/12843009?hl=en). |
+
+The **9.5 floor** is the owner's quality requirement, independent of platform eligibility, and all existing
+publication gates and frozen criteria remain binding. **170-179 seconds** remains the owner's current Short
+format decision; YouTube permits Shorts up to three minutes but does not require that duration for monetization
+([official format rule](https://support.google.com/youtube/answer/15424877?hl=en)). Any later format decision
+requires evidence through the existing process, not a shortcut around a current gate.
+
+Each episode must deliver its own narrative and original editorial value. Licensed sources, exact KJV and a
+percentage of original narration do not by themselves establish YPP compliance: original, materially varied
+content is assessed separately from copyright permission
+([monetization policy](https://support.google.com/youtube/answer/1311392?hl=en)). Keep required synthetic-media
+disclosure; disclosure alone does not remove earning eligibility
+([official disclosure guidance](https://support.google.com/youtube/answer/14328491?hl=en)). TikTok remains the
+existing free mirror of Shorts already public on YouTube, without a separate production commitment or an
+assumption that the account or each mirrored video qualifies for Creator Rewards.
+
+**Historical goal stated on 2026-10-18 (superseded):**
+> The goal is YPP in 14 days (30 at most), and the system is being validated to become a product.
 
 ## Protocol (daily, after the goal report at 07:45 UTC)
 1. **Read:**
@@ -32,9 +85,12 @@ Otherwise nothing changes. The daily analysis still runs and records measurement
 **Not "changes" (always done):**
 - fixing defects (bugs, failures, broken automation);
 - compliance with the owner's fixed rules (policy, zero cost, English-only);
-- execution drifting from the strategy registered before publication (`MARKET_FORECAST_TIME_TO_YPP_20261017.md`: daily original 25–40 min prayer videos, Shorts as acquisition).
+- correcting execution drift from the current Bible-series direction in `production/bible/SERIES.md` and the current strategy above.
 
-**Applied to today's decisions:**
+**Historical conformance example from 2026-10-18 (prayer production stopped on 2026-10-26):**
+> execution drifting from the strategy registered before publication (`MARKET_FORECAST_TIME_TO_YPP_20261017.md`: daily original 25–40 min prayer videos, Shorts as acquisition).
+
+**Historical applications on 2026-10-18:**
 
 | Decision | Evidence | Confidence | Outcome |
 |---|---|---|---|

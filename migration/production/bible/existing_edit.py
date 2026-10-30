@@ -208,9 +208,37 @@ def import_edit(binding_path, bundle_root, work, engine):
         output['manifest.json'] = snapshots.data(encoded(manifest))
         output['binding.json'] = snapshots.data(raw)
         checked = engine.check_plan(plan)
+        # The verified visual intervals form a disjoint partition. Count a whole visual once when it carries
+        # any Keeper/lesson unit: these are conservative upper bounds, never invented within-block speech times.
+        keeper_frames, lesson_frames = 0, 0
+        for visual in visuals:
+            count = visual['end_frame'] - visual['start_frame']
+            has_keeper = any(s['shot'] in keeper for s in visual['logical_shots'])
+            if has_keeper:
+                keeper_frames += count
+            if has_keeper or any(u['kind'] in engine.plan_check.LESSON_KINDS for u in visual['narration_units']):
+                lesson_frames += count
+        # Use the same scripture normalization and content/length function as the plan check, with measured
+        # frames/PCM instead of a synthesis estimate. This limited result never removes a full-plan refusal.
+        narration = [{'kind': 'scripture' if x['kind'] != 'scripture' and engine.plan_check.kjv_quote(x['text'])
+                      else x['kind'], 'text': x['text']} for x in items]
+        measured = {
+            'seconds': seconds,
+            'problems': engine.plan_check.publish_episode.short_problems(
+                {'format': 'short', 'part': plan.get('part', 0), 'seconds': seconds, 'narration': narration}),
+            'measurement': {'frames': frames, 'fps': 30, 'pcm_samples': params.nframes,
+                            'sample_rate': params.framerate, 'channels': params.nchannels,
+                            'sample_width_bytes': params.sampwidth},
+            'conservative_shares': {'basis': 'whole_visual_interval_union',
+                                    'keeper_frames': keeper_frames, 'keeper_seconds': keeper_frames / 30,
+                                    'keeper_share_upper_bound': keeper_frames / frames,
+                                    'lesson_frames': lesson_frames, 'lesson_seconds': lesson_frames / 30,
+                                    'lesson_share_upper_bound': lesson_frames / frames,
+                                    'speech_boundaries': None}}
         receipt = {'schema': SCHEMA, 'status': 'IMPORTED_NOT_APPROVED', 'episode': binding['episode'],
                    'binding_sha256': binding_sha, 'plan_sha256': inputs['plan'].sha256,
                    'fps': 30, 'frames': frames, 'seconds': seconds, 'keeper': keeper,
+                   'measured_short_contract': measured, 'static_estimate': checked['estimate'],
                    'plan_blockers': checked['problems'] + checked['pending'],
                    'word_boundaries': None, 'production_approved': False, 'publication_approved': False,
                    'outputs': {name: snap.sha256 for name, snap in output.items()}}

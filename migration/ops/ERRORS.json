@@ -2843,6 +2843,34 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E231",
+   "date": "2026-10-30",
+   "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186"
+   ],
+   "error": "The existing-edit receipt preserved measured frames and PCM but exposed only the synthesis-time plan refusals, leaving consumers without a separate measured Short content/length result. A valid imported duration could therefore be confused with a shorter static estimate.",
+   "fix": "Expose measured_short_contract after exact input, PCM, frame coverage and word checks, using the existing Short validator and canonical Scripture normalization. Keep static_estimate, all plan_blockers and false approval flags; count shared visual intervals conservatively without inventing speech boundaries. Historical receipts remain immutable.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "test_measured_short_contract_preserves_175_seconds_and_all_plan_refusals",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }
