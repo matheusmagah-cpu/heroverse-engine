@@ -71,3 +71,22 @@ changed script is previewed again automatically. `render_pilot.sh` refuses a ful
 current script is at 9.5 or more (`preview_gate.py gate`), on the engine and on the public runner alike.
 Every main-clock run also runs `render_queue.py ... reassign 168`: a pilot listed there still names clips the library no
 longer approves, so preview and render skip it (E78) until `footage/assign.py PILOT_DIR` reassigns it (PR as above).
+
+## Owner-authorized native evidence route, 29 October 2026
+
+The owner explicitly accepted the tested Gemini route and requested review of
+the actual Short09 before publication. Two synthetic audio samples completed;
+one uncertain earlier request remains unrepeated. This acceptance is not an
+assertion that all calibration samples passed, nor an audiovisual approval.
+`native-review.yml` obtains exact-file audio/video evidence using the configured
+`GEMINI_API_KEY` and a fresh, key-bound Free Tier readback. A resumable upload session and evidence artifacts are encrypted to the operator's
+public certificate. The caller transfers the exact local master directly to Google
+without obtaining the API key. Keep the private recovery key outside the public repository.
+
+Invoke once per exact master hash on main, under the existing episode concurrency
+group. A timeout is reconciled by its saved file/interaction IDs, never another
+POST. The evidence uses the actual `gemini-3.8-flash` identity and explicit 4-fps
+video sampling with native audio. It cannot claim complete 30-fps inspection.
+This entry point does not write an approval or change existing source, thumbnail,
+plan, QA or publication gates. A qualifying actual master review must still be
+integrated through the normal branch/PR/checks and hash-bound preflight path.

@@ -1,0 +1,103 @@
+name: HeroVerse native audio and video review evidence
+run-name: "native-review: plan=${{ inputs.plan }} sha256=${{ inputs.sha256 }}"
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Existing Bible plan (review does not replace or approve it)
+        required: true
+        default: migration/production/bible/plans/genesis-09-short.json
+      sha256:
+        description: SHA256 of the exact private master
+        required: true
+      byte_size:
+        description: Exact MP4 byte count for the one resumable upload
+        required: true
+      free_tier_evidence:
+        description: Fresh verified Free Tier JSON bound to the API key hash (no key or account data)
+        required: true
+      receipt_certificate:
+        description: Public PEM certificate for encrypted private evidence (never a private key)
+        required: true
+      owner_review_authorized:
+        description: Owner explicitly designated this reviewer for this master
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    concurrency:
+      group: heroverse-subject-${{ inputs.plan }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (existing subject, history, imports)
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run native-review.yml
+      - name: Refuse duplicate content and rerun before credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review.py guard
+      - name: Open one private resumable upload session
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py upload
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist upload state before inference
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-upload
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Await exact-byte upload and read back provider hash
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py ready
+      - name: Submit native audio and video review once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py submit
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist interaction ID before polling
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-submission
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Read the same interaction (GET only)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py poll
+      - name: Delete provider media after completed review
+        if: always()
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py cleanup
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Preserve evidence without granting approval
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-result
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore

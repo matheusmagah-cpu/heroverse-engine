@@ -111,6 +111,7 @@ def render(expr, inputs, subject):
 
 
 SAMPLES = {
+    "native-review.yml": {"plan": PLAN, "sha256": "a" * 64, "byte_size": "100", "owner_review_authorized": "true"},
     "episode.yml": {"plan": PLAN, "resume_run": ""},
     "shot-probe.yml": {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""},
     "publish-episode.yml": {"episode": "genesis-09-short", "source_url": "", "publish_at": ""},
