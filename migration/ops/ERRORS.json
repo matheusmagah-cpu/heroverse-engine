@@ -2490,6 +2490,32 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E220",
+   "date": "2026-10-29",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219"
+   ],
+   "error": "The new native review transport accepted multiline PEM, but GitHub web workflow dispatch uses single-line INPUT fields and removes CR/LF. A real local reproduction of that exact input shape failed certificate encryption before any provider operation. No review/upload run was dispatched.",
+   "fix": "Validate and canonically rewrap the public CERTIFICATE PEM body before encryption. Bound the input size, decode strict base64, and refuse other PEM types. Preserve the main-only, Free Tier, exact-hash, no-replay and encrypted-artifact guards.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "test_e220_single_line_certificate_roundtrip_hides_private_receipt",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }

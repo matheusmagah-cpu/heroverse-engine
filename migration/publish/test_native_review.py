@@ -78,7 +78,7 @@ class Review(unittest.TestCase):
             with self.assertRaises(n.Refusal):
                 n.validate_report(r | delta)
 
-    def test_ciphertext_roundtrip_hides_private_receipt(self):
+    def test_e220_single_line_certificate_roundtrip_hides_private_receipt(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d); key = root / 'key.pem'; cert = root / 'cert.pem'
             n.subprocess.run(['openssl', 'req', '-x509', '-newkey', 'rsa:2048', '-nodes',
@@ -86,7 +86,7 @@ class Review(unittest.TestCase):
                              check=True, stdout=n.subprocess.DEVNULL, stderr=n.subprocess.DEVNULL)
             receipt = root / 'receipt.json'
             n.save(receipt, {'private_id': 'private-receipt-fixture'})
-            n.seal({'receipt_certificate': cert.read_text()}, receipt)
+            n.seal({'receipt_certificate': cert.read_text().replace('\n', '')}, receipt)
             encrypted = (root / 'receipt.cms').read_bytes()
             self.assertNotIn(b'private-receipt-fixture', encrypted)
             clear = n.subprocess.check_output(['openssl', 'cms', '-decrypt', '-binary', '-inform', 'DER',
