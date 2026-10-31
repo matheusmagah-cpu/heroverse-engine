@@ -12,12 +12,13 @@
  },
  "_dispatch": {
   "version": "request-claim-v1",
-  "state": "claimed",
+  "state": "acknowledged",
   "request_sha256": "6bf76ea898b1fb365ddf5a9126d890cdacedaadc514d3f25918e84275fc1f5e4",
   "original_path": "migration/requests/native-review-recover-submitted-41157848418.json",
   "base_commit": "a41c127195a05442c1aa6576eb87df68dcbeec2a",
   "dispatcher_run_id": "41197672387",
   "dispatcher_attempt": "1",
-  "claimed_at": "2026-10-31T11:38:28.402861+00:00"
+  "claimed_at": "2026-10-31T11:38:28.402861+00:00",
+  "acknowledged_at": "2026-10-31T11:38:33.564989+00:00"
  }
 }
