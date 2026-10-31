@@ -4,8 +4,9 @@
   "k-close": {
    "source": "still_motion",
    "score": 9.5,
-   "note": "Borrowed arc-01 Keeper still (approved 9.5): a closer crop than k-insight's still, a different picture; Kokoro voice-over.",
-   "approved_at": "2026-10-28",
+   "note": "Same approved Keeper still (arc-01-long-k-promise-3, 9.5) re-bound to the plan's current k-close request after #530 changed the close's words; image unchanged, re-viewed by this session: the Keeper's face, hood and beard against the stars, mouth closed; Kokoro voice-over.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
    "still_from": "arc-01-long-k-promise-3",
    "still": "arc-01-long-k-promise-3",
    "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
@@ -17,7 +18,7 @@
    ],
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 12,
-   "request_sha256": "80adfcdaea214e2dd402e3015204883785d1905546b79e66fa104781dfb2be9b"
+   "request_sha256": "81ad3c28ef78cec3cec371547a9adcf803a8402e38c179ad64de135a01078ac3"
   },
   "k-insight": {
    "source": "still_motion",
@@ -118,6 +119,24 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 8,
    "request_sha256": "da63873969c42f6051cfd6037d089511b0b3fba88b98d5902e5b768e013e6674"
+  },
+  "s-fists": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-fists",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-fists.jpg",
+   "clip_sha256": null,
+   "still_sha256": "04fb28066669996668d74a6835a0633defeb92dc4f4258aa490ee5c1ef3d78ee",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 9,
+   "request_sha256": "1c1f85b7a06cb9babb6cd571386e9eea3cfcba450245376501f51c2a4401a8bc"
   },
   "s-float": {
    "source": "still_motion",
@@ -335,8 +354,9 @@
   "s-voice": {
    "source": "still_motion",
    "score": 9.5,
-   "note": "Approved ark still (refs): the box alone under black clouds and lightning, no people; God's Genesis 7:4 on Kokoro over a slow push-in.",
-   "approved_at": "2026-10-28",
+   "note": "Same approved ark still (genesis-09-s-voice, 9.5 on 2026-10-28) re-bound to the plan's current request after the plan text changes of #530/#540; image unchanged, re-viewed by this session: the black box alone under storm clouds and lightning, no people; God's Genesis 7:4 on Kokoro over a slow push-in.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
    "still": "genesis-09-s-voice",
    "repo_path": "migration/production/bible/stills/genesis-09-s-voice.jpg",
    "clip_sha256": null,
@@ -347,7 +367,7 @@
    ],
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 8,
-   "request_sha256": "735e2b22f2feb4a4d002ebec0a9408306fc1e919e77d893a7ab6c29faabd78d2"
+   "request_sha256": "ceae3b98016ab667f6e801ea81af18a8faeaf54bd7a86f6c3476ab35eee25e5a"
   },
   "s-windows": {
    "source": "still_motion",
