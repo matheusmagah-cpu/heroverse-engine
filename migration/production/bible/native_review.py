@@ -26,6 +26,19 @@ RUBRIC = ('opening_and_promise', 'picture_quality', 'figure_and_background_integ
           'captions_readable_and_synced', 'audio_clarity_and_mix', 'pacing_and_visual_variety',
           'scripture_on_screen', 'policy_safe')
 LIMIT = 150_000_000
+# E242 (owner, 2026-10-31, PR #599): a plan with "track": "buzzy" (a Short made with Buzzy clips) is reviewed against
+# overall 8.0 and every item >= 7; every other plan keeps 9.5. Nothing else about the review changes.
+TRACK_FLOORS = {'buzzy': 8.0}
+DEFAULT_FLOOR = 9.5
+
+
+def floor_for(plan_path):
+    try:
+        track = json.loads(Path(plan_path).read_text()).get('track')
+    except (OSError, ValueError, AttributeError):
+        return DEFAULT_FLOOR
+    return TRACK_FLOORS.get(track, DEFAULT_FLOOR)
+
 
 
 class Refusal(Exception):
@@ -407,7 +420,7 @@ def poll(i, receipt):
             report = json.loads(re.sub(r'^```(?:json)?\s*|\s*```$', '', text.strip()))
             validate_report(report, r['duration_seconds'])
             r.update(status='EVIDENCE_COMPLETE', report=report,
-                     owner_floor_met=report['overall'] >= 9.5,
+                     owner_floor_met=report['overall'] >= floor_for(i['plan']),
                      publication_ready=False)  # independent gates remain mandatory
             save(receipt, r)
             return
@@ -494,7 +507,7 @@ def public_evidence(i, r, run_id):
             items = report.get(k) if isinstance(report.get(k), list) else []
             out[k] = [_public_text(x, secrets) for x in items if isinstance(x, str)][:PUBLIC_LIST_LIMIT]
         known = [v for v in out['scores'].values()] + [out['overall']]
-        out['owner_floor_met'] = bool(validated and None not in known and out['overall'] >= 9.5
+        out['owner_floor_met'] = bool(validated and None not in known and out['overall'] >= floor_for(i['plan'])
                                       and all(v >= 7 for v in out['scores'].values()))
         out['every_criterion_at_least_9_5'] = bool(validated and None not in known
                                                    and all(v >= 9.5 for v in known))

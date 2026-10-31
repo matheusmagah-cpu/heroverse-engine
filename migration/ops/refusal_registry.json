@@ -2658,6 +2658,21 @@
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
    "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
   },
+  "REVIEW_ITEM_BELOW_FLOOR": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E242: Buzzy track (owner 2026-10-31): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "TRACK_UNKNOWN": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E242: Buzzy track (owner 2026-10-31): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "TRACK_BUZZY_WITHOUT_BUZZY_SHOT": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E242: track buzzy is valid only with an approved source=buzzy shot whose task_id is in evidence/buzzy/ledger.json; check-record refuses it before publish-episode.yml"
+  },
   "REVIEW_ISSUES_MISSING": {
    "class": "A",
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",

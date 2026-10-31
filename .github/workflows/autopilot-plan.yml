@@ -87,7 +87,7 @@ jobs:
 
           Gates that passed in the job on this exact file: kjv_check (every Scripture line is inserted by code from the KJV table), plan_check --strict, own-words overlap (< 15 % against the last 10 plans, < 5 % against mined references). Attempts and findings: \`migration/evidence/autopilot/plan-$EP.json\`.
 
-          Not done, by design: no source, still, clip or thumbnail is chosen or approved; no APPROVAL; not merged. pr-checks does not start for a PR opened with GITHUB_TOKEN: Claude reviews the story, tone and Keeper reuse, then runs the PR checks (push an empty commit) before the squash.
+          Not done, by design: no source, still, clip or thumbnail is chosen or approved; no APPROVAL; not merged. pr-checks does not start for a PR opened with GITHUB_TOKEN: Claude reviews the story, tone and Keeper reuse, then makes a real review commit (pr-checks has no manual dispatch) so the checks run before the squash.
 
           Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
           EOF
