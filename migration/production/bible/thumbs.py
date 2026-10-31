@@ -26,15 +26,18 @@ usage:
   thumbs.py check SPEC                                     the spec's problems (exit 1 on any)
   thumbs.py refs SPEC SRC_DIR OUT_DIR                      the character's approved reference images (verified by
                                                            sha256 from SRC_DIR) as JPEGs the image model accepts
-  thumbs.py finalize SPEC IMAGE RUN N META_JSON [--crop X,Y,W,H]
-                                                           one candidate (crop, text, record, R16); --crop: a box
-                                                           inside IMAGE at the format's aspect, long side >=
-                                                           CROP_LONG_MIN (upscale <= 2x), E239
+  thumbs.py finalize SPEC IMAGE RUN N META_JSON [--crop X,Y,W,H] [--grade saturation=F[,contrast=F]]
+                                                           one candidate (crop, grade, text, record, R16); --crop: a
+                                                           box inside IMAGE at the format's aspect, long side >=
+                                                           CROP_LONG_MIN (upscale <= 2x), E239; --grade: recorded
+                                                           factors 1.0 .. GRADE_MAX (saturation 1.6, contrast 1.2)
+                                                           after crop/resize, before the text, E241
   thumbs.py sheet EPISODE RUN OUT_JPG                      the run's contact sheet
   thumbs.py approve EPISODE CANDIDATE --score S --note T --reviewer MODEL [--reviewed-sha256 HEX]
                                                         after the named session's review (>= 9.5), by PR; the
                                                         sha256 of the image the full-resolution review saw is
-                                                        required for a cropped candidate and must be its own
+                                                        required for a cropped or graded candidate and must be
+                                                        its own final image
   thumbs.py verify EPISODE [THUMBNAIL]                     what publish refuses (exit 1 on any)
 """
 from datetime import datetime, timezone
@@ -69,6 +72,11 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 # so its long side is at least half the format's long side: short 1920 -> 960 px, long 1280 -> 640 px
 MAX_UPSCALE = 2
 CROP_LONG_MIN = {form: -(-max(size) // MAX_UPSCALE) for form, size in FORMATS.items()}
+# E241: Pavo's thumbnail pictures come out muted (genesis-09's cropped candidates: R16 saturation 0.33 and 0.36, the
+# ruler wants > 0.45). finalize may apply a recorded, bounded grade to the base (after crop/resize, before our text);
+# R16's threshold is unchanged and is measured on the graded final image. Each factor is 1.0 (none) .. its maximum.
+GRADE_ORDER = ("saturation", "contrast")          # applied in this order (PIL ImageEnhance.Color, then .Contrast)
+GRADE_MAX = {"saturation": 1.6, "contrast": 1.2}
 
 
 def sha256(path):
@@ -152,8 +160,42 @@ def candidate_crop_problems(rec):
     out = crop_problems(c.get("box"), c.get("source_size"), rec.get("format"))
     if not HEX64.fullmatch(str(c.get("source_sha256") or "")) or c.get("source_sha256") != rec.get("source_sha256"):
         out.append("THUMB_CROP_INVALID (the source's sha256 is not recorded)")
-    if not HEX64.fullmatch(str(c.get("cropped_sha256") or "")) or c.get("cropped_sha256") != rec.get("base_sha256"):
+    g = rec.get("grade") if isinstance(rec.get("grade"), dict) else None
+    base = g.get("pre_grade_sha256") if g else rec.get("base_sha256")   # E241: a grade comes after the crop
+    if not HEX64.fullmatch(str(c.get("cropped_sha256") or "")) or c.get("cropped_sha256") != base:
         out.append("THUMB_CROP_INVALID (the cropped image's sha256 is not the candidate's base)")
+    return out
+
+
+def grade_problems(factors):
+    """E241: a grade names one or more of GRADE_ORDER, each a number in [1.0, GRADE_MAX[name]] (stdlib only)."""
+    if not isinstance(factors, dict) or not factors:
+        return [f"THUMB_GRADE_INVALID {factors!r} (saturation=F[,contrast=F])"]
+    out = []
+    for name, f in factors.items():
+        if name not in GRADE_MAX:
+            out.append(f"THUMB_GRADE_INVALID {name!r} (one of {list(GRADE_ORDER)})")
+        elif isinstance(f, bool) or not isinstance(f, (int, float)) or not 1.0 <= f <= GRADE_MAX[name]:
+            out.append(f"THUMB_GRADE_OUT_OF_BOUNDS {name}={f!r} (1.0 .. {GRADE_MAX[name]})")
+    return out
+
+
+def candidate_grade_problems(rec):
+    """E241: a graded candidate's record names bounded factors, the pre-grade base and the graded base (the
+    candidate's base, under our text), and the crop (if any) made the pre-grade base (candidate_crop_problems)."""
+    g = rec.get("grade") if isinstance(rec, dict) else None
+    if g is None:
+        return []
+    if not isinstance(g, dict):
+        return [f"THUMB_GRADE_INVALID {g!r} (a grade record)"]
+    out = grade_problems(g.get("factors"))
+    pre, graded = str(g.get("pre_grade_sha256") or ""), str(g.get("graded_sha256") or "")
+    if not HEX64.fullmatch(pre) or not HEX64.fullmatch(graded) or pre == graded:
+        out.append("THUMB_GRADE_INVALID (the pre-grade and graded sha256 are not two recorded images)")
+    if graded != rec.get("base_sha256"):
+        out.append("THUMB_GRADE_INVALID (the graded sha256 is not the candidate's base)")
+    if pre in (rec.get("sha256"), rec.get("base_sha256")):
+        out.append("THUMB_GRADE_INVALID (the pre-grade sha256 is the candidate's own image)")
     return out
 
 
@@ -243,11 +285,11 @@ def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=
           or (rec.get("r16") or {}).get("status") != "PASS"):
         out.append(f"THUMB_NOT_APPROVED {episode}: candidate {a['candidate']} is not these bytes, this spec and R16 PASS")
     else:
-        out += [f"THUMB_NOT_APPROVED {episode}: {p}" for p in candidate_crop_problems(rec)]
-        if (rec.get("crop") is not None or a.get("reviewed_sha256") is not None) \
+        out += [f"THUMB_NOT_APPROVED {episode}: {p}" for p in candidate_crop_problems(rec) + candidate_grade_problems(rec)]
+        if (rec.get("crop") is not None or rec.get("grade") is not None or a.get("reviewed_sha256") is not None) \
                 and a.get("reviewed_sha256") != rec.get("sha256"):
             out.append(f"THUMB_NOT_APPROVED {episode}: the full-resolution review is not of the cropped candidate "
-                       f"{a['candidate']} (reviewed_sha256 {a.get('reviewed_sha256')!r}; E239)")
+                       f"{a['candidate']} (reviewed_sha256 {a.get('reviewed_sha256')!r}; E239, E241)")
     img = image_path(episode, thumbs_dir)
     if not img.is_file() or sha256(img) != a["sha256"]:
         out.append(f"THUMB_NOT_APPROVED {episode}: the image is not the approved one (sha256)")
@@ -325,11 +367,38 @@ def r16(path):
     return {"status": "FAIL" if fails else "PASS", "fails": fails, "metrics": {k: round(v, 3) for k, v in m.items()}}
 
 
-def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None):
+def apply_grade(im, factors):
+    """E241: the bounded grade, in GRADE_ORDER (PIL ImageEnhance: Color is saturation, then Contrast)."""
+    from PIL import ImageEnhance
+    for name in GRADE_ORDER:
+        if name in factors:
+            im = (ImageEnhance.Color if name == "saturation" else ImageEnhance.Contrast)(im).enhance(float(factors[name]))
+    return im
+
+
+def parse_grade(text):
+    """--grade saturation=F[,contrast=F] -> {name: float}; the bounds are grade_problems'."""
+    out = {}
+    for part in (text or "").split(","):
+        name, sep, value = part.partition("=")
+        try:
+            f = float(value)
+        except ValueError:
+            raise SystemExit(f"THUMB_GRADE_INVALID {text!r} (saturation=F[,contrast=F])")
+        if not sep or name.strip() in out or f != f:
+            raise SystemExit(f"THUMB_GRADE_INVALID {text!r} (saturation=F[,contrast=F])")
+        out[name.strip()] = f
+    return out
+
+
+def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None, grade=None):
     """One candidate: the model's picture to the format, our text on it, both sha256, the spec digest, R16.
     E239: CROP, a box [x, y, w, h] on IMAGE (crop_problems), is cut first and then resized to the format (at most 2x);
     the record keeps the box, the source's sha256 and the cropped base's sha256, and every check (spec, references,
-    words, R16, the review) is of the cropped result."""
+    words, R16, the review) is of the cropped result.
+    E241: GRADE, {saturation: <= 1.6, contrast: <= 1.2} (each >= 1.0), is applied to the base after the crop/resize and
+    before our text; the record keeps the factors and the pre-grade and graded sha256, and R16 and the review are of
+    the graded final image."""
     from PIL import Image
     spec = json.loads(Path(spec_file).read_text())
     bad = spec_problems(spec)
@@ -344,6 +413,10 @@ def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None):
     with Image.open(image) as src:
         source_size = list(src.size)
         picture = src.convert("RGB")
+    if grade is not None:
+        bad = grade_problems(grade)
+        if bad:
+            raise SystemExit(bad[0])
     box = None
     if crop is not None:
         box = list(crop) if isinstance(crop, (list, tuple)) else crop
@@ -355,9 +428,21 @@ def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None):
     base = cover(picture, FORMATS[form])
     base_path = thumbs_dir / "candidates" / f"{cid}-base.jpg"
     base_path.parent.mkdir(parents=True, exist_ok=True)
+    grade_rec = None
+    if grade is not None:   # E241: the ungraded base is kept next to it; the candidate's base is the graded one
+        pre_path = thumbs_dir / "candidates" / f"{cid}-ungraded.jpg"
+        base.save(pre_path, "JPEG", quality=92)
+        base = apply_grade(base, grade)
+        grade_rec = {"factors": {k: float(grade[k]) for k in GRADE_ORDER if k in grade}, "order": list(GRADE_ORDER),
+                     "bounds": {k: [1.0, GRADE_MAX[k]] for k in GRADE_ORDER},
+                     "by": "thumbs.py apply_grade (PIL ImageEnhance), after crop/resize, before the text",
+                     "pre_grade_path": rel(pre_path), "pre_grade_sha256": sha256(pre_path)}
     base.save(base_path, "JPEG", quality=92)
+    if grade_rec is not None:
+        grade_rec["graded_sha256"] = sha256(base_path)
     crop_rec = None if box is None else {
-        "box": box, "source_size": source_size, "source_sha256": source_sha256, "cropped_sha256": sha256(base_path),
+        "box": box, "source_size": source_size, "source_sha256": source_sha256,
+        "cropped_sha256": grade_rec["pre_grade_sha256"] if grade_rec else sha256(base_path),
         "upscale": round(max(FORMATS[form]) / max(box[2], box[3]), 3),
         "resize": f"crop {box}, Lanczos to {FORMATS[form][0]}x{FORMATS[form][1]}"}
     dst = thumbs_dir / "candidates" / f"{cid}.jpg"
@@ -369,7 +454,7 @@ def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None):
            "resolution": meta.get("resolution"), "conversation_id": meta.get("conversation_id"),
            "quote": meta.get("quote"), "references": meta.get("references") or [],
            "references_live": meta.get("references_live"), "source_size": source_size,
-           "source_sha256": source_sha256, "crop": crop_rec,
+           "source_sha256": source_sha256, "crop": crop_rec, "grade": grade_rec,
            "base_path": rel(base_path), "base_sha256": sha256(base_path),
            "repo_path": rel(dst), "sha256": sha256(dst), "r16": r16(dst),
            "generated_by": "HeroVerse pipeline (AI-generated image)"}
@@ -433,12 +518,14 @@ def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=
         raise SystemExit(f"THUMB_R16_FAIL {candidate} " + "; ".join(check["fails"]))
     if meta.get("episode") != episode or spec.get("episode") != episode:
         raise SystemExit(f"THUMB_CANDIDATE_UNKNOWN {candidate} (the spec and candidate are {episode}'s)")
-    bad = candidate_crop_problems(meta)
+    bad = candidate_crop_problems(meta) + candidate_grade_problems(meta)
     if bad:
         raise SystemExit(bad[0])
-    if (meta.get("crop") is not None or reviewed_sha256 is not None) and reviewed_sha256 != meta["sha256"]:
+    if (meta.get("crop") is not None or meta.get("grade") is not None or reviewed_sha256 is not None) \
+            and reviewed_sha256 != meta["sha256"]:
         raise SystemExit(f"THUMB_REVIEW_SHA256_MISMATCH {candidate} (the full-resolution review saw "
-                         f"{reviewed_sha256!r}; it must be the cropped candidate {meta['sha256']}; E239)")
+                         f"{reviewed_sha256!r}; it must be the final cropped/graded candidate {meta['sha256']}; "
+                         f"E239, E241)")
     model = reviewer_identity.require(reviewer)
     dst = image_path(episode, thumbs_dir)
     shutil.copyfile(src, dst)
@@ -462,14 +549,18 @@ def main(argv):
     if cmd == "refs" and len(args) == 3:
         print(json.dumps(reference_inputs(json.loads(Path(args[0]).read_text()), args[1], args[2]), indent=1))
         return 0
-    if cmd == "finalize" and len(args) in (5, 7) and (len(args) == 5 or args[5] == "--crop"):
+    opts = dict(zip(args[5::2], args[6::2])) if cmd == "finalize" else {}
+    if cmd == "finalize" and len(args) in (5, 7, 9) and len(opts) == (len(args) - 5) // 2 \
+            and set(opts) <= {"--crop", "--grade"}:
         box = None
-        if len(args) == 7:
+        if "--crop" in opts:
             try:
-                box = [int(v) for v in args[6].split(",")]
+                box = [int(v) for v in opts["--crop"].split(",")]
             except ValueError:
                 raise SystemExit("THUMB_CROP_INVALID (X,Y,W,H)")
-        rec = finalize(args[0], args[1], args[2], args[3], json.loads(Path(args[4]).read_text()), crop=box)
+        grade = parse_grade(opts["--grade"]) if "--grade" in opts else None
+        rec = finalize(args[0], args[1], args[2], args[3], json.loads(Path(args[4]).read_text()), crop=box,
+                       grade=grade)
         print(json.dumps({"candidate": rec["id"], "sha256": rec["sha256"], "r16": rec["r16"]["status"]}))
         return 0
     if cmd == "sheet" and len(args) == 3:

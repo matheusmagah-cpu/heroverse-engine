@@ -3116,6 +3116,40 @@
      "external"
     ]
    }
+  },
+  {
+   "id": "E241",
+   "date": "2026-10-31",
+   "error": "Pavo agnes-image's genesis-09 thumbnail pictures are muted: after the E239 crop the best candidates measured R16 saturation 0.33 and 0.36 against the ruler's > 0.45, so a candidate whose face, emotion and framing were right could not pass R16, and thumbs.py finalize had no recorded way to correct colour; the only remedy was another generation that the model renders as muted.",
+   "fix": "thumbs.py finalize ... --grade saturation=F[,contrast=F]: a recorded, bounded grade (PIL ImageEnhance Color then Contrast, each factor 1.0 .. GRADE_MAX: saturation <= 1.6, contrast <= 1.2; anything else is THUMB_GRADE_OUT_OF_BOUNDS / THUMB_GRADE_INVALID before any record) applied to the base after crop/resize and before our text. The record keeps grade {factors, order, bounds, pre_grade_path, pre_grade_sha256 (the crop's cropped_sha256), graded_sha256 (the candidate's base)}. R16's threshold is unchanged and is measured on the graded final image; spec rules (refs, look, <= 4 words, period / E238) apply as before. approve requires --reviewed-sha256 for a graded candidate and it must be the final candidate's sha256 (the pre-grade base, the graded base or the source: THUMB_REVIEW_SHA256_MISMATCH); publish_problems re-checks the grade record (candidate_grade_problems: bounds, two distinct hashes, graded == base, crop -> pre-grade) and the review binding (THUMB_NOT_APPROVED). Ungraded candidates behave as before.",
+   "class": [
+    "fragile-input"
+   ],
+   "prior": [
+    "E101",
+    "E125",
+    "E143",
+    "E148",
+    "E188",
+    "E205",
+    "E208",
+    "E219",
+    "E220",
+    "E221",
+    "E222",
+    "E224",
+    "E225",
+    "E226",
+    "E229",
+    "E230"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_thumbs.py",
+    "contains": "def test_e241_bounded_grade_recorded_r16_after_it_and_review_bound",
+    "covers": [
+     "fragile-input"
+    ]
+   }
   }
  ]
 }
