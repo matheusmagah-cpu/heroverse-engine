@@ -27,6 +27,11 @@ original evidence. This page is not a historical task queue or a second producti
   motion. Retain truthful rights/provenance and distinguish camera motion from acted motion.
 - No new spending or paid fallback. Use current cost/capacity evidence and existing ledgers; reconcile uncertain
   provider jobs instead of repeating them.
+- Owner, 2026-10-31: Pavo is the main video source ("temos o pavo como principal"). Buzzy (annual plan already
+  paid, connected as the claude.ai connector `https://mcp.buzzy.now/mcp`) is support only, when Pavo, FLUX
+  stills and licensed footage cannot cover a shot, and always with the lowest-credit model that meets the shot
+  ("utilize no modelo de menor gasto"). Read the balance before and after each generation, record model, credits
+  and purpose in `evidence/buzzy/ledger.json`, and never buy credits or upgrade. Not new spending: prepaid credits.
 - Keep the shared executor lease, heartbeat, durable requests and current supervisors. Do not add a scheduler,
   parallel ledger or generic approval system to continue an existing delivery.
 - Restore two daily Shorts only when completed masters sustain it; preserve the long and the existing reserve
