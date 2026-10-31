@@ -251,7 +251,7 @@ carry no production effect.
 | A1-2 reviewer | `production/bible/gemini_review.py` (text, image, clip modes, schema, grounding, pre-filter vs accept mode) + calibration replay; identity allowlist PR after owner decision | `test_gemini_review`, `test_reviewer_calibration` | below 9.5, lenient reviewer, 503 |
 | A1-3 lease | `ops/autopilot_lease.py` (+ `autopilot` owner) | `test_autopilot_lease` | lease busy / crash |
 | A1-4 planner | `autopilot_plan.py` + `autopilot-plan.yml`: S1-S3 | `test_autopilot_plan` (gates run before PR; bounded retries) | bad plan never reaches a PR |
-| A1-5 sources | `autopilot_sources.py`: S5-S9 loop via `requests`, per-shot bound, fallbacks | `test_autopilot_sources`, `test_review_loop` | no footage, Pavo down, repeat review |
+| A1-5 sources | `autopilot_sources.py`: S5-S9 loop via `requests`, per-shot bound, fallbacks | `test_autopilot_sources`, `test_review_loop` | no footage, Pavo down, repeat review | Implemented (dispatch-only): public Commons images via `public_sources.fetch` + vetted library clips; Gemini flash-lite pre-filter may only REJECT/MAYBE (evidence); sheet + list in a PR; nothing approved; Pavo/Buzzy shots routed to Claude.
 | A1-6 merge | `autopilot-merge.yml` + decision function | `test_merge_decision` | PR stuck, wrong path |
 | A1-7 tick + clock | `autopilot.yml`, `autopilot_state.json`, layers L2/L3 (L4 after owner decision), stale alarm Issue | `test_clock_layers`, `test_autopilot_state` | cron dropped |
 | A1-8 finish | thumbnail, `native-review.yml` dispatch/consume, record writer, publish dispatch, readback | `test_autopilot_finish` | double publish, unreviewed publish |

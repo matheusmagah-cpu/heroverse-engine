@@ -1,0 +1,93 @@
+name: 'HeroVerse autopilot sources (S5-S9 - public images and library clips as candidates; PR for Claude, nothing approved)'
+# AUTOPILOT.md S5-S9, phase A1-5. Free: GitHub Actions + Wikimedia Commons (public_sources.fetch verifies host, licence,
+# hash, resolution) + the vetted footage library + Gemini flash-lite as a pre-filter that can only REJECT or pass as MAYBE.
+# No paid-provider call, no approval, no reviewer identity, no merge: the PR carries a contact sheet and a candidate
+# list, and Claude accepts (or not) at full resolution in its own PR. Every Gemini call is counted first in
+# migration/evidence/autopilot/budget.json (a 429 stops the day; an uncertain call is never retried).
+# No cron here (single clock design): the A1-7 tick / heartbeat dispatches it for a planned episode.
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: 'Planned Short (plans/<episode>.json on main), e.g. genesis-12-short'
+        required: true
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: heroverse-gemini-budget
+  cancel-in-progress: false
+jobs:
+  sources:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+      - name: Check the episode and install image libraries
+        id: pick
+        env:
+          EP: ${{ inputs.episode }}
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*-short$ ]] || { echo "BAD_EPISODE"; exit 1; }
+          [ -f "migration/production/bible/plans/$EP.json" ] || { echo "PLAN_NOT_ON_MAIN $EP"; exit 1; }
+          branch="claude/autopilot-sources-$EP"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "BRANCH_EXISTS $branch: its PR is waiting for review"; echo "run=no" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "run=yes" >> "$GITHUB_OUTPUT"; echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          python3 -c 'import PIL' 2>/dev/null || APT_UPDATE_TIMEOUT=90s APT_INSTALL_TIMEOUT=180s bash migration/ci/apt_install.sh python3-pil
+      - name: Unit tests
+        if: steps.pick.outputs.run == 'yes'
+        run: |
+          python3 -I -B migration/ops/test_autopilot_budget.py
+          python3 -I -B migration/production/bible/test_autopilot_sources.py
+          python3 -I -B migration/production/bible/test_scene_stills.py
+      - name: Gather candidates, pre-filter (budgeted), sheet and list
+        id: run
+        if: steps.pick.outputs.run == 'yes'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EP: ${{ inputs.episode }}
+        run: |
+          set +e
+          python3 -I -B migration/production/bible/autopilot_sources.py run migration/evidence/autopilot/budget.json "$EP"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          { echo '```json'; head -c 6000 "migration/evidence/autopilot/sources-$EP.json"; echo; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit the budget ledger (counts only; no media, no key)
+        if: always() && steps.pick.outputs.run == 'yes'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/autopilot/budget.json
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Record autopilot Gemini budget (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
+      - name: Open the review PR (never merged here)
+        if: steps.run.outputs.code == '0' || steps.run.outputs.code == '3'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EP: ${{ inputs.episode }}
+          BRANCH: ${{ steps.pick.outputs.branch }}
+          CODE: ${{ steps.run.outputs.code }}
+        run: |
+          git checkout -q -b "$BRANCH"
+          git add "migration/production/bible/plans/$EP.json" migration/production/bible/stills "migration/evidence/autopilot/sources-$EP.json" "migration/evidence/autopilot/footage-queries-$EP.json"
+          git commit -q -m "Autopilot source candidates for $EP (public images + library clips; nothing accepted)"
+          git push -q origin "$BRANCH"
+          cat > "$RUNNER_TEMP/body.md" <<EOF
+          Candidate pictures and clips for \`$EP\`, gathered by the autopilot (GitHub Actions, no Claude session).
+
+          - Stills: public images fetched by \`public_sources.fetch\` (allowlisted host, licence read from the source's API, sha256, 9:16 crop). Records stay DRAFT; \`first_frame\` was added to the anonymous scene shots of the plan (nothing else in the plan changed).
+          - Pre-filter: Gemini flash-lite (free tier) may only reject or pass as MAYBE; its answer is evidence, not an approval. Rejected files are not in this PR; their ids and reasons are in \`migration/evidence/autopilot/sources-$EP.json\`. Job exit code: $CODE (3 = Gemini stopped for the day, candidates are unfiltered).
+          - Clips: vetted library clips ranked by the shot's words; shots with too few clips have a ready \`footage-queries-$EP.json\` for footage.yml (not dispatched here).
+          - Speaking, character, God-voice and Keeper shots are left for the paid-provider route and Claude.
+
+          Not done, by design: nothing accepted, no reviewer named, not merged, no paid-provider call. Claude opens the contact sheet and the clips at full resolution and accepts in its own PR (public_sources.py approve / footage-seen). pr-checks does not start for a PR opened with GITHUB_TOKEN: push an empty commit to run it.
+
+          Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          EOF
+          gh pr create --base main --head "$BRANCH" --title "Autopilot source candidates: $EP" --body-file "$RUNNER_TEMP/body.md" \
+            || echo "PR_CREATE_FAILED: branch $BRANCH is pushed; open the PR by hand (Actions may not be allowed to create PRs)"
