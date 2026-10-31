@@ -2924,6 +2924,31 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E234",
+   "date": "2026-10-31",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134",
+    "E136",
+    "E227",
+    "E232"
+   ],
+   "error": "The token budget hook refused every long agent for the week: the long allocation (14,635,343 = one mean long after scaling the cadence to the budget) was checked as spent + p90 (49,228,089), so even the first long could never start; an image-engine agent whose brief mentioned the long was refused the same way.",
+   "fix": "The project budget stays the inviolable cap (used + p90 of the action must stay under half of the weekly cap). An activity allocation now blocks once it is spent, not before its first action.",
+   "antidote": {
+    "file": "migration/ops/test_token_budget.py",
+    "contains": "test_an_allocation_smaller_than_one_p90_action_still_admits_the_first",
+    "covers": [
+     "capacity"
+    ]
+   }
   }
  ]
 }

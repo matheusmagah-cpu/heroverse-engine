@@ -109,9 +109,18 @@ class Budget(unittest.TestCase):
         sub = self.t / "proj/-x-heroverse-engine/sess1/subagents/agent-s.jsonl"
         sub.write_text(json.dumps({"type": "user", "message": {"role": "user", "content": "Make a Short"}}) + "\n"
                        + entry("2026-10-31T20:00:00Z", "s", out=20) + "\n")
-        self.assertEqual(self.run_cli("check", "", "agent_short").returncode, 2)    # 20 + 50 crosses the shorts allocation 60
+        self.assertEqual(self.run_cli("check", "", "agent_short").returncode, 0)    # 20 of 60 spent: the allocation still admits
         self.assertEqual(self.run_cli("check", "", "agent_long").returncode, 0)     # 20 + 100 is within budget and long (400)
+        sub.write_text(json.dumps({"type": "user", "message": {"role": "user", "content": "Make a Short"}}) + "\n"
+                       + entry("2026-10-31T20:00:00Z", "s", out=60) + "\n")
+        self.assertEqual(self.run_cli("check", "", "agent_short").returncode, 2)    # 60 of 60 spent: blocked
         self.assertEqual(self.run_cli("plan").returncode, 0)
+
+    def test_an_allocation_smaller_than_one_p90_action_still_admits_the_first(self):
+        # E234: long allocation 14.6M < long p90 49.2M blocked every long for the week; the project cap stays used + p90.
+        self.assertEqual(self.run_cli("check", "", "agent_long").returncode, 0)     # long alloc 400, p90 100, nothing spent
+        self.write([entry("2026-10-31T20:00:00Z", "a", out=450)])                   # 450 + p90 100 crosses the budget 500
+        self.assertEqual(self.run_cli("check", "", "agent_long").returncode, 2)
 
     def test_there_is_no_warn_only_path(self):
         src = (ROOT / "migration/ops/token_budget.py").read_text()

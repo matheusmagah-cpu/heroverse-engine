@@ -342,8 +342,11 @@ def check(action=None, data=None):
     elif action in ACTIVITY_OF:
         act = ACTIVITY_OF[action]
         alloc = load_json("TOKEN_BUDGET_PLAN", "token_plan.json", {"allocations": {}})["allocations"].get(act)
-        if alloc is not None and s["by_activity"][act] + est >= alloc:
-            why = f"the {act} allocation ({alloc:,}, spent {s['by_activity'][act]:,}) would be crossed"
+        # The project budget above is the inviolable cap (used + p90). An allocation is the plan's share: it
+        # blocks once spent, never before the first action, or an allocation smaller than one p90 action
+        # (long: 14.6M vs 49.2M) would forbid that activity for the whole week (E234).
+        if alloc is not None and s["by_activity"][act] >= alloc:
+            why = f"the {act} allocation ({alloc:,}, spent {s['by_activity'][act]:,}) is spent"
     if why and not (escape_allowed(data) or "token_budget.py status" in str(data.get("prompt", ""))):
         print(refusal(s, action, est, why), file=sys.stderr)
         return 2
