@@ -80,6 +80,9 @@ def check_receipt(i, r):
     need(re.fullmatch(r'[0-9a-f]{64}', r.get('prompt_sha256', '')) is not None and
          r.get('coverage') == {'video_sampling_fps':4, 'native_audio':True, 'full_input':True},
          'RECOVERY_COVERAGE_INVALID')
+    # E236: the measured duration of the original submission's file, never a constant.
+    need(type(r.get('duration_seconds')) in (int, float) and 0 < r['duration_seconds'] <= 3600,
+         'RECOVERY_DURATION_INVALID')
 
 
 def check_lease(i, legacy):
@@ -164,10 +167,12 @@ def receive(i, root, receipt, legacy):
             cipher = base64.b64decode(encoded.strip(), validate=True)
             r = decrypt_receipt(root, cipher)
             check_receipt(i, r)
-            need(r['prompt_sha256'] == hashlib.sha256(legacy.prompt().encode()).hexdigest(), 'RECOVERY_PROMPT_CHANGED')
+            need(r['prompt_sha256'] == hashlib.sha256(legacy.prompt(r['duration_seconds']).encode()).hexdigest(),
+                 'RECOVERY_PROMPT_CHANGED')
             # Import only known fields; no caller-supplied score, response or approval survives.
             keys = ('version','run_id','plan','model','output_sha256','provider_sha256','byte_size',
-                    'status','interaction_id','file_name','file_uri','prompt_sha256','coverage')
+                    'status','interaction_id','file_name','file_uri','prompt_sha256','coverage',
+                    'duration_seconds')
             record = {k:r[k] for k in keys}
             record.update(recovery_run_id=os.environ['GITHUB_RUN_ID'], production_approved=False,
                           publication_ready=False)
@@ -239,6 +244,7 @@ def check_remote_binding(r, response, i, key, legacy):
          f.get('displayName')=='review-master-'+i['sha256']+'-'+i['recover_submitted_run'] and
          legacy.provider_sha256(f.get('sha256Hash',''))==i['sha256'] and
          int(f.get('sizeBytes',0))==int(i['byte_size']), 'RECOVERY_PROVIDER_FILE_MISMATCH')
+    need(legacy.provider_duration(f)==r['duration_seconds'], 'RECOVERY_PROVIDER_DURATION_MISMATCH')
 
 
 def poll_saved(i, receipt, key, legacy, attempts=120):
@@ -261,7 +267,7 @@ def poll_saved(i, receipt, key, legacy, attempts=120):
         def validate(report):
             if i.get('recover_submitted_run'):
                 check_remote_binding(r,json.loads(body),i,key,legacy)
-            legacy.validate_report(report)
+            legacy.validate_report(report, r['duration_seconds'])
         status = record_readback(receipt,body,validate)
         if status != 'SUBMITTED':
             return status

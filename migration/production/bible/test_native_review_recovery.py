@@ -37,7 +37,7 @@ class RecoveryTests(unittest.TestCase):
                         'byte_size': 123, 'status': 'SUBMITTED', 'production_approved': False,
                         'interaction_id': 'synthetic_interaction', 'file_name': 'files/synthetic',
                         'file_uri': recovery.API+'/v1beta/files/synthetic',
-                        'prompt_sha256': 'b'*64,
+                        'prompt_sha256': 'b'*64, 'duration_seconds': 174.4,
                         'coverage': {'video_sampling_fps': 4, 'native_audio': True, 'full_input': True}}
         recovery.save(self.path, self.receipt)
 
@@ -141,7 +141,7 @@ class RecoveryTests(unittest.TestCase):
             return {},self.response('failed',error={'code':'synthetic'})
         class Legacy:
             request=staticmethod(get)
-            validate_report=staticmethod(lambda r: None)
+            validate_report=staticmethod(lambda r, duration: None)
         self.assertEqual(recovery.poll_saved(self.i,self.path,'fake-key',Legacy, attempts=1),'PROVIDER_FAILED')
         self.assertEqual(calls,[recovery.API+'/v1beta/interactions/synthetic_interaction'])
 
@@ -178,7 +178,7 @@ class RecoveryTests(unittest.TestCase):
         obj={'type':'file','encoding':'base64','size':len(encoded),'content':base64.b64encode(encoded).decode()}
         class Legacy:
             github_read=staticmethod(lambda path: obj)
-            prompt=staticmethod(lambda: 'synthetic prompt')
+            prompt=staticmethod(lambda duration: 'synthetic prompt')
         recovery.save(self.root/'recovery.json',{'source_run_id':'1234','current_run_id':'5678','plan':self.i['plan'],'sha256':self.i['sha256']})
         with patch.dict(os.environ,{'GITHUB_RUN_ID':'5678'}), patch.object(recovery,'check_lease'):
             recovery.receive(self.i,self.root,self.path,Legacy)
@@ -214,8 +214,9 @@ class RecoveryTests(unittest.TestCase):
             return {},json.dumps(response if '/interactions/' in url else f).encode()
         class Legacy:
             request=staticmethod(get)
-            validate_report=staticmethod(lambda report:None)
+            validate_report=staticmethod(lambda report,duration:None)
             provider_sha256=staticmethod(lambda digest:'a'*64)
+            provider_duration=staticmethod(lambda f:174.4)
         self.assertEqual(recovery.poll_saved(self.i,self.path,'fake',Legacy,attempts=1),'EVIDENCE_COMPLETE')
         self.assertEqual(len(calls),2)
         recovery.save(self.path,r);parts[0]['uri']='https://other.invalid/video'
@@ -297,6 +298,7 @@ class RecoveryTests(unittest.TestCase):
             saved=json.loads(path.read_text());self.assertEqual(saved['status'],'FILE_READY')
             self.assertEqual(saved['retry_count'],1);self.assertEqual(saved['prior_failure']['interaction_id'],'synthetic_interaction')
             self.assertEqual(saved['file_uri'],r['file_uri']);self.assertNotIn('report',saved)
+            self.assertEqual(saved['duration_seconds'],174.4)
             saved['status']='SUBMIT_UNCERTAIN';recovery.save(path,saved)
             calls.append('POST')
             saved.update(status='SUBMITTED',interaction_id='synthetic_retry');recovery.save(path,saved)
@@ -328,6 +330,77 @@ class RecoveryTests(unittest.TestCase):
             with self.assertRaises(recovery.Blocked): recovery.submit_retry(i,self.path,Legacy)
         self.assertEqual(calls,['POST'])
         self.assertEqual(self.stored()['status'],'SUBMIT_UNCERTAIN')
+
+    def test_e236_recovery_and_retry_keep_the_original_files_measured_duration(self):
+        import native_review as legacy
+        text=legacy.prompt(174.4)
+        r=dict(self.receipt,prompt_sha256=hashlib.sha256(text.encode()).hexdigest())
+        recovery.check_receipt(self.i,r)
+        for bad in ({'duration_seconds':None},{'duration_seconds':0},{'duration_seconds':'174.4'}):
+            with self.subTest(bad=bad), self.assertRaises(recovery.Blocked):
+                recovery.check_receipt(self.i,{k:v for k,v in dict(r,**bad).items() if v is not None})
+        # Receive: the prompt hash must be the prompt for the receipt's own measured duration.
+        def deliver(receipt):
+            root=Path(tempfile.mkdtemp(dir=self.root))
+            recovery.make_transport_key(root)
+            cipher=subprocess.run(['openssl','cms','-encrypt','-binary','-aes-256-gcm','-outform','DER',str(root/'ingress.pem')],
+                                  input=json.dumps(receipt).encode(),stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True).stdout
+            encoded=base64.b64encode(cipher)
+            obj={'type':'file','encoding':'base64','size':len(encoded),'content':base64.b64encode(encoded).decode()}
+            recovery.save(root/'recovery.json',{'source_run_id':'1234','current_run_id':'5678','plan':self.i['plan'],'sha256':self.i['sha256']})
+            with patch.dict(os.environ,{'GITHUB_RUN_ID':'5678'}), patch.object(recovery,'check_lease'), \
+                 patch.object(legacy,'github_read',return_value=obj):
+                recovery.receive(self.i,root,self.path,legacy)
+        deliver(r)
+        self.assertEqual(self.stored()['duration_seconds'],174.4)
+        stale=dict(r,prompt_sha256=hashlib.sha256(legacy.prompt(175).encode()).hexdigest())
+        with self.assertRaisesRegex(recovery.Blocked,'RECOVERY_PROMPT_CHANGED'): deliver(stale)
+        # Readback: validated against 174.4 s with the provider's file still measuring the same duration.
+        recovery.save(self.path,r)
+        seg=lambda a,b:{'start':a,'end':b,'audible_observation':'Voice','visual_observation':'Landscape',
+                        'sync_observation':'Aligned','speech_excerpt':'A synthetic fixture sentence',
+                        'speaker_observation':'One voice','motion_observation':'camera_only'}
+        ends=[25,50,75,100,125,150,174.4]
+        report={'audio_received':True,'visual_received':True,'duration_seconds':174.4,
+                'scores':{k:9.5 for k in recovery.RUBRIC},'overall':9.5,'issues':[],'limitations':[],
+                'criterion_issues':{},'coverage':[seg(a,b) for a,b in zip([0]+ends[:-1],ends)]}
+        f={'name':r['file_name'],'uri':r['file_uri'],'displayName':'review-master-'+'a'*64+'-1234',
+           'sha256Hash':base64.b64encode(b'a'*64).decode(),'sizeBytes':'123',
+           'videoMetadata':{'videoDuration':'174.400s'}}
+        def body(rep):
+            return json.dumps({'id':r['interaction_id'],'model':recovery.MODEL,'status':'completed','steps':[
+                {'type':'user_input','content':[{'type':'video','uri':r['file_uri']},{'type':'text','text':text}]},
+                {'type':'model_output','content':[{'type':'text','text':json.dumps(rep)}]}]}).encode()
+        def run(rep,file):
+            recovery.save(self.path,r)
+            get=lambda url,key:({},body(rep) if '/interactions/' in url else json.dumps(file).encode())
+            with patch.object(legacy,'request',side_effect=get):
+                return recovery.poll_saved(self.i,self.path,'fake',legacy,attempts=1)
+        self.assertEqual(run(report,f),'EVIDENCE_COMPLETE')
+        early=dict(report,coverage=report['coverage'][:-1]+[seg(150,173.5)])
+        over=dict(report,coverage=report['coverage'][:-1]+[seg(150,175)])
+        for bad in (early,over):
+            with self.assertRaisesRegex(recovery.Blocked,'REPORT_VALIDATION_FAILED'): run(bad,f)
+            self.assertIn('COVERAGE_INCOMPLETE',self.stored()['validation_error'])
+        moved=dict(f,videoMetadata={'videoDuration':'175s'})
+        with self.assertRaisesRegex(recovery.Blocked,'REPORT_VALIDATION_FAILED'): run(report,moved)
+        self.assertEqual(self.stored()['status'],'COMPLETE_UNVALIDATED')
+        # Retry: the single new POST reuses the receipt's measured duration in its prompt.
+        q=self.failed_receipt();q['prompt_sha256']=r['prompt_sha256']
+        raw=json.dumps(q['provider_response']).encode()
+        q.update(response_sha256=hashlib.sha256(raw).hexdigest(),response_body_base64=base64.b64encode(raw).decode(),
+                 readback_at='synthetic')
+        q['retry_qualification']={'run_id':'5678','response_sha256':q['response_sha256'],'at_unix':__import__('time').time()}
+        recovery.save(self.path,q)
+        sent=[]
+        def post(url,key=None,data=None,headers=None,method='GET'):
+            sent.append(json.loads(data));return {},json.dumps({'id':'synthetic_retry','model':recovery.MODEL}).encode()
+        with patch.dict(os.environ,{'GITHUB_RUN_ID':'5678','GITHUB_RUN_ATTEMPT':'1'}),patch.object(recovery,'check_lease'), \
+             patch.object(legacy,'free_key',return_value='fake'),patch.object(legacy,'request',side_effect=post):
+            recovery.submit_retry(dict(self.i,retry_transient_once='true'),self.path,legacy)
+        self.assertEqual(len(sent),1)
+        self.assertEqual(sent[0]['input'][1]['text'],text)
+        self.assertEqual(self.stored()['prompt_sha256'],r['prompt_sha256'])
 
 
 if __name__ == '__main__': unittest.main()
