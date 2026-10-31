@@ -6,8 +6,15 @@ original evidence. This page is not a historical task queue or a second producti
 
 ## Current policy
 
-- Deliver the English KJV Bible series in story order. Finish the accepted Short09, prepare Short10, then the
-  existing arc-01 long. Preserve valid construction and original accepted audio.
+- Deliver the English KJV Bible series in story order: Short09, Short10, Short11, then the next planned Short and
+  the existing arc-01 long. Preserve valid construction and original accepted audio where it is reachable.
+- Owner, 2026-10-31 ("faça o que for mais entregue o que eu pedi.. como vai fazer voce escolhe.. só não mexe nas do
+  pavo"): the accepted Short09 master exists only in a prior executor's private package and its review route is
+  closed, so Short09 is rebuilt through the repository's own episode route from sources the repository, its releases
+  and workflows can reach. The plan's structure, voices and timing are kept; unreachable accepted audio is regenerated
+  only on the same pinned Kokoro voices and settings. Existing Pavo clips are never regenerated, recut in content or
+  replaced; they are used as stored (release asset or saved provider ID read by GET). New visuals other than the hook,
+  speaking characters and the Keeper's close are animated FLUX stills or licensed footage, each with a second option.
 - Build within the 9.5 quality parameters before final review. Review the actual complete audio/video, retain
   grounded defects and require overall ≥9.5 before a new upload. Never manufacture scores or approvals.
 - Bible Shorts use the existing episode route and `publish-episode.yml`. Longs use their existing build/handoff and
