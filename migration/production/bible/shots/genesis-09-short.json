@@ -49,6 +49,24 @@
    "from_score": 9.5,
    "request_sha256": "5fd29c79b6f6bc46a5fb8fa7814814b30b04b9fdc92deb5cb55fa9821abc94c8"
   },
+  "s-climb": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-climb, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-climb",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-climb.jpg",
+   "clip_sha256": null,
+   "still_sha256": "7d7a2157951ae64c9b7b280792bdd5ca01ce2f9f9d1dfdce02ab50729a4f12a4",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 11,
+   "request_sha256": "c5acc1908763e2782f2af4f121721184b6937282bdbe8032da3fb00ff5b6fcd9"
+  },
   "s-drift": {
    "source": "still_motion",
    "score": 9.5,
@@ -100,6 +118,60 @@
    "clip_seconds": 10,
    "request_sha256": "1599816cfaeb4471ec75cc16f50a0d26ee70a8c97536476a4fbbc40ebd8054a4"
   },
+  "s-hills": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-hills, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-hills",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-hills.jpg",
+   "clip_sha256": null,
+   "still_sha256": "3fb41c94fe1308d371015eb86c72aa12291ab0e39695229abd8006a868c77293",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 9,
+   "request_sha256": "f01beb012323a21a95c60e1a8569ec07418aabf7db20fc4cf6608a059970fa78"
+  },
+  "s-music": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-music, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-music",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-music.jpg",
+   "clip_sha256": null,
+   "still_sha256": "d5f19084e070ceef8dc473cd600c46a3e2b66fd2ac07d4a53a9b070a69799dd9",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 9,
+   "request_sha256": "3bd7e4c09195edf42088868d1760e1bf721894e67405a69d079802f6f8a8009b"
+  },
+  "s-noah-door": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-short-s-noah-door, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-short-s-noah-door",
+   "repo_path": "migration/production/bible/stills/genesis-09-short-s-noah-door.jpg",
+   "clip_sha256": null,
+   "still_sha256": "db17cb9b9a1b8647986b67ba6a27220cbee81fbc037e2da0db6a9e4f4394bfff",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 6,
+   "request_sha256": "13cb3978dc45967c191083d8a94cb9a60d239754580106ebc65c1c7eb0fa6383"
+  },
   "s-peak-crowd": {
    "source": "still_motion",
    "score": 9.5,
@@ -116,6 +188,24 @@
    "licence": "apache-2.0",
    "clip_seconds": 9,
    "request_sha256": "9d1fac09b48a349cde6e5e48fc81f15ec351c79d80586bdcaff7516c18b992f2"
+  },
+  "s-rock": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-rock, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-rock",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-rock.jpg",
+   "clip_sha256": null,
+   "still_sha256": "ff9e5a85315d1967f9248a2d91e5c43a7ec289f70aa284df4fb72baecb6369fe",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 6,
+   "request_sha256": "9b637854150f091dd0d615dd481999eef09b9e9c13591e37a83c4ca64fd11b9d"
   },
   "s-sky": {
    "source": "still_motion",

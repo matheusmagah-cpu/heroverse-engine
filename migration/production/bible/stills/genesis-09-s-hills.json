@@ -2,6 +2,25 @@
  "id": "genesis-09-s-hills",
  "episode": "genesis-09-short",
  "shot": "s-hills",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. The rounded tops of bare grassy hills sink one after another under a wide brown flood, a few tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot wading toward the last hilltop, only the crowns of a few trees still above the water. Grey day, rain and drifting mist. Relentless and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. The rounded tops of bare grassy hills sink one after another under a wide brown flood, a few tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot wading toward the last hilltop, only the crowns of a few trees still above the water. Grey day, rain and drifting mist. Relentless and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-hills.jpg",
+ "sha256": "3fb41c94fe1308d371015eb86c72aa12291ab0e39695229abd8006a868c77293",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-hills-41236671261-3",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Full-res review: rounded grassy hilltops sinking into a brown flood, bare tree crowns on the last one, a lone hooded robed figure wading toward it in grey mist; no modern object. Relentless and silent for line 13.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "fdd6086b87c1610ace01097c2443386a4c8aaf6e098aa61fa39443703be1cb0d",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

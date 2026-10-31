@@ -1,0 +1,37 @@
+{
+ "id": "genesis-09-s-hills-41236671261-2",
+ "still": "genesis-09-s-hills",
+ "episode": "genesis-09-short",
+ "shot": "s-hills",
+ "run": "41236671261",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. The rounded tops of bare grassy hills sink one after another under a wide brown flood, a few tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot wading toward the last hilltop, only the crowns of a few trees still above the water. Grey day, rain and drifting mist. Relentless and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. The rounded tops of bare grassy hills sink one after another under a wide brown flood, a few tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot wading toward the last hilltop, only the crowns of a few trees still above the water. Grey day, rain and drifting mist. Relentless and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos., tall vertical composition, the whole subject inside the central third of the frame",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "source": "cf-flux",
+ "conversation_id": null,
+ "quote": null,
+ "references": [],
+ "pavo": null,
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 576 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-hills-41236671261-2.jpg",
+ "sha256": "3d92960b78ca660bad11ad0fef8fb4cf49b6393e5d61f17df57a294f35e2d575"
+}
