@@ -484,5 +484,177 @@ class LongStills(unittest.TestCase):
         self.assertTrue(str(c.exception).startswith(f"STILL_ASPECT_MISMATCH {self.still}-57-2"), str(c.exception))
 
 
+class PublicStills(unittest.TestCase):
+    """E237 (owner 31/10, "utilizar a pública"): a public-domain or openly licensed picture becomes a scene still only
+    from an allowlisted host, with its licence read from the source's own API, the exact bytes' sha256, a crop at the
+    plan's aspect and resolution, and a full-resolution review naming every check; then it is a still like any other."""
+    PAGE = "https://commons.wikimedia.org/wiki/File:Gustave_Dore_-_The_Deluge.jpg"
+    FILE = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Gustave_Dore_-_The_Deluge.jpg"
+    CHECKS = ["period", "writing", "god", "characters"]
+    NOTE = "Full-res: engraved pairs of animals on a bare hill, no legible text or signature, no figure of God."
+
+    def setUp(self):
+        import public_sources
+        self.ps = public_sources
+        self.dir = Path(tempfile.mkdtemp(prefix=".test-public-", dir=HERE))
+        self.saved = pc.STILLS_DIR
+        pc.STILLS_DIR = self.dir
+        self.plan = json.loads((HERE / "plans" / "genesis-09-short.json").read_text())
+        for sid in ("genesis-09-s-pairs", "genesis-09-s-lions"):
+            rec = json.loads((HERE / "stills" / f"{sid}.json").read_text())
+            ss.save(self.dir / f"{sid}.json", {k: rec[k] for k in ("id", "episode", "shot", "prompt")} |
+                    {"status": "DRAFT"})
+        self.data = self.picture()
+        self.licence = ("cc-by-sa-4.0", "CC BY-SA 4.0")
+
+    def tearDown(self):
+        pc.STILLS_DIR = self.saved
+        shutil.rmtree(self.dir)
+
+    @staticmethod
+    def picture(size=(1600, 1200)):
+        import io
+        from PIL import Image
+        buf = io.BytesIO()
+        Image.new("RGB", size, (120, 110, 90)).save(buf, "JPEG", quality=90)
+        return buf.getvalue()
+
+    def get(self, url):
+        import hashlib
+        if url == self.FILE:
+            return self.data
+        if url.startswith("https://commons.wikimedia.org/w/api.php"):
+            ext = {"License": {"value": self.licence[0]}, "LicenseShortName": {"value": self.licence[1]},
+                   "Artist": {"value": "<a href=\"//x\">Gustave Doré</a>"}, "ObjectName": {"value": "The Deluge"}}
+            return json.dumps({"query": {"pages": [{"imageinfo": [{
+                "url": self.FILE, "sha1": hashlib.sha1(self.data).hexdigest(), "extmetadata": ext}]}]}}).encode()
+        raise AssertionError(f"unexpected fetch {url}")
+
+    def fetch(self, still="genesis-09-s-pairs", n=1, **kw):
+        kw.setdefault("get", self.get)
+        return self.ps.fetch(still, kw.pop("page", self.PAGE), kw.pop("file_url", self.FILE), n=n,
+                             stills_dir=self.dir, **kw)
+
+    def approve(self, cand, still="genesis-09-s-pairs", checks=None, note=None):
+        return self.ps.approve(still, cand["id"], 9.6, self.CHECKS if checks is None else checks,
+                               self.NOTE if note is None else note, stills_dir=self.dir,
+                               reviewer="claude-session-reviewer")
+
+    def refused(self, code, fn, *a, **kw):
+        with self.assertRaises(SystemExit) as err:
+            fn(*a, **kw)
+        self.assertTrue(str(err.exception).startswith(code), str(err.exception))
+
+    def test_e237_public_still_is_verified_reviewed_and_used_like_a_generated_still(self):
+        import shot_sources
+        sys.path.insert(0, str(HERE.parents[1] / "publish"))
+        import publish_episode
+        cand = self.fetch()
+        pub = cand["public"]
+        self.assertEqual((pub["licence"], pub["author"], pub["licence_source"]),
+                         ("CC-BY-SA-4.0", "Gustave Doré", "commons-extmetadata"))
+        self.assertEqual(pub["sha256"], __import__("hashlib").sha256(self.data).hexdigest())
+        self.assertEqual(pub["crop"], [462, 0, 675, 1200])
+        self.assertIn("Gustave Doré", pub["attribution"])
+        rec = self.approve(cand)
+        self.assertEqual((rec["status"], rec["engine"], rec["approved"]["review"]["checked"]),
+                         ("APPROVED", "public-image", sorted(self.CHECKS)))
+        i = next(k for k, s in enumerate(self.plan["shots"]) if s["id"] == "s-pairs")
+        shot = self.plan["shots"][i]
+        self.assertEqual(pc.frame_problems(i, shot, self.plan, self.dir), [])
+        # a tampered record (attribution dropped) no longer carries the frame
+        bad = json.loads((self.dir / "genesis-09-s-pairs.json").read_text())
+        bad["public"]["attribution"] = None
+        ss.save(self.dir / "genesis-09-s-pairs.json", bad)
+        self.assertTrue(any(p.startswith("STILL_PUBLIC_REFUSED") and "PUBLIC_ATTRIBUTION_MISSING" in p
+                            for p in pc.frame_problems(i, shot, self.plan, self.dir)))
+        with self.assertRaises(SystemExit) as err:
+            shot_sources.approve_source(self.plan, "s-pairs", "still_motion", "genesis-09-s-pairs", 9.6, "x",
+                                        shots_dir=self.dir / "shots", reviewer="claude-session-reviewer")
+        self.assertTrue(str(err.exception).startswith("SOURCE_PUBLIC_REFUSED"), str(err.exception))
+        ss.save(self.dir / "genesis-09-s-pairs.json", rec)
+        # approve-source: camera motion over it, its licence and attribution carried, E139 by the original's sha256
+        entry = shot_sources.approve_source(self.plan, "s-pairs", "still_motion", "genesis-09-s-pairs", 9.6,
+                                            "the pairs on the hill", shots_dir=self.dir / "shots",
+                                            reviewer="claude-session-reviewer")
+        self.assertEqual((entry["licence"], entry["attribution"], entry["picture_sha256"]),
+                         ("CC-BY-SA-4.0", pub["attribution"], pub["sha256"]))
+        self.assertEqual(shot_sources.picture_sha256(entry), pub["sha256"])
+        # the description must credit it word for word
+        ep = {"id": "genesis-09-short", "description": "Genesis 7 (public domain). AI visuals."}
+        self.assertTrue(publish_episode.attribution_problems(ep, self.dir / "shots")[0].startswith(
+            "ATTRIBUTION_MISSING s-pairs"))
+        ep["description"] += "\nVisual credits: " + pub["attribution"]
+        self.assertEqual(publish_episode.attribution_problems(ep, self.dir / "shots"), [])
+
+    def test_e237_each_refusal_of_a_public_still(self):
+        import hashlib
+        # host not allowlisted (file and page), and an allowlisted host without a licence reader
+        self.refused("PUBLIC_HOST_REFUSED", self.fetch, file_url="https://example.org/deluge.jpg")
+        self.refused("PUBLIC_HOST_REFUSED", self.fetch, file_url=self.FILE.replace("https", "http"))
+        self.refused("PUBLIC_HOST_REFUSED", self.fetch, page="https://en.wikipedia.org/wiki/File:x.jpg")
+        self.refused("PUBLIC_LICENCE_UNVERIFIED", self.fetch, page="https://www.loc.gov/item/2006691549/")
+        # bad licences: NC, ND, unknown
+        for lic in (("cc-by-nc-sa-4.0", "CC BY-NC-SA 4.0"), ("cc-by-nd-4.0", "CC BY-ND 4.0"), ("", "All rights")):
+            self.licence = lic
+            self.refused("PUBLIC_LICENCE_REFUSED", self.fetch)
+        self.licence = ("cc-by-sa-4.0", "CC BY-SA 4.0")
+        # sha mismatch: Commons' sha1, the caller's expected sha256
+        good = self.get
+
+        def wrong_sha1(url):
+            out = good(url)
+            return out.replace(hashlib.sha1(self.data).hexdigest().encode(), b"0" * 40) if b"sha1" in out else out
+        self.refused("PUBLIC_SHA_MISMATCH", self.fetch, get=wrong_sha1)
+        self.refused("PUBLIC_SHA256_MISMATCH", self.fetch, expect_sha256="0" * 64)
+        # resolution: a crop whose long side is under a FLUX still's
+        self.data = self.picture((900, 700))
+        self.refused("PUBLIC_RESOLUTION_LOW", self.fetch)
+        self.data = self.picture()
+        self.refused("STILL_ASPECT_MISMATCH", self.fetch, crop=[0, 0, 900, 1200])
+        self.assertFalse(list((self.dir / "candidates").glob("*.json")) if (self.dir / "candidates").is_dir()
+                         else [])
+        # missing attribution for CC-BY(-SA) at record level
+        cand = self.fetch()
+        rec = dict(cand["public"], attribution=None)
+        self.assertTrue(pc.public_problems(rec)[0].startswith("PUBLIC_ATTRIBUTION_MISSING"))
+        self.assertEqual(pc.public_problems(dict(rec, licence="Public Domain")), [])
+        # approve without a review note, with checks missing, through the generated-still route, or tampered
+        self.refused("PUBLIC_REVIEW_NOTE_MISSING", self.approve, cand, note=" ")
+        self.refused("PUBLIC_REVIEW_INCOMPLETE", self.approve, cand, checks=["period", "writing"])
+        self.refused("PUBLIC_CANDIDATE_REFUSED", ss.approve, "genesis-09-s-pairs", cand["id"], 9.6, "x",
+                     self.dir, reviewer="claude-session-reviewer")
+        self.refused("REVIEWER_IDENTITY_REFUSED", self.ps.approve, "genesis-09-s-pairs", cand["id"], 9.6,
+                     self.CHECKS, self.NOTE, stills_dir=self.dir, reviewer=None)
+        self.assertEqual(pc.still_record("genesis-09-s-pairs", self.dir)["status"], "DRAFT")
+        jpg = self.dir / "candidates" / f"{cand['id']}.jpg"
+        saved = jpg.read_bytes()
+        jpg.write_bytes(saved + b"\0")
+        self.refused("STILL_CANDIDATE_SHA256_MISMATCH", self.approve, cand)
+        jpg.write_bytes(saved)
+        # E139: the same original approved for another still of this Short (shorter than 300 s) is a repeat
+        self.approve(cand)
+        other = self.fetch("genesis-09-s-lions", crop=[0, 0, 675, 1200])
+        self.refused("PUBLIC_IMAGE_REPEAT genesis-09-s-lions", self.approve, other, still="genesis-09-s-lions")
+        self.assertEqual(pc.still_record("genesis-09-s-lions", self.dir)["status"], "DRAFT")
+
+    def test_e237_met_open_access_is_read_from_its_api(self):
+        page = "https://www.metmuseum.org/art/collection/search/436105"
+        image = "https://images.metmuseum.org/CRDImages/ep/original/DP-13139-001.jpg"
+        obj = {"isPublicDomain": True, "primaryImage": image, "additionalImages": [], "title": "The Flood",
+               "artistDisplayName": "A Painter"}
+
+        def get(url):
+            if url == image:
+                return self.data
+            if url == "https://collectionapi.metmuseum.org/public/collection/v1/objects/436105":
+                return json.dumps(obj).encode()
+            raise AssertionError(url)
+        cand = self.fetch(page=page, file_url=image, get=get)
+        self.assertEqual((cand["public"]["licence"], cand["public"]["attribution"]), ("CC0", None))
+        obj["isPublicDomain"] = False
+        self.refused("PUBLIC_LICENCE_REFUSED", self.fetch, page=page, file_url=image, get=get, n=2)
+
+
 if __name__ == "__main__":
     unittest.main()

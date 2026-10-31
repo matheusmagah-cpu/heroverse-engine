@@ -29,7 +29,8 @@ motion is never claimed as body motion or lip-sync. The same rule holds at gener
 usage:
   episode_build.py sources PLAN [--write]   the per-shot source plan for today's budget (evidence/sources/<ep>.json)
   episode_build.py approve-source PLAN SHOT SOURCE ITEM SCORE NOTE --reviewer MODEL
-        SOURCE footage (ITEM a library clip id), still_motion (ITEM an APPROVED still id of this shot) or pavo_reuse
+        SOURCE footage (ITEM a library clip id), still_motion (ITEM an APPROVED still id of this shot, generated or a
+        public picture approved by public_sources.py: its licence and attribution carried, E237) or pavo_reuse
         (ITEM <inventory.json path>#<clip sha256>)
         MODEL is the actual reviewing session identity from owner_quality_policy.LONG_REVIEWERS, never a default
 """
@@ -72,6 +73,8 @@ def still_licence(rec):
     """The licence a still carries: a FLUX still its model's (apache-2.0), a Pavo agnes-image still Pavo's (owner-owned
     output). `source` is the engine's name (a string) or a {license, revision} record."""
     src = (rec or {}).get("source")
+    if isinstance((rec or {}).get("public"), dict):   # E237: a public picture's own verified licence
+        return rec["public"].get("licence")
     if isinstance(src, dict):
         return src.get("license") or "apache-2.0"
     if str(src or "").startswith("pavo") or (rec or {}).get("pavo"):
@@ -675,6 +678,14 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (an APPROVED scene still of {still_owner(shot)})")
         if not reviewer_identity.valid(rec.get("approved") or {}):
             raise SystemExit(f"STILL_NOT_FOR_SHOT {item} (unknown reviewer identity)")
+        if "public" in rec:   # E237: a public picture in camera motion, its licence, attribution and review kept
+            bad = plan_check.public_still_problems(rec, plan.get("aspect_ratio", "9:16"))
+            if bad:
+                raise SystemExit(f"SOURCE_PUBLIC_REFUSED {item} " + "; ".join(bad))
+            pub = rec["public"]
+            entry.update(picture_sha256=pub["sha256"], attribution=pub.get("attribution"),
+                         credit=pub.get("attribution") or f"Still: \"{pub.get('title')}\" by {pub.get('author')}, "
+                                                          f"{pub.get('licence')}, via {pub.get('source_page')}")
         if borrowed:
             entry["still_from"] = item
         if shot.get("still_of") is not None:
@@ -789,8 +800,8 @@ def picture_sha256(approval):
     """E139: what a fallback shows, by content: a still's sha256 (one picture whatever part is shown) or a library
     clip's; None for a Pavo clip (each generation is its own picture)."""
     a = approval or {}
-    if a.get("source") == "still_motion":
-        return a.get("still_sha256")
+    if a.get("source") == "still_motion":   # E237: a public still is its original's sha256, whatever the crop
+        return a.get("picture_sha256") or a.get("still_sha256")
     if a.get("source") == "footage":
         return a.get("clip_sha256")
     return None

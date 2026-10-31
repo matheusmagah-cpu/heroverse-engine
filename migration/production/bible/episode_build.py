@@ -932,7 +932,7 @@ def prop_refusal(plan, shot):
 FRAME_REFUSALS = ("FRAMES_NOT_SCENE", "FRAME_FIELD_INVALID", "FRAME_LAST_WITHOUT_FIRST", "FRAMES_WITH_REFERENCES",
                   "FRAMES_WITH_AUDIO", "STILL_MISSING", "STILL_NOT_APPROVED", "STILL_PATH_REFUSED",
                   "STILL_SHA256_MISMATCH", "STILL_PROMPT_CHANGED", "STILL_ASPECT_MISMATCH", "STILL_PROMPT_REFUSED",
-                  "STILL_PROP_UNREFERENCED")
+                  "STILL_PROP_UNREFERENCED", "STILL_PUBLIC_REFUSED")
 
 
 def frame_refusal(plan, shot):
@@ -1657,7 +1657,8 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
         entry["source"] = source
         entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score", "source",
                                "footage", "still", "still_sha256", "repo_path", "frame", "motion", "still_from",
-                               "clip_from", "clip_seconds", "crop_to", "url", "inventory", "licence", "credit", "speech")
+                               "clip_from", "clip_seconds", "crop_to", "url", "inventory", "licence", "credit", "speech",
+                               "attribution", "picture_sha256")
                              if k in approved}
         entry["checks"] = {"flags": flags, "measures": measures}
         report["shots"][shot["id"]] = entry

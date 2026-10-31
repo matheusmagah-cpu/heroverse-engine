@@ -559,8 +559,9 @@ def manifest_of(plan, cuts, layout, timeline, report, ups, music_sha, out_sha, s
                                                     "revision": revision}}}
             refs_ok = shot_sources.has_character(s) and not shot_sources.character_still_problems(s, still)
             clips.append(dict(base, source="still", licence=approved.get("licence"),
-                              credit=("Still: Pavo agnes-image with the characters' approved references (owner-owned), "
-                                      "approved scene still") if pavo_still else
+                              credit=approved.get("credit") if still.get("public") else   # E237: its attribution
+                              ("Still: Pavo agnes-image with the characters' approved references (owner-owned), "
+                               "approved scene still") if pavo_still else
                               "Still: FLUX.1 [schnell] (Apache-2.0) on Workers AI, approved scene still",
                               vetting="APPROVED" if vetted else "PENDING", audio="removed", talking=False, character_refs=refs_ok,
                               voice="kokoro" if eb.pavo_native.spoken(s) else None,

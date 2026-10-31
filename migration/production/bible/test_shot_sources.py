@@ -1057,5 +1057,47 @@ class SpeechStockPolicy(unittest.TestCase):
                     self.assertEqual(ss.stock_required(p, s), not plan_check.talking(s))
 
 
+class FootageSeen(unittest.TestCase):
+    """E237: shot_sources.footage_ok requires claude_seen, and nothing wrote it. public_sources.py footage-seen writes
+    it only for the named reviewer's real frame review: the clip's own sha256, the frames looked at, a note."""
+    def setUp(self):
+        import public_sources
+        self.ps = public_sources
+        self.dir = Path(tempfile.mkdtemp())
+        self.rec = clip("clip-river-a", claude_seen=None)
+        del self.rec["claude_seen"]
+        (self.dir / "clip-river-a.json").write_text(json.dumps(self.rec))
+
+    def tearDown(self):
+        shutil.rmtree(self.dir)
+
+    def seen(self, **kw):
+        args = {"clip_id": "clip-river-a", "clip_sha256": self.rec["sha256"], "frames": 5,
+                "note": "5 frames: river over rocks, no person, no text", "reviewer": "claude-session-reviewer"}
+        args.update(kw)
+        return self.ps.footage_seen(args.pop("clip_id"), args.pop("clip_sha256"), args.pop("frames"),
+                                    args.pop("note"), library=self.dir, today="2026-10-31", **args)
+
+    def test_e237_claude_seen_only_after_a_named_frame_review(self):
+        self.assertFalse(ss.footage_ok(self.rec))
+        for kw, code in (({"note": " "}, "FOOTAGE_REVIEW_NOTE_MISSING"), ({"frames": 1}, "FOOTAGE_REVIEW_INCOMPLETE"),
+                         ({"clip_sha256": "0" * 64}, "FOOTAGE_SHA256_MISMATCH"), ({"clip_id": "clip-gone"},
+                                                                                   "FOOTAGE_UNKNOWN"),
+                         ({"reviewer": None}, "REVIEWER_IDENTITY_REFUSED")):
+            with self.assertRaises(SystemExit) as err:
+                self.seen(**kw)
+            self.assertTrue(str(err.exception).startswith(code), (kw, str(err.exception)))
+        self.assertNotIn("claude_seen", json.loads((self.dir / "clip-river-a.json").read_text()))
+        rec = self.seen()
+        self.assertTrue(ss.footage_ok(rec))
+        self.assertEqual((rec["claude_seen_review"]["model"], rec["claude_seen_review"]["frames"]),
+                         ("claude-session-reviewer", 5))
+        unvetted = dict(self.rec, vetting="REJECTED")
+        (self.dir / "clip-river-a.json").write_text(json.dumps(unvetted))
+        with self.assertRaises(SystemExit) as err:
+            self.seen()
+        self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_VETTED"))
+
+
 if __name__ == "__main__":
     unittest.main()
