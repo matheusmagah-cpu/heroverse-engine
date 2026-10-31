@@ -27,6 +27,14 @@ original evidence. This page is not a historical task queue or a second producti
   motion. Retain truthful rights/provenance and distinguish camera motion from acted motion.
 - No new spending or paid fallback. Use current cost/capacity evidence and existing ledgers; reconcile uncertain
   provider jobs instead of repeating them.
+- Owner, 2026-10-31 (Buzzy track): to get flow, a Short may be produced as a whole by Buzzy (prepaid annual
+  plan, its cheapest adequate model, credits managed to last the year), with Pavo only for the hook and the
+  Keeper's close. The owner set the 9.5 floor for image-only videos; for this Buzzy track the bar is "coherent,
+  a minimum of appearance and a good layer of originality". Concretely: our own KJV script, narration, Keeper
+  commentary and captions are the originality layer (never Buzzy's agent rewriting the script); hard refusals stay
+  (KJV text exact, God never shown as a figure, nothing modern, no on-screen AI text or watermark, AI disclosure,
+  technical/loudness checks); the audiovisual review floor for this track is 8.0 overall with every item >= 7.
+  The 9.5 floor and the frozen QA stay unchanged for the existing image/Pavo track and for longs.
 - Owner, 2026-10-31 (correction): Pavo generates VIDEO only for the hook, character-specific spoken lines and the
   Keeper's closing lines, nothing else; plus the one exception the owner named: the episode's THUMBNAIL image may
   be made in Pavo, built from the mined package rules (character close-up, emotion, few words) to be striking and
