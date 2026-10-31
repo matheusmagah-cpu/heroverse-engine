@@ -2696,6 +2696,14 @@
   "THUMB_REVIEW_SHA256_MISMATCH": {
    "class": "N",
    "why": "thumbs.py approve, a local review command run by PR: the full-resolution review's sha256 is not the cropped candidate's own (E239); publish_problems names it as THUMB_NOT_APPROVED"
+  },
+  "THUMB_GRADE_INVALID": {
+   "class": "N",
+   "why": "thumbs.py finalize, a local review tool run after the generation: the colour grade the reviewer chose for the candidate picture is refused by thumbs.grade_problems before anything is recorded (no generation is redone; E241); publish_problems re-checks the recorded grade as THUMB_NOT_APPROVED: a grade that names no factor, an unknown one or is not saturation=F[,contrast=F]"
+  },
+  "THUMB_GRADE_OUT_OF_BOUNDS": {
+   "class": "N",
+   "why": "thumbs.py finalize, a local review tool run after the generation: the colour grade the reviewer chose for the candidate picture is refused by thumbs.grade_problems before anything is recorded (no generation is redone; E241); publish_problems re-checks the recorded grade as THUMB_NOT_APPROVED: a factor outside 1.0 .. GRADE_MAX (saturation 1.6, contrast 1.2)"
   }
  },
  "review": {
