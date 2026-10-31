@@ -2977,6 +2977,79 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E236",
+   "date": "2026-10-31",
+   "class": [
+    "drift"
+   ],
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168",
+    "E169",
+    "E189",
+    "E218"
+   ],
+   "error": "native_review.py hardcoded the earlier Genesis09 master: the prompt described a 175-second Short, pointed the reviewer at 6.40, 114.28 and 131.46 seconds and asked for coverage 0-175, and validate_report required duration_seconds within 1 of 175, issue times under 175 and coverage ending within 0.5 of 175. The rebuilt master measures about 174.4 s and every other Short differs, so a valid report could be refused (or a wrong one accepted) and the prompt pointed at content that no longer exists.",
+   "fix": "The runner never holds the master (the caller uploads it through the resumable session), so file_ready reads the duration the provider measured on the same hash-, size- and MIME-verified file (Files API videoMetadata.videoDuration) and stores it as duration_seconds in the receipt; a missing or malformed value refuses before inference. prompt(duration) and validate_report(report, duration) use that value with the same tolerances (report within 1 s, issue times inside media, coverage ending within 0.5 s); the stale focus timestamps are removed. Recovery imports the original receipt's duration, requires the prompt hash to match prompt(that duration) and the provider file to still measure it, and a transient retry resubmits with it. Model, sampling, rubric, retry rules and public evidence are unchanged.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e236_measured_master_duration_drives_prompt_and_validation",
+    "covers": [
+     "drift"
+    ]
+   }
+  },
+  {
+   "id": "E237",
+   "date": "2026-10-31",
+   "class": [
+    "direction",
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E165",
+    "E205",
+    "E209",
+    "E212",
+    "E218",
+    "E219",
+    "E223",
+    "E235"
+   ],
+   "error": "DECISIONS allows licensed/public-domain visuals with truthful provenance and the owner (31/10) asked to use real public images, but the still pipeline had no route for them: scene_stills.py approve accepts only a candidate scene-stills.yml generated from the still's own prompt, and shot_sources approve-source takes footage or a generated APPROVED still. Footage was silently unusable as well: footage_ok requires claude_seen, and no code ever wrote it.",
+   "fix": "public_sources.py fetch downloads a picture only over https from allowlisted hosts (plan_check.PUBLIC_PAGE_HOSTS / PUBLIC_FILE_HOSTS, redirects too), reads the licence from the source's own API (Commons extmetadata with the bytes' sha1 equal to the API's; the Met's isPublicDomain), allows only Public Domain, CC0, CC-BY-x and CC-BY-SA-x (attribution naming author and licence required for BY/SA), records the exact bytes' sha256, original size, crop box at the plan's aspect (long side >= 1024) and retrieval time as a DRAFT candidate; a host without a licence reader (LOC, NGA, Rijksmuseum for now) is PUBLIC_LICENCE_UNVERIFIED. public_sources.py approve requires the named reviewer, score >= 9.5, a full-resolution note and every check (period, writing/watermark/signature, God not a figure, characters), keeps every generated-still check (sha256, aspect, prompt, scene rules, E122 prop references) and refuses the same original approved for another still within image_repeat_gap_seconds_min (E139, by the original's sha256). scene_stills.py approve refuses a public candidate. plan_check.frame_problems re-checks the public record and review (STILL_PUBLIC_REFUSED); approve-source carries licence, attribution and the original's sha256 as picture_sha256 (SOURCE_PUBLIC_REFUSED otherwise); publish_episode refuses a description missing a BY/SA attribution (ATTRIBUTION_MISSING, also at check-record); long_build credits it. public_sources.py footage-seen writes claude_seen only with the reviewer, the clip's sha256, >= 3 frames and a note (test_shot_sources FootageSeen).",
+   "antidote": {
+    "file": "migration/production/bible/test_scene_stills.py",
+    "contains": "def test_e237_each_refusal_of_a_public_still",
+    "covers": [
+     "direction",
+     "silent"
+    ]
+   }
   }
  ]
 }

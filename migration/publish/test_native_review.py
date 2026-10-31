@@ -27,31 +27,31 @@ class Review(unittest.TestCase):
                  'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
                  for x in range(7)]}
         before = copy.deepcopy(r)
-        n.validate_report(r)
+        n.validate_report(r, 175)
         self.assertEqual(r, before)
         for field in ('speech_excerpt', 'speaker_observation', 'motion_observation'):
             bad=copy.deepcopy(r); del bad['coverage'][0][field]
             before = copy.deepcopy(bad)
-            with self.assertRaises(n.Refusal): n.validate_report(bad)
+            with self.assertRaises(n.Refusal): n.validate_report(bad, 175)
             self.assertEqual(bad, before)
         for key in (*n.RUBRIC, 'overall'):
             bad=copy.deepcopy(r)
             if key == 'overall': bad[key]=6.6
             else: bad['scores'][key]=6.6
             before = copy.deepcopy(bad)
-            with self.assertRaises(n.Refusal): n.validate_report(bad)
+            with self.assertRaises(n.Refusal): n.validate_report(bad, 175)
             self.assertEqual(bad, before)
             bad['issues']=['00:05.00 - Synthetic fixture defect']
             bad['criterion_issues']={key:[0]}
             before = copy.deepcopy(bad)
-            n.validate_report(bad)
+            n.validate_report(bad, 175)
             self.assertEqual(bad, before)
             for ref in (-1, 1, True, '0'):
                 bad['criterion_issues']={key:[ref]}
                 before = copy.deepcopy(bad)
-                with self.assertRaises(n.Refusal): n.validate_report(bad)
+                with self.assertRaises(n.Refusal): n.validate_report(bad, 175)
                 self.assertEqual(bad, before)
-        self.assertNotIn('the speaking Keeper', n.prompt())
+        self.assertNotIn('the speaking Keeper', n.prompt(175))
 
     def test_e222_issue_times_are_valid_and_inside_media(self):
         report = {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
@@ -69,13 +69,13 @@ class Review(unittest.TestCase):
                 bad['issues'] = [stamp + ' Synthetic defect']
                 before = copy.deepcopy(bad)
                 with self.assertRaises(n.Refusal):
-                    n.validate_report(bad)
+                    n.validate_report(bad, 175)
                 self.assertEqual(bad, before)
         for stamp in ('00:00', '02:54.99', '00:02:54.99'):
             good = copy.deepcopy(report)
             good['issues'] = [stamp + ' Synthetic defect']
             before = copy.deepcopy(good)
-            n.validate_report(good)
+            n.validate_report(good, 175)
             self.assertEqual(good, before)
 
     def test_e222_timestamp_without_description_stays_unvalidated(self):
@@ -99,7 +99,7 @@ class Review(unittest.TestCase):
                                        {'type': 'text', 'text': response_text}]}]}).encode()
                 receipt = Path(d) / 'receipt.json'
                 n.save(receipt, {'status': 'SUBMITTED', 'output_sha256': 'a'*64,
-                                 'interaction_id': 'fixture-id'})
+                                 'interaction_id': 'fixture-id', 'duration_seconds': 175})
                 with patch.object(n, 'request', return_value=({}, body)) as send:
                     with self.assertRaisesRegex(n.Refusal, 'ISSUE_DESCRIPTION_MISSING'):
                         n.poll({'sha256': 'a'*64}, receipt)
@@ -128,8 +128,79 @@ class Review(unittest.TestCase):
                       'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
                       for x in range(7)]}
         before = copy.deepcopy(report)
-        n.validate_report(report)
+        n.validate_report(report, 175)
         self.assertEqual(report, before)
+
+    def test_e236_measured_master_duration_drives_prompt_and_validation(self):
+        # The rebuilt Genesis09 master is 174.4 s: its report must not be judged against an old 175 s constant.
+        f = {'videoMetadata': {'videoDuration': '174.400s'}}
+        duration = n.provider_duration(f)
+        self.assertEqual(duration, 174.4)
+        for bad in ({}, {'videoMetadata': {}}, {'videoMetadata': {'videoDuration': '174.4'}},
+                    {'videoMetadata': {'videoDuration': '0s'}}, {'videoMetadata': {'videoDuration': 174.4}},
+                    {'videoMetadata': {'videoDuration': '-3s'}}, {'videoMetadata': {'videoDuration': '9999s'}}):
+            with self.subTest(bad=bad), self.assertRaises(n.Refusal):
+                n.provider_duration(bad)
+        text = n.prompt(duration)
+        self.assertIn('complete 174.4-second', text)
+        self.assertIn('covering 0-174.4 without gaps', text)
+        for stale in ('175', '6.40', '114.28', '131.46'):
+            self.assertNotIn(stale, text)
+        self.assertEqual(n.prompt(60), n.prompt(60.0))
+        self.assertNotEqual(n.prompt(60), n.prompt(174.4))
+
+        def report(ends):
+            starts = [0] + ends[:-1]
+            return {'audio_received': True, 'visual_received': True, 'duration_seconds': 174.4,
+                    'scores': {k: 9.5 for k in n.RUBRIC}, 'overall': 9.0,
+                    'issues': ['02:54.30 Synthetic final-frame defect'], 'limitations': [],
+                    'criterion_issues': {'overall': [0]},
+                    'coverage': [{'start': a, 'end': b,
+                        'audible_observation': 'Voice over music', 'visual_observation': 'Landscape',
+                        'sync_observation': 'Words align', 'speech_excerpt': 'A synthetic fixture sentence',
+                        'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'}
+                        for a, b in zip(starts, ends)]}
+        good = report([25, 50, 75, 100, 125, 150, 174.4])
+        before = copy.deepcopy(good)
+        n.validate_report(good, duration)
+        self.assertEqual(good, before)
+        # The old constant would have refused this valid 174.4 s report (issue at 174.3 s is inside media).
+        n.validate_report(good | {'issues': ['02:54.39 Synthetic last-frame defect']}, duration)
+        cases = {'COVERAGE_INCOMPLETE': report([25, 50, 75, 100, 125, 150, 173.5]),       # stops early
+                 'COVERAGE_INCOMPLETE ': report([25, 50, 75, 100, 125, 150, 175]),        # exceeds media
+                 'ISSUE_TIMESTAMP_OUTSIDE_MEDIA': good | {'issues': ['02:54.40 Synthetic defect']},
+                 'COVERAGE_DURATION_INVALID': good | {'duration_seconds': 176}}
+        for code, bad in cases.items():
+            with self.subTest(code=code), self.assertRaisesRegex(n.Refusal, code.strip()):
+                n.validate_report(bad, duration)
+        for missing in (None, 0, -1, '174.4', True):
+            with self.subTest(missing=missing), self.assertRaisesRegex(n.Refusal, 'DURATION_INVALID'):
+                n.validate_report(good, missing)
+        # Submit and poll use the receipt's own measured duration; a receipt without one is refused.
+        with tempfile.TemporaryDirectory() as d, patch.object(n, 'free_key', return_value='test'), \
+             patch.object(n, 'request', return_value=({}, json.dumps({'id': 'actual-id', 'model': n.MODEL}).encode())) as send:
+            p = Path(d) / 'receipt.json'
+            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test'})
+            with self.assertRaisesRegex(n.Refusal, 'SUBMIT_STATE_INVALID'):
+                n.submit({'sha256': 'a'*64}, p)
+            send.assert_not_called()
+            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test',
+                       'duration_seconds': duration})
+            n.submit({'sha256': 'a'*64}, p)
+            sent = json.loads(send.call_args.args[2])['input'][1]['text']
+            self.assertEqual(sent, n.prompt(174.4))
+            self.assertEqual(json.loads(p.read_text())['prompt_sha256'], n.hashlib.sha256(sent.encode()).hexdigest())
+        # A file that the provider cannot measure never reaches inference.
+        with tempfile.TemporaryDirectory() as d, patch.object(n, 'free_key', return_value='test'):
+            p = Path(d) / 'receipt.json'
+            n.save(p, {'file_display_name': 'fixture'})
+            digest = 'a' * 64
+            f = {'name': 'files/test', 'state': 'ACTIVE', 'mimeType': 'video/mp4', 'sizeBytes': '80',
+                 'uri': n.API + '/v1beta/files/test', 'sha256Hash': n.base64.b64encode(digest.encode()).decode()}
+            with patch.object(n, 'find_file', return_value=f), \
+                 self.assertRaisesRegex(n.Refusal, 'PROVIDER_DURATION_MISSING'):
+                n.file_ready({'sha256': digest, 'byte_size': '80'}, p)
+            self.assertNotEqual(json.loads(p.read_text())['status'], 'FILE_READY')
 
     def test_e221_provider_hash_encodings_preserve_exact_identity(self):
         digest = '34c91fa1a67f01575596e5440c86ff230f7cd5e0adc55544d945974e864812df'
@@ -173,9 +244,11 @@ class Review(unittest.TestCase):
             n.upload(i,root,receipt); send.assert_not_called()
             self.assertEqual(json.loads(receipt.read_text())['file_display_name'], 'review-master-'+digest+'-1')
             f={'name':'files/test','state':'ACTIVE','mimeType':'video/mp4','sizeBytes':'80',
-               'uri':n.API+'/v1beta/files/test','sha256Hash':n.base64.b64encode(digest.encode()).decode()}
+               'uri':n.API+'/v1beta/files/test','sha256Hash':n.base64.b64encode(digest.encode()).decode(),
+               'videoMetadata':{'videoDuration':'174.400s'}}
             with patch.object(n,'find_file',return_value=f): n.file_ready(i,receipt)
             self.assertEqual(json.loads(receipt.read_text())['status'],'FILE_READY')
+            self.assertEqual(json.loads(receipt.read_text())['duration_seconds'],174.4)
             send.assert_not_called()
 
     def test_exact_content_never_replayed_even_after_success(self):
@@ -222,7 +295,8 @@ class Review(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d, patch.object(n, 'free_key', return_value='test'), \
              patch.object(n, 'request', side_effect=TimeoutError('private URL should not leak')) as send:
             p=Path(d)/'r.json'
-            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test'})
+            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test',
+                       'duration_seconds': 175})
             with self.assertRaises(TimeoutError):
                 n.submit({'sha256': 'a'*64}, p)
             self.assertEqual(json.loads(p.read_text())['status'], 'SUBMIT_UNCERTAIN')
@@ -237,11 +311,11 @@ class Review(unittest.TestCase):
                            'visual_observation': 'video', 'sync_observation': 'sync',
                            'speech_excerpt': 'A synthetic fixture sentence',
                            'speaker_observation': 'One low voice', 'motion_observation': 'camera_only'} for x in range(7)]}
-        n.validate_report(r)
+        n.validate_report(r, 175)
         for delta in ({'audio_received': False}, {'duration_seconds': 20}, {'overall': True},
                       {'coverage': r['coverage'][:-1]}, {'coverage': r['coverage'][1:]}):
             with self.assertRaises(n.Refusal):
-                n.validate_report(r | delta)
+                n.validate_report(r | delta, 175)
 
     def test_e220_single_line_certificate_roundtrip_hides_private_receipt(self):
         with tempfile.TemporaryDirectory() as d:
@@ -262,7 +336,8 @@ class Review(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d, patch.object(n, 'free_key', return_value='test'), \
              patch.object(n, 'request', return_value=({}, json.dumps({'id': 'actual-id', 'model': n.MODEL}).encode())) as send:
             p = Path(d) / 'receipt.json'
-            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test'})
+            n.save(p, {'status': 'FILE_READY', 'output_sha256': 'a'*64, 'file_uri': n.API+'/v1beta/files/test',
+                       'duration_seconds': 175})
             n.submit({'sha256': 'a'*64}, p)
             payload = json.loads(send.call_args.args[2])
             self.assertTrue(payload['background'])

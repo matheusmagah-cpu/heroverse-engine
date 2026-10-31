@@ -285,6 +285,8 @@ def approve(still, candidate, score, note, stills_dir=None, today=None, *, revie
     if not parts or parts[0] != still or not src.is_file() or not meta_path.is_file():
         raise SystemExit(f"STILL_CANDIDATE_UNKNOWN {candidate} (a candidate of {still} in stills/candidates)")
     meta = json.loads(meta_path.read_text())
+    if "public" in meta:   # E237: a public picture is approved only with its licence and full review checks
+        raise SystemExit(f"PUBLIC_CANDIDATE_REFUSED {candidate} (a public candidate: public_sources.py approve)")
     if sha256(src) != meta.get("sha256"):
         raise SystemExit(f"STILL_CANDIDATE_SHA256_MISMATCH {candidate}")
     from PIL import Image

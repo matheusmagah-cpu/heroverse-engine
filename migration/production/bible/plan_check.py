@@ -936,6 +936,100 @@ def prop_reference_problems(prompt, references, props=None, pavo=None, plan=None
     return pavo_proof_problems(pavo, len(need))
 
 
+# E237 (owner 31/10, "utilizar a pública"): a scene still may be a public-domain or openly licensed picture
+# (public_sources.py). Pages, files and the APIs read for the licence are https on these hosts only.
+PUBLIC_PAGE_HOSTS = frozenset({"commons.wikimedia.org", "www.metmuseum.org", "www.loc.gov", "www.nga.gov",
+                               "www.rijksmuseum.nl"})
+PUBLIC_FILE_HOSTS = frozenset({"upload.wikimedia.org", "images.metmuseum.org", "tile.loc.gov", "api.nga.gov",
+                               "media.nga.gov", "iiif.micr.io"})
+PUBLIC_API_HOSTS = frozenset({"commons.wikimedia.org", "collectionapi.metmuseum.org", "www.loc.gov", "api.nga.gov",
+                              "data.rijksmuseum.nl"})
+PUBLIC_LICENCE = re.compile(r"^(Public Domain|CC0|CC-BY-[0-9]\.[0-9]|CC-BY-SA-[0-9]\.[0-9])$")
+# what the reviewer checks at full resolution before a public still is approved
+PUBLIC_REVIEW_CHECKS = ("period", "writing", "god", "characters")
+# the crop's long side: a FLUX still's own (1024), so a public still is never upscaled further than a generated one
+PUBLIC_CROP_LONG_MIN = 1024
+
+
+def normalize_licence(machine, short=""):
+    """A licence as published (Commons extmetadata `License` / `LicenseShortName`) -> Public Domain, CC0, CC-BY-x or
+    CC-BY-SA-x, or None (NC, ND, GFDL-only, unknown: refused)."""
+    for raw in (machine, short):
+        t = re.sub(r"[\s_]+", "-", str(raw or "").strip().lower())
+        if not t:
+            continue
+        if re.search(r"(^|-)(nc|nd)(-|$)", t):
+            return None
+        if t in ("pd", "public-domain") or t.startswith("pd-") or t.startswith("public-domain"):
+            return "Public Domain"
+        if t in ("cc0", "cc-zero", "cc0-1.0", "cc-0"):
+            return "CC0"
+        m = re.fullmatch(r"cc-by(-sa)?-([0-9]\.[0-9])", t)
+        if m:
+            return f"CC-BY{'-SA' if m.group(1) else ''}-{m.group(2)}"
+    return None
+
+
+def public_problems(public, aspect="9:16"):
+    """E237: what keeps a public picture's record from carrying a still: hosts, licence (allowlist), attribution for
+    CC-BY / CC-BY-SA, the exact bytes' sha256, the original's size and a crop inside it at ASPECT and resolution."""
+    p = public if isinstance(public, dict) else {}
+    out = []
+    import urllib.parse
+    for key, hosts in (("source_page", PUBLIC_PAGE_HOSTS), ("file_url", PUBLIC_FILE_HOSTS)):
+        u = urllib.parse.urlsplit(str(p.get(key) or ""))
+        if u.scheme != "https" or (u.hostname or "") not in hosts:
+            out.append(f"PUBLIC_HOST_REFUSED {key} {p.get(key)!r} (https on {sorted(hosts)})")
+    lic = p.get("licence")
+    if not isinstance(lic, str) or not PUBLIC_LICENCE.fullmatch(lic):
+        out.append(f"PUBLIC_LICENCE_REFUSED {lic!r} (Public Domain, CC0, CC-BY or CC-BY-SA; never NC, ND or unknown)")
+    elif lic.startswith("CC-BY") and not (isinstance(p.get("attribution"), str) and p.get("author")
+                                          and str(p["author"]) in p["attribution"] and lic in p["attribution"]):
+        out.append(f"PUBLIC_ATTRIBUTION_MISSING {lic} (its attribution names the author and the licence)")
+    if p.get("licence_source") not in ("commons-extmetadata", "met-collectionapi") or not p.get("author") \
+            or not p.get("retrieved_at"):
+        out.append("PUBLIC_RECORD_INCOMPLETE (licence_source read from the source's API, author, retrieved_at)")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(p.get("sha256") or "")):
+        out.append("PUBLIC_RECORD_INCOMPLETE (the downloaded bytes' sha256)")
+    dims, box = p.get("dimensions"), p.get("crop")
+    ints = lambda v, n: isinstance(v, list) and len(v) == n and all(  # noqa: E731
+        isinstance(x, int) and not isinstance(x, bool) and x >= 0 for x in v)
+    if not ints(dims, 2) or not ints(box, 4) or box[2] <= 0 or box[3] <= 0 \
+            or box[0] + box[2] > dims[0] or box[1] + box[3] > dims[1]:
+        out.append(f"PUBLIC_CROP_INVALID {box} (a box [x, y, w, h] inside the original {dims})")
+    else:
+        aw, ah = (int(v) for v in aspect.split(":"))
+        if abs(box[2] / box[3] - aw / ah) > 0.01:
+            out.append(f"STILL_ASPECT_MISMATCH crop {box} is not {aspect}")
+        if max(box[2], box[3]) < PUBLIC_CROP_LONG_MIN:
+            out.append(f"PUBLIC_RESOLUTION_LOW crop {box[2]}x{box[3]} (long side >= {PUBLIC_CROP_LONG_MIN})")
+    return out
+
+
+def public_review_problems(review):
+    """E237: the reviewer's full-resolution review of a public still names every check and what it saw."""
+    r = review if isinstance(review, dict) else {}
+    out = []
+    missing = [c for c in PUBLIC_REVIEW_CHECKS if c not in (r.get("checked") or [])]
+    if missing:
+        out.append(f"PUBLIC_REVIEW_INCOMPLETE {missing} (period accuracy; no legible writing, watermark or signature "
+                   "text; God never a figure; characters consistent or anonymous)")
+    if not isinstance(r.get("note"), str) or not r["note"].strip():
+        out.append("PUBLIC_REVIEW_NOTE_MISSING (what the full-resolution review saw)")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(r.get("reviewed_sha256") or "")):
+        out.append("PUBLIC_REVIEW_INCOMPLETE (the sha256 of the image reviewed)")
+    return out
+
+
+def public_still_problems(rec, aspect="9:16"):
+    """E237: an APPROVED public still: its record and its review, the review of exactly the approved image."""
+    approved = (rec or {}).get("approved") or {}
+    out = public_problems(rec.get("public"), aspect) + public_review_problems(approved.get("review"))
+    if (approved.get("review") or {}).get("reviewed_sha256") != rec.get("sha256"):
+        out.append("PUBLIC_REVIEW_INCOMPLETE (the review is not of the approved image)")
+    return out
+
+
 def _image_size(path):
     """(width, height) of a PNG or JPEG, read from its header (no imaging library at plan time)."""
     data = Path(path).read_bytes()
@@ -1000,6 +1094,9 @@ def frame_problems(i, shot, plan, stills_dir=None):
                 or src.suffix.lower() not in (".jpg", ".jpeg", ".png"):
             out.append(f"STILL_PATH_REFUSED shot {i} {sid} ({f} {still}: a PNG/JPEG inside the repository)")
             continue
+        if "public" in rec:   # E237: a public picture keeps its licence, attribution and full review
+            out += [f"STILL_PUBLIC_REFUSED shot {i} {sid} ({f} {still}: {p})"
+                    for p in public_still_problems(rec, aspect)]
         out += [f"STILL_PROP_UNREFERENCED shot {i} {sid} ({f} {still}: {p}; E122)"
                 for p in prop_reference_problems(rec.get("prompt"), rec.get("references"), pavo=rec.get("pavo"),
                                                  plan=plan)]
