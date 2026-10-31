@@ -110,6 +110,7 @@ One current home per subject:
 - `production/bible/SERIES.md`, `PROMPT_GUIDE.md`, `LONG_DESIGN.md`: series, construction and long-specific design.
 - `ops/CLAUDE_REVIEW.md`: actual audiovisual review; `ops/ERRORS.json`: regression evidence;
   `ops/RUNNER_WAKEUP.md`: runner mechanics when that execution surface is needed.
+- `ops/AUTOPILOT.md`: the free, session-independent pipeline design (autopilot phases, fallbacks).
 - `strategy/DECISIONS.md`: current generic policy; `MODELING_SPEC.md`, `VIDIQ.md`,
   `BEAT_THE_REFERENCE_RULE.md`: research/measurement details subject to SYSTEM and current no-spending policy.
 - `STANDARD.md`: applicable rendering mechanics; historical audits and evidence are records, not another work queue.
