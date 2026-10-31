@@ -8,5 +8,86 @@
    "source": "buzzy.now header, owner's browser"
   }
  ],
- "calls": []
+ "calls": [
+  {
+   "date": "2026-10-31",
+   "project_id": "6ae6543a7f163a25e37cb50a",
+   "model": "dreamina-seedance-2-0-mini-260615",
+   "resolution": "480p",
+   "aspect_ratio": "9:16",
+   "tool": "generate_video",
+   "executor": "claude-opus-5-5 (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
+   "authorization": "owner 2026-10-31: genesis-10 end-to-end Buzzy experiment, cap 3,000 credits",
+   "credits": null,
+   "credits_note": "not reported by list_model, generate_video or get_task; balance not readable through the MCP connector. Read it in the buzzy.now header and fill in.",
+   "balance_before": null,
+   "balance_after": null,
+   "episode_shot": "genesis-10-short s-voice",
+   "purpose": "cost/quality probe: text-to-video, cold-open dawn on Ararat",
+   "duration_s": 8,
+   "task_id": "gt_auZUOn8WOiXjfLUKauZUP6ttu6zauhp6",
+   "node_id": "6ae6543fab6dbbacdaba1a7a",
+   "submitted_utc": "20:49:05",
+   "ready_utc": "~20:51:40",
+   "wall_minutes": 2.6,
+   "output_sha256": "3b989df5be8cc2fe948ab5c7bde10252910b1d49590da311743118e067f5d793",
+   "output": "496x864 24 fps 8.04 s, with generated ambient audio"
+  },
+  {
+   "date": "2026-10-31",
+   "project_id": "6ae6543a7f163a25e37cb50a",
+   "model": "dreamina-seedance-2-0-mini-260615",
+   "resolution": "480p",
+   "aspect_ratio": "9:16",
+   "tool": "generate_video",
+   "executor": "claude-opus-5-5 (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
+   "authorization": "owner 2026-10-31: genesis-10 end-to-end Buzzy experiment, cap 3,000 credits",
+   "credits": null,
+   "credits_note": "not reported by list_model, generate_video or get_task; balance not readable through the MCP connector. Read it in the buzzy.now header and fill in.",
+   "balance_before": null,
+   "balance_after": null,
+   "episode_shot": "genesis-10-short s-noah-dove",
+   "purpose": "character-consistency probe: Noah from the two APPROVED refs (ch-noah-front sha256 4c237cba..., ch-noah-three-quarter 3c5fc8f4..., uploaded as 1024 px JPEG)",
+   "duration_s": 7,
+   "task_id": "gt_auZUOn8WOiXjfLUKauZVFStvVFg7Xhjt",
+   "node_id": "6ae655152b6f54583b5e18ed",
+   "submitted_utc": "~20:52:35",
+   "ready_utc": "~20:57:10",
+   "wall_minutes": 4.6,
+   "output_sha256": "7bd499ce463cdcf6e826351274d9c49b15412c8298bf5796e1a2d4d7346077e0",
+   "output": "496x864 7.10 s"
+  },
+  {
+   "date": "2026-10-31",
+   "project_id": "6ae6543a7f163a25e37cb50a",
+   "model": "dreamina-seedance-2-0-mini-260615",
+   "resolution": "480p",
+   "aspect_ratio": "9:16",
+   "tool": "generate_video",
+   "executor": "claude-opus-5-5 (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
+   "authorization": "owner 2026-10-31: genesis-10 end-to-end Buzzy experiment, cap 3,000 credits",
+   "credits": null,
+   "credits_note": "not reported by list_model, generate_video or get_task; balance not readable through the MCP connector. Read it in the buzzy.now header and fill in.",
+   "balance_before": null,
+   "balance_after": null,
+   "episode_shot": "genesis-10-short s-leaf",
+   "purpose": "action probe: dove lands with olive leaf (text-to-video)",
+   "duration_s": 10,
+   "task_id": "gt_auZUOn8WOiXjfLUKauZVFitvVFg7Xhju",
+   "node_id": "6ae655162b6f54583b5e18ee",
+   "submitted_utc": "~20:52:35",
+   "ready_utc": "~20:55:50",
+   "wall_minutes": 3.3,
+   "output_sha256": "585ae4d805050fa9c43d8d4be56b00ebf7ee544390b2c1043e3cb026e25647e2",
+   "output": "496x864 10.08 s"
+  }
+ ],
+ "non_generation_calls": [
+  {
+   "date": "2026-10-31",
+   "tool": "create_project / upload_file x2 / create_canvas_node",
+   "purpose": "project, Noah reference upload, local preview cut placed on the project canvas (no generation)"
+  }
+ ],
+ "stop_reason_20261031": "Experiment rule: credit cost never visible through the connector, so generation stopped after 3 clips (ai-story agent mode not run: every step bills, and its run_prompt/story steps also expose no cost)."
 }
