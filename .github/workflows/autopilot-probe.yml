@@ -1,0 +1,21 @@
+name: Autopilot A1-0 probe (one-off, never merged)
+on:
+  push:
+    branches: [claude/autopilot-probe]
+    paths: [.github/workflows/autopilot-probe.yml]
+permissions:
+  contents: read
+concurrency:
+  group: autopilot-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Three Gemini calls, each once (no retry), and the settings readback
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/autopilot_probe.py | tee -a "$GITHUB_STEP_SUMMARY"
