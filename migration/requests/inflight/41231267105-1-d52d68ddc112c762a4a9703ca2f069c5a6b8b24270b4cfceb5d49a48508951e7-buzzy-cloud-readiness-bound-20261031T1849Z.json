@@ -1,0 +1,14 @@
+{
+ "workflow": "buzzy-cloud-readiness.yml",
+ "inputs": {},
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "claimed",
+  "request_sha256": "d52d68ddc112c762a4a9703ca2f069c5a6b8b24270b4cfceb5d49a48508951e7",
+  "original_path": "migration/requests/buzzy-cloud-readiness-bound-20261031T1849Z.json",
+  "base_commit": "fd24e7c963faed81f251fc0454314ad8461fd6df",
+  "dispatcher_run_id": "41231267105",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-31T18:49:41.134235+00:00"
+ }
+}
