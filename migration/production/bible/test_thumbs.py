@@ -333,6 +333,128 @@ class CropE239(unittest.TestCase):
         self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
 
 
+class GradeE241(unittest.TestCase):
+    """E241: Pavo's genesis-09 thumbnail pictures are muted (cropped candidates scored R16 saturation 0.33 and 0.36 vs
+    > 0.45), so finalize takes a recorded, bounded grade (saturation <= 1.6, contrast <= 1.2) after crop/resize and
+    before our text. R16's threshold is unchanged and measured on the graded final image; the review is bound to it."""
+    EP = "genesis-09-short"
+    BOX = CropE239.BOX
+    MUTED = (150, 120, 100)   # HSV saturation 0.33: R16 fails as Pavo's pictures did
+
+    def setUp(self):
+        from PIL import Image, ImageDraw
+        self.tmp = tempfile.TemporaryDirectory(dir=HERE / "thumbs")
+        self.dir = Path(self.tmp.name)
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(copy.deepcopy(REAL)))
+        self.img = self.dir / "src.png"
+        im = Image.new("RGB", (1472, 2624), (128, 128, 128))
+        x, y, w, h = self.BOX
+        ImageDraw.Draw(im).rectangle((x, y, x + w - 1, y + h - 1), fill=self.MUTED)
+        im.save(self.img)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def finalize(self, n, grade=None, box=BOX):
+        return thumbs.finalize(self.dir / f"{self.EP}.json", self.img, "7", n, {"source": "test"}, self.dir,
+                               crop=box, grade=grade)
+
+    def test_e241_bounded_grade_recorded_r16_after_it_and_review_bound(self):
+        self.assertEqual(thumbs.GRADE_MAX, {"saturation": 1.6, "contrast": 1.2})
+        muted = self.finalize("1")
+        self.assertEqual(muted["r16"]["status"], "FAIL")   # the threshold is unchanged
+        rec = self.finalize("2", {"saturation": 1.6, "contrast": 1.1})
+        g = rec["grade"]
+        self.assertEqual(g["factors"], {"saturation": 1.6, "contrast": 1.1})
+        self.assertEqual(g["graded_sha256"], rec["base_sha256"])
+        self.assertEqual(g["pre_grade_sha256"], rec["crop"]["cropped_sha256"])
+        self.assertEqual(thumbs.sha256(thumbs.REPO / g["pre_grade_path"]), g["pre_grade_sha256"])
+        self.assertNotEqual(g["pre_grade_sha256"], g["graded_sha256"])
+        # R16 is measured on the graded final image (with our text), not on the pre-grade base
+        self.assertEqual(rec["r16"], thumbs.r16(thumbs.REPO / rec["repo_path"]))
+        self.assertEqual(rec["r16"]["status"], "PASS")
+        self.assertEqual(thumbs.r16(thumbs.REPO / g["pre_grade_path"])["status"], "FAIL")
+        self.assertGreater(rec["r16"]["metrics"]["saturation"], 0.45)
+        self.assertEqual(json.loads((self.dir / "candidates" / f"{rec['id']}.json").read_text())["grade"], g)
+        # out of bounds (or unknown, or not a number) is refused before anything is recorded
+        for n, (grade, code) in enumerate([({"saturation": 1.61}, "THUMB_GRADE_OUT_OF_BOUNDS"),
+                                           ({"contrast": 1.21}, "THUMB_GRADE_OUT_OF_BOUNDS"),
+                                           ({"saturation": 0.9}, "THUMB_GRADE_OUT_OF_BOUNDS"),
+                                           ({"saturation": True}, "THUMB_GRADE_OUT_OF_BOUNDS"),
+                                           ({"vibrance": 1.2}, "THUMB_GRADE_INVALID"),
+                                           ({}, "THUMB_GRADE_INVALID")], start=3):
+            with self.assertRaisesRegex(SystemExit, code):
+                self.finalize(str(n), grade)
+            self.assertFalse((self.dir / "candidates" / f"{self.EP}-7-{n}.json").exists(), grade)
+        for bad in ("saturation=x", "saturation", "saturation=1.2,saturation=1.3", "saturation=nan"):
+            with self.assertRaisesRegex(SystemExit, "THUMB_GRADE_INVALID"):
+                thumbs.parse_grade(bad)
+        self.assertEqual(thumbs.parse_grade("saturation=1.5,contrast=1.2"), {"saturation": 1.5, "contrast": 1.2})
+        meta = self.dir / "meta.json"
+        meta.write_text(json.dumps({"source": "test"}))
+        with self.assertRaisesRegex(SystemExit, "THUMB_GRADE_OUT_OF_BOUNDS"):
+            thumbs.main(["thumbs.py", "finalize", str(self.dir / f"{self.EP}.json"), str(self.img), "7", "9",
+                         str(meta), "--grade", "saturation=1.7"])
+        self.assertFalse((self.dir / "candidates" / f"{self.EP}-7-9.json").exists())
+        # the spec's own rules refuse a graded candidate as any other
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(dict(REAL, text="THE DAY THE FLOOD BEGAN")))
+        with self.assertRaisesRegex(SystemExit, "THUMB_SPEC_REFUSED"):
+            self.finalize("9", {"saturation": 1.6})
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(copy.deepcopy(REAL)))
+        # the review must be of the graded final image: none, the pre-grade base, the graded base or the source fail
+        spec_before = (self.dir / f"{self.EP}.json").read_bytes()
+        for seen in (None, g["pre_grade_sha256"], g["graded_sha256"], rec["source_sha256"]):
+            with self.assertRaisesRegex(SystemExit, "THUMB_REVIEW_SHA256_MISMATCH"):
+                thumbs.approve(self.EP, rec["id"], 9.6, "graded face", self.dir,
+                               reviewer="claude-session-reviewer", reviewed_sha256=seen)
+            self.assertEqual((self.dir / f"{self.EP}.json").read_bytes(), spec_before)
+        spec = thumbs.approve(self.EP, rec["id"], 9.6, "graded face", self.dir,
+                              reviewer="claude-session-reviewer", reviewed_sha256=rec["sha256"])
+        self.assertEqual(spec["approved"]["reviewed_sha256"], rec["sha256"])
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+        # a grade record edited after approval is refused at publish
+        cand = self.dir / "candidates" / f"{rec['id']}.json"
+        for forged, code in ((dict(rec, grade=dict(g, factors={"saturation": 2.0})), "THUMB_GRADE_OUT_OF_BOUNDS"),
+                             (dict(rec, grade=dict(g, graded_sha256=g["pre_grade_sha256"])), "THUMB_GRADE_INVALID"),
+                             (dict(rec, grade=dict(g, pre_grade_sha256=rec["sha256"])), "THUMB_GRADE_INVALID"),
+                             (dict(rec, grade="graded"), "THUMB_GRADE_INVALID"),
+                             (dict(rec, grade=None), "not the candidate's base"),   # the grade hidden
+                             (dict(rec, crop=dict(rec["crop"], cropped_sha256=g["graded_sha256"])),
+                              "not the candidate's base")):
+            thumbs.save(cand, forged)
+            self.assertIn(code, " ".join(thumbs.publish_problems(self.EP, "short", None, self.dir)), forged["grade"])
+        thumbs.save(cand, rec)
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+
+    def test_e241_grade_without_a_crop_and_through_the_command(self):
+        from PIL import Image
+        Image.new("RGB", (1472, 2624), self.MUTED).save(self.img)
+        meta = self.dir / "meta.json"
+        meta.write_text(json.dumps({"source": "test"}))
+        spec = str(self.dir / f"{self.EP}.json")
+        old = thumbs.THUMBS
+        thumbs.THUMBS = self.dir
+        try:
+            self.assertEqual(thumbs.main(["thumbs.py", "finalize", spec, str(self.img), "7", "1", str(meta),
+                                          "--grade", "saturation=1.6", "--crop", ",".join(map(str, self.BOX))]), 0)
+            self.assertEqual(thumbs.main(["thumbs.py", "finalize", spec, str(self.img), "7", "2", str(meta),
+                                          "--grade", "saturation=1.6"]), 0)
+            with self.assertRaises(SystemExit):
+                thumbs.main(["thumbs.py", "finalize", spec, str(self.img), "7", "3", str(meta), "--tint", "1"])
+        finally:
+            thumbs.THUMBS = old
+        both = json.loads((self.dir / "candidates" / f"{self.EP}-7-1.json").read_text())
+        self.assertEqual(both["crop"]["cropped_sha256"], both["grade"]["pre_grade_sha256"])
+        plain = json.loads((self.dir / "candidates" / f"{self.EP}-7-2.json").read_text())
+        self.assertIsNone(plain["crop"])
+        self.assertEqual(plain["r16"]["status"], "PASS")
+        with self.assertRaisesRegex(SystemExit, "THUMB_REVIEW_SHA256_MISMATCH"):   # a graded candidate needs it
+            thumbs.approve(self.EP, plain["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer")
+        thumbs.approve(self.EP, plain["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer",
+                       reviewed_sha256=plain["sha256"])
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+
+
 class Publish(unittest.TestCase):
     def test_check_record_refuses_part_9_without_an_approved_thumbnail(self):
         ep = {"id": "genesis-09-short", "format": "short", "part": 9}
