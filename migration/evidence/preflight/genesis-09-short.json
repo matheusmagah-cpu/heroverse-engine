@@ -1,7 +1,7 @@
 {
  "plan": "migration/production/bible/plans/genesis-09-short.json",
  "episode": "genesis-09-short",
- "checked_at": "2026-10-31T21:29:14Z",
+ "checked_at": "2026-10-31T21:33:46Z",
  "plan_check": {
   "problems": [],
   "pending": [],
@@ -181,7 +181,7 @@
   "setups": "0caff8f5bd70483f889bf2219fa29949d17504192dee6aef96f0bc8dcbba1b4a",
   "code": {
    "episode_build.py": "684709b0ae447e0763fe3ee588e4889694998ed245c5a696a091874784e41c25",
-   "plan_check.py": "254ca663abca6121102e2f4885309ed9229d6da34c12beb96de67045d8fb257a",
+   "plan_check.py": "88f393459bdf2590655e5229dbf6e6a3e00668d83b42173c056e6930b536515d",
    "voice_pace.py": "d4d2850c60e7df3680130725b6d584a83239538ad91f59671fcff4a626837c4b",
    "lipsync_check.py": "8222df7918d027eb2dbe21ca351cf29ae4c5f59bcda377906e4156a2be8dfdc9",
    "syncnet.py": "0f6e65316b50850629e488e6167ad7159efc3b2480d27ced3166311e054633f7",
