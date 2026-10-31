@@ -1,0 +1,1236 @@
+{
+ "episode": "genesis-09-short",
+ "shots": {
+  "s-voice": {
+   "kind": "scene",
+   "lines": null,
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. The black clouds roll in lower over the valley and lightning flickers deep inside them, the cold wind bending the dry grass and lifting dust off the slopes, the great dark shape on the hill unmoving. Dusk, the light failing. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-voice.jpg"
+   },
+   "speaker": "god",
+   "line": "For yet seven days, and I will cause it to rain upon the earth forty days and forty nights;",
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "ceae3b98016ab667f6e801ea81af18a8faeaf54bd7a86f6c3476ab35eee25e5a",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-voice",
+    "still_sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 8,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-finished": {
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The crowd seen from behind points and mutters, shifting on its feet, as dust drifts across the slope below the open wooden door on the hill. Late afternoon, the long shadows lengthening. Mocking and uneasy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-finished.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "da63873969c42f6051cfd6037d089511b0b3fba88b98d5902e5b768e013e6674",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-finished",
+    "still_sha256": "88e470eb1e28212e73dc78d9740443aeee2997458062f9aecf639dc6512437ef",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-finished.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 8,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-sky": {
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tilt up. The men in silhouette pause in their work and glance up at the darkening sky, then turn back to their fires, smoke drifting across the camp. Evening, the clouds thickening. Heedless and uneasy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-sky.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "54b8b18785fa340ed2cdf2842e1da8f014fb0010e10622105908f2eb07f0747a",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-sky",
+    "still_sha256": "801fa50d75c3dd7448ee719017cd2a4e15a2a4f14d931f4e63395e3b07fa9f29",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-sky.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 6,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-noah-door": {
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. An old man with short grey hair on a bare head, in a plain brown wool robe belted with a rope, barefoot, seen from behind, his face never visible, standing in a great square doorway of rough pitch-black planks under a grey sky, looks out over the valley, a gust of wind tugging at his robe, while people in silhouette pass far below without looking up. Overcast afternoon, flat grey light on the timber. Patient and grave. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-short-s-noah-door.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "13cb3978dc45967c191083d8a94cb9a60d239754580106ebc65c1c7eb0fa6383",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-short-s-noah-door",
+    "still_sha256": "db17cb9b9a1b8647986b67ba6a27220cbee81fbc037e2da0db6a9e4f4394bfff",
+    "repo_path": "migration/production/bible/stills/genesis-09-short-s-noah-door.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 6,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-pairs": {
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The animals walk on in pairs up the hillside path while the figures in silhouette stand aside and watch. Evening, warm low sun. Ordered and strange. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-pairs.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "521081c5566c8fed025193ed69fb68b48e2d0706983a263728a33b4e5a374a24",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-pairs",
+    "still_sha256": "71f4b0f83091cca827abdca3fb9a9cf4ffe86959762144d420da048954d119d4",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-pairs.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-lions": {
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. The lions and the sheep walk down the mountain path side by side and the small silhouettes below back away. Morning, pale golden light. Astonished and hushed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-lions.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "017b885f3864e9b6f33caab275ef489e7d6f843958b646745793020624c1d41b",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-lions",
+    "still_sha256": "c0e0530f2cb87fc9ce3ad2d091aef496adf4259582d2cee156e27d88aba56df2",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-lions.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 10,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-music": {
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The silhouettes whirl around the bonfire, sparks and smoke rising, never looking up at the dark hill behind them. Night, firelight flickering. Merry and blind. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-music.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "3bd7e4c09195edf42088868d1760e1bf721894e67405a69d079802f6f8a8009b",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-music",
+    "still_sha256": "d5f19084e070ceef8dc473cd600c46a3e2b66fd2ac07d4a53a9b070a69799dd9",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-music.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-enter": {
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The family seen from behind climbs the ramp step by step with their bundles and passes in through the wide wooden door, the first drops of rain spotting the boards. Grey morning. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-enter.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "8a3f20e23162bd8882f1acef78a2459a37a0f95f13b1809adb33973807b8483d",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-enter",
+    "still_sha256": "b642611e2f1c474e73f82723c8a974c08c57966ea075f9dff71d597be0c3ddd7",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-enter.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-shut": {
+   "kind": "scene",
+   "lines": [
+    6,
+    7
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The wide wooden door swings slowly up and shuts by itself with a heavy boom, and the onlookers in silhouette at the foot of the ramp stumble back. Grey dusk, rain streaking down. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-shut.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "fa50d14debaa12b94223d38b7db63cc4d5eb0724c300a989b2a6b51bb40cacbc",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-shut",
+    "still_sha256": "db588b95d8ed19001535fe431c512e31ce1da162b114fa0f37b0cd8dad4c4d07",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-shut.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 10,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-windows": {
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow tilt down. The rain pours down in sheets on the camp, tiny silhouettes running between the tents as lightning splits the black sky. Night, lightning. Overwhelming and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-windows.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "66777165e08616ead9e896d2542b0e5e1d269a324cea73b30f504b0f24ddf11b",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-windows",
+    "still_sha256": "874e794546c8fa5a94c8943d381ed6dec4dfb61f14d8427c6c6fdb333d419e99",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-windows.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 8,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-springs": {
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. Muddy water bursts up out of the cracked earth and floods between the collapsing tents as the silhouettes wade away. Night, rain and lightning. Frantic and dark. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-springs.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "2931b6b7c5590b4d4029e1a288bb545d683ff901d8a8f5e5761ebcb73673cc16",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-springs",
+    "still_sha256": "b847de39a8a8b3a34aa2b1f1bc0d375b8fd21d2b320ddf129affc374f0044566",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-springs.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 10,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-climb": {
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow crane up. The long line of tiny silhouettes struggles up the muddy hillside as the valley below fills with brown water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 11,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-climb.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "c5acc1908763e2782f2af4f121721184b6937282bdbe8032da3fb00ff5b6fcd9",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-climb",
+    "still_sha256": "7d7a2157951ae64c9b7b280792bdd5ca01ce2f9f9d1dfdce02ab50729a4f12a4",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-climb.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 11,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-float": {
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. It drifts slowly across the drowned valley and the last treetops sink beneath it, the figures in silhouette on the tree trunk watching it go. Grey day, rain and mist. Vast and lonely. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 10,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-float.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "1599816cfaeb4471ec75cc16f50a0d26ee70a8c97536476a4fbbc40ebd8054a4",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-float",
+    "still_sha256": "0495ab46be49ef22e0bcf3f2bd38a3b191c474dae36bd37ac2012af85f8146b5",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-float.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 10,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-fists": {
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. The figures in silhouette seen from behind hammer their fists on the wet black planks as rain runs down them. Grey day, cold rain. Desperate and too late. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-fists.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "1c1f85b7a06cb9babb6cd571386e9eea3cfcba450245376501f51c2a4401a8bc",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-fists",
+    "still_sha256": "04fb28066669996668d74a6835a0633defeb92dc4f4258aa490ee5c1ef3d78ee",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-fists.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-hills": {
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. The tops of the hills sink one after another under the brown flood as the tiny silhouettes wade toward the last one. Grey day, rain and mist. Relentless and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-hills.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "f01beb012323a21a95c60e1a8569ec07418aabf7db20fc4cf6608a059970fa78",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-hills",
+    "still_sha256": "3fb41c94fe1308d371015eb86c72aa12291ab0e39695229abd8006a868c77293",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-hills.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-peak-crowd": {
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. The water laps higher at the stones and the silhouettes on the peak press together, the flood stretching away on every side. Grey dusk, rain and mist. Trapped and silent. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-peak-crowd.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "9d1fac09b48a349cde6e5e48fc81f15ec351c79d80586bdcaff7516c18b992f2",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-peak-crowd",
+    "still_sha256": "48b3a53d3909bbcdbbf1db795ec65a0025a13756c948310a9149636a7b183e2a",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-peak-crowd.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 9,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-drift": {
+   "kind": "scene",
+   "lines": [
+    15,
+    16
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The lone man seen from behind watches as the great dark shape drifts away into the rain until it is only a shadow in the mist. Grey dusk. Final and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 8,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-drift.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "538aece5a2798a112ec2cba52d2b5dc60acb41fa760e9ba397adb6e335591cd5",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-drift",
+    "still_sha256": "68b858c87a8a681433de72286958b5065aeaa7ec1a6132622efb460acfde4bbd",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-drift.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 8,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-rock": {
+   "kind": "scene",
+   "lines": [
+    15,
+    16
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The lone man seen from behind stands on the black rock as the grey water rises over his feet. Grey dusk, rain and mist. Alone and too late. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-s-rock.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "9b637854150f091dd0d615dd481999eef09b9e9c13591e37a83c4ca64fd11b9d",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-s-rock",
+    "still_sha256": "ff9e5a85315d1967f9248a2d91e5c43a7ec289f70aa284df4fb72baecb6369fe",
+    "repo_path": "migration/production/bible/stills/genesis-09-s-rock.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 6,
+    "licence": "apache-2.0"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "s-noah-lamp": {
+   "kind": "scene",
+   "lines": [
+    17,
+    18
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man with short grey hair on a bare head, in a plain brown wool robe belted with a rope, barefoot, seen from behind, his face never visible, sits on a rough plank floor in the dark beside a small clay oil lamp, his family in silhouette asleep on the straw around him and a white lamb curled at his feet, and he lifts his eyes toward the drumming of the rain overhead. Dim warm lamplight in deep shadow, the steady sound of rain. Safe and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+    "seconds": 12,
+    "aspect_ratio": "9:16",
+    "references": null,
+    "audios": null,
+    "sound": false,
+    "first_frame": "migration/production/bible/stills/genesis-09-short-s-noah-lamp.jpg"
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "723d30070606fb0977e9c68edeea57568deaefcf5e5ebcb8d5b59017041db35e",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "genesis-09-short-s-noah-lamp",
+    "still_sha256": "7d79d141827ead2780c1b02c218b7f00f9cda19a2e7a008d706977db9b5647eb",
+    "repo_path": "migration/production/bible/stills/genesis-09-short-s-noah-lamp.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "clip_seconds": 12,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "k-insight": {
+   "kind": "keeper",
+   "lines": [
+    19
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
+    "seconds": 11,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-09-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "75ff5984986d4ac531e22202f10dcd263252d99749abe22a089c068872db04ee",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "arc-01-long-k-promise-2",
+    "still_sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
+    "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "still_from": "arc-01-long-k-promise-2",
+    "clip_seconds": 12,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  },
+  "k-question": {
+   "kind": "keeper",
+   "lines": [
+    20
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos.",
+    "seconds": 6,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-09-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "source": "pavo_reuse",
+   "approved": {
+    "asset": "shot-genesis-08-short-k-question-sha256-0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead.mp4",
+    "clip_sha256": "0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead",
+    "request_sha256": "5fd29c79b6f6bc46a5fb8fa7814814b30b04b9fdc92deb5cb55fa9821abc94c8",
+    "score": 9.5,
+    "source": "pavo_reuse",
+    "clip_from": "genesis-08-short#k-question",
+    "clip_seconds": 6
+   },
+   "checks": {
+    "flags": [],
+    "measures": {
+     "still_mouth": {
+      "opening_range": 0.0576,
+      "opening_motion": 0.00068,
+      "window_motion": 0.00211,
+      "closed_opening": 0.00345,
+      "face_frames": 1.0,
+      "frames": 158
+     }
+    }
+   }
+  },
+  "k-close": {
+   "kind": "keeper",
+   "lines": [
+    21
+   ],
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
+    "seconds": 9,
+    "aspect_ratio": "9:16",
+    "references": [
+     ".episode/genesis-09-short/refs/ch-keeper-talk.jpg"
+    ],
+    "audios": null,
+    "sound": false
+   },
+   "source": "still_motion",
+   "approved": {
+    "clip_sha256": null,
+    "request_sha256": "81ad3c28ef78cec3cec371547a9adcf803a8402e38c179ad64de135a01078ac3",
+    "score": 9.5,
+    "source": "still_motion",
+    "still": "arc-01-long-k-promise-3",
+    "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
+    "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
+    "frame": [
+     1080,
+     1920
+    ],
+    "still_from": "arc-01-long-k-promise-3",
+    "clip_seconds": 12,
+    "licence": "Pavo generated (owner-owned)"
+   },
+   "checks": {
+    "flags": [],
+    "measures": null
+   }
+  }
+ },
+ "composed": {
+  "output_sha256": "d731b1ab61ce33fc3174ce7fc14b717cf1bb4f5b6c67ef8e16d5424c1bca6206",
+  "seconds": 174.39,
+  "frame": [
+   1080,
+   1920
+  ],
+  "black_check": {
+   "black_starts": [],
+   "unexpected": [],
+   "intended_dips": [
+    173.59
+   ]
+  },
+  "lufs": -14.5,
+  "keeper_share": 0.132,
+  "lesson_share": 0.136,
+  "spoken": {
+   "s-voice": {
+    "start": 0.0,
+    "end": 5.632,
+    "seconds": 5.632,
+    "speaker": "god"
+   }
+  },
+  "establishing_share": 0.0,
+  "cuts": 52,
+  "timeline": [
+   {
+    "shot": "s-voice",
+    "kind": "scene",
+    "start": 0.0,
+    "end": 2.991,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-voice",
+    "kind": "scene",
+    "start": 2.991,
+    "end": 5.982,
+    "src_start": 5.009,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-finished",
+    "kind": "scene",
+    "start": 5.982,
+    "end": 8.929,
+    "src_start": 0.0,
+    "speed": 1.1051
+   },
+   {
+    "shot": "s-finished",
+    "kind": "scene",
+    "start": 8.929,
+    "end": 11.876,
+    "src_start": 2.667,
+    "speed": 1.1051
+   },
+   {
+    "shot": "s-finished",
+    "kind": "scene",
+    "start": 11.876,
+    "end": 14.823,
+    "src_start": 5.333,
+    "speed": 1.1051
+   },
+   {
+    "shot": "s-sky",
+    "kind": "scene",
+    "start": 14.823,
+    "end": 16.99,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-sky",
+    "kind": "scene",
+    "start": 16.99,
+    "end": 19.157,
+    "src_start": 3.833,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-noah-door",
+    "kind": "scene",
+    "start": 19.157,
+    "end": 21.323,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-noah-door",
+    "kind": "scene",
+    "start": 21.323,
+    "end": 23.49,
+    "src_start": 3.833,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-pairs",
+    "kind": "scene",
+    "start": 23.49,
+    "end": 27.185,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-pairs",
+    "kind": "scene",
+    "start": 27.185,
+    "end": 30.88,
+    "src_start": 5.305,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-lions",
+    "kind": "scene",
+    "start": 30.88,
+    "end": 34.391,
+    "src_start": 0.0,
+    "speed": 1.0533
+   },
+   {
+    "shot": "s-lions",
+    "kind": "scene",
+    "start": 34.391,
+    "end": 37.902,
+    "src_start": 3.333,
+    "speed": 1.0533
+   },
+   {
+    "shot": "s-lions",
+    "kind": "scene",
+    "start": 37.902,
+    "end": 41.413,
+    "src_start": 6.667,
+    "speed": 1.0533
+   },
+   {
+    "shot": "s-music",
+    "kind": "scene",
+    "start": 41.413,
+    "end": 45.209,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-music",
+    "kind": "scene",
+    "start": 45.209,
+    "end": 49.004,
+    "src_start": 5.204,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-enter",
+    "kind": "scene",
+    "start": 49.004,
+    "end": 51.951,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-enter",
+    "kind": "scene",
+    "start": 51.951,
+    "end": 54.898,
+    "src_start": 3.026,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-enter",
+    "kind": "scene",
+    "start": 54.898,
+    "end": 57.845,
+    "src_start": 6.053,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-shut",
+    "kind": "scene",
+    "start": 57.845,
+    "end": 60.588,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-shut",
+    "kind": "scene",
+    "start": 60.588,
+    "end": 63.332,
+    "src_start": 3.628,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-shut",
+    "kind": "scene",
+    "start": 63.332,
+    "end": 66.075,
+    "src_start": 7.257,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-windows",
+    "kind": "scene",
+    "start": 66.075,
+    "end": 69.493,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-windows",
+    "kind": "scene",
+    "start": 69.493,
+    "end": 72.911,
+    "src_start": 4.582,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-springs",
+    "kind": "scene",
+    "start": 72.911,
+    "end": 75.968,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-springs",
+    "kind": "scene",
+    "start": 75.968,
+    "end": 79.024,
+    "src_start": 3.472,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-springs",
+    "kind": "scene",
+    "start": 79.024,
+    "end": 82.081,
+    "src_start": 6.943,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-climb",
+    "kind": "scene",
+    "start": 82.081,
+    "end": 85.33,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-climb",
+    "kind": "scene",
+    "start": 85.33,
+    "end": 88.578,
+    "src_start": 3.876,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-climb",
+    "kind": "scene",
+    "start": 88.578,
+    "end": 91.827,
+    "src_start": 7.751,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-float",
+    "kind": "scene",
+    "start": 91.827,
+    "end": 94.5,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-float",
+    "kind": "scene",
+    "start": 94.5,
+    "end": 97.172,
+    "src_start": 3.664,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-float",
+    "kind": "scene",
+    "start": 97.172,
+    "end": 99.845,
+    "src_start": 7.327,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-fists",
+    "kind": "scene",
+    "start": 99.845,
+    "end": 102.852,
+    "src_start": 0.0,
+    "speed": 1.0022
+   },
+   {
+    "shot": "s-fists",
+    "kind": "scene",
+    "start": 102.852,
+    "end": 105.858,
+    "src_start": 3.0,
+    "speed": 1.0022
+   },
+   {
+    "shot": "s-fists",
+    "kind": "scene",
+    "start": 105.858,
+    "end": 108.865,
+    "src_start": 6.0,
+    "speed": 1.0022
+   },
+   {
+    "shot": "s-hills",
+    "kind": "scene",
+    "start": 108.865,
+    "end": 112.586,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-hills",
+    "kind": "scene",
+    "start": 112.586,
+    "end": 116.307,
+    "src_start": 5.279,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-peak-crowd",
+    "kind": "scene",
+    "start": 116.307,
+    "end": 119.172,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-peak-crowd",
+    "kind": "scene",
+    "start": 119.172,
+    "end": 122.036,
+    "src_start": 3.068,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-peak-crowd",
+    "kind": "scene",
+    "start": 122.036,
+    "end": 124.901,
+    "src_start": 6.135,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-drift",
+    "kind": "scene",
+    "start": 124.901,
+    "end": 128.246,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-drift",
+    "kind": "scene",
+    "start": 128.246,
+    "end": 131.591,
+    "src_start": 4.655,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-rock",
+    "kind": "scene",
+    "start": 131.591,
+    "end": 134.1,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-rock",
+    "kind": "scene",
+    "start": 134.1,
+    "end": 136.609,
+    "src_start": 3.491,
+    "speed": 1.0
+   },
+   {
+    "shot": "s-noah-lamp",
+    "kind": "scene",
+    "start": 136.609,
+    "end": 139.843,
+    "src_start": 0.0,
+    "speed": 1.0778
+   },
+   {
+    "shot": "s-noah-lamp",
+    "kind": "scene",
+    "start": 139.843,
+    "end": 143.076,
+    "src_start": 3.0,
+    "speed": 1.0778
+   },
+   {
+    "shot": "s-noah-lamp",
+    "kind": "scene",
+    "start": 143.076,
+    "end": 146.31,
+    "src_start": 6.0,
+    "speed": 1.0778
+   },
+   {
+    "shot": "s-noah-lamp",
+    "kind": "scene",
+    "start": 146.31,
+    "end": 149.543,
+    "src_start": 9.0,
+    "speed": 1.0778
+   },
+   {
+    "shot": "k-insight",
+    "kind": "keeper-vo",
+    "start": 149.543,
+    "end": 159.99,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "k-question",
+    "kind": "keeper-vo",
+    "start": 159.99,
+    "end": 165.981,
+    "src_start": 0.0,
+    "speed": 1.0
+   },
+   {
+    "shot": "k-close",
+    "kind": "keeper-vo",
+    "start": 165.981,
+    "end": 174.389,
+    "src_start": 0.0,
+    "speed": 1.0
+   }
+  ],
+  "release_asset": "bible-genesis-09-short-sha256-d731b1ab61ce33fc3174ce7fc14b717cf1bb4f5b6c67ef8e16d5424c1bca6206.mp4",
+  "release_tag": "v0.0.0-cloud-assets-20261025",
+  "run_id": "41248615742"
+ }
+}
