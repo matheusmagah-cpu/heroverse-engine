@@ -212,7 +212,9 @@ def record_readback(receipt, body, validator):
             raise Blocked('REPORT_JSON_INVALID') from None
         try:
             validator(report)
-        except Exception:
+        except Exception as exc:
+            r.update(validation_error_type=type(exc).__name__, validation_error=str(exc)[:2000])
+            save(receipt, r)
             raise Blocked('REPORT_VALIDATION_FAILED') from None
         r.update(status='EVIDENCE_COMPLETE', report=report,
                  owner_floor_met=report['overall'] >= 9.5 and all(report['scores'][k] >= 7 for k in RUBRIC))

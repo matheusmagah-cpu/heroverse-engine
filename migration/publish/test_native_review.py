@@ -275,7 +275,7 @@ class Review(unittest.TestCase):
         self.assertNotIn('source_url', w)
         self.assertNotIn('contents: write', w)
         self.assertNotIn('HEROVERSE_REVIEW_MEDIA_URL', w)
-        self.assertLess(w.index('Persist interaction ID'), w.index('native_review.py poll'))
+        self.assertLess(w.index('Persist interaction ID'), w.index('native_review_recovery.py poll'))
         self.assertLess(w.index('Refuse duplicate'), w.index('secrets.'))
         self.assertNotIn('APPROVAL.json', w)
         self.assertNotIn('path: ${{ runner.temp }}/native-review/receipt.json', w)
