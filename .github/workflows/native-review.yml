@@ -19,6 +19,11 @@ on:
       recover_submitted_run:
         description: Failed original run with successful submission; encrypted receipt ingress and GET only
         required: false
+      retry_transient_once:
+        description: One retry only after proven INTERNAL/UNAVAILABLE failure without model output; fresh Free Tier proof required
+        type: boolean
+        required: false
+        default: false
       lease_run_id:
         description: Current shared executor lease; required for submitted-review recovery
         required: false
@@ -46,6 +51,8 @@ jobs:
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Validate native review mode
+        run: python3 -I -B migration/production/bible/native_review_recovery.py options
       - name: Dispatch guard (existing subject, history, imports)
         if: inputs.recover_submitted_run == ''
         env:
@@ -113,6 +120,36 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
       - name: Read the same interaction (GET only)
+        continue-on-error: ${{ inputs.retry_transient_once }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py poll
+      - name: Qualify one transient-error retry without model output
+        if: inputs.retry_transient_once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py qualify-retry
+      - name: Submit one qualified transient-error retry
+        if: inputs.retry_transient_once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py retry-submit
+      - name: Encrypt retry identity
+        if: always() && inputs.retry_transient_once
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist retry identity before readback
+        if: always() && inputs.retry_transient_once
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-retry-submission
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Read the single retry interaction (GET only)
+        if: inputs.retry_transient_once
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GH_TOKEN: ${{ github.token }}
