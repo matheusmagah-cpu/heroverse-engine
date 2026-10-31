@@ -16,7 +16,7 @@ approve`) and `shots/genesis-09-short.json` → `episode_build.py preflight` / `
 public/processed readback of the same video ID.
 
 State on 2026-10-31 23:10Z: all 22 shots approved (5 FLUX stills, 8 Pavo agnes-image stills made at 0 credits and
-kept by the owner, 7 earlier approved stills, k-question's released genesis-08 Pavo clip); thumbnail APPROVED (Pavo
+kept by the owner, 8 earlier approved stills incl. the two Keeper stills, k-question's released genesis-08 Pavo clip); thumbnail APPROVED (Pavo
 image with ch-noah refs, E239 crop, E241 grade); preflight PASS. `episode.yml` run 41248615742 built master
 d731b1ab…6206 (77,852,043 bytes, 174.39 s, -14.5 LUFS, 52 cuts; release asset bible-genesis-09-short-sha256-d731…).
 `native-review.yml` run 41250892924 (gemini-3.8-flash, Free Tier proof read by the owner at 1793487327) completed:
