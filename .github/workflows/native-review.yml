@@ -51,14 +51,14 @@ jobs:
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-      - name: Validate native review mode
-        run: python3 -I -B migration/production/bible/native_review_recovery.py options
       - name: Dispatch guard (existing subject, history, imports)
         if: inputs.recover_submitted_run == ''
         env:
           GUARD_INPUTS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}
         run: python3 -I -B migration/ops/dispatch_guard.py run native-review.yml
+      - name: Validate native review mode
+        run: python3 -I -B migration/production/bible/native_review_recovery.py options
       - name: Refuse duplicate content and rerun before credentials
         if: inputs.recover_submitted_run == ''
         env:
