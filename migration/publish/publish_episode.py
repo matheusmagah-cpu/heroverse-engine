@@ -142,11 +142,22 @@ def problems(episode, video=None):
             sys.path.insert(0, str(THUMBS_CODE))
         import episode_build
         out += episode_build.revocation_problems(episode["id"])
+        out += attribution_problems(episode)
     if video is not None and sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:
         out.append("TITLE_LENGTH")
     return out + description_problems(episode["description"])
+
+
+def attribution_problems(episode, shots_dir=None):
+    """E237: a CC-BY / CC-BY-SA public still approved for a shot of this episode (bible/shots/<id>.json, its
+    `attribution`) is credited word for word in the description, or the record is refused (ATTRIBUTION_MISSING)."""
+    path = Path(shots_dir or THUMBS_CODE / "shots") / f"{episode['id']}.json"
+    shots = (json.loads(path.read_text()).get("shots") or {}) if path.is_file() else {}
+    return [f"ATTRIBUTION_MISSING {sid} ({a['attribution']!r} is not in the description)"
+            for sid, a in sorted(shots.items()) if isinstance(a, dict) and a.get("attribution")
+            and str(a["attribution"]) not in episode.get("description", "")]
 
 
 def record_video_id(episode_path, episode, vid):

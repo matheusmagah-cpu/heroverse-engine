@@ -2662,6 +2662,24 @@
    "class": "A",
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
    "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "SOURCE_PUBLIC_REFUSED": {
+   "class": "N",
+   "why": "E237: approve-source is the review's own local command (after the reviewer saw the candidate, before the PR): it stops no generation, voice or render; it refuses a public still whose licence, attribution or full-resolution review record (plan_check.public_still_problems, the same function plan_check.frame_problems runs) does not hold"
+  },
+  "ATTRIBUTION_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::def record_problems(episode, video=None)",
+   "note": "E237: a CC-BY / CC-BY-SA public still's attribution, approved into shots/<episode>.json, is required word for word in the description; episode_build.py check-record runs publish_episode.problems (attribution_problems) on the record before publish-episode.yml is dispatched"
+  },
+  "STILL_PUBLIC_REFUSED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::def public_still_problems(",
+    "migration/production/bible/plan_check.py::problems += frame_problems(i, s, plan)",
+    "migration/production/bible/episode_build.py::def frame_refusal("
+   ],
+   "note": "E237: an APPROVED public still whose record (hosts, licence allowlist, BY/SA attribution, sha256, crop at aspect and resolution) or full-resolution review (every check, a note, the approved image's sha256) does not hold; public_sources.py fetch and approve refuse it first, plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.public_still_problems"
   }
  },
  "review": {
