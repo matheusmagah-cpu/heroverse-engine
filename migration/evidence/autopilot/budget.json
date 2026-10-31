@@ -1,0 +1,102 @@
+{
+ "schema": "heroverse-autopilot-budget-v1",
+ "limits_source": "migration/ops/AUTOPILOT.md 1.1 (AI Studio, 2026-10-31)",
+ "calls": [
+  {
+   "id": "c0001",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-01-short",
+   "at": "2026-10-31T20:01:10Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 21588,
+   "status": "200",
+   "tokens": 20033
+  },
+  {
+   "id": "c0002",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-02-short",
+   "at": "2026-10-31T20:03:47Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 18362,
+   "status": "200",
+   "tokens": 17242
+  },
+  {
+   "id": "c0003",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-03-short",
+   "at": "2026-10-31T20:05:44Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 16793,
+   "status": "503"
+  },
+  {
+   "id": "c0004",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-04-short",
+   "at": "2026-10-31T20:06:48Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 17208,
+   "status": "503"
+  },
+  {
+   "id": "c0005",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-05-short",
+   "at": "2026-10-31T20:07:47Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 21529,
+   "status": "200",
+   "tokens": 20332
+  },
+  {
+   "id": "c0006",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-06-short",
+   "at": "2026-10-31T20:08:58Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 28308,
+   "status": "503"
+  },
+  {
+   "id": "c0007",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-07-short",
+   "at": "2026-10-31T20:09:28Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 54444,
+   "status": "200",
+   "tokens": 52113
+  },
+  {
+   "id": "c0008",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-08-short",
+   "at": "2026-10-31T20:12:04Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 54832,
+   "status": "503"
+  },
+  {
+   "id": "c0009",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-02-short:repeat",
+   "at": "2026-10-31T20:12:54Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 18362,
+   "status": "503"
+  },
+  {
+   "id": "c0010",
+   "model": "gemini-3.8-flash",
+   "purpose": "calibration:genesis-03-short:repeat",
+   "at": "2026-10-31T20:13:37Z",
+   "pacific_day": "2026-10-31",
+   "tokens_estimate": 16793,
+   "status": "200",
+   "tokens": 15689
+  }
+ ],
+ "stops": []
+}

@@ -1,0 +1,19 @@
+{
+ "model": "gemini-3.8-flash",
+ "validator_version": "short-av-v1",
+ "rule": {
+  "min_accepted_rows": 7,
+  "min_known_bad_rows": 1,
+  "same_verdict_everywhere": true,
+  "max_mean_signed": 0.25,
+  "max_mean_abs": 0.5,
+  "max_row_abs": 1.0,
+  "min_repeats": 2,
+  "max_repeat_abs": 0.3
+ },
+ "qualified": false,
+ "prompt_sha256s": [
+  "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa"
+ ],
+ "reason": "INCOMPLETE_OR_INVALID"
+}

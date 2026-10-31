@@ -1,0 +1,218 @@
+[
+ {
+  "episode": "genesis-01-short",
+  "video_id": "ku2MTQKmXaU",
+  "seconds": 62.8,
+  "accepted_overall": 8.0,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "FAIL",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": "gemini-3.8-flash",
+  "gemini_overall": 6.8,
+  "gemini_status": "FAIL",
+  "gemini_items": {
+   "opening_and_promise": 7.0,
+   "picture_quality": 7.2,
+   "figure_and_background_integrity": 6.2,
+   "captions_readable_and_synced": 7.0,
+   "audio_clarity_and_mix": 7.2,
+   "pacing_and_visual_variety": 6.8,
+   "scripture_on_screen": 6.0,
+   "policy_safe": 7.5
+  },
+  "gemini_issues": [
+   "00:00 - Lacks on-screen chapter/verse citations for recited Genesis scripture passages.",
+   "00:29 - Visual shows a modern person leaning against an automobile under stars, conflicting with primordial theme.",
+   "00:41 - Visual depicts modern snowboarder apparel on snowy peak, contrasting with ancient creation tone.",
+   "01:00 - Audio cut abruptly ends into part-two prompt teaser."
+  ]
+ },
+ {
+  "episode": "genesis-02-short",
+  "video_id": "hwq4qgjreh0",
+  "seconds": 51.9,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": "gemini-3.8-flash",
+  "gemini_overall": 7.1,
+  "gemini_status": "FAIL",
+  "gemini_items": {
+   "opening_and_promise": 7.0,
+   "picture_quality": 7.2,
+   "figure_and_background_integrity": 7.1,
+   "captions_readable_and_synced": 7.0,
+   "audio_clarity_and_mix": 7.2,
+   "pacing_and_visual_variety": 7.3,
+   "scripture_on_screen": 6.5,
+   "policy_safe": 7.5
+  },
+  "gemini_issues": [
+   "00:00 - No on-screen scripture citation or book/chapter reference provided.",
+   "00:12 - Brief visual overlap artifact in subtitle during cut to canopy.",
+   "00:29 - Noticeable compression artifacts and banding around moon imagery.",
+   "00:48 - Text outro lacks book citation despite quoting scripture passages earlier."
+  ]
+ },
+ {
+  "episode": "genesis-03-short",
+  "video_id": "K_ZwsCt-Wg4",
+  "seconds": 46.6,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": null,
+  "error": "PROVIDER_ERROR",
+  "problems": [],
+  "http": 503
+ },
+ {
+  "episode": "genesis-04-short",
+  "video_id": "s9YK37YErRc",
+  "seconds": 48.0,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": null,
+  "error": "PROVIDER_ERROR",
+  "problems": [],
+  "http": 503
+ },
+ {
+  "episode": "genesis-05-short",
+  "video_id": "OYijqQdQq0o",
+  "seconds": 62.6,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": "gemini-3.8-flash",
+  "gemini_overall": 6.9,
+  "gemini_status": "FAIL",
+  "gemini_items": {
+   "opening_and_promise": 6.8,
+   "picture_quality": 7.2,
+   "figure_and_background_integrity": 7.0,
+   "captions_readable_and_synced": 7.3,
+   "audio_clarity_and_mix": 7.4,
+   "pacing_and_visual_variety": 6.8,
+   "scripture_on_screen": 6.5,
+   "policy_safe": 7.5
+  },
+  "gemini_issues": [
+   "00:00 - Hook relies on generic stock landscape rather than a distinctive visual scene.",
+   "00:05 - Visual citation displays only chapter level without specific verse references.",
+   "00:16 - Abrupt cut from grazing livestock to stone altars without narrative bridge.",
+   "00:35 - Narrative climax relies on generic cloud B-roll, abstracting the key event.",
+   "00:53 - Visual pacing slows during the concluding prayer over repeated landscape vistas."
+  ]
+ },
+ {
+  "episode": "genesis-06-short",
+  "video_id": "dyuqBS_FXew",
+  "seconds": 85.5,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "claude-session-reviewer",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": null,
+  "error": "PROVIDER_ERROR",
+  "problems": [],
+  "http": 503
+ },
+ {
+  "episode": "genesis-07-short",
+  "video_id": "Vvfw4W4nV7M",
+  "seconds": 173.8,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "claude-session-reviewer",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": "gemini-3.8-flash",
+  "gemini_overall": 6.7,
+  "gemini_status": "FAIL",
+  "gemini_items": {
+   "opening_and_promise": 7.0,
+   "picture_quality": 6.8,
+   "figure_and_background_integrity": 6.2,
+   "captions_readable_and_synced": 7.1,
+   "audio_clarity_and_mix": 7.2,
+   "pacing_and_visual_variety": 6.8,
+   "scripture_on_screen": 6.0,
+   "policy_safe": 7.5
+  },
+  "gemini_issues": [
+   "00:23 AI morphing distortion visible around figures and water well basin.",
+   "00:47 Unnatural silhouette morphing and limbs warping in campfire fight scene.",
+   "01:11 Direct KJV scripture citations are omitted from on-screen display.",
+   "02:33 AI talking-head lip sync displays rubbery facial distortion and uncanny movements."
+  ]
+ },
+ {
+  "episode": "genesis-08-short",
+  "video_id": "jPNjgf-PWHM",
+  "seconds": 175.11,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "claude-session-reviewer",
+  "accepted_status": "PASS",
+  "repeat": false,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": null,
+  "error": "PROVIDER_ERROR",
+  "problems": [],
+  "http": 503
+ },
+ {
+  "episode": "genesis-02-short",
+  "video_id": "hwq4qgjreh0",
+  "seconds": 51.9,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": true,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": null,
+  "error": "PROVIDER_ERROR",
+  "problems": [],
+  "http": 503
+ },
+ {
+  "episode": "genesis-03-short",
+  "video_id": "K_ZwsCt-Wg4",
+  "seconds": 46.6,
+  "accepted_overall": 9.5,
+  "accepted_reviewer": "unrecorded (historical session)",
+  "accepted_status": "PASS",
+  "repeat": true,
+  "prompt_sha256": "2e6678c0d60d23545add3ae4b9b73409cb0563d29f201a3d02c2ff14815100aa",
+  "model_returned": "gemini-3.8-flash",
+  "gemini_overall": 6.7,
+  "gemini_status": "FAIL",
+  "gemini_items": {
+   "opening_and_promise": 6.8,
+   "picture_quality": 6.9,
+   "figure_and_background_integrity": 6.4,
+   "captions_readable_and_synced": 7.1,
+   "audio_clarity_and_mix": 7.0,
+   "pacing_and_visual_variety": 6.6,
+   "scripture_on_screen": 6.7,
+   "policy_safe": 7.2
+  },
+  "gemini_issues": [
+   "00:00 - Generic opening relies on fragmented stock b-roll clips rather than contextual narrative setup.",
+   "00:07 - Pear orchard footage breaks thematic period immersion for Eden narrative.",
+   "00:32 - Modern silhouetted figure in contemporary jacket walking in misty woods conflicts with period context.",
+   "00:43 - Teaser transition cuts off scripture meditation abruptly with promotional text."
+  ]
+ }
+]
