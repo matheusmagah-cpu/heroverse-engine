@@ -1,0 +1,12 @@
+{
+ "version": "buzzy-ledger-v1",
+ "rule": "owner 2026-10-31: support only, lowest-credit model, balance read before/after each generation; no purchases or upgrades",
+ "balance_seen": [
+  {
+   "date": "2026-10-31",
+   "credits": 42309,
+   "source": "buzzy.now header, owner's browser"
+  }
+ ],
+ "calls": []
+}
