@@ -457,7 +457,9 @@ class GradeE241(unittest.TestCase):
 
 class Publish(unittest.TestCase):
     def test_check_record_refuses_part_9_without_an_approved_thumbnail(self):
-        ep = {"id": "genesis-09-short", "format": "short", "part": 9}
+        # a hypothetical part-9 episode with no thumbnail spec: live episodes get approved thumbnails over time,
+        # so the test never asserts on a real one's current state
+        ep = {"id": "genesis-98-short", "format": "short", "part": 9}
         self.assertTrue(any(p.startswith("THUMB_NOT_APPROVED") for p in pe.thumb_problems(ep)))
         self.assertTrue(any(p.startswith("THUMB_NOT_APPROVED") for p in pe.thumb_problems(dict(ep, id="genesis-99-short"))))
         self.assertEqual(pe.thumb_problems(dict(ep, part=8)), [])   # published parts keep what they have
