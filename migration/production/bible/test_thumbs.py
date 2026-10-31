@@ -214,6 +214,125 @@ class Pipeline(unittest.TestCase):
         self.assertIn("THUMB_SPEC_CHANGED", str(e.exception))
 
 
+class CropE239(unittest.TestCase):
+    """E239: Pavo agnes-image framed a bust with shacks and a stone tower behind Noah in 6 of 6 genesis-09 candidates
+    whatever the prompt said ("only his face"), so finalize takes a recorded crop box on the candidate picture: inside
+    it, at the format's aspect, long side >= half the format's (upscale <= 2x); the record keeps the box and both
+    sha256, every check is of the cropped result, and the full-resolution review is bound to the cropped image."""
+    EP = "genesis-09-short"
+    BOX = [400, 600, 720, 1280]   # 9:16, 1280 / 1920: upscale 1.5x
+
+    def setUp(self):
+        from PIL import Image, ImageDraw
+        self.tmp = tempfile.TemporaryDirectory(dir=HERE / "thumbs")
+        self.dir = Path(self.tmp.name)
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(copy.deepcopy(REAL)))
+        self.img = self.dir / "src.png"
+        im = Image.new("RGB", (1472, 2624), (128, 128, 128))   # grey around the face: R16 fails uncropped
+        x, y, w, h = self.BOX
+        ImageDraw.Draw(im).rectangle((x, y, x + w - 1, y + h - 1), fill=(200, 90, 30))
+        im.save(self.img)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def finalize(self, box, n="1"):
+        return thumbs.finalize(self.dir / f"{self.EP}.json", self.img, "7", n, {"source": "test"}, self.dir, crop=box)
+
+    def test_e239_thumbnail_crop_box_recorded_bound_and_reviewed(self):
+        from PIL import Image
+        self.assertEqual(thumbs.CROP_LONG_MIN, {"short": 960, "long": 640})
+        rec = self.finalize(self.BOX)
+        c = rec["crop"]
+        self.assertEqual(c["box"], self.BOX)
+        self.assertEqual(c["source_size"], [1472, 2624])
+        self.assertEqual(c["source_sha256"], thumbs.sha256(self.img))
+        self.assertEqual(rec["source_sha256"], c["source_sha256"])
+        self.assertEqual(c["cropped_sha256"], rec["base_sha256"])
+        self.assertEqual(c["upscale"], 1.5)
+        self.assertEqual(rec["r16"]["status"], "PASS")   # R16 of the cropped result (the grey frame would fail)
+        with Image.open(thumbs.REPO / rec["base_path"]) as base:
+            self.assertEqual(base.size, (1080, 1920))
+            r, g, b = base.convert("RGB").getpixel((5, 1900))
+            self.assertGreater(r, 180)   # the crop's own pixels, not the grey around it
+        self.assertEqual(json.loads((self.dir / "candidates" / f"{rec['id']}.json").read_text())["crop"], c)
+        # every crop rule refuses before anything is recorded
+        for n, (box, code) in enumerate([([900, 0, 720, 1280], "THUMB_CROP_INVALID"),       # outside the width
+                                         ([0, 2000, 720, 1280], "THUMB_CROP_INVALID"),       # outside the height
+                                         ([-1, 0, 720, 1280], "THUMB_CROP_INVALID"),
+                                         ([0, 0, 1000, 1000], "THUMB_CROP_ASPECT_MISMATCH"),
+                                         ([0, 0, 1280, 720], "THUMB_CROP_ASPECT_MISMATCH"),
+                                         ([0, 0, 504, 896], "THUMB_CROP_RESOLUTION_LOW")], start=2):
+            with self.assertRaisesRegex(SystemExit, code):
+                self.finalize(box, str(n))
+            self.assertFalse((self.dir / "candidates" / f"{self.EP}-7-{n}.json").exists(), box)
+        self.assertEqual(thumbs.crop_problems([0, 0, 540, 960], [1472, 2624], "short"), [])   # exactly 2x
+        self.assertEqual(thumbs.crop_problems([0, 0, 640, 360], [1472, 2624], "long"), [])
+        self.assertIn("THUMB_CROP_RESOLUTION_LOW", " ".join(thumbs.crop_problems([0, 0, 632, 356], [1472, 2624], "long")))
+        with self.assertRaisesRegex(SystemExit, "THUMB_CROP_INVALID"):
+            thumbs.main(["thumbs.py", "finalize", "s", "i", "7", "1", "m", "--crop", "1,2,x,4"])
+        # the review must be of the cropped candidate's bytes: none, the source or the bare crop are refused
+        spec_before = (self.dir / f"{self.EP}.json").read_bytes()
+        for seen in (None, c["source_sha256"], c["cropped_sha256"], "0" * 64):
+            with self.assertRaisesRegex(SystemExit, "THUMB_REVIEW_SHA256_MISMATCH"):
+                thumbs.approve(self.EP, rec["id"], 9.6, "face fills the frame", self.dir,
+                               reviewer="claude-session-reviewer", reviewed_sha256=seen)
+            self.assertEqual((self.dir / f"{self.EP}.json").read_bytes(), spec_before)
+        spec = thumbs.approve(self.EP, rec["id"], 9.6, "face fills the frame", self.dir,
+                              reviewer="claude-session-reviewer", reviewed_sha256=rec["sha256"])
+        self.assertEqual(spec["approved"]["reviewed_sha256"], rec["sha256"])
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+        # an approval edited to the uncropped review, or a crop record edited after it, is refused at publish
+        path = self.dir / f"{self.EP}.json"
+        spec["approved"]["reviewed_sha256"] = c["source_sha256"]
+        thumbs.save(path, spec)
+        self.assertIn("not of the cropped candidate", " ".join(thumbs.publish_problems(self.EP, "short", None, self.dir)))
+        del spec["approved"]["reviewed_sha256"]
+        thumbs.save(path, spec)
+        self.assertIn("not of the cropped candidate", " ".join(thumbs.publish_problems(self.EP, "short", None, self.dir)))
+        spec["approved"]["reviewed_sha256"] = rec["sha256"]
+        thumbs.save(path, spec)
+        cand = self.dir / "candidates" / f"{rec['id']}.json"
+        forged = dict(rec, crop=dict(c, box=[0, 0, 504, 896]))
+        thumbs.save(cand, forged)
+        self.assertIn("THUMB_CROP_RESOLUTION_LOW", " ".join(thumbs.publish_problems(self.EP, "short", None, self.dir)))
+        thumbs.save(cand, dict(rec, crop=dict(c, cropped_sha256=c["source_sha256"])))
+        self.assertIn("not the candidate's base", " ".join(thumbs.publish_problems(self.EP, "short", None, self.dir)))
+        thumbs.save(cand, rec)
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+
+    def test_e239_checks_apply_to_the_cropped_result(self):
+        # a grey crop of a saturated picture fails R16, and approve refuses it even with its own review sha256
+        from PIL import Image
+        Image.new("RGB", (1472, 2624), (200, 90, 30)).save(self.img)
+        from PIL import ImageDraw
+        im = Image.open(self.img).convert("RGB")
+        ImageDraw.Draw(im).rectangle((0, 0, 719, 1279), fill=(128, 128, 128))
+        im.save(self.img)
+        rec = self.finalize([0, 0, 720, 1280])
+        self.assertEqual(rec["r16"]["status"], "FAIL")
+        with self.assertRaisesRegex(SystemExit, "THUMB_R16_FAIL"):
+            thumbs.approve(self.EP, rec["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer",
+                           reviewed_sha256=rec["sha256"])
+        # the spec's rules (character, <= 4 words, period / E238) refuse a cropped candidate as any other
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(dict(REAL, text="THE DAY THE FLOOD BEGAN")))
+        with self.assertRaisesRegex(SystemExit, "THUMB_SPEC_REFUSED"):
+            self.finalize(self.BOX, "2")
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(dict(REAL, prompt=REAL["prompt"] + " No towers.")))
+        with self.assertRaisesRegex(SystemExit, "THUMB_PROMPT_REFUSED .*PERIOD"):
+            self.finalize(self.BOX, "3")
+        # an uncropped candidate keeps the centred cover and needs no review sha256 (as before), but one given is bound
+        (self.dir / f"{self.EP}.json").write_text(json.dumps(REAL))
+        Image.new("RGB", (1472, 2624), (200, 90, 30)).save(self.img)
+        plain = self.finalize(None, "4")
+        self.assertIsNone(plain["crop"])
+        with self.assertRaisesRegex(SystemExit, "THUMB_REVIEW_SHA256_MISMATCH"):
+            thumbs.approve(self.EP, plain["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer",
+                           reviewed_sha256=plain["source_sha256"])
+        thumbs.approve(self.EP, plain["id"], 9.6, "x", self.dir, reviewer="claude-session-reviewer")
+        self.assertEqual(thumbs.publish_problems(self.EP, "short", None, self.dir), [])
+
+
 class Publish(unittest.TestCase):
     def test_check_record_refuses_part_9_without_an_approved_thumbnail(self):
         ep = {"id": "genesis-09-short", "format": "short", "part": 9}

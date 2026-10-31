@@ -3080,6 +3080,23 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E239",
+   "date": "2026-10-31",
+   "error": "Pavo agnes-image ignores 'only his face' for thumbnails: 6 of 6 genesis-09 candidates framed a bust with background structures (shacks, a stone tower) although Noah's face matched the references and the emotion read well. thumbs.py finalize could only centre-cover the whole picture to the format, so the provider's framing went straight into the candidate and the only remedy was another generation that the model frames the same way.",
+   "fix": "thumbs.py finalize SPEC IMAGE RUN N META_JSON --crop X,Y,W,H: a recorded crop box on the candidate picture, checked by thumbs.crop_problems (mirroring plan_check.public_problems for a public still's crop): whole pixels inside the source (THUMB_CROP_INVALID), at the format's aspect within 1% (THUMB_CROP_ASPECT_MISMATCH), long side >= CROP_LONG_MIN = half the format's long side (short 1080x1920 -> 960 px, long 1280x720 -> 640 px) so the Lanczos resize upscales at most 2x (THUMB_CROP_RESOLUTION_LOW). The record keeps crop {box, source_size, source_sha256, cropped_sha256 (the base), upscale}; the spec rules (character refs and look, <= 4 words, period / E238), the text overlay and R16 run on the cropped result. approve --reviewed-sha256 binds the full-resolution review to the cropped candidate's own sha256 (required for a cropped candidate; the source or the bare crop is refused: THUMB_REVIEW_SHA256_MISMATCH), and publish_problems re-checks the crop record and the review binding (THUMB_NOT_APPROVED). Uncropped candidates behave as before.",
+   "class": [
+    "external"
+   ],
+   "prior": [],
+   "antidote": {
+    "file": "migration/production/bible/test_thumbs.py",
+    "contains": "def test_e239_thumbnail_crop_box_recorded_bound_and_reviewed",
+    "covers": [
+     "external"
+    ]
+   }
   }
  ]
 }
