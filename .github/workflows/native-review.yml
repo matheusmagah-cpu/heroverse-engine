@@ -171,6 +171,17 @@ jobs:
           path: ${{ runner.temp }}/native-review/receipt.cms
           retention-days: 7
           if-no-files-found: ignore
+      - name: Write public score evidence (no media, IDs or secrets)
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py public
+      - name: Preserve public score evidence for later executors
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-public-evidence
+          path: ${{ runner.temp }}/native-review-public/public-evidence.json
+          retention-days: 90
+          if-no-files-found: ignore
       - name: Remove ephemeral transport private key
         if: always()
         run: rm -f -- "$RUNNER_TEMP/native-review/ingress.key"

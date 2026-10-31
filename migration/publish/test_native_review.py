@@ -282,5 +282,100 @@ class Review(unittest.TestCase):
         self.assertIn('native-review/receipt.cms', w)
 
 
+class PublicEvidence(unittest.TestCase):
+    """E233: a score must not exist only inside a receipt encrypted to one executor's key."""
+
+    I = {'plan': 'migration/production/bible/plans/genesis-09-short.json', 'sha256': 'b' * 64}
+    PRIVATE = {'interaction_id': 'v1_SyntheticInteraction_abc123', 'file_name': 'files/synthfile42',
+               'file_uri': n.API + '/v1beta/files/synthfile42',
+               'upload_url': n.API + '/upload/v1beta/files?upload_id=SYNTHuploadTOKEN',
+               'response_body_base64': 'eyJzZWNyZXQiOiJyYXcifQ==', 'response_sha256': 'c' * 64}
+
+    def report(self):
+        scores = {k: 9.6 for k in n.RUBRIC}
+        scores['audio_clarity_and_mix'] = 8.0
+        return {'audio_received': True, 'visual_received': True, 'duration_seconds': 175,
+                'scores': scores, 'overall': 9.1,
+                'issues': ['01:54.28 Music swells over the narration in files/synthfile42 '
+                           'see https://example.invalid/x?key=AIzaSyntheticKeyValue123456'],
+                'limitations': ['Sampled at 4 fps'], 'criterion_issues': {'audio_clarity_and_mix': [0],
+                                                                         'overall': [0]},
+                'coverage': [{'start': 0, 'end': 175, 'speech_excerpt': 'secret heard words here'}]}
+
+    def test_e233_public_evidence_has_scores_and_timed_issues_without_private_fields(self):
+        r = dict(self.PRIVATE, status='EVIDENCE_COMPLETE', reviewed_at='2026-10-31T20:00:00+00:00',
+                 report=self.report(), response_text=json.dumps(self.report()))
+        p = n.public_evidence(self.I, r, '999')
+        self.assertTrue(p['report_validated'])
+        self.assertEqual(p['overall'], 9.1)
+        self.assertEqual(p['scores']['audio_clarity_and_mix'], 8.0)
+        self.assertEqual(set(p['scores']), set(n.RUBRIC))
+        self.assertEqual(p['criterion_issues'], {'audio_clarity_and_mix': [0], 'overall': [0]})
+        self.assertTrue(p['issues'][0].startswith('01:54.28 Music swells'))
+        self.assertFalse(p['owner_floor_met'])
+        self.assertFalse(p['production_approved'])
+        self.assertFalse(p['publication_ready'])
+        text = json.dumps(p)
+        for secret in ('SyntheticInteraction', 'synthfile42', 'SYNTHuploadTOKEN', 'eyJzZWNyZXQ',
+                       'AIzaSynthetic', 'example.invalid', 'secret heard words', 'c' * 64):
+            self.assertNotIn(secret, text)
+        for field in ('interaction_id', 'file_name', 'file_uri', 'upload_url', 'response_text',
+                      'response_body_base64', 'provider_response', 'coverage_segments', 'report'):
+            self.assertNotIn(field, p)
+
+    def test_e233_unvalidated_report_is_exposed_but_never_passes(self):
+        good = self.report()
+        good['overall'] = 9.8
+        good['scores'] = {k: 9.8 for k in n.RUBRIC}
+        r = dict(self.PRIVATE, status='COMPLETE_UNVALIDATED', response_text='```json\n' + json.dumps(good) + '\n```')
+        p = n.public_evidence(self.I, r, '1000')
+        self.assertFalse(p['report_validated'])
+        self.assertEqual(p['overall'], 9.8)
+        self.assertFalse(p['owner_floor_met'])
+        self.assertFalse(p['every_criterion_at_least_9_5'])
+
+    def test_e233_provider_failure_publishes_only_error_codes(self):
+        response = {'id': self.PRIVATE['interaction_id'], 'status': 'failed',
+                    'errors': [{'code': 'INTERNAL', 'message': 'detail with files/synthfile42'}]}
+        r = dict(self.PRIVATE, status='PROVIDER_FAILED', provider_response=response)
+        p = n.public_evidence(dict(self.I, recover_submitted_run='41157848418'), r, '41197695635')
+        self.assertEqual(p['provider_error_codes'], ['INTERNAL'])
+        self.assertEqual(p['provider_status'], 'failed')
+        self.assertEqual(p['source_run_id'], '41157848418')
+        self.assertNotIn('scores', p)
+        self.assertNotIn('synthfile42', json.dumps(p))
+        self.assertNotIn('detail with', json.dumps(p))
+
+    def test_e233_missing_receipt_and_summary_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            summary = Path(d) / 'summary.md'
+            with patch.dict(os.environ, {'GITHUB_RUN_ID': '7', 'GITHUB_STEP_SUMMARY': str(summary)}):
+                p = n.write_public(self.I, Path(d) / 'absent.json', Path(d) / 'out')
+                self.assertEqual(p['status'], 'NO_RECEIPT')
+                receipt = Path(d) / 'receipt.json'
+                n.save(receipt, dict(self.PRIVATE, status='EVIDENCE_COMPLETE', report=self.report()))
+                p = n.write_public(self.I, receipt, Path(d) / 'out')
+            stored = json.loads((Path(d) / 'out' / 'public-evidence.json').read_text())
+            self.assertEqual(stored, p)
+            md = summary.read_text()
+            self.assertIn('audio_clarity_and_mix | 8.0', md)
+            self.assertIn('01:54.28', md)
+            self.assertNotIn('synthfile42', md)
+
+    def test_e233_workflow_always_publishes_public_evidence_after_readback(self):
+        w = (ROOT / '.github/workflows/native-review.yml').read_text()
+        step = w.split('- name: Write public score evidence', 1)[1].split('- name:', 1)[0]
+        self.assertIn('if: always()', step)
+        self.assertIn('native_review.py public', step)
+        self.assertNotIn('secrets.', step)
+        upload = w.split('- name: Preserve public score evidence', 1)[1].split('- name:', 1)[0]
+        self.assertIn('if: always()', upload)
+        self.assertIn('native-review-public/public-evidence.json', upload)
+        self.assertIn('retention-days: 90', upload)
+        self.assertLess(w.rindex('native_review_recovery.py poll'), w.index('Write public score evidence'))
+        self.assertLess(w.index('Delete provider media'), w.index('Write public score evidence'))
+        self.assertNotIn('contents: write', w)
+
+
 if __name__ == '__main__':
     unittest.main()

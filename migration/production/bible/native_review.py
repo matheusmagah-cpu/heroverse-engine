@@ -384,6 +384,117 @@ def poll(i, receipt):
     raise Refusal('INTERACTION_PENDING_GET_ONLY')
 
 
+PUBLIC_TEXT_LIMIT = 600
+PUBLIC_LIST_LIMIT = 60
+# Provider/file identifiers, URLs and anything that looks like a credential or signed query.
+_PRIVATE_TOKEN = re.compile(r'https?://\S+|\bfiles/[A-Za-z0-9_-]+|\binteractions/[A-Za-z0-9_-]+'
+                            r'|\bAIza[0-9A-Za-z_-]{10,}|[A-Za-z0-9_-]{32,}')
+
+
+def _public_text(value, secrets):
+    text = str(value)
+    for s in secrets:
+        text = text.replace(s, '[redacted]')
+    return _PRIVATE_TOKEN.sub('[redacted]', text)[:PUBLIC_TEXT_LIMIT]
+
+
+def _score(value):
+    return value if type(value) in (int, float) and 0 <= value <= 10 else None
+
+
+def public_evidence(i, r, run_id):
+    """Non-sensitive score evidence for every later executor (E233).
+
+    Scores, per-criterion scores, criterion links and timed issue text only. No media, no
+    provider file/interaction identifiers, no upload URL, no raw provider reply, no key.
+    An unvalidated report is exposed as such, never as a passing review.
+    """
+    r = r if isinstance(r, dict) else {}
+    secrets = [str(r[k]) for k in ('interaction_id', 'file_name', 'file_uri', 'upload_url')
+               if isinstance(r.get(k), str) and r[k]]
+    prior = r.get('prior_failure') if isinstance(r.get('prior_failure'), dict) else {}
+    if isinstance(prior.get('interaction_id'), str) and prior['interaction_id']:
+        secrets.append(prior['interaction_id'])
+    out = {'version': 'native-review-public-v1', 'plan': i['plan'], 'output_sha256': i['sha256'],
+           'model': MODEL, 'run_id': str(run_id),
+           'source_run_id': str(i.get('recover_submitted_run') or i.get('resume_before_inference') or run_id),
+           'status': r.get('status', 'NO_RECEIPT'),
+           'coverage': {'video_sampling_fps': 4, 'native_audio': True, 'full_input': True},
+           'retry_count': r.get('retry_count', 0) if type(r.get('retry_count')) is int else 0,
+           'production_approved': False, 'publication_ready': False}
+    if r.get('reviewed_at'):
+        out['reviewed_at'] = _public_text(r['reviewed_at'], secrets)[:40]
+    if type(r.get('provider_http_status')) is int:
+        out['provider_http_status'] = r['provider_http_status']
+    response = r.get('provider_response') if isinstance(r.get('provider_response'), dict) else {}
+    if isinstance(response.get('status'), str):
+        out['provider_status'] = response['status'][:40]
+    codes = [e.get('code') for e in response.get('errors', []) if isinstance(e, dict)] \
+        if isinstance(response.get('errors'), list) else []
+    if prior:
+        p = prior.get('provider_response') if isinstance(prior.get('provider_response'), dict) else {}
+        codes += [e.get('code') for e in p.get('errors', []) if isinstance(e, dict)] \
+            if isinstance(p.get('errors'), list) else []
+    codes = [c for c in codes if isinstance(c, str) and re.fullmatch(r'[A-Z_]{1,40}', c)]
+    if codes:
+        out['provider_error_codes'] = codes[:10]
+    if isinstance(r.get('validation_error'), str):
+        out['validation_error'] = _public_text(r['validation_error'], secrets)[:120]
+    report, validated = None, False
+    if isinstance(r.get('report'), dict) and r.get('status') == 'EVIDENCE_COMPLETE':
+        report, validated = r['report'], True
+    elif isinstance(r.get('response_text'), str):
+        try:
+            parsed = json.loads(re.sub(r'^```(?:json)?\s*|\s*```$', '', r['response_text'].strip()))
+            report = parsed if isinstance(parsed, dict) else None
+        except ValueError:
+            report = None
+    if report is not None:
+        scores = report.get('scores') if isinstance(report.get('scores'), dict) else {}
+        out['report_validated'] = validated
+        out['scores'] = {k: _score(scores.get(k)) for k in RUBRIC}
+        out['overall'] = _score(report.get('overall'))
+        links = report.get('criterion_issues') if isinstance(report.get('criterion_issues'), dict) else {}
+        out['criterion_issues'] = {k: [x for x in v if type(x) is int][:PUBLIC_LIST_LIMIT]
+                                   for k, v in links.items()
+                                   if k in (*RUBRIC, 'overall') and isinstance(v, list)}
+        for k in ('issues', 'limitations'):
+            items = report.get(k) if isinstance(report.get(k), list) else []
+            out[k] = [_public_text(x, secrets) for x in items if isinstance(x, str)][:PUBLIC_LIST_LIMIT]
+        known = [v for v in out['scores'].values()] + [out['overall']]
+        out['owner_floor_met'] = bool(validated and None not in known and out['overall'] >= 9.5
+                                      and all(v >= 7 for v in out['scores'].values()))
+        out['every_criterion_at_least_9_5'] = bool(validated and None not in known
+                                                   and all(v >= 9.5 for v in known))
+    return out
+
+
+def summary_markdown(p):
+    lines = [f"### Native review evidence (public, no media)", '',
+             f"- status: `{p['status']}`; run `{p['run_id']}`; source run `{p['source_run_id']}`",
+             f"- master sha256: `{p['output_sha256']}`; model `{p['model']}`"]
+    if p.get('provider_error_codes'):
+        lines.append('- provider error codes: ' + ', '.join(p['provider_error_codes']))
+    if 'scores' in p:
+        lines.append(f"- overall: **{p['overall']}**; validated: {p['report_validated']}; "
+                     f"owner floor met: {p['owner_floor_met']}")
+        lines += ['', '| criterion | score |', '|---|---|']
+        lines += [f'| {k} | {v} |' for k, v in p['scores'].items()]
+        lines += ['', 'Timed issues:'] + [f'- [{n}] {x}' for n, x in enumerate(p['issues'])]
+    return '\n'.join(lines) + '\n'
+
+
+def write_public(i, receipt, out_dir):
+    r = json.loads(receipt.read_text()) if receipt.exists() else {}
+    p = public_evidence(i, r, os.environ.get('GITHUB_RUN_ID', ''))
+    save(Path(out_dir) / 'public-evidence.json', p)
+    summary = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary:
+        with open(summary, 'a') as f:
+            f.write(summary_markdown(p))
+    return p
+
+
 def main():
     i = inputs()
     phase = sys.argv[1]
@@ -405,6 +516,8 @@ def main():
             seal(i, receipt)
         elif phase == 'cleanup':
             cleanup(i, receipt)
+        elif phase == 'public':
+            write_public(i, receipt, Path(os.environ['RUNNER_TEMP']) / 'native-review-public')
         else:
             raise Refusal('PHASE_INVALID')
         print('NATIVE_REVIEW_' + phase.upper() + '_COMPLETE')

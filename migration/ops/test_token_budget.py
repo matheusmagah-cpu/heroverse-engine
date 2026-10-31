@@ -117,7 +117,7 @@ class Budget(unittest.TestCase):
         self.assertEqual(self.run_cli("plan").returncode, 0)
 
     def test_an_allocation_smaller_than_one_p90_action_still_admits_the_first(self):
-        # E233: long allocation 14.6M < long p90 49.2M blocked every long for the week; the project cap stays used + p90.
+        # E234: long allocation 14.6M < long p90 49.2M blocked every long for the week; the project cap stays used + p90.
         self.assertEqual(self.run_cli("check", "", "agent_long").returncode, 0)     # long alloc 400, p90 100, nothing spent
         self.write([entry("2026-10-31T20:00:00Z", "a", out=450)])                   # 450 + p90 100 crosses the budget 500
         self.assertEqual(self.run_cli("check", "", "agent_long").returncode, 2)

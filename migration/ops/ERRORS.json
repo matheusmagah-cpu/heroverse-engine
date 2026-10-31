@@ -2900,6 +2900,35 @@
    "id": "E233",
    "date": "2026-10-31",
    "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231"
+   ],
+   "error": "Native review run 41101753017 produced the only real score for an earlier Genesis09 master (6.0, with timed issues), but the score existed only inside a receipt encrypted to one executor's certificate. When that executor and its key were gone, no later executor could read the score, its per-criterion breakdown or the timed defects, so the responsible-stage fix could not be planned and the provider INTERNAL outcome of later runs was equally invisible without decryption.",
+   "fix": "native_review.py gains a 'public' phase, run with if: always() after readback and cleanup: it writes public-evidence.json (plan, master sha256, model, run IDs, status, provider error codes, overall, per-criterion scores, criterion links, timed issues and limitations) to the job summary and a 90-day public artifact. Provider file/interaction identifiers, upload URL, raw reply, coverage excerpts and credential-like tokens are excluded or redacted; an unvalidated report is labelled report_validated=false and can never set owner_floor_met. The encrypted receipt remains the complete private record; workflow permissions stay contents: read.",
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "test_e233_public_evidence_has_scores_and_timed_issues_without_private_fields",
+    "covers": [
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E234",
+   "date": "2026-10-31",
+   "class": [
     "capacity"
    ],
    "prior": [
