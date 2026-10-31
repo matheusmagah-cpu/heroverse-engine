@@ -1,0 +1,37 @@
+{
+ "id": "genesis-09-s-rock-41236671261-2",
+ "still": "genesis-09-s-rock",
+ "episode": "genesis-09-short",
+ "shot": "s-rock",
+ "run": "41236671261",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static medium-wide rear view. Opaque grey floodwater surrounds one small black rock and one lone grey-haired old man in a pale rough undyed wool robe. The water surface crosses both shins; his feet and ankles lie entirely beneath opaque floodwater. Only small edges of the rock break the surface around his submerged legs. His back faces the camera and his head points straight away toward unbroken empty water stretching across the whole background. His whole body and the surface across both shins fit inside the central third of the square image for a vertical crop. Long visible rain streaks cross the scene. Grey dusk, rain and mist. Alone and too late. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static medium-wide rear view. Opaque grey floodwater surrounds one small black rock and one lone grey-haired old man in a pale rough undyed wool robe. The water surface crosses both shins; his feet and ankles lie entirely beneath opaque floodwater. Only small edges of the rock break the surface around his submerged legs. His back faces the camera and his head points straight away toward unbroken empty water stretching across the whole background. His whole body and the surface across both shins fit inside the central third of the square image for a vertical crop. Long visible rain streaks cross the scene. Grey dusk, rain and mist. Alone and too late. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos., tall vertical composition, the whole subject inside the central third of the frame",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "source": "cf-flux",
+ "conversation_id": null,
+ "quote": null,
+ "references": [],
+ "pavo": null,
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 576 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-rock-41236671261-2.jpg",
+ "sha256": "988d141f86f08558e07d2e2ff94b9549d70360818df0c23e6ca1d04a0586efd9"
+}
