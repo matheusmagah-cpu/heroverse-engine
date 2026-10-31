@@ -1,0 +1,98 @@
+name: 'HeroVerse autopilot plan (S1-S3 - Gemini free text drafts the next Short plan; output is a PR, never a merge)'
+# AUTOPILOT.md S1-S3, phase A1-4. Free: GitHub Actions + Gemini free tier. The planner picks the first Short of
+# arcs.json without a plan, drafts it from the previous plan, and runs kjv_check, plan_check --strict and the own-words
+# overlap check on the exact file (max 3 attempts). Only a plan that passes every gate reaches a branch; the PR is for
+# Claude's review. It writes no approval, selects no source and never merges. Every Gemini call is counted first in
+# migration/evidence/autopilot/budget.json (a 429 stops the day; an uncertain call is never retried).
+# No cron here (single clock design, test_schedules): the A1-7 tick / heartbeat dispatches it.
+# A PR opened with GITHUB_TOKEN does not start pr-checks: the unit tests run in this job and Claude's review runs the rest.
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: 'Optional episode id (default: the first Short without a plan)'
+        required: false
+        default: ''
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: heroverse-gemini-budget
+  cancel-in-progress: false
+jobs:
+  plan:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+      - name: Unit tests
+        run: |
+          python3 -I -B migration/ops/test_autopilot_budget.py
+          python3 -I -B migration/production/bible/test_autopilot_plan.py
+          python3 -I -B migration/production/bible/test_plan_check.py
+      - name: Choose the episode (no duplicate work)
+        id: pick
+        env:
+          INPUT_EPISODE: ${{ inputs.episode }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ep=$(python3 -I -B migration/production/bible/autopilot_plan.py next $INPUT_EPISODE)
+          echo "episode=$ep" >> "$GITHUB_OUTPUT"
+          if [ "$ep" = "NONE" ]; then echo "run=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [[ ! "$ep" =~ ^genesis-[0-9]+-short$|^[a-z0-9-]+-short$ ]]; then echo "BAD_EPISODE"; exit 1; fi
+          branch="claude/autopilot-plan-$ep"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "BRANCH_EXISTS $branch: its PR is waiting for review"; echo "run=no" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "run=yes" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - name: Draft and gate (budgeted; at most 3 attempts)
+        id: draft
+        if: steps.pick.outputs.run == 'yes'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EP: ${{ steps.pick.outputs.episode }}
+        run: |
+          mkdir -p migration/evidence/autopilot
+          set +e
+          python3 -I -B migration/production/bible/autopilot_plan.py draft \
+            migration/evidence/autopilot/budget.json "migration/evidence/autopilot/plan-$EP.json" "$EP"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          { echo '```json'; cat "migration/evidence/autopilot/plan-$EP.json"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit the budget ledger (counts only; no media, no key)
+        if: always() && steps.pick.outputs.run == 'yes'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/autopilot/budget.json
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Record autopilot Gemini budget (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
+      - name: Open the review PR (never merged here)
+        if: steps.draft.outputs.code == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EP: ${{ steps.pick.outputs.episode }}
+          BRANCH: ${{ steps.pick.outputs.branch }}
+        run: |
+          git checkout -q -b "$BRANCH"
+          git add "migration/production/bible/plans/$EP.json" "migration/evidence/autopilot/plan-$EP.json"
+          git commit -q -m "Autopilot plan draft for $EP (Gemini free tier; gates passed; needs review)"
+          git push -q origin "$BRANCH"
+          cat > "$RUNNER_TEMP/body.md" <<EOF
+          Draft plan for \`$EP\`, written by the autopilot planner (GitHub Actions + Gemini free tier, no Claude session).
+
+          Gates that passed in the job on this exact file: kjv_check (every Scripture line is inserted by code from the KJV table), plan_check --strict, own-words overlap (< 15 % against the last 10 plans, < 5 % against mined references). Attempts and findings: \`migration/evidence/autopilot/plan-$EP.json\`.
+
+          Not done, by design: no source, still, clip or thumbnail is chosen or approved; no APPROVAL; not merged. pr-checks does not start for a PR opened with GITHUB_TOKEN: Claude reviews the story, tone and Keeper reuse, then runs the PR checks (push an empty commit) before the squash.
+
+          Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          EOF
+          gh pr create --base main --head "$BRANCH" --title "Autopilot plan draft: $EP" --body-file "$RUNNER_TEMP/body.md" \
+            || echo "PR_CREATE_FAILED: branch $BRANCH is pushed; open the PR by hand (Actions may not be allowed to create PRs)"
+      - name: Record a failed draft (no plan file, evidence only)
+        if: steps.draft.outputs.code != '0' && steps.draft.outputs.code != ''
+        run: echo "Draft ended with code ${{ steps.draft.outputs.code }}; no plan reached a branch. See the summary."

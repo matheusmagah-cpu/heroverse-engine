@@ -250,7 +250,7 @@ carry no production effect.
 | A1-1 budget | `ops/autopilot_budget.py` + ledger | `test_autopilot_budget` | quota out |
 | A1-2 reviewer | `production/bible/gemini_review.py` (text, image, clip modes, schema, grounding, pre-filter vs accept mode) + calibration replay; identity allowlist PR after owner decision | `test_gemini_review`, `test_reviewer_calibration` | below 9.5, lenient reviewer, 503 |
 | A1-3 lease | `ops/autopilot_lease.py` (+ `autopilot` owner) | `test_autopilot_lease` | lease busy / crash |
-| A1-4 planner | `autopilot_plan.py` + `autopilot-plan.yml`: S1-S3 | `test_autopilot_plan` (gates run before PR; bounded retries) | bad plan never reaches a PR |
+| A1-4 planner | `autopilot_plan.py` + `autopilot-plan.yml`: S1-S3 | `test_autopilot_plan` (gates run before PR; bounded retries) | bad plan never reaches a PR | Implemented: Scripture inserted by code from the KJV table (model gives references/excerpts only), no `first_frame` at plan time (stills are chosen in A1-5), gates run on the exact file, dispatch-only (the single-clock rule: the A1-7 tick dispatches it), PR only.
 | A1-5 sources | `autopilot_sources.py`: S5-S9 loop via `requests`, per-shot bound, fallbacks | `test_autopilot_sources`, `test_review_loop` | no footage, Pavo down, repeat review |
 | A1-6 merge | `autopilot-merge.yml` + decision function | `test_merge_decision` | PR stuck, wrong path |
 | A1-7 tick + clock | `autopilot.yml`, `autopilot_state.json`, layers L2/L3 (L4 after owner decision), stale alarm Issue | `test_clock_layers`, `test_autopilot_state` | cron dropped |
