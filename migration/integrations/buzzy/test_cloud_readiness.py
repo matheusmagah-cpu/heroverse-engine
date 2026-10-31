@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import re
 from pathlib import Path
 import unittest
 
@@ -74,5 +75,14 @@ class Readiness(unittest.TestCase):
         self.assertEqual(r['subscription_count'], 0)
         self.assertEqual(r['billing_state'], 'READABLE_NOT_A_COST_QUOTE')
         self.assertFalse(r['generation_enabled'])
+
+    def test_account_binding_matches_the_existing_image_workflow(self):
+        root = Path(__file__).resolve().parents[3]
+        pattern = r"CLOUDFLARE_ACCOUNT_ID: (\$\{\{[^\n]+?\}\})"
+        existing = re.search(pattern, (root / '.github/workflows/cf-images.yml').read_text())
+        inspection = re.search(pattern, (root / '.github/workflows/buzzy-cloud-readiness.yml').read_text())
+        self.assertIsNotNone(existing)
+        self.assertIsNotNone(inspection)
+        self.assertEqual(inspection.group(1), existing.group(1))
 
 if __name__ == '__main__': unittest.main()
