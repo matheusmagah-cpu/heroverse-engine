@@ -111,6 +111,13 @@ def thumb_problems(episode):
 # designated Short reviewer at the owner floor, or it is refused (fail-closed; the score is never produced here).
 SHORT_REVIEWERS = ("claude-session-reviewer", "gemini-3.8-flash")
 SHORT_FLOOR = 9.5
+# E242 (owner, 2026-10-31, PR #599): a record with "track": "buzzy" (Short made with Buzzy clips) is reviewed at
+# overall 8.0 with every rubric item >= 7 (review.scores); the default track keeps 9.5. Reviewer, sha binding, issues,
+# hard refusals and frozen QA are the same on both tracks.
+TRACK_FLOORS = {"buzzy": 8.0}
+TRACK_ITEM_FLOOR = 7
+RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
+          "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 
 
 def review_problems(episode):
@@ -118,9 +125,19 @@ def review_problems(episode):
     if not isinstance(review, dict):
         return ["REVIEW_MISSING"]
     out = []
+    track = episode.get("track")
+    if track is not None and track not in TRACK_FLOORS:
+        out.append("TRACK_UNKNOWN")
+    floor = TRACK_FLOORS.get(track, SHORT_FLOOR)
     overall = review.get("overall")
-    if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not SHORT_FLOOR <= overall <= 10:
+    if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not floor <= overall <= 10:
         out.append("REVIEW_BELOW_FLOOR")
+    if track in TRACK_FLOORS:
+        scores = review.get("scores")
+        if not (isinstance(scores, dict) and all(
+                not isinstance(scores.get(k), bool) and isinstance(scores.get(k), (int, float))
+                and TRACK_ITEM_FLOOR <= scores[k] <= 10 for k in RUBRIC)):
+            out.append("REVIEW_ITEM_BELOW_FLOOR")
     if review.get("reviewer") not in SHORT_REVIEWERS:
         out.append("REVIEW_REVIEWER_NOT_DESIGNATED")
     if review.get("output_sha256") != episode.get("output_sha256"):

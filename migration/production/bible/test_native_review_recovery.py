@@ -142,6 +142,7 @@ class RecoveryTests(unittest.TestCase):
         class Legacy:
             request=staticmethod(get)
             validate_report=staticmethod(lambda r, duration: None)
+            floor_for=staticmethod(lambda plan: 9.5)
         self.assertEqual(recovery.poll_saved(self.i,self.path,'fake-key',Legacy, attempts=1),'PROVIDER_FAILED')
         self.assertEqual(calls,[recovery.API+'/v1beta/interactions/synthetic_interaction'])
 
@@ -215,6 +216,7 @@ class RecoveryTests(unittest.TestCase):
         class Legacy:
             request=staticmethod(get)
             validate_report=staticmethod(lambda report,duration:None)
+            floor_for=staticmethod(lambda plan:9.5)
             provider_sha256=staticmethod(lambda digest:'a'*64)
             provider_duration=staticmethod(lambda f:174.4)
         self.assertEqual(recovery.poll_saved(self.i,self.path,'fake',Legacy,attempts=1),'EVIDENCE_COMPLETE')
