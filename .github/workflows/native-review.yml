@@ -16,8 +16,14 @@ on:
       resume_before_inference:
         description: Optional failed run ID only when its inference step was skipped; reuses its uploaded file
         required: false
+      recover_submitted_run:
+        description: Failed original run with successful submission; encrypted receipt ingress and GET only
+        required: false
+      lease_run_id:
+        description: Current shared executor lease; required for submitted-review recovery
+        required: false
       free_tier_evidence:
-        description: Fresh verified Free Tier JSON bound to the API key hash (no key or account data)
+        description: Fresh verified Free Tier JSON for new inference; prior key binding suffices for GET-only recovery
         required: true
       receipt_certificate:
         description: Public PEM certificate for encrypted private evidence (never a private key)
@@ -41,15 +47,36 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Dispatch guard (existing subject, history, imports)
+        if: inputs.recover_submitted_run == ''
         env:
           GUARD_INPUTS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}
         run: python3 -I -B migration/ops/dispatch_guard.py run native-review.yml
       - name: Refuse duplicate content and rerun before credentials
+        if: inputs.recover_submitted_run == ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 -I -B migration/production/bible/native_review.py guard
+      - name: Verify submitted source and prepare encrypted recovery ingress
+        if: inputs.recover_submitted_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py prepare
+      - name: Publish only the ephemeral transport public certificate
+        if: inputs.recover_submitted_run != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-recovery-ingress
+          path: ${{ runner.temp }}/native-review/ingress.pem
+          retention-days: 1
+          if-no-files-found: error
+      - name: Restore exact submitted receipt without public identifiers
+        if: inputs.recover_submitted_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py receive
       - name: Open one private resumable upload session
+        if: inputs.recover_submitted_run == ''
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 -I -B migration/production/bible/native_review.py upload
@@ -65,10 +92,12 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
       - name: Await exact-byte upload and read back provider hash
+        if: inputs.recover_submitted_run == ''
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 -I -B migration/production/bible/native_review.py ready
       - name: Submit native audio and video review once
+        if: inputs.recover_submitted_run == ''
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 -I -B migration/production/bible/native_review.py submit
@@ -86,9 +115,10 @@ jobs:
       - name: Read the same interaction (GET only)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python3 -I -B migration/production/bible/native_review.py poll
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py poll
       - name: Delete provider media after completed review
-        if: always()
+        if: always() && inputs.recover_submitted_run == ''
         continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -104,3 +134,6 @@ jobs:
           path: ${{ runner.temp }}/native-review/receipt.cms
           retention-days: 7
           if-no-files-found: ignore
+      - name: Remove ephemeral transport private key
+        if: always()
+        run: rm -f -- "$RUNNER_TEMP/native-review/ingress.key"
