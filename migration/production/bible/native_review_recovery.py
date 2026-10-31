@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recover a submitted native review without uploading or invoking a model again.
+"""Recover native review evidence; optionally retry one proven transient no-output failure.
 
 The existing workflow uses a temporary runner-owned CMS key to receive an encrypted
 receipt via its existing request area. Only public certificates and fixed status
@@ -26,6 +26,7 @@ SOURCE_STEPS = ('Await exact-byte upload and read back provider hash',
                 'Submit native audio and video review once',
                 'Persist interaction ID before polling')
 TERMINAL = {'failed', 'cancelled', 'incomplete', 'requires_action'}
+RETRY_STEP = 'Submit one qualified transient-error retry'
 
 
 class Blocked(Exception):
@@ -268,6 +269,97 @@ def poll_saved(i, receipt, key, legacy, attempts=120):
     return 'SUBMITTED'
 
 
+def check_modes(i):
+    flag = i.get('retry_transient_once', 'false')
+    need(flag in ('true', 'false', ''), 'RETRY_FLAG_INVALID')
+    need(not (i.get('recover_submitted_run') and i.get('resume_before_inference')),
+         'RECOVERY_MODE_INVALID')
+    need(flag != 'true' or (i.get('recover_submitted_run') and not i.get('resume_before_inference')),
+         'RETRY_REQUIRES_SUBMITTED_RECOVERY')
+
+
+def retry_eligible(i, r):
+    response = r.get('provider_response', {})
+    errors = response.get('errors', []) if isinstance(response, dict) else []
+    need(r.get('status') == 'PROVIDER_FAILED' and r.get('provider_status') == 'failed' and
+         response.get('status') == 'failed' and response.get('id') == r.get('interaction_id') and
+         response.get('model') == MODEL and r.get('output_sha256') == i['sha256'] and
+         str(r.get('run_id')) == i['recover_submitted_run'] and
+         not r.get('retry_count') and not r.get('prior_failure') and 'report' not in r and
+         'response_text' not in r, 'RETRY_NOT_ELIGIBLE')
+    need(isinstance(errors, list) and bool(errors) and
+         all(isinstance(e, dict) and e.get('code') in ('INTERNAL', 'UNAVAILABLE') for e in errors),
+         'RETRY_NOT_TRANSIENT')
+    steps = response.get('steps')
+    need(isinstance(steps, list) and bool(steps) and
+         all(isinstance(step, dict) and step.get('type') == 'user_input' for step in steps),
+         'RETRY_OUTPUT_OR_UNKNOWN_STEPS')
+
+
+def check_retry_history(i, runs, current, jobs_for):
+    for run in runs:
+        if run.get('display_title') != subject_title(i) or str(run['id']) in (
+                str(current), i['recover_submitted_run']):
+            continue
+        need(run.get('path') == '.github/workflows/native-review.yml' and
+             run.get('status') == 'completed', 'RETRY_OTHER_RUN_UNRESOLVED')
+        jobs = jobs_for(str(run['id']))
+        need(len(jobs) == 1 and jobs[0].get('name') == 'review', 'RETRY_HISTORY_AMBIGUOUS')
+        steps = {step['name']: step for step in jobs[0].get('steps', [])}
+        original = steps.get('Submit native audio and video review once', {})
+        retry = steps.get(RETRY_STEP)
+        need(original.get('status') == 'completed' and original.get('conclusion') == 'skipped' and
+             (retry is None or (retry.get('status') == 'completed' and retry.get('conclusion') == 'skipped')),
+             'RETRY_ALREADY_ATTEMPTED_OR_UNKNOWN')
+
+
+def qualify_retry(i, receipt, legacy):
+    check_modes(i)
+    need(i.get('retry_transient_once') == 'true', 'RETRY_NOT_REQUESTED')
+    check_lease(i, legacy)
+    r = json.loads(Path(receipt).read_text())
+    retry_eligible(i, r)
+    key = legacy.free_key(i)  # Existing fresh cost proof; historical GET binding is insufficient for a POST.
+    check_remote_binding(r, r['provider_response'], i, key, legacy)
+    page = 1
+    while True:
+        runs = legacy.github_read('/actions/workflows/native-review.yml/runs?per_page=100&page=' + str(page))['workflow_runs']
+        check_retry_history(i, runs, os.environ['GITHUB_RUN_ID'],
+                            lambda rid: legacy.github_read('/actions/runs/' + rid + '/jobs')['jobs'])
+        if len(runs) < 100:
+            break
+        page += 1
+    r['retry_qualification'] = {'run_id': os.environ['GITHUB_RUN_ID'],
+                                'response_sha256': r['response_sha256'],
+                                'at_unix': time.time()}
+    save(receipt, r)
+
+
+def submit_retry(i, receipt, legacy):
+    check_modes(i)
+    need(i.get('retry_transient_once') == 'true' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1',
+         'RETRY_NOT_FIRST_ATTEMPT')
+    check_lease(i, legacy)
+    legacy.free_key(i)  # Recheck immediately before the one provider mutation.
+    r = json.loads(Path(receipt).read_text())
+    retry_eligible(i, r)
+    proof = r.get('retry_qualification', {})
+    need(proof.get('run_id') == os.environ['GITHUB_RUN_ID'] and
+         proof.get('response_sha256') == r.get('response_sha256') and
+         0 <= time.time() - proof.get('at_unix', 0) <= 300, 'RETRY_QUALIFICATION_REQUIRED')
+    r['prior_failure'] = {key: r[key] for key in (
+        'interaction_id', 'provider_response', 'response_body_base64', 'response_sha256', 'readback_at')}
+    r.update(status='FILE_READY', retry_count=1, retry_run_id=os.environ['GITHUB_RUN_ID'],
+             production_approved=False, publication_ready=False)
+    for key in ('provider_response', 'provider_status', 'response_body_base64', 'response_sha256',
+                'readback_at', 'retry_qualification'):
+        r.pop(key, None)
+    save(receipt, r)
+    # submit() writes SUBMIT_UNCERTAIN before exactly one POST and saves the returned identity.
+    # No upload, different file, model, prompt, score or exception-driven retry is introduced.
+    legacy.submit(i, receipt)
+
+
 def main():
     sys.path.insert(0,str(Path(__file__).resolve().parent))
     import native_review as legacy
@@ -276,7 +368,14 @@ def main():
     receipt = root/'receipt.json'
     try:
         i = legacy.inputs()
-        if phase=='prepare':
+        check_modes(i)
+        if phase=='options':
+            pass
+        elif phase=='qualify-retry':
+            qualify_retry(i,receipt,legacy)
+        elif phase=='retry-submit':
+            submit_retry(i,receipt,legacy)
+        elif phase=='prepare':
             prepare(i,root,legacy)
         elif phase=='receive':
             receive(i,root,receipt,legacy)

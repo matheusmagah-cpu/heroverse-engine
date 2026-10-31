@@ -222,5 +222,112 @@ class RecoveryTests(unittest.TestCase):
         with self.assertRaises(recovery.Blocked): recovery.poll_saved(self.i,self.path,'fake',Legacy,attempts=1)
         self.assertEqual(self.stored()['status'],'COMPLETE_UNVALIDATED')
 
+    def failed_receipt(self):
+        response={'id':self.receipt['interaction_id'],'model':recovery.MODEL,'status':'failed',
+                  'errors':[{'code':'INTERNAL','message':'synthetic server failure'}],
+                  'steps':[{'type':'user_input','content':[]}]}
+        r=dict(self.receipt,status='PROVIDER_FAILED',provider_status='failed',provider_response=response)
+        return r
+
+    def test_retry_only_terminal_transient_error_without_output(self):
+        r=self.failed_receipt()
+        recovery.retry_eligible(self.i,r)
+        for code in ('UNAVAILABLE','INTERNAL'):
+            r['provider_response']['errors'][0]['code']=code
+            recovery.retry_eligible(self.i,r)
+        for code in ('RESOURCE_EXHAUSTED','PERMISSION_DENIED','INVALID_ARGUMENT','UNKNOWN'):
+            r['provider_response']['errors'][0]['code']=code
+            with self.subTest(code=code),self.assertRaises(recovery.Blocked): recovery.retry_eligible(self.i,r)
+
+    def test_retry_never_accepts_a_score_partial_output_or_unknown_state(self):
+        for delta in ({'status':'SUBMITTED'},{'status':'COMPLETE_UNVALIDATED'},
+                      {'status':'EVIDENCE_COMPLETE'},{'retry_count':1},{'report':{'overall':6.0}}):
+            r=self.failed_receipt();r.update(delta)
+            with self.subTest(delta=delta),self.assertRaises(recovery.Blocked): recovery.retry_eligible(self.i,r)
+        r=self.failed_receipt();r['provider_response']['steps'].append({'type':'model_output','content':[]})
+        with self.assertRaises(recovery.Blocked): recovery.retry_eligible(self.i,r)
+        r=self.failed_receipt();r['provider_response']['id']='other'
+        with self.assertRaises(recovery.Blocked): recovery.retry_eligible(self.i,r)
+
+    def test_retry_history_accepts_only_proven_readonly_recoveries(self):
+        run={'id':777,'display_title':recovery.subject_title(self.i),'path':'.github/workflows/native-review.yml','status':'completed'}
+        jobs=[{'name':'review','steps':[{'name':'Submit native audio and video review once','status':'completed','conclusion':'skipped'}]}]
+        recovery.check_retry_history(self.i,[run],'888',lambda rid:jobs)
+        for outcome in ('success','failure',None):
+            bad=[{'name':'review','steps':jobs[0]['steps']+[{'name':recovery.RETRY_STEP,'status':'completed','conclusion':outcome}]}]
+            with self.subTest(outcome=outcome),self.assertRaises(recovery.Blocked):
+                recovery.check_retry_history(self.i,[run],'888',lambda rid:bad)
+        with self.assertRaises(recovery.Blocked):
+            recovery.check_retry_history(self.i,[dict(run,status='in_progress')],'888',lambda rid:jobs)
+
+    def test_retry_mode_requires_submitted_recovery_and_excludes_upload_resume(self):
+        recovery.check_modes(dict(self.i,retry_transient_once='true'))
+        recovery.check_modes(dict(self.i,retry_transient_once='false'))
+        recovery.check_modes(dict(self.i,recover_submitted_run=''))
+        for delta in ({'recover_submitted_run':'','retry_transient_once':'true'},
+                      {'resume_before_inference':'123','retry_transient_once':'true'},
+                      {'retry_transient_once':'invalid'}):
+            with self.subTest(delta=delta),self.assertRaises(recovery.Blocked): recovery.check_modes(dict(self.i,**delta))
+
+    def test_retry_refuses_stale_cost_proof_before_provider_requests(self):
+        recovery.save(self.path,self.failed_receipt())
+        class Legacy:
+            free_key=staticmethod(lambda i: (_ for _ in ()).throw(ValueError('stale proof')))
+            request=staticmethod(lambda *a: self.fail('provider contacted without fresh cost proof'))
+        with patch.object(recovery,'check_lease'):
+            with self.assertRaises(ValueError): recovery.qualify_retry(dict(self.i,retry_transient_once='true'),self.path,Legacy)
+        self.assertEqual(self.stored()['status'],'PROVIDER_FAILED')
+
+    def test_retry_workflow_persists_new_identity_before_second_poll(self):
+        text=(ROOT.parents[2]/'.github/workflows/native-review.yml').read_text()
+        self.assertIn('retry_transient_once:',text)
+        self.assertLess(text.index('Validate native review mode'),text.index('secrets.'))
+        self.assertLess(text.index('Persist retry identity before readback'),text.index('Read the single retry interaction'))
+        self.assertIn('native_review_recovery.py retry-submit',text)
+
+    def test_one_retry_keeps_original_failure_and_refuses_repetition(self):
+        r=self.failed_receipt()
+        raw=json.dumps(r['provider_response']).encode()
+        r.update(response_sha256=hashlib.sha256(raw).hexdigest(),
+                 response_body_base64=base64.b64encode(raw).decode(),readback_at='2026-01-01T00:00:00Z')
+        r['retry_qualification']={'run_id':'5678','response_sha256':r['response_sha256'],'at_unix':__import__('time').time()}
+        recovery.save(self.path,r)
+        calls=[]
+        def fake_submit(i,path):
+            saved=json.loads(path.read_text());self.assertEqual(saved['status'],'FILE_READY')
+            self.assertEqual(saved['retry_count'],1);self.assertEqual(saved['prior_failure']['interaction_id'],'synthetic_interaction')
+            self.assertEqual(saved['file_uri'],r['file_uri']);self.assertNotIn('report',saved)
+            saved['status']='SUBMIT_UNCERTAIN';recovery.save(path,saved)
+            calls.append('POST')
+            saved.update(status='SUBMITTED',interaction_id='synthetic_retry');recovery.save(path,saved)
+        class Legacy:
+            free_key=staticmethod(lambda i:'fake')
+            submit=staticmethod(fake_submit)
+        i=dict(self.i,retry_transient_once='true')
+        with patch.dict(os.environ,{'GITHUB_RUN_ID':'5678','GITHUB_RUN_ATTEMPT':'1'}),patch.object(recovery,'check_lease'):
+            recovery.submit_retry(i,self.path,Legacy)
+            with self.assertRaises(recovery.Blocked): recovery.submit_retry(i,self.path,Legacy)
+        self.assertEqual(calls,['POST'])
+        self.assertEqual(self.stored()['status'],'SUBMITTED')
+        self.assertEqual(self.stored()['prior_failure']['provider_response'],r['provider_response'])
+
+    def test_retry_post_timeout_cannot_repeat_in_same_receipt(self):
+        r=self.failed_receipt();r.update(response_sha256='c'*64,response_body_base64='e30=',readback_at='synthetic')
+        r['retry_qualification']={'run_id':'5678','response_sha256':'c'*64,'at_unix':__import__('time').time()}
+        recovery.save(self.path,r)
+        calls=[]
+        def fail(i,path):
+            saved=json.loads(path.read_text());saved['status']='SUBMIT_UNCERTAIN';recovery.save(path,saved)
+            calls.append('POST');raise TimeoutError('synthetic')
+        class Legacy:
+            free_key=staticmethod(lambda i:'fake')
+            submit=staticmethod(fail)
+        i=dict(self.i,retry_transient_once='true')
+        with patch.dict(os.environ,{'GITHUB_RUN_ID':'5678','GITHUB_RUN_ATTEMPT':'1'}),patch.object(recovery,'check_lease'):
+            with self.assertRaises(TimeoutError): recovery.submit_retry(i,self.path,Legacy)
+            with self.assertRaises(recovery.Blocked): recovery.submit_retry(i,self.path,Legacy)
+        self.assertEqual(calls,['POST'])
+        self.assertEqual(self.stored()['status'],'SUBMIT_UNCERTAIN')
+
 
 if __name__ == '__main__': unittest.main()
