@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-g09b-waterfall-stream-river-mountains-nature-",
+ "theme": "flood-springs-g09b",
+ "query": "water bursting from ground",
+ "source": "pixabay",
+ "title": "waterfall, stream, river, mountains, nature, park, water, tourism, trees, mossy, landscape",
+ "page": "https://pixabay.com/videos/id-169249/",
+ "author": "Leolo212",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Leolo212 via Pixabay (https://pixabay.com/videos/id-169249/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f6dffb1cc2a78f393aeb85b5b41da1fc5d07a183cf76c62ab93a9daf45c6b7b8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.3,
+  95.0,
+  95.2,
+  95.4,
+  95.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-g09b-waterfall-stream-river-mountains-nature--sha256-f6dffb1cc2a78f393aeb85b5b41da1fc5d07a183cf76c62ab93a9daf45c6b7b8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

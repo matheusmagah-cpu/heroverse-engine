@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-windows-g09b-light-flare-l-shiny-design-lightning-spa",
+ "theme": "flood-windows-g09b",
+ "query": "lightning storm night",
+ "source": "pixabay",
+ "title": "light, flare, l, shiny, design, lightning, sparkle, glitter, fantasy, shine, balance",
+ "page": "https://pixabay.com/videos/id-29353/",
+ "author": "liaqateagle",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 10.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 8.0,
+ "credit": "Footage: liaqateagle via Pixabay (https://pixabay.com/videos/id-29353/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5dc8762a597c1a1dfe73767219ba83d67423290c7515a442a50a910a640f2275",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  106.3,
+  102.7,
+  102.6,
+  99.2,
+  103.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-windows-g09b-light-flare-l-shiny-design-lightning-spa-sha256-5dc8762a597c1a1dfe73767219ba83d67423290c7515a442a50a910a640f2275.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

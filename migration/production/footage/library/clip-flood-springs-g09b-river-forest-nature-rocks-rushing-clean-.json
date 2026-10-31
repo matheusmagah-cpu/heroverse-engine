@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-g09b-river-forest-nature-rocks-rushing-clean-",
+ "theme": "flood-springs-g09b",
+ "query": "muddy flood water rushing",
+ "source": "pixabay",
+ "title": "river, forest, nature, rocks, rushing, clean, clear, water",
+ "page": "https://pixabay.com/videos/id-263529/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-263529/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9619fe2d51e956420dd6bd2695b7ba0c4139218bf6e62f4108b0af3cb9a82b89",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  131.6,
+  130.8,
+  131.6,
+  130.7,
+  130.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-g09b-river-forest-nature-rocks-rushing-clean--sha256-9619fe2d51e956420dd6bd2695b7ba0c4139218bf6e62f4108b0af3cb9a82b89.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

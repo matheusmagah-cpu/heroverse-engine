@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-windows-g09b-mount-fuji-snow-clouds-night",
+ "theme": "flood-windows-g09b",
+ "query": "lightning storm night",
+ "source": "pixabay",
+ "title": "mount fuji, snow, clouds, night",
+ "page": "https://pixabay.com/videos/id-202877/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 12.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 10.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-202877/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0a942c3241802b1d28e7c6099fe6ba25eaec6ee88408deba2b7f6f1dbb4ff5a1",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  51.3,
+  49.5,
+  46.7,
+  44.6,
+  44.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-windows-g09b-mount-fuji-snow-clouds-night-sha256-0a942c3241802b1d28e7c6099fe6ba25eaec6ee88408deba2b7f6f1dbb4ff5a1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

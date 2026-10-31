@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-windows-g09b-clouds-cloud-formation-atmosphere-weathe",
+ "theme": "flood-windows-g09b",
+ "query": "heavy rain storm clouds",
+ "source": "pixabay",
+ "title": "clouds, cloud formation, atmosphere, weather, rain clouds, thunderclouds, landscape",
+ "page": "https://pixabay.com/videos/id-215149/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-215149/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7dc96a6fd78af97a1924ecb06402f3bd289ff89affb31403573c6a19bf34b251",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.4,
+  89.3,
+  79.6,
+  84.5,
+  82.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-windows-g09b-clouds-cloud-formation-atmosphere-weathe-sha256-7dc96a6fd78af97a1924ecb06402f3bd289ff89affb31403573c6a19bf34b251.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

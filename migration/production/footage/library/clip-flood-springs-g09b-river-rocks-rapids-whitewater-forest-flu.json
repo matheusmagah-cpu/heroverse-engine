@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-g09b-river-rocks-rapids-whitewater-forest-flu",
+ "theme": "flood-springs-g09b",
+ "query": "muddy flood water rushing",
+ "source": "pixabay",
+ "title": "river, rocks, rapids, whitewater, forest, fluid, flowing, rushing, scenic, nature",
+ "page": "https://pixabay.com/videos/id-230924/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-230924/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "42824db153fd04a67779f04b214a8a6c5cb0ecbf6cd403b6f29910f629ee2260",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.3,
+  93.0,
+  93.6,
+  93.4,
+  93.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-g09b-river-rocks-rapids-whitewater-forest-flu-sha256-42824db153fd04a67779f04b214a8a6c5cb0ecbf6cd403b6f29910f629ee2260.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
