@@ -172,7 +172,7 @@ class Wiring(unittest.TestCase):
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("episode.yml", "shot-probe.yml",
                                                                      "publish-episode.yml", "scene-stills.yml")}), 1)
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("cf-images.yml", "pilot-render-stills.yml",
-                                                                     "pilot-preview.yml")}), 1)
+                                                                     "pilot-preview.yml", "footage.yml")}), 1)
         footage = (g.WF_DIR / "footage.yml").read_text()
         self.assertIn("subject: ${{ steps.guard.outputs.subject }}", footage)
 
