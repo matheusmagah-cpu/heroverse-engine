@@ -82,7 +82,7 @@ They do not justify a duplicate upload.
 The operational ref `claude/shared-executor-control` carries coordination metadata in its commit message after
 `HEROVERSE_EXECUTOR_LEASE_V1\n`. Its tree equals its parent's tree. It is not a production branch or merge candidate.
 
-Fields: schema `heroverse-executor-lease-v1`, owner `codex`/`claude`/null, run_id, state active/idle, renewed_at,
+Fields: schema `heroverse-executor-lease-v1`, owner `codex`/`claude`/`autopilot`/null (`autopilot` = `ops/autopilot_lease.py`; it never authorises a Pavo effect), run_id, state active/idle, renewed_at,
 expires_at, task, base_main_sha and next_action. Keep descriptions generic; never store private links or credentials.
 
 1. Read the ref and exact head SHA. Missing/malformed control permits read-only diagnosis, not a second controller.
