@@ -11,7 +11,19 @@
  "period": "the-flood",
  "prompt": "Extreme close-up portrait, only his face from brow to chin filling the frame edge to edge, nothing else in the picture: a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, his dark eyes lifted to the sky in grief and dread, the first heavy rain of the flood streaming down his weathered cheeks and grey beard, his mouth closed. Behind his head there is only a dark teal sky of storm clouds and falling rain, nothing else at all. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. Warm amber light from the last sunset glow bathes his face in rich warm orange and amber against the deep teal storm, vivid saturated colour, high contrast, photorealistic cinematic film still, sharp focus on the eyes, film grain, no text, no lettering, no signature, no watermark.",
  "variant": null,
- "status": "DRAFT",
+ "status": "APPROVED",
  "evidence": "evidence/vidiq/20261027/thumb-host.json (PR #458): story-character face 30/36 Bible-story long winners vs host 2/36",
- "note": "Owner decision 27/10: the story character by reference, close-up face with clear emotion, text <= 4 words, no Keeper. Run 20261027 (2 candidates) reviewed below 9.5 (evidence/thumbs/genesis-09-short-20261027.json): revised 28/10 to its findings: led by the close-up and the emotion, no ark or doorway, warm light for R16; next candidates with Noah's references. Run 20261028-1 (Noah's face by reference, grief: right) refused: a columned temple in the background and R16 saturation 0.33; v3 asks for an empty plain and vivid warm light."
+ "note": "Owner decision 27/10: the story character by reference, close-up face with clear emotion, text <= 4 words, no Keeper. Run 20261027 (2 candidates) reviewed below 9.5 (evidence/thumbs/genesis-09-short-20261027.json): revised 28/10 to its findings: led by the close-up and the emotion, no ark or doorway, warm light for R16; next candidates with Noah's references. Run 20261028-1 (Noah's face by reference, grief: right) refused: a columned temple in the background and R16 saturation 0.33; v3 asks for an empty plain and vivid warm light.",
+ "repo_path": "migration/production/bible/thumbs/genesis-09-short.jpg",
+ "approved": {
+  "sha256": "43c6ebc7819f2a06aab895d5994d5d597fd280334e5917f1ceed46b848b894c1",
+  "spec_sha256": "bb6651b4a7ee00fb0d5c512b010549b995051d3ffa20dcbd97be804f7dc2bf1e",
+  "candidate": "genesis-09-short-20261031-4",
+  "score": 9.5,
+  "note": "Full-resolution review of the final cropped and graded candidate (Pavo agnes-image 375034882939947648 with the ch-noah front and three-quarter refs, 0 credits; E239 crop brow to chest; saturation 1.5): Noah's approved face (bald crown, grey side hair, long grey beard, brown rope-belted robe) in close-up with clear grief and dread, rain on his cheek, a teal storm sky behind and no structure in frame; text THE FLOOD BEGINS (3 words) in the top band, readable, not covering the eyes. Residual: the mouth is slightly open, not closed as the prompt asked.",
+  "date": "2026-10-31",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "reviewed_sha256": "43c6ebc7819f2a06aab895d5994d5d597fd280334e5917f1ceed46b848b894c1"
+ }
 }
