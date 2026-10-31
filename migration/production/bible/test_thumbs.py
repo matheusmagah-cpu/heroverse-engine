@@ -15,7 +15,9 @@ import thumbs  # noqa: E402
 import publish_episode as pe  # noqa: E402
 import publish_video as pv  # noqa: E402
 
-REAL = json.loads((HERE / "thumbs" / "genesis-09-short.json").read_text())
+# A frozen copy of the genesis-09 spec as it stood on 2026-10-31 (exclusion sentence included): the live spec under
+# thumbs/ is production data that changes (E238 rewrite, approval), so tests never read it as their fixture.
+REAL = json.loads((HERE / "testdata" / "thumb-spec-genesis-09-20261031.json").read_text())
 
 
 def codes(found):
