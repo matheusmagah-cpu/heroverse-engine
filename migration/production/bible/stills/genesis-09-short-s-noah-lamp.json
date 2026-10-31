@@ -2,6 +2,41 @@
  "id": "genesis-09-short-s-noah-lamp",
  "episode": "genesis-09-short",
  "shot": "s-noah-lamp",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static medium-wide view from directly behind and slightly above a seated man, looking down at the wooden floor. A small open clay oil lamp and its single flame are fully visible in the foreground below his left knee, inside the central third of the square image. A white lamb is curled beside his right knee, also inside the central third. An old man with short grey hair on a bare head wears a plain brown wool robe belted with a rope and sits barefoot on rough planks. Only the back of his head is visible; both ears and shoulders are symmetric about the centre line. Around him on the straw, clearly visible, his wife, his three sons and their wives lie asleep, faces turned away and bodies wrapped in rough wool blankets. The warm light clearly reveals the lamp, the curled lamb, the wool robe and the plank floor; the upper background stays dark. Safe and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static medium-wide view from directly behind and slightly above a seated man, looking down at the wooden floor. The scene is indoors, deep inside a dark closed hold of rough planks on every side and overhead, with no opening and no sky anywhere. A small open clay oil lamp and its single flame are fully visible in the foreground below his left knee, inside the central third of the square image. A white lamb is curled beside his right knee, also inside the central third. An old man with short grey hair on a bare head wears a plain brown wool robe belted with a rope and sits barefoot on rough planks. Only the back of his head is visible; both ears and shoulders are symmetric about the centre line. Around him on the straw, clearly visible, his wife, his three sons and their wives lie asleep with their backs to the camera, faces turned away and hidden and bodies wrapped in rough wool blankets. The warm light clearly reveals the lamp, the curled lamb, the wool robe and the plank floor; the upper background stays dark. Safe and solemn. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-short-s-noah-lamp.jpg",
+ "sha256": "7d79d141827ead2780c1b02c218b7f00f9cda19a2e7a008d706977db9b5647eb",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-short-s-noah-lamp-2026103104-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375030290550920896",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375030290550920896",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-f43835ae1227-0-507b06d0f116.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: inside a dark closed plank hold, the grey-haired bare-headed old man (as in s-noah-door) in a rope-belted brown wool robe seen squarely from behind, barefoot on rough planks; the clay oil lamp and its flame fully visible at his left, a white lamb curled at his right; his family asleep on straw around him, faces turned away; no sky, no modern object. Safe and solemn for lines 17-18.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "977e6bca290df767589ed28bd85bc3392d575d9b0aef78eaa4478b484c54a6c4",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

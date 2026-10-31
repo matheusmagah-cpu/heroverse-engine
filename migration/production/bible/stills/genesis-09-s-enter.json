@@ -2,6 +2,41 @@
  "id": "genesis-09-s-enter",
  "episode": "genesis-09-short",
  "shot": "s-enter",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot from behind. A family seen from behind, their faces never visible, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbs a steep ramp of rough planks into a great dark square doorway cut in a high side of rough timber smeared pitch-black, the doorway filling the frame. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Medium shot from behind. A family seen from behind, their faces never visible, in ankle-length rough undyed wool robes and head-cloths, barefoot, bundles on their shoulders, climbs a steep ramp of rough planks into a great dark square doorway cut in a high side of rough timber smeared pitch-black, the doorway filling the frame. Grey morning, the first drops of rain darkening the boards. Solemn and quiet. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-enter.jpg",
+ "sha256": "b642611e2f1c474e73f82723c8a974c08c57966ea075f9dff71d597be0c3ddd7",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-enter-2026103101-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375027209662635776",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375027209662635776",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-84d599262d29-0-8e0a4e0c6759.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: three hooded figures in ankle-length undyed wool robes, barefoot, sacks on their backs, seen from behind climbing a wet plank ramp into a dark square doorway in a towering side of pitch-black timber; grey morning, wet boards. No face, no modern object; the black timber matches the approved ark. Solemn and quiet for line 5.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "b4360a1f51c60b147aa51289f2f1a463f2ab9d9c3b0cd9f533f05a55f6a972ce",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

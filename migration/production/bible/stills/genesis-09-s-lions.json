@@ -2,6 +2,41 @@
  "id": "genesis-09-s-lions",
  "episode": "genesis-09-short",
  "shot": "s-lions",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Two maned lions walk calmly side by side down a rocky mountain path, and right beside them walk two white woolly sheep, unafraid, side by side. No one leads them. Morning, pale golden light and drifting dust. Astonished and hushed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Two maned lions walk calmly side by side down a rocky mountain path, and right beside them walk two white woolly sheep, unafraid, side by side. No one leads them. Morning, pale golden light and drifting dust. Astonished and hushed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-lions.jpg",
+ "sha256": "c0e0530f2cb87fc9ce3ad2d091aef496adf4259582d2cee156e27d88aba56df2",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-lions-2026103101-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375026773131561024",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375026773131561024",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-f533d8489ac6-0-266c0b2fe1fb.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: two lions and two white sheep walk calmly side by side down a rocky mountain path in pale golden light, nobody leading them; no person, no modern object. Residual: both lions are maned (two males); the line names lions beside sheep, not a breeding pair.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "afa0f83a49b2c66c79f32bdf58eeb0ccd65a40c1be14a0c39d56f22807998923",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }
