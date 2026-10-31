@@ -1,0 +1,28 @@
+name: HeroVerse Buzzy cloud deployment readiness (read only)
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - migration/integrations/buzzy/cloud_readiness.py
+      - migration/integrations/buzzy/test_cloud_readiness.py
+      - .github/workflows/buzzy-cloud-readiness.yml
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-buzzy-cloud-readiness-${{ github.event_name }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Synthetic tests without network or credentials
+        run: python3 -I -B migration/integrations/buzzy/test_cloud_readiness.py
+      - name: Inspect existing account without deployment or purchases
+        if: github.event_name == 'workflow_dispatch' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python3 -I -B migration/integrations/buzzy/cloud_readiness.py
