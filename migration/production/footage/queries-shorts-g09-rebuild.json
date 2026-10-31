@@ -1,0 +1,11 @@
+{
+ "version": "footage-queries-v1",
+ "library": "migration/production/footage/library",
+ "note": "Short09 rebuild (owner 2026-10-31): second options for the storm and springs shots while FLUX's daily allocation is spent. Search candidates only: the 9:16 crop must show the subject with no person, building, modern fixture, text or branding; Claude's review and approve-source remain required.",
+ "themes": [
+  {"theme": "flood-windows-g09b", "query": "lightning storm night"},
+  {"theme": "flood-windows-g09b", "query": "heavy rain storm clouds"},
+  {"theme": "flood-springs-g09b", "query": "muddy flood water rushing"},
+  {"theme": "flood-springs-g09b", "query": "water bursting from ground"}
+ ]
+}
