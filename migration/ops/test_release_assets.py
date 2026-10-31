@@ -159,6 +159,55 @@ class ReleaseAssets(unittest.TestCase):
         for wf in ("cf-images.yml", "footage.yml"):   # records say which release holds their asset
             self.assertIn("release_tag", (ROOT / ".github/workflows" / wf).read_text(), wf)
 
+    def test_e240_pinned_weights_read_from_the_mirror_first_and_fail_closed(self):
+        # E240: episode.yml run 41244405674 died in its tools step: www.robots.ox.ac.uk refused syncnet_v2.model
+        script = ROOT / "migration/ci/pinned_asset.sh"
+        good, bad = b"weights", b"tampered"
+        sha = hashlib.sha256(good).hexdigest(); name = f"syncnet_v2-{sha}.model"
+        curl = self.t / "bin" / "curl"
+        curl.write_text('#!/usr/bin/env bash\necho call >> "$FAKE_CURL_LOG"\n[ -n "${FAKE_CURL_BODY:-}" ] || exit 28\n'
+                        'while [ $# -gt 0 ]; do [ "$1" = -o ] && printf %s "$FAKE_CURL_BODY" > "$2"; shift; done\n')
+        curl.chmod(0o755); log = self.t / "curl.log"; dest = self.t / "out" / "syncnet_v2.model"; dest.parent.mkdir()
+
+        def run(*args, body=""):
+            log.write_text("")
+            return subprocess.run(["bash", str(script), *args], capture_output=True, text=True,
+                                  env={**self.env, "FAKE_CURL_LOG": str(log), "FAKE_CURL_BODY": body})
+        fetch = ("fetch", name, sha, str(dest), "https://origin.example/syncnet_v2.model")
+        r = run(*fetch)   # not mirrored and the host refuses: the build stops, nothing half-written is left
+        self.assertNotEqual(r.returncode, 0); self.assertIn("PINNED_ASSET_UNAVAILABLE", r.stderr); self.assertFalse(dest.exists())
+        r = run(*fetch, body=bad.decode())   # the original host's bytes are checked too
+        self.assertNotEqual(r.returncode, 0); self.assertIn("PINNED_ASSET_SHA_MISMATCH origin", r.stderr); self.assertFalse(dest.exists())
+        r = run(*fetch, body=good.decode())
+        self.assertEqual(r.returncode, 0, r.stderr); self.assertIn("PINNED_ASSET_FROM_ORIGIN", r.stdout)
+        self.assertEqual(dest.read_bytes(), good)
+        # mirror: uploads only bytes that hash to the pin, once, into the newest release
+        r = run("mirror", name, sha, "https://origin.example/x", body=bad.decode())
+        self.assertNotEqual(r.returncode, 0); self.assertFalse((self.t / "rel" / NEW).exists())
+        r = run("mirror", name, sha, "https://origin.example/x", body=good.decode())
+        self.assertEqual(r.returncode, 0, r.stderr); self.assertEqual(os.listdir(self.t / "rel" / NEW), [name])
+        r = run("mirror", name, sha, "https://origin.example/x")
+        self.assertEqual(r.returncode, 0, r.stderr); self.assertIn("PINNED_ASSET_ALREADY_MIRRORED", r.stdout)
+        self.assertEqual(log.read_text(), "")
+        dest.unlink()
+        r = run(*fetch)   # mirrored: the host is never asked
+        self.assertEqual(r.returncode, 0, r.stderr); self.assertIn("PINNED_ASSET_FROM_MIRROR", r.stdout)
+        self.assertEqual(dest.read_bytes(), good); self.assertEqual(log.read_text(), "")
+        (self.t / "rel" / NEW / name).write_bytes(bad)   # a tampered mirror is never used nor hidden behind the host
+        r = run(*fetch, body=good.decode())
+        self.assertNotEqual(r.returncode, 0); self.assertIn("PINNED_ASSET_SHA_MISMATCH mirror", r.stderr)
+        self.assertFalse(dest.exists()); self.assertEqual(log.read_text(), "")
+        self.assertNotEqual(run("fetch", name, "x" * 64, str(dest), "https://o/x").returncode, 0)
+        # every build that reads the weights goes through the mirror; the mirror workflow uploads them by the pin
+        for wf in sorted((ROOT / ".github/workflows").glob("*.yml")):
+            text = wf.read_text()
+            if "syncnet_v2.model" in text and wf.name != "pinned-assets.yml":
+                self.assertNotRegex(text, r"curl[^\n]*syncnet_v2\.model", wf.name)
+                self.assertIn('pinned_asset.sh fetch "syncnet_v2-$sha.model" "$sha" "$RUNNER_TEMP/syncnet_v2.model"', text, wf.name)
+        mirror = (ROOT / ".github/workflows/pinned-assets.yml").read_text()
+        self.assertIn('pinned_asset.sh mirror "syncnet_v2-$sha.model" "$sha"', mirror)
+        self.assertIn("contents: write", mirror)
+
     def test_cf_images_refuses_a_bad_input_by_name(self):
         # E96: pilot=migration/production/characters exited 1 with no message; the refusal must say why
         wf = (ROOT / ".github/workflows/cf-images.yml").read_text().splitlines()

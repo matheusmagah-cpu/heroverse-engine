@@ -3099,6 +3099,25 @@
    }
   },
   {
+   "id": "E240",
+   "date": "2026-10-31",
+   "error": "episode.yml run 41244405674 (genesis-09) failed in its tools step before any build work: the pinned SyncNet weights were downloaded only from their original host www.robots.ox.ac.uk, which refused every connection (curl exit 28 on all 4 tries). The sync gate cannot run without them, so a third-party host's outage stopped every Short, long and shot probe (episode.yml, long-build.yml and shot-probe.yml read the same URL).",
+   "fix": "migration/ci/pinned_asset.sh fetch NAME SHA256 DEST URL: the three builds read syncnet_v2.model from the engine's own release first (assets.sh, asset syncnet_v2-<SYNCNET_SHA256>.model) and from the original host only when the mirror does not hold it (warning PINNED_ASSET_NOT_MIRRORED); either copy must hash to syncnet.SYNCNET_SHA256. A mirror copy with another hash fails closed (PINNED_ASSET_SHA_MISMATCH mirror) and is never replaced by the host's; a host copy with another hash, or no copy at all, fails too (PINNED_ASSET_SHA_MISMATCH origin / PINNED_ASSET_UNAVAILABLE), leaving no file behind. pinned-assets.yml (workflow_dispatch, contents: write, idempotent, exempt from dispatch_guard) mirrors the weights once via pinned_asset.sh mirror, uploading only bytes that hash to the pin; its optional source input accepts another https copy, verified by the same pin, while the original host is down.",
+   "class": [
+    "external"
+   ],
+   "prior": [
+    "E239"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_release_assets.py",
+    "contains": "def test_e240_pinned_weights_read_from_the_mirror_first_and_fail_closed",
+    "covers": [
+     "external"
+    ]
+   }
+  },
+  {
    "id": "E241",
    "date": "2026-10-31",
    "error": "Pavo agnes-image's genesis-09 thumbnail pictures are muted: after the E239 crop the best candidates measured R16 saturation 0.33 and 0.36 against the ruler's > 0.45, so a candidate whose face, emotion and framing were right could not pass R16, and thumbs.py finalize had no recorded way to correct colour; the only remedy was another generation that the model renders as muted.",
