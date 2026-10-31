@@ -179,6 +179,21 @@ class Provider(unittest.TestCase):
             g.calibrate(str(Path(d) / 'b.json'), str(Path(d) / 'rows.json'), 'k', post=post)
             self.assertEqual(calls, [])  # stopped for the day: nothing is sent
 
+    def test_recorded_uncertain_or_invalid_rows_are_never_re_asked(self):
+        calls = []
+
+        def post(body, key):
+            calls.append(1)
+            return None, None  # every call times out: uncertain
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(g.time, 'sleep'):
+            tick = iter(NOW + timedelta(minutes=k) for k in range(100))
+            args = (str(Path(d) / 'b.json'), str(Path(d) / 'rows.json'), 'k')
+            q = g.calibrate(*args, post=post, clock=lambda: next(tick))
+            first = len(calls)
+            self.assertEqual(q['reason'], 'INCOMPLETE_OR_INVALID')
+            g.calibrate(*args, post=post, clock=lambda: next(tick))
+            self.assertEqual(len(calls), first)  # nothing re-sent
+
     def test_budget_refusal_sends_nothing(self):
         led = self.ledger()
         led['stops'].append({'pacific_day': B.pacific_day(NOW), 'reason': '429'})

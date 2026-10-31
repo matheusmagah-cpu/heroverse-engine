@@ -238,7 +238,9 @@ def calibrate(ledger_path, rows_path, key, repeats=2, post=_post, clock=None):
     """Resumable: rows already in ROWS_JSON are kept; stops at the first budget refusal or quota stop."""
     ledger = budget.load(ledger_path)
     rows = json.loads(Path(rows_path).read_text()) if Path(rows_path).exists() else []
-    done = {(r['video_id'], bool(r.get('repeat'))) for r in rows if not r.get('error')}
+    # Every recorded row is final (an uncertain, invalid or failed answer is never re-asked: no retry of an uncertain
+    # submission, no re-asking for a better answer); only a definitive 429 (nothing was answered) is redone next day.
+    done = {(r['video_id'], bool(r.get('repeat'))) for r in rows if str(r.get('http')) != '429'}
     corpus = accepted_corpus()
     plan = [(c, False) for c in corpus] + [(c, True) for c in [c for c in corpus if c['accepted_status'] == 'PASS'][:repeats]]
     for c, rep in plan:
