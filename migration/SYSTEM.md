@@ -166,3 +166,27 @@ After publication, use available 48-hour and 7-day results at comparable ages to
 and the Short-to-long path. Sparse data stays inconclusive. `mining/live_intel.py` and existing learning records
 retain observations; change one supported attribute at a time and measure it. Defects and policy problems are
 corrected immediately. `strategy/DECISIONS.md` summarizes current policy; CURRENT carries execution.
+
+## Token budget
+
+Hard rule (owner, 2026-10-31; E232): this project spends at most 50% of the weekly Claude Code cap, and the stop cannot
+be passed. On 2026-10-28 ~13:08Z the account hit the weekly limit and every agent stopped until the reset on 2026-10-31
+19:00Z, because nothing enforced a budget.
+- `migration/ops/token_budget.json`: `weekly_cap_tokens` (an ESTIMATE: weighted usage from the first surviving transcript,
+  2026-10-27T13:22Z, to the first weekly-limit error, 2026-10-28T13:07:59Z, about 201M; the real cap is at least that),
+  `project_share` 0.5, `cache_read_weight` 0.1 (cache reads are cheap; counted tokens = input + cache creation + output +
+  0.1 x cache read), reset Saturday 19:00 UTC. There is no warn level: crossing is a stop.
+- Hook (`.claude/settings.json`, PreToolUse on every tool and UserPromptSubmit) runs `token_budget.py check`; exit 2 with
+  TOKEN_BUDGET_EXCEEDED blocks. For an Agent call the hook takes the action type from the brief; for other tools, the tool kind.
+  Over budget only `token_budget.py status|plan` and `git status` pass, so the session can report. Do not work around it.
+- Pre-check: `token_budget.py check --action <type>` blocks when used + that action's p90 would cross the budget, or when
+  its activity allocation (`token_plan.json`) would be crossed. Run it before a long, a Short, a clock or a review agent.
+- Reading it: `token_budget.py status` (used, budget, %, projected end of week); `plan` (allocation, spent, left per
+  activity: long, shorts, clocks, reviews_prs, reserve); `costs --write` (weekly, at the reset: recompute
+  `token_costs.json` mean and p90 per action from last week's transcripts); `plan --write` (re-size the allocations from
+  the cost table and the cadence in `token_plan.json`, scaling down when the cadence does not fit the budget).
+- `record --action T --actual N` after each action stores the actual against its estimate; with 3+ actuals in the week
+  the estimate follows them. `record` alone saves the weekly ledger (`migration/evidence/tokens/<week>.json`, merged by
+  max per session so container restarts lose nothing); commit it with the handoff.
+- Be economical: no whole-file reads of big files, no 600k+ context orchestrators, brief agents narrowly.
+Antidote: `migration/ops/test_token_budget.py`.
