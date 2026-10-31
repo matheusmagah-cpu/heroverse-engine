@@ -69,6 +69,7 @@ EXEMPT = {
     "arc-links.yml": "metadata edits on published videos; idempotent",
     "comment-replies.yml": "replies to viewers' comments, decided by Claude and gated by reply_policy; idempotent by its ledger",
     "autopilot-sources.yml": "public images and library clips as candidates plus a free-tier Gemini pre-filter, PR only; no paid generation, render or upload; budget ledger + one run at a time (heroverse-gemini-budget)",
+    "autopilot-plan.yml": "free-tier Gemini text drafts a plan and opens a PR; no generation, render or upload; budget ledger + one run at a time (heroverse-gemini-budget)",
     "channel-config.yml": "channel metadata; no generation",
     "channel-privacy.yml": "privacy flips, dispatched by hand (plan by default); idempotent",
     "goal-report.yml": "a report; reads only",
