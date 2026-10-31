@@ -747,8 +747,9 @@ class StoryQa(unittest.TestCase):
         # review of #418, point 4: v3 relaxes three v2 rows by the owner's explicit decision of 2026-10-26
         entry = "Owner decision: story QA v3 for the acted Bible long; the long follows arcs.json (2026-10-26)"
         self.assertIn(entry, json.loads(QA_V3.read_text())["basis"])
-        decisions = (ROOT / "migration" / "strategy" / "DECISIONS.md").read_text()
-        section = decisions.split("## " + entry, 1)[1].split("\n## ", 1)[0]
+        design = (HERE / "LONG_DESIGN.md").read_text()
+        self.assertIn("**Profile selection.**", design)
+        section = design.split("**Profile selection.**", 1)[1].split("**v3's readers", 1)[0]
         self.assertIn('"Sim, régua nova"', section)
         for row in ("title_card_seconds", "figure_present_fraction_max", "footage_picture_share_min",
                     "footage_picture_share_counts", "ai_video_picture_share_max", "first_shot", "figures_allowed",
@@ -788,9 +789,10 @@ class StoryQa(unittest.TestCase):
             self.assertIn(tool, g3["ai_video_clip_checks"])
         r = lc.check(json.loads(DRAFT_PLAN.read_text()))
         self.assertFalse({"QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE"} & set(codes(r, "pending")), r["pending"])
-        decisions = (ROOT / "migration" / "strategy" / "DECISIONS.md").read_text()
-        entry = "## Owner decision: Pavo freed in the long, no real-footage minimum (2026-10-27)"
-        self.assertIn('"Libera o pavo no longo."', decisions.split(entry, 1)[1].split("\n## ", 1)[0])
+        design = (HERE / "LONG_DESIGN.md").read_text()
+        self.assertIn("**Profile selection.**", design)
+        section = design.split("**Profile selection.**", 1)[1].split("**v3's readers", 1)[0]
+        self.assertIn('"Libera o pavo no longo."', section)
 
     def test_v2_differs_from_v1_only_in_the_caption_rows(self):
         v1, v2 = json.loads(QA_V1.read_text()), json.loads(QA_V2.read_text())

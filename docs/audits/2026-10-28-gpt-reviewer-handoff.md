@@ -43,7 +43,7 @@ under `.github/workflows/`.
 - The implementing agent reported 50 focused tests passing. The reviewing
   agent did not independently rerun the functional suite.
 - The final canonical PR-suite results and any checkout/environment limitations
-  are recorded in the [transition handoff](../../migration/evidence/handoff/20261028-chatgpt-transition.md).
+  are recorded in the [transition handoff](https://github.com/matheusmagah-cpu/heroverse-engine/blob/62362bc10c6a414af65fed72b8fdfe8aaafa99fc/migration/evidence/handoff/20261028-chatgpt-transition.md).
   That record is authoritative for the functional validation count; this manual
   report does not substitute for it.
 
