@@ -1,0 +1,79 @@
+{
+ "version": "buzzy-experiment-v1",
+ "date": "2026-10-31",
+ "episode": "genesis-10-short",
+ "authorization": "owner 31/10: produce Genesis 10 end to end with Buzzy, simplest model, to judge video and speed; not for publication",
+ "executor": "claude-opus-5-5 (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
+ "reviewer": "claude-opus-5-5, same session; frames only (sampled stills at 0.4-4 fps and spectrograms); native audio NOT heard, so this is not a complete CLAUDE_REVIEW audiovisual review and creates no qualification",
+ "model_choice": "list_model publishes no prices; dreamina-seedance-2-0-mini-260615 at 480p is the lowest tier of the lightest Seedance line and the ai-story skill's own defaults are heavier (MiniMax-H3 768p / Seedance 2.0 Fast 720p)",
+ "credits": {
+  "visible": false,
+  "spent": null,
+  "note": "no cost in list_model, generate_video or get_task; connector has no balance tool. Per the experiment rule, stopped after 3 clips."
+ },
+ "agent_mode": "ai-story skill loaded and read (intent questions -> style picker -> settings -> run_prompt script -> Nano Banana 2 character/background images -> preview images -> run_prompt video prompts -> clips -> merge_videos). Not run: each stage bills unseen credits, it requires interactive host questions/pickers, and it would replace the plan's KJV script with its own.",
+ "audio": "Kokoro, the project's existing local route (pilot_render.py voice, plan voice-script: God am_onyx, narration am_michael): 21 segments, 166.34 s, made locally at zero cost; Buzzy clips' native audio muted",
+ "preview": {
+  "what": "local ffmpeg cut of the 3 clips with their Kokoro segments (Genesis 8:16 God; 8:8; 8:11), no captions, no music",
+  "seconds": 25.24,
+  "sha256": "d19b773467481ea78c49100fae945e1e3a47d8c85f285da784d1d6ad6fb10078",
+  "location": "Buzzy project 6ae6543a7f163a25e37cb50a canvas node 6ae6566dca757272636378c3 (private media, URL not committed)"
+ },
+ "clips": [
+  {
+   "shot": "s-voice",
+   "seconds": 8.04,
+   "wall_minutes": 2.6,
+   "estimate": 7.5,
+   "good": [
+    "clean steady push-in, no warping",
+    "mist, water reflections and god-rays coherent",
+    "no text, no people"
+   ],
+   "defects": [
+    "the ark reads as a small rectangular hut/shipping box with a door, not a vast hull; scale wrong against the peak",
+    "sun-burst god-rays cliche, borders on stock-inspirational look",
+    "480p (496x864): soft when upscaled to 1080x1920",
+    "native audio has a tonal drone despite 'no music' (muted)"
+   ]
+  },
+  {
+   "shot": "s-noah-dove",
+   "seconds": 7.1,
+   "wall_minutes": 4.6,
+   "estimate": 7.0,
+   "good": [
+    "Noah identity follows the APPROVED refs (bald crown, grey sides, iron-grey beard, brown robe, rope)",
+    "dove release action reads, hands correct"
+   ],
+   "defects": [
+    "plan requires face never visible: profile and three-quarter face shown from 2 s on",
+    "robe drawn with a monk's hood, the Keeper's distinguishing trait (Noah has a bare neck)",
+    "rough whitecap sea and storm light contradict waters abating",
+    "480p softness"
+   ]
+  },
+  {
+   "shot": "s-leaf",
+   "seconds": 10.08,
+   "wall_minutes": 3.3,
+   "estimate": 6.5,
+   "good": [
+    "dove flight and landing on the hand are convincing; olive leaf in the beak",
+    "hand anatomy correct"
+   ],
+   "defects": [
+    "~4.1 s: the background jumps from the outer wall/window to an interior full of people while dove and hand stay, a spatial discontinuity",
+    "about a dozen people with clearly lit faces: eight on the ark, and the plan keeps the family in silhouette",
+    "a three-leaf sprig instead of one leaf (minor)",
+    "480p softness"
+   ]
+  }
+ ],
+ "verdict": {
+  "estimated_overall_for_a_full_episode": "about 7 (picture 7, figure/background integrity 6.5, policy-safe 8); below the 9.5 bar",
+  "basis": "3 of 20 shots, frames only; captions, mix and full timeline not built"
+ },
+ "speed": "2.6-4.6 min wall per clip; two ran in parallel; a 20-shot episode would be about 20-30 min of generation at 4 parallel",
+ "episode_progress": "3/20 shots generated (s-voice, s-noah-dove, s-leaf); Kokoro narration complete; no captions, no master, nothing qualified or published"
+}
