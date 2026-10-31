@@ -678,6 +678,54 @@ def period_problems(i, shot, per):
     return out
 
 
+# E238 (thumbnail runs of 28/10 and 31/10, 8 of 8 refused at review): Pavo agnes-image reads the exclusion
+# sentence's negated nouns ("No stone buildings, towers, churches...") as what to draw, so a thumbnail close-up that
+# had to carry it word for word came back with towers and temples behind the face; no compliant thumbnail could be
+# made. A thumbnail (one character's close-up, thumbs.py) may therefore leave the exclusion sentence out: it still
+# states the setting sentence word for word, and then names none of the period's excluded terms anywhere, negated or
+# not (the exclusion sentence's own nouns, the period's `avoid` and THUMB_PERIOD_AVOID): THUMB_PERIOD_EXCLUDED_TERM.
+# One that keeps the exclusion sentence is judged as before (period_problems). Scene and still prompts are unchanged.
+# The full-resolution review of the image still judges the period: the picture is what is checked, not the words.
+def exclusion_terms(per):
+    """The nouns an exclusion sentence names ("No stone buildings, towers, ... or roads." -> stone buildings, towers,
+    churches, glass lanterns, modern clothing, roads), each as a regular expression that takes its singular too."""
+    body = re.sub(r"(?i)^\s*(?:no|never|without)\s+", "", (per or {}).get("exclude") or "").strip().rstrip(".")
+    out = []
+    for term in re.split(r"(?i)\s*,\s*(?:or\s+|and\s+)?|\s+or\s+|\s+and\s+|\s+nor\s+", body):
+        term = re.sub(r"(?i)^(?:no|any|a|an)\s+", "", term.strip())
+        if not term:
+            continue
+        stem = re.sub(r"(?i)(?<=ch|sh|ss)es$|(?<=x)es$|s$", "", term)
+        out.append(r"\s+".join(re.escape(w) for w in stem.split()) + r"(?:e?s)?")
+    return out
+
+
+# what the refused runs drew behind the face (genesis-09 thumbnail runs 20261028-1 on: a columned temple, towers):
+# a thumbnail that leaves the exclusion sentence out names none of these either
+THUMB_PERIOD_AVOID = (r"temples?", r"columns?", r"columned", r"pillars?", r"palaces?", r"ruins?", r"arch(?:es)?",
+                      r"archways?", r"ziggurats?", r"pyramids?", r"statues?")
+
+
+def thumb_period_problems(i, shot, per):
+    """E238: a thumbnail prompt with the period's exclusion sentence word for word is judged by period_problems; one
+    without it states the setting sentence word for word and names no excluded term anywhere (negated or not)."""
+    if not isinstance(shot.get("prompt"), str) or per is None or per["exclude"] in shot["prompt"]:
+        return period_problems(i, shot, per)
+    sid, p = shot.get("id"), shot["prompt"]
+    out = []
+    if per["setting"] not in p:
+        out.append(f"SCENE_PERIOD_MISSING shot {i} {sid} (the thumbnail prompt states, word for word: "
+                   f"'{per['setting']}')")
+    rest = p.replace(per["setting"], " ")
+    hits = sorted({m.group(0).lower() for a in list(per.get("avoid") or PERIOD_AVOID) + list(THUMB_PERIOD_AVOID)
+                   + exclusion_terms(per)
+                   for m in re.finditer(rf"(?i)\b(?:{a})\b", rest)})
+    if hits:
+        out.append(f"THUMB_PERIOD_EXCLUDED_TERM shot {i} {sid} (a thumbnail without the exclusion sentence names "
+                   f"nothing the period excludes, negated or not, since the image model draws it: {', '.join(hits)})")
+    return out
+
+
 # E110 (review of genesis-07 run 40357197063): s-scroll asked for "an old scroll ... the ink lines catching the light"
 # beside "No text", and Pavo drew lines of legible Arabic-looking script: AI text on screen and a later age's writing in
 # the days before the flood. A prompt that asks for writing gets writing, whatever its exclusions say, so a scene prompt
@@ -858,11 +906,12 @@ def still_record(still_id, stills_dir=None):
     return json.loads(path.read_text()) if path.is_file() else None
 
 
-def still_prompt_problems(label, prompt, plan):
+def still_prompt_problems(label, prompt, plan, *, thumbnail=False):
     """A still's own prompt under the scene rules (E108 period, E110 writing, E113 ark): what a frame shows is what
     Pavo animates, so the still states the period and the ark's look word for word like any scene prompt. A still of a
     Keeper shot (the owner's arc-01 exception, plan B) is judged as the Keeper's own prompt is: he sits outside the
-    story's time, at his campfire (prompt_problems), never under the scene's period."""
+    story's time, at his campfire (prompt_problems), never under the scene's period. A thumbnail (thumbnail=True,
+    thumbs.py only) is judged by thumb_period_problems (E238) instead of period_problems; nothing else changes."""
     sid = str(label).partition("/")[0]
     if isinstance(plan, dict) and any(s.get("id") == sid and s.get("kind") == "keeper" for s in plan.get("shots") or []):
         return [p for p in prompt_problems(0, {"id": label, "prompt": prompt})
@@ -873,7 +922,7 @@ def still_prompt_problems(label, prompt, plan):
     if problem:
         found.append(problem)
     else:
-        found += period_problems(0, pseudo, per)
+        found += (thumb_period_problems if thumbnail else period_problems)(0, pseudo, per)
     found += writing_problems(0, pseudo) + prop_problems(0, pseudo, per, plan if isinstance(plan, dict) else {})
     return found
 

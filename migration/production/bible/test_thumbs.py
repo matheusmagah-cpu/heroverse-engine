@@ -57,6 +57,51 @@ class Spec(unittest.TestCase):
         self.assertNotIn("THUMB_KEEPER_FACE", codes(thumbs.spec_problems(ab, chars)))
 
 
+class ThumbPeriodE238(unittest.TestCase):
+    """E238: Pavo drew the exclusion sentence's negated nouns (towers, a columned temple) behind 8 of 8 thumbnails, so
+    a thumbnail may leave that sentence out, keeping the setting sentence and naming no excluded term anywhere."""
+
+    def test_e238_thumbnail_period_without_the_exclusion_sentence(self):
+        import plan_check as pc
+        chars = thumbs.characters()
+        per = pc.PERIODS["the-flood"]
+        self.assertIn(per["exclude"], REAL["prompt"])
+        bare = REAL["prompt"].replace(" " + per["exclude"], "")
+        self.assertNotIn(per["exclude"], bare)
+        self.assertIn(per["setting"], bare)
+        # the setting sentence and no excluded term: passes, with every other thumbnail check unchanged
+        self.assertEqual(thumbs.spec_problems(dict(REAL, prompt=bare), chars), [])
+        self.assertEqual(thumbs.spec_problems(REAL, chars), [])   # the full sentence still passes as before
+        # an excluded term anywhere, negated or not (the sentence's own nouns, the period's avoid, what Pavo drew)
+        for extra in ("A stone tower far behind him.", "No towers.", "no temples, no columns", "a ruined temple",
+                      "without churches", "no modern clothing", "a road behind him", "no stone buildings"):
+            found = thumbs.spec_problems(dict(REAL, prompt=bare + " " + extra), chars)
+            self.assertIn("THUMB_PROMPT_REFUSED", codes(found), extra)
+            self.assertIn("THUMB_PERIOD_EXCLUDED_TERM", " ".join(found), extra)
+        # the setting sentence is still required word for word
+        found = " ".join(thumbs.spec_problems(dict(REAL, prompt=bare.replace(per["setting"], "The flood.")), chars))
+        self.assertIn("SCENE_PERIOD_MISSING", found)
+        # a partial exclusion sentence is not the sentence: its nouns are refused
+        part = bare + " No stone buildings or roads."
+        self.assertIn("THUMB_PERIOD_EXCLUDED_TERM", " ".join(thumbs.spec_problems(dict(REAL, prompt=part), chars)))
+        # every other rule still holds on the shorter prompt (look, keeper, text, saturation is R16's at finalize)
+        self.assertIn("THUMB_LOOK_CHANGED", codes(thumbs.spec_problems(
+            dict(REAL, prompt=bare.replace("long grey beard", "short beard")), chars)))
+        self.assertIn("THUMB_TEXT_WORDS", codes(thumbs.spec_problems(
+            dict(REAL, prompt=bare, text="THE DAY THE FLOOD BEGAN"), chars)))
+        self.assertIn("THUMB_PROMPT_REFUSED", codes(thumbs.spec_problems(
+            dict(REAL, prompt=bare + " " + thumbs_ark()), chars)))
+
+    def test_e238_a_scene_still_still_needs_the_exclusion_sentence(self):
+        import plan_check as pc
+        per = pc.PERIODS["the-flood"]
+        bare = REAL["prompt"].replace(" " + per["exclude"], "")
+        found = " ".join(pc.still_prompt_problems("s-1/still", bare, {"period": "the-flood"}))
+        self.assertIn("SCENE_PERIOD_MISSING", found)
+        self.assertIn(per["exclude"], found)
+        self.assertEqual(pc.still_prompt_problems("s-1/still", REAL["prompt"], {"period": "the-flood"}), [])
+
+
 def thumbs_ark():
     sys.path.insert(0, str(HERE))
     import plan_check

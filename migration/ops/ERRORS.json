@@ -3050,6 +3050,36 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E238",
+   "date": "2026-10-31",
+   "error": "No compliant thumbnail could be generated (8 of 8 tries on 28/10 and 31/10 refused at review): thumbs.py check ran plan_check.still_prompt_problems with the spec's period, which requires the period's exclusion sentence word for word ('No stone buildings, towers, churches, glass lanterns, modern clothing or roads.'), and Pavo agnes-image reads those negated nouns as what to draw, putting towers and a columned temple behind the close-up face. finalize binds spec_sha256 and the prompt, so the prompt could not differ from the spec: the text gate demanded the wording that caused the defect it is meant to prevent.",
+   "fix": "plan_check.thumb_period_problems (reached only by still_prompt_problems(..., thumbnail=True), which thumbs.spec_problems passes): a thumbnail prompt that keeps the exclusion sentence word for word is judged by period_problems as before; one that leaves it out must still state the setting sentence word for word (SCENE_PERIOD_MISSING) and may name none of the period's excluded terms anywhere, negated or not: the exclusion sentence's own nouns (exclusion_terms, singular too), the period's avoid list and THUMB_PERIOD_AVOID (temple, column, pillar, palace, ruin, arch, ziggurat, pyramid, statue: what the refused runs drew), else THUMB_PERIOD_EXCLUDED_TERM (via THUMB_PROMPT_REFUSED). Character look, Keeper, <= 4 words, emotion, face, writing, ark rules, R16 saturation at finalize and the full-resolution 9.5 review of the image (which judges period accuracy) are unchanged. Scene and still prompts still require both sentences.",
+   "class": [
+    "instrument"
+   ],
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_thumbs.py",
+    "contains": "def test_e238_thumbnail_period_without_the_exclusion_sentence",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }

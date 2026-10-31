@@ -151,7 +151,8 @@ def spec_problems(spec, chars=None):
     if spec.get("text") and spec["text"].lower() in low:
         out.append("THUMB_TEXT_IN_PROMPT (the words are drawn by our code, never by the image model)")
     if prompt:
-        bad = plan_check.still_prompt_problems(f"thumb/{spec.get('episode')}", prompt, {"period": spec.get("period")})
+        bad = plan_check.still_prompt_problems(f"thumb/{spec.get('episode')}", prompt, {"period": spec.get("period")},
+                                               thumbnail=True)   # E238: the setting, without the exclusion sentence
         out += [f"THUMB_PROMPT_REFUSED {p}" for p in bad]
     else:
         out.append("THUMB_PROMPT_MISSING")
