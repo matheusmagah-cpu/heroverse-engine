@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-life-church-netherlands-flag-dutch-trees-spri",
+ "theme": "arc01-s-c4-life",
+ "query": "ancient tree golden light",
+ "source": "pixabay",
+ "title": "church, netherlands, flag, dutch, trees, spring, day, light",
+ "page": "https://pixabay.com/videos/id-370958/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-370958/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "68e40675b29d9dc2a3bdee6f1234b6089eb86d2240f96542efe31fffff41106e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  140.2,
+  142.6,
+  145.4,
+  145.8,
+  145.2
+ ],
+ "vetting_descriptions": [
+  "A clock tower with a flag on top of it, surrounded by trees.",
+  "A church with a clock tower and a flag on top of it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-life-church-netherlands-flag-dutch-trees-spri-sha256-68e40675b29d9dc2a3bdee6f1234b6089eb86d2240f96542efe31fffff41106e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

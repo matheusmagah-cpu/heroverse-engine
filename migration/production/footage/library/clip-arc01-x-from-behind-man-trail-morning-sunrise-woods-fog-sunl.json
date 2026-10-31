@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-from-behind-man-trail-morning-sunrise-woods-fog-sunl",
+ "theme": "arc01-x-from-behind",
+ "query": "man walking away field back view",
+ "source": "pixabay",
+ "title": "man, trail, morning, sunrise, woods, fog, sunlight, wilderness, sunbeams, misty, mystical, scenic, field, outdoors, walking, alone, hiking, lonely, nature, drenthe, netherlands, landscape",
+ "page": "https://pixabay.com/videos/id-220364/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-220364/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c68f91eb73539f66d808216ce439e4a0be9f2986a0fc39f36c43ca3b0abd95a4",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  116.9,
+  119.9,
+  121.9,
+  122.7,
+  123.3
+ ],
+ "vetting_descriptions": [
+  "A man is walking in a grassy field with a sunset in the background.",
+  "A man is walking on a path in a foggy field, with a sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-day-night-dark-time-lapse-timelapse-dusk",
+ "theme": "arc01-keeper-camp",
+ "query": "fire crackling dark night",
+ "source": "pixabay",
+ "title": "day, night, dark, time lapse, timelapse, dusk, star, mountain",
+ "page": "https://pixabay.com/videos/id-22555/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 17.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 15.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-22555/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a4f06a6bff38369499aca707916a9594ac7f9b6a9f3e0e76968648bd934f8594",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  82.9,
+  56.7,
+  50.9,
+  41.7,
+  38.9
+ ],
+ "vetting_descriptions": [
+  "A mountain range is visible in the distance, with a clear blue sky above.",
+  "The image shows a nighttime view of a mountain with a starry sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-day-night-dark-time-lapse-timelapse-dusk-sha256-a4f06a6bff38369499aca707916a9594ac7f9b6a9f3e0e76968648bd934f8594.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

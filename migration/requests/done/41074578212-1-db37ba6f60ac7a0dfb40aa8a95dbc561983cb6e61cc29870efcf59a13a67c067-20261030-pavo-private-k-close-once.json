@@ -1,0 +1,27 @@
+{
+ "workflow": "pavo-private-audio.yml",
+ "inputs": {
+  "plan": "migration/production/bible/plans/genesis-09-short.json",
+  "manifest": "migration/integrations/pavo/private-inputs/genesis-09-k-close-20261030.json",
+  "sha256": "7ea943f06681a33d3dc32de31cbf525bb7f03eb67e414f8bfd9628c081373f33",
+  "receipt_certificate": "-----BEGIN CERTIFICATE-----\nMIIENzCCAp+gAwIBAgIUX8DjrlcZRBvLDKxN8h4lIWGoKTkwDQYJKoZIhvcNAQEL\nBQAwKzEpMCcGA1UEAwwgSGVyb1ZlcnNlLXByaXZhdGUtcmV2aWV3LXJlY2VpcHQw\nHhcNMjYxMDMwMDE1NDEwWhcNMjYxMTI5MDE1NDEwWjArMSkwJwYDVQQDDCBIZXJv\nVmVyc2UtcHJpdmF0ZS1yZXZpZXctcmVjZWlwdDCCAaIwDQYJKoZIhvcNAQEBBQAD\nggGPADCCAYoCggGBAIqMhiRT3fk8xa9KUIWtHiT99OTycCfXGsrfawBMWHUj1D0o\nZddA7+7s1Dj9AoT5ixrzqhYFb/LifVPF8dNrz9ZzHGHeJU6RSg7hkWRq0ISYtgdh\nEru2FyOHKMsNnkW7Har+osznMmoEV9yutYeNdgplkvmFGl5RuXWg8J+HahR3Nq3T\nNAUG1EeNPbhQVHPmCnRAVsTLxR1lvsQgFuOMlz8cauyk/5DUt4mUg1o+fdO0DRL7\nnhjK8RdB5rfIf4LGsSLBUopt9Th6AeorkSAA1NRFLgQ1HJShbm0WOrK5XzW4P81w\ngezoSsy7tWxzag1XGxfEvapfre7swcZuS7nX0nPO8T0iO/Wi3QycO7WXZn87SfMZ\nSl1HRr/rq1+MzgYKDKQII8MHj/DPwPlrif59ANUR3Yf02srohbgYwW94KPbQOnZy\nLkozZ1Boyx9XD9DJR+7yeo0R4vNDqUttvOLumm7m2YpOOZNHWzHuHMC7/qMQrPkZ\ns1pRkfIKcavieylK7QIDAQABo1MwUTAdBgNVHQ4EFgQU+pjJSdGonbQ4/BYfDszW\nNsCHBQkwHwYDVR0jBBgwFoAU+pjJSdGonbQ4/BYfDszWNsCHBQkwDwYDVR0TAQH/\nBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAYEAPSf/+uuyMB6fQ8Ahe5MWzW4ar7+J\nzkouJpEZnNlgGJVFxR4gATkhXWAYBvBHYJ2XMcD/vRY2gFp4l0awH3RyL8Dq8upz\n1DW4lK/C0gcdkCJ6xlRfbNZHp3v08l8sDUO/CnJNSPDK3RF6xjGnDuo1nS6Vx8X9\nA9iuhLYdmmTCLhQCl0TXHjIRL21CGsNcQbGtrZ1wRMKvrxpNcltct1hgKOeGytoj\ncySvwG9ci/sBHx4+G80vSHjCZEM2AIy6+LBppG2XJsc8+LBgKk9UjRMUGzdFISTW\nlQ4QKie8u8vzWwQBGyn5BEeVzEqylggz3bRGOca5UTvgW+nJPJE76WanZFVfBPRW\n54tnI6RwuYSJ9vgurYe0CTDTLR/Yj7JuLnFL4gEdNCW0ULMpo6OsjxJoBivmHBl4\n+0FmK7rKLguPyGVodKAzhKTns/Un/ayBwzbmXY49LC9hUiec/49dw4WczfvJvC/L\nLbbI+i10grcNLsLMFi8ww6uK0239HsrKtoOM\n-----END CERTIFICATE-----\n",
+  "lease_run_id": "codex-import-audio-20261030-1318"
+ },
+ "_resume": {
+  "dispatcher_run_id": 41072937005,
+  "result": "REJECTED_BEFORE_CLAIM_BAD_INPUT",
+  "fix": "E229",
+  "same_pending_request": true
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "acknowledged",
+  "request_sha256": "db37ba6f60ac7a0dfb40aa8a95dbc561983cb6e61cc29870efcf59a13a67c067",
+  "original_path": "migration/requests/20261030-pavo-private-k-close-once.json",
+  "base_commit": "26af9fa9b0505c608c1909c9b186b93226d6abf5",
+  "dispatcher_run_id": "41074578212",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-30T14:46:32.600846+00:00",
+  "acknowledged_at": "2026-10-30T14:46:35.532390+00:00"
+ }
+}

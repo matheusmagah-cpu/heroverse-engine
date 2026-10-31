@@ -120,13 +120,30 @@ def combine(records, day=None):
     before generating) says nothing about the quota, so it never hides an earlier run's stop (review of #475)."""
     if not records:
         return dict(NO_ACTIONS)
+    # Private-audio GET reconciliation updates the record branch, not the provider
+    # submission. Both REST and git/MCP readers call this shared normalizer.
+    stable = []
+    for at, r in records:
+        if r.get('version') == 'private-audio-probe-v1' and record_usage(r)[0]:
+            submitted = _when(r.get('submitted_at'), 'private_audio.submitted_at')
+            if submitted is None:
+                raise _unreadable('private audio job lacks its stable submission time')
+            at = submitted
+        stable.append((at, r))
+    records = stable
     units = sum(record_usage(r)[0] for at, r in records
                 if day is None or at.astimezone(timezone.utc).strftime("%Y-%m-%d") == day)
-    generating = [(at, r) for at, r in records if record_usage(r)[0]]
+    generating = [(at, r) for at, r in records if record_usage(r)[0]
+                  and (r.get('version') != 'private-audio-probe-v1' or r.get('state') in ('COMPLETE', 'FAILED'))]
     if not generating:
         return {"units": units, "failed_tail": 0, "last_at": None}
     at, last = max(generating, key=lambda x: x[0])
-    return {"units": units, "failed_tail": record_usage(last)[1], "last_at": at.isoformat()}
+    stopped_at = at
+    if last.get('version') == 'private-audio-probe-v1' and last.get('state') == 'FAILED':
+        stopped_at = _when(last.get('terminal_at'), 'private_audio.terminal_at')
+        if stopped_at is None or stopped_at < at:
+            raise _unreadable('private audio failure lacks its stable terminal time')
+    return {"units": units, "failed_tail": record_usage(last)[1], "last_at": stopped_at.isoformat()}
 
 
 def git_actions_usage(day, repo=None, run=subprocess.run, now=None):
@@ -313,7 +330,7 @@ class QuotaGuard:
                             "submission; E136)" % ",".join(waiting))
 
     def _unread(self, data):
-        """E136: today's submissions not yet read back to an end (completed with media, or failed)."""
+        """E136: today's submissions not yet read back to an end (completed with media, failed or terminal blocked)."""
         day = self._day()
         out = []
         for job in data["unread"]:
@@ -368,7 +385,17 @@ class QuotaGuard:
 
     def read_back(self, conversation_id, status, images):
         """A job read back (a still's images or a video's clips): completed with media lifts a suspension only when the job was submitted after it began;
-        failed with none counts toward a stop (and a failed probe suspends again at once)."""
+        failed with none counts toward a stop (and a failed probe suspends again at once). A terminal prompt block
+        has been read, but is neither a quota failure nor a success; consumption and any suspension stay intact."""
+        if status == "blocked" and not images:
+            # E187: _history only emits blocked after is_running=False, with no media. Unknown, incomplete and
+            # acknowledgement rejection are not terminal evidence. This never resubmits or changes the prompt.
+            data = self._load()
+            data["unread"] = [j for j in data["unread"] if j != conversation_id]
+            if (data["probe"] or {}).get("conversation_id") == conversation_id:
+                data["probe"] = None  # a later explicit request is still subject to the one-probe/cool-down rule
+            self._save(data)
+            return
         if status == "completed" and images:
             data = self._load()
             data["unread"] = [j for j in data["unread"] if j != conversation_id]

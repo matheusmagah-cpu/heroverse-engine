@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rain-snowfall-snow-rain-rainfall-heavy-rainin",
+ "theme": "flood-rain",
+ "query": "heavy rain night",
+ "source": "pixabay",
+ "title": "snowfall, snow, rain, rainfall, heavy, raining, winter, winter snow",
+ "page": "https://pixabay.com/videos/id-143404/",
+ "author": "FestiMania",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: FestiMania via Pixabay (https://pixabay.com/videos/id-143404/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b6cdf5312362e7fde221d7acca2b32ca429a490c24b1d46aaee0f1265ab62cd2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  76.6,
+  59.6,
+  43.1,
+  57.5,
+  33.1
+ ],
+ "vetting_descriptions": [
+  "The image is a close up of a bright light source with a background of white and grey bubbles.",
+  "A black and white photo of a snowy scene with a blurry background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rain-snowfall-snow-rain-rainfall-heavy-rainin-sha256-b6cdf5312362e7fde221d7acca2b32ca429a490c24b1d46aaee0f1265ab62cd2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

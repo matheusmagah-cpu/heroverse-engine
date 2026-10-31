@@ -1,0 +1,40 @@
+{
+ "id": "clip-herd-sheep-wool-grazing-grass-meadow-nature-l",
+ "theme": "herd",
+ "query": "sheep flock grazing hillside",
+ "source": "pixabay",
+ "title": "sheep, wool, grazing, grass, meadow, nature, livestock, pasture, agriculture, forest, trees",
+ "page": "https://pixabay.com/videos/id-49970/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-49970/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5a294e35663915bf7336ddd77379d32f2aeccb7142501cad747723849052b22c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.4,
+  122.8,
+  123.7,
+  124.3,
+  124.9
+ ],
+ "vetting_descriptions": [
+  "A group of sheep grazing in a forest, with a sun shining through the trees.",
+  "A group of sheep are walking down a path in a forest, with sunlight shining through the trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-herd-sheep-wool-grazing-grass-meadow-nature-l-sha256-5a294e35663915bf7336ddd77379d32f2aeccb7142501cad747723849052b22c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

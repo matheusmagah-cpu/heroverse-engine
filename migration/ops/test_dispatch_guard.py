@@ -58,6 +58,7 @@ def hand_copied_shot_ids(root=ROOT):
     return out
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
+    "buzzy-cloud-readiness.yml": "bounded allowlisted GET-only account inspection; no deploy, generation, render, upload or billing mutation",
     "heartbeat.yml": "the scheduler itself; it dispatches, it makes nothing",
     "requests.yml": "dispatches committed requests; each dispatched workflow runs its own guard",
     "reconcile.yml": "reconciles ledgers; no generation, render or upload",
@@ -111,6 +112,10 @@ def render(expr, inputs, subject):
 
 
 SAMPLES = {
+    "pavo-private-audio.yml": {"plan": PLAN, "sha256": "7ea943f06681a33d3dc32de31cbf525bb7f03eb67e414f8bfd9628c081373f33",
+                               "manifest": "migration/integrations/pavo/private-inputs/genesis-09-k-close-20261030.json",
+                               "lease_run_id": "offline-test"},
+    "native-review.yml": {"plan": PLAN, "sha256": "a" * 64, "byte_size": "100", "owner_review_authorized": "true"},
     "episode.yml": {"plan": PLAN, "resume_run": ""},
     "shot-probe.yml": {"plan": PLAN, "shots": S1, "attempts": "2", "adopt_run": ""},
     "publish-episode.yml": {"episode": "genesis-09-short", "source_url": "", "publish_at": ""},
@@ -258,7 +263,7 @@ class Inputs(unittest.TestCase):
         # LONG_DESIGN slice 3: the long's build takes a long plan only
         self.refused("long-build.yml", {"plan": PLAN}, "GUARD_INPUT_INVALID")
         self.refused("long-build.yml", {"plan": LONG_PLAN, "resume_run": "x"}, "GUARD_INPUT_INVALID")
-        self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 2)
+        self.assertEqual(g.WORKFLOWS["long-build.yml"][1]({"plan": LONG_PLAN})["uploads"], 3)
 
     def test_no_test_copies_a_live_plans_shot_ids_by_hand(self):
         """E133: a fixture that copies a live plan's shot ids breaks when the plan is edited (genesis-09's redesign

@@ -12,12 +12,13 @@ PLAN: {"voice": WAV, "timeline": timeline.json, "music": FLAC, "music_offset": s
        "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s, "speed": f?}, ...]}   shots tile [0, voice end + tail]
        ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed;
         "talk", optional: {"start", "end"} of the line a talking clip carries - the Keeper or a character speaking -
-        which must sit on that line of the voice track, from the clip's 0 s at normal speed: talk_problems;
+        which must sit on that line at normal speed, from 0 s or the measured source onset in native_onsets;
         "hold", optional: seconds of the clip's last frame held after it, <= HOLD_MAX, E95)
 The voice WAV holds every line in order, the spoken lines in their speakers' own voices; clips are muted (-an), so
 a talking clip's lips meet its line in the mix only through that alignment.
 """
 import json
+import math
 from pathlib import Path
 import re
 import subprocess
@@ -61,16 +62,21 @@ def check_shots(shots, total):
     return problems
 
 
-def talk_problems(shots, sentences):
+def talk_problems(shots, sentences, native_onsets=None):
     """A talking shot (the Keeper, a character speaking its line; `talk` = its line's span in the voice track) plays
-    its clip from 0 s at normal speed starting exactly on its line's first word and runs past its last, and that span
-    is a line of the voice track, so the lips on screen meet the same words in the mix."""
+    its clip from 0 s (Kokoro) or the exact measured source onset used in native_voice's premix, at normal speed,
+    starting exactly on its line's first word and running past its last. The span must be on the voice track. A
+    positive video offset without the native audio binding still fails; the synchronization rule is unchanged."""
     problems = []
+    native_onsets = native_onsets or {}
     for i, s in enumerate(shots):
         t = s.get("talk")
         if not t:
             continue
-        if (abs(s["start"] - t["start"]) > 1e-3 or s.get("src_start", 0.0) != 0.0 or s.get("speed", 1.0) != 1.0
+        onset, src = native_onsets.get(s.get("shot"), 0.0), s.get("src_start", 0.0)
+        aligned = (isinstance(onset, (int, float)) and math.isfinite(onset) and onset >= 0
+                   and isinstance(src, (int, float)) and math.isfinite(src) and src == round(onset, 3))
+        if (abs(s["start"] - t["start"]) > 1e-3 or not aligned or s.get("speed", 1.0) != 1.0
                 or s["end"] + 1e-3 < t["end"]):
             problems.append(f"TALK_NOT_ALIGNED {i}")
         if (not any(abs(x["start"] - t["start"]) <= 0.05 for x in sentences)
@@ -148,7 +154,7 @@ def main(plan_path, out):
     timeline = json.loads(Path(plan["timeline"]).read_text())
     total = round(timeline["voice_seconds"] + plan.get("tail", 1.2), 3)
     shots = plan["shots"]
-    problems = check_shots(shots, total) + talk_problems(shots, timeline["sentences"])
+    problems = check_shots(shots, total) + talk_problems(shots, timeline["sentences"], plan.get("native_onsets"))
     if problems:
         raise SystemExit("PLAN_REFUSED " + "; ".join(problems))
     with tempfile.TemporaryDirectory() as tmp:

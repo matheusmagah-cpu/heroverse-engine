@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-flowers-tulips-petals-yellow-golden-clos",
+ "theme": "arc01-x-snake",
+ "query": "snake head close up",
+ "source": "pixabay",
+ "title": "flowers, tulips, petals, yellow, golden, close up, springtime, season, green, gold, blossom, grass, field, garden, beauty, summer, bloom, spring",
+ "page": "https://pixabay.com/videos/id-212453/",
+ "author": "JoshuaWoroniecki",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: JoshuaWoroniecki via Pixabay (https://pixabay.com/videos/id-212453/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c7ef74e310a077f39586154aa2a919db467fe83a1e0fdbc28c6ab5179ad4a3f9",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.5,
+  82.9,
+  84.6,
+  85.9,
+  85.5
+ ],
+ "vetting_descriptions": [
+  "A field of yellow flowers with green leaves and a yellow flower in the foreground.",
+  "A field of yellow flowers with green stems."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-flowers-tulips-petals-yellow-golden-clos-sha256-c7ef74e310a077f39586154aa2a919db467fe83a1e0fdbc28c6ab5179ad4a3f9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

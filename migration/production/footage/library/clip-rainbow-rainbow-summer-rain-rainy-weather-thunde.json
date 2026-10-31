@@ -1,0 +1,40 @@
+{
+ "id": "clip-rainbow-rainbow-summer-rain-rainy-weather-thunde",
+ "theme": "rainbow",
+ "query": "rainbow after rain",
+ "source": "pixabay",
+ "title": "rainbow, summer rain, rainy weather, thunderstorm, clouds, blue hour, nightfall, nature, landscape",
+ "page": "https://pixabay.com/videos/id-221682/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-221682/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4d2c3ce3715da1d3f04ad0d6f7f5451ee82fcf5bef2110a40d97ab8b4301f6e8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  145.2,
+  133.3,
+  141.5,
+  145.3,
+  142.7
+ ],
+ "vetting_descriptions": [
+  "A view of a cloudy sky with a hillside in the background and a house with a garden in the foreground.",
+  "A beautiful sunset with a rainbow in the sky, a house with a garden, and a mountain in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-rainbow-rainbow-summer-rain-rainy-weather-thunde-sha256-4d2c3ce3715da1d3f04ad0d6f7f5451ee82fcf5bef2110a40d97ab8b4301f6e8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

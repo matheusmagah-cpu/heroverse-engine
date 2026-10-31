@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-co-gate-volcano-smoke-fire-heat-flame-burn-geolo",
+ "theme": "arc01-s-co-gate",
+ "query": "torch flame night trees",
+ "source": "pixabay",
+ "title": "volcano, smoke, fire, heat, flame, burn, geology, volcanology, spatter, splash, iceland, nature, lava, magma, eruption",
+ "page": "https://pixabay.com/videos/id-152174/",
+ "author": "Gylfi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 22.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Gylfi via Pixabay (https://pixabay.com/videos/id-152174/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "06f7d66f3418f3fb50bd9bf47830c7edd83f116241dc930ccf6ab4717521e9ad",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  89.0,
+  88.0,
+  88.9,
+  90.4,
+  89.5
+ ],
+ "vetting_descriptions": [
+  "A red lava flow is seen in a volcano, with smoke coming out of it.",
+  "A volcano is spewing lava, and the ground is covered in ash."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-co-gate-volcano-smoke-fire-heat-flame-burn-geolo-sha256-06f7d66f3418f3fb50bd9bf47830c7edd83f116241dc930ccf6ab4717521e9ad.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

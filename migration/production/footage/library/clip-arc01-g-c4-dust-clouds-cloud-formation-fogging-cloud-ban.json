@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-dust-clouds-cloud-formation-fogging-cloud-ban",
+ "theme": "arc01-g-c4-dust",
+ "query": "barren desert clouds thorns",
+ "source": "pixabay",
+ "title": "clouds, cloud formation, fogging, cloud band, nature",
+ "page": "https://pixabay.com/videos/id-222446/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-222446/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b127fb9865098fdd3bfecc34ee7c8e390e53fbbd4b30464a423f24251483cb2e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.8,
+  95.6,
+  96.6,
+  98.1,
+  99.3
+ ],
+ "vetting_descriptions": [
+  "A beautiful view of mountains and a cloudy sky with a blue background.",
+  "The image shows a beautiful view of a mountain range with clouds in the sky, and a green field with trees in the foreground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-dust-clouds-cloud-formation-fogging-cloud-ban-sha256-b127fb9865098fdd3bfecc34ee7c8e390e53fbbd4b30464a423f24251483cb2e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

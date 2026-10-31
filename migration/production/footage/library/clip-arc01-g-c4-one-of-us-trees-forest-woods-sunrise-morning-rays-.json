@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-one-of-us-trees-forest-woods-sunrise-morning-rays-",
+ "theme": "arc01-g-c4-one-of-us",
+ "query": "misty forest dawn light rays",
+ "source": "pixabay",
+ "title": "trees, forest, woods, sunrise, morning, rays, fog, netherlands, drenthe",
+ "page": "https://pixabay.com/videos/id-189813/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-189813/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4644fc24fe80a25f071ccc02e57832dc3005a497bb0b272f45a60a9a2d417d96",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  73.8,
+  82.9,
+  91.8,
+  83.4,
+  81.6
+ ],
+ "vetting_descriptions": [
+  "A sunny day in the woods with a sunbeam shining through the trees.",
+  "A sunny day in the woods with a tree and a sun shining through the trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-one-of-us-trees-forest-woods-sunrise-morning-rays--sha256-4644fc24fe80a25f071ccc02e57832dc3005a497bb0b272f45a60a9a2d417d96.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

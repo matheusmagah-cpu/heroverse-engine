@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-flower-dandelion-wild-flowers-blossom-bl",
+ "theme": "arc01-keeper-camp",
+ "query": "starry sky desert night time lapse",
+ "source": "pixabay",
+ "title": "flower, dandelion, wild flowers, blossom, bloom, feather, time lapse, timelapse, live wallpaper",
+ "page": "https://pixabay.com/videos/id-72763/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 21.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 19.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-72763/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8ac22d7bbfb8f5bf3573e614c417e336a39c05e0cd800767e24cde15537b6b0b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  53.1,
+  53.8,
+  54.9,
+  54.9,
+  55.8
+ ],
+ "vetting_descriptions": [
+  "A group of yellow flowers are in the foreground, with a dark background.",
+  "A group of yellow flowers are in a field with a dark background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-flower-dandelion-wild-flowers-blossom-bl-sha256-8ac22d7bbfb8f5bf3573e614c417e336a39c05e0cd800767e24cde15537b6b0b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

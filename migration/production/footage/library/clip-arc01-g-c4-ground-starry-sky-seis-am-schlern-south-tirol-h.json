@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-ground-starry-sky-seis-am-schlern-south-tirol-h",
+ "theme": "arc01-g-c4-ground",
+ "query": "lightning storm night sky",
+ "source": "pixabay",
+ "title": "starry sky, seis am schlern, south-tirol, heaven, stars, night, dolomites, night sky, seiser alm, winter night, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-14955/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 17.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 15.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-14955/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a0334e3ffd244d94d0de0d8534430c0e203539fd40504d79435da3e826421af8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  39.8,
+  37.4,
+  39.8,
+  41.9,
+  43.3
+ ],
+ "vetting_descriptions": [
+  "A nighttime view of a mountain with a starry sky above it.",
+  "A nighttime view of a mountain with a starry sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-ground-starry-sky-seis-am-schlern-south-tirol-h-sha256-a0334e3ffd244d94d0de0d8534430c0e203539fd40504d79435da3e826421af8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

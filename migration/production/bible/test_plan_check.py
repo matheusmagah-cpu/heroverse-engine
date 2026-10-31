@@ -104,6 +104,19 @@ def codes(result):
 
 
 class Plan(unittest.TestCase):
+    def test_e212_short_close_does_not_claim_unpublished_delivery(self):
+        # An upcoming arc's long has no confirmed publication. Its spoken close must remain
+        # truthful even if a slot is missed; the existing arc-links worker adds live links later.
+        p = json.loads((EXAMPLE.parent / "genesis-09-short.json").read_text())
+        close = p["narration"][-1]
+        self.assertEqual(close["kind"], "cta")
+        text = close["text"].lower()
+        self.assertIn("full story", text)
+        self.assertIn("part ten", text)
+        for claim in ("is in the long video", "is on the channel", "watch now", "tomorrow", "today"):
+            with self.subTest(claim=claim):
+                self.assertNotIn(claim, text)
+
     def test_the_fixture_plan_passes(self):
         r = pc.check(plan(), CHARS)
         self.assertEqual(r["problems"], [])

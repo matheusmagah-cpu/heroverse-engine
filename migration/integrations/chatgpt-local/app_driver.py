@@ -129,7 +129,7 @@ def glide_click(el, double=False):
     (mouse.double_click if double else mouse.click)(coords=(tx, ty))
 
 
-APP = {"pids": set(), "win": None}   # the ChatGPT app's processes: every click and key goes only to them (E147)
+APP = {"pids": set(), "win": None}   # the ChatGPT app's processes: every click and key goes only to them (E235)
 
 
 def root_pid_at(x, y):
@@ -228,7 +228,7 @@ def composer(w):
 
 
 def new_chat_button(w):
-    """The topmost "Novo chat" button (the sidebar's own). E145: a window found through Desktop().windows() is a
+    """The topmost "Novo chat" button (the sidebar's own). E233: a window found through Desktop().windows() is a
     wrapper (no child_window): only descendants() and element_info are used, and only the button's name is compared."""
     found = [e for e in w.descendants() if e.element_info.control_type == "Button"
              and (e.element_info.name or "").strip() == "Novo chat"]
@@ -269,7 +269,7 @@ def menu_item(w, prefix):
 
 def file_dialog(w):
     """The app's own Open dialog (a Windows #32770 dialog owned by the app: a child of its window or a top-level
-    window of the same process). E146: it is not found among the desktop's top-level windows by its title alone."""
+    window of the same process). E234: it is not found among the desktop's top-level windows by its title alone."""
     from pywinauto import Desktop
     pid = w.element_info.process_id
     cands = [d for d in w.descendants() if d.element_info.control_type == "Window"]

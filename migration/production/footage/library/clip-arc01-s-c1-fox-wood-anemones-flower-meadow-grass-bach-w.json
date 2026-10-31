@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-fox-wood-anemones-flower-meadow-grass-bach-w",
+ "theme": "arc01-s-c1-fox",
+ "query": "red fox meadow grass",
+ "source": "pixabay",
+ "title": "wood anemones, flower, meadow, grass, bach, watercourse, on the water, nature",
+ "page": "https://pixabay.com/videos/id-276645/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-276645/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f5223d3cc6ba0998a5d522df56beee944c050499c7e62ff35f2af15a1f319ae0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  87.8,
+  87.8,
+  88.2,
+  87.8,
+  87.9
+ ],
+ "vetting_descriptions": [
+  "A river with ripples and a green grassy bank with white flowers and green grass.",
+  "A river with green grass and white flowers on the bank."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-fox-wood-anemones-flower-meadow-grass-bach-w-sha256-f5223d3cc6ba0998a5d522df56beee944c050499c7e62ff35f2af15a1f319ae0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

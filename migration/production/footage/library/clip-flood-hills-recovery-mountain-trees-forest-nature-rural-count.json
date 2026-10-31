@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-hills-recovery-mountain-trees-forest-nature-rural-count",
+ "theme": "flood-hills-recovery",
+ "query": "mist mountains",
+ "source": "pixabay",
+ "title": "mountain, trees, forest, nature, rural, countryside, fog, haze, mist, sky, laos, landscape",
+ "page": "https://pixabay.com/videos/id-180186/",
+ "author": "Anewlifetraveling",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Anewlifetraveling via Pixabay (https://pixabay.com/videos/id-180186/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fd1c68ec0b752a403a0daa94a738bfd1f69898a503d91b2e704a738c53e12421",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  119.4,
+  119.2,
+  119.1,
+  119.5,
+  119.0
+ ],
+ "vetting_descriptions": [
+  "A mountainous area with a foggy valley and a green forest.",
+  "A mountainous area with a foggy valley and a green hillside."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-hills-recovery-mountain-trees-forest-nature-rural-count-sha256-fd1c68ec0b752a403a0daa94a738bfd1f69898a503d91b2e704a738c53e12421.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

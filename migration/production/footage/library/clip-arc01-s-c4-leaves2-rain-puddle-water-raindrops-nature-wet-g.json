@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c4-leaves2-rain-puddle-water-raindrops-nature-wet-g",
+ "theme": "arc01-s-c4-leaves2",
+ "query": "leaves on wet ground rain",
+ "source": "pixabay",
+ "title": "rain, puddle, water, raindrops, nature, wet, grass, greenery, outdoor, rainfall, splash, weather, reflection, natural, tranquil, droplets, rainy day, ripples on water, ripples, calm, scenic, raining",
+ "page": "https://pixabay.com/videos/id-217713/",
+ "author": "YanaHD",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: YanaHD via Pixabay (https://pixabay.com/videos/id-217713/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "aa36a9d1187aba5a6089afba5425094c10b1f0aa967a5a6c72af47e5a1975125",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN rays"
+ ],
+ "vetting_luma": [
+  104.1,
+  102.9,
+  105.0,
+  102.5,
+  103.1
+ ],
+ "vetting_descriptions": [
+  "A rainy day in a forest with a stream of water running through it.",
+  "A puddle of water with a reflection of a tree and a green field."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

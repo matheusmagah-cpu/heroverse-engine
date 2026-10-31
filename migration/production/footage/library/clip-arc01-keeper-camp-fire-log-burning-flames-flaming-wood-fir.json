@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-fire-log-burning-flames-flaming-wood-fir",
+ "theme": "arc01-keeper-camp",
+ "query": "old scroll by fire",
+ "source": "pixabay",
+ "title": "fire, log, burning, flames, flaming, wood fire, easter fire, glow, embers, firelight, burn, fireplace, fire bowl, heat, warmth",
+ "page": "https://pixabay.com/videos/id-8647/",
+ "author": "KlausHausmann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 2025,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KlausHausmann via Pixabay (https://pixabay.com/videos/id-8647/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "067e0b5ed8a6469c0d1029f5aad3128343ca32b7719cac6348a9ad81373bc055",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  79.7,
+  73.4,
+  69.9,
+  80.3,
+  68.3
+ ],
+ "vetting_descriptions": [
+  "A fire is burning a wooden log, and there is a piece of paper on the log.",
+  "A flaming piece of wood is on a wooden surface, and there is a fire in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-fire-log-burning-flames-flaming-wood-fir-sha256-067e0b5ed8a6469c0d1029f5aad3128343ca32b7719cac6348a9ad81373bc055.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

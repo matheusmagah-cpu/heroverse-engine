@@ -34,10 +34,12 @@ class StructureMining(unittest.TestCase):
     def test_reviewer_allowance_is_reserved_for_decisions(self):
         # E26: mining and Shorts selection spent gemini-3.8-flash's small free daily allowance before the reviews
         root = Path(__file__).resolve().parents[2]
-        reviewers = set()
-        for f in ("migration/production/long_review.py", "migration/production/shorts_review.py"):
-            reviewers |= set(re.findall(r'REVIEW_MODELS = \(([^)]*)\)', (root / f).read_text())[0].replace('"', "").replace(",", " ").split())
-        reviewers = {m for m in reviewers if m.startswith("gemini")}  # long videos: Claude, no Gemini allowance (2026-10-24)
+        sys.path.insert(0, str(root / "migration/production"))
+        import long_review
+        import shorts_review
+        # Read the policy actually used by each reviewer, including shared imported policies.
+        reviewers = set(long_review.REVIEW_MODELS) | set(shorts_review.REVIEW_MODELS)
+        reviewers = {m for m in reviewers if m.startswith("gemini")}  # session reviews use no Gemini allowance
         self.assertEqual(set(sm.DECISION_MODELS), reviewers)
         self.assertFalse(set(sm.SUPPORT_MODELS) & reviewers)
         self.assertTrue(sm.SUPPORT_MODELS)

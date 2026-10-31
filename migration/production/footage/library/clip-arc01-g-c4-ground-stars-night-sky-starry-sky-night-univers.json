@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-g-c4-ground-stars-night-sky-starry-sky-night-univers",
+ "theme": "arc01-g-c4-ground",
+ "query": "lightning storm night sky",
+ "source": "pixabay",
+ "title": "stars, night sky, starry sky, night, universe",
+ "page": "https://pixabay.com/videos/id-144597/",
+ "author": "Bernhard_Schuermann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: Bernhard_Schuermann via Pixabay (https://pixabay.com/videos/id-144597/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "288b5daef0310466c26733be66b31d5cc824142730b4bdbfd2f9368793cc80dd",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car"
+ ],
+ "vetting_luma": [
+  31.1,
+  29.1,
+  32.4,
+  31.4,
+  45.2
+ ],
+ "vetting_descriptions": [
+  "A nighttime view of a house with a chimney, a tree, and a sky full of stars.",
+  "A nighttime scene with a house, a tree, a street light, and a car."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

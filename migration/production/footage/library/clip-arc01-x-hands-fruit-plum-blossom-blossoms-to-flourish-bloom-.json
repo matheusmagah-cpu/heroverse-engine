@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-hands-fruit-plum-blossom-blossoms-to-flourish-bloom-",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hand picking fruit tree",
+ "source": "pixabay",
+ "title": "plum blossom, blossoms, to flourish, bloom, spring blossom, early bloomer, spring flower, fruit tree blossoming, stone fruit blossom",
+ "page": "https://pixabay.com/videos/id-145826/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-145826/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a34adf248e10a1c2236a69ca976f695a4659ed3e44e2543811cd3e425db39bd5",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  35.7,
+  37.1,
+  37.6,
+  38.8,
+  40.0
+ ],
+ "vetting_descriptions": [
+  "A close up of a tree branch with white flowers and green leaves.",
+  "A close up of a branch with white flowers on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-hands-fruit-plum-blossom-blossoms-to-flourish-bloom--sha256-a34adf248e10a1c2236a69ca976f695a4659ed3e44e2543811cd3e425db39bd5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

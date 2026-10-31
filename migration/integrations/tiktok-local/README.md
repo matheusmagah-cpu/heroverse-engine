@@ -32,6 +32,18 @@ through Desktop Commander (`mcp__Remote_Desktop_Commander__*`). Installed at `C:
 "text", "verse": {"reference", "quote"}?} | {..., "decision": "SKIP", "reason": "spam|hate|provocation|..."}]}`
 (the same decision format and gate as YouTube's `migration/publish/comment_replies.json`).
 
+Every REPLY requires the original `comment_id`, `video_id`, profile `author` handle and full `comment_text`.
+The runner accepts only one visible container with an explicit matching comment id, exact profile link and full
+text (layout whitespace may differ). Missing ids, changed selectors, duplicate targets or mismatched text stop
+before a like/reply. `_comment_id_attributes` in selectors.json lists accepted DOM attributes; their availability
+has **not** been validated on the owner's live page. If TikTok does not expose one, the runner reports
+`COMMENT_IDENTITY_UNVERIFIABLE` and needs a verified identity adapter; it never falls back to a text prefix.
+
+Immediately before either write leaves the browser, a route guard also checks its video id and comment/parent id
+(and like action or exact reply text), aborting missing, ambiguous or mismatched fields. Only a response containing
+the expected parent, video, account, text and a new reply id becomes REPLIED; incomplete confirmation stays
+UNCERTAIN and cannot be retried automatically. No real post was used to validate this contract.
+
 ## Pacing and limits (owner)
 One comment at a time; 4-15 s between the steps on one comment, 45-240 s between comments; at most 3 a run, 20 a
 day, and 20 min after the last action of an earlier run. Only our own videos (the page must be

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-hide-from-the-air-from-above-bernese-oberland",
+ "theme": "arc01-x-hide",
+ "query": "hiding behind tree from behind",
+ "source": "pixabay",
+ "title": "from the air, from above, bernese oberland, switzerland, road, forest, mountain road, mountain trail, houses, fir trees, along the road, hilly, pitch, dji phantom professional, drone, copter, bird's eye view, midland, canton bern, summer, warm, farm yard, hotel, parking spot, excursion, nature, off the beaten track, lonely, the difference in height, perpendicular, air, 4k, 25fps",
+ "page": "https://pixabay.com/videos/id-9798/",
+ "author": "lukasbieri",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 44.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: lukasbieri via Pixabay (https://pixabay.com/videos/id-9798/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bf7ddac9cadd4c0cc248709039e60596ba233de3f3124f2e5e309785d7d202d2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  66.6,
+  70.2,
+  69.3,
+  66.1,
+  61.7
+ ],
+ "vetting_descriptions": [
+  "A road winds through a lush green hillside, with a few houses and trees in the background.",
+  "A large green field with a road going through it and a house in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-hide-from-the-air-from-above-bernese-oberland-sha256-bf7ddac9cadd4c0cc248709039e60596ba233de3f3124f2e5e309785d7d202d2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -5,8 +5,11 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import publication_binding as binding
+import three_stage
+import test_prepublish_gate as gate_fixture
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,6 +20,32 @@ def documents():
 
 
 class Tests(unittest.TestCase):
+    def test_e169_publication_reads_the_same_story_dimensions_and_rows_as_the_canonical_gate(self):
+        # Synthetic evidence for reader parity only, never an actual QA or approval of a production video.
+        for version in binding.canonical_gate.STORY_VERSIONS:
+            with self.subTest(version=version):
+                qa, manifest, review = gate_fixture.good()
+                qa.update(criteria_version=version,
+                          criteria_sha256=binding.canonical_gate.FROZEN_CRITERIA_SHA256[version],
+                          checks={key: True for names in binding.canonical_gate.story_v3_rows(version).values()
+                                  for key in names})
+                review['scorecard_hard'] = {'minutes': {'value': 15, 'pass': True}}
+                row = {'name': 'fixture', 'state': 'PASS', 'value': 'offline parity fixture'}
+                with mock.patch.object(three_stage, 'structure_rows', return_value=[row]), \
+                        mock.patch.object(three_stage, 'authenticity_rows', return_value=[row]):
+                    gate = gate_fixture.run(qa, manifest, review)
+                self.assertEqual(gate['decision'], 'PASS')
+                approval = {'approved': True, 'output_sha256': qa['output_sha256']}
+                self.assertEqual(binding.check(qa, approval, manifest, gate), [])
+                self.assertNotIn('title_card_seconds', {x['item'] for x in gate['items']['image']})
+                name = 'story_qa_' + version.rsplit('-', 1)[-1]
+                missing = copy.deepcopy(gate); missing['items'][name].pop()
+                self.assertIn('GATE_CANONICAL_ITEMS_MISSING:' + name,
+                              binding.check(qa, approval, manifest, missing))
+                missing = copy.deepcopy(gate)
+                del missing['items'][name]; del missing['dimensions'][name]
+                self.assertIn('GATE_CANONICAL_DIMENSIONS_MISSING', binding.check(qa, approval, manifest, missing))
+
     def test_valid(self): self.assertEqual(binding.check(*documents()),[])
     def test_reviewer_cannot_bypass(self):
         for reviewer in ('HeroVerse automatic gates','HeroVerse three-stage approval','Owner','',None,'unknown'):

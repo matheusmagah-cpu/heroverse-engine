@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lions-lioness-predator-dangerous-lion-carnivor",
+ "theme": "flood-lions",
+ "query": "lion walking",
+ "source": "pixabay",
+ "title": "lioness, predator, dangerous, lion, carnivores, big cat, wildlife",
+ "page": "https://pixabay.com/videos/id-109722/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-109722/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6afb8af198115a3123e958998447175e21418bfdb8f4cc6b6c089e6f15ec2657",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  140.5,
+  139.7,
+  138.2,
+  137.7,
+  134.7
+ ],
+ "vetting_descriptions": [
+  "A lion is laying down in a grassy field.",
+  "A lion is laying down in the grass, looking at the camera."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lions-lioness-predator-dangerous-lion-carnivor-sha256-6afb8af198115a3123e958998447175e21418bfdb8f4cc6b6c089e6f15ec2657.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

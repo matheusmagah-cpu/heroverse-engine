@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-naked-waterfalls-river-dolomiti-lake-mountains",
+ "theme": "arc01-g-c4-naked",
+ "query": "wind darkening forest leaves",
+ "source": "pixabay",
+ "title": "waterfalls, river, dolomiti, lake, mountains, alpi, water, panorama, landscape, italy, nature, sun, sunset, clouds, sky, wind, blue, forest, flowers, animals, plant, atmosphere, gopro, 4k, sport",
+ "page": "https://pixabay.com/videos/id-47213/",
+ "author": "Ambient_Nature_Atmosphere",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-47213/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "278ef60b252f5333726359d91cc160ab7b7a282d51e556751c68271471bb7ac0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.0,
+  85.5,
+  85.8,
+  86.5,
+  86.0
+ ],
+ "vetting_descriptions": [
+  "A river flows through a forest, surrounded by rocks and trees, and a waterfall can be seen in the distance.",
+  "A river with a waterfall in the middle of a forest, surrounded by rocks and trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-naked-waterfalls-river-dolomiti-lake-mountains-sha256-278ef60b252f5333726359d91cc160ab7b7a282d51e556751c68271471bb7ac0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

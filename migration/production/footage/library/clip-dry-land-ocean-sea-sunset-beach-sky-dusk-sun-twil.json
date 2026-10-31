@@ -1,0 +1,40 @@
+{
+ "id": "clip-dry-land-ocean-sea-sunset-beach-sky-dusk-sun-twil",
+ "theme": "dry-land",
+ "query": "dry cracked earth sun",
+ "source": "pixabay",
+ "title": "ocean, sea, sunset, beach, sky, dusk, sun, twilight, environment, horizon, clouds, water, scenery, silhouette, seascape, waves, reflection, golden, paradise, earth day, nature",
+ "page": "https://pixabay.com/videos/id-204153/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-204153/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "10b9a13d06584794674d1b65e5d78c461fe514fa5d8cf7aa17abc09ebc8a3f94",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.7,
+  74.8,
+  78.7,
+  77.2,
+  74.8
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over the ocean, with a few boats visible in the distance.",
+  "The sun is setting over the ocean, creating a beautiful scene with the sun shining through the clouds."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dry-land-ocean-sea-sunset-beach-sky-dusk-sun-twil-sha256-10b9a13d06584794674d1b65e5d78c461fe514fa5d8cf7aa17abc09ebc8a3f94.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

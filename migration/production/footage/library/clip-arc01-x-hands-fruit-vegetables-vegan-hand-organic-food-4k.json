@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hands-fruit-vegetables-vegan-hand-organic-food-4k",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hands holding fig",
+ "source": "pixabay",
+ "title": "vegetables, vegan, hand, organic, food, 4k",
+ "page": "https://pixabay.com/videos/id-167735/",
+ "author": "kamranwada786",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: kamranwada786 via Pixabay (https://pixabay.com/videos/id-167735/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b78d6ee80ab8eeb62ab7c632dd5e74fedf998497a6940fb4143feca6128fb0cc",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  169.7,
+  170.4,
+  151.2,
+  150.4,
+  156.0
+ ],
+ "vetting_descriptions": [
+  "A table full of various types of peppers and garlic.",
+  "A person is reaching for a pepper on a table with a bunch of garlic cloves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

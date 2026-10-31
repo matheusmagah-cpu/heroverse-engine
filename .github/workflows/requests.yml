@@ -1,8 +1,12 @@
 name: HeroVerse requests (start a workflow by committing a request file)
 # Sessions without GitHub API tools start work by committing
 # migration/requests/<name>.json = {"workflow": "file.yml", "inputs": {...}}.
-# GITHUB_TOKEN may dispatch workflow_dispatch runs. Each file runs once (it is moved to done/).
+# GITHUB_TOKEN may dispatch workflow_dispatch runs. A claim is committed and pushed BEFORE the POST.
+# Only pending root files are candidates; inflight claims are never replayed, including after a lost response,
+# crash or failed acknowledgement push. Reconcile their workflow/run history, request hash and base commit
+# read-only before explicitly resolving them. This is not an exactly-once guarantee from the provider.
 on:
+  workflow_call:
   push:
     branches: [main]
     paths: ['migration/requests/*.json']
@@ -21,28 +25,91 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main   # a queued old push must see the claims recorded by the previous dispatcher
       - name: Dispatch each pending request
         run: |
+          set -euo pipefail
           shopt -s nullglob
-          mkdir -p migration/requests/done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase -q origin main
+          mkdir -p migration/requests/done migration/requests/inflight
+          failed=0
           for f in migration/requests/*.json; do
-            args=$(python3 -I - "$f" <<'PY'
+            # Another engine job can update main during a dispatch. Refresh before reading the next request.
+            git pull --rebase -q origin main
+            [ -f "$f" ] || continue
+            if ! args=$(python3 -I - "$f" <<'PY'
           import json, re, shlex, sys
-          r = json.load(open(sys.argv[1]))
+          from pathlib import Path
+          path = Path(sys.argv[1])
+          assert path.is_file() and not path.is_symlink(), "REQUEST_NOT_REGULAR"
+          assert re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9_.-]*\.json", path.name), "BAD_REQUEST_NAME"
+          r = json.load(open(path))
+          assert "_dispatch" not in r, "CLAIM_IS_NOT_A_PENDING_REQUEST"
           wf = r["workflow"]
           assert re.fullmatch(r"[a-z0-9-]+\.yml", wf), "BAD_WORKFLOW"
           assert wf not in ("requests.yml",), "NO_RECURSION"
           out = [wf]
           for k, v in (r.get("inputs") or {}).items():
-              assert re.fullmatch(r"[a-z_]+", k), "BAD_INPUT"
+              assert re.fullmatch(r"[a-z_][a-z0-9_]*", k), "BAD_INPUT"
               out += ["-f", f"{k}={v}"]
           print(" ".join(shlex.quote(x) for x in out))
           PY
-            )
-            eval gh workflow run $args --ref main && echo "DISPATCHED $f: $args"
-            git mv "$f" "migration/requests/done/$(date -u +%Y%m%dT%H%M%S)-$(basename "$f")"
+            ); then
+              echo "::error::REQUEST_INVALID $f"
+              failed=1
+              continue
+            fi
+            request_sha=$(sha256sum "$f" | cut -d' ' -f1)
+            claim="migration/requests/inflight/$GITHUB_RUN_ID-${GITHUB_RUN_ATTEMPT:-1}-$request_sha-$(basename "$f")"
+            base_commit=$(git rev-parse HEAD)
+            git mv -- "$f" "$claim"
+            python3 -I - "$claim" "$f" "$request_sha" "$base_commit" <<'PY'
+          from datetime import datetime, timezone
+          import json, os, sys
+          path, original, digest, base = sys.argv[1:]
+          with open(path) as f:
+              request = json.load(f)
+          request["_dispatch"] = {"version": "request-claim-v1", "state": "claimed",
+              "request_sha256": digest, "original_path": original, "base_commit": base,
+              "dispatcher_run_id": os.environ["GITHUB_RUN_ID"],
+              "dispatcher_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+              "claimed_at": datetime.now(timezone.utc).isoformat()}
+          with open(path, "w") as f:
+              f.write(json.dumps(request, indent=1, ensure_ascii=False) + "\n")
+          PY
+            git add -- "$claim"
+            if ! git commit -q -m "Claim workflow request $request_sha (run $GITHUB_RUN_ID)" || \
+               ! git push -q origin HEAD:main; then
+              echo "::error::REQUEST_CLAIM_NOT_CONFIRMED: no dispatch sent; reconcile main before retry"
+              exit 1
+            fi
+            # No POST is allowed before the durable claim above. A nonzero/unknown response keeps it inflight.
+            if eval "gh workflow run $args --ref main"; then
+              echo "DISPATCHED $f"
+              done="migration/requests/done/$(basename "$claim")"
+              git mv -- "$claim" "$done"
+              python3 -I - "$done" <<'PY'
+          from datetime import datetime, timezone
+          import json, sys
+          path = sys.argv[1]
+          with open(path) as f:
+              request = json.load(f)
+          request["_dispatch"].update(state="acknowledged", acknowledged_at=datetime.now(timezone.utc).isoformat())
+          with open(path, "w") as f:
+              f.write(json.dumps(request, indent=1, ensure_ascii=False) + "\n")
+          PY
+              git add -- "$done"
+              if ! git commit -q -m "Acknowledge workflow request $request_sha (run $GITHUB_RUN_ID)" || \
+                 ! git pull --rebase -q origin main || ! git push -q origin HEAD:main; then
+                echo "::error::REQUEST_ACK_NOT_CONFIRMED: durable inflight claim prevents replay; reconcile the remote run"
+                exit 1
+              fi
+            else
+              echo "::error::REQUEST_DISPATCH_UNCERTAIN $claim: do not resend; reconcile the remote run read-only"
+              failed=1
+            fi
           done
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "Requests dispatched (run $GITHUB_RUN_ID)" || exit 0
-          git pull --rebase -q origin main && git push -q origin HEAD:main
+          exit "$failed"

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-two-meadow-village-flower-meadow-spring-mead",
+ "theme": "arc01-s-c2-two",
+ "query": "two big trees meadow",
+ "source": "pixabay",
+ "title": "meadow, village, flower meadow, spring meadow, outlook, wildflowers, nature",
+ "page": "https://pixabay.com/videos/id-209953/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-209953/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "686f1d34f84ec4f2f24217f5eca1eba7e350a05c777c1ec52d8074be242f6ac4",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  124.7,
+  125.2,
+  125.7,
+  126.2,
+  126.7
+ ],
+ "vetting_descriptions": [
+  "A beautiful view of a valley with a field of yellow flowers, green grass, and a town in the distance.",
+  "A beautiful view of a valley with a yellow field and green grass, with a town in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-two-meadow-village-flower-meadow-spring-mead-sha256-686f1d34f84ec4f2f24217f5eca1eba7e350a05c777c1ec52d8074be242f6ac4.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-dove-flight-ocean-sea-nature-water-waves-seascape-be",
+ "theme": "dove-flight",
+ "query": "pigeon flying over sea",
+ "source": "pixabay",
+ "title": "ocean, sea, nature, water, waves, seascape, beach, coast, spume, drone footage, drone, technology, tech, flight, flying, aerial, sand",
+ "page": "https://pixabay.com/videos/id-290838/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-290838/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9992bbd632e817bfd96d762da60b09315ea69b4bfad5fcaf377d7072e3d0e72a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  107.6,
+  102.0,
+  106.0,
+  105.2,
+  105.7
+ ],
+ "vetting_descriptions": [
+  "A green ocean with waves crashing on the shore.",
+  "A wave is crashing on the beach, and the water is green."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dove-flight-ocean-sea-nature-water-waves-seascape-be-sha256-9992bbd632e817bfd96d762da60b09315ea69b4bfad5fcaf377d7072e3d0e72a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

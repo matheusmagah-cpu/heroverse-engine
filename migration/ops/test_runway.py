@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline checks of the long runway: Bible-story longs only, one every other day at 10:00 UTC (owner, 2026-10-26)."""
+"""Offline long runway checks: authoritative arc deadlines, plus the legacy cadence when no calendar exists."""
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -41,19 +41,44 @@ class Runway(unittest.TestCase):
         p.start()
         self.addCleanup(p.stop)
 
-    def test_slots_are_the_bible_story_long_cadence(self):
+    def test_slots_keep_the_legacy_cadence_when_no_calendar_is_supplied(self):
         got = r.slots(NOW)
         self.assertEqual([t.strftime("%d/%m %H:%M") for t in got], ["29/10 10:00", "31/10 10:00", "02/11 10:00"])
         self.assertEqual(r.slots(datetime(2026, 10, 29, 10, 0, tzinfo=timezone.utc))[0].strftime("%d/%m"), "31/10")
         self.assertTrue(all(b - a == timedelta(days=2) for a, b in zip(got, got[1:])))   # never 2+ days without
         self.assertNotIn(0, {t.hour for t in r.slots(NOW, 20)})                       # the night slots retired
-        arcs = json.loads((Path(r.__file__).resolve().parents[1] / "production/bible/arcs.json").read_text())["arcs"]
-        # = SERIES.md calendar; arc-01's long moved off it to 04/11 (owner 27/10, "prioriza o longo agora":
-        # DECISIONS.md), then to 29/10 22:00 (owner 28/10: "tem que ser amanhã"), then to 28/10 22:00 (owner 28/10 ~11:10Z: "HOJE"); the others keep the cadence
-        # slots from 31/10 (owner 28/10: every other day after arc-01 on 29/10)
-        self.assertEqual(arcs[0]["long"]["slot"], "2026-10-28T22:00:00Z")
-        long_slots = [r.ts(a["long"]["slot"]) for a in arcs[1:]]
-        self.assertEqual(long_slots, [t for t in r.slots(NOW, 30) if long_slots[0] <= t <= long_slots[-1]])
+
+    def test_e166_authoritative_arc_deadline_is_visible_until_upload_without_invented_pilot_approval(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            prod = Path(temporary)
+            bible = prod / "bible"
+            (bible / "plans").mkdir(parents=True)
+            (bible / "arcs.json").write_text(json.dumps({"arcs": [
+                {"id": "arc-01", "long": {"pilot": "pilot-015", "slot": "2026-10-28T22:00:00Z"}},
+                {"id": "arc-02", "long": {"pilot": None, "slot": "2026-10-31T10:00:00Z"}}
+            ]}))
+            (bible / "plans/arc-01-long.json").write_text(json.dumps({"version": "bible-long-plan-v1",
+                                                                      "episode": "arc-01-long"}))
+            for at in ("2026-10-28T14:00:00Z", "2026-10-28T22:00:00Z", "2026-10-29T00:01:00Z"):
+                with self.subTest(at=at):
+                    rows, alerts = r.check(prod, {}, r.ts(at))
+                    self.assertEqual([row["slot"] for row in rows], ["2026-10-28T22:00Z", "2026-10-31T10:00Z"])
+                    self.assertEqual(rows[0]["pilot"], "arc-01-long")
+                    self.assertEqual(rows[0]["stage"], "planned")
+                    self.assertTrue(rows[0]["late"])
+                    self.assertTrue(any("arc-01-long" in alert for alert in alerts))
+            ledger = {"entries": {"bible:arc-01-long:" + "a" * 64: {"video_id": "confirmed-video"}}}
+            rows, _ = r.check(prod, ledger, r.ts("2026-10-29T00:01:00Z"))
+            self.assertEqual([row["slot"] for row in rows], ["2026-10-31T10:00Z"])
+
+    def test_invalid_arc_calendar_is_reported_instead_of_replaced_by_a_different_deadline(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            prod = Path(temporary)
+            (prod / "bible").mkdir()
+            (prod / "bible/arcs.json").write_text('{"arcs":[{"id":"arc-01","long":{"slot":"not-a-date"}}]}')
+            rows, alerts = r.check(prod, {}, NOW)
+            self.assertEqual(rows, [])
+            self.assertTrue(any("LONG_CALENDAR_INVALID" in alert for alert in alerts))
 
     def test_every_slot_listed_and_gaps_alerted(self):
         # E15: every long slot of the next days is listed and a gap alerts; a prayer pilot never fills one (2026-10-26)
@@ -130,6 +155,65 @@ class Runway(unittest.TestCase):
             self.assertFalse(any("pilot-017" in a for a in alerts))
             alerts = r.check(prod, {}, datetime(2026, 10, 30, 14, 0, tzinfo=timezone.utc))[1]   # 20 h, not approved
             self.assertTrue(any("pilot-017" in a and "rendered" in a for a in alerts))
+
+
+class Recovery(unittest.TestCase):
+    def test_owner_targets_have_only_two_makeups_and_do_not_skip_parts(self):
+        root = Path(__file__).resolve().parents[2]
+        table = json.loads((root / "migration/production/bible/arcs.json").read_text())
+        targets = table["recovery"]["targets"]
+        shorts = [t for t in targets if t["kind"] != "long"]
+        longs = [t for t in targets if t["kind"] == "long"]
+        self.assertEqual([t["episode"] for t in shorts], [f"genesis-{n:02d}-short" for n in range(9, 49)])
+        self.assertEqual(len(longs), 10)
+        self.assertEqual([t["slot"] for t in shorts if t["kind"] == "makeup"],
+                         ["2026-10-30T19:30:00Z", "2026-10-31T19:30:00Z"])
+        self.assertEqual(longs[0]["slot"], "2026-10-29T22:00:00Z")
+        for arc in table["arcs"]:
+            target = next(t for t in longs if t["episode"] == arc["id"] + "-long")
+            self.assertEqual(arc["long"]["slot"], target["slot"])
+        early = [t for t in targets if t["slot"][:10] <= "2026-10-31"]
+        self.assertEqual(sum(t["kind"] != "long" for t in early), 8)
+        self.assertEqual(sum(t["kind"] == "long" for t in early), 2)
+        self.assertEqual(len({t["slot"] for t in targets}), 50)
+
+    def test_deadline_report_never_promotes_an_upload_or_old_receipt_to_a_schedule(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            prod = Path(tmp) / "production"
+            bible = prod / "bible"
+            (bible / "episodes").mkdir(parents=True)
+            receipts = Path(tmp) / "publish/receipts"
+            receipts.mkdir(parents=True)
+            ep, sha, at = "genesis-09-short", "a" * 64, "2026-10-29T13:30:00Z"
+            (bible / "arcs.json").write_text(json.dumps({"recovery": {
+                "master_review_lead_hours": 4, "scheduled_readback_lead_hours": 2,
+                "targets": [{"episode": ep, "slot": at, "kind": "regular"}]}}))
+            ledger = {"entries": {"bible:" + ep + ":" + sha: {"video_id": "the-existing-id"}}}
+            def status(now):
+                return r.recovery_rows(prod, ledger, r.ts(now))[0]["state"]
+            self.assertEqual(status("2026-10-29T09:30:00Z"), "AT_RISK_NO_MASTER")
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+            self.assertEqual(status("2026-10-29T13:30:00Z"), "PUBLIC_READBACK_REQUIRED")
+            (bible / "episodes" / (ep + ".json")).write_text(json.dumps({"output_sha256": sha}))
+            self.assertEqual(status("2026-10-29T09:30:00Z"), "MASTER_GATES_RECHECK_REQUIRED")
+            receipt = {"version": "publish-receipt-v1", "key": "bible:" + ep + ":" + sha,
+                       "video_id": "the-existing-id", "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+                       "upload_status": "processed", "privacy": "private", "publish_at": at,
+                       "verified_at": "2026-10-29T10:29:00Z"}
+            path = receipts / "one.json"
+            path.write_text(json.dumps(receipt))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+            receipt["verified_at"] = "2026-10-29T11:29:00Z"
+            path.write_text(json.dumps(receipt))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "SCHEDULE_READBACK_CONFIRMED")
+            for key, bad in [("video_id", "wrong-id"), ("channel_id", "wrong-channel"),
+                             ("upload_status", "uploaded"), ("publish_at", "2026-10-30T13:30:00Z")]:
+                value = dict(receipt, **{key: bad}); path.write_text(json.dumps(value))
+                self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED", key)
+            path.write_text(json.dumps(receipt))
+            (bible / "episodes" / (ep + ".json")).write_text(json.dumps({"output_sha256": "b" * 64}))
+            self.assertEqual(status("2026-10-29T11:30:00Z"), "NOT_SCHEDULED_CONFIRMED")
+
 
 
 if __name__ == "__main__":

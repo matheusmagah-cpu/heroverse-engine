@@ -1,0 +1,53 @@
+{
+ "episode": "genesis-10-short",
+ "shots": {
+  "k-close": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5), the wider crop with the stars; Kokoro voice-over.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-2",
+   "still": "arc-01-long-k-promise-2",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
+   "clip_sha256": null,
+   "still_sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "da373326b83b80c01326ee62c6fd8e8ec1ff992ea9ad277536653d83a2389fcb"
+  },
+  "k-insight": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5, ch-keeper ref), 9:16 centre crop, face and beard whole; Kokoro voice-over.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-3",
+   "still": "arc-01-long-k-promise-3",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
+   "clip_sha256": null,
+   "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "ec406c4699ba8b0ccb0a05ecdb820a136e0549a1e2546d3c924370c3d83ceaf0"
+  },
+  "k-question": {
+   "source": "pavo_reuse",
+   "score": 9.5,
+   "note": "genesis-08's approved Keeper voice-over clip, 6 s for the question's 6 s; repeat judged at the confirmation review.",
+   "approved_at": "2026-10-28",
+   "clip_from": "genesis-08-short#k-question",
+   "asset": "shot-genesis-08-short-k-question-sha256-0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead.mp4",
+   "clip_sha256": "0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead",
+   "clip_seconds": 6,
+   "from_score": 9.5,
+   "request_sha256": "2944e1fa385878ecf01778bd61e3ff5c1a0f70e37e88b6b273289550d5e9a4d5"
+  }
+ }
+}

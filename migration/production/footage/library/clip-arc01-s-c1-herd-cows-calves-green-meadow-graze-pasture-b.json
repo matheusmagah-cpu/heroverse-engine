@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-herd-cows-calves-green-meadow-graze-pasture-b",
+ "theme": "arc01-s-c1-herd",
+ "query": "cattle grazing green hillside",
+ "source": "pixabay",
+ "title": "cows, calves, green meadow, graze, pasture, bull calves, farm, yard, rural scene, agriculture, natural environment, grazing, pasture land, cow herd, pasture feeding, animal welfare",
+ "page": "https://pixabay.com/videos/id-172777/",
+ "author": "joergip31",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: joergip31 via Pixabay (https://pixabay.com/videos/id-172777/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9fd2db7dd9f2fdb4539dd27c09f5bd6f3a08d1b0ce3834fc287581791f979453",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  122.5,
+  121.1,
+  119.5,
+  119.9,
+  115.3
+ ],
+ "vetting_descriptions": [
+  "Two brown cows are grazing in a field with yellow flowers.",
+  "Two brown cows are grazing in a field with yellow flowers."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-herd-cows-calves-green-meadow-graze-pasture-b-sha256-9fd2db7dd9f2fdb4539dd27c09f5bd6f3a08d1b0ce3834fc287581791f979453.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

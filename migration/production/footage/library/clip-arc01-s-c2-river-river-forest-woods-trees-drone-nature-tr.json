@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-river-river-forest-woods-trees-drone-nature-tr",
+ "theme": "arc01-s-c2-river",
+ "query": "river delta aerial green valley",
+ "source": "pixabay",
+ "title": "river, forest, woods, trees, drone, nature, travel, montenegro, aerial",
+ "page": "https://pixabay.com/videos/id-168783/",
+ "author": "antonlukin",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: antonlukin via Pixabay (https://pixabay.com/videos/id-168783/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "051c5cd370bb3ae97e827a142d7c45944c7a9c357deec83724b90f18cad4452e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.9,
+  99.5,
+  99.9,
+  100.8,
+  102.2
+ ],
+ "vetting_descriptions": [
+  "A river with a rock in the middle and a green forest on both sides.",
+  "A river with a rock in the middle of it, surrounded by trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-river-river-forest-woods-trees-drone-nature-tr-sha256-051c5cd370bb3ae97e827a142d7c45944c7a9c357deec83724b90f18cad4452e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

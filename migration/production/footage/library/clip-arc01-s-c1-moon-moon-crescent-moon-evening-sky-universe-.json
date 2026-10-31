@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-moon-moon-crescent-moon-evening-sky-universe-",
+ "theme": "arc01-s-c1-moon",
+ "query": "full moon rising over lake",
+ "source": "pixabay",
+ "title": "moon, crescent moon, evening, sky, universe, cloud",
+ "page": "https://pixabay.com/videos/id-367134/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-367134/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9d6aaf3dd7a838b6d6a080211d3155179618e390b91183b00cc8b719357f574c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  86.0,
+  75.4,
+  71.4,
+  76.0,
+  76.8
+ ],
+ "vetting_descriptions": [
+  "A moon is visible in the sky, and the sky is blue.",
+  "A blue sky with a crescent moon and a star in the middle of the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-moon-moon-crescent-moon-evening-sky-universe--sha256-9d6aaf3dd7a838b6d6a080211d3155179618e390b91183b00cc8b719357f574c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

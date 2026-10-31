@@ -113,6 +113,7 @@ import characters as ch  # noqa: E402
 import props as prop_refs  # noqa: E402  (E122: a prop's approved reference images)
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
+import reviewer_identity  # noqa: E402
 from voice_pace import SHORT_PACE, VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (one measured table, Short and long)
 
 VERSION = "bible-plan-v2"
@@ -992,6 +993,8 @@ def frame_problems(i, shot, plan, stills_dir=None):
             out.append(f"STILL_NOT_APPROVED shot {i} {sid} ({f} {still} is {rec.get('status')}: Claude reviews its "
                        "candidates and approves one with scene_stills.py approve, by PR)")
             continue
+        if not reviewer_identity.valid(rec.get("approved") or {}):
+            out.append(f"STILL_NOT_APPROVED shot {i} {sid} ({f} {still}: unknown reviewer identity)")
         src = (ROOT / str(rec.get("repo_path") or "")).resolve()
         if not rec.get("repo_path") or ROOT.resolve() not in src.parents or not src.is_file() \
                 or src.suffix.lower() not in (".jpg", ".jpeg", ".png"):
@@ -1071,7 +1074,8 @@ def _speaker_problems(i, s, chars, span, span_slowest):
 def check(plan, chars=None):
     """{"problems": [...], "pending": [...], "estimate": {...}} for a plan."""
     chars = chars if chars is not None else ch.registry()
-    problems, pending = [], []
+    import shot_sources
+    problems, pending = shot_sources.source_policy_problems(plan), []
     if plan.get("version") != VERSION:
         problems.append(f"PLAN_VERSION (need {VERSION})")
     if not isinstance(plan.get("episode"), str) or not EPISODE_ID.fullmatch(plan["episode"]):
@@ -1100,14 +1104,13 @@ def check(plan, chars=None):
 
 
 def audio_route_problems(plan, shots):
-    """Owner 27/10 (R4), review of #476: a Short's `audio_route` is "kokoro" (or absent); "pavo_native" is refused
-    (AUDIO_ROUTE_SHORT_UNSUPPORTED) until a new frozen Short criteria file holds the speech-check rows story QA v4
-    holds for the long."""
+    """A Short's effective audio route must remain Kokoro until native speech has a Short criteria contract.
+    E153: the engine can inherit native speech from criteria, not only an explicit audio_route flag."""
     import pavo_native as pn
     route = plan.get("audio_route")
     if route not in (None, pn.KOKORO, pn.NATIVE):
         return [f"AUDIO_ROUTE_UNKNOWN {route!r} ({pn.KOKORO} or {pn.NATIVE})"]
-    if route != pn.NATIVE:
+    if not pn.native_plan(plan):
         return []
     # review of #476: refused for a Short until a Short criteria file with the speech-check rows exists (a new
     # frozen file, owner); the engine path is the long's (story QA v4)

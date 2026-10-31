@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-fox-meadow-grass-wind-grain-field-forest-edg",
+ "theme": "arc01-s-c1-fox",
+ "query": "red fox meadow grass",
+ "source": "pixabay",
+ "title": "meadow, grass, wind, grain field, forest, edge of the forest, glade, forest glade, grain, nature, landscape",
+ "page": "https://pixabay.com/videos/id-164099/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-164099/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e469aab8d1042344893cb50ae85cb228817af8c050a4040d598332588af47d46",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.7,
+  87.1,
+  86.4,
+  86.8,
+  87.6
+ ],
+ "vetting_descriptions": [
+  "A green field with yellow flowers and a shadow of a tree on the ground.",
+  "A green field with yellow flowers and a pathway leading to a forest."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-fox-meadow-grass-wind-grain-field-forest-edg-sha256-e469aab8d1042344893cb50ae85cb228817af8c050a4040d598332588af47d46.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

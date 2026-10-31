@@ -1,0 +1,40 @@
+{
+ "id": "clip-dove-hands-bird-zebra-dove-animal-feathers-plumage-",
+ "theme": "dove-hands",
+ "query": "hands releasing white dove",
+ "source": "pixabay",
+ "title": "bird, zebra dove, animal, feathers, plumage, nature",
+ "page": "https://pixabay.com/videos/id-203329/",
+ "author": "PiAnt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: PiAnt via Pixabay (https://pixabay.com/videos/id-203329/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "07a090ce9155df64ab91b83b7bebe892f7e78ca55260d8f8f54435e06cb255f0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  42.6,
+  41.2,
+  41.3,
+  41.3,
+  40.6
+ ],
+ "vetting_descriptions": [
+  "A bird is perched on a wooden pole, looking at the camera.",
+  "A bird is perched on a wire, looking at the camera."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dove-hands-bird-zebra-dove-animal-feathers-plumage--sha256-07a090ce9155df64ab91b83b7bebe892f7e78ca55260d8f8f54435e06cb255f0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

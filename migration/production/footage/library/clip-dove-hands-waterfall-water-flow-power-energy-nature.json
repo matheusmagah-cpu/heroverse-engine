@@ -1,0 +1,40 @@
+{
+ "id": "clip-dove-hands-waterfall-water-flow-power-energy-nature",
+ "theme": "dove-hands",
+ "query": "hands releasing white dove",
+ "source": "pixabay",
+ "title": "waterfall, water, flow, power, energy, nature, cascade, river, landscape, flowing, move, fall, mountain, magnificent, white, foam, live wallpaper, earth day",
+ "page": "https://pixabay.com/videos/id-24515/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-24515/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "59bf9644f7688b20cab64e6d277cfed223cb29ca199f0d94f476767851c08a0b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  95.4,
+  94.3,
+  95.7,
+  94.2,
+  95.6
+ ],
+ "vetting_descriptions": [
+  "A waterfall is shown with a large rock in the foreground and a smaller waterfall in the background.",
+  "A waterfall with a large rock in the middle of it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dove-hands-waterfall-water-flow-power-energy-nature-sha256-59bf9644f7688b20cab64e6d277cfed223cb29ca199f0d94f476767851c08a0b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

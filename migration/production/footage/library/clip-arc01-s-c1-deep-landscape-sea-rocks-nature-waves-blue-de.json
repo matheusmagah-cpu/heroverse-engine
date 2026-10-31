@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-deep-landscape-sea-rocks-nature-waves-blue-de",
+ "theme": "arc01-s-c1-deep",
+ "query": "deep sea swell mist",
+ "source": "pixabay",
+ "title": "landscape, sea, rocks, nature, waves, blue, deep",
+ "page": "https://pixabay.com/videos/id-90544/",
+ "author": "thomasgiardina",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 46.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: thomasgiardina via Pixabay (https://pixabay.com/videos/id-90544/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "acb965ec2a5de418fc0470a639b2f2c9d612a2c61e4928ccf667147ec356a475",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.3,
+  95.0,
+  92.7,
+  93.1,
+  90.2
+ ],
+ "vetting_descriptions": [
+  "A lighthouse is visible in the ocean, surrounded by waves.",
+  "A rocky shoreline with a lighthouse in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-deep-landscape-sea-rocks-nature-waves-blue-de-sha256-acb965ec2a5de418fc0470a639b2f2c9d612a2c61e4928ccf667147ec356a475.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -13,6 +13,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -63,6 +64,13 @@ class Scratch(unittest.TestCase):
 
     def generated(self):
         return [s["id"] for s in self.plan["shots"] if not eb.is_window(s)]
+
+    def predict_fixture(self, durations):
+        # E210: estimated-duration cases have no real approved media. Isolate just
+        # this input; real media refusals remain exercised by MediaTiming in
+        # test_episode_build.py, without patching the production guard.
+        with patch.object(eb, "load_approvals", return_value={}):
+            return eb.predict(self.plan, durations)
 
 
 class Preflight(Scratch):
@@ -141,19 +149,26 @@ class ApprovedShots(Scratch):
                     del s[f]
 
     def layout_and_refs(self):
-        _, layout = eb.predict(self.plan, estimate_durations(self.plan))
+        _, layout = self.predict_fixture(estimate_durations(self.plan))
         for folder in ("keeper", "speakers"):
             for sid, rec in layout[folder].items():
                 rec["wav"] = f".episode/test/{folder}/{sid}.wav"
         return layout, eb.ref_paths(self.plan, ROOT / ".episode" / "test")
 
+    def test_e210_layout_fixture_is_independent_of_live_native_approvals(self):
+        # Structural/request cases supply estimated speech and explicit approvals below.
+        # Mutable production speech receipts must not silently enter those fixtures.
+        with patch.object(eb, "load_approvals", side_effect=AssertionError("live approval store read")):
+            problems, _ = self.predict_fixture(estimate_durations(self.plan))
+        self.assertEqual(problems, [])
+
     def test_the_long_layout_is_measured_at_its_own_gap_and_gate(self):
         durations = estimate_durations(self.plan)
-        problems, layout = eb.predict(self.plan, durations)
+        problems, layout = self.predict_fixture(durations)
         self.assertEqual(problems, [])
         self.assertAlmostEqual(layout["lines"][1]["start"] - layout["lines"][0]["end"], lpc.LONG_LINE_GAP, places=3)
         self.assertIsNone(layout["lesson_share"])
-        problems, _ = eb.predict(self.plan, [d * 1.3 for d in durations])   # ~18.9 min: over the gate
+        problems, _ = self.predict_fixture([d * 1.3 for d in durations])   # ~18.9 min: over the gate
         self.assertTrue(any(p.startswith("LONG_LENGTH") for p in problems), problems)
 
     def test_every_generated_shot_has_a_16x9_request_digest_and_windows_have_none(self):
@@ -163,7 +178,7 @@ class ApprovedShots(Scratch):
         self.assertEqual(len(digests), len(self.generated()))   # the live plan's count (E133: never a copied literal)
         i, shot = next((i, s) for i, s in enumerate(self.plan["shots"]) if s["id"] == "s-c1-light")
         self.assertEqual(eb.request_identity(shot, i, self.plan, layout, refs)[1]["aspect_ratio"], "16:9")
-        self.assertEqual(sorted(eb.clip_needs(self.plan, layout)), sorted(self.generated()))
+        self.assertEqual(sorted(eb.clip_needs(self.plan, layout, approvals={})), sorted(self.generated()))
         self.assertEqual(eb.request_problems(self.plan, layout, refs, client=type("C", (), {
             "prepare_video": lambda *a: None, "_plan": lambda *a: None})()), [])
         self.assertEqual(eb.shots_path(self.plan).name, "arc-01-long.json")   # approve-shot writes here
@@ -334,7 +349,7 @@ class ReviewOf468(Scratch):
         saved = lpc.gate
         lpc.gate = lambda: dict(saved(), keeper_share_max=0.01)
         try:
-            problems, _ = eb.predict(self.plan, estimate_durations(self.plan))
+            problems, _ = self.predict_fixture(estimate_durations(self.plan))
         finally:
             lpc.gate = saved
         self.assertTrue(any(p.startswith("KEEPER_SHARE") and p.endswith("(measured)") for p in problems), problems)

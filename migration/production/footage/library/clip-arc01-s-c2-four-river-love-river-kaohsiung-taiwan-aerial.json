@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c2-four-river-love-river-kaohsiung-taiwan-aerial",
+ "theme": "arc01-s-c2-four",
+ "query": "river branches aerial",
+ "source": "pixabay",
+ "title": "river, love river, kaohsiung, taiwan, aerial, landscape, cityscape, scenery, urban, water",
+ "page": "https://pixabay.com/videos/id-272855/",
+ "author": "hagemann_one",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: hagemann_one via Pixabay (https://pixabay.com/videos/id-272855/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "477c81cd6b518343238c6845825cf38fe3f7ed411ac577fd2fcb9c92fef1fdea",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED buildings,city"
+ ],
+ "vetting_luma": [
+  127.5,
+  127.5,
+  127.5,
+  127.2,
+  126.8
+ ],
+ "vetting_descriptions": [
+  "A city with a river running through it, with a red bridge crossing the river.",
+  "A cityscape with a river running through it, a bridge, and a city with buildings and vehicles."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

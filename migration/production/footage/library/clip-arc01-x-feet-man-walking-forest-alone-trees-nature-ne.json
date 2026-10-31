@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-feet-man-walking-forest-alone-trees-nature-ne",
+ "theme": "arc01-x-feet",
+ "query": "barefoot walking grass",
+ "source": "pixabay",
+ "title": "man, walking, forest, alone, trees, nature, netherlands, landscape",
+ "page": "https://pixabay.com/videos/id-212483/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-212483/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "96a1c1d265bab722f791d2adb0f0a2cdc6a21e8e818fe118bbb2db7e3008399a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man"
+ ],
+ "vetting_luma": [
+  139.2,
+  137.9,
+  136.7,
+  135.8,
+  135.4
+ ],
+ "vetting_descriptions": [
+  "A man is walking through a wooded area with a backpack on, and there are trees and a sky in the background.",
+  "A man is walking through a forest, with a backpack on, and a tree trunk in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

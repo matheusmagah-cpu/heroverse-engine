@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-climb-beach-coast-people-dog-pet-walking-zandv",
+ "theme": "flood-climb",
+ "query": "people walking up hill rain",
+ "source": "pixabay",
+ "title": "beach, coast, people, dog, pet, walking, zandvoort, animal, nederlands, holland, dutch",
+ "page": "https://pixabay.com/videos/id-217067/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-217067/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ba1c86ae548c9a8be71d169920d21e40252c57b8198e6769a6c5c1921dda5c42",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man,people,woman"
+ ],
+ "vetting_luma": [
+  184.3,
+  184.2,
+  184.1,
+  183.9,
+  184.0
+ ],
+ "vetting_descriptions": [
+  "A man and a woman are walking on a beach with a dog.",
+  "A group of people are walking on a beach, with a few of them carrying backpacks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

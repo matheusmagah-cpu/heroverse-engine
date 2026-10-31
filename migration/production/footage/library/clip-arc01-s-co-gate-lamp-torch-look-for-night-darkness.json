@@ -1,0 +1,43 @@
+{
+ "id": "clip-arc01-s-co-gate-lamp-torch-look-for-night-darkness",
+ "theme": "arc01-s-co-gate",
+ "query": "torch flame night trees",
+ "source": "pixabay",
+ "title": "lamp, torch, look for, night, darkness",
+ "page": "https://pixabay.com/videos/id-200941/",
+ "author": "conte_public",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: conte_public via Pixabay (https://pixabay.com/videos/id-200941/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2bc465ecbdf23134beaffa68d6d5b738907c070bc38a004352bec026bbe45e7b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_RUN_AFTER_GRADE 3.87s",
+  "DESCRIBED man,person"
+ ],
+ "vetting_luma": [
+  23.6,
+  24.4,
+  15.5,
+  17.3,
+  19.5
+ ],
+ "vetting_descriptions": [
+  "A person is holding a light in a dark room.",
+  "A man in a black shirt is singing into a microphone in a dark room."
+ ],
+ "vetting_black_run_s": 3.87,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-camp-sunset-nature-dusk-sea-twilight-ocean-la",
+ "theme": "flood-camp",
+ "query": "people dancing around fire silhouette",
+ "source": "pixabay",
+ "title": "sunset, nature, dusk, sea, twilight, ocean, landscape, beach, sky, water, horizon, silhouette, summer, seascape, wave, people, fishing, pier",
+ "page": "https://pixabay.com/videos/id-255544/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-255544/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "51249c27028afc470c848186ce9499400d0626436fa40d8f5955672d02eef77a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,people"
+ ],
+ "vetting_luma": [
+  124.0,
+  132.0,
+  130.0,
+  129.2,
+  121.3
+ ],
+ "vetting_descriptions": [
+  "The image shows a beach with a group of people standing on the shore, watching the waves crash into the shore.",
+  "A group of people are standing on a beach near the water, and there is a boat in the water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

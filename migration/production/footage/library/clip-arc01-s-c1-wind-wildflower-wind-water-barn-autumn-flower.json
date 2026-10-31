@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-wind-wildflower-wind-water-barn-autumn-flower",
+ "theme": "arc01-s-c1-wind",
+ "query": "wind ripples dark water",
+ "source": "pixabay",
+ "title": "wildflower, wind, water barn, autumn flowers, autumn, nature",
+ "page": "https://pixabay.com/videos/id-90745/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 56.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90745/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "865a6c6e3b2afaea3ecf582f2e40f45d5406f99ef3edbedb0a22a363538c83b8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.2,
+  80.2,
+  80.5,
+  80.8,
+  80.8
+ ],
+ "vetting_descriptions": [
+  "A purple flower with a yellow center is in a purple flower bush.",
+  "A purple flower with a yellow center is surrounded by green leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-wind-wildflower-wind-water-barn-autumn-flower-sha256-865a6c6e3b2afaea3ecf582f2e40f45d5406f99ef3edbedb0a22a363538c83b8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

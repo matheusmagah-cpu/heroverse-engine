@@ -1,25 +1,19 @@
-# The Bible-story long, built like the Shorts (design, 2026-10-26)
+# Bible-story long: active design and technical interfaces
 
-Owner, 2026-10-26: "Adjust the long videos. They need maximum precision. Apply the mined structure and model it to
-our format, without forgetting what we already agreed: the Keeper character narrating, and the Bible characters, who
-must be the same whenever they repeat across stories."
+`../../SYSTEM.md` is the current operating contract. This guide describes the existing long-specific grammar,
+source paths, audio, preflight and build. Current readiness comes from the actual plan, approvals and evidence,
+not a dated estimate in this guide. `../../evidence/handoff/CURRENT.md` carries the next delivery.
 
-This is the design with measured numbers, and slice 1 of the build:
-- the long's plan grammar (`bible-long-plan-v1`) and its check (`long_plan_check.py`), with tests in
-  `test_long_plan_check.py` that run in pr-checks through `test_plan_check.py`;
-- the frozen story QA v2 and v3;
-- the arc-1 draft plan (`plans/arc-01-long.json`);
-- two direct 0-credit Pavo tests.
+A long uses `bible-long-plan-v1`, `structures/bible-story-long.json` and the exact frozen criteria selected by its
+plan. The default v3, explicit v4, recorded v4 owner exception and explicit v5 have distinct supported readers.
+Read the plan's `criteria` and current source policy; do not replace them with a different profile or edit frozen
+rows to pass a source. Their files/hashes remain pinned by long_plan_check, qa_pilot, render_queue and prepublish_gate.
 
-Nothing here is built or published, and no Actions run was dispatched. `episode.yml` and the publishing code are
-unchanged.
-
-Owner decisions of the same day (DECISIONS.md):
-- "Nova régua, sem legenda": story QA v2 drops burned captions.
-- "Sim, régua nova": story QA v3, written for the acted long.
-- The long follows arcs.json: arc-01 is Genesis 1-3, Shorts 1-4.
-- "Manter público": the repository stays public, so Actions minutes cost nothing. The long is built for wall-clock
-  time.
+The delivery is current sources/preflight → `long-build.yml` → exact long handoff and technical evidence →
+complete actual audio/video review → `approve.yml` → `prepublish_gate.py` → `publish.yml` → public/processed readback.
+The true session identities are those in `owner_quality_policy.LONG_REVIEWERS`; `../../ops/CLAUDE_REVIEW.md` defines
+evidence and the unchanged overall ≥9.5 floor. A contact sheet alone is not final audiovisual review.
+The BibleShort has its separate episode publisher. No readiness, generation or publication is granted by this guide.
 
 ## 1. The plan grammar: every beat of the structure, in our format
 
@@ -31,7 +25,7 @@ chapter's title is that Short's title.
 | Beat (structure) | Our format | Check (code) | Number from |
 |---|---|---|---|
 | cold_open 0-30 s, acted, never the Keeper | The first shot is a scene whose spoken line starts at 0 s. A character or God speaks the conflict (`conflict: true`). It ends on an open question. Its words end by 30 s, and the build holds its last frame (under the music, at most 3 s) so the Keeper starts at exactly 30 s. | OPEN_NOT_SPOKEN, COLD_OPEN_CONFLICT, KEEPER_IN_COLD_OPEN, COLD_OPEN_LENGTH (> 30 s, on its own), COLD_OPEN_SHORT (more than 3 s of held frame), COLD_OPEN_NO_QUESTION | gate.cold_open_s, keeper_in_cold_open; QA v3 grammar.first_shot |
-| keeper_promise 30-50 s | Keeper shots only: lip-synced, facing the lens, static camera (E95, E98). Lines of kind `promise`. | KEEPER_PROMISE_LENGTH, KEEPER_BEAT_SCENE | gate.keeper_promise_max_s (= the beat's at_s span) |
+| keeper_promise 30-50 s | Keeper shots only, facing the lens with the supported talking or explicit Plan B voice-over route. Lines of kind `promise`. | KEEPER_PROMISE_LENGTH, KEEPER_BEAT_SCENE | gate.keeper_promise_max_s (= the beat's at_s span) |
 | chapters, one per Short | `chapters` lists arcs.json's Shorts in order. Acted scenes use the arc's approved cast. | ARC_SHORTS, CHAPTER_EMPTY, CHAPTER_ORDER | arcs.json |
 | re-hooks >= 6, one at every chapter end | A narration line or spoken line with `rehook: true` | REHOOKS, CHAPTER_END_NO_REHOOK, REHOOK_GAP (<= 240 s apart: the 4-min chapter rule) | gate.rehooks_min, rehook_gap_max_s |
 | climax at 0.6-0.85, on the KJV line | Exactly one `climax: true` acted scene with people on screen. A referenced line is spoken in that shot or the shot before it (God's voice-over or the hero). | CLIMAX_COUNT, CLIMAX_POSITION, CLIMAX_NOT_ACTED (E92), CLIMAX_NO_KJV_LINE | gate.climax_at |
@@ -39,15 +33,14 @@ chapter's title is that Short's title.
 | keeper_insight <= 125 s | Keeper lines of kind `insight` (>= 20 words). Cut-aways are allowed (windows of earlier clips). | KEEPER_INSIGHT_LENGTH, INSIGHT_SHORT | gate.keeper_insight_max_s |
 | keeper_close <= 30 s | The Keeper is last, with a comment question and the next story | KEEPER_CLOSE_LENGTH, KEEPER_MUST_CLOSE, CLOSE_NO_QUESTION, CLOSE_NO_NEXT | gate.keeper_close_max_s |
 | Keeper <= 25 % | Keeper shots appear only in the three Keeper beats | KEEPER_SHARE, KEEPER_OUT_OF_BEAT | gate.keeper_share_max |
-| no slow stretch > 20 s | No run of shots without a person on screen, and no single voice run, longer than 20 s | SLOW_STRETCH, ESTABLISHING_SHARE (<= 15 %) | gate.slow_stretch_max_s |
+| slow stretches and establishing share | The structure bounds voice/visual runs; the selected profile supplies its actual establishing-share limit | SLOW_STRETCH, ESTABLISHING_SHARE | gate.slow_stretch_max_s; selected grammar.establishing_share_max |
 | one complete story, 14-18 min | The estimate: each line at its voice's measured Kokoro pace (VOICE_PACE), 0.6 s between lines (LONG_LINE_GAP) | LONG_LENGTH | gate.length_min |
 | no burned captions | `burned_captions: false`, with the .srt track (QA v2/v3) | BURNED_CAPTIONS | gate.burned_captions |
-| 16:9 | `aspect_ratio: "16:9"` (Pavo honours it: section 2) | ASPECT_RATIO | gate.aspect_ratio |
+| 16:9 | `aspect_ratio: "16:9"`, inspected on the actual source and final crop | ASPECT_RATIO | gate.aspect_ratio |
 
 **One source, no copies.** The numbers come from two places:
 - The structure's `script.gate` block, read through `script_check.story_gate()`. That is the same reader
-  `structure_problems` uses for the long's script (#415). This PR adds to the block only the numbers the beat map
-  already states, and a test keeps the gate equal to the beat map.
+  `structure_problems` uses for the long's script (#415). The block contains the numbers the beat map states, and a test keeps the gate equal to the beat map.
 - The frozen QA file.
 
 **Characters stay the same.**
@@ -68,7 +61,9 @@ chapter's title is that Short's title.
 - Words are never carried by landscape alone (ESTABLISHING_ONLY: a voice run whose shots are all establishing). The
   Short's 2 s establishing hold does not apply: a long's holds are 4-7 s.
 
-**The frozen QA, checked on the plan.** The check reads story QA v3, with its sha256 pinned:
+**The frozen QA, checked on the plan.** The check reads the selected profile with its sha256 pinned. The following
+baseline v3 rows are retained by the later profiles unless their explicit rows say otherwise:
+
 - Every cut is a 4-7 s hold (`grammar.scene_seconds`: HOLD_UNDER_QA, HOLD_OVER_QA). A talking line is checked at its
   slowest pace.
 - "You" appears in the first 8 s (HOOK_SECOND_PERSON).
@@ -85,75 +80,30 @@ chapter's title is that Short's title.
 - The clip must cover all its holds, slowed 1.3x at most (FOOTAGE_SHORT).
 - Windows are used for the Keeper's recap and for intercutting.
 
-## 2. Footage: how many clips, and how long they take
+## 2. Source coverage and capacity
 
-**Cuts.** A 15-min long cut every 2-4 s (the Shorts' rhythm) would need ~300 holds. The frozen story QA allows 4-7 s
-holds, so a 15-min long has 129-225 holds, about 164 at 5.5 s each. The arc-1 draft has 175 holds over 14.5 min,
-about 5 s each.
+Reuse approved matching sources first. Source selection, request identity, licences, references, revocations and
+actual context must match the current plan. The long's 16:9 crop is inspected directly; a vertical Short clip or a
+previous speaking line does not automatically cover a different picture or audio requirement.
 
-**Pavo time, measured.** The figures come from episode.yml runs on genesis-07-short on 2026-10-26: step times from
-the Actions API, shot lists from the run logs and from the `report.json` files on the
-`claude/episode-genesis-07-short-*-failed` branches.
+A `window_of` shot reuses a distinct part of its approved source. Check non-adjacency, actual combined coverage
+and the existing maximum slowdown. No generation is needed for a valid window. Camera-only still movement stays
+classified as such and must meet the applicable long source/grammar requirements.
 
-| Run | Generations in the Pavo step | Step time | Per generation |
-|---|---|---|---|
-| 40263488773 | 25 scenes, 2 regenerated after an unknown submission, then PAVO_UNREACHABLE (28 submissions) | 8,062 s | 288 s |
-| 40278642295 | 5 scenes + 3 Keeper talking clips | 2,469 s | ~274 s a scene, 366 s a talking clip |
-| 40285879529 | 3 Keeper talking clips (all refused, E94/E95) | 1,101 s | 367 s |
-| 40297987571 | 3 Keeper talking clips (all refused, E98) | 1,096 s | 365 s |
+Pavo work belongs to the existing source probe path, with current shared quota, exact zero-credit quote and
+durable request identity. Reconcile saved jobs before submitting another one. A historical timing measurement
+or concurrency experiment is not permission to generate a chapter in parallel or a promise of a one-day build.
+Use the current workflow's actual concurrency/capacity. The build assembles approved bytes and does not generate.
 
-A scene generation takes about 4.8 min, and a talking one about 6.1 min including lipsync_check. episode_build
-submits one, polls every 15 s until Pavo finishes, then submits the next.
-
-**One long, as today's Shorts are built.**
-- Generation: the arc-1 draft has 136 scenes, 9 God voice-overs and 20 talking clips, plus 10 windows. In sequence
-  that is about 818 min of generation, and about 1,000 min with the measured regeneration rates. That is over the
-  300-min job limit, so it would take 4 runs or more.
-- Upscaling: Pavo delivers 1280x720, and the QA wants 2560x1440 through Real-ESRGAN, never a plain resize. That is
-  543 s for a 6 s clip on one runner, so the draft's 1,008 clip-seconds take about 1,520 CPU-minutes.
-- With the repository public (owner), these minutes cost nothing. What matters is the wall-clock time: about 14 h of
-  generation plus about 26 h of upscaling, if each runs in sequence.
-
-**Two direct Pavo tests (0 credits, no Actions run).** Full record:
-`evidence/pavo/20261026/long-16x9-and-concurrency.json`.
-1. **16:9 works.** A 16:9 request returns 1280x720 at 24 fps (6.58 s for 6 s asked), using the full frame, at an
-   exact 0-credit quote.
-2. **Two submissions in a row ran at the same time.** Both clips were done within 7 min of the first submission. In
-   sequence they would take about 9.6 min. The second clip, submitted 11 s later, finished first. How many jobs can
-   run at once is not measured yet; the next test is 4 at once.
-
-Test 2's river clip also showed modern houses at the frame edge. Every clip still needs Claude's frame check, and
-outdoor prompts need a stated ancient setting.
-
-**Options.**
-- **Reuse the arc's Short clips.** This gives little.
-  - Shorts 1-4 (arc 1) are vidIQ veo-3.1-lite and stock clips, and none shows an approved character (the character
-    sheets were approved on 25/10).
-  - Every Short clip is 9:16 (720x1280). A 16:9 band cut from one is 720x405. That is as many pixels as the 640x360
-    that `pavo_footage.py` already feeds Real-ESRGAN, so the quality would hold, but only 32 % of the frame survives.
-  - Only wide skies and landscapes survive, after a frame check. No talking clip survives: its lips belong to the
-    Short's line.
-- **Fewer, longer clips with windows.** An 8-12 s clip is shown as two non-adjacent windows (intercut, recap). The
-  draft uses 10. The ceiling is about 30 % fewer generations, because QA holds are 4-7 s and windows cannot sit side
-  by side.
-- **No polling wait (submit and leave).**
-  - Submit a chapter's shots, risky ones first (E99), and let the job end.
-  - Later short runs collect what Pavo finished (clip_check, lipsync_check, regenerations) and submit the next.
-  - With 2 or more Pavo jobs at once (measured), generation for the draft drops from about 14 h to about 7 h or less.
-
-**Recommendation: submit and leave, new 16:9 clips, and a matrix upscale.**
-1. Generate new 16:9 clips, submitting each chapter at once (submit and leave).
-2. Use windows where the edit wants them.
-3. Upscale in a matrix of parallel jobs. GitHub runs up to 20 at once for a free plan: 1,520 CPU-minutes become about
-   1.5 h of wall-clock, plus downloads.
-
-The long then needs about a working day of wall-clock time, not several days.
+The existing long upscale matrix handles approved sources at the declared profile's frame. Estimate wall-clock
+work from current accepted inventory and observed runs; preserve matching completed upscale artifacts.
+Historical feasibility measurements remain in `evidence/long/` and `evidence/pavo/`, not as a pending test queue.
 
 ## 3. Audio
 
 - **The Keeper.** He narrates in `am_michael`, the voice the QA pins: `qa_pilot.voice_model_pinned` reads the
-  manifest's narrator voice. He is on screen only for the promise, the insight and the close, lip-synced (E95
-  binding, E98 pose).
+  manifest's narrator voice. He is on screen only for the promise, insight and close, using the selected qualified
+  talking route or explicit silent Plan B. Preserve the accepted voice and actual source checks.
 - **Each voice has its own pace, measured** (`evidence/long/20261026/arc-01-voice.json`, the arc-1 draft voiced
   locally with the pinned model):
 
@@ -177,14 +127,14 @@ The long then needs about a working day of wall-clock time, not several days.
   - The Keeper: 11-14 words.
   - Adam: about 14-20 words.
   - Eve: about 13-19 words.
-- **Characters** speak in their own Kokoro voices from the same pinned model (`voices-v1.0.bin`, sha256
+- **Kokoro-route characters** speak in their own voices from the same pinned model (`voices-v1.0.bin`, sha256
   bca610b8...):
   - Adam am_fenrir;
   - Eve af_heart;
   - God am_onyx at 0.9 speed, voice-over only.
 
   The QA pins the model hash and the narrator voice, so no gate changes. The render manifest must list every
-  speaker's voice (slice 3).
+  speaker's actual voice.
 - **The serpent is silent.** lipsync_check finds a human face and lips, and a snake has neither, so a talking
   serpent clip would fail every generation (TALKING_WITHOUT_A_FACE). The Keeper narrates its KJV words.
 - **Music.** The owned track (`OWNED_MUSIC_SHA256`), ducked under the voice.
@@ -193,22 +143,25 @@ The long then needs about a working day of wall-clock time, not several days.
   -1.5 dBTP.
 - **Speech rows.**
   - First word within 1.5 s: the cold open speaks at 0 s.
-  - "You" within 8 s: Eve's line, at 0.7 s.
+  - "You" within 8 s, measured on the current accepted speech.
   - WER at or below 0.1.
-  - Speech presence at or above 0.85: the estimate is 0.92.
-  - Pace 115-165 words a minute. With the Shorts' 0.35 s between lines, the measured arc-1 voice ran 164.5 words a
-    minute, at the ceiling. The long breathes 0.6 s between lines (LONG_LINE_GAP), which measured 159.0. pilot_render's
-    v4 long widened its sentence gap for the same row. The long's build must use the same gap (slice 3).
+  - Speech presence at or above 0.85, measured on the actual file.
+  - Pace 115-165 words a minute. The long uses LONG_LINE_GAP and its measured accepted layout; a previous
+    voicing estimate does not establish the current result.
 
-**Which frozen QA applies: story QA v3, frozen in this PR** (owner, "Sim, régua nova"). It is v2 with only three
-rules replaced by the structure's own:
-1. Figures: approved characters on screen are allowed (v2: none).
-2. AI share: 100 % Pavo is allowed, provided each clip passes clip_check and every talking clip passes
-   lipsync_check (v2: at least 40 % real licensed footage and at most 55 % Pavo).
-3. First shot: the acted cold-open conflict replaces the 4-7 s title card.
+**Profile selection.** Use the profile the plan declares. V3 introduced the acted-long baseline below; v4 added
+qualified native speech and v5 added its explicit fallback rules. Older files remain frozen for the records they govern.
+The owner's existing permission remains in force: on 26 October, "Sim, régua nova"; on 27 October,
+"Libera o pavo no longo." The immutable v3 basis retains the original decision reference. Its three changes from v2 are:
+
+1. Figures: `figure_present_fraction_max` is replaced by `figures_allowed`, permitting APPROVED characters.
+2. AI share: `footage_picture_share_min` and `footage_picture_share_counts` are removed;
+   `ai_video_picture_share_max` becomes 1.0, with `ai_video_clip_checks` requiring clip_check and, for talking clips,
+   lipsync_check. There is no real-footage minimum; the former maximum AI share was 55%.
+3. First shot: `title_card_seconds` is replaced by `first_shot`, the acted cold-open conflict.
 
 Everything else is v2's, unchanged: audio, loudness, pace, the 4-7 s holds, the .srt track, the 9.5 floor and the
-Claude review. v2 is v1 with the burned captions replaced by an .srt track. v1 and v2 stay frozen and byte-identical,
+authorized complete audiovisual review. v2 is v1 with the burned captions replaced by an .srt track. v1 and v2 stay frozen and byte-identical,
 and a test asserts all three.
 
 **v3's readers (E126, 2026-10-27).** v2 and v3 renamed keys that the readers indexed directly, so until E126 no
@@ -225,94 +178,32 @@ long could be measured or approved. Now:
   the `caption_track` record the manifest carries. `captions.manifest_srt` is the one track publish_video uploads
   (YouTube captions, never burned in), preflight checks and qa_pilot measures against the script words, the voice
   timeline and the words heard. A v3 long without its recorded track is refused (CAPTIONS_TRACK_MISSING).
-- The render manifest the long's build writes (slice 3) carries, beside v4's fields: `holds[].beat`,
+- The render manifest the long's build writes carries, beside v4's fields: `holds[].beat`,
   `holds[].characters`, `holds[].shot_kind`; `sentences[].speaker` on spoken lines; per clip `source`, `licence`,
   `model`, `upscaler`, `audio`, `vetting`, `credit`, `sha256`, `clip_check`, `talking`, `lipsync_check`,
   `voiceover`, `face_check`; `burned_captions: false`; `caption_track`.
 - Antidote: `test_qa_pilot.py` fails when a frozen QA a plan check reads is not pinned, with the same hash, by
   prepublish_gate and render_queue and read by qa_pilot.
 
-## 4. What is still open, or not resolved here (no gate loosened)
+## 4. Readiness of the actual plan
 
-0. **v3's readers**: done (E126, above). The long's build (slice 3) still has to write the manifest fields and the
-   `caption_track` listed there.
+Read the current `plans/<arc>-long.json`, `arcs.json`, character/source approvals and exact preflight binding.
+Run the existing strict checks and retain their actual result. Old cast counts, estimated durations, promised
+dates or previous PASS reports do not establish readiness after inputs or code change.
 
-1. **Cutting.** The QA's 4-7 s holds replace the Shorts' 2-4 s, so the long cuts slower and its talking lines are
-   sized to fit them (section 3). Settled by the frozen QA; noted here because it differs from the Shorts.
-2. **The render path.** `still_render` and `pilot_render`, the long's old render, have no talking or lip-sync path;
-   only `episode_build` (the Shorts') does. The long's build is episode_build's path at 16:9, with submit and leave
-   and a matrix upscale (slice 3).
-3. **The cast.** Cain, Abel and Enoch are DRAFT characters.json entries (28/10, the arc-02 long): their sheets
-   are made by cf-images.yml and approved by Claude before any of their shots is generated.
-4. **Pavo concurrency.** Two jobs at once is measured; the ceiling is not. The next 0-credit test is 4 at once.
+Use measured accepted voice timing and the current composition prediction before a full build. Resolve the
+specific source, coverage, cold-open, line-length or review-row refusal at its responsible stage. Keep unchanged
+approved material and its saved jobs. Do not repeat historical concurrency tests or regenerate every shot.
 
-## 5. The arc-1 draft (`plans/arc-01-long.json`)
+## 5. Long preflight and approved-source contract
 
-- **Scope.** Genesis 1:1-3:24, four chapters: Shorts genesis-01 to genesis-04 with their titles, as `arcs.json`
-  arc-01 lists them, pilot-015. One complete story: how a very good world broke in one afternoon, and the promise
-  inside the curse.
-- **Cast.** Adam, Eve and the serpent are APPROVED. The serpent is silent and the Keeper narrates its lines. God is a
-  voice only. The Keeper appears in his three beats.
-- **Check result.** It passes `long_plan_check.py --strict` with no problem and no pending row.
-- **Estimate.**
-  - 14.52 min (871.1 s), 2,313 words, 159 words a minute.
-  - The cold open's words end at 29.8 s, so the Keeper starts at 30 s.
-  - The climax is at 0.78: God's Genesis 3:17 line ("cursed is the ground for thy sake"), then Adam on his knees in
-    the storm.
-  - 8 re-hooks, largest gap 105 s.
-  - Keeper share 8.5 %: promise 16 s, insight 92 s with recap windows, close 11 s.
-  - 175 holds; 165 Pavo generations (136 scenes, 9 God voice-overs, 20 talking: 14 Keeper, 3 Eve, 3 Adam) plus 10
-    windows.
-- **Measured voice.** Kokoro, voiced locally line by line in each speaker's voice, laid with the 0.6 s gap:
-  - **14.59 min (875.4 s)**, within 0.5 % of the estimate.
-  - 158.5 words a minute, climax at 0.78, Keeper 8.6 %.
-  - Every talking hold is inside 4-7 s.
-  - The cold open's words end at 27.1 s, so its last frame holds 2.9 s before the Keeper at 30 s (the limit is 3 s).
-    The estimate puts that end at 29.8 s, and the window is narrow, so the build must re-check it on the measured
-    voice (slice 3).
-
-  The first voicing, before the talking lines were lengthened and with the 0.35 s gap, measured 13.97 min and 164.5
-  words a minute.
-- **The local preflight (27/10, `evidence/preflight/arc-01-long.json`)** compose-predicted the measured voice with the
-  long's own cut (#470) and found four plan problems the estimate missed, fixed in the plan without touching a gate:
-  - FOOTAGE_SHORT s-c1-both: its 8 s clip had to cover 10.55 s (its own hold and the s-ki-valley window), 1.32x > 1.3:
-    it is now a 9 s clip.
-  - HOLD_UNDER_QA s-co-adam, s-co-eye, s-co-hide (3.86 s each on lines 0-1): three cuts did not fit those two lines,
-    and two lines more would make one 25 s voice run (SLOW_STRETCH). s-co-eye (the serpent's eye) is cut; s-co-adam
-    and s-co-hide hold lines 0-1, s-co-gate and s-co-exile lines 2-3.
-  - HOLD_UNDER_QA s-c3-turn, s-c3-listen (3.90 s on line 63): the four shots of lines 63 and 64 now share both lines
-    (about 4.3 s each).
-  - HOLD_OVER_QA g-c4-woman (8.12 s): Kokoro pauses at the semicolon of "I will greatly multiply thy sorrow and thy
-    conception; in sorrow thou shalt bring forth children". The first clause alone reads under 4 s at God's fastest
-    pace; the line is now "in sorrow thou shalt bring forth children, and thy desire shall be to thy husband" (Genesis
-    3:16 word for word, kjv_check PASS, one comma for the semicolon so it is one sentence).
-  The draft is now 174 holds, 164 generations (135 scenes); measured 14.54 min (872.6 s), Keeper 7.5 %. Plan, voice
-  and every request digest are clean; only the talking-line probes block (`evidence/pavo/20261027/arc-01-long-talk`).
-
-## 6. Slices
-1. (This PR.)
-   - The grammar and its check.
-   - Story QA v2 and v3, frozen.
-   - The arc-1 draft, estimated and voiced.
-   - The 16:9 and concurrency tests.
-2. Before the build:
-   - A 0-credit test of 4 Pavo jobs at once.
-   - The arc-1 long's still frames (first-frame stills where light or particles are risky).
-3. episode_build for a long:
-   - 16:9, submit and leave with per-chapter collect runs, and a matrix upscale.
-   - The .srt track and -15 LUFS.
-   - The manifest the QA reads.
-   - qa_pilot, render_queue and prepublish_gate learn v3.
-
-## 7. The no-rework contract of the Shorts, for the long (E127, 2026-10-27)
-
-Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes through the Shorts' own contract
-(E106, E114, E99), by the same code (`long_preflight.py` holds only what differs):
+The long shares the existing early-check and approved-source helpers (E106, E114, E99); `long_preflight.py`
+holds the long-specific behavior:
 - **Preflight before anything is built.** `episode_build.py preflight plans/arc-01-long.json --voice ... --refs --write`
-  runs long_plan_check `--strict` and the frozen story QA v3 (`episode_build.check_plan`), the pinned Kokoro voice laid
+  runs long_plan_check `--strict` and the selected frozen story QA (`episode_build.check_plan`), the pinned Kokoro voice laid
   out at LONG_LINE_GAP against the structure's gate (length, Keeper share, measured), every request through the
   adapter's offline checks and its digest, and every talking line's direct probe. It is BLOCKED (LONG_REVIEW_OPEN)
-  while any story QA v3 row or rubric `long` entry of `ops/refusal_registry.json` is `open`. The report binds the plan,
+  while any applicable story QA row or rubric `long` entry of `ops/refusal_registry.json` is `open`. The report binds the plan,
   the characters' entries (look, references, voice), their image records, the matched probes, the review rows and the
   code by sha256.
 - **The build ships approved clips only.** `verify-preflight` (the build's first step) refuses a long without a PASS
@@ -322,18 +213,19 @@ Owner, 27/10: get the arc-01 long publishable with no rework. The long now goes 
 - **Probes.** `shot-probe.yml` takes the long's plan (long_plan_check, 16:9, its own shot ids, windows refused by the
   dispatch guard and by `check-probe`, PROBE_WINDOW_SHOT). For a long, `check-probe` also refuses a plan without a clean
   committed preflight of these exact bytes (LONG_PROBE_PREFLIGHT); only the open review rows and the talking probes
-  may still block that report, since neither changes a request. Claude approves one clip a shot with
+  may still block that report, since neither changes a request. An authorized source reviewer records the actual
+  identity and approves one clip per shot with
   `approve-shot` into `shots/arc-01-long.json`.
 - **Risk order and resume.** `risk_rank`: talking characters, the Keeper's talking shots, voice-overs, wide and
   establishing scenes, then the rest. `episode_build.py probe-queue PLAN` lists the shots without an approved clip of
   their request now, in that order, cut into batches of one rank that each fit one shot-probe run.
-- **Slice 3 changes accordingly.** "Submit and leave" applies to the probes, not to the build: the build composes
+- **Assembly only.** Submission and recovery belong to the probes, not to the build: the build composes
   approved clips (16:9 at LONG_LINE_GAP, the .srt, -15 LUFS, the upscale matrix) and never holds a Pavo secret.
 
 The production estimate (no generation) is `evidence/long/20261027/arc-01-long-production-estimate.json`
 (`long_preflight.py estimate PLAN --write`).
 
-## 8. The long's build (slice 3, 2026-10-27)
+## 6. The existing long build
 
 `long-build.yml` (manual, main only, inputs `plan` and `resume_run`; no Pavo secret, nothing generated) runs
 `long_build.py` around the Short's own steps:
@@ -352,28 +244,29 @@ The production estimate (no generation) is `evidence/long/20261027/arc-01-long-p
    normal speed to the next line, its last frame held for the gap; a window shows the next unseen part of its
    source clip (source and windows slowed together, at most 1.3x: FOOTAGE_SHORT). No burned captions; the owned
    music ducked under the voice; two-pass loudnorm to -15 LUFS / -1.5 dBTP, measured again on the file. The .srt
-   comes from `captions.track_record` (the writer of #469, `captions.py long`), and `manifest.json` carries the
+   comes from `captions.track_record` (`captions.py long`), and `manifest.json` carries the
    fields qa_pilot reads for v3 (section 3). The preflight now predicts this compose too (`compose_problems`).
 4. **record**: `bible-<long>-sha256-<sha>.mp4` and `bible-<long>-sha256-<sha>.srt` into the release; the report,
-   manifest, .srt and a 16:9 sheet on `claude/long-<long>-<run>` for Claude's review (>= 9.5).
+   manifest, .srt and a 16:9 sheet on `claude/long-<long>-<run>`. The exact master must receive a complete
+   watched-and-heard review (>= 9.5) by its actual authorized reviewer before publication.
 
 `resume_run` keeps the upscaled clips of an earlier run whose artifact (`long-up-<long>--<shot>-<sha16>`) is of the
 clip approved now; a shot approved again since is upscaled again.
 
-The 9 image-first shots get 16:9 stills: `scene_stills.py` prepares, crops, finalizes (1920x1080), sheets and
+Image-first shots use 16:9 stills: `scene_stills.py` prepares, crops, finalizes (1920x1080), sheets and
 approves at the plan's aspect, and refuses a picture at another aspect instead of stretching it
-(STILL_ASPECT_MISMATCH). Pavo agnes-image at 16:9 quoted 0 credits (`evidence/pavo/20261027/agnes-image-16x9-quote.json`).
+(STILL_ASPECT_MISMATCH). A historical zero quote does not authorize a new call; verify the exact current request.
 
-## 9. No stall: Pavo's own speech, reuse, the budget and free fallbacks (owner, 27/10; story QA v4)
+## 7. Native speech, reuse and the selected source profile
 
-Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent shots"), for the long and the Shorts:
-- **Which QA.** A long declares `"criteria": "story-qa-criteria-v4"` (`qa_criteria_story_v4.json`: v3 with only
-  `rights.ai_video.audio` changed and rows added; every v3 number unchanged). Without it a long stays on v3 exactly as
-  before. long_plan_check, qa_pilot (STORY_V4_ROWS), prepublish_gate and render_queue pin both files.
-- **R4, Pavo's speech.** On v4 (a long's `"audio_route": "kokoro"` keeps our voice; a Short's `"audio_route":
-  "pavo_native"` is refused, AUDIO_ROUTE_SHORT_UNSUPPORTED, until a frozen Short criteria file holds the speech-check
-  rows) every spoken shot is generated with Pavo's
-  sound on and the SOUND sentence of #473's prompt A (`pavo_native.sound_sentence`: the speaker's fixed voice from
+These are long-profile interfaces. Current SYSTEM direction, the declared criteria and `source_policy` select
+the eligible route; they do not authorize a native-audio mode for a different format.
+
+- **Which QA.** A long may declare v4 or v5 through its supported criteria field; the default remains v3. V4 adds
+  native-speech rows to the v3 baseline; v5 adds its explicit fallback rules. long_plan_check, qa_pilot,
+  prepublish_gate and render_queue pin the applicable files. A different profile is not selected merely to pass a result.
+- **Native speech.** On the eligible native long route, `"audio_route": "kokoro"` retains the pinned voice.
+  A shot selected for Pavo speech uses sound on and the supported SOUND sentence (`pavo_native.sound_sentence`: the speaker's fixed voice from
   `voices.json`, on camera or off screen, the exact line once, pronunciation hints, the plan's `ambience`, no music).
   A silent scene's request is unchanged, so its approval stays valid. Each kept clip is measured
   (`episode_build.py speech-check`: medium.en words, YAMNet music and singing, loudness, the speaker cosine against
@@ -382,49 +275,42 @@ Owner, 27/10 (DECISIONS "no stall, Pavo speech kept, free fallbacks for silent s
   +12 dB, no music, no singing). The voice is bound to `voices.json` by sha256 (review of #476): measured against
   exactly the speaker's recorded reference (VOICE_REFERENCE_MISSING / _MISMATCH; a REFS file that is not that clip is
   refused, VOICE_REFERENCE_FILE_MISMATCH) and against every other speaker's reference (VOICE_OTHERS_MISSING when there
-  is none, VOICE_OTHERS_MISMATCH when one is left out). A reference is chosen by Claude's review (>= 9.5) of a probed
+  is none, VOICE_OTHERS_MISMATCH when one is left out). A reference is chosen by an authorized source review (>= 9.5, true identity) of a probed
   native clip that passed every other check: `episode_build.py voice-reference RECORD SHOT ASSET SCORE NOTE`, by PR. The build lays each clip's speech into the voice track at its line
   (`pavo_native.premix`: one gain, 80 ms fades, a continuous 60-900 Hz bed), starts the talking cut at the speech
   onset, then ducks the owned music and loudnorms as before; a native line's layout takes its approved clip's speech
   span.
 - **One God voice (owner, 28/10).** A spoken shot may say `"audio_route": "kokoro"` on a native plan and keep our
-  Kokoro voice-over (never the reverse: AUDIO_ROUTE_UNKNOWN); the arc-01 long puts all 9 of God's lines there (never
-  seen speaking), so God is one voice across the long and Pavo's units go to Adam, Eve and the Keeper.
+  Kokoro voice-over (never the reverse: AUDIO_ROUTE_UNKNOWN). God remains one pinned offscreen voice throughout;
+  select and verify each actual line through the plan's current routing.
 - **Refused words.** A line holding a word Pavo's filter refuses (`evidence/pavo/prompt-blocks.json`) is voiced by
-  Kokoro (today's input-audio route); a new block read back (PAVO_PROMPT_BLOCKED, E129) is recorded and the shot goes
-  again at once on the Kokoro route.
+  the supported Kokoro route. Record a new block (PAVO_PROMPT_BLOCKED, E129), reconcile the saved request and
+  qualify the eligible replacement; a refusal is not permission for an immediate duplicate submission.
 - **R1, reuse.** probe-queue lists a shot with a clean clip of its request (main's records, the shot-probe branches,
   clip inventories) under `awaiting_review`, never in a batch; a spoken shot with a clean clip of its Kokoro request
   keeps that route. An inventory clip on Pavo's CDN is approved with `approve-source ... pavo_reuse` and fetched by
   sha256.
 - **R2/R3, budget and fallbacks.** `episode_build.py sources PLAN [--write]` (and probe-queue's `sources`) spends the
-  shared budget (quota.py, #475) in risk order, the spoken shots first; a silent, character-free shot it does not
+  shared available capacity (quota.py) in risk order, the spoken shots first; a silent, character-free shot it does not
   reach gets licensed-footage candidates (APPROVED, seen, frozen licence list, 2560x1440, sharing words with its
   subject and line, no period clash or person) or an APPROVED still of the shot in camera motion; a spoken shot or a
-  shot with a character waits. Claude approves a candidate with `approve-source` (>= 9.5, a note); the build ships
+  shot with a character follows the selected profile's stricter source rules, including v5's explicit exceptions.
+  An authorized reviewer approves a candidate with `approve-source` (>= 9.5, a note and true identity); the build ships
   that source (footage at its frame, a still rendered in motion at 2560x1440) and the manifest names it per shot.
 - **The Keeper at 16:9 (E130).** Plan B (the voice-over Keeper) is a path of the long; under v4 a 16:9 Keeper prompt
   says "Close-up from the chest up, his face large in the centre of the frame" (KEEPER_FRAMING_16X9).
 
-## 10. The arc-02 plan: one production day (owner, 28/10)
+## 8. Planned source allocation and repeat identity
 
-`plans/arc-02-long.json` (Genesis 4:1-6:22; chapters genesis-05 to 08) is built for one day of production under
-today's limits, with the split in its `source_design`:
-- **Pavo, 59 clips:** 47 silent acted scenes with a character (Cain, Abel, Enoch, Adam, Eve, Noah), 5 voice-overs of
-  God on the Kokoro route (one voice, `audio_route: kokoro`), 7 talking shots (Cain's Genesis 4:13-14 and six Keeper
-  close-ups, Pavo's own speech under story QA v4). Expected about 160 units at one candidate a shot (scene 1.2 and
-  talking 2.5 generations, 2 units each), plus the direct talking probes the preflight asks for (7 lines x 6).
-- **Free, 50 holds:** 38 FLUX stills in motion (anonymous figures and establishing shots; DRAFT records
-  `stills/arc-02-long-*.json`) and 12 vetted footage holds (sky, clouds, rain, mist, sunrise).
-- **Windows, 56 holds** of the acted clips (at most two a clip, FOOTAGE_SHORT holds).
-- Measured locally with the pinned Kokoro (each speaker's voice, LONG_LINE_GAP): 14.77 min, cold open 27.7 s, climax
-  at 0.795, Keeper 3.8 %, every hold 4.08-6.87 s. long_plan_check: no problem; `--strict` waits only for the three
-  CHARACTER_PENDING rows.
-- **The engine follows the split.** `shot_sources.planned_fallbacks`: a shot the plan's `source_design` gives to
-  `footage` or `still_motion` (and that a fallback may carry) never takes Pavo budget in `episode_build.py sources`
-  and is never queued by probe-queue (`planned_fallback`); long_plan_check refuses a design that lists a spoken or
-  character shot as a fallback, an unknown or twice-listed id, a non-window under `window`, or a shot with no source
-  (SOURCE_DESIGN_*).
-- **Windows and story QA `image_repeat_gap_seconds_min` (300 s).** qa_pilot keys each hold by its manifest `image`,
-  which long_build writes as `<source shot>#<src_start>`: a window shows another part of its clip, so it is a
-  different image and no repeat (test_long_build). No hold of the plan repeats a source part.
+The plan's `source_design` is consumed by `shot_sources.planned_fallbacks`. An eligible shot assigned to
+`footage` or `still_motion` does not consume Pavo budget in `episode_build.py sources` and is not queued as a new
+generation by probe-queue. The current source policy/profile decides eligibility. `SOURCE_DESIGN_*` checks refuse
+unknown or duplicated IDs, incompatible source assignments, invalid windows and missing sources.
+
+The build records a hold's actual source part as `<source shot>#<src_start>`; a distinct window is a different
+part of the clip, not permission to repeat the same part. The selected frozen image-repeat rule remains binding.
+Review the complete sequence for visible repetition and narrative value.
+
+An owner-authorized source choice must be represented truthfully through the applicable source interface and
+profile. A source's origin or licence is never relabeled to fit an older field. Missing technical or rights evidence
+stays explicit; no automatic score or passing boolean is introduced by an adapter.

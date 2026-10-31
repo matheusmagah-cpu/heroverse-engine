@@ -1,0 +1,40 @@
+{
+ "id": "clip-receding-water-rock-flow",
+ "theme": "receding",
+ "query": "water receding rocks",
+ "source": "pixabay",
+ "title": "water, rock, flow",
+ "page": "https://pixabay.com/videos/id-128640/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128640/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7879d34400cb17b613b4a36a03a5d96a4ef2b8502fe30ceede13a4de1d925773",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  101.2,
+  100.8,
+  101.4,
+  100.9,
+  101.6
+ ],
+ "vetting_descriptions": [
+  "A waterfall is flowing down a rocky cliff, and the water is splashing into a pool below.",
+  "A waterfall is flowing down a rocky cliff, and the water is flowing down the rocks."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-receding-water-rock-flow-sha256-7879d34400cb17b613b4a36a03a5d96a4ef2b8502fe30ceede13a4de1d925773.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

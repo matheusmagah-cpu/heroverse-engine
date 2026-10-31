@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import random
 import re
+from urllib.parse import parse_qs, urlsplit
 
 HANDLE = "heroverse.official"
 DAY_CAP = 20                 # replies (each with its like) a day, owner
@@ -21,6 +22,119 @@ LIMIT = 150                  # TikTok's comment length limit
 URL = re.compile(r"https?://|www\.|\b[a-z0-9-]+\.(?:com|net|org|io|ly|be|me|tv|app)\b", re.I)
 VIDEO_ID = re.compile(r"^\d{15,22}$")
 COMMENT_ID = re.compile(r"^\d{15,22}$")
+AUTHOR = re.compile(r"[A-Za-z0-9_.]+")
+
+
+def normal_text(value):
+    """Only collapse layout whitespace; never truncate text or match a substring."""
+    return " ".join(value.split()) if isinstance(value, str) else ""
+
+
+def identity_problems(item, content=True):
+    """The complete immutable target of a REPLY, also checked before the runner opens a page."""
+    out = []
+    for field, pattern in (("comment_id", COMMENT_ID), ("video_id", VIDEO_ID)):
+        if not isinstance(item.get(field), str) or not pattern.fullmatch(item[field]):
+            out.append(field.upper() + "_INVALID")
+    if content:
+        if not isinstance(item.get("author"), str) or not AUTHOR.fullmatch(item["author"]):
+            out.append("AUTHOR_MISSING_OR_INVALID")
+        if not normal_text(item.get("comment_text")):
+            out.append("COMMENT_TEXT_MISSING_OR_INVALID")
+    return out
+
+
+def author_from_href(href):
+    """A profile's handle, not its display name or any substring of a wrapper's text."""
+    if not isinstance(href, str):
+        return None
+    try:
+        url = urlsplit(href)
+        absolute = url.scheme == "https" and url.netloc in ("www.tiktok.com", "tiktok.com")
+        relative = not url.scheme and not url.netloc and href.startswith("/@")
+        if not (absolute or relative):
+            return None
+        match = re.fullmatch(r"/@([A-Za-z0-9_.]+)/?", url.path)
+        return match.group(1) if match else None
+    except ValueError:
+        return None
+
+
+def own_video_page(url, video_id):
+    try:
+        parsed = urlsplit(url)
+        return (parsed.scheme == "https" and parsed.netloc in ("www.tiktok.com", "tiktok.com")
+                and parsed.path.rstrip("/") == f"/@{HANDLE}/video/{video_id}")
+    except (TypeError, ValueError):
+        return False
+
+
+def comment_index(item, candidates):
+    """Exactly one visible container must expose the requested cid and all its original fields.
+
+    Missing DOM ids cannot be replaced with a text search, even when the author/text look unique.
+    """
+    if identity_problems(item):
+        raise RuntimeError("COMMENT_IDENTITY_INVALID")
+    matches = [i for i, candidate in enumerate(candidates) if candidate.get("comment_id") == item["comment_id"]]
+    if len(matches) > 1:
+        raise RuntimeError("COMMENT_IDENTITY_AMBIGUOUS")
+    if not matches:
+        return None
+    index = matches[0]
+    candidate = candidates[index]
+    if identity_problems(candidate):
+        raise RuntimeError("COMMENT_IDENTITY_UNVERIFIABLE")
+    if (candidate["video_id"] != item["video_id"] or candidate["author"] != item["author"]
+            or normal_text(candidate["comment_text"]) != normal_text(item["comment_text"])):
+        raise RuntimeError("COMMENT_IDENTITY_MISMATCH")
+    return index
+
+
+def request_targets_comment(url, post_data, endpoint, item):
+    """Before a browser write leaves the PC: its explicit cid/parent, video and action must match.
+
+    Parse only in memory; no cookie, credential, URL or payload is logged. Unknown schemas fail closed.
+    """
+    if identity_problems(item):
+        return False
+    try:
+        parsed = urlsplit(url)
+        if (parsed.scheme != "https" or parsed.netloc != "www.tiktok.com"
+                or parsed.path.rstrip("/") != endpoint.rstrip("/") or parsed.fragment):
+            return False
+        fields = parse_qs(parsed.query, keep_blank_values=True, max_num_fields=500)
+        if post_data:
+            for key, values in parse_qs(post_data, keep_blank_values=True, max_num_fields=500).items():
+                fields.setdefault(key, []).extend(values)
+        expected = {"aweme_id": item["video_id"]}
+        if endpoint == "/api/comment/digg":
+            expected.update(cid=item["comment_id"], digg_type="1")
+        elif endpoint == "/api/comment/publish":
+            expected.update(reply_id=item["comment_id"], text=item["text"].strip())
+        else:
+            return False
+        return all(fields.get(key) == [value] for key, value in expected.items())
+    except (TypeError, ValueError, KeyError, AttributeError):
+        return False
+
+
+def verified_reply_id(body, item):
+    """A successful status alone cannot prove which parent/video/account was answered."""
+    if not isinstance(body, dict):
+        return None
+    comment = body.get("comment")
+    if type(body.get("status_code")) is not int or body["status_code"] != 0 or not isinstance(comment, dict):
+        return None
+    cid = str(comment.get("cid", ""))
+    author = comment.get("user") or {}
+    if (not COMMENT_ID.fullmatch(cid) or cid == item["comment_id"]
+            or str(comment.get("reply_id")) != item["comment_id"]
+            or str(comment.get("aweme_id")) != item["video_id"]
+            or not isinstance(author, dict) or author.get("unique_id") != HANDLE
+            or normal_text(comment.get("text")) != normal_text(item["text"])):
+        return None
+    return cid
 
 
 def now_utc():
@@ -63,18 +177,17 @@ def last_action(ledger):
 def reply_problems(item, own_videos, policy=None):
     """Why one decision of the input file may not be acted on ([] = it may). `policy` is reply_policy.problems (the
     repository's gate, deployed next to the runner); the runner's own checks stay even without it."""
-    out = []
-    cid, vid, text = str(item.get("comment_id", "")), str(item.get("video_id", "")), (item.get("text") or "").strip()
-    if not COMMENT_ID.match(cid):
-        out.append("COMMENT_ID_INVALID")
-    if not VIDEO_ID.match(vid):
-        out.append("VIDEO_ID_INVALID")
-    elif vid not in own_videos:
+    out = identity_problems(item, content=item.get("decision") == "REPLY")
+    vid = str(item.get("video_id", ""))
+    text = item["text"].strip() if isinstance(item.get("text"), str) else ""
+    if VIDEO_ID.fullmatch(vid) and vid not in own_videos:
         out.append("NOT_OUR_VIDEO")
     if item.get("decision") == "SKIP":
         return out + ([] if policy is None else policy(item, "tiktok"))
     if item.get("decision") != "REPLY":
         return out + ["DECISION_INVALID"]
+    if not isinstance(item.get("text"), str):
+        return out + ["REPLY_TEXT_INVALID"]
     if not text:
         out.append("REPLY_EMPTY")
     if len(text) > LIMIT:

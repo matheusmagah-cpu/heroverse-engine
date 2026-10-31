@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-wind-flower-poppy-wind-wildflower-plant-macro",
+ "theme": "arc01-s-c1-wind",
+ "query": "wind ripples dark water",
+ "source": "pixabay",
+ "title": "flower, poppy, wind, wildflower, plant, macro, affix, red",
+ "page": "https://pixabay.com/videos/id-164215/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-164215/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "573d03e1abf3e39eef420bd07743643953190c86192ef8340e6c973944edd567",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  64.4,
+  64.5,
+  64.1,
+  64.3,
+  64.4
+ ],
+ "vetting_descriptions": [
+  "A single red flower stands out in a field of red flowers.",
+  "A red flower stands out in a field of red flowers."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-wind-flower-poppy-wind-wildflower-plant-macro-sha256-573d03e1abf3e39eef420bd07743643953190c86192ef8340e6c973944edd567.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

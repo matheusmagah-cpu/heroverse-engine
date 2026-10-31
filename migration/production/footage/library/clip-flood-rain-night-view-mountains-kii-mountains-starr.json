@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-rain-night-view-mountains-kii-mountains-starr",
+ "theme": "flood-rain",
+ "query": "lightning night sky",
+ "source": "pixabay",
+ "title": "night view, mountains, kii mountains, starry sky, cloud, japan",
+ "page": "https://pixabay.com/videos/id-368458/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 22.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-368458/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "03d380dd040f90ff9bddb62a5879569cd21c06f2c52cbf70d02b58c29465d841",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  77.8,
+  71.7,
+  67.2,
+  65.6,
+  64.2
+ ],
+ "vetting_descriptions": [
+  "A view of the sky with clouds and a mountain range in the background.",
+  "A mountain range with a cloudy sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-rain-night-view-mountains-kii-mountains-starr-sha256-03d380dd040f90ff9bddb62a5879569cd21c06f2c52cbf70d02b58c29465d841.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -3,21 +3,374 @@
  "source": "migration/production/bible/SERIES.md 'One format, two lengths', calendar (owner, 2026-10-25): one arc = 4 Short episodes = 1 long",
  "note": "migration/publish/arc_links.py links only the videos named here (the Shorts by their episode ids in migration/publish/ledger.json 'bible:<id>:<sha>', the long by its pilot's ledger key '<pilot>:<sha>'). A long whose pilot is not yet known stays null and its arc is skipped until it is set.",
  "arcs": [
-  {"id": "arc-01", "title": "In the beginning", "kjv": "Genesis 1-3",
-   "shorts": ["genesis-01-short", "genesis-02-short", "genesis-03-short", "genesis-04-short"],
-   "long": {"pilot": "pilot-015", "title": "Creation, Eden and the Fall", "slot": "2026-10-28T22:00:00Z"},
-   "next": "arc-02"},
-  {"id": "arc-02", "title": "Brothers and the walk with God", "kjv": "Genesis 4-6",
-   "shorts": ["genesis-05-short", "genesis-06-short", "genesis-07-short", "genesis-08-short"],
-   "long": {"pilot": null, "title": "Cain, Abel and the days before the Flood", "slot": "2026-10-31T10:00:00Z"},
-   "next": "arc-03"},
-  {"id": "arc-03", "title": "The Flood", "kjv": "Genesis 7-11",
-   "shorts": ["genesis-09-short", "genesis-10-short", "genesis-11-short", "genesis-12-short"],
-   "long": {"pilot": null, "title": "Noah, the Flood and the rainbow", "slot": "2026-11-02T10:00:00Z"},
-   "next": "arc-04"},
-  {"id": "arc-04", "title": "Abram", "kjv": "Genesis 12-19",
-   "shorts": ["genesis-13-short", "genesis-14-short", "genesis-15-short", "genesis-16-short"],
-   "long": {"pilot": null, "title": "The call of Abraham", "slot": "2026-11-04T10:00:00Z"},
-   "next": null}
- ]
+  {
+   "id": "arc-01",
+   "title": "In the beginning",
+   "kjv": "Genesis 1-3",
+   "shorts": [
+    "genesis-01-short",
+    "genesis-02-short",
+    "genesis-03-short",
+    "genesis-04-short"
+   ],
+   "long": {
+    "pilot": "pilot-015",
+    "title": "Creation, Eden and the Fall",
+    "slot": "2026-10-29T22:00:00Z"
+   },
+   "next": "arc-02"
+  },
+  {
+   "id": "arc-02",
+   "title": "Brothers and the walk with God",
+   "kjv": "Genesis 4-6",
+   "shorts": [
+    "genesis-05-short",
+    "genesis-06-short",
+    "genesis-07-short",
+    "genesis-08-short"
+   ],
+   "long": {
+    "pilot": null,
+    "title": "Cain, Abel and the days before the Flood",
+    "slot": "2026-10-31T10:00:00Z"
+   },
+   "next": "arc-03"
+  },
+  {
+   "id": "arc-03",
+   "title": "The Flood",
+   "kjv": "Genesis 7-11",
+   "shorts": [
+    "genesis-09-short",
+    "genesis-10-short",
+    "genesis-11-short",
+    "genesis-12-short"
+   ],
+   "long": {
+    "pilot": null,
+    "title": "Noah, the Flood and the rainbow",
+    "slot": "2026-11-02T10:00:00Z"
+   },
+   "next": "arc-04"
+  },
+  {
+   "id": "arc-04",
+   "title": "Abram",
+   "kjv": "Genesis 12-19",
+   "shorts": [
+    "genesis-13-short",
+    "genesis-14-short",
+    "genesis-15-short",
+    "genesis-16-short"
+   ],
+   "long": {
+    "pilot": null,
+    "title": "The call of Abraham",
+    "slot": "2026-11-04T10:00:00Z"
+   },
+   "next": null
+  }
+ ],
+ "recovery": {
+  "status": "REANCHOR_PENDING_QUALIFIED_DELIVERY_NOT_YOUTUBE_SCHEDULE",
+  "owner_direction_date": "2026-10-30",
+  "timezone": "America/Sao_Paulo",
+  "master_review_lead_hours": 4,
+  "scheduled_readback_lead_hours": 2,
+  "reserve_shorts": 4,
+  "reserve_longs": 1,
+  "makeup_limit": 2,
+  "makeup_policy": "Only the extra is moved to the next eligible 19:30Z window if not approved, if either next-day regular Short is not ready, or if the long is not protected. At most one extra/day, two total. Never skip episodes or stack uploads. Recalculate remaining targets after a miss; no automatic rescheduling is authorized by this calendar.",
+  "targets": [
+   {
+    "episode": "genesis-09-short",
+    "slot": "2026-10-29T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-01-long",
+    "slot": "2026-10-29T22:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-10-short",
+    "slot": "2026-10-29T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-11-short",
+    "slot": "2026-10-30T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-12-short",
+    "slot": "2026-10-30T19:30:00Z",
+    "kind": "makeup"
+   },
+   {
+    "episode": "genesis-13-short",
+    "slot": "2026-10-30T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-02-long",
+    "slot": "2026-10-31T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-14-short",
+    "slot": "2026-10-31T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-15-short",
+    "slot": "2026-10-31T19:30:00Z",
+    "kind": "makeup"
+   },
+   {
+    "episode": "genesis-16-short",
+    "slot": "2026-10-31T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-17-short",
+    "slot": "2026-11-01T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-18-short",
+    "slot": "2026-11-01T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-03-long",
+    "slot": "2026-11-02T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-19-short",
+    "slot": "2026-11-02T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-20-short",
+    "slot": "2026-11-02T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-21-short",
+    "slot": "2026-11-03T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-22-short",
+    "slot": "2026-11-03T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-04-long",
+    "slot": "2026-11-04T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-23-short",
+    "slot": "2026-11-04T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-24-short",
+    "slot": "2026-11-04T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-25-short",
+    "slot": "2026-11-05T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-26-short",
+    "slot": "2026-11-05T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-05-long",
+    "slot": "2026-11-06T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-27-short",
+    "slot": "2026-11-06T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-28-short",
+    "slot": "2026-11-06T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-29-short",
+    "slot": "2026-11-07T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-30-short",
+    "slot": "2026-11-07T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-06-long",
+    "slot": "2026-11-08T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-31-short",
+    "slot": "2026-11-08T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-32-short",
+    "slot": "2026-11-08T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-33-short",
+    "slot": "2026-11-09T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-34-short",
+    "slot": "2026-11-09T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-07-long",
+    "slot": "2026-11-10T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-35-short",
+    "slot": "2026-11-10T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-36-short",
+    "slot": "2026-11-10T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-37-short",
+    "slot": "2026-11-11T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-38-short",
+    "slot": "2026-11-11T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-08-long",
+    "slot": "2026-11-12T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-39-short",
+    "slot": "2026-11-12T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-40-short",
+    "slot": "2026-11-12T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-41-short",
+    "slot": "2026-11-13T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-42-short",
+    "slot": "2026-11-13T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-09-long",
+    "slot": "2026-11-14T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-43-short",
+    "slot": "2026-11-14T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-44-short",
+    "slot": "2026-11-14T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-45-short",
+    "slot": "2026-11-15T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-46-short",
+    "slot": "2026-11-15T23:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "arc-10-long",
+    "slot": "2026-11-16T10:00:00Z",
+    "kind": "long"
+   },
+   {
+    "episode": "genesis-47-short",
+    "slot": "2026-11-16T13:30:00Z",
+    "kind": "regular"
+   },
+   {
+    "episode": "genesis-48-short",
+    "slot": "2026-11-16T23:30:00Z",
+    "kind": "regular"
+   }
+  ],
+  "production_direction": {
+   "cohort": "pavo-speech-qualified-video-gpt-stills-20261030",
+   "new_speech": "Pavo first for the speaking Keeper and speaking characters, approved references and consistent supported voices, fresh exact zero quote, shared quota, actual speech/lip-sync checks and long priority. God remains exact KJV/Kokoro without a figure; no invented Noah dialogue. Preserve matching accepted assets first.",
+   "new_other_scenes": "Action-matched legally usable public/library video or GPT-generated stills with cinematic motion. Require source, author/licence or generation provenance, file/hash, period, crop, continuity and designated review. Public accessibility is not a licence, camera motion is not proof of acted animation, and GPT DRAFTs remain unqualified under existing frozen source gates until legitimately qualified. Preserve existing valid assets and do not weaken frozen criteria.",
+   "precedence": "Current owner direction supersedes conflicting historical source/cadence text for new work. Frozen criteria and valid approvals remain binding.",
+   "private_budget": "Pause paid provider readings/generation pending private expense reconciliation and a free current balance check. Do not copy private analytics or provider responses into this repository.",
+   "standby": "Buzzy diagnostics only until its generation route, exact zero-cost conditions, rights and media checks are qualified; no generation fallback is implied by connection."
+  },
+  "targets_status": "HISTORICAL_SUPERSEDED_TARGETS: preserved as missed-slot evidence; no replacement publishAt until a qualified re-anchoring decision.",
+  "current_delivery": {
+   "episode": "genesis-09-short",
+   "state": "DRAFT_NOT_READY",
+   "requested_daypart": "morning",
+   "requested_date": "2026-10-30",
+   "timezone": "America/Sao_Paulo",
+   "readiness": "Active plan has 22 shots, 13 DRAFT first-frame refusals and stale preflight. Private v6 is not approved; no new public readback is claimed. If the morning target is missed, record it and use the next eligible qualified window without skipping parts."
+  },
+  "work_in_progress": {
+   "current": 1,
+   "next_in_preparation": 1,
+   "next_episode": "genesis-10-short",
+   "long_priority": "Complete existing arc-01-long after genesis-09-short; reuse accepted work and reconcile existing jobs before any new submission."
+  },
+  "quantity_scenarios": {
+   "window_start": "2026-10-30",
+   "window_end": "2026-11-16",
+   "inclusive_days": 18,
+   "regular_short_opportunities": 36,
+   "conditional_extra_shorts_max": 4,
+   "recovery_shorts_scenario": 40,
+   "stretch_production_shorts": 70,
+   "stretch_status": "CAPACITY_SCENARIO_NOT_COMMITMENT_OR_SCHEDULE",
+   "long_interval_hours_min": 48,
+   "longs_max_if_first_qualifies_on_oct30_or_oct31": 9,
+   "long_anchor": "First long only after the qualified publication of Short09; a later first long reduces the possible count."
+  },
+  "conditional_catchup_policy": "Replaces the historical two-makeup scenario for future re-anchoring only: up to four extras, at most one on each separate eligible day, only with the next-day regular Shorts ready and the long protected. Never bunch uploads or skip episodes; no new slots or automatic rescheduling are created here.",
+  "cadence_acceptance": "Restore two daily Shorts only when actual qualified inventory sustains them; preserve reserve targets of four Shorts and one long. After the first new public delivery, review throughput and available audience evidence at 48 hours and again by 72 hours in existing supervision; sparse analytics remain inconclusive."
+ }
 }

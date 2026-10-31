@@ -1,0 +1,21 @@
+{
+ "workflow": "pavo-private-audio.yml",
+ "inputs": {
+  "plan": "migration/production/bible/plans/genesis-09-short.json",
+  "manifest": "migration/integrations/pavo/private-inputs/genesis-09-k-insight-20261030.json",
+  "sha256": "4d11fb903ff6de50cfbe46a9b08a1ec10cf0f8dfb77490e4e84b9015de48213c",
+  "receipt_certificate": "-----BEGIN CERTIFICATE-----\nMIIENzCCAp+gAwIBAgIUX8DjrlcZRBvLDKxN8h4lIWGoKTkwDQYJKoZIhvcNAQEL\nBQAwKzEpMCcGA1UEAwwgSGVyb1ZlcnNlLXByaXZhdGUtcmV2aWV3LXJlY2VpcHQw\nHhcNMjYxMDMwMDE1NDEwWhcNMjYxMTI5MDE1NDEwWjArMSkwJwYDVQQDDCBIZXJv\nVmVyc2UtcHJpdmF0ZS1yZXZpZXctcmVjZWlwdDCCAaIwDQYJKoZIhvcNAQEBBQAD\nggGPADCCAYoCggGBAIqMhiRT3fk8xa9KUIWtHiT99OTycCfXGsrfawBMWHUj1D0o\nZddA7+7s1Dj9AoT5ixrzqhYFb/LifVPF8dNrz9ZzHGHeJU6RSg7hkWRq0ISYtgdh\nEru2FyOHKMsNnkW7Har+osznMmoEV9yutYeNdgplkvmFGl5RuXWg8J+HahR3Nq3T\nNAUG1EeNPbhQVHPmCnRAVsTLxR1lvsQgFuOMlz8cauyk/5DUt4mUg1o+fdO0DRL7\nnhjK8RdB5rfIf4LGsSLBUopt9Th6AeorkSAA1NRFLgQ1HJShbm0WOrK5XzW4P81w\ngezoSsy7tWxzag1XGxfEvapfre7swcZuS7nX0nPO8T0iO/Wi3QycO7WXZn87SfMZ\nSl1HRr/rq1+MzgYKDKQII8MHj/DPwPlrif59ANUR3Yf02srohbgYwW94KPbQOnZy\nLkozZ1Boyx9XD9DJR+7yeo0R4vNDqUttvOLumm7m2YpOOZNHWzHuHMC7/qMQrPkZ\ns1pRkfIKcavieylK7QIDAQABo1MwUTAdBgNVHQ4EFgQU+pjJSdGonbQ4/BYfDszW\nNsCHBQkwHwYDVR0jBBgwFoAU+pjJSdGonbQ4/BYfDszWNsCHBQkwDwYDVR0TAQH/\nBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAYEAPSf/+uuyMB6fQ8Ahe5MWzW4ar7+J\nzkouJpEZnNlgGJVFxR4gATkhXWAYBvBHYJ2XMcD/vRY2gFp4l0awH3RyL8Dq8upz\n1DW4lK/C0gcdkCJ6xlRfbNZHp3v08l8sDUO/CnJNSPDK3RF6xjGnDuo1nS6Vx8X9\nA9iuhLYdmmTCLhQCl0TXHjIRL21CGsNcQbGtrZ1wRMKvrxpNcltct1hgKOeGytoj\ncySvwG9ci/sBHx4+G80vSHjCZEM2AIy6+LBppG2XJsc8+LBgKk9UjRMUGzdFISTW\nlQ4QKie8u8vzWwQBGyn5BEeVzEqylggz3bRGOca5UTvgW+nJPJE76WanZFVfBPRW\n54tnI6RwuYSJ9vgurYe0CTDTLR/Yj7JuLnFL4gEdNCW0ULMpo6OsjxJoBivmHBl4\n+0FmK7rKLguPyGVodKAzhKTns/Un/ayBwzbmXY49LC9hUiec/49dw4WczfvJvC/L\nLbbI+i10grcNLsLMFi8ww6uK0239HsrKtoOM\n-----END CERTIFICATE-----\n",
+  "lease_run_id": "codex-import-audio-20261030-1318"
+ },
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "acknowledged",
+  "request_sha256": "7176fb1c79eaad024f6d782ba853653477c13e6e7c0d02103e055975f7236b56",
+  "original_path": "migration/requests/20261030-pavo-private-k-insight-once.json",
+  "base_commit": "b2361e469d6387cb2543850193730385f13e7b11",
+  "dispatcher_run_id": "41078028115",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-30T15:09:23.958063+00:00",
+  "acknowledged_at": "2026-10-30T15:09:27.487345+00:00"
+ }
+}

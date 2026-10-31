@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-river-river-stream-valley-water-flowing-nature",
+ "theme": "arc01-s-c2-river",
+ "query": "river delta aerial green valley",
+ "source": "pixabay",
+ "title": "river, stream, valley, water, flowing, nature",
+ "page": "https://pixabay.com/videos/id-171957/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-171957/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fc6b28be4d529611493824ba9166ac8e60a23cb069f58ea2152f8d943adb035a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.9,
+  110.5,
+  110.1,
+  110.2,
+  110.4
+ ],
+ "vetting_descriptions": [
+  "A river with green grass and rocks, with a small waterfall.",
+  "A river with a green bank and a small waterfall."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-river-river-stream-valley-water-flowing-nature-sha256-fc6b28be4d529611493824ba9166ac8e60a23cb069f58ea2152f8d943adb035a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-dust-red-flower-spring-leaf-nature-beautiful-",
+ "theme": "arc01-s-c2-dust",
+ "query": "red earth dust wind close up",
+ "source": "pixabay",
+ "title": "red, flower, spring, leaf, nature, beautiful, garden, botanical, summer, day, close, macro, green, weather, season, wind, forest, romantic, sedative, beauty, branch, herb",
+ "page": "https://pixabay.com/videos/id-99012/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-99012/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e9af31beb9d7de74d485decde6ac139a48256b04ddfdc6a40b22b255e67fda57",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.9,
+  106.0,
+  106.0,
+  105.9,
+  106.0
+ ],
+ "vetting_descriptions": [
+  "A close up of a flower with a red center and green leaves.",
+  "A close up of a flower with a red center and green leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-dust-red-flower-spring-leaf-nature-beautiful--sha256-e9af31beb9d7de74d485decde6ac139a48256b04ddfdc6a40b22b255e67fda57.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

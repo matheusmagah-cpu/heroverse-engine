@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lamp-recovery-ink-oil-drops-bubbles-psychedelic-abstra",
+ "theme": "flood-lamp-recovery",
+ "query": "oil lamp",
+ "source": "pixabay",
+ "title": "ink, oil, drops, bubbles, psychedelic, abstract, pattern, food colouring, vintage, macro, water, close-up, visuals, experimental, colourful, colorful, modern, design, multicolor, universe",
+ "page": "https://pixabay.com/videos/id-186655/",
+ "author": "StefWithAnF",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 67.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: StefWithAnF via Pixabay (https://pixabay.com/videos/id-186655/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "26e6b57e13fc0e2be3bdd4c6c6f1363616289be10302e321bae869f6ff7c87a5",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  42.5,
+  42.4,
+  42.1,
+  42.0,
+  42.0
+ ],
+ "vetting_descriptions": [
+  "A painting of a green and pink color with yellow dots.",
+  "A black and green colored substance with yellow and red specks in it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lamp-recovery-ink-oil-drops-bubbles-psychedelic-abstra-sha256-26e6b57e13fc0e2be3bdd4c6c6f1363616289be10302e321bae869f6ff7c87a5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

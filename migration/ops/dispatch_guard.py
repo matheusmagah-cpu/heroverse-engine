@@ -122,9 +122,10 @@ def long_build(i):
     need(plan.get("version") == "bible-long-plan-v1", "plan", i.get("plan"), "a long plan (bible-long-plan-v1)")
     need(re.fullmatch(r"(\d{6,20})?", i.get("resume_run") or ""), "resume_run", i.get("resume_run"), "a run id or empty")
     ep = plan["episode"]
-    return {"uploads": 2,   # the composed long and its .srt track
+    return {"uploads": 3,   # composed long, same-master pilot alias and .srt; record also checks actual split parts
             "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}.json",
-                     "migration/production/characters/"]}
+                     "migration/production/characters/", "migration/production/bible/arcs.json",
+                     "migration/production/bible/thumbs/"]}
 
 
 def shot_probe(i):
@@ -226,12 +227,51 @@ def publish_episode(i):
     return {"uploads": 1, "deps": [rel, "migration/publish/"]}
 
 
+def native_review(i):
+    plan = _plan(i)
+    need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
+    need(re.fullmatch(r"[0-9a-f]{64}", i.get("sha256", "")), "sha256", i.get("sha256"), "exact master SHA256")
+    need(i.get("owner_review_authorized") in (True, "true"), "owner_review_authorized", "[boolean]", "explicit designation")
+    need(str(i.get("byte_size", "")).isdigit() and 0 < int(i["byte_size"]) <= 150_000_000, "byte_size", i.get("byte_size"), "bounded exact bytes")
+    # Credentials, timestamp and content replay are checked before any provider mutation by native_review.py.
+    # The unfinished active plan is intentionally not built or silently replaced by this evidence-only step.
+    return {"uploads": 0, "deps": [i["plan"], "migration/ops/CLAUDE_REVIEW.md"]}
+
+
+def private_audio(i):
+    """Bound private WAV or approved hook frame; no plan approval/publication is implied."""
+    sys.path.insert(0, str(ROOT / "migration/integrations/pavo"))
+    import private_audio as bridge
+    plan = _plan(i)
+    need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
+    path = i.get("manifest", "")
+    need(isinstance(path, str) and re.fullmatch(re.escape(bridge.MANIFESTS) + r"[a-z0-9-]+\.json", path),
+         "manifest", path, "a committed private audio metadata manifest")
+    try:
+        manifest = bridge.validate(json.loads((ROOT / path).read_text()))
+        need(i.get("sha256") == bridge.digest(manifest), "sha256", i.get("sha256"), "exact manifest digest")
+        need(plan.get("episode") == manifest["episode"], "plan", i.get("plan"), "matching episode")
+        need(re.fullmatch(r"[a-zA-Z0-9-]{1,120}", i.get("lease_run_id", "")), "lease_run_id", "[id]", "shared owner run")
+        need(not i.get("reconcile_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["reconcile_run"]),
+             "reconcile_run", i.get("reconcile_run"), "prior private DRAFT run")
+        need(not i.get("retry_run") or re.fullmatch(r"[1-9][0-9]{5,19}", i["retry_run"]),
+             "retry_run", i.get("retry_run"), "prior terminal failed DRAFT run")
+        need(not (i.get("retry_run") and i.get("reconcile_run")), "retry_run", "[mode]", "one recovery mode")
+        need(not (manifest["version"] == "pavo-private-hook-v1" and i.get("retry_run")),
+             "retry_run", "[mode]", "hook has one claim only")
+    except (bridge.Blocked, ValueError, OSError) as exc:
+        raise Refusal("PRIVATE_AUDIO_MANIFEST_REFUSED") from None
+    return {"uploads": 0, "pavo_units": 0 if i.get("reconcile_run") else 2, "short": True,
+            "deps": [i["plan"], path, manifest.get("first_frame", bridge.REFERENCE),
+                     "migration/integrations/pavo/private_audio.py"]}
+
+
 def subject_of(workflow, inputs):
     """The subject a run works on, from its inputs alone (no file read): the episode's plan path, the pilot (or
     characters), or the footage library. The guarded jobs' concurrency group is heroverse-subject-<subject>, and the
     failure history (4) is keyed on workflow + subject. None: the workflow has no subject."""
     first = inputs.get(WORKFLOWS[workflow][0][0]) or ""
-    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml"):
+    if workflow in ("episode.yml", "shot-probe.yml", "scene-stills.yml", "long-build.yml", "native-review.yml", "pavo-private-audio.yml"):
         return first
     if workflow == "publish-episode.yml":
         return f"migration/production/bible/plans/{first}.json"
@@ -250,6 +290,8 @@ def subject_of(workflow, inputs):
 # workflow file -> (input names in run-name order, the first one naming the subject; check). run-name is
 # "<stem>: k=v k=v" (test_dispatch_guard), so a later dispatch finds the earlier runs of its subject.
 WORKFLOWS = {
+    "pavo-private-audio.yml": (("plan", "sha256"), private_audio),
+    "native-review.yml": (("plan", "sha256"), native_review),
     "episode.yml": (("plan", "resume_run"), episode),   # regenerate is always refused (E114), and kept off run-name
     "shot-probe.yml": (("plan", "shots", "attempts", "adopt_run"), shot_probe),
     "long-build.yml": (("plan", "resume_run"), long_build),
@@ -263,7 +305,7 @@ WORKFLOWS = {
 }
 # the job of each workflow that holds its subject's concurrency group (pavo-footage's work is a matrix of clip jobs:
 # GitHub keeps one pending job per group and cancels the rest, so it keeps its workflow-level group only)
-SUBJECT_JOBS = {"episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
+SUBJECT_JOBS = {"pavo-private-audio.yml": "talk", "native-review.yml": "review", "episode.yml": "build", "shot-probe.yml": "probe", "cf-images.yml": "images",
                 "pilot-render-stills.yml": "render", "pilot-preview.yml": "preview", "footage.yml": "library",
                 "publish-episode.yml": "publish", "scene-stills.yml": "stills", "long-build.yml": "prepare"}
 
@@ -734,6 +776,11 @@ def rerun(workflow, facts, inputs, api, run_id, attempt, sha):
     of this subject that this guard did not refuse failed -> a commit since its head_sha must touch what it depends
     on, or retries.json records its external cause."""
     attempt_check(api, run_id, attempt, sha)
+    if workflow == "pavo-private-audio.yml" and (inputs.get("reconcile_run") or inputs.get("retry_run")):
+        # E226: exact-CID GET recovery and an explicitly requested terminal-failure probe
+        # have their own stricter checks before provider mutation. UNKNOWN is never replayed.
+        private_audio(inputs)
+        return
     runs = (api(f"actions/workflows/{workflow}/runs?status=completed&per_page=100") or {}).get("workflow_runs", [])
     for r in runs:
         if str(r["id"]) == str(run_id) or not same_subject(workflow, facts, inputs, r.get("display_title")):

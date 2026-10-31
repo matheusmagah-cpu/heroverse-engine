@@ -1,0 +1,42 @@
+{
+ "id": "clip-family-back-pier-ocean-sea-waves-clouds-sunset-dusk-",
+ "theme": "family-back",
+ "query": "family walking field back view",
+ "source": "pixabay",
+ "title": "pier, ocean, sea, waves, clouds, sunset, dusk, cloudy, water, walk, walking, relaxing, telescope, view, holiday, relax, romantic, tenerife",
+ "page": "https://pixabay.com/videos/id-216485/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-216485/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e57bb0fb0eec4c09ef6223c53fa79d01fc4d6903184a5e52d79417da11729312",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED sign"
+ ],
+ "vetting_luma": [
+  156.2,
+  154.8,
+  152.9,
+  146.8,
+  137.6
+ ],
+ "vetting_descriptions": [
+  "A blue and yellow sign is on a pole next to a fence and a body of water.",
+  "A telescope is mounted on a metal railing overlooking the ocean, with a blue sky in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

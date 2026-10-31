@@ -6,6 +6,12 @@ on:
       - 'migration/integrations/pavo/**'
       - '.github/workflows/pavo-mcp.yml'
   workflow_dispatch:
+    inputs:
+      attachments_manifest:
+        description: Optional committed OpenAI DRAFT manifest; upload only, never generate or approve
+        type: string
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -19,13 +25,14 @@ jobs:
           python3 -I -B migration/integrations/pavo/test_client.py
           python3 -I -B migration/integrations/pavo/test_video.py
           python3 -I -B migration/integrations/pavo/test_image_gen.py
+          python3 -I -B migration/integrations/pavo/test_attachments.py
       - name: MCP transport smoke test (no upstream calls)
         run: |
           python3 -m venv "$RUNNER_TEMP/pavo-venv"
           "$RUNNER_TEMP/pavo-venv/bin/python" -m pip install --quiet 'mcp==2.3.0'
           "$RUNNER_TEMP/pavo-venv/bin/python" migration/integrations/pavo/test_stdio.py
   connection:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.attachments_manifest == ''
     needs: offline
     runs-on: ubuntu-24.04
     timeout-minutes: 2
@@ -35,3 +42,49 @@ jobs:
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
         run: python3 -I -B migration/integrations/pavo/client.py --probe
+  attachments:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.attachments_manifest != ''
+    needs: offline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    concurrency:
+      group: heroverse-pavo-draft-attachments
+      cancel-in-progress: false
+    env:
+      ATTACHMENTS_MANIFEST: ${{ inputs.attachments_manifest }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+      - name: Persist attachment claims before any provider call
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --ff-only origin main
+          python3 -I -B migration/integrations/pavo/attachments.py claim "$ATTACHMENTS_MANIFEST"
+          git add migration/evidence/pavo/attachments/receipts
+          git commit -m "Claim Pavo DRAFT attachments (run $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT)"
+          git push origin HEAD:main
+      - name: Upload drafts and read back exact hashes (no generation)
+        id: transfer
+        env:
+          PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
+        run: python3 -I -B migration/integrations/pavo/attachments.py send "$ATTACHMENTS_MANIFEST"
+      - name: Preserve transfer evidence, including partial or unknown outcomes
+        if: always() && steps.transfer.outcome != 'skipped'
+        run: |
+          set -euo pipefail
+          git add migration/evidence/pavo/attachments/receipts
+          if ! git diff --cached --quiet; then
+            git commit -m "Record Pavo DRAFT attachment outcomes (run $GITHUB_RUN_ID)"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.transfer.outcome != 'skipped'
+        with:
+          name: pavo-draft-attachment-receipts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: migration/evidence/pavo/attachments/receipts/*.json
+          if-no-files-found: error

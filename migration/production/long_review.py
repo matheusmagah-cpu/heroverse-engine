@@ -4,10 +4,10 @@
 
 1. Hard rows measured on our own file and script (length, Scripture read per
    10 minutes) block approval.
-2. Watched review by the designated reviewer, Claude (owner, 2026-10-24: "replace gemini-3.8-flash; find another
-   AI"). Claude reviews the inspection sheets, the transcript, the thumbnail and the QA audio measures and commits
-   inspection/claude_review.json bound to the render's hash (rubric items >= 7, overall >= 8; the owner floor 9.5
-   applies at publication). No provider is called here; a render without a valid Claude review for its hash is
+2. Watched review by an explicitly designated session reviewer (owner_quality_policy.LONG_REVIEWERS). The reviewer
+   inspects the sheets, transcript, thumbnail and QA audio measures and commits inspection/claude_review.json
+   bound to the render's hash, with its true model identity (rubric items >= 7, overall >= 8; the owner floor 9.5
+   applies at publication). The filename is legacy. No provider is called here; a render without a valid review for its hash is
    AWAITING_REVIEW, never a verdict.
 
 Writes out/review.json; prints the status. Never edits QA criteria.
@@ -21,14 +21,16 @@ import sys
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "mining"))
+sys.path.insert(0, str(HERE.parent / "publish"))
+import owner_quality_policy  # noqa: E402
 import shorts_review as sr  # noqa: E402  (Files API upload and delete: reviewer calibration only)
 import structure_mining as sm  # noqa: E402  (reviewer calibration only)
 
 RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 PASS_ITEM, PASS_OVERALL = 7, 8
-REVIEW_MODELS = ("claude-session-reviewer",)  # same tuple as publish/prepublish_gate.py
-CLAUDE_REVIEW = "inspection/claude_review.json"
+REVIEW_MODELS = owner_quality_policy.LONG_REVIEWERS
+CLAUDE_REVIEW = "inspection/claude_review.json"  # legacy path; model identifies the actual session reviewer
 # hard rows (block), prayer format: measured on our own file and script (deterministic).
 HARD = {"minutes": (10.02, 50.0), "scripture_per_10_min": (4, 99)}
 # free-tier tokens per minute: the whole-video review samples fewer frames
@@ -66,25 +68,36 @@ def watch(file, title, key, models):
 
 def own_measures(script, timeline, seconds):
     """Rows measured on our own file and script, no model: length and Scripture read per 10 minutes."""
-    spoken = {seg["id"] for seg in timeline.get("segments", [])}
+    spoken = {seg["id"] for seg in timeline.get("segments", [])} | {
+        sent.get("segment") for sent in timeline.get("sentences", [])}
     refs = [seg for seg in script["segments"] if seg.get("reference") and seg["id"] in spoken]
     return {"minutes": round(seconds / 60, 2), "scripture_per_10_min": round(10 * len(refs) / max(seconds / 60, 1e-6), 2)}
 
 
+def hard_bands(script):
+    """Keep legacy prayer bands frozen; the acted long uses its already-registered story length target."""
+    if script.get("archetype") == "bible-story-long" and script.get("criteria_version") in (
+            "story-qa-criteria-v3", "story-qa-criteria-v4", "story-qa-criteria-v4-owner-exception-arc01",
+            "story-qa-criteria-v5"):
+        import script_check
+        return {"minutes": tuple(script_check.story_gate()["length_min"])}
+    return HARD
+
+
 def claude_problems(review, sha):
-    """A Claude review is valid only for this render, with every rubric score, an overall and its evidence."""
+    """A designated session review is valid only for this render, with every score and its evidence."""
     if not isinstance(review, dict):
         return ["CLAUDE_REVIEW_MISSING"]
     problems = []
-    if review.get("model") != REVIEW_MODELS[0]:
+    if review.get("model") not in REVIEW_MODELS:
         problems.append("CLAUDE_REVIEW_MODEL")
     if review.get("output_sha256") != sha:
         problems.append("CLAUDE_REVIEW_NOT_FOR_THIS_FILE")
     for k in (*RUBRIC, "overall"):
         v = review.get(k)
-        if isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 <= v <= 10:
+        if not owner_quality_policy.score_valid(v):
             problems.append("CLAUDE_REVIEW_SCORE_" + k)
-    if not review.get("evidence") or not isinstance(review.get("issues"), list):
+    if not owner_quality_policy.evidence_valid(review):
         problems.append("CLAUDE_REVIEW_EVIDENCE")
     return problems
 
@@ -112,10 +125,13 @@ def main(pilot_dir, video_path=None):
     review["status"] = "PASS" if all(review[k] >= PASS_ITEM for k in RUBRIC) and review["overall"] >= PASS_OVERALL else "FAIL"
     timeline = json.loads((d / "out" / "timeline.json").read_text())
     own = own_measures(script, timeline, manifest["output_seconds"])
-    hard = {k: {"value": own[k], "band": b, "pass": b[0] <= own[k] <= b[1]} for k, b in HARD.items()}
+    bands = hard_bands(script)
+    hard = {k: {"value": own[k], "band": b, "pass": b[0] <= own[k] <= b[1]} for k, b in bands.items()}
     status = "PASS" if all(v["pass"] for v in hard.values()) and review["status"] == "PASS" else "FAIL"
     out = {"version": "long-review-v2", "pilot_id": script["pilot_id"], "output_sha256": sha,
-           "status": status, "scorecard_hard": hard, "scorecard_reported": {}, "watched_review": review}
+           "status": status, "scorecard_hard": hard,
+           "scorecard_reported": {k: {"value": v, "informative": True} for k, v in own.items() if k not in bands},
+           "watched_review": review}
     (d / "out" / "review.json").write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps({"status": status, "hard": {k: v["pass"] for k, v in hard.items()},
                       "review": {k: review.get(k) for k in (*RUBRIC, "overall", "status")}}))

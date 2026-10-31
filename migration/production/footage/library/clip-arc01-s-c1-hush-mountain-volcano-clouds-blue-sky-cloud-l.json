@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-hush-mountain-volcano-clouds-blue-sky-cloud-l",
+ "theme": "arc01-s-c1-hush",
+ "query": "still valley morning no wind",
+ "source": "pixabay",
+ "title": "mountain, volcano, clouds, blue sky, cloud layers, fog, hills, landscape, mist, peak, nature, panorama, sunset, travel, trees, valley, view, village, wind, height",
+ "page": "https://pixabay.com/videos/id-44278/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-44278/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "85937333c0425d68c7a120bba328a9407af8f04bfd532b90866d07c090da2c8b",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  124.0,
+  119.9,
+  120.4,
+  122.5,
+  123.0
+ ],
+ "vetting_descriptions": [
+  "A mountain range with clouds in the sky and a mountain peak in the distance.",
+  "A mountain with a cloudy sky and a mountain peak in the distance."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-hush-mountain-volcano-clouds-blue-sky-cloud-l-sha256-85937333c0425d68c7a120bba328a9407af8f04bfd532b90866d07c090da2c8b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

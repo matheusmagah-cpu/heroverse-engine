@@ -115,7 +115,7 @@ class FakeEl:
 
 class AppWrappers(unittest.TestCase):
     def test_the_new_chat_button_comes_from_the_wrapper_itself(self):
-        # E145: the first real run called child_window() on the wrapper Desktop().windows() returns and crashed
+        # E233: the first real run called child_window() on the wrapper Desktop().windows() returns and crashed
         import app_driver
         top = FakeEl("Button", "Novo chat", rect=(60, 96, 282, 126))
         low = FakeEl("Button", "Novo chat", rect=(322, 434, 346, 458))
@@ -125,7 +125,7 @@ class AppWrappers(unittest.TestCase):
         self.assertIsNone(app_driver.new_chat_button(FakeEl("Window", kids=[])))
 
     def test_the_open_dialog_is_found_by_its_class_inside_the_app(self):
-        # E146: the app's Open dialog was looked for among the desktop's windows by title and never found
+        # E234: the app's Open dialog was looked for among the desktop's windows by title and never found
         import app_driver
         from unittest import mock
         dlg = FakeEl("Window", "Selecionar arquivos", cls="#32770")
@@ -139,7 +139,7 @@ class AppWrappers(unittest.TestCase):
 
 class Hands(unittest.TestCase):
     def test_no_click_or_key_reaches_another_window(self):
-        # E147: on the PC in use, the owner's Claude app came over ChatGPT and the driver's '+' click landed outside
+        # E235: on the PC in use, the owner's Claude app came over ChatGPT and the driver's '+' click landed outside
         # the app; every click and key now checks the app's process is the one in front and under the pointer
         import app_driver
         from unittest import mock

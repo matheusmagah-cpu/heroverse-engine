@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hands-fruit-washing-hands-coronavirus-stop-the-sprea",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hand picking fruit tree",
+ "source": "pixabay",
+ "title": "washing hands, coronavirus, stop the spread, covid 19, water, hands, female, hygiene, cleanliness, technique, running water, handwashing, hand washing",
+ "page": "https://pixabay.com/videos/id-34091/",
+ "author": "jLasWilson",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 24.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: jLasWilson via Pixabay (https://pixabay.com/videos/id-34091/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4d6aa554816c0f9648ec14fd68aed1b53a38ac741f45b6fc69e9c9d9a4f7ab52",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  80.9,
+  94.0,
+  100.5,
+  73.4,
+  75.7
+ ],
+ "vetting_descriptions": [
+  "A person is washing their hands with water coming out of a faucet.",
+  "A person is washing their hands with soap and water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

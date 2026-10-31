@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c2-river-forest-nature-landscape-outdoor-river-ae",
+ "theme": "arc01-s-c2-river",
+ "query": "river delta aerial green valley",
+ "source": "pixabay",
+ "title": "forest, nature, landscape, outdoor, river, aerial view, green, grass trees, paradise, environment",
+ "page": "https://pixabay.com/videos/id-33898/",
+ "author": "newarta",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: newarta via Pixabay (https://pixabay.com/videos/id-33898/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "de53fac4797859e3106074e094124840ba0759559590afd27b7b2abb7ab299aa",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  111.5,
+  107.7,
+  94.2,
+  79.5,
+  76.2
+ ],
+ "vetting_descriptions": [
+  "A forest with tall grass and trees, and a person in the background.",
+  "A forest with tall grass and trees, and a person standing in the middle of the forest."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

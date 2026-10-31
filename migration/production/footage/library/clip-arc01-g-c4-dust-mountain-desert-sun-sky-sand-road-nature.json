@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-dust-mountain-desert-sun-sky-sand-road-nature",
+ "theme": "arc01-g-c4-dust",
+ "query": "barren desert clouds thorns",
+ "source": "pixabay",
+ "title": "mountain, desert, sun, sky, sand, road, nature, iran",
+ "page": "https://pixabay.com/videos/id-70577/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-70577/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8685436b7997b871eba1bae051a2052523a522b29888b477e08311ad520e952f",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  130.0,
+  131.8,
+  131.1,
+  131.1,
+  131.0
+ ],
+ "vetting_descriptions": [
+  "A mountain range with a clear blue sky above it.",
+  "A desert landscape with mountains in the background and a road in the foreground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-dust-mountain-desert-sun-sky-sand-road-nature-sha256-8685436b7997b871eba1bae051a2052523a522b29888b477e08311ad520e952f.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

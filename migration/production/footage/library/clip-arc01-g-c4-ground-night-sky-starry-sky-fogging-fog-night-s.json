@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-g-c4-ground-night-sky-starry-sky-fogging-fog-night-s",
+ "theme": "arc01-g-c4-ground",
+ "query": "lightning storm night sky",
+ "source": "pixabay",
+ "title": "night sky, starry sky, fogging, fog, night shot, ratzeburg, nature",
+ "page": "https://pixabay.com/videos/id-242060/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-242060/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1d4b42bb53df27651be3b12111f34847de97122661a8f5559b7ed29d2d808ba3",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city,people"
+ ],
+ "vetting_luma": [
+  24.1,
+  30.8,
+  31.6,
+  35.7,
+  55.4
+ ],
+ "vetting_descriptions": [
+  "A nighttime view of a city with a few lights on and a few people walking around.",
+  "A nighttime scene with a dark sky, a few stars, and a house with a light on."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

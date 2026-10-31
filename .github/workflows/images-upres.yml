@@ -51,7 +51,7 @@ jobs:
             id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
             asset="$PILOT-img-$id-4096-sha256-$sha.png"; cp "$png" "$asset"
             bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$asset" --repo "$GITHUB_REPOSITORY" --clobber
-            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];m['release_tag']=sys.argv[5];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json" "$(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" newest)"
           done
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"

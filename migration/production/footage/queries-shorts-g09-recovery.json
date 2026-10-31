@@ -1,0 +1,15 @@
+{
+ "version": "footage-queries-v1",
+ "library": "migration/production/footage/library",
+ "note": "Owner 29 October: Pavo for on-camera speech, licensed public-library video for other new pictures. Fresh, simpler search terms after existing flood-tagged results did not match their scenes. Two retained candidates per query, existing page deduplication, no paid source. These are search candidates only. Actual footage and the 9:16 crop must show the named subject without visible faces, modern fixtures, text, branding or a period clash. Nature inserts cannot substitute for required character action. Original scene approval and frozen QA remain required.",
+ "themes": [
+  {"theme": "flood-pairs-recovery", "query": "elephants walking"},
+  {"theme": "flood-lions-recovery", "query": "lion"},
+  {"theme": "flood-door-recovery", "query": "wooden door"},
+  {"theme": "flood-rain-recovery", "query": "rain drops"},
+  {"theme": "flood-springs-recovery", "query": "river rapids"},
+  {"theme": "flood-hills-recovery", "query": "mist mountains"},
+  {"theme": "flood-rock-recovery", "query": "waves rocks"},
+  {"theme": "flood-lamp-recovery", "query": "oil lamp"}
+ ]
+}

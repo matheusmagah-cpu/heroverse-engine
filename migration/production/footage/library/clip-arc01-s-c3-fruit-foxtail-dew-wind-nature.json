@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-fruit-foxtail-dew-wind-nature",
+ "theme": "arc01-s-c3-fruit",
+ "query": "red fruit hanging branch dew",
+ "source": "pixabay",
+ "title": "foxtail, dew, wind, nature",
+ "page": "https://pixabay.com/videos/id-185455/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-185455/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ffcdac0ce99a55c2d80f90de5afad12381626b06956ee74830dbcd106e1691a7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  92.2,
+  92.9,
+  92.7,
+  92.5,
+  92.7
+ ],
+ "vetting_descriptions": [
+  "A field of tall grass with a few flowers in it.",
+  "A foggy forest with tall grass and a few flowers."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-fruit-foxtail-dew-wind-nature-sha256-ffcdac0ce99a55c2d80f90de5afad12381626b06956ee74830dbcd106e1691a7.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

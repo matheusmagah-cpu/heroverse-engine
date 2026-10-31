@@ -1,0 +1,176 @@
+name: HeroVerse native audio and video review evidence
+run-name: "native-review: plan=${{ inputs.plan }} sha256=${{ inputs.sha256 }}"
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Existing Bible plan (review does not replace or approve it)
+        required: true
+        default: migration/production/bible/plans/genesis-09-short.json
+      sha256:
+        description: SHA256 of the exact private master
+        required: true
+      byte_size:
+        description: Exact MP4 byte count for the one resumable upload
+        required: true
+      resume_before_inference:
+        description: Optional failed run ID only when its inference step was skipped; reuses its uploaded file
+        required: false
+      recover_submitted_run:
+        description: Failed original run with successful submission; encrypted receipt ingress and GET only
+        required: false
+      retry_transient_once:
+        description: One retry only after proven INTERNAL/UNAVAILABLE failure without model output; fresh Free Tier proof required
+        type: boolean
+        required: false
+        default: false
+      lease_run_id:
+        description: Current shared executor lease; required for submitted-review recovery
+        required: false
+      free_tier_evidence:
+        description: Fresh verified Free Tier JSON for new inference; prior key binding suffices for GET-only recovery
+        required: true
+      receipt_certificate:
+        description: Public PEM certificate for encrypted private evidence (never a private key)
+        required: true
+      owner_review_authorized:
+        description: Owner explicitly designated this reviewer for this master
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    concurrency:
+      group: heroverse-subject-${{ inputs.plan }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch guard (existing subject, history, imports)
+        if: inputs.recover_submitted_run == ''
+        env:
+          GUARD_INPUTS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/ops/dispatch_guard.py run native-review.yml
+      - name: Validate native review mode
+        run: python3 -I -B migration/production/bible/native_review_recovery.py options
+      - name: Refuse duplicate content and rerun before credentials
+        if: inputs.recover_submitted_run == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review.py guard
+      - name: Verify submitted source and prepare encrypted recovery ingress
+        if: inputs.recover_submitted_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py prepare
+      - name: Publish only the ephemeral transport public certificate
+        if: inputs.recover_submitted_run != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-recovery-ingress
+          path: ${{ runner.temp }}/native-review/ingress.pem
+          retention-days: 1
+          if-no-files-found: error
+      - name: Restore exact submitted receipt without public identifiers
+        if: inputs.recover_submitted_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py receive
+      - name: Open one private resumable upload session
+        if: inputs.recover_submitted_run == ''
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py upload
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist upload state before inference
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-upload
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Await exact-byte upload and read back provider hash
+        if: inputs.recover_submitted_run == ''
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py ready
+      - name: Submit native audio and video review once
+        if: inputs.recover_submitted_run == ''
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py submit
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist interaction ID before polling
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-submission
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Read the same interaction (GET only)
+        continue-on-error: ${{ inputs.retry_transient_once }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py poll
+      - name: Qualify one transient-error retry without model output
+        if: inputs.retry_transient_once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py qualify-retry
+      - name: Submit one qualified transient-error retry
+        if: inputs.retry_transient_once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py retry-submit
+      - name: Encrypt retry identity
+        if: always() && inputs.retry_transient_once
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Persist retry identity before readback
+        if: always() && inputs.retry_transient_once
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-retry-submission
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Read the single retry interaction (GET only)
+        if: inputs.retry_transient_once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -I -B migration/production/bible/native_review_recovery.py poll
+      - name: Delete provider media after completed review
+        if: always() && inputs.recover_submitted_run == ''
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 -I -B migration/production/bible/native_review.py cleanup
+      - name: Encrypt private receipt
+        if: always()
+        run: python3 -I -B migration/production/bible/native_review.py seal
+      - name: Preserve evidence without granting approval
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-review-result
+          path: ${{ runner.temp }}/native-review/receipt.cms
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Remove ephemeral transport private key
+        if: always()
+        run: rm -f -- "$RUNNER_TEMP/native-review/ingress.key"

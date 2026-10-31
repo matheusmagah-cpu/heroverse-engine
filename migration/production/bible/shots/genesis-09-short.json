@@ -1,0 +1,155 @@
+{
+ "episode": "genesis-09-short",
+ "shots": {
+  "k-close": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5): a closer crop than k-insight's still, a different picture; Kokoro voice-over.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-3",
+   "still": "arc-01-long-k-promise-3",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
+   "clip_sha256": null,
+   "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "80adfcdaea214e2dd402e3015204883785d1905546b79e66fa104781dfb2be9b"
+  },
+  "k-insight": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Borrowed arc-01 Keeper still (approved 9.5, ch-keeper ref): the 9:16 centre crop keeps the whole face, hood and beard against the stars; Kokoro voice-over, his mouth closed.",
+   "approved_at": "2026-10-28",
+   "still_from": "arc-01-long-k-promise-2",
+   "still": "arc-01-long-k-promise-2",
+   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
+   "clip_sha256": null,
+   "still_sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "75ff5984986d4ac531e22202f10dcd263252d99749abe22a089c068872db04ee"
+  },
+  "k-question": {
+   "source": "pavo_reuse",
+   "score": 9.5,
+   "note": "genesis-08's approved Keeper voice-over clip (9:16, 6 s covers the question's 6 s); the confirmation review judges the repeat against genesis-08.",
+   "approved_at": "2026-10-28",
+   "clip_from": "genesis-08-short#k-question",
+   "asset": "shot-genesis-08-short-k-question-sha256-0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead.mp4",
+   "clip_sha256": "0977ad37cde590ab7cdc86c0193635a723f1dcf6652d6e7b21d1306e83ac4ead",
+   "clip_seconds": 6,
+   "from_score": 9.5,
+   "request_sha256": "5fd29c79b6f6bc46a5fb8fa7814814b30b04b9fdc92deb5cb55fa9821abc94c8"
+  },
+  "s-drift": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ark still: the lone robed man on the rock, the ark far off in the mist (lines 15-16).",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-drift",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-drift.jpg",
+   "clip_sha256": null,
+   "still_sha256": "68b858c87a8a681433de72286958b5065aeaa7ec1a6132622efb460acfde4bbd",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 8,
+   "request_sha256": "538aece5a2798a112ec2cba52d2b5dc60acb41fa760e9ba397adb6e335591cd5"
+  },
+  "s-finished": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ark still: the finished ark with its door open and the ramp, the crowd from behind pointing up (line 0).",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-finished",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-finished.jpg",
+   "clip_sha256": null,
+   "still_sha256": "88e470eb1e28212e73dc78d9740443aeee2997458062f9aecf639dc6512437ef",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 8,
+   "request_sha256": "da63873969c42f6051cfd6037d089511b0b3fba88b98d5902e5b768e013e6674"
+  },
+  "s-float": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ark still: the ark lifted on the drowned valley (line 11).",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-float",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-float.jpg",
+   "clip_sha256": null,
+   "still_sha256": "0495ab46be49ef22e0bcf3f2bd38a3b191c474dae36bd37ac2012af85f8146b5",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 10,
+   "request_sha256": "1599816cfaeb4471ec75cc16f50a0d26ee70a8c97536476a4fbbc40ebd8054a4"
+  },
+  "s-peak-crowd": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still: the last crowd on one bare peak with water on every side (line 14).",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-peak-crowd",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-peak-crowd.jpg",
+   "clip_sha256": null,
+   "still_sha256": "48b3a53d3909bbcdbbf1db795ec65a0025a13756c948310a9149636a7b183e2a",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 9,
+   "request_sha256": "9d1fac09b48a349cde6e5e48fc81f15ec351c79d80586bdcaff7516c18b992f2"
+  },
+  "s-sky": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still: silhouettes among the camp fires under a darkening sky (line 1: would anyone believe before the sky broke).",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-sky",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-sky.jpg",
+   "clip_sha256": null,
+   "still_sha256": "801fa50d75c3dd7448ee719017cd2a4e15a2a4f14d931f4e63395e3b07fa9f29",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 6,
+   "request_sha256": "54b8b18785fa340ed2cdf2842e1da8f014fb0010e10622105908f2eb07f0747a"
+  },
+  "s-voice": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ark still (refs): the box alone under black clouds and lightning, no people; God's Genesis 7:4 on Kokoro over a slow push-in.",
+   "approved_at": "2026-10-28",
+   "still": "genesis-09-s-voice",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+   "clip_sha256": null,
+   "still_sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 8,
+   "request_sha256": "735e2b22f2feb4a4d002ebec0a9408306fc1e919e77d893a7ab6c29faabd78d2"
+  }
+ }
+}

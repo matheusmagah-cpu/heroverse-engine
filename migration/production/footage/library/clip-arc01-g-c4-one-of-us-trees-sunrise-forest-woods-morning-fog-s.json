@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-one-of-us-trees-sunrise-forest-woods-morning-fog-s",
+ "theme": "arc01-g-c4-one-of-us",
+ "query": "misty forest dawn light rays",
+ "source": "pixabay",
+ "title": "trees, sunrise, forest, woods, morning, fog, sunlight, wilderness, trail, sunbeams, misty, scenic, field, outdoors, nature, drenthe, netherlands, landscape",
+ "page": "https://pixabay.com/videos/id-220346/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-220346/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e2de53dcfc2261babd8f4c2440f75a6ac0d2b8c0b58ea062c8ec7cf2dfad0c6c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  164.5,
+  172.2,
+  201.0,
+  201.3,
+  203.0
+ ],
+ "vetting_descriptions": [
+  "A tree with no leaves is next to a lake.",
+  "A foggy lake with trees in the background and a tree in the foreground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-one-of-us-trees-sunrise-forest-woods-morning-fog-s-sha256-e2de53dcfc2261babd8f4c2440f75a6ac0d2b8c0b58ea062c8ec7cf2dfad0c6c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

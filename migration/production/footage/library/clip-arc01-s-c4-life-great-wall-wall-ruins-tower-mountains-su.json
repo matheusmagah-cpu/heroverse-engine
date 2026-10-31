@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-life-great-wall-wall-ruins-tower-mountains-su",
+ "theme": "arc01-s-c4-life",
+ "query": "ancient tree golden light",
+ "source": "pixabay",
+ "title": "great wall, wall, ruins, tower, mountains, summit, peak, trees, sky, futuyu, bricks, ancient, old, architecture, rural, turret, beijing, asia, drone, nature, china, landscape",
+ "page": "https://pixabay.com/videos/id-199127/",
+ "author": "D-GM",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: D-GM via Pixabay (https://pixabay.com/videos/id-199127/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "26acbd615ccc50cb0a79d2776793b0b0cf1694e2ed12bb655da7968894825465",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  91.7,
+  96.2,
+  91.4,
+  89.3,
+  89.4
+ ],
+ "vetting_descriptions": [
+  "A mountain with a stone wall and a castle on top.",
+  "A large stone wall is visible in the image, along with a mountain and a forest."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-life-great-wall-wall-ruins-tower-mountains-su-sha256-26acbd615ccc50cb0a79d2776793b0b0cf1694e2ed12bb655da7968894825465.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

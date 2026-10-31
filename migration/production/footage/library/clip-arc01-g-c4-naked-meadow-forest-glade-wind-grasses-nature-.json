@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-naked-meadow-forest-glade-wind-grasses-nature-",
+ "theme": "arc01-g-c4-naked",
+ "query": "wind darkening forest leaves",
+ "source": "pixabay",
+ "title": "meadow, forest glade, wind, grasses, nature, blossoms, flower meadow",
+ "page": "https://pixabay.com/videos/id-210813/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-210813/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e5c3727718d185ac39122d146d6527be3bffcb98a5355de0b92166a37395bde7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  99.1,
+  99.7,
+  99.1,
+  99.3,
+  99.6
+ ],
+ "vetting_descriptions": [
+  "A field of yellow flowers with green grass and trees in the background.",
+  "A field of yellow flowers with green grass and trees in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-naked-meadow-forest-glade-wind-grasses-nature--sha256-e5c3727718d185ac39122d146d6527be3bffcb98a5355de0b92166a37395bde7.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import wave
 
 HERE = Path(__file__).resolve().parent
@@ -108,6 +109,74 @@ def _dialogue_plan():
 
 def dialogue_plan():
     return with_period(_dialogue_plan())
+
+
+class SourceRevocations(unittest.TestCase):
+    def test_e189_shot_writer_archives_current_only_revocation_before_replacement(self):
+        from unittest import mock
+        # Named reviewer and measured-duration fields are offline fixtures for the E149/E152 writer contract.
+        reviewer = {"reviewer": "gpt-6-astra-session-reviewer"} if hasattr(eb, "reviewer_identity") else {}
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(eb, "REPO", Path(tmp)):
+            directory = Path(tmp, "approvals")
+            path = directory / "fixture.json"
+            original = {"score": 9.6, "clip_sha256": "a" * 64, "request_sha256": "c" * 64,
+                        "note": "historical review", "revocation": {"by": "ChatGPT", "reason": "visible aircraft"}}
+            eb.save(path, {"episode": "fixture", "shots": {"s": original}})
+            record = Path(tmp, "migration/evidence/shots/fixture/probe.json")
+            eb.save(record, {"episode": "fixture", "run_id": "40500000001", "shots": {"s": {
+                "request_sha256": "c" * 64, "clip_seconds": 6,
+                "clips": [{"asset": name, "clip_sha256": sha, "uploaded": True, "flags": [],
+                           "media": {"version": "clip-media-v1", "clip_sha256": sha,
+                                     "video_seconds": 6.0, "audio_seconds": None}}
+                          for name, sha in (("new.mp4", "b" * 64), ("old.mp4", "a" * 64))]}}})
+            before = path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(record, "s", "old.mp4", 10, "not reinstatement", shots_dir=directory, **reviewer)
+            self.assertEqual(path.read_bytes(), before)
+            eb.approve_shot(record, "s", "new.mp4", 9.6, "replacement reviewed", shots_dir=directory, **reviewer)
+            replaced = eb.load(path)
+            self.assertEqual(replaced["revocations"], [dict(original, shot="s")])
+            self.assertEqual(replaced["shots"]["s"]["clip_sha256"], "b" * 64)
+            self.assertNotIn("revocation", replaced["shots"]["s"])
+            eb.approve_shot(record, "s", "new.mp4", 9.6, "replacement reviewed", shots_dir=directory, **reviewer)
+            self.assertEqual(eb.load(path)["revocations"], replaced["revocations"])
+            before = path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(record, "s", "old.mp4", 10, "not reinstatement", shots_dir=directory, **reviewer)
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_e189_revocation_wins_score_digest_and_source_type(self):
+        # A retraction is not a new quality score or a model-approved replacement.
+        with tempfile.TemporaryDirectory() as tmp:
+            for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+                for marker in ({"by": "ChatGPT", "reason": "visible aircraft"}, None, False):
+                    with self.subTest(source=source, marker=marker):
+                        rec = {"source": source, "score": 10, "clip_sha256": "a" * 64,
+                               "still_sha256": "b" * 64, "request_sha256": "c" * 64,
+                               "revocation": marker}
+                        before = copy.deepcopy(rec)
+                        bad = eb.revocation_problems("fixture", {"s": rec}, shots_dir=tmp)
+                        self.assertTrue(any(p.startswith("SHOT_REVIEW_REVOKED") for p in bad), bad)
+                        self.assertEqual(rec, before)
+            self.assertEqual(eb.revocation_problems("fixture", {"s": {"score": 9.6}}, shots_dir=tmp), [])
+
+    def test_e189_revoked_bytes_cannot_be_reused_even_after_the_source_shot_is_replaced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "origin.json").write_text(json.dumps({"shots": {"s": {"clip_sha256": "d" * 64}},
+                "revocations": [{"shot": "s", "clip_sha256": "a" * 64, "score": 9.6,
+                                 "revocation": {"by": "ChatGPT", "reason": "visible aircraft"}}]}))
+            for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+                rec = {"source": source, "score": 10, "request_sha256": "c" * 64,
+                       ("still_sha256" if source == "still_motion" else "clip_sha256"): "a" * 64}
+                self.assertTrue(eb.revocation_problems("borrower", {"s": rec}, shots_dir=tmp))
+            self.assertTrue(eb.revocation_problems("old-master", {}, shots_dir=tmp, source_hashes=["a" * 64]))
+            self.assertEqual(eb.revocation_problems("origin", shots_dir=tmp), [])
+
+    def test_e189_corrupt_revocation_history_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for history in (False, [{"revocation": {"reason": "missing hash"}}]):
+                Path(tmp, "origin.json").write_text(json.dumps({"revocations": history}))
+                self.assertTrue(eb.revocation_problems("fixture", {}, shots_dir=tmp))
 
 
 class Requests(unittest.TestCase):
@@ -545,6 +614,22 @@ class Gating(unittest.TestCase):
                                  fetch=lambda name, dst: Path(dst).write_bytes(b"approved clip"))
             self.assertTrue(str(err.exception).startswith(f"{want} {shot['id']}"), err.exception)
 
+    def test_e189_revocation_blocks_build_before_any_fetch(self):
+        import shot_sources as ss
+        for source in ("pavo", "pavo_reuse", "footage", "still_motion"):
+            with self.subTest(source=source):
+                approvals = self.approvals()
+                digests = {k: a["request_sha256"] for k, a in approvals.items()}
+                rec = approvals["s-a"]
+                rec.update(source=source, footage="fixture-footage", still="fixture-still", clip_from="origin#s",
+                           still_sha256="e" * 64, revocation={"by": "ChatGPT", "reason": "visible aircraft"})
+                rec["request_sha256"] = ss.expected_request(self.plan, self.plan["shots"][1], 1, rec, digests)
+                bad = eb.review_problems(self.plan, digests, approvals)
+                self.assertFalse(any(p.startswith("SHOT_REQUEST_CHANGED") for p in bad), bad)
+                with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                    eb.generate_step(self.plan, self.work, "py", "model", approvals=approvals,
+                                     fetch=lambda *a: self.fail("revoked bytes were fetched"))
+
     def test_a_build_never_generates_a_shot_that_has_a_reviewed_clip(self):
         # E114 (genesis-07: 8 builds; genesis-08: 7 of 29 shots rejected at the review after a full build): the clip
         # Claude reviewed is the clip the build ships, downloaded by its content hash and checked again, never a new one
@@ -708,33 +793,56 @@ class Gating(unittest.TestCase):
         unsealed, path = records / f".test-{os.getpid()}-raw.json", records / f".test-{os.getpid()}.json"
         try:
             with self.assertRaises(SystemExit) as err:                             # outside evidence/shots/
-                eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(out / "probe.json", ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
             shutil.copyfile(out / "probe.json", unsealed)                          # not from shot-probe's record job
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_RECORD_REFUSED"))
             no_upload = dict(json.loads(unsealed.read_text()), run_id="40500000001")
             unsealed.write_text(json.dumps(no_upload))
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec)
+                eb.approve_shot(unsealed, ids[0], clip["asset"], "9.6", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_CLIP_NOT_UPLOADED"))
-            eb.probe_assets(out, self.plan["episode"], "40500000001", path)       # sealed after the upload
+            media = {"version": "clip-media-v1", "clip_sha256": clip["clip_sha256"],
+                     "video_seconds": 7.25, "audio_seconds": 7.28}
+            with patch.object(eb.clip_timing, "measure", return_value=media):  # probe fixture has fake media bytes
+                eb.probe_assets(out, self.plan["episode"], "40500000001", path)
+            for model in (None, "unknown-session"):
+                with self.assertRaisesRegex(SystemExit, "REVIEWER_IDENTITY_REFUSED"):
+                    eb.approve_shot(path, ids[0], clip["asset"], "9.6", "reviewed fixture", shots_dir=rec,
+                                    reviewer=model)
+                self.assertFalse((rec / f"{self.plan['episode']}.json").exists())
             for score, note, code in (("9.4", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("10.5", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
                                       ("nan", "ok", "SHOT_SCORE_OUT_OF_RANGE"), ("inf", "ok", "SHOT_SCORE_OUT_OF_RANGE"),
                                       ("9.6", " ", "SHOT_NOTE_MISSING"), ("x", "ok", "SHOT_SCORE_INVALID")):
                 with self.assertRaises(SystemExit) as err:
-                    eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec)
+                    eb.approve_shot(path, ids[0], clip["asset"], score, note, shots_dir=rec, reviewer="claude-session-reviewer")
                 self.assertTrue(str(err.exception).startswith(code), (score, err.exception))
-            approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean", shots_dir=rec)
+            approved = eb.approve_shot(path, ids[0], clip["asset"], "9.6", "period, faces, motion clean", shots_dir=rec,
+                                       reviewer="gpt-6-astra-session-reviewer")
+            self.assertEqual(approved["model"], "gpt-6-astra-session-reviewer")
+            self.assertEqual(approved["clip_seconds"], media["video_seconds"])
+            self.assertEqual(approved["requested_clip_seconds"], entry["clip_seconds"])
+            self.assertEqual(approved["media"], media)
             self.assertEqual((approved["clip_sha256"], approved["request_sha256"], approved["asset"], approved["run_id"]),
                              (clip["clip_sha256"], entry["request_sha256"], clip["asset"], "40500000001"))
             self.assertEqual(eb.load_approvals(self.plan, rec / f"{self.plan['episode']}.json")[ids[0]], approved)
+            # E189: an explicit retraction cannot be overwritten by the same bytes with a higher score.
+            approvals_path = rec / f"{self.plan['episode']}.json"
+            history = json.loads(approvals_path.read_text())
+            history["revocations"] = [dict(approved, shot=ids[0], revocation={
+                "by": "ChatGPT", "reason": "later direct visual inspection found a modern object"})]
+            approvals_path.write_text(json.dumps(history))
+            before = approvals_path.read_bytes()
+            with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+                eb.approve_shot(path, ids[0], clip["asset"], "10", "new score cannot undo revocation", shots_dir=rec)
+            self.assertEqual(approvals_path.read_bytes(), before)
             failed = json.loads(path.read_text())
             failed["shots"][ids[0]]["clips"][0]["flags"] = ["FREEZE"]
             path.write_text(json.dumps(failed))
             with self.assertRaises(SystemExit) as err:
-                eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec)
+                eb.approve_shot(path, ids[0], clip["asset"], "9.8", "ok", shots_dir=rec, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("SHOT_CHECKS_FAILED"))
         finally:
             for f in (path, unsealed):
@@ -1637,6 +1745,61 @@ def native_plan():
     return p
 
 
+@unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "ffmpeg and ffprobe")
+class MediaTiming(unittest.TestCase):
+    def test_e152_measured_bytes_not_requested_seconds_govern_native_coverage_and_queue(self):
+        import long_preflight as lp
+        root = eb.REPO / "migration" / "evidence" / "shots"
+        with tempfile.TemporaryDirectory(prefix=".test-media-", dir=root) as d:
+            d = Path(d)
+            video = d / "native.mp4"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i",
+                            "testsrc2=size=160x90:rate=30:duration=2.3", "-f", "lavfi", "-i",
+                            "sine=frequency=220:sample_rate=48000:duration=2.4", "-c:v", "libx264", "-pix_fmt",
+                            "yuv420p", "-c:a", "aac", str(video)], check=True)
+            p = native_plan()
+            p["episode"] = "test-native-measured"
+            p["shots"] = p["shots"][:1]
+            sid, key = p["shots"][0]["id"], eb.sha256(video)
+            a = {"clip_seconds": 1, "clip_sha256": key, "request_sha256": "request",
+                 "speech": {"onset": 0.1, "end": 2.2, "gain_db": 0.0, "flags": []}}
+            needs = eb.clip_needs(p, {}, approvals={sid: a})
+            self.assertEqual(needs, {sid: 2.2})  # not ceil(Kokoro speech + generation padding)
+            self.assertTrue(eb.coverage_problems(p, needs, {sid: a}))  # old nominal approval is too short
+            before = copy.deepcopy(a)
+            record = d / "probe.json"
+            record.write_text(json.dumps({"episode": p["episode"], "shots": {sid: {"clips": [a]}}}))
+            media_dir = d / "measurements" / p["episode"] / "media"
+            media = eb.measure_clip_step(record, sid, video, media_dir)
+            self.assertEqual(media["clip_sha256"], key)
+            self.assertAlmostEqual(media["video_seconds"], 2.3, places=3)
+            self.assertGreaterEqual(media["audio_seconds"], 2.4)
+            with patch.object(eb.clip_timing, "RECORDS", d / "measurements"):
+                self.assertEqual(eb.coverage_problems(p, needs, {sid: a}), [])
+                queued = lp.queue(p, {sid: "request"}, {sid: a}, needs, max_units=400)
+                self.assertEqual((queued["approved"], queued["to_probe"]), (1, 0))
+                self.assertEqual(eb.native_spans(p, {sid: a})[sid][1:], (0.1, 2.2))
+                outside = copy.deepcopy(a)
+                outside["speech"]["end"] = 2.5
+                with self.assertRaisesRegex(SystemExit, "NATIVE_SPEECH_OUTSIDE_MEDIA"):
+                    eb.native_spans(p, {sid: outside})
+                corrupt = dict(media, clip_sha256="0" * 64)
+                eb.save(media_dir / f"{key}.json", corrupt)
+                with self.assertRaisesRegex(SystemExit, "SHOT_MEDIA_UNMEASURED"):
+                    eb.coverage_problems(p, needs, {sid: a})
+            self.assertEqual(a, before)  # no rewritten historical approval, score, note, or speech endpoint
+            with patch.object(eb.pavo_native, "premix") as premix:
+                bad = copy.deepcopy(a)
+                bad["speech"]["end"] = 2.5
+                with self.assertRaisesRegex(SystemExit, "NATIVE_SPEECH_OUTSIDE_MEDIA"):
+                    eb.native_voice(p, d, {"lines": [{"start": 0, "end": 2.4}], "total": 3.6},
+                                    {sid: str(video)}, {sid: 2.3}, {sid: bad})
+                premix.assert_not_called()  # an ASR timestamp beyond real media is not padded into speech
+            with self.assertRaisesRegex(SystemExit, "SHOT_CLIP_NOT_IN_RECORD"):
+                eb.measure_clip_step(record, "other-shot", video, d / "not-written")
+            self.assertFalse((d / "not-written").exists())
+
+
 class NativeSpeech(unittest.TestCase):
     """Owner 27/10 (R1, R2, R4): spoken shots keep Pavo's own speech and ambience on a plan that opts in; a line
     Pavo's prompt filter refuses goes to our Kokoro voice by itself (E129); a clip already made is never made again."""
@@ -1702,6 +1865,47 @@ class NativeSpeech(unittest.TestCase):
         # and a v4 long that says "kokoro" keeps our voice
         self.assertTrue(self.pn.native_plan({"criteria": self.pn.V4}))
         self.assertFalse(self.pn.native_plan({"criteria": self.pn.V4, "audio_route": "kokoro"}))
+
+    def test_e153_short_native_admission_uses_the_effective_route_not_only_an_explicit_flag(self):
+        # A V4/V5 criteria selector enables native_plan even without audio_route. The Short's guard must use
+        # that same resolver: removing the explicit flag cannot admit an unsupported native audio route.
+        for version in (self.pn.V4, self.pn.V4X, self.pn.V5):
+            for route in (None, self.pn.NATIVE):
+                with self.subTest(criteria=version, route=route):
+                    p = dialogue_plan()
+                    p["criteria"] = version
+                    if route is not None:
+                        p["audio_route"] = route
+                    self.assertTrue(self.pn.native_plan(p))
+                    self.assertEqual([x.split()[0] for x in eb.plan_check.audio_route_problems(p, p["shots"])],
+                                     ["AUDIO_ROUTE_SHORT_UNSUPPORTED"])
+                    self.assertTrue(any(x.startswith("AUDIO_ROUTE_SHORT_UNSUPPORTED")
+                                        for x in eb.check_plan(p)["problems"]))
+            p["audio_route"] = self.pn.KOKORO
+            self.assertFalse(self.pn.native_plan(p))
+            self.assertEqual(eb.plan_check.audio_route_problems(p, p["shots"]), [])
+        # Legacy Shorts still resolve to Kokoro, whether the field is absent or explicit.
+        for route in (None, self.pn.KOKORO):
+            p = dialogue_plan()
+            if route is not None:
+                p["audio_route"] = route
+            self.assertFalse(self.pn.native_plan(p))
+            self.assertEqual(eb.plan_check.audio_route_problems(p, p["shots"]), [])
+
+    def test_e153_native_longs_keep_their_own_criteria_admission(self):
+        import long_plan_check as lc
+        import test_long_plan_check as fixture
+        for version in (self.pn.V4, self.pn.V5):
+            for route in (None, self.pn.NATIVE, self.pn.KOKORO):
+                with self.subTest(criteria=version, route=route):
+                    p = fixture.v4_plan()
+                    p.update(criteria=version, episode=p["long"])
+                    if route is not None:
+                        p["audio_route"] = route
+                    with patch.object(lc, "arcs", return_value=fixture.ARCS):
+                        result = eb.check_plan(p, fixture.CHARS)
+                    self.assertEqual(result["problems"], [])
+                    self.assertEqual(self.pn.native_plan(p), route != self.pn.KOKORO)
 
     def probe(self, plan, ids, rounds, client):
         return eb.probe_step(plan, self.work, "py", "model", self.work / "out", ids, rounds, client=client,
@@ -1833,7 +2037,9 @@ class VoiceBinding(unittest.TestCase):
         self.record.write_text(json.dumps({"episode": self.episode, "run_id": "40500000002", "shots": {"s-eve": {
             "request_sha256": "r", "clip_seconds": 6, "request": {"audio": {
                 "route": "pavo_native", "speaker": "eve", "words": ["Why", "do", "you", "hide?"]}},
-            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True}]}}}))
+            "clips": [{"asset": "shot-x.mp4", "clip_sha256": self.clip, "flags": [], "uploaded": True,
+                       "media": {"version": "clip-media-v1", "clip_sha256": self.clip,
+                                 "video_seconds": 6.0, "audio_seconds": 6.0}}]}}}))
 
     def tearDown(self):
         self.pn.VOICES = self.saved
@@ -1859,7 +2065,7 @@ class VoiceBinding(unittest.TestCase):
         (self.dir / "speech" / f"{self.clip}.json").write_text(json.dumps({"measures": measures}))
 
     def approve(self):
-        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out)
+        return eb.approve_shot(self.record, "s-eve", "shot-x.mp4", "9.6", "lips and voice clean", shots_dir=self.out, reviewer="claude-session-reviewer")
 
     def test_the_verdict_binds_the_speakers_reference_and_every_other_reference(self):
         line, ok = "Why do you hide?", {"reference": self.E, "others": [self.K]}
@@ -1976,6 +2182,372 @@ class ProbeRecordOnAnyExit(unittest.TestCase):
         self.run_until(SystemExit("PROBE_TERMINATED (SIGTERM)"))
         text = (eb.HERE / "episode_build.py").read_text()
         self.assertIn("signal.signal(signal.SIGTERM", text)
+
+
+@unittest.skipUnless(HAS_FFMPEG, 'ffmpeg required')
+class ExistingEditImport(unittest.TestCase):
+    def fixture(self, root, seconds=2):
+        root.mkdir()
+        plan = {"episode": "import-fixture", "narration": [{"kind": "cta", "text": "Keep the existing words."}],
+                "shots": [{"id": "k-close", "kind": "keeper", "lines": [0], "prompt": "unchanged"}]}
+        eb.save(root / "plan.json", plan)
+        with wave.open(str(root / "narration.wav"), "wb") as f:
+            f.setparams((1, 2, 24000, 0, "NONE", "not compressed"))
+            f.writeframes(struct.pack('<h', 321) * (24000 * seconds))
+        subprocess.run(['ffmpeg', '-v', 'error', '-i', str(root / 'narration.wav'),
+                        '-c:a', 'aac', str(root / 'mix.m4a')], check=True)
+        subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=32x48',
+                        '-frames:v', '1', '-threads', '1', str(root / 'image.png')], check=True)
+        (root / "captions.ass").write_text('[Script Info]\nScriptType: v4.00+\n'
+                                          '[V4+ Styles]\nFormat: Name, Fontname, Fontsize\n'
+                                          'Style: Default,DejaVu Sans,16\n[Events]\n'
+                                          'Format: Layer, Start, End, Style, Text\n')
+        manifest = {"status": "DRAFT_NOT_APPROVED", "narrator": "narration.wav", "ass": "captions.ass",
+                    "reuse_existing_stills": True,
+                    "audio_copy": {"source": "mix.m4a", "sha256": eb.sha256(root / "mix.m4a")},
+                    "segments": [{"id": "k-close", "source": "image.png", "kind": "image", "seconds": seconds,
+                                  "sha256": eb.sha256(root / "image.png"), "crop": [0, 0, 16, 24]}]}
+        eb.save(root / "manifest.json", manifest)
+        def asset(name):
+            return {"path": name, "sha256": eb.sha256(root / name)}
+        binding = {"schema": "heroverse-existing-edit-v1", "episode": "import-fixture", "fps": 30,
+                   "frames": 30 * seconds,
+                   "plan": asset("plan.json"), "manifest": asset("manifest.json"),
+                   "master_audio": asset("narration.wav"), "final_mix": asset("mix.m4a"),
+                   "captions": asset("captions.ass"),
+                   "visuals": [{"id": "k-close", "start_frame": 0, "end_frame": 30 * seconds,
+                                "logical_shots": [{"shot": "k-close", "start_frame": 0,
+                                                   "end_frame": 30 * seconds}],
+                                "narration_units": [{"kind": "cta", "voice": "am_michael",
+                                                     "text": "Keep the existing words."}]}]}
+        eb.save(root / "binding.json", binding)
+        return plan, binding
+
+    def measured_fixture(self, root):
+        plan, binding = self.fixture(root, seconds=175)
+        story = ('A family prepares nearby while a distant neighbor watches and considers the changing weather '
+                 'outside.')
+        narration = [{'kind': 'story', 'text': story} for _ in range(18)] + [
+            {'kind': 'story', 'text': 'The workers carry supplies together and pause beside the entrance, watching '
+             'dark clouds gather while people across the valley continue ordinary routines and ignore the '
+             'changing weather all around.'},
+            {'kind': 'insight', 'text': 'Careful choices can protect others when danger approaches, and preparation '
+             'becomes meaningful when people use what they have learned to help someone who needs shelter.'},
+            {'kind': 'story', 'text': 'The narrator introduces the following quotation.'},
+            {'kind': 'scripture', 'text': 'and the Lord shut him in.', 'reference': 'Genesis 7:16 (KJV)'},
+            {'kind': 'insight', 'text': 'Consider how patient preparation helps people choose wisely when difficult '
+             'circumstances arrive.'},
+            {'kind': 'cta', 'text': 'Would you help a neighbor find safety when the final warning arrives?'},
+            {'kind': 'cta', 'text': 'Follow the full story and share what you learned with a friend before the next '
+             'episode.'}]
+        opening = {'kind': 'scripture', 'text': 'For yet seven days, and I will cause it to rain upon the earth '
+                   'forty days and forty nights;', 'reference': 'Genesis 7:4 (KJV)', 'voice': 'am_onyx'}
+        spans = [('s-open', 0, 300, []), ('s-story', 300, 4050, list(range(19))),
+                 ('s-lesson', 4050, 4410, [19]), ('k-insight', 4410, 4770, [20, 21, 22]),
+                 ('k-question', 4770, 4950, [23]), ('k-close', 4950, 5250, [24])]
+        shots = [{'id': sid, 'kind': 'keeper' if sid.startswith('k-') else 'scene', 'lines': lines,
+                  'prompt': 'Unqualified synthetic fixture ' + sid} for sid, _, _, lines in spans]
+        shots[0].pop('lines')
+        shots[0].update(speaker='god', line=opening['text'], reference=opening['reference'], seconds=10)
+        shots[1].update(seconds=12, figures='anonymous', first_frame='missing-synthetic-still')
+        shots[2].update(seconds=12, figures='anonymous', climax=True)
+        plan.update(version='bible-plan-v2', part=9, period='the-flood', narration=narration, shots=shots)
+        eb.save(root / 'plan.json', plan)
+        binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+        segment = eb.load(root / 'manifest.json')['segments'][0]
+        manifest = eb.load(root / 'manifest.json')
+        manifest['segments'] = [dict(segment, id=sid, seconds=(end - start) / 30)
+                                for sid, start, end, _ in spans]
+        eb.save(root / 'manifest.json', manifest)
+        binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+        binding['visuals'] = [
+            {'id': sid, 'start_frame': start, 'end_frame': end,
+             'logical_shots': [{'shot': sid, 'start_frame': start, 'end_frame': end}],
+             'narration_units': [opening] if sid == 's-open' else
+             [dict(narration[k], voice='am_michael') for k in lines]}
+            for sid, start, end, lines in spans]
+        eb.save(root / 'binding.json', binding)
+        return plan, binding
+
+    def test_measured_short_contract_preserves_175_seconds_and_all_plan_refusals(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.measured_fixture(root)
+            checked = eb.check_plan(plan)
+            self.assertEqual(checked['estimate']['words'], 395)
+            self.assertEqual(checked['estimate']['seconds'], 152.9)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            contract = result['measured_short_contract']
+            self.assertEqual(contract['seconds'], 175)
+            self.assertEqual(contract['problems'], [])
+            self.assertEqual(contract['measurement'], {'frames': 5250, 'fps': 30, 'pcm_samples': 4200000,
+                                                      'sample_rate': 24000, 'channels': 1, 'sample_width_bytes': 2})
+            self.assertEqual(contract['conservative_shares'], {
+                'basis': 'whole_visual_interval_union', 'keeper_frames': 840, 'keeper_seconds': 28,
+                'keeper_share_upper_bound': 0.16, 'lesson_frames': 1200, 'lesson_seconds': 40,
+                'lesson_share_upper_bound': 40 / 175, 'speech_boundaries': None})
+            self.assertEqual(result['static_estimate']['seconds'], 152.9)
+            self.assertEqual(result['plan_blockers'], checked['problems'] + checked['pending'])
+            for code in ('SHORT SHORT_LENGTH 152.9', 'KEEPER_LINE_KIND', 'STILL_MISSING'):
+                self.assertTrue(any(p.startswith(code) for p in result['plan_blockers']), code)
+            self.assertEqual(result['plan_sha256'], binding['plan']['sha256'])
+            self.assertEqual(result['binding_sha256'], eb.sha256(root / 'binding.json'))
+            self.assertEqual(result['outputs']['narration.wav'], binding['master_audio']['sha256'])
+            self.assertEqual(result['outputs']['final-mix.m4a'], binding['final_mix']['sha256'])
+            for name in ('plan.json', 'narration.wav', 'captions.ass'):
+                self.assertEqual((work / name).read_bytes(), (root / name).read_bytes(), name)
+            self.assertEqual((work / 'final-mix.m4a').read_bytes(), (root / 'mix.m4a').read_bytes())
+            self.assertIsNone(result['word_boundaries'])
+            self.assertTrue(all(k['speech_boundaries'] is None for k in result['keeper'].values()))
+            self.assertFalse(result['production_approved'])
+            self.assertFalse(result['publication_approved'])
+            self.assertFalse((work / 'APPROVAL.json').exists())
+            self.assertFalse((work / 'layout.json').exists())
+            self.assertEqual(eb.import_edit_step(root / 'binding.json', root, work), result)
+            binding['plan']['sha256'] = '0' * 64
+            eb.save(root / 'binding.json', binding)
+            with self.assertRaisesRegex(ValueError, 'EXISTING_EDIT_INPUT_CHANGED'):
+                eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertEqual(eb.load(work / 'existing-edit.json'), result)
+
+    def test_measured_contract_counts_scripture_even_when_labelled_as_insight(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            quote = ('And the earth was without form, and void; and darkness was upon the face of the deep. '
+                     'And the Spirit of God moved upon the face of the waters.')
+            plan.update(part=9, narration=[{'kind': 'insight', 'text': quote}])
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            binding['visuals'][0]['narration_units'] = [dict(plan['narration'][0], voice='am_michael')]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            problems = result['measured_short_contract']['problems']
+            self.assertIn('ORIGINAL_SHARE 0.00 < 0.4', problems)
+            self.assertTrue(any(p.startswith('INSIGHT_MISSING') for p in problems))
+            self.assertTrue(any(p.startswith('KJV_UNREFERENCED') for p in result['plan_blockers']))
+            self.assertFalse(result['production_approved'])
+
+    def test_conservative_shares_count_a_shared_visual_once_without_unit_timing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            plan['narration'] = [{'kind': 'story', 'text': 'An introduction to the quotation.'},
+                                 {'kind': 'scripture', 'text': 'and the Lord shut him in.',
+                                  'reference': 'Genesis 7:16 (KJV)'},
+                                 {'kind': 'insight', 'text': 'Consider what the choice means.'}]
+            plan['shots'] = [{'id': 's-before', 'kind': 'scene', 'lines': [0], 'seconds': 1, 'prompt': 'fixture'},
+                             {'id': 'k-close', 'kind': 'keeper', 'lines': [1, 2], 'prompt': 'fixture'}]
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            binding['visuals'][0].update(
+                logical_shots=[{'shot': 's-before', 'start_frame': 0, 'end_frame': 30},
+                               {'shot': 'k-close', 'start_frame': 30, 'end_frame': 60}],
+                narration_units=[dict(n, voice='am_michael') for n in plan['narration']])
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertIn('measured_short_contract', result)
+            shares = result['measured_short_contract']['conservative_shares']
+            self.assertEqual(shares['keeper_frames'], 60)
+            self.assertEqual(shares['lesson_frames'], 60)
+            self.assertEqual(shares['keeper_share_upper_bound'], 1.0)
+            self.assertEqual(shares['lesson_share_upper_bound'], 1.0)
+            self.assertIsNone(shares['speech_boundaries'])
+            self.assertIsNone(result['word_boundaries'])
+            self.assertIsNone(result['keeper']['k-close']['speech_boundaries'])
+
+    def test_e224_existing_master_is_preserved_and_lines_cannot_rebuild_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, "source"), Path(tmp, "imported")
+            plan, binding = self.fixture(root)
+            result = eb.import_edit_step(root / "binding.json", root, work)
+            self.assertEqual(result["status"], "IMPORTED_NOT_APPROVED")
+            self.assertEqual(result["frames"], 60)
+            self.assertEqual(result["seconds"], 2)
+            self.assertTrue(result["plan_blockers"])
+            self.assertEqual((work / "narration.wav").read_bytes(), (root / "narration.wav").read_bytes())
+            with wave.open(str(work / "keeper" / "k-close.wav"), 'rb') as clip:
+                self.assertEqual(clip.readframes(48000), struct.pack('<h', 321) * 48000)
+            self.assertEqual(eb.load(work / "manifest.json")["segments"][0]["crop"], [0, 0, 16, 24])
+            with self.assertRaisesRegex(SystemExit, "EXISTING_EDIT_IMMUTABLE"):
+                eb.lines_step(plan, work)
+            for command in ('voice-script', 'lines', 'generate', 'probe', 'compose', 'adopt'):
+                with self.subTest(command=command), self.assertRaisesRegex(SystemExit, 'EXISTING_EDIT_IMMUTABLE'):
+                    eb.main(['episode_build.py', command, str(root / 'plan.json'), str(work)])
+            self.assertEqual((work / "narration.wav").read_bytes(), (root / "narration.wav").read_bytes())
+            self.assertFalse((work / "APPROVAL.json").exists())
+            self.assertFalse((work / "layout.json").exists())
+            self.assertEqual(eb.import_edit_step(root / "binding.json", root, work), result)
+
+    def test_import_refuses_changed_bytes_semantics_frames_and_paths_before_writes(self):
+        cases = ("hash", "text", "gap", "duration", "escape", "symlink", "bool", "nan", "non_aac",
+                 "pcm_sample", "pcm_length", "endpoint", "media_bytes", "plan_bytes")
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                root, work = Path(tmp, "source"), Path(tmp, "imported")
+                _, binding = self.fixture(root)
+                if case == "hash":
+                    binding["master_audio"]["sha256"] = "0" * 64
+                elif case == "text":
+                    binding["visuals"][0]["narration_units"][0]["text"] = "Different words."
+                elif case == "gap":
+                    binding["visuals"][0]["start_frame"] = 1
+                elif case == "duration":
+                    binding["frames"] = 61
+                elif case == "escape":
+                    binding["master_audio"]["path"] = "../source/narration.wav"
+                elif case == "symlink":
+                    (root / "alias.wav").symlink_to(root / "narration.wav")
+                    binding["master_audio"]["path"] = "alias.wav"
+                elif case == "bool":
+                    binding["frames"] = True
+                elif case == 'pcm_sample':
+                    audio = root / 'narration.wav'
+                    audio.write_bytes(audio.read_bytes()[:-2] + struct.pack('<h', 322))
+                elif case == 'pcm_length':
+                    with wave.open(str(root / 'narration.wav'), 'wb') as f:
+                        f.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+                        f.writeframes(struct.pack('<h', 321) * 47999)
+                    binding['master_audio']['sha256'] = eb.sha256(root / 'narration.wav')
+                elif case == 'endpoint':
+                    binding['visuals'][0]['end_frame'] = 59
+                elif case == 'media_bytes':
+                    with (root / 'image.png').open('ab') as f:
+                        f.write(b'changed media')
+                elif case == 'plan_bytes':
+                    with (root / 'plan.json').open('ab') as f:
+                        f.write(b'\n')
+                elif case == "nan":
+                    manifest = eb.load(root / 'manifest.json')
+                    manifest['segments'][0]['seconds'] = float('nan')
+                    eb.save(root / 'manifest.json', manifest)
+                    binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+                elif case == 'non_aac':
+                    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(root / 'narration.wav'),
+                                    '-c:a', 'alac', str(root / 'mix.m4a')], check=True)
+                    binding['final_mix']['sha256'] = eb.sha256(root / 'mix.m4a')
+                    manifest = eb.load(root / 'manifest.json')
+                    manifest['audio_copy']['sha256'] = binding['final_mix']['sha256']
+                    eb.save(root / 'manifest.json', manifest)
+                    binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+                eb.save(root / "binding.json", binding)
+                with self.assertRaises((ValueError, SystemExit)):
+                    eb.import_edit_step(root / "binding.json", root, work)
+                self.assertFalse(work.exists())
+
+    def test_import_never_overwrites_partial_or_mutated_outputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, "source"), Path(tmp, "imported")
+            self.fixture(root)
+            work.mkdir()
+            (work / "narration.wav").write_bytes(b"unrelated")
+            with self.assertRaisesRegex(ValueError, "EXISTING_EDIT_OUTPUT_EXISTS"):
+                eb.import_edit_step(root / "binding.json", root, work)
+            self.assertEqual((work / "narration.wav").read_bytes(), b"unrelated")
+            other = Path(tmp, "complete")
+            eb.import_edit_step(root / "binding.json", root, other)
+            (other / "narration.wav").write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "EXISTING_EDIT_OUTPUT_CHANGED"):
+                eb.import_edit_step(root / "binding.json", root, other)
+
+    def test_import_has_real_draft_consumer_with_identical_audio_packets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            self.fixture(root)
+            eb.import_edit_step(root / 'binding.json', root, work)
+            result = eb.existing_edit.render_imported(work, Path(tmp, 'draft.mp4'))
+            self.assertEqual(result['validation']['video_frames'], 60)
+            self.assertTrue(result['validation']['audio_packets_identical'])
+            self.assertFalse(result['publication_approved'])
+            with self.assertRaisesRegex(ValueError, 'EXISTING_EDIT_OUTPUT_OVERLAP'):
+                eb.existing_edit.render_imported(work, work / 'narration.wav')
+
+    def test_shared_narration_can_span_two_visuals_without_inventing_word_boundaries(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            plan['shots'] = [{'id': sid, 'kind': 'scene', 'lines': [0], 'seconds': 1,
+                              'characters': [], 'establishing': True, 'prompt': 'fixture'}
+                             for sid in ('s-one', 's-two')]
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            manifest = eb.load(root / 'manifest.json')
+            manifest['segments'] = [dict(manifest['segments'][0], id=sid, seconds=1)
+                                     for sid in ('s-one', 's-two')]
+            eb.save(root / 'manifest.json', manifest)
+            binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+            binding['visuals'] = [dict(binding['visuals'][0], id=sid, start_frame=i*30, end_frame=(i+1)*30,
+                                      logical_shots=[{'shot': sid, 'start_frame': i*30, 'end_frame': (i+1)*30}])
+                                  for i, sid in enumerate(('s-one', 's-two'))]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            self.assertEqual(result['frames'], 60)
+            self.assertIsNone(result['word_boundaries'])
+
+    def test_e225_caption_or_manifest_change_after_verify_is_refused_at_consumption(self):
+        for name in ('captions.ass', 'manifest.json'):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+                self.fixture(root)
+                eb.import_edit_step(root / 'binding.json', root, work)
+                render = eb.existing_edit.dr.render
+                def interleave(*args, **kwargs):
+                    with (work / name).open('ab') as f:
+                        f.write(b'\nchanged after verification\n')
+                    return render(*args, **kwargs)
+                with patch.object(eb.existing_edit.dr, 'render', side_effect=interleave):
+                    with self.assertRaisesRegex(ValueError, 'HASH_MISMATCH'):
+                        eb.existing_edit.render_imported(work, Path(tmp, 'draft.mp4'))
+                self.assertFalse(Path(tmp, 'draft.mp4').exists())
+
+    def test_keeper_slice_uses_nonzero_frame_offset_without_audio_retime(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, binding = self.fixture(root)
+            pcm = struct.pack('<h', 321) * 24000 + struct.pack('<h', 987) * 24000
+            with wave.open(str(root / 'narration.wav'), 'wb') as f:
+                f.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+                f.writeframes(pcm)
+            binding['master_audio']['sha256'] = eb.sha256(root / 'narration.wav')
+            plan['narration'].insert(0, {'kind': 'story', 'text': 'Earlier narration.'})
+            plan['shots'][0]['lines'] = [1]
+            plan['shots'].insert(0, {'id': 's-opening', 'kind': 'scene', 'lines': [0], 'seconds': 1,
+                                      'characters': [], 'establishing': True, 'prompt': 'fixture'})
+            eb.save(root / 'plan.json', plan)
+            binding['plan']['sha256'] = eb.sha256(root / 'plan.json')
+            manifest = eb.load(root / 'manifest.json')
+            manifest['segments'] = [dict(manifest['segments'][0], id=sid, seconds=1)
+                                     for sid in ('s-opening', 'k-close')]
+            eb.save(root / 'manifest.json', manifest)
+            binding['manifest']['sha256'] = eb.sha256(root / 'manifest.json')
+            binding['visuals'] = [dict(binding['visuals'][0], id=sid, start_frame=i*30, end_frame=(i+1)*30,
+                                      logical_shots=[{'shot': sid, 'start_frame': i*30, 'end_frame': (i+1)*30}],
+                                      narration_units=[dict(plan['narration'][i], voice='am_michael')])
+                                  for i, sid in enumerate(('s-opening', 'k-close'))]
+            eb.save(root / 'binding.json', binding)
+            result = eb.import_edit_step(root / 'binding.json', root, work)
+            with wave.open(str(work / result['keeper']['k-close']['path']), 'rb') as f:
+                self.assertEqual(f.getnframes(), 24000)
+                self.assertEqual(f.readframes(24000), struct.pack('<h', 987) * 24000)
+
+    def test_interrupted_receipt_write_still_blocks_voice_reconstruction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, work = Path(tmp, 'source'), Path(tmp, 'imported')
+            plan, _ = self.fixture(root)
+            actual_open = Path.open
+            def fail_receipt(path, *args, **kwargs):
+                if path == work / 'existing-edit.json' and args == ('xb',):
+                    raise OSError('synthetic receipt write failure')
+                return actual_open(path, *args, **kwargs)
+            with patch.object(Path, 'open', fail_receipt):
+                with self.assertRaisesRegex(OSError, 'synthetic receipt'):
+                    eb.import_edit_step(root / 'binding.json', root, work)
+            before = (work / 'narration.wav').read_bytes()
+            with self.assertRaisesRegex(SystemExit, 'EXISTING_EDIT_IMMUTABLE'):
+                eb.lines_step(plan, work)
+            self.assertEqual((work / 'narration.wav').read_bytes(), before)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 ACTIVE = ("migration/production", "migration/publish", "migration/ops", "migration/mining")
-DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDARD.md", "migration/ops/RUNNER_WAKEUP.md", "migration/ops/CLAUDE_REVIEW.md",
+DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDARD.md", "migration/ops/RUNNER_WAKEUP.md", "migration/ops/CLAUDE_REVIEW.md", "migration/ops/AUTOPILOT.md",
              "migration/strategy/DECISIONS.md", "migration/strategy/MODELING_SPEC.md", "migration/strategy/VIDIQ.md",
              "migration/strategy/BEAT_THE_REFERENCE_RULE.md",
              "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
@@ -98,7 +98,7 @@ class Register(unittest.TestCase):
     def test_approval_checks_the_owner_floor(self):
         # E65: a 9.0 review would be approved and then refused at publication, again and again
         wf = (ROOT / '.github/workflows/approve.yml').read_text()
-        i, j = wf.index('oq.check(w, r["output_sha256"], oq.LONG_REVIEWER)'), wf.index('"approved": True')
+        i, j = wf.index('oq.check(w, r["output_sha256"], oq.LONG_REVIEWERS)'), wf.index('"approved": True')
         self.assertLess(i, j)
         self.assertIn('status="BELOW_OWNER_FLOOR"', wf)
 
@@ -185,7 +185,7 @@ class Register(unittest.TestCase):
                  for p in (ROOT / d).glob("*.md")}
         self.assertEqual(found - DIRECTING, set(), "new directing document: list it in OPERATIONS.md and here, or delete it")
         ops = (ROOT / "migration/OPERATIONS.md").read_text()
-        for doc in ("RUNNER_WAKEUP.md", "DECISIONS.md", "MODELING_SPEC.md", "VIDIQ.md", "CLAUDE_REVIEW.md"):
+        for doc in ("RUNNER_WAKEUP.md", "DECISIONS.md", "MODELING_SPEC.md", "VIDIQ.md", "CLAUDE_REVIEW.md", "AUTOPILOT.md"):
             self.assertIn(doc, ops)
 
 

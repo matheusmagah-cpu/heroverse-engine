@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-herd-sunset-cattle-cows-afternoon-summer-4k-d",
+ "theme": "arc01-s-c1-herd",
+ "query": "cattle grazing green hillside",
+ "source": "pixabay",
+ "title": "sunset, cattle, cows, afternoon, summer, 4k, drone, aerial, nature, flight, green, forest, sun, glare, clouds, livestock, grass, relaxing smooth",
+ "page": "https://pixabay.com/videos/id-128305/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-128305/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b4e410c15215ec96f51d4f2f574b905c66c80747b7fcf84a95e9189fcdd7f9e2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  104.9,
+  104.8,
+  104.6,
+  104.6,
+  104.7
+ ],
+ "vetting_descriptions": [
+  "A herd of sheep graze in a field with a beautiful sunset in the background.",
+  "A herd of sheep grazing in a field with a beautiful sunset in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-herd-sunset-cattle-cows-afternoon-summer-4k-d-sha256-b4e410c15215ec96f51d4f2f574b905c66c80747b7fcf84a95e9189fcdd7f9e2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

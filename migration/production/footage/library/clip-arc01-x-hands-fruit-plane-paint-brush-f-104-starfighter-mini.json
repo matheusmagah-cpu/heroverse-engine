@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-hands-fruit-plane-paint-brush-f-104-starfighter-mini",
+ "theme": "arc01-x-hands-fruit",
+ "query": "hands holding fig",
+ "source": "pixabay",
+ "title": "plane, paint brush, f-104, starfighter, miniature, modelling, plastic, hobby, handcraft, colour, paint, air force, armed forces, hand",
+ "page": "https://pixabay.com/videos/id-131666/",
+ "author": "Matias_Luge",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 24.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matias_Luge via Pixabay (https://pixabay.com/videos/id-131666/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a3d5247a5c1ef8c855adb1333fb4c0a41e697a9e08fb1ad5bbc00b0532be01ab",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  42.5,
+  34.2,
+  37.2,
+  44.7,
+  37.9
+ ],
+ "vetting_descriptions": [
+  "A model of a fighter jet is sitting on a table.",
+  "A person is holding a small model of a submarine."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

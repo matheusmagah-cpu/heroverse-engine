@@ -1,0 +1,12 @@
+{
+  "version": "pavo-private-hook-v1",
+  "episode": "genesis-09-short",
+  "shot": "s-voice",
+  "prompt": "Animate the supplied first frame as a 10-second cinematic sequence with two distinct views and one clean cut. Preserve the exact pitch-black rectangular wooden ark, flat roof, square ends, plank structure, dry valley, distant cliffs, storm clouds and painterly realistic lighting. No people are visible; both God and the narrator are offscreen voices in the separate original soundtrack, never visible figures, faces or mouths. FIRST VIEW, 0 to 6.4 seconds: begin on the exact supplied vertical composition. The existing lightning glows briefly and fades naturally during the first second; clouds drift slowly, a thin veil of dust travels close to the ground, and sparse grass bends gently. Use a restrained steady camera push of approximately three percent, keeping the entire ark recognizable. SECOND VIEW, 6.4 to 10 seconds: make one clean hard cut to a tighter, steady three-quarter view of the same near square end and adjacent long plank wall of this exact ark. Keep the roof flat, the timber rigid, and the same orientation, dry ground, storm lighting and color. This closer framing must be visibly distinct from the first view; hold it with subtle cloud and dust motion. Do not invent or open a door. Do not increase rainfall or introduce floodwater. No orbit, handheld shake, transition effects, morphing, moving timber, vessels, people, divine figure, facial features, captions, text or logos. Silent visual output; no music, sound or generated speech. The original production audio remains unchanged in the edit.",
+  "seconds": 10,
+  "first_frame": "migration/production/bible/stills/genesis-09-s-voice.jpg",
+  "first_frame_sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
+  "sound": false,
+  "aspect_ratio": "9:16",
+  "production_approved": false
+}

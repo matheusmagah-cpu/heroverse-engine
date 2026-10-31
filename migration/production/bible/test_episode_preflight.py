@@ -9,6 +9,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
+import wave
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -16,6 +18,180 @@ sys.path.insert(0, str(HERE.parents[1] / "integrations" / "pavo"))
 import episode_preflight as pf  # noqa: E402
 
 EXAMPLE = HERE / "plans" / "genesis-07-short.json"
+
+
+class VoiceResume(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.work = self.root / 'preflight-example'
+        self.prepared = self.root / 'prepared'
+        for name in ('source', 'models'):
+            (self.prepared / name).mkdir(parents=True)
+        self.calls = 0
+        self.inputs = {'script': 'fixture', 'renderer': 'fixture', 'runtime': 'fixture'}
+        self.plan = json.loads(EXAMPLE.read_text())
+        self.layout = {'total': 30, 'keeper_share': .2, 'lesson_share': .8, 'retimed': {}}
+        self.addCleanup(patch.stopall)
+        patch.object(pf, 'WORK_ROOT', self.root).start()
+        # This fixture replaces synthesis/runtime only; cache bytes, lock and receipt are real.
+        patch.object(pf, 'voice_inputs', side_effect=lambda *a: (dict(self.inputs), {}), create=True).start()
+        patch.object(pf.subprocess, 'run', side_effect=self.fake_voice).start()
+        patch.object(pf.eb, 'lines_step', return_value=self.layout).start()
+        patch.object(pf.eb, 'compose_prediction', return_value=[]).start()
+        patch.object(pf, 'measured_pace', return_value={}).start()
+
+    def fake_voice(self, args, **kwargs):
+        if 'voice' not in args:
+            return subprocess.CompletedProcess(args, 0, stdout='/fixture', stderr='')
+        self.calls += 1
+        with wave.open(str(self.work / 'voice.wav'), 'wb') as w:
+            w.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+            w.writeframes(b'\0\0' * 24000)
+        (self.work / 'timeline.json').write_text(json.dumps({
+            'voice_seconds': 1, 'sample_rate': 24000,
+            'segments': [{'id': 'n00', 'start': 0, 'end': 1}],
+            'sentences': [{'segment': 'n00', 'text': 'Fixture.', 'start': 0, 'end': .8}]}))
+        return subprocess.CompletedProcess(args, 0, stdout='{}', stderr='')
+
+    def run_voice(self):
+        return pf.voice_step(self.plan, sys.executable, self.prepared, self.work)
+
+    def test_e211_completed_voice_is_reused_without_deleting_or_resynthesizing(self):
+        first = self.run_voice()
+        self.assertTrue(first['ran'])
+        before = (self.work / 'voice.wav').read_bytes()
+        (self.work / 'preserve.txt').write_text('existing evidence')
+        second = self.run_voice()
+        self.assertEqual(self.calls, 1)
+        self.assertTrue(second['reused'])
+        self.assertEqual((self.work / 'voice.wav').read_bytes(), before)
+        self.assertTrue((self.work / 'preserve.txt').exists())
+
+    def test_corrupt_missing_or_changed_input_never_replays_voice(self):
+        self.run_voice()
+        original = (self.work / 'voice.wav').read_bytes()
+        for mode in ('corrupt', 'missing', 'binding', 'receipt'):
+            with self.subTest(mode=mode):
+                receipt_path = self.work / 'voice-checkpoint.json'
+                receipt = receipt_path.read_bytes()
+                if mode == 'corrupt':
+                    (self.work / 'voice.wav').write_bytes(b'broken')
+                elif mode == 'missing':
+                    (self.work / 'voice.wav').unlink()
+                elif mode == 'binding':
+                    self.inputs['script'] = 'different'
+                else:
+                    receipt_path.write_text('[]')
+                out = self.run_voice()
+                self.assertFalse(out['ran'])
+                self.assertTrue(out['problems'][0].startswith('VOICE_CACHE_'), out)
+                self.assertEqual(self.calls, 1)
+                (self.work / 'voice.wav').write_bytes(original)
+                self.inputs['script'] = 'fixture'
+                receipt_path.write_bytes(receipt)
+
+    def test_legacy_unreceipted_work_is_preserved_and_not_adopted(self):
+        self.work.mkdir()
+        (self.work / 'voice.wav').write_bytes(b'previous voice')
+        out = self.run_voice()
+        self.assertFalse(out['ran'])
+        self.assertIn('VOICE_CACHE_UNATTESTED', out['problems'][0])
+        self.assertEqual(self.calls, 0)
+        self.assertEqual((self.work / 'voice.wav').read_bytes(), b'previous voice')
+
+    def test_failed_layout_does_not_consume_a_previous_layout(self):
+        self.run_voice()
+        (self.work / 'layout.json').write_text(json.dumps(self.layout))
+        with patch.object(pf.eb, 'lines_step', side_effect=SystemExit('NATIVE_SPEECH_OUTSIDE_MEDIA fixture')):
+            out = self.run_voice()
+        self.assertEqual(self.calls, 1)
+        self.assertTrue(out['reused'])
+        self.assertIsNone(out['measured'])
+        self.assertIn('NATIVE_SPEECH_OUTSIDE_MEDIA', out['problems'][0])
+
+    def test_incomplete_synthesis_is_not_replayed(self):
+        def fail(args, **kwargs):
+            if 'voice' not in args:
+                return subprocess.CompletedProcess(args, 0, stdout='/fixture', stderr='')
+            self.calls += 1
+            (self.work / 'voice.wav').write_bytes(b'partial')
+            return subprocess.CompletedProcess(args, 1, stdout='', stderr='interrupted')
+        with patch.object(pf.subprocess, 'run', side_effect=fail):
+            first = self.run_voice()
+            second = self.run_voice()
+        self.assertFalse(first['ran'])
+        self.assertFalse(second['ran'])
+        self.assertEqual(self.calls, 1)
+        self.assertEqual((self.work / 'voice.wav').read_bytes(), b'partial')
+
+    def test_another_owner_or_a_symlink_is_refused_before_synthesis(self):
+        import fcntl
+        self.work.mkdir()
+        with (self.work / '.preflight-voice.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            out = self.run_voice()
+            self.assertFalse(out['ran'])
+            self.assertIn('VOICE_CACHE_BUSY', out['problems'][0])
+        self.assertEqual(self.calls, 0)
+        linked = self.root / 'linked'
+        linked.symlink_to(self.work, target_is_directory=True)
+        out = pf.voice_step(self.plan, sys.executable, self.prepared, linked)
+        self.assertFalse(out['ran'])
+        self.assertIn('VOICE_CACHE_PATH_REFUSED', out['problems'][0])
+        outside = self.root / '..' / 'must-not-create-voice'
+        out = pf.voice_step(self.plan, sys.executable, self.prepared, outside)
+        self.assertFalse(out['ran'])
+        self.assertIn('VOICE_CACHE_PATH_REFUSED', out['problems'][0])
+
+    def test_a_mutating_input_is_not_sealed_as_completed(self):
+        self.inputs['models'] = 'before'
+        def mutate(args, **kwargs):
+            result = self.fake_voice(args, **kwargs)
+            if 'voice' in args:
+                self.inputs['models'] = 'after'
+            return result
+        with patch.object(pf.subprocess, 'run', side_effect=mutate):
+            out = self.run_voice()
+        self.assertFalse(out['ran'])
+        self.assertIn('VOICE_CACHE_INPUT_CHANGED_DURING_RUN', out['problems'])
+        self.assertFalse((self.work / 'voice-checkpoint.json').exists())
+        self.assertTrue((self.work / 'voice.wav').exists())
+        self.assertFalse(self.run_voice()['ran'])
+        self.assertEqual(self.calls, 1)
+
+    def test_model_source_or_runtime_bytes_change_the_binding(self):
+        tree = self.root / 'inputs'
+        tree.mkdir()
+        item = tree / 'model.bin'
+        item.write_bytes(b'first')
+        first = pf.voice_tree(tree)
+        item.write_bytes(b'second')
+        self.assertNotEqual(first, pf.voice_tree(tree))
+        item.write_bytes(b'first')
+        (tree / '__pycache__').mkdir()
+        (tree / '__pycache__' / 'temporary.pyc').write_bytes(b'cache')
+        # -B disables writes, not reads: pre-existing bytecode is also an input.
+        self.assertNotEqual(first, pf.voice_tree(tree))
+        (tree / 'external').symlink_to(item)
+        with self.assertRaisesRegex(ValueError, 'VOICE_CACHE_INPUT_SYMLINK'):
+            pf.voice_tree(tree)
+
+    def test_invalid_timeline_cannot_get_a_completion_receipt(self):
+        def invalid(args, **kwargs):
+            result = self.fake_voice(args, **kwargs)
+            if 'voice' in args:
+                path = self.work / 'timeline.json'
+                data = json.loads(path.read_text())
+                data['sentences'][0]['end'] = float('inf')
+                path.write_text(json.dumps(data))
+            return result
+        with patch.object(pf.subprocess, 'run', side_effect=invalid):
+            out = self.run_voice()
+        self.assertFalse(out['ran'])
+        self.assertFalse((self.work / 'voice-checkpoint.json').exists())
+        self.assertEqual(self.calls, 1)
 
 
 class Probes(unittest.TestCase):

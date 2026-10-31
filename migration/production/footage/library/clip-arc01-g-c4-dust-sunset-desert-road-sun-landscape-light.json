@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-g-c4-dust-sunset-desert-road-sun-landscape-light",
+ "theme": "arc01-g-c4-dust",
+ "query": "barren desert clouds thorns",
+ "source": "pixabay",
+ "title": "sunset, desert, road, sun, landscape, light",
+ "page": "https://pixabay.com/videos/id-94821/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-94821/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6f483f259c3ef0f91b1966a07311cb61b95619b352eb78f2919296af9520e8e5",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  87.8,
+  88.1,
+  88.3,
+  88.7,
+  89.2
+ ],
+ "vetting_descriptions": [
+  "A sunset on a road with a person standing on the side of the road.",
+  "A sunset is captured on a road, with a mountain in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

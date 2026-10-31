@@ -2,7 +2,9 @@
 """Offline checks of the footage selection: licence, size, length and title filters, and the credit line."""
 from pathlib import Path
 import sys
+import subprocess
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import footage as ft  # noqa: E402
@@ -73,6 +75,31 @@ class Selection(unittest.TestCase):
 
 class Vetting(unittest.TestCase):
     OK_DESC = ["A waterfall pours over mossy rocks into a green pool.", "White water rushes between rocks and ferns."]
+
+    def test_e186_failed_ocr_does_not_become_no_text(self):
+        header = "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n"
+        for output in ("", header):
+            with self.subTest(output=output), patch.object(ft.subprocess, "run", return_value=
+                    subprocess.CompletedProcess(["tesseract"], 1, output, "detector failed")):
+                result = ft.ocr_words(Path("synthetic.jpg"))
+                self.assertIsNone(result)
+                self.assertEqual(ft.decide([80] * 5, [result] + [[]] * 4, self.OK_DESC, 0.0)["vetting"], "PENDING")
+
+    def test_e186_failed_grade_does_not_become_zero_black(self):
+        for stderr in ("", "black_duration:0.1\n"):
+            with self.subTest(stderr=stderr), patch.object(ft.subprocess, "run", return_value=
+                    subprocess.CompletedProcess(["ffmpeg"], 1, "", stderr)):
+                result = ft.graded_black_run(Path("synthetic.mp4"))
+                self.assertIsNone(result)
+                self.assertEqual(ft.decide([80] * 5, [[]] * 5, self.OK_DESC, result)["vetting"], "PENDING")
+
+    def test_unmeasured_or_invalid_black_run_never_approves(self):
+        for measurement in (None, float("nan"), float("inf"), -1.0, True):
+            with self.subTest(measurement=measurement):
+                result = ft.decide([80] * 5, [[]] * 5, self.OK_DESC, measurement)
+                self.assertEqual(result["vetting"], "PENDING")
+                self.assertIsNone(result["vetting_black_run_s"])
+
 
     def test_clean_clip_is_approved(self):
         self.assertEqual(ft.decide([80, 90, 85, 88, 70], [[], [], [], [], []], self.OK_DESC)["vetting"], "APPROVED")

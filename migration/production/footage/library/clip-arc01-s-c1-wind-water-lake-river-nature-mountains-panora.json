@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-wind-water-lake-river-nature-mountains-panora",
+ "theme": "arc01-s-c1-wind",
+ "query": "wind ripples dark water",
+ "source": "pixabay",
+ "title": "water, lake, river, nature, mountains, panorama, sunset, sun, wind, clouds, sky, flowers, italy",
+ "page": "https://pixabay.com/videos/id-45214/",
+ "author": "Ambient_Nature_Atmosphere",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-45214/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "219f4d0dd4a9113536a6fcaa4de41db565c4e1510a3913fb6af0515300218553",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  99.7,
+  99.5,
+  99.7,
+  99.4,
+  99.4
+ ],
+ "vetting_descriptions": [
+  "A body of water with trees in the background and a blue sky above.",
+  "A calm river with trees on the bank and a blue sky above."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-wind-water-lake-river-nature-mountains-panora-sha256-219f4d0dd4a9113536a6fcaa4de41db565c4e1510a3913fb6af0515300218553.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

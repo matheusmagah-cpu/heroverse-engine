@@ -426,7 +426,12 @@ def grammar_checks_story_v4(criteria, manifest, script=None, words=None, first_w
         may show them, and a spoken shot may carry the Kokoro voice over such a still."""
         if exception and c["source"] == "still" and c.get("character_refs") is True:
             return c.get("id") not in spoken or c.get("voice") == "kokoro"
-        return not (holds.get(c.get("id")) or {}).get("characters") and c.get("id") not in spoken
+        no_character = not (holds.get(c.get("id")) or {}).get("characters")
+        # E150: v5 explicitly permits God's (always off-screen) and the Keeper's Kokoro voice over vetted
+        # character-free footage/stills. The manifest must declare that route; v4 remains silent-only.
+        voiced_fallback = (criteria.get("version") == STORY_V5 and c.get("voice") == "kokoro"
+                           and c.get("voiceover") in ("god", "keeper") and c.get("talking") is False)
+        return no_character and (c.get("id") not in spoken or voiced_fallback)
 
     def licence_ok(c):
         if c["source"] == "footage":

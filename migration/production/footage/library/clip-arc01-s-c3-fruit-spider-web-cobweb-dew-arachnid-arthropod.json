@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-fruit-spider-web-cobweb-dew-arachnid-arthropod",
+ "theme": "arc01-s-c3-fruit",
+ "query": "red fruit hanging branch dew",
+ "source": "pixabay",
+ "title": "spider, web, cobweb, dew, arachnid, arthropod, trap, autumn, orb",
+ "page": "https://pixabay.com/videos/id-300218/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-300218/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cfa259da57b1940abdc3b15ac3309b96832497b916f1d453b992a28aaad05a5c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.0,
+  95.0,
+  96.8,
+  98.2,
+  96.3
+ ],
+ "vetting_descriptions": [
+  "A spider is sitting in a web on a tree branch.",
+  "A spider is sitting on a web in front of a tree."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-fruit-spider-web-cobweb-dew-arachnid-arthropod-sha256-cfa259da57b1940abdc3b15ac3309b96832497b916f1d453b992a28aaad05a5c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,45 @@
+{
+ "id": "genesis-09-short-s-noah-door-2026102901-1",
+ "still": "genesis-09-short-s-noah-door",
+ "episode": "genesis-09-short",
+ "shot": "s-noah-door",
+ "run": "2026102901",
+ "status": "DRAFT",
+ "sent_prompt": null,
+ "engine": "chatgpt-imagegen",
+ "models": null,
+ "generated_by": "OpenAI (recovered prior conversation)",
+ "source": {
+  "provider": "OpenAI",
+  "license": "OpenAI generated output; owner-authorized creation; production license acceptance pending",
+  "original_sha256": "6416777cabf5ceccae1329bfc9637e591a7f4642472209e42af89042b78bab72"
+ },
+ "conversation_id": null,
+ "quote": null,
+ "references": [
+  {
+   "record": "ch-noah-front",
+   "release_asset": "characters-img-ch-noah-front-sha256-4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5.png",
+   "sha256": "4c237cbae8d70855bfc408ba60baf6281f7ee20e404e8abaff164228c2066fd5"
+  }
+ ],
+ "pavo": null,
+ "upscaler": "Lanczos resize only; no super-resolution or new generation",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-short-s-noah-door-2026102901-1.jpg",
+ "sha256": "f672fda18fe4c56f3dd72cb15f601440a0a03270571bc28406ab175d06a7a947",
+ "target_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Static full-body rear view, camera directly behind the man at shoulder height. Only the back of his head is visible; both ears and shoulders are symmetric about the centre line. An old man with short grey hair on a bare head wears a plain brown wool robe belted with a rope, barefoot. He stands on the threshold of one tall open doorway framed by rough pitch-black wooden planks. The uninterrupted opening reaches the floor, framing the valley from the grey sky down to the path below. His whole body, the threshold and the open passage fit inside the central third of the square image for a vertical crop. Far below are small human silhouettes walking on foot across the valley. Overcast afternoon, flat grey light on the timber. Patient and grave. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "prompt": null,
+ "provenance_status": "EXACT_GENERATION_PROMPT_NOT_RECOVERED",
+ "reference_use_reported": "Exact approved Noah front reference hash recovered from prior execution checkpoint; matches current canonical reference record",
+ "visual_triage": {
+  "observed": "Continuous doorway opening to the floor; symmetric rear view; bare head, brown robe and rope belt; distant people visible.",
+  "remaining": "The exact generation prompt is unavailable; the Noah reference hash is recovered and matches the current canonical record.",
+  "score": null,
+  "approved": false
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c3-wind-tree-house-wall-windows-wind",
+ "theme": "arc01-s-c3-wind",
+ "query": "trees bending strong wind",
+ "source": "pixabay",
+ "title": "tree, house, wall, windows, wind",
+ "page": "https://pixabay.com/videos/id-44374/",
+ "author": "ForceLabs",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ForceLabs via Pixabay (https://pixabay.com/videos/id-44374/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e6899f1991c47a6ada95871ef1730ad2372610ad1da84db53bab193e0bda9de7",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED building"
+ ],
+ "vetting_luma": [
+  70.3,
+  70.0,
+  69.4,
+  69.8,
+  70.1
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves is in front of a building with a window.",
+  "A tree with green leaves is in front of a building with a window."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

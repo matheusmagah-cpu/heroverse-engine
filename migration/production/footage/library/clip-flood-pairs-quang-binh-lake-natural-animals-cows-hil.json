@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-pairs-quang-binh-lake-natural-animals-cows-hil",
+ "theme": "flood-pairs",
+ "query": "goats walking hill",
+ "source": "pixabay",
+ "title": "quang binh, lake, natural, animals, cows, hills",
+ "page": "https://pixabay.com/videos/id-32414/",
+ "author": "longbozo",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: longbozo via Pixabay (https://pixabay.com/videos/id-32414/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "213cff21adb1847150dfec7eb26470744c2bbf4a067051c4aaf9bb5e394d94c5",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  152.3,
+  148.5,
+  152.3,
+  149.1,
+  143.1
+ ],
+ "vetting_descriptions": [
+  "A serene lake with a mountain in the background and a few trees on the shore.",
+  "A serene lake with a lush green island in the middle, surrounded by mountains and lush greenery."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-pairs-quang-binh-lake-natural-animals-cows-hil-sha256-213cff21adb1847150dfec7eb26470744c2bbf4a067051c4aaf9bb5e394d94c5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

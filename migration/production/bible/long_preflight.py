@@ -186,13 +186,14 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
                 shot_sources.expected_request(plan, s, i, a, digests):
             continue
         if a and a.get("request_sha256") == digests.get(s["id"]) and (
-                need is None or (isinstance(a.get("clip_seconds"), (int, float)) and a["clip_seconds"] >= need)):
-            continue
-        if s["id"] in fallback:   # its free source is approved by approve-source (R3), never probed
-            planned.append(s["id"])
+                need is None or (eb.clip_timing.finite_positive(eb.clip_timing.seconds(a, plan.get("episode")))
+                                 and eb.clip_timing.seconds(a, plan.get("episode")) >= need)):
             continue
         if existing.get(s["id"]):
             review[s["id"]] = [c.get("asset") or c.get("url") for c in existing[s["id"]]]
+            continue
+        if s["id"] in fallback:   # existing media wins before a new source is selected (R1)
+            planned.append(s["id"])
             continue
         todo.append(s)
     batches, cur, used, rank = [], [], 0.0, None

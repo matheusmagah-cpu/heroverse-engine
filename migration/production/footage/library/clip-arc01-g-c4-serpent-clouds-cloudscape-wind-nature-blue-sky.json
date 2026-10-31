@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-serpent-clouds-cloudscape-wind-nature-blue-sky",
+ "theme": "arc01-g-c4-serpent",
+ "query": "dark storm clouds wind dust",
+ "source": "pixabay",
+ "title": "clouds, cloudscape, wind, nature, blue sky",
+ "page": "https://pixabay.com/videos/id-158384/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-158384/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0c9086d7cdea4644a10689342b4811a6d3467946ff21c90a5257cdbc833f8ab2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  140.3,
+  137.8,
+  136.1,
+  134.4,
+  134.0
+ ],
+ "vetting_descriptions": [
+  "The sky is filled with clouds and the sun is shining through them.",
+  "A cloudy blue sky with a few clouds and a sun shining through."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-serpent-clouds-cloudscape-wind-nature-blue-sky-sha256-0c9086d7cdea4644a10689342b4811a6d3467946ff21c90a5257cdbc833f8ab2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

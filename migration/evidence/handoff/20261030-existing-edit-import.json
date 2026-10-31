@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-30",
+  "responsible": "Codex",
+  "stage": "existing-edit import and technical DRAFT consumption",
+  "base_main_sha": "34a3ead794cf5b0f895905c743edf5192d978e78",
+  "delivery": {
+    "cli": "episode_build.py import-edit BINDING ROOT WORK; render-imported WORK OUT",
+    "private_package_version": 12,
+    "existing_package_files_preserved": 123,
+    "imported_frames": 5250,
+    "fps": 30,
+    "seconds": 175,
+    "visuals": 21,
+    "logical_shots": 22,
+    "spoken_units": 26,
+    "words": 395,
+    "master_audio_bytes_preserved": true,
+    "keeper_pcm_slices_match_existing": true,
+    "full_decode": "PASS",
+    "aac_packets_identical": true
+  },
+  "verification": {
+    "canonical_test_files": 87,
+    "canonical_passed": 87,
+    "importer_cases": 8,
+    "original_toolkit_report": "migration/evidence/code-review/20261030-existing-edit-toolkit-review.md",
+    "original_sweep_report": "docs/audits/2026-10-30-existing-edit-import.md",
+    "sweep_recording_limitation": "The reproduced vulnerable working tree was not preserved as a Git commit; no complete historical findings-index compliance is claimed. Corrected hashes and retained regressions are recorded."
+  },
+  "provider_requests_created": 0,
+  "production_approved": false,
+  "publication_approved": false,
+  "new_publication": false,
+  "remaining": [
+    "The candidate full plan still has 26 blockers; import records rather than removes them.",
+    "Pavo account diagnostics succeeded previously, but no connected generation tool was found by the current Pavo plugin search. The repository adapter can consume WAV+reference only inside its checkout; private transport to that runtime remains unresolved.",
+    "Bind any imported PCM hash to the final request and use exact zero-cost quote, shared quota/claims and uncertain-request reconciliation. One probe round may contain multiple talking-shot generations; do not assume attempts=1 means a single provider request.",
+    "Keeper declared speech durations: 10.60825s fits 11s; 9.745375s fits 10s; 5.7529167s fails 6s padding by about 70 samples at 24kHz. Do not round away the failure or trim words.",
+    "Resolve current-source context, inherited prompts and plan semantics; then final genuine audiovisual review>=9.5, existing approval/publication gates and public readback."
+  ],
+  "next_action": "Continue private Pavo input transport and approved-shot integration from the preserved import, not another voice reconstruction or import rewrite. Keep Buzzy standby, accepted media, existing supervision clocks and shared executor lease. No completed automatic production/publication cycle is claimed."
+}

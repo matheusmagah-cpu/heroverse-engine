@@ -34,11 +34,13 @@ usage:
   scene_stills.py finalize IMG_DIR RUN                          candidates (JPEG 1080x1920 + record) into stills/candidates
                                                                 (FLUX PNGs, or Pavo Agnes Image JPEGs with `source`)
   scene_stills.py sheet RUN OUT_JPG                             contact sheet of that run's candidates
-  scene_stills.py approve STILL_ID CANDIDATE_ID --score S --note TEXT   after Claude's review (>= 9.5), by PR
+  scene_stills.py approve STILL_ID CANDIDATE_ID --score S --note TEXT --reviewer MODEL
+                                                                after the named session's review (>= 9.5), by PR
 """
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import shutil
@@ -47,6 +49,7 @@ import sys
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import plan_check  # noqa: E402
+import reviewer_identity  # noqa: E402
 
 REPO = plan_check.ROOT
 STILLS = plan_check.STILLS_DIR
@@ -264,15 +267,15 @@ def sheet(run, out_jpg, stills_dir=None):
     return [p.stem for p in files]
 
 
-def approve(still, candidate, score, note, stills_dir=None, today=None):
-    """Claude's review approved CANDIDATE as STILL (overall >= 9.5): its image becomes bible/stills/<still>.jpg and
+def approve(still, candidate, score, note, stills_dir=None, today=None, *, reviewer=None):
+    """The named session's review approved CANDIDATE as STILL (overall >= 9.5): its image becomes bible/stills/<still>.jpg and
     the record APPROVED with the sha256 computed here. Refused when the candidate's image is not the one recorded, was
     made from another prompt, belongs to another still, or its prompt fails the scene rules."""
     stills_dir = Path(stills_dir or STILLS)
     rec = plan_check.still_record(still, stills_dir)
     if rec is None:
         raise SystemExit(f"STILL_MISSING {still}")
-    if not isinstance(score, (int, float)) or score < FLOOR or score > 10:
+    if not isinstance(score, (int, float)) or not math.isfinite(score) or score < FLOOR or score > 10:
         raise SystemExit(f"STILL_SCORE_BELOW_FLOOR {score} (overall >= {FLOOR})")
     if not isinstance(note, str) or not note.strip():
         raise SystemExit("STILL_NOTE_MISSING (what the review saw)")
@@ -301,13 +304,14 @@ def approve(still, candidate, score, note, stills_dir=None, today=None):
                                                plan=plan or None)
     if unref:
         raise SystemExit(f"STILL_PROP_UNREFERENCED {candidate}: " + "; ".join(unref) + " (E122)")
+    model = reviewer_identity.require(reviewer)
     dst = stills_dir / f"{still}.jpg"
     shutil.copyfile(src, dst)
     rec.update({"status": "APPROVED", "repo_path": rel(dst), "sha256": sha256(dst), "size": meta.get("size"),
                 "candidate": candidate, "engine": meta.get("engine"), "references": meta.get("references") or [],
                 "pavo": meta.get("pavo"),
                 "approved": {"date": today or datetime.now(timezone.utc).strftime("%Y-%m-%d"), "score": score,
-                             "note": note.strip(), "by": "Claude's still review (ops/CLAUDE_REVIEW.md)",
+                             "note": note.strip(), "by": model, "model": model,
                              "prompt_sha256": hashlib.sha256(rec["prompt"].encode()).hexdigest(),
                              "references_sha256": plan_check.reference_digest(meta.get("references") or [])}})
     save(stills_dir / f"{still}.json", rec)
@@ -330,8 +334,8 @@ def main(argv):
         print(json.dumps({"candidates": finalize(args[0], args[1])}))
     elif cmd == "sheet" and len(args) == 2:
         print(json.dumps({"sheet": args[1], "candidates": sheet(args[0], args[1])}))
-    elif cmd == "approve" and len(args) == 6 and args[2] == "--score" and args[4] == "--note":
-        rec = approve(args[0], args[1], float(args[3]), args[5])
+    elif cmd == "approve" and len(args) == 8 and args[2] == "--score" and args[4] == "--note" and args[6] == "--reviewer":
+        rec = approve(args[0], args[1], float(args[3]), args[5], reviewer=args[7])
         print(json.dumps({"still": rec["id"], "status": rec["status"], "sha256": rec["sha256"]}))
     else:
         raise SystemExit(__doc__)

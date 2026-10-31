@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-co-gate-fire-fireplace-burning-crackling-logs-ch",
+ "theme": "arc01-s-co-gate",
+ "query": "fire burning dark forest night",
+ "source": "pixabay",
+ "title": "fire, fireplace, burning, crackling, logs, christmas fireplace, burning fire, crackling fire",
+ "page": "https://pixabay.com/videos/id-234515/",
+ "author": "BFCMUSIC",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: BFCMUSIC via Pixabay (https://pixabay.com/videos/id-234515/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c603ab7b08beef0b9073888d72fe582d8d706510486b4e9a52d384978e6f8920",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  55.4,
+  59.7,
+  54.5,
+  56.1,
+  57.8
+ ],
+ "vetting_descriptions": [
+  "A large log is burning in a fireplace, creating a warm and cozy atmosphere.",
+  "A large log is burning in a fireplace, creating a warm and cozy atmosphere."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-co-gate-fire-fireplace-burning-crackling-logs-ch-sha256-c603ab7b08beef0b9073888d72fe582d8d706510486b4e9a52d384978e6f8920.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

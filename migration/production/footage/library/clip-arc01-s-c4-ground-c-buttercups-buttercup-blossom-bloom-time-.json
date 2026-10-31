@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-ground-c-buttercups-buttercup-blossom-bloom-time-",
+ "theme": "arc01-s-c4-ground-c",
+ "query": "dry cracked earth time lapse",
+ "source": "pixabay",
+ "title": "buttercups, buttercup, blossom, bloom, time lapse, yellow, petals, flower, flora, spring flower",
+ "page": "https://pixabay.com/videos/id-22634/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 2120,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-22634/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3b267e91130a717a9e2e8e4aba48914cf3044043b4448085cb5a4fb8dd0f4140",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  100.7,
+  105.5,
+  109.0,
+  111.8,
+  114.4
+ ],
+ "vetting_descriptions": [
+  "A yellow flower with green leaves is in the center of the image.",
+  "A yellow flower with green leaves is in the center of the image."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-ground-c-buttercups-buttercup-blossom-bloom-time--sha256-3b267e91130a717a9e2e8e4aba48914cf3044043b4448085cb5a4fb8dd0f4140.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

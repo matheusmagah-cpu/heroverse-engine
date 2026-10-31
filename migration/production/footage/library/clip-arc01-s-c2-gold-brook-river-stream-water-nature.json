@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c2-gold-brook-river-stream-water-nature",
+ "theme": "arc01-s-c2-gold",
+ "query": "gold nugget stream water",
+ "source": "pixabay",
+ "title": "brook, river, stream, water, nature",
+ "page": "https://pixabay.com/videos/id-89454/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-89454/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9f6c2e1a3dfde3a6b44da3f2d5ec8b5e9123e5c1c060d419649de84fde91c339",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  102.9,
+  103.0,
+  102.7,
+  103.1,
+  103.1
+ ],
+ "vetting_descriptions": [
+  "A small stream of water with rocks and grass on the sides, and a small rock in the water.",
+  "A small stream of water with rocks and grass on the sides and a small waterfall."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c2-gold-brook-river-stream-water-nature-sha256-9f6c2e1a3dfde3a6b44da3f2d5ec8b5e9123e5c1c060d419649de84fde91c339.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

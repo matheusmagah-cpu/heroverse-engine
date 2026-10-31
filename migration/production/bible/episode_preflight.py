@@ -17,6 +17,8 @@ Steps (each one is the build's own code, not a copy):
   4. voice (--voice): pilot_render.py voice with the pinned Kokoro model in a prepared work directory (its `source/`
      and `models/`), then episode_build lines on the measured lines: retime, talking records, shares and length as
      the build measures them, and the compose predicted on that layout. Each line's measured pace is reported.
+     A complete hash-bound raw voice is reused on retry; layout/gates run again. Corrupt, incomplete, changed or
+     legacy unattested work is preserved and refused, never silently deleted or regenerated (E211).
   5. requests (--refs, after the voice): refs_step fetches and checks the reference images, and every shot's Pavo
      request goes through the adapter's own offline checks (episode_build.request_problems).
   6. talking lines: each talking shot's line, with its speaker, the reference images it sends and the prompt binding,
@@ -33,10 +35,12 @@ import contextlib
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
 import sys
+import wave
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
@@ -57,7 +61,8 @@ SHEET_IMAGES = len(ch.REF_ORDER)   # a character's reference sheet: front, three
 WORK_ROOT = REPO / ".episode"   # the only place preflight creates or removes a work directory
 # the code a report vouches for: a change to any of them can change what the build refuses
 CODE = [HERE / "episode_build.py", HERE / "plan_check.py", HERE / "voice_pace.py", HERE / "lipsync_check.py",
-        HERE / "syncnet.py", HERE / "episode_preflight.py"]
+        HERE / "syncnet.py", HERE / "episode_preflight.py", HERE / "clip_timing.py", HERE / "reviewer_identity.py",
+        REPO / "migration" / "publish" / "owner_quality_policy.py"]
 
 
 def sha256(path):
@@ -253,6 +258,9 @@ def binding(plan_path, plan, chars_raw=None, probes=None, registry=None):
     if eb.pavo_native.native_plan(plan):   # review of #476: a learned prompt block or a voice changes the routes
         out["prompt_blocks"] = eb.pavo_native.blocks_sha256()
         out["voices"] = sha256(eb.pavo_native.VOICES)
+        out["native_media"] = {sid: {"speech": digest(a["speech"]),
+                                    "media": digest(eb.clip_timing.evidence(a, plan.get("episode")))}
+                               for sid, a in eb.load_approvals(plan).items() if a.get("speech")}
     return out
 
 
@@ -283,29 +291,139 @@ def measured_pace(plan, work):
     return by
 
 
+def voice_tree(root):
+    """Conservative content identity, including bytecode (-B stops writes, not reads)."""
+    root = Path(root)
+    if not root.is_dir():
+        raise ValueError('VOICE_CACHE_INPUT_MISSING')
+    records = []
+    for p in sorted(root.rglob('*')):
+        if p.is_symlink():
+            raise ValueError('VOICE_CACHE_INPUT_SYMLINK')
+        if p.is_file():
+            records.append((p.relative_to(root).as_posix(), eb.sha256(p)))
+    if not records:
+        raise ValueError('VOICE_CACHE_INPUT_EMPTY')
+    return {'sha256': digest(records), 'files': len(records)}
+
+
+def voice_inputs(script, voice_python, prepared):
+    """Bind synthesis, not downstream layout/reviews. No secret/environment dump or network access."""
+    probe = ('import json,sys,sysconfig,espeakng_loader as e;print(json.dumps(dict('
+             'version=sys.version,executable=sys.executable,purelib=sysconfig.get_path("purelib"),'
+             'platlib=sysconfig.get_path("platlib"),espeak=e.get_data_path())))')
+    result = subprocess.run([str(voice_python), '-I', '-B', '-c', probe],
+                            capture_output=True, text=True, check=True, timeout=30)
+    runtime = json.loads(result.stdout)
+    packages = [voice_tree(p) for p in sorted({runtime['purelib'], runtime['platlib']})]
+    return {'script': digest(script),
+            'renderer': eb.sha256(REPO / 'migration' / 'production' / 'pilot_render.py'),
+            'source': voice_tree(Path(prepared) / 'source'),
+            'models': voice_tree(Path(prepared) / 'models'),
+            'runtime': {'version': runtime['version'], 'python': eb.sha256(runtime['executable']),
+                        'packages': packages, 'espeak': voice_tree(runtime['espeak'])}}, \
+           dict(os.environ, ESPEAK_DATA_PATH=runtime['espeak'])
+
+
+def voice_outputs(work):
+    """Only raw synthesis outputs; derived narration/layout must be recomputed under current gates."""
+    paths = [work / name for name in ('voice-script.json', 'voice.wav', 'timeline.json')]
+    if any(p.is_symlink() or not p.is_file() for p in paths):
+        raise ValueError('VOICE_CACHE_OUTPUT_MISSING')
+    with wave.open(str(work / 'voice.wav'), 'rb') as wav:
+        if wav.getsampwidth() != 2 or wav.getnframes() <= 0 or wav.getnchannels() != 1:
+            raise ValueError('VOICE_CACHE_WAV_INVALID')
+        rate, duration = wav.getframerate(), wav.getnframes() / wav.getframerate()
+        if len(wav.readframes(wav.getnframes())) != wav.getnframes() * 2:
+            raise ValueError('VOICE_CACHE_WAV_TRUNCATED')
+    timeline = json.loads((work / 'timeline.json').read_text())
+    number = lambda v: type(v) in (int, float) and math.isfinite(v)
+    if not isinstance(timeline, dict) or not number(timeline.get('voice_seconds')) or \
+            abs(timeline['voice_seconds'] - duration) > .002 or timeline.get('sample_rate') != rate:
+        raise ValueError('VOICE_CACHE_TIMELINE_INVALID')
+    for field in ('segments', 'sentences'):
+        rows = timeline.get(field)
+        if not isinstance(rows, list) or not rows:
+            raise ValueError('VOICE_CACHE_TIMELINE_INVALID')
+        for row in rows:
+            if not isinstance(row, dict) or not number(row.get('start')) or not number(row.get('end')) or \
+                    not 0 <= row['start'] <= row['end'] <= duration + .002:
+                raise ValueError('VOICE_CACHE_TIMELINE_INVALID')
+    return {p.name: {'sha256': eb.sha256(p), 'bytes': p.stat().st_size} for p in paths}
+
+
 def voice_step(plan, voice_python, prepared, work):
-    """Kokoro locally (the pinned model in a prepared work directory), then the build's lines step."""
-    work = Path(work)
-    if work.exists() or work.is_symlink():
-        eb.safe_rmtree(work, WORK_ROOT)   # review of #422: never anything outside .episode/
-    work.mkdir(parents=True)
-    for name in ("source", "models"):
-        src = Path(prepared) / name
-        if not src.is_dir():
-            return {"ran": False, "problems": [f"VOICE_NOT_PREPARED {src} (pilot_render.py prepare WORK ARCHIVE once)"]}
-        (work / name).symlink_to(src.resolve())
-    eb.save(work / "voice-script.json", eb.voice_script(plan))
-    env = dict(os.environ)
+    """E211: one owner, no destructive retry. A completed exact-input voice resumes layout only."""
+    work, root = Path(work).absolute(), WORK_ROOT.absolute()
+    if root not in work.parents or work.resolve() != work or root.resolve() != root or \
+            any(p.is_symlink() for p in (work, *work.parents)):
+        return {'ran': False, 'problems': ['VOICE_CACHE_PATH_REFUSED']}
     try:
-        env["ESPEAK_DATA_PATH"] = subprocess.run([str(voice_python), "-I", "-c",
-                                                  "import espeakng_loader as e;print(e.get_data_path())"],
-                                                 capture_output=True, text=True, check=True).stdout.strip()
-    except (OSError, subprocess.CalledProcessError):
-        pass
-    done = subprocess.run([str(voice_python), "-I", "-B", str(REPO / "migration" / "production" / "pilot_render.py"),
-                           "voice", str(work), str(work / "voice-script.json")], capture_output=True, text=True, env=env)
-    if done.returncode:
-        return {"ran": False, "problems": [f"VOICE_FAILED {done.stderr.strip()[-300:]}"]}
+        import fcntl   # the existing Linux executor; unsupported locking must fail closed
+        work.mkdir(parents=True, exist_ok=True)
+        lock = work / '.preflight-voice.lock'
+        with os.fdopen(os.open(lock, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600), 'a') as held:
+            try:
+                fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                return {'ran': False, 'problems': ['VOICE_CACHE_BUSY']}
+            return voice_step_locked(plan, voice_python, Path(prepared), work)
+    except (OSError, ValueError, TypeError, KeyError, EOFError, wave.Error, ImportError,
+            subprocess.SubprocessError) as exc:
+        reason = str(exc) if str(exc).startswith('VOICE_CACHE_') else 'VOICE_CACHE_INVALID ' + type(exc).__name__
+        return {'ran': False, 'problems': [reason]}
+
+
+def voice_step_locked(plan, voice_python, prepared, work):
+    receipt_path = work / 'voice-checkpoint.json'
+    reused = receipt_path.exists()
+    # Never bless a legacy or interrupted operation after the fact, nor silently discard its bytes.
+    if not reused and any(p.name != '.preflight-voice.lock' for p in work.iterdir()):
+        raise ValueError('VOICE_CACHE_UNATTESTED preserve existing work; reconcile before any synthesis')
+    for p in work.rglob('*'):
+        if p.is_symlink() and p not in (work / 'source', work / 'models'):
+            raise ValueError('VOICE_CACHE_PATH_REFUSED')
+    script = eb.voice_script(plan)
+    inputs, env = voice_inputs(script, voice_python, prepared)
+    if reused:
+        receipt = json.loads(receipt_path.read_text())
+        if not isinstance(receipt, dict) or receipt.get('schema') != 'preflight-voice-v1' or \
+                receipt.get('status') != 'COMPLETE' or receipt.get('inputs') != inputs:
+            raise ValueError('VOICE_CACHE_INPUT_CHANGED_OR_INVALID')
+        if receipt.get('outputs') != voice_outputs(work):
+            raise ValueError('VOICE_CACHE_OUTPUT_CHANGED')
+    else:
+        for name in ('source', 'models'):
+            (work / name).symlink_to((prepared / name).resolve())
+        eb.save(work / 'voice-script.json', script)
+        done = subprocess.run([str(voice_python), '-I', '-B', str(REPO / 'migration' / 'production' / 'pilot_render.py'),
+                               'voice', str(work), str(work / 'voice-script.json')],
+                              capture_output=True, text=True, env=env)
+        if done.returncode:
+            return {'ran': False, 'problems': [f'VOICE_FAILED {done.stderr.strip()[-300:]}']}
+        # An input changed while synthesis was running: retain outputs, but never attest them.
+        if inputs != voice_inputs(script, voice_python, prepared)[0]:
+            raise ValueError('VOICE_CACHE_INPUT_CHANGED_DURING_RUN')
+        receipt = {'schema': 'preflight-voice-v1', 'status': 'COMPLETE',
+                   'inputs': inputs, 'outputs': voice_outputs(work)}
+        pending = work / 'voice-checkpoint.pending'
+        with pending.open('x') as out:
+            json.dump(receipt, out, indent=1)
+            out.flush()
+            os.fsync(out.fileno())
+        os.replace(pending, receipt_path)
+    for name in ("source", "models"):
+        if (work / name).resolve() != (prepared / name).resolve():
+            raise ValueError('VOICE_CACHE_PREPARED_PATH_CHANGED')
+    # A new early refusal must not present the previous run's derived layout as a current measurement.
+    previous = work / 'layout.json'
+    if previous.exists():
+        history = work / 'layout-history'
+        history.mkdir(exist_ok=True)
+        archived = history / (eb.sha256(previous) + '.json')
+        if archived.exists() and eb.sha256(archived) != eb.sha256(previous):
+            raise ValueError('VOICE_CACHE_LAYOUT_HISTORY_INVALID')
+        os.replace(previous, archived)
     try:
         with contextlib.redirect_stdout(sys.stderr):   # the step logs; the report is the only stdout
             layout = eb.lines_step(plan, work)
@@ -315,7 +433,8 @@ def voice_step(plan, voice_python, prepared, work):
         problems = [str(exc)]
     if layout and not problems:   # a long's compose too (long_build.compose_problems, LONG_DESIGN slice 3)
         problems = [f"COMPOSE {p}" for p in eb.compose_prediction(plan, layout)]
-    return {"ran": True, "problems": problems, "pace": measured_pace(plan, work),
+    return {"ran": True, "reused": reused, "checkpoint_sha256": eb.sha256(receipt_path),
+            "problems": problems, "pace": measured_pace(plan, work),
             "measured": {k: layout[k] for k in ("total", "keeper_share", "lesson_share", "retimed")} if layout else None}
 
 

@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-lions-lion-lioness-few-predator-dangerous-carn",
+ "theme": "flood-lions",
+ "query": "lion walking",
+ "source": "pixabay",
+ "title": "lion, lioness, few, predator, dangerous, carnivores, big cat, wildlife",
+ "page": "https://pixabay.com/videos/id-162629/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-162629/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7672f28eead74afddd2e44560d5547a2dc31dba1382368243d923bec312a7dee",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.9,
+  81.5,
+  78.2,
+  84.7,
+  80.8
+ ],
+ "vetting_descriptions": [
+  "Two lions are standing next to each other, one of them is rubbing its head on the other.",
+  "Two lions are playing with each other on a dirt ground."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-lions-lion-lioness-few-predator-dangerous-carn-sha256-7672f28eead74afddd2e44560d5547a2dc31dba1382368243d923bec312a7dee.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

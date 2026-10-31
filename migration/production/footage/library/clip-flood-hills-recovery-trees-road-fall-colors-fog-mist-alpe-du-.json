@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-hills-recovery-trees-road-fall-colors-fog-mist-alpe-du-",
+ "theme": "flood-hills-recovery",
+ "query": "mist mountains",
+ "source": "pixabay",
+ "title": "trees, road, fall, colors, fog, mist, alpe du grand greenhouse, mountain, colorful, sheets, foliage, nature, landscape",
+ "page": "https://pixabay.com/videos/id-133843/",
+ "author": "Guyjass",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Guyjass via Pixabay (https://pixabay.com/videos/id-133843/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dc16b035ab1a09aa0e0df43eb77b159e53f0788ed5c36447e002c42978505d76",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED sign"
+ ],
+ "vetting_luma": [
+  89.6,
+  88.0,
+  87.0,
+  86.4,
+  86.4
+ ],
+ "vetting_descriptions": [
+  "A road with a fence on the side and a tree with yellow leaves.",
+  "A foggy road with a wooden fence and a sign on the side of the road."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

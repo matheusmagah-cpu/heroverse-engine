@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-silhouette-river-drought-plain-desert",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette walking desert",
+ "source": "pixabay",
+ "title": "river, drought, plain, desert",
+ "page": "https://pixabay.com/videos/id-89835/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-89835/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a43dd1b92aab17cd881f47eef18c550ea9cfcb6e37e3a7e22bec269ebfd73430",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  128.3,
+  129.4,
+  129.3,
+  129.0,
+  129.0
+ ],
+ "vetting_descriptions": [
+  "A large crack in the ground is visible in the image.",
+  "A large crack in the ground with a river running through it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-silhouette-river-drought-plain-desert-sha256-a43dd1b92aab17cd881f47eef18c550ea9cfcb6e37e3a7e22bec269ebfd73430.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

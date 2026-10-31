@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -165,7 +166,44 @@ class ApproveSource(unittest.TestCase):
 
     def approve(self, shot, item="clip-river-a", score=9.6, note="the river under the line", source="footage"):
         return ss.approve_source(plan(), shot, source, item, score, note, lib=self.lib, shots_dir=self.dir,
-                                 today="2026-10-27")
+                                 today="2026-10-27", reviewer="claude-session-reviewer")
+
+    def test_e149_source_identity_is_required_and_the_build_rejects_unknown(self):
+        for model in (None, "unknown-session"):
+            with self.assertRaisesRegex(SystemExit, "REVIEWER_IDENTITY_REFUSED"):
+                ss.approve_source(plan(), "s-river", "footage", "clip-river-a", 9.6, "reviewed fixture",
+                                   lib=self.lib, shots_dir=self.dir, reviewer=model)
+            self.assertFalse((self.dir / "t-sources.json").exists())
+        a = ss.approve_source(plan(), "s-river", "footage", "clip-river-a", 9.6, "reviewed fixture",
+                              lib=self.lib, shots_dir=self.dir, reviewer="gpt-6-astra-session-reviewer")
+        self.assertEqual(a["model"], "gpt-6-astra-session-reviewer")
+        self.assertFalse(any("SHOT_REVIEWER_REFUSED" in p for p in eb.review_problems(plan(), {}, {"s-river": a})))
+        a["model"] = "unknown-session"
+        self.assertIn("SHOT_REVIEWER_REFUSED", " ".join(eb.review_problems(plan(), {}, {"s-river": a})))
+        del a["model"]
+        self.assertFalse(any("SHOT_REVIEWER_REFUSED" in p for p in eb.review_problems(plan(), {}, {"s-river": a})))
+
+    def test_e189_source_writer_archives_current_only_revocation_before_replacement(self):
+        original = self.approve("s-river")
+        original["revocation"] = {"by": "ChatGPT", "reason": "visible aircraft"}
+        path = self.dir / "t-sources.json"
+        eb.save(path, {"episode": "t-sources", "shots": {"s-river": original}})
+        before = path.read_bytes()
+        with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+            self.approve("s-river", score=10)
+        self.assertEqual(path.read_bytes(), before)
+        self.lib.append(clip("clip-river-b"))
+        replacement = self.approve("s-river", item="clip-river-b")
+        replaced = eb.load(path)
+        self.assertEqual(replaced["revocations"], [dict(original, shot="s-river")])
+        self.assertEqual(replaced["shots"]["s-river"], replacement)
+        self.assertNotIn("revocation", replacement)
+        self.approve("s-river", item="clip-river-b")
+        self.assertEqual(eb.load(path)["revocations"], replaced["revocations"])
+        before = path.read_bytes()
+        with self.assertRaisesRegex(SystemExit, "SHOT_REVIEW_REVOKED"):
+            self.approve("s-river", score=10)
+        self.assertEqual(path.read_bytes(), before)
 
     def test_claude_approves_a_fallback_and_the_build_accepts_exactly_it(self):
         a = self.approve("s-river")
@@ -216,13 +254,13 @@ class ApproveSource(unittest.TestCase):
         p = plan()
         p["shots"].append(dict(p["shots"][2], id="s-river2", lines=[1]))
         p["shots"].pop(3)
-        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "the river", lib=self.lib, shots_dir=self.dir)
+        ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "the river", lib=self.lib, shots_dir=self.dir, reviewer="claude-session-reviewer")
         with self.assertRaises(SystemExit) as err:
             ss.approve_source(p, "s-river2", "footage", "clip-river-a", 9.6, "the river", lib=self.lib,
-                              shots_dir=self.dir)
+                              shots_dir=self.dir, reviewer="claude-session-reviewer")
         self.assertTrue(str(err.exception).startswith("SOURCE_IMAGE_REPEAT s-river2"), str(err.exception))
         ss.approve_source(p, "s-river", "footage", "clip-river-a", 9.6, "approved again", lib=self.lib,
-                          shots_dir=self.dir)                       # the same shot again is not a repeat
+                          shots_dir=self.dir, reviewer="claude-session-reviewer")                       # the same shot again is not a repeat
         # the long: the gap is measured on the plan's own timeline
         arc = json.loads((HERE / "plans" / "arc-02-long.json").read_text())
         gap = lpc.qa_for(arc)["grammar"]["image_repeat_gap_seconds_min"]
@@ -237,10 +275,10 @@ class ApproveSource(unittest.TestCase):
         title = " ".join(sorted(w for w in said if not ss.period_clash(arc, {"title": w, "query": ""})))
         lib = [clip("clip-any", theme="sky", title=title)]
         d = self.dir / "long"
-        ss.approve_source(arc, first, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
-        ss.approve_source(arc, far, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)   # far enough apart
+        ss.approve_source(arc, first, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d, reviewer="claude-session-reviewer")
+        ss.approve_source(arc, far, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d, reviewer="claude-session-reviewer")   # far enough apart
         with self.assertRaises(SystemExit) as err:
-            ss.approve_source(arc, near, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d)
+            ss.approve_source(arc, near, "footage", "clip-any", 9.6, "x", lib=lib, shots_dir=d, reviewer="claude-session-reviewer")
         self.assertTrue(str(err.exception).startswith(f"SOURCE_IMAGE_REPEAT {near}"), str(err.exception))
         # qa_pilot: two holds of different shots showing one still (or one footage part) are the same picture
         holds = [{"start": 0.0, "end": 5.0, "image": "s-a#0.000"}, {"start": 30.0, "end": 35.0, "image": "s-b#0.000"},
@@ -315,6 +353,7 @@ class OwnerException(unittest.TestCase):
         import long_plan_check as lpc
         ss.owner_exception, eb.reference_records = self.saved
         arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        arc.pop("source_policy", None)  # historical 28/10 exception; the 29/10 policy has its own refusal test
         reused = [s for s in arc["shots"] if s.get("still_of")]
         if not reused:
             self.skipTest("the plan reuses no still")
@@ -357,14 +396,14 @@ class OwnerException(unittest.TestCase):
             d = Path(tempfile.mkdtemp())
             try:
                 a = ss.approve_source(arc, t["id"], "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
-                                      shots_dir=d)
+                                      shots_dir=d, reviewer="claude-session-reviewer")
                 self.assertEqual(a["motion"], ss.REUSE_KEEPER_MOTION if t["kind"] == "keeper" else ss.REUSE_MOTION)
                 other = next(s["id"] for s in arc["shots"] if s["id"] not in (t["id"], t["still_of"])
                              and s.get("still_of") != t["still_of"] and s.get("window_of") is None
                              and sorted(ss.shown_characters(s)) == sorted(ss.shown_characters(t)))
                 with self.assertRaises(SystemExit) as err:   # a shot that does not name the still never takes it
                     ss.approve_source(arc, other, "still_motion", f"arc-01-long-{t['still_of']}", 9.6, "x",
-                                      shots_dir=d)
+                                      shots_dir=d, reviewer="claude-session-reviewer")
                 self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
             finally:
                 shutil.rmtree(d)
@@ -486,12 +525,12 @@ class ShortsV5OptIn(unittest.TestCase):
         ss.fallback_refusal = lambda *a, **k: None          # the keeper's own references: tested in OwnerException
         try:
             a = ss.approve_source(self.short(), "k-insight", "still_motion", "arc-k-promise-2", 9.5, "crop holds the face",
-                                  shots_dir=self.dir, today="2026-10-28")
+                                  shots_dir=self.dir, today="2026-10-28", reviewer="claude-session-reviewer")
             self.assertEqual((a["still_from"], a["frame"]), ("arc-k-promise-2", [1080, 1920]))
             for plan, item in ((self.short(criteria="story-qa-criteria-v4"), "arc-k-promise-2"),   # older criteria
                                (self.short(), "arc-k-promise-3")):                                 # not the named one
                 with self.assertRaises(SystemExit) as err:
-                    ss.approve_source(plan, "k-insight", "still_motion", item, 9.5, "x", shots_dir=self.dir)
+                    ss.approve_source(plan, "k-insight", "still_motion", item, 9.5, "x", shots_dir=self.dir, reviewer="claude-session-reviewer")
                 self.assertTrue(str(err.exception).startswith("STILL_NOT_FOR_SHOT"), str(err.exception))
         finally:
             plan_check.still_record, ss.fallback_refusal = keep, refusal
@@ -507,7 +546,7 @@ class ShortsV5OptIn(unittest.TestCase):
         real.write_text(json.dumps(src))
         try:
             a = ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "not read as recycled",
-                                  shots_dir=self.dir, today="2026-10-28")
+                                  shots_dir=self.dir, today="2026-10-28", reviewer="claude-session-reviewer")
             self.assertEqual((a["clip_from"], a["clip_sha256"], a["clip_seconds"]), ("g08#s-wedding", sha, 8))
             p = self.short()
             approvals = json.loads((self.dir / "t-short.json").read_text())["shots"]
@@ -517,16 +556,16 @@ class ShortsV5OptIn(unittest.TestCase):
             self.assertTrue([m for m in eb.review_problems(p, {}, approvals) if m.startswith("SHOT_REQUEST_CHANGED")])
             for plan, code in ((self.short(criteria="story-qa-criteria-v4"), "REUSE_NOT_NAMED"),):
                 with self.assertRaises(SystemExit) as err:
-                    ss.approve_source(plan, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+                    ss.approve_source(plan, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir, reviewer="claude-session-reviewer")
                 self.assertTrue(str(err.exception).startswith(code), str(err.exception))
             other = self.short()
             other["shots"][0]["characters"] = ["noah"]
             with self.assertRaises(SystemExit) as err:
-                ss.approve_source(other, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+                ss.approve_source(other, "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("REUSE_CHARACTERS_DIFFER"))
             real.write_text(json.dumps(dict(src, aspect_ratio="16:9")))
             with self.assertRaises(SystemExit) as err:
-                ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir)
+                ss.approve_source(self.short(), "s-music", "pavo_reuse", "g08#s-wedding", 9.5, "x", shots_dir=self.dir, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("REUSE_FRAME_MISMATCH"))
         finally:
             real.unlink()
@@ -544,10 +583,10 @@ class ShortsV5Footage(unittest.TestCase):
         self.assertEqual(ss.footage_candidates(old, old["shots"][2], 2, lib), [])
         with tempfile.TemporaryDirectory() as d:
             a = ss.approve_source(v5, "s-river", "footage", "clip-river-a", 9.6, "the river, cropped", lib=lib,
-                                  shots_dir=d, today="2026-10-28")
+                                  shots_dir=d, today="2026-10-28", reviewer="claude-session-reviewer")
             self.assertEqual(a["crop_to"], [1080, 1920])
             with self.assertRaises(SystemExit) as err:
-                ss.approve_source(old, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d)
+                ss.approve_source(old, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_USABLE"))
 
     @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
@@ -626,7 +665,7 @@ class ApproveReuse(unittest.TestCase):
     def approve(self, p=None, digests=None, item=None, **kw):
         return ss.approve_source(p or plan(), "s-eve", "pavo_reuse", item or f"{self.inv / 'inventory.json'}#{self.sha}",
                                  9.6, "the same take, clean", digests=digests, shots_dir=self.dir,
-                                 today="2026-10-28", inventories=self.inv, **kw)
+                                 today="2026-10-28", inventories=self.inv, **kw, reviewer="claude-session-reviewer")
 
     def refused(self, code, **kw):
         with self.assertRaises(SystemExit) as err:
@@ -681,6 +720,69 @@ class ApproveReuse(unittest.TestCase):
         self.assertEqual(str(err.exception), "REUSE_URL_REFUSED")
 
 
+class SourceBuildContract(unittest.TestCase):
+    def test_e145_every_approved_source_reaches_the_build_with_its_identity_intact(self):
+        # Exercise the real producer and consumer, with only media generation/analysis stubbed. No release or
+        # production approval is written: approve_source's records are confined to this temporary test folder.
+        with tempfile.TemporaryDirectory(dir=eb.REPO, prefix=".test-source-build-") as d:
+            work = Path(d)
+            p = {"episode": "t-sources", "aspect_ratio": "16:9", "narration": plan()["narration"],
+                 "shots": [plan()["shots"][2]]}
+            shot = p["shots"][0]
+            still = work / "still.jpg"
+            still.write_bytes(b"approved still")
+            rec = {"status": "APPROVED", "episode": p["episode"], "shot": shot["id"],
+                   "repo_path": eb.rel(still), "sha256": eb.sha256(still)}
+            final = work / "clips" / "s-river.mp4"
+            eb.save(work / "layout.json", {})
+            eb.save(work / "refs.json", {})
+            clip = b"approved inventory clip"
+            clip_sha = hashlib.sha256(clip).hexdigest()
+            inventory = work / "inventory.json"
+            url = "https://cos-aigc-default.agnes-ai.space/v/clip-1.mp4"
+            eb.save(inventory, {"plan": "migration/production/bible/plans/t-sources.json", "shots": [{
+                "shot": "s-river", "request_sha256": "request", "clips": [{"sha256": clip_sha,
+                "url": url, "seconds": 6.0, "lipsync_check": []}]}]})
+            with patch.object(eb.plan_check, "still_record", return_value=rec), \
+                    patch.object(eb, "request_digests", return_value={"s-river": "request"}), \
+                    patch.object(eb, "clip_needs", return_value={"s-river": 6}), \
+                    patch.object(eb, "shot_runner", return_value=({}, None, lambda f: ([], None), None, final)), \
+                    patch.object(eb, "clip_flags", return_value=[]), \
+                    patch.object(ss, "still_motion_clip", side_effect=lambda s, out, *a, **kw: out.write_bytes(b"motion")), \
+                    patch("pavo_footage.download", side_effect=lambda url, out: out.write_bytes(clip)):
+                for source, item in (("still_motion", "still-river"), ("pavo_reuse", f"{eb.rel(inventory)}#{clip_sha}")):
+                    with self.subTest(source=source):
+                        a = ss.approve_source(p, "s-river", source, item, 9.6, "reviewed fixture",
+                                              digests={"s-river": "request"}, shots_dir=work / "reviews",
+                                              inventories=work, reviewer="claude-session-reviewer")
+                        self.assertNotIn("asset", a)  # valid producers do not invent a release asset
+                        report = eb.generate_step(p, work, "py", "faces", approvals={"s-river": a},
+                                                  fetch=lambda *a: self.fail("no release fetch"))
+                        kept = report["shots"]["s-river"]["approved"]
+                        for key in ("source", "request_sha256", "clip_sha256", "still_sha256", "repo_path",
+                                    "frame", "clip_seconds", "motion", "url", "inventory"):
+                            if key in a:
+                                self.assertEqual(kept.get(key), a[key], key)
+                        self.assertEqual(report["shots"]["s-river"]["checks"]["flags"], [])
+
+    def test_e147_fallback_identity_binds_own_spoken_words_and_shared_narration(self):
+        p = plan()
+        for i in (0, 1, 2):  # character line, God line, ordinary narration
+            with self.subTest(shot=p["shots"][i]["id"]):
+                before = ss.fallback_digest(p, p["shots"][i], i, "still_motion", "still", "a" * 64)
+                changed = json.loads(json.dumps(p))
+                if "line" in changed["shots"][i]:
+                    changed["shots"][i]["line"] += " Hear these words."
+                else:
+                    changed["narration"][0]["text"] += " Hear these words."
+                after = ss.fallback_digest(changed, changed["shots"][i], i, "still_motion", "still", "a" * 64)
+                self.assertNotEqual(before, after)
+                approval = {"source": "still_motion", "still": "still", "still_sha256": "a" * 64,
+                            "request_sha256": before}
+                bad = eb.review_problems(changed, {}, {changed["shots"][i]["id"]: approval})
+                self.assertTrue(any(x.startswith("SHOT_REQUEST_CHANGED") for x in bad), bad)
+
+
 class SpeechChecks(unittest.TestCase):
     """R4 / story QA v4: each kept speech clip, measured; a missing measure never passes."""
     LINE = "Who told thee that thou wast naked"
@@ -716,6 +818,39 @@ class SpeechChecks(unittest.TestCase):
         self.assertEqual((rec["flags"], rec["onset"], rec["end"], rec["gain_db"]), ([], 1.2, 4.0, 6.0))
         self.assertEqual(pn.clip_gain_db(-27.6, V4["rights"]["ai_video"]["speech_checks"]), 9.6)   # #473's God clip
         self.assertIsNone(pn.clip_gain_db(-31.0, V4["rights"]["ai_video"]["speech_checks"]))
+
+    def test_e148_nonfinite_speech_measurements_never_pass_or_reach_the_mix(self):
+        for value in (float("nan"), float("inf"), -float("inf")):
+            for field, flag in (("same", "VOICE_NOT_CONSISTENT"), ("others", "VOICE_NOT_DISTINCT"),
+                                ("music", "PAVO_MUSIC"), ("singing", "PAVO_SINGING"),
+                                ("lufs", "SPEECH_LEVEL_UNREACHABLE")):
+                with self.subTest(value=value, field=field):
+                    m = self.good()
+                    if field in ("same", "others"):
+                        m["voice"][field] = [0.72, value] if field == "others" else value
+                    else:
+                        m[field] = value
+                    self.assertIn(flag, pn.speech_verdict(m, self.LINE, V4, self.BIND))
+            for span in ([0.0, value], [value, 4.0]):
+                with self.subTest(span=span), self.assertRaisesRegex(SystemExit, "SPEECH_SPAN_UNKNOWN"):
+                    pn.speech_span({"asr": {"speech_span": span}})
+            self.assertEqual(eb.speech_record_flags({"speech": {
+                "clip_sha256": "c", "flags": [], "gain_db": value}}, "c"), ["SPEECH_UNCHECKED"])
+        self.assertEqual(pn.speech_verdict(self.good(), self.LINE, V4, self.BIND), [])
+
+    def test_e148_nonfinite_clip_coverage_and_mix_gains_are_refused(self):
+        p = plan()
+        p["shots"] = [p["shots"][0]]
+        for value in (float("nan"), float("inf"), -float("inf")):
+            for have, need in ((value, 4.0), (4.0, value)):
+                with self.subTest(have=have, need=need):
+                    self.assertTrue(eb.coverage_problems(p, {"s-eve": need}, {"s-eve": {"clip_seconds": have}}))
+            with tempfile.TemporaryDirectory() as d:
+                clip = Path(d) / "clip.mp4"
+                clip.write_bytes(b"native clip")
+                with self.subTest(gain=value), self.assertRaisesRegex(SystemExit, "SPEECH_UNCHECKED"):
+                    pn.placements(p, {"lines": [{"start": 0.0}]}, {"s-eve": ([0], 0.2, 3.0)},
+                                  {"s-eve": clip}, {"s-eve": {"speech": {"gain_db": value}}})
 
     def test_gavest_is_exact_only_by_its_words(self):
         line = "The woman whom thou gavest to be with me"
@@ -773,7 +908,7 @@ class Mix(unittest.TestCase):
                          ["clip-river-a"])
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaises(SystemExit) as err:
-                ss.approve_source(short, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d)
+                ss.approve_source(short, "s-river", "footage", "clip-river-a", 9.6, "x", lib=lib, shots_dir=d, reviewer="claude-session-reviewer")
             self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_USABLE"))
         # a still in motion is approved with the Short's frame and the build's fetch renders it there
         # (episode_build.generate_step calls fetch_source with no frame: the approval carries it)
@@ -786,7 +921,7 @@ class Mix(unittest.TestCase):
             keep = plan_check.still_record
             plan_check.still_record = lambda i: rec if i == "st-river" else None
             try:
-                a = ss.approve_source(short, "s-river", "still_motion", "st-river", 9.6, "x", shots_dir=d)
+                a = ss.approve_source(short, "s-river", "still_motion", "st-river", 9.6, "x", shots_dir=d, reviewer="claude-session-reviewer")
             finally:
                 plan_check.still_record = keep
             self.assertEqual(a["frame"], [1080, 1920])
@@ -824,6 +959,102 @@ class Mix(unittest.TestCase):
             v = [s for s in info["streams"] if s["codec_type"] == "video"][0]
             self.assertEqual((v["width"], v["height"]), (320, 180))
             self.assertFalse([s for s in info["streams"] if s["codec_type"] == "audio"])
+
+
+class SpeechStockPolicy(unittest.TestCase):
+    """E218: the owner's selected source route holds at allocation and provider boundaries."""
+
+    def hybrid(self):
+        p = plan()
+        p.update(source_policy="pavo_speech_stock", criteria="story-qa-criteria-v5", audio_route="kokoro")
+        return p
+
+    def test_e218_stock_route_never_consumes_pavo_or_silently_uses_stills(self):
+        p = self.hybrid()
+        with patch.object(ss, "fallback_refusal", return_value=None):
+            for budget in (0, 10 ** 6):
+                got = {s["id"]: c for s, c in ss.allocate(p, p["shots"], budget)}
+                self.assertEqual(got["s-river"], "fallback")
+                self.assertEqual(got["s-god"], "fallback")
+                self.assertEqual(got["s-pair"], "fallback")
+                self.assertEqual(got["s-eve"], "pavo" if budget else "WAIT_PAVO_BUDGET")
+
+    def test_owner_20261029_report_offers_footage_and_reviewed_stills_without_pavo(self):
+        p = self.hybrid()
+        guard = type("Budget", (), {"check_batch": lambda self, units: {"remaining": 1000, "used": 0, "cap": 1000}})()
+        lib = [clip("clip-river-a"), clip("clip-light", theme="light", title="light water")]
+        with patch.object(ss, "still_candidates",
+                          return_value=[{"source": "still_motion", "item": "reviewed-still"}]) as stills:
+            report = ss.sources_report(p, {"s-eve": "e1"}, {}, guard=guard, lib=lib)
+            self.assertEqual([c["source"] for c in report["shots"]["s-river"]["candidates"]],
+                             ["footage", "still_motion"])
+            self.assertEqual(report["shots"]["s-god"]["source"], "still_motion")
+            self.assertEqual(report["shots"]["s-pair"]["source"], "still_motion")
+            self.assertEqual(stills.call_count, 3)
+        approved = {"s-river": {"source": "still_motion", "request_sha256": "unchanged"}}
+        with patch.object(ss, "expected_request", return_value="unchanged"):
+            report = ss.sources_report(p, {}, approved, guard=guard, lib=lib)
+        self.assertEqual(report["shots"]["s-river"], {"source": "still_motion", "state": "approved"})
+
+    def test_e218_queue_reconciles_existing_clips_before_routing_to_stock(self):
+        import long_preflight
+        p = self.hybrid()
+        q = long_preflight.queue(p, {}, {}, existing={"s-river": [{"asset": "already-made.mp4"}]}, max_units=1000)
+        self.assertEqual(q["awaiting_review"], {"s-river": ["already-made.mp4"]})
+        self.assertEqual(q["planned_fallback"], ["s-god", "s-pair"])
+        self.assertEqual([s for b in q["batches"] for s in b["shots"].split(",")], ["s-eve"])
+
+    def test_e218_provider_entry_points_refuse_wrong_route_before_any_work(self):
+        p = self.hybrid()
+        with patch.object(eb, "load") as read, patch.object(eb, "budget_client") as client:
+            for run in (lambda: eb.generate_clips(p, "missing", "python", "face", ids=["s-river"]),
+                        lambda: eb.probe_step(p, "missing", "python", "face", "missing", ["s-god"], 1)):
+                with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_PAVO_FORBIDDEN"):
+                    run()
+            read.assert_not_called()
+            client.assert_not_called()
+
+    def test_e218_unknown_policy_does_not_fall_back_to_legacy(self):
+        p = self.hybrid()
+        p["source_policy"] = "pavo_spech_stock"
+        with self.assertRaisesRegex(SystemExit, "SOURCE_POLICY_UNKNOWN"):
+            ss.allocate(p, p["shots"], 10 ** 6)
+
+    def test_e218_stale_fallback_approval_is_not_reported_as_ready(self):
+        p = self.hybrid()
+        guard = type("Budget", (), {"check_batch": lambda self, units: {"remaining": 0, "used": 0, "cap": 1000}})()
+        a = {"s-river": {"source": "still_motion", "request_sha256": "old-request"}}
+        with patch.object(ss, "expected_request", return_value="current-request"):
+            report = ss.sources_report(p, {}, a, guard=guard, lib=[])
+        self.assertEqual(report["shots"]["s-river"]["state"], "fallback")
+
+    def test_owner_20261029_reviewed_still_can_enter_selected_policy(self):
+        import plan_check
+        import reviewer_identity
+        p = self.hybrid()
+        rec = {"id": "still-river", "episode": p["episode"], "shot": "s-river", "status": "APPROVED",
+               "repo_path": "migration/production/bible/stills/still-river.jpg", "sha256": "a" * 64,
+               "source": {"license": "apache-2.0"}, "approved": {"model": "claude-session-reviewer"}}
+        with tempfile.TemporaryDirectory() as td, \
+             patch.object(plan_check, "still_record", return_value=rec), \
+             patch.object(reviewer_identity, "valid", return_value=True), \
+             patch.object(reviewer_identity, "require", return_value="claude-session-reviewer"):
+            got = ss.approve_source(p, "s-river", "still_motion", "still-river", 9.5,
+                                    "The reviewed still matches the river line.", shots_dir=Path(td),
+                                    reviewer="claude-session-reviewer")
+        self.assertEqual(got["source"], "still_motion")
+        self.assertEqual(got["still_sha256"], "a" * 64)
+        self.assertEqual(got["licence"], "apache-2.0")
+
+    def test_e218_active_plans_use_policy_without_changing_frozen_criteria(self):
+        import plan_check
+        for episode in ("genesis-09-short", "genesis-10-short", "genesis-11-short", "arc-01-long", "arc-02-long"):
+            p = json.loads((HERE / "plans" / f"{episode}.json").read_text())
+            self.assertEqual(p["source_policy"], "pavo_speech_stock")
+            self.assertEqual(ss.source_policy_problems(p), [])
+            for s in p["shots"]:
+                if s.get("window_of") is None:
+                    self.assertEqual(ss.stock_required(p, s), not plan_check.talking(s))
 
 
 if __name__ == "__main__":

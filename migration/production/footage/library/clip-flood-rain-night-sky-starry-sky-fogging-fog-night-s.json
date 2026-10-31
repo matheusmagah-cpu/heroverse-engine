@@ -1,0 +1,42 @@
+{
+ "id": "clip-flood-rain-night-sky-starry-sky-fogging-fog-night-s",
+ "theme": "flood-rain",
+ "query": "lightning night sky",
+ "source": "pixabay",
+ "title": "night sky, starry sky, fogging, fog, night shot, ratzeburg, nature",
+ "page": "https://pixabay.com/videos/id-242060/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-242060/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "515d0025e916522c5ee05d7aff319326c6fd90e0efe87e5babf7ac62079422ec",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city"
+ ],
+ "vetting_luma": [
+  24.1,
+  30.8,
+  31.6,
+  35.7,
+  55.4
+ ],
+ "vetting_descriptions": [
+  "The image shows a city at night with a sky full of stars, and a few lights on in the distance.",
+  "A nighttime cityscape with a lit-up skyline, a house with a chimney, and a few trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-woman-leaves-foliage-trees-autumn-fall-falling",
+ "theme": "arc01-g-c4-woman",
+ "query": "rain falling forest night",
+ "source": "pixabay",
+ "title": "leaves, foliage, trees, autumn, fall, falling, nature, sky, winter, season, branches, forest, park, woods, calm, peaceful, up, below, looking up, bare",
+ "page": "https://pixabay.com/videos/id-142343/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-142343/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eda684669132b54e3f3a127b758a226eb26fbacef834bbce31c19b1b64c51ae4",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  111.4,
+  111.4,
+  111.5,
+  111.4,
+  111.3
+ ],
+ "vetting_descriptions": [
+  "A tree with no leaves is seen in the sky above a tree with no leaves.",
+  "The image shows a tree with no leaves, surrounded by other trees, and the sky is blue."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-woman-leaves-foliage-trees-autumn-fall-falling-sha256-eda684669132b54e3f3a127b758a226eb26fbacef834bbce31c19b1b64c51ae4.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

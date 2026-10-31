@@ -111,6 +111,12 @@ def problems(episode, video=None):
     """Everything EPISODE_REFUSED names. video None: the record alone (episode_build.py check-record runs this before
     publish-episode.yml is dispatched, E106); the upload always passes the file, so its sha256 is checked there."""
     out = short_problems(episode) + thumb_problems(episode)
+    if episode.get("id"):
+        # E189: re-read explicit retractions at upload, not only when the master was built.
+        if str(THUMBS_CODE) not in sys.path:
+            sys.path.insert(0, str(THUMBS_CODE))
+        import episode_build
+        out += episode_build.revocation_problems(episode["id"])
     if video is not None and sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:

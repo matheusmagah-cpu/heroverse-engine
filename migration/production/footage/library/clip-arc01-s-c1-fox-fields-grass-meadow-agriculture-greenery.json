@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-fox-fields-grass-meadow-agriculture-greenery",
+ "theme": "arc01-s-c1-fox",
+ "query": "red fox meadow grass",
+ "source": "pixabay",
+ "title": "fields, grass, meadow, agriculture, greenery, green lands, farm, nature, landscape",
+ "page": "https://pixabay.com/videos/id-198771/",
+ "author": "Afzaal0001",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Afzaal0001 via Pixabay (https://pixabay.com/videos/id-198771/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9b882c2edc3663975dac07c426628f59c76dceed9612d38ee7539469cb291490",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  117.2,
+  117.6,
+  117.9,
+  117.5,
+  117.1
+ ],
+ "vetting_descriptions": [
+  "A large field of green grass with a blue sky above.",
+  "A field of green grass with a blue sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-fox-fields-grass-meadow-agriculture-greenery-sha256-9b882c2edc3663975dac07c426628f59c76dceed9612d38ee7539469cb291490.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

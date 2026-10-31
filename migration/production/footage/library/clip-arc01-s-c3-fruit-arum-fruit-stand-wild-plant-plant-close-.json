@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c3-fruit-arum-fruit-stand-wild-plant-plant-close-",
+ "theme": "arc01-s-c3-fruit",
+ "query": "fig fruit branch close up",
+ "source": "pixabay",
+ "title": "arum, fruit stand, wild plant, plant, close up, arum plant",
+ "page": "https://pixabay.com/videos/id-125067/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-125067/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7c98c7f9e2968808b6bb5db47f36764ebd7c0e80078f2677070c60b590c4db4b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  10.1,
+  10.0,
+  10.1,
+  10.8,
+  11.2
+ ],
+ "vetting_descriptions": [
+  "A close up of a flower with green and red berries on a stem.",
+  "A close up of a flower with red berries on a stem."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

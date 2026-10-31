@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-x-cloak-baboons-animal-louse-monkeys-zoo-animal-",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "baboons, animal, louse, monkeys, zoo animal, primates, cloak baboon",
+ "page": "https://pixabay.com/videos/id-17644/",
+ "author": "dianakuehn30010",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: dianakuehn30010 via Pixabay (https://pixabay.com/videos/id-17644/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e3872b0bf090e6448f65169cbeaacf445363bf045e0bf7d203b2ab92fa971413",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED face"
+ ],
+ "vetting_luma": [
+  30.0,
+  30.7,
+  31.2,
+  29.6,
+  29.7
+ ],
+ "vetting_descriptions": [
+  "A group of monkeys are sitting together in a dark room.",
+  "Three monkeys are sitting together, with one of them touching the other's face."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

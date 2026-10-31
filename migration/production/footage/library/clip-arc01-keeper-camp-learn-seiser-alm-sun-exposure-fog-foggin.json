@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-learn-seiser-alm-sun-exposure-fog-foggin",
+ "theme": "arc01-keeper-camp",
+ "query": "starry sky desert night time lapse",
+ "source": "pixabay",
+ "title": "learn, seiser alm, sun exposure, fog, fogging, light, lights game, sunlight, sunbeams, santner peak, south-tirol, dolomites, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-15138/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 21.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 19.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-15138/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1861d967f847ef4d9a49c681ac24398feedb3349d1d8e806228846915d9f345c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.5,
+  141.2,
+  135.0,
+  141.9,
+  140.3
+ ],
+ "vetting_descriptions": [
+  "A mountain with snow on it and a cloudy sky above it.",
+  "A mountain with snow on it and a cloudy sky above it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-learn-seiser-alm-sun-exposure-fog-foggin-sha256-1861d967f847ef4d9a49c681ac24398feedb3349d1d8e806228846915d9f345c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

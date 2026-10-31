@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-silhouette-sunset-nature-sky-dusk-sun-beach-sea-sea",
+ "theme": "arc01-x-silhouette",
+ "query": "silhouette couple sunset",
+ "source": "pixabay",
+ "title": "sunset, nature, sky, dusk, sun, beach, sea, seagull, bird, wildlife, gull, silhouette",
+ "page": "https://pixabay.com/videos/id-292575/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-292575/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a17a36698a70105916b28d1533774737b8e81b70ec72a28a15d1b726c23655cb",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  108.3,
+  107.8,
+  107.3,
+  107.1,
+  106.5
+ ],
+ "vetting_descriptions": [
+  "Two birds are standing on a rocky hill, looking out over the ocean.",
+  "Two birds are perched on a rocky hillside, overlooking the sunset."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-silhouette-sunset-nature-sky-dusk-sun-beach-sea-sea-sha256-a17a36698a70105916b28d1533774737b8e81b70ec72a28a15d1b726c23655cb.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

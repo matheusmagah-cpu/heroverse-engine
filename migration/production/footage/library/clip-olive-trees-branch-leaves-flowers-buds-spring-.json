@@ -1,0 +1,40 @@
+{
+ "id": "clip-olive-trees-branch-leaves-flowers-buds-spring-",
+ "theme": "olive",
+ "query": "olive branch leaves",
+ "source": "pixabay",
+ "title": "trees, branch, leaves, flowers, buds, spring, summer, wind, nature, plant, garden, forest, season, landscape",
+ "page": "https://pixabay.com/videos/id-68465/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 53.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-68465/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fcaa5d8fba2b53e587d10c51345259c1f75b2f989f02ea8d983b69185f919220",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  128.8,
+  130.0,
+  129.2,
+  130.6,
+  130.2
+ ],
+ "vetting_descriptions": [
+  "A small green tree is growing on a hillside overlooking a body of water.",
+  "A small green leafy plant is growing on a branch next to a body of water."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-olive-trees-branch-leaves-flowers-buds-spring--sha256-fcaa5d8fba2b53e587d10c51345259c1f75b2f989f02ea8d983b69185f919220.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

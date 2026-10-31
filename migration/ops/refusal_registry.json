@@ -1,6 +1,45 @@
 {
  "about": "E106: every refusal code a later, expensive stage can raise (test_refusal_parity.LATER), with its class: A predicted early by the same function or constant (`early`: path::needle), B a rework hole (`early`: the cheap check that would catch it, `open`: why it is still open), C knowable only after a generation, voice or render (`probe`: the cheapest earlier probe), D external or transient (`resume`), I an engine invariant no plan can break (`guard`), N not a refusal (`why`). `was`: B means the hole was closed by E106. A new later-stage code fails migration/ops/test_refusal_parity.py until it is classified here.",
  "codes": {
+  "SHOT_REVIEW_REVOKED": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_build.py::def revocation_problems(",
+    "migration/production/bible/episode_preflight.py::eb.review_problems(",
+    "migration/production/bible/long_handoff.py::episode_build.revocation_problems("
+   ],
+   "note": "E189: one explicit source-hash revocation contract runs before build/fetch and long inputs, before approve-shot, and again at Short upload and long approval/publication verification. Historical score/request/reviewer identity cannot override a retraction; append-only snapshots retain the veto after replacement. Malformed revocation history fails closed; no automatic visual detection is claimed."
+  },
+  "SHOT_MEDIA_UNMEASURED": {
+   "class": "C",
+   "probe": "E152: episode_build.py measure-clip measures existing bytes by ffprobe and binds the sidecar to their hash; probe-assets seals the same measurements for new clips before any approval"
+  },
+  "NATIVE_SPEECH_OUTSIDE_MEDIA": {
+   "class": "C",
+   "probe": "E152: episode_build.py measure-clip provides the real stream durations; native_spans refuses an out-of-media speech endpoint before voicing/layout when evidence exists, and native_voice repeats on the exact bytes before mixing"
+  },
+  "REVIEWER_IDENTITY_REFUSED": {
+   "class": "N",
+   "why": "E149: explicit session identity is required before any new still, thumbnail, shot or source approval is written; this input check generates, renders and publishes nothing"
+  },
+  "SHOT_REVIEWER_REFUSED": {
+   "class": "A",
+   "early": "migration/production/bible/episode_build.py::def review_problems(",
+   "note": "E149: the same review consumer runs in verify-preflight and generate; an explicit unknown identity is refused, historical approvals without a model are preserved without relabelling"
+  },
+  "LONG_HANDOFF_REFUSED": {
+   "class": "C",
+   "probe": "The exported master, retimed speech timeline, SRT and their hashes are knowable only after assembly. long_handoff.input_documents is also run before voice/upscale to reject all static publication inputs (title, arc mapping, frozen criteria, approved thumbnail). Candidate artifacts are preserved on failure, and test_long_handoff mutates every source/publication witness. No missing witness becomes an approval."
+  },
+  "LONG_HANDOFF_INVALID": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_handoff.py::def test_each_publication_file_and_plan_remain_bound_and_missing_witness_fails_closed",
+   "note": "The upload rechecks the qualified plan, script, package, timeline, SRT and thumbnail identities. A changed or missing binding cannot publish."
+  },
+  "LONG_RELEASE_CAPACITY": {
+   "class": "D",
+   "resume": "The dispatch reserves three minimum assets; before upload the actual master size counts every split part for both identical aliases plus the SRT. A full release keeps the completed build artifact; add a new asset release and resume storage, never regenerate the video."
+  },
   "ADOPT_CLIP_MISSING": {
    "class": "N",
    "why": "E114: shot-probe.yml with adopt_run turns clips a build run already made into a probe record before any build; these refuse a wrong input or a run without that clip, and stop no generation, voice or render"
@@ -215,13 +254,9 @@
    "class": "D",
    "resume": "the made images are kept and the rest wait for the next nightly slot (E62); episode_preflight reports today's images against the ~44 a day before a sheet is dispatched"
   },
-  "CF_HTTP_{}": {
+  "CF_GENERATION_OUTCOME_UNCERTAIN_NO_REPLAY": {
    "class": "D",
-   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
-  },
-  "CF_NO_IMAGE": {
-   "class": "C",
-   "probe": "one image (ONLY=<id>) before a batch"
+   "resume": "E214: reconcile the exact image request, workflow/run and any returned bytes before another invocation. An HTTP error, timeout or malformed acknowledgement is not proof that generation did not run. Do not automatically replay the POST; preserve prior outputs and the durable workflow claim. If the provider exposes no outcome identity, keep this request unresolved rather than infer failure or approve a new attempt."
   },
   "CHANNEL_IDENTITY_MISMATCH": {
    "class": "D",
@@ -2582,6 +2617,26 @@
   "FOOTAGE_RECORDS_NOT_PUSHED": {
    "class": "D",
    "resume": "main moved six times during the run's push window (parallel footage runs, E144); the clips are uploaded: dispatch the same queries again, the uploaded clips are found again by id and skipped"
+  },
+  "SOURCE_POLICY_UNKNOWN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/plan_check.py::shot_sources.source_policy_problems(plan)",
+    "migration/production/bible/long_plan_check.py::shot_sources.source_policy_problems(plan)"
+   ],
+   "note": "E218: unknown source policy is rejected during plan validation, never treated as legacy Pavo-first."
+  },
+  "SOURCE_POLICY_PAVO_FORBIDDEN": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/long_preflight.py::shot_sources.planned_fallbacks(plan)"
+   ],
+   "note": "E218: queue excludes new non-talking pictures from Pavo; generate_clips and probe_step enforce require_pavo_generation before work or provider calls. Existing clip discovery/review remains available."
+  },
+  "PRIVATE_AUDIO_MANIFEST_REFUSED": {
+   "class": "A",
+   "early": "migration/integrations/pavo/private_audio.py::def validate(",
+   "note": "E226: the same metadata, timing, Keeper reference and digest checks run in dispatch guard before credentials and again at the private-input consumer."
   }
  },
  "review": {

@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-ki-gate-okanagan-aerial-landscape-nature-mountai",
+ "theme": "arc01-s-ki-gate",
+ "query": "distant fire night forest edge",
+ "source": "pixabay",
+ "title": "okanagan, aerial, landscape, nature, mountain, spring, forest fire, bc, singing birds, tweeting",
+ "page": "https://pixabay.com/videos/id-8934/",
+ "author": "extemporalist",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: extemporalist via Pixabay (https://pixabay.com/videos/id-8934/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d4cc71d24a9af5ac48782ed2d5dc62a3c73c7ba0eff6e11de687a543f64a07ae",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  96.0,
+  98.4,
+  100.5,
+  101.2,
+  101.5
+ ],
+ "vetting_descriptions": [
+  "A mountain with a lot of trees and a person standing on top of it.",
+  "A forest with a lot of dead trees and a few pine trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

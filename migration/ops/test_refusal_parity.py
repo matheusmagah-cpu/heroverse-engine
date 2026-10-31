@@ -32,7 +32,10 @@ LATER = [
     "migration/production/bible/lipsync_check.py", "migration/production/bible/syncnet.py",
     "migration/production/bible/clip_check.py",
     "migration/production/bible/long_preflight.py",   # E127: the long's verify-preflight and shot-probe gate
+    "migration/production/bible/long_handoff.py",     # E168: measured long -> pilot publication contract
     "migration/production/bible/shot_sources.py",   # owner 27/10 (R1-R3): per-shot sources, approve-source, fetch
+    "migration/production/bible/reviewer_identity.py",   # E149: truthful explicit attribution before any approval write
+    "migration/production/bible/clip_timing.py",   # E152: measurements bind to bytes, not requested generation time
     "migration/production/bible/pavo_native.py",    # owner 27/10 (R4): native speech requests, checks and mix
     "migration/production/render_queue.py", "migration/production/qa_pilot.py", "migration/production/still_render.py",
     "migration/production/preview_gate.py", "migration/production/pilot_render.py", "migration/production/long_review.py",

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-birds-dandelion-blossom-bloom-faded-flying-see",
+ "theme": "arc01-s-c1-birds",
+ "query": "white birds flock river flying",
+ "source": "pixabay",
+ "title": "dandelion, blossom, bloom, faded, flying seeds, seeds, seed stand, plant, nature, time lapse",
+ "page": "https://pixabay.com/videos/id-163333/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-163333/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "50247190f530eb281e7e3d5e96090ac6642183ec36df19d9051572bd46597737",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  15.4,
+  22.0,
+  26.4,
+  28.5,
+  30.6
+ ],
+ "vetting_descriptions": [
+  "A close up of two dandelions with green stems and white flowers.",
+  "A close up of a dandelion with a white fluffy head."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-birds-dandelion-blossom-bloom-faded-flying-see-sha256-50247190f530eb281e7e3d5e96090ac6642183ec36df19d9051572bd46597737.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

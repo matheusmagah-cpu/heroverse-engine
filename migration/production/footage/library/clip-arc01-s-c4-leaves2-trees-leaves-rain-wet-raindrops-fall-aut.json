@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-leaves2-trees-leaves-rain-wet-raindrops-fall-aut",
+ "theme": "arc01-s-c4-leaves2",
+ "query": "leaves on wet ground rain",
+ "source": "pixabay",
+ "title": "trees, leaves, rain, wet, raindrops, fall, autumn leaves, outdoors, nature",
+ "page": "https://pixabay.com/videos/id-205700/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-205700/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6438565413e68d1197cdb1a7304a9bdc9cb6b20faa894d1d2e89f9c20421a3c8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  107.1,
+  109.5,
+  105.6,
+  105.6,
+  104.2
+ ],
+ "vetting_descriptions": [
+  "A tree with yellow leaves and a green tree branch.",
+  "A tree with yellow and orange leaves is in front of a green tree."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-leaves2-trees-leaves-rain-wet-raindrops-fall-aut-sha256-6438565413e68d1197cdb1a7304a9bdc9cb6b20faa894d1d2e89f9c20421a3c8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

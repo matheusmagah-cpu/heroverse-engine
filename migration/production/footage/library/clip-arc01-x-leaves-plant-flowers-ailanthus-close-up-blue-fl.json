@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-leaves-plant-flowers-ailanthus-close-up-blue-fl",
+ "theme": "arc01-x-leaves",
+ "query": "hands leaves close up",
+ "source": "pixabay",
+ "title": "plant, flowers, ailanthus, close up, blue flowers, japanese plants",
+ "page": "https://pixabay.com/videos/id-367126/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-367126/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1241ae52704272b6245ed9f543f78a4343f8794417545d21a1ac1fec702c6b17",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.7,
+  98.1,
+  98.2,
+  98.5,
+  99.0
+ ],
+ "vetting_descriptions": [
+  "A blue flower with green leaves is in the foreground, and a blue butterfly is in the background.",
+  "A blue flower with a green stem is surrounded by green leaves."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-leaves-plant-flowers-ailanthus-close-up-blue-fl-sha256-1241ae52704272b6245ed9f543f78a4343f8794417545d21a1ac1fec702c6b17.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

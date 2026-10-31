@@ -1,0 +1,40 @@
+{
+ "id": "clip-dove-flight-bird-animal-nature-pigeon-feather",
+ "theme": "dove-flight",
+ "query": "pigeon flying over sea",
+ "source": "pixabay",
+ "title": "bird, animal, nature, pigeon, feather",
+ "page": "https://pixabay.com/videos/id-21780/",
+ "author": "PiAnt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: PiAnt via Pixabay (https://pixabay.com/videos/id-21780/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d834087d680238d0f4c916da75d91a8ffd76cbfaf260245a7f04ef32c3c7aec8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  137.0,
+  136.9,
+  133.2,
+  134.3,
+  135.1
+ ],
+ "vetting_descriptions": [
+  "A bird is perched on a branch of a tree.",
+  "A bird is perched on a tree branch, looking up at the sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-dove-flight-bird-animal-nature-pigeon-feather-sha256-d834087d680238d0f4c916da75d91a8ffd76cbfaf260245a7f04ef32c3c7aec8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

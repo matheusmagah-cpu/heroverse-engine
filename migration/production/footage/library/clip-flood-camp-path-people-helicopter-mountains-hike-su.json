@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-camp-path-people-helicopter-mountains-hike-su",
+ "theme": "flood-camp",
+ "query": "people dancing around fire silhouette",
+ "source": "pixabay",
+ "title": "path, people, helicopter, mountains, hike, summer, alpine, transport, meiringen, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-44702/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 45.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-44702/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d5d3a2f4fcd0f6fc79d06bc43816414feb6b888279a375fa277e68fe2814cede",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  120.7,
+  111.7,
+  106.2,
+  117.6,
+  124.8
+ ],
+ "vetting_descriptions": [
+  "A mountain with snow on it is visible in the background, and a road is visible in the foreground.",
+  "A couple walks on a path in a mountainous area, with a large mountain in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-camp-path-people-helicopter-mountains-hike-su-sha256-d5d3a2f4fcd0f6fc79d06bc43816414feb6b888279a375fa277e68fe2814cede.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

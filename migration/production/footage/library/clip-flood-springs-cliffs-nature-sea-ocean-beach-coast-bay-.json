@@ -1,0 +1,40 @@
+{
+ "id": "clip-flood-springs-cliffs-nature-sea-ocean-beach-coast-bay-",
+ "theme": "flood-springs",
+ "query": "flood water rushing",
+ "source": "pixabay",
+ "title": "cliffs, nature, sea, ocean, beach, coast, bay, water, england, freshwater",
+ "page": "https://pixabay.com/videos/id-361729/",
+ "author": "paulmaunders",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: paulmaunders via Pixabay (https://pixabay.com/videos/id-361729/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "601bc55979a566dcb42e33262fb6a5a14284e20a1f8bd4280777822bc533783a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.6,
+  123.8,
+  126.8,
+  125.3,
+  127.5
+ ],
+ "vetting_descriptions": [
+  "A beautiful beach with a rocky cliff, a rocky shoreline, and a body of water.",
+  "A rocky coastline with a road leading to it, and a beach with a rock formation in the ocean."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-flood-springs-cliffs-nature-sea-ocean-beach-coast-bay--sha256-601bc55979a566dcb42e33262fb6a5a14284e20a1f8bd4280777822bc533783a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

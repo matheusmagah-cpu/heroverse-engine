@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-gate-path-trees-forest-netherlands-drenthe-dr",
+ "theme": "arc01-s-c4-gate",
+ "query": "dark forest path entrance",
+ "source": "pixabay",
+ "title": "path, trees, forest, netherlands, drenthe, drone, nature, landscape",
+ "page": "https://pixabay.com/videos/id-210782/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-210782/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "061b49439adc96d79e765994d7310aebc9ac0f6ca3466481842a94445a60b843",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  68.4,
+  71.2,
+  72.8,
+  77.5,
+  82.0
+ ],
+ "vetting_descriptions": [
+  "A dirt pathway in a forest with a bench at the end.",
+  "A dirt pathway in a forest with trees and grass."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-gate-path-trees-forest-netherlands-drenthe-dr-sha256-061b49439adc96d79e765994d7310aebc9ac0f6ca3466481842a94445a60b843.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

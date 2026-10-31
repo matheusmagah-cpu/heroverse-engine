@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-g-c4-woman-rain-river-lake-mountains-nature-panoram",
+ "theme": "arc01-g-c4-woman",
+ "query": "rain falling forest night",
+ "source": "pixabay",
+ "title": "rain, river, lake, mountains, nature, panorama, landscape, italy, forest, water, fog, national park",
+ "page": "https://pixabay.com/videos/id-47872/",
+ "author": "Ambient_Nature_Atmosphere",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-47872/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9811f5c7dfddc692758f4025735517e2b16fdd1f3db3e1374393aed443ea650f",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.2,
+  113.4,
+  113.3,
+  113.3,
+  113.3
+ ],
+ "vetting_descriptions": [
+  "A river flows through a valley with mountains in the background, and a forest of pine trees surrounds the area.",
+  "A river flows through a valley with mountains in the background."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-g-c4-woman-rain-river-lake-mountains-nature-panoram-sha256-9811f5c7dfddc692758f4025735517e2b16fdd1f3db3e1374393aed443ea650f.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-fire-campfire-log-flames-piece-of-wood-w",
+ "theme": "arc01-keeper-camp",
+ "query": "campfire embers close up night",
+ "source": "pixabay",
+ "title": "fire, campfire, log, flames, piece of wood, wood, glow, embers, heat, endless loop",
+ "page": "https://pixabay.com/videos/id-8639/",
+ "author": "KlausHausmann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: KlausHausmann via Pixabay (https://pixabay.com/videos/id-8639/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "acfae37d0288ff71985f271d5c9bcecd837bac4e0ea3e002326c845b52fee415",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  35.7,
+  33.7,
+  41.2,
+  36.1,
+  44.5
+ ],
+ "vetting_descriptions": [
+  "A fire is burning in a wood pile, and the flames are flickering.",
+  "A fire is burning in a wood pile, and the flames are flickering."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-fire-campfire-log-flames-piece-of-wood-w-sha256-acfae37d0288ff71985f271d5c9bcecd837bac4e0ea3e002326c845b52fee415.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

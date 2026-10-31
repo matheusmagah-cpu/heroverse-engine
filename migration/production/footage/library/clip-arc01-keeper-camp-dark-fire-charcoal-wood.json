@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-dark-fire-charcoal-wood",
+ "theme": "arc01-keeper-camp",
+ "query": "fire crackling dark night",
+ "source": "pixabay",
+ "title": "dark, fire, charcoal, wood",
+ "page": "https://pixabay.com/videos/id-110257/",
+ "author": "Amirirani",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: Amirirani via Pixabay (https://pixabay.com/videos/id-110257/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "879e6a8c6c0b38d6912fcafe4a5b540ba3a9f360d0823364f5f340c74f6a908d",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  45.2,
+  40.8,
+  43.9,
+  46.1,
+  44.1
+ ],
+ "vetting_descriptions": [
+  "A fire is burning in a fire pit, with a blackened log and a piece of wood in the fire.",
+  "A fire is burning in a fire pit, and the flames are flickering."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-dark-fire-charcoal-wood-sha256-879e6a8c6c0b38d6912fcafe4a5b540ba3a9f360d0823364f5f340c74f6a908d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

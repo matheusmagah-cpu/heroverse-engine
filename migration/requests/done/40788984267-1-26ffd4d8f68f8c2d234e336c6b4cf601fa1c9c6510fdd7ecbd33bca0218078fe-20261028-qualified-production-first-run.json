@@ -1,0 +1,15 @@
+{
+ "workflow": "heartbeat.yml",
+ "inputs": {},
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "acknowledged",
+  "request_sha256": "26ffd4d8f68f8c2d234e336c6b4cf601fa1c9c6510fdd7ecbd33bca0218078fe",
+  "original_path": "migration/requests/20261028-qualified-production-first-run.json",
+  "base_commit": "f5f6b6a2c44095ac9e6a11a627e0d6a464cc9930",
+  "dispatcher_run_id": "40788984267",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-28T23:40:48.439844+00:00",
+  "acknowledged_at": "2026-10-28T23:40:51.025938+00:00"
+ }
+}

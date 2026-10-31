@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-millipede-waking-forest-ground-zoom-dirt",
+ "theme": "arc01-x-snake",
+ "query": "snake slithering ground",
+ "source": "pixabay",
+ "title": "millipede, waking, forest, ground, zoom, dirt, brown, sunny",
+ "page": "https://pixabay.com/videos/id-1807/",
+ "author": "flexeye",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: flexeye via Pixabay (https://pixabay.com/videos/id-1807/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a3da81ad6b4fe7b56188cbdb03b224945b1fb8c60c796e64a50d4b33180cde10",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.9,
+  130.0,
+  131.3,
+  133.7,
+  128.2
+ ],
+ "vetting_descriptions": [
+  "A caterpillar is walking on a dirt ground with grass and leaves around it.",
+  "A green leafy plant with a caterpillar on it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-millipede-waking-forest-ground-zoom-dirt-sha256-a3da81ad6b4fe7b56188cbdb03b224945b1fb8c60c796e64a50d4b33180cde10.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

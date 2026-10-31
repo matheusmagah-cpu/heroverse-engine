@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-snake-fog-landscape-ground-fog-mystical-mist-n",
+ "theme": "arc01-x-snake",
+ "query": "snake slithering ground",
+ "source": "pixabay",
+ "title": "fog, landscape, ground fog, mystical, mist, nature",
+ "page": "https://pixabay.com/videos/id-103840/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-103840/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "31c76b9d48592f4091af9147e7ba12f355fefac55b51787e15b0c4e38c783e57",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  116.6,
+  117.1,
+  114.6,
+  110.8,
+  104.0
+ ],
+ "vetting_descriptions": [
+  "A foggy forest with a tree and a foggy sky.",
+  "A foggy forest with a tree and a foggy sky."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-snake-fog-landscape-ground-fog-mystical-mist-n-sha256-31c76b9d48592f4091af9147e7ba12f355fefac55b51787e15b0c4e38c783e57.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

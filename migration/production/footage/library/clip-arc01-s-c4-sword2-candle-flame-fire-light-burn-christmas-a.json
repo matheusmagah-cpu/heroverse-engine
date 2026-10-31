@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c4-sword2-candle-flame-fire-light-burn-christmas-a",
+ "theme": "arc01-s-c4-sword2",
+ "query": "fire flames spinning night",
+ "source": "pixabay",
+ "title": "candle, flame, fire, light, burn, christmas, advent, christmas time, festive season",
+ "page": "https://pixabay.com/videos/id-141427/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-141427/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "496ff5732c15eeb59bfb5f24ad60d970ca85c78a5cf9d7bd98314d3f1c1c458f",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  39.4,
+  38.7,
+  39.6,
+  39.5,
+  39.7
+ ],
+ "vetting_descriptions": [
+  "A lit candle in a pink wax holder with a yellow background.",
+  "A lit candle in a pink wax holder."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c4-sword2-candle-flame-fire-light-burn-christmas-a-sha256-496ff5732c15eeb59bfb5f24ad60d970ca85c78a5cf9d7bd98314d3f1c1c458f.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

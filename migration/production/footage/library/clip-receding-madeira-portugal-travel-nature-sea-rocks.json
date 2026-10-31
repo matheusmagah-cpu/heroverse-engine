@@ -1,0 +1,42 @@
+{
+ "id": "clip-receding-madeira-portugal-travel-nature-sea-rocks",
+ "theme": "receding",
+ "query": "water receding rocks",
+ "source": "pixabay",
+ "title": "madeira, portugal, travel, nature, sea, rocks, rock, water, clouds, waves",
+ "page": "https://pixabay.com/videos/id-376880/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-376880/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ad66f9bab4491cd2b80e7ccdd90466233ad9a857bd738882ce9ff415139f5b61",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city"
+ ],
+ "vetting_luma": [
+  145.1,
+  145.0,
+  144.8,
+  144.6,
+  146.0
+ ],
+ "vetting_descriptions": [
+  "A large rocky mountain with a waterfall and a blue ocean with a city in the background.",
+  "A rocky mountain with a waterfall and a body of water with a rocky shore."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

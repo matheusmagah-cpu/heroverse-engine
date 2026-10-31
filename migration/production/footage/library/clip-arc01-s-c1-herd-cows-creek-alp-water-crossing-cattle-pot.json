@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-herd-cows-creek-alp-water-crossing-cattle-pot",
+ "theme": "arc01-s-c1-herd",
+ "query": "cattle grazing green hillside",
+ "source": "pixabay",
+ "title": "cows, creek, alp, water crossing, cattle, potions, drink",
+ "page": "https://pixabay.com/videos/id-44022/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-44022/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "84b7f79c72004571b59cb9add63e913c0e2819852c8c140de853a7fef9946b1e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.9,
+  98.6,
+  98.0,
+  97.7,
+  98.7
+ ],
+ "vetting_descriptions": [
+  "A brown cow is walking across a river with a white cow behind it.",
+  "A brown cow is standing in a river, surrounded by rocks and trees."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-herd-cows-creek-alp-water-crossing-cattle-pot-sha256-84b7f79c72004571b59cb9add63e913c0e2819852c8c140de853a7fef9946b1e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c1-moon-flower-water-lilies-lake-aquatic-plants-",
+ "theme": "arc01-s-c1-moon",
+ "query": "full moon rising over lake",
+ "source": "pixabay",
+ "title": "flower, water lilies, lake, aquatic plants, wind, nature, pink",
+ "page": "https://pixabay.com/videos/id-163869/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-163869/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "804d84d518a1fd4a4e0efb38af1b5c71684c9a11b56f555688b6dbf79c45a1d7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  132.4,
+  132.3,
+  133.1,
+  132.0,
+  131.9
+ ],
+ "vetting_descriptions": [
+  "A pond with purple flowers and green leaves, with a reflection of the flowers in the water.",
+  "A bunch of pink flowers are floating on a pond, surrounded by lily pads."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c1-moon-flower-water-lilies-lake-aquatic-plants--sha256-804d84d518a1fd4a4e0efb38af1b5c71684c9a11b56f555688b6dbf79c45a1d7.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

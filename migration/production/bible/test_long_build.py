@@ -14,6 +14,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -124,6 +125,8 @@ class ColdOpen(unittest.TestCase):
         items, _ = eb.plan_check.sequence(plan)
         return [eb.plan_check.words(x["text"]) / lpc.pace(x) for x in items]
 
+    # E210: this case supplies synthetic durations, not current production speech receipts.
+    @patch.object(eb, "load_approvals", lambda *args, **kwargs: {})
     def test_the_keeper_starts_at_the_cold_open_end_measured_on_the_voice(self):
         plan = json.loads(LONG.read_text())
         d = self.durations(plan)
@@ -210,6 +213,22 @@ class Assemble(unittest.TestCase):
         self.assertIn("You stand in", srt)
         self.assertFalse(manifest["burned_captions"])
         self.assertEqual(manifest["output_sha256"], sha(video))
+        exported = eb.load(out / "timeline.json")
+        original = eb.load(work / "compose-timeline.json")
+        for field in ("sentences", "voice_seconds", "voice_id", "speed", "sample_rate"):
+            self.assertEqual(exported[field], original[field])
+        self.assertEqual(exported["version"], "bible-long-timeline-v1")
+        self.assertEqual(exported["output_sha256"], sha(video))
+        self.assertEqual(exported["output_seconds"], round(info["seconds"], 3))
+        self.assertEqual(manifest["timeline"], {"file": "timeline.json", "sha256": sha(out / "timeline.json")})
+        self.assertEqual(manifest["sentences"], exported["sentences"])
+        composed = eb.load(out / "report.json")["composed"]
+        for actual, recorded in zip(exported["cuts"], composed["timeline"]):
+            self.assertEqual({k: actual.get(k) for k in recorded}, recorded)
+            self.assertNotIn("clip", actual)
+        self.assertEqual(exported["cuts"][0]["start"], 0)
+        self.assertAlmostEqual(exported["cuts"][-1]["end"], info["seconds"], delta=0.1)
+        self.assertGreater(exported["output_seconds"], exported["sentences"][-1]["end"])
         self.assertEqual([h["shot_kind"] for h in manifest["holds"]], ["scene", "scene", "keeper", "window", "scene"])
         self.assertEqual(manifest["holds"][3]["image"].partition("#")[0], "s-a")
         self.assertNotEqual(manifest["holds"][3]["image"], manifest["holds"][0]["image"])
@@ -438,7 +457,97 @@ elif args[:2] == ["run", "download"]:
         self.assertEqual((up / "s-b.mp4").read_text(), "prev s-b.mp4")
 
 
+class SourceBinding(unittest.TestCase):
+    def test_e145_still_upscale_and_manifest_bind_the_actual_approved_image(self):
+        import shot_sources as ss
+        with tempfile.TemporaryDirectory(dir=eb.REPO, prefix=".test-upscale-binding-") as d:
+            d = Path(d)
+            image = d / "still.jpg"
+            image.write_bytes(b"the approved still")
+            plan = tiny_plan()
+            plan["shots"] = [plan["shots"][-1]]
+            a = {"source": "still_motion", "still": "still-x", "repo_path": eb.rel(image),
+                 "clip_sha256": None, "still_sha256": sha(image), "clip_seconds": 5.0,
+                 "licence": "apache-2.0"}
+            with patch.object(ss, "still_motion_clip", side_effect=lambda src, out, *a, **kw: out.write_bytes(b"motion")), \
+                    patch.object(lb, "frame_of", return_value=list(lb.FRAME)), \
+                    patch.object(lb, "probe", return_value={"seconds": 5.0}):
+                rec = lb.upscale_step(plan, "s-c", d / "up", "unused", approvals={"s-c": a})
+                self.assertEqual(rec["source_sha256"], a["still_sha256"])
+                ups = lb.upscaled(plan, d / "up", {"s-c": a})
+                report = {"shots": {"s-c": {"approved": a, "checks": {"flags": []}}}}
+                m = lb.manifest_of(plan, [], tiny_layout(), {"sentences": []}, report, ups, "m", "o", 21.2, {})
+                self.assertEqual(m["images"]["s-c"]["sha256"], a["still_sha256"])
+                self.assertEqual(m["clips"][0]["source_sha256"], a["still_sha256"])
+                self.assertEqual(m["clips"][0]["vetting"], "APPROVED")
+
+    def test_e145_missing_stale_or_wrong_kind_source_bindings_cannot_resume(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            plan = tiny_plan()
+            plan["shots"] = [plan["shots"][-1]]
+            image_sha = "a" * 64
+            approval = {"source": "still_motion", "clip_sha256": None, "still_sha256": image_sha}
+            clip = d / "s-c.mp4"
+            clip.write_bytes(b"cached picture")
+            base = {"source_kind": "still_motion", "source_sha256": image_sha, "sha256": sha(clip),
+                    "frame": list(lb.FRAME)}
+            with patch.object(lb, "frame_of", return_value=list(lb.FRAME)):
+                for changes, changed_approval in (({"source_sha256": None}, approval),
+                        ({"source_sha256": "b" * 64}, approval), ({"source_kind": "pavo"}, approval),
+                        ({"source_sha256": None}, dict(approval, still_sha256=None))):
+                    with self.subTest(changes=changes, approval=changed_approval):
+                        eb.save(d / "s-c.json", dict(base, **changes))
+                        with self.assertRaisesRegex(SystemExit, "UPSCALE_SOURCE_MISMATCH s-c"):
+                            lb.upscaled(plan, d, {"s-c": changed_approval})
+                eb.save(d / "s-c.json", base)
+                self.assertEqual(lb.upscaled(plan, d, {"s-c": approval})["s-c"][0], clip)
+
+
 class Contract(unittest.TestCase):
+    def test_e151_timeline_preserves_measured_voice_gaps_tail_and_native_offsets(self):
+        timeline = {"voice_seconds": 35.5, "voice_id": "am_michael", "speed": 1.0, "sample_rate": 24000,
+                    "sentences": [{"segment": "n00", "text": "You heard the words.", "start": 0, "end": 27.1},
+                                  {"segment": "n01", "text": "The Keeper answers.", "start": 30, "end": 35.5,
+                                   "speaker": "keeper"}]}
+        cuts = [{"shot": "s-first", "source": "s-first", "kind": "speaker", "start": 0, "end": 30,
+                 "src_start": 0.125, "speed": 1.0, "hold": 2.9, "talk": {"start": 0, "end": 27.1},
+                 "clip": "/temporary-runner/clip.mp4"},
+                {"shot": "k-last", "source": "k-last", "kind": "keeper", "start": 30, "end": 36.7,
+                 "src_start": 0.08, "speed": 1.0}]
+        record = lb.timeline_record(tiny_plan(), timeline, cuts, "a" * 64, 36.7)
+        for key, value in timeline.items():
+            self.assertEqual(record[key], value)
+        self.assertEqual(record["output_sha256"], "a" * 64)
+        self.assertEqual(record["output_seconds"], 36.7)
+        self.assertEqual(record["cuts"][0]["src_start"], 0.125)
+        self.assertEqual(record["cuts"][0]["hold"], 2.9)
+        self.assertEqual(record["cuts"][0]["talk"], cuts[0]["talk"])
+        self.assertNotIn("clip", record["cuts"][0])
+        self.assertNotIn("output_sha256", timeline)
+
+    def test_e150_manifest_declares_fallback_voice_without_claiming_a_native_clip_or_face(self):
+        for speaker in ("god", "keeper"):
+            p = tiny_plan()
+            p["criteria"] = "story-qa-criteria-v5"
+            s = {"id": "s-vo", "kind": "keeper" if speaker == "keeper" else "scene", "speaker": speaker,
+                 "line": "Let there be light.", "audio_route": "kokoro", "beat": "cold_open"}
+            p["shots"] = [s]
+            cuts = [{"shot": "s-vo", "source": "s-vo", "kind": "scene", "start": 0, "end": 6,
+                     "src_start": 0, "speed": 1.0}]
+            a = {"source": "footage", "clip_sha256": "a" * 64, "licence": "Pixabay Content License",
+                 "credit": "Footage: vetted sky"}
+            report = {"shots": {"s-vo": {"approved": a, "checks": {"flags": []}}}}
+            ups = {"s-vo": (Path("sky.mp4"), {"source_sha256": "a" * 64, "source_asset": "sky.mp4",
+                   "sha256": "b" * 64, "source_kind": "footage", "upscaler": "none (licensed footage at 2560x1440)"})}
+            m = lb.manifest_of(p, cuts, {}, {"sentences": []}, report, ups, "c" * 64, "d" * 64, 6, {})
+            self.assertEqual(m["holds"][0]["characters"], [])
+            clip = m["clips"][0]
+            self.assertEqual((clip["voice"], clip["voiceover"], clip["talking"]), ("kokoro", speaker, False))
+            self.assertEqual((clip["source"], clip["audio"], clip["vetting"]), ("footage", "removed", "APPROVED"))
+            self.assertNotIn("speech_checks", clip)
+            self.assertNotIn("face_check", clip)
+
     def test_the_frame_is_the_frozen_qa_16x9_and_the_loudness_inside_its_band(self):
         self.assertEqual(lb.FRAME, (2560, 1440))
         self.assertEqual(lb.FRAME[0] * 9, lb.FRAME[1] * 16)

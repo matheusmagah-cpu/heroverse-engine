@@ -266,11 +266,29 @@ class StoryV4Rows(unittest.TestCase):
         m.update(over)
         return m
 
-    def run_v4(self, manifest, asr=None):
+    def run_v4(self, manifest, asr=None, criteria=V4):
         import unittest.mock as mock
         base = {k: True for k in ("ai_video_source_and_licence", "footage_licensed_vetted_and_credited")}
         with mock.patch.object(q, "grammar_checks_story_v3", return_value=(dict(base), {})):
-            return q.grammar_checks_story_v4(V4, manifest, asr_sha256=asr)[0]
+            return q.grammar_checks_story_v4(criteria, manifest, asr_sha256=asr)[0]
+
+    def test_e150_v5_kokoro_voiceover_on_vetted_fallback_is_not_native_or_a_figure(self):
+        v5 = json.loads((HERE / "qa_criteria_story_v5.json").read_text())
+        for source, licence in (("footage", "Pixabay Content License"), ("still", "apache-2.0")):
+            for speaker in ("god", "keeper"):
+                m = self.manifest(spoken_shots=[{"shot": "s-talk"}, {"shot": "s-sky"}])
+                c = m["clips"][1]
+                c.update(source=source, licence=licence, voice="kokoro", voiceover=speaker)
+                self.assertTrue(self.run_v4(m, criteria=v5)["fallback_shots"])
+                self.assertFalse(self.run_v4(m)["fallback_shots"])  # unchanged frozen v4 interpretation
+                for change in ({"voice": None}, {"voice": "pavo"}, {"voiceover": None}, {"voiceover": "eve"},
+                               {"talking": True}, {"vetting": "PENDING"}, {"audio": "native"},
+                               {"licence": "unlicensed"}):
+                    bad = copy.deepcopy(m)
+                    bad["clips"][1].update(change)
+                    self.assertFalse(self.run_v4(bad, criteria=v5)["fallback_shots"], change)
+                m["holds"][1]["characters"] = [speaker]
+                self.assertFalse(self.run_v4(m, criteria=v5)["fallback_shots"])  # never show God or an unbound face
 
     def test_every_v4_row_maps_to_a_check_and_v3_rows_are_kept(self):
         rows = sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in V4[s])

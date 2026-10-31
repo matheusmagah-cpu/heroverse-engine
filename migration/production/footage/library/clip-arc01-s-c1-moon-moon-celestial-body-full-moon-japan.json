@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c1-moon-moon-celestial-body-full-moon-japan",
+ "theme": "arc01-s-c1-moon",
+ "query": "full moon rising over lake",
+ "source": "pixabay",
+ "title": "moon, celestial body, full moon, japan",
+ "page": "https://pixabay.com/videos/id-303274/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-303274/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8ad5fcb4e15adafbc4bfbda22d8c9de2995e652f7e1696791a9d49257f2c7b4b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  14.5,
+  14.9,
+  14.7,
+  14.0,
+  14.4
+ ],
+ "vetting_descriptions": [
+  "A full moon is visible in the sky, with no other objects or people visible in the image.",
+  "A full moon is visible in the sky, with a black background and no other objects or people visible."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

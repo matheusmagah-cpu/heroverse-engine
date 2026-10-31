@@ -1,0 +1,8 @@
+{
+  "_doc": "Claude Code token budget for this project. Counted weighted tokens = input + cache_creation + output + cache_read_weight * cache_read. Budget = weekly_cap_tokens * project_share. weekly_cap_tokens is an ESTIMATE measured from the local transcripts: weighted usage from the first transcript (2026-10-27T13:22Z) to the first weekly-limit error (2026-10-28T13:07:59Z); transcripts before 10-27 no longer exist, so the real cap is at least this value.",
+  "weekly_cap_tokens": 201000000,
+  "project_share": 0.5,
+  "cache_read_weight": 0.1,
+  "reset": {"weekday": "Saturday", "time_utc": "19:00"},
+  "cache_seconds": 60
+}

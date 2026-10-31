@@ -1,0 +1,42 @@
+{
+ "id": "clip-arc01-s-c2-four-river-flow-water-aerial-view-drone-lands",
+ "theme": "arc01-s-c2-four",
+ "query": "river branches aerial",
+ "source": "pixabay",
+ "title": "river, flow, water, aerial view, drone, landscape",
+ "page": "https://pixabay.com/videos/id-208744/",
+ "author": "43485955",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: 43485955 via Pixabay (https://pixabay.com/videos/id-208744/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9fecef0bff70a92cbc02706cff2210f5587a7091b3081944521e312a48a3305c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,city"
+ ],
+ "vetting_luma": [
+  115.8,
+  115.5,
+  114.5,
+  112.6,
+  113.4
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a bridge over it, a boat on the water, and a road running alongside it.",
+  "A city is visible in the background, with a river running through it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

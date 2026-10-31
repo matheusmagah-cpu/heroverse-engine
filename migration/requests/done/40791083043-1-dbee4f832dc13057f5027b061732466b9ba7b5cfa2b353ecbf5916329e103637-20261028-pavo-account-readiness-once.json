@@ -1,0 +1,15 @@
+{
+ "workflow": "pavo-mcp.yml",
+ "inputs": {},
+ "_dispatch": {
+  "version": "request-claim-v1",
+  "state": "acknowledged",
+  "request_sha256": "dbee4f832dc13057f5027b061732466b9ba7b5cfa2b353ecbf5916329e103637",
+  "original_path": "migration/requests/20261028-pavo-account-readiness-once.json",
+  "base_commit": "8767ed1e89725f7206996aa1a293c4ee92aca2db",
+  "dispatcher_run_id": "40791083043",
+  "dispatcher_attempt": "1",
+  "claimed_at": "2026-10-29T00:00:02.908351+00:00",
+  "acknowledged_at": "2026-10-29T00:00:05.760733+00:00"
+ }
+}

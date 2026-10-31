@@ -9,9 +9,9 @@ Evidence and method (each item names where it comes from):
 - qa      out/qa.json, frozen criteria (qa_pilot.py): deterministic tools over the
           WHOLE file (ffmpeg decode/loudness, ASR word error vs script, caption
           file vs detected speech, render manifest).
-- review  out/review.json (long_review.py): a free Gemini model watching the file
-          with audio. Pictures are SAMPLED at 0.5 frames/s, low resolution: it can
-          miss a defect shorter than ~2 s. Independent of qa (different instrument).
+- review  out/review.json (long_review.py): an explicitly designated session review
+          of inspection sheets, transcript, thumbnail and QA audio measures.
+          Pictures are sampled; whole-file QA and scan remain separate requirements.
 - score   out/review.json scorecard hard rows (same miner as the reference winners).
 - preflight  publish/preflight.py (YouTube limits, thumbnail, schedule, captions).
 - scan    out/scan.json (production/signal_scan.py): ffmpeg black/silence detectors over EVERY frame and
@@ -31,6 +31,9 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import owner_quality_policy  # noqa: E402
 
 VERSION = "prepublish-gate-v1"
 FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
@@ -64,7 +67,7 @@ PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
 # very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
 # render 6.8 / 6.7 / 7.0; flash-lite gave 8-10 to four of five pilot-002 Shorts): their answer is UNKNOWN, retried
-REVIEW_MODELS = ("claude-session-reviewer",)  # owner 2026-10-24: gemini-3.8-flash replaced (unstable, E58)
+REVIEW_MODELS = owner_quality_policy.LONG_REVIEWERS
 
 # dimension -> qa checks (whole file, deterministic) and review rubric items (sampled, model)
 DIMENSIONS = {
@@ -166,6 +169,11 @@ DIMENSIONS_BY_VERSION = {"pilot-qa-criteria-v3": DIMENSIONS_V3, "pilot-qa-criter
 SCORE_HARD = ("minutes", "scripture_per_10_min")
 
 
+def score_hard_keys(version):
+    """The acted story's registered structure has a length band, not a prayer's quotation frequency."""
+    return ("minutes",) if version in STORY_VERSIONS else SCORE_HARD
+
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -238,12 +246,14 @@ def review_items(review, names, sha):
     if review.get("status") not in ("PASS", "FAIL"):
         return [item("review", n, "UNKNOWN", f"review {review.get('status')}: {review.get('error', '')}"[:200]) for n in names]
     w = review.get("watched_review") or {}
+    if not owner_quality_policy.evidence_valid(w):
+        return [item("review", n, "UNKNOWN", "review evidence malformed or absent") for n in names]
     if w.get("model") not in REVIEW_MODELS:
         return [item("review", n, "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one") for n in names]
     out = []
     for n in names:
         v = w.get(n)
-        out.append(item("review", n, "UNKNOWN", "score absent") if not isinstance(v, (int, float)) else
+        out.append(item("review", n, "UNKNOWN", "score absent or invalid") if not owner_quality_policy.score_valid(v) else
                    item("review", n, "PASS" if v >= PASS_ITEM else "FAIL", v))
     return out
 
@@ -277,22 +287,26 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
         dims["story_qa_" + version.rsplit("-", 1)[-1]] = story_v3_row_items(qa, sha, version)
     # whole-video watched review: its overall score is a gate of its own
     w = (review or {}).get("watched_review") or {}
+    if not isinstance(w, dict):
+        w = {}
     if review is None or review.get("output_sha256") != sha or review.get("status") not in ("PASS", "FAIL"):
         overall = [item("review", "overall", "UNKNOWN", "no completed watched review for this file")]
+    elif not owner_quality_policy.evidence_valid(w):
+        overall = [item("review", "overall", "UNKNOWN", "review evidence malformed or absent")]
     elif w.get("model") not in REVIEW_MODELS:
         overall = [item("review", "overall", "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one")]
-    elif not isinstance(w.get("overall"), (int, float)):
-        overall = [item("review", "overall", "UNKNOWN", "score absent")]
+    elif not owner_quality_policy.score_valid(w.get("overall")):
+        overall = [item("review", "overall", "UNKNOWN", "score absent or invalid")]
     else:
         overall = [item("review", "overall", "PASS" if w["overall"] >= PASS_OVERALL else "FAIL", w["overall"])]
     dims["content_and_policy"] += overall
     hard = (review or {}).get("scorecard_hard") if review and review.get("output_sha256") == sha else None
     if not hard:
-        dims["scorecard"] = [item("score", n, "UNKNOWN", "no scorecard for this file") for n in SCORE_HARD]
+        dims["scorecard"] = [item("score", n, "UNKNOWN", "no scorecard for this file") for n in score_hard_keys(version)]
     else:
         dims["scorecard"] = [item("score", n, "UNKNOWN", "row absent") if n not in hard else
                              item("score", n, "PASS" if hard[n].get("pass") else "FAIL", hard[n].get("value"))
-                             for n in sorted(set(SCORE_HARD) | set(hard))]
+                             for n in sorted(set(score_hard_keys(version)) | set(hard))]
     scan = load(d / "out" / "scan.json")
     if scan is None or scan.get("status") not in ("PASS", "FAIL"):
         dims["full_file_scan"] = [item("scan", "signal_scan", "UNKNOWN", (scan or {}).get("error", "out/scan.json missing"))]

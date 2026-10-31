@@ -46,24 +46,29 @@ def run(model, payload):
     req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST",
                                  headers={"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"],
                                           "Content-Type": "application/json"})
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                body, ctype = r.read(), r.headers.get("Content-Type", "")
-            if ctype.startswith("image/"):
-                return body
-            data = json.loads(body)
-            image = (data.get("result") or {}).get("image")
-            if not image:
-                raise RuntimeError("CF_NO_IMAGE " + json.dumps(data)[:300])
-            return base64.b64decode(image)
-        except urllib.error.HTTPError as e:
-            msg = e.read()[:300].decode(errors="replace")
-            if e.code == 429 or "limit" in msg.lower():
-                raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED " + msg)
-            if attempt == 3:
-                raise RuntimeError(f"CF_HTTP_{e.code} {msg}")
-            time.sleep(2 ** attempt)
+    # E214: this POST creates a result, not a read. A lost/5xx acknowledgement may follow a completed generation.
+    # Never retry it here; the existing guarded workflow must reconcile its request/run before any new attempt.
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            body, ctype = r.read(), r.headers.get("Content-Type", "")
+        if ctype.startswith("image/"):
+            return body
+        data = json.loads(body)
+        result = data.get("result") if isinstance(data, dict) else None
+        image = result.get("image") if isinstance(result, dict) else None
+        if not isinstance(image, str) or not image:
+            raise ValueError("no image in acknowledgement")
+        return base64.b64decode(image, validate=True)
+    except urllib.error.HTTPError as e:
+        code = e.code
+        msg = e.read(300).decode(errors="replace")
+        e.close()
+        if code == 429 or "limit" in msg.lower() or "used up your daily free allocation" in msg.lower():
+            raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED HTTP_%s" % code) from None
+        # Provider response bodies are not public evidence; do not put account/credential echoes in Actions logs.
+        raise RuntimeError("CF_GENERATION_OUTCOME_UNCERTAIN_NO_REPLAY HTTP_%s" % code) from None
+    except (TimeoutError, OSError, ValueError, TypeError):
+        raise RuntimeError("CF_GENERATION_OUTCOME_UNCERTAIN_NO_REPLAY") from None
 
 
 def main(prompts_path, out_dir, engine="flux"):

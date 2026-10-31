@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-x-cloak-flowers-daisy-view-yellow-wind-macro-bea",
+ "theme": "arc01-x-cloak",
+ "query": "fur cloak wind back view",
+ "source": "pixabay",
+ "title": "flowers, daisy, view, yellow, wind, macro, beautiful wallpaper, summer, herb, calm, grass, weeds, nature, background",
+ "page": "https://pixabay.com/videos/id-220143/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-220143/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0627427ff1481f3ad630d50bd3350e7888e7846efd3ef843822e54e226fbabdc",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  116.3,
+  117.1,
+  121.8,
+  120.4,
+  124.5
+ ],
+ "vetting_descriptions": [
+  "A field of yellow flowers with green leaves and a blue sky in the background.",
+  "A field of yellow flowers with a blue sky above."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-x-cloak-flowers-daisy-view-yellow-wind-macro-bea-sha256-0627427ff1481f3ad630d50bd3350e7888e7846efd3ef843822e54e226fbabdc.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

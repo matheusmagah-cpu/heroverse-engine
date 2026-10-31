@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-s-c3-wind-trees-branch-leaves-flowers-buds-spring-",
+ "theme": "arc01-s-c3-wind",
+ "query": "trees bending strong wind",
+ "source": "pixabay",
+ "title": "trees, branch, leaves, flowers, buds, spring, summer, wind, nature, plant, garden, forest, season, landscape",
+ "page": "https://pixabay.com/videos/id-68465/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 53.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-68465/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6e4d0fe61d575dd1d7e8a38c788d1d39b2323c7150913a978a309fca2cce07a3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  128.8,
+  130.0,
+  129.2,
+  130.6,
+  130.2
+ ],
+ "vetting_descriptions": [
+  "A tree branch with green leaves is seen in front of a blue ocean.",
+  "A small green plant is growing on a hillside overlooking the ocean."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-s-c3-wind-trees-branch-leaves-flowers-buds-spring--sha256-6e4d0fe61d575dd1d7e8a38c788d1d39b2323c7150913a978a309fca2cce07a3.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

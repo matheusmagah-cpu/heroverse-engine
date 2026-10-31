@@ -1,0 +1,40 @@
+{
+ "id": "clip-arc01-keeper-camp-fire-fireplace-campfire-bonfire-cozy-war",
+ "theme": "arc01-keeper-camp",
+ "query": "campfire embers close up night",
+ "source": "pixabay",
+ "title": "fire, fireplace, campfire, bonfire, cozy, warm, crackling fireplace, christmas, holiday",
+ "page": "https://pixabay.com/videos/id-240502/",
+ "author": "BFCMUSIC",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: BFCMUSIC via Pixabay (https://pixabay.com/videos/id-240502/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b497d6ddfe698f1036e1425b06370a2b7fcdb8c29ba3889bd7f1e001000d4a93",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  44.9,
+  45.6,
+  44.3,
+  44.8,
+  48.4
+ ],
+ "vetting_descriptions": [
+  "A fire is burning in a fireplace, with flames and smoke rising up.",
+  "A fireplace with a fire burning in it, with flames and smoke coming out of it."
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-arc01-keeper-camp-fire-fireplace-campfire-bonfire-cozy-war-sha256-b497d6ddfe698f1036e1425b06370a2b7fcdb8c29ba3889bd7f1e001000d4a93.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
