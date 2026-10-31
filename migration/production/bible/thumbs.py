@@ -12,9 +12,10 @@ BEFORE publish, together with the episode's stills; the publish step uploads onl
                                            score, note, date} once `approve` ran (by PR)
   bible/thumbs/<episode>.jpg               the approved thumbnail (copied by `approve`, never by hand)
   bible/thumbs/candidates/<cid>.jpg|json   candidates, cid = <episode>-<run>-<n>: the image model's picture (Pavo
-                                           agnes-image, after a fresh exact 0-credit quote) cropped to the format,
-                                           with the text drawn by our own code; the record holds both sha256, the
-                                           spec digest, the references sent, the R16 ruler (thumb_check.py)
+                                           agnes-image, after a fresh exact 0-credit quote) cropped to the format
+                                           (centred, or the recorded --crop box: E239), with the text drawn by our
+                                           own code; the record holds the source, base and final sha256, the crop,
+                                           the spec digest, the references sent, the R16 ruler (thumb_check.py)
   bible/thumbs/sheets/<episode>-<run>.jpg  the contact sheet Claude reviews
 
 The prompt carries the character's look word for word and passes the scene rules (period, writing, ark) by
@@ -25,10 +26,15 @@ usage:
   thumbs.py check SPEC                                     the spec's problems (exit 1 on any)
   thumbs.py refs SPEC SRC_DIR OUT_DIR                      the character's approved reference images (verified by
                                                            sha256 from SRC_DIR) as JPEGs the image model accepts
-  thumbs.py finalize SPEC IMAGE RUN N META_JSON            one candidate (crop, text, record, R16)
+  thumbs.py finalize SPEC IMAGE RUN N META_JSON [--crop X,Y,W,H]
+                                                           one candidate (crop, text, record, R16); --crop: a box
+                                                           inside IMAGE at the format's aspect, long side >=
+                                                           CROP_LONG_MIN (upscale <= 2x), E239
   thumbs.py sheet EPISODE RUN OUT_JPG                      the run's contact sheet
-  thumbs.py approve EPISODE CANDIDATE --score S --note T --reviewer MODEL
-                                                        after the named session's review (>= 9.5), by PR
+  thumbs.py approve EPISODE CANDIDATE --score S --note T --reviewer MODEL [--reviewed-sha256 HEX]
+                                                        after the named session's review (>= 9.5), by PR; the
+                                                        sha256 of the image the full-resolution review saw is
+                                                        required for a cropped candidate and must be its own
   thumbs.py verify EPISODE [THUMBNAIL]                     what publish refuses (exit 1 on any)
 """
 from datetime import datetime, timezone
@@ -58,6 +64,11 @@ DESIGN = ("episode", "format", "story", "character", "emotion", "framing", "scen
 CID = re.compile(r"^([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9]{1,20})-([1-9])$")
 WORD = re.compile(r"[A-Za-z0-9']+")
 EPISODE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")   # a name, never a path
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
+# E239: a recorded crop box is resized to the format by at most 2x (as PUBLIC_CROP_LONG_MIN bounds a public still),
+# so its long side is at least half the format's long side: short 1920 -> 960 px, long 1280 -> 640 px
+MAX_UPSCALE = 2
+CROP_LONG_MIN = {form: -(-max(size) // MAX_UPSCALE) for form, size in FORMATS.items()}
 
 
 def sha256(path):
@@ -108,6 +119,42 @@ def keeper_variant(spec):
     v = spec.get("variant")
     return isinstance(v, dict) and v.get("ab") is True and isinstance(v.get("owner_approved"), str) \
         and v["owner_approved"].strip() != ""
+
+
+def crop_problems(box, dims, form):
+    """E239 (as plan_check.public_problems does for a public still's crop): a box [x, y, w, h] of whole pixels inside
+    the source picture DIMS, at the format's aspect (within 1%), whose long side is at least CROP_LONG_MIN[form] so
+    the resize to the format upscales it by at most MAX_UPSCALE. Stdlib only (publish_problems re-checks it)."""
+    ints = lambda v, n: isinstance(v, list) and len(v) == n and all(  # noqa: E731
+        isinstance(x, int) and not isinstance(x, bool) and x >= 0 for x in v)
+    if form not in FORMATS:
+        return [f"THUMB_FORMAT_INVALID {form!r} (one of {sorted(FORMATS)})"]
+    if not ints(dims, 2) or not ints(box, 4) or box[2] <= 0 or box[3] <= 0 \
+            or box[0] + box[2] > dims[0] or box[1] + box[3] > dims[1]:
+        return [f"THUMB_CROP_INVALID {box} (a box [x, y, w, h] inside the source {dims})"]
+    out = []
+    tw, th = FORMATS[form]
+    if abs(box[2] / box[3] - tw / th) > 0.01:
+        out.append(f"THUMB_CROP_ASPECT_MISMATCH crop {box} is not {RATIOS[form]} ({tw}x{th})")
+    if max(box[2], box[3]) < CROP_LONG_MIN[form]:
+        out.append(f"THUMB_CROP_RESOLUTION_LOW crop {box[2]}x{box[3]} (long side >= {CROP_LONG_MIN[form]}: the "
+                   f"{tw}x{th} {form} upscales it by at most {MAX_UPSCALE}x)")
+    return out
+
+
+def candidate_crop_problems(rec):
+    """E239: a cropped candidate's record names a valid crop of its recorded source, and the base it made."""
+    c = rec.get("crop") if isinstance(rec, dict) else None
+    if c is None:
+        return []
+    if not isinstance(c, dict):
+        return [f"THUMB_CROP_INVALID {c!r} (a crop record)"]
+    out = crop_problems(c.get("box"), c.get("source_size"), rec.get("format"))
+    if not HEX64.fullmatch(str(c.get("source_sha256") or "")) or c.get("source_sha256") != rec.get("source_sha256"):
+        out.append("THUMB_CROP_INVALID (the source's sha256 is not recorded)")
+    if not HEX64.fullmatch(str(c.get("cropped_sha256") or "")) or c.get("cropped_sha256") != rec.get("base_sha256"):
+        out.append("THUMB_CROP_INVALID (the cropped image's sha256 is not the candidate's base)")
+    return out
 
 
 def spec_problems(spec, chars=None):
@@ -195,6 +242,12 @@ def publish_problems(episode, form=None, thumbnail=None, thumbs_dir=None, chars=
     elif (rec.get("sha256") != a["sha256"] or rec.get("spec_sha256") != a.get("spec_sha256")
           or (rec.get("r16") or {}).get("status") != "PASS"):
         out.append(f"THUMB_NOT_APPROVED {episode}: candidate {a['candidate']} is not these bytes, this spec and R16 PASS")
+    else:
+        out += [f"THUMB_NOT_APPROVED {episode}: {p}" for p in candidate_crop_problems(rec)]
+        if (rec.get("crop") is not None or a.get("reviewed_sha256") is not None) \
+                and a.get("reviewed_sha256") != rec.get("sha256"):
+            out.append(f"THUMB_NOT_APPROVED {episode}: the full-resolution review is not of the cropped candidate "
+                       f"{a['candidate']} (reviewed_sha256 {a.get('reviewed_sha256')!r}; E239)")
     img = image_path(episode, thumbs_dir)
     if not img.is_file() or sha256(img) != a["sha256"]:
         out.append(f"THUMB_NOT_APPROVED {episode}: the image is not the approved one (sha256)")
@@ -272,8 +325,11 @@ def r16(path):
     return {"status": "FAIL" if fails else "PASS", "fails": fails, "metrics": {k: round(v, 3) for k, v in m.items()}}
 
 
-def finalize(spec_file, image, run, n, meta, thumbs_dir=None):
-    """One candidate: the model's picture to the format, our text on it, both sha256, the spec digest, R16."""
+def finalize(spec_file, image, run, n, meta, thumbs_dir=None, crop=None):
+    """One candidate: the model's picture to the format, our text on it, both sha256, the spec digest, R16.
+    E239: CROP, a box [x, y, w, h] on IMAGE (crop_problems), is cut first and then resized to the format (at most 2x);
+    the record keeps the box, the source's sha256 and the cropped base's sha256, and every check (spec, references,
+    words, R16, the review) is of the cropped result."""
     from PIL import Image
     spec = json.loads(Path(spec_file).read_text())
     bad = spec_problems(spec)
@@ -284,12 +340,26 @@ def finalize(spec_file, image, run, n, meta, thumbs_dir=None):
     thumbs_dir = Path(thumbs_dir or THUMBS)
     cid = f"{spec['episode']}-{run}-{n}"
     form = spec["format"]
+    source_sha256 = sha256(image)
     with Image.open(image) as src:
         source_size = list(src.size)
-        base = cover(src.convert("RGB"), FORMATS[form])
+        picture = src.convert("RGB")
+    box = None
+    if crop is not None:
+        box = list(crop) if isinstance(crop, (list, tuple)) else crop
+        bad = crop_problems(box, source_size, form)
+        if bad:
+            raise SystemExit(bad[0])
+        x, y, w, h = box
+        picture = picture.crop((x, y, x + w, y + h))
+    base = cover(picture, FORMATS[form])
     base_path = thumbs_dir / "candidates" / f"{cid}-base.jpg"
     base_path.parent.mkdir(parents=True, exist_ok=True)
     base.save(base_path, "JPEG", quality=92)
+    crop_rec = None if box is None else {
+        "box": box, "source_size": source_size, "source_sha256": source_sha256, "cropped_sha256": sha256(base_path),
+        "upscale": round(max(FORMATS[form]) / max(box[2], box[3]), 3),
+        "resize": f"crop {box}, Lanczos to {FORMATS[form][0]}x{FORMATS[form][1]}"}
     dst = thumbs_dir / "candidates" / f"{cid}.jpg"
     overlay(base.copy(), spec["text"], form).save(dst, "JPEG", quality=90)
     rec = {"id": cid, "episode": spec["episode"], "run": str(run), "status": "DRAFT", "format": form,
@@ -299,6 +369,7 @@ def finalize(spec_file, image, run, n, meta, thumbs_dir=None):
            "resolution": meta.get("resolution"), "conversation_id": meta.get("conversation_id"),
            "quote": meta.get("quote"), "references": meta.get("references") or [],
            "references_live": meta.get("references_live"), "source_size": source_size,
+           "source_sha256": source_sha256, "crop": crop_rec,
            "base_path": rel(base_path), "base_sha256": sha256(base_path),
            "repo_path": rel(dst), "sha256": sha256(dst), "r16": r16(dst),
            "generated_by": "HeroVerse pipeline (AI-generated image)"}
@@ -330,10 +401,13 @@ def sheet(episode, run, out_jpg, thumbs_dir=None):
     return [r["id"] for r in recs]
 
 
-def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=None, *, reviewer=None):
+def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=None, *, reviewer=None,
+            reviewed_sha256=None):
     """The named session's review approved CANDIDATE (overall >= 9.5): its image becomes bible/thumbs/<episode>.jpg and the spec
     APPROVED with the sha256 computed here. Refused when the candidate is not the recorded image, was made from
-    another spec, fails R16 (thumb_check.py), or the spec fails its own rules."""
+    another spec, fails R16 (thumb_check.py), or the spec fails its own rules. E239: REVIEWED_SHA256 is the sha256 of
+    the image the full-resolution review saw; a cropped candidate needs it, and it must be the candidate's own (the
+    cropped result with our text), never the uncropped source."""
     thumbs_dir = Path(thumbs_dir or THUMBS)
     spec = load(episode, thumbs_dir)
     if spec is None:
@@ -359,6 +433,12 @@ def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=
         raise SystemExit(f"THUMB_R16_FAIL {candidate} " + "; ".join(check["fails"]))
     if meta.get("episode") != episode or spec.get("episode") != episode:
         raise SystemExit(f"THUMB_CANDIDATE_UNKNOWN {candidate} (the spec and candidate are {episode}'s)")
+    bad = candidate_crop_problems(meta)
+    if bad:
+        raise SystemExit(bad[0])
+    if (meta.get("crop") is not None or reviewed_sha256 is not None) and reviewed_sha256 != meta["sha256"]:
+        raise SystemExit(f"THUMB_REVIEW_SHA256_MISMATCH {candidate} (the full-resolution review saw "
+                         f"{reviewed_sha256!r}; it must be the cropped candidate {meta['sha256']}; E239)")
     model = reviewer_identity.require(reviewer)
     dst = image_path(episode, thumbs_dir)
     shutil.copyfile(src, dst)
@@ -367,6 +447,8 @@ def approve(episode, candidate, score, note, thumbs_dir=None, today=None, chars=
                               "score": score, "note": note.strip(),
                               "date": today or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                               "by": model, "model": model}})
+    if reviewed_sha256 is not None:
+        spec["approved"]["reviewed_sha256"] = reviewed_sha256
     save(spec_path(episode, thumbs_dir), spec)
     return spec
 
@@ -380,15 +462,23 @@ def main(argv):
     if cmd == "refs" and len(args) == 3:
         print(json.dumps(reference_inputs(json.loads(Path(args[0]).read_text()), args[1], args[2]), indent=1))
         return 0
-    if cmd == "finalize" and len(args) == 5:
-        rec = finalize(args[0], args[1], args[2], args[3], json.loads(Path(args[4]).read_text()))
+    if cmd == "finalize" and len(args) in (5, 7) and (len(args) == 5 or args[5] == "--crop"):
+        box = None
+        if len(args) == 7:
+            try:
+                box = [int(v) for v in args[6].split(",")]
+            except ValueError:
+                raise SystemExit("THUMB_CROP_INVALID (X,Y,W,H)")
+        rec = finalize(args[0], args[1], args[2], args[3], json.loads(Path(args[4]).read_text()), crop=box)
         print(json.dumps({"candidate": rec["id"], "sha256": rec["sha256"], "r16": rec["r16"]["status"]}))
         return 0
     if cmd == "sheet" and len(args) == 3:
         print(json.dumps({"sheet": args[2], "candidates": sheet(*args)}))
         return 0
-    if cmd == "approve" and len(args) == 8 and args[2] == "--score" and args[4] == "--note" and args[6] == "--reviewer":
-        spec = approve(args[0], args[1], float(args[3]), args[5], reviewer=args[7])
+    if cmd == "approve" and len(args) in (8, 10) and args[2] == "--score" and args[4] == "--note" \
+            and args[6] == "--reviewer" and (len(args) == 8 or args[8] == "--reviewed-sha256"):
+        spec = approve(args[0], args[1], float(args[3]), args[5], reviewer=args[7],
+                       reviewed_sha256=args[9] if len(args) == 10 else None)
         print(json.dumps({"episode": args[0], "status": spec["status"], "sha256": spec["approved"]["sha256"]}))
         return 0
     if cmd == "verify" and len(args) in (1, 2):

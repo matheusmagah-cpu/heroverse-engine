@@ -2680,6 +2680,22 @@
     "migration/production/bible/episode_build.py::def frame_refusal("
    ],
    "note": "E237: an APPROVED public still whose record (hosts, licence allowlist, BY/SA attribution, sha256, crop at aspect and resolution) or full-resolution review (every check, a note, the approved image's sha256) does not hold; public_sources.py fetch and approve refuse it first, plan_check (and the preflight, which runs it strict) and episode_build.request (frame_refusal) by the same function, plan_check.public_still_problems"
+  },
+  "THUMB_CROP_INVALID": {
+   "class": "N",
+   "why": "thumbs.py finalize, a local review tool run after the generation: the crop box the reviewer chose on the candidate picture is refused by thumbs.crop_problems before anything is recorded (no generation is redone; E239): a box outside the source picture or not X,Y,W,H"
+  },
+  "THUMB_CROP_ASPECT_MISMATCH": {
+   "class": "N",
+   "why": "thumbs.py finalize, a local review tool run after the generation: the crop box the reviewer chose on the candidate picture is refused by thumbs.crop_problems before anything is recorded (no generation is redone; E239): a box not at the format's aspect"
+  },
+  "THUMB_CROP_RESOLUTION_LOW": {
+   "class": "N",
+   "why": "thumbs.py finalize, a local review tool run after the generation: the crop box the reviewer chose on the candidate picture is refused by thumbs.crop_problems before anything is recorded (no generation is redone; E239): a box whose long side is under CROP_LONG_MIN (short 960, long 640), so the upscale would pass 2x"
+  },
+  "THUMB_REVIEW_SHA256_MISMATCH": {
+   "class": "N",
+   "why": "thumbs.py approve, a local review command run by PR: the full-resolution review's sha256 is not the cropped candidate's own (E239); publish_problems names it as THUMB_NOT_APPROVED"
   }
  },
  "review": {
