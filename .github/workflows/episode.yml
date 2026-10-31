@@ -88,8 +88,9 @@ jobs:
           sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
           # E120: the sync gate is SyncNet (CPU, numpy, no torch); its public weights sit next to the face model
-          curl -fsSL --retry 3 -o "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
           sha=$(python3 -I -c "import re,sys;print(re.search(r'SYNCNET_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/syncnet.py)
+          # E240: from the engine release first (by sha256), the original host only when not mirrored yet; fail closed on any mismatch
+          bash migration/ci/pinned_asset.sh fetch "syncnet_v2-$sha.model" "$sha" "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
           echo "$sha  $RUNNER_TEMP/syncnet_v2.model" | sha256sum -c -
           # the lips check must work before any Pavo generation is spent (E89): the calibration clip must pass
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"

@@ -1,0 +1,37 @@
+name: HeroVerse pinned assets mirror (third-party weights -> engine release, sha256 checked; nothing else)
+run-name: "pinned-assets: source=${{ inputs.source }}"
+# E240: the build workflows read pinned third-party files from the engine's own release first (migration/ci/
+# pinned_asset.sh fetch) and from the original host only when the mirror lacks them. This uploads each file once,
+# only when its bytes hash to the sha256 pinned in the code; an asset already mirrored is left as it is. Idempotent.
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Other URL for syncnet_v2.model when its host is down (any copy is accepted only by its pinned sha256); empty = syncnet.SYNCNET_URL
+        required: false
+        default: ""
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-pinned-assets
+  cancel-in-progress: false
+jobs:
+  mirror:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write   # gh release upload into the engine's asset release (assets.sh)
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE: ${{ inputs.source }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
+        run: |
+          read -r sha url < <(python3 -I -c "import re,sys;t=open(sys.argv[1]).read();print(re.search(r'SYNCNET_SHA256 = \"([0-9a-f]{64})\"',t).group(1),re.search(r'SYNCNET_URL = \"(https://[^\"]+)\"',t).group(1))" migration/production/bible/syncnet.py)
+          case "$SOURCE" in ""|https://*) ;; *) echo "PINNED_ASSET_SOURCE_REFUSED"; exit 1 ;; esac
+          bash migration/ci/pinned_asset.sh mirror "syncnet_v2-$sha.model" "$sha" "${SOURCE:-$url}"
+          bash migration/ci/assets.sh which "syncnet_v2-$sha.model"

@@ -73,6 +73,8 @@ jobs:
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout (episode_build.rel)
       - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
+        env:
+          GH_TOKEN: ${{ github.token }}   # E240: the SyncNet weights' release mirror (assets.sh, read)
         run: |
           APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2   # mediapipe links libEGL/libGLESv2 (E89)
           python3 -m venv "$RUNNER_TEMP/voice"
@@ -82,8 +84,9 @@ jobs:
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
           sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
-          curl -fsSL --retry 3 -o "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
           sha=$(python3 -I -c "import re,sys;print(re.search(r'SYNCNET_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/syncnet.py)
+          # E240: from the engine release first (by sha256), the original host only when not mirrored yet; fail closed on any mismatch
+          bash migration/ci/pinned_asset.sh fetch "syncnet_v2-$sha.model" "$sha" "$RUNNER_TEMP/syncnet_v2.model" https://www.robots.ox.ac.uk/~vgg/software/lipsync/data/syncnet_v2.model
           echo "$sha  $RUNNER_TEMP/syncnet_v2.model" | sha256sum -c -
           # the lips check must work before an approved talking clip is checked again (E89): the calibration clip passes
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
