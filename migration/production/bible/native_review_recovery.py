@@ -183,7 +183,7 @@ def receive(i, root, receipt, legacy):
         (root/'ingress.key').unlink(missing_ok=True)
 
 
-def record_readback(receipt, body, validator):
+def record_readback(receipt, body, validator, floor=9.5):
     r = json.loads(Path(receipt).read_text())
     need(len(body) <= 2_000_000, 'READBACK_TOO_LARGE')
     r.update(response_body_base64=base64.b64encode(body).decode(),
@@ -223,7 +223,7 @@ def record_readback(receipt, body, validator):
             save(receipt, r)
             raise Blocked('REPORT_VALIDATION_FAILED') from None
         r.update(status='EVIDENCE_COMPLETE', report=report,
-                 owner_floor_met=report['overall'] >= 9.5 and all(report['scores'][k] >= 7 for k in RUBRIC))
+                 owner_floor_met=report['overall'] >= floor and all(report['scores'][k] >= 7 for k in RUBRIC))
     else:
         r['status'] = 'PROVIDER_STATUS_UNKNOWN'
     save(receipt, r)
@@ -268,7 +268,7 @@ def poll_saved(i, receipt, key, legacy, attempts=120):
             if i.get('recover_submitted_run'):
                 check_remote_binding(r,json.loads(body),i,key,legacy)
             legacy.validate_report(report, r['duration_seconds'])
-        status = record_readback(receipt,body,validate)
+        status = record_readback(receipt,body,validate,legacy.floor_for(i['plan']))
         if status != 'SUBMITTED':
             return status
         time.sleep(10)
