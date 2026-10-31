@@ -107,10 +107,35 @@ def thumb_problems(episode):
     return thumbs().publish_problems(episode["id"], episode.get("format", "short"))
 
 
+# E235: the Short publish route never read the review. A record now carries the review of THIS master by a
+# designated Short reviewer at the owner floor, or it is refused (fail-closed; the score is never produced here).
+SHORT_REVIEWERS = ("claude-session-reviewer", "gemini-3.8-flash")
+SHORT_FLOOR = 9.5
+
+
+def review_problems(episode):
+    review = episode.get("review")
+    if not isinstance(review, dict):
+        return ["REVIEW_MISSING"]
+    out = []
+    overall = review.get("overall")
+    if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not SHORT_FLOOR <= overall <= 10:
+        out.append("REVIEW_BELOW_FLOOR")
+    if review.get("reviewer") not in SHORT_REVIEWERS:
+        out.append("REVIEW_REVIEWER_NOT_DESIGNATED")
+    if review.get("output_sha256") != episode.get("output_sha256"):
+        out.append("REVIEW_NOT_FOR_THIS_FILE")
+    if not isinstance(review.get("issues"), list):
+        out.append("REVIEW_ISSUES_MISSING")
+    return out
+
+
 def problems(episode, video=None):
     """Everything EPISODE_REFUSED names. video None: the record alone (episode_build.py check-record runs this before
     publish-episode.yml is dispatched, E106); the upload always passes the file, so its sha256 is checked there."""
     out = short_problems(episode) + thumb_problems(episode)
+    if not episode.get("video_id"):   # a record already published resumes its own upload; it is never re-reviewed
+        out += review_problems(episode)
     if episode.get("id"):
         # E189: re-read explicit retractions at upload, not only when the master was built.
         if str(THUMBS_CODE) not in sys.path:

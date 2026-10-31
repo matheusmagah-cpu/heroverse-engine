@@ -43,10 +43,30 @@ class Episode(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             v = Path(d, "v.mp4")
             v.write_bytes(b"video")
-            ep = {"output_sha256": pe.sha256_file(v), "title": "T", "description": "KJV (public domain). AI voice."}
+            sha = pe.sha256_file(v)
+            ep = {"output_sha256": sha, "title": "T", "description": "KJV (public domain). AI voice.",
+                  "review": {"overall": 9.5, "reviewer": "claude-session-reviewer", "output_sha256": sha, "issues": []}}
             self.assertEqual(pe.problems(ep, v), [])
             self.assertIn("OUTPUT_SHA256_MISMATCH", pe.problems(dict(ep, output_sha256="0" * 64), v))
             self.assertIn("DISCLOSURE_MISSING", pe.problems(dict(ep, description="no source"), v))
+
+    def test_e235_a_short_without_a_floor_review_of_this_master_is_refused(self):
+        sha = "a" * 64
+        good = {"overall": 9.5, "reviewer": "gemini-3.8-flash", "output_sha256": sha, "issues": []}
+        ep = {"output_sha256": sha}
+        self.assertEqual(pe.review_problems(dict(ep, review=good)), [])
+        self.assertEqual(pe.review_problems(ep), ["REVIEW_MISSING"])
+        self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=9.4))))
+        self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=True))))
+        self.assertIn("REVIEW_REVIEWER_NOT_DESIGNATED",
+                      pe.review_problems(dict(ep, review=dict(good, reviewer="gpt-6-astra-session-reviewer"))))
+        self.assertIn("REVIEW_NOT_FOR_THIS_FILE", pe.review_problems(dict(ep, review=dict(good, output_sha256="b" * 64))))
+        self.assertIn("REVIEW_ISSUES_MISSING", pe.review_problems(dict(ep, review={k: v for k, v in good.items()
+                                                                                  if k != "issues"})))
+        # problems() applies it to every record not yet published (a published record resumes its own upload)
+        rec = {"output_sha256": sha, "title": "T", "description": "KJV (public domain). AI voice."}
+        self.assertIn("REVIEW_MISSING", pe.problems(rec))
+        self.assertNotIn("REVIEW_MISSING", pe.problems(dict(rec, video_id="VID12345678")))
 
 
 def short(**over):
