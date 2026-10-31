@@ -94,7 +94,7 @@ heartbeat's decide-from-history pattern (`ops/heartbeat.py::decide`), not a new 
 Purpose: only to stop the autopilot and a live Claude session from writing the same delivery at once. The schema allows
 `codex`/`claude` today (`private_audio.py`, `native_review_recovery.py`). Simplest: the autopilot holds it as owner
 `claude` with `task: autopilot` and `run_id` = the Actions run id (no code change; `codex` simply goes unused).
-Alternative: add an `autopilot` owner (code and tests in both readers). Compare-and-swap exactly per
+Implemented (A1-3) as the alternative: owner `autopilot` written only by `ops/autopilot_lease.py` (acquire/renew/release, CAS, never taking an active lease, expired holder only after `--reconciled`). The Pavo/private-audio readers keep accepting `codex`/`claude` only, so an autopilot lease never authorises a Pavo effect. Compare-and-swap exactly per
 `OPERATIONS.md` (parent = observed head, unchanged tree, expiry <= 55 min, force=false, read back, renew <= 10 min,
 release idle at a safe boundary). Behaviour: lease held by an unexpired Claude session -> the tick is read-only and exits
 `LEASE_BUSY` (no effects); expired -> reconcile saved IDs first, then take it. Release is in an `if: always()` step; a

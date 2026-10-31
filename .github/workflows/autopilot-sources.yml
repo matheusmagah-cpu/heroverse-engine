@@ -85,7 +85,7 @@ jobs:
           - Clips: vetted library clips ranked by the shot's words; shots with too few clips have a ready \`footage-queries-$EP.json\` for footage.yml (not dispatched here).
           - Speaking, character, God-voice and Keeper shots are left for the paid-provider route and Claude.
 
-          Not done, by design: nothing accepted, no reviewer named, not merged, no paid-provider call. Claude opens the contact sheet and the clips at full resolution and accepts in its own PR (public_sources.py approve / footage-seen). pr-checks does not start for a PR opened with GITHUB_TOKEN: push an empty commit to run it.
+          Not done, by design: nothing accepted, no reviewer named, not merged, no paid-provider call. Claude opens the contact sheet and the clips at full resolution and accepts in its own PR (public_sources.py approve / footage-seen). pr-checks does not start for a PR opened with GITHUB_TOKEN: Claude makes a real review commit (pr-checks has no manual dispatch) so the checks run before the squash.
 
           Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
           EOF
