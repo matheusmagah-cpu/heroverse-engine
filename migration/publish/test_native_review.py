@@ -367,7 +367,7 @@ class Review(unittest.TestCase):
 class PublicEvidence(unittest.TestCase):
     """E233: a score must not exist only inside a receipt encrypted to one executor's key."""
 
-    I = {'plan': 'migration/production/bible/plans/genesis-09-short.json', 'sha256': 'b' * 64}
+    I = {'plan': 'migration/production/bible/plans/fixture-default-track.json', 'sha256': 'b' * 64}
     PRIVATE = {'interaction_id': 'v1_SyntheticInteraction_abc123', 'file_name': 'files/synthfile42',
                'file_uri': n.API + '/v1beta/files/synthfile42',
                'upload_url': n.API + '/upload/v1beta/files?upload_id=SYNTHuploadTOKEN',

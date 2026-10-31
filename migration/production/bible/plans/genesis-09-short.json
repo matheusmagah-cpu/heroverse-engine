@@ -1,5 +1,6 @@
 {
  "source_policy": "pavo_speech_stock",
+ "track": "buzzy",
  "version": "bible-plan-v2",
  "episode": "genesis-09-short",
  "part": 9,
@@ -345,13 +346,14 @@
   },
   {
    "id": "k-insight",
-   "kind": "keeper",
-   "voiceover": true,
+   "kind": "scene",
    "lines": [
     19
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
-   "still_from": "arc-01-long-k-promise-2"
+   "seconds": 11,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A tall wide wooden doorway set in the vast black pitch-dark planks stands open at dusk above an empty wooden ramp, a warm lamp glowing deep inside, the first slow rain beginning to fall and a lone small figure in silhouette seen from behind at the foot of the ramp looking up at it; the door stays open in the wind. Grey evening, patient and grave. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+   "figures": "anonymous"
   },
   {
    "id": "k-question",
@@ -366,12 +368,11 @@
   {
    "id": "k-close",
    "kind": "keeper",
-   "voiceover": true,
    "lines": [
     21
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
-   "still_from": "arc-01-long-k-promise-3"
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm expectant look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
+   "ambience": "the open desert at night: a small campfire crackling softly and a light night wind"
   }
  ],
  "criteria": "story-qa-criteria-v5",
