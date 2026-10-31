@@ -1,28 +1,18 @@
-# HeroVerse: entry point for ChatGPT and Codex
+# HeroVerse: entry point for every executor
 
-The project memory already lives in this repository. Read `CLAUDE.md` first: its
-fixed owner rules and reading order apply to work by any assistant. This file is
-an entry point, not a second set of production rules.
+Read `CLAUDE.md`, then `migration/SYSTEM.md` and `migration/evidence/handoff/CURRENT.md`.
+SYSTEM is the current operating contract. CURRENT is the continuation point; older handoffs are not a work queue.
 
-Before continuing production, read the latest files in
-`migration/evidence/handoff/`, the current plans and ledgers, and the latest
-applicable decisions in `migration/strategy/DECISIONS.md`. Historical handoffs
-describe their own snapshots; current plans, evidence and later owner decisions
-must be checked before acting. `migration/production/bible/SERIES.md` supersedes
-the retired prayer niche.
+Use `migration/OPERATIONS.md` to find the existing entry point for the actual format. A Bible Short is an episode
+published by `publish-episode.yml`; a long follows its separate approval and publication route. Continue the
+accepted delivery from its missing check. Preserve valid source, audio, review, job and upload evidence.
 
-Keep implementation changes on a `claude/*` branch and follow the existing PR,
-test and review process in `CLAUDE.md`. Use the tests in
-`.github/workflows/pr-checks.yml` before pushing. Do not create a parallel status
-ledger: record a transition in the existing handoff directory.
+Read the shared control reference and reconcile existing claims, runs, provider IDs and publication receipts before
+effects. Follow the branch, PR, tests and review process in CLAUDE.md. Do not create another scheduler or ledger.
 
-Review evidence must identify the assistant that actually performed the review.
-A legacy filename containing `claude` is not permission to claim that Claude
-reviewed a file. Consult the current designated-reviewer policy and
-`migration/ops/CLAUDE_REVIEW.md`; changing the agent never replaces the required
-viewing, scores, hashes or automatic publication gates.
+Record the true executor/reviewer, the exact media identity, what was actually watched and heard, and the next
+concrete action. A filename containing `claude` does not identify the model that performed a new review. A native
+review uses its actual provider identity. Source inspection, code review and final audiovisual review are distinct.
 
-Verify scheduled execution separately from a chat handoff. Existing GitHub
-workflows, external assistant clocks and local-computer runners are different
-execution surfaces. Record which ones were actually checked or transferred;
-do not infer that a clock moved merely because another assistant has the code.
+Continue until the authorized delivery has a verified result. Report publication only after the existing YouTube
+video is confirmed public and processed; an unresolved or private upload resumes from its saved identity.

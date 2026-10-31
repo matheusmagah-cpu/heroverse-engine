@@ -52,7 +52,7 @@ Initial registry: 21 zones, 36 dated reports, no divergent or stale entries.
 | Final changed file | SHA256 |
 |---|---|
 | `.github/workflows/pavo-private-audio.yml` | `d23f60c5d5efc14a0cc2e46c42c0cafe7c293ae98095b8e11b1ffafcb556ab96` |
-| `migration/evidence/handoff/2026-10-30-short09-hook-inputs.md` | `f80a21efcaa39626dd034308e20d3f4ad5d1b47a2d9dd653012aa88a65d405fb` |
+| [migration/evidence/handoff/2026-10-30-short09-hook-inputs.md](https://github.com/matheusmagah-cpu/heroverse-engine/blob/62362bc10c6a414af65fed72b8fdfe8aaafa99fc/migration/evidence/handoff/2026-10-30-short09-hook-inputs.md) | `f80a21efcaa39626dd034308e20d3f4ad5d1b47a2d9dd653012aa88a65d405fb` |
 | `migration/evidence/pavo/prepared/genesis-09-s-voice-20261030.json` | `3d6c6920a37989cda580c59c3c7d88a6281b1d1747567c5a874f7c7fcfe0a00a` |
 | `migration/integrations/pavo/private-inputs/genesis-09-s-voice-20261030.json` | `de9fa240faab052bcf4968de12bbe0929219989b96095ccabe91252be07ffc4c` |
 | `migration/integrations/pavo/private_audio.py` | `ab4c3fca08d9190dfa85baa1a8c8fb2b5464e5c759449c5ee39b755a51968f47` |
