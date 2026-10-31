@@ -74,6 +74,14 @@ RPD resets at midnight Pacific. Consequence: at the default media resolution (~2
 tokens, at or over the 250K TPM; review a long at low media resolution or in chunks under 250K tokens, at most 5
 requests per minute and 20 per day on gemini-3.8-flash. A Short (175 s at 4 fps, ~52K tokens) fits one request.
 
+### 1.2 A1-0 verification (2026-10-31, `evidence/autopilot/a1-0-verification.json`)
+Repository public (standard runner minutes free); `main` has no branch protection and no rulesets, so nothing on
+GitHub enforces `pr-checks` before a merge (A1-6 must check the exact head itself). The job token cannot read the
+Actions settings (403): "Actions may create/approve PRs" stays an owner readback. The repository key answered text,
+image input and a YouTube-URI video on `gemini-3.8-flash` (200, model identity returned); a URI without
+`videoMetadata` is sampled at ~1 fps, so reviews set 4 fps explicitly; one multimodal call took 100-178 s.
+Three 200s do not prove the free tier for this key's project: the 1.1 numbers remain to be read for that project.
+
 ## 2. Components and shared rules
 
 ### 2.1 Autopilot controller = one scheduled "tick" workflow (`autopilot.yml`, later)
@@ -98,7 +106,7 @@ Use cases and what is proven:
 |---|---|---|---|
 | Plan drafting, query derivation, comment replies | text | `gemini-3.8-flash` (fallback `gemini-3.5-flash-lite`) | text works (probe 200) |
 | Clip/footage review | the mp4 via Files API (video+audio) | `gemini-3.8-flash` | same route as `native-review.yml`; per-clip use unmeasured |
-| Still review | contact sheet / PNG as image input | `gemini-3.8-flash` | image input NOT measured (generation = 0 is a different feature); first probe in A1-0 |
+| Still review | contact sheet / PNG as image input | `gemini-3.8-flash` | image input works (A1-0, run 41235834541: 20-frame sheet read correctly, 178 s); judgement not calibrated |
 | Final Short/long review | full master, native audio, 4 fps | `gemini-3.8-flash` | authorized for Short09; long not yet allowed (identity list) |
 Rules: schema-validated JSON (the existing `validate_report` shape), timestamps and heard excerpts must be grounded in
 the media; no repair-by-guess; below 9.5 or any item < 7 or ungrounded -> not PASS; the model id recorded is the one
@@ -238,7 +246,7 @@ carry no production effect.
 | PR | Content | Tests | Antidotes |
 |---|---|---|---|
 | A-docs (this) | AUTOPILOT.md; fix OPERATIONS.md references to "Clocks" | `test_hookify_rules` etc. unchanged | n/a |
-| A1-0 probe (evidence only) | one-off `claude/autopilot-probe` workflow (push-triggered like the 28/10 image probe, removed before merge): Gemini 3.8 Flash text, image input, 30 s video, 429 shape, AI Studio limits readback by the owner; `gh api` for branch protection, Actions-can-approve-PRs, repo visibility, minutes | evidence JSON | decisions for 2.2/2.4/2.5 |
+| A1-0 probe (evidence only; DONE 31/10, `evidence/autopilot/a1-0-verification.json`) | one-off `claude/autopilot-probe` workflow (push-triggered like the 28/10 image probe, removed before merge): Gemini 3.8 Flash text, image input, 30 s video, 429 shape, AI Studio limits readback by the owner; `gh api` for branch protection, Actions-can-approve-PRs, repo visibility, minutes | evidence JSON | decisions for 2.2/2.4/2.5 |
 | A1-1 budget | `ops/autopilot_budget.py` + ledger | `test_autopilot_budget` | quota out |
 | A1-2 reviewer | `production/bible/gemini_review.py` (text, image, clip modes, schema, grounding, pre-filter vs accept mode) + calibration replay; identity allowlist PR after owner decision | `test_gemini_review`, `test_reviewer_calibration` | below 9.5, lenient reviewer, 503 |
 | A1-3 lease | `ops/autopilot_lease.py` (+ `autopilot` owner) | `test_autopilot_lease` | lease busy / crash |

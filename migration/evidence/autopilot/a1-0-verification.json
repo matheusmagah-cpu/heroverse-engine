@@ -1,0 +1,47 @@
+{
+ "schema": "heroverse-autopilot-a1-0-v1",
+ "date": "2026-10-31",
+ "executor": "claude-session (Claude Code subagent), read-only checks plus one probe workflow run",
+ "repository": {
+  "visibility": "public (GitHub API repository search, 2026-10-31T19:45Z)",
+  "actions_minutes": "standard GitHub-hosted runners are free for public repositories: 24/7 ticks cost no money",
+  "main_branch_protection": "none: GET /repos/.../branches/main -> protected=false, required_status_checks enforcement off, no contexts",
+  "rulesets": "none: GET /repos/.../rulesets -> []",
+  "consequence": "nothing on GitHub enforces pr-checks before a merge; the claude/* -> PR -> green -> squash process is a project rule, so an autopilot merge function (A1-6) must check the exact head's pr-checks itself"
+ },
+ "github_token_limits": {
+  "actions_settings_readable_with_job_token": false,
+  "observed": "GET /actions/permissions/workflow and /actions/permissions -> 403 with the job GITHUB_TOKEN (admin-only)",
+  "unverified": "whether 'Allow GitHub Actions to create and approve pull requests' is enabled: the owner reads it in Settings > Actions > General",
+  "documented_github_behaviour": "events created with GITHUB_TOKEN (push, pull_request) do not start other workflows, except workflow_dispatch and repository_dispatch; a PR opened by an autopilot job would not start pr-checks without a PAT or in-job tests (AUTOPILOT 2.4)"
+ },
+ "gemini_probe": {
+  "run": 41235834541,
+  "branch": "claude/autopilot-probe (push-triggered one-off; never merged, deleted after the run)",
+  "key": "repository secret GEMINI_API_KEY (the native-review key); never printed",
+  "calls": [
+   {"kind": "text", "model_requested": "gemini-3.5-flash-lite", "http": 200, "model_returned": "gemini-3.5-flash-lite",
+    "total_tokens": 18, "seconds": 0.7, "answer_valid_json": true},
+   {"kind": "image input (committed 20-frame contact sheet of genesis-08-short, inline JPEG)", "model_requested": "gemini-3.8-flash",
+    "http": 200, "model_returned": "gemini-3.8-flash", "image_tokens": 1092, "thought_tokens": 275, "total_tokens": 1450,
+    "seconds": 177.8, "answer": "counted 20 frames; described Noah building the ark among mockers, ending with a scroll under stars (correct)"},
+   {"kind": "video input (public YouTube URI of genesis-03-short, 46.6 s, no download)", "model_requested": "gemini-3.8-flash",
+    "http": 200, "model_returned": "gemini-3.8-flash", "video_tokens": 4273, "total_tokens": 4465, "seconds": 100.4,
+    "answer": "duration 47.78 s; heard 'One question. That's all it took. Now the serpent was more subtil'; first visual a snake on a branch by red fruit"}
+  ],
+  "service_tier_field": "usageMetadata.serviceTier = 'standard' (an API serving tier, NOT a billing or Free Tier proof)",
+  "not_probed": "the 429 shape was not provoked (it would burn the day's quota); its observed shape is in evidence/gemini-image/20261028-free-tier.json: HTTP 429 RESOURCE_EXHAUSTED naming generate_content_free_tier_requests"
+ },
+ "findings": [
+  "Image input works on the review model: still/contact-sheet review (AUTOPILOT 2.3) is technically possible; its judgement is not calibrated.",
+  "A video URI without videoMetadata is sampled at about 1 fps (4273 tokens for 47.8 s, ~89 tokens/s); native-review uses 4 fps, so any review/calibration must set fps=4 explicitly to be comparable.",
+  "Latency: 100-178 s for one multimodal call; client timeouts must be >= 600 s, and a timeout is UNCERTAIN (never resubmitted).",
+  "Free-tier numbers (AUTOPILOT 1.1) are not proven to bind this key's project: three 200s are consistent with free tier but do not prove it. native_review.py still requires its fresh key-bound readback."
+ ],
+ "quota_used_by_this_probe": {"gemini-3.8-flash": 2, "gemini-3.5-flash-lite": 1, "pacific_day": "2026-10-31"},
+ "owner_actions_open": [
+  "Read Settings > Actions > General: workflow permissions and 'Allow GitHub Actions to create and approve pull requests'.",
+  "Read the AI Studio rate-limit page for the project that owns the GEMINI_API_KEY secret (1.1 was read on 'Default Gemini Project').",
+  "Decide on a fine-grained PAT (Actions read/write on the engine only) for the external watchdog (AUTOPILOT 2.5 L3/L4) and PR creation."
+ ]
+}
