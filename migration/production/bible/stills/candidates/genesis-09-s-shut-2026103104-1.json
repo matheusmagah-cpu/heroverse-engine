@@ -1,0 +1,48 @@
+{
+ "id": "genesis-09-s-shut-2026103104-1",
+ "still": "genesis-09-s-shut",
+ "episode": "genesis-09-short",
+ "shot": "s-shut",
+ "run": "2026103104",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Seen from inside a vast dark hold of rough planks smeared black with pitch: the huge square wooden door, taller than three men, swings shut by itself, the last grey daylight and rain outside narrowing to a thin bright line at its edge, a few animals and robed figures in silhouette in the darkness watching it. No handle and no latch on the door. Grey dusk, wind and heavy rain outside. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Seen from inside a vast dark hold of rough planks smeared black with pitch: the huge square wooden door, taller than three men, swings shut by itself, the last grey daylight and rain outside narrowing to a thin bright line at its edge, a few animals and robed figures in silhouette in the darkness watching it. No handle and no latch on the door. Grey dusk, wind and heavy rain outside. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, no references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "375029895413929664",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375029895413929664",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375029895413929664",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-9b1ae7327e28-0-c4f2b5894145.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-shut-2026103104-1.jpg",
+ "sha256": "db588b95d8ed19001535fe431c512e31ce1da162b114fa0f37b0cd8dad4c4d07"
+}

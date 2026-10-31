@@ -1,0 +1,48 @@
+{
+ "id": "genesis-09-s-pairs-2026103101-1",
+ "still": "genesis-09-s-pairs",
+ "episode": "genesis-09-short",
+ "shot": "s-pairs",
+ "run": "2026103101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Animals walk by themselves in pairs up a dusty bare hillside path toward the hilltop, two by two, one pair behind another: two camels side by side, then two oxen side by side, then two goats side by side. No one leads them. Bare rocky hills, dry grass. Evening, warm low sun and long shadows. Ordered and strange. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Animals walk by themselves in pairs up a dusty bare hillside path toward the hilltop, two by two, one pair behind another: two camels side by side, then two oxen side by side, then two goats side by side. No one leads them. Bare rocky hills, dry grass. Evening, warm low sun and long shadows. Ordered and strange. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, no references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "375026745516791488",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375026745516791488",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375026745516791488",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-e8fc0fa45198-0-39bfb097f1dd.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-pairs-2026103101-1.jpg",
+ "sha256": "34aa4ac57f7e3c85bfbd905e1f50367c88351b9240c7fb05cbeaa48f7a46c83c"
+}

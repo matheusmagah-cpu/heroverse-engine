@@ -2,6 +2,41 @@
  "id": "genesis-09-s-springs",
  "episode": "genesis-09-short",
  "shot": "s-springs",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Muddy water gushes up out of a long crack in the dry earth and floods between low round black goat-hair tents that are collapsing into it, small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, wading away through the water, the scene lit by a flash of lightning, rain hammering the ground. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Muddy water gushes up out of a long crack in the dry earth and floods between low round black goat-hair tents that are collapsing into it, small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, wading away through the water, the scene lit by a flash of lightning, rain hammering the ground. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-springs.jpg",
+ "sha256": "b847de39a8a8b3a34aa2b1f1bc0d375b8fd21d2b320ddf129affc374f0044566",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-springs-2026103101-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375027652291233856",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375027652291233856",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-e16962ba960b-0-64b16fed5383.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: white muddy water rushing through cracked dry earth between black goat-hair tents, hooded robed figures wading away seen from behind, lightning over the mountain; no modern object. The ground split and springs burst through the camps (line 9).",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "25080c7c77a0abdac5c25bfbf9387b2613f9659302d90ff8a4aa84e8f80ecff8",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

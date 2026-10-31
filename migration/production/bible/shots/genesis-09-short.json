@@ -84,6 +84,24 @@
    "clip_seconds": 8,
    "request_sha256": "538aece5a2798a112ec2cba52d2b5dc60acb41fa760e9ba397adb6e335591cd5"
   },
+  "s-enter": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-enter, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-enter",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-enter.jpg",
+   "clip_sha256": null,
+   "still_sha256": "b642611e2f1c474e73f82723c8a974c08c57966ea075f9dff71d597be0c3ddd7",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 9,
+   "request_sha256": "8a3f20e23162bd8882f1acef78a2459a37a0f95f13b1809adb33973807b8483d"
+  },
   "s-finished": {
    "source": "still_motion",
    "score": 9.5,
@@ -136,6 +154,24 @@
    "clip_seconds": 9,
    "request_sha256": "f01beb012323a21a95c60e1a8569ec07418aabf7db20fc4cf6608a059970fa78"
   },
+  "s-lions": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-lions, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-lions",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-lions.jpg",
+   "clip_sha256": null,
+   "still_sha256": "c0e0530f2cb87fc9ce3ad2d091aef496adf4259582d2cee156e27d88aba56df2",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 10,
+   "request_sha256": "017b885f3864e9b6f33caab275ef489e7d6f843958b646745793020624c1d41b"
+  },
   "s-music": {
    "source": "still_motion",
    "score": 9.5,
@@ -172,6 +208,42 @@
    "clip_seconds": 6,
    "request_sha256": "13cb3978dc45967c191083d8a94cb9a60d239754580106ebc65c1c7eb0fa6383"
   },
+  "s-noah-lamp": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its lines; camera motion only, no body motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-short-s-noah-lamp",
+   "repo_path": "migration/production/bible/stills/genesis-09-short-s-noah-lamp.jpg",
+   "clip_sha256": null,
+   "still_sha256": "7d79d141827ead2780c1b02c218b7f00f9cda19a2e7a008d706977db9b5647eb",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 12,
+   "request_sha256": "723d30070606fb0977e9c68edeea57568deaefcf5e5ebcb8d5b59017041db35e"
+  },
+  "s-pairs": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-pairs, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-pairs",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-pairs.jpg",
+   "clip_sha256": null,
+   "still_sha256": "71f4b0f83091cca827abdca3fb9a9cf4ffe86959762144d420da048954d119d4",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 9,
+   "request_sha256": "521081c5566c8fed025193ed69fb68b48e2d0706983a263728a33b4e5a374a24"
+  },
   "s-peak-crowd": {
    "source": "still_motion",
    "score": 9.5,
@@ -207,6 +279,24 @@
    "clip_seconds": 6,
    "request_sha256": "9b637854150f091dd0d615dd481999eef09b9e9c13591e37a83c4ca64fd11b9d"
   },
+  "s-shut": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its lines; camera motion only, the door's swing is not animated.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-shut",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-shut.jpg",
+   "clip_sha256": null,
+   "still_sha256": "db588b95d8ed19001535fe431c512e31ce1da162b114fa0f37b0cd8dad4c4d07",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 10,
+   "request_sha256": "fa50d14debaa12b94223d38b7db63cc4d5eb0724c300a989b2a6b51bb40cacbc"
+  },
   "s-sky": {
    "source": "still_motion",
    "score": 9.5,
@@ -224,6 +314,24 @@
    "clip_seconds": 6,
    "request_sha256": "54b8b18785fa340ed2cdf2842e1da8f014fb0010e10622105908f2eb07f0747a"
   },
+  "s-springs": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-springs, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-springs",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-springs.jpg",
+   "clip_sha256": null,
+   "still_sha256": "b847de39a8a8b3a34aa2b1f1bc0d375b8fd21d2b320ddf129affc374f0044566",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 10,
+   "request_sha256": "2931b6b7c5590b4d4029e1a288bb545d683ff901d8a8f5e5761ebcb73673cc16"
+  },
   "s-voice": {
    "source": "still_motion",
    "score": 9.5,
@@ -240,6 +348,24 @@
    "licence": "Pavo generated (owner-owned)",
    "clip_seconds": 8,
    "request_sha256": "735e2b22f2feb4a4d002ebec0a9408306fc1e919e77d893a7ab6c29faabd78d2"
+  },
+  "s-windows": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved still (genesis-09-s-windows, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-10-31",
+   "still": "genesis-09-s-windows",
+   "repo_path": "migration/production/bible/stills/genesis-09-s-windows.jpg",
+   "clip_sha256": null,
+   "still_sha256": "874e794546c8fa5a94c8943d381ed6dec4dfb61f14d8427c6c6fdb333d419e99",
+   "frame": [
+    1080,
+    1920
+   ],
+   "licence": "Pavo generated (owner-owned)",
+   "clip_seconds": 8,
+   "request_sha256": "66777165e08616ead9e896d2542b0e5e1d269a324cea73b30f504b0f24ddf11b"
   }
  }
 }

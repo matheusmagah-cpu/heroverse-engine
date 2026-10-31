@@ -2,6 +2,41 @@
  "id": "genesis-09-s-pairs",
  "episode": "genesis-09-short",
  "shot": "s-pairs",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Animals walk by themselves in pairs up a dusty bare hillside path toward the hilltop, two by two, one pair behind another: two camels side by side, then two oxen side by side, then two goats side by side. No one leads them. Bare rocky hills, dry grass. Evening, warm low sun and long shadows. Ordered and strange. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Seen from behind, animals walk by themselves in pairs away from the camera up a dusty bare hillside path toward the hilltop, two by two, one pair behind another: two oxen side by side, then two donkeys side by side, then two goats side by side. No one leads them. Bare rocky hills, dry grass. Evening, warm low sun and long shadows. Ordered and strange. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-pairs.jpg",
+ "sha256": "71f4b0f83091cca827abdca3fb9a9cf4ffe86959762144d420da048954d119d4",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-pairs-2026103103-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375028770535151296",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375028770535151296",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-cf1a2a32b1bd-0-9e27da38288c.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: seen from behind, two oxen, two donkeys and two goats walk by themselves in pairs, one pair behind another, up a dusty bare hillside path in low evening sun; nobody leads them; no person, no modern object. There went in two and two (line 2).",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "8ee62168618e0690e73c8f2c18ee276d5d74c2f8af8aa9e0e6eed3b1be59dfd9",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

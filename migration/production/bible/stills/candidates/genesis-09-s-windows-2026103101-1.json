@@ -1,0 +1,48 @@
+{
+ "id": "genesis-09-s-windows-2026103101-1",
+ "still": "genesis-09-s-windows",
+ "episode": "genesis-09-short",
+ "shot": "s-windows",
+ "run": "2026103101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Torrents of rain pour from black clouds onto a wide valley where a few low round black goat-hair tents stand scattered on open ground, tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot running between them, a fork of lightning splitting the sky and lighting the whole valley. Night, lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Torrents of rain pour from black clouds onto a wide valley where a few low round black goat-hair tents stand scattered on open ground, tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot running between them, a fork of lightning splitting the sky and lighting the whole valley. Night, lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, no references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "375027623165986880",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375027623165986880",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375027623165986880",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-ca2744c4b982-0-2b7888bce301.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-windows-2026103101-1.jpg",
+ "sha256": "874e794546c8fa5a94c8943d381ed6dec4dfb61f14d8427c6c6fdb333d419e99"
+}

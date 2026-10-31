@@ -2,6 +2,41 @@
  "id": "genesis-09-s-windows",
  "episode": "genesis-09-short",
  "shot": "s-windows",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Torrents of rain pour from black clouds onto a wide valley where a few low round black goat-hair tents stand scattered on open ground, tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot running between them, a fork of lightning splitting the sky and lighting the whole valley. Night, lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. Torrents of rain pour from black clouds onto a wide valley where a few low round black goat-hair tents stand scattered on open ground, tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot running between them, a fork of lightning splitting the sky and lighting the whole valley. Night, lightning and sheets of water. Overwhelming and loud. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-windows.jpg",
+ "sha256": "874e794546c8fa5a94c8943d381ed6dec4dfb61f14d8427c6c6fdb333d419e99",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-windows-2026103101-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375027623165986880",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375027623165986880",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-ca2744c4b982-0-2b7888bce301.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: night downpour and a fork of lightning over a valley of low black goat-hair tents, hooded robed figures running barefoot through the mud, faces hidden; no modern object or building. Overwhelming and loud for Genesis 7:11 (line 8).",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "4e248976877135397e745f208a0c99de916ca2b4629e5e3c2fbb049792a27e40",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

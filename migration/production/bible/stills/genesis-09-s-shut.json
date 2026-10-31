@@ -2,6 +2,41 @@
  "id": "genesis-09-s-shut",
  "episode": "genesis-09-short",
  "shot": "s-shut",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Close-up. A great square hatch of rough heavy planks smeared black with pitch, with no handle and no latch, swings shut on thick rope hinges, filling the frame, the last grey daylight narrowing to a thin line at its edge, rain streaking across the black pitch. Grey dusk, wind and heavy rain. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Seen from inside a vast dark hold of rough planks smeared black with pitch: the huge square wooden door, taller than three men, swings shut by itself, the last grey daylight and rain outside narrowing to a thin bright line at its edge, a few animals and robed figures in silhouette in the darkness watching it. No handle and no latch on the door. Grey dusk, wind and heavy rain outside. Final and awesome. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-shut.jpg",
+ "sha256": "db588b95d8ed19001535fe431c512e31ce1da162b114fa0f37b0cd8dad4c4d07",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-shut-2026103104-1",
+ "engine": "pavo",
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375029895413929664",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375029895413929664",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-9b1ae7327e28-0-c4f2b5894145.jpg"
+  }
+ },
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Pavo agnes-image (0 credits), reviewed at full resolution: from inside the dark hold the huge plank door swings shut on the grey rain outside, where robed figures and a dog stand left behind; no handle, no modern object, faces unseen. Residual: the gap is still wide and the inner planks are brown rather than pitch-black; the push-in carries the closing for lines 6-7.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "263d6dc066e6fd934ff9c3918afe8514c35b5da3a049dcd8d86e78fb35c0b939",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

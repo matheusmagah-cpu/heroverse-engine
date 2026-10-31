@@ -1,0 +1,48 @@
+{
+ "id": "genesis-09-s-springs-2026103101-1",
+ "still": "genesis-09-s-springs",
+ "episode": "genesis-09-short",
+ "shot": "s-springs",
+ "run": "2026103101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Muddy water gushes up out of a long crack in the dry earth and floods between low round black goat-hair tents that are collapsing into it, small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, wading away through the water, the scene lit by a flash of lightning, rain hammering the ground. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Muddy water gushes up out of a long crack in the dry earth and floods between low round black goat-hair tents that are collapsing into it, small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, wading away through the water, the scene lit by a flash of lightning, rain hammering the ground. Night, rain and a flash of lightning. Frantic and dark. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "pavo",
+ "models": [
+  "agnes-image"
+ ],
+ "generated_by": "pavo_generate_image (agnes-image, hd, 9:16, no references)",
+ "source": "pavo-agnes-image-2.5-flash",
+ "conversation_id": "375027652291233856",
+ "quote": {
+  "required_credits": 0.0,
+  "final_points": 0.0,
+  "is_estimate": false
+ },
+ "references": [],
+ "pavo": {
+  "generate": {
+   "model": "agnes-image",
+   "conversation_id": "375027652291233856",
+   "input_images": 0,
+   "quote": {
+    "required_credits": 0.0,
+    "final_points": 0.0,
+    "is_estimate": false
+   }
+  },
+  "job": {
+   "conversation_id": "375027652291233856",
+   "status": "completed",
+   "image_url": "https://cos-aigc-default.agnes-ai.space/pavo/self-i01/pavo-e16962ba960b-0-64b16fed5383.jpg"
+  }
+ },
+ "upscaler": "none (native 1472x2624 from Pavo), Lanczos to 1080x1920",
+ "aspect_ratio": "9:16",
+ "size": [
+  1080,
+  1920
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/genesis-09-s-springs-2026103101-1.jpg",
+ "sha256": "b847de39a8a8b3a34aa2b1f1bc0d375b8fd21d2b320ddf129affc374f0044566"
+}
