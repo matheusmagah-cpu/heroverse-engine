@@ -4,6 +4,10 @@
   {
    "run": 41244405674,
    "reason": "External outage: episode.yml build step 'Tools, pinned voice runtime...' could not download the pinned SyncNet weights; curl exit 28 four times (Failed to connect to www.robots.ox.ac.uk port 443 after ~135 s, 21:40-21:47Z 2026-10-31). No file of ours involved; the same URL also reset from this session at 21:50Z."
+  },
+  {
+   "run": 41245651365,
+   "reason": "Same external outage again on the re-dispatch after PR590 (about 21:55-22:03Z 2026-10-31): the tools step could not download the pinned SyncNet weights from www.robots.ox.ac.uk (connection failures); no file of ours involved; the URL also reset from this session at 21:53Z."
   }
  ]
 }
