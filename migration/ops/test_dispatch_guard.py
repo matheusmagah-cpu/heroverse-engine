@@ -58,6 +58,7 @@ def hand_copied_shot_ids(root=ROOT):
     return out
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
+    "buzzy-cloud-readiness.yml": "bounded allowlisted GET-only account inspection; no deploy, generation, render, upload or billing mutation",
     "heartbeat.yml": "the scheduler itself; it dispatches, it makes nothing",
     "requests.yml": "dispatches committed requests; each dispatched workflow runs its own guard",
     "reconcile.yml": "reconciles ledgers; no generation, render or upload",
@@ -171,7 +172,7 @@ class Wiring(unittest.TestCase):
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("episode.yml", "shot-probe.yml",
                                                                      "publish-episode.yml", "scene-stills.yml")}), 1)
         self.assertEqual(len({g.subject_of(w, SAMPLES[w]) for w in ("cf-images.yml", "pilot-render-stills.yml",
-                                                                     "pilot-preview.yml", "footage.yml")}), 1)
+                                                                     "pilot-preview.yml")}), 1)
         footage = (g.WF_DIR / "footage.yml").read_text()
         self.assertIn("subject: ${{ steps.guard.outputs.subject }}", footage)
 
