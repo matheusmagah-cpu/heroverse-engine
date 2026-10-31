@@ -2,6 +2,25 @@
  "id": "genesis-09-s-music",
  "episode": "genesis-09-short",
  "shot": "s-music",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, dance in a ring around a great bonfire in a camp of low black goat-hair tents, sparks streaming up into the night, a dark bare hill rising behind them. The camp is lit only by the fire. Night, firelight and sparks. Merry and blind. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Wide shot. Small dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, seen from behind, dance in a ring around a great bonfire in a camp of low black goat-hair tents, sparks streaming up into the night, a dark bare hill rising behind them. The camp is lit only by the fire. Night, firelight and sparks. Merry and blind. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-music.jpg",
+ "sha256": "d5f19084e070ceef8dc473cd600c46a3e2b66fd2ac07d4a53a9b070a69799dd9",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-music-41236671261-2",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Full-res review: hooded silhouettes in long robes dance in a ring round a great bonfire at night, sparks streaming up; faces unseen, no modern object or building. Merry and blind for line 4.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "9753d3f16b796adf8b0cf34b47d0eb8c4332cd79006f775fc88a6140a3106fa1",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

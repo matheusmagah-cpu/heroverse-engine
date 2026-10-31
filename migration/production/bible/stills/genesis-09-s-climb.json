@@ -2,6 +2,25 @@
  "id": "genesis-09-s-climb",
  "episode": "genesis-09-short",
  "shot": "s-climb",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. A long line of tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, driving goats among them, climbs a bare muddy hillside in the rain, the whole valley below turned to brown water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, fine film grain. Extreme wide shot. A long line of tiny dark silhouettes in hooded ankle-length robes of rough brown wool, barefoot, driving goats among them, climbs a bare muddy hillside in the rain, the whole valley below turned to brown water. Grey day, rain and mist. Desperate and crowded. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/genesis-09-s-climb.jpg",
+ "sha256": "7d7a2157951ae64c9b7b280792bdd5ca01ce2f9f9d1dfdce02ab50729a4f12a4",
+ "size": [
+  1080,
+  1920
+ ],
+ "candidate": "genesis-09-s-climb-41236671261-2",
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-10-31",
+  "score": 9.5,
+  "note": "Full-res review: a long line of hooded robed silhouettes with goats and a sheep climbs a bare muddy slope above a valley turned to water, grey mist; faces hidden, no modern object. Rain itself is not drawn; the mist and flooded valley carry line 10.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "1cc8e50b2bf4f3f816ce49a779dc1cf5bf813694ae4469802df6900625d5375c",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }
