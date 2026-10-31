@@ -56,6 +56,24 @@ unknowns and keep a ledger (2.7). The existing `native_review.py` already demand
 costs about 296 tokens/s at 66 tokens/frame -> ~18k tokens for 60 s; a 10 min long ~178k tokens, fits one context but may
 hit a tokens-per-minute cap: chunk by act and merge. These are arithmetic from the doc figures, not measurements.
 
+### 1.1 Numeric free-tier limits read from AI Studio (owner's screen, 2026-10-31)
+
+Source: the owner's AI Studio rate-limit page, project "Default Gemini Project", tier "Nível gratuito" (Free), billing
+not configured; that project's 28-day usage showed 0. The repository's `GEMINI_API_KEY` had real usage on 10-30/31, so
+the key may belong to a different project: these numbers bind that key only after its own project is read back or its
+behaviour (free-tier quota errors) is observed. Do not assume.
+
+| Model | RPM | TPM | RPD |
+|---|---|---|---|
+| gemini-3.8-flash (native review) | 5 | 250K | 20 |
+| gemini-3.6-flash, gemini-3-flash, gemini-2.5-flash (each) | 5 | 250K | 20 |
+| gemini-3.5-flash-lite, gemini-3.1-flash-lite (each) | 15 | 250K | 500 |
+| 2.5 Pro, 3.1 Pro, 4 Argon, every image-output model | 0 | 0 | 0 (not available) |
+
+RPD resets at midnight Pacific. Consequence: at the default media resolution (~290 tokens/s) a ~14.5 min long is ~250K
+tokens, at or over the 250K TPM; review a long at low media resolution or in chunks under 250K tokens, at most 5
+requests per minute and 20 per day on gemini-3.8-flash. A Short (175 s at 4 fps, ~52K tokens) fits one request.
+
 ## 2. Components and shared rules
 
 ### 2.1 Autopilot controller = one scheduled "tick" workflow (`autopilot.yml`, later)
