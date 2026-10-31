@@ -120,7 +120,25 @@ RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integ
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 
 
-def review_problems(episode):
+BUZZY_LEDGER = Path(__file__).resolve().parents[1] / "evidence" / "buzzy" / "ledger.json"
+
+
+def buzzy_shot_problems(episode, shots_dir=None, ledger=None):
+    """E242: track buzzy lowers the floor only for an episode that really contains Buzzy video: an approved shot of
+    bible/shots/<id>.json with source "buzzy" whose task_id is a call recorded in evidence/buzzy/ledger.json."""
+    path = Path(shots_dir or THUMBS_CODE / "shots") / f"{episode.get('id')}.json"
+    try:
+        shots = (json.loads(path.read_text()).get("shots") or {}) if path.is_file() else {}
+        calls = json.loads(Path(ledger or BUZZY_LEDGER).read_text()).get("calls") or []
+    except (OSError, ValueError, AttributeError):
+        return ["TRACK_BUZZY_WITHOUT_BUZZY_SHOT"]
+    known = {c.get("task_id") for c in calls if isinstance(c, dict) and c.get("task_id")}
+    if any(isinstance(a, dict) and a.get("source") == "buzzy" and a.get("task_id") in known for a in shots.values()):
+        return []
+    return ["TRACK_BUZZY_WITHOUT_BUZZY_SHOT"]
+
+
+def review_problems(episode, shots_dir=None, ledger=None):
     review = episode.get("review")
     if not isinstance(review, dict):
         return ["REVIEW_MISSING"]
@@ -133,6 +151,7 @@ def review_problems(episode):
     if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not floor <= overall <= 10:
         out.append("REVIEW_BELOW_FLOOR")
     if track in TRACK_FLOORS:
+        out += buzzy_shot_problems(episode, shots_dir, ledger)
         scores = review.get("scores")
         if not (isinstance(scores, dict) and all(
                 not isinstance(scores.get(k), bool) and isinstance(scores.get(k), (int, float))

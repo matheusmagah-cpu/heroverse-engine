@@ -72,23 +72,34 @@ class Episode(unittest.TestCase):
         sha = "a" * 64
         scores = {k: 7.5 for k in pe.RUBRIC}
         good = {"overall": 8.0, "reviewer": "gemini-3.8-flash", "output_sha256": sha, "issues": [], "scores": scores}
-        ep = {"output_sha256": sha, "track": "buzzy", "review": good}
-        self.assertEqual(pe.review_problems(ep), [])
-        # the default track keeps 9.5: the same review is refused without the track
-        self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems({k: v for k, v in ep.items() if k != "track"}))
-        self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=7.9))))
-        self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
-                      pe.review_problems(dict(ep, review=dict(good, scores=dict(scores, picture_quality=6.9)))))
-        self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
-                      pe.review_problems(dict(ep, review={k: v for k, v in good.items() if k != "scores"})))
-        self.assertIn("TRACK_UNKNOWN", pe.review_problems(dict(ep, track="cheap")))
-        # reviewer, sha binding and issues list are unchanged
-        self.assertIn("REVIEW_REVIEWER_NOT_DESIGNATED",
-                      pe.review_problems(dict(ep, review=dict(good, reviewer="gpt-6-astra-session-reviewer"))))
-        self.assertIn("REVIEW_NOT_FOR_THIS_FILE", pe.review_problems(dict(ep, review=dict(good, output_sha256="b" * 64))))
-        self.assertIn("REVIEW_ISSUES_MISSING",
-                      pe.review_problems(dict(ep, review={k: v for k, v in good.items() if k != "issues"})))
-        self.assertEqual(pe.review_problems(dict(ep, review=dict(good, overall=9.5))), [])
+        ep = {"id": "fx-short", "output_sha256": sha, "track": "buzzy", "review": good}
+        with tempfile.TemporaryDirectory() as d:
+            Path(d, "fx-short.json").write_text(json.dumps({"shots": {"a": {"source": "still_motion"},
+                                                                     "b": {"source": "buzzy", "task_id": "gt_1"}}}))
+            Path(d, "ledger.json").write_text(json.dumps({"calls": [{"task_id": "gt_1"}]}))
+            Path(d, "empty.json").write_text(json.dumps({"calls": []}))
+            kw = {"shots_dir": d, "ledger": Path(d, "ledger.json")}
+            self.assertEqual(pe.review_problems(ep, **kw), [])
+            # loophole closed: track buzzy without a Buzzy shot in the ledger is refused
+            self.assertEqual(pe.review_problems(ep, shots_dir=d, ledger=Path(d, "empty.json")),
+                             ["TRACK_BUZZY_WITHOUT_BUZZY_SHOT"])
+            self.assertEqual(pe.review_problems(dict(ep, id="none"), **kw), ["TRACK_BUZZY_WITHOUT_BUZZY_SHOT"])
+        with mock.patch.object(pe, "buzzy_shot_problems", return_value=[]):
+            # the default track keeps 9.5: the same review is refused without the track
+            self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems({k: v for k, v in ep.items() if k != "track"}))
+            self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=7.9))))
+            self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
+                          pe.review_problems(dict(ep, review=dict(good, scores=dict(scores, picture_quality=6.9)))))
+            self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
+                          pe.review_problems(dict(ep, review={k: v for k, v in good.items() if k != "scores"})))
+            self.assertIn("TRACK_UNKNOWN", pe.review_problems(dict(ep, track="cheap")))
+            # reviewer, sha binding and issues list are unchanged
+            self.assertIn("REVIEW_REVIEWER_NOT_DESIGNATED",
+                          pe.review_problems(dict(ep, review=dict(good, reviewer="gpt-6-astra-session-reviewer"))))
+            self.assertIn("REVIEW_NOT_FOR_THIS_FILE", pe.review_problems(dict(ep, review=dict(good, output_sha256="b" * 64))))
+            self.assertIn("REVIEW_ISSUES_MISSING",
+                          pe.review_problems(dict(ep, review={k: v for k, v in good.items() if k != "issues"})))
+            self.assertEqual(pe.review_problems(dict(ep, review=dict(good, overall=9.5))), [])
 
 
 def short(**over):
