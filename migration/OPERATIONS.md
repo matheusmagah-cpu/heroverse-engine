@@ -52,6 +52,9 @@ time does not prove capacity. These paths return source evidence, not final audi
 `native-review.yml` uses the existing operator certificate and configured provider credential without exposing the
 credential to the caller. Verify current Free Tier eligibility before submission. Preserve upload/interaction IDs,
 raw answers, exact model identity and media binding. Reconcile uncertain outcomes rather than repeating a POST.
+Every run also writes non-sensitive score evidence (status, provider error codes, overall, per-criterion scores and
+timed issues; no media, provider IDs or secrets) to its job summary and the 90-day `native-review-public-evidence`
+artifact, so a later executor never needs another executor's private key to read a score (E233).
 
 ## Existing automation and its limits
 
