@@ -1,37 +1,22 @@
 {
  "plan": "migration/production/bible/plans/genesis-09-short.json",
  "episode": "genesis-09-short",
- "checked_at": "2026-10-27T05:10:20Z",
+ "checked_at": "2026-10-31T21:29:14Z",
  "plan_check": {
   "problems": [],
   "pending": [],
   "estimate": {
-   "seconds": 177.6,
-   "keeper_share": 0.117,
-   "lesson_share": 0.121,
+   "seconds": 178.0,
+   "keeper_share": 0.118,
+   "lesson_share": 0.122,
    "establishing_share": 0.0,
    "lines": 23,
-   "shots": 37,
+   "shots": 22,
    "spoken_lines": 1,
-   "words": 466
+   "words": 467
   }
  },
  "characters": [
-  {
-   "id": "noah",
-   "status": "APPROVED",
-   "refs": [
-    "front",
-    "three-quarter"
-   ],
-   "talk_refs": [],
-   "voice": "bm_george",
-   "image_records": [
-    "ch-noah-front",
-    "ch-noah-full",
-    "ch-noah-three-quarter"
-   ]
-  },
   {
    "id": "keeper",
    "status": "APPROVED",
@@ -49,53 +34,103 @@
   }
  ],
  "cf_images": {
-  "recorded_today": 6,
+  "recorded_today": 0,
   "daily_allocation": 44,
   "sheets_needed": {},
   "fits_today": true
  },
  "voice": {
   "ran": true,
+  "reused": true,
+  "checkpoint_sha256": "6a09bfef41d754f166c8619b5213f39dabc5136f29317fb2e422953bb888ff07",
   "problems": [],
   "pace": {
    "god": [
     3.37
    ],
    "narration": [
-    2.95,
+    2.94,
     2.28,
     2.99,
     2.06,
     2.9,
-    3.07,
+    3.06,
     3.47,
     2.93,
-    3.08,
+    3.06,
     2.72,
     2.66,
     3.39,
-    2.88,
+    2.9,
     2.96,
     2.67,
     3.37,
-    3.15,
+    3.16,
     3.02,
-    2.78,
+    2.77,
     2.48,
     2.84,
-    2.44
+    2.36
    ]
   },
   "measured": {
-   "total": 173.664,
-   "keeper_share": 0.128,
-   "lesson_share": 0.132,
+   "total": 174.411,
+   "keeper_share": 0.132,
+   "lesson_share": 0.136,
    "retimed": {}
   }
  },
  "requests": {
   "ran": true,
-  "problems": []
+  "problems": [],
+  "digests": {
+   "s-voice": "1a8244f1696337ede396ba22ace50781a51e418dcab45c33ed092559a6264fcb",
+   "s-finished": "76b63ae7f79962e0bd847fcf8f24c4c434dd186c70bb150d4a87bb0adfeacbc6",
+   "s-sky": "a9d02ac35cf6a3d09fcfa3c4e3760b882890bfbaa26923f1f2748e6add4541e9",
+   "s-noah-door": "5c9c5721016c1b194c93f341a536b108c8b1c8e45ec88de64de783c69b780a7e",
+   "s-pairs": "d58e723f5937fc712f92a8464806c25a4028b278fa4507e343b0d90acc27e38e",
+   "s-lions": "ed70e7218bed3a95399a6a1494478fe81d7fc342c5bdf6b7b2377522fbe0ef80",
+   "s-music": "39f2344bf69f13fc554873255894f086d6c66e23540f1806f2b62f6d645814c6",
+   "s-enter": "16baedda8fa72f0e151b51a3251f94a7cd828f0b006100da55774a5676cf0d9c",
+   "s-shut": "cbd4ec04b856b57ed314d3f7721a048e20194cc3233e818b1ba64eaa11048863",
+   "s-windows": "dff30e6d7b6a893dd3c98d44c2ca310d15a5b03e3496122ac9a5337be6f37f02",
+   "s-springs": "3bc3fd9694fd9138b4dcc2a1c0ae50cc1c3db81f4a8da6b4ba6b304f60fa6551",
+   "s-climb": "c1941eed135835e1ff066b4b8efbeddea1c2a12bc0054604f5117c758e975c24",
+   "s-float": "1d53a7ddb9eb1fc8d56a037699c8af1decc876e24263d4d7262a2b8ef3f689b6",
+   "s-fists": "2cf345ac40780d3a8720d5ab6e2c771581d37abed280ff5e91f45041cda7e002",
+   "s-hills": "d9818f792f9b7aea034bb5826eb249ee9a9898f90ec4cca80903f869356247ea",
+   "s-peak-crowd": "e24d14bdf61c709cda7bd5ebf6204cbb36d8c2435ebbff67bbe9077d2a8da523",
+   "s-drift": "3075626282720a5ad61c0c5471c4d18d1fc475c3789f2323c48d87cc3adaea2d",
+   "s-rock": "f1c1cdaceb493c906a404b4262c55060a0197c9df75580e3f6d31a1e56a38972",
+   "s-noah-lamp": "4078bab7d0e4aea670d5048f017cad93099cbbdd661cdbf4fd01d20d487ae7e5",
+   "k-insight": "d6139213b1d6fe3a9d7059b65000d7155f2a3e532042a29bb222fee8836f587e",
+   "k-question": "9915d0105b03aee1fb2b3e1bafcd66bbc5bb82d434d570cc24430d2f3e06ff99",
+   "k-close": "fcd3f420eadf01dfbccbc5a6fc7758f45d036e077daf293f6eaf8bcf637723e3"
+  },
+  "needs": {
+   "s-voice": 8,
+   "s-finished": 8,
+   "s-sky": 6,
+   "s-noah-door": 6,
+   "s-pairs": 9,
+   "s-lions": 10,
+   "s-music": 9,
+   "s-enter": 9,
+   "s-shut": 10,
+   "s-windows": 8,
+   "s-springs": 10,
+   "s-climb": 11,
+   "s-float": 10,
+   "s-fists": 9,
+   "s-hills": 9,
+   "s-peak-crowd": 9,
+   "s-drift": 8,
+   "s-rock": 6,
+   "s-noah-lamp": 12,
+   "k-insight": 11,
+   "k-question": 6,
+   "k-close": 9
+  }
  },
  "setups": {
   "shots": [
@@ -105,18 +140,9 @@
     "probe": "none needed: generated right after the talking shots (risk_order), face check"
    },
    {
-    "kind": "still_mouth",
-    "speaker": "keeper",
-    "references": {
-     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
-    },
+    "kind": "plan_b_still",
     "shot": "k-insight",
-    "check": "lipsync_check --still-mouth",
-    "probe": [
-     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
-    ],
-    "passed": "2 of 2",
-    "shot_chance": 1.0
+    "probe": "none needed: the Kokoro voice over its approved still in motion (owner exception, arc-01 long); no lips are shown speaking"
    },
    {
     "kind": "still_mouth",
@@ -133,43 +159,36 @@
     "shot_chance": 1.0
    },
    {
-    "kind": "still_mouth",
-    "speaker": "keeper",
-    "references": {
-     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
-    },
+    "kind": "plan_b_still",
     "shot": "k-close",
-    "check": "lipsync_check --still-mouth",
-    "probe": [
-     "migration/evidence/pavo/20261026/keeper-vo/calibration.json"
-    ],
-    "passed": "2 of 2",
-    "shot_chance": 1.0
+    "probe": "none needed: the Kokoro voice over its approved still in motion (owner exception, arc-01 long); no lips are shown speaking"
    }
   ],
   "probes_required": [],
   "rate_low": [],
   "talk_attempts": 6,
   "min_shot_chance": 0.9,
-  "run_chance_all_talking_shots": 0.999
+  "run_chance_all_talking_shots": 1.0
  },
+ "shot_review": [],
  "binding": {
-  "plan": "30e810c6197f9585bbb4a4a4701ea89e046541b147df5d77bd4218854ab659c3",
-  "characters": "6faebadd832fe833ebc4dc0f00b238a852efad81e345f3b64d31bb3beef07e68",
+  "plan": "20235c6d3fa213755fcc4bd7acae675131aca7017db656919931dbe0651a8da5",
+  "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
   "image_records": {
-   "ch-noah-front.json": "3f9d442cac58d4ef7fe93719b9629a0b34591657adf53d695db80e90897e6dc9",
-   "ch-noah-full.json": "e0b92fca157d52923940084b038efe4e183f5eeaefffffc31148027be7c0a339",
-   "ch-noah-three-quarter.json": "e1a31ddc0bf1f5bc05e7bff907f7e069d99ddf981644fe28cdf55425bea0fefb",
    "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
    "ch-keeper-talk.json": "c431a6013669385cb236c64158160cc6966337cdfb8ada711ed98f58b509b6cc"
   },
-  "setups": "386110cf6909cea8ed1edcfe0f6476ea1b4ae528e6a3399e1861a7396d808a95",
+  "setups": "0caff8f5bd70483f889bf2219fa29949d17504192dee6aef96f0bc8dcbba1b4a",
   "code": {
-   "episode_build.py": "9177a6a37e85ff550944543d83686fefbdfa247a4761941724d2cf077f809e3e",
-   "plan_check.py": "2ad651a45682b354e8ac7cabba8db6d3963e796cc0fe276b24e7c5a56b27e916",
-   "voice_pace.py": "53ca18e54b2b7472b296f9a9dddba8e1df98f95bf9de924dd5be80bcddff01e5",
-   "lipsync_check.py": "a8bf2c564253bd4021bbf9f67bef305ae327fc5f4114c96cacf34ac191de7835",
-   "episode_preflight.py": "d486f36f092df36fc615abeb6a021ef00783f1d6bde83dff19ed21a0d71328da"
+   "episode_build.py": "684709b0ae447e0763fe3ee588e4889694998ed245c5a696a091874784e41c25",
+   "plan_check.py": "254ca663abca6121102e2f4885309ed9229d6da34c12beb96de67045d8fb257a",
+   "voice_pace.py": "d4d2850c60e7df3680130725b6d584a83239538ad91f59671fcff4a626837c4b",
+   "lipsync_check.py": "8222df7918d027eb2dbe21ca351cf29ae4c5f59bcda377906e4156a2be8dfdc9",
+   "syncnet.py": "0f6e65316b50850629e488e6167ad7159efc3b2480d27ced3166311e054633f7",
+   "episode_preflight.py": "bbde148225d8f96a523703fbf9af5fbe0953574794899f45f6458b999309bcde",
+   "clip_timing.py": "44626ba6ea7f807a62a99dcabcca3751d55c01ce452718efe1fc1b9e6db73509",
+   "reviewer_identity.py": "b813ceb46a450e21f7fd3fd08b38fe77094f1b3fafaec8db3251f56f954be24d",
+   "owner_quality_policy.py": "ca700221c299587c6390e59f96bc4cf647ab9acb78b3cddf8e23b2a73f9984f8"
   }
  },
  "blockers": [],
