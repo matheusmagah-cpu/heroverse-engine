@@ -2949,6 +2949,34 @@
      "capacity"
     ]
    }
+  },
+  {
+   "id": "E235",
+   "date": "2026-10-31",
+   "class": [
+    "silent"
+   ],
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E165",
+    "E205",
+    "E219"
+   ],
+   "error": "The Short publish route never verified the review: publish_episode.problems and episode_build check-record ignored the record's review (score, reviewer, file binding), so a record with no review or a failing one would publish through publish-episode.yml (found by the 2026-10-31 full audit; no Short was published that way).",
+   "fix": "publish_episode.review_problems refuses a not-yet-published record unless its review is by a designated Short reviewer (claude-session-reviewer or the owner-authorized native Gemini reviewer), overall within 9.5..10, bound to the record's output_sha256, with an issues list. Fail-closed in check-record and at upload.",
+   "antidote": {
+    "file": "migration/publish/test_publish_episode.py",
+    "contains": "test_e235_a_short_without_a_floor_review_of_this_master_is_refused",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

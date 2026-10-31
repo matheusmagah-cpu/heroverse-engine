@@ -2637,6 +2637,31 @@
    "class": "A",
    "early": "migration/integrations/pavo/private_audio.py::def validate(",
    "note": "E226: the same metadata, timing, Keeper reference and digest checks run in dispatch guard before credentials and again at the private-input consumer."
+  },
+  "REVIEW_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_BELOW_FLOOR": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_REVIEWER_NOT_DESIGNATED": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_NOT_FOR_THIS_FILE": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_ISSUES_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
   }
  },
  "review": {
