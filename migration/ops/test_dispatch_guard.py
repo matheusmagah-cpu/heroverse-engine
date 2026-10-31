@@ -76,6 +76,7 @@ EXEMPT = {
     "render-smoke.yml": "the render's CI smoke on fixtures",
     "pavo-mcp.yml": "the Pavo integration's tests; no generation",
     "reviewer-calibration.yml": "reviewer calibration on fixed samples (kept: E59's antidote reads it)",
+    "shorts-gemini-calibration.yml": "budgeted, resumable reviewer calibration on the published Shorts; no generation, render, upload or approval (autopilot A1-2)",
     "nightly-images.yml": "heartbeat's nightly slot; a used-up allocation defers (E62), never fails",
     "images-upres.yml": "upscales stills already made; no generation",
 }

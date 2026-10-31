@@ -1,0 +1,44 @@
+name: HeroVerse Shorts Gemini calibration (pre-filter reviewer against accepted Short reviews)
+# Autopilot A1-2 (migration/ops/AUTOPILOT.md 2.3). Replays the fixed Short reviewer on the channel's published Shorts
+# (public YouTube copies, no download) and compares with their accepted reviews. Every call is counted first in the
+# autopilot budget (80% of the AI Studio free-tier numbers); a 429 stops the day; an uncertain call is never retried.
+# Resumable: rows already recorded are not reviewed again. The rule is fixed in gemini_short_review.py (RULE).
+# Until it qualifies, a passing Gemini review only routes to READY_FOR_CLAUDE_REVIEW.
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-gemini-budget
+  cancel-in-progress: false
+jobs:
+  calibrate:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests
+        run: |
+          python3 -I -B migration/ops/test_autopilot_budget.py
+          python3 -I -B migration/production/bible/test_gemini_short_review.py
+      - name: Calibrate (budgeted, resumable)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          mkdir -p migration/evidence/autopilot migration/evidence/reviewer-calibration
+          python3 -I -B migration/production/bible/gemini_short_review.py calibrate \
+            migration/evidence/autopilot/budget.json \
+            migration/evidence/reviewer-calibration/shorts-gemini-rows.json \
+            > "$RUNNER_TEMP/q.json"
+          cp "$RUNNER_TEMP/q.json" migration/evidence/reviewer-calibration/shorts-gemini-qualification.json
+          { echo '```json'; cat "$RUNNER_TEMP/q.json"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit evidence (scores and counts only; no media, no key)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/autopilot/budget.json migration/evidence/reviewer-calibration/shorts-gemini-*.json || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Record Shorts Gemini calibration (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
