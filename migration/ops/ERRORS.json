@@ -2871,6 +2871,30 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E232",
+   "date": "2026-10-31",
+   "class": [
+    "capacity"
+   ],
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134",
+    "E136",
+    "E227"
+   ],
+   "error": "The Claude weekly limit was hit on 2026-10-28 ~13:08Z and every agent stopped until the reset on 2026-10-31 19:00Z (3 days). No token budget was enforced: agents and a 600k+ context orchestrator ran uncapped, and the project could spend the whole weekly cap.",
+   "fix": "migration/ops/token_budget.py sums the project's Claude Code usage from the local transcripts (subagents included) in the weekly window, persists a max-merged ledger, and a PreToolUse + UserPromptSubmit hook in .claude/settings.json exits 2 (TOKEN_BUDGET_EXCEEDED) once the project spent half of the measured weekly cap; only token_budget.py status and git status stay allowed. Warns at 80%.",
+   "antidote": {
+    "file": "migration/ops/test_token_budget.py",
+    "contains": "test_settings_wires_the_hook_on_every_tool_and_prompt",
+    "covers": [
+     "capacity"
+    ]
+   }
   }
  ]
 }

@@ -1,0 +1,98 @@
+{
+ "_doc": "Weighted tokens per action (input + cache_creation + output + cache_read_weight * cache_read), from the local transcripts of the window below; recomputed weekly with `token_budget.py costs --write`. Agent run = whole subagent transcript, by brief type (first prompt). Tool call = cost of the issuing turn / its tool calls. pr_cycle = all agent runs naming one PR. Main-session clock runs cannot be told apart locally. Transcripts before 2026-10-27T13:22Z no longer exist.",
+ "cache_read_weight": 0.1,
+ "window_start": "2026-10-24T19:00:00+00:00",
+ "window_end": "2026-10-31T19:00:00+00:00",
+ "actions": {
+  "agent_long": {
+   "n": 4,
+   "mean": 14631777,
+   "p90": 49228089,
+   "activity": "long"
+  },
+  "agent_mining": {
+   "n": 1,
+   "mean": 748517,
+   "p90": 748517,
+   "activity": "clocks"
+  },
+  "agent_other": {
+   "n": 1,
+   "mean": 1605953,
+   "p90": 1605953,
+   "activity": "reviews_prs"
+  },
+  "agent_review": {
+   "n": 10,
+   "mean": 345003,
+   "p90": 573971,
+   "activity": "reviews_prs"
+  },
+  "agent_short": {
+   "n": 8,
+   "mean": 6463357,
+   "p90": 11901062,
+   "activity": "shorts"
+  },
+  "clock_daily": {
+   "n": 6,
+   "mean": 8291200,
+   "p90": 33253445,
+   "activity": "clocks"
+  },
+  "main_turn": {
+   "n": 826,
+   "mean": 42766,
+   "p90": 69824,
+   "activity": null
+  },
+  "pr_cycle": {
+   "n": 16,
+   "mean": 7635520,
+   "p90": 48094448,
+   "activity": null
+  },
+  "tool_agent": {
+   "n": 2,
+   "mean": 48923,
+   "p90": 76822,
+   "activity": null
+  },
+  "tool_bash": {
+   "n": 1031,
+   "mean": 41862,
+   "p90": 63303,
+   "activity": null
+  },
+  "tool_mcp": {
+   "n": 284,
+   "mean": 47579,
+   "p90": 73373,
+   "activity": null
+  },
+  "tool_other": {
+   "n": 340,
+   "mean": 41525,
+   "p90": 74393,
+   "activity": null
+  },
+  "tool_read": {
+   "n": 20,
+   "mean": 39865,
+   "p90": 56911,
+   "activity": null
+  },
+  "tool_read_image": {
+   "n": 56,
+   "mean": 39749,
+   "p90": 56671,
+   "activity": null
+  },
+  "tool_read_large": {
+   "n": 9,
+   "mean": 13587,
+   "p90": 22658,
+   "activity": null
+  }
+ }
+}

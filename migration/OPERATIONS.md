@@ -113,3 +113,8 @@ One current home per subject:
 - `strategy/DECISIONS.md`: current generic policy; `MODELING_SPEC.md`, `VIDIQ.md`,
   `BEAT_THE_REFERENCE_RULE.md`: research/measurement details subject to SYSTEM and current no-spending policy.
 - `STANDARD.md`: applicable rendering mechanics; historical audits and evidence are records, not another work queue.
+
+## Shared Claude Code / ChatGPT execution: token budget
+
+The token budget (`SYSTEM.md` "Token budget") counts Claude Code only, from the local Claude transcripts. ChatGPT/Codex
+executor usage is a different account and is not counted here; the 50% cap governs Claude Code, and Codex keeps its own limits.
