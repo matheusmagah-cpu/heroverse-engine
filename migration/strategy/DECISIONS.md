@@ -27,9 +27,11 @@ original evidence. This page is not a historical task queue or a second producti
   motion. Retain truthful rights/provenance and distinguish camera motion from acted motion.
 - No new spending or paid fallback. Use current cost/capacity evidence and existing ledgers; reconcile uncertain
   provider jobs instead of repeating them.
-- Owner, 2026-10-31 (correction): Pavo generates VIDEO only, and only for the hook, character-specific spoken
-  lines and the Keeper's closing lines. No Pavo images (stills, thumbnails or probes) and no Pavo video elsewhere:
-  its quota is kept for those shots. Stills and thumbnails come from public images (`public_sources.py`), then
+- Owner, 2026-10-31 (correction): Pavo generates VIDEO only for the hook, character-specific spoken lines and the
+  Keeper's closing lines, nothing else; plus the one exception the owner named: the episode's THUMBNAIL image may
+  be made in Pavo, built from the mined package rules (character close-up, emotion, few words) to be striking and
+  irresistible. No other Pavo images (scene stills, probes) and no Pavo video elsewhere: its quota is kept for
+  those. Every other visual is an image not generated in Pavo: public images (`public_sources.py`) first, then
   Buzzy's lowest-credit image model as support, then FLUX when available.
 - Owner, 2026-10-31: Pavo is the main video source ("temos o pavo como principal"). Buzzy (annual plan already
   paid, connected as the claude.ai connector `https://mcp.buzzy.now/mcp`) is support only, when Pavo, FLUX
