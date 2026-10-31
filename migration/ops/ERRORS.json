@@ -3150,6 +3150,45 @@
      "fragile-input"
     ]
    }
+  },
+  {
+   "id": "E243",
+   "date": "2026-10-31",
+   "class": [
+    "drift"
+   ],
+   "error": "Buzzy video clips had no approvable source: shot_sources.approve_source took only footage, still_motion and pavo_reuse, the docs said Buzzy was metadata-only, and a Buzzy clip could reach a build only by being passed off as another source, with no task id, model, credits or hash of its bytes tied to the shot; the Buzzy-track floor (E242) therefore had nothing to verify.",
+   "fix": "source buzzy in shot_sources (SILENT_SOURCES = FALLBACKS + buzzy: same fallback_refusal and clip_flags, no speech or character shot): approve-source SHOT buzzy <task_id> needs a call in evidence/buzzy/ledger.json with credits, model, output_sha256 (hash of the downloaded bytes) and duration_s, made for this shot (episode_shot), else BUZZY_LEDGER_INCOMPLETE / BUZZY_NOT_FOR_SHOT; the bytes ship as the release asset named by their sha256 and are re-hashed at the build; request_sha256 binds shot, task and bytes; per-shot review floor is the track's 8.0 (other sources keep 9.5).",
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168",
+    "E169",
+    "E189",
+    "E218",
+    "E236"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "class BuzzySource",
+    "covers": [
+     "drift"
+    ]
+   }
   }
  ]
 }

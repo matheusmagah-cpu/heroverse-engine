@@ -21,7 +21,7 @@ a note, by PR. The approval records the shot's `source`, and the build ships exa
 long_build.upscale_step), the manifest naming it per shot.
 
 Owner 29/10 (latest direction): plans with source_policy=pavo_speech_stock keep valid approvals and existing clips
-first. Pavo/Buzzy are limited to speaking scenes; Buzzy remains metadata-only and is never invoked here. Other new
+first. Pavo is limited to the hook, speaking scenes and the Keeper close; Buzzy video is an approved silent source only through approve-source SHOT buzzy TASK_ID (E243, ledger entry required). Other new
 pictures use licensed footage or an APPROVED still in camera motion. Generated stills are allowed only with recorded
 provenance, rights, hash, contextual review and, when a character appears, the approved reference binding. Camera
 motion is never claimed as body motion or lip-sync. The same rule holds at generation and source-approval boundaries.
@@ -50,8 +50,14 @@ for _p in (HERE, REPO / "migration" / "production" / "characters", REPO / "migra
     if str(_p) not in sys.path:
         sys.path.insert(0, str(_p))
 
-SOURCES = ("pavo_reuse", "pavo", "footage", "still_motion")
+SOURCES = ("pavo_reuse", "pavo", "footage", "still_motion", "buzzy")
 FALLBACKS = ("footage", "still_motion")
+# E243 (owner 2026-10-31, Buzzy track): a Buzzy video clip is a silent, no-character, no-speech source like the free
+# fallbacks (same fallback_refusal and clip_flags), approved by task id + sha256 of the downloaded bytes + ledger entry.
+BUZZY = "buzzy"
+SILENT_SOURCES = FALLBACKS + (BUZZY,)
+BUZZY_REVIEW_MIN = 8.0   # the Buzzy track's per-shot floor (the episode's review floor is 8.0, every item >= 7)
+BUZZY_LEDGER = REPO / "migration" / "evidence" / "buzzy" / "ledger.json"
 LIBRARY = REPO / "migration" / "production" / "footage" / "library"
 RECORDS = REPO / "migration" / "evidence" / "shots"
 INVENTORIES = REPO / "migration" / "evidence" / "pavo"
@@ -623,7 +629,7 @@ def fallback_digest(plan, shot, index, source, item, sha):
 
 
 def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=None, shots_dir=None, today=None,
-                   speech_dir=None, inventories=INVENTORIES, *, reviewer=None):
+                   speech_dir=None, inventories=INVENTORIES, *, reviewer=None, ledger=None):
     """The named session's review of one fallback or inventory candidate (>= 9.5), into shots/<episode>.json with its `source`.
     Refused: a spoken shot or a shot with a character on a free fallback (SOURCE_SPOKEN_SHOT, SOURCE_CHARACTER_SHOT), a
     library clip not vetted, outside the licence list or clashing with the period (FOOTAGE_NOT_USABLE), one sharing
@@ -640,24 +646,27 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     if shot_id not in index or eb.is_window(plan["shots"][index[shot_id]]):
         raise SystemExit(f"SOURCE_SHOT_UNKNOWN {shot_id}")
     i, shot = index[shot_id], plan["shots"][index[shot_id]]
-    if source not in ("footage", "still_motion", "pavo_reuse"):
-        raise SystemExit(f"SOURCE_REFUSED {source!r} (footage, still_motion or pavo_reuse)")
+    if source not in ("footage", "still_motion", "pavo_reuse", BUZZY):
+        raise SystemExit(f"SOURCE_REFUSED {source!r} (footage, still_motion, pavo_reuse or buzzy)")
     try:
         score = float(score)
     except (TypeError, ValueError):
         raise SystemExit(f"SHOT_SCORE_INVALID {score!r}") from None
-    if not (math.isfinite(score) and REVIEW_MIN <= score <= 10):
-        raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {REVIEW_MIN}-10)")
+    floor = BUZZY_REVIEW_MIN if source == BUZZY else REVIEW_MIN
+    if not (math.isfinite(score) and floor <= score <= 10):
+        raise SystemExit(f"SHOT_SCORE_OUT_OF_RANGE {shot_id} {score} (a review score {floor}-10)")
     if not (note or "").strip():
         raise SystemExit(f"SHOT_NOTE_MISSING {shot_id} (what the review saw)")
     entry = {"source": source, "score": score, "note": note.strip(), "model": reviewer_identity.require(reviewer),
              "approved_at": today or time.strftime("%Y-%m-%d", time.gmtime())}
-    if source in FALLBACKS:
+    if source in SILENT_SOURCES:
         refused = fallback_refusal(plan, shot, i, source, plan_check.still_record(item) if source == "still_motion"
                                    else None)
         if refused:
             raise SystemExit(refused)
-    if source == "footage":
+    if source == BUZZY:
+        entry.update(buzzy_entry(plan, shot, i, item, ledger))
+    elif source == "footage":
         rec = next((r for r in (library() if lib is None else lib) if r.get("id") == item), None)
         frame = plan_frame(plan)
         if rec is None or not footage_usable(plan, rec) or period_clash(plan, rec, faceless_shot(plan, shot)):
@@ -743,6 +752,35 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
     data["shots"] = dict(sorted(data["shots"].items()))
     eb.save(out, data)
     return entry
+
+
+def buzzy_entry(plan, shot, index, task_id, ledger=None):
+    """E243: a Buzzy clip is approvable only from a call recorded in evidence/buzzy/ledger.json: its task_id, the model,
+    the sha256 of the downloaded bytes (output_sha256) and a credits field (BUZZY_LEDGER_INCOMPLETE otherwise), made
+    for this shot (episode_shot "<episode> <shot>", BUZZY_NOT_FOR_SHOT). The bytes ship as the release asset named by
+    their sha256 (shot_asset_name), fetched and re-hashed at the build like any approved clip."""
+    import episode_build as eb
+    try:
+        calls = json.loads(Path(ledger or BUZZY_LEDGER).read_text()).get("calls") or []
+    except (OSError, ValueError, AttributeError):
+        calls = []
+    call = next((c for c in calls if isinstance(c, dict) and c.get("task_id") == task_id), None)
+    if call is None or "credits" not in call:
+        raise SystemExit(f"BUZZY_LEDGER_INCOMPLETE {task_id} (a call with this task_id and its credits in "
+                         "evidence/buzzy/ledger.json)")
+    sha = call.get("output_sha256")
+    if not (isinstance(sha, str) and re.fullmatch(r"[0-9a-f]{64}", sha) and call.get("model")):
+        raise SystemExit(f"BUZZY_LEDGER_INCOMPLETE {task_id} (model and output_sha256 of the downloaded bytes)")
+    if call.get("episode_shot") != f"{plan['episode']} {shot['id']}":
+        raise SystemExit(f"BUZZY_NOT_FOR_SHOT {task_id} (ledger episode_shot {call.get('episode_shot')!r}, "
+                         f"want '{plan['episode']} {shot['id']}')")
+    seconds = call.get("duration_s")
+    if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or seconds <= 0:
+        raise SystemExit(f"BUZZY_LEDGER_INCOMPLETE {task_id} (duration_s)")
+    return {"task_id": task_id, "buzzy_model": call["model"], "buzzy_resolution": call.get("resolution"),
+            "asset": eb.shot_asset_name(plan["episode"], shot["id"], sha), "clip_sha256": sha,
+            "clip_seconds": seconds, "licence": "generated (Buzzy)",
+            "request_sha256": fallback_digest(plan, shot, index, BUZZY, task_id, sha)}
 
 
 def v5_plan(plan):
@@ -836,6 +874,8 @@ def expected_request(plan, shot, index, approval, digests):
     request the plan sends now."""
     if (approval or {}).get("source") == "footage":
         return fallback_digest(plan, shot, index, "footage", approval.get("footage"), approval.get("clip_sha256"))
+    if (approval or {}).get("source") == BUZZY:
+        return fallback_digest(plan, shot, index, BUZZY, approval.get("task_id"), approval.get("clip_sha256"))
     if (approval or {}).get("source") == "still_motion":
         return fallback_digest(plan, shot, index, "still_motion", approval.get("still"), approval.get("still_sha256"))
     if (approval or {}).get("source") == "pavo_reuse" and (approval or {}).get("clip_from"):

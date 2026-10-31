@@ -1099,5 +1099,67 @@ class FootageSeen(unittest.TestCase):
         self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_VETTED"))
 
 
+class BuzzySource(unittest.TestCase):
+    """E243: a Buzzy video clip is an approvable source only with its ledger entry (task id, model, credits, sha256
+    of the downloaded bytes, the shot it was made for); it carries the free fallbacks' refusals."""
+    SHA = "c" * 64
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.ledger = self.dir / "ledger.json"
+        self.call = {"task_id": "gt_1", "model": "dreamina-seedance-2-0-mini-260615", "resolution": "720p",
+                     "credits": "pending owner-browser read", "output_sha256": self.SHA, "duration_s": 6,
+                     "episode_shot": "t-sources s-river"}
+        self.ledger.write_text(json.dumps({"calls": [self.call]}))
+
+    def tearDown(self):
+        shutil.rmtree(self.dir)
+
+    def approve(self, shot="s-river", item="gt_1", score=8.2, source="buzzy"):
+        return ss.approve_source(plan(), shot, source, item, score, "full-res frames reviewed: ripples move",
+                                 shots_dir=self.dir, today="2026-10-31", reviewer="claude-session-reviewer",
+                                 ledger=self.ledger)
+
+    def test_a_ledgered_clip_is_approved_bound_to_its_bytes_and_the_build_keeps_it(self):
+        a = self.approve()
+        self.assertEqual((a["source"], a["task_id"], a["clip_sha256"], a["asset"]),
+                         ("buzzy", "gt_1", self.SHA, eb.shot_asset_name("t-sources", "s-river", self.SHA)))
+        approvals = json.loads((self.dir / "t-sources.json").read_text())["shots"]
+        self.assertFalse(any(m.startswith("SHOT_REQUEST_CHANGED") for m in eb.review_problems(plan(), {}, approvals)))
+        p = plan()
+        p["shots"][2]["prompt"] += " Birds rise."
+        self.assertTrue(any(m.startswith("SHOT_REQUEST_CHANGED") for m in eb.review_problems(p, {}, approvals)))
+        self.assertIn("buzzy", ss.SILENT_SOURCES)
+
+    def test_refused_without_a_complete_ledger_entry_or_for_another_shot(self):
+        for change, code in (({"task_id": "gt_other"}, "BUZZY_LEDGER_INCOMPLETE"),
+                             ({"output_sha256": "nothex"}, "BUZZY_LEDGER_INCOMPLETE"),
+                             ({"model": ""}, "BUZZY_LEDGER_INCOMPLETE"),
+                             ({"duration_s": 0}, "BUZZY_LEDGER_INCOMPLETE"),
+                             ({"episode_shot": "t-sources s-pair"}, "BUZZY_NOT_FOR_SHOT")):
+            self.ledger.write_text(json.dumps({"calls": [dict(self.call, **change)]}))
+            with self.assertRaises(SystemExit) as err:
+                self.approve()
+            self.assertTrue(str(err.exception).startswith(code), (change, str(err.exception)))
+        self.ledger.write_text(json.dumps({"calls": [{k: v for k, v in self.call.items() if k != "credits"}]}))
+        with self.assertRaisesRegex(SystemExit, "BUZZY_LEDGER_INCOMPLETE"):
+            self.approve()
+        self.assertFalse((self.dir / "t-sources.json").exists())
+
+    def test_same_fallback_rules_and_the_buzzy_track_floor(self):
+        for shot, code in (("s-eve", "SOURCE_SPOKEN_SHOT"), ("s-god", "SOURCE_SPOKEN_SHOT"),
+                           ("s-pair", "SOURCE_CHARACTER_SHOT")):
+            with self.assertRaises(SystemExit) as err:
+                self.approve(shot)
+            self.assertTrue(str(err.exception).startswith(code), str(err.exception))
+        for score in (7.9, 11):
+            with self.assertRaisesRegex(SystemExit, "SHOT_SCORE_OUT_OF_RANGE"):
+                self.approve(score=score)
+        # other sources keep the 9.5 floor
+        with self.assertRaisesRegex(SystemExit, "SHOT_SCORE_OUT_OF_RANGE"):
+            ss.approve_source(plan(), "s-river", "footage", "clip-x", 8.5, "n", shots_dir=self.dir,
+                              reviewer="claude-session-reviewer")
+
+
 if __name__ == "__main__":
     unittest.main()

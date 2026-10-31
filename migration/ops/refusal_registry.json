@@ -1913,6 +1913,14 @@
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
   },
+  "BUZZY_LEDGER_INCOMPLETE": {
+   "class": "N",
+   "why": "E243 (owner 2026-10-31, Buzzy track): approve-source is the review's own local command (Claude, after reviewing the clip at full resolution, before the PR): it stops no generation, voice or render, and refuses only a Buzzy clip with no complete ledger entry or made for another shot"
+  },
+  "BUZZY_NOT_FOR_SHOT": {
+   "class": "N",
+   "why": "E243 (owner 2026-10-31, Buzzy track): approve-source is the review's own local command (Claude, after reviewing the clip at full resolution, before the PR): it stops no generation, voice or render, and refuses only a Buzzy clip with no complete ledger entry or made for another shot"
+  },
   "SOURCE_OFF_LINE": {
    "class": "N",
    "why": "owner 27/10 (R3): approve-source is the review's own local command (Claude, after reviewing the candidate, before the PR): it stops no generation, voice or render, and refuses only a candidate that would break the floor or a wrong argument"

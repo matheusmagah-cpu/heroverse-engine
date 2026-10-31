@@ -182,7 +182,7 @@ def queue(plan, digests, approvals, needs=None, max_minutes=None, rounds=PROBE_R
     for i, s in eb.risk_order(plan["shots"]):
         a = approvals.get(s["id"])
         need = (needs or {}).get(s["id"])
-        if a and a.get("source") in shot_sources.FALLBACKS and a.get("request_sha256") == \
+        if a and a.get("source") in shot_sources.SILENT_SOURCES and a.get("request_sha256") == \
                 shot_sources.expected_request(plan, s, i, a, digests):
             continue
         if a and a.get("request_sha256") == digests.get(s["id"]) and (

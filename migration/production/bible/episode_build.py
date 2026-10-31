@@ -1641,14 +1641,14 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
             entry.update(speaker=shot["speaker"], line=shot["line"])
         import shot_sources
         source = approved.get("source", "pavo")   # owner 27/10 (R1-R3): the source Claude approved, recorded per shot
-        if source in shot_sources.FALLBACKS:   # review of #476: the plan may have changed the shot since
+        if source in shot_sources.SILENT_SOURCES:   # review of #476: the plan may have changed the shot since
             refused = shot_sources.fallback_refusal(plan, shot, index, source, plan_check.still_record(
                 approved.get("still")) if source == "still_motion" else None)
             if refused:
                 raise SystemExit(refused)
         if not (final.exists() and approved.get("clip_sha256") and sha256(final) == approved["clip_sha256"]):
             shot_sources.fetch_source(approved, final, fetch)
-        if source in shot_sources.FALLBACKS:   # a licensed clip or a still in motion: no person, no speech
+        if source in shot_sources.SILENT_SOURCES:   # a Buzzy clip, a licensed clip or a still in motion: no person, no speech
             flags, measures = clip_flags(final, plan.get("aspect_ratio", "9:16")), None
         else:
             flags, measures = check(final)
@@ -1658,7 +1658,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
         entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score", "source",
                                "footage", "still", "still_sha256", "repo_path", "frame", "motion", "still_from",
                                "clip_from", "clip_seconds", "crop_to", "url", "inventory", "licence", "credit", "speech",
-                               "attribution", "picture_sha256")
+                               "attribution", "picture_sha256", "task_id", "buzzy_model", "buzzy_resolution")
                              if k in approved}
         entry["checks"] = {"flags": flags, "measures": measures}
         report["shots"][shot["id"]] = entry
