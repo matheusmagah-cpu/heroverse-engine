@@ -188,9 +188,11 @@ def guard(i):
     page = 1
     while True:
         runs = github_read(f'/actions/workflows/native-review.yml/runs?per_page=100&page={page}')['workflow_runs']
-        harmless = [r['id'] for r in runs if source and str(r['id']) not in (str(source), os.environ['GITHUB_RUN_ID'])
-                    and never_uploaded(i, r, github_read('/actions/runs/' + str(r['id']) + '/jobs')['jobs'])
-                    ] if source else []
+        # E257: a same-titled run that never opened a provider upload (the dispatch guard refused it) touched nothing,
+        # so it blocks neither a resume (E247) nor a first submission; any run that opened an upload still blocks.
+        harmless = [r['id'] for r in runs if str(r['id']) not in (str(source), os.environ['GITHUB_RUN_ID'])
+                    and r.get('display_title') == title(i)
+                    and never_uploaded(i, r, github_read('/actions/runs/' + str(r['id']) + '/jobs')['jobs'])]
         reject_duplicate(i, runs, os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], source, harmless)
         if len(runs) < 100:
             break

@@ -3566,6 +3566,29 @@
      "recurrence"
     ]
    }
+  },
+  {
+   "id": "E257",
+   "date": "2026-11-01",
+   "class": [
+    "rerun-without-fix"
+   ],
+   "error": "native_review.guard ignored a same-content run that never opened a provider upload only when resuming (E247); for a first submission, the arc-02 compilation run 41318103408 that the dispatch guard had refused before any provider call blocked the fixed re-dispatch 41318954228 with CONTENT_ALREADY_SUBMITTED_RECONCILE_EXISTING_RUN.",
+   "fix": "guard() treats a same-titled completed failure whose 'Open one private resumable upload session' never succeeded as harmless for every dispatch, not only a resume; a run that opened an upload still blocks (exact content is never replayed).",
+   "prior": [
+    "E116",
+    "E211",
+    "E214",
+    "E228",
+    "E247"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e257_a_guard_refused_run_does_not_block_a_first_submission",
+    "covers": [
+     "rerun-without-fix"
+    ]
+   }
   }
  ]
 }
