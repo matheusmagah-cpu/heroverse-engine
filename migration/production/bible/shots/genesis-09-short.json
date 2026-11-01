@@ -21,22 +21,19 @@
    "request_sha256": "81ad3c28ef78cec3cec371547a9adcf803a8402e38c179ad64de135a01078ac3"
   },
   "k-insight": {
-   "source": "still_motion",
-   "score": 9.5,
-   "note": "Borrowed arc-01 Keeper still (approved 9.5, ch-keeper ref): the 9:16 centre crop keeps the whole face, hood and beard against the stars; Kokoro voice-over, his mouth closed.",
-   "approved_at": "2026-10-28",
-   "still_from": "arc-01-long-k-promise-2",
-   "still": "arc-01-long-k-promise-2",
-   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-2.jpg",
-   "clip_sha256": null,
-   "still_sha256": "fd3ffd3708872b1b662c649649b917cfc95f9f2c49f6d047b3105c2d98542065",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12,
-   "request_sha256": "75ff5984986d4ac531e22202f10dcd263252d99749abe22a089c068872db04ee"
+   "source": "buzzy",
+   "score": 8.2,
+   "note": "Full-resolution frames (720x1256, 11 s) reviewed: the open doorway of the black plank hull above an empty wet ramp at dusk, a single robed figure from behind, a lamp glowing inside, reflections on the boards, slow push-in; no face, no Keeper portrait, no God. The small lamp reads as a glass lantern (minor period flag).",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-01",
+   "task_id": "gt_auZ_fr1DWkQZNR0UauZ_izoOuNSwEkbP",
+   "buzzy_model": "dreamina-seedance-2-0-mini-260615",
+   "buzzy_resolution": "720p",
+   "asset": "shot-genesis-09-short-k-insight-sha256-705a16892b123eca5780efb7493ee0e8e3eeaad8afffc4fa2d84df564d892015.mp4",
+   "clip_sha256": "705a16892b123eca5780efb7493ee0e8e3eeaad8afffc4fa2d84df564d892015",
+   "clip_seconds": 11,
+   "licence": "generated (Buzzy)",
+   "request_sha256": "843d0ed1efbbd628637eeebd7671edc0b31a63dbb4ac18388499ab0112a754ad"
   },
   "k-question": {
    "source": "pavo_reuse",
@@ -121,22 +118,19 @@
    "request_sha256": "da63873969c42f6051cfd6037d089511b0b3fba88b98d5902e5b768e013e6674"
   },
   "s-fists": {
-   "source": "still_motion",
-   "score": 9.5,
-   "note": "Approved still (Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body motion claimed.",
+   "source": "buzzy",
+   "score": 8.3,
+   "note": "Full-resolution frames (720x1256, 9 s) reviewed: robed men hammer on the wet black planks in rising grey flood water that surges, foams and slaps against their bodies and the hull; fluid water against figures and planks, rain on the wood. A man's bearded profile shows in some frames (the plan asked for silhouettes from behind); no modern object, no God.",
    "model": "claude-session-reviewer",
-   "approved_at": "2026-10-31",
-   "still": "genesis-09-s-fists",
-   "repo_path": "migration/production/bible/stills/genesis-09-s-fists.jpg",
-   "clip_sha256": null,
-   "still_sha256": "04fb28066669996668d74a6835a0633defeb92dc4f4258aa490ee5c1ef3d78ee",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
+   "approved_at": "2026-11-01",
+   "task_id": "gt_auZ_fr1DWkQZNR0UauZ_iDoOuNSwEkbL",
+   "buzzy_model": "dreamina-seedance-2-0-mini-260615",
+   "buzzy_resolution": "720p",
+   "asset": "shot-genesis-09-short-s-fists-sha256-d1a161707c75550ad0b89878c32e53908798bae7dd7d12f21e7e489487128756.mp4",
+   "clip_sha256": "d1a161707c75550ad0b89878c32e53908798bae7dd7d12f21e7e489487128756",
    "clip_seconds": 9,
-   "request_sha256": "1c1f85b7a06cb9babb6cd571386e9eea3cfcba450245376501f51c2a4401a8bc"
+   "licence": "generated (Buzzy)",
+   "request_sha256": "26588b4b2a2a235120c862ad5cbf826c900af6a5b1eaca9b9081fd6cb7b1df34"
   },
   "s-float": {
    "source": "still_motion",
@@ -174,22 +168,19 @@
    "request_sha256": "f01beb012323a21a95c60e1a8569ec07418aabf7db20fc4cf6608a059970fa78"
   },
   "s-lions": {
-   "source": "still_motion",
-   "score": 9.5,
-   "note": "Approved still (genesis-09-s-lions, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body or fluid motion claimed.",
+   "source": "buzzy",
+   "score": 8.8,
+   "note": "Full-resolution frames (720x1256, 10 s) reviewed: two lions and two sheep walk down the path side by side with natural gait and wind in the manes, sun rising, torch and goat-hair tent behind, silhouettes small; period-plain, no modern object. Real motion.",
    "model": "claude-session-reviewer",
-   "approved_at": "2026-10-31",
-   "still": "genesis-09-s-lions",
-   "repo_path": "migration/production/bible/stills/genesis-09-s-lions.jpg",
-   "clip_sha256": null,
-   "still_sha256": "c0e0530f2cb87fc9ce3ad2d091aef496adf4259582d2cee156e27d88aba56df2",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
+   "approved_at": "2026-11-01",
+   "task_id": "gt_auZ_fr1DWkQZNR0UauZ_hToOuNSwEkbJ",
+   "buzzy_model": "dreamina-seedance-2-0-mini-260615",
+   "buzzy_resolution": "720p",
+   "asset": "shot-genesis-09-short-s-lions-sha256-013e336b5296dacc117f4c09ca92a131ae17e3b91e0805b6fe97e6615b57e70b.mp4",
+   "clip_sha256": "013e336b5296dacc117f4c09ca92a131ae17e3b91e0805b6fe97e6615b57e70b",
    "clip_seconds": 10,
-   "request_sha256": "017b885f3864e9b6f33caab275ef489e7d6f843958b646745793020624c1d41b"
+   "licence": "generated (Buzzy)",
+   "request_sha256": "cd154f9dac356fa2a3cb02f1e0bda0ea3ab95791a386d54993ab50bc864f96ca"
   },
   "s-music": {
    "source": "still_motion",
@@ -246,22 +237,19 @@
    "request_sha256": "723d30070606fb0977e9c68edeea57568deaefcf5e5ebcb8d5b59017041db35e"
   },
   "s-pairs": {
-   "source": "still_motion",
-   "score": 9.5,
-   "note": "Approved still (genesis-09-s-pairs, Pavo agnes-image at 0 credits, reviewed at full resolution by this session) in camera motion for its line; camera motion only, no body motion claimed.",
+   "source": "buzzy",
+   "score": 8.5,
+   "note": "Full-resolution frames (720x1256, 9 s) reviewed: six animals in three pairs walk up the hillside path with legs stepping, heads and tails swaying and dust at the hooves, tents and silhouettes small in the distance, Ararat behind; period-plain, no modern object, no God. Real animal motion, replacing the rigid still-in-pan.",
    "model": "claude-session-reviewer",
-   "approved_at": "2026-10-31",
-   "still": "genesis-09-s-pairs",
-   "repo_path": "migration/production/bible/stills/genesis-09-s-pairs.jpg",
-   "clip_sha256": null,
-   "still_sha256": "71f4b0f83091cca827abdca3fb9a9cf4ffe86959762144d420da048954d119d4",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
+   "approved_at": "2026-11-01",
+   "task_id": "gt_auZ_fr1DWkQZNR0UauZ_fitvVFg7Xi17",
+   "buzzy_model": "dreamina-seedance-2-0-mini-260615",
+   "buzzy_resolution": "720p",
+   "asset": "shot-genesis-09-short-s-pairs-sha256-536f2871b5305aa5c8538f8da8ec5d8230564257d22a5132122b322785573c67.mp4",
+   "clip_sha256": "536f2871b5305aa5c8538f8da8ec5d8230564257d22a5132122b322785573c67",
    "clip_seconds": 9,
-   "request_sha256": "521081c5566c8fed025193ed69fb68b48e2d0706983a263728a33b4e5a374a24"
+   "licence": "generated (Buzzy)",
+   "request_sha256": "382acb6759a113b5124302b5783b1036f604233090eac7926672e77cf2d96f95"
   },
   "s-peak-crowd": {
    "source": "still_motion",
