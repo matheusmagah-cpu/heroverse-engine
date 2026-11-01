@@ -147,3 +147,19 @@ duration.
   publishes at 23:30 UTC. Gemini's Free Tier proof is read on the owner's PC through Desktop Commander. If the PC or a
   provider is unavailable, the session stops and tells the owner; it does not invent evidence.
 - Longs are built when an arc's Shorts are all public.
+
+## 2026-11-01 — Quality, authenticity, originality and critical insight remain pillars (Shorts and longs)
+
+Owner, 2026-11-01: "A gente mudou um pouco, né? Mas a qualidade ainda precisa ser um pilar... tem que entrar aí a
+questão da autenticidade, originalidade e crítica. Não pode esquecer disso de jeito nenhum, nem no longo e nem no
+short." And for the long: "o longo vai ter hook novo... e o fechamento tem que ser novo também... narração, tudo lá no
+pavo... gerado pronto para só conectar no final e conectar no início... por isso que eu quero a mineração, para saber
+como que vai ser o melhor início."
+
+Every Short and every long carries the Keeper's own layer: an interpretive or critical insight (why the story matters,
+what readers miss in the text, an honest question), stated as commentary and kept distinct from KJV scripture. A
+script whose hook and close only summarize the passage is not ready.
+
+A compilation long gets its own new hook and new close: Keeper Pavo video (exact 0-credit quote), made for 16:9 and
+splice-ready at head and tail. The hook follows the opening structure measured from winning long Bible-story videos
+(vidIQ mining, logged). Joins must be clean (no cut speech, no pop, consistent loudness).
