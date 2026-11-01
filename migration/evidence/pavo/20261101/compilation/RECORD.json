@@ -1,0 +1,30 @@
+{
+ "date": "2026-11-01",
+ "purpose": "arc-02 compilation long: Keeper hook and close, 16:9, our Kokoro line (am_michael 1.0), Pavo agnes-video-new-flash omni_to_video 720p, sound false, reference ch-keeper-talk (storyteller-ref.jpg)",
+ "quotes": "each fresh, exact, required_credits 0.0, zero_cost_confirmed true; additional_spend_allowed false",
+ "jobs": [
+  {
+   "role": "hook v1 (SUPERSEDED: line said 'Genesis five to nine' but the long covers Genesis 5-7)",
+   "conversation_id": "375257285238721216",
+   "audio": "hook.wav",
+   "clip": "hook-clip.mp4",
+   "clip_sha256": "a6a0d611cfd11aebca2476bfe7b0cd8bc75ab67e8e00b0263ce4396047924458",
+   "note": "files removed from the repository; sha256 kept here"
+  },
+  {
+   "role": "close",
+   "conversation_id": "375257418030683840",
+   "audio": "close.wav",
+   "clip": "close-clip.mp4",
+   "clip_sha256": "c1b6648896a4fced3a221563704d8ae8bdfda7b85e407182ab3075eca9b407ac"
+  },
+  {
+   "role": "hook v2 (Genesis five to seven)",
+   "conversation_id": "375260545475152512",
+   "audio": "hook2.wav",
+   "clip": "hook2-clip.mp4",
+   "clip_sha256": "2e8eb2c368a904190f3ce4329ac4d2c6751fdd23636dc9fe39da43e8cdc145c8"
+  }
+ ],
+ "lease": "claude-compilation-long-20261101 on claude/shared-executor-control; no job resubmitted"
+}
