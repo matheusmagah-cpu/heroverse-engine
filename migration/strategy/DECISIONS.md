@@ -277,3 +277,30 @@ character lines and the close made in Pavo, and images for the rest. This entry 
 - Cuts (the Shorts) come from the long and cost no Buzzy credit.
 - The ledger records the balance read before and after every Buzzy use. If the running average goes over 100 a day,
   the next longs use no Buzzy until it is back under.
+
+## 2026-11-01 — Every long and every Short is built for emotion and virality, from the mining
+
+Owner: the structure must be extremely viral, tied directly to the mining, with a lot of emotion in every long and
+every Short. These rules apply the validated Short beat map (structures/bible-story-short.json, status validated) and
+the long's mined opening (evidence/vidiq/20261101/compilation-hook-mining.json) to emotion, in every plan:
+
+- Long opening (0–30 s): two stacked "What if…" questions put the viewer in the character's place, then the stakes,
+  then the promise. No calm scene-setting and no title card.
+- Each story chapter of a long, and each Short cut, follows the validated beat map:
+  - cold open on the spoken conflict;
+  - stake and an open question;
+  - three escalation steps, each showing a felt human cost and ending on a small hook;
+  - the climax;
+  - the Keeper's honest, personal question. That question is the critical and authenticity layer.
+- Emotion is planned, not hoped for:
+  - Every escalation step has one close-up face still with a named emotion (fear, grief, awe, resolve, mercy), the
+    face "centred in the frame".
+  - Pavo lines carry a delivery direction (urgent, trembling, broken, defiant).
+  - The music rises through the escalation and drops to near silence for one beat before the KJV climax line, then
+    swells.
+- Cuts: each Short cut holds one emotional peak (an escalation step into the climax, or the Keeper's question) and
+  opens on its strongest line within the first 2 s.
+- Honesty is unchanged: KJV quoted exactly, scenes dramatized, no fear-bait, no fabricated prophecy (three_stage
+  critique).
+- The weekly mining measures these emotional devices in winners against weak contrasts. A device changes only with
+  validated evidence: ≥6 winners from ≥4 channels.
