@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-fountains-2026110101-1",
+ "still": "flood-ends-long-s-fountains",
+ "episode": "flood-ends-long",
+ "shot": "s-fountains",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. Dark fountains of water sink back into the deep and the last curtains of rain thin out against a clearing sky over a great dark shape floating on the water, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Soft silver light breaking through cloud. Quiet and relieved. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. Dark fountains of water sink back into the deep and the last curtains of rain thin out against a clearing sky over a great dark shape floating on the water, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Soft silver light breaking through cloud. Quiet and relieved. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-fountains.png",
+  "sha256": "79c4fe303d49896ecadc026d0e851e8c49ef519d4061bcef4c0808220cb68309",
+  "size_bytes": 2210776,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-fountains-2026110101-1.jpg",
+ "sha256": "7363ca7f6c564d4f54384b58e04649267a86c98451346000e3f2e2d3bb36c9d1"
+}
