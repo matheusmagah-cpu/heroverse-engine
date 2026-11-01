@@ -33,9 +33,9 @@ def check(qa, approval, manifest, gate, review=None):
     version = qa.get('criteria_version')
     if version not in canonical_gate.FROZEN_CRITERIA_SHA256:
         problems.append('QA_CRITERIA_VERSION_UNKNOWN')
-    compilation = version == canonical_gate.COMPILATION   # E251: its own dimensions, no score rows
+    compilation = version in canonical_gate.DEFECT_TRACKS   # E251/E259: their own dimensions, no score rows
     if compilation:
-        required = {name: {('qa', key) for key in keys} for name, keys in canonical_gate.COMPILATION_DIMENSIONS.items()}
+        required = {name: {('qa', key) for key in keys} for name, keys in canonical_gate.DEFECT_TRACKS[version][1].items()}
         required['defect_review'] = {('review', key) for key in canonical_gate.COMPILATION_REVIEW_ITEMS}
         required['format'] = {('format', 'story_long')}
         required['binding'] = {('binding', key) for key in ('manifest', 'qa_for_this_file', 'qa_criteria_frozen', 'review_for_this_file')}
@@ -97,6 +97,13 @@ def main(pilot_dir):
             compilation_long.verify(d)
         except (OSError, ValueError, KeyError, TypeError, SystemExit):
             problems.append('COMPILATION_HANDOFF_INVALID')
+    elif isinstance(docs[0], dict) and docs[0].get('criteria_version') == canonical_gate.BUZZY_LONG:   # E259
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production/bible'))
+        import buzzy_long
+        try:
+            buzzy_long.verify(d)
+        except (OSError, ValueError, KeyError, TypeError, SystemExit):
+            problems.append('BUZZY_LONG_HANDOFF_INVALID')
     elif isinstance(docs[0], dict) and docs[0].get('criteria_version') in canonical_gate.STORY_VERSIONS:
         # Recheck the plan/script/package/timeline/thumbnail identity at upload as well as at qualification.
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production/bible'))

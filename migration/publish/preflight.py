@@ -102,7 +102,7 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
         import publish_video
         problems += publish_video.bible_thumb_problems(pkg, thumbnail, d)
     sentences = man.get("sentences") or []
-    if man.get("version") == "bible-compilation-manifest-v1":
+    if man.get("version") in ("bible-compilation-manifest-v1", "bible-buzzy-long-manifest-v1"):   # E251, E259
         # E251: the compilation keeps the Shorts' burned captions and uploads no track; it needs valid chapters instead
         rows = man.get("chapters") or []
         if (len(rows) < 3 or rows[0][0] != 0 or any(b[0] - a[0] < 10 for a, b in zip(rows, rows[1:]))

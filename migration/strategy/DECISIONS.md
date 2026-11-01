@@ -242,3 +242,21 @@ writes the decisions for the comments still undecided:
 - SKIP spam, hate and provocation (never argue);
 - deliver them in its own PR.
 TikTok runs only while the runner reports LOGGED_IN; the owner logs in by hand once (`runner.py login`).
+
+## 2026-11-01 — Long-first, Shorts cut from the long
+
+Owner, 2026-11-01: "Faça os longos e do longo faça os cortes para os Shorts e vá postando a partir do longo. É muito
+mais fácil cortar uma imagem que já está enquadrada para o longo para um Short do que o inverso (a tela quebra).
+Depois da compilação atual do Noé, ao invés de fazer Shorts, faça os longos e, dos longos, faça alguns cortes
+COERENTES para postar como Shorts."
+
+- After the current Noah compilation, each story (or arc) is made as a 16:9 long of about 8–12 minutes: plan track
+  `buzzy-long`, built by the existing episode route at 1920x1080 with burned 16:9 captions; the caption-free master
+  and the sentence/shot timeline are kept, bound to the master's sha256.
+- Every picture keeps its subject in the centre 9:16 column (PROMPT_GUIDE "Long-first"), so the cut does not break.
+- The Shorts are coherent cuts of that long (`short_cuts.py`): each starts and ends between sentences (no cut speech),
+  lasts 20–179 s, and is a unit (recommended: hook line → beat → KJV line or the Keeper's insight). Each cut is its
+  own file with its own native defect review and the session reviewer's decision; it links its parent long.
+- The long publishes through approve.yml → prepublish_gate.py → publish.yml on its own defect-gated track
+  (buzzy-long-qa-criteria-v1: the owner's defect finder, not the 9.5 floor). The 9.5 story-long track, the Short
+  route, the compilation and every frozen QA file are unchanged. Implemented in E259.

@@ -92,6 +92,23 @@ Measured frame/PCM duration and narration estimates are different evidence. Keep
 true provenance and explicit unknowns. `episode_build.py import-edit` preserves those inputs without synthesizing
 voice, retiming, extra gaps or a tail. Its receipt and construction samples remain DRAFT evidence until qualified.
 
+## Long-first: the centre 9:16 safe area
+
+Owner, 2026-11-01 (E259): after the Noah compilation the story is made as a 16:9 long first (plan `"track":
+"buzzy-long"`, `"aspect_ratio": "16:9"`, about 8–12 minutes) and its Shorts are 9:16 centre cuts of it
+(`short_cuts.py`). Every picture must survive that crop:
+
+- The subject (the speaking face, the acting figure, the object the line names) stays inside the centre 9:16 column:
+  the middle 56 % of the frame width (607 px of 1920 at full height). Wide establishing shots may fill the frame, but
+  what the line is about stays in that column.
+- Every scene, Keeper and still prompt says so in words: "centred in the frame" (`plan_check.SAFE_AREA_UNSTATED`
+  otherwise), and names no off-centre framing — off-centre, rule of thirds, split screen, at the left/right edge or
+  third (`SAFE_AREA_OFF_CENTRE`). FLUX stills of this track get the centre-column style (`scene_stills.LONG_FIRST_STYLE`).
+- The words cannot prove the picture: the source review still looks at the actual 16:9 frame and its centre 9:16
+  crop. A cut may move its window (`x`, 0–1) for one range; a subject that leaves the column is a [b] defect of the cut.
+- The long's own captions are burned at 16:9 sizes (about 7 % of 1080 px, four words a card, `short_engine.caption_style`);
+  the caption-free master is kept for the cuts, which get the Short's own caption style from the same sentences.
+
 ## BibleShort story grammar
 
 The plan is `bible-plan-v2`, with narration records and ordered shots. `plan_check.sequence` gives the spoken

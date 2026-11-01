@@ -410,9 +410,15 @@ def plan_layout(plan, layout, voice_seconds=None, problems=()):
     lesson_share = lesson_seconds / total
     if lesson_share > plan_check.LESSON_SHARE_MAX:
         problems.append(f"LESSON_SHARE {lesson_share:.3f} > {plan_check.LESSON_SHARE_MAX} (measured)")
-    low, high = plan_check.publish_episode.short_length(plan.get("part", 0))
-    if not low <= total <= high:
-        problems.append(f"SHORT_LENGTH {total} s ({low:.0f}-{high:.0f}, measured)")
+    if plan_check.long_first(plan):   # E259: the long-first long is about 8-12 min; its Shorts are cuts of it
+        import buzzy_long
+        low, high = buzzy_long.LENGTH_S
+        if not low <= total <= high:
+            problems.append(f"LONG_FIRST_LENGTH {total} s ({low:.0f}-{high:.0f}, measured)")
+    else:
+        low, high = plan_check.publish_episode.short_length(plan.get("part", 0))
+        if not low <= total <= high:
+            problems.append(f"SHORT_LENGTH {total} s ({low:.0f}-{high:.0f}, measured)")
     return {"lines": [{"start": a, "end": b} for a, b in layout], "voice_seconds": voice_seconds, "total": total,
             "keeper": keeper, "speakers": speakers, "voice_over": voice_over, "keeper_share": round(share, 3),
             "lesson_share": round(lesson_share, 3), "retimed": {}, "problems": problems}
@@ -2138,6 +2144,11 @@ def compose_step(plan, work, music, out):
     compose_plan = {"voice": voice, "timeline": str(work / "compose-timeline.json"),
                     "music": str(music), "music_offset": float(plan.get("music_offset", 600.0)), "tail": TAIL,
                     "shots": shots, "native_onsets": onsets}
+    long_first = plan_check.long_first(plan)
+    frame = list(short_engine.LONG_FIRST_FRAME if long_first else (short_engine.W, short_engine.H))
+    clean = Path(out).with_name(Path(out).stem + ".clean.mp4")
+    if long_first:   # E259: 1920x1080, and the caption-free master the Short cuts are made from
+        compose_plan.update(frame=frame, clean_out=str(clean))
     save(work / "compose-plan.json", compose_plan)
     short_engine.main(str(work / "compose-plan.json"), str(out))
     runs = clip_check.black_runs(str(out))
@@ -2148,13 +2159,20 @@ def compose_step(plan, work, music, out):
     report_path = work / "report.json"
     report = load(report_path) if report_path.exists() else {"episode": plan["episode"], "shots": {}}
     report["composed"] = {
-        "output_sha256": sha256(out), "seconds": round(length, 2), "frame": [short_engine.W, short_engine.H],
+        "output_sha256": sha256(out), "seconds": round(length, 2), "frame": frame,
         "black_check": {"black_starts": runs, "unexpected": unexpected, "intended_dips": [dip]},
         "lufs": lufs, "keeper_share": layout["keeper_share"], "lesson_share": layout.get("lesson_share"),
         "spoken": {**layout.get("speakers", {}), **layout.get("voice_over", {})},
         "establishing_share": establishing_share(plan, shots, layout["total"]),
         "cuts": len(shots), "timeline": [{k: c[k] for k in ("shot", "kind", "start", "end", "src_start", "speed")}
                                          for c in shots]}
+    if long_first:   # E259: what the cuts need, bound to this master in its report: the clean file and the timelines
+        items, _ = plan_check.sequence(plan)
+        sentences = load(work / "compose-timeline.json")["sentences"]
+        report["composed"].update(
+            clean={"output_sha256": sha256(clean), "seconds": round(clip_check.probe(str(clean))["seconds"], 2)},
+            sentences=[dict(x, line=int(x["segment"][1:]), line_kind=items[int(x["segment"][1:])].get("kind"))
+                       for x in sentences])
     save(report_path, report)
     problems = []
     if unexpected:
@@ -2172,12 +2190,15 @@ def compose_step(plan, work, music, out):
 def sheet_step(video, sheet, frames=20):
     import short_engine
     d = short_engine.duration(video)
+    import clip_check
+    probe = clip_check.probe(str(video))
+    tile = "384:216" if probe.get("width", 0) > probe.get("height", 1) else "216:384"   # E259: a 16:9 long's frames
     tmp = Path(sheet).parent / "sheet-frames"
     tmp.mkdir(parents=True, exist_ok=True)
     for k in range(frames):
         t = d * (k + 0.5) / frames
         run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-ss", f"{t:.2f}", "-i", video, "-frames:v", "1", "-vf",
-             f"scale=216:384,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='{t:.1f}s':"
+             f"scale={tile},drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='{t:.1f}s':"
              "x=6:y=6:fontsize=16:fontcolor=yellow:box=1:boxcolor=black@0.6", tmp / f"f{k:02d}.jpg"])
     run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", tmp / "f%02d.jpg", "-vf", "tile=5x4", "-frames:v", "1",
          "-q:v", "3", sheet])

@@ -2742,6 +2742,53 @@
    "class": "A",
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
    "note": "E250: Buzzy track defect gate (owner 2026-11-01): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "CUT_LENGTH": {
+   "class": "A",
+   "early": [
+    "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+    "migration/production/bible/short_cuts.py::def check(spec"
+   ],
+   "note": "E259: Short cut of a long-first long; check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched, the same function runs again at upload; short_cuts.py check refuses the range before any render"
+  },
+  "CUT_PARENT_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E259: Short cut of a long-first long; check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched, the same function runs again at upload; short_cuts.py check refuses the range before any render"
+  },
+  "CUT_PARENT_IS_ITSELF": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E259: Short cut of a long-first long; check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched, the same function runs again at upload; short_cuts.py check refuses the range before any render"
+  },
+  "CUT_NOT_A_SHORT": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E259: Short cut of a long-first long; check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched, the same function runs again at upload; short_cuts.py check refuses the range before any render"
+  },
+  "CUT_DESCRIPTION_NOT_TO_THE_LONG": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E259: Short cut of a long-first long; check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched, the same function runs again at upload; short_cuts.py check refuses the range before any render"
+  },
+  "LONG_FIRST_LENGTH": {
+   "class": "C",
+   "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict); E259 long-first band 480-720 s"
+  },
+  "FRAME_REFUSED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_first.py::def test_long_first_compose_is_1920x1080_with_a_caption_free_master",
+   "note": "E259: short_engine composes only the Short's 1080x1920 or the long-first 1920x1080; episode_build sets the frame from the plan's track"
+  },
+  "CLEAN_SHA256_MISMATCH": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::CLEAN_SHA256_MISMATCH",
+   "note": "E259: the record job uploads the caption-free master only under the sha256 its report recorded"
+  },
+  "BUZZY_LONG_HANDOFF_INVALID": {
+   "class": "I",
+   "guard": "migration/production/bible/test_long_first.py::def test_materialize_and_verify",
+   "note": "E259: the upload rechecks the long-first pilot's plan, build report and handoff files; a changed binding cannot publish"
   }
  },
  "review": {

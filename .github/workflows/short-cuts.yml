@@ -1,0 +1,70 @@
+name: HeroVerse Short cuts (a long-first long's clean master -> 9:16 Shorts; nothing generated, nothing published)
+run-name: "short-cuts: spec=${{ inputs.spec }}"
+# E259 (owner, 2026-11-01): each cut of a cuts spec (migration/production/bible/cuts/<long>.json) is rendered from the
+# long's caption-free master (downloaded by the report's sha256): centre 9:16 crop, captions from the same sentences,
+# gain-only -14 LUFS, faded edges. A cut inside speech, outside 20-179 s or not on sentence edges is refused before
+# any render. Each cut goes into the release as bible-<cut>-sha256-<sha>.mp4 (the name publish-episode.yml downloads)
+# and its draft episode record (no review) onto claude/cuts-<long>-<run>. Its own native review (native-review.yml,
+# plan = the spec) and the session reviewer's defect decision come next; publish-episode.yml publishes it.
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: Cuts spec (migration/production/bible/cuts/<long episode>.json, bible-cuts-v1)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-subject-${{ inputs.spec }}
+  cancel-in-progress: false
+jobs:
+  cuts:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write   # release assets (assets.sh) and the evidence branch; no secret in this job
+    env:
+      SPEC: ${{ inputs.spec }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Spec (path, every cut on sentence edges, 20-179 s, the long's report)
+        run: |
+          [[ "$SPEC" =~ ^migration/production/bible/cuts/[a-z0-9]+(-[a-z0-9]+)*\.json$ ]] || { echo "SPEC_PATH_REFUSED"; exit 1; }
+          test -f "$SPEC" || { echo "SPEC_MISSING"; exit 1; }
+          python3 -I -B migration/production/bible/short_cuts.py check "$SPEC"
+      - name: Tools and the caption-free master (sha256 = the report's)
+        run: |
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg fonts-dejavu-core
+          report=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['report'])" "$SPEC")
+          asset=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['composed']['clean']['release_asset'])" "$report")
+          sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['composed']['clean']['output_sha256'])" "$report")
+          [[ "$asset" =~ ^bible-[a-z0-9-]+-clean-sha256-[0-9a-f]{64}\.mp4$ ]] || { echo "ASSET_REFUSED"; exit 1; }
+          bash migration/ci/assets.sh download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/clean.mp4" --clobber
+          echo "$sha  $RUNNER_TEMP/clean.mp4" | sha256sum -c -
+      - name: Render and measure every cut
+        run: python3 -I -B migration/production/bible/short_cuts.py render "$SPEC" "$RUNNER_TEMP/clean.mp4" "$RUNNER_TEMP/out"
+      - name: Each cut into the release by its sha256; draft records and measures on claude/cuts-<long>-<run>
+        run: |
+          long=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['long'])" "$SPEC")
+          d="migration/evidence/episodes/$long/cuts-$GITHUB_RUN_ID"; mkdir -p "$d"
+          for j in "$RUNNER_TEMP"/out/*.json; do
+            id=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['id'])" "$j")
+            [[ "$id" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "CUT_ID_REFUSED"; exit 1; }
+            sha=$(sha256sum "$RUNNER_TEMP/out/$id.mp4" | cut -d' ' -f1)
+            python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['output_sha256']==sys.argv[2] else 'CUT_SHA256_MISMATCH')" "$j" "$sha"
+            cp "$RUNNER_TEMP/out/$id.mp4" "$RUNNER_TEMP/bible-$id-sha256-$sha.mp4"
+            bash migration/ci/assets.sh upload "$RUNNER_TEMP/bible-$id-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+            cp "$j" "$d/$id.json"
+            python3 -I -B migration/production/bible/short_cuts.py record "$SPEC" "$j"
+            echo "ASSET bible-$id-sha256-$sha.mp4"
+          done
+          branch="claude/cuts-$long-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d" migration/production/bible/episodes
+          git commit -q -m "Short cuts of $long (run $GITHUB_RUN_ID): measured cuts and draft records for their own review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"

@@ -1,0 +1,78 @@
+name: HeroVerse long-first pilot (the built 16:9 long -> QA and publication inputs; nothing generated, nothing published)
+run-name: "buzzy-long-pilot: plan=${{ inputs.plan }} report=${{ inputs.report }}"
+# E259 (owner, 2026-11-01): a long-first long (plan track buzzy-long) is built by episode.yml; its record job puts the
+# master and the caption-free master in the release and the report on claude/episode-<id>-<run>. Once that report is on
+# main, this downloads the master by the report's sha256, measures it (buzzy-long-qa-criteria-v1), writes the pilot's
+# publication inputs and puts the master under its pilot alias. No provider call, no secret, no review, no approval:
+# approve.yml -> prepublish_gate.py -> publish.yml stay the only route, on the defect-gated buzzy-long track.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Long-first plan (migration/production/bible/plans/<id>.json, track buzzy-long)
+        required: true
+      report:
+        description: Its build report on main (migration/evidence/episodes/<id>/report-<run>.json)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-long-build
+  cancel-in-progress: false
+jobs:
+  pilot:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write   # the pilot alias (release_video.sh) and the evidence branch; no secret in this job
+    env:
+      PLAN: ${{ inputs.plan }}
+      REPORT: ${{ inputs.report }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Plan and report (paths, track, publication fields, the report's clean master and timelines)
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          ep="${BASH_REMATCH[1]}"
+          [[ "$REPORT" =~ ^migration/evidence/episodes/$ep/report-[0-9]+\.json$ ]] || { echo "REPORT_PATH_REFUSED"; exit 1; }
+          test -f "$PLAN" && test -f "$REPORT" || { echo "INPUT_MISSING"; exit 1; }
+          python3 -I -B - "$PLAN" "$REPORT" <<'PY'
+          import json, sys
+          sys.path.insert(0, "migration/production/bible")
+          import buzzy_long
+          plan, report = json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))
+          bad = buzzy_long.publication_problems(plan) + buzzy_long.report_problems(plan, report)
+          if bad:
+              raise SystemExit("LONG_FIRST_REFUSED " + "; ".join(bad))
+          PY
+      - name: Tools and the master (sha256 = the report's)
+        run: |
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg fonts-dejavu-core
+          asset=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['composed']['release_asset'])" "$REPORT")
+          sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['composed']['output_sha256'])" "$REPORT")
+          [[ "$asset" =~ ^bible-[a-z0-9-]+-sha256-[0-9a-f]{64}\.mp4$ ]] || { echo "ASSET_REFUSED"; exit 1; }
+          bash migration/ci/assets.sh download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/master.mp4" --clobber
+          echo "$sha  $RUNNER_TEMP/master.mp4" | sha256sum -c -
+      - name: Measure (buzzy-long-qa-criteria-v1) and materialize the pilot's publication inputs
+        run: |
+          python3 -I -B migration/production/bible/buzzy_long.py qa "$PLAN" "$REPORT" "$RUNNER_TEMP/master.mp4" "$RUNNER_TEMP/out" || true
+          python3 -I -B migration/production/bible/buzzy_long.py materialize "$PLAN" "$REPORT" "$RUNNER_TEMP/master.mp4" "$RUNNER_TEMP/out"
+      - name: The pilot alias into the release by the file's sha256; publication inputs on claude/long-<id>-<run>
+        run: |
+          pilot=$(python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["long"]["pilot"])' "$PLAN")
+          ep=$(python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["episode"])' "$PLAN")
+          [[ "$pilot" =~ ^pilot-[0-9]{3}$ && "$ep" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "ID_REFUSED"; exit 1; }
+          mp4="$RUNNER_TEMP/master.mp4"; sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['output_sha256']==sys.argv[2] else 'QA_SHA256_MISMATCH')" "$RUNNER_TEMP/out/qa.json" "$sha"
+          REPO="$GITHUB_REPOSITORY" bash migration/ci/release_video.sh put "$mp4" "$pilot-sha256-$sha.mp4"
+          python3 -I -B migration/production/bible/buzzy_long.py verify "migration/production/$pilot" "$mp4"
+          branch="claude/long-$ep-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "migration/production/$pilot"
+          git commit -q -m "Long-first $ep as $pilot (run $GITHUB_RUN_ID): QA and publication inputs for review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"; echo "SHA256 $sha"; cat "$RUNNER_TEMP/out/qa.json"

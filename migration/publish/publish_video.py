@@ -264,7 +264,7 @@ def check_new_upload(manifest_path, manifest, video):
     if problems:
         raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
     watched = review.get("watched_review")
-    if review.get("track") == "compilation":   # E251: defect gate, no 9.5 floor (owner_quality_policy.compilation_problems)
+    if review.get("track") in ("compilation", "buzzy-long"):   # E251/E259: defect gate, no 9.5 floor (compilation_problems)
         problems = owner_quality_policy.compilation_problems(
             {**watched, "output_sha256": review["output_sha256"]} if isinstance(watched, dict) else watched, actual_sha256)
         if problems:
@@ -290,12 +290,22 @@ def bible_long(package, pilot_dir=None):
     return isinstance(script, dict) and script.get("archetype") == "bible-story-long"
 
 
+def long_first(pilot_dir):
+    """E259: a long-first story long (script archetype bible-buzzy-long) uploads its approved thumbnail like a Bible
+    long; its words are burned captions, so it is not a caption-track long (bible_long stays as it is)."""
+    try:
+        script = json.loads((Path(pilot_dir) / "script.json").read_text()) if pilot_dir is not None else None
+    except (FileNotFoundError, json.JSONDecodeError):
+        return False
+    return isinstance(script, dict) and script.get("archetype") == "bible-buzzy-long"
+
+
 def bible_thumb_problems(package, thumbnail, pilot_dir=None):
     """Owner, 27/10: a Bible-series long (bible_long) uploads only the thumbnail approved in
     bible/thumbs/<thumb_episode>.json (the story character, reviewed before publish); the prayer pilots keep theirs.
     Every reason is THUMB_NOT_APPROVED (or the spec's own code); preflight.check (approve.yml, prepublish_gate) runs
     this before any upload."""
-    if not bible_long(package, pilot_dir):
+    if not (bible_long(package, pilot_dir) or long_first(pilot_dir)):
         return []
     episode = package.get("thumb_episode")
     if not isinstance(episode, str) or not episode:

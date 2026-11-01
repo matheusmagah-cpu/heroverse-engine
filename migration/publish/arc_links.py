@@ -88,11 +88,18 @@ def resolve(arcs, ledger, episodes_dir):
         return ep, vid, rec.get("slot")
 
     out = []
+    cuts = {}   # E259: a Short cut of a long-first long links that long through its record's parent.pilot
+    for path in sorted(Path(episodes_dir).glob("*.json")):
+        rec = read_json(path, {}) or {}
+        parent = rec.get("parent") if isinstance(rec, dict) else None
+        if rec.get("track") == "buzzy-cut" and isinstance(parent, dict) and parent.get("pilot") and rec.get("id"):
+            cuts.setdefault(parent["pilot"], []).append(rec["id"])
     for a in arcs["arcs"]:
         pilot = (a.get("long") or {}).get("pilot")
         long_id = latest(v for k, v in entries.items() if pilot and k.startswith(f"{pilot}:")) if pilot else None
         nxt = by_id.get(a.get("next")) if a.get("next") else None
-        out.append({"id": a["id"], "shorts": [short(ep) for ep in a["shorts"]], "long": long_id,
+        names = list(a["shorts"]) + [c for c in cuts.get(pilot, []) if c not in a["shorts"]]
+        out.append({"id": a["id"], "shorts": [short(ep) for ep in names], "long": long_id,
                     "long_slot": (a.get("long") or {}).get("slot"), "next_first": short(nxt["shorts"][0]) if nxt else None})
     return out
 

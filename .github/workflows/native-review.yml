@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       plan:
-        description: Existing Bible plan (review does not replace or approve it)
+        description: Existing Bible plan, compilation plan or cuts spec (review does not replace or approve it)
         required: true
         default: migration/production/bible/plans/genesis-09-short.json
       sha256:
