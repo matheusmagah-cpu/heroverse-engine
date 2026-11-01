@@ -3671,6 +3671,29 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E261",
+   "date": "2026-11-01",
+   "class": [
+    "direction"
+   ],
+   "error": "A long-first long holds about 25-30 approved stills of 15-20 s each, but every approved still got the same move: one centred eased zoompan push-in (shot_sources.still_motion_clip), whatever its beat, emotion, span or picture. The owner: 'it cannot be rigid; it has to animate according to need'. Fifteen to twenty seconds of one identical push, shot after shot, reads as a slideshow.",
+   "fix": "motion.py's cinematic engine (cinematic-v2): an auto-director (motion.direct) picks each still's keyframed move (push_in, pull_back, pans, tilts, pan_to_subject, drift, parallax_2_5d on a Depth Anything V2 map, hold_then_push), its easing, size and up to three procedural atmosphere layers from the beat, the prompt's emotion and named camera, the spoken span and the picture (face, saliency, depth, sky, water, fire), never the same move twice in a row, with the subject kept in the centre 9:16 band; a plan `motion`/`atmosphere` overrides it; the move and its reason go in the shot's report (motion_direction). plan_check refuses a hold on a still of 12-20 s (MOTION_REQUIRED) and a repeated explicit move (MOTION_REPEATED).",
+   "prior": [
+    "E209",
+    "E212",
+    "E218",
+    "E223",
+    "E237"
+   ],
+   "antidote": {
+    "file": "migration/production/test_motion.py",
+    "contains": "def test_e261_a_long_first_still_is_directed_and_a_long_hold_must_move",
+    "covers": [
+     "direction"
+    ]
+   }
   }
  ]
 }

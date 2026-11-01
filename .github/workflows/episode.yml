@@ -79,7 +79,7 @@ jobs:
       - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256), SyncNet weights (sha256 = syncnet.SYNCNET_SHA256)
         run: |
           timeout 300s sudo apt-get update -qq
-          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 python3-numpy python3-opencv opencv-data >/dev/null   # mediapipe links libEGL/libGLESv2 (E89); numpy, OpenCV and its face cascades: motion.py, the long-first stills
           python3 -m venv "$RUNNER_TEMP/voice"
           "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           python3 -m venv "$RUNNER_TEMP/lip"
@@ -154,6 +154,15 @@ jobs:
           cp "$RUNNER_TEMP/prev/report.json" "$WORK/report.json"
           find "$RUNNER_TEMP/prev/clips" -maxdepth 1 -name '*.mp4' ! -name '*-raw.mp4' -exec cp {} "$WORK/clips/" \;
           echo "RESUMED_FROM $RESUME"
+      - name: Depth maps of a long-first long's stills (owner 2026-11-01; Depth Anything V2 Small, ONNX on CPU, sha256 = motion.DEPTH_MODEL)
+        run: |
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('track')=='buzzy-long' else 1)" "$PLAN" || { echo "not a long-first plan: no depth maps"; exit 0; }
+          # the venv sees the apt numpy/OpenCV; only onnxruntime is added. No map: the director's depth proxy, recorded per shot
+          python3 -m venv --system-site-packages "$RUNNER_TEMP/depth"
+          "$RUNNER_TEMP/depth/bin/pip" install --disable-pip-version-check -q 'onnxruntime==1.20.1' || { echo "depth runtime unavailable: the depth proxy is used"; exit 0; }
+          curl -fsSL --retry 3 --max-time 600 -o "$RUNNER_TEMP/depth.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/4472b7362082ad9968fee890ca0f1e5aca36b93d/onnx/model.onnx || { echo "depth model unavailable: the depth proxy is used"; exit 0; }
+          echo "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c  $RUNNER_TEMP/depth.onnx" | sha256sum -c -
+          "$RUNNER_TEMP/depth/bin/python" -I -B migration/production/bible/episode_build.py depth "$PLAN" "$WORK" "$RUNNER_TEMP/depth.onnx"
       - name: Approved clips (E114; shots/<episode>.json, sha256 checked), clip_check, lipsync_check, face and still-mouth checks again; no generation, no secret
         run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"
       - name: Compose (cuts, captions, owned music, -14 LUFS), clip_check --composed, 20-frame sheet

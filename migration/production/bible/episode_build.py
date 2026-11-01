@@ -96,6 +96,7 @@ REPO = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(REPO / "migration" / "production" / "characters"))
 sys.path.insert(0, str(REPO / "migration" / "production" / "footage"))
+sys.path.append(str(REPO / "migration" / "production"))   # motion.py: the cinematic still engine (appended: no shadowing)
 sys.path.insert(0, str(REPO / "migration" / "integrations" / "pavo"))
 import plan_check  # noqa: E402
 import characters as ch  # noqa: E402
@@ -1625,6 +1626,46 @@ def generate_clips(plan, work, lip_python, face_model, ids=None, client=None, do
     return report
 
 
+def depth_png(work, approval):
+    """WORK/depth/<still sha256>.png: the Depth Anything V2 map episode.yml's depth step made (motion.depth_maps)."""
+    sha = approval.get("still_sha256") or ""
+    p = Path(work) / "depth" / f"{sha}.png"
+    return p if re.fullmatch(r"[0-9a-f]{64}", sha) and p.is_file() else None
+
+
+def cinematic_stills(plan, approvals):
+    """{shot id: approval} of the long-first stills the cinematic engine moves (approve_source: motion_engine)."""
+    return {s["id"]: approvals[s["id"]] for s in plan["shots"] if plan_check.long_first(plan)
+            and (approvals.get(s["id"]) or {}).get("source") == "still_motion"
+            and approvals[s["id"]].get("motion_engine")}
+
+
+def still_directions(plan, layout, approvals, work):
+    """Owner 2026-11-01 (DECISIONS "Cinematic still animation"): the auto-director's move for every long-first still,
+    from its beat, emotion, spoken span (this layout) and picture (motion.analyse_still, with its depth map)."""
+    stills = cinematic_stills(plan, approvals)
+    if not stills:
+        return {}
+    import motion as camera
+    frame = camera.plan_frame(plan)
+    spans = clip_needs(plan, layout, 0.0, approvals)
+    analyses = {}
+    for sid, a in stills.items():
+        still = REPO / str(a.get("repo_path") or "")
+        if REPO.resolve() not in still.resolve().parents or not still.is_file() or sha256(still) != a.get("still_sha256"):
+            raise SystemExit(f"STILL_SHA256_MISMATCH {a.get('still')}")
+        analyses[sid] = camera.analyse_still(still, frame, depth_png(work, a))
+    return camera.direct(plan, set(stills), spans, analyses, frame)
+
+
+def depth_step(plan, work, model):
+    """episode.yml's depth step (its own venv: onnxruntime): Depth Anything V2 maps of the long-first stills."""
+    import motion as camera
+    stills = [REPO / str(a.get("repo_path") or "") for a in cinematic_stills(plan, load_approvals(plan)).values()]
+    stills = [p for p in stills if REPO.resolve() in p.resolve().parents and p.is_file()]
+    return camera.depth_maps(model, stills, Path(work) / "depth") if stills else []
+
+
 def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetch_release_asset):
     """episode.yml's shots step (E114): every shot ships the clip Claude approved in shots/<episode>.json, made from
     the request the plan sends now (SHOT_NOT_REVIEWED / SHOT_REQUEST_CHANGED, as verify-preflight predicted),
@@ -1640,6 +1681,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
         raise SystemExit("; ".join(bad))
     report_path = work / "report.json"
     report = {"episode": plan["episode"], "shots": {}}
+    directions = still_directions(plan, layout, approvals, work)
     for index, shot in risk_order(plan["shots"]):
         req, _, check, _, final = shot_runner(shot, index, plan, layout, refs, work, None, None, lip_python,
                                               face_model)
@@ -1655,7 +1697,10 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
             if refused:
                 raise SystemExit(refused)
         if not (final.exists() and approved.get("clip_sha256") and sha256(final) == approved["clip_sha256"]):
-            shot_sources.fetch_source(approved, final, fetch)
+            shot_sources.fetch_source(approved, final, fetch, direction=directions.get(shot["id"]),
+                                      depth_png=depth_png(work, approved))
+        if shot["id"] in directions:   # owner 2026-11-01: the move the director chose and why, for the reviewer
+            entry["motion_direction"] = directions[shot["id"]]
         if source in shot_sources.SILENT_SOURCES:   # a Buzzy clip, a licensed clip or a still in motion: no person, no speech
             flags, measures = clip_flags(final, plan.get("aspect_ratio", "9:16")), None
         else:
@@ -1664,7 +1709,7 @@ def generate_step(plan, work, lip_python, face_model, approvals=None, fetch=fetc
                 flags = flags + speech_record_flags(approved, sha256(final))
         entry["source"] = source
         entry["approved"] = {k: approved.get(k) for k in ("asset", "clip_sha256", "request_sha256", "score", "source",
-                               "footage", "still", "still_sha256", "repo_path", "frame", "motion", "still_from",
+                               "footage", "still", "still_sha256", "repo_path", "frame", "motion", "motion_engine", "still_from",
                                "clip_from", "clip_seconds", "crop_to", "url", "inventory", "licence", "credit", "speech",
                                "attribution", "picture_sha256", "task_id", "buzzy_model", "buzzy_resolution")
                              if k in approved}
@@ -2217,6 +2262,10 @@ def main(argv):
         return 0
     if cmd in ('voice-script', 'lines', 'generate', 'probe', 'compose', 'adopt') and len(argv) >= 4:
         existing_edit.refuse_rebuild(argv[3])
+    if cmd == "depth" and len(argv) == 5:   # PLAN WORK MODEL (episode.yml, a long-first plan)
+        print(json.dumps({"depth_maps": [str(p) for p in depth_step(json.loads(Path(argv[2]).read_text()), argv[3],
+                                                                    argv[4])]}))
+        return
     if cmd == "sheet" and len(argv) == 4:
         return sheet_step(argv[2], argv[3])
     if cmd == "check-regenerate" and len(argv) == 3:

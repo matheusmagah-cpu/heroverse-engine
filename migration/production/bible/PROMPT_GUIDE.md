@@ -109,6 +109,51 @@ Owner, 2026-11-01 (E259): after the Noah compilation the story is made as a 16:9
 - The long's own captions are burned at 16:9 sizes (about 7 % of 1080 px, four words a card, `short_engine.caption_style`);
   the caption-free master is kept for the cuts, which get the Short's own caption style from the same sentences.
 
+## Cinematic still animation
+
+Owner, 2026-11-01 (E261, DECISIONS "Cinematic still animation"): "it cannot be rigid; it has to animate according to
+need". A long-first long (`"track": "buzzy-long"`) holds about 25–30 approved stills of 15–20 s each; a scene shot may
+run 4–20 s, and beyond 12 s it is an approved still. Each still is moved by `motion.py`'s cinematic engine
+(`cinematic-v2`, CPU only, zero cost); a Short's still keeps its plain push-in.
+
+How the director (`motion.direct`) chooses, per still, in plan order:
+
+- **Beat**: hook (the first shot: a confident push or reveal that starts moving at the cut), escalation (pushes, pans,
+  parallax, growing with the story), KJV line and climax (`hold_then_push`: the silence before the line held, then a
+  slow push), Keeper insight (a gentle drift or parallax), aftermath (a settling pull back or tilt down). The climax is
+  the shot ids named after "climax" in the plan's `beats`, else the last scripture shot of the last 45 %.
+- **Emotion**: the prompt's mood sentence ("Mocking and uneasy.") — dread and tension creep (`build` easing), awe
+  tilts up or reveals, grief pulls back, calm drifts, urgency pans and settles fast.
+- **Words**: a camera the prompt names ("slow tilt up", "tracking shot") weighs in; sentences most prompts share
+  (the style and world lines) are ignored.
+- **Span**: the move is fitted to the shot's spoken span in the build's layout and lands on its last frame; a short
+  span gets a smaller move and no hold.
+- **Picture**: a face found off centre gets a pan that lands on it; a clear near/far depth (Depth Anything V2) favours
+  parallax; fire, a torch, water in the lower frame, rain, mist, dust, light from above and darkness choose up to three
+  atmosphere layers (`dust`, `embers`, `mist`, `rain`, `water_shimmer`, `god_rays`, `torch_flicker`, `film_grain`,
+  `vignette`).
+- **Sequence**: never the same move twice in a row; the same family (in, out, lateral, vertical) and the same lateral
+  direction are avoided after each other, like an editor varying scale and direction.
+
+Hard limits on every frame: the still always covers the frame (no edge), the subject box (face, else saliency) stays
+inside the centre 9:16 band, sub-pixel motion from a 2x master, and the same input gives the same file. A move the room
+cannot hold is made smaller; the report says so.
+
+Override in the plan shot (it wins over the director; plan_check validates it):
+
+```json
+{"id": "s-12", "kind": "scene", "seconds": 18, "motion": "pan_to_subject", "atmosphere": ["mist", "vignette"]}
+{"id": "s-13", "kind": "scene", "seconds": 16, "motion": {"move": "hold_then_push", "hold": 0.4, "ease": "in_out", "strength": 1.2}}
+```
+
+`motion` is one of `push_in`, `pull_back`, `pan_left`, `pan_right`, `tilt_up`, `tilt_down`, `pan_to_subject`, `drift`,
+`parallax_2_5d`, `hold_then_push`, `hold`, or `{move, ease (in_out, settle, build, gentle), hold (0.1–0.5), strength
+(0.4–1.5)}`; `atmosphere` lists at most three names (`[]` = none). A still of 12–20 s may not hold
+(`MOTION_REQUIRED`), and two stills in a row may not name the same move (`MOTION_REPEATED`). Overrides are part of the
+shot's request digest, so changing one needs a new approval. Every still's chosen move, easing, atmosphere, keyframes
+and reason are in the build report (`shots.<id>.motion_direction`); `motion.py moves IMAGE OUT.jpg` shows every move
+on a still for review. The moving picture is still judged by watching the long.
+
 ## BibleShort story grammar
 
 The plan is `bible-plan-v2`, with narration records and ordered shots. `plan_check.sequence` gives the spoken

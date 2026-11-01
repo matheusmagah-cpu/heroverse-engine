@@ -634,6 +634,9 @@ def fallback_digest(plan, shot, index, source, item, sha):
                  "prompt": shot.get("prompt"), "words": pavo_native.words(
         pavo_native.shot_line(plan, index)), "source": source,
                  "item": item, "sha256": sha}
+    for key in ("motion", "atmosphere"):   # a long-first still's move is part of what was asked (absent: unchanged)
+        if shot.get(key) is not None:
+            canonical[key] = shot[key]
     return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
@@ -713,11 +716,15 @@ def approve_source(plan, shot_id, source, item, score, note, digests=None, lib=N
                 raise SystemExit(mine[0])
             # another camera move over the same picture; a talking Keeper stays static (E98): a tighter crop
             entry["motion"] = REUSE_KEEPER_MOTION if shot.get("kind") == "keeper" else REUSE_MOTION
+        if plan_check.long_first(plan):   # owner 2026-11-01: the cinematic engine moves it (motion.direct at the
+            import motion as camera     # build; the plan's motion/atmosphere override is bound by request_sha256)
+            entry["motion_engine"] = camera.ENGINE
         entry.update(still=item, repo_path=rec["repo_path"], clip_sha256=None, still_sha256=rec["sha256"],
                      frame=list(plan_frame(plan)),   # E132: rendered at the frame of the plan that ships it
                      licence=still_licence(rec),
                      # a spoken shot has no `seconds` (its line decides): the longest clip the adapter makes covers it
-                     clip_seconds=int(shot.get("seconds") or MAX_STILL_CLIP_SECONDS),   # E118: whole seconds, like a Pavo clip
+                     clip_seconds=int(shot.get("seconds") or (plan_check.LONG_FIRST_STILL_SECONDS[1] if
+                                                              plan_check.long_first(plan) else MAX_STILL_CLIP_SECONDS)),   # E118: whole seconds, like a Pavo clip
                      request_sha256=fallback_digest(plan, shot, i, source, item, rec["sha256"]))
     elif shot.get("clip_from") is not None:   # story QA v5 opt-in: another episode's approved Pavo clip
         entry.update(borrowed_clip(plan, shot, i, item, shots_dir))
@@ -894,10 +901,13 @@ def expected_request(plan, shot, index, approval, digests):
 
 # ---------- the build: fetch and render what was approved ----------
 
-def still_motion_clip(still, out, seconds, frame=FRAME, motion="push_in", fps=30):
+def still_motion_clip(still, out, seconds, frame=FRAME, motion="push_in", fps=30, direction=None, depth_png=None):
     """An approved still in slow continuous camera motion (motion.py's eased zoompan over a 2x master) at the QA's
-    frame, no audio."""
+    frame, no audio. A long-first still renders the auto-director's direction (motion.direct: its keyframed move and
+    atmosphere, owner 2026-11-01) with motion.py's cinematic engine."""
     import motion as camera
+    if direction is not None:
+        return camera.render_direction(still, out, seconds, direction, tuple(frame), fps, depth_png)
     w, h = frame
     frames = int(round(seconds * fps))
     e = f"(3*pow(on/{frames},2)-2*pow(on/{frames},3))"
@@ -915,7 +925,7 @@ def still_motion_clip(still, out, seconds, frame=FRAME, motion="push_in", fps=30
     return out
 
 
-def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME):
+def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME, direction=None, depth_png=None):
     """The approved clip of a shot by its source, its sha256 checked: a probed clip or a library clip from the release
     by content-hash name, an inventory clip from Pavo's CDN, a still rendered in motion (its still's sha256)."""
     import episode_build as eb
@@ -932,6 +942,12 @@ def fetch_source(approval, dst, fetch=None, download=None, frame=FRAME):
         if eb.sha256(still) != approval.get("still_sha256"):
             raise SystemExit(f"STILL_SHA256_MISMATCH {approval.get('still')}")
         move = {"motion": approval["motion"]} if approval.get("motion") else {}   # a reused still's own camera move
+        if approval.get("motion_engine"):   # a long-first still: the director's move (episode_build.generate_step)
+            import motion as camera
+            if approval["motion_engine"] != camera.ENGINE or (direction or {}).get("engine") != camera.ENGINE:
+                raise SystemExit(f"STILL_MOTION_DIRECTION_MISSING {approval.get('still')} (engine "
+                                 f"{approval['motion_engine']!r}, a motion.direct direction of {camera.ENGINE})")
+            move = {"direction": direction, "depth_png": depth_png}
         return still_motion_clip(still, dst, approval["clip_seconds"], frame, **move)
     if src == "pavo_reuse" and approval.get("url"):
         if not CDN.fullmatch(approval["url"]):
