@@ -260,3 +260,20 @@ COERENTES para postar como Shorts."
 - The long publishes through approve.yml → prepublish_gate.py → publish.yml on its own defect-gated track
   (buzzy-long-qa-criteria-v1: the owner's defect finder, not the 9.5 floor). The 9.5 story-long track, the Short
   route, the compilation and every frozen QA file are unchanged. Implemented in E259.
+
+## 2026-11-01 — Buzzy must last a full year; Pavo carries the hook, the speech and the close
+
+Owner: the Buzzy credits are a one-year stock, so 600 credits a long makes no sense. He asked for a viral hook, some
+character lines and the close made in Pavo, and images for the rest. This entry supersedes the Buzzy numbers in the
+"Resource plan" and "long-first" entries.
+
+- Buzzy budget: 41,994 credits (measured 2026-11-01) over 365 days is ~115 a day. The ceiling is 100 a day on average
+  (~36,500 a year), so ~5,000 stay in reserve.
+- Per long-first long:
+  - Pavo, at an exact 0-credit quote: the viral hook, the speaking-character lines, and the Keeper's close.
+  - Images: every other shot is a FLUX still (free, in Actions) animated cinematically in the edit.
+  - Buzzy: at most 2 clips (≤120 credits), and only for a non-speaking action peak that an animated still cannot carry.
+    Zero is the default.
+- Cuts (the Shorts) come from the long and cost no Buzzy credit.
+- The ledger records the balance read before and after every Buzzy use. If the running average goes over 100 a day,
+  the next longs use no Buzzy until it is back under.
