@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-peaks-2026110101-1",
+ "still": "flood-ends-long-s-peaks",
+ "episode": "flood-ends-long",
+ "shot": "s-peaks",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. The first grey mountain peaks push up out of the water like islands in a vast silver sea, birds-eye calm, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Soft morning light and low mist. Hope rising slowly. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. The first grey mountain peaks push up out of the water like islands in a vast silver sea, birds-eye calm, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Soft morning light and low mist. Hope rising slowly. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-peaks.png",
+  "sha256": "aa74817331cb99f9e4da49a6185e0dba2f845869047d6a1fd75725bab16852fb",
+  "size_bytes": 2298212,
+  "pixels": [
+   1672,
+   940
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-peaks-2026110101-1.jpg",
+ "sha256": "6eca5e70e099562fe17bd50648cbb4fe72026ddcd2953b1d141d0e5dd6d46089"
+}
