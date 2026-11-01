@@ -3357,6 +3357,29 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E249",
+   "date": "2026-11-01",
+   "class": [
+    "review-after-build"
+   ],
+   "error": "genesis-09-short native review (run 41275081559) scored scripture_on_screen 6.0: KJV words were burned in the same caption style as our commentary and with no chapter/verse citation, so the reviewer could not tell Scripture from commentary. Nothing in the composer or plan encoded that Scripture is displayed and cited differently; the defect surfaced only in review after the build.",
+   "fix": "short_engine.build_ass sets each scripture sentence in its own style (DejaVu Serif italic, gold) and keeps a 'Genesis 7:9 · KJV' citation up for the whole quotation; episode_build.lines_step carries kind and reference from the plan's narration/shot into compose-timeline sentences. Own commentary stays in the normal caption style. No gate loosened.",
+   "prior": [
+    "E109",
+    "E110",
+    "E117",
+    "E127",
+    "E189"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_short_engine.py",
+    "contains": "def test_e249_scripture_is_styled_apart_and_cited_with_chapter_and_verse",
+    "covers": [
+     "review-after-build"
+    ]
+   }
   }
  ]
 }

@@ -659,6 +659,8 @@ def lines_step(plan, work):
     for k in range(n):
         first = by_line[k][0]["start"]
         who = {"speaker": items[k]["speaker"]} if items[k].get("speaker") else {}
+        if items[k].get("kind") == "scripture" and items[k].get("reference"):   # E249: the captions style and cite it
+            who.update(kind="scripture", reference=items[k]["reference"])
         sentences += [dict({"segment": f"n{k:02d}", "text": s["text"],
                             "start": round(layout[k][0] + (s["start"] - first) * scale[k], 3),
                             "end": round(layout[k][0] + (s["end"] - first) * scale[k], 3)}, **who) for s in by_line[k]]
