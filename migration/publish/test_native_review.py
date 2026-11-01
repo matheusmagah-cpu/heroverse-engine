@@ -17,6 +17,21 @@ SPEC.loader.exec_module(n)
 
 class Review(unittest.TestCase):
 
+    def test_e247_a_run_that_never_uploaded_does_not_block_the_resume_of_the_one_that_did(self):
+        i = {'plan': 'migration/production/bible/plans/p.json', 'sha256': 'a' * 64}
+        t = n.title(i)
+        guard_failed = {'display_title': t, 'status': 'completed', 'conclusion': 'failure'}
+        job = [{'steps': [{'name': 'Open one private resumable upload session', 'status': 'completed', 'conclusion': 'skipped'}]}]
+        self.assertTrue(n.never_uploaded(i, guard_failed, job))
+        uploaded = [{'steps': [{'name': 'Open one private resumable upload session', 'status': 'completed', 'conclusion': 'success'}]}]
+        self.assertFalse(n.never_uploaded(i, guard_failed, uploaded))
+        self.assertFalse(n.never_uploaded(i, dict(guard_failed, conclusion='success'), job))
+        self.assertFalse(n.never_uploaded(i, dict(guard_failed, display_title='other'), job))
+        runs = [{'id': 1, 'display_title': t}, {'id': 2, 'display_title': t}, {'id': 3, 'display_title': t}]
+        n.reject_duplicate(i, runs, 3, '1', 1, [2])   # resumed run 1, harmless 2, current 3
+        with self.assertRaises(n.Refusal):
+            n.reject_duplicate(i, runs, 3, '1', 1, [])
+
     def test_e246_the_provider_file_wait_covers_a_slow_processing_of_a_full_master(self):
         # genesis-09 round 2 (run 41262411652): the file was still PROCESSING after the old 15 min wait
         self.assertGreaterEqual(n.FILE_POLLS * 10, 30 * 60)

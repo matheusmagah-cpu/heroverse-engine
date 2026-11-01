@@ -3305,6 +3305,28 @@
      "capacity"
     ]
    }
+  },
+  {
+   "id": "E247",
+   "date": "2026-11-01",
+   "class": [
+    "rerun-without-fix"
+   ],
+   "error": "native-review's duplicate guard counted every same-titled run, so a resume of the run that uploaded (41262411652, FILE_PROCESSING_PENDING) was refused CONTENT_ALREADY_SUBMITTED_RECONCILE_EXISTING_RUN because an earlier resume attempt (41263494756) had itself failed in the dispatch guard before touching the provider; only one run could be the permitted source.",
+   "fix": "never_uploaded(): a same-titled completed failure whose 'Open one private resumable upload session' step did not succeed touched nothing and is ignored by reject_duplicate when a resume names the run that did upload; everything else (any run that opened an upload, any success, REPLAY_REFUSED) still blocks.",
+   "prior": [
+    "E116",
+    "E211",
+    "E214",
+    "E228"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e247_a_run_that_never_uploaded_does_not_block_the_resume_of_the_one_that_did",
+    "covers": [
+     "rerun-without-fix"
+    ]
+   }
   }
  ]
 }
