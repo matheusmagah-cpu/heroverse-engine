@@ -2,23 +2,25 @@
  "episode": "genesis-09-short",
  "shots": {
   "k-close": {
-   "source": "still_motion",
+   "asset": "shot-genesis-09-short-k-close-sha256-454a7e4cacb5d33d2bf92b4772e5eadd43f54b3e2a2fa46e3682138cd13962e6.mp4",
+   "clip_sha256": "454a7e4cacb5d33d2bf92b4772e5eadd43f54b3e2a2fa46e3682138cd13962e6",
+   "request_sha256": "ee713cda970dbcec3679b45111220a34bea4e9d84c2d077759ff3db9f2f4722d",
+   "clip_seconds": 8.0,
+   "requested_clip_seconds": 8,
+   "media": {
+    "version": "clip-media-v1",
+    "clip_sha256": "454a7e4cacb5d33d2bf92b4772e5eadd43f54b3e2a2fa46e3682138cd13962e6",
+    "video_seconds": 8.0,
+    "audio_seconds": 8.0,
+    "instrument": "ffprobe stream durations"
+   },
    "score": 9.5,
-   "note": "Same approved Keeper still (arc-01-long-k-promise-3, 9.5) re-bound to the plan's current k-close request after #530 changed the close's words; image unchanged, re-viewed by this session: the Keeper's face, hood and beard against the stars, mouth closed; Kokoro voice-over.",
-   "model": "claude-session-reviewer",
-   "approved_at": "2026-10-31",
-   "still_from": "arc-01-long-k-promise-3",
-   "still": "arc-01-long-k-promise-3",
-   "repo_path": "migration/production/bible/stills/arc-01-long-k-promise-3.jpg",
-   "clip_sha256": null,
-   "still_sha256": "d06d4d2eb4d0120dc4dfdab01b737d4d14a57dd52759e60e3284826973e5636f",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
-   "clip_seconds": 12,
-   "request_sha256": "81ad3c28ef78cec3cec371547a9adcf803a8402e38c179ad64de135a01078ac3"
+   "note": "Frame review of the probe sheet (20 frames, 720x1280, 8 s, round 2 first generation, no flags): the Keeper of the approved references speaks to the camera, mouth shapes changing with the words, same hood, beard, scroll and campfire light as his earlier clips; audio corr 0.993, face frames 0.96, SyncNet confidence 7.08; lips move continuously (replaces the silent portrait the review of run 41250892924 flagged). The shipped audio stays the accepted Kokoro line.",
+   "probe_record": "migration/evidence/shots/genesis-09-short/41254369410.json",
+   "run_id": "41254369410",
+   "source_run": null,
+   "approved_at": "2026-11-01",
+   "model": "claude-session-reviewer"
   },
   "k-insight": {
    "source": "buzzy",
