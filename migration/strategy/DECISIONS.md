@@ -101,3 +101,49 @@ quality effort goes into writing good prompts the first time. Existing support: 
 to `MAX_SLOW` 1.3x to fill its span (never loops), a shot may carry an explicit `speed` (1.0-1.3, `explicit_speed`),
 `src_start` trims the clip's start, `hold` freezes a talking clip's last frame (<= `HOLD_MAX` 1.3 s). Speeding a clip
 up beyond 1.0 is done by trimming (`src_start`/shorter span); a 0.75x-1.5x speed-up range is not built.
+
+## 2026-11-01 — Strategy reset: Shorts, longs and TikTok toward YPP, on automatic
+
+Owner, 2026-11-01: "Resolva o que falta e já refaça a estratégia de longos e shorts e TIKTOK para alcançar a meta e
+deixa lá no automático."
+
+Measured on 2026-11-01 (daily report 09:41 UTC):
+- 300 / 1,000 subscribers;
+- 27.9 / 4,000 public long watch hours;
+- 2,447 Shorts views in 90 days.
+
+The best recent Bible Shorts reached 157-532 views each, held 72-85% of their length on average and gained 2-8
+subscribers each. The prayer longs averaged 2-9 minutes viewed per view and received no traffic from Shorts. At this
+rate 4,000 hours by day 30 (16/11) is not reachable; the YPP hours window is 365 days, so it is a target to accumulate,
+not a cliff. Subscribers come from Shorts volume and consistency. Hours come only from longs with long average view
+duration.
+
+**Shorts**
+- The Buzzy posting flow (above) is the only Short route: one Bible story per Short, in canonical order (genesis-10,
+  genesis-11, then the next arc).
+- Cadence: 1 Short a day at 23:30 UTC, automated; 2 a day (13:30 too) once the measured token cost of one automated
+  Short fits the weekly budget twice daily.
+- Each Short's pinned comment and description point to its arc's long.
+
+**Longs (redesigned)**
+- A long is the "complete story" of an arc, assembled from that arc's already-published Shorts: their accepted masters
+  in order, framed for 16:9 with a blurred fill, joined by short Keeper bridges and one chapter card per story.
+  Nothing is regenerated. Target length is 15-30 minutes.
+- A second, sleep-oriented edit of the same material runs about 60 minutes: slower pacing, no hook music, a calm Keeper
+  intro. The prayer longs' 8-9 minute average views show this audience watches long calm content.
+- The long reuses the Short track's defect-finder review (no cut speech, no incoherent scene, policy). It still
+  publishes only through approve.yml -> prepublish_gate.py -> publish.yml.
+- Changing the long review from the 9.5 score floor to that defect gate is owner-directed here and is implemented as
+  its own code change with tests before the first compilation long.
+- First compilation: arc-02 (Noah: genesis-06 to genesis-09, all public).
+
+**TikTok**
+- tiktok.yml already mirrors every public Short through Buffer's free channel (8 posts SENT); it stays automatic, with
+  no new spending.
+
+**Automation**
+- The 4 old clocks are disabled.
+- One daily production session (fresh session, cheaper model) runs the Short flow end to end for the next plan and
+  publishes at 23:30 UTC. Gemini's Free Tier proof is read on the owner's PC through Desktop Commander. If the PC or a
+  provider is unavailable, the session stops and tells the owner; it does not invent evidence.
+- Longs are built when an arc's Shorts are all public.
