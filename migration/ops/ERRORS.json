@@ -3589,6 +3589,31 @@
      "rerun-without-fix"
     ]
    }
+  },
+  {
+   "id": "E258",
+   "date": "2026-11-01",
+   "class": [
+    "review-after-build"
+   ],
+   "error": "approve.yml refused the arc-02 compilation (GATE=FAIL): the 2.5 s chapter cards were separate black, silent, frozen segments (signal scan: black 2.6 s, digital silence 4.0 s after the hook, frozen 2.03 s), real dead air a viewer would leave on, and three_stage critique crashed on the compilation script (KeyError 'segments'); neither was exercised before the first approval run.",
+   "fix": "The chapter card is drawn over the first 2.5 s of its Short (real picture and sound; render_card removed), canonical_order is hook + Short (with its chapter) per story + close, the description's chapters start at each Short, and the compilation script carries 'segments' (hook, each Short's planned lines, close) for the critique. The signal scan and its thresholds are unchanged.",
+   "prior": [
+    "E109",
+    "E110",
+    "E117",
+    "E127",
+    "E189",
+    "E249",
+    "E254"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_compilation_long.py",
+    "contains": "def test_e258_the_chapter_card_is_drawn_over_its_short_not_dead_air",
+    "covers": [
+     "review-after-build"
+    ]
+   }
   }
  ]
 }
