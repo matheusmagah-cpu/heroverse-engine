@@ -192,6 +192,19 @@
    "evidence": "migration/evidence/pavo/20261027/arc-01-long-talk/probes.json",
    "kind": "talk",
    "note": "arc-01-long k-insight-2 (16:9): lipsync_check 0 of 1"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "Follow the full story as this series continues. Next, part ten: The dove and the olive leaf.",
+   "generations": 9,
+   "passed": 4,
+   "evidence": "migration/evidence/shots/genesis-09-short/41254369410.json and 41256532612.json",
+   "kind": "talk",
+   "note": "genesis-09-short k-close (9:16), Kokoro line as input audio: shot-probe runs 41254369410 (4 generations, 2 passed) and 41256532612 (5 generations, 2 passed), lipsync_check pass counts from the probe records (clip flags empty = passed)"
   }
  ]
 }

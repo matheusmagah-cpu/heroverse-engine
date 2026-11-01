@@ -1,13 +1,13 @@
 {
  "plan": "migration/production/bible/plans/genesis-09-short.json",
  "episode": "genesis-09-short",
- "checked_at": "2026-10-31T21:33:46Z",
+ "checked_at": "2026-11-01T00:59:13Z",
  "plan_check": {
   "problems": [],
   "pending": [],
   "estimate": {
    "seconds": 178.0,
-   "keeper_share": 0.118,
+   "keeper_share": 0.067,
    "lesson_share": 0.122,
    "establishing_share": 0.0,
    "lines": 23,
@@ -42,7 +42,7 @@
  "voice": {
   "ran": true,
   "reused": true,
-  "checkpoint_sha256": "6a09bfef41d754f166c8619b5213f39dabc5136f29317fb2e422953bb888ff07",
+  "checkpoint_sha256": "ac9a2a5db17ff915cfbdf17b31686602c0fb74a0ae9cca669ccf077f0848b002",
   "problems": [],
   "pace": {
    "god": [
@@ -54,14 +54,14 @@
     2.99,
     2.06,
     2.9,
-    3.06,
+    3.07,
     3.47,
     2.93,
     3.06,
     2.72,
     2.66,
     3.39,
-    2.9,
+    2.88,
     2.96,
     2.67,
     3.37,
@@ -74,10 +74,16 @@
    ]
   },
   "measured": {
-   "total": 174.411,
-   "keeper_share": 0.132,
-   "lesson_share": 0.136,
-   "retimed": {}
+   "total": 174.753,
+   "keeper_share": 0.075,
+   "lesson_share": 0.137,
+   "retimed": {
+    "k-close": {
+     "speech": 7.208,
+     "retimed": 7.55,
+     "atempo": 0.9547
+    }
+   }
   }
  },
  "requests": {
@@ -103,9 +109,9 @@
    "s-drift": "3075626282720a5ad61c0c5471c4d18d1fc475c3789f2323c48d87cc3adaea2d",
    "s-rock": "f1c1cdaceb493c906a404b4262c55060a0197c9df75580e3f6d31a1e56a38972",
    "s-noah-lamp": "4078bab7d0e4aea670d5048f017cad93099cbbdd661cdbf4fd01d20d487ae7e5",
-   "k-insight": "d6139213b1d6fe3a9d7059b65000d7155f2a3e532042a29bb222fee8836f587e",
+   "k-insight": "a18c90c03bdb0e9d80a91061588a0cde8d2dd3986bf3e7a32a26a5472a1babe1",
    "k-question": "9915d0105b03aee1fb2b3e1bafcd66bbc5bb82d434d570cc24430d2f3e06ff99",
-   "k-close": "fcd3f420eadf01dfbccbc5a6fc7758f45d036e077daf293f6eaf8bcf637723e3"
+   "k-close": "ee713cda970dbcec3679b45111220a34bea4e9d84c2d077759ff3db9f2f4722d"
   },
   "needs": {
    "s-voice": 8,
@@ -129,7 +135,7 @@
    "s-noah-lamp": 12,
    "k-insight": 11,
    "k-question": 6,
-   "k-close": 9
+   "k-close": 8
   }
  },
  "setups": {
@@ -138,11 +144,6 @@
     "kind": "god_voice_over",
     "shot": "s-voice",
     "probe": "none needed: generated right after the talking shots (risk_order), face check"
-   },
-   {
-    "kind": "plan_b_still",
-    "shot": "k-insight",
-    "probe": "none needed: the Kokoro voice over its approved still in motion (owner exception, arc-01 long); no lips are shown speaking"
    },
    {
     "kind": "still_mouth",
@@ -159,28 +160,38 @@
     "shot_chance": 1.0
    },
    {
-    "kind": "plan_b_still",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+    "line": "follow the full story as this series continues next part ten the dove and the olive leaf",
     "shot": "k-close",
-    "probe": "none needed: the Kokoro voice over its approved still in motion (owner exception, arc-01 long); no lips are shown speaking"
+    "kind": "talk",
+    "probe": [
+     "migration/evidence/shots/genesis-09-short/41254369410.json and 41256532612.json"
+    ],
+    "passed": "4 of 9",
+    "shot_chance": 0.974
    }
   ],
   "probes_required": [],
   "rate_low": [],
   "talk_attempts": 6,
   "min_shot_chance": 0.9,
-  "run_chance_all_talking_shots": 1.0
+  "run_chance_all_talking_shots": 0.973
  },
  "shot_review": [],
  "binding": {
-  "plan": "20235c6d3fa213755fcc4bd7acae675131aca7017db656919931dbe0651a8da5",
+  "plan": "a46621fc8c11bf48c625378739e2ac559df1ee36be03d099acaca8b2213f8b31",
   "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
   "image_records": {
    "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
    "ch-keeper-talk.json": "c431a6013669385cb236c64158160cc6966337cdfb8ada711ed98f58b509b6cc"
   },
-  "setups": "0caff8f5bd70483f889bf2219fa29949d17504192dee6aef96f0bc8dcbba1b4a",
+  "setups": "99e5309e3c43318c5b4fff4216cdbd19d94a383ae62240566088dd52569427af",
   "code": {
-   "episode_build.py": "684709b0ae447e0763fe3ee588e4889694998ed245c5a696a091874784e41c25",
+   "episode_build.py": "c224f096d4a2015d551e169e45dcd476ef8689925769a51aa7ba02efe4c09280",
    "plan_check.py": "88f393459bdf2590655e5229dbf6e6a3e00668d83b42173c056e6930b536515d",
    "voice_pace.py": "d4d2850c60e7df3680130725b6d584a83239538ad91f59671fcff4a626837c4b",
    "lipsync_check.py": "8222df7918d027eb2dbe21ca351cf29ae4c5f59bcda377906e4156a2be8dfdc9",
