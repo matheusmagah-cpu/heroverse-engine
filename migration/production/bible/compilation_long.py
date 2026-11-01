@@ -148,7 +148,7 @@ def loudness(path):
 def gain_filter(path):
     """Gain only (no compression): the segment's mean brought to LUFS, then a -1 dBFS ceiling."""
     lufs, _ = loudness(path)
-    return f"volume={LUFS - lufs:.2f}dB,alimiter=limit=0.89:level=false"
+    return f"volume={LUFS - lufs:.2f}dB,alimiter=limit=0.8:level=false"
 
 
 def fades(d):
@@ -210,6 +210,11 @@ def thumbnail(src, spec, out):
          "-q:v", "2", out])
     t1.unlink()
     t2.unlink()
+
+
+def fps(rate):
+    num, _, den = str(rate).partition("/")
+    return float(num) / float(den or 1) if float(den or 1) else 0.0
 
 
 def clock(t):
@@ -281,7 +286,7 @@ def qa(plan_path, out_dir):
     shorts = [r for r in tl["segments"] if r["kind"] == "short"]
     checks = {
         "full_decode_without_errors": dec.returncode == 0 and not dec.stderr.strip(),
-        "video_format_1920x1080_30fps": (probe["width"], probe["height"]) == (W, H) and probe["avg_frame_rate"] == f"{FPS}/1",
+        "video_format_1920x1080_30fps": (probe["width"], probe["height"]) == (W, H) and abs(fps(probe["avg_frame_rate"]) - FPS) < 0.01,
         "duration_is_sum_of_segments": abs(dur - expected) < 1.0,
         "no_padding": dur <= sum(s["seconds"] for s in src) + 30 + len(src) * (CARD + 1.0),
         "integrated_lufs_band": LUFS_BAND[0] <= lufs <= LUFS_BAND[1],
@@ -295,7 +300,7 @@ def qa(plan_path, out_dir):
     doc = {"version": "compilation-qa-v1", "criteria_version": CRITERIA,
            "criteria_sha256": sha256(ROOT / "migration/production/qa_criteria_compilation_v1.json"),
            "output_sha256": sha, "status": "PASS" if all(checks.values()) else "FAIL", "checks": checks,
-           "measured": {"seconds": round(dur, 3), "lufs": lufs, "true_peak_dbfs": peak}}
+           "measured": {"seconds": round(dur, 3), "lufs": lufs, "true_peak_dbfs": peak, "frame_rate": probe["avg_frame_rate"]}}
     save(out / "qa.json", doc)
     print(json.dumps({"status": doc["status"], "checks": {k: v for k, v in checks.items() if not v}, **doc["measured"]}))
     return 0 if doc["status"] == "PASS" else 1
