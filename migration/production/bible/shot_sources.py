@@ -359,7 +359,16 @@ def speech_stock(plan):
 def stock_required(plan, shot):
     """New pictures only: preserve valid approvals/reuse; footage or reviewed still motion cannot relax gates."""
     import plan_check
-    return speech_stock(plan) and shot.get("window_of") is None and not plan_check.talking(shot)
+    return (speech_stock(plan) and shot.get("window_of") is None and not plan_check.talking(shot)
+            and not pavo_hook(plan, shot))
+
+
+def pavo_hook(plan, shot):
+    """E245 (owner 2026-10-31: Pavo video only for the hook, character-specific lines and the Keeper close): the plan's
+    FIRST shot may opt in with `pavo_hook: true` and then goes to Pavo like a spoken shot (0-credit quote, the build's
+    checks, Claude's frame review). Any other shot carrying the flag is not exempt."""
+    shots = plan.get("shots") or []
+    return bool(shot.get("pavo_hook") is True and shots and shots[0] is shot)
 
 
 def require_pavo_generation(plan, ids=None):

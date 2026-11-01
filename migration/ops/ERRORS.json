@@ -3238,6 +3238,46 @@
      "capacity"
     ]
    }
+  },
+  {
+   "id": "E245",
+   "date": "2026-11-01",
+   "class": [
+    "drift"
+   ],
+   "error": "The owner's hook rule (Pavo video for the hook) had no route under source_policy pavo_speech_stock: stock_required refused every non-talking shot, so shot-probe could not generate the God-voice-over hook (s-voice) and the hook stayed a still with a pan, which the review of run 41250892924 scored down.",
+   "fix": "A plan's FIRST shot may carry pavo_hook: true; shot_sources.pavo_hook exempts only that shot from stock_required (any other shot with the flag stays refused), so shot-probe generates it at a 0-credit quote with the build's checks and Claude's frame review.",
+   "prior": [
+    "E100",
+    "E102",
+    "E126",
+    "E130",
+    "E132",
+    "E133",
+    "E145",
+    "E146",
+    "E147",
+    "E149",
+    "E150",
+    "E151",
+    "E152",
+    "E153",
+    "E166",
+    "E167",
+    "E168",
+    "E169",
+    "E189",
+    "E218",
+    "E236",
+    "E243"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_shot_sources.py",
+    "contains": "class PavoHook",
+    "covers": [
+     "drift"
+    ]
+   }
   }
  ]
 }
