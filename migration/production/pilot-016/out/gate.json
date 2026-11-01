@@ -1,0 +1,174 @@
+{
+ "version": "prepublish-gate-v1",
+ "pilot_id": "pilot-016",
+ "output_sha256": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e",
+ "decision": "PASS",
+ "eligible_for_automatic_publication": true,
+ "dimensions": {
+  "binding": "PASS",
+  "format": "PASS",
+  "technical": "PASS",
+  "audio": "PASS",
+  "rights": "PASS",
+  "structure": "PASS",
+  "defect_review": "PASS",
+  "full_file_scan": "PASS",
+  "preflight": "PASS"
+ },
+ "items": {
+  "binding": [
+   {
+    "source": "binding",
+    "item": "manifest",
+    "state": "PASS",
+    "detail": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e"
+   },
+   {
+    "source": "binding",
+    "item": "qa_for_this_file",
+    "state": "PASS",
+    "detail": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e"
+   },
+   {
+    "source": "binding",
+    "item": "qa_criteria_frozen",
+    "state": "PASS",
+    "detail": {
+     "version": "compilation-qa-criteria-v1",
+     "recorded": "023e4183247ce3436407dea58e546cbf47bf914569770a9cbc091121df9efe99",
+     "file": "023e4183247ce3436407dea58e546cbf47bf914569770a9cbc091121df9efe99"
+    }
+   },
+   {
+    "source": "binding",
+    "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
+    "state": "PASS",
+    "detail": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e"
+   }
+  ],
+  "format": [
+   {
+    "source": "format",
+    "item": "story_long",
+    "state": "PASS",
+    "detail": "bible-compilation-long"
+   }
+  ],
+  "technical": [
+   {
+    "source": "qa",
+    "item": "full_decode_without_errors",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "video_format_1920x1080_30fps",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "duration_is_sum_of_segments",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_padding",
+    "state": "PASS"
+   }
+  ],
+  "audio": [
+   {
+    "source": "qa",
+    "item": "integrated_lufs_band",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "true_peak_ceiling",
+    "state": "PASS"
+   }
+  ],
+  "rights": [
+   {
+    "source": "qa",
+    "item": "sources_are_the_public_masters_by_sha",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "keeper_clips_zero_credit",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "music_and_voice_owned",
+    "state": "PASS"
+   }
+  ],
+  "structure": [
+   {
+    "source": "qa",
+    "item": "canonical_order",
+    "state": "PASS"
+   }
+  ],
+  "defect_review": [
+   {
+    "source": "review",
+    "item": "designated_reviewer_bound_to_file",
+    "state": "PASS",
+    "detail": "claude-session-reviewer"
+   },
+   {
+    "source": "review",
+    "item": "publish_decision",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "no_unresolved_a_b_e",
+    "state": "PASS"
+   }
+  ],
+  "full_file_scan": [
+   {
+    "source": "scan",
+    "item": "black_picture",
+    "state": "PASS",
+    "detail": 0.1
+   },
+   {
+    "source": "scan",
+    "item": "digital_silence",
+    "state": "PASS",
+    "detail": 1.5
+   }
+  ],
+  "preflight": [
+   {
+    "source": "preflight",
+    "item": "preflight",
+    "state": "PASS"
+   }
+  ]
+ },
+ "informative_not_deciding": {},
+ "market_evidence_not_deciding": {
+  "status": "UNKNOWN",
+  "detail": "no vidIQ market opinion for this pilot",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
+ "method_notes": {
+  "track": "compilation (E251): defect gate, no score floor",
+  "not_claimed": [
+   "perceived quality by viewers",
+   "retention, CTR or revenue"
+  ]
+ }
+}

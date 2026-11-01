@@ -1,0 +1,13 @@
+{
+ "version": "critique-v1",
+ "model": "gemini-3.6-flash",
+ "findings": [
+  {
+   "category": "YouTube 'inauthentic content' risk",
+   "quote": "Enoch Walked With God The end of all flesh is come before me",
+   "why": "The script abruptly includes an unedited structural section header ('Enoch Walked With God') directly before quotes from Genesis 6 without narrative context, suggesting low-effort or automated script assembly."
+  }
+ ],
+ "narrative_value": "The script accurately quotes KJV scripture from Genesis 6 and 7 and concludes with a meaningful reflection question on faith, though the pacing is fragmented.",
+ "status": "FAIL"
+}
