@@ -3456,6 +3456,37 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E253",
+   "date": "2026-11-01",
+   "class": [
+    "instrument"
+   ],
+   "error": "The compilation long route (E251) names the Gemini native review as its defect finder, but native_review.py accepted only migration/production/bible/plans/*.json and masters up to 150 MB, so the arc-02 Noah compilation master (273 MB, compilations/arc-02-noah-compilation.json) could not be reviewed at all.",
+   "fix": "native_review accepts compilations/*.json; a bible-compilation-plan-v1 reads as track 'compilation' (defect-finder prompt naming a 16:9 long compilation, no score floor, like buzzy) with its own 600 MB size limit. Shorts keep the plans/ path, the 150 MB limit and their floors.",
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233",
+    "E238"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e253_compilation_long_is_reviewed_as_a_defect_finder_within_its_own_limit",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }
