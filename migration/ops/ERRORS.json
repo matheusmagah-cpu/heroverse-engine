@@ -3429,6 +3429,33 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E252",
+   "date": "2026-11-01",
+   "class": [
+    "env-vs-test"
+   ],
+   "error": "The token-budget PreToolUse/UserPromptSubmit hook ran migration/ops/token_budget.py by a relative path; when the production routine's working directory moved to migration/, every tool call was refused, so genesis-10 was not produced (no credit spent).",
+   "fix": "Both hook commands run the script through \"$CLAUDE_PROJECT_DIR/...\", so the guard works from any working directory.",
+   "prior": [
+    "E105",
+    "E116",
+    "E118",
+    "E137",
+    "E141",
+    "E168",
+    "E206",
+    "E210",
+    "E217"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_token_budget.py",
+    "contains": "def test_e252_hook_runs_from_any_working_directory",
+    "covers": [
+     "env-vs-test"
+    ]
+   }
   }
  ]
 }
