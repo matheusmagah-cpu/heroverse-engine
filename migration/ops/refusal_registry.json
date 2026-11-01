@@ -2789,6 +2789,10 @@
    "class": "I",
    "guard": "migration/production/bible/test_long_first.py::def test_materialize_and_verify",
    "note": "E259: the upload rechecks the long-first pilot's plan, build report and handoff files; a changed binding cannot publish"
+  },
+  "STILL_MOTION_DIRECTION_MISSING": {
+   "class": "I",
+   "guard": "migration/production/test_motion.py::def test_a_long_first_approval_renders_only_a_direction"
   }
  },
  "review": {

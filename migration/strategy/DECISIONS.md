@@ -328,3 +328,14 @@ Pacing: a 10-min long uses about 25–30 stills, and each still carries 15–20 
 - eased push-in, pull-back, pan and tilt;
 - atmosphere layers (dust, embers, mist, rain, water shimmer, light rays).
 These are built in the edit at zero cost. No fast cutting.
+
+## 2026-11-01 — Cinematic still animation: the move follows the need (owner)
+
+The owner, on the long-first longs of few stills (about 25–30, each 15–20 s on screen, so the picture is not cut fast):
+"it cannot be rigid; it has to animate according to need; make it really well". Every approved still had received the
+same centred push-in. Decision (E261): `motion.py`'s cinematic engine directs each still from its beat, the prompt's
+emotion, its spoken span and the picture (face, saliency, Depth Anything V2 depth, sky, water, fire), with keyframed,
+eased moves (push, pull, pans, tilts, a pan that lands on a face, drift, 2.5D parallax, a hold before the KJV line) and
+procedural atmosphere, never the same move twice in a row, the subject inside the centre 9:16 band for the Short cuts,
+bit-exact, at zero cost on the Actions CPU. A plan may override the move and atmosphere per shot; the chosen move and its
+reason are recorded for the reviewer. The Short route keeps its push-in. The watched long remains the judge.
