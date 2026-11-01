@@ -1054,7 +1054,7 @@ class SpeechStockPolicy(unittest.TestCase):
             self.assertEqual(ss.source_policy_problems(p), [])
             for s in p["shots"]:
                 if s.get("window_of") is None:
-                    self.assertEqual(ss.stock_required(p, s), not plan_check.talking(s))
+                    self.assertEqual(ss.stock_required(p, s), not plan_check.talking(s) and not ss.pavo_hook(p, s))
 
 
 class FootageSeen(unittest.TestCase):
@@ -1097,6 +1097,20 @@ class FootageSeen(unittest.TestCase):
         with self.assertRaises(SystemExit) as err:
             self.seen()
         self.assertTrue(str(err.exception).startswith("FOOTAGE_NOT_VETTED"))
+
+
+class PavoHook(unittest.TestCase):
+    """E245: only the plan's first shot, and only with pavo_hook, may take new Pavo video under pavo_speech_stock."""
+    def test_the_first_shot_with_the_flag_is_not_stock_required_and_nothing_else_is(self):
+        p = plan()
+        p["source_policy"] = "pavo_speech_stock"
+        p["shots"] = [s for s in p["shots"] if s["id"] in ("s-god", "s-river", "s-pair")]
+        self.assertTrue(ss.stock_required(p, p["shots"][1]))
+        ss.require_pavo_generation(p, ["s-god"]) if not ss.stock_required(p, p["shots"][0]) else None
+        p["shots"][0]["pavo_hook"] = True
+        self.assertFalse(ss.stock_required(p, p["shots"][0]))
+        p["shots"][1]["pavo_hook"] = True   # not the first shot: no exemption
+        self.assertTrue(ss.stock_required(p, p["shots"][1]))
 
 
 class BuzzySource(unittest.TestCase):
