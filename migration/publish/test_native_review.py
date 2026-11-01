@@ -46,9 +46,21 @@ class Review(unittest.TestCase):
         self.assertGreaterEqual(n.FILE_POLLS * 10, 30 * 60)
         self.assertLess(n.FILE_POLLS * 10, 40 * 60)   # inside the workflow's 45 min
 
+    def test_e250_buzzy_prompt_is_a_defect_finder_and_the_default_prompt_is_unchanged(self):
+        base, buzzy = n.prompt(174.4), n.prompt(174.4, 'buzzy')
+        self.assertEqual(base, n.prompt(174.4, None))
+        self.assertIn('Owner publication floor is overall 9.5', base)
+        self.assertNotIn('Owner publication floor', buzzy)
+        self.assertNotIn('Anchors:', buzzy)
+        for marker in ('[a] speech cut off mid-word or mid-sentence', '[b] a scene that does not match its spoken line',
+                       '[c] audio errors', '[d] captions out of sync', '[e] policy problems', '[f] broken or glitched',
+                       '[info]', 'Still return the rubric scores'):
+            self.assertIn(marker, buzzy)
+        self.assertEqual(n.track_for(Path('/nonexistent.json')), None)
+
     def test_e242_buzzy_plan_floor_is_8_and_the_default_stays_9_5(self):
         with tempfile.TemporaryDirectory() as d:
-            for name, track, want in (('a.json', 'buzzy', 8.0), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):
+            for name, track, want in (('a.json', 'buzzy', 0.0), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):
                 Path(d, name).write_text(json.dumps({'track': track} if track else {}))
                 self.assertEqual(n.floor_for(Path(d, name)), want)
             self.assertEqual(n.floor_for(Path(d, 'missing.json')), 9.5)

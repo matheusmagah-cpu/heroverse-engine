@@ -114,8 +114,14 @@ SHORT_FLOOR = 9.5
 # E242 (owner, 2026-10-31, PR #599): a record with "track": "buzzy" (Short made with Buzzy clips) is reviewed at
 # overall 8.0 with every rubric item >= 7 (review.scores); the default track keeps 9.5. Reviewer, sha binding, issues,
 # hard refusals and frozen QA are the same on both tracks.
-TRACK_FLOORS = {"buzzy": 8.0}
-TRACK_ITEM_FLOOR = 7
+# E250 (owner, 2026-11-01, DECISIONS.md): the buzzy track is gated on defects, not scores. The native review is a defect
+# finder; the record carries review.publish_decision {"decision": "publish", "by": "claude-session-reviewer", "note"}
+# and review.defects [{"issue": index, "category": "a".."f"|"info", "resolved": bool}]. Categories a (speech cut off),
+# b (scene does not fit its line / story order) and e (policy) refuse while unresolved. Every other track keeps 9.5.
+BUZZY_TRACKS = ("buzzy",)
+BUZZY_BLOCKING = ("a", "b", "e")
+BUZZY_CATEGORIES = ("a", "b", "c", "d", "e", "f", "info")
+BUZZY_DECIDER = "claude-session-reviewer"
 RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 
@@ -138,25 +144,43 @@ def buzzy_shot_problems(episode, shots_dir=None, ledger=None):
     return ["TRACK_BUZZY_WITHOUT_BUZZY_SHOT"]
 
 
+def buzzy_decision_problems(review):
+    """E250: the buzzy gate. A designated reviewer's publish decision with a note, and no unresolved cut-off speech (a),
+    scene/story-order mismatch (b) or policy problem (e). Scores are information and gate nothing."""
+    out = []
+    decision = review.get("publish_decision")
+    if not (isinstance(decision, dict) and decision.get("decision") == "publish"
+            and decision.get("by") == BUZZY_DECIDER
+            and isinstance(decision.get("note"), str) and decision["note"].strip()):
+        out.append("REVIEW_DECISION_MISSING")
+    issues = review.get("issues") if isinstance(review.get("issues"), list) else []
+    defects = review.get("defects")
+    if not isinstance(defects, list) or not all(
+            isinstance(d, dict) and d.get("category") in BUZZY_CATEGORIES and type(d.get("resolved")) is bool
+            and type(d.get("issue")) is int and 0 <= d["issue"] < len(issues) for d in defects):
+        return out + ["REVIEW_DEFECTS_INVALID"]
+    if any(d["category"] in BUZZY_BLOCKING and not d["resolved"] for d in defects):
+        out.append("REVIEW_DEFECT_UNRESOLVED")
+    classified = {d["issue"] for d in defects}
+    if len(classified) != len(defects) or classified != set(range(len(issues))):
+        out.append("REVIEW_DEFECTS_INVALID")   # every listed issue is classified exactly once
+    return out
+
+
 def review_problems(episode, shots_dir=None, ledger=None):
     review = episode.get("review")
     if not isinstance(review, dict):
         return ["REVIEW_MISSING"]
     out = []
     track = episode.get("track")
-    if track is not None and track not in TRACK_FLOORS:
+    if track is not None and track not in BUZZY_TRACKS:
         out.append("TRACK_UNKNOWN")
-    floor = TRACK_FLOORS.get(track, SHORT_FLOOR)
-    overall = review.get("overall")
-    if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not floor <= overall <= 10:
-        out.append("REVIEW_BELOW_FLOOR")
-    if track in TRACK_FLOORS:
-        out += buzzy_shot_problems(episode, shots_dir, ledger)
-        scores = review.get("scores")
-        if not (isinstance(scores, dict) and all(
-                not isinstance(scores.get(k), bool) and isinstance(scores.get(k), (int, float))
-                and TRACK_ITEM_FLOOR <= scores[k] <= 10 for k in RUBRIC)):
-            out.append("REVIEW_ITEM_BELOW_FLOOR")
+    if track in BUZZY_TRACKS:
+        out += buzzy_shot_problems(episode, shots_dir, ledger) + buzzy_decision_problems(review)
+    else:
+        overall = review.get("overall")
+        if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not SHORT_FLOOR <= overall <= 10:
+            out.append("REVIEW_BELOW_FLOOR")
     if review.get("reviewer") not in SHORT_REVIEWERS:
         out.append("REVIEW_REVIEWER_NOT_DESIGNATED")
     if review.get("output_sha256") != episode.get("output_sha256"):
