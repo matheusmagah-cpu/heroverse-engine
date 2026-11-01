@@ -47,3 +47,7 @@ ark shots s-wind/s-fountains draw a rounded hull with a cabin, against the box c
 STOPPED at s-ararat: the ChatGPT app showed the Codex/Work usage limit ("Voce esgotou o uso do Codex e do Work", reset 4 Nov
 07:01) after a queue script mis-typed into the Work composer; not worked around. Resume: check the Chat tab can still make
 images, then `C:\HeroVerse\one.ps1 -still <id>` per still (send, wait, save, upload candidate). Nothing approved, built or published.
+
+Relayed by the coordinator session (owner preference, not yet confirmed by the owner in this run): use ONE ChatGPT chat named
+"HeroVerse — stills" for all stills (create it once, send every prompt in it, download from each reply, same style line);
+do not delete existing chats. `one.ps1`/`send.ps1` still open a new chat per still and must change before resuming.
