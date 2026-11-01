@@ -41,6 +41,21 @@ class Review(unittest.TestCase):
         with self.assertRaises(n.Refusal):
             n.reject_duplicate(i, runs, 3, '1', 1, [])
 
+    def test_e257_a_guard_refused_run_does_not_block_a_first_submission(self):
+        i = {'plan': 'migration/production/bible/compilations/c.json', 'sha256': 'b' * 64}
+        t = n.title(i)
+        refused = {'id': 1, 'display_title': t, 'status': 'completed', 'conclusion': 'failure'}
+        job = {'jobs': [{'steps': [{'name': 'Open one private resumable upload session', 'status': 'completed', 'conclusion': 'skipped'}]}]}
+        opened = {'jobs': [{'steps': [{'name': 'Open one private resumable upload session', 'status': 'completed', 'conclusion': 'success'}]}]}
+        env = {'GITHUB_REPOSITORY': 'matheusmagah-cpu/heroverse-engine', 'GITHUB_REF': 'refs/heads/main',
+               'GITHUB_RUN_ID': '2', 'GITHUB_RUN_ATTEMPT': '1', 'GH_TOKEN': 'x'}
+        runs = {'workflow_runs': [refused, {'id': 2, 'display_title': t}]}
+        with patch.dict(os.environ, env), patch.object(n, 'github_read', side_effect=lambda p: runs if 'workflows' in p else job):
+            n.guard(i)   # the refused run never uploaded: the first submission goes ahead
+        with patch.dict(os.environ, env), patch.object(n, 'github_read', side_effect=lambda p: runs if 'workflows' in p else opened):
+            with self.assertRaises(n.Refusal):
+                n.guard(i)   # a run that opened an upload still blocks
+
     def test_e246_the_provider_file_wait_covers_a_slow_processing_of_a_full_master(self):
         # genesis-09 round 2 (run 41262411652): the file was still PROCESSING after the old 15 min wait
         self.assertGreaterEqual(n.FILE_POLLS * 10, 30 * 60)

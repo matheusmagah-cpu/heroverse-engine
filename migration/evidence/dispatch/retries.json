@@ -12,6 +12,10 @@
   {
    "run": 41270806198,
    "reason": "No code at fault (E248): the caller never sent the master bytes to the run's saved resumable upload_url, so the provider had no file and 'Await exact-byte upload' timed out (receipt status AWAITING_EXACT_BYTES). The exact 100766072 bytes (sha 57e8768c...1829) were sent to that upload_url at 04:30Z 2026-11-01 (HTTP 200, state PROCESSING, size matches); the resume reuses that upload."
+  },
+  {
+   "run": 41318954228,
+   "reason": "Fixed in this PR (E257): native_review.guard refused the first submission of the arc-02 compilation master because run 41318103408, refused by the dispatch guard before any provider call, carried the same title. The run itself failed at that guard step, before any upload or inference."
   }
  ]
 }
