@@ -1,0 +1,79 @@
+{
+ "output_sha256": "037c0142c34a869c6118f2e71ea76369196f76e14f16cae42df3a5fc2cbecf04",
+ "segments": [
+  {
+   "kind": "hook",
+   "name": "hook",
+   "seconds": 12.552,
+   "start": 0.0,
+   "end": 12.552
+  },
+  {
+   "kind": "card",
+   "name": "genesis-06-short",
+   "seconds": 2.5,
+   "start": 12.552,
+   "end": 15.052
+  },
+  {
+   "kind": "short",
+   "name": "genesis-06-short",
+   "seconds": 85.539,
+   "source_sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+   "start": 15.052,
+   "end": 100.591
+  },
+  {
+   "kind": "card",
+   "name": "genesis-07-short",
+   "seconds": 2.5,
+   "start": 100.591,
+   "end": 103.091
+  },
+  {
+   "kind": "short",
+   "name": "genesis-07-short",
+   "seconds": 173.803,
+   "source_sha256": "da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea",
+   "start": 103.091,
+   "end": 276.894
+  },
+  {
+   "kind": "card",
+   "name": "genesis-08-short",
+   "seconds": 2.5,
+   "start": 276.894,
+   "end": 279.394
+  },
+  {
+   "kind": "short",
+   "name": "genesis-08-short",
+   "seconds": 175.11,
+   "source_sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+   "start": 279.394,
+   "end": 454.504
+  },
+  {
+   "kind": "card",
+   "name": "genesis-09-short",
+   "seconds": 2.5,
+   "start": 454.504,
+   "end": 457.004
+  },
+  {
+   "kind": "short",
+   "name": "genesis-09-short",
+   "seconds": 174.81,
+   "source_sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+   "start": 457.004,
+   "end": 631.814
+  },
+  {
+   "kind": "close",
+   "name": "close",
+   "seconds": 10.44,
+   "start": 631.814,
+   "end": 642.254
+  }
+ ]
+}
