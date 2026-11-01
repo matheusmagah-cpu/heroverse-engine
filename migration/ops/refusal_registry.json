@@ -2666,11 +2666,6 @@
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
    "note": "E235: check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
   },
-  "REVIEW_ITEM_BELOW_FLOOR": {
-   "class": "A",
-   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
-   "note": "E242: Buzzy track (owner 2026-10-31): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
-  },
   "TRACK_UNKNOWN": {
    "class": "A",
    "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
@@ -2727,6 +2722,21 @@
   "THUMB_GRADE_OUT_OF_BOUNDS": {
    "class": "N",
    "why": "thumbs.py finalize, a local review tool run after the generation: the colour grade the reviewer chose for the candidate picture is refused by thumbs.grade_problems before anything is recorded (no generation is redone; E241); publish_problems re-checks the recorded grade as THUMB_NOT_APPROVED: a factor outside 1.0 .. GRADE_MAX (saturation 1.6, contrast 1.2)"
+  },
+  "REVIEW_DECISION_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E250: Buzzy track defect gate (owner 2026-11-01): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_DEFECTS_INVALID": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E250: Buzzy track defect gate (owner 2026-11-01): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
+  },
+  "REVIEW_DEFECT_UNRESOLVED": {
+   "class": "A",
+   "early": "migration/production/bible/episode_preflight.py::plan_check.publish_episode.problems(episode, video)",
+   "note": "E250: Buzzy track defect gate (owner 2026-11-01): check-record (episode_build.py -> publish_episode.problems) refuses it before publish-episode.yml is dispatched; the same function runs again at upload"
   }
  },
  "review": {
