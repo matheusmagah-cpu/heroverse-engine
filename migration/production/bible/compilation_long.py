@@ -98,6 +98,9 @@ def plan_problems(plan, episodes=EPISODES, root=ROOT):
             bad.append(f"{c['short']} is not a public Short with a master sha256")
         if not all(isinstance(c.get(k), str) and c[k].strip() for k in ("title", "reference")):
             bad.append(f"{c['short']} chapter needs title and reference")
+        end = c.get("end_s")   # E254: cut the Short's own series CTA ("the full story is in the long video", "part N tomorrow")
+        if end is not None and not (type(end) in (int, float) and 10 <= end < float(ep.get("seconds") or 0)):
+            bad.append(f"{c['short']} end_s must be a number from 10 s up to the Short's length")
     if parts != sorted(parts) or len(set(parts)) != len(parts) or any(b - a != 1 for a, b in zip(parts, parts[1:])):
         bad.append("shorts are not consecutive parts in canonical order")
     for key in ("hook", "close"):
@@ -157,13 +160,14 @@ def fades(d):
             f"afade=t=in:st=0:d={FADE},afade=t=out:st={max(d - FADE, 0):.3f}:d={FADE}")
 
 
-def render_short(src, out):
-    d = duration(src)
+def render_short(src, out, end=None):
+    d = duration(src) if end is None else min(duration(src), float(end))
     v, a = fades(d)
     graph = (f"[0:v]split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=40:6,"
              f"eq=brightness=-0.28[bg];[b]scale=-2:{H}[fg];[bg][fg]overlay=(W-w)/2:0,setsar=1,{v}[v];"
              f"[0:a]aresample=48000,aformat=channel_layouts=stereo,{gain_filter(src)},{a}[a]")
-    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", src, "-filter_complex", graph, "-map", "[v]", "-map", "[a]", *ENC, out])
+    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", src, "-filter_complex", graph, "-map", "[v]", "-map", "[a]",
+         "-t", f"{d:.3f}", *ENC, out])
 
 
 def render_card(kind_text, out):
@@ -247,8 +251,8 @@ def build(plan_path, src_dir, out_dir):
         c = plan["chapters"][k - 1]
         render_card((f"PART {k} OF {len(plan['chapters'])}", c["title"], c["reference"] + " (KJV)"), seg / f"{k:02d}a-card.mp4")
         add("card", sid, seg / f"{k:02d}a-card.mp4")
-        render_short(master, seg / f"{k:02d}b-short.mp4")
-        add("short", sid, seg / f"{k:02d}b-short.mp4", source_sha256=sha)
+        render_short(master, seg / f"{k:02d}b-short.mp4", c.get("end_s"))
+        add("short", sid, seg / f"{k:02d}b-short.mp4", source_sha256=sha, **({"end_s": c["end_s"]} if c.get("end_s") else {}))
     render_keeper(ROOT / plan["close"]["video"], ROOT / plan["close"]["audio"], seg / "99-close.mp4")
     add("close", "close", seg / "99-close.mp4")
     lst = out / "concat.txt"

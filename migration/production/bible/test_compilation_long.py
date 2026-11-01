@@ -49,6 +49,16 @@ class PlanTests(unittest.TestCase):
             mutate(p)
             self.assertTrue(any(text in x for x in cl.plan_problems(p)), text)
 
+    def test_e254_each_chapter_cuts_the_shorts_own_series_cta(self):
+        plan = cl.load(PLAN)
+        for c in plan["chapters"]:   # the Shorts close with "the full story is in the long video" / "part N tomorrow"
+            self.assertIsInstance(c.get("end_s"), (int, float), c["short"])
+        self.assertNotIn("FULL STORY", json.dumps(plan["thumbnail"]).upper())   # Genesis 5-7 is not the full story
+        for bad in (5, 10_000, "70"):
+            p = copy.deepcopy(plan)
+            p["chapters"][0]["end_s"] = bad
+            self.assertTrue(any("end_s" in x for x in cl.plan_problems(p)), bad)
+
     def test_sources_are_the_episode_records_masters(self):
         for sid, asset, sha, ep in cl.sources(cl.load(PLAN)):
             self.assertEqual(asset, f"bible-{sid}-sha256-{sha}.mp4")
