@@ -304,3 +304,20 @@ the long's mined opening (evidence/vidiq/20261101/compilation-hook-mining.json) 
   critique).
 - The weekly mining measures these emotional devices in winners against weak contrasts. A device changes only with
   validated evidence: ≥6 winners from ≥4 channels.
+
+## 2026-11-01 — Stills: Pavo agnes-image replaces FLUX as the primary source
+
+Owner: "Troca ele, acha outro. Não podemos depender dele." The Cloudflare FLUX free allocation (10,000 neurons a day)
+was used up by another consumer of the account before the project made a single image (scene-stills run 41339130885,
+E260 detail cf4006). So FLUX can no longer be the primary still source.
+
+- Primary: Pavo agnes-image through `scene_stills.py prepare … --engine pavo` (E122 route; provenance in each
+  candidate's sidecar). Each still needs a fresh exact quote of 0 credits ("zero_cost_confirmed": true). It also takes
+  approved reference images (characters, props), so the same Noah appears in every scene. Measured 2026-11-01: hd
+  16:9 at 2624x1472, quote 0, account balance unchanged at 1,474 (conversation 375358832676964992). The emotion and
+  light were good enough for publication.
+- Second: FLUX via scene-stills.yml, only when it has allocation left. It is a bonus, never a dependency.
+- Last: Buzzy images (about 6 credits each) inside the ≤100-a-day average.
+- If a Pavo still quote is ever above 0, the request is refused and reported (the tool does this), and the next
+  source is used. A Pavo free limit has not been measured yet: the first runs record how many 0-credit stills a day
+  are accepted.
