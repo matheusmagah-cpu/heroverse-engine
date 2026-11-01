@@ -1,0 +1,274 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-09-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 9,
+ "passage": "Genesis 7 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+ "seconds": 174.79,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-11-01T13:30:00Z",
+ "narration": [
+  {
+   "kind": "scripture",
+   "speaker": "god",
+   "reference": "Genesis 7:4 (KJV)",
+   "text": "For yet seven days, and I will cause it to rain upon the earth forty days and forty nights;"
+  },
+  {
+   "kind": "story",
+   "text": "Seven days before the rain, the ark stood finished on the hillside, its door wide open, and the whole valley was still laughing at it."
+  },
+  {
+   "kind": "story",
+   "text": "One week of warning. One open door, and room inside. Would anyone outside believe it before the sky broke?"
+  },
+  {
+   "kind": "scripture",
+   "text": "There went in two and two unto Noah into the ark, the male and the female, as God had commanded Noah.",
+   "reference": "Genesis 7:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "They descended from the mountains by themselves. Lions beside frightened sheep. Birds in pairs settling along the roof. Nobody herded them."
+  },
+  {
+   "kind": "story",
+   "text": "The crowd stopped laughing for a moment. Then the loudest of them shrugged, and the music in the camps started again."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah went in, and his sons, and his wife, and his sons’ wives with him, into the ark, because of the waters of the flood.",
+   "reference": "Genesis 7:7 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "and the Lord shut him in.",
+   "reference": "Genesis 7:16 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "And once that door was shut, no hand on earth could open it again, not even Noah's."
+  },
+  {
+   "kind": "scripture",
+   "text": "the same day were all the fountains of the great deep broken up, and the windows of heaven were opened.",
+   "reference": "Genesis 7:11 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Water from below and water from above. The ground split, springs burst through the camps, and the rain did not stop, day or night."
+  },
+  {
+   "kind": "story",
+   "text": "Now the whole valley stampeded toward higher ground, dragging children and animals up the slopes. And the men who had laughed the loudest ran first."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the flood was forty days upon the earth; and the waters increased, and bare up the ark, and it was lift up above the earth.",
+   "reference": "Genesis 7:17 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The ark that sat in the dust for years groaned, lifted, and floated free. Fists pounded on its hull as it drifted away from them."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the waters prevailed exceedingly upon the earth; and all the high hills, that were under the whole heaven, were covered.",
+   "reference": "Genesis 7:19 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Hill after hill went under. The last of the people crowded onto one bare peak, and still the cold water kept climbing."
+  },
+  {
+   "kind": "story",
+   "text": "On the last rock, a man who had laughed for years watched the ark he mocked float past him in the rain."
+  },
+  {
+   "kind": "scripture",
+   "text": "and Noah only remained alive, and they that were with him in the ark.",
+   "reference": "Genesis 7:23 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And the waters prevailed upon the earth an hundred and fifty days.",
+   "reference": "Genesis 7:24 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Inside, eight people and a vessel full of animals, alone on an ocean with no shoreline. The door that was shut had held."
+  },
+  {
+   "kind": "insight",
+   "text": "Most miss this: after the ark was finished, God gave seven more days with the door open. And Noah never shut it. The Lord did."
+  },
+  {
+   "kind": "cta",
+   "text": "If that door were open today, who would you call inside? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "Follow the full story as this series continues. Next, part ten: The dove and the olive leaf."
+  }
+ ],
+ "scripture": [
+  {
+   "reference": "Genesis 7:4 (KJV)",
+   "text": "For yet seven days, and I will cause it to rain upon the earth forty days and forty nights;"
+  },
+  {
+   "reference": "Genesis 7:9 (KJV)",
+   "text": "There went in two and two unto Noah into the ark, the male and the female, as God had commanded Noah."
+  },
+  {
+   "reference": "Genesis 7:7 (KJV)",
+   "text": "And Noah went in, and his sons, and his wife, and his sons’ wives with him, into the ark, because of the waters of the flood."
+  },
+  {
+   "reference": "Genesis 7:16 (KJV)",
+   "text": "and the Lord shut him in."
+  },
+  {
+   "reference": "Genesis 7:11 (KJV)",
+   "text": "the same day were all the fountains of the great deep broken up, and the windows of heaven were opened."
+  },
+  {
+   "reference": "Genesis 7:17 (KJV)",
+   "text": "And the flood was forty days upon the earth; and the waters increased, and bare up the ark, and it was lift up above the earth."
+  },
+  {
+   "reference": "Genesis 7:19 (KJV)",
+   "text": "And the waters prevailed exceedingly upon the earth; and all the high hills, that were under the whole heaven, were covered."
+  },
+  {
+   "reference": "Genesis 7:23 (KJV)",
+   "text": "and Noah only remained alive, and they that were with him in the ark."
+  },
+  {
+   "reference": "Genesis 7:24 (KJV)",
+   "text": "And the waters prevailed upon the earth an hundred and fifty days."
+  }
+ ],
+ "review": {
+  "overall": 6.8,
+  "reviewer": "gemini-3.8-flash",
+  "output_sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+  "scores": {
+   "opening_and_promise": 7.0,
+   "picture_quality": 6.8,
+   "figure_and_background_integrity": 6.5,
+   "captions_readable_and_synced": 7.1,
+   "audio_clarity_and_mix": 7.2,
+   "pacing_and_visual_variety": 6.9,
+   "scripture_on_screen": 6.0,
+   "policy_safe": 7.4
+  },
+  "issues": [
+   "00:00 - 00:06: Scripture text is integrated into standard captions without distinct typographic styling or chapter/verse citation.",
+   "00:30 - 00:41: Minor AI anatomical blending on walking lions and sheep paws/limbs.",
+   "01:39 - 01:48: Hands pounding ark hull exhibit slight AI warping against water surface.",
+   "02:39 - 02:54: Presenter speaking has slightly unnatural AI lip generation and temporal flickering around beard."
+  ],
+  "defects": [
+   {
+    "issue": 0,
+    "category": "d",
+    "resolved": false
+   },
+   {
+    "issue": 1,
+    "category": "info",
+    "resolved": false
+   },
+   {
+    "issue": 2,
+    "category": "info",
+    "resolved": false
+   },
+   {
+    "issue": 3,
+    "category": "info",
+    "resolved": false
+   }
+  ],
+  "publish_decision": {
+   "decision": "publish",
+   "by": "claude-session-reviewer",
+   "note": "Defect list of native review 41275081559: no speech cut off mid-word or mid-sentence, no scene that mismatches its line or breaks story order (contact sheet and the plan's shot-to-line map checked on this exact master), no audio error (max -1.4 dB, -14.6 LUFS, no unexpected black), no policy issue. The four issues are scripture styling (d, informational, fixed for the next Shorts by E249) and mild AI artifacts (info). Owner order of 2026-11-01 to publish."
+  },
+  "process": "native-review.yml run 41275081559 (native Gemini review of this exact master: native audio and video, 4 fps sampling, status EVIDENCE_COMPLETE, public evidence artifact native-review-public-evidence, receipt run 41270806198) of the master built by episode.yml run 41266581173 from plan genesis-09-short; reviewer gemini-3.8-flash; E250 defect-finder gate (owner 2026-11-01). Scores are information; limitations: sampled at 4 fps.",
+  "run_id": "41275081559"
+ },
+ "title": "Seven Days Before the Rain 🌧️ | The Flood Begins, Bible Story (KJV) #shorts",
+ "description": "Genesis 7, the flood begins, read from the King James Version. Part 9 of a journey through the whole Bible, one story at a time.\n\nLord, thank You for the open door of Your mercy. Help me call others inside while there is time. Type Amen if you prayed this with me 🙏\n\nPart 8: Noah builds the ark. Next: Part 10, the dove and the olive leaf.\n\nScripture: King James Version (public domain).\nVisuals: AI-generated scenes (Buzzy, Pavo, GPT-image stills with camera motion). Narration: AI voice. Music: original, owned.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "noah",
+  "noahs ark",
+  "genesis 7",
+  "the flood",
+  "noah and the flood",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts",
+  "bible stories"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 9 of the whole Bible, one story at a time. If that door were open today, who would you call inside? Part 10 next: the dove and the olive leaf 🕊️",
+ "sources": {
+  "voice": "engine Kokoro v1.0 am_michael (the Keeper's narration) and am_onyx (God's voice-over lines), hash-pinned",
+  "music": "original-rest-music.lossless.flac (owned)",
+  "ai_video": [
+   "k-close (Keeper/God shot, source None, sha256 454a7e4cacb5)",
+   "k-insight (Buzzy dreamina-seedance-2-0-mini image-to-video from its approved still, task gt_auZ_fr1DWkQZNR0UauZ_izoOuNSwEkbP, clip sha256 705a16892b12)",
+   "k-question (genesis-08's released Pavo clip, used as is, sha256 0977ad37cde5)",
+   "s-climb (approved scene still with camera motion)",
+   "s-drift (approved scene still with camera motion)",
+   "s-enter (approved scene still with camera motion)",
+   "s-finished (approved scene still with camera motion)",
+   "s-fists (Buzzy dreamina-seedance-2-0-mini image-to-video from its approved still, task gt_auZ_fr1DWkQZNR0UauZ_iDoOuNSwEkbL, clip sha256 d1a161707c75)",
+   "s-float (approved scene still with camera motion)",
+   "s-hills (approved scene still with camera motion)",
+   "s-lions (Buzzy dreamina-seedance-2-0-mini image-to-video from its approved still, task gt_auZ_fr1DWkQZNR0UauZ_hToOuNSwEkbJ, clip sha256 013e336b5296)",
+   "s-music (approved scene still with camera motion)",
+   "s-noah-door (approved scene still with camera motion)",
+   "s-noah-lamp (approved scene still with camera motion)",
+   "s-pairs (Buzzy dreamina-seedance-2-0-mini image-to-video from its approved still, task gt_auZ_fr1DWkQZNR0UauZ_fitvVFg7Xi17, clip sha256 536f2871b530)",
+   "s-peak-crowd (approved scene still with camera motion)",
+   "s-rock (approved scene still with camera motion)",
+   "s-shut (approved scene still with camera motion)",
+   "s-sky (approved scene still with camera motion)",
+   "s-springs (approved scene still with camera motion)",
+   "s-voice (Keeper/God shot, source None, sha256 841f4d9c023c)",
+   "s-windows (approved scene still with camera motion)"
+  ],
+  "stock": "none",
+  "compose": "migration/production/bible/short_engine.py (episode_build.py compose, episode.yml run 41266581173)",
+  "release_asset": "v0.0.0-cloud-assets-20261025/bible-genesis-09-short-sha256-57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829.mp4",
+  "report": "migration/evidence/episodes/genesis-09-short/report-41266581173.json"
+ },
+ "credits": {
+  "vidiq": 0,
+  "pavo": 0
+ },
+ "attributes": {
+  "hook_type": "god_voice_cold_open",
+  "hook_line": "For yet seven days, and I will cause it to rain upon the earth forty days and forty nights",
+  "title_pattern": "hook_emoji_pipe_story_kjv",
+  "first_visual": "storm_over_finished_ark",
+  "ai_scenes": 22,
+  "slot_utc": "13:30",
+  "transition": "cut",
+  "seconds": 174.79,
+  "voice": "kokoro_am_michael",
+  "compose": "engine",
+  "structure": "bible-story-short"
+ },
+ "track": "buzzy",
+ "video_id": "IYSxVKTikSs"
+}

@@ -167,8 +167,11 @@ def receive(i, root, receipt, legacy):
             cipher = base64.b64decode(encoded.strip(), validate=True)
             r = decrypt_receipt(root, cipher)
             check_receipt(i, r)
-            need(r['prompt_sha256'] == hashlib.sha256(legacy.prompt(r['duration_seconds']).encode()).hexdigest(),
-                 'RECOVERY_PROMPT_CHANGED')
+            known = {hashlib.sha256(legacy.prompt(r['duration_seconds']).encode()).hexdigest()}
+            track = legacy.track_for(i['plan']) if hasattr(legacy, 'track_for') else None
+            if track:   # E250: a buzzy run submitted after the defect-finder prompt; earlier runs used the base prompt
+                known.add(hashlib.sha256(legacy.prompt(r['duration_seconds'], track).encode()).hexdigest())
+            need(r['prompt_sha256'] in known, 'RECOVERY_PROMPT_CHANGED')
             # Import only known fields; no caller-supplied score, response or approval survives.
             keys = ('version','run_id','plan','model','output_sha256','provider_sha256','byte_size',
                     'status','interaction_id','file_name','file_uri','prompt_sha256','coverage',

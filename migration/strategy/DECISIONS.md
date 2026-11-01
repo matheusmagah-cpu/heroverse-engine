@@ -62,3 +62,42 @@ immediately without waiting for an audience experiment. Frozen criteria are not 
 Update the relevant current guide when a valid owner decision changes behavior. Remove the superseded instruction
 instead of appending its contradiction. Keep receipts, source approvals, revocations, QA and idempotency history;
 a record is not obsolete merely because it is old.
+
+## Buzzy track: defect-finder review and the posting flow (owner, 2026-11-01; E250)
+
+Owner: "já tem vídeo pra publicar.. tem uma meta.. e tem que ser atingida". His bar for a Buzzy video is "algo
+coerente... um mínimo de aparência e uma camada de originalidade boa". The owner approved this final design: for a
+plan/record with `"track": "buzzy"` the Gemini native review is a defect finder (eyes and ears only; its prompt drops
+the 9.5 floor and score anchors and lists, with timecodes and a category, only: [a] speech cut off mid-word or
+mid-sentence; [b] a scene that does not match its line or breaks story order; [c] audio errors; [d] captions out of
+sync or unreadable; [e] policy problems; [f] broken or glitched clips; mild AI artifacts are `[info]`; it still returns
+the rubric scores, as information). Publication does not gate on scores: `publish_episode.review_problems` requires the
+same file sha, a designated reviewer, an issues list, `review.publish_decision` = `publish` by
+`claude-session-reviewer` with a note, and `review.defects` classifying every issue; an unresolved [a], [b] or [e]
+defect is refused. The Buzzy-shot ledger check, policy and frozen QA are unchanged. The image/Pavo track and every long
+keep the 9.5 prompt and floor.
+
+Hard limits of the flow, in the owner's words: "o que não pode é ter fala cortada sem sentido ou o vídeo sem
+sentido.. tem que estar bom!" (1) no line of speech cut off mid-word or mid-sentence; (2) every scene makes sense
+with the line it carries, in story order. They are the only reasons for the single fix round.
+
+His posting flow, in his words: "precisamos de fluxo de postagem.. não precisa ficar nesse preciosismo.. faz algo bom
+e sem papagaiada.. as duas ferramentas fazem vídeos bons já.. só edita.. deixa coerente.. camada de originalidade é
+autenticidade e posta." Operating flow for every Short:
+
+1. KJV script and plan.
+2. Buzzy clips on the cheapest model at >= 720p, plus Pavo for the hook and the Keeper close (exact 0-credit quote).
+3. One edit with `episode.yml`.
+4. One Gemini native review, used only to catch defects against the buzzy floor; no regeneration loops.
+5. Publish at the next slot.
+
+At most one fix round, and only for a real defect (a broken clip, an audio error, a policy problem). No rework for
+cosmetic AI artifacts.
+
+Pacing rule (owner, 2026-11-01): "Referente ao ritmo você mesmo acelera ou desacelera o vídeo criado mediante cada
+cena.. não precisa ficar fazendo e refazendo.. trabalha com o que tem.. não quero retrabalho.. faça bem os prompts e
+vamos pra cima." A clip too long or too short for its line is retimed in the edit or trimmed, never regenerated;
+quality effort goes into writing good prompts the first time. Existing support: `short_engine.speed` slows a clip up
+to `MAX_SLOW` 1.3x to fill its span (never loops), a shot may carry an explicit `speed` (1.0-1.3, `explicit_speed`),
+`src_start` trims the clip's start, `hold` freezes a talking clip's last frame (<= `HOLD_MAX` 1.3 s). Speeding a clip
+up beyond 1.0 is done by trimming (`src_start`/shorter span); a 0.75x-1.5x speed-up range is not built.

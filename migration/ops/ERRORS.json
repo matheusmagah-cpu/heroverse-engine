@@ -3359,6 +3359,30 @@
    }
   },
   {
+   "id": "E250",
+   "date": "2026-11-01",
+   "class": [
+    "threshold"
+   ],
+   "error": "The buzzy-track gate (overall 8.0, items 7, E242) scored AI-video cosmetics like the 9.5 track; genesis-09-short's complete master (run 41275081559: overall 6.8, lowest item 6.0, no cut line and no incoherent scene) could not be published although the owner's bar for Buzzy videos is 'algo coerente... um mínimo de aparência e uma camada de originalidade boa' and he ordered publication.",
+   "fix": "Owner-approved design (DECISIONS.md, 2026-11-01): for track buzzy native_review.prompt(duration, 'buzzy') asks only for categorised defects (a cut speech, b scene/story order, c audio, d captions, e policy, f broken clips, info for mild artifacts) and drops the 9.5 floor/anchors; publish_episode.review_problems gates on sha, designated reviewer, issues, a publish_decision by claude-session-reviewer with a note and classified defects, refusing unresolved a/b/e; scores gate nothing. The 9.5 prompt and floor for the default track and longs are unchanged and tested; recovery accepts the base or the track prompt hash.",
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120",
+    "E138",
+    "E242"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_publish_episode.py",
+    "contains": "def test_e250_owner_buzzy_floor_is_6_5_overall_6_per_item_and_9_5_elsewhere",
+    "covers": [
+     "threshold"
+    ]
+   }
+  },
+  {
    "id": "E249",
    "date": "2026-11-01",
    "class": [
