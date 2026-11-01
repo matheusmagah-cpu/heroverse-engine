@@ -33,19 +33,27 @@ def check(qa, approval, manifest, gate, review=None):
     version = qa.get('criteria_version')
     if version not in canonical_gate.FROZEN_CRITERIA_SHA256:
         problems.append('QA_CRITERIA_VERSION_UNKNOWN')
-    mapping = (canonical_gate.dimensions_story_v3(version) if version in canonical_gate.STORY_VERSIONS
-               else canonical_gate.DIMENSIONS_BY_VERSION.get(version, canonical_gate.DIMENSIONS))
-    required = {name: {(kind, key) for kind, keys in spec.items() for key in keys}
-                for name, spec in mapping.items()}
-    required['content_and_policy'].add(('review', 'overall'))
-    required.update({'binding': {('binding', key) for key in ('manifest', 'qa_for_this_file', 'qa_criteria_frozen', 'review_for_this_file')},
-                     'scorecard': {('score', key) for key in canonical_gate.score_hard_keys(version)},
-                     'full_file_scan': set(), 'preflight': {('preflight', 'preflight')}})
-    if version in canonical_gate.STORY_VERSIONS:
+    compilation = version == canonical_gate.COMPILATION   # E251: its own dimensions, no score rows
+    if compilation:
+        required = {name: {('qa', key) for key in keys} for name, keys in canonical_gate.COMPILATION_DIMENSIONS.items()}
+        required['defect_review'] = {('review', key) for key in canonical_gate.COMPILATION_REVIEW_ITEMS}
+        required['format'] = {('format', 'story_long')}
+        required['binding'] = {('binding', key) for key in ('manifest', 'qa_for_this_file', 'qa_criteria_frozen', 'review_for_this_file')}
+        required.update({'full_file_scan': set(), 'preflight': {('preflight', 'preflight')}})
+    else:
+        mapping = (canonical_gate.dimensions_story_v3(version) if version in canonical_gate.STORY_VERSIONS
+                   else canonical_gate.DIMENSIONS_BY_VERSION.get(version, canonical_gate.DIMENSIONS))
+        required = {name: {(kind, key) for kind, keys in spec.items() for key in keys}
+                    for name, spec in mapping.items()}
+        required['content_and_policy'].add(('review', 'overall'))
+        required.update({'binding': {('binding', key) for key in ('manifest', 'qa_for_this_file', 'qa_criteria_frozen', 'review_for_this_file')},
+                         'scorecard': {('score', key) for key in canonical_gate.score_hard_keys(version)},
+                         'full_file_scan': set(), 'preflight': {('preflight', 'preflight')}})
+    if version in canonical_gate.STORY_VERSIONS and not compilation:
         story = 'story_qa_' + version.rsplit('-', 1)[-1]
         required[story] = {(story, key) for key in canonical_gate.story_v3_rows(version)}
         required['format'] = {('format', 'story_long')}
-    if version in canonical_gate.STANDARD_VERSIONS: required.update({'structure': set(), 'authenticity': set()})
+    if version in canonical_gate.STANDARD_VERSIONS and not compilation: required.update({'structure': set(), 'authenticity': set()})
     if review is not None:
         if not isinstance(review, dict) or review.get('status') != 'PASS' or review.get('output_sha256') != hashes[0]:
             problems.append('REVIEW_NOT_PASS_FOR_THIS_FILE')
@@ -82,7 +90,14 @@ def main(pilot_dir):
         print(json.dumps({'status': 'FAIL', 'problems': ['EVIDENCE_UNREADABLE:' + type(exc).__name__]}))
         return 1
     problems = check(*docs, review=review)
-    if isinstance(docs[0], dict) and docs[0].get('criteria_version') in canonical_gate.STORY_VERSIONS:
+    if isinstance(docs[0], dict) and docs[0].get('criteria_version') == canonical_gate.COMPILATION:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production/bible'))
+        import compilation_long
+        try:
+            compilation_long.verify(d)
+        except (OSError, ValueError, KeyError, TypeError, SystemExit):
+            problems.append('COMPILATION_HANDOFF_INVALID')
+    elif isinstance(docs[0], dict) and docs[0].get('criteria_version') in canonical_gate.STORY_VERSIONS:
         # Recheck the plan/script/package/timeline/thumbnail identity at upload as well as at qualification.
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production/bible'))
         import long_handoff

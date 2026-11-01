@@ -163,3 +163,13 @@ script whose hook and close only summarize the passage is not ready.
 A compilation long gets its own new hook and new close: Keeper Pavo video (exact 0-credit quote), made for 16:9 and
 splice-ready at head and tail. The hook follows the opening structure measured from winning long Bible-story videos
 (vidIQ mining, logged). Joins must be clean (no cut speech, no pop, consistent loudness).
+
+## 2026-11-01 — Compilation long: hook, close and quality layer (owner, via coordinator)
+
+The arc-02 compilation (Shorts genesis-06 to genesis-09, Noah) gets a NEW Keeper hook and close written for the long,
+spoken by the Keeper in Pavo clips (fresh exact 0-credit quote, our Kokoro line, 16:9, still beat at each end),
+and its hook is written on the structure measured in `evidence/vidiq/20261101/compilation-hook-mining.json`
+(question that puts the viewer in the story, the stakes, the promise and scope, one marked critical insight).
+Authenticity, originality and critical insight are mandatory in the long and in the Shorts: the Keeper's voice adds an
+interpretive layer (what people miss in the text, an honest question) in KJV-faithful commentary clearly marked apart
+from scripture. The review track is the defect gate (E251), implemented as `compilation-qa-criteria-v1`.

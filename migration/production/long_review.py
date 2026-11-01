@@ -102,10 +102,35 @@ def claude_problems(review, sha):
     return problems
 
 
+def compilation_main(d, script, manifest):
+    """E251: the compilation track. The session reviewer's inspection/claude_review.json is a defect list bound to this
+    master (owner_quality_policy.compilation_problems); out/review.json is PASS only for a publish decision with no
+    unresolved [a], [b] or [e]. Scores in the file are information."""
+    sha = manifest["output_sha256"]
+    try:
+        claude = json.loads((d / CLAUDE_REVIEW).read_text())
+    except (FileNotFoundError, ValueError):
+        claude = None
+    problems = owner_quality_policy.compilation_problems(claude, sha)
+    out = {"version": "long-review-v3-compilation", "track": "compilation", "pilot_id": script["pilot_id"],
+           "output_sha256": sha, "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+    if problems:
+        out.update(status="AWAITING_REVIEW" if claude is None or "REVIEW_NOT_FOR_THIS_FILE" in problems else "FAIL",
+                   error=" ".join(problems))
+    else:
+        out.update(status="PASS", watched_review={**{k: claude.get(k) for k in (
+            "model", "issues", "defects", "publish_decision", "evidence", "strongest_moment", "reviewed_at")},
+            "overall": claude.get("overall")})
+    (d / "out" / "review.json").write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
+    print(json.dumps({"status": out["status"], "error": out.get("error")}))
+
+
 def main(pilot_dir, video_path=None):
     d = Path(pilot_dir)
     script = json.loads((d / "script.json").read_text())
     manifest = json.loads((d / "out" / "manifest.json").read_text())
+    if script.get("archetype") == "bible-compilation-long":
+        return compilation_main(d, script, manifest)
     sha = manifest["output_sha256"]
     try:
         claude = json.loads((d / CLAUDE_REVIEW).read_text())
