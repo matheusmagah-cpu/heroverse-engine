@@ -30,6 +30,7 @@ LIMIT = 150_000_000
 # overall 8.0 and every item >= 7; every other plan keeps 9.5. Nothing else about the review changes.
 TRACK_FLOORS = {'buzzy': 8.0}
 DEFAULT_FLOOR = 9.5
+FILE_POLLS = 210   # E246: 10 s each, 35 min: a 100 MB master can sit in the provider's PROCESSING state past 15 min
 
 
 def floor_for(plan_path):
@@ -295,7 +296,7 @@ def valid_duration(value):
 def file_ready(i, receipt):
     key = free_key(i)
     record = json.loads(receipt.read_text())
-    for _ in range(90):
+    for _ in range(FILE_POLLS):
         f = find_file(record, key)
         if f:
             require(re.fullmatch(r'files/[a-zA-Z0-9_-]+', f['name']), 'FILE_ID_INVALID')
