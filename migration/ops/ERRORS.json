@@ -3640,6 +3640,37 @@
      "threshold"
     ]
    }
+  },
+  {
+   "id": "E260",
+   "date": "2026-11-01",
+   "class": [
+    "silent"
+   ],
+   "error": "cf_images.run turned every Cloudflare HTTP 429 (and any body containing 'limit') into CF_DAILY_ALLOCATION_EXHAUSTED and dropped the provider's message, so scene-stills run 41331046448 reported the free FLUX allocation used up on its first request of the day, with no image made by the project that day, and nobody could tell a used-up allocation from a per-minute rate limit or another consumer of the account.",
+   "fix": "The refusal now carries the provider's own error codes and a short message with id/token-like strings redacted (cf_error_detail); 'daily free allocation'/'neurons' is named as the allocation, any other 429 as RATE_OR_QUOTA. The deferral behaviour (E62) is unchanged.",
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E165",
+    "E205",
+    "E219",
+    "E235",
+    "E237",
+    "E248"
+   ],
+   "antidote": {
+    "file": "migration/production/imagegen/test_cf_images.py",
+    "contains": "def test_e260_a_refusal_names_the_provider_code_without_ids",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

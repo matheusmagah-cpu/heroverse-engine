@@ -12,6 +12,7 @@ usage: cf_images.py PROMPTS_JSON OUT_DIR [ENGINE]
 import base64
 import io
 import json
+import re
 import os
 from pathlib import Path
 import sys
@@ -41,6 +42,21 @@ def account_id():
     return accounts[0]["id"]
 
 
+def cf_error_detail(body):
+    """E260: the provider's own error codes and a short message, with anything id- or token-like redacted, so a
+    refusal says which limit it was without echoing account data."""
+    try:
+        errs = json.loads(body).get("errors") or []
+    except (ValueError, AttributeError):
+        errs = []
+    parts = []
+    for e in errs[:3]:
+        if isinstance(e, dict):
+            text = re.sub(r"[A-Za-z0-9_-]{16,}", "[redacted]", str(e.get("message", "")))[:120]
+            parts.append(f"cf{e.get('code')}:{text}")
+    return ("detail=" + " | ".join(parts)) if parts else "detail=none"
+
+
 def run(model, payload):
     url = f"https://api.cloudflare.com/client/v4/accounts/{account_id()}/ai/run/{model}"
     req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST",
@@ -63,8 +79,12 @@ def run(model, payload):
         code = e.code
         msg = e.read(300).decode(errors="replace")
         e.close()
-        if code == 429 or "limit" in msg.lower() or "used up your daily free allocation" in msg.lower():
-            raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED HTTP_%s" % code) from None
+        detail = cf_error_detail(msg)
+        if "daily free allocation" in msg.lower() or "neurons" in msg.lower():
+            raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED HTTP_%s %s" % (code, detail)) from None
+        if code == 429 or "limit" in msg.lower():
+            # E260: a 429 is not always the daily allocation (per-minute rate limits answer 429 too); say which
+            raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED HTTP_%s RATE_OR_QUOTA %s" % (code, detail)) from None
         # Provider response bodies are not public evidence; do not put account/credential echoes in Actions logs.
         raise RuntimeError("CF_GENERATION_OUTCOME_UNCERTAIN_NO_REPLAY HTTP_%s" % code) from None
     except (TimeoutError, OSError, ValueError, TypeError):
