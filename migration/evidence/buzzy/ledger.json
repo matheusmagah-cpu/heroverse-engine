@@ -17,6 +17,12 @@
    "time_utc": "21:24",
    "credits": 42228,
    "source": "buzzy.now header, owner's browser (after the s-fists image)"
+  },
+  {
+   "date": "2026-11-01",
+   "time_utc": "14:10",
+   "credits": 41994,
+   "source": "buzzy.now header, owner's browser, read by the coordinator through Desktop Commander"
   }
  ],
  "calls": [
@@ -121,7 +127,7 @@
    "tool": "generate_video",
    "executor": "claude (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
    "authorization": "owner 2026-10-31: genesis-09-short round 2 on the Buzzy track, cap 300 credits",
-   "credits": "pending owner-browser read",
+   "credits": "~58 (234 for the 4 genesis-09 round-2 clips together, 42,228 -> 41,994; split per clip not reported)",
    "credits_note": "no balance tool exists; the owner reads the balance in the browser and fills the credits",
    "output": "720x1256 24 fps with generated ambient audio (not used: the build is silent-source)",
    "task_id": "gt_auZ_fr1DWkQZNR0UauZ_fitvVFg7Xi17",
@@ -140,7 +146,7 @@
    "tool": "generate_video",
    "executor": "claude (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
    "authorization": "owner 2026-10-31: genesis-09-short round 2 on the Buzzy track, cap 300 credits",
-   "credits": "pending owner-browser read",
+   "credits": "~58 (234 for the 4 genesis-09 round-2 clips together, 42,228 -> 41,994; split per clip not reported)",
    "credits_note": "no balance tool exists; the owner reads the balance in the browser and fills the credits",
    "output": "720x1256 24 fps with generated ambient audio (not used: the build is silent-source)",
    "task_id": "gt_auZ_fr1DWkQZNR0UauZ_hToOuNSwEkbJ",
@@ -159,7 +165,7 @@
    "tool": "generate_video",
    "executor": "claude (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
    "authorization": "owner 2026-10-31: genesis-09-short round 2 on the Buzzy track, cap 300 credits",
-   "credits": "pending owner-browser read",
+   "credits": "~58 (234 for the 4 genesis-09 round-2 clips together, 42,228 -> 41,994; split per clip not reported)",
    "credits_note": "no balance tool exists; the owner reads the balance in the browser and fills the credits",
    "output": "720x1256 24 fps with generated ambient audio (not used: the build is silent-source)",
    "task_id": "gt_auZ_fr1DWkQZNR0UauZ_iDoOuNSwEkbL",
@@ -178,7 +184,7 @@
    "tool": "generate_video",
    "executor": "claude (Claude Code subagent, session_01J6965eGRpV1J5ZDLkPxvjc)",
    "authorization": "owner 2026-10-31: genesis-09-short round 2 on the Buzzy track, cap 300 credits",
-   "credits": "pending owner-browser read",
+   "credits": "~58 (234 for the 4 genesis-09 round-2 clips together, 42,228 -> 41,994; split per clip not reported)",
    "credits_note": "no balance tool exists; the owner reads the balance in the browser and fills the credits",
    "output": "720x1256 24 fps with generated ambient audio (not used: the build is silent-source)",
    "task_id": "gt_auZ_fr1DWkQZNR0UauZ_izoOuNSwEkbP",

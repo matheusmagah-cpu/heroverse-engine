@@ -194,3 +194,34 @@ The owner asked to sustain the whole week and post more Shorts without spending 
   - the vidIQ mining runs weekly (Monday).
   GitHub Actions (heartbeat, reconcile, TikTok, links) carry the mechanical work at zero tokens.
 - Coordinator: answers the owner and failures only, with no recurring work in the long-context session.
+
+## 2026-11-01 — Resource plan: no tool runs out, quality at the peaks
+
+The owner asked for a measured budget per tool, free tools first, no tool overloaded, video where it matters and
+images animated cinematically elsewhere. Balances measured today:
+- Buzzy: 41,994 credits (header, 14:10 UTC). Seedance 2.0 mini at 720p costs ~58 credits a clip (234 for 4 clips).
+  The credits are treated as a finite stock.
+- Pavo: 1,474 credits, 0 daily free. Used only with an exact 0-credit quote, unchanged.
+- vidIQ: 3,179 credits (2,959 renewable, reset 2026-11-18).
+- Cloudflare FLUX: ~44 free images a day through `scene-stills.yml`. It runs in Actions, so it costs no Claude tokens.
+
+Per Short (3 a day):
+- Peaks in video. The 3–4 key action moments (climax, the KJV line, the turn) are Buzzy image-to-video, Seedance mini
+  720p. The cap is 240 credits a Short, so 3 Shorts a day use ≤720, which lasts ≥58 days (past the YPP window). The
+  balance is read in the owner's browser before and after each batch and written to the Buzzy ledger, so the cost is
+  measured, not estimated.
+- Pavo for 1–2 shots: the hook and/or the Keeper's close (direction and voice), at a 0-credit quote only.
+- Every other shot is a free still animated cinematically in the edit (push-in, pan, parallax, light), with no
+  generation cost:
+  - stills come first from FLUX in Actions;
+  - the owner's PC tools (AI Studio image generation, ChatGPT desktop app) are used only for a hero still FLUX cannot
+    make, because driving a desktop UI costs Claude tokens.
+- No regeneration for cosmetic artifacts. Retime, trim or replace with an animated still.
+
+Longs: compilations of the public Shorts (Actions, no generation), plus the new Pavo hook and close at a 0-credit quote.
+
+Mining: weekly (Monday), thorough, at most 900 vidIQ credits a run, so the balance lasts to the 18/11 reset. It uses
+the validated-structure rule (≥6 winners from ≥4 channels, weak contrasts). The channel's own Shorts and longs are
+read free from YouTube analytics (goal-report). Its findings change the Short and long formats only with that
+validated evidence, and the authenticity, originality and critical layer (the Keeper's interpretation) is never
+traded away for reach.
