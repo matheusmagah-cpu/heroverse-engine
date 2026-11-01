@@ -79,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -I -B migration/ops/token_budget.py check",
+            "command": "python3 -I -B \"$CLAUDE_PROJECT_DIR/migration/ops/token_budget.py\" check",
             "timeout": 20
           }
         ]
@@ -90,7 +90,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -I -B migration/ops/token_budget.py check",
+            "command": "python3 -I -B \"$CLAUDE_PROJECT_DIR/migration/ops/token_budget.py\" check",
             "timeout": 20
           }
         ]

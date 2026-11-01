@@ -182,11 +182,23 @@ class Budget(unittest.TestCase):
 
     def test_settings_wires_the_hook_on_every_tool_and_prompt(self):
         hooks = json.loads((ROOT / ".claude/settings.json").read_text())["hooks"]
-        cmd = "python3 -I -B migration/ops/token_budget.py check"
+        # E252: absolute through $CLAUDE_PROJECT_DIR, so a session whose cwd moved below the root is not blocked
+        cmd = 'python3 -I -B "$CLAUDE_PROJECT_DIR/migration/ops/token_budget.py" check'
         pre = [h for g in hooks["PreToolUse"] if g.get("matcher") == "*" for h in g["hooks"]]
         ups = [h for g in hooks["UserPromptSubmit"] for h in g["hooks"]]
         self.assertIn(cmd, [h["command"] for h in pre])
         self.assertIn(cmd, [h["command"] for h in ups])
+
+    def test_e252_hook_runs_from_any_working_directory(self):
+        hooks = json.loads((ROOT / ".claude/settings.json").read_text())["hooks"]
+        cmds = [h["command"] for k in ("PreToolUse", "UserPromptSubmit") for g in hooks[k] for h in g["hooks"]]
+        for c in cmds:
+            if "token_budget.py" in c:
+                self.assertIn("$CLAUDE_PROJECT_DIR/", c)
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(ROOT))
+        r = subprocess.run(["bash", "-c", cmds[0].replace(" check", " --help")], cwd=ROOT / "migration",
+                           env=env, capture_output=True, text=True)
+        self.assertNotIn("No such file", r.stderr)
 
 
 if __name__ == "__main__":
