@@ -31,6 +31,11 @@
    "class": "C",
    "probe": "The exported master, retimed speech timeline, SRT and their hashes are knowable only after assembly. long_handoff.input_documents is also run before voice/upscale to reject all static publication inputs (title, arc mapping, frozen criteria, approved thumbnail). Candidate artifacts are preserved on failure, and test_long_handoff mutates every source/publication witness. No missing witness becomes an approval."
   },
+  "COMPILATION_HANDOFF_INVALID": {
+   "class": "I",
+   "guard": "migration/production/bible/test_compilation_long.py::def test_refusals",
+   "note": "The upload rechecks the compilation's plan, hook/close clip shas and handoff files; a changed or missing binding cannot publish."
+  },
   "LONG_HANDOFF_INVALID": {
    "class": "I",
    "guard": "migration/production/bible/test_long_handoff.py::def test_each_publication_file_and_plan_remain_bound_and_missing_witness_fails_closed",

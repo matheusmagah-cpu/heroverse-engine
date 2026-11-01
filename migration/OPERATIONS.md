@@ -37,6 +37,14 @@ claims; do not invent an input name or a new approval format. The workflow remai
 Use the exact allowed reviewer identities and evidence in `ops/CLAUDE_REVIEW.md`.
 Only that workflow creates the long's `APPROVAL.json`. The Short uses its episode record and publisher instead.
 
+Compilation long (owner, 2026-11-01; E251): an arc's complete story assembled from its public Shorts. Plan
+`production/bible/compilations/<id>.json` → `compilation-build.yml` (`compilation_long.py`: masters by sha256, 16:9
+over a blurred fill, chapter cards, the Keeper's new hook and close from Pavo clips at an exact zero-credit quote,
+gain-only -14 LUFS, faded joins; QA `compilation-qa-criteria-v1`) → the Gemini native review as a defect finder →
+`inspection/claude_review.json` with `defects` and a `publish_decision` by `claude-session-reviewer`
+(`owner_quality_policy.compilation_problems`: no unresolved [a], [b] or [e]) → the same `approve.yml` →
+`prepublish_gate.py` → `publish.yml`. The 9.5 track of the story longs is unchanged.
+
 ## Sources and private provider work
 
 Reuse approved matching material first. Existing source tools include `shot-probe.yml`, `scene-stills.yml`,

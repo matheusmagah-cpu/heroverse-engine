@@ -1,0 +1,75 @@
+{
+ "version": "bible-compilation-plan-v1",
+ "id": "arc-02-noah-compilation",
+ "pilot": "pilot-016",
+ "status": "DRAFT 2026-11-01: owner-requested complete-story compilation of Shorts genesis-06..09 (Enoch to the flood begins). Built by compilation-build.yml; reviewed by the defect gate (E251).",
+ "title": "Noah's Ark and the Flood Begins: Genesis 5-7 Bible Story (KJV)",
+ "publish_at": null,
+ "chapters": [
+  {
+   "short": "genesis-06-short",
+   "title": "Enoch Walked With God",
+   "reference": "Genesis 5:21-24"
+  },
+  {
+   "short": "genesis-07-short",
+   "title": "God Sees the Earth Corrupt",
+   "reference": "Genesis 6:5-13"
+  },
+  {
+   "short": "genesis-08-short",
+   "title": "Noah Builds the Ark",
+   "reference": "Genesis 6:14-22"
+  },
+  {
+   "short": "genesis-09-short",
+   "title": "The Flood Begins",
+   "reference": "Genesis 7"
+  }
+ ],
+ "chapter_zero": "The Keeper's question",
+ "chapter_last": "The Keeper's honest question",
+ "hook": {
+  "text": "What if obeying God meant building alone, while the whole world laughed? Genesis five to seven. Watch what most people miss: God himself shut the door.",
+  "commentary": "Keeper's own words, marked apart from scripture; the closing claim is Genesis 7:16, 'the LORD shut him in'.",
+  "mining": "migration/evidence/vidiq/20261101/compilation-hook-mining.json",
+  "video": "migration/evidence/pavo/20261101/compilation/hook2-clip.mp4",
+  "audio": "migration/evidence/pavo/20261101/compilation/hook2.wav",
+  "video_sha256": "2e8eb2c368a904190f3ce4329ac4d2c6751fdd23636dc9fe39da43e8cdc145c8",
+  "audio_sha256": "f577286a68d849c92dd4557ccca7c673bacfac162eb069ad79fa45a71e71ab0e",
+  "conversation_id": "375260545475152512",
+  "quote": "0 credits (exact, fresh)"
+ },
+ "close": {
+  "text": "Noah obeyed before one drop of rain fell. So here is my honest question: what are you waiting to see, before you trust God?",
+  "commentary": "Keeper's own interpretive question, marked apart from scripture; Genesis 7:4 'yet seven days' and 6:22 'Thus did Noah'.",
+  "video": "migration/evidence/pavo/20261101/compilation/close-clip.mp4",
+  "audio": "migration/evidence/pavo/20261101/compilation/close.wav",
+  "video_sha256": "c1b6648896a4fced3a221563704d8ae8bdfda7b85e407182ab3075eca9b407ac",
+  "audio_sha256": "132f7cf8f682c5379961c8f9b6b8bc8d6bedd550122eb2d041a7dcff1199c7eb",
+  "conversation_id": "375257418030683840",
+  "quote": "0 credits (exact, fresh)"
+ },
+ "thumbnail": {
+  "short": "genesis-08-short",
+  "at": 60.0,
+  "y": 0.35,
+  "line1": "NOAH'S ARK",
+  "line2": "THE FULL STORY"
+ },
+ "tags": [
+  "noah's ark",
+  "noah",
+  "the flood",
+  "genesis 6",
+  "genesis 7",
+  "enoch",
+  "bible story",
+  "kjv bible",
+  "bible stories",
+  "full bible story"
+ ],
+ "playlist": null,
+ "first_comment": "Which moment in Noah's story would you have found hardest to trust: the years of building, or the seven days of waiting? I read it from the King James Version; the notes between the scenes are the Keeper's own.",
+ "description": "Noah's Ark, from Enoch who walked with God to the day the flood begins, read from the King James Version: Genesis 5:21-24, Genesis 6 and Genesis 7. Four stories in one sitting, with the Keeper's honest questions in between.\n\nChapters\n{chapters}\n\nThe four Shorts this video is built from:\n{links}\n\nScripture quotations: King James Version (public domain). The Keeper's commentary is the channel's own interpretation, spoken apart from the scripture.\nOriginal narration and owned music by HeroVerse. Narration voices are AI-generated. Visuals are AI-generated or animated illustrations: an artistic Bible-story reconstruction, not footage of historical events.\n\nSubscribe for the whole Bible, one story at a time."
+}

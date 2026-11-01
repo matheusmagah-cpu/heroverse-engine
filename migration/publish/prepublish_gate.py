@@ -52,7 +52,9 @@ FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e513512
                           # owner exception 2026-10-28 ("tem que ser amanhã"): v4 with only the fallback rows widened,
                           # for the arc-01 long only (long_plan_check CRITERIA_EXCEPTION_PLAN); v4 stays frozen
                           "story-qa-criteria-v4-owner-exception-arc01": "7895818a855f84ee70666f64a9461e4ed1eadf82ddeffbfab97a6ce0a6b7b388",
-                          "story-qa-criteria-v5": "d75998f8dffc0e8ad378360d2f897db2d110459beca2097059f32dc6594396ce"}
+                          "story-qa-criteria-v5": "d75998f8dffc0e8ad378360d2f897db2d110459beca2097059f32dc6594396ce",
+                          # owner, 2026-11-01 (E251): the compilation long of an arc's public Shorts, defect-gated
+                          "compilation-qa-criteria-v1": "023e4183247ce3436407dea58e546cbf47bf914569770a9cbc091121df9efe99"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
                   "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json",
@@ -61,9 +63,20 @@ CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
                   "story-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v4.json",
                   "story-qa-criteria-v4-owner-exception-arc01": Path(__file__).resolve().parents[1] / "production"
                   / "qa_criteria_story_v4_owner_exception_arc01.json",
-                  "story-qa-criteria-v5": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v5.json"}
-STANDARD_VERSIONS = tuple(CRITERIA_FILES)  # STANDARD.md renders: the only ones approved or published
+                  "story-qa-criteria-v5": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v5.json",
+                  "compilation-qa-criteria-v1": Path(__file__).resolve().parents[1] / "production"
+                  / "qa_criteria_compilation_v1.json"}
+COMPILATION = "compilation-qa-criteria-v1"   # E251: its own track; none of the STANDARD/story rows apply to it
+COMPILATION_ARCHETYPE = "bible-compilation-long"
+STANDARD_VERSIONS = tuple(v for v in CRITERIA_FILES if v != COMPILATION)  # STANDARD.md renders approved or published
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
+# E251: the compilation's dimensions (qa checks of compilation_long.qa; the review is the defect gate below)
+COMPILATION_DIMENSIONS = {
+    "technical": ["full_decode_without_errors", "video_format_1920x1080_30fps", "duration_is_sum_of_segments", "no_padding"],
+    "audio": ["integrated_lufs_band", "true_peak_ceiling"],
+    "rights": ["sources_are_the_public_masters_by_sha", "keeper_clips_zero_credit", "music_and_voice_owned"],
+    "structure": ["canonical_order"]}
+COMPILATION_REVIEW_ITEMS = ("designated_reviewer_bound_to_file", "publish_decision", "no_unresolved_a_b_e")
 # the watched review decides only when the designated model answered. Fallback free models score the same file
 # very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
 # render 6.8 / 6.7 / 7.0; flash-lite gave 8-10 to four of five pilot-002 Shorts): their answer is UNKNOWN, retried
@@ -199,12 +212,61 @@ def story_long(pilot_dir):
     render_queue -> shorts_prerequisite -> publication_binding imports this module."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
     import render_queue
-    return render_queue.story_pilot(pilot_dir)
+    return render_queue.story_pilot(pilot_dir) or compilation_long(pilot_dir)
 
 
 def format_items(pilot_dir):
     ok = story_long(pilot_dir)
     return [item("format", "story_long", "PASS" if ok else "FAIL", "bible-story-long" if ok else "NOT_STORY_LONG")]
+
+
+def compilation_long(pilot_dir):
+    """E251: the pilot holds the compilation of an arc's public Shorts (script archetype bible-compilation-long)."""
+    script = load(Path(pilot_dir) / "script.json")
+    return isinstance(script, dict) and script.get("archetype") == COMPILATION_ARCHETYPE
+
+
+def compilation_review_items(review, sha):
+    """The defect gate as items: the designated reviewer's file for this master, a publish decision, no unresolved
+    [a] [b] [e]. A review that is absent or for another file is UNKNOWN, a refused one FAIL; never a pass by default."""
+    if review is None or review.get("output_sha256") != sha or review.get("status") not in ("PASS", "FAIL"):
+        why = f"review {None if review is None else review.get('status')}: {(review or {}).get('error', '')}"[:200]
+        return [item("review", n, "UNKNOWN", why) for n in COMPILATION_REVIEW_ITEMS]
+    w = dict(review.get("watched_review") or {})
+    if review.get("status") == "FAIL":
+        return [item("review", n, "FAIL", review.get("error")) for n in COMPILATION_REVIEW_ITEMS]
+    problems = owner_quality_policy.compilation_problems({**w, "output_sha256": review["output_sha256"]}, sha)
+    unresolved = "REVIEW_DEFECT_UNRESOLVED" in problems
+    decision = any(p in problems for p in ("REVIEW_DECISION_MISSING",))
+    other = [p for p in problems if p not in ("REVIEW_DEFECT_UNRESOLVED", "REVIEW_DECISION_MISSING")]
+    return [item("review", COMPILATION_REVIEW_ITEMS[0], "FAIL" if other else "PASS", other or w.get("model")),
+            item("review", COMPILATION_REVIEW_ITEMS[1], "FAIL" if decision else "PASS"),
+            item("review", COMPILATION_REVIEW_ITEMS[2], "FAIL" if unresolved else "PASS")]
+
+
+def evaluate_compilation(d, qa, manifest, review, video, preflight_problems):
+    sha = (manifest or {}).get("output_sha256")
+    dims = {"binding": binding(d, qa, manifest, review, video), "format": format_items(d)}
+    dims["format"] = [item("format", "story_long", "PASS" if compilation_long(d) else "FAIL",
+                           COMPILATION_ARCHETYPE if compilation_long(d) else "script is not a compilation long")]
+    for name, checks in COMPILATION_DIMENSIONS.items():
+        dims[name] = qa_items(qa, checks, sha)
+    dims["defect_review"] = compilation_review_items(review, sha)
+    scan = load(d / "out" / "scan.json")
+    if scan is None or scan.get("status") not in ("PASS", "FAIL"):
+        dims["full_file_scan"] = [item("scan", "signal_scan", "UNKNOWN", (scan or {}).get("error", "out/scan.json missing"))]
+    else:
+        dims["full_file_scan"] = [item("scan", n, "PASS" if r["pass"] else "FAIL", r["longest_s"])
+                                  for n, r in scan["rows"].items() if r.get("blocking")]
+    dims["preflight"] = ([item("preflight", "preflight", "UNKNOWN", "not run")] if preflight_problems is None else
+                         [item("preflight", "preflight", "FAIL" if preflight_problems else "PASS", preflight_problems or None)])
+    summary = {k: decide([i["state"] for i in v]) for k, v in dims.items()}
+    decision = decide(list(summary.values()))
+    return {"version": VERSION, "pilot_id": d.name, "output_sha256": sha, "decision": decision,
+            "eligible_for_automatic_publication": decision == "PASS", "dimensions": summary, "items": dims,
+            "informative_not_deciding": {}, "market_evidence_not_deciding": market_summary(d),
+            "method_notes": {"track": "compilation (E251): defect gate, no score floor",
+                             "not_claimed": ["perceived quality by viewers", "retention, CTR or revenue"]}}
 
 
 def binding(d, qa, manifest, review, video):
@@ -279,6 +341,8 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     sha = (manifest or {}).get("output_sha256")
     dims = {"binding": binding(d, qa, manifest, review, video), "format": format_items(d)}
     version = (qa or {}).get("criteria_version")
+    if version == COMPILATION:
+        return evaluate_compilation(d, qa, manifest, review, video, preflight_problems)
     spec_by_dim = (dimensions_story_v3(version) if version in STORY_VERSIONS
                    else DIMENSIONS_BY_VERSION.get(version, DIMENSIONS))
     for name, spec in spec_by_dim.items():

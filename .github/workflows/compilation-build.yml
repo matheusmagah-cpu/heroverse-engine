@@ -1,0 +1,87 @@
+name: HeroVerse compilation long (an arc's public Shorts -> 16:9 complete story; nothing generated, nothing published)
+run-name: "compilation-build: plan=${{ inputs.plan }}"
+# E251 (owner, 2026-11-01): the arc's accepted Short masters are downloaded by sha256 from the release (each verified),
+# framed 16:9 over a blurred fill, joined by chapter cards and the Keeper's new hook and close (Pavo clips committed
+# with their exact zero-credit record), loudness by gain only, every join faded. No Pavo or Buzzy call, no secret.
+# The record job puts the master and its pilot alias in the release under the file's sha256 and the pilot's
+# publication inputs on claude/long-<id>-<run>. approve.yml is still the only approval writer; the review is the
+# defect gate (compilation-qa-criteria-v1).
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Compilation plan (migration/production/bible/compilations/<id>.json, bible-compilation-plan-v1)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-long-build
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: write   # release assets (assets.sh, release_video.sh) and the evidence branch; no secret in this job
+    env:
+      PLAN: ${{ inputs.plan }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Plan (path, schema, public Shorts in canonical order, Keeper clips' zero-credit record)
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/compilations/[a-z0-9]+(-[a-z0-9]+)*\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
+          python3 -I -B migration/production/bible/compilation_long.py inputs "$PLAN" > "$RUNNER_TEMP/inputs.txt"
+          cat "$RUNNER_TEMP/inputs.txt"
+      - name: Tools and the accepted masters (sha256 checked by the builder)
+        run: |
+          APT_UPDATE_TIMEOUT=300s APT_INSTALL_TIMEOUT=600s bash migration/ci/apt_install.sh ffmpeg fonts-dejavu-core
+          mkdir -p "$RUNNER_TEMP/src"
+          while read -r name sha; do
+            bash migration/ci/assets.sh download --repo "$GITHUB_REPOSITORY" --pattern "$name" -O "$RUNNER_TEMP/src/$name" --clobber
+            echo "$sha  $RUNNER_TEMP/src/$name" | sha256sum -c -
+          done < "$RUNNER_TEMP/inputs.txt"
+      - name: Build, measure (compilation-qa-criteria-v1) and materialize the pilot's publication inputs
+        run: |
+          set -o pipefail
+          python3 -I -B migration/production/bible/compilation_long.py build "$PLAN" "$RUNNER_TEMP/src" "$RUNNER_TEMP/out" | tee "$RUNNER_TEMP/build.json"
+          python3 -I -B migration/production/bible/compilation_long.py qa "$PLAN" "$RUNNER_TEMP/out" || true
+          python3 -I -B migration/production/bible/compilation_long.py materialize "$PLAN" "$RUNNER_TEMP/out"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: compilation-out-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/out/sheet.jpg
+            ${{ runner.temp }}/out/thumbnail.jpg
+            ${{ runner.temp }}/out/qa.json
+            ${{ runner.temp }}/out/timeline.json
+            ${{ runner.temp }}/out/sources.json
+          retention-days: 14
+      - name: The master and its pilot alias into the release by the file's sha256; inputs and evidence on claude/long-<id>-<run>
+        run: |
+          pilot=$(python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["pilot"])' "$PLAN")
+          ep=$(python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["id"])' "$PLAN")
+          [[ "$pilot" =~ ^pilot-[0-9]{3}$ && "$ep" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "ID_REFUSED"; exit 1; }
+          mp4="$RUNNER_TEMP/out/$ep.mp4"; sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['output_sha256']==sys.argv[2] else 'QA_SHA256_MISMATCH')" "$RUNNER_TEMP/out/qa.json" "$sha"
+          REPO="$GITHUB_REPOSITORY" bash migration/ci/release_video.sh put "$mp4" "bible-$ep-sha256-$sha.mp4"
+          REPO="$GITHUB_REPOSITORY" bash migration/ci/release_video.sh put "$mp4" "$pilot-sha256-$sha.mp4"
+          python3 -I -B migration/production/bible/compilation_long.py verify "migration/production/$pilot" "$mp4"
+          d="migration/evidence/episodes/$ep"; mkdir -p "$d"
+          cp "$RUNNER_TEMP/out/sheet.jpg" "$d/sheet-$GITHUB_RUN_ID.jpg"
+          cp "$RUNNER_TEMP/out/timeline.json" "$d/timeline-$GITHUB_RUN_ID.json"
+          cp "$RUNNER_TEMP/out/sources.json" "$d/sources-$GITHUB_RUN_ID.json"
+          cp "$RUNNER_TEMP/out/thumbnail.jpg" "$d/thumbnail-$GITHUB_RUN_ID.jpg"
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r.update(release_asset=sys.argv[2],run_id=sys.argv[3]);open(sys.argv[4],'w').write(json.dumps(r,indent=1)+'\n')" \
+            "$RUNNER_TEMP/build.json" "bible-$ep-sha256-$sha.mp4" "$GITHUB_RUN_ID" "$d/build-$GITHUB_RUN_ID.json"
+          branch="claude/long-$ep-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d" "migration/production/$pilot"
+          git commit -q -m "Compilation $ep built from its public Shorts' masters (run $GITHUB_RUN_ID): sheet, QA and publication inputs for review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"; echo "SHA256 $sha"; cat "$RUNNER_TEMP/build.json"

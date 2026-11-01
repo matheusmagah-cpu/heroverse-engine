@@ -1,0 +1,25 @@
+{
+ "version": "compilation-qa-criteria-v1",
+ "frozen_at_utc": "2026-11-01T13:00:00Z",
+ "basis": "Owner, 2026-11-01 (DECISIONS.md 'Strategy reset'): the complete-story compilation long of an arc, assembled from its already-public Shorts' accepted masters (sha256), framed 16:9, one chapter card per story, a new Keeper hook and close (Pavo clips at an exact zero-credit quote, our Kokoro line). It is gated on defects (the buzzy Short design, E250), not on the 9.5 score floor; story-qa-criteria-v1..v5 are untouched and keep their own tracks. Technical rows below are measured by compilation_long.py qa on the real master.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "integrated_lufs": [-15.0, -13.0],
+  "true_peak_dbtp_max": -1.0,
+  "duration_is_sum_of_segments_seconds_tolerance": 1.0
+ },
+ "rows": [
+  "full_decode_without_errors",
+  "video_format_1920x1080_30fps",
+  "duration_is_sum_of_segments",
+  "no_padding",
+  "integrated_lufs_band",
+  "true_peak_ceiling",
+  "sources_are_the_public_masters_by_sha",
+  "canonical_order",
+  "keeper_clips_zero_credit",
+  "music_and_voice_owned"
+ ],
+ "review": "defect finder: publish_decision publish by claude-session-reviewer, every issue classified a-f or info, no unresolved a, b or e"
+}

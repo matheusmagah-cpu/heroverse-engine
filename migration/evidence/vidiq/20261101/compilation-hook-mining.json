@@ -1,0 +1,32 @@
+{
+ "date": "2026-11-01",
+ "purpose": "how winning long Bible-story videos open (first 30 s), to write the arc-02 compilation hook",
+ "query": "Noah's Ark Bible story complete, long, 3 months, by views (9 results)",
+ "winners": [
+  {
+   "videoId": "FaYEXkK6RsA",
+   "title": "NOAH AND THE GREAT FLOOD | The Full Bible Story of Noah's Ark | Genesis 6-9",
+   "views": 367400,
+   "breakout": 207,
+   "minutes": 27.9,
+   "open_0_30s": "Calm scene-setting narration: humanity multiplied, then 'a terrible problem'; no question, no stakes stated, no personal angle; subscribe plea at 1:02. Wins on title/thumbnail and length, not on the hook."
+  },
+  {
+   "videoId": "bOvEdvjydhs",
+   "title": "The Man Who Built an Ark When It Had Never Rained Once | The Untold Story of Noah",
+   "views": 1100,
+   "breakout": 5.1,
+   "minutes": 15.3,
+   "open_0_30s": "Two stacked 'What if...' questions put the viewer in Noah's place (the whole world turns away; obedience means standing alone), then the promise in one sentence ('This is the account of Noah...'), then the stakes (preserved breath from the greatest catastrophe). Strongest explicit hook structure; it also adds interpretive layers later ('Perhaps Noah...', 'Picture for a moment...', 'This is what genuine faith resembles...')."
+  }
+ ],
+ "structure_measured": [
+  "0-5 s: a question that puts the viewer inside the story (not a summary)",
+  "5-15 s: the cost of obedience / the stakes stated plainly",
+  "15-30 s: the promise of the video (what you will see), with the scope (Genesis 6-9 complete)",
+  "title carries character + 'Full/Complete Bible Story' + Genesis 6-9",
+  "closing of the top winner: a single moral line ('first response to deliverance was worship'), then a comment prompt"
+ ],
+ "our_hook_rule": "question that puts the viewer in Noah's place -> the stakes -> the promise (four stories, Genesis 5-9, KJV) -> one marked critical insight; ~10 s of speech",
+ "caution": "the 367K winner is AI-labelled and pads with repeated subscribe prompts and invented dialogue; we do not copy that (KJV only, commentary marked apart)"
+}
