@@ -109,6 +109,7 @@ ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration" / "production" / "characters"))
 sys.path.insert(0, str(ROOT / "migration" / "publish"))
+sys.path.append(str(ROOT / "migration" / "production"))   # motion.py: the still-motion vocabulary (appended: no shadowing)
 import characters as ch  # noqa: E402
 import props as prop_refs  # noqa: E402  (E122: a prop's approved reference images)
 import kjv_check  # noqa: E402
@@ -150,6 +151,12 @@ SPEAKER_AUDIO = KEEPER_AUDIO         # a character's line goes to Pavo the same 
 KEEPER_SHARE_MAX = 0.25
 LESSON_SHARE_MAX = 0.25
 SCENE_SECONDS = (4, 12)
+# owner 2026-11-01 (DECISIONS "Cinematic still animation"): a long-first long holds about 25-30 stills of 15-20 s each,
+# each moved by motion.direct (the auto-director) unless the shot overrides it with `motion` / `atmosphere`. A long-first
+# scene may run 4-20 s (beyond 12 s, an approved still), and a still held 12-20 s needs a real move (MOTION_REQUIRED).
+# A Short's plan carries neither field: its stills keep their push-in.
+LONG_FIRST_STILL_SECONDS = (4, 20)
+STILL_MOVE_FROM = 12
 ESTABLISHING_HOLD = 2.0
 ESTABLISHING_SHARE_MAX = 0.15
 MAX_SLOW = 1.3                       # short_engine.MAX_SLOW
@@ -1263,11 +1270,57 @@ def check(plan, chars=None):
     problems += audio_route_problems(plan, shots)
     if long_first(plan):
         problems += [p for i, s in enumerate(shots) if isinstance(s, dict) for p in safe_area_problems(i, s)]
+    problems += motion_problems(plan, shots)
     return _check_shots(plan, chars, narration, shots, problems, pending)
 
 
 def long_first(plan):
     return isinstance(plan, dict) and plan.get("track") == LONG_FIRST_TRACK
+
+
+def motion_problems(plan, shots):
+    """Owner 2026-11-01 (DECISIONS "Cinematic still animation"): a long-first scene shot may override the director with
+    `motion` (motion.MOTIONS, or {move, ease, hold, strength}) and `atmosphere` (motion.ATMOSPHERES, at most 3); a
+    still held 12-20 s must move for real (MOTION_REQUIRED: the director's move from the plan's words, or the
+    override, never a hold); two stills in a row never share an explicit move. Elsewhere both fields are refused."""
+    import motion as camera
+    out = []
+    design = plan.get("source_design") if isinstance(plan.get("source_design"), dict) else {}
+    listed = set(x for x in design.get("still_motion") or [] if isinstance(x, str))
+    stills = []
+    for i, s in enumerate(shots):
+        if not isinstance(s, dict):
+            continue
+        sid = s.get("id")
+        has = "motion" in s or "atmosphere" in s
+        if not long_first(plan):
+            if has:
+                out.append(f"MOTION_LONG_FIRST_ONLY shot {i} {sid} (`motion` and `atmosphere` move a long-first "
+                           "long's stills; a Short's still keeps its push-in)")
+            continue
+        scene = s.get("kind") == "scene" and s.get("window_of") is None
+        if has and not scene:
+            out.append(f"MOTION_NOT_A_STILL_SHOT shot {i} {sid} (only a scene shot is a still in motion)")
+            continue
+        out += [f"{p} shot {i} {sid}" for p in camera.override_problems(s.get("motion"))]
+        out += [f"{p} shot {i} {sid}" for p in camera.atmosphere_problems(s.get("atmosphere"))]
+        secs = s.get("seconds")
+        if scene and (has or sid in listed or (type(secs) is int and secs > SCENE_SECONDS[1])):
+            stills.append((i, s))
+    if out or not stills:
+        return out
+    directed = camera.direct(plan, {s["id"] for _, s in stills})
+    for (i, s), (j, t) in zip(stills, stills[1:]):
+        a, b = camera.override_move(s.get("motion")), camera.override_move(t.get("motion"))
+        if a is not None and a == b and j == i + 1:
+            out.append(f"MOTION_REPEATED shot {j} {t['id']} ({a} again after {s['id']}: vary the move)")
+    for i, s in stills:
+        secs = s.get("seconds")
+        if type(secs) is int and STILL_MOVE_FROM <= secs <= LONG_FIRST_STILL_SECONDS[1] and \
+                (directed[s["id"]]["move"] in camera.TRIVIAL_MOTIONS or not directed[s["id"]]["strength"]):
+            moves = ", ".join(x for x in camera.MOTIONS if x not in camera.TRIVIAL_MOTIONS)
+            out.append(f"MOTION_REQUIRED shot {i} {s['id']} (a still held {secs} s needs a real move: {moves})")
+    return out
 
 
 def safe_area_problems(i, shot, prompt=None):
@@ -1469,8 +1522,13 @@ def character_problems(i, cids, prompt, chars, drafts=None):
     return out
 
 
-def scene_seconds_problems(i, s):
-    """A scene clip (not a talking one) is 4-12 s of Pavo video."""
+def scene_seconds_problems(i, s, plan=None):
+    """A scene clip (not a talking one) is 4-12 s of Pavo video; a long-first scene 4-20 s (beyond 12 s, a still)."""
+    if long_first(plan):   # a scene longer than a Pavo clip is an approved still in motion (motion.py)
+        lo, hi = LONG_FIRST_STILL_SECONDS
+        if type(s.get("seconds")) is not int or not lo <= s["seconds"] <= hi:
+            return [f"SCENE_SECONDS shot {i} {s['id']} ({lo}-{hi}: a long-first still in motion)"]
+        return []
     if type(s.get("seconds")) is not int or not SCENE_SECONDS[0] <= s["seconds"] <= SCENE_SECONDS[1]:
         return [f"SCENE_SECONDS shot {i} {s['id']} (4-12)"]
     return []
@@ -1600,7 +1658,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
             problems.append(f"REFERENCES_OVER_{ch.MAX_REFS} shot {i} {s['id']} ({refs} approved images)")
         if talking(s):
             continue   # its clip's length comes from its line
-        problems += scene_seconds_problems(i, s)
+        problems += scene_seconds_problems(i, s, plan)
         if speaking(s):
             continue   # God's voice-over shot: no one on screen (checked above)
         if not cids and s.get("establishing") is True:

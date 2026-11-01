@@ -60,6 +60,12 @@ story is made once as a 16:9 long, and the Shorts are coherent 9:16 cuts of it. 
 | Cut the Shorts | `cuts/<long>.json` (bible-cuts-v1, track buzzy-cut, pilot, report, cuts: id, start, end, optional x, title, description with "full story", tags, first_comment); `short_cuts.py check SPEC` refuses a cut inside speech, off sentence edges or outside 20–179 s; `short-cuts.yml` renders them (centre 9:16, Short captions, gain-only -14 LUFS, fades), puts `bible-<cut>-sha256-<sha>.mp4` in the release and draft `episodes/<cut>.json` (track buzzy-cut, parent long) on `claude/cuts-<long>-<run>` |
 | Review and publish each cut | `native-review.yml` with plan = the cuts spec and the cut's own sha256 (never the long's score), the session reviewer's `review` (defects, publish decision) in its record, `episode_build.py check-record`, then `publish-episode.yml`; `arc_links.py` links each cut to its long through `parent.pilot` |
 
+Long-first stills move by need (E261): `episode.yml` maps each approved still's depth (Depth Anything V2 Small, ONNX
+on CPU, sha256-pinned; unreachable model: a depth proxy, recorded) and `episode_build.py generate` renders every still
+with `motion.direct`'s move, fitted to its spoken span (about 15–60 s of CPU per 15–20 s shot at 1080p). The move and its reason
+are in the report's `motion_direction`; a plan shot's `motion`/`atmosphere` overrides it (PROMPT_GUIDE "Cinematic
+still animation").
+
 The 9.5 story long (`approve.yml` on story-qa-criteria), the Short episode route, the compilation and every frozen
 QA file keep their rules; the buzzy-long and buzzy-cut tracks apply only to their own criteria and records.
 

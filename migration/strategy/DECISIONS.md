@@ -304,3 +304,14 @@ the long's mined opening (evidence/vidiq/20261101/compilation-hook-mining.json) 
   critique).
 - The weekly mining measures these emotional devices in winners against weak contrasts. A device changes only with
   validated evidence: ≥6 winners from ≥4 channels.
+
+## 2026-11-01 — Cinematic still animation: the move follows the need (owner)
+
+The owner, on the long-first longs of few stills (about 25–30, each 15–20 s on screen, so the picture is not cut fast):
+"it cannot be rigid; it has to animate according to need; make it really well". Every approved still had received the
+same centred push-in. Decision (E261): `motion.py`'s cinematic engine directs each still from its beat, the prompt's
+emotion, its spoken span and the picture (face, saliency, Depth Anything V2 depth, sky, water, fire), with keyframed,
+eased moves (push, pull, pans, tilts, a pan that lands on a face, drift, 2.5D parallax, a hold before the KJV line) and
+procedural atmosphere, never the same move twice in a row, the subject inside the centre 9:16 band for the Short cuts,
+bit-exact, at zero cost on the Actions CPU. A plan may override the move and atmosphere per shot; the chosen move and its
+reason are recorded for the reviewer. The Short route keeps its push-in. The watched long remains the judge.
