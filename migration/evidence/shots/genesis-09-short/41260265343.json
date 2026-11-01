@@ -1,0 +1,98 @@
+{
+ "episode": "genesis-09-short",
+ "plan_sha256": "8488b3f1a0e406918d33a73d02d6823cd86a6a2903b85aa2ee3c06ec009a64cd",
+ "attempts": 2,
+ "shots": {
+  "s-voice": {
+   "kind": "scene",
+   "request_sha256": "1a8244f1696337ede396ba22ace50781a51e418dcab45c33ed092559a6264fcb",
+   "request": {
+    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. The black clouds roll in lower over the valley and lightning flickers deep inside them, the cold wind bending the dry grass and lifting dust off the slopes, the great dark shape on the hill unmoving. Dusk, the light failing. Ominous and vast. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No people, no text, no logos.",
+    "aspect_ratio": "9:16",
+    "sound": false,
+    "references": [],
+    "audio": null,
+    "frames": [
+     {
+      "still": "genesis-09-s-voice",
+      "sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19"
+     }
+    ]
+   },
+   "clips": [
+    {
+     "round": 1,
+     "asset": "shot-genesis-09-short-s-voice-sha256-841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8.mp4",
+     "clip_sha256": "841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "375091186156996672",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1260.0,
+        "seconds": 8.0
+       },
+       "flags": [],
+       "faces": {
+        "frames_sampled": 48,
+        "faces_found": 0
+       }
+      }
+     ],
+     "sheet": "41260265343-s-voice-1.jpg",
+     "media": {
+      "version": "clip-media-v1",
+      "clip_sha256": "841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8",
+      "video_seconds": 8.0,
+      "audio_seconds": null,
+      "instrument": "ffprobe stream durations"
+     },
+     "uploaded": true
+    },
+    {
+     "round": 2,
+     "asset": "shot-genesis-09-short-s-voice-sha256-ba3502d0ccf8aaeedd8e342dd4d4e9d85f9b965a2a7c04d22e7a5416f71e6bc5.mp4",
+     "clip_sha256": "ba3502d0ccf8aaeedd8e342dd4d4e9d85f9b965a2a7c04d22e7a5416f71e6bc5",
+     "flags": [],
+     "generations": [
+      {
+       "generation": 1,
+       "conversation_id": "375092377847413440",
+       "submission": "submitted",
+       "quoted_credits": 0,
+       "source": {
+        "width": 720.0,
+        "height": 1260.0,
+        "seconds": 8.0
+       },
+       "flags": [],
+       "faces": {
+        "frames_sampled": 48,
+        "faces_found": 0
+       }
+      }
+     ],
+     "sheet": "41260265343-s-voice-2.jpg",
+     "media": {
+      "version": "clip-media-v1",
+      "clip_sha256": "ba3502d0ccf8aaeedd8e342dd4d4e9d85f9b965a2a7c04d22e7a5416f71e6bc5",
+      "video_seconds": 8.0,
+      "audio_seconds": null,
+      "instrument": "ffprobe stream durations"
+     },
+     "uploaded": true
+    }
+   ],
+   "clip_seconds": 8
+  }
+ },
+ "pavo_budget": {
+  "units_before": 18,
+  "units_this_run": 4
+ },
+ "run_id": "41260265343"
+}
