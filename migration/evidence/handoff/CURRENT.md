@@ -51,3 +51,6 @@ images, then `C:\HeroVerse\one.ps1 -still <id>` per still (send, wait, save, upl
 Relayed by the coordinator session (owner preference, not yet confirmed by the owner in this run): use ONE ChatGPT chat named
 "HeroVerse — stills" for all stills (create it once, send every prompt in it, download from each reply, same style line);
 do not delete existing chats. `one.ps1`/`send.ps1` still open a new chat per still and must change before resuming.
+
+Cleanup (relayed, apply only after ALL 30 stills are downloaded): delete the project's per-image chats ("Create ... Image"
+titles opened today) via "..." > Excluir; keep "HeroVerse — stills" and every owner chat; ambiguous titles stay. Report the count.
