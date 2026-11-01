@@ -58,6 +58,39 @@ class Review(unittest.TestCase):
             self.assertIn(marker, buzzy)
         self.assertEqual(n.track_for(Path('/nonexistent.json')), None)
 
+    def test_e253_compilation_long_is_reviewed_as_a_defect_finder_within_its_own_limit(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            plan = Path(d, 'c.json')
+            plan.write_text(json.dumps({'version': 'bible-compilation-plan-v1', 'id': 'x'}))
+            self.assertEqual(n.track_for(plan), 'compilation')
+            self.assertEqual(n.floor_for(plan), 0.0)
+            text = n.prompt(642.3, 'compilation')
+            self.assertIn('long compilation', text)
+            self.assertIn('[a] speech cut off mid-word or mid-sentence', text)
+            self.assertNotIn('Owner publication floor', text)
+
+            def run(plan_path, size):
+                ev = Path(d, 'event.json')
+                ev.write_text(json.dumps({'inputs': {'plan': plan_path, 'sha256': '0' * 64, 'byte_size': str(size),
+                                                     'owner_review_authorized': 'true'}}))
+                old = os.environ.get('GITHUB_EVENT_PATH')
+                os.environ['GITHUB_EVENT_PATH'] = str(ev)
+                try:
+                    return n.inputs()
+                finally:
+                    if old is None:
+                        os.environ.pop('GITHUB_EVENT_PATH')
+                    else:
+                        os.environ['GITHUB_EVENT_PATH'] = old
+            run('migration/production/bible/compilations/arc-02-noah-compilation.json', 273031544)
+            with self.assertRaises(n.Refusal):   # a Short keeps its 150 MB limit
+                run('migration/production/bible/plans/genesis-09-short.json', 273031544)
+            with self.assertRaises(n.Refusal):
+                run('migration/production/bible/compilations/arc-02-noah-compilation.json', 600_000_001)
+            with self.assertRaises(n.Refusal):
+                run('migration/production/other/x.json', 1000)
+
     def test_e242_buzzy_plan_floor_is_8_and_the_default_stays_9_5(self):
         with tempfile.TemporaryDirectory() as d:
             for name, track, want in (('a.json', 'buzzy', 0.0), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):

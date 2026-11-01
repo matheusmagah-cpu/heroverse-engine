@@ -3456,6 +3456,61 @@
      "env-vs-test"
     ]
    }
+  },
+  {
+   "id": "E253",
+   "date": "2026-11-01",
+   "class": [
+    "instrument"
+   ],
+   "error": "The compilation long route (E251) names the Gemini native review as its defect finder, but native_review.py accepted only migration/production/bible/plans/*.json and masters up to 150 MB, so the arc-02 Noah compilation master (273 MB, compilations/arc-02-noah-compilation.json) could not be reviewed at all.",
+   "fix": "native_review accepts compilations/*.json; a bible-compilation-plan-v1 reads as track 'compilation' (defect-finder prompt naming a 16:9 long compilation, no score floor, like buzzy) with its own 600 MB size limit. Shorts keep the plans/ path, the 150 MB limit and their floors.",
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233",
+    "E238"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e253_compilation_long_is_reviewed_as_a_defect_finder_within_its_own_limit",
+    "covers": [
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E254",
+   "date": "2026-11-01",
+   "class": [
+    "review-after-build"
+   ],
+   "error": "The arc-02 compilation kept each Short's own series call to action (\"The full story is in the long video\", \"Part eight tomorrow\", \"Follow the full story... part ten\") inside the long itself, and its thumbnail claimed \"THE FULL STORY\" over an empty desert frame for a video that ends as the flood begins; both were found only by the coordinator's look at the built master.",
+   "fix": "compilation plan chapters take an optional end_s that cuts the Short just before that CTA (measured from the burned captions: 70.6, 165.9, 168.0, 165.7 s); the Keeper's insight and comment question stay. The thumbnail is the ark with the torch-lit crowd (genesis-08 at 80.6 s) with the true line WHEN GOD SHUT THE DOOR (Genesis 7:16).",
+   "prior": [
+    "E109",
+    "E110",
+    "E117",
+    "E127",
+    "E189",
+    "E249"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_compilation_long.py",
+    "contains": "def test_e254_each_chapter_cuts_the_shorts_own_series_cta",
+    "covers": [
+     "review-after-build"
+    ]
+   }
   }
  ]
 }
