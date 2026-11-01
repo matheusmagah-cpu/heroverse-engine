@@ -339,3 +339,32 @@ eased moves (push, pull, pans, tilts, a pan that lands on a face, drift, 2.5D pa
 procedural atmosphere, never the same move twice in a row, the subject inside the centre 9:16 band for the Short cuts,
 bit-exact, at zero cost on the Actions CPU. A plan may override the move and atmosphere per shot; the chosen move and its
 reason are recorded for the reviewer. The Short route keeps its push-in. The watched long remains the judge.
+
+## 2026-11-01 — Mining scope: viral structures from any niche, adapted to ours
+
+Owner: viral, consistent structures are not limited to our niche, because structure is general. The daily intelligence
+mines them across niches and adapts them to the KJV Bible story. This extends the 2026-11-01 "Daily intelligence"
+mining; it replaces nothing and keeps the same daily vidIQ budget (≤150 credits) and the same validation rule.
+
+- Two pools, labelled in the evidence:
+  - in-niche: KJV / Bible-story longs and Shorts;
+  - cross-niche: the top outliers of storytelling, documentary, history, true-story and emotional narrative channels.
+  Each pool keeps its own counts.
+- From cross-niche winners, mine only the structure. Their topic, wording and visuals are never copied. The
+  structure covers:
+  - hook type in the first 2 s / 30 s;
+  - open loops and payoffs;
+  - escalation rhythm;
+  - pattern interrupts;
+  - emotional peaks and their devices;
+  - ending/loop and CTA;
+  - title/thumbnail promise and the payoff that matches it.
+- A cross-niche structure becomes a rule only when:
+  - it is validated in its own pool (≥6 winners from ≥4 channels, no channel above 1/3, breakout ≥50, ≥6 weak
+    contrasts);
+  - it is adapted to our format without breaking the pillars: exact KJV, the Keeper's critical layer, honesty, no
+    fear-bait;
+  - it wins as a labelled one-day test in our own data (daily intelligence).
+  Until then it is a test, never a rule.
+- One source of truth: findings go into structures/ and the "Daily intelligence" entries only, so there are never two
+  conflicting instructions.
