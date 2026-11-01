@@ -3543,6 +3543,29 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E256",
+   "date": "2026-11-01",
+   "class": [
+    "recurrence"
+   ],
+   "error": "comment-replies.yml removes a posted comment from comment_queue.json but its decision stays in comment_replies.json, so comment_replies.check (and test_committed_decisions_pass_the_policy in every PR) reported NOT_IN_QUEUE after each posting run; it was first patched on 2026-11-01 by pruning one entry by hand (#610) and came back with the next 4 posts.",
+   "fix": "check() takes the replies ledger: an id already posted or refused there is done, not an error; only an id in neither the queue nor the ledger is NOT_IN_QUEUE. The CLI check and the repository test pass the ledger.",
+   "prior": [
+    "E115",
+    "E122",
+    "E123",
+    "E125",
+    "E128"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_comment_replies.py",
+    "contains": "def test_e256_a_posted_reply_that_left_the_queue_is_not_an_error",
+    "covers": [
+     "recurrence"
+    ]
+   }
   }
  ]
 }
