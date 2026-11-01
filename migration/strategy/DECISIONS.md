@@ -62,3 +62,24 @@ immediately without waiting for an audience experiment. Frozen criteria are not 
 Update the relevant current guide when a valid owner decision changes behavior. Remove the superseded instruction
 instead of appending its contradiction. Keep receipts, source approvals, revocations, QA and idempotency history;
 a record is not obsolete merely because it is old.
+
+## Buzzy track floor and the posting flow (owner, 2026-11-01; E250)
+
+Owner: "já tem vídeo pra publicar.. tem uma meta.. e tem que ser atingida". His bar for a Buzzy video is "algo
+coerente... um mínimo de aparência e uma camada de originalidade boa". A plan/record with `"track": "buzzy"` is
+therefore reviewed at overall >= 6.5 with every rubric item >= 6.0 (`TRACK_FLOORS`/`TRACK_ITEM_FLOOR` in
+`publish_episode.py`, `native_review.py`). The image/Pavo track and every long keep 9.5. Hard refusals are unchanged:
+policy, wrong file, wrong reviewer, missing issues, a Buzzy track without a ledgered Buzzy shot, frozen QA.
+
+His posting flow, in his words: "precisamos de fluxo de postagem.. não precisa ficar nesse preciosismo.. faz algo bom
+e sem papagaiada.. as duas ferramentas fazem vídeos bons já.. só edita.. deixa coerente.. camada de originalidade é
+autenticidade e posta." Operating flow for every Short:
+
+1. KJV script and plan.
+2. Buzzy clips on the cheapest model at >= 720p, plus Pavo for the hook and the Keeper close (exact 0-credit quote).
+3. One edit with `episode.yml`.
+4. One Gemini native review, used only to catch defects against the buzzy floor; no regeneration loops.
+5. Publish at the next slot.
+
+At most one fix round, and only for a real defect (a broken clip, an audio error, a policy problem). No rework for
+cosmetic AI artifacts.

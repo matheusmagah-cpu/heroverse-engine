@@ -27,8 +27,9 @@ RUBRIC = ('opening_and_promise', 'picture_quality', 'figure_and_background_integ
           'scripture_on_screen', 'policy_safe')
 LIMIT = 150_000_000
 # E242 (owner, 2026-10-31, PR #599): a plan with "track": "buzzy" (a Short made with Buzzy clips) is reviewed against
-# overall 8.0 and every item >= 7; every other plan keeps 9.5. Nothing else about the review changes.
-TRACK_FLOORS = {'buzzy': 8.0}
+# the buzzy floor (E250 lowered it to overall 6.5, every item 6.0); every other plan keeps 9.5. Nothing else changes.
+TRACK_FLOORS = {'buzzy': 6.5}
+TRACK_ITEM_FLOOR = 6.0   # E250 (owner 2026-11-01): buzzy track overall >= 6.5, every item >= 6.0
 DEFAULT_FLOOR = 9.5
 FILE_POLLS = 210   # E246: 10 s each, 35 min: a 100 MB master can sit in the provider's PROCESSING state past 15 min
 
@@ -39,6 +40,10 @@ def floor_for(plan_path):
     except (OSError, ValueError, AttributeError):
         return DEFAULT_FLOOR
     return TRACK_FLOORS.get(track, DEFAULT_FLOOR)
+
+
+def item_floor_for(plan_path):
+    return TRACK_ITEM_FLOOR if floor_for(plan_path) < DEFAULT_FLOOR else 7
 
 
 
@@ -524,7 +529,8 @@ def public_evidence(i, r, run_id):
             out[k] = [_public_text(x, secrets) for x in items if isinstance(x, str)][:PUBLIC_LIST_LIMIT]
         known = [v for v in out['scores'].values()] + [out['overall']]
         out['owner_floor_met'] = bool(validated and None not in known and out['overall'] >= floor_for(i['plan'])
-                                      and all(v >= 7 for v in out['scores'].values()))
+                                      and all(v >= item_floor_for(i['plan'])
+                                              for v in out['scores'].values()))
         out['every_criterion_at_least_9_5'] = bool(validated and None not in known
                                                    and all(v >= 9.5 for v in known))
     return out

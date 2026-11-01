@@ -3357,6 +3357,30 @@
      "silent"
     ]
    }
+  },
+  {
+   "id": "E250",
+   "date": "2026-11-01",
+   "class": [
+    "threshold"
+   ],
+   "error": "The buzzy-track floor (overall 8.0, items 7, E242) was set above the owner's own bar for Buzzy videos; genesis-09-short's complete master reached 6.8 with the lowest item 6.0 and could not be published although the owner's bar ('coerente... um mínimo de aparência e uma camada de originalidade boa') was met and he ordered publication.",
+   "fix": "Owner decision of 2026-11-01 recorded in DECISIONS.md: track buzzy floor is overall >= 6.5, every item >= 6.0 (publish_episode.TRACK_FLOORS/TRACK_ITEM_FLOOR, native_review.TRACK_FLOORS/TRACK_ITEM_FLOOR with item_floor_for). 9.5 for the default track and longs, and all hard refusals, are unchanged and tested.",
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120",
+    "E138",
+    "E242"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_publish_episode.py",
+    "contains": "def test_e250_owner_buzzy_floor_is_6_5_overall_6_per_item_and_9_5_elsewhere",
+    "covers": [
+     "threshold"
+    ]
+   }
   }
  ]
 }

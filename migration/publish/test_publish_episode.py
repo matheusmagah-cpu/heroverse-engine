@@ -68,10 +68,16 @@ class Episode(unittest.TestCase):
         self.assertIn("REVIEW_MISSING", pe.problems(rec))
         self.assertNotIn("REVIEW_MISSING", pe.problems(dict(rec, video_id="VID12345678")))
 
+    def test_e250_owner_buzzy_floor_is_6_5_overall_6_per_item_and_9_5_elsewhere(self):
+        # the name of the E242 test below keeps its original numbers; E250 (owner 2026-11-01) lowered them
+        self.assertEqual(pe.TRACK_FLOORS, {"buzzy": 6.5})
+        self.assertEqual(pe.TRACK_ITEM_FLOOR, 6.0)
+        self.assertEqual(pe.SHORT_FLOOR, 9.5)
+
     def test_e242_buzzy_track_floor_is_8_with_every_item_7_and_nothing_else_relaxed(self):
         sha = "a" * 64
-        scores = {k: 7.5 for k in pe.RUBRIC}
-        good = {"overall": 8.0, "reviewer": "gemini-3.8-flash", "output_sha256": sha, "issues": [], "scores": scores}
+        scores = {k: 6.5 for k in pe.RUBRIC}
+        good = {"overall": 6.5, "reviewer": "gemini-3.8-flash", "output_sha256": sha, "issues": [], "scores": scores}
         ep = {"id": "fx-short", "output_sha256": sha, "track": "buzzy", "review": good}
         with tempfile.TemporaryDirectory() as d:
             Path(d, "fx-short.json").write_text(json.dumps({"shots": {"a": {"source": "still_motion"},
@@ -87,9 +93,9 @@ class Episode(unittest.TestCase):
         with mock.patch.object(pe, "buzzy_shot_problems", return_value=[]):
             # the default track keeps 9.5: the same review is refused without the track
             self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems({k: v for k, v in ep.items() if k != "track"}))
-            self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=7.9))))
+            self.assertIn("REVIEW_BELOW_FLOOR", pe.review_problems(dict(ep, review=dict(good, overall=6.4))))
             self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
-                          pe.review_problems(dict(ep, review=dict(good, scores=dict(scores, picture_quality=6.9)))))
+                          pe.review_problems(dict(ep, review=dict(good, scores=dict(scores, picture_quality=5.9)))))
             self.assertIn("REVIEW_ITEM_BELOW_FLOOR",
                           pe.review_problems(dict(ep, review={k: v for k, v in good.items() if k != "scores"})))
             self.assertIn("TRACK_UNKNOWN", pe.review_problems(dict(ep, track="cheap")))

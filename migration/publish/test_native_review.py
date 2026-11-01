@@ -48,7 +48,7 @@ class Review(unittest.TestCase):
 
     def test_e242_buzzy_plan_floor_is_8_and_the_default_stays_9_5(self):
         with tempfile.TemporaryDirectory() as d:
-            for name, track, want in (('a.json', 'buzzy', 8.0), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):
+            for name, track, want in (('a.json', 'buzzy', 6.5), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):
                 Path(d, name).write_text(json.dumps({'track': track} if track else {}))
                 self.assertEqual(n.floor_for(Path(d, name)), want)
             self.assertEqual(n.floor_for(Path(d, 'missing.json')), 9.5)

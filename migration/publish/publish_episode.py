@@ -114,8 +114,9 @@ SHORT_FLOOR = 9.5
 # E242 (owner, 2026-10-31, PR #599): a record with "track": "buzzy" (Short made with Buzzy clips) is reviewed at
 # overall 8.0 with every rubric item >= 7 (review.scores); the default track keeps 9.5. Reviewer, sha binding, issues,
 # hard refusals and frozen QA are the same on both tracks.
-TRACK_FLOORS = {"buzzy": 8.0}
-TRACK_ITEM_FLOOR = 7
+# E250 (owner, 2026-11-01): the buzzy floor is overall 6.5 with every item >= 6.0 (DECISIONS.md); 9.5 elsewhere.
+TRACK_FLOORS = {"buzzy": 6.5}
+TRACK_ITEM_FLOOR = 6.0
 RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 
