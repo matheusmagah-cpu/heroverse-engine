@@ -3212,6 +3212,32 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E244",
+   "date": "2026-11-01",
+   "class": [
+    "capacity"
+   ],
+   "error": "A Buzzy clip approved by approve-source (E243) names a release asset by its sha256, but the executor session cannot upload binaries to the release (the proxy accepts only JSON bodies), so a downloaded Buzzy clip had no way to become the asset the build fetches; the only alternative was to route around the session's egress policy.",
+   "fix": "buzzy-ingest.yml (workflow_dispatch on main) downloads the clip from Buzzy's file service and mirrors it into the engine release through pinned_asset.sh, accepting the bytes only when they hash to the output_sha256 of the committed ledger call for that episode shot (buzzy_ingest.py decides the name and sha from the ledger, never from the caller; BUZZY_URL_REFUSED / BUZZY_NOT_FOR_SHOT / BUZZY_LEDGER_INCOMPLETE).",
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134",
+    "E136",
+    "E227",
+    "E232",
+    "E234"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_buzzy_ingest.py",
+    "contains": "def test_refused_url_shot_or_incomplete_ledger",
+    "covers": [
+     "capacity"
+    ]
+   }
   }
  ]
 }
