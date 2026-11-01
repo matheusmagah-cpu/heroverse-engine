@@ -99,5 +99,13 @@ class Allocation(unittest.TestCase):
         self.assertIn("if: env.NO_IMAGES != '1'", wf)
 
 
+class ErrorDetailTests(unittest.TestCase):
+    def test_e260_a_refusal_names_the_provider_code_without_ids(self):
+        body = json.dumps({"errors": [{"code": 4006, "message": "you have used up your daily free allocation of 10,000 neurons for account a6384d28432b16b02970b4ffe92731ce"}]})
+        d = cf.cf_error_detail(body)
+        self.assertIn("cf4006", d)
+        self.assertNotIn("a6384d28432b16b02970b4ffe92731ce", d)
+        self.assertEqual(cf.cf_error_detail("not json"), "detail=none")
+
 if __name__ == "__main__":
     unittest.main()
