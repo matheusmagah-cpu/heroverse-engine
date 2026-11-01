@@ -3327,6 +3327,36 @@
      "rerun-without-fix"
     ]
    }
+  },
+  {
+   "id": "E248",
+   "date": "2026-11-01",
+   "class": [
+    "silent"
+   ],
+   "error": "genesis-09-short native reviews 41262411652 and 41270806198 waited 35 min in 'Await exact-byte upload' and failed FILE_PROCESSING_PENDING_GET_ONLY: the executor never sent the master bytes to the run's resumable upload_url (receipt status AWAITING_EXACT_BYTES), because OPERATIONS did not say the caller performs that upload; it was misread as slow provider processing and led to E246/E247 and a rebuild.",
+   "fix": "OPERATIONS.md now states the caller step (download native-review-upload, decrypt, send the exact bytes once with upload, finalize) and how to resume a run that timed out that way; run 41270806198 is recorded in dispatch/retries.json after its bytes were sent. A test binds the runner's AWAITING_EXACT_BYTES state to that documented caller step, so the step cannot silently disappear from OPERATIONS again.",
+   "prior": [
+    "E107",
+    "E121",
+    "E124",
+    "E128",
+    "E129",
+    "E140",
+    "E142",
+    "E165",
+    "E205",
+    "E219",
+    "E235",
+    "E237"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e248_operations_names_the_caller_upload_of_the_exact_bytes",
+    "covers": [
+     "silent"
+    ]
+   }
   }
  ]
 }

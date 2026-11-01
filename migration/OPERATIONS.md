@@ -55,6 +55,11 @@ raw answers, exact model identity and media binding. Reconcile uncertain outcome
 Every run also writes non-sensitive score evidence (status, provider error codes, overall, per-criterion scores and
 timed issues; no media, provider IDs or secrets) to its job summary and the 90-day `native-review-public-evidence`
 artifact, so a later executor never needs another executor's private key to read a score (E233).
+The runner never holds the master (E248): after a new run reaches `Persist upload state before inference`, the
+caller downloads that run's `native-review-upload` artifact, decrypts it with the matching private key, and sends the
+exact master bytes once to the receipt's `upload_url` (`X-Goog-Upload-Command: upload, finalize`, offset 0). Until
+then the provider has no file and `Await exact-byte upload` can only time out. If a run timed out that way, upload
+to its saved `upload_url` and dispatch `resume_before_inference=<run>` with a fresh Free Tier proof.
 
 ## Existing automation and its limits
 

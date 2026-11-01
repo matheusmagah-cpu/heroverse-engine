@@ -8,6 +8,10 @@
   {
    "run": 41245651365,
    "reason": "Same external outage again on the re-dispatch after PR590 (about 21:55-22:03Z 2026-10-31): the tools step could not download the pinned SyncNet weights from www.robots.ox.ac.uk (connection failures); no file of ours involved; the URL also reset from this session at 21:53Z."
+  },
+  {
+   "run": 41270806198,
+   "reason": "No code at fault (E248): the caller never sent the master bytes to the run's saved resumable upload_url, so the provider had no file and 'Await exact-byte upload' timed out (receipt status AWAITING_EXACT_BYTES). The exact 100766072 bytes (sha 57e8768c...1829) were sent to that upload_url at 04:30Z 2026-11-01 (HTTP 200, state PROCESSING, size matches); the resume reuses that upload."
   }
  ]
 }
