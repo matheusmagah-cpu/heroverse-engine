@@ -63,13 +63,23 @@ Update the relevant current guide when a valid owner decision changes behavior. 
 instead of appending its contradiction. Keep receipts, source approvals, revocations, QA and idempotency history;
 a record is not obsolete merely because it is old.
 
-## Buzzy track floor and the posting flow (owner, 2026-11-01; E250)
+## Buzzy track: defect-finder review and the posting flow (owner, 2026-11-01; E250)
 
 Owner: "já tem vídeo pra publicar.. tem uma meta.. e tem que ser atingida". His bar for a Buzzy video is "algo
-coerente... um mínimo de aparência e uma camada de originalidade boa". A plan/record with `"track": "buzzy"` is
-therefore reviewed at overall >= 6.5 with every rubric item >= 6.0 (`TRACK_FLOORS`/`TRACK_ITEM_FLOOR` in
-`publish_episode.py`, `native_review.py`). The image/Pavo track and every long keep 9.5. Hard refusals are unchanged:
-policy, wrong file, wrong reviewer, missing issues, a Buzzy track without a ledgered Buzzy shot, frozen QA.
+coerente... um mínimo de aparência e uma camada de originalidade boa". The owner approved this final design: for a
+plan/record with `"track": "buzzy"` the Gemini native review is a defect finder (eyes and ears only; its prompt drops
+the 9.5 floor and score anchors and lists, with timecodes and a category, only: [a] speech cut off mid-word or
+mid-sentence; [b] a scene that does not match its line or breaks story order; [c] audio errors; [d] captions out of
+sync or unreadable; [e] policy problems; [f] broken or glitched clips; mild AI artifacts are `[info]`; it still returns
+the rubric scores, as information). Publication does not gate on scores: `publish_episode.review_problems` requires the
+same file sha, a designated reviewer, an issues list, `review.publish_decision` = `publish` by
+`claude-session-reviewer` with a note, and `review.defects` classifying every issue; an unresolved [a], [b] or [e]
+defect is refused. The Buzzy-shot ledger check, policy and frozen QA are unchanged. The image/Pavo track and every long
+keep the 9.5 prompt and floor.
+
+Hard limits of the flow, in the owner's words: "o que não pode é ter fala cortada sem sentido ou o vídeo sem
+sentido.. tem que estar bom!" (1) no line of speech cut off mid-word or mid-sentence; (2) every scene makes sense
+with the line it carries, in story order. They are the only reasons for the single fix round.
 
 His posting flow, in his words: "precisamos de fluxo de postagem.. não precisa ficar nesse preciosismo.. faz algo bom
 e sem papagaiada.. as duas ferramentas fazem vídeos bons já.. só edita.. deixa coerente.. camada de originalidade é
