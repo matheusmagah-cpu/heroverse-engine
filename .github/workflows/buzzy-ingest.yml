@@ -1,0 +1,47 @@
+name: HeroVerse Buzzy clip ingest (a ledgered Buzzy video -> engine release by its sha256; nothing else)
+run-name: "buzzy-ingest: ${{ inputs.episode }} ${{ inputs.shot }} ${{ inputs.task_id }}"
+# E244: a Buzzy clip downloaded by the executor is not a release asset (the session cannot upload binaries). This
+# downloads the clip from Buzzy's file service and uploads it once, named by its content hash, only when its bytes
+# hash to the output_sha256 of the committed evidence/buzzy/ledger.json call for this episode shot. Idempotent.
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: Episode id (plans/<episode>.json)
+        required: true
+      shot:
+        description: Shot id the clip was made for
+        required: true
+      task_id:
+        description: Buzzy task id (a call of evidence/buzzy/ledger.json)
+        required: true
+      url:
+        description: The clip's https://res-prod.buzzy.now/file-service/<uuid>.mp4 URL from get_task
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-buzzy-ingest
+  cancel-in-progress: false
+jobs:
+  ingest:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write   # gh release upload into the engine's asset release (assets.sh)
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EPISODE: ${{ inputs.episode }}
+      SHOT: ${{ inputs.shot }}
+      TASK_ID: ${{ inputs.task_id }}
+      CLIP_URL: ${{ inputs.url }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Mirror the ledgered clip (sha256 = the ledger's output_sha256)
+        run: |
+          read -r name sha < <(python3 -I -B migration/production/bible/buzzy_ingest.py asset "$EPISODE" "$SHOT" "$TASK_ID" "$CLIP_URL")
+          bash migration/ci/pinned_asset.sh mirror "$name" "$sha" "$CLIP_URL"
+          bash migration/ci/assets.sh which "$name"

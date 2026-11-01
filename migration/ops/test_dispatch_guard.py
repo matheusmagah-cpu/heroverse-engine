@@ -81,6 +81,7 @@ EXEMPT = {
     "shorts-gemini-calibration.yml": "budgeted, resumable reviewer calibration on the published Shorts; no generation, render, upload or approval (autopilot A1-2)",
     "nightly-images.yml": "heartbeat's nightly slot; a used-up allocation defers (E62), never fails",
     "images-upres.yml": "upscales stills already made; no generation",
+    "buzzy-ingest.yml": "mirrors a ledgered Buzzy clip into the engine release by its ledger sha256; idempotent, no generation (E244)",
     "pinned-assets.yml": "mirrors pinned third-party weights into the engine release by their sha256; idempotent, no generation (E240)",
 }
 
