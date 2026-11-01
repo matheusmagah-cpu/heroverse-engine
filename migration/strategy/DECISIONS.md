@@ -305,19 +305,26 @@ the long's mined opening (evidence/vidiq/20261101/compilation-hook-mining.json) 
 - The weekly mining measures these emotional devices in winners against weak contrasts. A device changes only with
   validated evidence: ≥6 winners from ≥4 channels.
 
-## 2026-11-01 — Stills: Pavo agnes-image replaces FLUX as the primary source
+## 2026-11-01 — Stills: ChatGPT (owner's PC) replaces FLUX; fewer stills, animated cinematically
 
-Owner: "Troca ele, acha outro. Não podemos depender dele." The Cloudflare FLUX free allocation (10,000 neurons a day)
-was used up by another consumer of the account before the project made a single image (scene-stills run 41339130885,
-E260 detail cf4006). So FLUX can no longer be the primary still source.
+Owner: "Troca ele, acha outro. Não podemos depender dele" (Cloudflare FLUX). Another consumer used up the free
+allocation (10,000 neurons) before the project made a single image (scene-stills run 41339130885, E260 detail cf4006).
+His next instructions: "Usa o GPT como programa. Pavo não": Pavo stays for video only (the hook, the speaking lines and
+the close), so its quota is never spent on stills. He also asked for fewer images, each animated very well, because
+very short cuts would not work.
 
-- Primary: Pavo agnes-image through `scene_stills.py prepare … --engine pavo` (E122 route; provenance in each
-  candidate's sidecar). Each still needs a fresh exact quote of 0 credits ("zero_cost_confirmed": true). It also takes
-  approved reference images (characters, props), so the same Noah appears in every scene. Measured 2026-11-01: hd
-  16:9 at 2624x1472, quote 0, account balance unchanged at 1,474 (conversation 375358832676964992). The emotion and
-  light were good enough for publication.
-- Second: FLUX via scene-stills.yml, only when it has allocation left. It is a bonus, never a dependency.
-- Last: Buzzy images (about 6 credits each) inside the ≤100-a-day average.
-- If a Pavo still quote is ever above 0, the request is refused and reported (the tool does this), and the next
-  source is used. A Pavo free limit has not been measured yet: the first runs record how many 0-credit stills a day
-  are accepted.
+Still sources, in this order:
+1. Primary: the ChatGPT image runner on the owner's PC (migration/integrations/chatgpt-local).
+   - It generates 16:9 images with the approved character references and records each one.
+   - Its own rules apply: one request at a time, 3 min between requests, 30 a day.
+   - The owner signs in once with `runner.py login`.
+   - The account risk noted in its README is the owner's, by his explicit request.
+   - Candidates are approved by PR, like every still.
+2. FLUX (scene-stills.yml), only as a bonus when it has allocation. It is never a dependency.
+3. Buzzy images (about 6 credits each), last, inside the ≤100-a-day average.
+
+Pacing: a 10-min long uses about 25–30 stills, and each still carries 15–20 s of cinematic animation:
+- 2.5D depth parallax;
+- eased push-in, pull-back, pan and tilt;
+- atmosphere layers (dust, embers, mist, rain, water shimmer, light rays).
+These are built in the edit at zero cost. No fast cutting.
