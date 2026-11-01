@@ -48,3 +48,25 @@ Each record cites OpenAI's Terms of Use: the user owns the Output ("you ... (b) 
 you all our right, title, and interest, if any, in and to Output"). The same terms forbid extracting Output
 "automatically or programmatically"; this runner is a browser script in the owner's own session, run at his explicit
 request, so the account risk (a warning or suspension) is his. The record says so (`licence.automation_note`).
+
+## Desktop app route (primary since 2026-11-01)
+
+Owner, 2026-11-01: "Usa o GPT como programa". The browser runner above meets a Cloudflare "Confirme que é humano"
+challenge at chatgpt.com/auth/login, and no session ever solves a challenge. The ChatGPT Windows app
+(`shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App`) is already signed in to the owner's Pro account and shows no
+challenge. Verified 2026-11-01 16:20–16:28 BRT: one 16:9 image in about 1 min 40 s, downloaded at 1672x941, sha256
+f5f9f375…e105.
+
+Steps (Desktop Commander + `C:\HeroVerse\ui.ps1`; screen 1366x768; take one screenshot to confirm each layout before
+trusting the coordinates):
+1. Open or focus the app: `Start-Process "shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App"`. Open a new chat with
+   "Novo chat"; the composer shows the "Criar imagem" chip.
+2. Put the prompt on the clipboard (`Set-Clipboard`). It starts with "Create an image, 16:9 landscape, no text." and
+   then the still's exact plan prompt, which says "centred in the frame". Click the composer, `type '^v'`, then click
+   the send arrow. Clear the clipboard with `Set-Clipboard ' '`.
+3. Wait about 2 min, then take one screenshot to confirm the image. Its share icon (bottom-right of the image) leads to
+   "Baixar", which opens "Salvar como". Paste the full path `C:\HeroVerse\gpt-images\<still id>.png`, then Enter.
+4. Record the still exactly as the runner does (prompt, sha256, size, source "chatgpt-desktop", the licence line
+   below), then upscale it to the plan's still size and take it through the still review (`scene_stills.py approve`).
+   One image at a time, and at most 30 a day.
+5. A login page, a usage-limit message or any challenge stops the run, which is reported. Nothing is worked around.
