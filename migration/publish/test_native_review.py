@@ -17,6 +17,15 @@ SPEC.loader.exec_module(n)
 
 class Review(unittest.TestCase):
 
+    def test_e248_operations_names_the_caller_upload_of_the_exact_bytes(self):
+        # genesis-09 runs 41262411652/41270806198 timed out because nobody sent the bytes to the saved upload_url
+        src = (ROOT / 'migration/production/bible/native_review.py').read_text()
+        self.assertIn("status='AWAITING_EXACT_BYTES'", src)
+        ops = (ROOT / 'migration/OPERATIONS.md').read_text()
+        self.assertIn('The runner never holds the master (E248)', ops)
+        for step in ('native-review-upload', 'upload_url', 'upload, finalize', 'resume_before_inference'):
+            self.assertIn(step, ops)
+
     def test_e247_a_run_that_never_uploaded_does_not_block_the_resume_of_the_one_that_did(self):
         i = {'plan': 'migration/production/bible/plans/p.json', 'sha256': 'a' * 64}
         t = n.title(i)
