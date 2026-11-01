@@ -77,7 +77,6 @@ EXEMPT = {
     "channel-privacy.yml": "privacy flips, dispatched by hand (plan by default); idempotent",
     "goal-report.yml": "a report; reads only",
     "market-panel.yml": "a market report; reads only",
-    "thumb-study.yml": "a study of thumbnails; reads only",
     "render-smoke.yml": "the render's CI smoke on fixtures",
     "pavo-mcp.yml": "the Pavo integration's tests; no generation",
     "reviewer-calibration.yml": "reviewer calibration on fixed samples (kept: E59's antidote reads it)",
