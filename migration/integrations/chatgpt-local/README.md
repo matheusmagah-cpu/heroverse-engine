@@ -59,8 +59,10 @@ f5f9f375…e105.
 
 Steps (Desktop Commander + `C:\HeroVerse\ui.ps1`; screen 1366x768; take one screenshot to confirm each layout before
 trusting the coordinates):
-1. Open or focus the app: `Start-Process "shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App"`. Open a new chat with
-   "Novo chat"; the composer shows the "Criar imagem" chip.
+1. Open or focus the app: `Start-Process "shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App"`. Owner, 2026-11-01: ONE
+   chat for all the stills. Never open a new chat per image. Select the chat "HeroVerse — stills" in the sidebar and
+   create it with "Novo chat" only if it does not exist. Every image prompt goes into that same chat; the composer shows
+   the "Criar imagem" chip. Never delete the owner's other chats.
 2. Put the prompt on the clipboard (`Set-Clipboard`). It starts with "Create an image, 16:9 landscape, no text." and
    then the still's exact plan prompt, which says "centred in the frame". Click the composer, `type '^v'`, then click
    the send arrow. Clear the clipboard with `Set-Clipboard ' '`.
