@@ -1,0 +1,52 @@
+{
+ "version": "long-review-v3-compilation",
+ "track": "compilation",
+ "pilot_id": "pilot-016",
+ "output_sha256": "37448472081988d60c9a1fe73afe35214be0e8a19ffb468a8f31bd99344cd46b",
+ "checked_at": "2026-11-01T15:17:07Z",
+ "status": "PASS",
+ "watched_review": {
+  "model": "claude-session-reviewer",
+  "issues": [
+   "00:15.000 [info] Aspect ratio shifts from full 16:9 framing to vertical 9:16 Shorts pillarboxed with blurred side extensions.",
+   "01:51.000 [info] Subtle AI generation anomalies visible in crowd hands and circular gathering geometry around the well.",
+   "04:40.000 [info] Artificial limb movement and rigid sliding motion on human figures pulling timber.",
+   "07:38.000 [info] Unnatural gait motion in animal walking animations on mountain ridge."
+  ],
+  "defects": [
+   {
+    "issue": 0,
+    "category": "info",
+    "resolved": true
+   },
+   {
+    "issue": 1,
+    "category": "info",
+    "resolved": true
+   },
+   {
+    "issue": 2,
+    "category": "info",
+    "resolved": true
+   },
+   {
+    "issue": 3,
+    "category": "info",
+    "resolved": true
+   }
+  ],
+  "publish_decision": {
+   "decision": "publish",
+   "by": "claude-session-reviewer",
+   "note": "No speech cut, no scene against its line or story order, no policy issue. The four items are informational: the 9:16 Shorts framed over a blurred 16:9 fill is the compilation format by design, and the mild AI motion/hand artifacts are the accepted cosmetic class (owner 2026-11-01: no regeneration for cosmetic artifacts). The hook and close add the Keeper's critical layer (Genesis 7:16)."
+  },
+  "evidence": [
+   "Gemini native audio+video review of the exact master (run 41319528599, 603.2 s, track compilation defect finder): no [a]-[f] defect listed; 4 [info] items.",
+   "Coordinator checks before the review: built frames sheet at 20 points (hook, 4 chapters, close), caption reads at each chapter cut (E254 cuts at 70.6/165.9/168.0/165.7 s remove the Shorts' own series CTA), new thumbnail (ark at night with torch-lit crowd, line WHEN GOD SHUT THE DOOR).",
+   "compilation-qa-criteria-v1 PASS (build run 41316280847): -14.2 LUFS, -1.3 dBTP, 1920x1080, canonical order, source masters verified by sha256."
+  ],
+  "strongest_moment": "The thematic transition at 08:05 where the door is shut by God, accompanied by heavy atmospheric sound design and striking visual contrast.",
+  "reviewed_at": "2026-11-01T15:20:00Z",
+  "overall": 6.5
+ }
+}
