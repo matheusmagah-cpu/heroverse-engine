@@ -1,0 +1,155 @@
+{
+ "version": "bible-compilation-manifest-v1",
+ "pilot_id": "pilot-016",
+ "compilation": "arc-02-noah-compilation",
+ "output_sha256": "b6a162ec471dfafba3ccc3e9e0fed99d1b83d6996b9dc25c6702422d8b68d3f5",
+ "output_seconds": 642.275,
+ "criteria_version": "compilation-qa-criteria-v1",
+ "burned_captions": "kept from the Shorts",
+ "sources": [
+  {
+   "short": "genesis-06-short",
+   "asset": "bible-genesis-06-short-sha256-e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609.mp4",
+   "sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+   "video_id": "dyuqBS_FXew",
+   "seconds": 85.5
+  },
+  {
+   "short": "genesis-07-short",
+   "asset": "bible-genesis-07-short-sha256-da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea.mp4",
+   "sha256": "da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea",
+   "video_id": "Vvfw4W4nV7M",
+   "seconds": 173.8
+  },
+  {
+   "short": "genesis-08-short",
+   "asset": "bible-genesis-08-short-sha256-00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23.mp4",
+   "sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+   "video_id": "jPNjgf-PWHM",
+   "seconds": 175.11
+  },
+  {
+   "short": "genesis-09-short",
+   "asset": "bible-genesis-09-short-sha256-57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829.mp4",
+   "sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+   "video_id": "IYSxVKTikSs",
+   "seconds": 174.79
+  }
+ ],
+ "segments": [
+  {
+   "kind": "hook",
+   "name": "hook",
+   "seconds": 12.552,
+   "start": 0.0,
+   "end": 12.552
+  },
+  {
+   "kind": "card",
+   "name": "genesis-06-short",
+   "seconds": 2.5,
+   "start": 12.552,
+   "end": 15.052
+  },
+  {
+   "kind": "short",
+   "name": "genesis-06-short",
+   "seconds": 85.539,
+   "source_sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+   "start": 15.052,
+   "end": 100.591
+  },
+  {
+   "kind": "card",
+   "name": "genesis-07-short",
+   "seconds": 2.5,
+   "start": 100.591,
+   "end": 103.091
+  },
+  {
+   "kind": "short",
+   "name": "genesis-07-short",
+   "seconds": 173.803,
+   "source_sha256": "da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea",
+   "start": 103.091,
+   "end": 276.894
+  },
+  {
+   "kind": "card",
+   "name": "genesis-08-short",
+   "seconds": 2.5,
+   "start": 276.894,
+   "end": 279.394
+  },
+  {
+   "kind": "short",
+   "name": "genesis-08-short",
+   "seconds": 175.11,
+   "source_sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+   "start": 279.394,
+   "end": 454.504
+  },
+  {
+   "kind": "card",
+   "name": "genesis-09-short",
+   "seconds": 2.5,
+   "start": 454.504,
+   "end": 457.004
+  },
+  {
+   "kind": "short",
+   "name": "genesis-09-short",
+   "seconds": 174.81,
+   "source_sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+   "start": 457.004,
+   "end": 631.814
+  },
+  {
+   "kind": "close",
+   "name": "close",
+   "seconds": 10.44,
+   "start": 631.814,
+   "end": 642.254
+  }
+ ],
+ "chapters": [
+  [
+   0,
+   "The Keeper's question"
+  ],
+  [
+   12.552,
+   "Enoch Walked With God"
+  ],
+  [
+   100.591,
+   "God Sees the Earth Corrupt"
+  ],
+  [
+   276.894,
+   "Noah Builds the Ark"
+  ],
+  [
+   454.504,
+   "The Flood Begins"
+  ],
+  [
+   631.814,
+   "The Keeper's honest question"
+  ]
+ ],
+ "keeper_clips": {
+  "hook": {
+   "conversation_id": "375260545475152512",
+   "quote": "0 credits (exact, fresh)",
+   "video_sha256": "2e8eb2c368a904190f3ce4329ac4d2c6751fdd23636dc9fe39da43e8cdc145c8",
+   "audio_sha256": "f577286a68d849c92dd4557ccca7c673bacfac162eb069ad79fa45a71e71ab0e"
+  },
+  "close": {
+   "conversation_id": "375257418030683840",
+   "quote": "0 credits (exact, fresh)",
+   "video_sha256": "c1b6648896a4fced3a221563704d8ae8bdfda7b85e407182ab3075eca9b407ac",
+   "audio_sha256": "132f7cf8f682c5379961c8f9b6b8bc8d6bedd550122eb2d041a7dcff1199c7eb"
+  }
+ }
+}
