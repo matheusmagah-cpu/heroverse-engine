@@ -3404,6 +3404,31 @@
      "review-after-build"
     ]
    }
+  },
+  {
+   "id": "E251",
+   "date": "2026-11-01",
+   "class": [
+    "threshold"
+   ],
+   "error": "The 9.5 long gate (story QA rows, 2560x1440, ASR on the script, per-chapter approved character thumbnail, score floor) cannot measure or accept a complete-story compilation of an arc's already-public Shorts, so the owner's compilation long (01/11) had no route to publication.",
+   "fix": "Owner-directed compilation track (DECISIONS.md 2026-11-01): compilation_long.py assembles the arc's public Short masters by sha256 (16:9 over a blurred fill, chapter cards, a new Keeper hook and close from Pavo clips at an exact zero-credit quote, gain-only loudness, faded joins) and measures it with its own frozen compilation-qa-criteria-v1; long_review writes the defect-gate review (owner_quality_policy.compilation_problems: designated reviewer, publish decision, no unresolved a/b/e), prepublish_gate/publication_binding/approve.yml/publish_video apply it only to that criteria version. approve.yml -> prepublish_gate -> publish.yml is unchanged and the 9.5 track, story QA files and every other gate keep their rules (tested).",
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120",
+    "E138",
+    "E242",
+    "E250"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_compilation_long.py",
+    "contains": "def test_other_tracks_are_unchanged",
+    "covers": [
+     "threshold"
+    ]
+   }
   }
  ]
 }

@@ -1299,6 +1299,33 @@
    "saved_to": "evidence/vidiq/20261028/arc01-still-test.json",
    "balance_before": 3216,
    "outcome": "completed (job_506b5375-8386-4584-a2cf-305f27600aa7), 1376x768, identity FAIL (another woman), review 7.5: not usable; evidence/vidiq/20261028/arc01-still-test.json"
+  },
+  {
+   "date": "2026-11-01",
+   "kind": "read",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "outliers: long Bible Noah videos, 3 months",
+   "saved_to": "evidence/vidiq/20261101/compilation-hook-mining.json",
+   "outcome": "completed"
+  },
+  {
+   "date": "2026-11-01",
+   "kind": "read",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "transcript FaYEXkK6RsA (367K winner)",
+   "saved_to": "evidence/vidiq/20261101/compilation-hook-mining.json",
+   "outcome": "completed"
+  },
+  {
+   "date": "2026-11-01",
+   "kind": "read",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "transcript bOvEdvjydhs (strongest hook)",
+   "saved_to": "evidence/vidiq/20261101/compilation-hook-mining.json",
+   "outcome": "completed"
   }
  ]
 }

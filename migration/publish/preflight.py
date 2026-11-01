@@ -102,7 +102,13 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
         import publish_video
         problems += publish_video.bible_thumb_problems(pkg, thumbnail, d)
     sentences = man.get("sentences") or []
-    if not sentences or any(not s.get("text") or s["end"] <= s["start"] for s in sentences):
+    if man.get("version") == "bible-compilation-manifest-v1":
+        # E251: the compilation keeps the Shorts' burned captions and uploads no track; it needs valid chapters instead
+        rows = man.get("chapters") or []
+        if (len(rows) < 3 or rows[0][0] != 0 or any(b[0] - a[0] < 10 for a, b in zip(rows, rows[1:]))
+                or man.get("output_seconds", 0) - rows[-1][0] < 10):
+            problems.append("CHAPTERS (from 0:00, at least 3, each at least 10 s)")
+    elif not sentences or any(not s.get("text") or s["end"] <= s["start"] for s in sentences):
         problems.append("CAPTIONS_TIMELINE (missing or invalid sentences)")
     else:
         problems += caption_problems(man, d / "out")

@@ -264,6 +264,12 @@ def check_new_upload(manifest_path, manifest, video):
     if problems:
         raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
     watched = review.get("watched_review")
+    if review.get("track") == "compilation":   # E251: defect gate, no 9.5 floor (owner_quality_policy.compilation_problems)
+        problems = owner_quality_policy.compilation_problems(
+            {**watched, "output_sha256": review["output_sha256"]} if isinstance(watched, dict) else watched, actual_sha256)
+        if problems:
+            raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
+        return
     # Long evidence binds the watched review at the top level. Adapt a new
     # in-memory copy only, after checking that binding against the actual MP4.
     bound_review = {**watched, "output_sha256": review["output_sha256"]} if isinstance(watched, dict) else watched
