@@ -3511,6 +3511,84 @@
      "review-after-build"
     ]
    }
+  },
+  {
+   "id": "E255",
+   "date": "2026-11-01",
+   "class": [
+    "instrument"
+   ],
+   "error": "E253 let native_review.py take a compilation plan, but the dispatch guard that runs first (dispatch_guard.native_review) still accepted only bible/plans/*.json at 150 MB, so the arc-02 compilation review (run 41318103408) was refused before any provider call; the fix covered one layer of the route, not the route.",
+   "fix": "dispatch_guard.native_review accepts compilations/<id>.json (bible-compilation-plan-v1, id names the file) with the same 600 MB limit as native_review.py; Short plans keep their check and 150 MB.",
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233",
+    "E238",
+    "E253"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e255_native_review_takes_a_compilation_plan_within_its_own_limit",
+    "covers": [
+     "instrument"
+    ]
+   }
+  },
+  {
+   "id": "E256",
+   "date": "2026-11-01",
+   "class": [
+    "recurrence"
+   ],
+   "error": "comment-replies.yml removes a posted comment from comment_queue.json but its decision stays in comment_replies.json, so comment_replies.check (and test_committed_decisions_pass_the_policy in every PR) reported NOT_IN_QUEUE after each posting run; it was first patched on 2026-11-01 by pruning one entry by hand (#610) and came back with the next 4 posts.",
+   "fix": "check() takes the replies ledger: an id already posted or refused there is done, not an error; only an id in neither the queue nor the ledger is NOT_IN_QUEUE. The CLI check and the repository test pass the ledger.",
+   "prior": [
+    "E115",
+    "E122",
+    "E123",
+    "E125",
+    "E128"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_comment_replies.py",
+    "contains": "def test_e256_a_posted_reply_that_left_the_queue_is_not_an_error",
+    "covers": [
+     "recurrence"
+    ]
+   }
+  },
+  {
+   "id": "E257",
+   "date": "2026-11-01",
+   "class": [
+    "rerun-without-fix"
+   ],
+   "error": "native_review.guard ignored a same-content run that never opened a provider upload only when resuming (E247); for a first submission, the arc-02 compilation run 41318103408 that the dispatch guard had refused before any provider call blocked the fixed re-dispatch 41318954228 with CONTENT_ALREADY_SUBMITTED_RECONCILE_EXISTING_RUN.",
+   "fix": "guard() treats a same-titled completed failure whose 'Open one private resumable upload session' never succeeded as harmless for every dispatch, not only a resume; a run that opened an upload still blocks (exact content is never replayed).",
+   "prior": [
+    "E116",
+    "E211",
+    "E214",
+    "E228",
+    "E247"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e257_a_guard_refused_run_does_not_block_a_first_submission",
+    "covers": [
+     "rerun-without-fix"
+    ]
+   }
   }
  ]
 }

@@ -228,11 +228,21 @@ def publish_episode(i):
 
 
 def native_review(i):
-    plan = _plan(i)
-    need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
+    p = i.get("plan", "")
+    compilation = re.fullmatch(rf"migration/production/bible/compilations/({SLUG})\.json", p)   # E255 (E253's route)
+    if compilation:
+        need_file(p)
+        plan = load(p)
+        need(plan.get("version") == "bible-compilation-plan-v1" and plan.get("id") == compilation.group(1),
+             "plan", p, "a compilation plan whose id names the file")
+        limit = 600_000_000
+    else:
+        plan = _plan(i)
+        need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
+        limit = 150_000_000
     need(re.fullmatch(r"[0-9a-f]{64}", i.get("sha256", "")), "sha256", i.get("sha256"), "exact master SHA256")
     need(i.get("owner_review_authorized") in (True, "true"), "owner_review_authorized", "[boolean]", "explicit designation")
-    need(str(i.get("byte_size", "")).isdigit() and 0 < int(i["byte_size"]) <= 150_000_000, "byte_size", i.get("byte_size"), "bounded exact bytes")
+    need(str(i.get("byte_size", "")).isdigit() and 0 < int(i["byte_size"]) <= limit, "byte_size", i.get("byte_size"), "bounded exact bytes")
     # Credentials, timestamp and content replay are checked before any provider mutation by native_review.py.
     # The unfinished active plan is intentionally not built or silently replaced by this evidence-only step.
     return {"uploads": 0, "deps": [i["plan"], "migration/ops/CLAUDE_REVIEW.md"]}
