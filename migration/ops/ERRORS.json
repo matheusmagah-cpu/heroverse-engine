@@ -3278,6 +3278,33 @@
      "drift"
     ]
    }
+  },
+  {
+   "id": "E246",
+   "date": "2026-11-01",
+   "class": [
+    "capacity"
+   ],
+   "error": "native-review.yml run 41262411652 (genesis-09 round 2 master, 100 MB) ended FILE_PROCESSING_PENDING_GET_ONLY: the provider still held the uploaded file in PROCESSING after the fixed 15 min wait (90 polls), so no inference ran and the owner's one-hour Free Tier proof was burned waiting.",
+   "fix": "native_review.FILE_POLLS = 210 (35 min) inside the workflow's 45 min timeout; the resume path (resume_before_inference) reuses the uploaded file without a second upload.",
+   "prior": [
+    "E116",
+    "E124",
+    "E128",
+    "E134",
+    "E136",
+    "E227",
+    "E232",
+    "E234",
+    "E244"
+   ],
+   "antidote": {
+    "file": "migration/publish/test_native_review.py",
+    "contains": "def test_e246_the_provider_file_wait_covers_a_slow_processing_of_a_full_master",
+    "covers": [
+     "capacity"
+    ]
+   }
   }
  ]
 }

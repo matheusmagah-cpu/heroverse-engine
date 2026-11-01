@@ -17,6 +17,11 @@ SPEC.loader.exec_module(n)
 
 class Review(unittest.TestCase):
 
+    def test_e246_the_provider_file_wait_covers_a_slow_processing_of_a_full_master(self):
+        # genesis-09 round 2 (run 41262411652): the file was still PROCESSING after the old 15 min wait
+        self.assertGreaterEqual(n.FILE_POLLS * 10, 30 * 60)
+        self.assertLess(n.FILE_POLLS * 10, 40 * 60)   # inside the workflow's 45 min
+
     def test_e242_buzzy_plan_floor_is_8_and_the_default_stays_9_5(self):
         with tempfile.TemporaryDirectory() as d:
             for name, track, want in (('a.json', 'buzzy', 8.0), ('b.json', None, 9.5), ('c.json', 'other', 9.5)):
