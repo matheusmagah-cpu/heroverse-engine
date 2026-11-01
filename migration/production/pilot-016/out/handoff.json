@@ -1,0 +1,21 @@
+{
+ "version": "compilation-handoff-v1",
+ "pilot_id": "pilot-016",
+ "episode": "arc-02-noah-compilation",
+ "output_sha256": "037c0142c34a869c6118f2e71ea76369196f76e14f16cae42df3a5fc2cbecf04",
+ "source_plan": {
+  "file": "migration/production/bible/compilations/arc-02-noah-compilation.json",
+  "sha256": "b6d3f6bd7f71ada6437af9c29fc1b4bf41822202fa61f91b8d47457ebdac7c29"
+ },
+ "release_asset": "pilot-016-sha256-037c0142c34a869c6118f2e71ea76369196f76e14f16cae42df3a5fc2cbecf04.mp4",
+ "files": {
+  "script.json": "0f1eb22fdfc587ef802376709897617fc03f7191f460f59aae471f14ea067531",
+  "schedule.json": "f3159f8e8578383b7c1acb00e96c71e6950d3d19af8c860390f3e981d78e9503",
+  "out/manifest.json": "c013afa470d621b00ac987d6636f378504e563e46654db4c2d525f792a702d56",
+  "out/timeline.json": "9ef8a3ac5b06081b8bf5da9a3b019c6f0297af0f0039efd1acfd1041bdada6f0",
+  "out/package.json": "0b606eebd254468fb37c10a82738f3f73bb5283c555d31511b664588cfd6547f",
+  "inspection/thumbnail.jpg": "54163682beb331609b2adeff846cc3c931182cf743cd6ff271ac3bc7ef67ce90"
+ },
+ "review_status": "AWAITING_REVIEW",
+ "approval_created": false
+}
