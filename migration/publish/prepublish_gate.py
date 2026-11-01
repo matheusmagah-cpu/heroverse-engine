@@ -248,7 +248,7 @@ def evaluate_compilation(d, qa, manifest, review, video, preflight_problems):
     sha = (manifest or {}).get("output_sha256")
     dims = {"binding": binding(d, qa, manifest, review, video), "format": format_items(d)}
     dims["format"] = [item("format", "story_long", "PASS" if compilation_long(d) else "FAIL",
-                           COMPILATION_ARCHETYPE if compilation_long(d) else "NOT_COMPILATION_LONG")]
+                           COMPILATION_ARCHETYPE if compilation_long(d) else "script is not a compilation long")]
     for name, checks in COMPILATION_DIMENSIONS.items():
         dims[name] = qa_items(qa, checks, sha)
     dims["defect_review"] = compilation_review_items(review, sha)

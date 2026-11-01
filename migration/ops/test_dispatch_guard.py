@@ -59,6 +59,7 @@ def hand_copied_shot_ids(root=ROOT):
 # workflow_dispatch workflows the guard does not cover, each with its reason (a new one must be listed or guarded)
 EXEMPT = {
     "buzzy-cloud-readiness.yml": "bounded allowlisted GET-only account inspection; no deploy, generation, render, upload or billing mutation",
+    "compilation-build.yml": "ffmpeg assembly of an arc's public Short masters by sha256 (E251); no Pavo/Buzzy/provider call, no secret, no generation; one run at a time (heroverse-long-build); approval stays with approve.yml",
     "heartbeat.yml": "the scheduler itself; it dispatches, it makes nothing",
     "requests.yml": "dispatches committed requests; each dispatched workflow runs its own guard",
     "reconcile.yml": "reconciles ledgers; no generation, render or upload",
