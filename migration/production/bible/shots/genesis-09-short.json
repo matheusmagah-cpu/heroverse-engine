@@ -342,22 +342,25 @@
    "request_sha256": "2931b6b7c5590b4d4029e1a288bb545d683ff901d8a8f5e5761ebcb73673cc16"
   },
   "s-voice": {
-   "source": "still_motion",
-   "score": 9.5,
-   "note": "Same approved ark still (genesis-09-s-voice, 9.5 on 2026-10-28) re-bound to the plan's current request after the plan text changes of #530/#540; image unchanged, re-viewed by this session: the black box alone under storm clouds and lightning, no people; God's Genesis 7:4 on Kokoro over a slow push-in.",
-   "model": "claude-session-reviewer",
-   "approved_at": "2026-10-31",
-   "still": "genesis-09-s-voice",
-   "repo_path": "migration/production/bible/stills/genesis-09-s-voice.jpg",
-   "clip_sha256": null,
-   "still_sha256": "8c3ef26c79c19d7b7d0acb2b825809fab104790d49dfa452e597cbf5b6711e19",
-   "frame": [
-    1080,
-    1920
-   ],
-   "licence": "Pavo generated (owner-owned)",
+   "asset": "shot-genesis-09-short-s-voice-sha256-841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8.mp4",
+   "clip_sha256": "841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8",
+   "request_sha256": "1a8244f1696337ede396ba22ace50781a51e418dcab45c33ed092559a6264fcb",
    "clip_seconds": 8,
-   "request_sha256": "ceae3b98016ab667f6e801ea81af18a8faeaf54bd7a86f6c3476ab35eee25e5a"
+   "requested_clip_seconds": 8,
+   "media": {
+    "version": "clip-media-v1",
+    "clip_sha256": "841f4d9c023cca3de08acdaf618165ae4b333b4a0ada569da464ca2df4a366a8",
+    "video_seconds": 8.0,
+    "audio_seconds": null,
+    "instrument": "ffprobe stream durations"
+   },
+   "score": 9.5,
+   "note": "Frame review of the probe sheet (20 frames, 720x1280, 8 s, round 1, no flags, 0-credit quote): real video, not a pan: roiling storm clouds with a lightning fork in the opening second, wind-driven dust sweeping across the valley floor, the sunset gap and rain veil shifting; the black plank box on the hill stays unmoving as the plan says; no people, no God shown, no modern object. Replaces the still with a pan the review of run 41250892924 flagged for the hook.",
+   "probe_record": "migration/evidence/shots/genesis-09-short/41260265343.json",
+   "run_id": "41260265343",
+   "source_run": null,
+   "approved_at": "2026-11-01",
+   "model": "claude-session-reviewer"
   },
   "s-windows": {
    "source": "still_motion",
