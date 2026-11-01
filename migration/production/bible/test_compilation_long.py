@@ -75,9 +75,9 @@ class RenderTests(unittest.TestCase):
             ff("-f", "lavfi", "-i", "testsrc=s=640x360:r=24:d=2", "-c:v", "libx264", "-pix_fmt", "yuv420p", t / "k.mp4")
             ff("-f", "lavfi", "-i", "sine=f=200:r=24000:d=1.5", t / "k.wav")
             cl.render_short(t / "short.mp4", t / "s.mp4")
-            cl.render_card(("PART 1 OF 4", "Enoch Walked With God", "Genesis 5:21-24 (KJV)"), t / "c.mp4")
+            cl.render_short(t / "short.mp4", t / "c.mp4", None, ("PART 1 OF 4", "Enoch Walked With God", "Genesis 5:21-24 (KJV)"))
             cl.render_keeper(t / "k.mp4", t / "k.wav", t / "h.mp4")
-            for f, secs in (("s.mp4", 3.0), ("c.mp4", cl.CARD), ("h.mp4", 2.0 + 2 * cl.BEAT)):
+            for f, secs in (("s.mp4", 3.0), ("c.mp4", 3.0), ("h.mp4", 2.0 + 2 * cl.BEAT)):
                 p = json.loads(cl.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
                                        "stream=width,height", "-of", "json", t / f]).stdout)["streams"][0]
                 self.assertEqual((p["width"], p["height"]), (1920, 1080), f)
@@ -92,6 +92,25 @@ class RenderTests(unittest.TestCase):
             head = cl.run(["ffmpeg", "-nostdin", "-hide_banner", "-t", "0.4", "-i", t / "h.mp4", "-af", "volumedetect",
                            "-f", "null", "-"]).stderr
             self.assertIn("max_volume: -91", head)
+
+
+@unittest.skipUnless(FFMPEG, "ffmpeg")
+class CardTests(unittest.TestCase):
+    def test_e258_the_chapter_card_is_drawn_over_its_short_not_dead_air(self):
+        with tempfile.TemporaryDirectory() as t:
+            t = Path(t)
+            ff("-f", "lavfi", "-i", "testsrc=s=270x480:r=30:d=4", "-f", "lavfi", "-i", "sine=f=300:r=44100:d=4",
+               "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", t / "short.mp4")
+            cl.render_short(t / "short.mp4", t / "c.mp4", None, ("PART 1 OF 4", "Enoch Walked With God", "Genesis 5:21-24 (KJV)"))
+            log = cl.run(["ffmpeg", "-nostdin", "-hide_banner", "-i", t / "c.mp4", "-vf", "blackdetect=d=0.1:pic_th=0.98",
+                          "-af", "silencedetect=n=-60dB:d=0.5", "-f", "null", "-"]).stderr
+            self.assertNotIn("black_start", log)
+            self.assertNotIn("silence_start", log)
+        self.assertFalse(hasattr(cl, "render_card"))
+        plan = cl.load(PLAN)
+        segs = cl.script_segments(plan)
+        self.assertEqual([s["kind"] for s in segs], ["hook"] + ["short"] * len(plan["chapters"]) + ["close"])
+        self.assertTrue(all(s["text"].strip() for s in segs))
 
 
 def review_doc(**kw):

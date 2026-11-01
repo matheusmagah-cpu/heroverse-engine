@@ -39,7 +39,6 @@ FADE = 0.25
 BEAT = 0.5                      # still beat at each end of a Keeper clip
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 EPISODES = HERE / "episodes"
-CARD_BG = "0x0b1020"
 ENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-r", str(FPS),
        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart"]
 
@@ -160,30 +159,31 @@ def fades(d):
             f"afade=t=in:st=0:d={FADE},afade=t=out:st={max(d - FADE, 0):.3f}:d={FADE}")
 
 
-def render_short(src, out, end=None):
+def card_overlay(card, files):
+    """E258: the chapter card is drawn over the first CARD seconds of its Short (real picture and sound), never a
+    separate black, silent, frozen segment that the whole-file signal scan rightly refuses as dead air."""
+    if not card:
+        return ""
+    on = f"enable='between(t,0.2,{0.2 + CARD:.2f})'"
+    dt = lambda p, size, y, col: (f",drawtext=fontfile={FONT}:textfile={p}:fontsize={size}:fontcolor={col}:"
+                                  f"x=(w-text_w)/2:y={y}:borderw=3:bordercolor=black@0.85:{on}")
+    return (f",drawbox=x=0:y=40:w=iw:h=250:color=black@0.45:t=fill:{on}" + dt(files[0], 40, 62, "0xd9b25f")
+            + dt(files[1], 78, 112, "white") + dt(files[2], 44, 212, "0xc9d3e6"))
+
+
+def render_short(src, out, end=None, card=None):
     d = duration(src) if end is None else min(duration(src), float(end))
     v, a = fades(d)
+    files = []
+    for n, t in enumerate(card or ()):
+        p = Path(f"{Path(out).with_suffix('')}.card{n}.txt")
+        p.write_text(t)
+        files.append(p)
     graph = (f"[0:v]split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=40:6,"
-             f"eq=brightness=-0.28[bg];[b]scale=-2:{H}[fg];[bg][fg]overlay=(W-w)/2:0,setsar=1,{v}[v];"
+             f"eq=brightness=-0.28[bg];[b]scale=-2:{H}[fg];[bg][fg]overlay=(W-w)/2:0,setsar=1{card_overlay(card, files)},{v}[v];"
              f"[0:a]aresample=48000,aformat=channel_layouts=stereo,{gain_filter(src)},{a}[a]")
     run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", src, "-filter_complex", graph, "-map", "[v]", "-map", "[a]",
          "-t", f"{d:.3f}", *ENC, out])
-
-
-def render_card(kind_text, out):
-    """kind_text: (small line, title, reference). Text goes through files (no escaping); silent audio."""
-    tmp = Path(out).with_suffix("")
-    files = []
-    for n, t in enumerate(kind_text):
-        p = Path(f"{tmp}.{n}.txt")
-        p.write_text(t)
-        files.append(p)
-    v, a = fades(CARD)
-    dt = lambda p, size, y, col: (f"drawtext=fontfile={FONT}:textfile={p}:fontsize={size}:fontcolor={col}:"
-                                  f"x=(w-text_w)/2:y={y}")
-    vf = ",".join([dt(files[0], 40, 330, "0xd9b25f"), dt(files[1], 78, 440, "white"), dt(files[2], 44, 590, "0xc9d3e6"), v])
-    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "lavfi", "-i", f"color=c={CARD_BG}:s={W}x{H}:r={FPS}:d={CARD}",
-         "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", str(CARD), "-vf", vf, "-af", a, *ENC, out])
     for p in files:
         p.unlink()
 
@@ -249,10 +249,10 @@ def build(plan_path, src_dir, out_dir):
             raise SystemExit(f"SOURCE_SHA256_MISMATCH {sid}")
         verified.append({"short": sid, "asset": asset, "sha256": sha, "video_id": ep["video_id"], "seconds": ep["seconds"]})
         c = plan["chapters"][k - 1]
-        render_card((f"PART {k} OF {len(plan['chapters'])}", c["title"], c["reference"] + " (KJV)"), seg / f"{k:02d}a-card.mp4")
-        add("card", sid, seg / f"{k:02d}a-card.mp4")
-        render_short(master, seg / f"{k:02d}b-short.mp4", c.get("end_s"))
-        add("short", sid, seg / f"{k:02d}b-short.mp4", source_sha256=sha, **({"end_s": c["end_s"]} if c.get("end_s") else {}))
+        card = (f"PART {k} OF {len(plan['chapters'])}", c["title"], c["reference"] + " (KJV)")
+        render_short(master, seg / f"{k:02d}b-short.mp4", c.get("end_s"), card)
+        add("short", sid, seg / f"{k:02d}b-short.mp4", source_sha256=sha, chapter=c["title"],
+            **({"end_s": c["end_s"]} if c.get("end_s") else {}))
     render_keeper(ROOT / plan["close"]["video"], ROOT / plan["close"]["audio"], seg / "99-close.mp4")
     add("close", "close", seg / "99-close.mp4")
     lst = out / "concat.txt"
@@ -298,7 +298,8 @@ def qa(plan_path, out_dir):
         "true_peak_ceiling": peak <= TRUE_PEAK_MAX,
         "sources_are_the_public_masters_by_sha": [s["short"] for s in src] == [c["short"] for c in plan["chapters"]]
         and all(len(s["sha256"]) == 64 for s in src) and [r["source_sha256"] for r in shorts] == [s["sha256"] for s in src],
-        "canonical_order": [r["kind"] for r in tl["segments"]] == ["hook"] + ["card", "short"] * len(src) + ["close"],
+        "canonical_order": [r["kind"] for r in tl["segments"]] == ["hook"] + ["short"] * len(src) + ["close"]
+        and [r.get("chapter") for r in shorts] == [c["title"] for c in plan["chapters"]],   # E258: card over each Short
         "keeper_clips_zero_credit": plan["hook"]["quote"] == plan["close"]["quote"] == "0 credits (exact, fresh)",
         "music_and_voice_owned": True,   # the Shorts' own recorded sources (Kokoro voice, owned music) and our Kokoro hook/close
     }
@@ -313,13 +314,26 @@ def qa(plan_path, out_dir):
 
 def description(plan, tl):
     rows = [(0, plan["chapter_zero"])] + [(r["start"], plan["chapters"][i]["title"])
-                                          for i, r in enumerate(x for x in tl["segments"] if x["kind"] == "card")]
+                                          for i, r in enumerate(x for x in tl["segments"] if x["kind"] == "short")]
     close = next(r for r in tl["segments"] if r["kind"] == "close")
     rows.append((close["start"], plan["chapter_last"]))
     chapters = "\n".join(f"{clock(t)} {name}" for t, name in rows)
     links = "\n".join(f"- {c['title']} ({c['reference']}): https://www.youtube.com/shorts/{episode(c['short'])['video_id']}"
                       for c in plan["chapters"])
     return plan["description"].format(chapters=chapters, links=links), rows
+
+
+def script_segments(plan, root=ROOT):
+    """The spoken text in order: the Keeper's hook, each Short's planned lines (where its plan exists), the close."""
+    segs = [{"kind": "hook", "text": plan["hook"]["text"]}]
+    for c in plan["chapters"]:
+        p = Path(root) / "migration/production/bible/plans" / f"{c['short']}.json"
+        lines = []
+        if p.is_file():
+            lines = [s["line"] for s in load(p).get("shots", []) if isinstance(s.get("line"), str) and s["line"].strip()]
+        segs.append({"kind": "short", "short": c["short"], "text": " ".join(lines) or c["title"]})
+    segs.append({"kind": "close", "text": plan["close"]["text"]})
+    return segs
 
 
 def materialize(plan_path, out_dir, root=ROOT):
@@ -340,7 +354,8 @@ def materialize(plan_path, out_dir, root=ROOT):
     script = {"version": "bible-compilation-script-v1", "pilot_id": plan["pilot"], "archetype": ARCHETYPE, "series": SERIES,
               "episode": plan["id"], "working_title": plan["title"], "criteria_version": CRITERIA,
               "shorts": [c["short"] for c in plan["chapters"]],
-              "hook": {"text": plan["hook"]["text"]}, "close": {"text": plan["close"]["text"]}}
+              "hook": {"text": plan["hook"]["text"]}, "close": {"text": plan["close"]["text"]},
+              "segments": script_segments(plan, root)}   # E258: three_stage critique reads the whole spoken text
     manifest = {"version": MANIFEST_VERSION, "pilot_id": plan["pilot"], "compilation": plan["id"], "output_sha256": sha,
                 "output_seconds": round(dur, 3), "criteria_version": CRITERIA, "burned_captions": "kept from the Shorts",
                 "sources": load(out / "sources.json"), "segments": manifest_tl["segments"], "chapters": rows,
