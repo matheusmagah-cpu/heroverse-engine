@@ -204,9 +204,17 @@ jobs:
           cp "$mp4" "$RUNNER_TEMP/$asset"
           bash migration/ci/assets.sh upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
           tag=$(bash migration/ci/assets.sh which "$asset" --repo "$GITHUB_REPOSITORY")
+          clean_asset=""
+          if [ -f "$out/$EP.clean.mp4" ]; then   # E259: a long-first long's caption-free master, kept for its Short cuts
+            csha=$(sha256sum "$out/$EP.clean.mp4" | cut -d' ' -f1)
+            python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['composed']['clean']['output_sha256']==sys.argv[2] else 'CLEAN_SHA256_MISMATCH')" "$out/report.json" "$csha"
+            clean_asset="bible-$EP-clean-sha256-$csha.mp4"
+            cp "$out/$EP.clean.mp4" "$RUNNER_TEMP/$clean_asset"
+            bash migration/ci/assets.sh upload "$RUNNER_TEMP/$clean_asset" --repo "$GITHUB_REPOSITORY" --clobber
+          fi
           d="migration/evidence/episodes/$EP"; mkdir -p "$d"
-          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r['composed'].update(release_asset=sys.argv[2],release_tag=sys.argv[3],run_id=sys.argv[4]);open(sys.argv[5],'w').write(json.dumps(r,indent=1,ensure_ascii=False)+'\n')" \
-            "$out/report.json" "$asset" "$tag" "$GITHUB_RUN_ID" "$d/report-$GITHUB_RUN_ID.json"
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r['composed'].update(release_asset=sys.argv[2],release_tag=sys.argv[3],run_id=sys.argv[4]);sys.argv[6] and r['composed']['clean'].update(release_asset=sys.argv[6]);open(sys.argv[5],'w').write(json.dumps(r,indent=1,ensure_ascii=False)+'\n')" \
+            "$out/report.json" "$asset" "$tag" "$GITHUB_RUN_ID" "$d/report-$GITHUB_RUN_ID.json" "$clean_asset"
           cp "$out/sheet.jpg" "$d/sheet-$GITHUB_RUN_ID.jpg"
           branch="claude/episode-$EP-$GITHUB_RUN_ID"
           git config user.name "github-actions[bot]"

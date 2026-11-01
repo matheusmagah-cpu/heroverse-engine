@@ -9,6 +9,8 @@ second. Captions are burned large (about 7 % of the frame height) from the voice
 
 usage: short_engine.py PLAN.json OUT.mp4
 PLAN: {"voice": WAV, "timeline": timeline.json, "music": FLAC, "music_offset": s, "tail": s,
+       "frame": [W, H]? (E259: [1920, 1080] for a long-first long; default the Short's 1080x1920),
+       "clean_out": MP4? (E259: the same picture and mix without captions, for the Short cuts),
        "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s, "speed": f?}, ...]}   shots tile [0, voice end + tail]
        ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed;
         "talk", optional: {"start", "end"} of the line a talking clip carries - the Keeper or a character speaking -
@@ -39,6 +41,18 @@ REF_MARGIN_V = 880          # the citation sits above the (up to two-line) capti
 MARGIN_V = 560            # above the Shorts UI at the bottom
 MUSIC_DB = -22.0
 FADE_OUT = 0.8
+# E259: the long-first long (plan track buzzy-long) is composed at 16:9 with captions sized for it: about 7 % of the
+# 1080 px height, four words a card (the wide frame holds them), low in the frame (no Shorts UI to clear)
+LONG_FIRST_FRAME = (1920, 1080)
+LONG_FIRST_STYLE = {"words": 4, "font": 76, "margin": 70, "scr": 66, "ref": 40, "ref_margin": 190}
+
+
+def caption_style(w=W, h=H):
+    """The caption sizes of a frame: the Short's (1080x1920) as they are, or the 16:9 long-first long's."""
+    if (w, h) == LONG_FIRST_FRAME:
+        return dict(LONG_FIRST_STYLE, w=w, h=h)
+    return {"words": CAPTION_WORDS, "font": FONT_SIZE, "margin": MARGIN_V, "scr": SCR_SIZE, "ref": REF_SIZE,
+            "ref_margin": REF_MARGIN_V, "w": W, "h": H}
 
 
 def run(args):
@@ -119,10 +133,10 @@ def hold_filter(shot):
     return f"tpad=stop_mode=clone:stop_duration={hold:.3f}," if hold > 0 else ""
 
 
-def chunks(sentence):
-    """Caption cards of up to CAPTION_WORDS words, timed by their share of the sentence's characters."""
+def chunks(sentence, size=CAPTION_WORDS):
+    """Caption cards of up to `size` words (CAPTION_WORDS), timed by their share of the sentence's characters."""
     words = sentence["text"].split()
-    groups = [words[i:i + CAPTION_WORDS] for i in range(0, len(words), CAPTION_WORDS)]
+    groups = [words[i:i + size] for i in range(0, len(words), size)]
     total = sum(len(" ".join(g)) for g in groups) or 1
     t, out = sentence["start"], []
     for g in groups:
@@ -144,7 +158,8 @@ def citation(reference):
     return f"{ref} · KJV" if ref else ""
 
 
-def build_ass(sentences):
+def build_ass(sentences, style=None):
+    st = style or caption_style()
     head = ("[Script Info]\nScriptType: v4.00+\nWrapStyle: 0\nPlayResX: %d\nPlayResY: %d\n\n[V4+ Styles]\n"
             "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
             "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, "
@@ -153,12 +168,12 @@ def build_ass(sentences):
             "Style: Scr,%s,%d,%s,%s,&H00000000,&H64000000,1,1,0,0,100,100,0,0,1,8,3,2,60,60,%d,1\n"
             "Style: Ref,%s,%d,%s,%s,&H00000000,&H64000000,1,0,0,0,100,100,2,0,1,6,2,2,60,60,%d,1\n\n"
             "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
-            % (W, H, FONT, FONT_SIZE, MARGIN_V, SCR_FONT, SCR_SIZE, SCR_COLOUR, SCR_COLOUR, MARGIN_V,
-               FONT, REF_SIZE, SCR_COLOUR, SCR_COLOUR, REF_MARGIN_V))
+            % (st["w"], st["h"], FONT, st["font"], st["margin"], SCR_FONT, st["scr"], SCR_COLOUR, SCR_COLOUR,
+               st["margin"], FONT, st["ref"], SCR_COLOUR, SCR_COLOUR, st["ref_margin"]))
     lines = []
     for s in sentences:
         scripture = s.get("kind") == "scripture" and bool(citation(s.get("reference")))
-        for c in chunks(s):
+        for c in chunks(s, st["words"]):
             text = re.sub(r"[{}\\]", "", c["text"])
             style = "Scr" if scripture else "Cap"
             lines.append(f"Dialogue: 0,{ass_time(c['start'])},{ass_time(c['end'])},{style},,0,0,0,,{text}")
@@ -172,6 +187,9 @@ def main(plan_path, out):
     timeline = json.loads(Path(plan["timeline"]).read_text())
     total = round(timeline["voice_seconds"] + plan.get("tail", 1.2), 3)
     shots = plan["shots"]
+    w, h = (int(v) for v in plan.get("frame") or (W, H))
+    if (w, h) not in ((W, H), LONG_FIRST_FRAME):
+        raise SystemExit(f"FRAME_REFUSED {w}x{h} (the Short's {W}x{H} or the long-first {LONG_FIRST_FRAME[0]}x{LONG_FIRST_FRAME[1]})")
     problems = check_shots(shots, total) + talk_problems(shots, timeline["sentences"], plan.get("native_onsets"))
     if problems:
         raise SystemExit("PLAN_REFUSED " + "; ".join(problems))
@@ -186,26 +204,31 @@ def main(plan_path, out):
             need = s["end"] - s["start"]
             part = tmp / f"p{i:02d}.mp4"
             run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-ss", str(s.get("src_start", 0.0)), "-i", s["clip"], "-an",
-                 "-vf", f"setpts={factor:.4f}*PTS,{hold_filter(s)}scale={W}:{H}:flags=lanczos:"
+                 "-vf", f"setpts={factor:.4f}*PTS,{hold_filter(s)}scale={w}:{h}:flags=lanczos:"
                         "force_original_aspect_ratio=increase,"
-                        f"crop={W}:{H},fps={FPS},format=yuv420p",
+                        f"crop={w}:{h},fps={FPS},format=yuv420p",
                  "-t", f"{need:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "17", str(part)])
             parts.append(part)
         (tmp / "list.txt").write_text("".join(f"file '{p}'\n" for p in parts))
         run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(tmp / "list.txt"),
              "-c", "copy", str(tmp / "picture.mp4")])
-        (tmp / "captions.ass").write_text(build_ass(timeline["sentences"]))
+        (tmp / "captions.ass").write_text(build_ass(timeline["sentences"], caption_style(w, h)))
         fade_at = total - FADE_OUT
         audio = (f"[1:a]aresample=48000,apad=whole_dur={total},asplit=2[v][vk];"
                  f"[2:a]aresample=48000,atrim=start={plan.get('music_offset', 0.0)}:duration={total},asetpts=PTS-STARTPTS,"
                  f"volume={MUSIC_DB}dB[m];[m][vk]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=400[md];"
                  f"[v][md]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,"
                  f"afade=t=out:st={fade_at}:d={FADE_OUT},aformat=sample_rates=48000:channel_layouts=stereo[a]")
-        run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(tmp / "picture.mp4"), "-i", plan["voice"],
-             "-i", plan["music"], "-filter_complex",
-             f"[0:v]subtitles={tmp / 'captions.ass'},fade=t=out:st={fade_at}:d={FADE_OUT}[pv];{audio}",
-             "-map", "[pv]", "-map", "[a]", "-t", str(total), "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-             "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out])
+        # E259: the caption-free master (clean_out) is the same picture, mix and fade without the subtitles filter
+        for burn, dst in ((True, out), (False, plan.get("clean_out"))):
+            if dst is None:
+                continue
+            captions = f"subtitles={tmp / 'captions.ass'}," if burn else ""
+            run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(tmp / "picture.mp4"), "-i", plan["voice"],
+                 "-i", plan["music"], "-filter_complex",
+                 f"[0:v]{captions}fade=t=out:st={fade_at}:d={FADE_OUT}[pv];{audio}",
+                 "-map", "[pv]", "-map", "[a]", "-t", str(total), "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                 "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", dst])
     print(json.dumps({"out": out, "seconds": total, "shots": len(shots), "fade_out_at": round(fade_at, 2)}))
 
 

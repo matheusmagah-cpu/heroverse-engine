@@ -1,0 +1,25 @@
+{
+ "version": "buzzy-long-qa-criteria-v1",
+ "frozen_at_utc": "2026-11-01T20:00:00Z",
+ "basis": "Owner, 2026-11-01 (DECISIONS.md 'Long-first, Shorts cut from the long'): after the Noah compilation the story is made as a 16:9 long first (plan track buzzy-long, built by the existing episode route at 1920x1080, burned captions sized for 16:9, a caption-free master kept for the cuts) and the Shorts are coherent 9:16 cuts of it. It is gated on defects (the buzzy Short design, E250, and the compilation long, E251), not on the 9.5 score floor; story-qa-criteria-v1..v5 and compilation-qa-criteria-v1 are untouched and keep their own tracks. Technical rows below are measured by buzzy_long.py qa on the real master.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "integrated_lufs": [-15.0, -13.0],
+  "true_peak_dbtp_max": -1.0,
+  "length_seconds": [480, 720]
+ },
+ "rows": [
+  "full_decode_without_errors",
+  "video_format_1920x1080_30fps",
+  "length_8_to_12_minutes",
+  "integrated_lufs_band",
+  "true_peak_ceiling",
+  "build_report_for_this_file",
+  "caption_free_master_kept",
+  "sentence_timeline_kept",
+  "buzzy_shot_in_episode",
+  "music_and_voice_owned"
+ ],
+ "review": "defect finder: publish_decision publish by claude-session-reviewer, every issue classified a-f or info, no unresolved a, b or e"
+}

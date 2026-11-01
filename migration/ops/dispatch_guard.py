@@ -111,7 +111,7 @@ def episode(i):
     if bad:
         raise Refusal(bad)
     ep = plan["episode"]
-    return {"uploads": 1,
+    return {"uploads": 2 if plan.get("track") == "buzzy-long" else 1,   # E259: and its caption-free master
             "deps": [i["plan"], f"migration/production/bible/shots/{ep}.json", f"migration/evidence/preflight/{ep}.json",
                      "migration/production/characters/"]}
 
@@ -230,7 +230,14 @@ def publish_episode(i):
 def native_review(i):
     p = i.get("plan", "")
     compilation = re.fullmatch(rf"migration/production/bible/compilations/({SLUG})\.json", p)   # E255 (E253's route)
-    if compilation:
+    cuts = re.fullmatch(rf"migration/production/bible/cuts/({SLUG})\.json", p)   # E259: a Short cut of a long-first long
+    if cuts:
+        need_file(p)
+        spec = load(p)
+        need(spec.get("version") == "bible-cuts-v1" and spec.get("long") == cuts.group(1),
+             "plan", p, "a cuts spec whose long names the file")
+        limit = 150_000_000
+    elif compilation:
         need_file(p)
         plan = load(p)
         need(plan.get("version") == "bible-compilation-plan-v1" and plan.get("id") == compilation.group(1),
@@ -239,7 +246,7 @@ def native_review(i):
     else:
         plan = _plan(i)
         need(plan.get("version") == "bible-plan-v2", "plan", i.get("plan"), "a Bible Short plan")
-        limit = 150_000_000
+        limit = 600_000_000 if plan.get("track") == "buzzy-long" else 150_000_000   # E259: the 8-12 min long
     need(re.fullmatch(r"[0-9a-f]{64}", i.get("sha256", "")), "sha256", i.get("sha256"), "exact master SHA256")
     need(i.get("owner_review_authorized") in (True, "true"), "owner_review_authorized", "[boolean]", "explicit designation")
     need(str(i.get("byte_size", "")).isdigit() and 0 < int(i["byte_size"]) <= limit, "byte_size", i.get("byte_size"), "bounded exact bytes")

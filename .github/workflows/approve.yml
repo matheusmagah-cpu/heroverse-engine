@@ -94,8 +94,8 @@ jobs:
           d = sys.argv[1]
           r = json.load(open(f"{d}/out/review.json"))
           w = {**r["watched_review"], "output_sha256": r["output_sha256"]}
-          # E251: the compilation track is gated on defects (no 9.5 floor); every other long keeps the floor
-          problems = oq.compilation_problems(w, r["output_sha256"]) if r.get("track") == "compilation" else oq.check(w, r["output_sha256"], oq.LONG_REVIEWERS)
+          # E251/E259: the compilation and long-first tracks are gated on defects (no 9.5 floor); every other long keeps the floor
+          problems = oq.compilation_problems(w, r["output_sha256"]) if r.get("track") in ("compilation", "buzzy-long") else oq.check(w, r["output_sha256"], oq.LONG_REVIEWERS)
           print(",".join(problems) or "OK")
           PY
           )

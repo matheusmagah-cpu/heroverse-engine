@@ -102,7 +102,7 @@ def claude_problems(review, sha):
     return problems
 
 
-def compilation_main(d, script, manifest):
+def compilation_main(d, script, manifest, track="compilation"):
     """E251: the compilation track. The session reviewer's inspection/claude_review.json is a defect list bound to this
     master (owner_quality_policy.compilation_problems); out/review.json is PASS only for a publish decision with no
     unresolved [a], [b] or [e]. Scores in the file are information."""
@@ -112,7 +112,7 @@ def compilation_main(d, script, manifest):
     except (FileNotFoundError, ValueError):
         claude = None
     problems = owner_quality_policy.compilation_problems(claude, sha)
-    out = {"version": "long-review-v3-compilation", "track": "compilation", "pilot_id": script["pilot_id"],
+    out = {"version": "long-review-v3-compilation", "track": track, "pilot_id": script["pilot_id"],
            "output_sha256": sha, "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
     if problems:
         out.update(status="AWAITING_REVIEW" if claude is None or "REVIEW_NOT_FOR_THIS_FILE" in problems else "FAIL",
@@ -131,6 +131,8 @@ def main(pilot_dir, video_path=None):
     manifest = json.loads((d / "out" / "manifest.json").read_text())
     if script.get("archetype") == "bible-compilation-long":
         return compilation_main(d, script, manifest)
+    if script.get("archetype") == "bible-buzzy-long":   # E259: the long-first long, the same defect gate
+        return compilation_main(d, script, manifest, "buzzy-long")
     sha = manifest["output_sha256"]
     try:
         claude = json.loads((d / CLAUDE_REVIEW).read_text())

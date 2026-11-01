@@ -124,6 +124,16 @@ SHOT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 # episode.yml's plan input, character for character (test_refusal_parity checks the workflow holds this pattern)
 PLAN_PATH = re.compile(r"^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$")
 RATIOS = ("9:16",)                   # Shorts only
+# E259 (owner, 2026-11-01, DECISIONS.md "Long-first, Shorts cut from the long"): a plan with "track": "buzzy-long" is
+# the 16:9 story long made first; its Shorts are 9:16 centre cuts of it (short_cuts.py). It is 16:9 only, and every
+# picture keeps its subject inside the centre 9:16 column (PROMPT_GUIDE "Long-first: the centre 9:16 safe area"): each
+# scene, Keeper and still prompt says so in words (SAFE_AREA) and names no off-centre framing (OFF_CENTRE).
+LONG_FIRST_TRACK = "buzzy-long"
+LONG_FIRST_RATIOS = ("16:9",)
+SAFE_AREA = re.compile(r"(?i)\bcent(?:er|re)d in the frame\b")
+OFF_CENTRE = re.compile(r"(?i)\boff[- ]cent(?:er|re)\b|\brule of thirds\b|\bsplit[- ]screen\b|"
+                        r"\b(?:at|on|to|toward|towards) the (?:far )?(?:left|right) (?:edge|side|third|of the frame)\b|"
+                        r"\b(?:left|right)[- ]hand (?:edge|side|third) of the frame\b")
 # Kokoro pace of the narration (the Keeper, am_michael), words a second: 2.30-2.98 on Genesis 6
 # (evidence/pavo/20261025/genesis-06/compose/timeline.json), 2.756 over the 82 lines of genesis-07 to 10, 1.99-3.63 a
 # line (evidence/voice/20261026/kokoro-pace.json). Estimates use 2.75 (the 170-179 s band is narrow: the measured length
@@ -924,6 +934,8 @@ def still_prompt_problems(label, prompt, plan, *, thumbnail=False):
     else:
         found += (thumb_period_problems if thumbnail else period_problems)(0, pseudo, per)
     found += writing_problems(0, pseudo) + prop_problems(0, pseudo, per, plan if isinstance(plan, dict) else {})
+    if long_first(plan) and not thumbnail:   # E259: a long-first still keeps its subject in the centre 9:16 column
+        found += safe_area_problems(0, pseudo)
     return found
 
 
@@ -1228,7 +1240,10 @@ def check(plan, chars=None):
         problems.append("EPISODE_ID")
     if type(plan.get("part")) is not int or plan["part"] < 1:
         problems.append("PART")
-    if plan.get("aspect_ratio", "9:16") not in RATIOS:
+    if long_first(plan):   # E259: the long-first long is 16:9 only; every other plan keeps the Short's 9:16
+        if plan.get("aspect_ratio") not in LONG_FIRST_RATIOS:
+            problems.append("ASPECT_RATIO (a long-first plan, track buzzy-long, is 16:9)")
+    elif plan.get("aspect_ratio", "9:16") not in RATIOS:
         problems.append("ASPECT_RATIO (Shorts are 9:16)")
     narration = plan.get("narration")
     if not isinstance(narration, list) or not narration:
@@ -1246,7 +1261,29 @@ def check(plan, chars=None):
     if bad_lines:
         return {"problems": problems, "pending": pending, "estimate": {}}
     problems += audio_route_problems(plan, shots)
+    if long_first(plan):
+        problems += [p for i, s in enumerate(shots) if isinstance(s, dict) for p in safe_area_problems(i, s)]
     return _check_shots(plan, chars, narration, shots, problems, pending)
+
+
+def long_first(plan):
+    return isinstance(plan, dict) and plan.get("track") == LONG_FIRST_TRACK
+
+
+def safe_area_problems(i, shot, prompt=None):
+    """E259: what can be checked of the centre 9:16 safe area in words: the prompt keeps the subject centred in the
+    frame and names no off-centre framing. The picture itself is checked by eye in the source review."""
+    text = shot.get("prompt", "") if prompt is None else prompt
+    if shot.get("window_of") is not None:
+        return []
+    out = []
+    if not SAFE_AREA.search(text or ""):
+        out.append(f"SAFE_AREA_UNSTATED shot {i} {shot.get('id')} (a long-first prompt says the subject is "
+                   "'centred in the frame': its Shorts are the centre 9:16 column)")
+    if OFF_CENTRE.search(text or ""):
+        out.append(f"SAFE_AREA_OFF_CENTRE shot {i} {shot.get('id')} ({OFF_CENTRE.search(text).group(0)!r} leaves the "
+                   "centre 9:16 column)")
+    return out
 
 
 def audio_route_problems(plan, shots):

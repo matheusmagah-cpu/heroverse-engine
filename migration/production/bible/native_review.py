@@ -29,7 +29,7 @@ LIMIT = 150_000_000
 COMPILATION_LIMIT = 600_000_000   # E253: a 10-20 min compilation long (Gemini Files accepts up to 2 GB)
 # E242 (owner, 2026-10-31, PR #599): a plan with "track": "buzzy" (a Short made with Buzzy clips) is reviewed against
 # the buzzy track is a defect finder (E250: no score floor, see prompt(track='buzzy')); every other plan keeps 9.5.
-TRACK_FLOORS = {'buzzy': 0.0, 'compilation': 0.0}   # E253: the compilation long is the same defect finder   # E250 (owner 2026-11-01): the buzzy review finds defects; its scores gate nothing
+TRACK_FLOORS = {'buzzy': 0.0, 'compilation': 0.0, 'buzzy-long': 0.0, 'buzzy-cut': 0.0}   # E259: the long-first long and its cuts   # E253: the compilation long is the same defect finder   # E250 (owner 2026-11-01): the buzzy review finds defects; its scores gate nothing
 TRACK_ITEM_FLOOR = 0.0
 DEFAULT_FLOOR = 9.5
 FILE_POLLS = 210   # E246: 10 s each, 35 min: a 100 MB master can sit in the provider's PROCESSING state past 15 min
@@ -48,6 +48,8 @@ def track_for(plan_path):
         return None
     if plan.get('version') == 'bible-compilation-plan-v1':   # E253
         return 'compilation'
+    if plan.get('version') == 'bible-cuts-v1':   # E259: a cut of a long-first long is reviewed on its own master
+        return 'buzzy-cut'
     return plan.get('track')
 
 
@@ -108,7 +110,10 @@ def inputs():
     event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
     i = event['inputs']
     compilation = re.fullmatch(r'migration/production/bible/compilations/[a-z0-9-]+\.json', i['plan'])   # E253
-    require(compilation or re.fullmatch(r'migration/production/bible/plans/[a-z0-9-]+\.json', i['plan']), 'PLAN_INVALID')
+    cuts = re.fullmatch(r'migration/production/bible/cuts/[a-z0-9-]+\.json', i['plan'])   # E259: a Short cut
+    require(compilation or cuts or re.fullmatch(r'migration/production/bible/plans/[a-z0-9-]+\.json', i['plan']),
+            'PLAN_INVALID')
+    compilation = compilation or track_for(i['plan']) == 'buzzy-long'   # E259: a 8-12 min 16:9 long
     require(re.fullmatch(r'[0-9a-f]{64}', i['sha256']), 'HASH_INVALID')
     require(i['owner_review_authorized'] == 'true', 'OWNER_DESIGNATION_REQUIRED')
     require(str(i['byte_size']).isdigit() and 0 < int(i['byte_size'])
@@ -364,7 +369,11 @@ Use the frozen rubric: ''' + ', '.join(RUBRIC) + ''' and overall, each 0 to 10. 
 Return only one JSON object: audio_received (boolean), visual_received (boolean), duration_seconds, scores (object of those eight rubric fields), overall, issues (array of strings with timestamps), limitations (array of strings), strongest_moment (string), coverage (array of segments covering 0-''' + d + ''' without gaps, each with start,end,audible_observation,visual_observation,sync_observation). Add criterion_issues: an object mapping each rubric field and overall scoring below 9.5 to a nonempty array of zero-based indices into issues; each referenced issue must begin HH:MM:SS or MM:SS with optional decimals. For each coverage segment also supply speech_excerpt (a verbatim heard excerpt of at least three words), speaker_observation, and motion_observation (camera_only, body_motion, or uncertain). If speech is not discernible, explicitly disclose inability instead of inventing an excerpt; incomplete required evidence will be retained but rejected by validation. Do not infer sound effects from pictured actions or mouth motion from voice-over. Localize from media timestamps, not an estimated story order. Include heard speech excerpts/speaker distinctions and music/sound observations across the entire timeline; an ASR-like transcript alone is insufficient. No approval flag: this is evidence for the existing gates and does not approve sources, thumbnail, plan integration or publication.'''
     if track == 'compilation':   # E253: a 16:9 long assembled from public Shorts, reviewed as a defect finder
         text = text.replace('KJV Bible Short', 'KJV Bible long compilation (16:9, assembled from public Shorts with a spoken hook, chapter cards and a spoken close)', 1)
-    return buzzy_prompt(text) if track in ('buzzy', 'compilation') else text
+    if track == 'buzzy-long':   # E259: the long-first story long, the same defect finder
+        text = text.replace('KJV Bible Short', 'KJV Bible story long (16:9, its subjects kept in the centre 9:16 column for its Shorts)', 1)
+    if track == 'buzzy-cut':   # E259: a 9:16 Short cut from that long; speech cut at its edges is defect [a]
+        text = text.replace('KJV Bible Short', 'KJV Bible Short (a 9:16 centre cut of a 16:9 story long; check its first and last words are whole)', 1)
+    return buzzy_prompt(text) if track in ('buzzy', 'compilation', 'buzzy-long', 'buzzy-cut') else text
 
 
 BUZZY_ANCHORS = (' Anchors: 10 nothing to improve; 9.5 one tiny issue; 9 minor issues; 8 issues a viewer notices; 7 clearly amateur in places; below 7 fails. Every score below 9.5 needs a concrete timestamped issue. Owner publication floor is overall 9.5; do not change the scores to meet it.')

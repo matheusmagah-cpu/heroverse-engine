@@ -3614,6 +3614,32 @@
      "review-after-build"
     ]
    }
+  },
+  {
+   "id": "E259",
+   "date": "2026-11-01",
+   "class": [
+    "threshold"
+   ],
+   "error": "The owner's long-first decision (01/11: make the 16:9 long first and cut coherent 9:16 Shorts from it) had no route: plan_check accepted only 9:16 Short plans, the episode route composed only 1080x1920 with burned captions and kept no caption-free master or sentence timeline, no tool cut a Short from a long (nor refused a cut inside speech), the Short publisher knew no cut track and the long gates knew only the 9.5 story track and the compilation.",
+   "fix": "Owner-directed long-first track (DECISIONS.md 2026-11-01 'Long-first, Shorts cut from the long'): plan_check accepts track buzzy-long at 16:9 only (the Short's 9:16 rule unchanged) with the centre 9:16 safe area stated in every prompt; episode_build/short_engine compose it at 1920x1080 with 16:9 captions and a caption-free master, the report binding both hashes and the sentence/shot timeline (episode.yml uploads both); buzzy_long.py measures it (frozen buzzy-long-qa-criteria-v1) and materializes the pilot for approve.yml -> prepublish_gate.py -> publish.yml on the compilation's defect-gate code path (DEFECT_TRACKS); short_cuts.py and short-cuts.yml cut 9:16 Shorts refused inside speech, off sentence edges or outside 20-179 s, each with its own record (track buzzy-cut, parent long), its own native defect review and publish-episode.yml. The 9.5 story track, the Short route, the compilation and every frozen QA file keep their rules (tested).",
+   "prior": [
+    "E104",
+    "E111",
+    "E119",
+    "E120",
+    "E138",
+    "E242",
+    "E250",
+    "E251"
+   ],
+   "antidote": {
+    "file": "migration/production/bible/test_long_first.py",
+    "contains": "def test_other_tracks_are_unchanged",
+    "covers": [
+     "threshold"
+    ]
+   }
   }
  ]
 }

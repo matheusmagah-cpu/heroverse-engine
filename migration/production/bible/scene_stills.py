@@ -67,6 +67,10 @@ MAX_CANDIDATES = 3
 STYLES = {"9:16": "tall vertical composition, the whole subject inside the central third of the frame",
           "16:9": "wide horizontal composition, the whole subject inside the central band of the frame"}
 STYLE = STYLES["9:16"]
+# E259: a long-first (track buzzy-long) still is 16:9 with its subject in the centre 9:16 column, so a Short cut of
+# the long (short_cuts.py, centre crop) keeps the whole subject
+LONG_FIRST_STYLE = ("wide horizontal composition, the whole subject centred in the frame inside the central vertical "
+                    "third (the 9:16 safe area), nothing important near the left or right edges")
 RUN = re.compile(r"^[0-9]{1,20}$")
 
 
@@ -157,7 +161,8 @@ def prepare(plan, ids, candidates, run, stills_dir=None, engine="flux"):
                     "references": [r["repo_path"] for r in refs], "reference_records": refs}
                    for n in range(1, candidates + 1)]
     # aspect_ratio: what a Pavo agnes-image request asks for (16:9 quoted 0 credits, evidence/pavo/20261027)
-    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "engine": engine, "style": STYLES[aspect],
+    return {"version": "scene-stills-v1", "episode": plan.get("episode"), "engine": engine,
+            "style": LONG_FIRST_STYLE if plan_check.long_first(plan) else STYLES[aspect],
             "aspect_ratio": aspect, "side": list(SIDES[aspect]), "negative": None,
             "width": 1024, "height": 1024, "images": images}
 

@@ -46,11 +46,51 @@ def short_length(part):
     return (SHORT_MIN_S, SHORT_MAX_S) if part >= SHORT_LENGTH_FROM_PART else SHORT_PART6_S
 
 
+# E259 (owner, 2026-11-01, DECISIONS.md "Long-first, Shorts cut from the long"): a record with "track": "buzzy-cut"
+# is a 9:16 Short cut from a long-first long (short_cuts.py): a coherent unit of the long's own sentences, 20-179 s,
+# never starting or ending inside speech (checked by short_cuts.py on the long's timeline), linking its parent long
+# (`parent`). Its words keep the Short's originality share; the 170-179 s band, the 20-word insight and the spoken CTA
+# belong to a whole Short episode, so a cut points to the full story in its description instead. Its review is the
+# buzzy defect gate on the cut's own master, with the Buzzy shot and the revocations of its parent long.
+CUT_TRACK = "buzzy-cut"
+CUT_SECONDS = (20.0, 179.0)
+
+
+def cut_problems(episode):
+    out = []
+    parent = episode.get("parent")
+    if not (isinstance(parent, dict) and isinstance(parent.get("long"), str) and parent["long"]
+            and isinstance(parent.get("pilot"), str) and re.fullmatch(r"pilot-\d{3}", parent["pilot"])
+            and isinstance(parent.get("clean_master_sha256"), str)
+            and re.fullmatch(r"[0-9a-f]{64}", parent["clean_master_sha256"])):
+        out.append("CUT_PARENT_MISSING (parent: long, pilot, clean_master_sha256)")
+    elif parent["long"] == episode.get("id"):
+        out.append("CUT_PARENT_IS_ITSELF")
+    if episode.get("format") != "short":
+        out.append("CUT_NOT_A_SHORT")
+    seconds = episode.get("seconds")
+    if type(seconds) not in (int, float) or not CUT_SECONDS[0] <= seconds <= CUT_SECONDS[1]:
+        out.append(f"CUT_LENGTH {seconds} s (need {CUT_SECONDS[0]:.0f}-{CUT_SECONDS[1]:.0f})")
+    lines = episode.get("narration") or []
+    if not lines:
+        return out + ["NARRATION_MISSING (the cut's lines, kind scripture/story/insight/cta)"]
+    words = {k: sum(len(x.get("text", "").split()) for x in lines if x.get("kind") == k)
+             for k in ("scripture", "story", "insight", "cta")}
+    total = sum(words.values())
+    if total and (total - words["scripture"]) / total < ORIGINAL_MIN:
+        out.append(f"ORIGINAL_SHARE {(total - words['scripture']) / total:.2f} < {ORIGINAL_MIN}")
+    if not CTA_TO_LONG.search(episode.get("description", "")):
+        out.append("CUT_DESCRIPTION_NOT_TO_THE_LONG (the description sends the viewer to the full story)")
+    return out
+
+
 def short_problems(episode):
     """Owner, 2026-10-25: Shorts of 1 minute or more with a strong layer of originality, authenticity, critique and a
     clear direction to the long video, so neither TikTok nor YouTube can read them as reused or unoriginal content.
     The narration is recorded line by line: kind scripture (KJV, checked by kjv_check), story (our retelling),
     insight (our own observation or critique of the passage), cta (where to go next)."""
+    if episode.get("track") == CUT_TRACK:   # E259: a cut of a long-first long has its own rules (cut_problems)
+        return cut_problems(episode)
     if episode.get("format") != "short" or episode.get("part", 0) < SHORT_RULES_FROM_PART:
         return []
     out = []
@@ -173,10 +213,12 @@ def review_problems(episode, shots_dir=None, ledger=None):
         return ["REVIEW_MISSING"]
     out = []
     track = episode.get("track")
-    if track is not None and track not in BUZZY_TRACKS:
+    if track is not None and track not in BUZZY_TRACKS + (CUT_TRACK,):
         out.append("TRACK_UNKNOWN")
     if track in BUZZY_TRACKS:
         out += buzzy_shot_problems(episode, shots_dir, ledger) + buzzy_decision_problems(review)
+    elif track == CUT_TRACK:   # E259: the defect gate on the cut's own master; the Buzzy shot is its parent long's
+        out += buzzy_shot_problems({"id": parent_of(episode)}, shots_dir, ledger) + buzzy_decision_problems(review)
     else:
         overall = review.get("overall")
         if isinstance(overall, bool) or not isinstance(overall, (int, float)) or not SHORT_FLOOR <= overall <= 10:
@@ -203,11 +245,19 @@ def problems(episode, video=None):
         import episode_build
         out += episode_build.revocation_problems(episode["id"])
         out += attribution_problems(episode)
+        if episode.get("track") == CUT_TRACK and parent_of(episode):   # E259: the cut shows its parent long's shots
+            out += episode_build.revocation_problems(parent_of(episode))
+            out += attribution_problems(dict(episode, id=parent_of(episode)))
     if video is not None and sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:
         out.append("TITLE_LENGTH")
     return out + description_problems(episode["description"])
+
+
+def parent_of(episode):
+    parent = episode.get("parent")
+    return parent.get("long") if isinstance(parent, dict) and isinstance(parent.get("long"), str) else None
 
 
 def attribution_problems(episode, shots_dir=None):

@@ -45,6 +45,24 @@ gain-only -14 LUFS, faded joins; QA `compilation-qa-criteria-v1`) → the Gemini
 (`owner_quality_policy.compilation_problems`: no unresolved [a], [b] or [e]) → the same `approve.yml` →
 `prepublish_gate.py` → `publish.yml`. The 9.5 track of the story longs is unchanged.
 
+## Long-first and Short cuts
+
+Owner, 2026-11-01 (DECISIONS.md "Long-first, Shorts cut from the long", E259): after the current Noah compilation the
+story is made once as a 16:9 long, and the Shorts are coherent 9:16 cuts of it. Nothing below spends credits.
+
+| Work | Existing entry point |
+|---|---|
+| Plan the long | `plans/<id>.json` (bible-plan-v2) with `"track": "buzzy-long"`, `"aspect_ratio": "16:9"`, 480–720 s measured, every prompt "centred in the frame" (PROMPT_GUIDE "Long-first"), and `long` = pilot, title, description with `{chapters}`, tags, first_comment, chapters on shot ids, thumbnail frame; `plan_check.py --strict` |
+| Sources, preflight, build | the Short's own route: `shot-probe.yml` / `scene_stills.py` / `shot_sources.py` at 16:9, `episode_build.py preflight … --write`, `episode.yml` (1920x1080, 16:9 captions, owned music, -14 LUFS) |
+| What the cuts need | `episode.yml` record job: master `bible-<id>-sha256-<sha>.mp4` and caption-free master `bible-<id>-clean-sha256-<sha>.mp4` in the release; `evidence/episodes/<id>/report-<run>.json` binds both hashes, the sentence timeline (`composed.sentences`) and the shot timeline (`composed.timeline`) |
+| The long's pilot | merge the report, then `buzzy-long-pilot.yml` (plan, report) → `buzzy_long.py qa` (buzzy-long-qa-criteria-v1) + `materialize` → `<pilot>-sha256-<sha>.mp4` alias and the pilot on `claude/long-<id>-<run>` (PR) |
+| Review and publish the long | `native-review.yml` (plan = the long's plan, defect finder) as evidence; the session reviewer writes `inspection/claude_review.json` (defects, publish decision); thumbnail approved through `thumbs.py` (format long); then `approve.yml` → `prepublish_gate.py` → `publish.yml`, on the defect-gated buzzy-long track |
+| Cut the Shorts | `cuts/<long>.json` (bible-cuts-v1, track buzzy-cut, pilot, report, cuts: id, start, end, optional x, title, description with "full story", tags, first_comment); `short_cuts.py check SPEC` refuses a cut inside speech, off sentence edges or outside 20–179 s; `short-cuts.yml` renders them (centre 9:16, Short captions, gain-only -14 LUFS, fades), puts `bible-<cut>-sha256-<sha>.mp4` in the release and draft `episodes/<cut>.json` (track buzzy-cut, parent long) on `claude/cuts-<long>-<run>` |
+| Review and publish each cut | `native-review.yml` with plan = the cuts spec and the cut's own sha256 (never the long's score), the session reviewer's `review` (defects, publish decision) in its record, `episode_build.py check-record`, then `publish-episode.yml`; `arc_links.py` links each cut to its long through `parent.pilot` |
+
+The 9.5 story long (`approve.yml` on story-qa-criteria), the Short episode route, the compilation and every frozen
+QA file keep their rules; the buzzy-long and buzzy-cut tracks apply only to their own criteria and records.
+
 ## Sources and private provider work
 
 Reuse approved matching material first. Existing source tools include `shot-probe.yml`, `scene-stills.yml`,
