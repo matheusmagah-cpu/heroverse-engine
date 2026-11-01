@@ -1,0 +1,73 @@
+{
+ "version": "claude-review-compilation-v1",
+ "model": "claude-session-reviewer",
+ "output_sha256": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e",
+ "reviewed_at": "2026-11-01T16:00:00Z",
+ "native_review": {
+  "run_id": 41323320263,
+  "model": "gemini-3.8-flash",
+  "status": "EVIDENCE_COMPLETE",
+  "duration_seconds": 593.0
+ },
+ "evidence": [
+  "Gemini native audio+video review of this exact master (run 41323320263, 593.2 s, compilation defect-finder track).",
+  "Whole-file signal scan on the downloaded master (same scan as approve.yml): PASS - black 0.1 s, silence 1.5 s, no frozen span (the E258 overlay cards removed the dead air).",
+  "compilation-qa-criteria-v1 PASS (build 41321334158): -14.2 LUFS, -1.3 dBTP, 1920x1080, canonical order with each chapter card over its Short, source masters verified by sha256."
+ ],
+ "issues": [
+  "00:01 [info] Minor lip-sync misalignment and unnatural facial warping on the AI-generated narrator.",
+  "00:12 [b] Aspect ratio switches abruptly from 16:9 full-screen to vertical 9:16 pillarboxed format without transition.",
+  "06:38 [f] Visual glitch showing the ark levitating/floating mid-air above the desert landscape.",
+  "09:36 [b] Abrupt aspect ratio switch back to 16:9 framing for narrator closing sequence.",
+  "09:44 [info] Mild mouth-sync drifting during final spoken call to action."
+ ],
+ "defects": [
+  {
+   "issue": 0,
+   "category": "info",
+   "resolved": true
+  },
+  {
+   "issue": 1,
+   "category": "info",
+   "resolved": true
+  },
+  {
+   "issue": 2,
+   "category": "f",
+   "resolved": false
+  },
+  {
+   "issue": 3,
+   "category": "info",
+   "resolved": true
+  },
+  {
+   "issue": 4,
+   "category": "info",
+   "resolved": true
+  }
+ ],
+ "classification_notes": {
+  "1": "Gemini tagged [b]; reclassified [info] by the decider: [b] is a scene against its line or out of story order. The 16:9 Keeper hook to the 9:16 Shorts over the blurred fill is the compilation's designed format, joined with a 0.25 s fade; no line or story order is broken.",
+  "3": "Same as 1, at the close.",
+  "2": "[f] kept and unresolved (not blocking): the ark appears to float in one genesis-08 shot that is already public in that Short; noted for future Buzzy prompts (ground contact)."
+ },
+ "strongest_moment": "The dramatic transition and sound design during the breaking of the deep and opening of heaven's windows at 08:05.",
+ "overall": 6.4,
+ "scores_information_only": {
+  "opening_and_promise": 6.8,
+  "picture_quality": 6.5,
+  "figure_and_background_integrity": 6.0,
+  "captions_readable_and_synced": 6.8,
+  "audio_clarity_and_mix": 7.0,
+  "pacing_and_visual_variety": 6.2,
+  "scripture_on_screen": 6.8,
+  "policy_safe": 7.2
+ },
+ "publish_decision": {
+  "decision": "publish",
+  "by": "claude-session-reviewer",
+  "note": "No speech cut, no scene against its line or story order, no policy issue. Format switch and mild lip-sync drift are informational; the one [f] glitch is in an already-public Short. The Keeper's hook and close keep the critical layer (Genesis 7:16)."
+ }
+}

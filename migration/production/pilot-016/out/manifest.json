@@ -1,0 +1,135 @@
+{
+ "version": "bible-compilation-manifest-v1",
+ "pilot_id": "pilot-016",
+ "compilation": "arc-02-noah-compilation",
+ "output_sha256": "8a9edf11059fccd4ec4501fb2375e6fe24584a6d860c714a8231e47acf8b9b3e",
+ "output_seconds": 593.213,
+ "criteria_version": "compilation-qa-criteria-v1",
+ "burned_captions": "kept from the Shorts",
+ "sources": [
+  {
+   "short": "genesis-06-short",
+   "asset": "bible-genesis-06-short-sha256-e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609.mp4",
+   "sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+   "video_id": "dyuqBS_FXew",
+   "seconds": 85.5
+  },
+  {
+   "short": "genesis-07-short",
+   "asset": "bible-genesis-07-short-sha256-da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea.mp4",
+   "sha256": "da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea",
+   "video_id": "Vvfw4W4nV7M",
+   "seconds": 173.8
+  },
+  {
+   "short": "genesis-08-short",
+   "asset": "bible-genesis-08-short-sha256-00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23.mp4",
+   "sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+   "video_id": "jPNjgf-PWHM",
+   "seconds": 175.11
+  },
+  {
+   "short": "genesis-09-short",
+   "asset": "bible-genesis-09-short-sha256-57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829.mp4",
+   "sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+   "video_id": "IYSxVKTikSs",
+   "seconds": 174.79
+  }
+ ],
+ "segments": [
+  {
+   "kind": "hook",
+   "name": "hook",
+   "seconds": 12.552,
+   "start": 0.0,
+   "end": 12.552
+  },
+  {
+   "kind": "short",
+   "name": "genesis-06-short",
+   "seconds": 70.6,
+   "source_sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+   "chapter": "Enoch Walked With God",
+   "end_s": 70.6,
+   "start": 12.552,
+   "end": 83.152
+  },
+  {
+   "kind": "short",
+   "name": "genesis-07-short",
+   "seconds": 165.9,
+   "source_sha256": "da4c5f629dd8e8715a2a840395635b779beeda0917fcf2bc7860964b6cbcd6ea",
+   "chapter": "God Sees the Earth Corrupt",
+   "end_s": 165.9,
+   "start": 83.152,
+   "end": 249.052
+  },
+  {
+   "kind": "short",
+   "name": "genesis-08-short",
+   "seconds": 168.0,
+   "source_sha256": "00462a4c1d9de5c3dfd7c8cf8e131f52f462ced71e97598b066fcf4a3d500a23",
+   "chapter": "Noah Builds the Ark",
+   "end_s": 168.0,
+   "start": 249.052,
+   "end": 417.052
+  },
+  {
+   "kind": "short",
+   "name": "genesis-09-short",
+   "seconds": 165.7,
+   "source_sha256": "57e8768c53fd572b92750908fabdab37297ce74ec0438d3ed1ab3665e3a41829",
+   "chapter": "The Flood Begins",
+   "end_s": 165.7,
+   "start": 417.052,
+   "end": 582.752
+  },
+  {
+   "kind": "close",
+   "name": "close",
+   "seconds": 10.44,
+   "start": 582.752,
+   "end": 593.192
+  }
+ ],
+ "chapters": [
+  [
+   0,
+   "The Keeper's question"
+  ],
+  [
+   12.552,
+   "Enoch Walked With God"
+  ],
+  [
+   83.152,
+   "God Sees the Earth Corrupt"
+  ],
+  [
+   249.052,
+   "Noah Builds the Ark"
+  ],
+  [
+   417.052,
+   "The Flood Begins"
+  ],
+  [
+   582.752,
+   "The Keeper's honest question"
+  ]
+ ],
+ "keeper_clips": {
+  "hook": {
+   "conversation_id": "375260545475152512",
+   "quote": "0 credits (exact, fresh)",
+   "video_sha256": "2e8eb2c368a904190f3ce4329ac4d2c6751fdd23636dc9fe39da43e8cdc145c8",
+   "audio_sha256": "f577286a68d849c92dd4557ccca7c673bacfac162eb069ad79fa45a71e71ab0e"
+  },
+  "close": {
+   "conversation_id": "375257418030683840",
+   "quote": "0 credits (exact, fresh)",
+   "video_sha256": "c1b6648896a4fced3a221563704d8ae8bdfda7b85e407182ab3075eca9b407ac",
+   "audio_sha256": "132f7cf8f682c5379961c8f9b6b8bc8d6bedd550122eb2d041a7dcff1199c7eb"
+  }
+ }
+}
