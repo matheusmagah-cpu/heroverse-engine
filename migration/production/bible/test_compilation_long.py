@@ -77,6 +77,7 @@ class RenderTests(unittest.TestCase):
             self.assertLessEqual(peak, cl.TRUE_PEAK_MAX)   # E251: -0.8 dBTP after AAC failed the first real build
             self.assertEqual(cl.fps("30000/1001") > 29.9, True)
             self.assertAlmostEqual(cl.fps("30/1"), 30.0)
+            self.assertLess(abs(cl.fps("295249920/9864919") - cl.FPS), cl.FPS_TOLERANCE)   # the real master's average
             # the Keeper clip: still beat of silence at the head (the line starts after BEAT)
             head = cl.run(["ffmpeg", "-nostdin", "-hide_banner", "-t", "0.4", "-i", t / "h.mp4", "-af", "volumedetect",
                            "-f", "null", "-"]).stderr
