@@ -173,3 +173,24 @@ and its hook is written on the structure measured in `evidence/vidiq/20261101/co
 Authenticity, originality and critical insight are mandatory in the long and in the Shorts: the Keeper's voice adds an
 interpretive layer (what people miss in the text, an honest question) in KJV-faithful commentary clearly marked apart
 from scripture. The review track is the defect gate (E251), implemented as `compilation-qa-criteria-v1`.
+
+## 2026-11-01 — Token economy: more Shorts with the same tokens
+
+Measured: 71.1M tokens in the first ~19 h of the week (budget 239M = half of the 478M weekly cap), a projection of
+~630M, which is over budget. Most of it came from the long-context coordinator session and its agents, not from Shorts.
+The owner asked to sustain the whole week and post more Shorts without spending more tokens. The goal is unchanged.
+
+- Shorts: 3 slots a day (13:30, 18:30, 23:30 UTC). The production routine (Sonnet, fresh session, 06:43 and 16:43 UTC)
+  makes a batch of 2 Shorts per run. Plans, clip submission, the lease and one Free Tier proof (valid 1 h) are shared,
+  so the fixed cost of a run is paid once for 2 Shorts. Up to 4 a day are produced against 3 slots, and the surplus
+  builds runway. The quality pillars (Keeper's interpretive and critical layer, coherent edit, no cut speech) are
+  unchanged.
+- Longs: compilation of each completed arc, built by Actions (no tokens). 3 Shorts a day completes arcs faster, so
+  there are more longs for the same tokens.
+- Clocks:
+  - the coordinator's 4-hourly clock is off;
+  - the Haiku light clock runs every 3 h and wakes the coordinator only on a failure;
+  - the analysis runs every 2 days;
+  - the vidIQ mining runs weekly (Monday).
+  GitHub Actions (heartbeat, reconcile, TikTok, links) carry the mechanical work at zero tokens.
+- Coordinator: answers the owner and failures only, with no recurring work in the long-context session.
