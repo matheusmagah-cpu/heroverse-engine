@@ -1,0 +1,25 @@
+{
+ "version": "compilation-qa-v1",
+ "criteria_version": "compilation-qa-criteria-v1",
+ "criteria_sha256": "023e4183247ce3436407dea58e546cbf47bf914569770a9cbc091121df9efe99",
+ "output_sha256": "37448472081988d60c9a1fe73afe35214be0e8a19ffb468a8f31bd99344cd46b",
+ "status": "PASS",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format_1920x1080_30fps": true,
+  "duration_is_sum_of_segments": true,
+  "no_padding": true,
+  "integrated_lufs_band": true,
+  "true_peak_ceiling": true,
+  "sources_are_the_public_masters_by_sha": true,
+  "canonical_order": true,
+  "keeper_clips_zero_credit": true,
+  "music_and_voice_owned": true
+ },
+ "measured": {
+  "seconds": 603.213,
+  "lufs": -14.2,
+  "true_peak_dbfs": -1.3,
+  "frame_rate": "13235200/441187"
+ }
+}
