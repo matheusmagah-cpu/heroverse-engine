@@ -225,3 +225,20 @@ the validated-structure rule (≥6 winners from ≥4 channels, weak contrasts). 
 read free from YouTube analytics (goal-report). Its findings change the Short and long formats only with that
 validated evidence, and the authenticity, originality and critical layer (the Keeper's interpretation) is never
 traded away for reach.
+
+## 2026-11-01 — Comment replies on YouTube and TikTok, without rework
+
+Owner: every comment answered by reading what the person wrote and replying to that, so the person sees a direct
+answer, not a generic one. The mechanics already exist and stay:
+- YouTube: `comment-replies.yml` (heartbeat, 6 a day) queues new comments and posts the decided replies (20 a day).
+- TikTok: the local runner on the owner's PC (`migration/integrations/tiktok-local`, text-only, no screenshots).
+- Both pass the same gate (`reply_policy.py`).
+
+The missing piece was the writer, which was the retired 4-hourly clock. From now on, each production run (twice a day)
+writes the decisions for the comments still undecided:
+- reply in the commenter's language, 1–2 sentences, answering their exact point;
+- be honest when they question the scripture: KJV quoted word for word, scenes dramatized;
+- quote a verse only through the checked `verse` field;
+- SKIP spam, hate and provocation (never argue);
+- deliver them in its own PR.
+TikTok runs only while the runner reports LOGGED_IN; the owner logs in by hand once (`runner.py login`).
