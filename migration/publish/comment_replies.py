@@ -94,10 +94,12 @@ def todo(queue, replies, ledger):
     return waiting, len(to_post)
 
 
-def check(queue, replies):
+def check(queue, replies, ledger=None):
     out = reply_policy.file_problems(replies.get("replies", {}), "youtube")
     comments = queue.get("comments", {})
-    out += [f"{cid}: NOT_IN_QUEUE" for cid in replies.get("replies", {}) if cid not in comments]
+    done = set((ledger or {}).get("posted", {})) | set((ledger or {}).get("refused", {}))
+    # E256: a posted reply leaves the queue but stays in the decisions file; only an unknown id is an error
+    out += [f"{cid}: NOT_IN_QUEUE" for cid in replies.get("replies", {}) if cid not in comments and cid not in done]
     return out
 
 
@@ -291,7 +293,7 @@ def main(argv):
             print(f"post {to_post}")
         return 0
     if mode == "check":
-        bad = check(queue, replies)
+        bad = check(queue, replies, ledger)
         print("\n".join(bad) or "PASS")
         return 1 if bad else 0
     if mode in ("fetch", "post"):

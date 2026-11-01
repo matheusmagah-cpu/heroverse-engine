@@ -334,6 +334,14 @@ class Inputs(unittest.TestCase):
         self.assertIn("inputs.queries", top)
         self.assertEqual(g.subject_of("pavo-footage.yml", {"list": f"migration/production/{PILOT}/pavo-1.json"}), PILOT)
 
+    def test_e255_native_review_takes_a_compilation_plan_within_its_own_limit(self):
+        comp = "migration/production/bible/compilations/arc-02-noah-compilation.json"
+        ok = {"plan": comp, "sha256": "a" * 64, "owner_review_authorized": "true", "byte_size": "256130762"}
+        self.assertEqual(g.WORKFLOWS["native-review.yml"][1](ok)["uploads"], 0)
+        self.refused("native-review.yml", dict(ok, byte_size="600000001"), "GUARD_INPUT_INVALID")
+        self.refused("native-review.yml", dict(ok, plan=PLAN, byte_size="256130762"), "GUARD_INPUT_INVALID")
+        self.refused("native-review.yml", dict(ok, plan="migration/production/bible/compilations/nope.json"), "GUARD_INPUT_MISSING")
+
     def test_valid_inputs_name_their_subject_and_uploads(self):
         f = g.WORKFLOWS["shot-probe.yml"][1]({"plan": PLAN, "shots": f"{S1},{S2}", "attempts": "3"})
         self.assertEqual(f["uploads"], 6)

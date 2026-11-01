@@ -193,8 +193,14 @@ class Pipeline(unittest.TestCase):
 
 class Repository(unittest.TestCase):
     def test_committed_decisions_pass_the_policy(self):
-        q, r = (json.loads((HERE / n).read_text()) for n in ("comment_queue.json", "comment_replies.json"))
-        self.assertEqual(cr.check(q, r), [])
+        q, r, led = (json.loads((HERE / n).read_text())
+                     for n in ("comment_queue.json", "comment_replies.json", "comment_replies_ledger.json"))
+        self.assertEqual(cr.check(q, r, led), [])
+
+    def test_e256_a_posted_reply_that_left_the_queue_is_not_an_error(self):
+        r = {"replies": {"A": {"decision": "REPLY", "text": "Thank you for watching."}}}
+        self.assertEqual(cr.check({"comments": {}}, r, {"posted": {"A": {}}}), [])
+        self.assertEqual(cr.check({"comments": {}}, r, {"posted": {}}), ["A: NOT_IN_QUEUE"])
 
     def test_the_heartbeat_fetches_and_posts_through_the_day(self):
         task = [t for t in hb.TASKS if t["workflow"] == "comment-replies.yml"]
