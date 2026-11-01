@@ -211,7 +211,10 @@ class Provider(unittest.TestCase):
             q = g.calibrate(str(Path(d) / 'b.json'), str(Path(d) / 'rows.json'), 'k', post=post,
                             clock=lambda: next(tick))
             rows = json.loads((Path(d) / 'rows.json').read_text())
-            self.assertEqual(len(rows), 10)  # 8 published Shorts + 2 repeats
+            published = [f for f in (Path(g.__file__).resolve().parent / 'episodes').glob('*.json')
+                         if json.loads(f.read_text()).get('video_id')
+                         and type(json.loads(f.read_text()).get('review', {}).get('overall')) in (int, float)]
+            self.assertEqual(len(rows), len(published) + 2)  # every published Short + 2 repeats (9 with genesis-09)
             self.assertFalse(q['qualified'])  # the known-bad 8.0 Short was passed: never qualifies
             self.assertFalse(q['same_verdict_everywhere'])
             self.assertNotIn('"k"', (Path(d) / 'b.json').read_text())
