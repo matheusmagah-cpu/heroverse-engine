@@ -31,6 +31,11 @@ HOLD_MAX = 1.3            # a talking clip's last frame held at most this long (
 CAPTION_WORDS = 2         # words per caption card (large type fits two words on 1080 px)
 FONT = "DejaVu Sans"
 FONT_SIZE = 132           # line height about 7 % of 1920 (PROMPT_GUIDE: captions ~7 % of the frame height)
+SCR_FONT = "DejaVu Serif"   # E249: KJV Scripture is set apart from our own captions: serif italic, gold, and cited
+SCR_SIZE = 112
+SCR_COLOUR = "&H0000D7FF"   # gold (ASS is BGR)
+REF_SIZE = 66
+REF_MARGIN_V = 880          # the citation sits above the (up to two-line) caption
 MARGIN_V = 560            # above the Shorts UI at the bottom
 MUSIC_DB = -22.0
 FADE_OUT = 0.8
@@ -133,19 +138,32 @@ def ass_time(t):
     return f"{int(h)}:{int(m):02d}:{s:05.2f}"
 
 
+def citation(reference):
+    """'Genesis 7:9 (KJV)' -> 'Genesis 7:9 · KJV' (book chapter:verse and the version)."""
+    ref = re.sub(r"\s*\(KJV\)\s*$", "", reference or "").strip()
+    return f"{ref} · KJV" if ref else ""
+
+
 def build_ass(sentences):
     head = ("[Script Info]\nScriptType: v4.00+\nWrapStyle: 0\nPlayResX: %d\nPlayResY: %d\n\n[V4+ Styles]\n"
             "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
             "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, "
             "MarginR, MarginV, Encoding\n"
-            "Style: Cap,%s,%d,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,1,0,0,0,100,100,0,0,1,8,3,2,60,60,%d,1\n\n"
+            "Style: Cap,%s,%d,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,1,0,0,0,100,100,0,0,1,8,3,2,60,60,%d,1\n"
+            "Style: Scr,%s,%d,%s,%s,&H00000000,&H64000000,1,1,0,0,100,100,0,0,1,8,3,2,60,60,%d,1\n"
+            "Style: Ref,%s,%d,%s,%s,&H00000000,&H64000000,1,0,0,0,100,100,2,0,1,6,2,2,60,60,%d,1\n\n"
             "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
-            % (W, H, FONT, FONT_SIZE, MARGIN_V))
+            % (W, H, FONT, FONT_SIZE, MARGIN_V, SCR_FONT, SCR_SIZE, SCR_COLOUR, SCR_COLOUR, MARGIN_V,
+               FONT, REF_SIZE, SCR_COLOUR, SCR_COLOUR, REF_MARGIN_V))
     lines = []
     for s in sentences:
+        scripture = s.get("kind") == "scripture" and bool(citation(s.get("reference")))
         for c in chunks(s):
             text = re.sub(r"[{}\\]", "", c["text"])
-            lines.append(f"Dialogue: 0,{ass_time(c['start'])},{ass_time(c['end'])},Cap,,0,0,0,,{text}")
+            style = "Scr" if scripture else "Cap"
+            lines.append(f"Dialogue: 0,{ass_time(c['start'])},{ass_time(c['end'])},{style},,0,0,0,,{text}")
+        if scripture:   # the citation stays up for the whole quotation
+            lines.append(f"Dialogue: 1,{ass_time(s['start'])},{ass_time(s['end'])},Ref,,0,0,0,,{citation(s['reference'])}")
     return head + "\n".join(lines) + "\n"
 
 

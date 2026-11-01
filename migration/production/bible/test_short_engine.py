@@ -81,6 +81,31 @@ class Plan(unittest.TestCase):
         self.assertNotIn("{b}", ass)
         self.assertIn("WrapStyle: 0", ass)
 
+    def test_e249_scripture_is_styled_apart_and_cited_with_chapter_and_verse(self):
+        ass = se.build_ass([
+            {"start": 0.0, "end": 2.0, "text": "our own words here"},
+            {"start": 2.0, "end": 5.0, "text": "There went in two and two", "kind": "scripture",
+             "reference": "Genesis 7:9 (KJV)"}])
+        lines = [x for x in ass.splitlines() if x.startswith("Dialogue")]
+        own = [x for x in lines if ",Cap,," in x]
+        scr = [x for x in lines if ",Scr,," in x]
+        ref = [x for x in lines if ",Ref,," in x]
+        self.assertEqual(len(own), 2)                     # our commentary stays in the normal captions
+        self.assertTrue(scr and not any("our own" in x for x in scr))
+        self.assertEqual(len(ref), 1)                     # one citation for the whole quotation
+        self.assertTrue(ref[0].endswith("Genesis 7:9 · KJV"))
+        self.assertIn(",0:00:02.00,0:00:05.00,Ref,", ref[0])
+        self.assertIn("Style: Scr,DejaVu Serif", ass)     # its own typography
+        self.assertEqual(se.citation("Genesis 6:13 (KJV)"), "Genesis 6:13 · KJV")
+        self.assertEqual(se.citation(None), "")
+        # scripture without a reference is never silently shown as plain captions with a made-up citation
+        plain = se.build_ass([{"start": 0, "end": 1, "text": "x y", "kind": "scripture"}])
+        self.assertNotIn(",Ref,,", plain)
+
+    def test_e249_compose_timeline_carries_kind_and_reference_to_the_captions(self):
+        src = (Path(__file__).resolve().parent / "episode_build.py").read_text()
+        self.assertIn('who.update(kind="scripture", reference=items[k]["reference"])', src)
+
 
 if __name__ == "__main__":
     unittest.main()

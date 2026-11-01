@@ -60,6 +60,8 @@ construction defects in short contextual samples with the incoming/outgoing cuts
    continuity, including the acted climax; camera-only motion is classified honestly.
 3. Construct readable, correctly timed captions and a clear mix using the existing Short engine parameters.
    Its output is 1080×1920 at 30 fps, with large captions and a mix targeted near −14 LUFS.
+   KJV Scripture is set apart (E249): gold serif italic, with a "Genesis 7:9 · KJV" citation (from the line's
+   `reference`) shown for the whole quotation; our own commentary stays in the normal white captions.
 4. Inspect the composed picture and review the complete actual audio/video before publication. Contact sheets
    support the review; they cannot establish sound quality. Every demonstrated sub-floor defect is corrected.
 5. Downloaded candidates pass `clip_check.py` before composition: decode, opening/ending, size, frame rate and the
