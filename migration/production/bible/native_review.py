@@ -116,10 +116,22 @@ def title(i):
     return f"native-review: plan={i['plan']} sha256={i['sha256']}"
 
 
-def reject_duplicate(i, runs, current_run, attempt, permitted_source=None):
+def reject_duplicate(i, runs, current_run, attempt, permitted_source=None, never_uploaded=()):
     require(str(attempt) == '1', 'REPLAY_REFUSED')
-    require(not any(str(r['id']) not in (str(current_run), str(permitted_source)) and r.get('display_title') == title(i)
+    skip = {str(current_run), str(permitted_source)} | {str(x) for x in never_uploaded}
+    require(not any(str(r['id']) not in skip and r.get('display_title') == title(i)
                     for r in runs), 'CONTENT_ALREADY_SUBMITTED_RECONCILE_EXISTING_RUN')
+
+
+def never_uploaded(i, run, jobs):
+    """E247: a same-titled run that failed before it opened any provider upload (e.g. the dispatch guard refused it) has
+    touched nothing, so it must not block the resume of the run that did upload: only a completed failure whose single
+    job's 'Open one private resumable upload session' step did not succeed qualifies."""
+    if not (run.get('display_title') == title(i) and run.get('status') == 'completed'
+            and run.get('conclusion') == 'failure' and len(jobs) == 1):
+        return False
+    step = {x['name']: x for x in jobs[0].get('steps', [])}.get('Open one private resumable upload session', {})
+    return step.get('conclusion') in ('skipped', None) and step.get('status') in ('completed', None)
 
 
 def recovery_source(i, run, jobs):
@@ -160,7 +172,10 @@ def guard(i):
     page = 1
     while True:
         runs = github_read(f'/actions/workflows/native-review.yml/runs?per_page=100&page={page}')['workflow_runs']
-        reject_duplicate(i, runs, os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], source)
+        harmless = [r['id'] for r in runs if source and str(r['id']) not in (str(source), os.environ['GITHUB_RUN_ID'])
+                    and never_uploaded(i, r, github_read('/actions/runs/' + str(r['id']) + '/jobs')['jobs'])
+                    ] if source else []
+        reject_duplicate(i, runs, os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], source, harmless)
         if len(runs) < 100:
             break
         page += 1
