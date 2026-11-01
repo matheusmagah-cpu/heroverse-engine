@@ -3511,6 +3511,38 @@
      "review-after-build"
     ]
    }
+  },
+  {
+   "id": "E255",
+   "date": "2026-11-01",
+   "class": [
+    "instrument"
+   ],
+   "error": "E253 let native_review.py take a compilation plan, but the dispatch guard that runs first (dispatch_guard.native_review) still accepted only bible/plans/*.json at 150 MB, so the arc-02 compilation review (run 41318103408) was refused before any provider call; the fix covered one layer of the route, not the route.",
+   "fix": "dispatch_guard.native_review accepts compilations/<id>.json (bible-compilation-plan-v1, id names the file) with the same 600 MB limit as native_review.py; Short plans keep their check and 150 MB.",
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233",
+    "E238",
+    "E253"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e255_native_review_takes_a_compilation_plan_within_its_own_limit",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }
