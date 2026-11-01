@@ -83,3 +83,11 @@ autenticidade e posta." Operating flow for every Short:
 
 At most one fix round, and only for a real defect (a broken clip, an audio error, a policy problem). No rework for
 cosmetic AI artifacts.
+
+Pacing rule (owner, 2026-11-01): "Referente ao ritmo você mesmo acelera ou desacelera o vídeo criado mediante cada
+cena.. não precisa ficar fazendo e refazendo.. trabalha com o que tem.. não quero retrabalho.. faça bem os prompts e
+vamos pra cima." A clip too long or too short for its line is retimed in the edit or trimmed, never regenerated;
+quality effort goes into writing good prompts the first time. Existing support: `short_engine.speed` slows a clip up
+to `MAX_SLOW` 1.3x to fill its span (never loops), a shot may carry an explicit `speed` (1.0-1.3, `explicit_speed`),
+`src_start` trims the clip's start, `hold` freezes a talking clip's last frame (<= `HOLD_MAX` 1.3 s). Speeding a clip
+up beyond 1.0 is done by trimming (`src_start`/shorter span); a 0.75x-1.5x speed-up range is not built.
