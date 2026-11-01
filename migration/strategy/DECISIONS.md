@@ -304,3 +304,27 @@ the long's mined opening (evidence/vidiq/20261101/compilation-hook-mining.json) 
   critique).
 - The weekly mining measures these emotional devices in winners against weak contrasts. A device changes only with
   validated evidence: ≥6 winners from ≥4 channels.
+
+## 2026-11-01 — Stills: ChatGPT (owner's PC) replaces FLUX; fewer stills, animated cinematically
+
+Owner: "Troca ele, acha outro. Não podemos depender dele" (Cloudflare FLUX). Another consumer used up the free
+allocation (10,000 neurons) before the project made a single image (scene-stills run 41339130885, E260 detail cf4006).
+His next instructions: "Usa o GPT como programa. Pavo não": Pavo stays for video only (the hook, the speaking lines and
+the close), so its quota is never spent on stills. He also asked for fewer images, each animated very well, because
+very short cuts would not work.
+
+Still sources, in this order:
+1. Primary: the ChatGPT image runner on the owner's PC (migration/integrations/chatgpt-local).
+   - It generates 16:9 images with the approved character references and records each one.
+   - Its own rules apply: one request at a time, 3 min between requests, 30 a day.
+   - The owner signs in once with `runner.py login`.
+   - The account risk noted in its README is the owner's, by his explicit request.
+   - Candidates are approved by PR, like every still.
+2. FLUX (scene-stills.yml), only as a bonus when it has allocation. It is never a dependency.
+3. Buzzy images (about 6 credits each), last, inside the ≤100-a-day average.
+
+Pacing: a 10-min long uses about 25–30 stills, and each still carries 15–20 s of cinematic animation:
+- 2.5D depth parallax;
+- eased push-in, pull-back, pan and tilt;
+- atmosphere layers (dust, embers, mist, rain, water shimmer, light rays).
+These are built in the edit at zero cost. No fast cutting.
