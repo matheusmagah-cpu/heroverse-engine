@@ -368,3 +368,30 @@ mining; it replaces nothing and keeps the same daily vidIQ budget (≤150 credit
   Until then it is a test, never a rule.
 - One source of truth: findings go into structures/ and the "Daily intelligence" entries only, so there are never two
   conflicting instructions.
+
+## 2026-11-02 — Inteligência Viva governs; deadline; automation, tokens and model routing (owner)
+
+The owner decided:
+- Goal: YPP (1,000 subscribers + 4,000 public long watch hours), target by 2026-11-15, maximum 2026-12-01. No other
+  agent may change this deadline.
+- The daily mining is renamed **Inteligência Viva**. Every day it builds a data-driven strategy toward the deadline:
+  binding constraint, weakest factor, ranked levers with success/kill thresholds, and a review of yesterday's tests.
+  It writes `migration/strategy/live-plan.json`. Production executes that plan automatically and reports any
+  action it could not apply, with the reason. Volume is one lever, not the strategy.
+- Everything is automated. A long in progress never waits for a schedule: the light clock fires the production
+  routine to continue when a stage finishes.
+- Token economy, measured with `migration/ops/token_budget.py`:
+  - Inteligência Viva reads the budget and fits the day's quantities inside it.
+  - Every run checks the budget before heavy work.
+- Heavy work goes to free external compute first, when it gives the same quality. In order:
+  1. GitHub Actions workflows: build, render, review, publish;
+  2. the owner's PC: the ChatGPT app for stills, the local scripts;
+  3. free-tier APIs: Gemini native review;
+  4. the existing provider quotas: Pavo only at a 0-credit quote, Buzzy within ≤100 a day.
+  Claude tokens are spent on judgment, not on compute or polling.
+- Model routing, the cheapest model that keeps quality for the action:
+  - Haiku: mechanical checks, clocks, status reads;
+  - Sonnet: production, cuts, comments, Inteligência Viva, reviews;
+  - Opus: only coordination decisions and hard diagnosis that need it, kept short.
+  Sub-agents are given the model that fits their task.
+- No rework, and no drop in quality. Valid work is reused, and a defect is fixed at the stage responsible for it.
