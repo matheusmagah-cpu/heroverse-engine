@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-release-2026110101-1",
+ "still": "flood-ends-long-s-release",
+ "episode": "flood-ends-long",
+ "shot": "s-release",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. Cupped hands open at the dark opening and the dove flies up and away into the bright sky, figures in silhouette following it with their eyes, centred in the frame. The subject is centred in the frame. Clear morning light. Letting go. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. Cupped hands open at the dark opening and the dove flies up and away into the bright sky, figures in silhouette following it with their eyes, centred in the frame. The subject is centred in the frame. Clear morning light. Letting go. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-release.png",
+  "sha256": "c6b19876c209522d1ed4a87e4086001242b952d371331059a63b4e5d2e5159f4",
+  "size_bytes": 2224051,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-release-2026110101-1.jpg",
+ "sha256": "89485af2f0a37e998e6bacdea61872d4964d33b6adbb050535f508d4e4480870"
+}
