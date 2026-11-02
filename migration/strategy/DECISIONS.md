@@ -415,3 +415,15 @@ Claude tokens per post.
   It keeps a source that brings watch time and subscribers, and drops one that brings empty clicks.
 - A paid community (membership or a paid channel) is considered only after there is a proven, engaged audience,
   and on the owner's decision.
+
+## 2026-11-02 — Inteligência Viva
+
+Measured: 300 subs (+2.7/day, 7 d); public long hours 27.9 (own estimate; +~2.1/day, estimate); 385 long views in total,
+average ~4.3 min per view (estimate). Needed for 11-15: 54 subs/day and 306 h/day; for 12-01: 24 subs/day and 137 h/day.
+Hours bind. Neither date is reachable at the current pace; the deadline is unchanged.
+Weakest factor: long impressions (~600 per long); Shorts sent 0 views to longs.
+Market (vidIQ, in-niche, 11-02): small channels reach 20-57K views with a 'Why...' title and the Genesis chapters; a
+20-min Bible long got 35.5K views at 3.9K subs; Noah Shorts win with a paradox title. Cross-niche: no valid data today.
+Strategy (live-plan.json): (1) demand-backed 15-20 min long, (2) Short -> long funnel, (3) title/thumbnail A/B,
+(4) 1 Short a day. flood-ends-long publishes at the first 13:30/23:30 UTC after the gate (preferred 13:30; low confidence).
+No structure was validated. vidIQ: 45 credits (10 wasted on off-topic queries), 25 more pending a video_watch job.

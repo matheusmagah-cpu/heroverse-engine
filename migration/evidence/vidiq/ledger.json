@@ -1326,6 +1326,46 @@
    "purpose": "transcript bOvEdvjydhs (strongest hook)",
    "saved_to": "evidence/vidiq/20261101/compilation-hook-mining.json",
    "outcome": "completed"
+  },
+  {
+   "date": "2026-11-02",
+   "kind": "read",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "daily intel: broad query (keyword/contentType not applied; off-topic result, unused)",
+   "saved_to": "evidence/vidiq/20261102/in-niche-outliers.json"
+  },
+  {
+   "date": "2026-11-02",
+   "kind": "read",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "daily intel: duplicate broad query (off-topic, unused)",
+   "saved_to": "evidence/vidiq/20261102/in-niche-outliers.json"
+  },
+  {
+   "date": "2026-11-02",
+   "kind": "read",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "in-niche long Bible outliers",
+   "saved_to": "evidence/vidiq/20261102/in-niche-outliers.json"
+  },
+  {
+   "date": "2026-11-02",
+   "kind": "read",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "in-niche Noah Shorts outliers",
+   "saved_to": "evidence/vidiq/20261102/in-niche-outliers.json"
+  },
+  {
+   "date": "2026-11-02",
+   "kind": "read",
+   "tool": "vidiq_video_watch",
+   "credits": 25,
+   "purpose": "structure audit zURuppTrHro (job pending)",
+   "saved_to": "evidence/vidiq/20261102/in-niche-outliers.json"
   }
  ]
 }

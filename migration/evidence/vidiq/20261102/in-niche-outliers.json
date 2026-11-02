@@ -1,0 +1,109 @@
+{
+ "date": "2026-11-02",
+ "pool": "in-niche (Bible, long + Shorts); cross-niche query returned off-topic results and counts for nothing",
+ "queries": [
+  "outliers long 'Bible story Genesis KJV narrated' 3 months, <=100k subs, by breakout (12)",
+  "outliers short 'Bible story Noah flood Genesis' (10)"
+ ],
+ "long_winners": [
+  {
+   "id": "zURuppTrHro",
+   "channel": "Bible Stories (3.9K subs)",
+   "title": "Why God Cast Adam & Eve Out of Eden | The First Sin & Fall of Man | Genesis Bible Story",
+   "views": 35500,
+   "breakout": 198,
+   "min": 20.6
+  },
+  {
+   "id": "7zTUhgOpgXs",
+   "channel": "The Bible: A Cinematic Series (6.3K)",
+   "title": "The Book of Exodus | Full Movie 4K",
+   "views": 41800,
+   "breakout": 58,
+   "min": 104.8,
+   "ai_labeled": true
+  },
+  {
+   "id": "d5EyMnG1zfk",
+   "channel": "PicVersion (11.8K)",
+   "title": "The Book of GENESIS FULL MOVIE KJV | Adam and Eve | Noah | ...",
+   "views": 637200,
+   "breakout": 46,
+   "min": 280,
+   "ai_labeled": true
+  },
+  {
+   "id": "5N8_u9yi8p0",
+   "channel": "Holy Bible 01+ (1.8K)",
+   "title": "Noah, the Increase of Sin, and Preparation for the Flood (Genesis 6:1-22)",
+   "views": 46700,
+   "breakout": 4,
+   "min": 4.7
+  },
+  {
+   "id": "W3ehoMSZGYk",
+   "channel": "BibleNova (184)",
+   "title": "NOAH'S ARK: THE GREAT FLOOD | Part 1 | Genesis 6-7",
+   "views": 1400,
+   "breakout": 8.2,
+   "min": 5.6
+  }
+ ],
+ "short_winners": [
+  {
+   "id": "I8tEhxU8hHQ",
+   "channel": "The Bible Story House (1.2K)",
+   "title": "He Built a Giant Ship on Dry Land. Then It Rained | Noah's Ark",
+   "views": 20200,
+   "breakout": 107,
+   "s": 29
+  },
+  {
+   "id": "1L5oHMbZeho",
+   "channel": "Bible Hidden Truth (1.4K)",
+   "title": "Who Really Stopped the Giants From Storming Noah's Ark?",
+   "views": 57100,
+   "breakout": 40,
+   "s": 11
+  },
+  {
+   "id": "AIAkc2Gkamo",
+   "channel": "Cleed (20.1K)",
+   "title": "One Man. One Ark. God's Promise That Changed Everything.",
+   "views": 15300,
+   "breakout": 24,
+   "s": 73
+  },
+  {
+   "id": "uhwNfZjs4n4",
+   "channel": "Echoes of Scripture (12.5K)",
+   "title": "Methuselah Lived 969 Years... Longer Than Anyone Else in the Bible",
+   "views": 11900,
+   "breakout": 16,
+   "s": 81
+  }
+ ],
+ "pool_counts": {
+  "in_niche_winners": 9,
+  "channels": 8,
+  "max_channel_share": "1/9",
+  "breakout_ge_50": [
+   "zURuppTrHro",
+   "7zTUhgOpgXs",
+   "I8tEhxU8hHQ",
+   "(Short 1605x off-topic: excluded)"
+  ],
+  "weak_contrasts": "0 recorded today",
+  "cross_niche": "no valid data today; counts not advanced"
+ },
+ "read": [
+  "Small channels (1-4K subs) reach 20-57K views on single Bible-story videos: a 'Why did God...' title + the Genesis chapters + a 20 min length (the 3.9K-sub channel got 35.5K views, 198x).",
+  "Very long AI-labeled 'full book' videos (1.7-4.7 h) pull 40-640K views: they build watch hours, but they conflict with our originality/authenticity pillar if they are pure compilations; the sleep-style 60 min long stays our version.",
+  "Winning Noah Shorts name the paradox in the title ('ship on dry land. Then it rained'); ours 'Noah Built a Ship on Dry Ground' got 328 views, the same hook at a smaller channel reach."
+ ],
+ "video_watch": {
+  "video": "zURuppTrHro",
+  "job": "job_fdb620dc-d14e-4990-bdee-a89c56371d82",
+  "status": "inprogress after 4 polls; 25 credits charged on submit; read it tomorrow with vidiq_job_poll (0 credits)"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "date": "2026-11-02",
+ "run": "extra (owner request), before flood-ends-long is published",
+ "deadline": {
+  "target": "2026-11-15",
+  "max": "2026-12-01"
+ },
+ "goal": {
+  "subs_now": 300,
+  "subs_rate_7d": "2.7/day (measured: 281 on 10-25 -> 300 on 11-01)",
+  "subs_rate_28d": "not available (channel history only from 10-18: 2.7/day over 14 d, measured)",
+  "long_hours_365d": "27.9 (own estimate from Analytics rows; Studio counter not read)",
+  "hours_rate_7d": "~2.1 long h/day (ESTIMATE: 39.2 all-content h in 7 d x 0.37 long share measured in per-video rows)",
+  "hours_rate_28d": "not available",
+  "gap": {
+   "subs": 700,
+   "long_hours": 3972.1
+  },
+  "required_rates_target": {
+   "subs_per_day": 53.8,
+   "long_hours_per_day": 305.6,
+   "basis": "13 days 11-02..11-15"
+  },
+  "required_rates_max": {
+   "subs_per_day": 24.1,
+   "long_hours_per_day": 137.0,
+   "basis": "29 days 11-02..12-01"
+  },
+  "binding_constraint": "long watch hours (needs ~65x the current pace for 12-01; subscribers need ~9x)",
+  "weakest_factor": "long impressions (discovery): 12 longs got 7,154 impressions in ~2 weeks (~600 each); CTR 1.92% and average view ~4.3 min are secondary; Shorts sent 0 views to longs",
+  "eta_days_current_pace": {
+   "subs": "~258",
+   "long_hours": "~1,900 (estimate)"
+  },
+  "on_track": false,
+  "honesty": "Neither date is reachable at any pace we can plausibly produce; the deadline stays as the owner fixed it, and the plan maximises accumulation. 4,000 h at ~8 min per view = ~30,000 long views; our longs have 385 total."
+ },
+ "strategy": [
+  {
+   "lever": "long length + search-demand topic (hours per view and per impression)",
+   "action": "flood-ends-long (Genesis 8-9) 15-20 min with 'Why...' question title, Genesis chapters in title, KJV; then one such long per story/arc as capacity allows",
+   "evidence": "in-niche (measured, vidIQ 11-02): a 3.9K-sub channel's 20.6 min 'Why God Cast Adam & Eve Out...' got 35.5K views (198x); our prayer longs: 4.3 min average per view (estimate 27.8 h / 385 views)",
+   "expected_effect": "estimate: 1 long at 10 min average x 1,000 views = ~167 h; first test of the demand",
+   "metric": "7-day views and average view duration of flood-ends-long",
+   "success_threshold": ">=300 views and >=6 min average within 7 d",
+   "kill_threshold": "<100 views or <3 min average within 7 d -> revisit packaging before making more",
+   "status": "new"
+  },
+  {
+   "lever": "Short -> long funnel",
+   "action": "pinned comment + description link of each Short and each cut to flood-ends-long; cuts end on an open loop ('what happened after the flood?') and set related video; Short slots only after the long is public",
+   "evidence": "measured: 0 of 10 longs received any view from Shorts (daily report funnel table)",
+   "expected_effect": "estimate: if 1% of ~2,000 Short views/week click, +20 long views/week",
+   "metric": "views of the long with source Shorts / related video",
+   "success_threshold": ">=20 long views from Shorts in 7 d",
+   "kill_threshold": "0 in 7 d -> move the link to end screens/playlist only",
+   "status": "new"
+  },
+  {
+   "lever": "packaging A/B on the long",
+   "action": "title A 'Why Did God Send the Rainbow After the Flood? | Noah's Ark Ends | Genesis 8-9 Bible Story (KJV)'; B 'After 150 Days Without Land, Noah Opened the Window | Genesis 8-9 (KJV)'; thumbnail line 'THE WATER STOPPED'; swap to B at 48 h if CTR <2%",
+   "evidence": "measured: our long CTR 1.92% (range 0.4-3.6%); winners put a question/paradox in the title (Noah Shorts 20.2K views 'Then it rained')",
+   "expected_effect": "estimate: +0.5 pt CTR = +25% views at same impressions",
+   "metric": "CTR from Reporting API",
+   "success_threshold": ">=3% CTR",
+   "kill_threshold": "<1.5% after 1,000 impressions -> rebuild thumbnail",
+   "status": "new"
+  },
+  {
+   "lever": "subscribe conversion / cadence",
+   "action": "keep 1 Bible Short a day (13:30 or 23:30 UTC); Keeper CTA at the emotional peak, one line; cuts from the long carry the Keeper insight",
+   "evidence": "measured: 8 Bible Shorts 1,885 views, 26 subs (1.38 per 100 views); 24 older Shorts 3,193 views, 66 subs; best Bible Short 532 views",
+   "expected_effect": "estimate: 1.4 subs/100 views x ~300 views/Short = ~4 subs/Short; 2.7 subs/day now",
+   "metric": "subs gained per Short (7 d)",
+   "success_threshold": ">=4 per Short",
+   "kill_threshold": "<1.5 per Short over 5 Shorts -> change CTA/format",
+   "status": "keep"
+  }
+ ],
+ "experiments_review": [
+  "No live-plan existed before today: no experiments to evaluate. Baselines recorded above."
+ ],
+ "quantities": {
+  "longs": 1,
+  "short_cuts": 2,
+  "bridge_shorts": 1,
+  "keeper_reflections": 0,
+  "note": "flood-ends-long is already in production; cuts only after the long's gate passes; bridge Short genesis-10 continues in parallel only if stills exist. At least 1 Short/day."
+ },
+ "slots_utc": [
+  "13:30",
+  "23:30"
+ ],
+ "flood_ends_long_publication": {
+  "rule": "publish at the first 13:30 UTC or 23:30 UTC after prepublish_gate passes and APPROVAL.json exists; do not hold it more than ~10 h for a slot, and never publish before the gate",
+  "preferred": "13:30 UTC",
+  "why": "estimate, thin data: our best Short (532 views) went out at 13:30 UTC and 23:30 UTC got 328/302; long CTR spikes followed 13:30-slot days (10-27: 3.9%); no cross-day long sample exists. The Short for that day moves to 23:30 so the two do not compete in the same hour.",
+  "confidence": "low; measure and update after 3 longs"
+ },
+ "next_longs": [
+  {
+   "story": "flood-ends-long (Genesis 8-9)",
+   "title": "Why Did God Send the Rainbow After the Flood? | Noah's Ark Ends | Genesis 8-9 Bible Story (KJV)",
+   "title_variant_b": "After 150 Days Without Land, Noah Opened the Window | Genesis 8-9 (KJV)",
+   "thumbnail_line": "THE WATER STOPPED",
+   "hook": "question that puts the viewer on the ark, then the stakes, then the promise (structure from 11-01 mining; test, not rule)",
+   "target_length_s": 900,
+   "series/playlist": "Noah arc, playlist 'Genesis Stories (KJV)' after the arc-02 compilation"
+  }
+ ],
+ "cuts_first": [
+  "2 coherent cuts of flood-ends-long (raven/dove; rainbow covenant) 20-90 s, each with its own native defect review, link to the long"
+ ],
+ "packaging_refresh": [
+  {
+   "video_id": "jPNjgf-PWHM",
+   "new_title": "He Built a Ship on Dry Land. Then It Rained | Noah, Genesis 6 (KJV)",
+   "new_thumbnail_line": "ON DRY LAND",
+   "why": "same paradox as the 20.2K-view competitor; ours 328 views; title test only, keep the accepted media"
+  },
+  {
+   "video_id": "53Xysf9x46c",
+   "new_title": "keep",
+   "new_thumbnail_line": "keep",
+   "why": "CTR 3.61% is our best long; do not touch"
+  }
+ ],
+ "funnel_actions": [
+  "pinned comment on every new Short -> the long",
+  "end screen and playlist on flood-ends-long -> next Genesis Short",
+  "TikTok mirror stays through tiktok.yml"
+ ],
+ "capacity": {
+  "lease": "shared lease respected (not read this run)",
+  "chatgpt_stills": "BLOCKED until 2026-11-04 07:01 (Codex/Work limit, CURRENT.md); 6 of 30 long stills exist",
+  "flux": "daily allocation exhausted 11-01; retry after 00:00 UTC",
+  "buzzy": "41,994 credits measured 11-01; ledger has no newer balance; ceiling 100/day",
+  "pavo": "0-credit quote only; the pavo MCP did not connect this run",
+  "token_budget": "agent_mining check passed",
+  "vidiq": "45 of 150 credits used today (10 wasted on two off-topic queries); balance 3,164 -> ~3,119",
+  "pc": "owner's PC availability not verified this run"
+ },
+ "why": "Hours bind by two orders of magnitude; the only lever that moves them is longs people find and watch. Test one demand-backed long, wire the funnel, test packaging, and keep subscribers moving with the daily Short. Volume is last.",
+ "confidence": {
+  "goal_numbers": "measured (subs) / own estimate (hours)",
+  "strategy": "low-medium: the only demand evidence is competitor outliers; first own test is flood-ends-long",
+  "slot": "low"
+ },
+ "cross_niche_status": "no valid cross-niche data today (query returned off-topic); pool counts not advanced; no structure promoted"
+}
