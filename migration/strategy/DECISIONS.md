@@ -395,3 +395,23 @@ The owner decided:
   - Opus: only coordination decisions and hard diagnosis that need it, kept short.
   Sub-agents are given the model that fits their task.
 - No rework, and no drop in quality. Valid work is reused, and a defect is fixed at the stage responsible for it.
+
+## 2026-11-02 — Parallel distribution through our own channels, done the right way (owner)
+
+Goal: more qualified viewers on the longs, which means watch hours and subscribers, without spam risk and at zero
+Claude tokens per post.
+- Own channels only, automated, and posted after each video is public:
+  - Telegram channel: a bot posts through the free Bot API from a GitHub Actions step. The secret
+    `TELEGRAM_BOT_TOKEN` is created by the owner; agents never see it.
+  - Facebook Page Reels and Pinterest: through the existing Buffer free mirror, which may reuse an already-public
+    YouTube Short.
+  - WhatsApp Channel: no official posting API. It runs as a daily batch on the owner's PC through the desktop app;
+    a challenge or login stops it, as with every other tool.
+- The post text is built from a template with no LLM: the exact KJV verse, the Keeper's line from the approved
+  script, the YouTube link, and one honest question. Every post is in English and has no clickbait.
+- Third-party groups get no automation and no link blasts. Posts go only where self-promotion is allowed, written
+  value-first, and posted manually from a prepared text. Church and ministry partnerships are preferred.
+- Measurement: Inteligência Viva reads the YouTube external traffic sources and their average view duration.
+  It keeps a source that brings watch time and subscribers, and drops one that brings empty clicks.
+- A paid community (membership or a paid channel) is considered only after there is a proven, engaged audience,
+  and on the owner's decision.
