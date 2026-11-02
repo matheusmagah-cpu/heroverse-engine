@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-return",
+ "episode": "flood-ends-long",
+ "shot": "s-return",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. A man in silhouette stretches his arm out of the dark opening into the dusk and the tired white dove settles into his open hand, centred in the frame. The subject is centred in the frame. Dusk light, last gold on the water. Heavy with disappointment. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-return.jpg",
+ "sha256": "5220fb8981377e66349c9ed1f66cde90afd802fdc230e4f3187d2083776c1f25",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-return-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "4d76c5bc0604a2c7ca82a9cc9985f19063da879181ac165a069532f1080eb07b",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

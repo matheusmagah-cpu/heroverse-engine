@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-shut",
+ "episode": "flood-ends-long",
+ "shot": "s-shut",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. A man in silhouette stands at the shut great door with his hand flat on the planks, dry hills glowing through a crack beside him, centred in the frame. The subject is centred in the frame. Gold light through a crack, deep shadow. Restraint and longing. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-shut.jpg",
+ "sha256": "250ff57eecaeb7c729a77d262b0ae7413df0b35f3e33c2128b1314f66ad65883",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-shut-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "9f8bc9036a8a4ae8046d1988189dd64fd5248976d4e2a12fc769139cacc3fa0f",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-lines",
+ "episode": "flood-ends-long",
+ "shot": "s-lines",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. In a dark timber shelter a son seen in silhouette scratches a tally of marks into a wooden post with a stone, rows and rows of them, the family asleep in the straw behind him, centred in the frame. The subject is centred in the frame. Dim lamp light and shadow. Weary and patient. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-lines.jpg",
+ "sha256": "8c8641dbc57d4573d1ecf09505e55e39a917fa1de25545fce38bd4b6df23ed30",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-lines-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "4fdc2b3734f69780e2d14f19105f180c39cbdd4b14721c3a192201fe9fd5b81b",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

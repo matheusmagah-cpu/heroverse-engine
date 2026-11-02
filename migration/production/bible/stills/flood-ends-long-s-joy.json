@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-joy",
+ "episode": "flood-ends-long",
+ "shot": "s-joy",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. In a dim straw-floored shelter the family in silhouette passes the single olive leaf from hand to hand, sons and wives pressed close, arms rising in relief, centred in the frame. The subject is centred in the frame. Warm lamp glow and opening light. Breathless joy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-joy.jpg",
+ "sha256": "5716f46b060934db747ad47d6cb086d644f3d5e10a4856d92259ac74622a6dd3",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-joy-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "cdee92db37a162fd0254e31dbf2090b0defaf1d6a49428d3d3fa432c3ab36d05",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

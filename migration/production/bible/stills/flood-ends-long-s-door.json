@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-door",
+ "episode": "flood-ends-long",
+ "shot": "s-door",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. A massive closed wooden door in the dark timber shelter, a single beam of grey light along its edge, a man in silhouette standing before it with one hand flat on the wood, centred in the frame. The subject is centred in the frame. Cold grey light, deep shadow. Tense and uncertain. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-door.jpg",
+ "sha256": "07fa7268838d1023b71aa42aeffc8b46c8dd128bf8dae7f994c83d487f680d00",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-door-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "961fdb8eb0879bf0fbb0b8922456d6fe88b81907f5eadb9056893d6b7d020bee",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

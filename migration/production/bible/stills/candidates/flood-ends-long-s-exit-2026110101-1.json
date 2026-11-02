@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-exit-2026110101-1",
+ "still": "flood-ends-long-s-exit",
+ "episode": "flood-ends-long",
+ "shot": "s-exit",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. A great side door swings down like a ramp onto the hillside, people and animals in silhouette streaming out in a long line into golden light, centred in the frame. The subject is centred in the frame. Golden morning light on wet grass. Joyful release. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. A great side door swings down like a ramp onto the hillside, people and animals in silhouette streaming out in a long line into golden light, centred in the frame. The subject is centred in the frame. Golden morning light on wet grass. Joyful release. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-exit.png",
+  "sha256": "a07149a0200a4a161f47d08ea33ce7d103e09b6837e3d7f7cf1ad8c73b09bafd",
+  "size_bytes": 2691360,
+  "pixels": [
+   1672,
+   940
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-exit-2026110101-1.jpg",
+ "sha256": "6a696004df17713fe288d7fada15fc5006189f4d2673e87023c8f238dd9cfb74"
+}

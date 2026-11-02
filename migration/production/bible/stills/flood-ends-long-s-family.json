@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-family",
+ "episode": "flood-ends-long",
+ "shot": "s-family",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. The family in silhouette huddled near the dark opening at dusk, a mother's arm around a young wife's shoulders, heads bowed, all turned toward the empty sky, centred in the frame. The subject is centred in the frame. Fading blue dusk. Grief and quiet resolve. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-family.jpg",
+ "sha256": "6cbba38c01c4ad9e092ae2ea4b3461ca6071ad672c3dc86bacc73e88eb0802bd",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-family-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "f2d0185369d0558792a92566a1619ea17951714860ba3e620e85d73fab2d9552",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

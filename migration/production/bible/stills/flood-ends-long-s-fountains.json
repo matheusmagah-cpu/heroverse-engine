@@ -1,0 +1,26 @@
+{
+ "id": "flood-ends-long-s-fountains",
+ "episode": "flood-ends-long",
+ "shot": "s-fountains",
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. Dark fountains of water sink back into the deep and the last curtains of rain thin out against a clearing sky over a great dark shape floating on the water, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Soft silver light breaking through cloud. Quiet and relieved. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-fountains.jpg",
+ "sha256": "7363ca7f6c564d4f54384b58e04649267a86c98451346000e3f2e2d3bb36c9d1",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-fountains-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light. The vessel is drawn with a rounded hull (and sometimes a cabin) rather than the canonical box; accepted as one coherent look, flagged for the native review.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "54f3cf419eee8d90c0b312644ba98f69650cce016b667e18abad0bcd5c0ae932",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
+}

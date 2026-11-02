@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-joy-2026110101-1",
+ "still": "flood-ends-long-s-joy",
+ "episode": "flood-ends-long",
+ "shot": "s-joy",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. In a dim straw-floored shelter the family in silhouette passes the single olive leaf from hand to hand, sons and wives pressed close, arms rising in relief, centred in the frame. The subject is centred in the frame. Warm lamp glow and opening light. Breathless joy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. In a dim straw-floored shelter the family in silhouette passes the single olive leaf from hand to hand, sons and wives pressed close, arms rising in relief, centred in the frame. The subject is centred in the frame. Warm lamp glow and opening light. Breathless joy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-joy.png",
+  "sha256": "290fc4396e6cb815279dfad320fe8d7aba3ba839ae6cb162779fcdb2e5220f99",
+  "size_bytes": 2063658,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-joy-2026110101-1.jpg",
+ "sha256": "5716f46b060934db747ad47d6cb086d644f3d5e10a4856d92259ac74622a6dd3"
+}

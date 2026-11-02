@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-bow-2026110101-1",
+ "still": "flood-ends-long-s-bow",
+ "episode": "flood-ends-long",
+ "shot": "s-bow",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. A vast rainbow arcs across a dark clearing storm sky above the washed green hills, the great dark shape small on the mountain, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Golden sunlight against dark cloud, full spectrum colour. Awe and wonder. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. A vast rainbow arcs across a dark clearing storm sky above the washed green hills, the great dark shape small on the mountain, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Golden sunlight against dark cloud, full spectrum colour. Awe and wonder. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-bow.png",
+  "sha256": "81a11bb1faf6a51ebb740c99b383cf7b7d84ecfb5d86cf38b7780f5757bfdf5f",
+  "size_bytes": 2355794,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-bow-2026110101-1.jpg",
+ "sha256": "b26ff93fc06ece3b1841cb04a386d63bc7ac2cc20b37b0f667c1a221f6e70ed2"
+}

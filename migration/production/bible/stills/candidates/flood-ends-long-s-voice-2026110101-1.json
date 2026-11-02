@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-voice-2026110101-1",
+ "still": "flood-ends-long-s-voice",
+ "episode": "flood-ends-long",
+ "shot": "s-voice",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. Morning light breaks through the parting clouds and slides across the still water and the bare mountain top, mist lifting slowly off the slopes, the great dark shape on the peak unmoving, centred in the frame. Dawn, golden light after rain. Hushed and hopeful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No people, no text, no logos. No stone buildings, towers, churches, glass lanterns, modern clothing or roads.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. Morning light breaks through the parting clouds and slides across the still water and the bare mountain top, mist lifting slowly off the slopes, the great dark shape on the peak unmoving, centred in the frame. Dawn, golden light after rain. Hushed and hopeful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No people, no text, no logos. No stone buildings, towers, churches, glass lanterns, modern clothing or roads.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-voice.png",
+  "sha256": "a91db7427ce53e756f943c826694a100615746e16dd58945408f26ff29f1fff8",
+  "size_bytes": 2351528,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-voice-2026110101-1.jpg",
+ "sha256": "c1a4978685a58bbc13e742aab800483bae90d68d39d342e3e016f6a48cd1d404"
+}

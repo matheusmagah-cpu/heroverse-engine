@@ -1,0 +1,37 @@
+{
+ "id": "flood-ends-long-s-family-2026110101-1",
+ "still": "flood-ends-long-s-family",
+ "episode": "flood-ends-long",
+ "shot": "s-family",
+ "run": "2026110101",
+ "status": "DRAFT",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. The family in silhouette huddled near the dark opening at dusk, a mother's arm around a young wife's shoulders, heads bowed, all turned toward the empty sky, centred in the frame. The subject is centred in the frame. Fading blue dusk. Grief and quiet resolve. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "sent_prompt": "Create an image, 16:9 landscape, no text. Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. The family in silhouette huddled near the dark opening at dusk, a mother’s arm around a young wife’s shoulders, heads bowed, all turned toward the empty sky, centred in the frame. The subject is centred in the frame. Fading blue dusk. Grief and quiet resolve. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "engine": "chatgpt-desktop",
+ "models": [
+  "chatgpt-images"
+ ],
+ "generated_by": "ChatGPT Windows app on the owner's PC (Create image), one request at a time",
+ "source": "chatgpt-desktop",
+ "download": {
+  "file": "flood-ends-long-s-family.png",
+  "sha256": "08bc49d9070a4673cff8f00e0019b205979ecddf5de6db6740ec31e00855ccf0",
+  "size_bytes": 1914475,
+  "pixels": [
+   1672,
+   941
+  ]
+ },
+ "references": [],
+ "licence": {
+  "note": "OpenAI Terms of Use: the user owns the Output; made at the owner's request in his own session (README Licence and account risk)"
+ },
+ "upscaler": "System.Drawing HighQualityBicubic 1672x941 -> 1920x1080, JPEG quality 93",
+ "aspect_ratio": "16:9",
+ "size": [
+  1920,
+  1080
+ ],
+ "repo_path": "migration/production/bible/stills/candidates/flood-ends-long-s-family-2026110101-1.jpg",
+ "sha256": "6cbba38c01c4ad9e092ae2ea4b3461ca6071ad672c3dc86bacc73e88eb0802bd"
+}

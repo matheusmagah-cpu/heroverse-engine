@@ -37,3 +37,20 @@ God is never depicted. No source or final score is invented. The long uses its s
 
 The existing heartbeat and supervisors remain; no new clock or queue is needed. Update this handoff at the next
 accepted boundary, keeping historical receipts as evidence only.
+
+## Long-first long: flood-ends-long (2026-11-01 evening, branch claude/stoic-edison-gii4wc)
+
+Plan `plans/flood-ends-long.json` (buzzy-long, Genesis 8-9, 33 shots, ~515 s est.) passes `plan_check --strict` except
+STILL_NOT_APPROVED. 30 DRAFT still records exist. ChatGPT-desktop candidates (1920x1080 JPEG from the 1672x941 PNG, sidecars
+with the PNG sha256) exist for: s-voice, s-hold, s-door, s-wind, s-fountains, s-lines (unreviewed for approval; the exterior
+ark shots s-wind/s-fountains draw a rounded hull with a cabin, against the box canon: regenerate if the native review flags it).
+STOPPED at s-ararat: the ChatGPT app showed the Codex/Work usage limit ("Voce esgotou o uso do Codex e do Work", reset 4 Nov
+07:01) after a queue script mis-typed into the Work composer; not worked around. Resume: check the Chat tab can still make
+images, then `C:\HeroVerse\one.ps1 -still <id>` per still (send, wait, save, upload candidate). Nothing approved, built or published.
+
+Relayed by the coordinator session (owner preference, not yet confirmed by the owner in this run): use ONE ChatGPT chat named
+"HeroVerse — stills" for all stills (create it once, send every prompt in it, download from each reply, same style line);
+do not delete existing chats. `one.ps1`/`send.ps1` still open a new chat per still and must change before resuming.
+
+Cleanup (relayed, apply only after ALL 30 stills are downloaded): delete the project's per-image chats ("Create ... Image"
+titles opened today) via "..." > Excluir; keep "HeroVerse — stills" and every owner chat; ambiguous titles stay. Report the count.
