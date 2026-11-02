@@ -548,8 +548,12 @@ def request_problems(plan, layout, refs, client=None, chars=None):
         from video import PavoVideoClient
         client = PavoVideoClient(token="")
     out = []
+    approvals = load_approvals(plan) if plan.get("episode") else {}
     for index, shot in enumerate(plan["shots"]):
         if is_window(shot):
+            continue
+        # a long-first scene approved as a still in camera motion is never sent to Pavo: no Pavo request to validate
+        if (approvals.get(shot["id"]) or {}).get("source") == "still_motion":
             continue
         try:
             req = request(shot, index, plan, layout, refs, chars)
