@@ -142,6 +142,7 @@ If neither executor is available, already-started GitHub jobs keep their state b
 Use the existing `claude/*` → PR → checks/reviews → squash process. The original PR Review Toolkit and applicable
 security sweep record the real executor, exact head/base and findings. Keep `ops/ERRORS.json` and antidote tests;
 code-review evidence is not media approval. Existing host guards remain active.
+To check a run, use ci_digest.py; read full logs only when the digest is not enough.
 
 One current home per subject:
 

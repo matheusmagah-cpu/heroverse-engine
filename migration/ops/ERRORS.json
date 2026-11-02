@@ -3727,6 +3727,27 @@
      "instrument"
     ]
    }
+  },
+  {
+   "id": "E263",
+   "date": "2026-11-02",
+   "class": [
+    "cheap-vs-expensive"
+   ],
+   "error": "Sessions burned tens of thousands of tokens on avoidable reads: whole-file Reads of ERRORS.json (~250 KB, ~62k tokens), Reads of binary evidence (mp4/mov/wav, large images/JSON) and full CI logs, when a query, a probe or a digest answers the question.",
+   "fix": "read_guard.py (PreToolUse Read hook) denies ERRORS.json without limit, mp4/mov/wav and image/JSON over 2 MB, naming the cheap alternative; errors_query.py gives one entry, a grep or a class id list; ci_digest.py prints run/job conclusions and only failed jobs' last 40 log lines.",
+   "prior": [
+    "E106",
+    "E127",
+    "E135"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_read_guard.py",
+    "contains": "def test_errors_json_needs_limit",
+    "covers": [
+     "cheap-vs-expensive"
+    ]
+   }
   }
  ]
 }
