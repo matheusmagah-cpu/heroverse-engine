@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-bless",
  "episode": "flood-ends-long",
  "shot": "s-bless",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. The family in silhouette stands on a hillside at sunrise with arms open, the green valley below them, warm light on their shoulders, centred in the frame. The subject is centred in the frame. Golden sunrise light. Blessing and new life. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. The family in silhouette stands on a hillside at sunrise with arms open, the green valley below them, warm light on their shoulders, centred in the frame. The subject is centred in the frame. Golden sunrise light. Blessing and new life. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-bless.jpg",
+ "sha256": "40da2889621f6c521b8ae53690d2b7bdd9fc934376a807c6622cb8c378f8ad23",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-bless-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "fd2a58b1d808e9936099ab48fbf56d28e1894b7626a695f4f0e328d41e106c29",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-voice",
  "episode": "flood-ends-long",
  "shot": "s-voice",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. Morning light breaks through the parting clouds and slides across the still water and the bare mountain top, mist lifting slowly off the slopes, the great dark shape on the peak unmoving, centred in the frame. Dawn, golden light after rain. Hushed and hopeful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No people, no text, no logos. No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot. Morning light breaks through the parting clouds and slides across the still water and the bare mountain top, mist lifting slowly off the slopes, the great dark shape on the peak unmoving, centred in the frame. Dawn, golden light after rain. Hushed and hopeful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No people, no text, no logos. No stone buildings, towers, churches, glass lanterns, modern clothing or roads.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-voice.jpg",
+ "sha256": "c1a4978685a58bbc13e742aab800483bae90d68d39d342e3e016f6a48cd1d404",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-voice-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "6368af0f00b3de1c297d25b819f2ac1b4e18b3ffd9da3b587d3acf3bfcf4bed1",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

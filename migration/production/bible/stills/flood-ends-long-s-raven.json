@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-raven",
  "episode": "flood-ends-long",
  "shot": "s-raven",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. A black raven beats away over the empty water into a grey sky, shrinking to a dot, the small dark opening far behind it, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Flat grey light. Lonely and uncertain. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. A black raven beats away over the empty water into a grey sky, shrinking to a dot, the small dark opening far behind it, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Flat grey light. Lonely and uncertain. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-raven.jpg",
+ "sha256": "f25095789a2e3e9cd2302de6159d1a0d7a9fd813f9f447db21233db35780766a",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-raven-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light. The vessel is drawn with a rounded hull (and sometimes a cabin) rather than the canonical box; accepted as one coherent look, flagged for the native review.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "342e3446934200f8a7a80c7d4e1036acb13450e6fec5e048eda2d3288f1c7d7f",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

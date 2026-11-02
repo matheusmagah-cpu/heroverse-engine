@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-dry",
  "episode": "flood-ends-long",
  "shot": "s-dry",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. Flat roof boards pulled back, a man in silhouette standing at the opening looking out over a wide green and brown earth steaming in the sun, centred in the frame. The subject is centred in the frame. Bright morning sun on drying earth. Overwhelmed and amazed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. Flat roof boards pulled back, a man in silhouette standing at the opening looking out over a wide green and brown earth steaming in the sun, centred in the frame. The subject is centred in the frame. Bright morning sun on drying earth. Overwhelmed and amazed. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-dry.jpg",
+ "sha256": "69e00bca8a04483c241a0cd3190ad7059d79c36b052cafbd44f3771e09083599",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-dry-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "38efb8d014c2acab264f71be3593b407b661122d22eac16495c8539c4c1ae461",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

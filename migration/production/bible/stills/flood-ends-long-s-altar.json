@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-altar",
  "episode": "flood-ends-long",
  "shot": "s-altar",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. A man in silhouette kneels before a rough altar of fieldstones he has just built, a small flame catching on dry wood, smoke rising straight up, centred in the frame. The subject is centred in the frame. Warm firelight against the clear dusk. Reverent and grateful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. A man in silhouette kneels before a rough altar of fieldstones he has just built, a small flame catching on dry wood, smoke rising straight up, centred in the frame. The subject is centred in the frame. Warm firelight against the clear dusk. Reverent and grateful. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-altar.jpg",
+ "sha256": "1a4e71ba4384b59d006b542e945b9740ec6a15c3f6da5b41ab165e690a97014e",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-altar-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "f020437052356ba3227a2663751bd22a68d43e29b67154c85258c4874aefab8d",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

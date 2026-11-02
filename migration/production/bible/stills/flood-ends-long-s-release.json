@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-release",
  "episode": "flood-ends-long",
  "shot": "s-release",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. Cupped hands open at the dark opening and the dove flies up and away into the bright sky, figures in silhouette following it with their eyes, centred in the frame. The subject is centred in the frame. Clear morning light. Letting go. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot. Cupped hands open at the dark opening and the dove flies up and away into the bright sky, figures in silhouette following it with their eyes, centred in the frame. The subject is centred in the frame. Clear morning light. Letting go. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-release.jpg",
+ "sha256": "89485af2f0a37e998e6bacdea61872d4964d33b6adbb050535f508d4e4480870",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-release-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "38a099d75cd1cbdedc686ef7101845c3625704e7843db312a79bec54791f0191",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

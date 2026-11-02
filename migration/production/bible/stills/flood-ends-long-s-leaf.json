@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-leaf",
  "episode": "flood-ends-long",
  "shot": "s-leaf",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up. The dove in an open hand at evening, a small fresh green olive leaf in her beak, wet and bright, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Warm gold evening light on a green leaf. Wonder and joy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up. The dove in an open hand at evening, a small fresh green olive leaf in her beak, wet and bright, centred in the frame. A few small figures stand in silhouette, seen from behind. The subject is centred in the frame. Warm gold evening light on a green leaf. Wonder and joy. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-leaf.jpg",
+ "sha256": "ee1a681f47edcc36569ad49a776bde699ea18bb38092fa5f10d59d346896d121",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-leaf-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "ac4588577e43be17eecf85b5e11971d0a83b5cbff7980620327bf5e52125be99",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }

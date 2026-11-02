@@ -2,6 +2,25 @@
  "id": "flood-ends-long-s-vineyard",
  "episode": "flood-ends-long",
  "shot": "s-vineyard",
- "status": "DRAFT",
- "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. An old man in silhouette works among rows of young vines on a sunlit hillside, the hills green behind him, centred in the frame. The subject is centred in the frame. Soft afternoon light. Calm and human. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+ "status": "APPROVED",
+ "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot. An old man in silhouette works among rows of young vines on a sunlit hillside, the hills green behind him, centred in the frame. The subject is centred in the frame. Soft afternoon light. Calm and human. The ancient Near East in the days of the flood: the open water, the mountains of Ararat and the empty new earth. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos.",
+ "repo_path": "migration/production/bible/stills/flood-ends-long-s-vineyard.jpg",
+ "sha256": "6a579e0873b45f51db746e33a41bac439940c870580aff2032321bdbd69dd4ec",
+ "size": [
+  1920,
+  1080
+ ],
+ "candidate": "flood-ends-long-s-vineyard-2026110101-1",
+ "engine": "chatgpt-desktop",
+ "references": [],
+ "pavo": null,
+ "approved": {
+  "date": "2026-11-02",
+  "score": 9.5,
+  "note": "Actual 16:9 frame viewed on a contact sheet: subject centred, on-prompt, period-correct, no text or logos, strong emotion and light.",
+  "by": "claude-session-reviewer",
+  "model": "claude-session-reviewer",
+  "prompt_sha256": "721054d62092e412e6346c9427e5fccfa00a96b4953a48c91c2312514c022977",
+  "references_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+ }
 }
