@@ -1,0 +1,1 @@
+Source: anthropics/claude-plugins-official, plugins/claude-code-setup (Anthropic, v1.0.0), installed at project level on 2026-11-02 at the owner's request. Read-only recommender; it changes nothing by itself.
