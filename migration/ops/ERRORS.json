@@ -3694,6 +3694,39 @@
      "direction"
     ]
    }
+  },
+  {
+   "id": "E262",
+   "date": "2026-11-02",
+   "class": [
+    "instrument"
+   ],
+   "error": "shot-probe for the long-first long flood-ends-long (Keeper k-insight, k-bow, k-close) was refused with PAVO_SHORTS_SHARE: dispatch_guard.shot_probe marked every plan whose version is not bible-long-plan-v1 as a Short, and a buzzy-long plan is a bible-plan-v2 with track buzzy-long, so the long's 36 worst-case units were charged to the Shorts' 25-a-day share.",
+   "fix": "shot_probe's short flag is false for a bible-long-plan-v1 plan and for a plan with track buzzy-long; the long keeps priority on the rolling quota as E138 intends.",
+   "prior": [
+    "E120",
+    "E131",
+    "E137",
+    "E139",
+    "E148",
+    "E152",
+    "E166",
+    "E169",
+    "E185",
+    "E186",
+    "E231",
+    "E233",
+    "E238",
+    "E253",
+    "E255"
+   ],
+   "antidote": {
+    "file": "migration/ops/test_dispatch_guard.py",
+    "contains": "def test_e262_a_buzzy_long_probe_is_not_charged_to_the_shorts_share",
+    "covers": [
+     "instrument"
+    ]
+   }
   }
  ]
 }
