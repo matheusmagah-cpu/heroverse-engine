@@ -515,5 +515,17 @@ class Record(unittest.TestCase):
         self.assertEqual(pf.record_problems({"narration": rec.get("narration", [])}), ["RECORD_FIELD_MISSING title"])
 
 
+class StillMotionRequests(unittest.TestCase):
+    def test_a_still_motion_scene_has_no_pavo_request_to_validate(self):
+        plan = {"episode": "x-long", "shots": [{"id": "s-a", "kind": "scene", "seconds": 18}]}
+        eb = pf.eb
+        orig = eb.load_approvals
+        eb.load_approvals = lambda p, path=None: {"s-a": {"source": "still_motion"}}
+        try:
+            self.assertEqual(eb.request_problems(plan, {}, {}), [])
+        finally:
+            eb.load_approvals = orig
+
+
 if __name__ == "__main__":
     unittest.main()

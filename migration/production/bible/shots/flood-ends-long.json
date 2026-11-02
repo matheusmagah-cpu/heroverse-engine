@@ -1,0 +1,575 @@
+{
+ "episode": "flood-ends-long",
+ "shots": {
+  "s-altar": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-altar",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-altar.jpg",
+   "clip_sha256": null,
+   "still_sha256": "1a4e71ba4384b59d006b542e945b9740ec6a15c3f6da5b41ab165e690a97014e",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "2096e1c6b32934f11e82627e532b3b4ebc330354269bb58ad7c2c3ebff711a45"
+  },
+  "s-ararat": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-ararat",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-ararat.jpg",
+   "clip_sha256": null,
+   "still_sha256": "53581da935004d83b548f31a0412069befd672df1f14b0f8edc1b6ed5c03513a",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "fb5739f47f2050f1008052b0067877d6a84f3b9f40f78ee97339ab3dea27e7df"
+  },
+  "s-bless": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-bless",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-bless.jpg",
+   "clip_sha256": null,
+   "still_sha256": "40da2889621f6c521b8ae53690d2b7bdd9fc934376a807c6622cb8c378f8ad23",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 17,
+   "request_sha256": "c00591c142f254cb1e44d4add35f16502a2f5ea68fe2d599b98f58de21b8bb00"
+  },
+  "s-bow": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-bow",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-bow.jpg",
+   "clip_sha256": null,
+   "still_sha256": "b26ff93fc06ece3b1841cb04a386d63bc7ac2cc20b37b0f667c1a221f6e70ed2",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "65c5d5b08193cdfac5b949350c5da611e7a89760de7c9b6821cb56bfe2c2570d"
+  },
+  "s-door": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-door",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-door.jpg",
+   "clip_sha256": null,
+   "still_sha256": "07fa7268838d1023b71aa42aeffc8b46c8dd128bf8dae7f994c83d487f680d00",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 13,
+   "request_sha256": "75502c9153d3053ac4a929ddcea9ae79c1afd402a48d21e08b94b4d581cf7a3f"
+  },
+  "s-dove-out": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-dove-out",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-dove-out.jpg",
+   "clip_sha256": null,
+   "still_sha256": "471086ba46fc0ae5d6714ec8024224f0a05b32121d75e377f94e8de06c5d02be",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 11,
+   "request_sha256": "e82572e9d6f5c126f2ca6c2020c1ab868e7af3a99f901169bc1b55f13813969b"
+  },
+  "s-dry": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-dry",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-dry.jpg",
+   "clip_sha256": null,
+   "still_sha256": "69e00bca8a04483c241a0cd3190ad7059d79c36b052cafbd44f3771e09083599",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "50e291df70a7653e2164e50c9c9f5c6d3c06ec7f34b0029ffff04ba46f06464e"
+  },
+  "s-exit": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-exit",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-exit.jpg",
+   "clip_sha256": null,
+   "still_sha256": "6a696004df17713fe288d7fada15fc5006189f4d2673e87023c8f238dd9cfb74",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 19,
+   "request_sha256": "3399fb071344356145ef23ad7025032a826a6d49b41de7bd1a8688cebc9fa93c"
+  },
+  "s-family": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-family",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-family.jpg",
+   "clip_sha256": null,
+   "still_sha256": "6cbba38c01c4ad9e092ae2ea4b3461ca6071ad672c3dc86bacc73e88eb0802bd",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 9,
+   "request_sha256": "39b888a36ad31c8ed9212f00d86cf30454ea29a10fe0385525cf490005fccd20"
+  },
+  "s-fountains": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-fountains",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-fountains.jpg",
+   "clip_sha256": null,
+   "still_sha256": "7363ca7f6c564d4f54384b58e04649267a86c98451346000e3f2e2d3bb36c9d1",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 19,
+   "request_sha256": "1a8f298724686f347551ed88b20054a71c055538507dc5261c824f645d962edd"
+  },
+  "s-hands": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-hands",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-hands.jpg",
+   "clip_sha256": null,
+   "still_sha256": "1a003609ffdabdeea58972e71bb2760e90f7d2cd28e2fbf9c7f7d5e71d8c22aa",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 19,
+   "request_sha256": "cdd5510028d392ce65a10c2a1e7020c4bf27481b1ca8d50c0654b05f75a24247"
+  },
+  "s-hold": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-hold",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-hold.jpg",
+   "clip_sha256": null,
+   "still_sha256": "cb592cdb79401e81e826fe119ececd503be80e6fef6e9744aac94b5a8511f258",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 18,
+   "request_sha256": "48abc54e2fdc035426363ac9131e5b3ee613869789dacba9151114041d5b7734"
+  },
+  "s-joy": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-joy",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-joy.jpg",
+   "clip_sha256": null,
+   "still_sha256": "5716f46b060934db747ad47d6cb086d644f3d5e10a4856d92259ac74622a6dd3",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 12,
+   "request_sha256": "ace4dd54bccd49bf72d8599248ef2363cb4e54ce6043efdeacbfefc8dff48485"
+  },
+  "s-leaf": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-leaf",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-leaf.jpg",
+   "clip_sha256": null,
+   "still_sha256": "ee1a681f47edcc36569ad49a776bde699ea18bb38092fa5f10d59d346896d121",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "0dc122e2a20f13427661c9fe42f13033617b32b6d0ab694641ef10d3866ceed5"
+  },
+  "s-lines": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-lines",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-lines.jpg",
+   "clip_sha256": null,
+   "still_sha256": "8c8641dbc57d4573d1ecf09505e55e39a917fa1de25545fce38bd4b6df23ed30",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "3e205dc93d447fa03617147c523ebd7bbf89d8f69b833e4385bf42f27cd322d3"
+  },
+  "s-look": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-look",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-look.jpg",
+   "clip_sha256": null,
+   "still_sha256": "dd0b5186e423d3ce87ce0786b593c3700236c12e434505d788874a72da3120e5",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "60b6d3090397ee6ade699c52b9fabc8d417fe8bd65209c69340fed588149e7ec"
+  },
+  "s-peaks": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-peaks",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-peaks.jpg",
+   "clip_sha256": null,
+   "still_sha256": "6eca5e70e099562fe17bd50648cbb4fe72026ddcd2953b1d141d0e5dd6d46089",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "169af02bd59860b5bc81963aedc55f2f847a7170dd84ae67a40381f0e2da360b"
+  },
+  "s-promise": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-promise",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-promise.jpg",
+   "clip_sha256": null,
+   "still_sha256": "c74511a00a6947d23be9fa68752478fb372834e9e2b31fb0cf830581c0399a46",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 15,
+   "request_sha256": "19185c9782ce70db916769d74753b892303db45bfb4efc84e9a669c63b114148"
+  },
+  "s-raven": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-raven",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-raven.jpg",
+   "clip_sha256": null,
+   "still_sha256": "f25095789a2e3e9cd2302de6159d1a0d7a9fd813f9f447db21233db35780766a",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 19,
+   "request_sha256": "dbc912d12148110fa0b1df6053af7f01265bc0b7ed9d6cd7dd77d1468d177f0f"
+  },
+  "s-release": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-release",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-release.jpg",
+   "clip_sha256": null,
+   "still_sha256": "89485af2f0a37e998e6bacdea61872d4964d33b6adbb050535f508d4e4480870",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "f3b773506fdd1b7077e4026b812815b98641ad753dd8ac3787213b7d18d1fce8"
+  },
+  "s-return": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-return",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-return.jpg",
+   "clip_sha256": null,
+   "still_sha256": "5220fb8981377e66349c9ed1f66cde90afd802fdc230e4f3187d2083776c1f25",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "811ffe335986915587925d2764f8788f51364a9718a74a9cbd1804e44168d484"
+  },
+  "s-shut": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-shut",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-shut.jpg",
+   "clip_sha256": null,
+   "still_sha256": "250ff57eecaeb7c729a77d262b0ae7413df0b35f3e33c2128b1314f66ad65883",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 11,
+   "request_sha256": "0ee336ea0777397bd1ac01e91f1e880dd9505aa55883e3af895ffdeea01e0a93"
+  },
+  "s-smoke": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-smoke",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-smoke.jpg",
+   "clip_sha256": null,
+   "still_sha256": "6a12ca59e52a09bb8e40c0f10c13731fa330cfd0ac2ecf86e5cc6093555e96fc",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "b8d82deb5fdda293c4fa1490ae3c0e65e7d9d541fed30bab384f9d70002f45c4"
+  },
+  "s-storm": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-storm",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-storm.jpg",
+   "clip_sha256": null,
+   "still_sha256": "30d0f356f5304b56cfff9ac58d59ba525f13416652d5b90955b72c96bdef8929",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 13,
+   "request_sha256": "dbbeff56a391105d7f5da2b16dc2bdea8642e99574d03680ec622405b159a371"
+  },
+  "s-vineyard": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-vineyard",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-vineyard.jpg",
+   "clip_sha256": null,
+   "still_sha256": "6a579e0873b45f51db746e33a41bac439940c870580aff2032321bdbd69dd4ec",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "6b97ddc9fa93aebc6b9efd06ffcbd6b60b71af33bc87dd1071a144d042058f13"
+  },
+  "s-voice": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-voice",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-voice.jpg",
+   "clip_sha256": null,
+   "still_sha256": "c1a4978685a58bbc13e742aab800483bae90d68d39d342e3e016f6a48cd1d404",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 8,
+   "request_sha256": "83c680bec9971f677554a4c214b34e9596233859eaed56382d72062c1de97f4a"
+  },
+  "s-voice-go": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-voice-go",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-voice-go.jpg",
+   "clip_sha256": null,
+   "still_sha256": "71fdf5397bbf3d375a7eaf132e99f737b65a9d803571e9e26a574847c0e6fc18",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 16,
+   "request_sha256": "077d0e9047717e85186693c9354e3ad354c35730eef01111b65fbae2db2a7898"
+  },
+  "s-wait7": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-wait7",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-wait7.jpg",
+   "clip_sha256": null,
+   "still_sha256": "f13af1c1bf1d3684ecd01d78b288bf53e058e3c93c46f36d9a098e2170c7b0f6",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 17,
+   "request_sha256": "fd2975e719055e1ee41375f7e2a8071b47db67e2fc93ef38ac467fea6fcc0a70"
+  },
+  "s-wind": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-wind",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-wind.jpg",
+   "clip_sha256": null,
+   "still_sha256": "40eded1664e88f49ba711bf6a8f865e83459cebbadd5cc23c17125f0026140e5",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 20,
+   "request_sha256": "28bffae799dca0ed4096392b483521151a9bd535346ed8819bdc7a96c06a59be"
+  },
+  "s-window": {
+   "source": "still_motion",
+   "score": 9.5,
+   "note": "Approved ChatGPT-desktop still (viewed in #646) in cinematic camera motion; silent scene.",
+   "model": "claude-session-reviewer",
+   "approved_at": "2026-11-02",
+   "motion_engine": "cinematic-v2",
+   "still": "flood-ends-long-s-window",
+   "repo_path": "migration/production/bible/stills/flood-ends-long-s-window.jpg",
+   "clip_sha256": null,
+   "still_sha256": "d154550d52cffdabac1e8f276a3b693de8a74d6f6972ea9be8959268f9586743",
+   "frame": [
+    2560,
+    1440
+   ],
+   "licence": "apache-2.0",
+   "clip_seconds": 19,
+   "request_sha256": "96e399e2b62b8847bdc1ff5f45c3a6069297c1582dbe816c24a2f20027f55bb6"
+  }
+ }
+}
