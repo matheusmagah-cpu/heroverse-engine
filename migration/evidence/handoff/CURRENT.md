@@ -38,19 +38,17 @@ God is never depicted. No source or final score is invented. The long uses its s
 The existing heartbeat and supervisors remain; no new clock or queue is needed. Update this handoff at the next
 accepted boundary, keeping historical receipts as evidence only.
 
-## Long-first long: flood-ends-long (2026-11-01 evening, branch claude/stoic-edison-gii4wc)
+## Long-first long: flood-ends-long (2026-11-02, after PR #646)
 
-Plan `plans/flood-ends-long.json` (buzzy-long, Genesis 8-9, 33 shots, ~515 s est.) passes `plan_check --strict` except
-STILL_NOT_APPROVED. 30 DRAFT still records exist. ChatGPT-desktop candidates (1920x1080 JPEG from the 1672x941 PNG, sidecars
-with the PNG sha256) exist for: s-voice, s-hold, s-door, s-wind, s-fountains, s-lines (unreviewed for approval; the exterior
-ark shots s-wind/s-fountains draw a rounded hull with a cabin, against the box canon: regenerate if the native review flags it).
-STOPPED at s-ararat: the ChatGPT app showed the Codex/Work usage limit ("Voce esgotou o uso do Codex e do Work", reset 4 Nov
-07:01) after a queue script mis-typed into the Work composer; not worked around. Resume: check the Chat tab can still make
-images, then `C:\HeroVerse\one.ps1 -still <id>` per still (send, wait, save, upload candidate). Nothing approved, built or published.
+Merged (#646): `plans/flood-ends-long.json` (buzzy-long, Genesis 8-9, 33 shots, ~530 s est.) with 30 ChatGPT-desktop stills
+APPROVED (claude-session-reviewer, 9.5, frames actually viewed; the vessel in wind/fountains/wait7/ararat/exit/raven/dove-out
+has a rounded hull, flagged for the native review). `plan_check --strict` is clean. The orchestrator session made the 30 images
+in one ChatGPT chat after restarting the window and deleted the per-image chats.
 
-Relayed by the coordinator session (owner preference, not yet confirmed by the owner in this run): use ONE ChatGPT chat named
-"HeroVerse — stills" for all stills (create it once, send every prompt in it, download from each reply, same style line);
-do not delete existing chats. `one.ps1`/`send.ps1` still open a new chat per still and must change before resuming.
-
-Cleanup (relayed, apply only after ALL 30 stills are downloaded): delete the project's per-image chats ("Create ... Image"
-titles opened today) via "..." > Excluir; keep "HeroVerse — stills" and every owner chat; ambiguous titles stay. Report the count.
+Next, in order (`episode_build.py preflight PLAN` is BLOCKED, 2026-11-02):
+1. VOICE_NOT_MEASURED: needs a local Kokoro python + prepared work (`preflight PLAN --voice VOICE_PYTHON WORK --refs --write`);
+   none exists in the cloud sandbox: measure it on a host with Kokoro (or the PC) and commit the PASS preflight.
+2. PROBE_REQUIRED k-insight, k-bow, k-close: each voice-over Keeper shot needs >= 2 direct 0-credit Pavo generations judged by
+   lipsync_check --still-mouth (evidence/pavo/setups.json). Option: reuse an existing matching Keeper clip/still.
+3. Then shared lease, `episode.yml`, merge report, `buzzy-long-pilot.yml`, native review, thumbnail, approve -> gate -> publish,
+   then the cuts (cuts/flood-ends-long.json). No Short/bridge was made this run (owner's one-run exception).
