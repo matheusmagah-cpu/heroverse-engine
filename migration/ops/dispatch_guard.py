@@ -149,7 +149,8 @@ def shot_probe(i):
     units = 0 if i.get("adopt_run") else long_preflight.planned_units([by_id[x] for x in shots], int(i["attempts"]),
                                                                       worst=True)
     return {"uploads": len(shots) * int(i["attempts"]), "deps": deps, "pavo_units": units,
-            "short": plan.get("version") != "bible-long-plan-v1"}   # E138: the Shorts' share of the rolling quota
+            # E138: the Shorts' share of the rolling quota; E262: a long-first (buzzy-long) plan is a long too
+            "short": plan.get("version") != "bible-long-plan-v1" and plan.get("track") != "buzzy-long"}
 
 
 def cf_images(i):

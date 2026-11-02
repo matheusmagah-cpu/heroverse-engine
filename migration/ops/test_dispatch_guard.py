@@ -602,6 +602,11 @@ class PavoBudget(unittest.TestCase):
         api = self.api(ok=4, date="2026-10-28T00:30:00Z")
         self.assertEqual(g.pavo_actions_usage(api, "2026-10-28", now)["short_units"], 0)   # an arc-01-long record
 
+
+    def test_e262_a_buzzy_long_probe_is_not_charged_to_the_shorts_share(self):
+        plan = "migration/production/bible/plans/flood-ends-long.json"
+        facts = g.shot_probe({"plan": plan, "shots": "k-insight,k-bow,k-close", "attempts": "2", "adopt_run": ""})
+        self.assertFalse(facts["short"])
     def test_capacity_checks_the_budget_and_the_probe_gets_the_count(self):
         with mock.patch.object(g, "pavo_budget", return_value=57) as budget:
             facts = {"uploads": 0, "pavo_units": 10}
